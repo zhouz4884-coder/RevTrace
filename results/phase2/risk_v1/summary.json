@@ -1,0 +1,311 @@
+{
+  "boundaries": {
+    "active_policy": "model- and concurrency-specific: tau=0.05 for 0.6B/c16 and independently validated tau=0.10 for 1.7B/c16",
+    "natural_entries": "execution events on repeated natural traces, not independent utterances",
+    "performance": "real two-RTX-3090 wall-clock results; audit replay excluded from service timing",
+    "raw_selection_counters": "selected_*_violations cover mandatory/audited canonical checks only; unaudited disagreement is not directly observed and is controlled by the risk bound",
+    "risk": "time-uniform upper bound on disagreement with the frozen canonical execution, not deterministic arithmetic equivalence or transcript ground-truth correctness",
+    "terminal": "versioned fixed-shape canonical contract; singleton equivalence not claimed"
+  },
+  "calibration_rows": [
+    {
+      "audit_fraction": 0.02141653706583722,
+      "base_audits": 661,
+      "caught_error_margins": "0.078125",
+      "caught_state_errors": 1,
+      "claim_scope": "calibration/stress only; not c16 validation",
+      "concurrency": 64,
+      "decision": "S1_NATURAL_SHADOW_AUDIT_FAIL",
+      "model": "Qwen3-ASR-0.6B",
+      "risk_eligible_entries": 30864,
+      "upper_error_count": 503,
+      "upper_risk": 0.016297304302747537
+    },
+    {
+      "audit_fraction": 0.021650924570972462,
+      "base_audits": 651,
+      "caught_error_margins": "",
+      "caught_state_errors": 0,
+      "claim_scope": "calibration/stress only; not c16 validation",
+      "concurrency": 64,
+      "decision": "S1_NATURAL_SHADOW_AUDIT_PASS",
+      "model": "Qwen3-ASR-1.7B",
+      "risk_eligible_entries": 30068,
+      "upper_error_count": 144,
+      "upper_risk": 0.004789144605560729
+    },
+    {
+      "audit_fraction": 0.01969300135928124,
+      "base_audits": 594,
+      "caught_error_margins": "0.0625",
+      "caught_state_errors": 1,
+      "claim_scope": "frozen c16 v1 failure used to preregister v2; not v2 validation",
+      "concurrency": 16,
+      "decision": "S1_NATURAL_SHADOW_AUDIT_FAIL",
+      "model": "Qwen3-ASR-1.7B",
+      "risk_eligible_entries": 30163,
+      "upper_error_count": 503,
+      "upper_risk": 0.016676060073600105
+    }
+  ],
+  "decision": "PHASE2_RISK_AND_TAIL_GATE_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED",
+  "gates": {
+    "S1_anytime_simulation": "S1_ANYTIME_RISK_SIMULATION_PASS",
+    "S1_natural_shadow_audit": "PASS",
+    "S2_terminal_tail": "PASS",
+    "deterministic_intermediate_certificate": "UNRESOLVED"
+  },
+  "policy_repair_rows": [
+    {
+      "base_audits": 594,
+      "caught_state_errors": 1,
+      "deadline_miss_rate": 0.0,
+      "gpu_normalized_speedup": 2.4860395118941385,
+      "margin_threshold": 0.05,
+      "p99_state_entry_seconds": 1.6522453859634698,
+      "policy_version": "v1_frozen_failure",
+      "risk_decision": "S1_NATURAL_SHADOW_AUDIT_FAIL",
+      "risk_eligible_entries": 30163,
+      "risk_seed": 20260729,
+      "slo_goodput_speedup": 4.972079023788278,
+      "system_decision": "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS",
+      "upper_risk": 0.016676060073600105,
+      "verification_fraction": 0.09583333333333334,
+      "wall_speedup": 4.972079023788277
+    },
+    {
+      "base_audits": 597,
+      "caught_state_errors": 0,
+      "deadline_miss_rate": 0.0,
+      "gpu_normalized_speedup": 2.4150872670412635,
+      "margin_threshold": 0.1,
+      "p99_state_entry_seconds": 1.7301536003034563,
+      "policy_version": "v2_independent_validation",
+      "risk_decision": "S1_NATURAL_SHADOW_AUDIT_PASS",
+      "risk_eligible_entries": 30155,
+      "risk_seed": 20260730,
+      "slo_goodput_speedup": 4.830174534082527,
+      "system_decision": "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS",
+      "upper_risk": 0.0047753274747139775,
+      "verification_fraction": 0.09583333333333334,
+      "wall_speedup": 4.830174534082527
+    }
+  ],
+  "replicate_stats": [
+    {
+      "all_runs_pass": true,
+      "gpu_normalized_speedup_mean": 3.0258166906759354,
+      "gpu_normalized_speedup_min": 2.967350005878156,
+      "model": "Qwen3-ASR-0.6B",
+      "p99_seconds_max": 1.5819763728883118,
+      "p99_seconds_mean": 1.462768591467291,
+      "runs": 5,
+      "slo_goodput_speedup_mean": 6.05163338135187,
+      "slo_goodput_speedup_min": 5.934700011756311,
+      "total_deadline_misses": 0,
+      "total_output_mismatches_vs_run0": 0,
+      "total_output_violations": 0,
+      "total_stale_or_replayed": 0,
+      "total_state_mismatches_vs_run0": 0,
+      "total_state_violations": 0,
+      "total_terminal_output_mismatches_vs_run0": 0,
+      "total_terminal_state_mismatches_vs_run0": 0,
+      "unique_full_trace_digests": 1,
+      "unique_terminal_trace_digests": 1,
+      "wall_speedup_ci95_halfwidth": 0.1280771716029491,
+      "wall_speedup_max": 6.188551629065717,
+      "wall_speedup_mean": 6.051633381351871,
+      "wall_speedup_min": 5.934700011756312,
+      "wall_speedup_stddev": 0.10316616068807634
+    },
+    {
+      "all_runs_pass": true,
+      "gpu_normalized_speedup_mean": 2.474577231277911,
+      "gpu_normalized_speedup_min": 2.4150872670412635,
+      "model": "Qwen3-ASR-1.7B",
+      "p99_seconds_max": 1.7301536003034563,
+      "p99_seconds_mean": 1.6200168931875378,
+      "runs": 5,
+      "slo_goodput_speedup_mean": 4.949154462555822,
+      "slo_goodput_speedup_min": 4.830174534082527,
+      "total_deadline_misses": 0,
+      "total_output_mismatches_vs_run0": 0,
+      "total_output_violations": 0,
+      "total_stale_or_replayed": 0,
+      "total_state_mismatches_vs_run0": 0,
+      "total_state_violations": 0,
+      "total_terminal_output_mismatches_vs_run0": 0,
+      "total_terminal_state_mismatches_vs_run0": 0,
+      "unique_full_trace_digests": 1,
+      "unique_terminal_trace_digests": 1,
+      "wall_speedup_ci95_halfwidth": 0.10189313105630496,
+      "wall_speedup_max": 5.048420933139705,
+      "wall_speedup_mean": 4.949154462555822,
+      "wall_speedup_min": 4.830174534082527,
+      "wall_speedup_stddev": 0.08207491623998302
+    }
+  ],
+  "risk_rows": [
+    {
+      "audit_fraction": 0.021981681931723562,
+      "base_audits": 660,
+      "caught_output_errors": 0,
+      "caught_state_errors": 0,
+      "confidence": 0.95,
+      "decision": "S1_NATURAL_SHADOW_AUDIT_PASS",
+      "model": "Qwen3-ASR-0.6B",
+      "observed_verified_selection_output_violations": 0,
+      "observed_verified_selection_state_violations": 0,
+      "policy_version": "v1_tau0.05",
+      "risk_eligible_entries": 30025,
+      "source": "results/phase2/risk_v1/natural-shadow-Qwen3-ASR-0.6B.json",
+      "unique_audited_jobs": 209,
+      "upper_error_count": 144,
+      "upper_risk": 0.0047960033305578685
+    },
+    {
+      "audit_fraction": 0.0197977118222517,
+      "base_audits": 597,
+      "caught_output_errors": 0,
+      "caught_state_errors": 0,
+      "confidence": 0.95,
+      "decision": "S1_NATURAL_SHADOW_AUDIT_PASS",
+      "model": "Qwen3-ASR-1.7B",
+      "observed_verified_selection_output_violations": 0,
+      "observed_verified_selection_state_violations": 0,
+      "policy_version": "v2_tau0.10",
+      "risk_eligible_entries": 30155,
+      "source": "results/phase2/risk_v2/natural-shadow-Qwen3-ASR-1.7B-tau0.10.json",
+      "unique_audited_jobs": 204,
+      "upper_error_count": 144,
+      "upper_risk": 0.0047753274747139775
+    }
+  ],
+  "risk_strata": [
+    {
+      "audit_fraction": 0.025139664804469275,
+      "audits": 9,
+      "caught_state_errors": 0,
+      "entries": 358,
+      "model": "Qwen3-ASR-0.6B",
+      "stratum": "(0.05,0.10]"
+    },
+    {
+      "audit_fraction": 0.02197802197802198,
+      "audits": 18,
+      "caught_state_errors": 0,
+      "entries": 819,
+      "model": "Qwen3-ASR-0.6B",
+      "stratum": "(0.10,0.20]"
+    },
+    {
+      "audit_fraction": 0.024717514124293787,
+      "audits": 35,
+      "caught_state_errors": 0,
+      "entries": 1416,
+      "model": "Qwen3-ASR-0.6B",
+      "stratum": "(0.20,0.50]"
+    },
+    {
+      "audit_fraction": 0.018469656992084433,
+      "audits": 49,
+      "caught_state_errors": 0,
+      "entries": 2653,
+      "model": "Qwen3-ASR-0.6B",
+      "stratum": "(0.50,1.00]"
+    },
+    {
+      "audit_fraction": 0.02215585778279995,
+      "audits": 549,
+      "caught_state_errors": 0,
+      "entries": 24779,
+      "model": "Qwen3-ASR-0.6B",
+      "stratum": "(1.00,inf)"
+    },
+    {
+      "audit_fraction": 0.0,
+      "audits": 0,
+      "caught_state_errors": 0,
+      "entries": 0,
+      "model": "Qwen3-ASR-1.7B",
+      "stratum": "(0.05,0.10]"
+    },
+    {
+      "audit_fraction": 0.024171888988361683,
+      "audits": 27,
+      "caught_state_errors": 0,
+      "entries": 1117,
+      "model": "Qwen3-ASR-1.7B",
+      "stratum": "(0.10,0.20]"
+    },
+    {
+      "audit_fraction": 0.019121813031161474,
+      "audits": 27,
+      "caught_state_errors": 0,
+      "entries": 1412,
+      "model": "Qwen3-ASR-1.7B",
+      "stratum": "(0.20,0.50]"
+    },
+    {
+      "audit_fraction": 0.017883035282745288,
+      "audits": 37,
+      "caught_state_errors": 0,
+      "entries": 2069,
+      "model": "Qwen3-ASR-1.7B",
+      "stratum": "(0.50,1.00]"
+    },
+    {
+      "audit_fraction": 0.019798880932816842,
+      "audits": 506,
+      "caught_state_errors": 0,
+      "entries": 25557,
+      "model": "Qwen3-ASR-1.7B",
+      "stratum": "(1.00,inf)"
+    }
+  ],
+  "schema_version": 1,
+  "simulation": {
+    "decision": "S1_ANYTIME_RISK_SIMULATION_PASS",
+    "overall_violation_rate": 0.02,
+    "trajectories": 2500,
+    "zero_caught_error_upper_risk": 0.0048
+  },
+  "system_rows": [
+    {
+      "deadline_miss_rate": 0.0,
+      "deadline_misses": 0,
+      "events": 240,
+      "gate": "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS",
+      "gpu_normalized_speedup": 2.9959097714142313,
+      "model": "Qwen3-ASR-0.6B",
+      "output_violations": 0,
+      "p99_reduction_over_phase1": 0.5516256091771736,
+      "p99_state_entry_seconds": 1.335885764537379,
+      "slo_goodput_speedup": 5.991819542828463,
+      "stale_or_replayed": 0,
+      "state_violations": 0,
+      "verification_fraction": 0.07916666666666666,
+      "verified_events": 19,
+      "wall_improvement_over_phase1": 0.08293024053073683,
+      "wall_speedup": 5.991819542828463
+    },
+    {
+      "deadline_miss_rate": 0.0,
+      "deadline_misses": 0,
+      "events": 240,
+      "gate": "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS",
+      "gpu_normalized_speedup": 2.4150872670412635,
+      "model": "Qwen3-ASR-1.7B",
+      "output_violations": 0,
+      "p99_reduction_over_phase1": 0.3311439429494283,
+      "p99_state_entry_seconds": 1.7301536003034563,
+      "slo_goodput_speedup": 4.830174534082527,
+      "stale_or_replayed": 0,
+      "state_violations": 0,
+      "verification_fraction": 0.09583333333333334,
+      "verified_events": 23,
+      "wall_improvement_over_phase1": 0.01672039222298838,
+      "wall_speedup": 4.830174534082527
+    }
+  ]
+}

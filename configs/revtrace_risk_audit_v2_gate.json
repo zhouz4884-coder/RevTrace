@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "P2_S1_ANYTIME_RISK_V2",
+  "status": "PREREGISTERED_AFTER_V1_FAILURE",
+  "calibration_evidence": [
+    {
+      "population": "Qwen3-ASR-0.6B FP16 c64",
+      "seed": 20260727,
+      "caught_state_errors": 1,
+      "caught_margin": 0.078125
+    },
+    {
+      "population": "Qwen3-ASR-1.7B FP16 c16",
+      "seed": 20260729,
+      "caught_state_errors": 1,
+      "caught_margin": 0.0625
+    }
+  ],
+  "policy": {
+    "Qwen3-ASR-0.6B": {
+      "concurrency": 16,
+      "margin_threshold": 0.05,
+      "rationale": "v1 c16 natural audit passed; c64 remains a separate boundary"
+    },
+    "Qwen3-ASR-1.7B": {
+      "concurrency": 16,
+      "margin_threshold": 0.1,
+      "rationale": "the frozen v1 c16 failure lies in the predeclared (0.05,0.10] stratum"
+    }
+  },
+  "independent_validation": {
+    "model": "Qwen3-ASR-1.7B",
+    "seed": 20260730,
+    "target_risk_eligible_entries": 30000,
+    "minimum_base_audits": 500,
+    "audit_probability": 0.021,
+    "alpha": 0.05,
+    "target_delta": 0.005,
+    "required_caught_state_errors": 0
+  },
+  "system_gate": {
+    "duration_seconds": 30,
+    "concurrency": 16,
+    "state_entry_deadline_seconds": 2.0,
+    "maximum_deadline_miss_rate": 0.01,
+    "minimum_wall_speedup": 4.0,
+    "minimum_gpu_normalized_speedup": 2.0,
+    "maximum_observed_output_state_stale_violations": 0
+  },
+  "boundaries": [
+    "v1 failures remain frozen and are not relabeled as v2 validation",
+    "the v2 seed is independent of both calibration runs",
+    "the threshold is model-and-concurrency specific, not a deterministic certificate",
+    "performance must be remeasured rather than inferred from the v1 trace"
+  ]
+}

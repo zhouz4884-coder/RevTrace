@@ -1,0 +1,40 @@
+{
+  "experiment_id": "REVTRACE-S2-TERMINAL-CANONICAL-V2",
+  "study": "RevTrace precision-portfolio terminal canonical",
+  "models": {
+    "Qwen3-ASR-0.6B": {
+      "terminal_canonical_dtype": "float16",
+      "batch_invariant": true
+    },
+    "Qwen3-ASR-1.7B": {
+      "terminal_canonical_dtype": "float16",
+      "batch_invariant": true,
+      "scope": "terminal position only; the chunk-11 fixed-shape counterexample remains"
+    }
+  },
+  "frozen_service_workload": {
+    "duration_seconds": 30,
+    "concurrency": 16,
+    "chunk_seconds": 2,
+    "proposer_dtype": "float16",
+    "margin_threshold": 0.05,
+    "terminal_canonical_batch_size": 16,
+    "proposer_gpus": 1,
+    "terminal_canonical_gpus": 1
+  },
+  "gates": {
+    "maximum_state_entry_deadline_miss_rate": 0.01,
+    "minimum_wall_speedup": 4.0,
+    "minimum_gpu_normalized_speedup": 2.0,
+    "maximum_output_violations": 0,
+    "maximum_state_projection_violations": 0,
+    "maximum_stale_or_replayed_commits": 0
+  },
+  "claim_boundaries": {
+    "canonical_migration": "terminal precision is an explicit versioned service contract",
+    "singleton_equivalence": "not claimed for the terminal transition",
+    "fixed_shape": "validated only for batch size 16, terminal position, and the frozen runtime",
+    "intermediate_margin": "empirical scheduling signal, not a deterministic certificate",
+    "deadline": "terminal canonical execution starts concurrently with the discarded proposer path"
+  }
+}

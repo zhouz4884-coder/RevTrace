@@ -1,4 +1,4 @@
-"""Mathematical helpers for RevGuard execution-shape contracts."""
+"""State-transaction and arithmetic-contract helpers for RevTrace."""
 
 from __future__ import annotations
 

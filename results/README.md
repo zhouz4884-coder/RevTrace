@@ -1,6 +1,9 @@
 # Results policy
 
-`results/phase0` and `results/phase1` contain the migrated compact evidence.
+`results/phase0` and `results/phase1` contain migrated compact evidence.
+`results/phase2` is the first standalone-project evidence tree and includes
+raw compact records, independent policy-repair validation, five-run
+replication, paper-facing CSV/Markdown tables, and a source manifest.
 Future experiments use:
 
 ```text

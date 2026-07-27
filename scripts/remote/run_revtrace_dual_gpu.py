@@ -1148,6 +1148,9 @@ def main() -> int:
         ),
         "environment": {
             "python": platform.python_version(),
+            "code_commit": os.environ.get(
+                "REVTRACE_CODE_COMMIT", "UNRECORDED"
+            ),
             "proposer_gpu": args.proposer_gpu,
             "verifier_gpu": args.verifier_gpu,
             "proposer_pid": os.getpid(),

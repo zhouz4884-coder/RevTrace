@@ -1,0 +1,185 @@
+{
+  "batch_size": 16,
+  "chunks": [
+    {
+      "chunk_id": 0,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s000"
+    },
+    {
+      "chunk_id": 1,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s001"
+    },
+    {
+      "chunk_id": 2,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s002"
+    },
+    {
+      "chunk_id": 3,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s003"
+    },
+    {
+      "chunk_id": 4,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s004"
+    },
+    {
+      "chunk_id": 5,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s005"
+    },
+    {
+      "chunk_id": 6,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s006"
+    },
+    {
+      "chunk_id": 7,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s007"
+    },
+    {
+      "chunk_id": 8,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s008"
+    },
+    {
+      "chunk_id": 9,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s009"
+    },
+    {
+      "chunk_id": 10,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s010"
+    },
+    {
+      "chunk_id": 11,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s011"
+    },
+    {
+      "chunk_id": 12,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s012"
+    },
+    {
+      "chunk_id": 13,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s013"
+    },
+    {
+      "chunk_id": 14,
+      "composition_mismatch": 0,
+      "permutation_mismatches": 0,
+      "repeat_mismatches": 0,
+      "replicated_internal_mismatches": 0,
+      "target_session": "s014"
+    }
+  ],
+  "contract": {
+    "logprobs": "disabled to isolate greedy execution",
+    "scope": "fixed batch size and frozen runtime version",
+    "singleton_equivalence": "not claimed"
+  },
+  "decision": "FIXED_SHAPE_CANONICAL_GATE_PASS",
+  "dtype": "float32",
+  "environment": {
+    "python": "3.12.13",
+    "vllm_attention_backend": null,
+    "vllm_batch_invariant": null
+  },
+  "event_count": 240,
+  "model_name": "Qwen3-ASR-0.6B",
+  "schema_version": 1,
+  "smoke": {
+    "custom": [
+      [
+        "English",
+        "Uh huh. Oh yeah, yeah.",
+        "Uh huh. Oh yeah, yeah."
+      ],
+      [
+        "English",
+        "Hmm. Oh, yeah, yeah. He wasn't even that big when.",
+        "Hmm. Oh, yeah, yeah. He wasn't even that big when."
+      ]
+    ],
+    "exact": true,
+    "official": [
+      [
+        "English",
+        "Uh huh. Oh yeah, yeah.",
+        "Uh huh. Oh yeah, yeah."
+      ],
+      [
+        "English",
+        "Hmm. Oh, yeah, yeah. He wasn't even that big when.",
+        "Hmm. Oh, yeah, yeah. He wasn't even that big when."
+      ]
+    ],
+    "warmup_final": [
+      "English",
+      "Hmm. Oh, yeah, yeah. He wasn't even that big when.",
+      "Hmm. Oh, yeah, yeah. He wasn't even that big when."
+    ]
+  },
+  "study": "RevTrace fixed-shape multimodal invariance",
+  "summary": {
+    "batch_seconds": {
+      "base_a": 16.800115301273763,
+      "base_b": 13.342393525876105,
+      "permuted": 13.500069056637585,
+      "replicated": 11.865357531234622
+    },
+    "composition_mismatches": 0,
+    "permutation_mismatches": 0,
+    "repeat_mismatches": 0,
+    "replicated_internal_mismatches": 0
+  }
+}

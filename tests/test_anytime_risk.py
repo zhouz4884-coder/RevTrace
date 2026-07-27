@@ -1,3 +1,5 @@
+import math
+
 import pytest
 
 from revtrace.risk import (
@@ -24,6 +26,25 @@ def test_upper_count_is_monotone_in_caught_errors() -> None:
 def test_upper_count_contains_observed_catches() -> None:
     bound = AuditRiskBound(0.1, 0.05)
     assert bound.upper_error_count(100, 7) >= 7
+
+
+@pytest.mark.parametrize(
+    ("entries", "caught"),
+    ((100, 0), (100, 3), (1_000, 0), (1_000, 9)),
+)
+def test_upper_count_matches_brute_force_inversion(
+    entries: int,
+    caught: int,
+) -> None:
+    bound = AuditRiskBound(0.021, 0.05)
+    threshold = math.log(1.0 / bound.alpha)
+    accepted = [
+        errors
+        for errors in range(caught, entries + 1)
+        if bound.log_e_value(errors, caught) < threshold
+    ]
+    expected = max(accepted) if accepted else caught
+    assert bound.upper_error_count(entries, caught) == expected
 
 
 def test_stratified_bound_sums_simultaneous_upper_counts() -> None:

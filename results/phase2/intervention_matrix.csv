@@ -1,0 +1,10 @@
+intervention,model,decision,evidence
+c64 calibration shadow audit,both,CALIBRATION_ONLY,different batch shape from deployed c16; retained for stress diagnosis and excluded from the c16 risk claim
+two FP16 singleton verifier processes,Qwen3-ASR-0.6B,FAIL,3.33% deadline miss without MPS
+two FP16 singleton verifier processes with MPS,Qwen3-ASR-0.6B,FAIL,3.75% deadline miss; MPS did not remove terminal burst
+FP32 fixed-shape terminal canonical,Qwen3-ASR-1.7B,FAIL,6.67% deadline miss; P99 2.701 s
+FP16 batch-invariant same-input,Qwen3-ASR-0.6B,BOUNDARY,"1/240 output mismatch, 0/240 state mismatch"
+FP16 batch-invariant same-input,Qwen3-ASR-1.7B,FAIL,1/240 output and state mismatch
+FP16 fixed-shape invariance,Qwen3-ASR-0.6B,PASS,0 repeat/permutation/replication/composition mismatches
+FP16 fixed-shape invariance,Qwen3-ASR-1.7B,FAIL,7 replicated-row and 1 composition mismatches
+FP32 fixed-shape invariance,both,PASS,0 mismatches in all four invariance checks

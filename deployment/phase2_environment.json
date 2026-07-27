@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_phase": "phase2",
+  "experiment_code_commit": "eaabdaa017a13786370f3b0e13a1248f94084865",
+  "server": {
+    "os": "Ubuntu 20.04 kernel 5.15.0-139-generic",
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_mib": 24576,
+        "uuid": "GPU-ef01d441-985f-50b3-6e64-5d4c3e2def3a"
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_mib": 24576,
+        "uuid": "GPU-a696ce9a-7137-cf6f-b4d3-deb992a72f28"
+      }
+    ],
+    "driver_version": "570.133.07"
+  },
+  "software": {
+    "python": "3.12.13",
+    "torch": "2.9.1",
+    "vllm": "0.14.0",
+    "transformers": "4.57.6",
+    "numpy": "2.2.6",
+    "qwen_asr": "0.0.6"
+  },
+  "inputs": {
+    "workload_manifest_sha256": "66a613d9340bf9d3d299c835b0c02c370cb0202e349a5be6ca7e0bc949c30694",
+    "qwen3_asr_0_6b_config_sha256": "76d3ae4601ce939830b2517f4a6cadb86cc51316c3900af6b020b051c21a478c",
+    "qwen3_asr_0_6b_weight_bytes": 1876091704,
+    "qwen3_asr_1_7b_config_sha256": "2e74a751548b8ad7d7526d29365ad8144c345d8b412b1152d25dc6698452712f",
+    "qwen3_asr_1_7b_weight_bytes": 4698521512,
+    "shared_tokenizer_config_sha256": "4942d005604266809309cabc9f4e9cb89ce855d59b14681fdc0e1cc62ea26c4c"
+  },
+  "runners": {
+    "shadow_audit_sha256": "2a69d2e1965c3617e8fda1f9dfcacc0843f322682075b60fcd3fe55d95c55c50",
+    "dual_gpu_service_sha256": "06084a065b3e8dbd59fe79ec272bacae321c1ecef19500ae5f24d341bf20479c",
+    "terminal_replicates_orchestrator_sha256": "8e23d04f15555395ecee69d46f0da2629646a8c4ce8d74954110c42520825222",
+    "post_calibration_orchestrator_sha256": "17d458f04b4612973144ac9063f305ed312759f75e8997f7aa38f6055c19979a",
+    "risk_v2_repair_orchestrator_sha256": "3f295f3bb20aa757f8406878f1ef874e4267f249a6e97c1944c0da8240070be0"
+  },
+  "placement": {
+    "gpu_0": "FP16 batched proposer and intermediate canonical bypass",
+    "gpu_1": "FP16 shadow/canonical verifier and fixed-shape terminal canonical"
+  },
+  "boundaries": {
+    "source_revision": "eaabdaa is the committed baseline; the exact metadata-only runner revisions used by Phase 2 are identified by the SHA-256 values above and are preserved in the frozen artifact",
+    "weight_identity": "config hashes and frozen local file sizes recorded; full multi-gigabyte weight hashes were not recomputed in this phase",
+    "tokenizer": "Transformers 4.57.6 warns that the frozen Qwen2Tokenizer regex lacks fix_mistral_regex=True. The flag was not changed mid-study because doing so would migrate the canonical token trajectory; proposer, verifier, and baselines use the same frozen tokenizer configuration.",
+    "runner_cleanup": "The diagnostic shadow-audit runner emits a destroy_process_group cleanup warning after the result is durably written. This is an implementation-hygiene issue and is excluded from serving-performance claims.",
+    "large_state": "models, environments, caches, full logs, and remote raw state remain on the designated 8 TB experiment disk"
+  }
+}

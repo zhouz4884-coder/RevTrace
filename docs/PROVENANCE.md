@@ -22,3 +22,10 @@ project maps them into phase-scoped directories without rewriting raw evidence:
 The original workspace remains intact as an archival source. Future work must
 run from the standalone RevTrace repository and use the phase-scoped remote
 paths documented in the root README.
+
+Phase 2 is the first phase executed entirely from the standalone repository.
+Its exact remote runner revisions are bound by SHA-256 in
+`deployment/phase2_environment.json`; compact result files are copied back only
+after remote completion, then covered by the repository and artifact manifests.
+Models, environments, full logs, caches, and other large state remain on the
+designated experiment disk.

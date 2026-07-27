@@ -527,6 +527,9 @@ def main() -> int:
             "platform": platform.platform(),
             "proposer_gpu": args.proposer_gpu,
             "verifier_gpu": args.verifier_gpu,
+            "code_commit": os.environ.get(
+                "REVTRACE_CODE_COMMIT", "UNRECORDED"
+            ),
         },
         "claim_boundaries": {
             "population": (

@@ -10,6 +10,7 @@ export PATH="${DATA_ROOT}/envs/revbatch-cu128/bin:${PATH}"
 export PYTHONPATH="${PROJECT_ROOT}/src:${PROJECT_ROOT}/scripts/remote"
 export HF_HOME="${DATA_ROOT}/cache/huggingface"
 export VLLM_WORKER_MULTIPROC_METHOD=spawn
+export REVTRACE_CODE_COMMIT="eaabdaa017a13786370f3b0e13a1248f94084865"
 
 for model_name in Qwen3-ASR-0.6B Qwen3-ASR-1.7B; do
   if [[ -f "${RESULT_ROOT}/natural-shadow-${model_name}.json" ]]; then

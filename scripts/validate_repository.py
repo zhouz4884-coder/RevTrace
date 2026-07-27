@@ -100,6 +100,71 @@ def main() -> int:
             repo_relative=False,
         )
     )
+    phase2_summary = json.loads(
+        (
+            ROOT
+            / "results"
+            / "phase2"
+            / "risk_v1"
+            / "summary.json"
+        ).read_text(encoding="utf-8")
+    )
+    if not phase2_summary["decision"].startswith(
+        "PHASE2_RISK_AND_TAIL_GATE_PASS"
+    ):
+        failures.append(
+            f"phase2-decision:{phase2_summary['decision']}"
+        )
+    if len(phase2_summary.get("risk_rows", [])) != 2:
+        failures.append("phase2-risk-model-count")
+    for row in phase2_summary.get("risk_rows", []):
+        if not row["decision"].endswith("_PASS"):
+            failures.append(
+                f"phase2-risk:{row['model']}:{row['decision']}"
+            )
+    if len(phase2_summary.get("replicate_stats", [])) != 2:
+        failures.append("phase2-system-model-count")
+    for row in phase2_summary.get("replicate_stats", []):
+        if row["runs"] != 5 or not row["all_runs_pass"]:
+            failures.append(
+                f"phase2-replicates:{row['model']}:{row['runs']}"
+            )
+        if any(
+            row[key] != 0
+            for key in (
+                "total_deadline_misses",
+                "total_output_violations",
+                "total_state_violations",
+                "total_stale_or_replayed",
+            )
+        ):
+            failures.append(f"phase2-system-safety:{row['model']}")
+    phase2_environment = json.loads(
+        (ROOT / "deployment" / "phase2_environment.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    runner_paths = {
+        "shadow_audit_sha256":
+            ROOT / "scripts" / "remote" / "run_shadow_risk_audit.py",
+        "dual_gpu_service_sha256":
+            ROOT / "scripts" / "remote" / "run_revtrace_dual_gpu.py",
+        "terminal_replicates_orchestrator_sha256":
+            ROOT / "scripts" / "remote" / "run_terminal_replicates.sh",
+        "post_calibration_orchestrator_sha256":
+            ROOT
+            / "scripts"
+            / "remote"
+            / "run_phase2_post_calibration.sh",
+        "risk_v2_repair_orchestrator_sha256":
+            ROOT
+            / "scripts"
+            / "remote"
+            / "run_phase2_risk_v2_repair.sh",
+    }
+    for key, path in runner_paths.items():
+        if sha256(path) != phase2_environment["runners"][key]:
+            failures.append(f"phase2-runner-hash:{key}")
 
     print(
         json.dumps(

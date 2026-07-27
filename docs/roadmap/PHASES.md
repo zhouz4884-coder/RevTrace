@@ -53,8 +53,11 @@ Gate S2:
 Current status:
 
 - S1 simulation: `PASS` over 2,500 simulated trajectories;
-- S1 natural shadow audit: `RUNNING`;
-- S2 deployed terminal-tail gate: `PASS` for both Qwen3-ASR sizes;
+- S1 natural shadow audit: `PASS` for both active policies;
+- S1 frozen repair boundary: the 1.7B `tau=0.05` policy failed an independent
+  c16 audit; the preregistered `tau=0.10` replacement passed on a fresh seed;
+- S2 deployed terminal-tail gate: `PASS` for both Qwen3-ASR sizes with five
+  runs per active policy;
 - deterministic intermediate certificate: `UNRESOLVED`.
 
 ## Phase 3 — state amplification

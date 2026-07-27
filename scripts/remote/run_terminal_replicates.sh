@@ -10,9 +10,11 @@ export PATH="${DATA_ROOT}/envs/revbatch-cu128/bin:${PATH}"
 export PYTHONPATH="${PROJECT_ROOT}/src:${PROJECT_ROOT}/scripts/remote"
 export HF_HOME="${DATA_ROOT}/cache/huggingface"
 export VLLM_WORKER_MULTIPROC_METHOD=spawn
+export REVTRACE_CODE_COMMIT="eaabdaa017a13786370f3b0e13a1248f94084865"
 
 mkdir -p "${RESULT_ROOT}" "${LOG_ROOT}"
 
+overall_status=0
 for model_name in Qwen3-ASR-0.6B Qwen3-ASR-1.7B; do
   model_dir="${DATA_ROOT}/models/${model_name}"
   safe_name="${model_name//[^A-Za-z0-9._-]/_}"
@@ -41,7 +43,9 @@ for model_name in Qwen3-ASR-0.6B Qwen3-ASR-1.7B; do
     printf '{"model":"%s","repeat":%s,"status":%s}\n' \
       "${model_name}" "${repeat}" "${status}"
     if [[ ${status} -ne 0 ]]; then
-      exit "${status}"
+      overall_status=2
     fi
   done
 done
+
+exit "${overall_status}"

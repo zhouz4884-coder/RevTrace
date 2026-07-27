@@ -1,0 +1,78 @@
+{
+  "config": {
+    "alpha": 0.05,
+    "audit_probability": 0.021,
+    "delta": 0.005,
+    "entries": 30000,
+    "repetitions_per_scenario": 500,
+    "seed": 20260727
+  },
+  "decision": "S1_ANYTIME_RISK_SIMULATION_FAIL",
+  "formal_scope": {
+    "adaptive_extra_audits": "excluded from the formal e-process; diagnostics only",
+    "base_audit": "fixed independent coin decided before canonical outcome",
+    "drift": "arbitrary error order is allowed",
+    "guarantee": "time-uniform cumulative fast-path error count"
+  },
+  "overall_coverage_violation_rate": 0.022,
+  "scenarios": [
+    {
+      "coverage_violation_rate": 0.0,
+      "coverage_violation_wilson_upper_95": 0.007624618530903363,
+      "coverage_violations": 0,
+      "mean_base_audits": 630.636,
+      "mean_extra_audits": 0.0,
+      "mean_final_upper_risk": 0.0048,
+      "mean_stopped_at": 30000.0,
+      "repetitions": 500,
+      "scenario": "zero"
+    },
+    {
+      "coverage_violation_rate": 0.0,
+      "coverage_violation_wilson_upper_95": 0.007624618530903363,
+      "coverage_violations": 0,
+      "mean_base_audits": 617.212,
+      "mean_extra_audits": 0.0,
+      "mean_final_upper_risk": 0.010942866666666667,
+      "mean_stopped_at": 29332.8,
+      "repetitions": 500,
+      "scenario": "rare"
+    },
+    {
+      "coverage_violation_rate": 0.026,
+      "coverage_violation_wilson_upper_95": 0.04397190104437119,
+      "coverage_violations": 13,
+      "mean_base_audits": 629.374,
+      "mean_extra_audits": 499.158,
+      "mean_final_upper_risk": 0.023467333333333333,
+      "mean_stopped_at": 29930.4,
+      "repetitions": 500,
+      "scenario": "boundary"
+    },
+    {
+      "coverage_violation_rate": 0.054,
+      "coverage_violation_wilson_upper_95": 0.07742706124443205,
+      "coverage_violations": 27,
+      "mean_base_audits": 628.776,
+      "mean_extra_audits": 510.526,
+      "mean_final_upper_risk": 0.0328298,
+      "mean_stopped_at": 30000.0,
+      "repetitions": 500,
+      "scenario": "unsafe"
+    },
+    {
+      "coverage_violation_rate": 0.03,
+      "coverage_violation_wilson_upper_95": 0.04890409218496563,
+      "coverage_violations": 15,
+      "mean_base_audits": 629.406,
+      "mean_extra_audits": 2610.31,
+      "mean_final_upper_risk": 0.03382246666666666,
+      "mean_stopped_at": 30000.0,
+      "repetitions": 500,
+      "scenario": "sudden_drift"
+    }
+  ],
+  "schema_version": 1,
+  "study": "RevTrace S1 anytime randomized-audit simulation",
+  "zero_caught_error_upper_risk": 0.0048
+}

@@ -38,22 +38,37 @@
     {
       "id": "P2_S1_ANYTIME_RISK_V1",
       "phase": "phase2",
-      "status": "SIMULATION_PASS_NATURAL_AUDIT_RUNNING",
+      "status": "FROZEN_PARTIAL_FAIL_1P7B_TAU0P05",
       "config": "configs/revtrace_risk_audit_gate.json",
-      "result": "results/phase2/risk_v1/summary.json",
+      "result": "results/phase2/risk_v1/natural-shadow-Qwen3-ASR-1.7B.json",
+      "artifact": "artifact/phase2-risk-tail-v1"
+    },
+    {
+      "id": "P2_S1_ANYTIME_RISK_V2_REPAIR",
+      "phase": "phase2",
+      "status": "ANYTIME_RISK_GATE_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED",
+      "config": "configs/revtrace_risk_audit_v2_gate.json",
+      "result": "results/phase2/risk_v2/natural-shadow-Qwen3-ASR-1.7B-tau0.10.json",
       "artifact": "artifact/phase2-risk-tail-v1"
     },
     {
       "id": "P2_S2_TERMINAL_CANONICAL_V2",
       "phase": "phase2",
-      "status": "TERMINAL_TAIL_GATE_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED",
+      "status": "FROZEN_TAU0P05_BASELINE_REPLACED_FOR_1P7B",
       "config": "configs/revtrace_terminal_canonical_gate.json",
-      "result": "results/phase2/terminal_canonical/summary.json",
+      "result": "results/phase2/terminal_canonical/terminal-canonical-Qwen3-ASR-1.7B-d30-c16.json",
+      "artifact": "artifact/phase2-risk-tail-v1"
+    },
+    {
+      "id": "P2_S2_TERMINAL_CANONICAL_V2_REPAIR",
+      "phase": "phase2",
+      "status": "TERMINAL_TAIL_GATE_PASS_FIVE_RUNS_DETERMINISTIC_CERTIFICATE_UNRESOLVED",
+      "config": "configs/revtrace_risk_audit_v2_gate.json",
+      "result": "results/phase2/terminal_canonical_v2/terminal-canonical-Qwen3-ASR-1.7B-tau0.10-d30-c16.json",
       "artifact": "artifact/phase2-risk-tail-v1"
     }
   ],
   "next_gates": [
-    "S1_NATURAL_ANYTIME_RISK_AUDIT",
     "S3_REVISION_IMPULSE_RESPONSE",
     "S4_SECOND_ARCHITECTURE",
     "S5_PREVENTIVE_DETERMINISM_BASELINE"
