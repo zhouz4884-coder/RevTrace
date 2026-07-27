@@ -1,0 +1,189 @@
+{
+  "aggregate": {
+    "event_count": 6,
+    "final_count": 2,
+    "final_exact_match_rate": 1.0,
+    "final_exact_matches": 2,
+    "max_audio_throughput_speedup": 1.7578998357637563,
+    "max_p99_reduction_fraction": 0.33727727061952595,
+    "median_audio_throughput_speedup": 1.7578998357637563,
+    "token_exact_match_rate": 1.0,
+    "token_exact_matches": 6,
+    "transcript_exact_match_rate": 1.0,
+    "transcript_exact_matches": 6
+  },
+  "cells": [
+    {
+      "audio_throughput_speedup": 1.7578998357637563,
+      "batched": {
+        "audio_seconds": 12.0,
+        "audio_throughput": 11.929492413296122,
+        "batch_service_times": [
+          {
+            "audio_frontier_seconds": 2.0,
+            "batch_size": 2,
+            "service_seconds": 0.24565456714481115
+          },
+          {
+            "audio_frontier_seconds": 4.0,
+            "batch_size": 2,
+            "service_seconds": 0.4520265506580472
+          },
+          {
+            "audio_frontier_seconds": 6.0,
+            "batch_size": 2,
+            "service_seconds": 0.3066227016970515
+          }
+        ],
+        "deadline_met_fraction": 1.0,
+        "deadline_seconds": 2.0,
+        "event_count": 6,
+        "event_digest": "52e254717256b793ca12ddc3d3e1ea098e358479db2aaf070ae349c3ab3abaa4",
+        "final_states": [
+          {
+            "language": "English",
+            "raw_decoded": "Uh huh. Oh yeah, yeah. He wasn't even that big when I started listening to him.",
+            "session_id": "s000",
+            "text": "Uh huh. Oh yeah, yeah. He wasn't even that big when I started listening to him."
+          },
+          {
+            "language": "Chinese",
+            "raw_decoded": "甚至出现交易几乎停滞的情况，甚至出现。",
+            "session_id": "s001",
+            "text": "甚至出现交易几乎停滞的情况，甚至出现。"
+          }
+        ],
+        "mode": "batched",
+        "p50_event_latency_seconds": 0.3077633208595216,
+        "p95_event_latency_seconds": 0.45234517683275044,
+        "p99_event_latency_seconds": 0.4523509508464485,
+        "slo_audio_goodput": 11.929492413296122,
+        "wall_seconds": 1.0059103593230247
+      },
+      "comparison": {
+        "event_count": 6,
+        "final_count": 2,
+        "final_exact_match_rate": 1.0,
+        "final_exact_matches": 2,
+        "mismatches": [],
+        "raw_exact_match_rate": 1.0,
+        "raw_exact_matches": 6,
+        "token_exact_match_rate": 1.0,
+        "token_exact_matches": 6,
+        "transcript_exact_match_rate": 1.0,
+        "transcript_exact_matches": 6
+      },
+      "concurrency": 2,
+      "duration_seconds": 6,
+      "languages": [
+        "Chinese",
+        "English"
+      ],
+      "p99_reduction_fraction": 0.33727727061952595,
+      "singleton": {
+        "audio_seconds": 12.0,
+        "audio_throughput": 6.786218515182411,
+        "batch_service_times": [
+          {
+            "audio_frontier_seconds": 2.0,
+            "batch_size": 1,
+            "service_seconds": 0.25569219794124365
+          },
+          {
+            "audio_frontier_seconds": 2.0,
+            "batch_size": 1,
+            "service_seconds": 0.2394588692113757
+          },
+          {
+            "audio_frontier_seconds": 4.0,
+            "batch_size": 1,
+            "service_seconds": 0.4483064338564873
+          },
+          {
+            "audio_frontier_seconds": 4.0,
+            "batch_size": 1,
+            "service_seconds": 0.23905000276863575
+          },
+          {
+            "audio_frontier_seconds": 6.0,
+            "batch_size": 1,
+            "service_seconds": 0.3213149197399616
+          },
+          {
+            "audio_frontier_seconds": 6.0,
+            "batch_size": 1,
+            "service_seconds": 0.26253677625209093
+          }
+        ],
+        "deadline_met_fraction": 1.0,
+        "deadline_seconds": 2.0,
+        "event_count": 6,
+        "event_digest": "52e254717256b793ca12ddc3d3e1ea098e358479db2aaf070ae349c3ab3abaa4",
+        "final_states": [
+          {
+            "language": "English",
+            "raw_decoded": "Uh huh. Oh yeah, yeah. He wasn't even that big when I started listening to him.",
+            "session_id": "s000",
+            "text": "Uh huh. Oh yeah, yeah. He wasn't even that big when I started listening to him."
+          },
+          {
+            "language": "Chinese",
+            "raw_decoded": "甚至出现交易几乎停滞的情况，甚至出现。",
+            "session_id": "s001",
+            "text": "甚至出现交易几乎停滞的情况，甚至出现。"
+          }
+        ],
+        "mode": "singleton",
+        "p50_event_latency_seconds": 0.4719195030629635,
+        "p95_event_latency_seconds": 0.662092657526955,
+        "p99_event_latency_seconds": 0.6825644131284208,
+        "slo_audio_goodput": 6.786218515182411,
+        "wall_seconds": 1.7682896554470062
+      },
+      "slo_goodput_speedup": 1.7578998357637563
+    }
+  ],
+  "elapsed_seconds": 39.6752610206604,
+  "environment": {
+    "cuda_visible_devices": "1",
+    "hostname": "user",
+    "python": "3.12.13"
+  },
+  "model_name": "Qwen3-ASR-1.7B",
+  "model_path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-1.7B",
+  "official_semantics_smoke": {
+    "custom": [
+      [
+        "English",
+        "Uh huh. Oh yeah, yeah.",
+        "Uh huh. Oh yeah, yeah."
+      ],
+      [
+        "English",
+        "Uh huh. Oh yeah, yeah. He wasn't even that big when.",
+        "Uh huh. Oh yeah, yeah. He wasn't even that big when."
+      ]
+    ],
+    "exact": true,
+    "official": [
+      [
+        "English",
+        "Uh huh. Oh yeah, yeah.",
+        "Uh huh. Oh yeah, yeah."
+      ],
+      [
+        "English",
+        "Uh huh. Oh yeah, yeah. He wasn't even that big when.",
+        "Uh huh. Oh yeah, yeah. He wasn't even that big when."
+      ]
+    ],
+    "warmup_final": [
+      "English",
+      "Uh huh. Oh yeah, yeah. He wasn't even that big when.",
+      "Uh huh. Oh yeah, yeah. He wasn't even that big when."
+    ]
+  },
+  "schema_version": 1,
+  "smoke": true,
+  "started_unix": 1785080631.8302538
+}

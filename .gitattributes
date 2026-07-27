@@ -1,0 +1,27 @@
+* text=auto
+.gitattributes text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.csv text eol=lf
+*.prom text eol=lf
+*.patch text eol=lf -whitespace
+*.ps1 text eol=lf
+*.ini text eol=lf
+*.gitkeep text eol=lf
+# Runtime logs may contain terminal control bytes and intentional trailing
+# whitespace. Preserve their bytes and do not treat them as source-code diffs.
+*.log -text -diff
+SHA256SUMS text eol=lf
+server_resource_snapshot.txt text eol=lf
+
+# Frozen migrated evidence is byte-audited. Do not normalize it after the
+# standalone manifests have been frozen.
+artifact/phase0-revbatch-gate-v1/** -text -whitespace
+artifact/phase0-revguard-mechanism-v1/** -text -whitespace
+artifact/phase0-state-contract-v1/** -text -whitespace
+artifact/phase1-deployed-system-v1/** -text -whitespace
+results/phase0/** -text -whitespace
+results/phase1/** -text -whitespace

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "study": "RevGuard same-input mechanism and selective-verification gate",
+  "frozen_margin_threshold": 1.0,
+  "calibration_cell": {
+    "duration_seconds": 30,
+    "concurrency": 8
+  },
+  "held_out_shape_cell": {
+    "duration_seconds": 30,
+    "concurrency": 16
+  },
+  "m1": {
+    "singleton_repeat_token_exact_rate": 1.0,
+    "requires_cross_shape_mismatch": true
+  },
+  "m2_empirical": {
+    "held_out_false_safe_events": 0,
+    "minimum_safe_coverage": 0.5,
+    "claim_boundary": "Empirical admission evidence only. Margin is not a deterministic certificate without a bound on cross-shape logit perturbation."
+  },
+  "m3": {
+    "policy_violation_events": 0,
+    "minimum_single_gpu_policy_speedup": 2.0
+  },
+  "m4": {
+    "verifier_service_time_must_not_exceed_fraction_of_proposer": 0.8,
+    "claim_boundary": "A dual-GPU pipeline lower bound is not a live cross-GPU serving implementation."
+  },
+  "sequential_stop": true
+}

@@ -1,0 +1,32 @@
+{
+  "study": "RevTrace deployed two-GPU revision transactions",
+  "models": [
+    "Qwen3-ASR-0.6B",
+    "Qwen3-ASR-1.7B"
+  ],
+  "frozen_service_workload": {
+    "duration_seconds": 30,
+    "concurrency": 16,
+    "chunk_seconds": 2,
+    "dtype": "float16",
+    "margin_threshold": 0.05,
+    "proposer_gpus": 1,
+    "verifier_gpus": 1
+  },
+  "gates": {
+    "minimum_wall_speedup": 4.0,
+    "minimum_slo_goodput_speedup": 4.0,
+    "maximum_output_violations": 0,
+    "maximum_state_projection_violations": 0,
+    "maximum_stale_or_replayed_commits": 0,
+    "minimum_stress_mismatches_per_model": 50,
+    "maximum_stress_false_safe_rows": 0
+  },
+  "claim_boundaries": {
+    "margin": "empirical scheduling signal, not a deterministic certificate",
+    "stress": "safety stress, not natural prevalence",
+    "wsir": "generic batch-invariant kernel novelty rejected after D0",
+    "cascading_speculation": "not authorized without measured cross-chunk verifier lag",
+    "deterministic_certificate": "unresolved"
+  }
+}

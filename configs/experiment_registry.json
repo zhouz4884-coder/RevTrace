@@ -1,0 +1,46 @@
+{
+  "project": "RevTrace",
+  "schema_version": 1,
+  "source_commit": "dc8887dd538cc3d9916f441b38ebd909e92db97e",
+  "experiments": [
+    {
+      "id": "P0_REVBATCH_GATE_V1",
+      "phase": "phase0",
+      "status": "FROZEN_NO_GO_EXACTNESS_PERFORMANCE_OPPORTUNITY_PASS",
+      "config": "configs/revbatch_gate.json",
+      "result": "results/phase0/revbatch/revbatch_v1/summary.json",
+      "artifact": "artifact/phase0-revbatch-gate-v1"
+    },
+    {
+      "id": "P0_REVGUARD_MECHANISM_V1",
+      "phase": "phase0",
+      "status": "MECHANISM_ORACLE_VALIDATED_EXACT_CERTIFICATE_UNRESOLVED",
+      "config": "configs/revguard_mechanism_gate.json",
+      "result": "results/phase0/revguard/revguard_v1/summary.json",
+      "artifact": "artifact/phase0-revguard-mechanism-v1"
+    },
+    {
+      "id": "P0_STATE_CONTRACT_N1",
+      "phase": "phase0",
+      "status": "LIVE_MECHANISM_GATE_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED",
+      "config": "configs/revguard_state_contract_gate.json",
+      "result": "results/phase0/revguard/revguard_n1/summary.json",
+      "artifact": "artifact/phase0-state-contract-v1"
+    },
+    {
+      "id": "P1_DEPLOYED_SYSTEM_V1",
+      "phase": "phase1",
+      "status": "DEPLOYED_SYSTEM_GATE_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED",
+      "config": "configs/revtrace_deployed_gate.json",
+      "result": "results/phase1/deployed_v1/summary.json",
+      "artifact": "artifact/phase1-deployed-system-v1"
+    }
+  ],
+  "next_gates": [
+    "S1_STRATIFIED_ANYTIME_RISK",
+    "S2_TERMINAL_RESERVED_TAIL",
+    "S3_REVISION_IMPULSE_RESPONSE",
+    "S4_SECOND_ARCHITECTURE",
+    "S5_PREVENTIVE_DETERMINISM_BASELINE"
+  ]
+}

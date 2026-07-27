@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "candidate": "RevBatch",
+  "decision": "D0_PASS_PROCEED_TO_PERFORMANCE_GATE",
+  "audit_date": "2026-07-26",
+  "fixed_sources": [
+    {
+      "name": "Qwen3-ASR official repository",
+      "url": "https://github.com/QwenLM/Qwen3-ASR",
+      "commit": "7c6daf77a2421100f5fb066495372c00129d39ff",
+      "facts": [
+        "streaming inference is vLLM-only",
+        "streaming inference explicitly does not support batch inference",
+        "each ready chunk re-feeds all accumulated audio",
+        "the prompt rolls back the last K output tokens",
+        "the implementation calls model.generate with a singleton list"
+      ]
+    },
+    {
+      "name": "vLLM model-specific realtime streaming abstraction RFC",
+      "url": "https://github.com/vllm-project/vllm/issues/35908",
+      "facts": [
+        "Qwen3-ASR needs a growing audio buffer and prefix rollback",
+        "the public RFC does not provide revision-aware multi-session batching",
+        "the issue remained open at audit time"
+      ]
+    },
+    {
+      "name": "vLLM Qwen3-ASR stateless realtime issue",
+      "url": "https://github.com/vllm-project/vllm/issues/35767",
+      "facts": [
+        "the realtime endpoint processed segments without cross-segment state",
+        "the realtime protocol lacked draft/finalize revision semantics",
+        "the issue remained open at audit time"
+      ]
+    },
+    {
+      "name": "vLLM AsyncScheduler Qwen3-ASR crash",
+      "url": "https://github.com/vllm-project/vllm/issues/35755",
+      "facts": [
+        "streaming input and encoder output placeholder accounting could crash the engine",
+        "the issue did not implement revision-aware batching",
+        "the issue remained open at audit time"
+      ]
+    },
+    {
+      "name": "Duration Aware Scheduling for ASR Serving Under Workload Drift",
+      "url": "https://arxiv.org/abs/2603.11273",
+      "facts": [
+        "the work schedules offline ASR requests by duration",
+        "it does not model growing-buffer token-rollback revisions"
+      ]
+    }
+  ],
+  "claim_boundary": "D0 found no complete system for deadline- and shape-aware batching of multiple Qwen3-ASR growing-buffer revision streams. Generic ASR duration scheduling, offline batch inference, and realtime correctness repairs are prior art and are not claimed."
+}

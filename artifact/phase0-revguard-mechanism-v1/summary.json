@@ -1,0 +1,143 @@
+{
+  "claim_boundary": [
+    "The same-input controls distinguish revision-feedback contamination from execution-shape behavior.",
+    "Zero false-safe events on the held-out shape are empirical evidence, not a deterministic or production-frequency guarantee.",
+    "The dual-GPU number is a service-time pipeline lower bound, not a deployed cross-GPU runtime.",
+    "The public English and Chinese samples test execution semantics only, not ASR quality or dataset generalization."
+  ],
+  "decision": "MECHANISM_ORACLE_VALIDATED_EXACT_CERTIFICATE_UNRESOLVED",
+  "gates": {
+    "m1_fp32_shape_stability": "PASS",
+    "m1_same_input_mechanism": "PASS",
+    "m2_deterministic_margin_certificate": "NOT_ESTABLISHED",
+    "m2_empirical_margin_partition": "PASS",
+    "m3_live_selective_oracle": "PASS",
+    "m4_verifier_fully_hidden": "FAIL",
+    "m5_dynamic_rollback": "NOT_RUN_SEQUENTIAL_STOP"
+  },
+  "mathematical_boundary": {
+    "missing_for_deterministic_claim": "a sound online upper bound on full-distribution cross-shape perturbation",
+    "observed_signal": "top-1/top-2 margin",
+    "sufficient_condition": "m_batch > 2 * ||log_p_batch - log_p_singleton||_infinity"
+  },
+  "models": [
+    {
+      "calibration": {
+        "batch_repeat_exact": 1.0,
+        "cross_shape_exact": 0.9666666666666667,
+        "event_count": 120,
+        "replica_all_rows_exact_count": 0,
+        "replica_all_rows_match_singleton_count": 0,
+        "replica_probe_count": 4,
+        "singleton_repeat_exact": 1.0,
+        "threshold_1_coverage": 0.8083333333333333,
+        "threshold_1_false_safe": 0
+      },
+      "fp32_control": {
+        "bf16_fp32_same_input_pairs": 90,
+        "bf16_singleton_fp32_singleton_exact_pairs": 84,
+        "c16_batch_speedup_over_fp32_singleton": 5.5526043877690405,
+        "c16_cross_shape_exact": 1.0,
+        "c8_batch_speedup_over_fp32_singleton": 3.536214795484771,
+        "c8_cross_shape_exact": 1.0,
+        "whole_trajectory_events": 120,
+        "whole_trajectory_token_exact_events": 108
+      },
+      "fp32_shape_stable": true,
+      "held_out_shape": {
+        "batch_repeat_exact": 0.9916666666666667,
+        "cross_shape_exact": 0.9708333333333333,
+        "cross_shape_mismatch_events": 7,
+        "event_count": 240,
+        "lcp_reference_fraction_median": 1.0,
+        "lcp_reference_fraction_minimum": 0.125,
+        "singleton_repeat_exact": 1.0,
+        "threshold_1_coverage": 0.8,
+        "threshold_1_false_safe": 0
+      },
+      "m1_pass": true,
+      "m2_empirical_pass": true,
+      "m3_live_oracle_pass": true,
+      "m4_full_hide_pass": false,
+      "model_name": "Qwen3-ASR-0.6B",
+      "selective_live_oracle": {
+        "batch_proposer_seconds": 9.88179176300764,
+        "canonical_verifier_seconds": 15.205383332446218,
+        "dual_gpu_headroom_condition_ratio": 1.9234091975818814,
+        "dual_gpu_pipeline_lower_bound_speedup": 4.937049263005255,
+        "event_count": 240,
+        "policy_exact_rate": 1.0,
+        "policy_violation_events": 0,
+        "proposal_exact_rate": 0.9708333333333333,
+        "proposal_mismatch_events": 7,
+        "reference_singleton_seconds": 75.06972657516599,
+        "single_gpu_policy_seconds": 25.08717509545386,
+        "single_gpu_policy_speedup": 2.9923547107051385,
+        "verification_fraction": 0.19166666666666668,
+        "verified_events": 46,
+        "verifier_request_seconds_p50": 0.32672303868457675,
+        "verifier_to_proposer_service_ratio": 1.5387273580655052
+      }
+    },
+    {
+      "calibration": {
+        "batch_repeat_exact": 0.9916666666666667,
+        "cross_shape_exact": 0.975,
+        "event_count": 120,
+        "replica_all_rows_exact_count": 0,
+        "replica_all_rows_match_singleton_count": 0,
+        "replica_probe_count": 3,
+        "singleton_repeat_exact": 1.0,
+        "threshold_1_coverage": 0.7833333333333333,
+        "threshold_1_false_safe": 0
+      },
+      "fp32_control": {
+        "bf16_fp32_same_input_pairs": 118,
+        "bf16_singleton_fp32_singleton_exact_pairs": 116,
+        "c16_batch_speedup_over_fp32_singleton": 4.2083777482800935,
+        "c16_cross_shape_exact": 1.0,
+        "c8_batch_speedup_over_fp32_singleton": 2.85825232645737,
+        "c8_cross_shape_exact": 1.0,
+        "whole_trajectory_events": 120,
+        "whole_trajectory_token_exact_events": 116
+      },
+      "fp32_shape_stable": true,
+      "held_out_shape": {
+        "batch_repeat_exact": 0.9958333333333333,
+        "cross_shape_exact": 0.9875,
+        "cross_shape_mismatch_events": 3,
+        "event_count": 240,
+        "lcp_reference_fraction_median": 1.0,
+        "lcp_reference_fraction_minimum": 0.0,
+        "singleton_repeat_exact": 1.0,
+        "threshold_1_coverage": 0.8166666666666667,
+        "threshold_1_false_safe": 0
+      },
+      "m1_pass": true,
+      "m2_empirical_pass": true,
+      "m3_live_oracle_pass": true,
+      "m4_full_hide_pass": false,
+      "model_name": "Qwen3-ASR-1.7B",
+      "selective_live_oracle": {
+        "batch_proposer_seconds": 11.71814617048949,
+        "canonical_verifier_seconds": 14.106380032375455,
+        "dual_gpu_headroom_condition_ratio": 1.5047580721322198,
+        "dual_gpu_pipeline_lower_bound_speedup": 5.27565010155428,
+        "event_count": 240,
+        "policy_exact_rate": 1.0,
+        "policy_violation_events": 0,
+        "proposal_exact_rate": 0.9833333333333333,
+        "proposal_mismatch_events": 4,
+        "reference_singleton_seconds": 74.42032525036484,
+        "single_gpu_policy_seconds": 25.824526202864945,
+        "single_gpu_policy_speedup": 2.88176924005323,
+        "verification_fraction": 0.17083333333333334,
+        "verified_events": 41,
+        "verifier_request_seconds_p50": 0.36670808121562004,
+        "verifier_to_proposer_service_ratio": 1.2038064577057759
+      }
+    }
+  ],
+  "schema_version": 1,
+  "study": "RevGuard same-input mechanism and selective-verification gate"
+}

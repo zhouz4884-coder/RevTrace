@@ -1,0 +1,45 @@
+# Python and local tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# IDE and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local runtime state
+logs/*
+tmp/*
+exports/*
+.artifacts/*
+!logs/.gitkeep
+!tmp/.gitkeep
+!exports/.gitkeep
+!.artifacts/.gitkeep
+
+# Large data and model state stay on the designated experiment disk.
+data/
+datasets/
+models/
+checkpoints/
+cache/
+runs/
+profiles/
+
+# Paper build products
+Paper/*.aux
+Paper/*.bbl
+Paper/*.blg
+Paper/*.log
+Paper/*.out
+Paper/*.synctex.gz
+
+# Keep audited results and artifacts; raw transient runs belong on the server.
+results/**/scratch/
+results/**/unregistered/
