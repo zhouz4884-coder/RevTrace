@@ -43,6 +43,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--proposer-gpu", default="0")
     parser.add_argument("--verifier-gpu", default="1")
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.82)
+    parser.add_argument("--verifier-lanes", type=int, default=1)
+    parser.add_argument(
+        "--verifier-gpu-memory-utilization",
+        type=float,
+        default=None,
+    )
+    parser.add_argument("--verifier-max-model-len", type=int, default=4096)
+    parser.add_argument("--terminal-canonical-dtype")
+    parser.add_argument("--terminal-canonical-batch-size", type=int, default=16)
+    parser.add_argument(
+        "--terminal-canonical-batch-invariant",
+        action="store_true",
+    )
     parser.add_argument("--result-timeout-seconds", type=float, default=900.0)
     return parser.parse_args()
 
@@ -62,26 +75,37 @@ def build_asr(
     model: str,
     dtype: str,
     gpu_memory_utilization: float,
+    max_model_len: int | None = None,
+    logprobs: int | None = 20,
+    max_num_seqs: int | None = None,
 ) -> Any:
     from qwen_asr import Qwen3ASRModel
     from vllm import SamplingParams
 
+    engine_kwargs = {
+        "model": model,
+        "gpu_memory_utilization": gpu_memory_utilization,
+        "max_inference_batch_size": 128,
+        "max_new_tokens": 32,
+        "enforce_eager": True,
+        "max_num_seqs": 128,
+        "mm_processor_cache_gb": 0,
+        "async_scheduling": False,
+        "enable_prefix_caching": False,
+        "dtype": dtype,
+    }
+    if max_model_len is not None:
+        engine_kwargs["max_model_len"] = max_model_len
+        verifier_capacity = max_num_seqs or 1
+        engine_kwargs["max_inference_batch_size"] = verifier_capacity
+        engine_kwargs["max_num_seqs"] = verifier_capacity
     asr = Qwen3ASRModel.LLM(
-        model=model,
-        gpu_memory_utilization=gpu_memory_utilization,
-        max_inference_batch_size=128,
-        max_new_tokens=32,
-        enforce_eager=True,
-        max_num_seqs=128,
-        mm_processor_cache_gb=0,
-        async_scheduling=False,
-        enable_prefix_caching=False,
-        dtype=dtype,
+        **engine_kwargs,
     )
     asr.sampling_params = SamplingParams(
         temperature=0.0,
         max_tokens=32,
-        logprobs=20,
+        logprobs=logprobs,
     )
     return asr
 
@@ -133,9 +157,16 @@ def verifier_worker(
     data_manifest: str,
     duration_seconds: int,
     concurrency: int,
+    worker_id: int,
+    max_model_len: int,
+    terminal_canonical_batch_size: int,
+    terminal_canonical_batch_invariant: bool,
 ) -> None:
     try:
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu
+        if terminal_canonical_batch_invariant:
+            os.environ["VLLM_BATCH_INVARIANT"] = "1"
+            os.environ["VLLM_ATTENTION_BACKEND"] = "FLASH_ATTN"
         script_dir = str(Path(__file__).resolve().parent)
         if script_dir not in sys.path:
             sys.path.insert(0, script_dir)
@@ -152,7 +183,14 @@ def verifier_worker(
             state_projection_record,
         )
 
-        asr = build_asr(model, dtype, gpu_memory_utilization)
+        asr = build_asr(
+            model,
+            dtype,
+            gpu_memory_utilization,
+            max_model_len=max_model_len,
+            logprobs=None,
+            max_num_seqs=terminal_canonical_batch_size,
+        )
         sources = load_sources(Path(data_manifest))
         smoke = official_smoke(asr, sources["English"][0])
         if not smoke["exact"]:
@@ -161,6 +199,8 @@ def verifier_worker(
             {
                 "kind": "ready",
                 "role": "verifier",
+                "worker_id": worker_id,
+                "max_model_len": max_model_len,
                 "smoke": smoke,
                 "pid": os.getpid(),
             }
@@ -170,7 +210,13 @@ def verifier_worker(
             message = command_queue.get()
             kind = message["kind"]
             if kind == "stop":
-                result_queue.put({"kind": "stopped", "role": "verifier"})
+                result_queue.put(
+                    {
+                        "kind": "stopped",
+                        "role": "verifier",
+                        "worker_id": worker_id,
+                    }
+                )
                 return
             if kind == "verify":
                 items = message["items"]
@@ -181,6 +227,7 @@ def verifier_worker(
                     result_queue.put(
                         {
                             "kind": "verified_item",
+                            "worker_id": worker_id,
                             "batch_id": message["batch_id"],
                             "position": position,
                             "batch_size": len(items),
@@ -188,6 +235,44 @@ def verifier_worker(
                             "request_seconds": request_seconds[0],
                             "ticket": item["ticket"],
                             "record": candidate_record(outputs[0]),
+                        }
+                    )
+                continue
+            if kind == "canonical_batch":
+                items = message["items"]
+                if not items:
+                    raise ValueError("canonical batch cannot be empty")
+                if len(items) > terminal_canonical_batch_size:
+                    raise ValueError("canonical batch exceeds fixed shape")
+                padded_jobs = [item["job"] for item in items]
+                padded_jobs.extend(
+                    [items[0]["job"]]
+                    * (terminal_canonical_batch_size - len(items))
+                )
+                started = time.perf_counter()
+                outputs = asr.model.generate(
+                    padded_jobs,
+                    sampling_params=asr.sampling_params,
+                    use_tqdm=False,
+                )
+                elapsed = time.perf_counter() - started
+                for position, (item, output) in enumerate(
+                    zip(items, outputs)
+                ):
+                    result_queue.put(
+                        {
+                            "kind": "verified_item",
+                            "worker_id": worker_id,
+                            "batch_id": message["batch_id"],
+                            "position": position,
+                            "batch_size": len(items),
+                            "elapsed_seconds": (
+                                elapsed if position == 0 else 0.0
+                            ),
+                            "request_seconds": elapsed,
+                            "ticket": item["ticket"],
+                            "record": candidate_record(output),
+                            "canonical_batch": True,
                         }
                     )
                 continue
@@ -246,6 +331,7 @@ def verifier_worker(
                 result_queue.put(
                     {
                         "kind": "audit_complete",
+                        "worker_id": worker_id,
                         "elapsed_seconds": time.perf_counter() - audit_started,
                         "request_seconds": request_seconds,
                         "events": audit_events,
@@ -258,6 +344,7 @@ def verifier_worker(
             {
                 "kind": "error",
                 "role": "verifier",
+                "worker_id": worker_id,
                 "error": repr(exc),
                 "traceback": traceback.format_exc(),
             }
@@ -282,27 +369,51 @@ def main() -> int:
         sys.path.insert(0, script_dir)
 
     context = mp.get_context("spawn")
-    command_queue = context.Queue()
-    result_queue = context.Queue()
-    verifier = context.Process(
-        target=verifier_worker,
-        kwargs={
-            "command_queue": command_queue,
-            "result_queue": result_queue,
-            "gpu": args.verifier_gpu,
-            "model": str(args.model),
-            "dtype": args.dtype,
-            "gpu_memory_utilization": args.gpu_memory_utilization,
-            "data_manifest": str(args.data_manifest),
-            "duration_seconds": args.duration_seconds,
-            "concurrency": args.concurrency,
-        },
-        name="revtrace-verifier",
+    if args.verifier_lanes < 1:
+        raise ValueError("--verifier-lanes must be positive")
+    verifier_memory_utilization = (
+        args.verifier_gpu_memory_utilization
+        if args.verifier_gpu_memory_utilization is not None
+        else args.gpu_memory_utilization / args.verifier_lanes
     )
-    verifier.start()
-    ready = receive_or_raise(result_queue, args.result_timeout_seconds)
-    if ready.get("kind") != "ready":
-        raise RuntimeError(f"unexpected verifier initialization result: {ready}")
+    command_queues = [context.Queue() for _ in range(args.verifier_lanes)]
+    result_queue = context.Queue()
+    verifiers = []
+    ready_by_worker: dict[int, dict[str, Any]] = {}
+    for worker_id, command_queue in enumerate(command_queues):
+        verifier = context.Process(
+            target=verifier_worker,
+            kwargs={
+                "command_queue": command_queue,
+                "result_queue": result_queue,
+                "gpu": args.verifier_gpu,
+                "model": str(args.model),
+                "dtype": (
+                    args.terminal_canonical_dtype or args.dtype
+                ),
+                "gpu_memory_utilization": verifier_memory_utilization,
+                "data_manifest": str(args.data_manifest),
+                "duration_seconds": args.duration_seconds,
+                "concurrency": args.concurrency,
+                "worker_id": worker_id,
+                "max_model_len": args.verifier_max_model_len,
+                "terminal_canonical_batch_size": (
+                    args.terminal_canonical_batch_size
+                ),
+                "terminal_canonical_batch_invariant": (
+                    args.terminal_canonical_batch_invariant
+                ),
+            },
+            name=f"revtrace-verifier-{worker_id}",
+        )
+        verifier.start()
+        verifiers.append(verifier)
+        ready = receive_or_raise(result_queue, args.result_timeout_seconds)
+        if ready.get("kind") != "ready":
+            raise RuntimeError(
+                f"unexpected verifier initialization result: {ready}"
+            )
+        ready_by_worker[int(ready["worker_id"])] = ready
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.proposer_gpu
     import numpy as np
@@ -367,6 +478,9 @@ def main() -> int:
     max_pending = 0
     stale_results = 0
     verification_batches = 0
+    verifier_dispatch_cursor = 0
+    verifier_worker_events = [0 for _ in range(args.verifier_lanes)]
+    terminal_burst_sizes: list[int] = []
 
     def commit_record(
         pending: dict[str, Any],
@@ -424,6 +538,7 @@ def main() -> int:
             raise RuntimeError(f"unexpected verifier result: {message}")
         elapsed = float(message["elapsed_seconds"])
         verifier_seconds += elapsed
+        verifier_worker_events[int(message["worker_id"])] += 1
         verifier_request_seconds.append(float(message["request_seconds"]))
         revision_id = message["ticket"]["revision_id"]
         pending = pending_by_revision.pop(revision_id, None)
@@ -507,6 +622,43 @@ def main() -> int:
                         },
                     }
                 )
+            terminal_direct_ids: set[str] = set()
+            if args.terminal_canonical_dtype:
+                terminal_items: list[dict[str, Any]] = []
+                for item in prepared:
+                    if not item["terminal"]:
+                        continue
+                    pending = {
+                        **item,
+                        "proposal": {
+                            "minimum_margin": None,
+                            "token_ids": [],
+                        },
+                        "submitted_at": time.perf_counter(),
+                    }
+                    revision_id = item["ticket"]["revision_id"]
+                    pending_by_revision[revision_id] = pending
+                    terminal_direct_ids.add(revision_id)
+                    terminal_items.append(
+                        {
+                            "ticket": item["ticket"],
+                            "job": item["job"],
+                        }
+                    )
+                if terminal_items:
+                    terminal_burst_sizes.append(len(terminal_items))
+                    command_queues[0].put(
+                        {
+                            "kind": "canonical_batch",
+                            "batch_id": batch_id,
+                            "items": terminal_items,
+                        }
+                    )
+                    batch_id += 1
+                    verification_batches += 1
+                    max_pending = max(
+                        max_pending, len(pending_by_revision)
+                    )
             proposal_batch_sizes.append(len(jobs))
             proposal_started = time.perf_counter()
             outputs = asr.model.generate(
@@ -527,6 +679,10 @@ def main() -> int:
                     proposal,
                     terminal=item["terminal"],
                 )
+                revision_id = item["ticket"]["revision_id"]
+                if revision_id in terminal_direct_ids:
+                    pending_by_revision[revision_id]["proposal"] = proposal
+                    continue
                 pending = {
                     **item,
                     "proposal": proposal,
@@ -548,42 +704,102 @@ def main() -> int:
                     verify_pending.append(pending)
                 else:
                     commit_record(pending, proposal, verified=False)
-            if verify_items:
-                local_items: list[dict[str, Any]] = []
-                local_pending: list[dict[str, Any]] = []
-                if (
-                    len(verify_items) >= 4
-                    and all(pending["terminal"] for pending in verify_pending)
+            if verify_items and args.terminal_canonical_dtype:
+                for verify_item, pending in zip(
+                    verify_items, verify_pending
                 ):
-                    split = len(verify_items) // 2
-                    local_items = verify_items[split:]
-                    local_pending = verify_pending[split:]
-                    verify_items = verify_items[:split]
-                command_queue.put(
-                    {
-                        "kind": "verify",
-                        "batch_id": batch_id,
-                        "items": verify_items,
-                    }
-                )
-                batch_id += 1
-                verification_batches += 1
-                max_pending = max(max_pending, len(pending_by_revision))
-                if local_items:
                     local_outputs, elapsed, local_request_seconds = (
-                        singleton_records(
-                            asr,
-                            [item["job"] for item in local_items],
-                        )
+                        singleton_records(asr, [verify_item["job"]])
                     )
+                    request_elapsed = local_request_seconds[0]
                     proposer_gpu_terminal_verifier_seconds += elapsed
-                    proposer_gpu_terminal_verified_events += len(local_items)
-                    verifier_request_seconds.extend(local_request_seconds)
-                    for pending, output, request_elapsed in zip(
-                        local_pending,
-                        local_outputs,
-                        local_request_seconds,
+                    proposer_gpu_terminal_verified_events += 1
+                    verifier_request_seconds.append(request_elapsed)
+                    revision_id = pending["ticket"]["revision_id"]
+                    current = pending_by_revision.pop(revision_id, None)
+                    if current is None:
+                        stale_results += 1
+                        continue
+                    wait_seconds = (
+                        time.perf_counter() - current["submitted_at"]
+                    )
+                    verifier_wait_seconds.append(wait_seconds)
+                    verifier_wait_intermediate_seconds.append(wait_seconds)
+                    commit_record(
+                        current,
+                        candidate_record(local_outputs[0]),
+                        verified=True,
+                        verifier_elapsed=request_elapsed,
+                    )
+                    while True:
+                        try:
+                            message = result_queue.get_nowait()
+                        except queue.Empty:
+                            break
+                        if message.get("kind") == "error":
+                            raise RuntimeError(
+                                "verifier failed: "
+                                f"{message.get('error')}\n"
+                                f"{message.get('traceback')}"
+                            )
+                        process_verified_message(message)
+                verify_items = []
+                verify_pending = []
+            if verify_items:
+                terminal_burst = all(
+                    pending["terminal"] for pending in verify_pending
+                )
+                lane_count = (
+                    args.verifier_lanes + 1
+                    if terminal_burst and len(verify_items) >= 4
+                    else args.verifier_lanes
+                )
+                if terminal_burst:
+                    terminal_burst_sizes.append(len(verify_items))
+                lane_items: list[list[dict[str, Any]]] = [
+                    [] for _ in range(lane_count)
+                ]
+                lane_pending: list[list[dict[str, Any]]] = [
+                    [] for _ in range(lane_count)
+                ]
+                for position, (verify_item, pending) in enumerate(
+                    zip(verify_items, verify_pending)
+                ):
+                    lane = position % lane_count
+                    lane_items[lane].append(verify_item)
+                    lane_pending[lane].append(pending)
+                for lane in range(args.verifier_lanes):
+                    if not lane_items[lane]:
+                        continue
+                    worker_id = (
+                        verifier_dispatch_cursor + lane
+                    ) % args.verifier_lanes
+                    command_queues[worker_id].put(
+                        {
+                            "kind": "verify",
+                            "batch_id": batch_id,
+                            "items": lane_items[lane],
+                        }
+                    )
+                    batch_id += 1
+                    verification_batches += 1
+                verifier_dispatch_cursor = (
+                    verifier_dispatch_cursor + args.verifier_lanes
+                ) % args.verifier_lanes
+                max_pending = max(max_pending, len(pending_by_revision))
+                if lane_count > args.verifier_lanes:
+                    local_lane = args.verifier_lanes
+                    for verify_item, pending in zip(
+                        lane_items[local_lane],
+                        lane_pending[local_lane],
                     ):
+                        local_outputs, elapsed, local_request_seconds = (
+                            singleton_records(asr, [verify_item["job"]])
+                        )
+                        request_elapsed = local_request_seconds[0]
+                        proposer_gpu_terminal_verifier_seconds += elapsed
+                        proposer_gpu_terminal_verified_events += 1
+                        verifier_request_seconds.append(request_elapsed)
                         revision_id = pending["ticket"]["revision_id"]
                         current = pending_by_revision.pop(revision_id, None)
                         if current is None:
@@ -596,10 +812,22 @@ def main() -> int:
                         verifier_wait_terminal_seconds.append(wait_seconds)
                         commit_record(
                             current,
-                            candidate_record(output),
+                            candidate_record(local_outputs[0]),
                             verified=True,
                             verifier_elapsed=request_elapsed,
                         )
+                        while True:
+                            try:
+                                message = result_queue.get_nowait()
+                            except queue.Empty:
+                                break
+                            if message.get("kind") == "error":
+                                raise RuntimeError(
+                                    "verifier failed: "
+                                    f"{message.get('error')}\n"
+                                    f"{message.get('traceback')}"
+                                )
+                            process_verified_message(message)
             progressed = True
 
         if not progressed:
@@ -626,10 +854,125 @@ def main() -> int:
     if pending_by_revision:
         raise AssertionError("service ended with unresolved revisions")
 
-    command_queue.put({"kind": "audit"})
-    audit = receive_or_raise(result_queue, args.result_timeout_seconds)
-    if audit.get("kind") != "audit_complete":
-        raise RuntimeError(f"unexpected audit result: {audit}")
+    if args.terminal_canonical_dtype:
+        audit_streams = make_streams(
+            sources,
+            duration=args.duration_seconds,
+            concurrency=args.concurrency,
+        )
+        audit_states = [
+            asr.init_streaming_state(
+                language=stream["language"],
+                unfixed_chunk_num=2,
+                unfixed_token_num=5,
+                chunk_size_sec=2.0,
+            )
+            for stream in audit_streams
+        ]
+        audit_events: list[dict[str, Any]] = []
+        audit_request_seconds: list[float] = []
+        for chunk_index in range(rounds):
+            terminal = chunk_index == rounds - 1
+            audit_jobs: list[dict[str, Any]] = []
+            audit_prefixes: list[str] = []
+            singleton_audit_records: list[dict[str, Any]] = []
+            for stream, state in zip(audit_streams, audit_states):
+                begin = chunk_index * chunk_samples
+                end = begin + chunk_samples
+                job, prefix = prepare_job(
+                    asr,
+                    state,
+                    stream["audio"][begin:end],
+                    tail=False,
+                )
+                audit_jobs.append(job)
+                audit_prefixes.append(prefix)
+                outputs, _, request_seconds = singleton_records(asr, [job])
+                audit_request_seconds.extend(request_seconds)
+                singleton_audit_records.append(
+                    candidate_record(outputs[0])
+                )
+            selected_audit_records = singleton_audit_records
+            if terminal:
+                audit_items = [
+                    {
+                        "ticket": {
+                            "session_id": stream["session_id"],
+                            "revision_id": (
+                                f"audit:{stream['session_id']}:{chunk_index}"
+                            ),
+                            "parent_version": chunk_index,
+                            "next_version": chunk_index + 1,
+                        },
+                        "job": job,
+                    }
+                    for stream, job in zip(audit_streams, audit_jobs)
+                ]
+                command_queues[0].put(
+                    {
+                        "kind": "canonical_batch",
+                        "batch_id": -1,
+                        "items": audit_items,
+                    }
+                )
+                terminal_records: list[dict[str, Any] | None] = [
+                    None for _ in audit_items
+                ]
+                for _ in audit_items:
+                    message = receive_or_raise(
+                        result_queue, args.result_timeout_seconds
+                    )
+                    if message.get("kind") != "verified_item":
+                        raise RuntimeError(
+                            f"unexpected terminal audit result: {message}"
+                        )
+                    terminal_records[int(message["position"])] = message[
+                        "record"
+                    ]
+                if any(item is None for item in terminal_records):
+                    raise AssertionError(
+                        "terminal audit returned an incomplete batch"
+                    )
+                selected_audit_records = [
+                    item
+                    for item in terminal_records
+                    if item is not None
+                ]
+            for stream, state, prefix, selected_record in zip(
+                audit_streams,
+                audit_states,
+                audit_prefixes,
+                selected_audit_records,
+            ):
+                selected_record["state_projection"] = (
+                    state_projection_record(
+                        asr,
+                        state,
+                        prefix,
+                        selected_record,
+                        terminal=terminal,
+                    )
+                )
+                audit_events.append(
+                    {
+                        "session_id": stream["session_id"],
+                        "chunk_id": chunk_index,
+                        "record": selected_record,
+                    }
+                )
+                apply_candidate_record(state, selected_record, prefix)
+        audit = {
+            "kind": "audit_complete",
+            "elapsed_seconds": sum(audit_request_seconds),
+            "request_seconds": audit_request_seconds,
+            "events": audit_events,
+            "hybrid_terminal_canonical": True,
+        }
+    else:
+        command_queues[0].put({"kind": "audit"})
+        audit = receive_or_raise(result_queue, args.result_timeout_seconds)
+        if audit.get("kind") != "audit_complete":
+            raise RuntimeError(f"unexpected audit result: {audit}")
     canonical_by_key = {
         (event["session_id"], int(event["chunk_id"])): event["record"]
         for event in audit["events"]
@@ -676,13 +1019,15 @@ def main() -> int:
         else float("inf")
     )
     decision = (
-        "DEPLOYED_TWO_GPU_REVISION_TRANSACTION_GATE_PASS"
+        "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS"
         if output_violations == 0
         and state_violations == 0
         and stale_results == 0
         and verifier_ratio < 0.8
         and online_speedup >= 4.0
-        else "DEPLOYED_TWO_GPU_REVISION_TRANSACTION_GATE_FAIL"
+        and gpu_normalized_speedup >= 2.0
+        and (len(events) - deployed_slo_events) / len(events) < 0.01
+        else "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_FAIL"
     )
     summary = {
         "event_count": len(events),
@@ -695,6 +1040,12 @@ def main() -> int:
         "proposal_batch_size_p50": statistics.median(proposal_batch_sizes),
         "proposal_batch_size_p95": percentile(proposal_batch_sizes, 0.95),
         "verification_batches": verification_batches,
+        "verifier_lanes": args.verifier_lanes,
+        "verifier_worker_events": verifier_worker_events,
+        "terminal_burst_count": len(terminal_burst_sizes),
+        "terminal_burst_size_max": (
+            max(terminal_burst_sizes) if terminal_burst_sizes else 0
+        ),
         "max_pending_verifications": max_pending,
         "proposer_service_seconds": proposer_seconds,
         "verifier_service_seconds": verifier_seconds,
@@ -759,7 +1110,7 @@ def main() -> int:
     }
     payload = {
         "schema_version": 1,
-        "study": "RevTrace deployed two-GPU revision transaction gate",
+        "study": "RevTrace terminal-canonical revision transaction gate",
         "decision": decision,
         "model_name": args.model_name,
         "dtype": args.dtype,
@@ -767,11 +1118,22 @@ def main() -> int:
         "concurrency": args.concurrency,
         "margin_threshold": args.margin_threshold,
         "contract": {
-            "canonical": "FP16 singleton execution",
+            "canonical": (
+                "FP16 singleton for intermediate revisions; "
+                f"{args.terminal_canonical_dtype} fixed-shape batch for "
+                "terminal revisions"
+                if args.terminal_canonical_dtype
+                else "FP16 singleton execution"
+            ),
             "state_entry": (
                 "only a version-matched selected transition may update state"
             ),
-            "terminal": "all terminal revisions require canonical verification",
+            "terminal": (
+                "terminal revisions execute on the fixed-shape canonical "
+                "path concurrently with the non-authoritative proposer"
+                if args.terminal_canonical_dtype
+                else "all terminal revisions require canonical verification"
+            ),
             "margin_boundary": (
                 "empirical scheduling signal; not a deterministic certificate"
             ),
@@ -789,11 +1151,28 @@ def main() -> int:
             "proposer_gpu": args.proposer_gpu,
             "verifier_gpu": args.verifier_gpu,
             "proposer_pid": os.getpid(),
-            "verifier_pid": ready["pid"],
+            "verifier_pids": [
+                ready_by_worker[index]["pid"]
+                for index in sorted(ready_by_worker)
+            ],
+            "verifier_lanes": args.verifier_lanes,
+            "verifier_gpu_memory_utilization_per_lane": (
+                verifier_memory_utilization
+            ),
+            "terminal_canonical_dtype": args.terminal_canonical_dtype,
+            "terminal_canonical_batch_size": (
+                args.terminal_canonical_batch_size
+            ),
+            "terminal_canonical_batch_invariant": (
+                args.terminal_canonical_batch_invariant
+            ),
         },
         "smoke": {
             "proposer": proposer_smoke,
-            "verifier": ready["smoke"],
+            "verifiers": [
+                ready_by_worker[index]["smoke"]
+                for index in sorted(ready_by_worker)
+            ],
         },
     }
     args.output.write_text(
@@ -801,15 +1180,24 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    command_queue.put({"kind": "stop"})
-    stopped = receive_or_raise(result_queue, args.result_timeout_seconds)
-    if stopped.get("kind") != "stopped":
-        raise RuntimeError(f"unexpected verifier shutdown result: {stopped}")
-    verifier.join(timeout=30.0)
-    if verifier.is_alive():
-        verifier.terminate()
-        verifier.join(timeout=10.0)
-        raise RuntimeError("verifier failed to stop cleanly")
+    for command_queue in command_queues:
+        command_queue.put({"kind": "stop"})
+    stopped_workers: set[int] = set()
+    while len(stopped_workers) < args.verifier_lanes:
+        stopped = receive_or_raise(
+            result_queue, args.result_timeout_seconds
+        )
+        if stopped.get("kind") != "stopped":
+            raise RuntimeError(
+                f"unexpected verifier shutdown result: {stopped}"
+            )
+        stopped_workers.add(int(stopped["worker_id"]))
+    for verifier in verifiers:
+        verifier.join(timeout=30.0)
+        if verifier.is_alive():
+            verifier.terminate()
+            verifier.join(timeout=10.0)
+            raise RuntimeError("verifier failed to stop cleanly")
 
     print(json.dumps({"decision": decision, **summary}, sort_keys=True))
     return 0 if decision.endswith("_PASS") else 2

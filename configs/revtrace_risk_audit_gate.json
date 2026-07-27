@@ -1,0 +1,54 @@
+{
+  "experiment_id": "REVTRACE-S1-ANYTIME-RISK-V1",
+  "study": "RevTrace time-uniform randomized state-entry audit",
+  "population": {
+    "dtype": "float16",
+    "models": [
+      "Qwen3-ASR-0.6B",
+      "Qwen3-ASR-1.7B"
+    ],
+    "minimum_risk_eligible_entries_per_model": 30000,
+    "minimum_base_audits_per_model": 500,
+    "deployed_concurrency": 16,
+    "calibration_concurrency": 64,
+    "validation_seeds": {
+      "Qwen3-ASR-0.6B": 20260728,
+      "Qwen3-ASR-1.7B": 20260729
+    },
+    "terminal_entries": "canonicalized and excluded",
+    "low_margin_entries": "canonicalized and excluded"
+  },
+  "risk_contract": {
+    "base_audit_probability": 0.021,
+    "alpha": 0.05,
+    "delta": 0.005,
+    "bound": "fixed-probability mixture e-process inversion",
+    "optional_stopping": true,
+    "arbitrary_temporal_drift": true,
+    "adaptive_extra_audits": "diagnostic only; excluded from formal bound"
+  },
+  "simulation": {
+    "entries_per_trajectory": 30000,
+    "repetitions_per_scenario": 500,
+    "scenarios": [
+      "zero",
+      "rare",
+      "boundary",
+      "unsafe",
+      "sudden_drift"
+    ]
+  },
+  "gates": {
+    "maximum_time_uniform_upper_risk": 0.005,
+    "minimum_confidence": 0.95,
+    "maximum_selected_output_violations": 0,
+    "maximum_selected_state_violations": 0
+  },
+  "claim_boundaries": {
+    "determinism": "not claimed",
+    "independence": "error events may be dependent; base audit coins must be independent",
+    "sample_unit": "execution events, not independent utterances",
+    "calibration": "c64 results cannot certify the c16 deployed population",
+    "performance": "shadow audit wall time is not a serving result"
+  }
+}

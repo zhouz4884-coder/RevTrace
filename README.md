@@ -15,14 +15,15 @@ The core execution contract is:
 
 ## Current paper-facing result
 
-The frozen Phase 1 Qwen3-ASR deployment uses an FP16 batched proposer, an FP16
-singleton canonical verifier, versioned state commits, and terminal work
-stealing.
+The Phase 2 Qwen3-ASR deployment uses an FP16 batched proposer, an FP16
+singleton verifier for risky intermediate revisions, a fixed-shape terminal
+canonical path, and versioned state commits. Terminal canonical execution is
+launched concurrently with a discarded non-authoritative proposer result.
 
-| Model | Two-GPU wall speedup | GPU-normalized speedup | 2 s SLO goodput | P99 reduction | Observed state violations |
-|---|---:|---:|---:|---:|---:|
-| Qwen3-ASR-0.6B | 5.53x | 2.77x | 5.23x | 38.3% | 0/240 |
-| Qwen3-ASR-1.7B | 4.75x | 2.38x | 4.49x | 41.7% | 0/240 |
+| Model | Two-GPU wall speedup | GPU-normalized speedup | 2 s SLO goodput | Deadline miss | P99 state entry | Observed state violations |
+|---|---:|---:|---:|---:|---:|---:|
+| Qwen3-ASR-0.6B | 5.99x | 3.00x | 5.99x | 0/240 | 1.336 s | 0/240 |
+| Qwen3-ASR-1.7B | 4.97x | 2.49x | 4.97x | 0/240 | 1.652 s | 0/240 |
 
 The flip-rich safety stress suite contains 1,021 real execution-shape flips and
 zero observed margin-gate false-safe events. These observations do not establish
@@ -30,7 +31,7 @@ a deterministic certificate or a production error rate.
 
 Current decision:
 
-`DEPLOYED_SYSTEM_GATE_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED`
+`PHASE2_TERMINAL_TAIL_GATE_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED`
 
 ## Phase map
 

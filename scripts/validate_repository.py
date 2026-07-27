@@ -42,7 +42,11 @@ def main() -> int:
         "results/phase0",
         "results/phase1/deployed_v1/summary.json",
         "artifact/phase1-deployed-system-v1/MANIFEST.json",
+        "results/phase2/risk_v1/summary.json",
+        "results/phase2/terminal_canonical/summary.json",
+        "artifact/phase2-risk-tail-v1/MANIFEST.json",
         "src/revtrace/core.py",
+        "src/revtrace/risk.py",
     ]
     failures = [
         f"missing-required:{path}"
@@ -66,6 +70,23 @@ def main() -> int:
         check_manifest(
             ROOT / "results" / "phase1" / "deployed_v1",
             ROOT / "results" / "phase1" / "deployed_v1" / "MANIFEST.json",
+            repo_relative=False,
+        )
+    )
+    failures.extend(
+        check_manifest(
+            ROOT / "results" / "phase2",
+            ROOT / "results" / "phase2" / "MANIFEST.json",
+            repo_relative=True,
+        )
+    )
+    failures.extend(
+        check_manifest(
+            ROOT / "artifact" / "phase2-risk-tail-v1",
+            ROOT
+            / "artifact"
+            / "phase2-risk-tail-v1"
+            / "MANIFEST.json",
             repo_relative=False,
         )
     )

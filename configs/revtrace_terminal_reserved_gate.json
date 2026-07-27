@@ -1,0 +1,37 @@
+{
+  "experiment_id": "REVTRACE-S2-TERMINAL-RESERVED-V1",
+  "study": "RevTrace terminal-reserved exact revision transactions",
+  "models": [
+    "Qwen3-ASR-0.6B",
+    "Qwen3-ASR-1.7B"
+  ],
+  "frozen_service_workload": {
+    "duration_seconds": 30,
+    "concurrency": 16,
+    "chunk_seconds": 2,
+    "dtype": "float16",
+    "margin_threshold": 0.05,
+    "proposer_gpus": 1,
+    "verifier_gpus": 1,
+    "verifier_process_lanes": 2,
+    "canonical_lane_count_during_terminal_burst": 3,
+    "verifier_gpu_memory_utilization_per_lane": 0.38,
+    "verifier_max_model_len": 4096
+  },
+  "gates": {
+    "maximum_state_entry_deadline_miss_rate": 0.01,
+    "minimum_wall_speedup": 4.0,
+    "minimum_gpu_normalized_speedup": 2.0,
+    "maximum_output_violations": 0,
+    "maximum_state_projection_violations": 0,
+    "maximum_stale_or_replayed_commits": 0,
+    "maximum_verifier_to_proposer_service_ratio": 0.8
+  },
+  "contract": {
+    "canonical": "FP16 singleton execution",
+    "terminal": "every terminal revision is verified",
+    "state_entry": "no uncertified exact-mode result may update state",
+    "scheduling": "terminal bursts use isolated BS=1 lanes and per-item commit",
+    "evidence": "all performance gates use measured two-GPU wall clock"
+  }
+}

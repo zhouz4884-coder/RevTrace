@@ -359,7 +359,9 @@ def main() -> int:
     asr.sampling_params = SamplingParams(
         temperature=0.0,
         max_tokens=32,
-        logprobs=args.top_logprobs,
+        logprobs=(
+            args.top_logprobs if args.top_logprobs > 0 else None
+        ),
     )
     smoke = official_smoke(asr, sources["English"][0])
     if not smoke["exact"]:

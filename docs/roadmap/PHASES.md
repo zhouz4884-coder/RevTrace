@@ -35,19 +35,27 @@ Primary system name: **RevOCC** — risk-limiting optimistic state transactions.
 
 Gate S1:
 
-- stratified anytime-valid shadow-audit simulation;
-- natural run with at least 30,000 state entries;
-- at least 500 randomized shadow audits;
+- fixed-probability, anytime-valid shadow-audit confidence sequence;
+- sudden-drift and optional-stopping simulation;
+- natural run with at least 30,000 eligible state entries per model;
+- at least 500 randomized base audits per model;
 - target risk budget `delta=0.5%`, confidence `1-alpha=95%`;
-- SLO goodput speedup at least 4x.
+- adaptive extra audits excluded from the formal certificate.
 
 Gate S2:
 
-- terminal-reserved state-commit EDF;
-- audit preemption and canonical bypass;
+- terminal canonical reservation with concurrent discarded proposer work;
 - deadline miss below 1%;
+- wall-clock speedup at least 4x;
 - GPU-normalized speedup at least 2x;
-- no uncertified exact-mode commit.
+- no observed output, state-projection, stale, or replayed violations.
+
+Current status:
+
+- S1 simulation: `PASS` over 2,500 simulated trajectories;
+- S1 natural shadow audit: `RUNNING`;
+- S2 deployed terminal-tail gate: `PASS` for both Qwen3-ASR sizes;
+- deterministic intermediate certificate: `UNRESOLVED`.
 
 ## Phase 3 — state amplification
 
