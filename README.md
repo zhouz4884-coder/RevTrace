@@ -15,15 +15,31 @@ The core execution contract is:
 
 ## Current paper-facing result
 
-The Phase 2 Qwen3-ASR deployment uses an FP16 batched proposer, an FP16
+The Phase 3A Qwen3-ASR deployment uses an FP16 batched proposer, an FP16
 singleton verifier for risky intermediate revisions, a fixed-shape terminal
-canonical path, and versioned state commits. Terminal canonical execution is
-launched concurrently with a discarded non-authoritative proposer result.
+canonical path, versioned state commits, and a contract-scoped adaptive
+controller. Thresholds are selected from a simultaneous confidence envelope;
+they are not manually configured per stage.
 
 | Model / active policy | Two-GPU wall speedup | GPU-normalized speedup | 2 s SLO goodput | Deadline miss | P99 state entry | Observed state violations |
 |---|---:|---:|---:|---:|---:|---:|
 | Qwen3-ASR-0.6B / `tau=0.05` | 5.99x | 3.00x | 5.99x | 0/240 | 1.336 s | 0/240 |
 | Qwen3-ASR-1.7B / `tau=0.10` | 4.83x | 2.42x | 4.83x | 0/240 | 1.730 s | 0/240 |
+
+The real Phase 3A controller trajectory is:
+
+| Epoch | Contract fingerprint | Selected policy | Controller response |
+|---:|---|---:|---|
+| 1 | 0.6B / FP16 / c16 | `tau=0.05` | initial certification |
+| 2 | 0.6B / FP16 / c64 | `tau=0.20` | new epoch and fail-closed contraction |
+| 3 | 1.7B / FP16 / c16 | `tau=0.10` | model-drift contraction |
+| 4 | 0.6B / FP16 / c16 | `tau=0.05` | fresh-epoch re-expansion |
+
+Across the three deployed c16 epochs, the minimum wall-clock speedup is
+`4.932x` and the minimum GPU-normalized speedup is `2.466x`, with zero
+deadline misses and zero observed output, state, stale-result, or replay
+violations. The c64 epoch remains fail closed because its terminal canonical
+shape has not been independently certified.
 
 Across five real two-GPU runs per active policy, mean wall speedups are
 `6.052 +/- 0.128x` and `4.949 +/- 0.102x` (95% t intervals), with no deadline
@@ -35,7 +51,7 @@ production transcript-error rate.
 
 Current decision:
 
-`PHASE2_RISK_AND_TAIL_GATE_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED`
+`PHASE3A_ADAPTIVE_CONTROL_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED`
 
 ## Phase map
 
@@ -48,7 +64,7 @@ Current decision:
 - **Phase 2 — tail and risk contract:** terminal-reserved state-commit EDF,
   fixed-probability anytime risk-limiting audits with frozen margin-stratum
   diagnostics, and a `<1%` deadline-miss gate.
-- **Phase 3A — adaptive control (running):** contract-scoped certificate
+- **Phase 3A — adaptive control (pass):** contract-scoped certificate
   epochs, simultaneous policy confidence envelopes, permanent failure-ledger
   exclusions, risk/queue-priced policy selection, and dual-channel auditing.
 - **Phase 3B — amplification:** Revision Impulse Response, Revision Amplification

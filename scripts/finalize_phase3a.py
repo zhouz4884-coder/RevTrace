@@ -132,6 +132,45 @@ def main() -> int:
         )
         writer.writeheader()
         writer.writerows(policy_rows)
+    trajectory_rows = [
+        {
+            "epoch": 1,
+            "fingerprint": "Qwen3-ASR-0.6B/fp16/c16",
+            "selected_threshold": selected["initial_0p6b_c16"],
+            "transition": "initial certification",
+            "controller_action": "admit certified minimum-cost policy",
+        },
+        {
+            "epoch": 2,
+            "fingerprint": "Qwen3-ASR-0.6B/fp16/c64",
+            "selected_threshold": selected["unsafe_0p6b_c64"],
+            "transition": "concurrency drift",
+            "controller_action": "new epoch, fail closed, contract policy",
+        },
+        {
+            "epoch": 3,
+            "fingerprint": "Qwen3-ASR-1.7B/fp16/c16",
+            "selected_threshold": selected["model_1p7b_c16"],
+            "transition": "model drift",
+            "controller_action": "new epoch, retain frozen failure exclusion",
+        },
+        {
+            "epoch": 4,
+            "fingerprint": "Qwen3-ASR-0.6B/fp16/c16",
+            "selected_threshold": selected["return_0p6b_c16"],
+            "transition": "fresh return epoch",
+            "controller_action": "re-expand after independent certification",
+        },
+    ]
+    trajectory_path = args.result_root / "CONTROL_TRAJECTORY.csv"
+    with trajectory_path.open(
+        "w", encoding="utf-8", newline=""
+    ) as handle:
+        writer = csv.DictWriter(
+            handle, fieldnames=list(trajectory_rows[0])
+        )
+        writer.writeheader()
+        writer.writerows(trajectory_rows)
     summary = {
         "schema_version": 1,
         "study": "RevTrace Phase 3A adaptive risk control",
@@ -179,6 +218,11 @@ Decision: **{summary['decision']}**
 The controller retained the frozen c64 error at margin 0.078125 and the 1.7B
 error at margin 0.0625 as hard exclusions.  Later zero-error audits cannot
 erase those failures.
+
+These are not four manually configured static thresholds.  Each row is the
+endpoint of a contract-scoped controller epoch.  Risk and verifier-queue prices
+select within the simultaneously certified policy envelope; the finite grid is
+the current deployment approximation to that dynamic control objective.
 
 ## Deployed recovery
 

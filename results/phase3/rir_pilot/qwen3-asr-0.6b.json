@@ -1,0 +1,166 @@
+{
+  "claim_boundaries": {
+    "frequency": "the execution-shape search is a stress test and is not a production mismatch-rate estimate",
+    "sample_size": "one pilot pair; not the Phase 3C population gate",
+    "state_projection": "an output mismatch is not an impulse when D(0)=0"
+  },
+  "decision": "RIR_PILOT_NO_STATE_IMPULSE",
+  "dtype": "float16",
+  "environment": {
+    "python": "3.12.13"
+  },
+  "model": "Qwen3-ASR-0.6B",
+  "official_semantics_smoke": {
+    "custom": [
+      [
+        "English",
+        "Uh huh. Oh yeah, yeah.",
+        "Uh huh. Oh yeah, yeah."
+      ],
+      [
+        "English",
+        "Hmm. Oh, yeah, yeah. He wasn't even that big when.",
+        "Hmm. Oh, yeah, yeah. He wasn't even that big when."
+      ]
+    ],
+    "exact": true,
+    "official": [
+      [
+        "English",
+        "Uh huh. Oh yeah, yeah.",
+        "Uh huh. Oh yeah, yeah."
+      ],
+      [
+        "English",
+        "Hmm. Oh, yeah, yeah. He wasn't even that big when.",
+        "Hmm. Oh, yeah, yeah. He wasn't even that big when."
+      ]
+    ],
+    "warmup_final": [
+      "English",
+      "Hmm. Oh, yeah, yeah. He wasn't even that big when.",
+      "Hmm. Oh, yeah, yeah. He wasn't even that big when."
+    ]
+  },
+  "schema_version": 1,
+  "study": "RevTrace fixed-future canonical Revision Impulse pilot",
+  "summary": {
+    "initial_distance": 0.0,
+    "interpretation": "the legal output flip was absorbed by the official state projection, so no revision-state impulse exists",
+    "pairs": 1
+  },
+  "target": {
+    "canonical": {
+      "chosen_logprobs": [
+        -0.00028534632292576134,
+        -0.021032162010669708,
+        -2.264974000354414e-06,
+        -1.0728830375228426e-06,
+        -2.0265558760002023e-06,
+        -1.1920928244535389e-07,
+        -0.0003293210465926677,
+        -0.6265079975128174,
+        -0.00023338454775512218,
+        -0.6876638531684875
+      ],
+      "margins": [
+        8.49999980229768,
+        3.8749999329447746,
+        14.046874642374632,
+        14.187499880791279,
+        13.953124880792757,
+        16.078124880790718,
+        8.171874696592567,
+        0.46875,
+        9.562500265659764,
+        0.03125
+      ],
+      "minimum_margin": 0.03125,
+      "text": "的情况，甚至出现交易几乎停滞的情。",
+      "token_ids": [
+        102072,
+        3837,
+        100636,
+        100347,
+        99886,
+        100740,
+        118083,
+        101747,
+        1773,
+        151645
+      ]
+    },
+    "chunk_index": 3,
+    "divergent": {
+      "chosen_logprobs": [
+        -0.00028534632292576134,
+        -0.020391585305333138,
+        -2.264974000354414e-06,
+        -1.0728830375228426e-06,
+        -2.0265558760002023e-06,
+        -1.1920928244535389e-07,
+        -0.0003389737685211003,
+        -0.6224671006202698,
+        -0.00023445718397852033,
+        -0.6954556107521057
+      ],
+      "margins": [
+        8.49999980229768,
+        3.9062501173466444,
+        14.046874642374632,
+        14.203124880791279,
+        13.953124880792757,
+        16.062499880790718,
+        8.140624580613803,
+        0.4687499403953552,
+        9.546875146697857,
+        0.015625
+      ],
+      "minimum_margin": 0.015625,
+      "text": "的情况，甚至出现交易几乎停滞的情。",
+      "token_ids": [
+        102072,
+        3837,
+        100636,
+        100347,
+        99886,
+        100740,
+        118083,
+        101747,
+        1773,
+        151643
+      ]
+    },
+    "execution_shape_attempts": 16,
+    "session_id": "s001"
+  },
+  "trajectory": [
+    {
+      "canonical_state_token_ids": [
+        100636,
+        100347,
+        99886,
+        100740,
+        118083,
+        102072,
+        3837,
+        100636,
+        100347
+      ],
+      "chunk_index": 3,
+      "distance": 0.0,
+      "divergent_state_token_ids": [
+        100636,
+        100347,
+        99886,
+        100740,
+        118083,
+        102072,
+        3837,
+        100636,
+        100347
+      ],
+      "offset": 0
+    }
+  ]
+}

@@ -1,0 +1,658 @@
+{
+  "claim_boundaries": {
+    "certificate": "the controller logic uses a simultaneous policy envelope; real model evidence is evaluated in a separate GPU gate",
+    "error_injection": "state errors are injected at margins copied from frozen real executions; no artificial logit noise is used",
+    "evidence_tier": "controlled semantic simulation",
+    "performance": "not a GPU or serving performance result"
+  },
+  "config": {
+    "alpha": 0.05,
+    "audit_probability": 0.05,
+    "control_interval_events": 128,
+    "delta": 0.005,
+    "drift_quarantine_events": 64,
+    "initial_queue_price": 1.0,
+    "initial_risk_price": 1.0,
+    "minimum_base_audits": 500,
+    "policy_thresholds": [
+      0.0,
+      0.025,
+      0.05,
+      0.075,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "queue_price_step": 0.05,
+    "risk_price_step": 0.25,
+    "target_queue_depth": 0
+  },
+  "decision": "PHASE3A_SEMANTIC_CONTROL_PASS",
+  "schema_version": 1,
+  "stages": [
+    {
+      "certified_thresholds": [
+        0.0,
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.15,
+        0.2,
+        0.3,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "concurrency": 16,
+      "error_margin": null,
+      "events": 32000,
+      "first_active_event": 21248,
+      "first_repaired_threshold": null,
+      "injected_numerical_state_errors": 0,
+      "mode_changes": [
+        {
+          "event": 21248,
+          "from": "warmup_all_verify",
+          "threshold": 0.0,
+          "to": "active_certified"
+        }
+      ],
+      "model": "Qwen3-ASR-0.6B",
+      "name": "0.6B-c16-safe",
+      "selected_state_violations": 0,
+      "snapshot": {
+        "base_audits": 1590,
+        "caught_base_state_errors": 0,
+        "caught_idle_state_errors": 0,
+        "certificates": [
+          {
+            "base_audits": 1590,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 32000,
+            "threshold": 0.0,
+            "upper_error_count": 106,
+            "upper_risk": 0.0033125
+          },
+          {
+            "base_audits": 1590,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 32000,
+            "threshold": 0.025,
+            "upper_error_count": 106,
+            "upper_risk": 0.0033125
+          },
+          {
+            "base_audits": 1590,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 32000,
+            "threshold": 0.05,
+            "upper_error_count": 106,
+            "upper_risk": 0.0033125
+          },
+          {
+            "base_audits": 1457,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 28800,
+            "threshold": 0.075,
+            "upper_error_count": 106,
+            "upper_risk": 0.0036805555555555554
+          },
+          {
+            "base_audits": 1457,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 28800,
+            "threshold": 0.1,
+            "upper_error_count": 106,
+            "upper_risk": 0.0036805555555555554
+          },
+          {
+            "base_audits": 1303,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.15,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1303,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.2,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1303,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.3,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1303,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.5,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1303,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.75,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1303,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 1.0,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          }
+        ],
+        "decisions": 32000,
+        "epoch": 1,
+        "fast_path": 10233,
+        "fingerprint": "1fed5b2590072c12d28eac16067b2d2ec245b10b6e3900af5ba466803ca0a209",
+        "idle_audits": 0,
+        "mode": "active_certified",
+        "quarantine_remaining": 0,
+        "queue_price": 1.0,
+        "risk_price": 1.0,
+        "selected_threshold": 0.0,
+        "verified": 21767
+      }
+    },
+    {
+      "certified_thresholds": [
+        0.1,
+        0.15,
+        0.2,
+        0.3,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "concurrency": 64,
+      "error_margin": 0.078125,
+      "events": 32000,
+      "first_active_event": 23681,
+      "first_repaired_threshold": {
+        "event": 23681,
+        "threshold": 0.1
+      },
+      "injected_numerical_state_errors": 1,
+      "mode_changes": [
+        {
+          "event": 16001,
+          "from": "warmup_all_verify",
+          "threshold": null,
+          "to": "drift_quarantine"
+        },
+        {
+          "event": 16065,
+          "from": "drift_quarantine",
+          "threshold": null,
+          "to": "warmup_all_verify"
+        },
+        {
+          "event": 23681,
+          "from": "warmup_all_verify",
+          "threshold": 0.1,
+          "to": "active_certified"
+        }
+      ],
+      "model": "Qwen3-ASR-0.6B",
+      "name": "0.6B-c64-unsafe",
+      "selected_state_violations": 0,
+      "snapshot": {
+        "base_audits": 1576,
+        "caught_base_state_errors": 1,
+        "caught_idle_state_errors": 0,
+        "certificates": [
+          {
+            "base_audits": 1576,
+            "caught_state_errors": 1,
+            "certified": false,
+            "eligible_entries": 32000,
+            "threshold": 0.0,
+            "upper_error_count": 263,
+            "upper_risk": 0.00821875
+          },
+          {
+            "base_audits": 1576,
+            "caught_state_errors": 1,
+            "certified": false,
+            "eligible_entries": 32000,
+            "threshold": 0.025,
+            "upper_error_count": 263,
+            "upper_risk": 0.00821875
+          },
+          {
+            "base_audits": 1576,
+            "caught_state_errors": 1,
+            "certified": false,
+            "eligible_entries": 32000,
+            "threshold": 0.05,
+            "upper_error_count": 263,
+            "upper_risk": 0.00821875
+          },
+          {
+            "base_audits": 1415,
+            "caught_state_errors": 1,
+            "certified": false,
+            "eligible_entries": 28800,
+            "threshold": 0.075,
+            "upper_error_count": 263,
+            "upper_risk": 0.009131944444444444
+          },
+          {
+            "base_audits": 1414,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 28799,
+            "threshold": 0.1,
+            "upper_error_count": 106,
+            "upper_risk": 0.003680683357061009
+          },
+          {
+            "base_audits": 1274,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.15,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1274,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.2,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1274,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.3,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1274,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.5,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1274,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.75,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1274,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 1.0,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          }
+        ],
+        "decisions": 32000,
+        "epoch": 2,
+        "fast_path": 7089,
+        "fingerprint": "66e6058f564893b5e37af5ddbd479c4d247156ca72d409c513cc7ba496cf2f39",
+        "idle_audits": 0,
+        "mode": "active_certified",
+        "quarantine_remaining": 0,
+        "queue_price": 1.0,
+        "risk_price": 1.25,
+        "selected_threshold": 0.1,
+        "verified": 24911
+      }
+    },
+    {
+      "certified_thresholds": [
+        0.075,
+        0.1,
+        0.15,
+        0.2,
+        0.3,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "concurrency": 16,
+      "error_margin": 0.0625,
+      "events": 32000,
+      "first_active_event": 23681,
+      "first_repaired_threshold": {
+        "event": 23681,
+        "threshold": 0.075
+      },
+      "injected_numerical_state_errors": 1,
+      "mode_changes": [
+        {
+          "event": 16001,
+          "from": "warmup_all_verify",
+          "threshold": null,
+          "to": "drift_quarantine"
+        },
+        {
+          "event": 16065,
+          "from": "drift_quarantine",
+          "threshold": null,
+          "to": "warmup_all_verify"
+        },
+        {
+          "event": 23681,
+          "from": "warmup_all_verify",
+          "threshold": 0.075,
+          "to": "active_certified"
+        }
+      ],
+      "model": "Qwen3-ASR-1.7B",
+      "name": "1.7B-c16-unsafe-low-policy",
+      "selected_state_violations": 0,
+      "snapshot": {
+        "base_audits": 1647,
+        "caught_base_state_errors": 1,
+        "caught_idle_state_errors": 0,
+        "certificates": [
+          {
+            "base_audits": 1647,
+            "caught_state_errors": 1,
+            "certified": false,
+            "eligible_entries": 32000,
+            "threshold": 0.0,
+            "upper_error_count": 263,
+            "upper_risk": 0.00821875
+          },
+          {
+            "base_audits": 1647,
+            "caught_state_errors": 1,
+            "certified": false,
+            "eligible_entries": 32000,
+            "threshold": 0.025,
+            "upper_error_count": 263,
+            "upper_risk": 0.00821875
+          },
+          {
+            "base_audits": 1647,
+            "caught_state_errors": 1,
+            "certified": false,
+            "eligible_entries": 32000,
+            "threshold": 0.05,
+            "upper_error_count": 263,
+            "upper_risk": 0.00821875
+          },
+          {
+            "base_audits": 1484,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 28799,
+            "threshold": 0.075,
+            "upper_error_count": 106,
+            "upper_risk": 0.003680683357061009
+          },
+          {
+            "base_audits": 1484,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 28799,
+            "threshold": 0.1,
+            "upper_error_count": 106,
+            "upper_risk": 0.003680683357061009
+          },
+          {
+            "base_audits": 1340,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.15,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1340,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.2,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1340,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.3,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1340,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.5,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1340,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 0.75,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          },
+          {
+            "base_audits": 1340,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25599,
+            "threshold": 1.0,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140786749482402
+          }
+        ],
+        "decisions": 32000,
+        "epoch": 3,
+        "fast_path": 7132,
+        "fingerprint": "ca360cc5509ea7ca14db5b252a438262aac1ef25318d337da2c1e18f3f562271",
+        "idle_audits": 0,
+        "mode": "active_certified",
+        "quarantine_remaining": 0,
+        "queue_price": 1.0,
+        "risk_price": 1.25,
+        "selected_threshold": 0.075,
+        "verified": 24868
+      }
+    },
+    {
+      "certified_thresholds": [
+        0.0,
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.15,
+        0.2,
+        0.3,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "concurrency": 16,
+      "error_margin": null,
+      "events": 32000,
+      "first_active_event": 21248,
+      "first_repaired_threshold": null,
+      "injected_numerical_state_errors": 0,
+      "mode_changes": [
+        {
+          "event": 21248,
+          "from": "warmup_all_verify",
+          "threshold": 0.0,
+          "to": "active_certified"
+        }
+      ],
+      "model": "Qwen3-ASR-0.6B",
+      "name": "0.6B-c16-fresh-return",
+      "selected_state_violations": 0,
+      "snapshot": {
+        "base_audits": 1597,
+        "caught_base_state_errors": 0,
+        "caught_idle_state_errors": 0,
+        "certificates": [
+          {
+            "base_audits": 1597,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 32000,
+            "threshold": 0.0,
+            "upper_error_count": 106,
+            "upper_risk": 0.0033125
+          },
+          {
+            "base_audits": 1597,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 32000,
+            "threshold": 0.025,
+            "upper_error_count": 106,
+            "upper_risk": 0.0033125
+          },
+          {
+            "base_audits": 1597,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 32000,
+            "threshold": 0.05,
+            "upper_error_count": 106,
+            "upper_risk": 0.0033125
+          },
+          {
+            "base_audits": 1400,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 28800,
+            "threshold": 0.075,
+            "upper_error_count": 106,
+            "upper_risk": 0.0036805555555555554
+          },
+          {
+            "base_audits": 1400,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 28800,
+            "threshold": 0.1,
+            "upper_error_count": 106,
+            "upper_risk": 0.0036805555555555554
+          },
+          {
+            "base_audits": 1248,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.15,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1248,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.2,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1248,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.3,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1248,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.5,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1248,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 0.75,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          },
+          {
+            "base_audits": 1248,
+            "caught_state_errors": 0,
+            "certified": true,
+            "eligible_entries": 25600,
+            "threshold": 1.0,
+            "upper_error_count": 106,
+            "upper_risk": 0.004140625
+          }
+        ],
+        "decisions": 32000,
+        "epoch": 4,
+        "fast_path": 10200,
+        "fingerprint": "1fed5b2590072c12d28eac16067b2d2ec245b10b6e3900af5ba466803ca0a209",
+        "idle_audits": 0,
+        "mode": "active_certified",
+        "quarantine_remaining": 0,
+        "queue_price": 1.0,
+        "risk_price": 1.0,
+        "selected_threshold": 0.0,
+        "verified": 21800
+      }
+    }
+  ],
+  "study": "RevControl Phase 3A controlled semantic switch gate"
+}

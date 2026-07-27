@@ -1,0 +1,112 @@
+{
+  "claim_boundaries": {
+    "failure_ledger": "previously caught real failures are hard exclusions and cannot be diluted by later zero-error evidence",
+    "grid": "finite policy grid is an implementation approximation; risk-price optimization is the method abstraction",
+    "idle_audits": "excluded from all formal counts",
+    "performance": "no serving performance claim is made here",
+    "selection": "threshold is selected only after simultaneous confidence allocation is frozen",
+    "source": "compiled from one fixed-probability randomized shadow audit; no post-outcome threshold was added"
+  },
+  "decision": "ADAPTIVE_POLICY_ENVELOPE_PASS",
+  "familywise_alpha": 0.05,
+  "frozen_caught_margins": [
+    0.078125
+  ],
+  "policies": [
+    {
+      "base_audits": 1550,
+      "caught_state_errors": 2,
+      "certified": false,
+      "eligible_entries": 30852,
+      "frozen_failure_excluded": true,
+      "risk_price_objective": 0.00949695319590302,
+      "simultaneous_alpha": 0.01,
+      "threshold": 0.05,
+      "upper_error_count": 293,
+      "upper_risk": 0.00949695319590302,
+      "verifier_fraction_proxy": 0.0
+    },
+    {
+      "base_audits": 1540,
+      "caught_state_errors": 2,
+      "certified": false,
+      "eligible_entries": 30531,
+      "frozen_failure_excluded": false,
+      "risk_price_objective": 0.020001315112244924,
+      "simultaneous_alpha": 0.01,
+      "threshold": 0.1,
+      "upper_error_count": 293,
+      "upper_risk": 0.009596803249156596,
+      "verifier_fraction_proxy": 0.010404511863088328
+    },
+    {
+      "base_audits": 1506,
+      "caught_state_errors": 0,
+      "certified": true,
+      "eligible_entries": 29729,
+      "frozen_failure_excluded": false,
+      "risk_price_objective": 0.03946056934019614,
+      "simultaneous_alpha": 0.01,
+      "threshold": 0.2,
+      "upper_error_count": 91,
+      "upper_risk": 0.0030609842241582294,
+      "verifier_fraction_proxy": 0.036399585116037914
+    },
+    {
+      "base_audits": 1384,
+      "caught_state_errors": 0,
+      "certified": true,
+      "eligible_entries": 27465,
+      "frozen_failure_excluded": false,
+      "risk_price_objective": 0.11309549376622544,
+      "simultaneous_alpha": 0.01,
+      "threshold": 0.5,
+      "upper_error_count": 91,
+      "upper_risk": 0.0033133078463499,
+      "verifier_fraction_proxy": 0.10978218591987554
+    },
+    {
+      "base_audits": 1274,
+      "caught_state_errors": 0,
+      "certified": true,
+      "eligible_entries": 25357,
+      "frozen_failure_excluded": false,
+      "risk_price_objective": 0.18169714104780035,
+      "simultaneous_alpha": 0.01,
+      "threshold": 1.0,
+      "upper_error_count": 91,
+      "upper_risk": 0.003588752612690776,
+      "verifier_fraction_proxy": 0.17810838843510957
+    }
+  ],
+  "schema_version": 1,
+  "selected_policy": {
+    "base_audits": 1506,
+    "caught_state_errors": 0,
+    "certified": true,
+    "eligible_entries": 29729,
+    "frozen_failure_excluded": false,
+    "risk_price_objective": 0.03946056934019614,
+    "simultaneous_alpha": 0.01,
+    "threshold": 0.2,
+    "upper_error_count": 91,
+    "upper_risk": 0.0030609842241582294,
+    "verifier_fraction_proxy": 0.036399585116037914
+  },
+  "simultaneous_method": "Bonferroni-composed fixed-probability mixture e-process inversions over a preregistered monotone policy family",
+  "source_config": {
+    "alpha": 0.05,
+    "audit_probability": 0.05,
+    "concurrency": 64,
+    "delta": 0.005,
+    "dtype": "float16",
+    "duration_seconds": 30,
+    "margin_threshold": 0.05,
+    "seed": 20260731,
+    "target_risk_entries": 30000
+  },
+  "source_model": "Qwen3-ASR-0.6B",
+  "source_study": "RevTrace S1 randomized natural shadow audit",
+  "study": "RevControl simultaneous adaptive policy envelope",
+  "target_delta": 0.005
+}

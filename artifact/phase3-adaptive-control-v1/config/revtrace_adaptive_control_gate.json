@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "REVTRACE-P3A-ADAPTIVE-CONTROL",
+  "status": "PREREGISTERED_BEFORE_PHASE3A_RESULTS",
+  "controller": {
+    "name": "RevControl",
+    "target_state_disagreement_risk": 0.005,
+    "familywise_alpha": 0.05,
+    "base_audit_probability": 0.05,
+    "minimum_base_audits_per_selected_policy": 500,
+    "policy_thresholds": [
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      1.0
+    ],
+    "selection": "minimize risk_price * upper_risk * state_amplification + queue_price * verifier_fraction * verifier_cost inside the simultaneous certified set",
+    "formal_audit_channel": "fixed-probability independent base audit only",
+    "idle_audit_channel": "diagnostic only and excluded from the confidence sequence",
+    "drift_action": "caught base-audit state disagreement enters quarantine and recomputes the certified policy; no certified policy means all-verify"
+  },
+  "contract_fingerprint_fields": [
+    "model_sha256",
+    "tokenizer_sha256",
+    "runtime",
+    "precision",
+    "kernel_backend",
+    "concurrency_class",
+    "chunk_policy",
+    "canonical_path"
+  ],
+  "switch_sequence": [
+    "Qwen3-ASR-0.6B/c16/safe",
+    "Qwen3-ASR-0.6B/c64/unsafe",
+    "Qwen3-ASR-1.7B/c16",
+    "Qwen3-ASR-0.6B/c16/fresh-return-epoch"
+  ],
+  "frozen_failure_ledger": [
+    {
+      "contract": "Qwen3-ASR-0.6B/float16/c64",
+      "caught_state_error_margin": 0.078125,
+      "effect": "all policies with threshold below 0.078125 are permanently excluded for this contract"
+    },
+    {
+      "contract": "Qwen3-ASR-1.7B/float16/c16",
+      "caught_state_error_margin": 0.0625,
+      "effect": "all policies with threshold below 0.0625 are permanently excluded for this contract"
+    }
+  ],
+  "gates": {
+    "unsafe_c64_detected": true,
+    "no_human_threshold_change": true,
+    "maximum_observed_selected_output_violations": 0,
+    "maximum_observed_selected_state_violations": 0,
+    "maximum_deadline_miss_rate": 0.0,
+    "minimum_gpu_normalized_speedup_after_recovery": 2.0,
+    "familywise_anytime_risk_not_above_budget": 0.005
+  },
+  "claim_boundaries": [
+    "the policy grid is preregistered and finite; it is a numerical approximation to a continuous monotone policy family",
+    "simultaneous validity uses alpha divided across all candidate policies before outcomes are observed",
+    "a caught disagreement is repaired before state entry but does not prove that unaudited events are deterministically exact",
+    "idle audits do not enter the formal certificate without a separate known-propensity design",
+    "changing any contract fingerprint field invalidates the old certificate and starts a fail-closed epoch",
+    "performance is reported only from deployed serving runs, never from shadow-audit wall time"
+  ]
+}

@@ -190,6 +190,59 @@ def main() -> int:
             "divergent_state_token_ids": divergent_tokens,
         }
     ]
+    if distances[0] == 0:
+        payload = {
+            "schema_version": 1,
+            "study": (
+                "RevTrace fixed-future canonical Revision Impulse pilot"
+            ),
+            "decision": "RIR_PILOT_NO_STATE_IMPULSE",
+            "model": args.model_name,
+            "dtype": args.dtype,
+            "target": {
+                "session_id": args.target_session,
+                "chunk_index": args.target_chunk,
+                "canonical": canonical,
+                "divergent": divergent,
+                "execution_shape_attempts": attempts,
+            },
+            "trajectory": trajectory,
+            "summary": {
+                "pairs": 1,
+                "initial_distance": 0.0,
+                "interpretation": (
+                    "the legal output flip was absorbed by the official "
+                    "state projection, so no revision-state impulse exists"
+                ),
+            },
+            "official_semantics_smoke": smoke,
+            "environment": {"python": platform.python_version()},
+            "claim_boundaries": {
+                "sample_size": (
+                    "one pilot pair; not the Phase 3C population gate"
+                ),
+                "state_projection": (
+                    "an output mismatch is not an impulse when D(0)=0"
+                ),
+                "frequency": (
+                    "the execution-shape search is a stress test and is "
+                    "not a production mismatch-rate estimate"
+                ),
+            },
+        }
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(
+            json.dumps(
+                payload,
+                indent=2,
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        print(json.dumps(payload["summary"], sort_keys=True))
+        return 2
     for chunk_index in range(args.target_chunk + 1, rounds):
         terminal = chunk_index == rounds - 1
         begin = chunk_index * chunk_samples

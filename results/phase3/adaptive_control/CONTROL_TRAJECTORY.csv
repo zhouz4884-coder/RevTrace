@@ -1,0 +1,5 @@
+epoch,fingerprint,selected_threshold,transition,controller_action
+1,Qwen3-ASR-0.6B/fp16/c16,0.05,initial certification,admit certified minimum-cost policy
+2,Qwen3-ASR-0.6B/fp16/c64,0.2,concurrency drift,"new epoch, fail closed, contract policy"
+3,Qwen3-ASR-1.7B/fp16/c16,0.1,model drift,"new epoch, retain frozen failure exclusion"
+4,Qwen3-ASR-0.6B/fp16/c16,0.05,fresh return epoch,re-expand after independent certification

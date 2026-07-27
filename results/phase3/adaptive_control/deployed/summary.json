@@ -1,0 +1,79 @@
+{
+  "claim_boundaries": {
+    "c64": "configuration switch is fail closed; c64 performance is not claimed without a certified terminal arithmetic path",
+    "controller": "thresholds come from simultaneous envelope artifacts, not CLI choices",
+    "risk": "statistical state-disagreement contract, not deterministic exactness"
+  },
+  "decision": "PHASE3A_DEPLOYED_SEQUENCE_PASS",
+  "environment": {
+    "code_commit": "e23d09ee2c8a3ed8fb6e9549b001b08df9035ffa",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "python": "3.12.13"
+  },
+  "metrics": {
+    "minimum_gpu_normalized_speedup": 2.465841181957195,
+    "minimum_wall_speedup": 4.93168236391439,
+    "total_deadline_misses": 0,
+    "total_observed_violations": 0
+  },
+  "schema_version": 1,
+  "stages": [
+    {
+      "deadline_miss_events": 0,
+      "deadline_miss_rate": 0.0,
+      "decision": "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS",
+      "envelope": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/results/phase3/envelopes/initial-0p6b-c16.json",
+      "gpu_normalized_speedup": 3.0315519784505325,
+      "label": "stage1-0p6b-c16-initial",
+      "model": "Qwen3-ASR-0.6B",
+      "output_violations": 0,
+      "process_status": 0,
+      "result": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/phase3/deployed_sequence/stage1-0p6b-c16-initial.json",
+      "selected_threshold": 0.05,
+      "stale_or_replayed_results": 0,
+      "state_projection_violations": 0,
+      "wall_speedup": 6.063103956901065
+    },
+    {
+      "decision": "NEW_CONTRACT_EPOCH_FAIL_CLOSED_DURING_CERTIFICATION",
+      "envelope": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/results/phase3/envelopes/unsafe-0p6b-c64.json",
+      "label": "stage2-0p6b-c64-contract-change",
+      "model": "Qwen3-ASR-0.6B",
+      "performance_scope": "excluded: c64 terminal canonical shape is not certified; no c16 evidence is reused",
+      "selected_threshold": 0.2
+    },
+    {
+      "deadline_miss_events": 0,
+      "deadline_miss_rate": 0.0,
+      "decision": "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS",
+      "envelope": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/results/phase3/envelopes/model-1p7b-c16.json",
+      "gpu_normalized_speedup": 2.465841181957195,
+      "label": "stage3-1p7b-c16",
+      "model": "Qwen3-ASR-1.7B",
+      "output_violations": 0,
+      "process_status": 0,
+      "result": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/phase3/deployed_sequence/stage3-1p7b-c16.json",
+      "selected_threshold": 0.1,
+      "stale_or_replayed_results": 0,
+      "state_projection_violations": 0,
+      "wall_speedup": 4.93168236391439
+    },
+    {
+      "deadline_miss_events": 0,
+      "deadline_miss_rate": 0.0,
+      "decision": "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS",
+      "envelope": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/results/phase3/envelopes/return-0p6b-c16.json",
+      "gpu_normalized_speedup": 3.0328807664790545,
+      "label": "stage4-0p6b-c16-fresh-return",
+      "model": "Qwen3-ASR-0.6B",
+      "output_violations": 0,
+      "process_status": 0,
+      "result": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/phase3/deployed_sequence/stage4-0p6b-c16-fresh-return.json",
+      "selected_threshold": 0.05,
+      "stale_or_replayed_results": 0,
+      "state_projection_violations": 0,
+      "wall_speedup": 6.065761532958109
+    }
+  ],
+  "study": "RevControl automatic policy deployment sequence"
+}

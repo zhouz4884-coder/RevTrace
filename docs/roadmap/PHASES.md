@@ -83,7 +83,16 @@ Gate sequence:
 
 `0.6B/c16 -> 0.6B/c64 -> 1.7B/c16 -> fresh 0.6B/c16 epoch`.
 
-Status: `RUNNING`.
+Status: `PASS`.
+
+Observed controller trajectory:
+
+`0.6B/c16 tau=0.05 -> 0.6B/c64 tau=0.20 -> 1.7B/c16 tau=0.10 -> fresh 0.6B/c16 tau=0.05`.
+
+The c64 transition is fail closed for serving performance because its terminal
+canonical shape is not independently certified. Across the three deployed
+c16 epochs, minimum wall speedup is `4.932x`, minimum GPU-normalized speedup is
+`2.466x`, and deadline/state/stale-result violations are all zero.
 
 ## Phase 3B — state amplification
 
