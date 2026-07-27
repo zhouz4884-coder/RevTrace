@@ -47,6 +47,8 @@ def main() -> int:
         "artifact/phase2-risk-tail-v1/MANIFEST.json",
         "src/revtrace/core.py",
         "src/revtrace/risk.py",
+        "src/revtrace/control.py",
+        "src/revtrace/amplification.py",
     ]
     failures = [
         f"missing-required:{path}"
@@ -61,6 +63,11 @@ def main() -> int:
     )
     for experiment in registry["experiments"]:
         for key in ("config", "result", "artifact"):
+            if (
+                key in {"result", "artifact"}
+                and experiment["status"].startswith("RUNNING_")
+            ):
+                continue
             if not (ROOT / experiment[key]).exists():
                 failures.append(
                     f"registry:{experiment['id']}:{key}:{experiment[key]}"

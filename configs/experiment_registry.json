@@ -66,10 +66,20 @@
       "config": "configs/revtrace_risk_audit_v2_gate.json",
       "result": "results/phase2/terminal_canonical_v2/terminal-canonical-Qwen3-ASR-1.7B-tau0.10-d30-c16.json",
       "artifact": "artifact/phase2-risk-tail-v1"
+    },
+    {
+      "id": "P3A_ADAPTIVE_CONTROL",
+      "phase": "phase3",
+      "status": "RUNNING_PREREGISTERED_SIMULTANEOUS_POLICY_GATE",
+      "config": "configs/revtrace_adaptive_control_gate.json",
+      "result": "results/phase3/adaptive_control/summary.json",
+      "artifact": "artifact/phase3-adaptive-control-v1"
     }
   ],
   "next_gates": [
-    "S3_REVISION_IMPULSE_RESPONSE",
+    "P3A_ADAPTIVE_CONTROL",
+    "P3B_IDLE_AUDIT",
+    "P3C_REVISION_IMPULSE_RESPONSE",
     "S4_SECOND_ARCHITECTURE",
     "S5_PREVENTIVE_DETERMINISM_BASELINE"
   ]

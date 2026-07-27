@@ -1,5 +1,17 @@
 # Claim boundaries
 
+## Phase 3A adaptive-control boundary
+
+- A contract fingerprint change invalidates all old evidence and starts a new
+  fail-closed epoch.
+- Adaptive policy selection is valid only inside the preregistered
+  simultaneous confidence envelope; a post-hoc threshold is not allowed.
+- Caught real failures are permanent exclusions for every policy whose fast
+  path contains the failed margin under the same contract.
+- Opportunistic idle audits are excluded from the formal confidence sequence.
+- The Phase 3A controller is statistical and does not establish deterministic
+  floating-point exactness.
+
 ## Established
 
 - BF16/FP16 batched execution can diverge from singleton execution for

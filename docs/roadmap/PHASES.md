@@ -60,7 +60,32 @@ Current status:
   runs per active policy;
 - deterministic intermediate certificate: `UNRESOLVED`.
 
-## Phase 3 — state amplification
+## Phase 3A — adaptive state certification
+
+Primary controller name: **RevControl**.
+
+Frozen design:
+
+- every certificate is bound to a complete arithmetic/revision contract
+  fingerprint;
+- configuration changes start a fresh fail-closed epoch;
+- a preregistered monotone policy family receives simultaneous anytime-valid
+  confidence sequences;
+- risk and verifier-queue prices select a policy inside the certified
+  envelope;
+- caught real failures are permanent policy exclusions for that exact
+  contract;
+- independent base audits alone support the formal certificate;
+- idle VOI audits remain diagnostic unless a separate propensity design is
+  preregistered.
+
+Gate sequence:
+
+`0.6B/c16 -> 0.6B/c64 -> 1.7B/c16 -> fresh 0.6B/c16 epoch`.
+
+Status: `RUNNING`.
+
+## Phase 3B — state amplification
 
 Gate S3:
 

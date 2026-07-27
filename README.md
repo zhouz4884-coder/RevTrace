@@ -48,7 +48,10 @@ Current decision:
 - **Phase 2 — tail and risk contract:** terminal-reserved state-commit EDF,
   fixed-probability anytime risk-limiting audits with frozen margin-stratum
   diagnostics, and a `<1%` deadline-miss gate.
-- **Phase 3 — amplification:** Revision Impulse Response, Revision Amplification
+- **Phase 3A — adaptive control (running):** contract-scoped certificate
+  epochs, simultaneous policy confidence envelopes, permanent failure-ledger
+  exclusions, risk/queue-priced policy selection, and dual-channel auditing.
+- **Phase 3B — amplification:** Revision Impulse Response, Revision Amplification
   Factor, Numerical State Exposure, and amplification-aware verification.
 - **Phase 4 — generality:** a second feedback/revision architecture.
 - **Phase 5 — deterministic baseline:** Qwen3-ASR-compatible preventive
