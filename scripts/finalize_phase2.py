@@ -24,6 +24,7 @@ def write_json(path: Path, payload: object) -> None:
     path.write_text(
         json.dumps(payload, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
+        newline="\n",
     )
 
 
@@ -131,7 +132,11 @@ def write_paper_tables(
             "",
         ]
     )
-    path.write_text("\n".join(lines), encoding="utf-8")
+    path.write_text(
+        "\n".join(lines),
+        encoding="utf-8",
+        newline="\n",
+    )
 
 
 def sha256(path: Path) -> str:
@@ -761,7 +766,11 @@ def main() -> int:
             continue
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=list(rows[0]),
+                lineterminator="\n",
+            )
             writer.writeheader()
             writer.writerows(rows)
 

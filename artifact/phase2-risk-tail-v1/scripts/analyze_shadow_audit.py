@@ -65,7 +65,11 @@ def main() -> int:
         "canonical_projection_sha256",
     ]
     with args.output.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=fields,
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
     print(json.dumps({"caught_records": len(rows), "output": str(args.output)}))

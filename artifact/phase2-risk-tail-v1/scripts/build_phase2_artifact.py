@@ -101,7 +101,11 @@ python -m pytest -q
 python scripts/validate_repository.py
 ```
 """
-    (OUTPUT / "README.md").write_text(readme, encoding="utf-8")
+    (OUTPUT / "README.md").write_text(
+        readme,
+        encoding="utf-8",
+        newline="\n",
+    )
     files = sorted(path for path in OUTPUT.rglob("*") if path.is_file())
     manifest = {
         "schema_version": 1,
@@ -121,6 +125,7 @@ python scripts/validate_repository.py
     (OUTPUT / "MANIFEST.json").write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
+        newline="\n",
     )
     print(json.dumps({"files": len(files), "output": str(OUTPUT)}))
     return 0
