@@ -313,6 +313,9 @@ def main() -> int:
                 )
                 metadata_by_ticket[ticket] = {
                     "position": position,
+                    "session_id": streams[position]["session_id"],
+                    "episode": episodes,
+                    "chunk_index": chunk_index,
                     "audited": audited,
                     "mandatory": mandatory,
                     "terminal": terminal,
@@ -369,6 +372,9 @@ def main() -> int:
                         audit_records.append(
                             {
                                 "ticket": result["ticket"],
+                                "session_id": metadata["session_id"],
+                                "episode": metadata["episode"],
+                                "chunk_index": metadata["chunk_index"],
                                 "job_sha256": metadata["job_sha256"],
                                 "terminal": metadata["terminal"],
                                 "minimum_margin": metadata[

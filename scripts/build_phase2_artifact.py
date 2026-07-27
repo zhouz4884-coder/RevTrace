@@ -32,6 +32,8 @@ def main() -> int:
             OUTPUT / "results" / "SOURCE_MANIFEST.json",
         ROOT / "scripts" / "simulate_anytime_risk.py":
             OUTPUT / "scripts" / "simulate_anytime_risk.py",
+        ROOT / "scripts" / "analyze_shadow_audit.py":
+            OUTPUT / "scripts" / "analyze_shadow_audit.py",
         ROOT / "scripts" / "remote" / "run_shadow_risk_audit.py":
             OUTPUT / "scripts" / "run_shadow_risk_audit.py",
         ROOT / "scripts" / "remote" / "run_revtrace_dual_gpu.py":
