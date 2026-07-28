@@ -1,0 +1,87 @@
+{
+  "experiment_id": "P5_SYSTEM_HARDENING",
+  "decision_target": "PAPER_CORE_GO_PHASE5_SYSTEM_HARDENING",
+  "phase5a": {
+    "sequence": [
+      "c16_initial",
+      "c64_drift",
+      "c16_return"
+    ],
+    "minimum_epoch_audits": 1350,
+    "risk_budget": 0.005,
+    "alpha": 0.05,
+    "switch_action": "invalidate evidence and set fast path to zero",
+    "gates": {
+      "observed_state_or_stale_violations": 0,
+      "deadline_misses": 0,
+      "risk_upper_bound": 0.005,
+      "steady_oracle_recovery": 0.9,
+      "gpu_normalized_goodput": 2.0
+    }
+  },
+  "phase5b": {
+    "models": [
+      "whisper-tiny.en",
+      "whisper-base.en"
+    ],
+    "natural_sessions_per_model": 100,
+    "windows_per_session": 3,
+    "replicas": 16,
+    "gates": {
+      "protected_state_propagation": 0,
+      "wall_speedup": 2.0,
+      "gpu_normalized_speedup": 1.5
+    }
+  },
+  "phase5c": {
+    "representative_cells": 8,
+    "concurrency": [
+      8,
+      16,
+      32
+    ],
+    "duration_seconds": [
+      30,
+      60,
+      120
+    ],
+    "arrival": [
+      "sync",
+      "poisson",
+      "burst"
+    ],
+    "language": [
+      "English",
+      "Chinese",
+      "mixed"
+    ],
+    "models": [
+      "Qwen3-ASR-0.6B",
+      "Qwen3-ASR-1.7B"
+    ]
+  },
+  "phase5d": {
+    "non_blocking": true,
+    "mechanism": "release-aware non-preemptive audit packing",
+    "gates": {
+      "deadline_miss": 0,
+      "p99_change_fraction": 0.02,
+      "detection_time_improvement": 0.2
+    }
+  },
+  "phase5e": {
+    "artifact": "consequential state-pair corpus",
+    "population_claim": false,
+    "required_fields": [
+      "audio_hash",
+      "pair_hash",
+      "canonical_state",
+      "batched_state",
+      "margin",
+      "RAF",
+      "persistent",
+      "terminal_effect",
+      "source_kind"
+    ]
+  }
+}

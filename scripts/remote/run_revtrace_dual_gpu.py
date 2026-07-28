@@ -57,6 +57,23 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
     )
     parser.add_argument("--result-timeout-seconds", type=float, default=900.0)
+    parser.add_argument(
+        "--power-sampling-interval-seconds",
+        type=float,
+        default=0.1,
+    )
+    parser.add_argument(
+        "--arrival-mode",
+        choices=("sync", "poisson", "burst"),
+        default="sync",
+    )
+    parser.add_argument("--arrival-seed", type=int, default=20260728)
+    parser.add_argument("--arrival-scale-seconds", type=float, default=0.02)
+    parser.add_argument(
+        "--language-mode",
+        choices=("mixed", "English", "Chinese"),
+        default="mixed",
+    )
     return parser.parse_args()
 
 
@@ -419,6 +436,7 @@ def main() -> int:
     import numpy as np
     from run_revbatch_gate import (
         SAMPLE_RATE,
+        cycle_audio,
         load_sources,
         make_streams,
         official_smoke,
@@ -430,6 +448,7 @@ def main() -> int:
         state_projection_record,
     )
     from revtrace.core import RevisionCommitLedger, RevisionTicket
+    from revtrace.phase5 import NvidiaPowerSampler, summarize_energy
 
     sources = load_sources(args.data_manifest)
     streams = make_streams(
@@ -437,6 +456,16 @@ def main() -> int:
         duration=args.duration_seconds,
         concurrency=args.concurrency,
     )
+    if args.language_mode != "mixed":
+        for index, stream in enumerate(streams):
+            language = args.language_mode
+            source = sources[language][index % len(sources[language])]
+            stream["language"] = language
+            stream["audio"] = cycle_audio(
+                source,
+                args.duration_seconds,
+                offset=(index * 7919) % max(1, source.size),
+            )
     asr = build_asr(
         str(args.model),
         args.dtype,
@@ -558,7 +587,31 @@ def main() -> int:
             verifier_elapsed=elapsed,
         )
 
+    service_power = NvidiaPowerSampler(
+        [int(args.proposer_gpu), int(args.verifier_gpu)],
+        interval_seconds=args.power_sampling_interval_seconds,
+    )
+    service_power.start()
     service_started = time.perf_counter()
+    arrival_rng = np.random.default_rng(args.arrival_seed)
+    if args.arrival_mode == "sync":
+        session_release_seconds = [0.0 for _ in streams]
+    elif args.arrival_mode == "poisson":
+        intervals = arrival_rng.exponential(
+            args.arrival_scale_seconds,
+            size=max(0, len(streams) - 1),
+        )
+        session_release_seconds = [0.0]
+        for interval in intervals:
+            session_release_seconds.append(
+                session_release_seconds[-1] + float(interval)
+            )
+    else:
+        burst_size = max(1, len(streams) // 4)
+        session_release_seconds = [
+            (index // burst_size) * args.arrival_scale_seconds
+            for index in range(len(streams))
+        ]
     batch_id = 0
     while len(events) < len(streams) * rounds:
         progressed = False
@@ -580,6 +633,10 @@ def main() -> int:
             index
             for index, chunk_index in enumerate(next_chunks)
             if chunk_index < rounds
+            and (
+                time.perf_counter() - service_started
+                >= session_release_seconds[index]
+            )
             and not any(
                 pending["state_index"] == index
                 for pending in pending_by_revision.values()
@@ -647,15 +704,23 @@ def main() -> int:
                     )
                 if terminal_items:
                     terminal_burst_sizes.append(len(terminal_items))
-                    command_queues[0].put(
-                        {
-                            "kind": "canonical_batch",
-                            "batch_id": batch_id,
-                            "items": terminal_items,
-                        }
-                    )
-                    batch_id += 1
-                    verification_batches += 1
+                    for begin in range(
+                        0,
+                        len(terminal_items),
+                        args.terminal_canonical_batch_size,
+                    ):
+                        command_queues[0].put(
+                            {
+                                "kind": "canonical_batch",
+                                "batch_id": batch_id,
+                                "items": terminal_items[
+                                    begin : begin
+                                    + args.terminal_canonical_batch_size
+                                ],
+                            }
+                        )
+                        batch_id += 1
+                        verification_batches += 1
                     max_pending = max(
                         max_pending, len(pending_by_revision)
                     )
@@ -831,11 +896,28 @@ def main() -> int:
             progressed = True
 
         if not progressed:
-            message = receive_or_raise(
-                result_queue,
-                args.result_timeout_seconds,
-            )
-            process_verified_message(message)
+            if pending_by_revision:
+                message = receive_or_raise(
+                    result_queue,
+                    args.result_timeout_seconds,
+                )
+                process_verified_message(message)
+            else:
+                elapsed = time.perf_counter() - service_started
+                future = [
+                    release
+                    for release, chunk_index in zip(
+                        session_release_seconds, next_chunks
+                    )
+                    if chunk_index < rounds and release > elapsed
+                ]
+                if not future:
+                    raise RuntimeError(
+                        "scheduler made no progress without pending work"
+                    )
+                time.sleep(
+                    min(0.01, max(0.0, min(future) - elapsed))
+                )
 
         print(
             json.dumps(
@@ -851,15 +933,31 @@ def main() -> int:
         )
 
     service_wall_seconds = time.perf_counter() - service_started
+    service_power_samples = service_power.stop()
     if pending_by_revision:
         raise AssertionError("service ended with unresolved revisions")
 
+    audit_power = NvidiaPowerSampler(
+        [int(args.proposer_gpu), int(args.verifier_gpu)],
+        interval_seconds=args.power_sampling_interval_seconds,
+    )
+    audit_power.start()
     if args.terminal_canonical_dtype:
         audit_streams = make_streams(
             sources,
             duration=args.duration_seconds,
             concurrency=args.concurrency,
         )
+        if args.language_mode != "mixed":
+            for index, stream in enumerate(audit_streams):
+                language = args.language_mode
+                source = sources[language][index % len(sources[language])]
+                stream["language"] = language
+                stream["audio"] = cycle_audio(
+                    source,
+                    args.duration_seconds,
+                    offset=(index * 7919) % max(1, source.size),
+                )
         audit_states = [
             asr.init_streaming_state(
                 language=stream["language"],
@@ -908,27 +1006,36 @@ def main() -> int:
                     }
                     for stream, job in zip(audit_streams, audit_jobs)
                 ]
-                command_queues[0].put(
-                    {
-                        "kind": "canonical_batch",
-                        "batch_id": -1,
-                        "items": audit_items,
-                    }
-                )
                 terminal_records: list[dict[str, Any] | None] = [
                     None for _ in audit_items
                 ]
-                for _ in audit_items:
-                    message = receive_or_raise(
-                        result_queue, args.result_timeout_seconds
-                    )
-                    if message.get("kind") != "verified_item":
-                        raise RuntimeError(
-                            f"unexpected terminal audit result: {message}"
-                        )
-                    terminal_records[int(message["position"])] = message[
-                        "record"
+                for begin in range(
+                    0,
+                    len(audit_items),
+                    args.terminal_canonical_batch_size,
+                ):
+                    chunk = audit_items[
+                        begin : begin + args.terminal_canonical_batch_size
                     ]
+                    command_queues[0].put(
+                        {
+                            "kind": "canonical_batch",
+                            "batch_id": -1 - begin,
+                            "items": chunk,
+                        }
+                    )
+                    for _ in chunk:
+                        message = receive_or_raise(
+                            result_queue, args.result_timeout_seconds
+                        )
+                        if message.get("kind") != "verified_item":
+                            raise RuntimeError(
+                                "unexpected terminal audit result: "
+                                f"{message}"
+                            )
+                        terminal_records[
+                            begin + int(message["position"])
+                        ] = message["record"]
                 if any(item is None for item in terminal_records):
                     raise AssertionError(
                         "terminal audit returned an incomplete batch"
@@ -973,6 +1080,7 @@ def main() -> int:
         audit = receive_or_raise(result_queue, args.result_timeout_seconds)
         if audit.get("kind") != "audit_complete":
             raise RuntimeError(f"unexpected audit result: {audit}")
+    audit_power_samples = audit_power.stop()
     canonical_by_key = {
         (event["session_id"], int(event["chunk_id"])): event["record"]
         for event in audit["events"]
@@ -1107,6 +1215,14 @@ def main() -> int:
             if verifier_request_seconds
             else 0.0
         ),
+        "service_energy": summarize_energy(
+            service_power_samples,
+            completed_audio_seconds=len(events) * 2.0,
+        ),
+        "canonical_audit_energy": summarize_energy(
+            audit_power_samples,
+            completed_audio_seconds=len(events) * 2.0,
+        ),
     }
     payload = {
         "schema_version": 1,
@@ -1117,6 +1233,10 @@ def main() -> int:
         "duration_seconds": args.duration_seconds,
         "concurrency": args.concurrency,
         "margin_threshold": args.margin_threshold,
+        "arrival_mode": args.arrival_mode,
+        "arrival_seed": args.arrival_seed,
+        "arrival_scale_seconds": args.arrival_scale_seconds,
+        "language_mode": args.language_mode,
         "contract": {
             "canonical": (
                 "FP16 singleton for intermediate revisions; "
