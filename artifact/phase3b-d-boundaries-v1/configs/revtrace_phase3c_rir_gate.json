@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "REVTRACE-P3C-REVISION-IMPULSE-POPULATION",
+  "minimum_distinct_state_pairs_per_model": 50,
+  "legal_interventions": [
+    "batch_size",
+    "batch_slot",
+    "batch_composition",
+    "execution_repeat",
+    "audio_stress_transform",
+    "independent_public_utterance_stress"
+  ],
+  "forbidden_interventions": [
+    "logit_noise",
+    "manual_token_edit",
+    "future_audio_change_between_pair_branches"
+  ],
+  "metrics": [
+    "survival_curve",
+    "pollution_half_life",
+    "right_censoring",
+    "revision_amplification_factor",
+    "terminal_difference_rate",
+    "numerical_state_exposure"
+  ],
+  "claim_boundaries": [
+    "natural and stress flip rates are reported separately",
+    "duplicate slots producing the same state pair count once",
+    "no recovery inside a finite horizon is right-censored, not infinite"
+  ]
+}

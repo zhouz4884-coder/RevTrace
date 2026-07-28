@@ -1,0 +1,81 @@
+{
+  "claim_boundaries": [
+    "All labels come from independent randomized base audits.",
+    "The replay is retrospective diagnostic evidence, not a live SLO result.",
+    "Idle selections do not enter the formal confidence sequence.",
+    "Formal time-uniform certification speed is unchanged by idle labels.",
+    "Verifier GPU-seconds use the measured request-time median.",
+    "Only one unique failing job is present, limiting VOI-versus-margin conclusions.",
+    "No production error frequency is estimated from this stress pool."
+  ],
+  "config": {
+    "base_retain_probability": 0.4,
+    "effective_base_probability": 0.020000000000000004,
+    "idle_budget": 4,
+    "seed": 20260729,
+    "trials": 2000,
+    "verifier_request_seconds_p50": 0.30990824894979596,
+    "window": 64
+  },
+  "decision": "P3B_DUAL_CHANNEL_PASS_VOI_NOT_DISTINGUISHED",
+  "derived": {
+    "margin_detection_probability_gain": 0.356,
+    "margin_median_verifier_request_reduction": 0.20141342756183744,
+    "voi_minus_margin_detection_probability": 0.0,
+    "voi_minus_margin_verifier_requests": 3.0
+  },
+  "gates": {
+    "dual_channel_drift_detection_gain": true,
+    "formal_certificate_uses_idle_labels": false,
+    "voi_independent_gain_over_margin": false
+  },
+  "labelled_base_audits": 1550,
+  "labelled_state_errors": 2,
+  "phase_decision": "PHASE3B_BOUNDED_DIAGNOSTIC_PASS_VOI_AND_LIVE_SLO_UNRESOLVED",
+  "policies": {
+    "base_only": {
+      "candidate_records_to_detection_median": 704.0,
+      "detection_probability": 0.644,
+      "formal_base_requests_to_detection_median": 283.0,
+      "idle_requests_to_detection_median": 0.0,
+      "verifier_gpu_seconds_to_detection_median": 87.70403445279226,
+      "verifier_requests_to_detection_median": 283.0,
+      "verifier_requests_to_detection_p95": 602.0
+    },
+    "margin_idle": {
+      "candidate_records_to_detection_median": 512.0,
+      "detection_probability": 1.0,
+      "formal_base_requests_to_detection_median": 195.0,
+      "idle_requests_to_detection_median": 32.0,
+      "verifier_gpu_seconds_to_detection_median": 70.03926426265389,
+      "verifier_requests_to_detection_median": 226.0,
+      "verifier_requests_to_detection_p95": 564.0
+    },
+    "uniform_idle": {
+      "candidate_records_to_detection_median": 704.0,
+      "detection_probability": 0.716,
+      "formal_base_requests_to_detection_median": 285.0,
+      "idle_requests_to_detection_median": 44.0,
+      "verifier_gpu_seconds_to_detection_median": 102.26972215343267,
+      "verifier_requests_to_detection_median": 330.0,
+      "verifier_requests_to_detection_p95": 689.0
+    },
+    "voi_idle": {
+      "candidate_records_to_detection_median": 512.0,
+      "detection_probability": 1.0,
+      "formal_base_requests_to_detection_median": 198.0,
+      "idle_requests_to_detection_median": 32.0,
+      "verifier_gpu_seconds_to_detection_median": 70.96898900950328,
+      "verifier_requests_to_detection_median": 229.0,
+      "verifier_requests_to_detection_p95": 570.0
+    }
+  },
+  "schema_version": 1,
+  "source": "results\\phase3\\adaptive_control\\raw\\c64-shadow-p0.05-seed20260731.json",
+  "study": "Phase 3B retrospective dual-channel audit gate",
+  "unique_error_jobs": 1,
+  "unresolved_gates": [
+    "live cancellable idle-audit SLO preservation",
+    "VOI advantage over margin-only on multiple independent failures"
+  ]
+}
