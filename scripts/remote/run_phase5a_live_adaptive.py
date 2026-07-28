@@ -267,6 +267,46 @@ def main() -> int:
             )
         )
 
+    # Compile/profile every proposer and canonical contract shape before the
+    # measured switch sequence.  A shape's first-use compilation is deployment
+    # initialization, not state-entry latency.
+    warmup_started = time.perf_counter()
+    for warmup_concurrency in sorted({item[1] for item in stages}):
+        warmup_streams = make_streams(
+            sources,
+            duration=2,
+            concurrency=warmup_concurrency,
+        )
+        warmup_states = [
+            asr.init_streaming_state(
+                language=stream["language"],
+                unfixed_chunk_num=2,
+                unfixed_token_num=5,
+                chunk_size_sec=2.0,
+            )
+            for stream in warmup_streams
+        ]
+        warmup_jobs = []
+        for stream, state in zip(warmup_streams, warmup_states):
+            job, _ = prepare_job(
+                asr,
+                state,
+                stream["audio"][: 2 * SAMPLE_RATE],
+                tail=False,
+            )
+            warmup_jobs.append(job)
+        dispatched = dispatch_canonical_batch(
+            warmup_jobs,
+            fixed_shape=warmup_concurrency,
+        )
+        asr.model.generate(
+            warmup_jobs,
+            sampling_params=asr.sampling_params,
+            use_tqdm=False,
+        )
+        collect_canonical_batch(dispatched)
+    warmup_seconds_excluded = time.perf_counter() - warmup_started
+
     stage_payloads: list[dict[str, Any]] = []
     global_event = 0
     for stage_index, (label, concurrency, episodes) in enumerate(stages):
@@ -644,6 +684,9 @@ def main() -> int:
         ),
         "model": args.model_name,
         "canonical_dtype": args.canonical_dtype,
+        "shape_warmup_seconds_excluded_from_service": (
+            warmup_seconds_excluded
+        ),
         "stages": stage_payloads,
         "environment": {
             "python": platform.python_version(),
