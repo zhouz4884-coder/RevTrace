@@ -188,54 +188,77 @@ def main() -> int:
     )
     batch_id = 0
 
+    def dispatch_canonical_batch(
+        jobs: list[dict[str, Any]],
+        *,
+        fixed_shape: int,
+    ) -> tuple[int, int]:
+        nonlocal batch_id
+        if not jobs or len(jobs) > fixed_shape:
+            raise ValueError("canonical dispatch must fit one fixed shape")
+        current_batch_id = batch_id
+        items = [
+            {
+                "ticket": {
+                    "session_id": f"canonical-{batch_id}-{position}",
+                    "revision_id": f"canonical-{batch_id}-{position}",
+                    "parent_version": 0,
+                    "next_version": 1,
+                },
+                "job": job,
+            }
+            for position, job in enumerate(jobs)
+        ]
+        command_queue.put(
+            {
+                "kind": "canonical_batch",
+                "batch_id": batch_id,
+                "items": items,
+                "fixed_shape": fixed_shape,
+            }
+        )
+        batch_id += 1
+        return current_batch_id, len(items)
+
+    def collect_canonical_batch(
+        dispatched: tuple[int, int],
+    ) -> tuple[list[dict[str, Any]], float]:
+        expected_batch_id, item_count = dispatched
+        elapsed = 0.0
+        by_position: list[dict[str, Any] | None] = [
+            None for _ in range(item_count)
+        ]
+        for _ in range(item_count):
+            message = receive_or_raise(
+                result_queue, args.result_timeout_seconds
+            )
+            if (
+                message.get("kind") != "verified_item"
+                or int(message["batch_id"]) != expected_batch_id
+            ):
+                raise RuntimeError(
+                    f"unexpected canonical result: {message}"
+                )
+            by_position[int(message["position"])] = message["record"]
+            elapsed += float(message["elapsed_seconds"])
+        if any(record is None for record in by_position):
+            raise AssertionError("incomplete canonical batch")
+        return (
+            [record for record in by_position if record is not None],
+            elapsed,
+        )
+
     def canonical_batch(
         jobs: list[dict[str, Any]],
         *,
         fixed_shape: int,
     ) -> tuple[list[dict[str, Any]], float]:
-        nonlocal batch_id
-        records: list[dict[str, Any]] = []
-        elapsed = 0.0
-        for begin in range(0, len(jobs), fixed_shape):
-            chunk = jobs[begin : begin + fixed_shape]
-            items = [
-                {
-                    "ticket": {
-                        "session_id": f"canonical-{batch_id}-{position}",
-                        "revision_id": f"canonical-{batch_id}-{position}",
-                        "parent_version": 0,
-                        "next_version": 1,
-                    },
-                    "job": job,
-                }
-                for position, job in enumerate(chunk)
-            ]
-            command_queue.put(
-                {
-                    "kind": "canonical_batch",
-                    "batch_id": batch_id,
-                    "items": items,
-                    "fixed_shape": fixed_shape,
-                }
+        return collect_canonical_batch(
+            dispatch_canonical_batch(
+                jobs,
+                fixed_shape=fixed_shape,
             )
-            by_position: list[dict[str, Any] | None] = [
-                None for _ in items
-            ]
-            for _ in items:
-                message = receive_or_raise(
-                    result_queue, args.result_timeout_seconds
-                )
-                if message.get("kind") != "verified_item":
-                    raise RuntimeError(
-                        f"unexpected canonical result: {message}"
-                    )
-                by_position[int(message["position"])] = message["record"]
-                elapsed += float(message["elapsed_seconds"])
-            if any(record is None for record in by_position):
-                raise AssertionError("incomplete canonical batch")
-            records.extend(record for record in by_position if record is not None)
-            batch_id += 1
-        return records, elapsed
+        )
 
     stage_payloads: list[dict[str, Any]] = []
     global_event = 0
@@ -291,6 +314,15 @@ def main() -> int:
                     )
                     jobs.append(job)
                     prefixes.append(prefix)
+                preverify_all = controller.fail_closed or terminal
+                overlapped_dispatch = (
+                    dispatch_canonical_batch(
+                        jobs,
+                        fixed_shape=concurrency,
+                    )
+                    if preverify_all
+                    else None
+                )
                 proposal_started = time.perf_counter()
                 outputs = asr.model.generate(
                     jobs,
@@ -300,16 +332,26 @@ def main() -> int:
                 proposal_elapsed = time.perf_counter() - proposal_started
                 proposer_seconds += proposal_elapsed
                 proposals = [candidate_record(output) for output in outputs]
-                verify_positions = [
-                    position
-                    for position, proposal in enumerate(proposals)
-                    if controller.requires_verification(
-                        minimum_margin=proposal["minimum_margin"],
-                        terminal=terminal,
-                    )
-                ]
                 verified_by_position: dict[int, dict[str, Any]] = {}
-                if verify_positions:
+                if overlapped_dispatch is not None:
+                    verified, elapsed = collect_canonical_batch(
+                        overlapped_dispatch
+                    )
+                    verify_positions = list(range(len(jobs)))
+                    required_verifier_seconds += elapsed
+                    verified_by_position.update(
+                        zip(verify_positions, verified)
+                    )
+                else:
+                    verify_positions = [
+                        position
+                        for position, proposal in enumerate(proposals)
+                        if controller.requires_verification(
+                            minimum_margin=proposal["minimum_margin"],
+                            terminal=terminal,
+                        )
+                    ]
+                if verify_positions and overlapped_dispatch is None:
                     verified, elapsed = canonical_batch(
                         [jobs[position] for position in verify_positions],
                         fixed_shape=concurrency,
