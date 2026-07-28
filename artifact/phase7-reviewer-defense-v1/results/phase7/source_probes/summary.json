@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "study": "Phase 7 public-source SOTA probes",
+  "rows": [
+    {
+      "method": "Thinking Machines batch_invariant_ops",
+      "scope": "source operator",
+      "status": "PASS",
+      "bitwise_invariant": true,
+      "ordinary_pair_latency_seconds_p50": 0.0001328461803495884,
+      "invariant_pair_latency_seconds_p50": 0.0006178319454193115,
+      "latency_ratio": 4.650730138573012
+    },
+    {
+      "method": "Thinking Machines batch_invariant_ops",
+      "scope": "Qwen3-ASR c4/d4 integration smoke",
+      "status": "PASS_SMALL_SMOKE",
+      "events": 8,
+      "state_mismatches": 0,
+      "speedup_over_singleton": 2.08603447755992,
+      "ordinary_fp16_speedup_same_smoke": 2.19806122526128
+    },
+    {
+      "method": "TBIK",
+      "scope": "source Triton fallback operator on RTX 3090",
+      "status": "PASS_WITH_SOURCE_BUG_WORKAROUND",
+      "bitwise_invariant": true,
+      "ordinary_pair_latency_seconds_p50": 0.000101420097053051,
+      "invariant_pair_latency_seconds_p50": 0.00027158111333847046,
+      "latency_ratio": 2.677756255742331
+    },
+    {
+      "method": "vLLM Batch Invariance",
+      "scope": "actual Qwen3-ASR decoding",
+      "status": "INCOMPATIBLE",
+      "reason": "batch-invariant log_softmax path asserts _half_to_float is not implemented"
+    },
+    {
+      "method": "SGLang deterministic inference",
+      "scope": "current-source Qwen3-ASR import",
+      "status": "INCOMPATIBLE_FROZEN_STACK",
+      "reason": "current source requires Torch 2.11/CUDA 13-era FlashInfer interfaces; server is Torch 2.9.1+cu128"
+    },
+    {
+      "method": "LLM-42",
+      "scope": "original source text-server attempt",
+      "status": "BUILD_BLOCKED",
+      "reason": "source requires a custom batch-invariant sgl-kernel absent from wheels; bundled build requires nvcc, which is not installed"
+    }
+  ],
+  "claim_boundary": "Operator and import probes are not end-to-end serving results. Failure logs are retained verbatim."
+}

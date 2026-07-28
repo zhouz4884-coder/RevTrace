@@ -26,6 +26,7 @@ from revtrace.phase6 import (
     FailureRecord,
     PopulationContract,
     PositiveCertificate,
+    ReshapeCandidate,
     RuntimeContract,
     ServiceContract,
     ShapeEnvelope,
@@ -66,12 +67,16 @@ def make_contract(
     return RuntimeContract(
         identity,
         ShapeEnvelope(
-            (batch,),
-            (4096,),
-            ("observed",),
-            (f"c{batch}-{language}-{arrival}",),
-            (language,),
-            ("all-revisions",),
+            (
+                ExecutionSignature(
+                    batch,
+                    4096,
+                    "observed",
+                    f"c{batch}-{language}-{arrival}",
+                    language,
+                    "all-revisions",
+                ),
+            )
         ),
         PopulationContract(
             language,
@@ -188,7 +193,21 @@ def main() -> int:
         c64,
         predicted_p99_seconds=2.888937874697149,
         upper_risk=0.004988737202775151,
-        reshape_candidates=((16, 1.4055951461195946),),
+        reshape_candidates=(
+            ReshapeCandidate(
+                c16.digest,
+                16,
+                1.4055951461195946,
+                PositiveCertificate(
+                    c16.digest,
+                    0.05,
+                    0.0045,
+                    1497,
+                    identity.digest,
+                    1,
+                ),
+            ),
+        ),
     )
 
     c16_margins = [

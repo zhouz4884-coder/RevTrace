@@ -173,6 +173,26 @@ See the
 [paper-facing tables](results/phase6/PAPER_TABLES.md), and
 [audited artifact](artifact/phase6-submission-repairs-v1).
 
+### Phase 7 frozen reviewer-defense status
+
+`PHASE7_REVIEWER_DEFENSE_COMPLETE_WITH_COMPATIBILITY_BOUNDARIES`
+
+Phase 7 adds exact-signature/certificate-bound reshaping, public-source SOTA
+probes, faithful MarginGate/RW-TTT/LLM-42 revision adaptations, a seven-step
+causal ablation, full c64 queue accounting, and delta sensitivity. The live
+64-offered/16-active run drains 1,920 audio-seconds in 55.678 seconds
+(34.484 audio-s/wall-s), with active P99 1.942 seconds and end-to-end P99
+44.797 seconds after queueing. One state violation in 960 events yields a
+one-sided 95% upper bound of 0.4932%, inside the frozen 0.5% statistical
+contract; it is explicitly not deterministic exactness.
+
+The failed mixed-language certificate-transfer run is retained because it
+demonstrates why an unobserved execution signature cannot inherit an English
+certificate. See the
+[Phase 7 report](docs/reports/phase7_reviewer_defense_report.md),
+[collision matrix](docs/research/phase7_related_work_collision_matrix.md), and
+[paper tables](results/phase7/PAPER_TABLES.md).
+
 ## Phase map
 
 - **Phase 0 — discovery and causal controls:** RevBatch performance opportunity,

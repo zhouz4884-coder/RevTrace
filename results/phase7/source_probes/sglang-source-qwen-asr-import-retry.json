@@ -1,0 +1,10 @@
+{
+  "import_sglang": "pass",
+  "qwen3_asr_error": "ImportError(\"cannot import name 'PreTrainedConfig' from 'transformers.configuration_utils' (/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/configuration_utils.py)\")",
+  "qwen3_asr_model_import": "fail",
+  "qwen3_asr_traceback": "Traceback (most recent call last):\n  File \"/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/scripts/remote/run_phase7_import_probe.py\", line 36, in main\n    from sglang.srt.models.qwen3_asr import (  # noqa: F401\n  File \"/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/revtrace-phase7/sglang-current/python/sglang/srt/models/qwen3_asr.py\", line 9, in <module>\n    from sglang.srt.configs.qwen3_asr import Qwen3ASRConfig\n  File \"/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/revtrace-phase7/sglang-current/python/sglang/srt/configs/__init__.py\", line 4, in <module>\n    from sglang.srt.configs.cohere2_moe import Cohere2MoeConfig\n  File \"/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/revtrace-phase7/sglang-current/python/sglang/srt/configs/cohere2_moe.py\", line 4, in <module>\n    from transformers.configuration_utils import PreTrainedConfig\nImportError: cannot import name 'PreTrainedConfig' from 'transformers.configuration_utils' (/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/configuration_utils.py)\n",
+  "schema_version": 1,
+  "sglang_version": "0.0.0.dev0",
+  "source": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/revtrace-phase7/sglang-current/python",
+  "target": "sglang-asr"
+}

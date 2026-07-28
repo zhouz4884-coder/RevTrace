@@ -68,39 +68,39 @@ class ExecutionSignature:
 
 @dataclass(frozen=True)
 class ShapeEnvelope:
-    batch_sizes: tuple[int, ...]
-    sequence_buckets: tuple[int, ...]
-    padding_buckets: tuple[str, ...]
-    composition_signatures: tuple[str, ...]
-    language_classes: tuple[str, ...]
-    revision_depth_buckets: tuple[str, ...]
+    """A finite set of complete, observed execution signatures.
+
+    Keeping dimensions in separate sets accidentally denotes their Cartesian
+    product.  That can transfer evidence to an execution combination that was
+    never observed.  Membership and coverage are therefore exact set
+    operations over complete signatures.
+    """
+
+    signatures: tuple[ExecutionSignature, ...]
 
     def __post_init__(self) -> None:
-        for name, values in asdict(self).items():
-            if not values:
-                raise ValueError(f"shape envelope {name} cannot be empty")
-            if len(set(values)) != len(values):
-                raise ValueError(f"shape envelope {name} must be unique")
+        if not self.signatures:
+            raise ValueError("shape envelope signatures cannot be empty")
+        if len(set(self.signatures)) != len(self.signatures):
+            raise ValueError("shape envelope signatures must be unique")
+
+    @property
+    def batch_sizes(self) -> tuple[int, ...]:
+        return tuple(sorted({item.batch_size for item in self.signatures}))
+
+    @property
+    def language_classes(self) -> tuple[str, ...]:
+        return tuple(
+            sorted({item.language_class for item in self.signatures})
+        )
 
     def contains(self, signature: ExecutionSignature) -> bool:
-        return (
-            signature.batch_size in self.batch_sizes
-            and signature.sequence_bucket in self.sequence_buckets
-            and signature.padding_bucket in self.padding_buckets
-            and signature.composition_signature
-            in self.composition_signatures
-            and signature.language_class in self.language_classes
-            and signature.revision_depth_bucket
-            in self.revision_depth_buckets
-        )
+        return signature in self.signatures
 
     def covers(self, other: "ShapeEnvelope") -> bool:
-        """Return set inclusion, not an assumed concurrency severity order."""
+        """Return explicit signature-set inclusion."""
 
-        return all(
-            set(getattr(other, name)).issubset(set(getattr(self, name)))
-            for name in asdict(self)
-        )
+        return set(other.signatures).issubset(set(self.signatures))
 
 
 @dataclass(frozen=True)
@@ -392,13 +392,33 @@ class AdmissionDecision:
     reason: str
 
 
+@dataclass(frozen=True)
+class ReshapeCandidate:
+    """A measured capacity region bound to an exact risk certificate."""
+
+    contract_digest: str
+    concurrency: int
+    predicted_p99_seconds: float
+    certificate: PositiveCertificate
+
+    def __post_init__(self) -> None:
+        if not self.contract_digest:
+            raise ValueError("reshape contract digest must be non-empty")
+        if self.concurrency < 1 or self.predicted_p99_seconds < 0:
+            raise ValueError("invalid reshape capacity estimate")
+        if self.certificate.contract_digest != self.contract_digest:
+            raise ValueError(
+                "reshape certificate is not bound to the candidate contract"
+            )
+
+
 def joint_risk_slo_admission(
     contract: RuntimeContract,
     *,
     predicted_p99_seconds: float,
     upper_risk: float,
     strict_predicted_p99_seconds: float | None = None,
-    reshape_candidates: Iterable[tuple[int, float]] = (),
+    reshape_candidates: Iterable[ReshapeCandidate] = (),
 ) -> AdmissionDecision:
     """Four-level degradation funnel with safety before throughput."""
 
@@ -434,23 +454,33 @@ def joint_risk_slo_admission(
             )
     feasible = sorted(
         (
-            (int(concurrency), float(p99))
-            for concurrency, p99 in reshape_candidates
-            if p99 + contract.service.p99_guard_seconds
+            candidate
+            for candidate in reshape_candidates
+            if candidate.certificate.upper_risk
+            <= contract.service.allowed_risk
+            and candidate.predicted_p99_seconds
+            + contract.service.p99_guard_seconds
             <= contract.service.deadline_seconds
+        ),
+        key=lambda candidate: (
+            candidate.concurrency,
+            -candidate.predicted_p99_seconds,
         ),
         reverse=True,
     )
     if feasible:
-        concurrency, p99 = feasible[0]
+        candidate = feasible[0]
+        concurrency = candidate.concurrency
+        p99 = candidate.predicted_p99_seconds
         return AdmissionDecision(
             AdmissionLevel.RESHAPE,
             True,
             p99,
             p99 + contract.service.p99_guard_seconds,
-            upper_risk,
+            candidate.certificate.upper_risk,
             concurrency,
-            "offered contract exceeds capacity; reshape to a measured region",
+            "offered contract exceeds capacity; reshape to a risk-certified "
+            "measured region",
         )
     return AdmissionDecision(
         AdmissionLevel.REJECT,

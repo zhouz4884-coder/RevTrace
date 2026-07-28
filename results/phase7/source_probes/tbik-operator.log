@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/scripts/remote/run_phase7_tbik_probe.py", line 95, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/scripts/remote/run_phase7_tbik_probe.py", line 34, in main
+    from src.tbik.tree_based_matmul import matmul_tp_persistent
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/revtrace-phase7/llm_reproducibility-main/llm_reproducibility-main/src/__init__.py", line 8, in <module>
+    from . import patch
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/revtrace-phase7/llm_reproducibility-main/llm_reproducibility-main/src/patch/__init__.py", line 3, in <module>
+    from .patch_training_inference_align import patch_training_inference_align as patch_align, patch_training_baseline
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/revtrace-phase7/llm_reproducibility-main/llm_reproducibility-main/src/patch/patch_training_inference_align.py", line 9, in <module>
+    from vllm.attention.ops.paged_attn import PagedAttention
+ModuleNotFoundError: No module named 'vllm.attention.ops'

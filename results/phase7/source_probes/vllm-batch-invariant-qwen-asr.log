@@ -1,0 +1,107 @@
+INFO 07-29 00:41:29 [utils.py:263] non-default args: {'dtype': 'float16', 'max_model_len': 4096, 'enable_prefix_caching': False, 'gpu_memory_utilization': 0.82, 'max_num_seqs': 128, 'disable_log_stats': True, 'enforce_eager': True, 'mm_processor_cache_gb': 0, 'async_scheduling': False, 'model': '/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-0.6B'}
+INFO 07-29 00:41:29 [model.py:530] Resolved architecture: Qwen3ASRForConditionalGeneration
+ERROR 07-29 00:41:29 [repo_utils.py:65] Error retrieving safetensors: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-0.6B'. Use `repo_type` argument if needed., retrying 1 of 2
+ERROR 07-29 00:41:31 [repo_utils.py:63] Error retrieving safetensors: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-0.6B'. Use `repo_type` argument if needed.
+INFO 07-29 00:41:31 [model.py:1866] Downcasting torch.float32 to torch.float16.
+INFO 07-29 00:41:31 [model.py:1545] Using max model len 4096
+INFO 07-29 00:41:31 [scheduler.py:229] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 07-29 00:41:31 [vllm.py:630] Asynchronous scheduling is disabled.
+WARNING 07-29 00:41:31 [vllm.py:665] Enforce eager set, overriding optimization level to -O0
+INFO 07-29 00:41:31 [vllm.py:765] Cudagraph is disabled under eager mode
+The tokenizer you are loading from '/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-0.6B' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+WARNING 07-29 00:41:32 [system_utils.py:136] We must use the `spawn` multiprocessing start method. Overriding VLLM_WORKER_MULTIPROC_METHOD to 'spawn'. See https://docs.vllm.ai/en/latest/usage/troubleshooting.html#python-multiprocessing for more information. Reasons: CUDA is initialized
+[0;36m(EngineCore_DP0 pid=226123)[0;0m INFO 07-29 00:41:44 [core.py:97] Initializing a V1 LLM engine (v0.14.0) with config: model='/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-0.6B', speculative_config=None, tokenizer='/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-0.6B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.float16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=True, quantization=None, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-0.6B, enable_prefix_caching=False, enable_chunked_prefill=True, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'eliminate_noops': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': True}, 'local_cache_dir': None}
+[0;36m(EngineCore_DP0 pid=226123)[0;0m The tokenizer you are loading from '/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-0.6B' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936] EngineCore failed to start.
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936] Traceback (most recent call last):
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 927, in run_engine_core
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 692, in __init__
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     super().__init__(
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 106, in __init__
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     self.model_executor = executor_class(vllm_config)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 101, in __init__
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     self._init_executor()
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 47, in _init_executor
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     self.driver_worker.init_device()
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/worker/worker_base.py", line 326, in init_device
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     self.worker.init_device()  # type: ignore
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     ^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 217, in init_device
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     init_worker_distributed_environment(
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 951, in init_worker_distributed_environment
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     init_batch_invariance(attention_config.backend)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/model_executor/layers/batch_invariant.py", line 1057, in init_batch_invariance
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     override_envs_for_invariance(attention_backend)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/model_executor/layers/batch_invariant.py", line 1025, in override_envs_for_invariance
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936]     raise RuntimeError(error)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m ERROR 07-29 00:41:45 [core.py:936] RuntimeError: VLLM batch_invariant mode requires an attention backend in ['FLASH_ATTN', 'FLASHINFER', 'FLASH_ATTN_MLA', 'TRITON_MLA'], but got 'None'. Please use --attention-backend or attention_config to set one of the supported backends before enabling batch_invariant.
+[0;36m(EngineCore_DP0 pid=226123)[0;0m Process EngineCore_DP0:
+[0;36m(EngineCore_DP0 pid=226123)[0;0m Traceback (most recent call last):
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     self.run()
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/multiprocessing/process.py", line 108, in run
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     self._target(*self._args, **self._kwargs)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 940, in run_engine_core
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     raise e
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 927, in run_engine_core
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 692, in __init__
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     super().__init__(
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 106, in __init__
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     self.model_executor = executor_class(vllm_config)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 101, in __init__
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     self._init_executor()
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 47, in _init_executor
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     self.driver_worker.init_device()
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/worker/worker_base.py", line 326, in init_device
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     self.worker.init_device()  # type: ignore
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     ^^^^^^^^^^^^^^^^^^^^^^^^^
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 217, in init_device
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     init_worker_distributed_environment(
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 951, in init_worker_distributed_environment
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     init_batch_invariance(attention_config.backend)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/model_executor/layers/batch_invariant.py", line 1057, in init_batch_invariance
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     override_envs_for_invariance(attention_backend)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m   File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/model_executor/layers/batch_invariant.py", line 1025, in override_envs_for_invariance
+[0;36m(EngineCore_DP0 pid=226123)[0;0m     raise RuntimeError(error)
+[0;36m(EngineCore_DP0 pid=226123)[0;0m RuntimeError: VLLM batch_invariant mode requires an attention backend in ['FLASH_ATTN', 'FLASHINFER', 'FLASH_ATTN_MLA', 'TRITON_MLA'], but got 'None'. Please use --attention-backend or attention_config to set one of the supported backends before enabling batch_invariant.
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/scripts/remote/run_revguard_same_input.py", line 594, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/scripts/remote/run_revguard_same_input.py", line 345, in main
+    asr = Qwen3ASRModel.LLM(
+          ^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/Qwen3-ASR/qwen_asr/inference/qwen3_asr.py", line 269, in LLM
+    llm = vLLM(model=model, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/entrypoints/llm.py", line 338, in __init__
+    self.llm_engine = LLMEngine.from_engine_args(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/llm_engine.py", line 176, in from_engine_args
+    return cls(
+           ^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/llm_engine.py", line 110, in __init__
+    self.engine_core = EngineCoreClient.make_client(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 94, in make_client
+    return SyncMPClient(vllm_config, executor_class, log_stats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 652, in __init__
+    super().__init__(
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/core_client.py", line 479, in __init__
+    with launch_core_engines(vllm_config, executor_class, log_stats) as (
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/utils.py", line 921, in launch_core_engines
+    wait_for_engine_startup(
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/vllm/v1/engine/utils.py", line 980, in wait_for_engine_startup
+    raise RuntimeError(
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}

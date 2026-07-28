@@ -9,6 +9,7 @@ from .control import (
 from .phase6 import (
     ContractEvidenceMemory,
     EpochFencedCommitLedger,
+    ReshapeCandidate,
     RuntimeContract,
     joint_risk_slo_admission,
 )
@@ -21,6 +22,7 @@ __all__ = [
     "EpochFencedCommitLedger",
     "RevisionCommitLedger",
     "RevisionTicket",
+    "ReshapeCandidate",
     "RuntimeContract",
     "joint_risk_slo_admission",
 ]

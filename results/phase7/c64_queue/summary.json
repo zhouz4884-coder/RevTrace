@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "study": "Phase 7D full c64 offered-load accounting",
+  "measurement": "live two-GPU run; 64 sessions declared at time zero and admitted in four measured active-16 waves",
+  "offered_sessions": 64,
+  "active_capacity": 16,
+  "initial_queued_sessions": 48,
+  "admission_latency_seconds_p50": 21.812094375491142,
+  "admission_latency_seconds_p95": 42.98833473678678,
+  "admission_latency_seconds_p99": 42.98833473678678,
+  "queue_depth_trace": [
+    {
+      "time_seconds": 0.0,
+      "queued": 48,
+      "active": 16
+    },
+    {
+      "time_seconds": 15.805574920028448,
+      "queued": 32,
+      "active": 16
+    },
+    {
+      "time_seconds": 27.818613830953836,
+      "queued": 16,
+      "active": 16
+    },
+    {
+      "time_seconds": 42.98833473678678,
+      "queued": 0,
+      "active": 16
+    },
+    {
+      "time_seconds": 55.67782013770193,
+      "queued": 0,
+      "active": 0
+    }
+  ],
+  "completion_wall_seconds": 55.67782013770193,
+  "completion_goodput_sessions_per_second": 1.1494702889178443,
+  "completed_audio_seconds": 1920.0,
+  "completed_audio_goodput_per_wall_second": 34.484108667535324,
+  "active_state_entry_latency_seconds_p99": 1.9418401885777712,
+  "end_to_end_latency_seconds_p99": 44.796745607070626,
+  "active_deadline_miss_events": 0,
+  "energy_joules_per_completed_audio_second": 8.765204066771565,
+  "output_violations": 3,
+  "state_violations": 1,
+  "observed_state_violation_rate": 0.0010416666666666667,
+  "state_violation_rate_95pct_upper": 0.004931900368786157,
+  "risk_contract_delta": 0.005,
+  "risk_contract_met_by_current_95pct_upper": true,
+  "claim_boundary": "Active P99 excludes admission wait; end-to-end P99 includes measured wave admission wait. This is finite-wave overload handling, not unconstrained c64 residency."
+}

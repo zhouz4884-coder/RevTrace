@@ -12,6 +12,7 @@ from revtrace.phase6 import (
     FailureRecord,
     PopulationContract,
     PositiveCertificate,
+    ReshapeCandidate,
     RuntimeContract,
     ServiceContract,
     ShapeEnvelope,
@@ -35,12 +36,18 @@ def contract(
     return RuntimeContract(
         identity(),
         ShapeEnvelope(
-            batch,
-            (4096,),
-            ("p25",),
-            ("homogeneous",),
-            language,
-            ("r0-r16",),
+            tuple(
+                ExecutionSignature(
+                    batch_size,
+                    4096,
+                    "p25",
+                    "homogeneous",
+                    language_class,
+                    "r0-r16",
+                )
+                for batch_size in batch
+                for language_class in language
+            )
         ),
         PopulationContract(
             "+".join(language), arrival, "d30", "q0-q16", "young",
@@ -141,15 +148,62 @@ def test_failed_canary_requires_the_observed_signature() -> None:
 
 def test_joint_admission_reshapes_overload() -> None:
     c64 = contract(batch=(64,))
+    c16 = contract(batch=(16,))
+    c32 = contract(batch=(32,))
     decision = joint_risk_slo_admission(
         c64,
         predicted_p99_seconds=2.889,
         upper_risk=0.0049,
-        reshape_candidates=((16, 1.406), (32, 2.7)),
+        reshape_candidates=(
+            ReshapeCandidate(c16.digest, 16, 1.406, certificate(c16)),
+            ReshapeCandidate(c32.digest, 32, 2.7, certificate(c32)),
+        ),
     )
     assert decision.level == AdmissionLevel.RESHAPE
     assert decision.admitted_concurrency == 16
     assert decision.guarded_p99_seconds < 2.0
+
+
+def test_unobserved_cartesian_combination_cannot_warm_start() -> None:
+    memory = ContractEvidenceMemory()
+    observed = RuntimeContract(
+        identity(),
+        ShapeEnvelope(
+            (
+                ExecutionSignature(
+                    16, 4096, "p25", "homogeneous", "English", "r0-r16"
+                ),
+                ExecutionSignature(
+                    32, 4096, "p25", "homogeneous", "Chinese", "r0-r16"
+                ),
+            )
+        ),
+        PopulationContract("EN+ZH", "mixed", "d30", "q0-q32", "young"),
+        ServiceContract(2.0, 0.005, 0.1),
+        "2s-k5",
+        32,
+    )
+    unseen = contract(batch=(16,), language=("Chinese",))
+    memory.store_certificate(observed, certificate(observed))
+    decision = memory.enter(unseen)
+    assert decision.status == EvidenceStatus.QUARANTINE
+
+
+def test_uncertified_reshape_candidate_cannot_admit() -> None:
+    offered = contract(batch=(64,))
+    c16 = contract(batch=(16,))
+    unsafe = PositiveCertificate(
+        c16.digest, 0.05, 0.02, 1500, c16.identity.digest, 1
+    )
+    decision = joint_risk_slo_admission(
+        offered,
+        predicted_p99_seconds=2.889,
+        upper_risk=0.0049,
+        reshape_candidates=(
+            ReshapeCandidate(c16.digest, 16, 1.406, unsafe),
+        ),
+    )
+    assert decision.level == AdmissionLevel.REJECT
 
 
 def test_joint_admission_rejects_when_no_capacity_exists() -> None:

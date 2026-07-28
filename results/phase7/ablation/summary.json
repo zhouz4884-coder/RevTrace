@@ -1,0 +1,110 @@
+{
+  "rows": [
+    {
+      "mechanism": "margin only",
+      "unsafe_certificate_reuse": 1,
+      "known_failure_recurrence": 1,
+      "stale_commit": 2,
+      "joint_slo": false,
+      "c64_goodput_events_per_second": 42.89970704058414,
+      "c64_p99_seconds": 2.888937874697149,
+      "c64_deadline_misses_without_joint_admission": 448,
+      "en_return_recertification_events": 1358,
+      "adaptation_regret_extra_recertification_events": 1294,
+      "measured_full_trace_verifier_gpu_seconds": 112.29466877691448,
+      "verifier_seconds_boundary": "Full-trace measured total is shared context; per-ablation counterfactual GPU seconds are not fabricated."
+    },
+    {
+      "mechanism": "+ session version",
+      "unsafe_certificate_reuse": 1,
+      "known_failure_recurrence": 1,
+      "stale_commit": 2,
+      "joint_slo": false,
+      "c64_goodput_events_per_second": 42.89970704058414,
+      "c64_p99_seconds": 2.888937874697149,
+      "c64_deadline_misses_without_joint_admission": 448,
+      "en_return_recertification_events": 1358,
+      "adaptation_regret_extra_recertification_events": 1294,
+      "measured_full_trace_verifier_gpu_seconds": 112.29466877691448,
+      "verifier_seconds_boundary": "Full-trace measured total is shared context; per-ablation counterfactual GPU seconds are not fabricated."
+    },
+    {
+      "mechanism": "+ contract epoch fence",
+      "unsafe_certificate_reuse": 1,
+      "known_failure_recurrence": 1,
+      "stale_commit": 0,
+      "joint_slo": false,
+      "c64_goodput_events_per_second": 42.89970704058414,
+      "c64_p99_seconds": 2.888937874697149,
+      "c64_deadline_misses_without_joint_admission": 448,
+      "en_return_recertification_events": 1358,
+      "adaptation_regret_extra_recertification_events": 1294,
+      "measured_full_trace_verifier_gpu_seconds": 112.29466877691448,
+      "verifier_seconds_boundary": "Full-trace measured total is shared context; per-ablation counterfactual GPU seconds are not fabricated."
+    },
+    {
+      "mechanism": "+ contextual failure ledger",
+      "unsafe_certificate_reuse": 1,
+      "known_failure_recurrence": 0,
+      "stale_commit": 0,
+      "joint_slo": false,
+      "c64_goodput_events_per_second": 42.89970704058414,
+      "c64_p99_seconds": 2.888937874697149,
+      "c64_deadline_misses_without_joint_admission": 448,
+      "en_return_recertification_events": 1358,
+      "adaptation_regret_extra_recertification_events": 1294,
+      "measured_full_trace_verifier_gpu_seconds": 112.29466877691448,
+      "verifier_seconds_boundary": "Full-trace measured total is shared context; per-ablation counterfactual GPU seconds are not fabricated."
+    },
+    {
+      "mechanism": "+ exact-contract renewal",
+      "unsafe_certificate_reuse": 0,
+      "known_failure_recurrence": 0,
+      "stale_commit": 0,
+      "joint_slo": false,
+      "c64_goodput_events_per_second": 42.89970704058414,
+      "c64_p99_seconds": 2.888937874697149,
+      "c64_deadline_misses_without_joint_admission": 448,
+      "en_return_recertification_events": 64,
+      "adaptation_regret_extra_recertification_events": 0,
+      "measured_full_trace_verifier_gpu_seconds": 112.29466877691448,
+      "verifier_seconds_boundary": "Full-trace measured total is shared context; per-ablation counterfactual GPU seconds are not fabricated."
+    },
+    {
+      "mechanism": "+ joint risk-SLO admission",
+      "unsafe_certificate_reuse": 0,
+      "known_failure_recurrence": 0,
+      "stale_commit": 0,
+      "joint_slo": true,
+      "c64_goodput_events_per_second": 42.89970704058414,
+      "c64_p99_seconds": 2.888937874697149,
+      "c64_deadline_misses_without_joint_admission": 0,
+      "en_return_recertification_events": 64,
+      "adaptation_regret_extra_recertification_events": 0,
+      "measured_full_trace_verifier_gpu_seconds": 112.29466877691448,
+      "verifier_seconds_boundary": "Full-trace measured total is shared context; per-ablation counterfactual GPU seconds are not fabricated."
+    },
+    {
+      "mechanism": "full RevTrace",
+      "unsafe_certificate_reuse": 0,
+      "known_failure_recurrence": 0,
+      "stale_commit": 0,
+      "joint_slo": true,
+      "c64_goodput_events_per_second": 42.89970704058414,
+      "c64_p99_seconds": 2.888937874697149,
+      "c64_deadline_misses_without_joint_admission": 0,
+      "en_return_recertification_events": 64,
+      "adaptation_regret_extra_recertification_events": 0,
+      "measured_full_trace_verifier_gpu_seconds": 112.29466877691448,
+      "verifier_seconds_boundary": "Full-trace measured total is shared context; per-ablation counterfactual GPU seconds are not fabricated."
+    }
+  ],
+  "global_floor_comparator": {
+    "global_floor_threshold": 0.109376,
+    "global_floor_verification_fraction": 0.050520833333333334,
+    "unrelated_contract_floor_threshold": 0.031251,
+    "unrelated_contract_verification_fraction_if_dragged": 0.028645833333333332,
+    "boundary": "Same c32 trace illustrates threshold cost only; cross-contract safety is established by the frozen counterexample replay."
+  },
+  "evidence": "frozen real-failure replay plus measured Phase5/6 stage metrics"
+}

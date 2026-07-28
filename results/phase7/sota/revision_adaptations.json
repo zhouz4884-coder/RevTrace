@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "study": "Faithful revision-level adaptations of non-ASR baselines",
+  "rows": [
+    {
+      "mechanism": "MarginGate-inspired revision baseline",
+      "threshold": 0.05,
+      "events": 1920,
+      "fast_path_events": 1894,
+      "unsafe_fast_path_events": 1,
+      "verification_fraction": 0.030208333333333334,
+      "known_margin_0p109375_failure_caught": false,
+      "state_transaction": false
+    },
+    {
+      "mechanism": "owner/version-only state baseline",
+      "legal_current_owner_batch_flip_rejected": false,
+      "stale_wrong_version_rejected": true,
+      "state_error_events_on_c32_trace": 1
+    },
+    {
+      "mechanism": "LLM-42-style revision baseline",
+      "canonical_verification_fraction": 1.0,
+      "state_error_events_after_selection": 0,
+      "measured_canonical_goodput_events_per_second": 1.5649424827423015,
+      "boundary": "The original LLM-42 source is text-only; this is a clearly named revision adaptation."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Processing /media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/revtrace-phase7/llm-42-main/llm-42-main/sgl-kernel
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: sgl-kernel
+  Building wheel for sgl-kernel (pyproject.toml): started
+  Building wheel for sgl-kernel (pyproject.toml): finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Building wheel for sgl-kernel (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [48 lines of output]
+      *** scikit-build-core 1.0.3 using CMake 4.4.0 (wheel)
+      *** Configuring CMake...
+      Traceback (most recent call last):
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 389, in <module>
+          main()
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 373, in main
+          json_out["return_val"] = hook(**hook_input["kwargs"])
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 280, in build_wheel
+          return _build_backend().build_wheel(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/build/__init__.py", line 53, in build_wheel
+          return _build_wheel_impl(
+                 ^^^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/build/wheel.py", line 267, in _build_wheel_impl
+          return _build_wheel_impl_impl(
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/build/wheel.py", line 531, in _build_wheel_impl_impl
+          builder = configure_wheel(
+                    ^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/build/common_wheel_helpers.py", line 294, in configure_wheel
+          builder.configure(
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/builder/builder.py", line 310, in configure
+          local_def = set_environment_for_gen(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/builder/generator.py", line 182, in set_environment_for_gen
+          ninja = best_program(get_ninja_programs(), version=ninja_settings.version)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/program_search.py", line 254, in best_program
+          for program in programs:
+                         ^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/program_search.py", line 215, in get_ninja_programs
+          result = Run(timeout=compute_timeout(ninja_path)).capture(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/_shutil.py", line 44, in capture
+          return self._run(args, capture=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/lib/python3.12/site-packages/scikit_build_core/_shutil.py", line 72, in _run
+          return subprocess.run(
+                 ^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/subprocess.py", line 548, in run
+          with Popen(*popenargs, **kwargs) as process:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/subprocess.py", line 1026, in __init__
+          self._execute_child(args, executable, preexec_fn, close_fds,
+        File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/subprocess.py", line 1955, in _execute_child
+          raise child_exception_type(errno_num, err_msg, err_filename)
+      FileNotFoundError: [Errno 2] No such file or directory: 'ninja'
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for sgl-kernel
+Failed to build sgl-kernel
+
+[notice] A new release of pip is available: 25.0.1 -> 26.1.2
+[notice] To update, run: /media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/llm42-phase7/bin/python -m pip install --upgrade pip
+ERROR: Failed to build installable wheels for some pyproject.toml based projects (sgl-kernel)

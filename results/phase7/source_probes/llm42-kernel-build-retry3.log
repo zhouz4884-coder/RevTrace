@@ -1,0 +1,42 @@
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Processing /media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/sources/revtrace-phase7/llm-42-main/llm-42-main/sgl-kernel
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: sgl-kernel
+  Building wheel for sgl-kernel (pyproject.toml): started
+  Building wheel for sgl-kernel (pyproject.toml): finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Building wheel for sgl-kernel (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [21 lines of output]
+      *** scikit-build-core 1.0.3 using CMake 4.4.0 (wheel)
+      *** Configuring CMake...
+      loading initial cache file /tmp/tmp23kxswhg/build/CMakeInit.txt
+      -- The CXX compiler identification is GNU 9.4.0
+      -- The CUDA compiler identification is unknown
+      -- Detecting CXX compiler ABI info
+      -- Detecting CXX compiler ABI info - done
+      -- Check for working CXX compiler: /usr/bin/g++ - skipped
+      -- Detecting CXX compile features
+      -- Detecting CXX compile features - done
+      CMake Error at CMakeLists.txt:2 (project):
+        No CMAKE_CUDA_COMPILER could be found.
+      
+        Tell CMake where to find the compiler by setting either the environment
+        variable "CUDACXX" or the CMake cache entry CMAKE_CUDA_COMPILER to the full
+        path to the compiler, or to the compiler name if it is in the PATH.
+      
+      
+      -- Configuring incomplete, errors occurred!
+      
+      *** CMake configuration failed
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for sgl-kernel
+Failed to build sgl-kernel
+
+[notice] A new release of pip is available: 25.0.1 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+ERROR: Failed to build installable wheels for some pyproject.toml based projects (sgl-kernel)
