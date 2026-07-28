@@ -172,7 +172,9 @@ def main() -> int:
             "worker_id": 0,
             "max_model_len": 4096,
             "terminal_canonical_batch_size": max_concurrency,
-            "terminal_canonical_batch_invariant": True,
+            "terminal_canonical_batch_invariant": (
+                args.canonical_dtype != "float32"
+            ),
         },
         name="phase5a-canonical-verifier",
     )
