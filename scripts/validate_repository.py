@@ -32,6 +32,23 @@ def check_manifest(root: Path, manifest_path: Path, repo_relative: bool) -> list
     return failures
 
 
+def check_keyed_manifest(root: Path, manifest_path: Path) -> list[str]:
+    """Validate manifests whose files are keyed by artifact-relative path."""
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    failures: list[str] = []
+    for relative, expected in manifest["files"].items():
+        path = root / relative
+        if not path.is_file():
+            failures.append(f"missing:{path}")
+            continue
+        if path.stat().st_size != expected["bytes"]:
+            failures.append(f"size:{path}")
+        if sha256(path) != expected["sha256"]:
+            failures.append(f"sha256:{path}")
+    return failures
+
+
 def main() -> int:
     required = [
         "README.md",
@@ -53,6 +70,8 @@ def main() -> int:
         "artifact/phase4-adaptation-generality-v1/MANIFEST.json",
         "results/phase5/summary.json",
         "artifact/phase5-system-hardening-v1/MANIFEST.json",
+        "results/phase6/summary.json",
+        "artifact/phase6-submission-repairs-v1/MANIFEST.json",
         "src/revtrace/core.py",
         "src/revtrace/risk.py",
         "src/revtrace/control.py",
@@ -152,6 +171,16 @@ def main() -> int:
                 ROOT / "artifact" / "phase5-system-hardening-v1",
                 phase5_artifact_manifest,
                 repo_relative=False,
+            )
+        )
+    phase6_artifact_manifest = (
+        ROOT / "artifact" / "phase6-submission-repairs-v1" / "MANIFEST.json"
+    )
+    if phase6_artifact_manifest.exists():
+        failures.extend(
+            check_keyed_manifest(
+                ROOT / "artifact" / "phase6-submission-repairs-v1",
+                phase6_artifact_manifest,
             )
         )
     phase2_summary = json.loads(

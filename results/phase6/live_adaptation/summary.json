@@ -1,0 +1,176 @@
+{
+  "claim_boundary": "live persistent two-GPU sequence; risk-limited stages are statistical and exact return requires canary renewal; the controller risk bound is not a bitwise-repeatability certificate for the canonical runtime itself",
+  "cross_contract_certificate_reuse": 0,
+  "decision": "PHASE6D_FEASIBLE_LIVE_ADAPTATION_PASS",
+  "exact_certificate_restores": 1,
+  "gates": {
+    "admitted_deadline_misses_zero": true,
+    "all_contract_risk_bounds_valid": true,
+    "cross_contract_certificate_reuse_zero": true,
+    "exact_return_restore_observed": true,
+    "observed_state_risk_within_contract": true,
+    "return_renewal_faster_than_flat_recertification": true
+  },
+  "maximum_observed_state_risk": 0.0,
+  "recertification_event_reduction_vs_flat": 0.9528718703976435,
+  "repair_attempt_diagnoses": [
+    {
+      "attempt": 1,
+      "cause": "quarantine-learning counterexamples were incorrectly treated as failures against active positive evidence, so the learning window was repeatedly reset",
+      "cause_class": "implementation_state_machine",
+      "decision": "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL",
+      "repair": "retain caught failures as calibration evidence while a new contract is quarantined",
+      "stages": [
+        {
+          "deadline_miss_events": 0,
+          "events": 1440,
+          "failure_floor": 0.031251,
+          "label": "c16_en_initial",
+          "output_violations": 1,
+          "risk_upper_bound": 1.0,
+          "state_violations": 3,
+          "threshold": null
+        },
+        {
+          "deadline_miss_events": 0,
+          "events": 1440,
+          "failure_floor": 0.015626,
+          "label": "c16_zh_drift",
+          "output_violations": 1,
+          "risk_upper_bound": 1.0,
+          "state_violations": 0,
+          "threshold": null
+        },
+        {
+          "deadline_miss_events": 0,
+          "events": 320,
+          "failure_floor": 0.031251,
+          "label": "c16_en_return",
+          "output_violations": 0,
+          "risk_upper_bound": 1.0,
+          "state_violations": 0,
+          "threshold": null
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "cause": "a caught error after promotion invalidated the active certificate too aggressively while its cached copy remained eligible for exact return",
+      "cause_class": "incomplete_repair_and_cache_consistency",
+      "decision": "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL",
+      "repair": "raise the contextual floor and recompute the certificate atomically; delete both active and cached evidence only when the stricter window no longer meets the risk budget",
+      "stages": [
+        {
+          "deadline_miss_events": 0,
+          "events": 1440,
+          "failure_floor": 0.015626,
+          "label": "c16_en_initial",
+          "output_violations": 1,
+          "risk_upper_bound": 1.0,
+          "state_violations": 0,
+          "threshold": null
+        },
+        {
+          "deadline_miss_events": 0,
+          "events": 1440,
+          "failure_floor": 1e-06,
+          "label": "c16_zh_drift",
+          "output_violations": 1,
+          "risk_upper_bound": 0.0049393845139860115,
+          "state_violations": 0,
+          "threshold": 1e-06
+        },
+        {
+          "deadline_miss_events": 0,
+          "events": 320,
+          "failure_floor": 0.015626,
+          "label": "c16_en_return",
+          "output_violations": 0,
+          "risk_upper_bound": 0.004972177089234475,
+          "state_violations": 0,
+          "threshold": 0.015626
+        }
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "certified_after_events": 1358,
+      "concurrency": 16,
+      "deadline_miss_events": 0,
+      "energy": {
+        "completed_audio_seconds": 2880.0,
+        "joules": 23383.964372372306,
+        "joules_per_audio_second": 8.119432073740384,
+        "sample_count": 373.0
+      },
+      "events": 1440,
+      "failure_floor": 0.031251,
+      "fast_path_window": 0.9712812960235641,
+      "fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float32-fixed-canonical-b16",
+      "goodput_events_per_second": 22.031927539002382,
+      "label": "c16_en_initial",
+      "language": "English",
+      "output_violations": 1,
+      "renewal_canaries_remaining": 0,
+      "risk_upper_bound": 0.004997058694246492,
+      "state_entry_latency_seconds_p99": 1.2966432916000485,
+      "state_violations": 0,
+      "switch_action": "new_contract_quarantine",
+      "threshold": 0.031251,
+      "verification_fraction": 0.95625
+    },
+    {
+      "certified_after_events": 1350,
+      "concurrency": 16,
+      "deadline_miss_events": 0,
+      "energy": {
+        "completed_audio_seconds": 2880.0,
+        "joules": 19337.144789396905,
+        "joules_per_audio_second": 6.7142863852072585,
+        "sample_count": 298.0
+      },
+      "events": 1440,
+      "failure_floor": 0.015626,
+      "fast_path_window": 0.9940740740740741,
+      "fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=Chinese/arrival=episode-sync/float32-fixed-canonical-b16",
+      "goodput_events_per_second": 28.051810990560863,
+      "label": "c16_zh_drift",
+      "language": "Chinese",
+      "output_violations": 0,
+      "renewal_canaries_remaining": 0,
+      "risk_upper_bound": 0.004947542039521191,
+      "state_entry_latency_seconds_p99": 0.8810207359492779,
+      "state_violations": 0,
+      "switch_action": "new_contract_quarantine",
+      "threshold": 0.015626,
+      "verification_fraction": 0.9555555555555556
+    },
+    {
+      "certified_after_events": 64,
+      "concurrency": 16,
+      "deadline_miss_events": 0,
+      "energy": {
+        "completed_audio_seconds": 640.0,
+        "joules": 4687.536310823613,
+        "joules_per_audio_second": 7.324275485661896,
+        "sample_count": 88.0
+      },
+      "events": 320,
+      "failure_floor": 0.031251,
+      "fast_path_window": 0.9712812960235641,
+      "fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float32-fixed-canonical-b16",
+      "goodput_events_per_second": 21.54093102892686,
+      "label": "c16_en_return",
+      "language": "English",
+      "output_violations": 0,
+      "renewal_canaries_remaining": 0,
+      "risk_upper_bound": 0.004997058694246492,
+      "state_entry_latency_seconds_p99": 1.350290329195559,
+      "state_violations": 0,
+      "switch_action": "exact_restore_canary",
+      "threshold": 0.031251,
+      "verification_fraction": 0.409375
+    }
+  ]
+}

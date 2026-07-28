@@ -303,3 +303,50 @@ Status:
 The deduplicated corpus contains 72 state pairs across Qwen3-ASR and Whisper,
 with natural, stress, and targeted sources kept distinct. It is a mechanism
 and damage-stress artifact, not a production prevalence estimator.
+
+## Phase 6A — asymmetric contract evidence
+
+Purpose:
+
+- separate strict execution identity, execution-shape coverage, population
+  risk, and service capacity;
+- restore a positive certificate only for an exact contract and only after
+  renewal canaries;
+- retain each observed failure inside its recorded applicability cone;
+- quarantine an unseen contract without invalidating certified lanes;
+- fence state commits by session, contract, and policy epochs.
+
+The semantic gate uses the real Phase 5 c32 counterexample and fails closed for
+unsupported execution shapes. A covering positive certificate may warm-start
+an unseen population, but it cannot mark that population certified.
+
+## Phase 6B — complete contract scoping
+
+The frozen repair reruns the exact
+`Qwen3-ASR-0.6B/c32/120-second/burst/Chinese` cell. It must not read a c16
+positive certificate, must quarantine the first contract observations, must
+verify the known margin-0.109375 counterexample, and must preserve zero
+observed state-projection violations in the full canonical audit. Safety and
+the measured two-second capacity boundary are reported separately.
+
+## Phase 6C — joint risk-SLO admission
+
+The historical c64 workload is an offered load, not an admissible service
+contract. Admission requires both the statistical risk budget and guarded P99
+capacity. When c64 fails the capacity condition, the runtime reshapes active
+service to a measured feasible concurrency and backpressures or queues the
+remainder; overload cannot authorize an uncertified commit.
+
+## Phase 6D — feasible live adaptation
+
+The persistent two-GPU process switches between two service-feasible c16
+populations and then returns to the original one. New populations learn in
+separate quarantine lanes. Exact return may restore the old certificate only
+after canary renewal; no positive certificate crosses populations.
+
+## Phase 6E — submission repair freeze
+
+The finalizer emits compact summaries, source-trace hashes, paper-facing tables,
+claim boundaries, regression tests, and a hash-audited artifact. Large live
+traces stay on the designated experiment disk. Phase 6 ends mechanism
+expansion and begins the first submission freeze.

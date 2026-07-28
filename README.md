@@ -141,6 +141,38 @@ See the
 [Phase 5 report](docs/reports/phase5_system_hardening_report.md) and
 [paper-facing tables](results/phase5/PAPER_TABLES.md).
 
+## Phase 6 submission-repair results
+
+Phase 6 completes the evidence-lifecycle, contract-scoping, joint risk--SLO
+admission, feasible adaptation, and artifact-freeze work packages:
+
+`PHASE6_SUBMISSION_REPAIRS_COMPLETE`
+
+Positive certificates are now keyed by the exact execution contract and
+restored only after renewal canaries. Counterexamples raise contextual floors
+inside their measured applicability cone; contract or policy epoch changes
+fence stale results. The exact 0.6B/c32/120-second/burst/Chinese repair catches
+the known margin-0.109375 event with zero state violations, but its 6.107 s P99
+and 1,266 deadline misses keep it outside the two-second service region.
+
+The joint admission controller therefore rejects c64 as offered and reshapes
+active service to c16, where guarded P99 is 1.397 s with zero deadline misses.
+In the live English-c16 -> Chinese-c16 -> English-c16 sequence, the two new
+population contracts learn independently. Returning to the exact English
+contract performs 64 renewal canaries before restoring its certificate,
+reducing recertification events by 95.29% versus flat relearning. Cross-contract
+reuse, deadline misses, and observed state violations are all zero.
+
+The learned thresholds (`0.031251` for English and `0.015626` for Chinese) are
+outputs of the live split-sample risk controller plus observed failure floors;
+they are not a fixed hand-written threshold ladder. Their upper risk bounds are
+statistical (at most 0.5%), not deterministic arithmetic certificates.
+
+See the
+[Phase 6 report](docs/reports/phase6_submission_repair_report.md),
+[paper-facing tables](results/phase6/PAPER_TABLES.md), and
+[audited artifact](artifact/phase6-submission-repairs-v1).
+
 ## Phase map
 
 - **Phase 0 — discovery and causal controls:** RevBatch performance opportunity,

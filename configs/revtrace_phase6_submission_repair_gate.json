@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "study": "RevTrace Phase 6 submission repairs",
+  "claim_boundary": {
+    "risk_limited_mode": "statistical state-entry risk at or below 0.5 percent; not deterministic exactness",
+    "strict_mode": "consistent with the frozen canonical execution path",
+    "positive_evidence": "direct restore only for an exact contract digest and only after canary renewal",
+    "negative_evidence": "persistent only inside its recorded execution applicability cone",
+    "capacity": "admission and active-session deadline are distinct from queued-session waiting time"
+  },
+  "phase6a": {
+    "cross_contract_certificate_reuse": 0,
+    "stale_contract_commit": 0,
+    "stale_policy_commit": 0,
+    "known_counterexample_floor_must_be_strictly_above_margin": true
+  },
+  "phase6b": {
+    "cell": "0p6b-c32-d120-burst-zh",
+    "minimum_quarantine_events": 64,
+    "certificate_source_contract": "none",
+    "state_projection_violations": 0,
+    "known_counterexample_unverified_commits": 0
+  },
+  "phase6c": {
+    "offered_concurrency": 64,
+    "allowed_actions": [
+      "capacity_reshape",
+      "backpressure_reject"
+    ],
+    "deadline_seconds": 2.0,
+    "p99_guard_seconds": 0.1,
+    "admitted_deadline_misses": 0
+  },
+  "phase6d": {
+    "sequence": [
+      "c16-English",
+      "c16-Chinese",
+      "c16-English"
+    ],
+    "cross_contract_certificate_reuse": 0,
+    "minimum_exact_certificate_restores": 1,
+    "risk_upper_bound": 0.005,
+    "admitted_deadline_misses": 0,
+    "known_counterexample_unverified_commits": 0
+  }
+}

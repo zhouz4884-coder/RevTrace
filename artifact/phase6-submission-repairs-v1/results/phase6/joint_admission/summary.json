@@ -1,0 +1,22 @@
+{
+  "admission_action": "reshape_to_c16",
+  "backpressured_or_queued_new_sessions": 48,
+  "claim_boundary": "active-session live latency after admission; queued-session waiting is not counted as state-entry service latency",
+  "decision": "PHASE6C_JOINT_RISK_SLO_ADMISSION_PASS",
+  "gates": {
+    "admitted_deadline_misses_zero": true,
+    "c64_not_admitted_at_64": true,
+    "reshaped_live_p99_with_guard_meets_slo": true
+  },
+  "live_reshaped_contract": {
+    "concurrency": 16,
+    "deadline_misses": 0,
+    "guarded_p99_seconds": 1.3966432916000486,
+    "p99_seconds": 1.2966432916000485
+  },
+  "offered_c64": {
+    "concurrency": 64,
+    "phase5_deadline_misses": 448,
+    "phase5_p99_seconds": 2.888937874697149
+  }
+}

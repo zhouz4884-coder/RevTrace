@@ -1,0 +1,90 @@
+{
+  "certificate_source_contract": "none",
+  "claim_boundary": "live exact-cell rerun; safety repair is distinct from the known c32 physical deadline-capacity boundary",
+  "contract_digest": "qwen0p6-fp16-c32-zh-burst-d120-v1",
+  "decision": "PHASE6B_CONTRACT_SCOPING_REPAIR_PASS",
+  "gates": {
+    "known_counterexample_floor_applied": true,
+    "known_counterexample_verified": true,
+    "new_contract_quarantine": true,
+    "no_c16_certificate_reuse": true,
+    "state_projection_violations_zero": true
+  },
+  "known_counterexample": {
+    "proposal_minimum_margin": 0.109375,
+    "quarantine_forced": false,
+    "revision_id": "s023:8",
+    "selected_vs_canonical": {
+      "candidate_tokens": 11,
+      "lcp_reference_fraction": 1.0,
+      "lcp_tokens": 11,
+      "reference_tokens": 11,
+      "state_projection_text_exact": true,
+      "state_projection_token_exact": true,
+      "text_exact": true,
+      "token_exact": true
+    },
+    "verified": true
+  },
+  "margin_threshold": 0.109376,
+  "model": "Qwen3-ASR-0.6B",
+  "summary": {
+    "canonical_audit_energy": {
+      "completed_audio_seconds": 3840.0,
+      "joules": 222720.67964864493,
+      "joules_per_audio_second": 58.000176991834614,
+      "sample_count": 7702.0
+    },
+    "canonical_audit_request_seconds_p50": 0.6062878975644708,
+    "canonical_audit_request_seconds_p99": 1.114895432041958,
+    "canonical_audit_seconds_excluded_from_service": 1267.9479014594108,
+    "canonical_slo_goodput_events_per_second": 1.514257800174657,
+    "deployed_slo_goodput_events_per_second": 3.045945870829193,
+    "deployed_two_gpu_wall_speedup": 5.905352713878949,
+    "event_count": 1920,
+    "gpu_normalized_throughput_speedup": 2.9526763569394743,
+    "intermediate_verifier_wait_seconds_p95": 6.010194465983658,
+    "max_pending_verifications": 24,
+    "output_violation_events": 0,
+    "proposal_batch_size_p50": 32,
+    "proposal_batch_size_p95": 32.0,
+    "proposal_batches": 61,
+    "proposer_gpu_terminal_verified_events": 127,
+    "proposer_gpu_terminal_verifier_seconds": 45.359839614480734,
+    "proposer_service_seconds": 156.38466385100037,
+    "quarantine_events_requested": 64,
+    "quarantine_forced_events": 64,
+    "service_energy": {
+      "completed_audio_seconds": 3840.0,
+      "joules": 58629.74328721488,
+      "joules_per_audio_second": 15.268162314378875,
+      "sample_count": 1229.0
+    },
+    "service_wall_seconds": 214.7116290749982,
+    "slo_goodput_speedup": 2.011510768165017,
+    "stale_or_replayed_result_events": 0,
+    "state_entry_deadline_miss_events": 1266,
+    "state_entry_deadline_miss_rate": 0.659375,
+    "state_entry_deadline_seconds": 2.0,
+    "state_entry_latency_seconds_p50": 3.08129756571725,
+    "state_entry_latency_seconds_p95": 4.7250746404752135,
+    "state_entry_latency_seconds_p99": 6.10702221195213,
+    "state_projection_violation_events": 0,
+    "terminal_burst_count": 2,
+    "terminal_burst_size_max": 24,
+    "terminal_verifier_wait_seconds_p50": 4.73635329445824,
+    "terminal_verifier_wait_seconds_p95": 8.01846303520724,
+    "verification_batches": 3,
+    "verification_fraction": 0.0828125,
+    "verified_events": 159,
+    "verifier_lanes": 1,
+    "verifier_request_seconds_p50": 0.30533677712082863,
+    "verifier_service_seconds": 11.512858676724136,
+    "verifier_to_proposer_service_ratio": 0.07361884722720201,
+    "verifier_wait_seconds_p50": 2.268782116472721,
+    "verifier_wait_seconds_p95": 7.176725683733816,
+    "verifier_worker_events": [
+      32
+    ]
+  }
+}

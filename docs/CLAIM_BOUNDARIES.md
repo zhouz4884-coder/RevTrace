@@ -142,3 +142,35 @@
   limit. It is frozen as a NO-GO and is not a paper optimization claim.
 - The 72-record consequential state-pair corpus is deduplicated mechanism and
   stress evidence. It is not an estimate of production mismatch prevalence.
+
+## Phase 6 boundaries
+
+- Execution identity is an exact-equality boundary. Execution-shape evidence
+  may be compared only through recorded set inclusion; concurrency labels do
+  not define a numerical-risk ordering.
+- A positive statistical certificate is restored only for an exact contract
+  and only after renewal canaries. A covering certificate may provide a
+  conservative warm start, but it cannot certify a new population.
+- A negative counterexample persists only where its recorded execution
+  signature is applicable. A c32/c64 failure is not a global margin floor and
+  does not automatically propagate to a different kernel path.
+- Quarantine is contract-local. An unseen population is fail closed without
+  revoking unrelated certified lanes.
+- State commits are fenced by session, contract, and policy epochs. A result
+  from an earlier policy or contract cannot cross a mode switch.
+- Risk-limited mode is a statistical contract and may observe errors within
+  its declared bound. Canonical-consistent strict mode means equality to the
+  frozen canonical implementation, not mathematical truth.
+- The c32 Chinese burst repair closes unsafe c16-certificate reuse. It does not
+  convert an overloaded c32 workload into an SLO-admissible workload.
+- The c64 result is a capacity boundary. Its active concurrency must be
+  reshaped, backpressured, or rejected; queued-session waiting is reported
+  separately from active-session state-entry latency.
+- Exact return to a cached population is not cross-contract reuse. It still
+  requires renewal canaries before the fast path is reopened.
+- Zero observed violations in a finite live run remains empirical evidence,
+  not a deterministic arithmetic certificate.
+- The online controller's statistical bound applies to the measured
+  proposer-admission disagreement process. It does not prove bitwise
+  repeatability of two independent canonical-runtime executions; replay
+  differences are reported separately.

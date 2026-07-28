@@ -1,0 +1,307 @@
+{
+  "decision": "PHASE6_SUBMISSION_REPAIRS_COMPLETE",
+  "phase6a": {
+    "decision": "PHASE6A_SEMANTIC_GATE_PASS",
+    "gates": {
+      "c16_exact_return_requires_canary": true,
+      "c32_enters_quarantine": true,
+      "c32_failure_floor_covers_known_error": true,
+      "c64_reshaped": true,
+      "cross_contract_positive_reuse_zero": true,
+      "semantic_gate_pass": true,
+      "stale_contract_result_rejected": true,
+      "stale_policy_result_rejected": true
+    }
+  },
+  "phase6b": {
+    "certificate_source_contract": "none",
+    "claim_boundary": "live exact-cell rerun; safety repair is distinct from the known c32 physical deadline-capacity boundary",
+    "contract_digest": "qwen0p6-fp16-c32-zh-burst-d120-v1",
+    "decision": "PHASE6B_CONTRACT_SCOPING_REPAIR_PASS",
+    "gates": {
+      "known_counterexample_floor_applied": true,
+      "known_counterexample_verified": true,
+      "new_contract_quarantine": true,
+      "no_c16_certificate_reuse": true,
+      "state_projection_violations_zero": true
+    },
+    "known_counterexample": {
+      "proposal_minimum_margin": 0.109375,
+      "quarantine_forced": false,
+      "revision_id": "s023:8",
+      "selected_vs_canonical": {
+        "candidate_tokens": 11,
+        "lcp_reference_fraction": 1.0,
+        "lcp_tokens": 11,
+        "reference_tokens": 11,
+        "state_projection_text_exact": true,
+        "state_projection_token_exact": true,
+        "text_exact": true,
+        "token_exact": true
+      },
+      "verified": true
+    },
+    "margin_threshold": 0.109376,
+    "model": "Qwen3-ASR-0.6B",
+    "summary": {
+      "canonical_audit_energy": {
+        "completed_audio_seconds": 3840.0,
+        "joules": 222720.67964864493,
+        "joules_per_audio_second": 58.000176991834614,
+        "sample_count": 7702.0
+      },
+      "canonical_audit_request_seconds_p50": 0.6062878975644708,
+      "canonical_audit_request_seconds_p99": 1.114895432041958,
+      "canonical_audit_seconds_excluded_from_service": 1267.9479014594108,
+      "canonical_slo_goodput_events_per_second": 1.514257800174657,
+      "deployed_slo_goodput_events_per_second": 3.045945870829193,
+      "deployed_two_gpu_wall_speedup": 5.905352713878949,
+      "event_count": 1920,
+      "gpu_normalized_throughput_speedup": 2.9526763569394743,
+      "intermediate_verifier_wait_seconds_p95": 6.010194465983658,
+      "max_pending_verifications": 24,
+      "output_violation_events": 0,
+      "proposal_batch_size_p50": 32,
+      "proposal_batch_size_p95": 32.0,
+      "proposal_batches": 61,
+      "proposer_gpu_terminal_verified_events": 127,
+      "proposer_gpu_terminal_verifier_seconds": 45.359839614480734,
+      "proposer_service_seconds": 156.38466385100037,
+      "quarantine_events_requested": 64,
+      "quarantine_forced_events": 64,
+      "service_energy": {
+        "completed_audio_seconds": 3840.0,
+        "joules": 58629.74328721488,
+        "joules_per_audio_second": 15.268162314378875,
+        "sample_count": 1229.0
+      },
+      "service_wall_seconds": 214.7116290749982,
+      "slo_goodput_speedup": 2.011510768165017,
+      "stale_or_replayed_result_events": 0,
+      "state_entry_deadline_miss_events": 1266,
+      "state_entry_deadline_miss_rate": 0.659375,
+      "state_entry_deadline_seconds": 2.0,
+      "state_entry_latency_seconds_p50": 3.08129756571725,
+      "state_entry_latency_seconds_p95": 4.7250746404752135,
+      "state_entry_latency_seconds_p99": 6.10702221195213,
+      "state_projection_violation_events": 0,
+      "terminal_burst_count": 2,
+      "terminal_burst_size_max": 24,
+      "terminal_verifier_wait_seconds_p50": 4.73635329445824,
+      "terminal_verifier_wait_seconds_p95": 8.01846303520724,
+      "verification_batches": 3,
+      "verification_fraction": 0.0828125,
+      "verified_events": 159,
+      "verifier_lanes": 1,
+      "verifier_request_seconds_p50": 0.30533677712082863,
+      "verifier_service_seconds": 11.512858676724136,
+      "verifier_to_proposer_service_ratio": 0.07361884722720201,
+      "verifier_wait_seconds_p50": 2.268782116472721,
+      "verifier_wait_seconds_p95": 7.176725683733816,
+      "verifier_worker_events": [
+        32
+      ]
+    }
+  },
+  "phase6c": {
+    "admission_action": "reshape_to_c16",
+    "backpressured_or_queued_new_sessions": 48,
+    "claim_boundary": "active-session live latency after admission; queued-session waiting is not counted as state-entry service latency",
+    "decision": "PHASE6C_JOINT_RISK_SLO_ADMISSION_PASS",
+    "gates": {
+      "admitted_deadline_misses_zero": true,
+      "c64_not_admitted_at_64": true,
+      "reshaped_live_p99_with_guard_meets_slo": true
+    },
+    "live_reshaped_contract": {
+      "concurrency": 16,
+      "deadline_misses": 0,
+      "guarded_p99_seconds": 1.3966432916000486,
+      "p99_seconds": 1.2966432916000485
+    },
+    "offered_c64": {
+      "concurrency": 64,
+      "phase5_deadline_misses": 448,
+      "phase5_p99_seconds": 2.888937874697149
+    }
+  },
+  "phase6d": {
+    "claim_boundary": "live persistent two-GPU sequence; risk-limited stages are statistical and exact return requires canary renewal; the controller risk bound is not a bitwise-repeatability certificate for the canonical runtime itself",
+    "cross_contract_certificate_reuse": 0,
+    "decision": "PHASE6D_FEASIBLE_LIVE_ADAPTATION_PASS",
+    "exact_certificate_restores": 1,
+    "gates": {
+      "admitted_deadline_misses_zero": true,
+      "all_contract_risk_bounds_valid": true,
+      "cross_contract_certificate_reuse_zero": true,
+      "exact_return_restore_observed": true,
+      "observed_state_risk_within_contract": true,
+      "return_renewal_faster_than_flat_recertification": true
+    },
+    "maximum_observed_state_risk": 0.0,
+    "recertification_event_reduction_vs_flat": 0.9528718703976435,
+    "repair_attempt_diagnoses": [
+      {
+        "attempt": 1,
+        "cause": "quarantine-learning counterexamples were incorrectly treated as failures against active positive evidence, so the learning window was repeatedly reset",
+        "cause_class": "implementation_state_machine",
+        "decision": "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL",
+        "repair": "retain caught failures as calibration evidence while a new contract is quarantined",
+        "stages": [
+          {
+            "deadline_miss_events": 0,
+            "events": 1440,
+            "failure_floor": 0.031251,
+            "label": "c16_en_initial",
+            "output_violations": 1,
+            "risk_upper_bound": 1.0,
+            "state_violations": 3,
+            "threshold": null
+          },
+          {
+            "deadline_miss_events": 0,
+            "events": 1440,
+            "failure_floor": 0.015626,
+            "label": "c16_zh_drift",
+            "output_violations": 1,
+            "risk_upper_bound": 1.0,
+            "state_violations": 0,
+            "threshold": null
+          },
+          {
+            "deadline_miss_events": 0,
+            "events": 320,
+            "failure_floor": 0.031251,
+            "label": "c16_en_return",
+            "output_violations": 0,
+            "risk_upper_bound": 1.0,
+            "state_violations": 0,
+            "threshold": null
+          }
+        ]
+      },
+      {
+        "attempt": 2,
+        "cause": "a caught error after promotion invalidated the active certificate too aggressively while its cached copy remained eligible for exact return",
+        "cause_class": "incomplete_repair_and_cache_consistency",
+        "decision": "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL",
+        "repair": "raise the contextual floor and recompute the certificate atomically; delete both active and cached evidence only when the stricter window no longer meets the risk budget",
+        "stages": [
+          {
+            "deadline_miss_events": 0,
+            "events": 1440,
+            "failure_floor": 0.015626,
+            "label": "c16_en_initial",
+            "output_violations": 1,
+            "risk_upper_bound": 1.0,
+            "state_violations": 0,
+            "threshold": null
+          },
+          {
+            "deadline_miss_events": 0,
+            "events": 1440,
+            "failure_floor": 1e-06,
+            "label": "c16_zh_drift",
+            "output_violations": 1,
+            "risk_upper_bound": 0.0049393845139860115,
+            "state_violations": 0,
+            "threshold": 1e-06
+          },
+          {
+            "deadline_miss_events": 0,
+            "events": 320,
+            "failure_floor": 0.015626,
+            "label": "c16_en_return",
+            "output_violations": 0,
+            "risk_upper_bound": 0.004972177089234475,
+            "state_violations": 0,
+            "threshold": 0.015626
+          }
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "certified_after_events": 1358,
+        "concurrency": 16,
+        "deadline_miss_events": 0,
+        "energy": {
+          "completed_audio_seconds": 2880.0,
+          "joules": 23383.964372372306,
+          "joules_per_audio_second": 8.119432073740384,
+          "sample_count": 373.0
+        },
+        "events": 1440,
+        "failure_floor": 0.031251,
+        "fast_path_window": 0.9712812960235641,
+        "fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float32-fixed-canonical-b16",
+        "goodput_events_per_second": 22.031927539002382,
+        "label": "c16_en_initial",
+        "language": "English",
+        "output_violations": 1,
+        "renewal_canaries_remaining": 0,
+        "risk_upper_bound": 0.004997058694246492,
+        "state_entry_latency_seconds_p99": 1.2966432916000485,
+        "state_violations": 0,
+        "switch_action": "new_contract_quarantine",
+        "threshold": 0.031251,
+        "verification_fraction": 0.95625
+      },
+      {
+        "certified_after_events": 1350,
+        "concurrency": 16,
+        "deadline_miss_events": 0,
+        "energy": {
+          "completed_audio_seconds": 2880.0,
+          "joules": 19337.144789396905,
+          "joules_per_audio_second": 6.7142863852072585,
+          "sample_count": 298.0
+        },
+        "events": 1440,
+        "failure_floor": 0.015626,
+        "fast_path_window": 0.9940740740740741,
+        "fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=Chinese/arrival=episode-sync/float32-fixed-canonical-b16",
+        "goodput_events_per_second": 28.051810990560863,
+        "label": "c16_zh_drift",
+        "language": "Chinese",
+        "output_violations": 0,
+        "renewal_canaries_remaining": 0,
+        "risk_upper_bound": 0.004947542039521191,
+        "state_entry_latency_seconds_p99": 0.8810207359492779,
+        "state_violations": 0,
+        "switch_action": "new_contract_quarantine",
+        "threshold": 0.015626,
+        "verification_fraction": 0.9555555555555556
+      },
+      {
+        "certified_after_events": 64,
+        "concurrency": 16,
+        "deadline_miss_events": 0,
+        "energy": {
+          "completed_audio_seconds": 640.0,
+          "joules": 4687.536310823613,
+          "joules_per_audio_second": 7.324275485661896,
+          "sample_count": 88.0
+        },
+        "events": 320,
+        "failure_floor": 0.031251,
+        "fast_path_window": 0.9712812960235641,
+        "fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float32-fixed-canonical-b16",
+        "goodput_events_per_second": 21.54093102892686,
+        "label": "c16_en_return",
+        "language": "English",
+        "output_violations": 0,
+        "renewal_canaries_remaining": 0,
+        "risk_upper_bound": 0.004997058694246492,
+        "state_entry_latency_seconds_p99": 1.350290329195559,
+        "state_violations": 0,
+        "switch_action": "exact_restore_canary",
+        "threshold": 0.031251,
+        "verification_fraction": 0.409375
+      }
+    ]
+  },
+  "publication_boundary": "risk-limited mode is not deterministic exactness; strict mode means frozen-canonical consistency; c32 safety repair does not make its overloaded workload SLO-admissible",
+  "schema_version": 1,
+  "study": "RevTrace Phase 6 submission repairs"
+}

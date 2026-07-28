@@ -17,10 +17,15 @@ import math
 import subprocess
 import threading
 import time
+from dataclasses import replace
 from dataclasses import dataclass, field
 from typing import Iterable, Mapping, Sequence
 
-from .risk_window import WindowCertificate, certify_risk_window
+from .risk_window import (
+    WindowCertificate,
+    certify_risk_window,
+    zero_error_upper_bound,
+)
 
 
 class NvidiaPowerSampler:
@@ -175,6 +180,249 @@ class LiveRiskWindowController:
         assert self.current is not None
         assert self.current.threshold is not None
         return float(minimum_margin) <= self.current.threshold
+
+
+class AsymmetricLiveRiskWindowController(LiveRiskWindowController):
+    """Exact-contract certificate restore with persistent failure floors.
+
+    Returning to an exact contract requires a short canary renewal instead of
+    importing the immediately preceding contract's controller state. Unknown
+    contracts remain fully fail closed until fresh split-sample evidence is
+    available. Observed counterexamples persist per exact contract and can
+    only raise, never lower, its verification threshold.
+    """
+
+    def __init__(
+        self,
+        *,
+        minimum_audits: int = 1350,
+        delta: float = 0.005,
+        alpha: float = 0.05,
+        calibration_fraction: float = 0.55,
+        renewal_canaries: int = 64,
+        failure_epsilon: float = 1e-6,
+    ) -> None:
+        super().__init__(
+            minimum_audits=minimum_audits,
+            delta=delta,
+            alpha=alpha,
+            calibration_fraction=calibration_fraction,
+        )
+        if renewal_canaries < 1 or failure_epsilon <= 0:
+            raise ValueError("invalid asymmetric memory configuration")
+        self.renewal_canaries = renewal_canaries
+        self.failure_epsilon = failure_epsilon
+        self._certificate_cache: dict[str, WindowCertificate] = {}
+        self._threshold_cache: dict[str, float] = {}
+        self._failure_floors: dict[str, float] = {}
+        self._pending_restore: WindowCertificate | None = None
+        self._renewal_remaining = 0
+        self.cross_contract_certificate_reuse = 0
+        self.exact_certificate_restores = 0
+        self.switch_status = "uninitialized"
+
+    def seed_failure(self, fingerprint: str, margin: float) -> None:
+        if not fingerprint or margin < 0:
+            raise ValueError("invalid failure floor seed")
+        floor = float(margin) + self.failure_epsilon
+        self._failure_floors[fingerprint] = max(
+            floor, self._failure_floors.get(fingerprint, floor)
+        )
+
+    def switch(self, fingerprint: str) -> ContractEpoch:
+        if self.current is not None:
+            if self.current.certificate is not None:
+                self._certificate_cache[self.current.fingerprint] = (
+                    self.current.certificate
+                )
+                assert self.current.threshold is not None
+                self._threshold_cache[self.current.fingerprint] = (
+                    self.current.threshold
+                )
+            self.history.append(self.current)
+        epoch = len(self.history) + 1
+        self.current = ContractEpoch(
+            fingerprint=fingerprint,
+            epoch=epoch,
+            switched_at_event=self.event_index,
+        )
+        self._pending_restore = self._certificate_cache.get(fingerprint)
+        if self._pending_restore is not None:
+            self._renewal_remaining = self.renewal_canaries
+            self.exact_certificate_restores += 1
+            self.switch_status = "exact_restore_canary"
+        else:
+            self._renewal_remaining = 0
+            self.switch_status = "new_contract_quarantine"
+        return self.current
+
+    def _apply_floor(
+        self, fingerprint: str, certificate: WindowCertificate
+    ) -> WindowCertificate:
+        floor = self._failure_floors.get(fingerprint)
+        if floor is None or certificate.threshold is None:
+            return certificate
+        threshold = max(certificate.threshold, floor)
+        if threshold == certificate.threshold:
+            return certificate
+        split = max(
+            1,
+            min(
+                len(self.current.audit_records) - 1,
+                int(
+                    len(self.current.audit_records)
+                    * self.calibration_fraction
+                ),
+            ),
+        )
+        validation = self.current.audit_records[split:]
+        admitted = [
+            item
+            for item in validation
+            if float(item["minimum_margin"]) > threshold
+        ]
+        validation_errors = sum(
+            bool(item["state_error"]) for item in admitted
+        )
+        upper = (
+            zero_error_upper_bound(len(admitted), self.alpha)
+            if admitted and validation_errors == 0
+            else 1.0
+        )
+        certified = bool(admitted) and upper <= self.delta
+        window = sum(
+            float(item["minimum_margin"]) > threshold
+            for item in self.current.audit_records
+        ) / len(self.current.audit_records)
+        return replace(
+            certificate,
+            threshold=threshold if certified else None,
+            fast_path_window=window if certified else 0.0,
+            admitted_validation_audits=len(admitted),
+            caught_validation_errors=validation_errors,
+            upper_risk=upper,
+            certified=certified,
+            failure_floor=max(
+                floor,
+                certificate.failure_floor
+                if certificate.failure_floor is not None
+                else floor,
+            ),
+        )
+
+    def observe(
+        self,
+        *,
+        minimum_margin: float,
+        state_error: bool,
+    ) -> WindowCertificate | None:
+        if self.current is None:
+            raise RuntimeError("switch() must be called before observe()")
+        self.event_index += 1
+        margin = float(minimum_margin)
+        self.current.audit_records.append(
+            {"minimum_margin": margin, "state_error": bool(state_error)}
+        )
+        if state_error:
+            self.seed_failure(self.current.fingerprint, margin)
+            self.switch_status = "counterexample_quarantine"
+            if self._pending_restore is not None:
+                # A canary failure invalidates the cached certificate: the
+                # exact-return population no longer supports direct renewal.
+                self._pending_restore = None
+                self._renewal_remaining = 0
+                self._certificate_cache.pop(self.current.fingerprint, None)
+                self._threshold_cache.pop(self.current.fingerprint, None)
+                self.current.audit_records = [self.current.audit_records[-1]]
+                return None
+            if self.current.certificate is not None:
+                # A caught error in risk-limited mode is not automatically an
+                # unsafe commit. Raise the contextual failure floor and
+                # recompute the existing split-sample certificate. Retain it
+                # only when the stricter fast-path window still satisfies the
+                # frozen risk budget.
+                adjusted = self._apply_floor(
+                    self.current.fingerprint, self.current.certificate
+                )
+                if adjusted.certified:
+                    self.current.certificate = adjusted
+                    self.current.threshold = adjusted.threshold
+                    self.current.fast_path_window = (
+                        adjusted.fast_path_window
+                    )
+                    self._certificate_cache[
+                        self.current.fingerprint
+                    ] = adjusted
+                    assert adjusted.threshold is not None
+                    self._threshold_cache[
+                        self.current.fingerprint
+                    ] = adjusted.threshold
+                    self.switch_status = "counterexample_floor_raised"
+                    return adjusted
+                self.current.certificate = None
+                self.current.threshold = None
+                self.current.fast_path_window = 0.0
+                self._certificate_cache.pop(self.current.fingerprint, None)
+                self._threshold_cache.pop(self.current.fingerprint, None)
+                self.current.audit_records = [self.current.audit_records[-1]]
+                return adjusted
+
+        if self._pending_restore is not None:
+            if not state_error:
+                self._renewal_remaining = max(
+                    0, self._renewal_remaining - 1
+                )
+            if self._renewal_remaining == 0:
+                certificate = self._apply_floor(
+                    self.current.fingerprint, self._pending_restore
+                )
+                if not certificate.certified:
+                    self._pending_restore = None
+                    self.switch_status = "restore_invalidated_by_failure_floor"
+                    return certificate
+                self.current.certificate = certificate
+                self.current.threshold = certificate.threshold
+                self.current.fast_path_window = certificate.fast_path_window
+                self.current.certified_at_event = self.event_index
+                self._pending_restore = None
+                self.switch_status = "exact_restore_promoted"
+                return certificate
+            return None
+
+        if self.current.certificate is not None:
+            return self.current.certificate
+        if len(self.current.audit_records) < self.minimum_audits:
+            return None
+        certificate = certify_risk_window(
+            self.current.audit_records,
+            delta=self.delta,
+            alpha=self.alpha,
+            calibration_fraction=self.calibration_fraction,
+        )
+        if certificate.certified:
+            certificate = self._apply_floor(
+                self.current.fingerprint, certificate
+            )
+            if not certificate.certified:
+                return certificate
+            self.current.certificate = certificate
+            self.current.threshold = certificate.threshold
+            self.current.fast_path_window = certificate.fast_path_window
+            self.current.certified_at_event = self.event_index
+            self._certificate_cache[self.current.fingerprint] = certificate
+            assert certificate.threshold is not None
+            self._threshold_cache[self.current.fingerprint] = (
+                certificate.threshold
+            )
+            self.switch_status = "fresh_contract_promoted"
+        return certificate
+
+    @property
+    def renewal_remaining(self) -> int:
+        return self._renewal_remaining
+
+    def failure_floor(self, fingerprint: str) -> float | None:
+        return self._failure_floors.get(fingerprint)
 
 
 def adaptation_regret(

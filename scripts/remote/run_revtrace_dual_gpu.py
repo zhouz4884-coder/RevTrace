@@ -39,6 +39,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--duration-seconds", type=int, default=30)
     parser.add_argument("--concurrency", type=int, default=16)
     parser.add_argument("--margin-threshold", type=float, default=0.05)
+    parser.add_argument(
+        "--quarantine-events",
+        type=int,
+        default=0,
+        help="force the first N state entries through canonical verification",
+    )
+    parser.add_argument("--contract-digest", default="legacy-contract")
+    parser.add_argument("--contract-epoch", type=int, default=1)
+    parser.add_argument("--policy-epoch", type=int, default=1)
+    parser.add_argument(
+        "--certificate-source-contract",
+        default="none",
+        help="exact contract digest or 'none'; recorded for reuse auditing",
+    )
     parser.add_argument("--dtype", default="float16")
     parser.add_argument("--proposer-gpu", default="0")
     parser.add_argument("--verifier-gpu", default="1")
@@ -389,6 +403,10 @@ def receive_or_raise(result_queue: Any, timeout: float) -> dict[str, Any]:
 
 def main() -> int:
     args = parse_args()
+    if args.quarantine_events < 0:
+        raise ValueError("--quarantine-events cannot be negative")
+    if args.contract_epoch < 1 or args.policy_epoch < 1:
+        raise ValueError("contract and policy epochs must be positive")
     args.output.parent.mkdir(parents=True, exist_ok=True)
     script_dir = str(Path(__file__).resolve().parent)
     if script_dir not in sys.path:
@@ -519,6 +537,7 @@ def main() -> int:
     verifier_dispatch_cursor = 0
     verifier_worker_events = [0 for _ in range(args.verifier_lanes)]
     terminal_burst_sizes: list[int] = []
+    proposal_sequence = 0
 
     def commit_record(
         pending: dict[str, Any],
@@ -558,6 +577,12 @@ def main() -> int:
                 "parent_version": ticket.parent_version,
                 "committed_version": ticket.next_version,
                 "verified": verified,
+                "quarantine_forced": bool(
+                    pending.get("quarantine_forced", False)
+                ),
+                "contract_digest": args.contract_digest,
+                "contract_epoch": args.contract_epoch,
+                "policy_epoch": args.policy_epoch,
                 "proposal_minimum_margin": proposal["minimum_margin"],
                 "proposal_token_ids": proposal["token_ids"],
                 "selected_token_ids": selected_record["token_ids"],
@@ -744,6 +769,8 @@ def main() -> int:
             verify_items: list[dict[str, Any]] = []
             verify_pending: list[dict[str, Any]] = []
             for item, output in zip(prepared, outputs):
+                in_quarantine = proposal_sequence < args.quarantine_events
+                proposal_sequence += 1
                 state = states[item["state_index"]]
                 proposal = candidate_record(output)
                 proposal["state_projection"] = state_projection_record(
@@ -760,8 +787,11 @@ def main() -> int:
                 pending = {
                     **item,
                     "proposal": proposal,
+                    "quarantine_forced": in_quarantine,
                 }
                 risky = (
+                    in_quarantine
+                    or
                     item["terminal"]
                     or proposal["minimum_margin"] is None
                     or proposal["minimum_margin"] <= args.margin_threshold
@@ -1149,6 +1179,10 @@ def main() -> int:
     summary = {
         "event_count": len(events),
         "verified_events": verified_events,
+        "quarantine_events_requested": args.quarantine_events,
+        "quarantine_forced_events": sum(
+            bool(event["quarantine_forced"]) for event in events
+        ),
         "verification_fraction": verified_events / len(events),
         "output_violation_events": output_violations,
         "state_projection_violation_events": state_violations,
@@ -1248,6 +1282,10 @@ def main() -> int:
         "duration_seconds": args.duration_seconds,
         "concurrency": args.concurrency,
         "margin_threshold": args.margin_threshold,
+        "contract_digest": args.contract_digest,
+        "contract_epoch": args.contract_epoch,
+        "policy_epoch": args.policy_epoch,
+        "certificate_source_contract": args.certificate_source_contract,
         "arrival_mode": args.arrival_mode,
         "arrival_seed": args.arrival_seed,
         "arrival_scale_seconds": args.arrival_scale_seconds,
@@ -1261,7 +1299,8 @@ def main() -> int:
                 else "FP16 singleton execution"
             ),
             "state_entry": (
-                "only a version-matched selected transition may update state"
+                "only a session-, contract-, and policy-epoch-matched selected "
+                "transition may update state"
             ),
             "terminal": (
                 "terminal revisions execute on the fixed-shape canonical "

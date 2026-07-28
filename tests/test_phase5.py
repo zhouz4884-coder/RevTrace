@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from revtrace.phase5 import (
+    AsymmetricLiveRiskWindowController,
     LiveRiskWindowController,
     adaptation_regret,
     contamination_damage,
@@ -33,6 +34,94 @@ def test_terminal_is_always_verified() -> None:
     assert controller.requires_verification(
         minimum_margin=100.0, terminal=True
     )
+
+
+def test_asymmetric_memory_restores_exact_contract_only() -> None:
+    controller = AsymmetricLiveRiskWindowController(
+        minimum_audits=4, renewal_canaries=2, delta=0.9
+    )
+    first = controller.switch("c16-en")
+    for margin in (1.0, 1.1, 1.2, 1.3):
+        controller.observe(minimum_margin=margin, state_error=False)
+    assert first.certificate is not None
+
+    controller.switch("c16-zh")
+    assert controller.fail_closed
+    assert controller.switch_status == "new_contract_quarantine"
+
+    returned = controller.switch("c16-en")
+    assert controller.fail_closed
+    assert controller.switch_status == "exact_restore_canary"
+    controller.observe(minimum_margin=1.0, state_error=False)
+    assert controller.fail_closed
+    controller.observe(minimum_margin=1.0, state_error=False)
+    assert returned.certificate is not None
+    assert controller.switch_status == "exact_restore_promoted"
+    assert controller.cross_contract_certificate_reuse == 0
+
+
+def test_asymmetric_failure_floor_persists_per_contract() -> None:
+    controller = AsymmetricLiveRiskWindowController(
+        minimum_audits=4, renewal_canaries=2, failure_epsilon=1e-6
+    )
+    controller.seed_failure("c32-zh", 0.109375)
+    assert controller.failure_floor("c32-zh") == 0.109376
+    assert controller.failure_floor("c16-en") is None
+
+
+def test_active_counterexample_tightens_a_still_valid_certificate() -> None:
+    controller = AsymmetricLiveRiskWindowController(
+        minimum_audits=4, renewal_canaries=2, delta=0.9
+    )
+    epoch = controller.switch("c16-en")
+    for margin in (1.0, 1.1, 1.2, 1.3):
+        controller.observe(minimum_margin=margin, state_error=False)
+    assert epoch.certificate is not None
+
+    adjusted = controller.observe(
+        minimum_margin=0.2, state_error=True
+    )
+    assert adjusted is not None
+    assert adjusted.certified
+    assert not controller.fail_closed
+    assert epoch.certificate is adjusted
+    assert epoch.threshold is not None and epoch.threshold > 0.2
+    assert controller.failure_floor("c16-en") == 0.200001
+
+
+def test_restore_canary_failure_removes_cached_certificate() -> None:
+    controller = AsymmetricLiveRiskWindowController(
+        minimum_audits=4, renewal_canaries=2, delta=0.9
+    )
+    controller.switch("c16-en")
+    for margin in (1.0, 1.1, 1.2, 1.3):
+        controller.observe(minimum_margin=margin, state_error=False)
+    controller.switch("c16-zh")
+    returned = controller.switch("c16-en")
+    assert controller.switch_status == "exact_restore_canary"
+    controller.observe(minimum_margin=0.2, state_error=True)
+    assert returned.certificate is None
+    assert controller.fail_closed
+    controller.switch("c16-zh")
+    controller.switch("c16-en")
+    assert controller.switch_status == "new_contract_quarantine"
+
+
+def test_quarantine_counterexample_is_retained_as_learning_evidence() -> None:
+    controller = AsymmetricLiveRiskWindowController(
+        minimum_audits=4, renewal_canaries=2, delta=0.9
+    )
+    epoch = controller.switch("c16-zh")
+    controller.observe(minimum_margin=0.2, state_error=True)
+    assert epoch.audit_records == [
+        {"minimum_margin": 0.2, "state_error": True}
+    ]
+    for margin in (1.0, 1.1, 1.2):
+        controller.observe(minimum_margin=margin, state_error=False)
+    assert len(epoch.audit_records) == 4
+    assert epoch.certificate is not None
+    assert epoch.threshold is not None
+    assert epoch.threshold > 0.2
 
 
 def test_slack_admission_is_strict() -> None:

@@ -1,0 +1,82 @@
+{
+  "c64_admission": {
+    "admitted": true,
+    "admitted_concurrency": 16,
+    "guarded_p99_seconds": 1.5055951461195947,
+    "level": "capacity_reshape",
+    "predicted_p99_seconds": 1.4055951461195946,
+    "reason": "offered contract exceeds capacity; reshape to a measured region",
+    "upper_risk": 0.004988737202775151
+  },
+  "decision": "PHASE6A_SEMANTIC_GATE_PASS",
+  "evidence_tier": "offline semantic replay over real Phase 5 events; not a serving performance result",
+  "evidence_trace": [
+    {
+      "certified": false,
+      "contract_digest": "1cf9d9037b484b4f6066d4a7dda2e0b77c3ac2dfac2d19c3cf49cd8268e99b4f",
+      "failure_floor": null,
+      "initial_threshold": 0.05,
+      "label": "c16_initial",
+      "reason": "exact certificate restored as a canary-gated warm state",
+      "source_contract_digest": "1cf9d9037b484b4f6066d4a7dda2e0b77c3ac2dfac2d19c3cf49cd8268e99b4f",
+      "status": "exact_restore_canary"
+    },
+    {
+      "certified": false,
+      "contract_digest": "7390aa619fac9ced6ba7da9b503283990238239e1ebae1a63c70e53832166c34",
+      "failure_floor": 0.109376,
+      "initial_threshold": 0.109376,
+      "label": "c32_zh_burst",
+      "reason": "unknown contract is isolated and all state entries are verified",
+      "source_contract_digest": null,
+      "status": "quarantine_all_verify"
+    },
+    {
+      "certified": false,
+      "contract_digest": "1cf9d9037b484b4f6066d4a7dda2e0b77c3ac2dfac2d19c3cf49cd8268e99b4f",
+      "failure_floor": null,
+      "initial_threshold": 0.05,
+      "label": "c16_return",
+      "reason": "exact certificate restored as a canary-gated warm state",
+      "source_contract_digest": "1cf9d9037b484b4f6066d4a7dda2e0b77c3ac2dfac2d19c3cf49cd8268e99b4f",
+      "status": "exact_restore_canary"
+    },
+    {
+      "certified": false,
+      "contract_digest": "dca590cb61beefff785abb1d46ac23bf87af6ade80a698abafc3d5b64e226a31",
+      "failure_floor": null,
+      "initial_threshold": null,
+      "label": "c64_overload",
+      "reason": "unknown contract is isolated and all state entries are verified",
+      "source_contract_digest": null,
+      "status": "quarantine_all_verify"
+    }
+  ],
+  "fingerprint_fragmentation_proxy": {
+    "mechanism_regions": 4,
+    "note": "protocol-state proxy, not measured serving speedup",
+    "raw_queue_depth_values": 64
+  },
+  "gates": {
+    "c16_exact_return_requires_canary": true,
+    "c32_enters_quarantine": true,
+    "c32_failure_floor_covers_known_error": true,
+    "c64_reshaped": true,
+    "cross_contract_positive_reuse_zero": true,
+    "stale_contract_result_rejected": true,
+    "stale_policy_result_rejected": true
+  },
+  "global_floor_boundary": {
+    "events": 464,
+    "exact_scope_verifications": 5,
+    "global_floor_verifications": 14,
+    "unnecessary_extra_if_global_floor": 9
+  },
+  "schema_version": 1,
+  "source_failure": {
+    "margin": 0.109375,
+    "revision_id": "s023:8",
+    "verified": false
+  },
+  "study": "RevTrace Phase 6 offline evidence-lifecycle gate"
+}

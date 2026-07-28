@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Persistent-process c16 -> c64 -> c16 live adaptation gate.
+"""Persistent-process multi-contract live adaptation gate.
 
 The proposer and verifier are loaded once.  A contract switch creates a fresh
 controller epoch, immediately forces all state entries through the fixed-shape
 canonical path, and expands the fast path only after the new epoch has enough
-split-sample evidence.  Post-stage canonical replay is excluded from service
-timing and checks every selected state transition.
+split-sample evidence.  With Phase 6 asymmetric memory enabled, an exact
+contract return restores only behind renewal canaries, while unseen
+populations stay isolated. Post-stage canonical replay is excluded from
+service timing and checks every selected state transition.
 """
 
 from __future__ import annotations
@@ -46,6 +48,30 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--result-timeout-seconds", type=float, default=900.0)
     parser.add_argument("--episode-seed-base", type=int, default=20260729)
     parser.add_argument(
+        "--phase6-asymmetric-memory",
+        action="store_true",
+        help=(
+            "use exact-contract certificate restore, canary renewal, and "
+            "persistent per-contract counterexample floors"
+        ),
+    )
+    parser.add_argument("--renewal-canaries", type=int, default=64)
+    parser.add_argument(
+        "--failure-floor",
+        action="append",
+        default=[],
+        metavar="LABEL:VALUE",
+        help="seed one observed counterexample margin for a stage contract",
+    )
+    parser.add_argument(
+        "--statistical-risk-gate",
+        action="store_true",
+        help=(
+            "evaluate risk-limited stages against the 0.5 percent contract "
+            "instead of incorrectly requiring zero observed disagreements"
+        ),
+    )
+    parser.add_argument(
         "--frozen-threshold",
         action="append",
         default=[],
@@ -68,7 +94,7 @@ def parse_args() -> argparse.Namespace:
         "--stage",
         action="append",
         default=[],
-        help="LABEL:CONCURRENCY:EPISODES",
+        help="LABEL:CONCURRENCY:EPISODES[:LANGUAGE]",
     )
     return parser.parse_args()
 
@@ -131,16 +157,29 @@ class PowerSampler:
         return self.samples
 
 
-def parse_stages(values: list[str]) -> list[tuple[str, int, int]]:
+def parse_stages(
+    values: list[str],
+) -> list[tuple[str, int, int, str]]:
     source = values or [
-        "c16_initial:16:8",
-        "c64_drift:64:3",
-        "c16_return:16:8",
+        "c16_initial:16:8:mixed",
+        "c64_drift:64:3:mixed",
+        "c16_return:16:8:mixed",
     ]
     stages = []
     for value in source:
-        label, concurrency, episodes = value.split(":")
-        stages.append((label, int(concurrency), int(episodes)))
+        fields = value.split(":")
+        if len(fields) == 3:
+            label, concurrency, episodes = fields
+            language = "mixed"
+        elif len(fields) == 4:
+            label, concurrency, episodes, language = fields
+        else:
+            raise ValueError(
+                "stage must be LABEL:CONCURRENCY:EPISODES[:LANGUAGE]"
+            )
+        if language not in {"mixed", "English", "Chinese"}:
+            raise ValueError(f"unsupported stage language: {language}")
+        stages.append((label, int(concurrency), int(episodes), language))
     return stages
 
 
@@ -152,6 +191,16 @@ def parse_frozen_thresholds(values: list[str]) -> dict[str, float]:
             raise ValueError(f"duplicate frozen threshold: {label}")
         thresholds[label] = float(raw_threshold)
     return thresholds
+
+
+def parse_label_values(values: list[str]) -> dict[str, float]:
+    result: dict[str, float] = {}
+    for value in values:
+        label, raw_value = value.split(":", 1)
+        if label in result:
+            raise ValueError(f"duplicate label value: {label}")
+        result[label] = float(raw_value)
+    return result
 
 
 def main() -> int:
@@ -167,6 +216,7 @@ def main() -> int:
     from run_revbatch_gate import (
         SAMPLE_RATE,
         apply_output,
+        cycle_audio,
         load_sources,
         make_streams,
         official_smoke,
@@ -183,19 +233,29 @@ def main() -> int:
         verifier_worker,
     )
     from revtrace.phase5 import (
+        AsymmetricLiveRiskWindowController,
         LiveRiskWindowController,
         summarize_energy,
     )
 
     stages = parse_stages(args.stage)
     frozen_thresholds = parse_frozen_thresholds(args.frozen_threshold)
+    failure_floors = parse_label_values(args.failure_floor)
     unknown_thresholds = set(frozen_thresholds) - {
-        label for label, _, _ in stages
+        label for label, _, _, _ in stages
     }
     if unknown_thresholds:
         raise ValueError(
             "frozen thresholds do not match stages: "
             f"{sorted(unknown_thresholds)}"
+        )
+    unknown_floors = set(failure_floors) - {
+        label for label, _, _, _ in stages
+    }
+    if unknown_floors:
+        raise ValueError(
+            "failure floors do not match stages: "
+            f"{sorted(unknown_floors)}"
         )
     max_concurrency = max(item[1] for item in stages)
     context = mp.get_context("spawn")
@@ -234,8 +294,13 @@ def main() -> int:
     if not smoke["exact"]:
         raise AssertionError("proposer official-semantics smoke failed")
 
-    controller = LiveRiskWindowController(
-        minimum_audits=args.minimum_audits
+    controller = (
+        AsymmetricLiveRiskWindowController(
+            minimum_audits=args.minimum_audits,
+            renewal_canaries=args.renewal_canaries,
+        )
+        if args.phase6_asymmetric_memory
+        else LiveRiskWindowController(minimum_audits=args.minimum_audits)
     )
     batch_id = 0
 
@@ -245,6 +310,7 @@ def main() -> int:
         episode: int,
         duration: int,
         concurrency: int,
+        language: str,
     ) -> list[dict[str, Any]]:
         """Create reproducibly distinct live inputs for each stage episode."""
 
@@ -254,6 +320,14 @@ def main() -> int:
             concurrency=concurrency,
         )
         for position, stream in enumerate(streams):
+            if language != "mixed":
+                source = sources[language][position % len(sources[language])]
+                stream["language"] = language
+                stream["audio"] = cycle_audio(
+                    source,
+                    duration,
+                    offset=(position * 7919) % max(1, source.size),
+                )
             audio = stream["audio"]
             salt = (
                 int(args.episode_seed_base)
@@ -383,14 +457,25 @@ def main() -> int:
 
     stage_payloads: list[dict[str, Any]] = []
     global_event = 0
-    for stage_index, (label, concurrency, episodes) in enumerate(stages):
+    for stage_index, (
+        label,
+        concurrency,
+        episodes,
+        language,
+    ) in enumerate(stages):
         frozen_threshold = frozen_thresholds.get(label)
         static_oracle_stage = frozen_threshold is not None
         fingerprint = (
             f"{args.model_name}/fp16/c{concurrency}/"
+            f"language={language}/arrival=episode-sync/"
             f"{args.canonical_dtype}-fixed-canonical-b{concurrency}"
         )
+        if args.phase6_asymmetric_memory and label in failure_floors:
+            controller.seed_failure(fingerprint, failure_floors[label])
         epoch = controller.switch(fingerprint)
+        switch_status_at_entry = getattr(
+            controller, "switch_status", "fresh_epoch"
+        )
         stage_started = time.perf_counter()
         sampler = PowerSampler((int(args.proposer_gpu), int(args.verifier_gpu)))
         sampler.start()
@@ -410,6 +495,7 @@ def main() -> int:
                 episode=episode,
                 duration=args.episode_seconds,
                 concurrency=concurrency,
+                language=language,
             )
             states = [
                 asr.init_streaming_state(
@@ -718,6 +804,7 @@ def main() -> int:
                 episode=episode,
                 duration=args.episode_seconds,
                 concurrency=concurrency,
+                language=language,
             )
             states = [
                 asr.init_streaming_state(
@@ -822,12 +909,23 @@ def main() -> int:
                 "label": label,
                 "fingerprint": fingerprint,
                 "concurrency": concurrency,
+                "language": language,
                 "episodes": episodes,
                 "events": len(service_events),
                 "switch_action": (
                     "none; frozen threshold loaded before service"
                     if static_oracle_stage
-                    else "fast_path_window=0; all state entries verified"
+                    else switch_status_at_entry
+                ),
+                "failure_floor": (
+                    controller.failure_floor(fingerprint)
+                    if args.phase6_asymmetric_memory
+                    else None
+                ),
+                "renewal_canaries_remaining": (
+                    controller.renewal_remaining
+                    if args.phase6_asymmetric_memory
+                    else None
                 ),
                 "policy": (
                     "frozen_prior-certified_static_oracle"
@@ -914,8 +1012,24 @@ def main() -> int:
             if static_oracle_run
             else stage["risk_upper_bound"] <= 0.005
         )
-        and stage["output_violations"] == 0
-        and stage["state_violations"] == 0
+        and (
+            (
+                stage["state_violations"] / stage["events"] <= 0.005
+                and not any(
+                    row["proposal_minimum_margin"] is not None
+                    and stage["failure_floor"] is not None
+                    and float(row["proposal_minimum_margin"])
+                    <= float(stage["failure_floor"])
+                    and not bool(row["verified"])
+                    for row in stage["audit_violation_rows"]
+                )
+            )
+            if args.statistical_risk_gate
+            else (
+                stage["output_violations"] == 0
+                and stage["state_violations"] == 0
+            )
+        )
         and stage["deadline_miss_events"] == 0
         for stage in stage_payloads
     )
@@ -941,6 +1055,14 @@ def main() -> int:
         ),
         "model": args.model_name,
         "canonical_dtype": args.canonical_dtype,
+        "phase6_asymmetric_memory": args.phase6_asymmetric_memory,
+        "statistical_risk_gate": args.statistical_risk_gate,
+        "cross_contract_certificate_reuse": getattr(
+            controller, "cross_contract_certificate_reuse", None
+        ),
+        "exact_certificate_restores": getattr(
+            controller, "exact_certificate_restores", None
+        ),
         "shape_warmup_seconds_excluded_from_service": (
             warmup_seconds_excluded
         ),
@@ -958,6 +1080,13 @@ def main() -> int:
         "claim_boundaries": [
             "models remain loaded across the c16-c64-c16 sequence",
             "each fingerprint switch starts a fresh fail-closed epoch",
+            (
+                "exact-contract returns require canary renewal; positive "
+                "certificates never cross contract digests and contextual "
+                "failure floors persist"
+                if args.phase6_asymmetric_memory
+                else "Phase 5 controller uses fresh epochs only"
+            ),
             "post-stage replay is excluded from service timing",
             "risk is statistical state-entry disagreement, not bitwise determinism",
             (
