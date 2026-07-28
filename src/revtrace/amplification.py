@@ -90,17 +90,32 @@ def summarize_impulses(
     if not 0.0 <= flip_rate <= 1.0:
         raise ValueError("flip rate must lie in [0,1]")
     horizon = max(len(item.distances) for item in pairs) - 1
-    survival = []
-    for offset in range(horizon + 1):
-        at_risk = [
-            item
-            for item in pairs
-            if offset < len(item.distances)
-        ]
-        survival.append(
-            sum(item.distances[offset] > 0 for item in at_risk)
-            / len(at_risk)
+    # Kaplan-Meier estimate for the time until the state difference recovers.
+    # A trajectory that ends without recovery is right-censored at its final
+    # observed offset.  The resulting survival curve must be monotone.
+    recovery_times = [item.reconvergence_time() for item in pairs]
+    censor_times = [len(item.distances) - 1 for item in pairs]
+    survival = [1.0]
+    probability = 1.0
+    for offset in range(1, horizon + 1):
+        at_risk = sum(
+            (
+                (recovery is None and censor >= offset)
+                or (
+                    recovery is not None
+                    and recovery >= offset
+                )
+            )
+            for recovery, censor in zip(
+                recovery_times, censor_times
+            )
         )
+        events = sum(
+            recovery == offset for recovery in recovery_times
+        )
+        if at_risk:
+            probability *= 1.0 - events / at_risk
+        survival.append(probability)
     half_life = next(
         (
             offset

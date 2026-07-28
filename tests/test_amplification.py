@@ -43,3 +43,28 @@ def test_no_recovery_is_right_censored_not_infinite() -> None:
     assert summary.pollution_half_life is None
     assert summary.half_life_right_censored
     assert summary.reconverged_fraction == 0.0
+
+
+def test_survival_uses_right_censored_risk_sets() -> None:
+    summary = summarize_impulses(
+        [
+            RevisionImpulsePair("short-recovery", (1.0, 0.0), False),
+            RevisionImpulsePair(
+                "short-censored", (1.0, 1.0), True
+            ),
+            RevisionImpulsePair(
+                "long-censored", (1.0, 1.0, 1.0, 1.0), True
+            ),
+        ],
+        flip_rate=0.01,
+    )
+    assert summary.survival_curve == pytest.approx(
+        (1.0, 2 / 3, 2 / 3, 2 / 3)
+    )
+    assert all(
+        left >= right
+        for left, right in zip(
+            summary.survival_curve,
+            summary.survival_curve[1:],
+        )
+    )

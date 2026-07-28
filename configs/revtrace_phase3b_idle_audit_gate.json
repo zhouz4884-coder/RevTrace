@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "REVTRACE-P3B-DUAL-CHANNEL-IDLE-AUDIT",
+  "formal_base_audit_probability": 0.02,
+  "source_label_probability": 0.05,
+  "strategies": [
+    "base_only",
+    "uniform_idle",
+    "margin_idle",
+    "voi_idle"
+  ],
+  "idle_priority": [
+    "terminal",
+    "state_blocking",
+    "base_random_audit",
+    "idle_opportunistic_audit"
+  ],
+  "gates": {
+    "minimum_detection_probability_gain_over_base": 0.10,
+    "maximum_deadline_miss_rate": 0.0,
+    "minimum_slo_goodput_retention": 0.99,
+    "voi_independent_detection_gain_over_margin": 0.05,
+    "voi_independent_verifier_request_reduction": 0.10
+  },
+  "claim_boundaries": [
+    "only independent base-audit labels support the formal confidence sequence",
+    "idle audit results are diagnostic unless a known-propensity estimator is preregistered",
+    "retrospective replay cannot establish live SLO preservation",
+    "a single unique failing job cannot establish VOI generality"
+  ]
+}

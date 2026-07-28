@@ -94,7 +94,39 @@ canonical shape is not independently certified. Across the three deployed
 c16 epochs, minimum wall speedup is `4.932x`, minimum GPU-normalized speedup is
 `2.466x`, and deadline/state/stale-result violations are all zero.
 
-## Phase 3B — state amplification
+## Phase 3B — dual-channel idle auditing
+
+Gate P3-B compares:
+
+- fixed-probability base audits only;
+- base plus unprioritized idle audits;
+- base plus margin-only idle audits;
+- base plus value-of-information idle audits.
+
+The formal anytime-valid certificate continues to use independent base-audit
+coins only.  Opportunistic audits are cancellable, lower priority than
+terminal, state-blocking, and base-audit work, and do not enter the formal
+confidence sequence unless a separately preregistered known-propensity design
+is used.
+
+Primary metrics:
+
+- wall time and verifier GPU-seconds required to reach upper risk below 0.5%;
+- drift-detection delay;
+- deadline misses and SLO goodput;
+- state errors discovered per verifier GPU-second.
+
+Status:
+
+`PHASE3B_BOUNDED_DIAGNOSTIC_PASS_VOI_AND_LIVE_SLO_UNRESOLVED`.
+
+Across 2,000 retrospective trials, margin-prioritized idle audits increased
+detection probability from `0.644` to `1.000` and reduced median verifier
+requests from `283` to `226`. VOI matched detection but used three more median
+requests. The measured pool contains only one unique failing job, so neither a
+general VOI advantage nor live cancellability/SLO preservation is claimed.
+
+## Phase 3C — state-pollution dynamics
 
 Gate S3:
 
@@ -102,11 +134,29 @@ Gate S3:
 - fixed-future-audio canonical replay;
 - Revision Impulse Response curves;
 - RAF, reconvergence time, terminal difference, and Numerical State Exposure;
-- natural and stress evidence reported separately.
+- natural and stress evidence reported separately;
+- right-censored survival estimates rather than unsupported infinite
+  half-life claims.
 
-## Phase 4 — second architecture
+For legal state-entry flip pairs, report the pollution survival function,
+pollution half-life, Revision Amplification Factor, terminal-difference rate,
+and Numerical State Exposure.
 
-Gate S4 requires another revision architecture to demonstrate:
+Status:
+
+`PHASE3C_MECHANISM_CONFIRMED_POPULATION_GATE_NOT_MET`.
+
+After deduplicating replicated executions and separating natural,
+waveform-stress, and independent-speech stress evidence, the 0.6B and 1.7B
+models provide `19` and `15` distinct legal state pairs, respectively. This
+is below the preregistered `50` pairs per model. The mechanism-level RIR
+measurements are retained, but the population-generalization claim is
+excluded.
+
+## Phase 3D — second-architecture boundary
+
+The second-architecture gate requires another revision architecture to
+demonstrate:
 
 1. execution environment can create a state difference;
 2. that difference can enter a future revision;
@@ -115,7 +165,17 @@ Gate S4 requires another revision architecture to demonstrate:
 Voxtral Realtime is the first candidate. A negative RAF result is acceptable if
 it establishes a principled boundary where certification is unnecessary.
 
-## Phase 5 — preventive deterministic baseline
+Status:
+
+`PHASE3D_SECOND_ARCHITECTURE_BOUNDARY_PASS`.
+
+Voxtral Mini 4B Realtime completed 10 growing-prefix revisions and 120
+execution rows with zero observed singleton-repeat, cross-shape, or
+replicated-row mismatch. Its decoded text is not re-injected into the next
+transition, so it establishes a causal append-only boundary rather than a
+second feedback-pollution architecture.
+
+## Supporting baseline — preventive deterministic execution
 
 Gate S5:
 
@@ -123,3 +183,12 @@ Gate S5:
 - treat it as a preventive-determinism baseline, not the main novelty;
 - compare quality, capacity, wall performance, and GPU-normalized performance
   against optimistic state certification.
+
+## Post-Phase-3 paper and artifact freeze
+
+- freeze the introduction claim spine and state-transaction formalization;
+- synchronize risk proofs, system diagrams, experiment protocols, and the
+  failure ledger;
+- keep deterministic, production-error-rate, and cross-architecture claims
+  outside the paper unless their corresponding gates pass;
+- build and hash-audit the complete submission artifact.

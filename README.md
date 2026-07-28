@@ -53,6 +53,31 @@ Current decision:
 
 `PHASE3A_ADAPTIVE_CONTROL_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED`
 
+## Phase 3B--3D bounded results
+
+Phase 3B retrospectively replayed 2,000 audit schedules over 1,550 measured
+labels. Margin-prioritized idle auditing raised failure-detection probability
+from `0.644` to `1.000` while reducing median verifier requests from `283` to
+`226`. The more complex VOI policy also detected every replayed failure but
+used three additional median requests; because the pool contains only one
+unique failing job, VOI superiority and live SLO preservation remain
+unresolved. Idle labels remain outside the formal certificate.
+
+Phase 3C found many execution-shape output flips, but strict deduplication
+yielded only `19` and `15` legal state pairs for the 0.6B and 1.7B models,
+below the preregistered `50`-pair population gate. The mechanism is real but
+heterogeneous: natural 0.6B pairs have mean RAF `9.357`, half-life `2`
+revisions, and `50%` terminal difference, whereas natural 1.7B pairs have RAF
+`1.0`, half-life `1`, and zero terminal difference. Stress evidence is kept
+separate and is not used as a production prevalence estimate.
+
+Phase 3D executed Voxtral Mini 4B Realtime for 10 growing-prefix revisions and
+120 execution rows. No singleton-repeat, cross-shape, or replicated-row
+mismatch was observed. Because decoded text is not fed back into the next
+transition, Voxtral establishes an append-only architecture boundary rather
+than a second instance of Qwen3-ASR state pollution. Zero observed flips is
+not a deterministic certificate.
+
 ## Phase map
 
 - **Phase 0 — discovery and causal controls:** RevBatch performance opportunity,
@@ -67,11 +92,20 @@ Current decision:
 - **Phase 3A — adaptive control (pass):** contract-scoped certificate
   epochs, simultaneous policy confidence envelopes, permanent failure-ledger
   exclusions, risk/queue-priced policy selection, and dual-channel auditing.
-- **Phase 3B — amplification:** Revision Impulse Response, Revision Amplification
-  Factor, Numerical State Exposure, and amplification-aware verification.
-- **Phase 4 — generality:** a second feedback/revision architecture.
-- **Phase 5 — deterministic baseline:** Qwen3-ASR-compatible preventive
-  batch-invariant execution or another independently certified canonical path.
+- **Phase 3B — dual-channel idle auditing (bounded diagnostic pass):** compare fixed-probability base
+  audits, base plus idle audits, margin-only idle audits, and
+  value-of-information idle audits without contaminating the formal
+  certificate.
+- **Phase 3C — state-pollution dynamics (population gate not met):** estimate Revision Impulse Response
+  survival curves, pollution half-life, Revision Amplification Factor, and
+  Numerical State Exposure from legal state-entry flip pairs.
+- **Phase 3D — second-architecture boundary (pass):** test whether Numerical State
+  Exposure predicts the certification strength needed by another
+  feedback/revision architecture.
+
+Preventive deterministic execution remains a strong supporting baseline, and
+paper/artifact freezing follows completion of Phase 3A--3D; neither is a
+renumbered Phase 3 work package.
 
 See [the phase roadmap](docs/roadmap/PHASES.md) and
 [claim boundaries](docs/CLAIM_BOUNDARIES.md).

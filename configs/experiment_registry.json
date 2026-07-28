@@ -74,12 +74,34 @@
       "config": "configs/revtrace_adaptive_control_gate.json",
       "result": "results/phase3/adaptive_control/summary.json",
       "artifact": "artifact/phase3-adaptive-control-v1"
+    },
+    {
+      "id": "P3B_IDLE_AUDIT",
+      "phase": "phase3",
+      "status": "PHASE3B_BOUNDED_DIAGNOSTIC_PASS_VOI_AND_LIVE_SLO_UNRESOLVED",
+      "config": "configs/revtrace_phase3b_idle_audit_gate.json",
+      "result": "results/phase3/idle_audit/summary.json",
+      "artifact": "artifact/phase3b-d-boundaries-v1"
+    },
+    {
+      "id": "P3C_REVISION_IMPULSE_RESPONSE",
+      "phase": "phase3",
+      "status": "PHASE3C_MECHANISM_CONFIRMED_POPULATION_GATE_NOT_MET",
+      "config": "configs/revtrace_phase3c_rir_gate.json",
+      "result": "results/phase3/rir_population/summary.json",
+      "artifact": "artifact/phase3b-d-boundaries-v1"
+    },
+    {
+      "id": "P3D_SECOND_ARCHITECTURE",
+      "phase": "phase3",
+      "status": "PHASE3D_SECOND_ARCHITECTURE_BOUNDARY_PASS",
+      "config": "configs/revtrace_phase3d_second_architecture_gate.json",
+      "result": "results/phase3/second_architecture/summary.json",
+      "artifact": "artifact/phase3b-d-boundaries-v1"
     }
   ],
   "next_gates": [
-    "P3B_IDLE_AUDIT",
-    "P3C_REVISION_IMPULSE_RESPONSE",
-    "S4_SECOND_ARCHITECTURE",
-    "S5_PREVENTIVE_DETERMINISM_BASELINE"
+    "SUPPORTING_PREVENTIVE_DETERMINISM_BASELINE",
+    "POST_PHASE3_PAPER_ARTIFACT_FREEZE"
   ]
 }

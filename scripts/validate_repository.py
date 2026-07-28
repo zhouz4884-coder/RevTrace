@@ -45,6 +45,10 @@ def main() -> int:
         "results/phase2/risk_v1/summary.json",
         "results/phase2/terminal_canonical/summary.json",
         "artifact/phase2-risk-tail-v1/MANIFEST.json",
+        "results/phase3/idle_audit/summary.json",
+        "results/phase3/rir_population/summary.json",
+        "results/phase3/second_architecture/summary.json",
+        "artifact/phase3b-d-boundaries-v1/MANIFEST.json",
         "src/revtrace/core.py",
         "src/revtrace/risk.py",
         "src/revtrace/control.py",
@@ -107,6 +111,20 @@ def main() -> int:
             repo_relative=False,
         )
     )
+    phase3_artifact_manifest = (
+        ROOT
+        / "artifact"
+        / "phase3b-d-boundaries-v1"
+        / "MANIFEST.json"
+    )
+    if phase3_artifact_manifest.exists():
+        failures.extend(
+            check_manifest(
+                ROOT / "artifact" / "phase3b-d-boundaries-v1",
+                phase3_artifact_manifest,
+                repo_relative=False,
+            )
+        )
     phase2_summary = json.loads(
         (
             ROOT
