@@ -36,6 +36,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--proposer-gpu", default="0")
     parser.add_argument("--verifier-gpu", default="1")
     parser.add_argument("--canonical-batch-size", type=int, default=16)
+    parser.add_argument(
+        "--canonical-dtype",
+        choices=("float16", "float32"),
+        default="float32",
+    )
     parser.add_argument("--result-timeout-seconds", type=float, default=900.0)
     parser.add_argument(
         "--stage",
@@ -159,7 +164,7 @@ def main() -> int:
             "result_queue": result_queue,
             "gpu": args.verifier_gpu,
             "model": str(args.model),
-            "dtype": "float16",
+            "dtype": args.canonical_dtype,
             "gpu_memory_utilization": 0.82,
             "data_manifest": str(args.data_manifest),
             "duration_seconds": args.episode_seconds,
@@ -265,7 +270,7 @@ def main() -> int:
     for stage_index, (label, concurrency, episodes) in enumerate(stages):
         fingerprint = (
             f"{args.model_name}/fp16/c{concurrency}/"
-            f"fixed-canonical-b{concurrency}"
+            f"{args.canonical_dtype}-fixed-canonical-b{concurrency}"
         )
         epoch = controller.switch(fingerprint)
         stage_started = time.perf_counter()
@@ -636,6 +641,7 @@ def main() -> int:
             else "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL"
         ),
         "model": args.model_name,
+        "canonical_dtype": args.canonical_dtype,
         "stages": stage_payloads,
         "environment": {
             "python": platform.python_version(),
@@ -652,6 +658,10 @@ def main() -> int:
             "each fingerprint switch starts a fresh fail-closed epoch",
             "post-stage replay is excluded from service timing",
             "risk is statistical state-entry disagreement, not bitwise determinism",
+            (
+                "the canonical dtype is a versioned service reference and "
+                "is not claimed to reproduce the official BF16 trajectory"
+            ),
         ],
     }
     args.output.write_text(
