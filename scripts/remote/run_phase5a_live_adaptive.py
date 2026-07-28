@@ -166,7 +166,7 @@ def main() -> int:
             "concurrency": max_concurrency,
             "worker_id": 0,
             "max_model_len": 4096,
-            "terminal_canonical_batch_size": args.canonical_batch_size,
+            "terminal_canonical_batch_size": max_concurrency,
             "terminal_canonical_batch_invariant": True,
         },
         name="phase5a-canonical-verifier",
@@ -190,12 +190,14 @@ def main() -> int:
 
     def canonical_batch(
         jobs: list[dict[str, Any]],
+        *,
+        fixed_shape: int,
     ) -> tuple[list[dict[str, Any]], float]:
         nonlocal batch_id
         records: list[dict[str, Any]] = []
         elapsed = 0.0
-        for begin in range(0, len(jobs), args.canonical_batch_size):
-            chunk = jobs[begin : begin + args.canonical_batch_size]
+        for begin in range(0, len(jobs), fixed_shape):
+            chunk = jobs[begin : begin + fixed_shape]
             items = [
                 {
                     "ticket": {
@@ -213,6 +215,7 @@ def main() -> int:
                     "kind": "canonical_batch",
                     "batch_id": batch_id,
                     "items": items,
+                    "fixed_shape": fixed_shape,
                 }
             )
             by_position: list[dict[str, Any] | None] = [
@@ -239,7 +242,7 @@ def main() -> int:
     for stage_index, (label, concurrency, episodes) in enumerate(stages):
         fingerprint = (
             f"{args.model_name}/fp16/c{concurrency}/"
-            f"fixed-canonical-b{args.canonical_batch_size}"
+            f"fixed-canonical-b{concurrency}"
         )
         epoch = controller.switch(fingerprint)
         stage_started = time.perf_counter()
@@ -308,7 +311,8 @@ def main() -> int:
                 verified_by_position: dict[int, dict[str, Any]] = {}
                 if verify_positions:
                     verified, elapsed = canonical_batch(
-                        [jobs[position] for position in verify_positions]
+                        [jobs[position] for position in verify_positions],
+                        fixed_shape=concurrency,
                     )
                     required_verifier_seconds += elapsed
                     verified_by_position.update(zip(verify_positions, verified))
@@ -477,7 +481,10 @@ def main() -> int:
                     )
                     jobs.append(job)
                     prefixes.append(prefix)
-                canonical, _ = canonical_batch(jobs)
+                canonical, _ = canonical_batch(
+                    jobs,
+                    fixed_shape=concurrency,
+                )
                 for state, prefix, record in zip(states, prefixes, canonical):
                     selected = service_events[selected_cursor]
                     record["state_projection"] = state_projection_record(

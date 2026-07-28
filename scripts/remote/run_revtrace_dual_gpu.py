@@ -257,14 +257,22 @@ def verifier_worker(
                 continue
             if kind == "canonical_batch":
                 items = message["items"]
+                fixed_shape = int(
+                    message.get(
+                        "fixed_shape",
+                        terminal_canonical_batch_size,
+                    )
+                )
                 if not items:
                     raise ValueError("canonical batch cannot be empty")
-                if len(items) > terminal_canonical_batch_size:
+                if not 1 <= fixed_shape <= terminal_canonical_batch_size:
+                    raise ValueError("invalid canonical fixed shape")
+                if len(items) > fixed_shape:
                     raise ValueError("canonical batch exceeds fixed shape")
                 padded_jobs = [item["job"] for item in items]
                 padded_jobs.extend(
                     [items[0]["job"]]
-                    * (terminal_canonical_batch_size - len(items))
+                    * (fixed_shape - len(items))
                 )
                 started = time.perf_counter()
                 outputs = asr.model.generate(
@@ -283,6 +291,7 @@ def verifier_worker(
                             "batch_id": message["batch_id"],
                             "position": position,
                             "batch_size": len(items),
+                            "fixed_shape": fixed_shape,
                             "elapsed_seconds": (
                                 elapsed if position == 0 else 0.0
                             ),
