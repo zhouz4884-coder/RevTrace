@@ -1175,6 +1175,12 @@ def main() -> int:
         "verifier_to_proposer_service_ratio": verifier_ratio,
         "service_wall_seconds": service_wall_seconds,
         "canonical_audit_seconds_excluded_from_service": reference_seconds,
+        "canonical_audit_request_seconds_p50": statistics.median(
+            audit["request_seconds"]
+        ),
+        "canonical_audit_request_seconds_p99": percentile(
+            audit["request_seconds"], 0.99
+        ),
         "deployed_two_gpu_wall_speedup": online_speedup,
         "gpu_normalized_throughput_speedup": gpu_normalized_speedup,
         "state_entry_latency_seconds_p50": statistics.median(

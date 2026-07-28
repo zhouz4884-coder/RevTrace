@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -23,6 +24,13 @@ def percentile(values: list[float], q: float) -> float:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--workload-dir",
+        type=Path,
+        default=ROOT / "results" / "phase5" / "workload_matrix",
+    )
+    args = parser.parse_args()
     source = json.loads(
         (
             ROOT
@@ -38,8 +46,24 @@ def main() -> int:
             ROOT / "results" / "phase4" / "slackguard" / "summary.json"
         ).read_text(encoding="utf-8")
     )
-    audit_quantum = float(
-        slack["measurements"]["measured_full_audit_request_p50_seconds"]
+    workload_paths = sorted(args.workload_dir.glob("*.json"))
+    audit_p99_values = []
+    for path in workload_paths:
+        run = json.loads(path.read_text(encoding="utf-8"))
+        value = run["summary"].get(
+            "canonical_audit_request_seconds_p99"
+        )
+        if value is not None:
+            audit_p99_values.append(float(value))
+    audit_p99_measured = bool(audit_p99_values)
+    audit_quantum = (
+        max(audit_p99_values)
+        if audit_p99_measured
+        else float(
+            slack["measurements"][
+                "measured_full_audit_request_p50_seconds"
+            ]
+        )
     )
     mandatory = [
         float(event["state_entry_latency_seconds"])
@@ -60,7 +84,7 @@ def main() -> int:
         if release_aware_audit_admissible(
             now=now,
             verifier_backlog_seconds=0.0,
-        audit_p99_seconds=audit_quantum,
+            audit_p99_seconds=audit_quantum,
             guard_seconds=guard,
             next_mandatory_release=next_release,
         ):
@@ -82,14 +106,20 @@ def main() -> int:
         "schema_version": 1,
         "study": "Phase 5D release-aware audit packing physical replay",
         "decision": (
-            "PHASE5D_SLACK_PACKING_P50_REPLAY_PASS_P99_LIVE_UNRESOLVED"
+            (
+                "PHASE5D_SLACK_PACKING_P99_REPLAY_PASS_LIVE_UNRESOLVED"
+                if audit_p99_measured
+                else "PHASE5D_SLACK_PACKING_P50_REPLAY_PASS_P99_LIVE_UNRESOLVED"
+            )
             if physical_replay_pass
             else "PHASE5D_SLACK_PACKING_NO_GO"
         ),
         "measurements": {
             "mandatory_jobs": len(mandatory),
             "full_audit_quantum_p50_seconds": audit_quantum,
-            "full_audit_quantum_p99_seconds": None,
+            "full_audit_quantum_p99_seconds": (
+                audit_quantum if audit_p99_measured else None
+            ),
             "guard_seconds": guard,
             "packed_audits": packed,
             "skipped_audits": skipped,
@@ -111,12 +141,17 @@ def main() -> int:
                 detection_improvement >= 0.20
             ),
             "live_gpu_service_executed": False,
-            "audit_p99_measured": False,
+            "audit_p99_measured": audit_p99_measured,
         },
         "claim_boundaries": [
-            "the available full-audit quantum is a measured median, not P99",
+            (
+                "the audit quantum is the maximum measured P99 across "
+                "Phase 5C cells"
+                if audit_p99_measured
+                else "the available full-audit quantum is a measured median, not P99"
+            ),
             "arrival and mandatory-service traces are replayed",
-            "missing audit P99 prevents a no-interference guarantee",
+            "packing remains replay rather than a live GPU scheduler",
             "a live implementation remains optional and non-blocking",
         ],
     }

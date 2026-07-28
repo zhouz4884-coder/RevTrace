@@ -1,0 +1,70 @@
+{
+  "claim_boundaries": [
+    "models remain loaded across the c16-c64-c16 sequence",
+    "each fingerprint switch starts a fresh fail-closed epoch",
+    "post-stage replay is excluded from service timing",
+    "risk is statistical state-entry disagreement, not bitwise determinism"
+  ],
+  "decision": "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL",
+  "environment": {
+    "code_commit": "5daabf9",
+    "proposer_gpu": "0",
+    "proposer_pid": 95331,
+    "python": "3.12.13",
+    "verifier_gpu": "1",
+    "verifier_pid": 95529
+  },
+  "model": "Qwen3-ASR-0.6B",
+  "schema_version": 1,
+  "stages": [
+    {
+      "audit_events": 128,
+      "audit_seconds_excluded_from_service": 2.416835431009531,
+      "certified_after_episode": null,
+      "certified_after_events": null,
+      "concurrency": 64,
+      "deadline_miss_events": 128,
+      "energy": {
+        "completed_audio_seconds": 256.0,
+        "joules": 1055.0991616211554,
+        "joules_per_audio_second": 4.121481100082638,
+        "sample_count": 25.0
+      },
+      "episodes": 1,
+      "episodes_detail": [
+        {
+          "certified": false,
+          "deadline_miss_rounds": 2,
+          "episode": 0,
+          "events": 128,
+          "fast_path_window": 0.0,
+          "goodput_events_per_second": 25.98072252684694,
+          "required_verifier_seconds": 2.339233755134046,
+          "state_entry_latency_seconds_p50": 2.4593871776014566,
+          "state_entry_latency_seconds_p95": 2.4820063744671645,
+          "state_entry_latency_seconds_p99": 2.484016969744116,
+          "threshold": null,
+          "wall_seconds": 4.926729803904891
+        }
+      ],
+      "events": 128,
+      "fast_path_window": 0.0,
+      "fingerprint": "Qwen3-ASR-0.6B/fp16/c64/fixed-canonical-b64",
+      "goodput_events_per_second": 25.707989259669482,
+      "label": "smoke-c64",
+      "output_violations": 0,
+      "proposer_seconds": 2.3301772698760033,
+      "required_verifier_seconds": 2.339233755134046,
+      "risk_upper_bound": 1.0,
+      "service_wall_seconds": 4.978996945545077,
+      "state_entry_latency_seconds_p50": 2.4593871776014566,
+      "state_entry_latency_seconds_p95": 2.484519618563354,
+      "state_entry_latency_seconds_p99": 2.484519618563354,
+      "state_violations": 0,
+      "switch_action": "fast_path_window=0; all state entries verified",
+      "threshold": null,
+      "verification_fraction": 1.0
+    }
+  ],
+  "study": "RevTrace Phase 5A persistent live adaptive controller"
+}

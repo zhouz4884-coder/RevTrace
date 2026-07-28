@@ -56,6 +56,12 @@ def phase5a_summary(payload: dict[str, Any]) -> dict[str, Any]:
                 )
             }
         )
+    sequential = read(
+        PHASE5 / "live_adaptive" / "diagnostics" / "c64-sequential.json"
+    )["stages"][0]
+    overlapped = read(
+        PHASE5 / "live_adaptive" / "diagnostics" / "c64-overlapped.json"
+    )["stages"][0]
     return {
         "decision": payload["decision"],
         "model": payload["model"],
@@ -66,6 +72,32 @@ def phase5a_summary(payload: dict[str, Any]) -> dict[str, Any]:
             for stage in payload["stages"]
         ),
         "models_persistent_across_switches": True,
+        "c64_overlap_ablation": {
+            "sequential_p99_seconds": sequential[
+                "state_entry_latency_seconds_p99"
+            ],
+            "overlapped_p99_seconds": overlapped[
+                "state_entry_latency_seconds_p99"
+            ],
+            "p99_reduction": 1.0
+            - overlapped["state_entry_latency_seconds_p99"]
+            / sequential["state_entry_latency_seconds_p99"],
+            "sequential_deadline_misses": sequential[
+                "deadline_miss_events"
+            ],
+            "overlapped_deadline_misses": overlapped[
+                "deadline_miss_events"
+            ],
+            "wall_speedup": sequential["service_wall_seconds"]
+            / overlapped["service_wall_seconds"],
+            "energy_reduction": 1.0
+            - overlapped["energy"]["joules_per_audio_second"]
+            / sequential["energy"]["joules_per_audio_second"],
+            "evidence": (
+                "same c64 jobs, model, fixed canonical shape, and replay "
+                "oracle; execution overlap is the only intervention"
+            ),
+        },
         "claim_boundary": (
             "live c16-c64-c16 service with post-stage canonical replay "
             "excluded from service timing"
