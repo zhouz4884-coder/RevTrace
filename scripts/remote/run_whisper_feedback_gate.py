@@ -106,34 +106,12 @@ class WhisperExecutor:
             "attention_mask": payload.attention_mask.to("cuda"),
         }
 
-    @torch.inference_mode()
-    def generate(
+    def _decode_rows(
         self,
-        features: dict[str, torch.Tensor],
+        generated: torch.Tensor,
         *,
-        batch_size: int = 1,
-        prompt_text: str = "",
+        prompt_ids: torch.Tensor | None,
     ) -> list[dict[str, Any]]:
-        values = features["input_features"].repeat(batch_size, 1, 1)
-        kwargs: dict[str, Any] = {
-            "max_new_tokens": self.max_new_tokens,
-            "do_sample": False,
-            "return_timestamps": True,
-            "attention_mask": features["attention_mask"].repeat(
-                batch_size, 1
-            ),
-        }
-        if bool(getattr(
-            self.model.generation_config, "is_multilingual", False
-        )):
-            kwargs["task"] = "transcribe"
-        prompt_ids = None
-        if prompt_text:
-            prompt_ids = self.processor.get_prompt_ids(
-                prompt_text[-800:], return_tensors="pt"
-            ).to("cuda")
-            kwargs["prompt_ids"] = prompt_ids
-        generated = self.model.generate(values, **kwargs)
         rows: list[dict[str, Any]] = []
         for row in generated:
             ids = [int(value) for value in row.detach().cpu().tolist()]
@@ -167,6 +145,75 @@ class WhisperExecutor:
                 }
             )
         return rows
+
+    def _generation_kwargs(
+        self,
+        attention_mask: torch.Tensor,
+        *,
+        prompt_text: str,
+    ) -> tuple[dict[str, Any], torch.Tensor | None]:
+        kwargs: dict[str, Any] = {
+            "max_new_tokens": self.max_new_tokens,
+            "do_sample": False,
+            "return_timestamps": True,
+            "attention_mask": attention_mask,
+        }
+        if bool(getattr(
+            self.model.generation_config, "is_multilingual", False
+        )):
+            kwargs["task"] = "transcribe"
+        prompt_ids = None
+        if prompt_text:
+            prompt_ids = self.processor.get_prompt_ids(
+                prompt_text[-800:], return_tensors="pt"
+            ).to("cuda")
+            kwargs["prompt_ids"] = prompt_ids
+        return kwargs, prompt_ids
+
+    @torch.inference_mode()
+    def generate(
+        self,
+        features: dict[str, torch.Tensor],
+        *,
+        batch_size: int = 1,
+        prompt_text: str = "",
+    ) -> list[dict[str, Any]]:
+        values = features["input_features"].repeat(batch_size, 1, 1)
+        attention_mask = features["attention_mask"].repeat(batch_size, 1)
+        kwargs, prompt_ids = self._generation_kwargs(
+            attention_mask,
+            prompt_text=prompt_text,
+        )
+        generated = self.model.generate(values, **kwargs)
+        return self._decode_rows(generated, prompt_ids=prompt_ids)
+
+    @torch.inference_mode()
+    def generate_distinct(
+        self,
+        features: list[dict[str, torch.Tensor]],
+    ) -> list[dict[str, Any]]:
+        """Generate an unprompted batch containing distinct audio windows.
+
+        This is the Feedback-OFF boundary path: no generated text is fed into
+        a later window, so state-entry certification is intentionally bypassed.
+        """
+
+        if not features:
+            return []
+        values = torch.cat(
+            [record["input_features"] for record in features],
+            dim=0,
+        )
+        attention_mask = torch.cat(
+            [record["attention_mask"] for record in features],
+            dim=0,
+        )
+        kwargs, prompt_ids = self._generation_kwargs(
+            attention_mask,
+            prompt_text="",
+        )
+        generated = self.model.generate(values, **kwargs)
+        return self._decode_rows(generated, prompt_ids=prompt_ids)
 
 
 def pair_hash(canonical: list[int], proposer: list[int]) -> str:

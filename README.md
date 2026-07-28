@@ -107,6 +107,40 @@ Phase 4 decision:
 
 `PHASE4_TASKS_COMPLETE_WITH_BOUNDED_NEGATIVE_GATES`
 
+## Phase 5 system-hardening results
+
+Phase 5 completes all A--E work packages and freezes the decision:
+
+`PAPER_CORE_GO_WITH_PHASE5_MEASURED_BOUNDARIES`
+
+The live c16 -> c64 -> c16 controller learns thresholds
+`0.03125 -> 0.015625 -> 0.015625` from fresh contract epochs. It reaches
+21.01, 42.90, and 22.31 state-entry events/s, but rare post-certification
+disagreements remain and c64 has 448 two-second deadline misses. The controller
+therefore demonstrates live risk adaptation, not deterministic exactness.
+
+Whisper protection closes all 21 known feedback-bearing state pairs with zero
+observed output/state violation, but all-state-entry canonical execution is a
+1.00x performance boundary. When previous-text feedback is disabled,
+certification is bypassed: tiny/base obtain 6.12x/6.44x wall speedup and local
+batch differences do not create any state-propagation violation.
+
+The eight-cell Qwen3-ASR workload matrix spans 2.93x--6.77x wall speedup and
+1.47x--3.38x GPU-normalized speedup. Seven cells have zero observed state
+violation and two have zero deadline misses. One unseen c32/Chinese/burst
+contract exceeds the frozen c16 risk boundary; the result is retained rather
+than repaired with a post-hoc threshold.
+
+Live release-aware audit packing preserves outputs and has zero deadline
+misses, but raises mandatory P99 by 2.35%, above its frozen 2% limit, so the
+optimization is stopped. The Phase 5 artifact also freezes 72 distinct
+consequential state pairs and explicitly excludes production-prevalence
+claims.
+
+See the
+[Phase 5 report](docs/reports/phase5_system_hardening_report.md) and
+[paper-facing tables](results/phase5/PAPER_TABLES.md).
+
 ## Phase map
 
 - **Phase 0 — discovery and causal controls:** RevBatch performance opportunity,

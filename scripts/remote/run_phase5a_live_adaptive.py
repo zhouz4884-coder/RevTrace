@@ -24,6 +24,8 @@ import time
 from pathlib import Path
 from typing import Any
 
+import numpy as np
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -42,6 +44,26 @@ def parse_args() -> argparse.Namespace:
         default="float32",
     )
     parser.add_argument("--result-timeout-seconds", type=float, default=900.0)
+    parser.add_argument("--episode-seed-base", type=int, default=20260729)
+    parser.add_argument(
+        "--frozen-threshold",
+        action="append",
+        default=[],
+        metavar="LABEL:VALUE",
+        help=(
+            "run an independently seeded static-oracle stage with a threshold "
+            "frozen by prior certification; repeat once per stage label"
+        ),
+    )
+    parser.add_argument(
+        "--suppress-certified-terminal-proposer",
+        action="store_true",
+        help=(
+            "after an epoch is certified, execute terminal revisions only "
+            "on the authoritative canonical path instead of co-running a "
+            "discarded proposer"
+        ),
+    )
     parser.add_argument(
         "--stage",
         action="append",
@@ -122,12 +144,25 @@ def parse_stages(values: list[str]) -> list[tuple[str, int, int]]:
     return stages
 
 
+def parse_frozen_thresholds(values: list[str]) -> dict[str, float]:
+    thresholds: dict[str, float] = {}
+    for value in values:
+        label, raw_threshold = value.split(":", 1)
+        if label in thresholds:
+            raise ValueError(f"duplicate frozen threshold: {label}")
+        thresholds[label] = float(raw_threshold)
+    return thresholds
+
+
 def main() -> int:
     args = parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     script_dir = str(Path(__file__).resolve().parent)
+    source_dir = str(Path(__file__).resolve().parents[2] / "src")
     if script_dir not in sys.path:
         sys.path.insert(0, script_dir)
+    if source_dir not in sys.path:
+        sys.path.insert(0, source_dir)
 
     from run_revbatch_gate import (
         SAMPLE_RATE,
@@ -153,6 +188,15 @@ def main() -> int:
     )
 
     stages = parse_stages(args.stage)
+    frozen_thresholds = parse_frozen_thresholds(args.frozen_threshold)
+    unknown_thresholds = set(frozen_thresholds) - {
+        label for label, _, _ in stages
+    }
+    if unknown_thresholds:
+        raise ValueError(
+            "frozen thresholds do not match stages: "
+            f"{sorted(unknown_thresholds)}"
+        )
     max_concurrency = max(item[1] for item in stages)
     context = mp.get_context("spawn")
     command_queue = context.Queue()
@@ -194,6 +238,36 @@ def main() -> int:
         minimum_audits=args.minimum_audits
     )
     batch_id = 0
+
+    def make_stage_streams(
+        *,
+        stage_index: int,
+        episode: int,
+        duration: int,
+        concurrency: int,
+    ) -> list[dict[str, Any]]:
+        """Create reproducibly distinct live inputs for each stage episode."""
+
+        streams = make_streams(
+            sources,
+            duration=duration,
+            concurrency=concurrency,
+        )
+        for position, stream in enumerate(streams):
+            audio = stream["audio"]
+            salt = (
+                int(args.episode_seed_base)
+                + stage_index * 1_000_003
+                + episode * 10_007
+                + position * 101
+            )
+            shift = salt % max(1, int(audio.shape[0]))
+            stream["audio"] = np.roll(audio, shift)
+            stream["session_id"] = (
+                f"stage{stage_index:02d}-episode{episode:04d}-"
+                f"s{position:03d}"
+            )
+        return streams
 
     def dispatch_canonical_batch(
         jobs: list[dict[str, Any]],
@@ -310,6 +384,8 @@ def main() -> int:
     stage_payloads: list[dict[str, Any]] = []
     global_event = 0
     for stage_index, (label, concurrency, episodes) in enumerate(stages):
+        frozen_threshold = frozen_thresholds.get(label)
+        static_oracle_stage = frozen_threshold is not None
         fingerprint = (
             f"{args.model_name}/fp16/c{concurrency}/"
             f"{args.canonical_dtype}-fixed-canonical-b{concurrency}"
@@ -324,11 +400,14 @@ def main() -> int:
         service_events: list[dict[str, Any]] = []
         episode_snapshots: list[dict[str, Any]] = []
         selected_by_episode: list[list[dict[str, Any]]] = []
-        certified_before_episode: int | None = None
+        certified_before_episode: int | None = (
+            0 if static_oracle_stage else None
+        )
 
         for episode in range(episodes):
-            streams = make_streams(
-                sources,
+            streams = make_stage_streams(
+                stage_index=stage_index,
+                episode=episode,
                 duration=args.episode_seconds,
                 concurrency=concurrency,
             )
@@ -347,6 +426,7 @@ def main() -> int:
             episode_round_latencies: list[float] = []
             episode_service_started = time.perf_counter()
             for chunk_index in range(rounds):
+                round_execution_started = time.perf_counter()
                 terminal = chunk_index == rounds - 1
                 jobs: list[dict[str, Any]] = []
                 prefixes: list[str] = []
@@ -361,7 +441,18 @@ def main() -> int:
                     )
                     jobs.append(job)
                     prefixes.append(prefix)
-                preverify_all = controller.fail_closed or terminal
+                preverify_all = (
+                    (not static_oracle_stage and controller.fail_closed)
+                    or terminal
+                )
+                suppress_terminal_proposer = bool(
+                    terminal
+                    and (
+                        static_oracle_stage
+                        or epoch.certificate is not None
+                    )
+                    and args.suppress_certified_terminal_proposer
+                )
                 overlapped_dispatch = (
                     dispatch_canonical_batch(
                         jobs,
@@ -370,17 +461,12 @@ def main() -> int:
                     if preverify_all
                     else None
                 )
-                proposal_started = time.perf_counter()
-                outputs = asr.model.generate(
-                    jobs,
-                    sampling_params=asr.sampling_params,
-                    use_tqdm=False,
-                )
-                proposal_elapsed = time.perf_counter() - proposal_started
-                proposer_seconds += proposal_elapsed
-                proposals = [candidate_record(output) for output in outputs]
                 verified_by_position: dict[int, dict[str, Any]] = {}
-                if overlapped_dispatch is not None:
+                if suppress_terminal_proposer:
+                    if overlapped_dispatch is None:
+                        raise AssertionError(
+                            "terminal suppression requires canonical dispatch"
+                        )
                     verified, elapsed = collect_canonical_batch(
                         overlapped_dispatch
                     )
@@ -389,16 +475,64 @@ def main() -> int:
                     verified_by_position.update(
                         zip(verify_positions, verified)
                     )
-                else:
-                    verify_positions = [
-                        position
-                        for position, proposal in enumerate(proposals)
-                        if controller.requires_verification(
-                            minimum_margin=proposal["minimum_margin"],
-                            terminal=terminal,
-                        )
+                    outputs = None
+                    proposal_elapsed = 0.0
+                    proposals = [
+                        dict(verified_by_position[position])
+                        for position in verify_positions
                     ]
-                if verify_positions and overlapped_dispatch is None:
+                else:
+                    proposal_started = time.perf_counter()
+                    outputs = asr.model.generate(
+                        jobs,
+                        sampling_params=asr.sampling_params,
+                        use_tqdm=False,
+                    )
+                    proposal_elapsed = time.perf_counter() - proposal_started
+                    proposer_seconds += proposal_elapsed
+                    proposals = [
+                        candidate_record(output) for output in outputs
+                    ]
+                    if overlapped_dispatch is not None:
+                        verified, elapsed = collect_canonical_batch(
+                            overlapped_dispatch
+                        )
+                        verify_positions = list(range(len(jobs)))
+                        required_verifier_seconds += elapsed
+                        verified_by_position.update(
+                            zip(verify_positions, verified)
+                        )
+                    else:
+                        verify_positions = [
+                            position
+                            for position, proposal in enumerate(proposals)
+                            if (
+                                (
+                                    static_oracle_stage
+                                    and (
+                                        proposal["minimum_margin"] is None
+                                        or float(
+                                            proposal["minimum_margin"]
+                                        )
+                                        <= float(frozen_threshold)
+                                    )
+                                )
+                                or (
+                                    not static_oracle_stage
+                                    and controller.requires_verification(
+                                        minimum_margin=proposal[
+                                            "minimum_margin"
+                                        ],
+                                        terminal=terminal,
+                                    )
+                                )
+                            )
+                        ]
+                if (
+                    verify_positions
+                    and overlapped_dispatch is None
+                    and not suppress_terminal_proposer
+                ):
                     verified, elapsed = canonical_batch(
                         [jobs[position] for position in verify_positions],
                         fixed_shape=concurrency,
@@ -429,7 +563,11 @@ def main() -> int:
                         terminal=terminal,
                     )
                     selected["state_projection"] = selected_projection
-                    if position in verified_by_position:
+                    if (
+                        position in verified_by_position
+                        and not suppress_terminal_proposer
+                        and not static_oracle_stage
+                    ):
                         comparison = compare_records(
                             verified_by_position[position],
                             proposal,
@@ -458,19 +596,41 @@ def main() -> int:
                         "chunk_index": chunk_index,
                         "global_event": global_event,
                         "terminal": terminal,
+                        "proposal_executed": not suppress_terminal_proposer,
                         "verified": position in verified_by_position,
-                        "fail_closed": epoch.certificate is None,
-                        "threshold": epoch.threshold,
-                        "proposal_minimum_margin": proposal["minimum_margin"],
-                        "proposal_token_ids": proposal["token_ids"],
-                        "proposal_state_projection": proposal_projection,
+                        "fail_closed": (
+                            False
+                            if static_oracle_stage
+                            else epoch.certificate is None
+                        ),
+                        "threshold": (
+                            frozen_threshold
+                            if static_oracle_stage
+                            else epoch.threshold
+                        ),
+                        "proposal_minimum_margin": (
+                            proposal["minimum_margin"]
+                            if not suppress_terminal_proposer
+                            else None
+                        ),
+                        "proposal_token_ids": (
+                            proposal["token_ids"]
+                            if not suppress_terminal_proposer
+                            else None
+                        ),
+                        "proposal_state_projection": (
+                            proposal_projection
+                            if not suppress_terminal_proposer
+                            else None
+                        ),
                         "selected_token_ids": selected["token_ids"],
                         "selected_text": selected["text"],
                         "selected_state_projection": selected_projection,
                     }
                     service_events.append(event)
                     episode_selected.append(event)
-                    if selected is proposal:
+                    if selected is proposal and not suppress_terminal_proposer:
+                        assert outputs is not None
                         apply_output(state, outputs[position], prefix)
                     else:
                         from run_revtrace_dual_gpu import apply_candidate_record
@@ -481,7 +641,7 @@ def main() -> int:
                     global_event += 1
                 round_commit_elapsed = time.perf_counter() - round_started
                 round_state_entry_latency = (
-                    time.perf_counter() - proposal_started
+                    time.perf_counter() - round_execution_started
                 )
                 episode_round_latencies.append(round_state_entry_latency)
                 for event in episode_selected[-len(streams) :]:
@@ -522,9 +682,20 @@ def main() -> int:
                     "deadline_miss_rounds": sum(
                         value > 2.0 for value in episode_round_latencies
                     ),
-                    "certified": epoch.certificate is not None,
-                    "threshold": epoch.threshold,
-                    "fast_path_window": epoch.fast_path_window,
+                    "certified": (
+                        static_oracle_stage
+                        or epoch.certificate is not None
+                    ),
+                    "threshold": (
+                        frozen_threshold
+                        if static_oracle_stage
+                        else epoch.threshold
+                    ),
+                    "fast_path_window": (
+                        None
+                        if static_oracle_stage
+                        else epoch.fast_path_window
+                    ),
                     "required_verifier_seconds": required_verifier_seconds,
                 }
             )
@@ -539,10 +710,12 @@ def main() -> int:
         output_violations = 0
         state_violations = 0
         audit_events = 0
+        audit_violation_rows: list[dict[str, Any]] = []
         selected_cursor = 0
         for episode in range(episodes):
-            streams = make_streams(
-                sources,
+            streams = make_stage_streams(
+                stage_index=stage_index,
+                episode=episode,
                 duration=args.episode_seconds,
                 concurrency=concurrency,
             )
@@ -597,6 +770,38 @@ def main() -> int:
                     state_violations += int(
                         not comparison["state_projection_token_exact"]
                     )
+                    if (
+                        not comparison["token_exact"]
+                        or not comparison["state_projection_token_exact"]
+                    ):
+                        audit_violation_rows.append(
+                            {
+                                "stage": label,
+                                "episode": episode,
+                                "session_id": selected["session_id"],
+                                "chunk_index": chunk_index,
+                                "terminal": terminal,
+                                "verified": selected["verified"],
+                                "proposal_executed": selected[
+                                    "proposal_executed"
+                                ],
+                                "proposal_minimum_margin": selected[
+                                    "proposal_minimum_margin"
+                                ],
+                                "threshold": selected["threshold"],
+                                "selected_token_ids": selected[
+                                    "selected_token_ids"
+                                ],
+                                "canonical_token_ids": record["token_ids"],
+                                "selected_state_projection": selected[
+                                    "selected_state_projection"
+                                ],
+                                "canonical_state_projection": record[
+                                    "state_projection"
+                                ],
+                                "comparison": comparison,
+                            }
+                        )
                     apply_output(state, type("Output", (), {})(), prefix) if False else None
                     from run_revtrace_dual_gpu import apply_candidate_record
 
@@ -619,19 +824,49 @@ def main() -> int:
                 "concurrency": concurrency,
                 "episodes": episodes,
                 "events": len(service_events),
-                "switch_action": "fast_path_window=0; all state entries verified",
+                "switch_action": (
+                    "none; frozen threshold loaded before service"
+                    if static_oracle_stage
+                    else "fast_path_window=0; all state entries verified"
+                ),
+                "policy": (
+                    "frozen_prior-certified_static_oracle"
+                    if static_oracle_stage
+                    else "live_adaptive_risk_window"
+                ),
                 "certified_after_episode": certified_before_episode,
                 "certified_after_events": (
-                    epoch.certified_at_event - epoch.switched_at_event
-                    if epoch.certified_at_event is not None
-                    else None
+                    0
+                    if static_oracle_stage
+                    else (
+                        epoch.certified_at_event - epoch.switched_at_event
+                        if epoch.certified_at_event is not None
+                        else None
+                    )
                 ),
-                "threshold": epoch.threshold,
-                "fast_path_window": epoch.fast_path_window,
+                "threshold": (
+                    frozen_threshold
+                    if static_oracle_stage
+                    else epoch.threshold
+                ),
+                "fast_path_window": (
+                    None
+                    if static_oracle_stage
+                    else epoch.fast_path_window
+                ),
                 "risk_upper_bound": (
-                    epoch.certificate.upper_risk
-                    if epoch.certificate is not None
-                    else 1.0
+                    None
+                    if static_oracle_stage
+                    else (
+                        epoch.certificate.upper_risk
+                        if epoch.certificate is not None
+                        else 1.0
+                    )
+                ),
+                "risk_bound_source": (
+                    "prior independent split-sample certificate"
+                    if static_oracle_stage
+                    else "current live epoch split-sample certificate"
                 ),
                 "service_wall_seconds": stage_wall,
                 "proposer_seconds": proposer_seconds,
@@ -650,6 +885,7 @@ def main() -> int:
                 "output_violations": output_violations,
                 "state_violations": state_violations,
                 "audit_events": audit_events,
+                "audit_violation_rows": audit_violation_rows,
                 "audit_seconds_excluded_from_service": audit_seconds,
                 "episodes_detail": episode_snapshots,
                 "energy": energy,
@@ -666,9 +902,18 @@ def main() -> int:
         verifier.join(timeout=10.0)
         raise RuntimeError("verifier did not stop")
 
+    static_oracle_run = bool(frozen_thresholds)
+    if static_oracle_run and len(frozen_thresholds) != len(stages):
+        raise ValueError(
+            "static-oracle runs require one frozen threshold per stage"
+        )
     passed = all(
         stage["threshold"] is not None
-        and stage["risk_upper_bound"] <= 0.005
+        and (
+            stage["risk_upper_bound"] is None
+            if static_oracle_run
+            else stage["risk_upper_bound"] <= 0.005
+        )
         and stage["output_violations"] == 0
         and stage["state_violations"] == 0
         and stage["deadline_miss_events"] == 0
@@ -676,11 +921,23 @@ def main() -> int:
     )
     payload = {
         "schema_version": 1,
-        "study": "RevTrace Phase 5A persistent live adaptive controller",
+        "study": (
+            "RevTrace Phase 5A independent static certified oracle"
+            if static_oracle_run
+            else "RevTrace Phase 5A persistent live adaptive controller"
+        ),
         "decision": (
-            "PHASE5A_LIVE_ADAPTIVE_CONTROL_PASS"
+            (
+                "PHASE5A_STATIC_CERTIFIED_ORACLE_PASS"
+                if static_oracle_run
+                else "PHASE5A_LIVE_ADAPTIVE_CONTROL_PASS"
+            )
             if passed
-            else "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL"
+            else (
+                "PHASE5A_STATIC_CERTIFIED_ORACLE_FAIL"
+                if static_oracle_run
+                else "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL"
+            )
         ),
         "model": args.model_name,
         "canonical_dtype": args.canonical_dtype,
@@ -703,6 +960,23 @@ def main() -> int:
             "each fingerprint switch starts a fresh fail-closed epoch",
             "post-stage replay is excluded from service timing",
             "risk is statistical state-entry disagreement, not bitwise determinism",
+            (
+                "static-oracle thresholds are frozen from prior independent "
+                "split-sample certificates and supply performance references"
+                if static_oracle_run
+                else (
+                    "no static threshold is supplied; every contract epoch "
+                    "learns its risk window from fresh live evidence"
+                )
+            ),
+            (
+                "episode-specific stream identities and audio offsets prevent "
+                "exact episode replay from being counted as fresh evidence"
+            ),
+            (
+                "certified terminal revisions suppress discarded proposer "
+                "work when the corresponding flag is enabled"
+            ),
             (
                 "the canonical dtype is a versioned service reference and "
                 "is not claimed to reproduce the official BF16 trajectory"

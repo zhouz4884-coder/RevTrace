@@ -242,3 +242,64 @@ is reported as targeted mechanism damage rather than production prevalence.
 - keep deterministic, production-error-rate, and cross-architecture claims
   outside the paper unless their corresponding gates pass;
 - build and hash-audit the complete submission artifact.
+
+## Phase 5A — live adaptive risk window
+
+Status:
+
+`PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL`.
+
+The persistent two-GPU service executes c16 -> c64 -> c16 with a fresh
+contract epoch at each switch. It learns thresholds from new evidence rather
+than using a manual ladder. All three statistical upper bounds are below 0.5%,
+but fresh canonical replay observes rare output/state violations. The c64
+stage also exceeds the two-second RTX 3090 service region. This is retained as
+the measured boundary between a risk-limited certificate and deterministic
+state-entry exactness.
+
+## Phase 5B — Whisper protected intervention
+
+Status:
+
+`PHASE5B_PROTECTION_PASS_PERFORMANCE_BOUNDARY`.
+
+Both Whisper checkpoints protect every known Phase 4 feedback pair by
+fail-closing feedback-bearing state entries to singleton canonical execution.
+Feedback OFF uses distinct batched audio windows, performs zero state
+certifications, and records local output disagreement separately from state
+propagation. Whisper supplies cross-family causal/mechanism evidence rather
+than a second main throughput result.
+
+## Phase 5C — workload and energy frontier
+
+Status:
+
+`PHASE5C_WORKLOAD_FRONTIER_COMPLETE_WITH_BOUNDARIES`.
+
+Eight live two-GPU cells cover two model sizes, concurrency 8/16/32,
+30/60/120-second streams, synchronous/Poisson/burst arrivals, and
+English/Chinese/mixed inputs. Seven cells have zero observed state violation;
+one unseen c32/Chinese/burst contract defeats the frozen c16 threshold. Two
+cells meet the two-second deadline without misses. Safety and service-capacity
+failures remain separate.
+
+## Phase 5D — live release-aware audit packing
+
+Status:
+
+`PHASE5D_LIVE_SLACK_PACKING_NO_GO`.
+
+The live one-GPU gate preserves mandatory outputs, has zero deadline misses,
+and substantially improves first audit completion, but mandatory P99 grows by
+2.35%, above the frozen 2% limit. Full-request slack packing is stopped rather
+than repaired with post-hoc guard tuning.
+
+## Phase 5E — consequential state-pair corpus
+
+Status:
+
+`PHASE5E_CONSEQUENTIAL_CORPUS_COMPLETE`.
+
+The deduplicated corpus contains 72 state pairs across Qwen3-ASR and Whisper,
+with natural, stress, and targeted sources kept distinct. It is a mechanism
+and damage-stress artifact, not a production prevalence estimator.

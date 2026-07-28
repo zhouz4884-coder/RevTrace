@@ -1,0 +1,43 @@
+{
+  "data_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9",
+  "environment": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128",
+  "experiment_id": "P5_SYSTEM_HARDENING",
+  "hardware": "2 x NVIDIA RTX 3090 24 GiB",
+  "publication_runner_sha256": {
+    "phase5a": "46c47ee71d686462ad9c6655d70c1be30968689c64d3d7b7a447478fec4948b2",
+    "phase5b_executor": "1e6fd8d7e348c5dc4eb50ddfd7e7790660c375ef4759f94bae02d9dde4a368e5",
+    "phase5b_feedback_off": "b3af19ea14eda380c4c3ebc406526884b6935bb5efcfcea9463deb7493d7e6e7",
+    "phase5b_protected": "4ef7be58a982fcadd8073e5650969dee86e965cc8eea16779fe275a1a6d2efbf",
+    "phase5c": "176217dc9a133bbfb2a2b22aad78cefdc47441bc9175f7dc67e86d54e51fcabb",
+    "phase5d": "079a2356da87c5d39b8e3f90475dbc8eb22edee650bea05823e8a5f9f8f18453"
+  },
+  "schema_version": 1,
+  "source_base_commit": "ba3b7adbc468f82539763d9d142807e6ab42b19e",
+  "source_state": "base commit plus publication-runner hashes. Phase 5A v2 preceded a logging-only audit_violation_rows change, so the publication hash is not retroactively claimed as its exact execution hash",
+  "stages": {
+    "phase5a": {
+      "config": "configs/revtrace_phase5_system_hardening_gate.json",
+      "log_root": "logs/revtrace/phase5/live_adaptive",
+      "results": [
+        "results/revtrace/phase5/live_adaptive/formal-v2-c16-c64-c16.json",
+        "results/revtrace/phase5/live_adaptive/static-oracle-v2.json"
+      ]
+    },
+    "phase5b": {
+      "log_root": "logs/revtrace/phase5/whisper_protection",
+      "protocol_repair": "corrected to the 16 kHz LibriSpeech manifest and data-root Phase 4 pair paths",
+      "results": "results/revtrace/phase5/whisper_protection"
+    },
+    "phase5c": {
+      "results": "results/revtrace/phase5/workload_matrix",
+      "source_manifest": "results/phase5/workload_matrix/SOURCE_MANIFEST.json"
+    },
+    "phase5d": {
+      "log": "logs/revtrace/phase5/slack_packing/live-c8.log",
+      "result": "results/revtrace/phase5/slack_packing/live-c8.json"
+    },
+    "phase5e": {
+      "result": "results/phase5/consequential_corpus/corpus.json"
+    }
+  }
+}

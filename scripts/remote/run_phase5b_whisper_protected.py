@@ -31,14 +31,26 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sessions", type=int, default=100)
     parser.add_argument("--replicas", type=int, default=16)
     parser.add_argument("--max-new-tokens", type=int, default=96)
+    parser.add_argument(
+        "--protection-mode",
+        choices=("replication-signal", "all-state-entry"),
+        default="all-state-entry",
+        help=(
+            "Replication disagreement is diagnostic only. The paper-facing "
+            "mode fail-closes every feedback-bearing state transition."
+        ),
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     script_dir = str(Path(__file__).resolve().parent)
+    source_dir = str(Path(__file__).resolve().parents[2] / "src")
     if script_dir not in sys.path:
         sys.path.insert(0, script_dir)
+    if source_dir not in sys.path:
+        sys.path.insert(0, source_dir)
     from run_whisper_feedback_gate import (
         WhisperExecutor,
         build_sessions,
@@ -82,24 +94,40 @@ def main() -> int:
 
             protected_features = executor.features(window)
             started = time.perf_counter()
-            replicated = executor.generate(
-                protected_features,
-                batch_size=args.replicas,
-                prompt_text=protected_prompt,
-            )
-            token_variants = {
-                tuple(record["token_ids"]) for record in replicated
-            }
-            replication_disagreement = len(token_variants) > 1
-            verify = terminal or replication_disagreement
-            if verify:
+            if args.protection_mode == "all-state-entry":
+                # The paper-facing fail-closed policy already knows that every
+                # feedback-bearing transition needs canonical execution.
+                # Running a replicated proposer first would be discarded work,
+                # not protection.
+                replicated: list[dict[str, Any]] = []
+                token_variants: set[tuple[int, ...]] = set()
+                replication_disagreement = False
+                proposal_executed = False
+                verify = True
                 selected = executor.generate(
                     protected_features,
                     prompt_text=protected_prompt,
                 )[0]
-                verified_events += 1
             else:
-                selected = replicated[0]
+                replicated = executor.generate(
+                    protected_features,
+                    batch_size=args.replicas,
+                    prompt_text=protected_prompt,
+                )
+                token_variants = {
+                    tuple(record["token_ids"]) for record in replicated
+                }
+                replication_disagreement = len(token_variants) > 1
+                proposal_executed = True
+                verify = terminal or replication_disagreement
+                if verify:
+                    selected = executor.generate(
+                        protected_features,
+                        prompt_text=protected_prompt,
+                    )[0]
+                else:
+                    selected = replicated[0]
+            verified_events += int(verify)
             protected_seconds += time.perf_counter() - started
             protected_events += 1
 
@@ -120,11 +148,14 @@ def main() -> int:
                     "window_index": window_index,
                     "terminal": terminal,
                     "known_phase4_pair": key in known_pairs,
+                    "proposal_executed": proposal_executed,
                     "replication_disagreement": replication_disagreement,
                     "verified": verify,
                     "token_distance": token_distance,
                     "state_difference": state_difference,
-                    "variant_count": len(token_variants),
+                    "variant_count": (
+                        len(token_variants) if proposal_executed else None
+                    ),
                 }
             )
             canonical_prompt = canonical["text"]
@@ -161,7 +192,12 @@ def main() -> int:
             "replicas": args.replicas,
             "feedback": "previous text ON",
             "terminal": "always singleton canonical",
-            "risk_signal": "within-batch replication disagreement",
+            "risk_signal": (
+                "all feedback-bearing state entries are fail-closed"
+                if args.protection_mode == "all-state-entry"
+                else "within-batch replication disagreement"
+            ),
+            "protection_mode": args.protection_mode,
         },
         "counts": {
             "events": protected_events,
@@ -182,13 +218,25 @@ def main() -> int:
                 if state_violations == 0
                 else 1.0
             ),
-            "variant_count_p50": statistics.median(
-                row["variant_count"] for row in event_rows
+            "variant_count_p50": (
+                statistics.median(
+                    row["variant_count"]
+                    for row in event_rows
+                    if row["variant_count"] is not None
+                )
+                if any(
+                    row["variant_count"] is not None for row in event_rows
+                )
+                else None
             ),
         },
         "events": event_rows,
         "claim_boundaries": [
-            "replication disagreement is an empirical fail-closed signal",
+            (
+                "replication disagreement is an incomplete diagnostic signal; "
+                "paper-facing protection verifies every feedback-bearing "
+                "state transition"
+            ),
             "zero observed violations is not deterministic exactness",
             "the experiment is a single-GPU finite mechanism gate",
             "performance failure retains Whisper as causal/mechanism evidence",

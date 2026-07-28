@@ -1,13 +1,13 @@
 {
   "claim_boundaries": [
-    "the available full-audit quantum is a measured median, not P99",
+    "the audit quantum is the maximum measured P99 across Phase 5C cells",
     "arrival and mandatory-service traces are replayed",
-    "missing audit P99 prevents a no-interference guarantee",
+    "packing remains replay rather than a live GPU scheduler",
     "a live implementation remains optional and non-blocking"
   ],
-  "decision": "PHASE5D_SLACK_PACKING_P50_REPLAY_PASS_P99_LIVE_UNRESOLVED",
+  "decision": "PHASE5D_SLACK_PACKING_P99_REPLAY_PASS_LIVE_UNRESOLVED",
   "gates": {
-    "audit_p99_measured": false,
+    "audit_p99_measured": true,
     "deadline_miss_projection": 0,
     "detection_improvement_at_least_20_percent": true,
     "live_gpu_service_executed": false,
@@ -15,15 +15,15 @@
   },
   "measurements": {
     "baseline_p99_seconds": 1.4760229617077856,
-    "detection_time_improvement": 0.9896697250350068,
-    "full_audit_quantum_p50_seconds": 0.30990824894979596,
-    "full_audit_quantum_p99_seconds": null,
+    "detection_time_improvement": 0.9603637766415875,
+    "full_audit_quantum_p50_seconds": 1.1890867007523775,
+    "full_audit_quantum_p99_seconds": 1.1890867007523775,
     "guard_seconds": 0.14760229617077855,
     "mandatory_jobs": 20,
     "p99_change_fraction": 0.0,
-    "packed_audits": 17,
+    "packed_audits": 11,
     "packed_p99_seconds": 1.4760229617077856,
-    "skipped_audits": 3
+    "skipped_audits": 9
   },
   "schema_version": 1,
   "study": "Phase 5D release-aware audit packing physical replay"

@@ -111,3 +111,34 @@
   population claim.
 - Persistent Contamination Mass and TailRAF describe only observed targeted
   pairs; they are not production probabilities or expected production damage.
+
+## Phase 5 boundaries
+
+- The live c16 -> c64 -> c16 controller learned contract-specific thresholds,
+  but its split-sample risk certificates are statistical. The adaptive run
+  observed rare post-certification output/state disagreements, so it did not
+  pass the frozen zero-observed-violation gate and is not an exactness result.
+- The independently seeded static-policy run also observed disagreements.
+  Its throughput is an independent risk-certified performance reference, not
+  a deterministic oracle.
+- c64 exceeded the two-second RTX 3090 service region in both adaptive and
+  static runs. This is a measured capacity boundary, not a controller bug.
+- Whisper protection verifies every feedback-bearing transition with the
+  singleton canonical path. It demonstrates finite cross-family protection,
+  but its throughput is a performance boundary rather than a second main
+  speedup result.
+- Whisper Feedback OFF can bypass state-entry certification because generated
+  text is not admitted into future model state. Local batched output
+  differences may still exist.
+- In the eight-cell workload matrix, an unseen c32/Chinese/burst contract
+  produced one state-projection violation above the c16 frozen threshold.
+  The matrix therefore establishes a contract-fingerprint failure boundary;
+  it does not support universal cross-contract threshold transfer.
+- Several longer or more concurrent workload cells exceeded the two-second
+  deadline while preserving state safety. Deadline/capacity failure and state
+  safety are reported separately.
+- Live Release-Aware Audit Packing preserved outputs and had zero deadline
+  misses, but increased mandatory P99 by 2.35%, above the preregistered 2%
+  limit. It is frozen as a NO-GO and is not a paper optimization claim.
+- The 72-record consequential state-pair corpus is deduplicated mechanism and
+  stress evidence. It is not an estimate of production mismatch prevalence.

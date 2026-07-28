@@ -51,6 +51,8 @@ def main() -> int:
         "artifact/phase3b-d-boundaries-v1/MANIFEST.json",
         "results/phase4/summary.json",
         "artifact/phase4-adaptation-generality-v1/MANIFEST.json",
+        "results/phase5/summary.json",
+        "artifact/phase5-system-hardening-v1/MANIFEST.json",
         "src/revtrace/core.py",
         "src/revtrace/risk.py",
         "src/revtrace/control.py",
@@ -141,6 +143,17 @@ def main() -> int:
                 repo_relative=False,
             )
         )
+    phase5_artifact_manifest = (
+        ROOT / "artifact" / "phase5-system-hardening-v1" / "MANIFEST.json"
+    )
+    if phase5_artifact_manifest.exists():
+        failures.extend(
+            check_manifest(
+                ROOT / "artifact" / "phase5-system-hardening-v1",
+                phase5_artifact_manifest,
+                repo_relative=False,
+            )
+        )
     phase2_summary = json.loads(
         (
             ROOT
@@ -189,7 +202,14 @@ def main() -> int:
         "shadow_audit_sha256":
             ROOT / "scripts" / "remote" / "run_shadow_risk_audit.py",
         "dual_gpu_service_sha256":
-            ROOT / "scripts" / "remote" / "run_revtrace_dual_gpu.py",
+            # Phase 5 legitimately extends the live runner. Validate the
+            # immutable Phase 2 snapshot instead of requiring the mutable
+            # working runner to retain a historical hash forever.
+            ROOT
+            / "artifact"
+            / "phase2-risk-tail-v1"
+            / "scripts"
+            / "run_revtrace_dual_gpu.py",
         "terminal_replicates_orchestrator_sha256":
             ROOT / "scripts" / "remote" / "run_terminal_replicates.sh",
         "post_calibration_orchestrator_sha256":

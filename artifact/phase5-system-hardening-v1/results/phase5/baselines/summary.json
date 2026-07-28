@@ -1,0 +1,119 @@
+{
+  "claim_boundaries": [
+    "policy rows are offline paired-record replay, not live serving",
+    "generic-margin counterexample reorders real canonical payloads",
+    "zero observed violations are empirical, not deterministic proof"
+  ],
+  "decision": "PHASE5_STRONG_BASELINES_COMPLETE",
+  "input_files": [
+    "results/phase3/adaptive_control/raw/c16-initial-shadow-p0.05-seed20260732.json",
+    "results/phase3/adaptive_control/raw/c64-shadow-p0.05-seed20260731.json",
+    "results/phase3/adaptive_control/raw/c16-return-shadow-p0.05-seed20260734.json",
+    "results/phase3/adaptive_control/raw/1p7b-c16-shadow-p0.05-seed20260733.json"
+  ],
+  "policies": [
+    {
+      "claim_boundary": "offline paired-record policy replay",
+      "events": 6009,
+      "policy": "no_verification",
+      "selected_output_violations": 2,
+      "selected_state_violations": 2,
+      "state_violation_rate": 0.0003328340822100183,
+      "verification_fraction": 0.0,
+      "verified_events": 0
+    },
+    {
+      "claim_boundary": "offline paired-record policy replay",
+      "events": 6009,
+      "policy": "all_verification",
+      "selected_output_violations": 0,
+      "selected_state_violations": 0,
+      "state_violation_rate": 0.0,
+      "verification_fraction": 1.0,
+      "verified_events": 6009
+    },
+    {
+      "claim_boundary": "offline paired-record policy replay",
+      "events": 6009,
+      "policy": "static_margin_0.05",
+      "selected_output_violations": 2,
+      "selected_state_violations": 2,
+      "state_violation_rate": 0.0003328340822100183,
+      "verification_fraction": 0.0,
+      "verified_events": 0
+    },
+    {
+      "claim_boundary": "offline paired-record policy replay",
+      "events": 6009,
+      "policy": "static_margin_0.10",
+      "selected_output_violations": 2,
+      "selected_state_violations": 2,
+      "state_violation_rate": 0.0003328340822100183,
+      "verification_fraction": 0.009485771342985522,
+      "verified_events": 57
+    },
+    {
+      "claim_boundary": "offline paired-record policy replay",
+      "events": 6009,
+      "policy": "static_margin_0.20",
+      "selected_output_violations": 0,
+      "selected_state_violations": 0,
+      "state_violation_rate": 0.0,
+      "verification_fraction": 0.034947578632051925,
+      "verified_events": 210
+    },
+    {
+      "certificate": {
+        "admitted_validation_audits": 2683,
+        "caught_validation_errors": 0,
+        "certified": true,
+        "upper_risk": 0.0011159375465644716,
+        "validation_audits": 2705
+      },
+      "claim_boundary": "offline paired-record policy replay",
+      "events": 6009,
+      "learned_threshold": 0.109375,
+      "policy": "adaptive_certified_window",
+      "selected_output_violations": 0,
+      "selected_state_violations": 0,
+      "state_violation_rate": 0.0,
+      "verification_fraction": 0.010151439507405558,
+      "verified_events": 61
+    },
+    {
+      "all_contracts_certified": true,
+      "claim_boundary": "offline paired-record policy replay",
+      "contract_thresholds": {
+        "results/phase3/adaptive_control/raw/1p7b-c16-shadow-p0.05-seed20260733.json": 0.06249999999999999,
+        "results/phase3/adaptive_control/raw/c16-initial-shadow-p0.05-seed20260732.json": 0.06249999999999999,
+        "results/phase3/adaptive_control/raw/c16-return-shadow-p0.05-seed20260734.json": 0.06249999999999999,
+        "results/phase3/adaptive_control/raw/c64-shadow-p0.05-seed20260731.json": 0.109375
+      },
+      "events": 6009,
+      "policy": "per_contract_certified_window",
+      "selected_output_violations": 0,
+      "selected_state_violations": 0,
+      "state_violation_rate": 0.0,
+      "verification_fraction": 0.002163421534365119,
+      "verified_events": 13
+    }
+  ],
+  "records": 6009,
+  "schema_version": 1,
+  "study": "RevTrace Phase 5 strong policy baselines",
+  "transaction_counterexample": {
+    "claim_boundary": "real record payloads with replayed completion order; not a live scheduler measurement",
+    "completion_order": [
+      1,
+      0
+    ],
+    "evidence": "out-of-order replay over two adjacent real canonical records",
+    "first_chunk": 0,
+    "generic_final_projection_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "generic_margin_without_transaction_stale_overwrite": true,
+    "second_chunk": 1,
+    "session_id": "s009",
+    "transaction_rejects_stale_parent": true,
+    "transactional_final_projection_sha256": "473db2fc0f0fc82f00ea3c885c63251e7150fe0225a3f1586869a4ce5e62bca3"
+  }
+}

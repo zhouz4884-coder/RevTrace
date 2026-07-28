@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "P5_SYSTEM_HARDENING",
+  "phase": "phase5",
+  "hardware": {
+    "gpus": 2,
+    "gpu_model": "NVIDIA RTX 3090",
+    "gpu_memory_gib": 24
+  },
+  "stages": {
+    "phase5a": {
+      "workload": "live c16 -> c64 -> c16 contract switch",
+      "risk_upper_bound_max": 0.005,
+      "observed_state_violations_max": 0,
+      "deadline_misses_max": 0,
+      "steady_goodput_fraction_of_independent_oracle_min": 0.9
+    },
+    "phase5b": {
+      "models": [
+        "whisper-tiny.en",
+        "whisper-base.en"
+      ],
+      "known_pairs_protected_fraction_min": 1.0,
+      "state_violations_max": 0,
+      "wall_speedup_min": 2.0,
+      "feedback_off_certification_events": 0
+    },
+    "phase5c": {
+      "workload_cells": 8,
+      "observed_state_violations_max_per_cell": 0,
+      "deadline_misses_max_per_cell": 0,
+      "report_energy_per_audio_second": true
+    },
+    "phase5d": {
+      "deadline_misses_max": 0,
+      "mandatory_p99_change_fraction_max": 0.02,
+      "detection_time_improvement_min": 0.2
+    },
+    "phase5e": {
+      "deduplicate_by_pair_hash": true,
+      "required_fields": [
+        "audio_hash",
+        "pair_hash",
+        "canonical_state",
+        "batched_state",
+        "margin",
+        "raf",
+        "pcm",
+        "terminal_effect",
+        "source"
+      ],
+      "production_prevalence_claim": false
+    }
+  },
+  "claim_boundary": "Risk-limited, exact, stress, natural, live, replay, and oracle evidence remain separate."
+}

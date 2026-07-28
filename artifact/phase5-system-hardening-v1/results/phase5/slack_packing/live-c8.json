@@ -1,0 +1,52 @@
+{
+  "baseline": {
+    "deadline_misses": 0,
+    "first_audit_completion_seconds": null,
+    "mandatory_p50_seconds": 0.5775990192778409,
+    "mandatory_p99_seconds": 0.8228518702741711,
+    "packed_audits": 0,
+    "packing": false,
+    "release_lateness_p99_seconds": 0.00020085450261831273,
+    "service_wall_seconds": 38.84761681035161,
+    "skipped_audits": 0
+  },
+  "claim_boundaries": [
+    "one warmed Qwen3-ASR GPU executes both mandatory and audit work",
+    "audit admission uses a pre-measured request P99 plus guard",
+    "this small physical gate tests safe packing opportunity; it does not establish production drift-detection prevalence"
+  ],
+  "config": {
+    "audit_calibration_requests": 20,
+    "audit_p99_seconds": 0.6350269851926712,
+    "concurrency": 8,
+    "guard_seconds": 0.06350269851926713,
+    "release_interval_seconds": 2.0,
+    "rounds": 20
+  },
+  "decision": "PHASE5D_LIVE_SLACK_PACKING_NO_GO",
+  "gates": {
+    "deadline_miss_zero": true,
+    "detection_improvement_at_least_20_percent": true,
+    "live_gpu_service_executed": true,
+    "p99_change_at_most_2_percent": false
+  },
+  "metrics": {
+    "detection_time_improvement": 0.9848618262214586,
+    "mandatory_outputs_exact": true,
+    "p99_change_fraction": 0.023547083719077433
+  },
+  "model": "Qwen3-ASR-0.6B",
+  "packed": {
+    "deadline_misses": 0,
+    "first_audit_completion_seconds": 0.6055269511416554,
+    "mandatory_p50_seconds": 0.5675803921185434,
+    "mandatory_p99_seconds": 0.8422276321519164,
+    "packed_audits": 19,
+    "packing": true,
+    "release_lateness_p99_seconds": 0.00014765383675694463,
+    "service_wall_seconds": 38.867258491925895,
+    "skipped_audits": 0
+  },
+  "schema_version": 1,
+  "study": "RevTrace Phase 5D live release-aware audit packing"
+}
