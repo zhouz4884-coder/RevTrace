@@ -271,6 +271,7 @@ def main() -> int:
             chunk_samples = 2 * SAMPLE_RATE
             rounds = args.episode_seconds // 2
             episode_selected: list[dict[str, Any]] = []
+            episode_round_latencies: list[float] = []
             episode_service_started = time.perf_counter()
             for chunk_index in range(rounds):
                 terminal = chunk_index == rounds - 1
@@ -386,6 +387,14 @@ def main() -> int:
                         apply_candidate_record(state, selected, prefix)
                     global_event += 1
                 round_commit_elapsed = time.perf_counter() - round_started
+                round_state_entry_latency = (
+                    time.perf_counter() - proposal_started
+                )
+                episode_round_latencies.append(round_state_entry_latency)
+                for event in episode_selected[-len(streams) :]:
+                    event["state_entry_latency_seconds"] = (
+                        round_state_entry_latency
+                    )
                 service_seconds += (
                     proposal_elapsed
                     + (
@@ -407,6 +416,18 @@ def main() -> int:
                     "wall_seconds": episode_wall,
                     "goodput_events_per_second": (
                         len(episode_selected) / episode_wall
+                    ),
+                    "state_entry_latency_seconds_p50": statistics.median(
+                        episode_round_latencies
+                    ),
+                    "state_entry_latency_seconds_p95": percentile(
+                        episode_round_latencies, 0.95
+                    ),
+                    "state_entry_latency_seconds_p99": percentile(
+                        episode_round_latencies, 0.99
+                    ),
+                    "deadline_miss_rounds": sum(
+                        value > 2.0 for value in episode_round_latencies
                     ),
                     "certified": epoch.certificate is not None,
                     "threshold": epoch.threshold,
@@ -488,9 +509,8 @@ def main() -> int:
                     audit_events += 1
         audit_seconds = time.perf_counter() - audit_started
         latencies = [
-            snapshot["wall_seconds"] / max(1, snapshot["events"])
-            for snapshot in episode_snapshots
-            for _ in range(snapshot["events"])
+            float(event["state_entry_latency_seconds"])
+            for event in service_events
         ]
         energy = summarize_energy(
             energy_samples,
