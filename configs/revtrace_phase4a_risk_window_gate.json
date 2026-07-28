@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "REVTRACE-P4A-CERTIFIED-RISK-WINDOW",
+  "sequence": [
+    "Qwen3-ASR-0.6B/c16",
+    "Qwen3-ASR-0.6B/c64",
+    "Qwen3-ASR-0.6B/c16-fresh"
+  ],
+  "risk_budget": 0.005,
+  "confidence": 0.95,
+  "controller": {
+    "action": "fast_path_window",
+    "threshold": "empirical margin quantile implied by the certified window",
+    "contract_change": "multiplicative contraction to zero",
+    "recovery": "split-sample canary-certified additive expansion",
+    "manual_threshold_change": false
+  },
+  "gates": {
+    "state_violations": 0,
+    "deadline_misses": 0,
+    "minimum_gpu_normalized_goodput_after_recovery": 2.0,
+    "minimum_recovered_fraction_of_static_oracle": 0.9
+  },
+  "claim_boundaries": [
+    "split-sample replay establishes controller semantics, not new live serving latency",
+    "deployed performance is inherited only from matching frozen c16 runs",
+    "contract changes invalidate the old window before any new state entry"
+  ]
+}

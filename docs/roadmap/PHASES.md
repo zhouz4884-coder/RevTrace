@@ -184,7 +184,57 @@ Gate S5:
 - compare quality, capacity, wall performance, and GPU-normalized performance
   against optimistic state certification.
 
-## Post-Phase-3 paper and artifact freeze
+## Phase 4A — certified risk window
+
+Status:
+
+`PHASE4A_RISK_WINDOW_REPLAY_PASS_LIVE_SWITCH_UNRESOLVED`.
+
+The controller uses observed margin order statistics rather than a manual
+threshold ladder. Every contract switch invalidates the prior epoch and sets
+the fast-path window to zero. Calibration and validation are temporally split:
+validation failures cannot retroactively change the boundary. The frozen
+c16-to-c64-to-c16 replay selects `0.0625 -> 0.109375 -> 0.0625` and keeps each
+held-out upper risk bound below 0.5%. This remains a replay, not a live c64
+performance result.
+
+## Phase 4B — Whisper previous-text feedback intervention
+
+Status:
+
+`PHASE4B_FEEDBACK_CAUSAL_GATE_PASS`.
+
+Whisper tiny.en and base.en each process 100 disjoint 90-second streams. The
+same checkpoints and fixed future audio are replayed with previous-text
+feedback ON and OFF. Twenty-one distinct legal execution-shape state pairs are
+found; eight propagate under feedback ON and none propagate under feedback
+OFF. No application-catastrophe event is observed, so hallucination-loop
+prevention remains outside the claim.
+
+## Phase 4C — SlackGuard physical gate
+
+Status:
+
+`PHASE4C_FULL_REQUEST_QUANTUM_NO_GO_FINE_GRAINED_UNRESOLVED`.
+
+The measured full audit request takes 309.9 ms versus a 27.5 ms two-percent P99
+intrusion budget. Because CUDA priority is not running-kernel preemption, a
+full-request live audit cannot meet the intended contract. Fine-grained
+cancellable checkpoints are the only legal repair.
+
+## Phase 4D — diversity-aware active mining
+
+Status:
+
+`PHASE4D_ACTIVE_MINING_BUDGET_COMPLETE_TARGET_NOT_MET`.
+
+Each model screens 500 independent LibriSpeech candidates and probes each at
+most once. Pair yield improves by `2.78x` and `2.54x` over the previous natural
+search, but only 8 and 5 pairs are found. The 50-pair population claim remains
+excluded. The observed pairs retain high persistent-contamination mass, which
+is reported as targeted mechanism damage rather than production prevalence.
+
+## Post-Phase-4 paper and artifact freeze
 
 - freeze the introduction claim spine and state-transaction formalization;
 - synchronize risk proofs, system diagrams, experiment protocols, and the

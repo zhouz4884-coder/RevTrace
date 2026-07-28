@@ -1,0 +1,215 @@
+{
+  "claim_boundaries": [
+    "Phase 4A is split-sample controller replay, not a live c16-c64 switch",
+    "Phase 4B isolates the previous-text feedback edge under fixed future audio",
+    "Phase 4C full-request audit failed a physical preemption-quantum gate; no live SLO claim is made",
+    "Phase 4D is targeted active mining and cannot estimate production prevalence",
+    "zero observed violations are empirical, not deterministic arithmetic proof"
+  ],
+  "decision": "PHASE4_TASKS_COMPLETE_WITH_BOUNDED_NEGATIVE_GATES",
+  "schema_version": 1,
+  "stages": {
+    "phase4a_certified_risk_window": {
+      "contract_switch_fail_closed": true,
+      "decision": "PHASE4A_RISK_WINDOW_REPLAY_PASS_LIVE_SWITCH_UNRESOLVED",
+      "live_switch_executed": false,
+      "stages": [
+        {
+          "certificate": {
+            "admitted_validation_audits": 690,
+            "caught_validation_errors": 0,
+            "certified": true,
+            "failure_floor": null,
+            "fast_path_window": 1.0,
+            "threshold": 0.06249999999999999,
+            "upper_risk": 0.004332229678067789,
+            "validation_audits": 690
+          },
+          "conservative_recovered_gpu_normalized_projection": 3.0315519784505325,
+          "contract_switch_action": "w=0",
+          "expansion_trace": [
+            0.0,
+            0.1,
+            0.2,
+            0.30000000000000004,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.7999999999999999,
+            0.8999999999999999,
+            0.9999999999999999,
+            1.0
+          ],
+          "matching_static_oracle_gpu_normalized_speedup": 3.0315519784505325,
+          "observed_deadline_misses": 0,
+          "observed_selected_state_violations": 0,
+          "performance_evidence": "matching frozen deployed c16 result",
+          "recovered_fraction_of_static_oracle": 1.0,
+          "stage": "c16_initial"
+        },
+        {
+          "certificate": {
+            "admitted_validation_audits": 694,
+            "caught_validation_errors": 0,
+            "certified": true,
+            "failure_floor": 0.109375,
+            "fast_path_window": 0.9916129032258064,
+            "threshold": 0.109375,
+            "upper_risk": 0.0043073139081674094,
+            "validation_audits": 698
+          },
+          "conservative_recovered_gpu_normalized_projection": null,
+          "contract_switch_action": "w=0",
+          "expansion_trace": [
+            0.0,
+            0.1,
+            0.2,
+            0.30000000000000004,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.7999999999999999,
+            0.8999999999999999,
+            0.9916129032258064
+          ],
+          "matching_static_oracle_gpu_normalized_speedup": null,
+          "observed_deadline_misses": 0,
+          "observed_selected_state_violations": 0,
+          "performance_evidence": "fail-closed control replay only",
+          "recovered_fraction_of_static_oracle": null,
+          "stage": "c64_drift"
+        },
+        {
+          "certificate": {
+            "admitted_validation_audits": 667,
+            "caught_validation_errors": 0,
+            "certified": true,
+            "failure_floor": null,
+            "fast_path_window": 1.0,
+            "threshold": 0.06249999999999999,
+            "upper_risk": 0.0044812816924483245,
+            "validation_audits": 667
+          },
+          "conservative_recovered_gpu_normalized_projection": 3.0328807664790545,
+          "contract_switch_action": "w=0",
+          "expansion_trace": [
+            0.0,
+            0.1,
+            0.2,
+            0.30000000000000004,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.7999999999999999,
+            0.8999999999999999,
+            0.9999999999999999,
+            1.0
+          ],
+          "matching_static_oracle_gpu_normalized_speedup": 3.0328807664790545,
+          "observed_deadline_misses": 0,
+          "observed_selected_state_violations": 0,
+          "performance_evidence": "matching frozen deployed c16 result",
+          "recovered_fraction_of_static_oracle": 1.0,
+          "stage": "c16_return"
+        }
+      ]
+    },
+    "phase4b_whisper_feedback": {
+      "catastrophe_prevention_claim_eligible": false,
+      "claim_boundary": "legal execution-shape intervention with fixed future audio; pair yield is not production prevalence",
+      "decision": "PHASE4B_FEEDBACK_CAUSAL_GATE_PASS",
+      "distinct_pairs": 21,
+      "feedback_off_propagating_pairs": 0,
+      "feedback_on_propagating_pairs": 8,
+      "median_raf": 1.0,
+      "per_model": {
+        "whisper-base.en": {
+          "candidate_windows_scanned": 100,
+          "distinct_state_pairs": 16,
+          "maximum_raf": 153.0,
+          "mean_raf": 14.980518583428067,
+          "median_raf": 1.0,
+          "pcm_h": 0.375,
+          "persistent_pairs": 6,
+          "singleton_repeat_mismatches": 0,
+          "wall_seconds": 575.0406627291813
+        },
+        "whisper-tiny.en": {
+          "candidate_windows_scanned": 100,
+          "distinct_state_pairs": 5,
+          "maximum_raf": 2.75,
+          "mean_raf": 1.35,
+          "median_raf": 1.0,
+          "pcm_h": 0.0,
+          "persistent_pairs": 0,
+          "singleton_repeat_mismatches": 0,
+          "wall_seconds": 408.5221109800041
+        }
+      },
+      "unprotected_catastrophes": 0
+    },
+    "phase4c_slackguard": {
+      "decision": "PHASE4C_FULL_REQUEST_QUANTUM_NO_GO_FINE_GRAINED_UNRESOLVED",
+      "legal_repair": "Expose token/block/encoder-decoder checkpoint quanta below the measured intrusion budget, then rerun the live no-idle versus SlackGuard SLO gate.",
+      "live_gate_executed": false,
+      "offline_detection_improvement": 0.2727272727272727,
+      "quantum_to_budget_ratio": 11.273058939228813
+    },
+    "phase4d_active_mining": {
+      "budget_complete": true,
+      "claim_boundary": "targeted mechanism population; not natural or production mismatch prevalence",
+      "decision": "PHASE4D_ACTIVE_MINING_BUDGET_COMPLETE_TARGET_NOT_MET",
+      "gate_pass": false,
+      "per_model": {
+        "Qwen3-ASR-0.6B": {
+          "decision": "PHASE4D_ACTIVE_MINING_BUDGET_EXHAUSTED",
+          "distinct_pairs": 8,
+          "duplicate_early_stops": 0,
+          "new_pairs_vs_phase3": 7,
+          "pair_yield_per_1000_rows": 1.0,
+          "previous_natural_pairs_per_1000_rows": 0.3597861842105263,
+          "probed": 500,
+          "replicated_rows": 8000,
+          "screened": 500,
+          "tail": {
+            "horizon": 4,
+            "median_recovery_time_recovered": 1.0,
+            "pairs": 8,
+            "persistent_contamination_mass": 0.875,
+            "persistent_pairs": 7,
+            "recovered_pairs": 1,
+            "tail_raf": 9.071428571428571
+          },
+          "wall_seconds": 694.4920010780916,
+          "yield_improvement": 2.7794285714285714
+        },
+        "Qwen3-ASR-1.7B": {
+          "decision": "PHASE4D_ACTIVE_MINING_BUDGET_EXHAUSTED",
+          "distinct_pairs": 5,
+          "duplicate_early_stops": 0,
+          "new_pairs_vs_phase3": 4,
+          "pair_yield_per_1000_rows": 0.625,
+          "previous_natural_pairs_per_1000_rows": 0.24606299212598426,
+          "probed": 500,
+          "replicated_rows": 8000,
+          "screened": 500,
+          "tail": {
+            "horizon": 4,
+            "median_recovery_time_recovered": 1.5,
+            "pairs": 5,
+            "persistent_contamination_mass": 0.6,
+            "persistent_pairs": 3,
+            "recovered_pairs": 2,
+            "tail_raf": 10.666666666666666
+          },
+          "wall_seconds": 711.0374633278698,
+          "yield_improvement": 2.54
+        }
+      }
+    }
+  },
+  "study": "RevTrace Phase 4 adaptation and positive generality"
+}

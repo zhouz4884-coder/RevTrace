@@ -78,6 +78,35 @@ transition, Voxtral establishes an append-only architecture boundary rather
 than a second instance of Qwen3-ASR state pollution. Zero observed flips is
 not a deterministic certificate.
 
+## Phase 4 adaptation and feedback results
+
+Phase 4A replaces a hand-written threshold ladder with a continuous
+split-sample risk window. On the frozen c16-to-c64-to-c16 replay it selected
+observed margin boundaries `0.0625 -> 0.109375 -> 0.0625`, invalidated evidence
+at each contract switch, and kept every held-out upper risk bound below 0.5%.
+This establishes fail-closed controller semantics; it is not a new live c64
+serving result.
+
+Phase 4B provides the positive second-family result. Two real Whisper
+checkpoints were evaluated on 100 disjoint 90-second streams each. Legal
+singleton-versus-batch execution produced 21 distinct state pairs. Eight pairs
+propagated when previous text was fed into the next window, while zero
+propagated when the same model and future audio were replayed with feedback
+disabled. Whisper-base contained six pairs still different at the two-window
+horizon, including RAF values up to `153`. No preregistered application
+catastrophe occurred, so RevTrace does not claim hallucination-loop prevention.
+
+Phase 4C freezes full-request SlackGuard as a physical NO-GO: the measured
+309.9 ms audit quantum is `11.27x` the 27.5 ms P99 intrusion budget, and CUDA
+stream priority cannot preempt a running kernel. Phase 4D completed the
+500-candidate budget per Qwen3-ASR model. Active mining improved distinct-pair
+yield by `2.78x` and `2.54x`, but found only 8 and 5 pairs rather than 50;
+population generality remains outside the claim.
+
+Phase 4 decision:
+
+`PHASE4_TASKS_COMPLETE_WITH_BOUNDED_NEGATIVE_GATES`
+
 ## Phase map
 
 - **Phase 0 — discovery and causal controls:** RevBatch performance opportunity,
@@ -106,6 +135,11 @@ not a deterministic certificate.
 Preventive deterministic execution remains a strong supporting baseline, and
 paper/artifact freezing follows completion of Phase 3A--3D; neither is a
 renumbered Phase 3 work package.
+
+Phase 4 adds the certified-risk-window replay, the Whisper feedback
+intervention, the SlackGuard physical stop gate, and diversity-aware state-pair
+mining. Its bounded negatives remain first-class results rather than being
+hidden by new thresholds or relaxed pair definitions.
 
 See [the phase roadmap](docs/roadmap/PHASES.md) and
 [claim boundaries](docs/CLAIM_BOUNDARIES.md).

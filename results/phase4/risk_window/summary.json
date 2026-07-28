@@ -1,0 +1,120 @@
+{
+  "claim_boundaries": [
+    "thresholds are observed margin order statistics, not manual stages",
+    "the replay does not establish new live transition latency",
+    "performance projections use only matching frozen deployed c16 runs"
+  ],
+  "decision": "PHASE4A_RISK_WINDOW_REPLAY_PASS_LIVE_SWITCH_UNRESOLVED",
+  "gates": {
+    "contract_switch_fail_closed": true,
+    "live_switch_deployment": false,
+    "no_manual_threshold": true,
+    "recovery_projection": true,
+    "split_sample_certificates": true
+  },
+  "schema_version": 1,
+  "stages": [
+    {
+      "certificate": {
+        "admitted_validation_audits": 690,
+        "caught_validation_errors": 0,
+        "certified": true,
+        "failure_floor": null,
+        "fast_path_window": 1.0,
+        "threshold": 0.06249999999999999,
+        "upper_risk": 0.004332229678067789,
+        "validation_audits": 690
+      },
+      "conservative_recovered_gpu_normalized_projection": 3.0315519784505325,
+      "contract_switch_action": "w=0",
+      "expansion_trace": [
+        0.0,
+        0.1,
+        0.2,
+        0.30000000000000004,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.7999999999999999,
+        0.8999999999999999,
+        0.9999999999999999,
+        1.0
+      ],
+      "matching_static_oracle_gpu_normalized_speedup": 3.0315519784505325,
+      "observed_deadline_misses": 0,
+      "observed_selected_state_violations": 0,
+      "performance_evidence": "matching frozen deployed c16 result",
+      "recovered_fraction_of_static_oracle": 1.0,
+      "stage": "c16_initial"
+    },
+    {
+      "certificate": {
+        "admitted_validation_audits": 694,
+        "caught_validation_errors": 0,
+        "certified": true,
+        "failure_floor": 0.109375,
+        "fast_path_window": 0.9916129032258064,
+        "threshold": 0.109375,
+        "upper_risk": 0.0043073139081674094,
+        "validation_audits": 698
+      },
+      "conservative_recovered_gpu_normalized_projection": null,
+      "contract_switch_action": "w=0",
+      "expansion_trace": [
+        0.0,
+        0.1,
+        0.2,
+        0.30000000000000004,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.7999999999999999,
+        0.8999999999999999,
+        0.9916129032258064
+      ],
+      "matching_static_oracle_gpu_normalized_speedup": null,
+      "observed_deadline_misses": 0,
+      "observed_selected_state_violations": 0,
+      "performance_evidence": "fail-closed control replay only",
+      "recovered_fraction_of_static_oracle": null,
+      "stage": "c64_drift"
+    },
+    {
+      "certificate": {
+        "admitted_validation_audits": 667,
+        "caught_validation_errors": 0,
+        "certified": true,
+        "failure_floor": null,
+        "fast_path_window": 1.0,
+        "threshold": 0.06249999999999999,
+        "upper_risk": 0.0044812816924483245,
+        "validation_audits": 667
+      },
+      "conservative_recovered_gpu_normalized_projection": 3.0328807664790545,
+      "contract_switch_action": "w=0",
+      "expansion_trace": [
+        0.0,
+        0.1,
+        0.2,
+        0.30000000000000004,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.7999999999999999,
+        0.8999999999999999,
+        0.9999999999999999,
+        1.0
+      ],
+      "matching_static_oracle_gpu_normalized_speedup": 3.0328807664790545,
+      "observed_deadline_misses": 0,
+      "observed_selected_state_violations": 0,
+      "performance_evidence": "matching frozen deployed c16 result",
+      "recovered_fraction_of_static_oracle": 1.0,
+      "stage": "c16_return"
+    }
+  ],
+  "study": "RevTrace Phase 4A certified risk-window replay"
+}

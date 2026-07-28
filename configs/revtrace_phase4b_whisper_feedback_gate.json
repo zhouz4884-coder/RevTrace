@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "experiment_id": "REVTRACE-P4B-WHISPER-FEEDBACK-COUNTERFACTUAL",
+  "models": [
+    "openai/whisper-tiny.en",
+    "openai/whisper-base.en"
+  ],
+  "execution_shapes": [1, 8, 16],
+  "feedback_modes": ["on", "off"],
+  "independent_long_audio_sessions_per_model": 100,
+  "session_construction": "disjoint 90-second streams with no source-sample reuse",
+  "future_audio_policy": "fixed counterfactual replay",
+  "minimum_distinct_state_pairs": 20,
+  "minimum_unprotected_catastrophes_for_claim": 5,
+  "prohibited_interventions": [
+    "manual token edits",
+    "logit noise injection",
+    "future audio changes between branches"
+  ],
+  "claim_boundaries": [
+    "targeted legal shape probes are mechanism stress, not prevalence",
+    "feedback OFF is the same model and audio without previous-text state",
+    "no hallucination-prevention claim below five observed catastrophes"
+  ]
+}

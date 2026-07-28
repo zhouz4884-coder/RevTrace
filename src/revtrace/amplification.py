@@ -79,6 +79,82 @@ class RevisionImpulseSummary:
         return asdict(self)
 
 
+@dataclass(frozen=True)
+class ContaminationTailSummary:
+    """Two-part summary separating recovery from persistent contamination."""
+
+    pairs: int
+    horizon: int
+    recovered_pairs: int
+    persistent_pairs: int
+    persistent_contamination_mass: float
+    median_recovery_time_recovered: float | None
+    tail_raf: float | None
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+def summarize_contamination_tail(
+    pairs: Sequence[RevisionImpulsePair],
+    *,
+    horizon: int | None = None,
+) -> ContaminationTailSummary:
+    if not pairs:
+        raise ValueError("at least one impulse pair is required")
+    selected_horizon = (
+        max(len(item.distances) for item in pairs) - 1
+        if horizon is None
+        else horizon
+    )
+    if selected_horizon < 1:
+        raise ValueError("horizon must be positive")
+    recoveries: list[int] = []
+    persistent: list[RevisionImpulsePair] = []
+    for item in pairs:
+        recovery = item.reconvergence_time()
+        if recovery is not None and recovery <= selected_horizon:
+            recoveries.append(recovery)
+        else:
+            persistent.append(item)
+    sorted_recoveries = sorted(recoveries)
+    median_recovery: float | None
+    if not sorted_recoveries:
+        median_recovery = None
+    else:
+        middle = len(sorted_recoveries) // 2
+        median_recovery = (
+            float(sorted_recoveries[middle])
+            if len(sorted_recoveries) % 2
+            else (
+                sorted_recoveries[middle - 1]
+                + sorted_recoveries[middle]
+            )
+            / 2
+        )
+    tail_values = [
+        sum(
+            item.normalized_response()[
+                1 : min(selected_horizon + 1, len(item.distances))
+            ]
+        )
+        for item in persistent
+    ]
+    return ContaminationTailSummary(
+        pairs=len(pairs),
+        horizon=selected_horizon,
+        recovered_pairs=len(recoveries),
+        persistent_pairs=len(persistent),
+        persistent_contamination_mass=len(persistent) / len(pairs),
+        median_recovery_time_recovered=median_recovery,
+        tail_raf=(
+            sum(tail_values) / len(tail_values)
+            if tail_values
+            else None
+        ),
+    )
+
+
 def summarize_impulses(
     pairs: Sequence[RevisionImpulsePair],
     *,

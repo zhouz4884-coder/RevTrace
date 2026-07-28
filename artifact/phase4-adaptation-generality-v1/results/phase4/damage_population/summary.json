@@ -1,0 +1,186 @@
+{
+  "claim_boundaries": [
+    "tail summaries describe observed targeted pairs",
+    "targeted mining cannot estimate production prevalence",
+    "the unexecuted 500-candidate budget is not a population result"
+  ],
+  "decision": "PHASE4D_DAMAGE_METRICS_PASS_ACTIVE_500_CANDIDATE_RUN_UNRESOLVED",
+  "frozen_active_policy": {
+    "candidate_cap_per_model": 500,
+    "duplicate_action": "stop all remaining slot/repeat probes",
+    "objective": "new consequential state pairs per GPU-hour",
+    "pair_cap_per_model": 50,
+    "priority": [
+      "low canonical margin",
+      "unseen state projection signature",
+      "EOS or output-length frontier damage proxy",
+      "acoustic uncertainty"
+    ]
+  },
+  "gates": {
+    "active_500_candidate_gpu_run": false,
+    "fifty_distinct_pairs_per_model": false,
+    "pcm_and_tail_raf_computed": true
+  },
+  "model_totals": {
+    "Qwen3-ASR-0.6B": {
+      "distinct_pairs": 19,
+      "duplicate_state_pairs": 714,
+      "replicated_rows": 52288
+    },
+    "Qwen3-ASR-1.7B": {
+      "distinct_pairs": 15,
+      "duplicate_state_pairs": 1073,
+      "replicated_rows": 49472
+    }
+  },
+  "root_cause": "slot/repeat expansion repeatedly rediscovers the same state pair; existing files contain only 19 and 15 deduplicated pairs.",
+  "runs": [
+    {
+      "candidate_revisions": 113,
+      "distinct_pairs": 6,
+      "duplicate_state_pairs": 168,
+      "file": "qwen3-asr-0.6b-c64.json",
+      "model": "Qwen3-ASR-0.6B-c64",
+      "pair_yield_per_1000_replicated_rows": 0.41482300884955753,
+      "replicated_rows": 14464,
+      "tail": {
+        "horizon": 13,
+        "median_recovery_time_recovered": 1.0,
+        "pairs": 6,
+        "persistent_contamination_mass": 0.5,
+        "persistent_pairs": 3,
+        "recovered_pairs": 3,
+        "tail_raf": 16.666666666666668
+      }
+    },
+    {
+      "candidate_revisions": 152,
+      "distinct_pairs": 7,
+      "duplicate_state_pairs": 202,
+      "file": "qwen3-asr-0.6b-librispeech.json",
+      "model": "Qwen3-ASR-0.6B-librispeech",
+      "pair_yield_per_1000_replicated_rows": 0.3597861842105263,
+      "replicated_rows": 19456,
+      "tail": {
+        "horizon": 13,
+        "median_recovery_time_recovered": 1.0,
+        "pairs": 7,
+        "persistent_contamination_mass": 0.0,
+        "persistent_pairs": 0,
+        "recovered_pairs": 7,
+        "tail_raf": null
+      }
+    },
+    {
+      "candidate_revisions": 109,
+      "distinct_pairs": 6,
+      "duplicate_state_pairs": 299,
+      "file": "qwen3-asr-0.6b-stress.json",
+      "model": "Qwen3-ASR-0.6B-stress",
+      "pair_yield_per_1000_replicated_rows": 0.43004587155963303,
+      "replicated_rows": 13952,
+      "tail": {
+        "horizon": 11,
+        "median_recovery_time_recovered": 1.0,
+        "pairs": 6,
+        "persistent_contamination_mass": 0.5,
+        "persistent_pairs": 3,
+        "recovered_pairs": 3,
+        "tail_raf": 11.666666666666666
+      }
+    },
+    {
+      "candidate_revisions": 23,
+      "distinct_pairs": 1,
+      "duplicate_state_pairs": 45,
+      "file": "qwen3-asr-0.6b.json",
+      "model": "Qwen3-ASR-0.6B",
+      "pair_yield_per_1000_replicated_rows": 0.22644927536231885,
+      "replicated_rows": 4416,
+      "tail": {
+        "horizon": 11,
+        "median_recovery_time_recovered": null,
+        "pairs": 1,
+        "persistent_contamination_mass": 1.0,
+        "persistent_pairs": 1,
+        "recovered_pairs": 0,
+        "tail_raf": 16.0
+      }
+    },
+    {
+      "candidate_revisions": 108,
+      "distinct_pairs": 4,
+      "duplicate_state_pairs": 191,
+      "file": "qwen3-asr-1.7b-c64.json",
+      "model": "Qwen3-ASR-1.7B-c64",
+      "pair_yield_per_1000_replicated_rows": 0.28935185185185186,
+      "replicated_rows": 13824,
+      "tail": {
+        "horizon": 3,
+        "median_recovery_time_recovered": 1.0,
+        "pairs": 4,
+        "persistent_contamination_mass": 0.0,
+        "persistent_pairs": 0,
+        "recovered_pairs": 4,
+        "tail_raf": null
+      }
+    },
+    {
+      "candidate_revisions": 127,
+      "distinct_pairs": 4,
+      "duplicate_state_pairs": 361,
+      "file": "qwen3-asr-1.7b-librispeech.json",
+      "model": "Qwen3-ASR-1.7B-librispeech",
+      "pair_yield_per_1000_replicated_rows": 0.24606299212598426,
+      "replicated_rows": 16256,
+      "tail": {
+        "horizon": 13,
+        "median_recovery_time_recovered": 1.0,
+        "pairs": 4,
+        "persistent_contamination_mass": 0.0,
+        "persistent_pairs": 0,
+        "recovered_pairs": 4,
+        "tail_raf": null
+      }
+    },
+    {
+      "candidate_revisions": 114,
+      "distinct_pairs": 7,
+      "duplicate_state_pairs": 256,
+      "file": "qwen3-asr-1.7b-stress.json",
+      "model": "Qwen3-ASR-1.7B-stress",
+      "pair_yield_per_1000_replicated_rows": 0.47971491228070173,
+      "replicated_rows": 14592,
+      "tail": {
+        "horizon": 13,
+        "median_recovery_time_recovered": 1.0,
+        "pairs": 7,
+        "persistent_contamination_mass": 0.42857142857142855,
+        "persistent_pairs": 3,
+        "recovered_pairs": 4,
+        "tail_raf": 18.722222222222225
+      }
+    },
+    {
+      "candidate_revisions": 25,
+      "distinct_pairs": 3,
+      "duplicate_state_pairs": 265,
+      "file": "qwen3-asr-1.7b.json",
+      "model": "Qwen3-ASR-1.7B",
+      "pair_yield_per_1000_replicated_rows": 0.625,
+      "replicated_rows": 4800,
+      "tail": {
+        "horizon": 3,
+        "median_recovery_time_recovered": 1.0,
+        "pairs": 3,
+        "persistent_contamination_mass": 0.0,
+        "persistent_pairs": 0,
+        "recovered_pairs": 3,
+        "tail_raf": null
+      }
+    }
+  ],
+  "schema_version": 1,
+  "study": "Phase 4D contamination-tail and mining-accounting gate"
+}

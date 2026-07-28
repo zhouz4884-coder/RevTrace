@@ -90,3 +90,24 @@
 - A process-group cleanup warning after the diagnostic audit result is written
   is not a serving failure or performance result; it remains an implementation
   hygiene issue.
+
+## Phase 4 boundaries
+
+- The certified risk-window sequence is a split-sample replay of measured
+  audits. Matching c16 performance projections are not a live c16-to-c64
+  service transition, and no c64 goodput is claimed.
+- Whisper feedback pairs come from 100 disjoint 90-second streams per model;
+  no source audio sample is reused across sessions.
+- Whisper feedback OFF is the same checkpoint and fixed future audio with only
+  the previous-text edge removed. The observed 21-pair causal gate is not a
+  production mismatch-prevalence estimate.
+- Zero observed Whisper application catastrophes means hallucination-loop
+  prevention is not an eligible claim.
+- CUDA stream priority is not kernel preemption. The 309.9 ms full-request
+  audit quantum fails the 27.5 ms intrusion budget, so Phase 3B remains an
+  offline diagnostic until a finer cancellable quantum is implemented.
+- Active mining improved targeted pair yield but produced only 8 and 5 pairs
+  within the frozen 500-candidate budgets. It does not establish a 50-pair
+  population claim.
+- Persistent Contamination Mass and TailRAF describe only observed targeted
+  pairs; they are not production probabilities or expected production damage.

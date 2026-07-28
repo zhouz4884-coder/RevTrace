@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "study": "RevTrace Phase 4D diversity-aware active state-pair mining",
+  "candidate_budget_per_model": 500,
+  "target_distinct_pairs_per_model": 50,
+  "batch_size": 16,
+  "future_rounds": 4,
+  "dtype": "float16",
+  "selection": {
+    "flip_proxy": "inverse canonical minimum token margin",
+    "novelty": "inverse frequency of the canonical state signature",
+    "future_damage_proxy": "earlier vulnerable token receives higher priority",
+    "acoustic_features": [
+      "spectral flatness",
+      "zero-crossing rate"
+    ]
+  },
+  "deduplication": "global hash of parent, canonical output/state, and divergent output/state",
+  "early_stop": "one execution-shape probe per candidate; stop at 50 distinct pairs",
+  "claim_boundary": "targeted mechanism population, never production prevalence"
+}
