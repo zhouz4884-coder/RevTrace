@@ -1,0 +1,101 @@
+{
+  "aggregate": {
+    "deadline_miss_events": 28,
+    "deadline_miss_rounds": 2,
+    "goodput_events_per_second": {
+      "mean": 15.874036146897009,
+      "std": 0.5884803317400455
+    },
+    "joules_per_audio_second": {
+      "mean": 9.449886670781371,
+      "std": 0.2077477116378322
+    },
+    "p99_seconds_max": 2.027654267847538,
+    "p99_seconds_mean": 1.9159228913486004,
+    "post_stage_replay_output_disagreements": 14,
+    "post_stage_replay_state_disagreements": 34,
+    "slo_replicates_passing": 2,
+    "slo_replicates_total": 3,
+    "slo_tail_variance_detected": true,
+    "unverified_fast_path_replay_roots": 0,
+    "verification_fraction": {
+      "mean": 0.08544973544973544,
+      "std": 0.004371087735941351
+    },
+    "verified_canonical_replay_roots": 6
+  },
+  "claim_boundaries": [
+    "the prior c14 certificate threshold is restored; the 1,350-event cold certification is not repeated",
+    "three reporting stages use independent episode seeds under one frozen contract",
+    "post-stage replay is excluded from service time and is not online selection-authority evidence",
+    "the first seed has two synchronized rounds above the 2-second deadline (28 event-level misses); this is retained as tail-latency variance rather than relabeled as a safety failure",
+    "the remote project was not a Git checkout; the compact artifact hashes the final runner and the change log records any protocol or reporting repair"
+  ],
+  "decision": "F7_STEADY_REPLICATION_COMPLETE_WITH_TAIL_VARIANCE",
+  "provenance": {
+    "final_runner_sha256": "ca40ecec748ae1c2eeaec8cdb6162638319810bb58e090eca1a3c43ab535fdc8",
+    "raw_code_commit_label": "UNRECORDED"
+  },
+  "replicates": [
+    {
+      "continued_same_contract_epoch": false,
+      "deadline_miss_events": 28,
+      "deadline_miss_rounds": 2,
+      "events": 1260,
+      "fingerprint": "Qwen3-ASR-0.6B/proposer=float16/c=14/language=English/arrival=episode-sync/canonical=f152611e3d1a0de6439554b424a01f35113632879b2def3f2ead3ccba507ad66",
+      "goodput_events_per_second": 15.20041205862548,
+      "joules_per_audio_second": 9.622120714465163,
+      "p99_seconds": 2.027654267847538,
+      "post_stage_replay_output_disagreements": 7,
+      "post_stage_replay_state_disagreements": 13,
+      "risk_bound_source": "prior independent split-sample certificate",
+      "risk_upper_bound": null,
+      "seed_label": "steady_seed_1",
+      "threshold": 0.062501,
+      "unverified_fast_path_replay_roots": 0,
+      "verification_fraction": 0.09047619047619047,
+      "verified_canonical_replay_roots": 2
+    },
+    {
+      "continued_same_contract_epoch": true,
+      "deadline_miss_events": 0,
+      "deadline_miss_rounds": 0,
+      "events": 1260,
+      "fingerprint": "Qwen3-ASR-0.6B/proposer=float16/c=14/language=English/arrival=episode-sync/canonical=f152611e3d1a0de6439554b424a01f35113632879b2def3f2ead3ccba507ad66",
+      "goodput_events_per_second": 16.288191850243713,
+      "joules_per_audio_second": 9.219164367784176,
+      "p99_seconds": 1.8590132780373096,
+      "post_stage_replay_output_disagreements": 2,
+      "post_stage_replay_state_disagreements": 12,
+      "risk_bound_source": "prior independent split-sample certificate",
+      "risk_upper_bound": null,
+      "seed_label": "steady_seed_2",
+      "threshold": 0.062501,
+      "unverified_fast_path_replay_roots": 0,
+      "verification_fraction": 0.08253968253968254,
+      "verified_canonical_replay_roots": 1
+    },
+    {
+      "continued_same_contract_epoch": true,
+      "deadline_miss_events": 0,
+      "deadline_miss_rounds": 0,
+      "events": 1260,
+      "fingerprint": "Qwen3-ASR-0.6B/proposer=float16/c=14/language=English/arrival=episode-sync/canonical=f152611e3d1a0de6439554b424a01f35113632879b2def3f2ead3ccba507ad66",
+      "goodput_events_per_second": 16.13350453182183,
+      "joules_per_audio_second": 9.508374930094773,
+      "p99_seconds": 1.8611011281609535,
+      "post_stage_replay_output_disagreements": 5,
+      "post_stage_replay_state_disagreements": 9,
+      "risk_bound_source": "prior independent split-sample certificate",
+      "risk_upper_bound": null,
+      "seed_label": "steady_seed_3",
+      "threshold": 0.062501,
+      "unverified_fast_path_replay_roots": 0,
+      "verification_fraction": 0.08333333333333333,
+      "verified_canonical_replay_roots": 3
+    }
+  ],
+  "schema_version": 1,
+  "source_runner_decision": "PHASE5A_STATIC_CERTIFIED_ORACLE_FAIL",
+  "study": "RevTrace F7 steady-state replications"
+}

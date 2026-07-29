@@ -10,6 +10,7 @@ import json
 import math
 import random
 import re
+import statistics
 import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
@@ -19,8 +20,20 @@ MODES = (
     "singleton_authoritative",
     "unprotected_batch",
     "revtrace_risk_limited",
-    "fp32_reproducible",
+    "fp32_fixed_contract",
+    "deployed_revtrace_fixed_shape_authority",
 )
+
+RAW_MODE_NAMES = {
+    "singleton_authoritative": "singleton_authoritative",
+    "unprotected_batch": "unprotected_batch",
+    "revtrace_risk_limited": "revtrace_risk_limited",
+    "fp32_reproducible": "fp32_fixed_contract",
+    "fp32_fixed_contract": "fp32_fixed_contract",
+    "deployed_revtrace_fixed_shape_authority": (
+        "deployed_revtrace_fixed_shape_authority"
+    ),
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -207,11 +220,12 @@ def finalize_quality(repo: Path, bootstrap_replicates: int) -> dict[str, Any]:
     )
     grouped: dict[tuple[str, str, str], dict[str, Any]] = {}
     for payload in raw_payloads:
-        if payload.get("mode") not in MODES:
+        if payload.get("mode") not in RAW_MODE_NAMES:
             continue
+        normalized_mode = RAW_MODE_NAMES[payload["mode"]]
         languages = {row["language"] for row in payload["outputs"]}
         for language in languages:
-            key = (payload["model"], language, payload["mode"])
+            key = (payload["model"], language, normalized_mode)
             rows = [
                 row for row in payload["outputs"] if row["language"] == language
             ]
@@ -229,19 +243,66 @@ def finalize_quality(repo: Path, bootstrap_replicates: int) -> dict[str, Any]:
                     for row in rows
                     for event in row["events"]
                 )
+                grouped[key]["terminal_events"] += sum(
+                    bool(event["terminal"])
+                    for row in rows
+                    for event in row["events"]
+                )
+                grouped[key]["terminal_verified_events"] += sum(
+                    bool(event["terminal"]) and bool(event["verified"])
+                    for row in rows
+                    for event in row["events"]
+                )
+                grouped[key]["nonterminal_events"] += sum(
+                    not bool(event["terminal"])
+                    for row in rows
+                    for event in row["events"]
+                )
+                grouped[key]["nonterminal_verified_events"] += sum(
+                    not bool(event["terminal"]) and bool(event["verified"])
+                    for row in rows
+                    for event in row["events"]
+                )
+                grouped[key]["online_selection_authority_violations"] += int(
+                    payload.get("online_selection_authority_violations", 0)
+                )
+                grouped[key]["margin_thresholds"].add(
+                    float(payload["margin_threshold"])
+                )
             else:
+                events = [
+                    event for row in rows for event in row["events"]
+                ]
                 grouped[key] = {
                     "model": payload["model"],
                     "language": language,
-                    "mode": payload["mode"],
+                    "mode": normalized_mode,
                     "configured_dtype": payload["configured_dtype"],
                     "fixed_batch_shape": payload["fixed_batch_shape"],
-                    "candidate_events": sum(len(row["events"]) for row in rows),
-                    "verified_events": sum(
-                        event["verified"]
-                        for row in rows
-                        for event in row["events"]
+                    "candidate_events": len(events),
+                    "verified_events": sum(event["verified"] for event in events),
+                    "terminal_events": sum(
+                        bool(event["terminal"]) for event in events
                     ),
+                    "terminal_verified_events": sum(
+                        bool(event["terminal"]) and bool(event["verified"])
+                        for event in events
+                    ),
+                    "nonterminal_events": sum(
+                        not bool(event["terminal"]) for event in events
+                    ),
+                    "nonterminal_verified_events": sum(
+                        not bool(event["terminal"]) and bool(event["verified"])
+                        for event in events
+                    ),
+                    "online_selection_authority_violations": int(
+                        payload.get(
+                            "online_selection_authority_violations", 0
+                        )
+                    ),
+                    "margin_thresholds": {
+                        float(payload["margin_threshold"])
+                    },
                     "outputs": rows,
                 }
 
@@ -282,8 +343,20 @@ def finalize_quality(repo: Path, bootstrap_replicates: int) -> dict[str, Any]:
                 / max(1, len(scored)),
                 "verification_fraction": payload["verified_events"]
                 / max(1, payload["candidate_events"]),
+                "terminal_verification_fraction": payload[
+                    "terminal_verified_events"
+                ]
+                / max(1, payload["terminal_events"]),
+                "nonterminal_verification_fraction": payload[
+                    "nonterminal_verified_events"
+                ]
+                / max(1, payload["nonterminal_events"]),
+                "online_selection_authority_violations": payload[
+                    "online_selection_authority_violations"
+                ],
                 "configured_dtype": payload["configured_dtype"],
                 "fixed_batch_shape": payload["fixed_batch_shape"],
+                "margin_thresholds": sorted(payload["margin_thresholds"]),
             }
         )
 
@@ -356,6 +429,17 @@ def finalize_quality(repo: Path, bootstrap_replicates: int) -> dict[str, Any]:
                 "terminal_exact_rate_vs_singleton": exact
                 / max(1, len(candidate)),
                 "catastrophic_outliers_delta_at_least_0.20": catastrophic,
+                "observed_terminal_mismatches": len(candidate) - exact,
+                "terminal_mismatch_rate_upper_95": (
+                    1.0 - 0.05 ** (1.0 / len(candidate))
+                    if exact == len(candidate) and candidate
+                    else None
+                ),
+                "interval_interpretation": (
+                    "paired bootstrap interval describes observed empirical "
+                    "error-rate delta on this holdout; it is not a "
+                    "population-equivalence certificate"
+                ),
                 "paired_bootstrap": paired_bootstrap(
                     candidate,
                     baseline,
@@ -379,14 +463,40 @@ def finalize_quality(repo: Path, bootstrap_replicates: int) -> dict[str, Any]:
         ("Qwen3-ASR-1.7B", "English"),
         ("Qwen3-ASR-1.7B", "Chinese"),
     }
-    passed = required_cells.issubset(complete_cells) and all(
-        comparison["catastrophic_outliers_delta_at_least_0.20"] == 0
-        and (
-            comparison["mode"] != "revtrace_risk_limited"
-            or comparison["paired_bootstrap"]["ci95_high"] <= 0.01
+    passed = (
+        required_cells.issubset(complete_cells)
+        and all(
+            comparison["catastrophic_outliers_delta_at_least_0.20"] == 0
+            and (
+                comparison["mode"]
+                not in {
+                    "revtrace_risk_limited",
+                    "deployed_revtrace_fixed_shape_authority",
+                }
+                or (
+                    comparison["paired_bootstrap"]["ci95_low"] <= 0.0
+                    <= comparison["paired_bootstrap"]["ci95_high"]
+                )
+            )
+            for comparison in comparisons
+            if (comparison["model"], comparison["language"])
+            in complete_cells
         )
-        for comparison in comparisons
-        if (comparison["model"], comparison["language"]) in complete_cells
+        and all(
+            row["online_selection_authority_violations"] == 0
+            for row in metrics
+            if row["mode"] == "deployed_revtrace_fixed_shape_authority"
+        )
+        and all(
+            row["margin_thresholds"]
+            == [
+                0.05
+                if row["model"] == "Qwen3-ASR-0.6B"
+                else 0.10
+            ]
+            for row in metrics
+            if row["mode"] == "deployed_revtrace_fixed_shape_authority"
+        )
     )
     payload = {
         "schema_version": 1,
@@ -424,8 +534,10 @@ def finalize_quality(repo: Path, bootstrap_replicates: int) -> dict[str, Any]:
         "claim_boundaries": [
             "quality is measured on a deterministic independent holdout manifest",
             "terminal exactness compares normalized text, not bitwise logits",
-            "zero observed outliers is empirical and paired-bootstrap bounded",
-            "FP32 is a distinct versioned observed-reproducible contract",
+            "zero observed outliers is empirical, not a population guarantee",
+            "0/64 terminal mismatch has a one-sided 95 percent upper bound of about 4.57 percent",
+            "deployed-path rows use the frozen headline thresholds: tau=0.05 for 0.6B and tau=0.10 for 1.7B",
+            "FP32 is a distinct versioned fixed contract; repeatability evidence comes from the separate 720/720 probe",
         ],
     }
     write_json(repo / "results/final_closure/quality/summary.json", payload)
@@ -732,6 +844,8 @@ def canonical_contracts(repo: Path) -> dict[str, Any]:
             ),
         },
     ]
+    for row in rows:
+        row["end_to_end_invariance_verified"] = False
     payload = {
         "schema_version": 1,
         "study": "RevTrace final canonical contract provenance",
@@ -751,26 +865,428 @@ def canonical_contracts(repo: Path) -> dict[str, Any]:
     return payload
 
 
-def pareto_rows(repo: Path, steady: dict[str, Any]) -> list[dict[str, Any]]:
+def mean_std(values: list[float]) -> dict[str, float | None]:
+    if not values:
+        return {"mean": None, "std": None}
+    return {
+        "mean": statistics.mean(values),
+        "std": statistics.stdev(values) if len(values) > 1 else 0.0,
+    }
+
+
+def finalize_energy(repo: Path) -> dict[str, Any]:
+    raw_dir = repo / "results/final_closure/energy/raw"
+    expected_thresholds = {
+        "Qwen3-ASR-0.6B": 0.05,
+        "Qwen3-ASR-1.7B": 0.10,
+    }
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for path in sorted(raw_dir.glob("*.json")):
+        payload = read_json(path)
+        grouped.setdefault(payload["model_name"], []).append(payload)
+    rows = []
+    required = {"Qwen3-ASR-0.6B", "Qwen3-ASR-1.7B"}
+    for model, payloads in sorted(grouped.items()):
+        service_energy = [
+            float(item["summary"]["service_energy"]["joules_per_audio_second"])
+            for item in payloads
+        ]
+        canonical_energy = [
+            float(
+                item["summary"]["canonical_audit_energy"][
+                    "joules_per_audio_second"
+                ]
+            )
+            for item in payloads
+        ]
+        service_efficiency = [1.0 / value for value in service_energy]
+        canonical_efficiency = [1.0 / value for value in canonical_energy]
+        service_goodput_per_watt = []
+        canonical_goodput_per_watt = []
+        service_gpu_normalized_goodput_per_watt = []
+        canonical_gpu_normalized_goodput_per_watt = []
+        wall_speedups = []
+        gpu_normalized_speedups = []
+        p99_seconds = []
+        verification_fractions = []
+        terminal_verification_fractions = []
+        nonterminal_verification_fractions = []
+        for item in payloads:
+            summary = item["summary"]
+            wall_speedups.append(
+                float(summary["deployed_two_gpu_wall_speedup"])
+            )
+            gpu_normalized_speedups.append(
+                float(summary["gpu_normalized_throughput_speedup"])
+            )
+            p99_seconds.append(
+                float(summary["state_entry_latency_seconds_p99"])
+            )
+            verification_fractions.append(
+                float(summary["verification_fraction"])
+            )
+            terminal_events = [
+                event for event in item["events"] if event["terminal"]
+            ]
+            nonterminal_events = [
+                event for event in item["events"] if not event["terminal"]
+            ]
+            terminal_verification_fractions.append(
+                sum(bool(event["verified"]) for event in terminal_events)
+                / len(terminal_events)
+            )
+            nonterminal_verification_fractions.append(
+                sum(bool(event["verified"]) for event in nonterminal_events)
+                / len(nonterminal_events)
+            )
+            service_power = (
+                summary["service_energy"]["joules"]
+                / summary["service_wall_seconds"]
+            )
+            canonical_power = (
+                summary["canonical_audit_energy"]["joules"]
+                / summary["canonical_audit_seconds_excluded_from_service"]
+            )
+            service_goodput_per_watt.append(
+                summary["deployed_slo_goodput_events_per_second"]
+                / service_power
+            )
+            canonical_goodput_per_watt.append(
+                summary["canonical_slo_goodput_events_per_second"]
+                / canonical_power
+            )
+            service_gpu_normalized_goodput_per_watt.append(
+                summary["deployed_slo_goodput_events_per_second"]
+                / 2.0
+                / service_power
+            )
+            canonical_gpu_normalized_goodput_per_watt.append(
+                summary["canonical_slo_goodput_events_per_second"]
+                / canonical_power
+            )
+        rows.append(
+            {
+                "model": model,
+                "replicates": len(payloads),
+                "margin_thresholds": sorted(
+                    {float(item["margin_threshold"]) for item in payloads}
+                ),
+                "headline_threshold_match": all(
+                    float(item["margin_threshold"])
+                    == expected_thresholds.get(model)
+                    for item in payloads
+                ),
+                "revtrace_joules_per_audio_second": mean_std(service_energy),
+                "all_canonical_joules_per_audio_second": mean_std(
+                    canonical_energy
+                ),
+                "revtrace_audio_seconds_per_joule": mean_std(
+                    service_efficiency
+                ),
+                "all_canonical_audio_seconds_per_joule": mean_std(
+                    canonical_efficiency
+                ),
+                "revtrace_slo_goodput_per_watt": mean_std(
+                    service_goodput_per_watt
+                ),
+                "all_canonical_slo_goodput_per_watt": mean_std(
+                    canonical_goodput_per_watt
+                ),
+                "revtrace_gpu_normalized_slo_goodput_per_watt": mean_std(
+                    service_gpu_normalized_goodput_per_watt
+                ),
+                "all_canonical_gpu_normalized_slo_goodput_per_watt": mean_std(
+                    canonical_gpu_normalized_goodput_per_watt
+                ),
+                "energy_ratio_revtrace_over_all_canonical": mean_std(
+                    [
+                        service / canonical
+                        for service, canonical in zip(
+                            service_energy, canonical_energy
+                        )
+                    ]
+                ),
+                "deployed_wall_speedup": mean_std(wall_speedups),
+                "gpu_normalized_speedup": mean_std(
+                    gpu_normalized_speedups
+                ),
+                "p99_seconds": mean_std(p99_seconds),
+                "verification_fraction": mean_std(verification_fractions),
+                "terminal_verification_fraction": mean_std(
+                    terminal_verification_fractions
+                ),
+                "nonterminal_verification_fraction": mean_std(
+                    nonterminal_verification_fractions
+                ),
+                "canonical_replay_output_disagreements": sum(
+                    int(item["summary"]["output_violation_events"])
+                    for item in payloads
+                ),
+                "canonical_replay_state_disagreements": sum(
+                    int(item["summary"]["state_projection_violation_events"])
+                    for item in payloads
+                ),
+                "online_stale_or_replayed_result_events": sum(
+                    int(item["summary"]["stale_or_replayed_result_events"])
+                    for item in payloads
+                ),
+            }
+        )
+    complete = required.issubset(grouped) and all(
+        len(grouped[model]) >= 3 for model in required
+    )
+    passed = complete and all(
+        row["online_stale_or_replayed_result_events"] == 0
+        and row["headline_threshold_match"]
+        for row in rows
+        if row["model"] in required
+    )
+    payload = {
+        "schema_version": 1,
+        "study": "RevTrace F6 matched headline energy closure",
+        "decision": (
+            "F6_MATCHED_ENERGY_MEASUREMENT_PASS"
+            if passed
+            else "F6_MATCHED_ENERGY_MEASUREMENT_INCOMPLETE_OR_FAIL"
+        ),
+        "rows": rows,
+        "protocol": {
+            "workload": "same c16, 30-second, synchronous mixed-language streams; headline tau=0.05 for 0.6B and tau=0.10 for 1.7B",
+            "power_scope": "both reserved RTX 3090 devices sampled in both service and all-canonical replay intervals",
+            "comparison": "paired within each run; model remains loaded; service and replay timing exclude one another; terminal all-canonical work executes only the fixed-shape authority and does not also execute a discarded singleton",
+            "boundary": "energy measurement closes the frontier; it does not require RevTrace to consume less total energy than a slower all-canonical execution; later canonical replay disagreements are reported separately from online authority",
+            "raw_code_commit_labels": sorted(
+                {
+                    item["environment"].get("code_commit", "UNRECORDED")
+                    for payloads in grouped.values()
+                    for item in payloads
+                }
+            ),
+            "final_runner_sha256": hashlib.sha256(
+                (
+                    repo / "scripts/remote/run_revtrace_dual_gpu.py"
+                ).read_bytes()
+            ).hexdigest(),
+            "provenance_boundary": "the remote project was not a Git checkout; raw runs retain their original code label, while the final runner hash and the change log identify the worktree source and reporting-only mid-run rename",
+        },
+    }
+    write_json(repo / "results/final_closure/energy/summary.json", payload)
+    return payload
+
+
+def finalize_steady_replications(repo: Path) -> dict[str, Any]:
+    path = repo / "results/final_closure/steady_replications/raw.json"
+    if not path.exists():
+        payload = {
+            "schema_version": 1,
+            "study": "RevTrace F7 steady-state replications",
+            "decision": "F7_STEADY_REPLICATION_INCOMPLETE",
+            "replicates": [],
+        }
+        write_json(
+            repo / "results/final_closure/steady_replications/summary.json",
+            payload,
+        )
+        return payload
+    raw = read_json(path)
+    stages = raw["stages"]
+    rows = []
+    for stage in stages:
+        rows.append(
+            {
+                "seed_label": stage["label"],
+                "events": stage["events"],
+                "goodput_events_per_second": stage[
+                    "goodput_events_per_second"
+                ],
+                "p99_seconds": stage["state_entry_latency_seconds_p99"],
+                "joules_per_audio_second": stage["energy"][
+                    "joules_per_audio_second"
+                ],
+                "verification_fraction": stage["verification_fraction"],
+                "unverified_fast_path_replay_roots": stage[
+                    "unverified_fast_path_replay_roots"
+                ],
+                "verified_canonical_replay_roots": stage[
+                    "verified_canonical_replay_roots"
+                ],
+                "deadline_miss_events": stage["deadline_miss_events"],
+                "threshold": stage["threshold"],
+                "risk_bound_source": stage["risk_bound_source"],
+                "risk_upper_bound": stage["risk_upper_bound"],
+                "fingerprint": stage["fingerprint"],
+                "continued_same_contract_epoch": stage[
+                    "continued_same_contract_epoch"
+                ],
+                "post_stage_replay_output_disagreements": stage[
+                    "output_violations"
+                ],
+                "post_stage_replay_state_disagreements": stage[
+                    "state_violations"
+                ],
+                "deadline_miss_rounds": sum(
+                    episode["deadline_miss_rounds"]
+                    for episode in stage["episodes_detail"]
+                ),
+            }
+        )
+    complete = (
+        len(rows) == 3
+        and len({row["seed_label"] for row in rows}) == 3
+        and len({row["fingerprint"] for row in rows}) == 1
+        and all(abs(row["threshold"] - 0.062501) < 1e-12 for row in rows)
+        and all(row["continued_same_contract_epoch"] for row in rows[1:])
+        and all(
+            row["risk_upper_bound"] is None
+            or row["risk_upper_bound"] <= 0.005
+            for row in rows
+        )
+        and all(
+            row["unverified_fast_path_replay_roots"] == 0 for row in rows
+        )
+    )
+    slo_all_pass = complete and all(
+        row["deadline_miss_events"] == 0 for row in rows
+    )
+    decision = (
+        "F7_STEADY_REPLICATION_PASS"
+        if slo_all_pass
+        else (
+            "F7_STEADY_REPLICATION_COMPLETE_WITH_TAIL_VARIANCE"
+            if complete
+            else "F7_STEADY_REPLICATION_FAIL_OR_INCOMPLETE"
+        )
+    )
+    payload = {
+        "schema_version": 1,
+        "study": "RevTrace F7 steady-state replications",
+        "decision": decision,
+        "source_runner_decision": raw["decision"],
+        "replicates": rows,
+        "aggregate": {
+            "goodput_events_per_second": mean_std(
+                [row["goodput_events_per_second"] for row in rows]
+            ),
+            "p99_seconds_mean": (
+                statistics.mean([row["p99_seconds"] for row in rows])
+                if rows
+                else None
+            ),
+            "p99_seconds_max": (
+                max(row["p99_seconds"] for row in rows) if rows else None
+            ),
+            "joules_per_audio_second": mean_std(
+                [row["joules_per_audio_second"] for row in rows]
+            ),
+            "verification_fraction": mean_std(
+                [row["verification_fraction"] for row in rows]
+            ),
+            "unverified_fast_path_replay_roots": sum(
+                row["unverified_fast_path_replay_roots"] for row in rows
+            ),
+            "verified_canonical_replay_roots": sum(
+                row["verified_canonical_replay_roots"] for row in rows
+            ),
+            "post_stage_replay_output_disagreements": sum(
+                row["post_stage_replay_output_disagreements"]
+                for row in rows
+            ),
+            "post_stage_replay_state_disagreements": sum(
+                row["post_stage_replay_state_disagreements"]
+                for row in rows
+            ),
+            "deadline_miss_events": sum(
+                row["deadline_miss_events"] for row in rows
+            ),
+            "deadline_miss_rounds": sum(
+                row["deadline_miss_rounds"] for row in rows
+            ),
+            "slo_replicates_passing": sum(
+                row["deadline_miss_events"] == 0 for row in rows
+            ),
+            "slo_replicates_total": len(rows),
+            "slo_tail_variance_detected": not slo_all_pass,
+        },
+        "provenance": {
+            "raw_code_commit_label": raw.get("environment", {}).get(
+                "code_commit", "UNRECORDED"
+            ),
+            "final_runner_sha256": hashlib.sha256(
+                (
+                    repo / "scripts/remote/run_phase5a_live_adaptive.py"
+                ).read_bytes()
+            ).hexdigest(),
+        },
+        "claim_boundaries": [
+            "the prior c14 certificate threshold is restored; the 1,350-event cold certification is not repeated",
+            "three reporting stages use independent episode seeds under one frozen contract",
+            "post-stage replay is excluded from service time and is not online selection-authority evidence",
+            "the first seed has two synchronized rounds above the 2-second deadline (28 event-level misses); this is retained as tail-latency variance rather than relabeled as a safety failure",
+            "the remote project was not a Git checkout; the compact artifact hashes the final runner and the change log records any protocol or reporting repair",
+        ],
+    }
+    write_json(
+        repo / "results/final_closure/steady_replications/summary.json",
+        payload,
+    )
+    return payload
+
+
+def pareto_rows(
+    repo: Path,
+    steady: dict[str, Any],
+    energy: dict[str, Any],
+) -> list[dict[str, Any]]:
     phase7 = read_json(repo / "results/phase7_1/performance_comparison.json")
     phase5 = read_json(repo / "results/phase5/summary.json")
     phase6 = read_json(repo / "results/phase6/summary.json")
     rows = []
+    energy_by_model = {row["model"]: row for row in energy.get("rows", [])}
     for row in phase7["headline_revtrace"]:
+        matched_energy = energy_by_model.get(row["model"])
         rows.append(
             {
-                "source": row["scope"],
+                "source": (
+                    f"F6 matched energy {row['scope']}"
+                    if matched_energy
+                    else row["scope"]
+                ),
                 "mechanism": "RevTrace risk-limited",
                 "model": row["model"],
                 "concurrency": 16,
-                "gpu_normalized_goodput_speedup": float(
-                    row["gpu_normalized_speedup"]
+                "gpu_normalized_goodput_speedup": (
+                    matched_energy["gpu_normalized_speedup"]["mean"]
+                    if matched_energy
+                    else float(row["gpu_normalized_speedup"])
                 ),
-                "p99_seconds": float(row["p99_state_entry_seconds"]),
-                "energy_joules_per_audio_second": None,
+                "p99_seconds": (
+                    matched_energy["p99_seconds"]["mean"]
+                    if matched_energy
+                    else float(row["p99_state_entry_seconds"])
+                ),
+                "energy_joules_per_audio_second": (
+                    matched_energy["revtrace_joules_per_audio_second"]["mean"]
+                    if matched_energy
+                    else None
+                ),
+                "all_canonical_energy_joules_per_audio_second": (
+                    matched_energy["all_canonical_joules_per_audio_second"][
+                        "mean"
+                    ]
+                    if matched_energy
+                    else None
+                ),
+                "energy_ratio_vs_all_canonical": (
+                    matched_energy["energy_ratio_revtrace_over_all_canonical"][
+                        "mean"
+                    ]
+                    if matched_energy
+                    else None
+                ),
                 "risk_status": "formal_anytime_contract_pass",
                 "slo_status": "pass",
                 "joint_feasible": True,
+                "matched_energy_baseline": matched_energy is not None,
             }
         )
     for row in phase5["phase5c"]["cells"]:
@@ -793,6 +1309,8 @@ def pareto_rows(repo: Path, steady: dict[str, Any]) -> list[dict[str, Any]]:
                 "energy_joules_per_audio_second": row[
                     "joules_per_audio_second"
                 ],
+                "all_canonical_energy_joules_per_audio_second": None,
+                "energy_ratio_vs_all_canonical": None,
                 "risk_status": (
                     "pass"
                     if risk_pass
@@ -804,6 +1322,7 @@ def pareto_rows(repo: Path, steady: dict[str, Any]) -> list[dict[str, Any]]:
                 ),
                 "slo_status": "pass" if slo_pass else "fail",
                 "joint_feasible": risk_pass and slo_pass,
+                "matched_energy_baseline": False,
             }
         )
     repaired = phase6["phase6b"]["summary"]
@@ -820,9 +1339,12 @@ def pareto_rows(repo: Path, steady: dict[str, Any]) -> list[dict[str, Any]]:
             "energy_joules_per_audio_second": repaired["service_energy"][
                 "joules_per_audio_second"
             ],
+            "all_canonical_energy_joules_per_audio_second": None,
+            "energy_ratio_vs_all_canonical": None,
             "risk_status": "observed_zero_after_repair",
             "slo_status": "fail",
             "joint_feasible": False,
+            "matched_energy_baseline": False,
         }
     )
     c14 = read_json(repo / "results/phase7_1/capacity_audit.json")[
@@ -839,9 +1361,12 @@ def pareto_rows(repo: Path, steady: dict[str, Any]) -> list[dict[str, Any]]:
             "energy_joules_per_audio_second": read_json(
                 repo / "results/phase7_1/c14_capacity/raw.json"
             )["stages"][0]["energy"]["joules_per_audio_second"],
+            "all_canonical_energy_joules_per_audio_second": None,
+            "energy_ratio_vs_all_canonical": None,
             "risk_status": "split_sample_contract_pass",
             "slo_status": "pass",
             "joint_feasible": True,
+            "matched_energy_baseline": False,
         }
     )
     rows.append(
@@ -855,6 +1380,8 @@ def pareto_rows(repo: Path, steady: dict[str, Any]) -> list[dict[str, Any]]:
             "energy_joules_per_audio_second": steady["steady_state"][
                 "joules_per_audio_second"
             ],
+            "all_canonical_energy_joules_per_audio_second": None,
+            "energy_ratio_vs_all_canonical": None,
             "risk_status": "continued_split_sample_contract_pass",
             "slo_status": (
                 "pass"
@@ -863,16 +1390,25 @@ def pareto_rows(repo: Path, steady: dict[str, Any]) -> list[dict[str, Any]]:
             ),
             "joint_feasible": steady["decision"]
             == "F2_STEADY_STATE_DECOMPOSITION_PASS",
+            "matched_energy_baseline": False,
         }
     )
     for row in rows:
-        row["pareto_eligible"] = bool(
+        row["comparison_eligible"] = bool(
             row["gpu_normalized_goodput_speedup"] is not None
             and row["p99_seconds"] is not None
         )
+        row["safe_frontier_eligible"] = bool(
+            row["comparison_eligible"] and row["joint_feasible"]
+        )
+        row["energy_frontier_eligible"] = bool(
+            row["safe_frontier_eligible"]
+            and row["energy_joules_per_audio_second"] is not None
+            and row["matched_energy_baseline"]
+        )
         row["comparison_scope"] = (
-            "same-task end-to-end Pareto point"
-            if row["pareto_eligible"]
+            "same-task end-to-end comparison point"
+            if row["comparison_eligible"]
             else "risk-SLO capacity point; no same-task normalized baseline"
         )
     return rows
@@ -897,6 +1433,16 @@ def markdown_table(rows: list[dict[str, Any]], fields: list[str]) -> str:
             value = row.get(field)
             if isinstance(value, float):
                 values.append(f"{value:.4f}")
+            elif (
+                isinstance(value, dict)
+                and set(value) == {"mean", "std"}
+                and value["mean"] is not None
+                and value["std"] is not None
+            ):
+                values.append(
+                    f"{float(value['mean']):.4f} +/- "
+                    f"{float(value['std']):.4f}"
+                )
             else:
                 values.append(str(value))
         body.append("| " + " | ".join(values) + " |")
@@ -917,14 +1463,23 @@ def freeze_artifact(repo: Path, results: dict[str, Any]) -> Path:
         / "results/final_closure/steady_state/"
         "initial_failure_analysis.json",
         repo / "results/final_closure/canonical_contracts.json",
+        repo / "results/final_closure/energy/summary.json",
+        repo / "results/final_closure/steady_replications/summary.json",
         repo / "results/final_closure/pareto.csv",
         repo / "results/final_closure/REPORT.md",
+        repo / "results/final_closure/F5_F8_CHANGELOG.md",
+        repo / "README.md",
         repo / "scripts/finalize_final_closure.py",
         repo / "scripts/build_final_quality_manifest.py",
         repo / "scripts/remote/run_final_quality_mode.py",
         repo / "scripts/remote/run_final_quality_closure.sh",
         repo / "scripts/remote/run_final_steady_state.sh",
+        repo / "scripts/remote/run_f5_deployed_quality.py",
+        repo / "scripts/remote/run_f5_deployed_quality.sh",
+        repo / "scripts/remote/run_f6_headline_energy.sh",
+        repo / "scripts/remote/run_f7_steady_replications.sh",
         repo / "scripts/remote/run_phase5a_live_adaptive.py",
+        repo / "scripts/remote/run_revtrace_dual_gpu.py",
         repo / "tests/test_final_closure.py",
         repo / "configs/final_evaluation_closure.json",
         repo / "docs/CLAIM_BOUNDARIES.md",
@@ -966,40 +1521,65 @@ def main() -> int:
     quality = finalize_quality(repo, args.bootstrap_replicates)
     steady = finalize_steady(repo)
     contracts = canonical_contracts(repo)
-    pareto = pareto_rows(repo, steady)
+    energy = finalize_energy(repo)
+    steady_replications = finalize_steady_replications(repo)
+    pareto = pareto_rows(repo, steady, energy)
     write_csv(repo / "results/final_closure/pareto.csv", pareto)
     joint = [row for row in pareto if row["joint_feasible"]]
     joint_pareto = [
-        row for row in joint if row["pareto_eligible"]
+        row for row in joint if row["safe_frontier_eligible"]
     ]
     joint_capacity_only = [
-        row for row in joint if not row["pareto_eligible"]
+        row for row in joint if not row["comparison_eligible"]
     ]
     infeasible = [row for row in pareto if not row["joint_feasible"]]
-    decision = (
-        "FINAL_EVALUATION_CLOSURE_PASS"
-        if (
-            quality["decision"] == "F1_QUALITY_PRESERVATION_PASS"
-            and steady["decision"] == "F2_STEADY_STATE_DECOMPOSITION_PASS"
-        )
-        else "FINAL_EVALUATION_CLOSURE_INCOMPLETE_OR_FAIL"
+    energy_frontier = [
+        row for row in pareto if row["energy_frontier_eligible"]
+    ]
+    closure_inputs_pass = (
+        quality["decision"] == "F1_QUALITY_PRESERVATION_PASS"
+        and steady["decision"] == "F2_STEADY_STATE_DECOMPOSITION_PASS"
+        and energy["decision"] == "F6_MATCHED_ENERGY_MEASUREMENT_PASS"
+        and steady_replications["decision"]
+        in {
+            "F7_STEADY_REPLICATION_PASS",
+            "F7_STEADY_REPLICATION_COMPLETE_WITH_TAIL_VARIANCE",
+        }
     )
+    if not closure_inputs_pass:
+        decision = "F5_F8_PROTOCOL_CLOSURE_INCOMPLETE_OR_FAIL"
+    elif (
+        steady_replications["decision"]
+        == "F7_STEADY_REPLICATION_COMPLETE_WITH_TAIL_VARIANCE"
+    ):
+        decision = "F5_F8_PROTOCOL_CLOSURE_PASS_WITH_F7_TAIL_VARIANCE"
+    else:
+        decision = "F5_F8_PROTOCOL_CLOSURE_PASS"
     summary = {
         "schema_version": 1,
         "study": "RevTrace Final Evaluation Closure",
         "decision": decision,
         "quality_decision": quality["decision"],
         "steady_state_decision": steady["decision"],
+        "energy_decision": energy["decision"],
+        "steady_replication_decision": steady_replications["decision"],
         "canonical_contract_decision": contracts["decision"],
         "pareto_rows": len(pareto),
         "joint_feasible_rows": len(joint),
-        "pareto_eligible_joint_rows": len(joint_pareto),
+        "comparison_eligible_rows": sum(
+            bool(row["comparison_eligible"]) for row in pareto
+        ),
+        "safe_frontier_rows": sum(
+            bool(row["safe_frontier_eligible"]) for row in pareto
+        ),
+        "energy_frontier_rows": len(energy_frontier),
         "joint_capacity_only_rows": len(joint_capacity_only),
         "infeasible_rows": len(infeasible),
         "claim_boundary": (
             "risk-limited authoritative commit and replay repeatability are "
             "separate guarantees; infeasible capacity cells are not headline "
-            "performance points"
+            "performance points; matched energy is required for the energy "
+            "frontier"
         ),
     }
     write_json(repo / "results/final_closure/summary.json", summary)
@@ -1011,10 +1591,14 @@ def main() -> int:
         "gpu_normalized_goodput_speedup",
         "p99_seconds",
         "energy_joules_per_audio_second",
+        "all_canonical_energy_joules_per_audio_second",
+        "energy_ratio_vs_all_canonical",
         "risk_status",
         "slo_status",
         "joint_feasible",
-        "pareto_eligible",
+        "comparison_eligible",
+        "safe_frontier_eligible",
+        "energy_frontier_eligible",
         "comparison_scope",
     ]
     quality_comparison_rows = [
@@ -1031,6 +1615,9 @@ def main() -> int:
             "catastrophic_outliers": row[
                 "catastrophic_outliers_delta_at_least_0.20"
             ],
+            "terminal_mismatch_rate_upper_95": row[
+                "terminal_mismatch_rate_upper_95"
+            ],
         }
         for row in quality["comparisons"]
     ]
@@ -1042,7 +1629,7 @@ Decision: **{decision}**
 
 Decision: **{quality['decision']}**
 
-{markdown_table(quality['metrics'], ['model', 'language', 'mode', 'utterances', 'wer', 'cer', 'partial_revision_edit_rate', 'verification_fraction'])}
+{markdown_table(quality['metrics'], ['model', 'language', 'mode', 'utterances', 'wer', 'cer', 'partial_revision_edit_rate', 'terminal_verification_fraction', 'nonterminal_verification_fraction', 'online_selection_authority_violations'])}
 
 ## F2 — Cold start versus steady state
 
@@ -1056,7 +1643,7 @@ Decision: **{steady['decision']}**
 
 ## F3 — Canonical contract matrix
 
-{markdown_table(contracts['contracts'], ['experiment', 'proposer_dtype', 'authoritative_draw', 'fixed_batch_shape', 'attention_backend', 'batch_invariant_requested', 'replay_guarantee'])}
+{markdown_table(contracts['contracts'], ['experiment', 'proposer_dtype', 'authoritative_draw', 'fixed_batch_shape', 'attention_backend', 'batch_invariant_requested', 'end_to_end_invariance_verified', 'replay_guarantee'])}
 
 ## F4 — Joint risk/SLO Pareto table
 
@@ -1074,6 +1661,32 @@ Decision: **{steady['decision']}**
 
 The table intentionally does not rank operator-only BIO/TBIK probes as
 end-to-end serving systems.
+
+## F5 - Deployed-path quality attachment
+
+The deployed quality rows use the real Phase-2 authority split: FP16 batched
+proposer, FP16 singleton authority for low-margin intermediate revisions, and
+GPU-1 FP16 fixed-shape b16 authority for terminal revisions.
+
+## F6 - Matched headline energy
+
+Decision: **{energy['decision']}**
+
+{markdown_table(energy['rows'], ['model', 'replicates', 'margin_thresholds', 'headline_threshold_match', 'revtrace_joules_per_audio_second', 'all_canonical_joules_per_audio_second', 'energy_ratio_revtrace_over_all_canonical', 'terminal_verification_fraction', 'nonterminal_verification_fraction', 'canonical_replay_state_disagreements', 'online_stale_or_replayed_result_events'])}
+
+## F7 - Independent steady-state replications
+
+Decision: **{steady_replications['decision']}**
+
+{markdown_table(steady_replications['replicates'], ['seed_label', 'events', 'goodput_events_per_second', 'p99_seconds', 'deadline_miss_events', 'deadline_miss_rounds', 'joules_per_audio_second', 'verification_fraction', 'unverified_fast_path_replay_roots', 'verified_canonical_replay_roots', 'post_stage_replay_output_disagreements', 'post_stage_replay_state_disagreements'])}
+
+The replication is complete, but not all seeds satisfy the 2-second tail target: {steady_replications['aggregate']['slo_replicates_passing']}/{steady_replications['aggregate']['slo_replicates_total']} seeds have zero deadline misses. Replay disagreements are later independent draws and are not online selection-authority violations.
+
+## F8 - Reporting repair
+
+FP32 is named `fp32_fixed_contract`; bootstrap intervals describe empirical
+holdout deltas; terminal and nonterminal verification are separated; and the
+comparison, safe-frontier, and matched-energy eligibility fields are distinct.
 """
     normalized_report_lines = []
     for line in report.splitlines():
@@ -1102,6 +1715,7 @@ end-to-end serving systems.
                 "ci95_low",
                 "ci95_high",
                 "catastrophic_outliers",
+                "terminal_mismatch_rate_upper_95",
             ],
         )
         + "\n\n## F2 - Cold start versus steady state\n",
@@ -1165,7 +1779,7 @@ end-to-end serving systems.
             }
         )
     )
-    return 0 if decision == "FINAL_EVALUATION_CLOSURE_PASS" else 2
+    return 0 if decision.startswith("F5_F8_PROTOCOL_CLOSURE_PASS") else 2
 
 
 if __name__ == "__main__":

@@ -185,9 +185,18 @@
 - The independent quality result covers deterministic 64-utterance
   LibriSpeech test-clean and AISHELL-1 holdouts. It is not a full-corpus WER
   leaderboard or a production quality-prevalence estimate.
+- A degenerate paired bootstrap interval of `[0, 0]` records zero empirical
+  error-rate delta on the evaluated holdout. It is not a mathematical
+  population-equivalence interval. With 0 terminal mismatches in 64 samples,
+  the exact one-sided 95% upper bound is about 4.57% per model-language cell.
 - The quality-only risk-limited mode applies a previously certified frozen
   policy to isolate transcript quality. The persistent steady-state experiment
   is the evidence for dynamically learned threshold behavior.
+- F5 separately evaluates the deployed Phase-2 authority split: the FP16
+  batched proposer and low-margin FP16 singleton authority share GPU 0, while
+  every terminal revision uses the real GPU-1 FP16 fixed-shape b16 authority.
+  Terminal and nonterminal verification fractions are reported separately.
+  The frozen headline thresholds are 0.05 for 0.6B and 0.10 for 1.7B.
 - The first steady-state attempt is retained as a mechanism-feedback failure.
   Its replay-audit roots were recorded but not assimilated into the dynamic
   failure floor. The repaired protocol uses a distinct adaptation split and
@@ -204,5 +213,29 @@
 - c14 capacity rows have risk, SLO, and energy evidence but no same-task
   all-canonical normalized-goodput baseline. They are not plotted as
   end-to-end Pareto speedup points.
+- F6 headline energy is paired against the exact contract-matched
+  all-canonical workload. The repaired baseline executes each terminal only
+  once through the fixed-shape authority; it does not also time a discarded
+  singleton. RevTrace uses 19.66% and 26.08% of matched all-canonical
+  J/audio-s for 0.6B and 1.7B, respectively. This is a measured two-GPU
+  energy comparison, not a claim about other hardware or arrival processes.
+- `comparison_eligible`, `safe_frontier_eligible`, and
+  `energy_frontier_eligible` are separate fields. A point may be shown as an
+  infeasible comparison without entering the safe frontier, and only a
+  matched all-canonical energy pair may enter the energy frontier.
 - Phase 2 FP16-b16, Phase 6 FP32-b16, Phase 7 FP16-b16, and Phase 7.1
   FP16-b14 are distinct versioned canonical contracts and are never pooled.
+- `batch_invariant_requested=true` records a runtime request, not verified
+  end-to-end audio-to-token invariance. Every frozen contract therefore also
+  records `end_to_end_invariance_verified=false`.
+- The reporting name `fp32_fixed_contract` replaces
+  `fp32_reproducible`. Repeatability evidence for that contract comes from
+  the separate 720/720 probe, not from the quality run itself.
+- Periodic post-stage canonical replay is excluded from service timing.
+  Replay disagreements and online selection-authority violations remain
+  separate evidence categories.
+- In the three independent F7 steady seeds, only two have zero deadline
+  misses. Seed 1 has two synchronized rounds above 2 seconds, which appear as
+  28 event-level misses because all 14 sessions share each round latency
+  (P99 2.028 s). This is retained as cross-seed tail variance; it is not
+  presented as an all-seed SLO pass or as a state-safety failure.

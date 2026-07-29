@@ -14,7 +14,8 @@
       "singleton_authoritative",
       "unprotected_batch",
       "revtrace_risk_limited",
-      "fp32_reproducible"
+      "fp32_fixed_contract",
+      "deployed_revtrace_fixed_shape_authority"
     ],
     "fixed_batch_shape": 16,
     "chunk_seconds": 2.0,
@@ -25,6 +26,16 @@
         "Qwen3-ASR-1.7B": 0.1
       },
       "boundary": "quality isolation only; the live F2 controller learns a dynamic threshold"
+    },
+    "deployed_path_attachment": {
+      "mode": "deployed_revtrace_fixed_shape_authority",
+      "proposer_dtype": "float16",
+      "terminal_authority": "GPU-1 float16 fixed-shape b16",
+      "intermediate_authority": "GPU-0 float16 singleton when margin is below the model-specific headline threshold",
+      "headline_margin_thresholds": {
+        "Qwen3-ASR-0.6B": 0.05,
+        "Qwen3-ASR-1.7B": 0.1
+      }
     },
     "bootstrap_replicates": 10000,
     "catastrophic_primary_error_delta": 0.2
@@ -48,5 +59,26 @@
     "risk_upper_limit": 0.005,
     "separate_infeasible_points": true,
     "operator_only_results_excluded": true
+  },
+  "energy_closure": {
+    "models": [
+      "Qwen3-ASR-0.6B",
+      "Qwen3-ASR-1.7B"
+    ],
+    "replicates_per_model": 3,
+    "concurrency": 16,
+    "duration_seconds": 30,
+    "headline_margin_thresholds": {
+      "Qwen3-ASR-0.6B": 0.05,
+      "Qwen3-ASR-1.7B": 0.1
+    },
+    "power_scope": "both reserved GPUs in service and all-canonical replay"
+  },
+  "steady_replication": {
+    "model": "Qwen3-ASR-0.6B",
+    "replicates": 3,
+    "episodes_per_replicate": 6,
+    "restored_threshold": 0.062501,
+    "cold_certification_repeated": false
   }
 }

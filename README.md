@@ -53,32 +53,44 @@ Current decision:
 
 `PHASE3A_ADAPTIVE_CONTROL_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED`
 
-## Final evaluation closure
+## F5-F8 submission closure
 
-The submission-facing four-part closure is complete:
+The deployment-path, matched-energy, replication, and reporting protocols are
+complete:
 
-`FINAL_EVALUATION_CLOSURE_PASS`
+`F5_F8_PROTOCOL_CLOSURE_PASS_WITH_F7_TAIL_VARIANCE`
 
-- **Quality:** 1,024 real ASR executions cover two Qwen3-ASR models,
-  independent 64-utterance LibriSpeech test-clean and AISHELL-1 holdouts, and
-  four execution modes. RevTrace is terminal-text exact with the FP16
-  singleton authoritative baseline in all four model-language cells. Its
-  paired WER/CER delta and all 10,000-replicate bootstrap interval endpoints
-  are zero; no catastrophic primary-error outlier is observed.
-- **Cold versus steady:** one persistent c14 process certifies after 1,350
-  events (interpolated 102.635 s). A separate adaptation split raises the
-  learned threshold from `0.015626` to `0.062501` using two root
-  counterexamples. The independently seeded steady split verifies 9.05% of
-  events, sustains 14.99 state entries/s, remains below the 2 s SLO at
-  P99=1.766 s, and uses 10.00 J/audio-s.
-- **Guarantee boundary:** the steady split has zero unverified fast-path replay
-  roots, but three already-verified canonical draws differ when executed
-  again later. These are retained as FP16 replay non-repeatability, not
-  relabeled as online selection-authority failures.
-- **Evidence separation:** four canonical contracts are frozen separately.
-  The final Pareto table keeps two same-task end-to-end joint-feasible points,
-  two additional risk/SLO capacity-only points without a normalized baseline,
-  and nine infeasible or statistically uncertified points.
+- **F5 deployed-path quality:** the full quality matrix now contains 1,280
+  real ASR executions across two models, two languages, and five execution
+  modes. The additional 256 executions use the real Phase-2 authority split:
+  GPU-0 FP16 batched proposal, model-specific low-margin singleton authority,
+  and GPU-1 FP16 fixed-shape b16 terminal authority. All four deployed cells
+  are terminal-text exact with their paired singleton reference, have zero
+  empirical WER/CER delta, zero catastrophic outliers, and zero online
+  selection-authority violations. The 0/64 one-sided 95% terminal-mismatch
+  upper bound remains 4.57% per cell.
+- **F6 matched energy:** three paired c16/d30 runs per model sample both
+  reserved RTX 3090s during both RevTrace service and all-canonical replay.
+  Qwen3-ASR-0.6B achieves `5.890 +/- 0.111x` wall and
+  `2.945 +/- 0.055x` GPU-normalized speedup while using
+  `5.398 +/- 0.096` versus `27.450 +/- 0.041` J/audio-s. Qwen3-ASR-1.7B
+  achieves `4.756 +/- 0.071x` and `2.378 +/- 0.036x`, using
+  `8.166 +/- 0.131` versus `31.312 +/- 0.191` J/audio-s. Online stale/replay
+  events and matched canonical replay output/state disagreements are all zero.
+- **F7 independent steady seeds:** the restored c14 contract is repeated
+  without another 1,350-event cold certification. Across three independent
+  six-episode seeds, goodput is `15.874 +/- 0.588` state entries/s, energy is
+  `9.450 +/- 0.208` J/audio-s, and verification is
+  `8.545 +/- 0.437%`. Every seed has zero unverified fast-path replay roots.
+  Tail behavior is not hidden: two seeds have zero deadline misses, while the
+  first has two synchronized rounds above 2 seconds (28 event-level misses)
+  and P99=2.028 s; mean P99 is 1.916 s.
+- **F8 evidence separation:** `fp32_fixed_contract` replaces the overbroad
+  reproducibility label; empirical `[0,0]` bootstrap deltas are not population
+  equivalence; terminal/nonterminal verification is separated; comparison,
+  safe-frontier, and energy-frontier eligibility are distinct; and every
+  frozen contract explicitly records
+  `end_to_end_invariance_verified=false`.
 
 See the
 [final closure report](results/final_closure/REPORT.md),

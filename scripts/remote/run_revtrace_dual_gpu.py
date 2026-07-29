@@ -524,8 +524,8 @@ def main() -> int:
     events: list[dict[str, Any]] = []
     proposer_seconds = 0.0
     verifier_seconds = 0.0
-    proposer_gpu_terminal_verifier_seconds = 0.0
-    proposer_gpu_terminal_verified_events = 0
+    proposer_gpu_intermediate_verifier_seconds = 0.0
+    proposer_gpu_intermediate_verified_events = 0
     verifier_request_seconds: list[float] = []
     verifier_wait_seconds: list[float] = []
     verifier_wait_terminal_seconds: list[float] = []
@@ -816,8 +816,8 @@ def main() -> int:
                         singleton_records(asr, [verify_item["job"]])
                     )
                     request_elapsed = local_request_seconds[0]
-                    proposer_gpu_terminal_verifier_seconds += elapsed
-                    proposer_gpu_terminal_verified_events += 1
+                    proposer_gpu_intermediate_verifier_seconds += elapsed
+                    proposer_gpu_intermediate_verified_events += 1
                     verifier_request_seconds.append(request_elapsed)
                     revision_id = pending["ticket"]["revision_id"]
                     current = pending_by_revision.pop(revision_id, None)
@@ -901,8 +901,8 @@ def main() -> int:
                             singleton_records(asr, [verify_item["job"]])
                         )
                         request_elapsed = local_request_seconds[0]
-                        proposer_gpu_terminal_verifier_seconds += elapsed
-                        proposer_gpu_terminal_verified_events += 1
+                        proposer_gpu_intermediate_verifier_seconds += elapsed
+                        proposer_gpu_intermediate_verified_events += 1
                         verifier_request_seconds.append(request_elapsed)
                         revision_id = pending["ticket"]["revision_id"]
                         current = pending_by_revision.pop(revision_id, None)
@@ -1008,6 +1008,7 @@ def main() -> int:
         ]
         audit_events: list[dict[str, Any]] = []
         audit_request_seconds: list[float] = []
+        audit_elapsed_seconds = 0.0
         for chunk_index in range(rounds):
             terminal = chunk_index == rounds - 1
             audit_jobs: list[dict[str, Any]] = []
@@ -1024,11 +1025,15 @@ def main() -> int:
                 )
                 audit_jobs.append(job)
                 audit_prefixes.append(prefix)
-                outputs, _, request_seconds = singleton_records(asr, [job])
-                audit_request_seconds.extend(request_seconds)
-                singleton_audit_records.append(
-                    candidate_record(outputs[0])
-                )
+                if not terminal:
+                    outputs, elapsed, request_seconds = singleton_records(
+                        asr, [job]
+                    )
+                    audit_elapsed_seconds += elapsed
+                    audit_request_seconds.extend(request_seconds)
+                    singleton_audit_records.append(
+                        candidate_record(outputs[0])
+                    )
             selected_audit_records = singleton_audit_records
             if terminal:
                 audit_items = [
@@ -1048,6 +1053,7 @@ def main() -> int:
                 terminal_records: list[dict[str, Any] | None] = [
                     None for _ in audit_items
                 ]
+                terminal_batch_elapsed = 0.0
                 for begin in range(
                     0,
                     len(audit_items),
@@ -1072,6 +1078,12 @@ def main() -> int:
                                 "unexpected terminal audit result: "
                                 f"{message}"
                             )
+                        terminal_batch_elapsed += float(
+                            message.get("elapsed_seconds", 0.0)
+                        )
+                        audit_request_seconds.append(
+                            float(message["request_seconds"])
+                        )
                         terminal_records[
                             begin + int(message["position"])
                         ] = message["record"]
@@ -1079,6 +1091,7 @@ def main() -> int:
                     raise AssertionError(
                         "terminal audit returned an incomplete batch"
                     )
+                audit_elapsed_seconds += terminal_batch_elapsed
                 selected_audit_records = [
                     item
                     for item in terminal_records
@@ -1109,10 +1122,11 @@ def main() -> int:
                 apply_candidate_record(state, selected_record, prefix)
         audit = {
             "kind": "audit_complete",
-            "elapsed_seconds": sum(audit_request_seconds),
+            "elapsed_seconds": audit_elapsed_seconds,
             "request_seconds": audit_request_seconds,
             "events": audit_events,
             "hybrid_terminal_canonical": True,
+            "redundant_terminal_singleton_suppressed": True,
         }
     else:
         command_queues[0].put({"kind": "audit"})
@@ -1143,6 +1157,14 @@ def main() -> int:
         )
 
     verified_events = sum(bool(event["verified"]) for event in events)
+    terminal_events = [event for event in events if event["terminal"]]
+    nonterminal_events = [event for event in events if not event["terminal"]]
+    terminal_verified_events = sum(
+        bool(event["verified"]) for event in terminal_events
+    )
+    nonterminal_verified_events = sum(
+        bool(event["verified"]) for event in nonterminal_events
+    )
     reference_seconds = float(audit["elapsed_seconds"])
     online_speedup = reference_seconds / service_wall_seconds
     gpu_normalized_speedup = reference_seconds / (
@@ -1200,11 +1222,21 @@ def main() -> int:
         "max_pending_verifications": max_pending,
         "proposer_service_seconds": proposer_seconds,
         "verifier_service_seconds": verifier_seconds,
-        "proposer_gpu_terminal_verifier_seconds": (
-            proposer_gpu_terminal_verifier_seconds
+        "proposer_gpu_intermediate_verifier_seconds": (
+            proposer_gpu_intermediate_verifier_seconds
         ),
-        "proposer_gpu_terminal_verified_events": (
-            proposer_gpu_terminal_verified_events
+        "proposer_gpu_intermediate_verified_events": (
+            proposer_gpu_intermediate_verified_events
+        ),
+        "terminal_verification_fraction": (
+            terminal_verified_events / len(terminal_events)
+            if terminal_events
+            else 0.0
+        ),
+        "nonterminal_verification_fraction": (
+            nonterminal_verified_events / len(nonterminal_events)
+            if nonterminal_events
+            else 0.0
         ),
         "verifier_to_proposer_service_ratio": verifier_ratio,
         "service_wall_seconds": service_wall_seconds,
@@ -1312,7 +1344,8 @@ def main() -> int:
                 "empirical scheduling signal; not a deterministic certificate"
             ),
             "audit": (
-                "fresh singleton replay after service; excluded from timing"
+                "fresh contract-matched canonical replay after service; "
+                "excluded from service timing"
             ),
         },
         "summary": summary,

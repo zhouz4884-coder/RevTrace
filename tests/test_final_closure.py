@@ -87,3 +87,20 @@ def test_initial_failure_summary_separates_roots_from_cascades() -> None:
     assert result["root_counterexamples"] == 2
     assert result["cascade_descendants"] == 1
     assert result["root_margins"] == [0.03125, 0.0625]
+
+
+def test_fp32_mode_is_reported_as_fixed_contract() -> None:
+    assert (
+        MODULE.RAW_MODE_NAMES["fp32_reproducible"]
+        == "fp32_fixed_contract"
+    )
+
+
+def test_mean_std_keeps_replication_variance() -> None:
+    result = MODULE.mean_std([1.0, 2.0, 3.0])
+    assert result["mean"] == 2.0
+    assert result["std"] == 1.0
+
+
+def test_empty_replication_summary_is_explicit() -> None:
+    assert MODULE.mean_std([]) == {"mean": None, "std": None}

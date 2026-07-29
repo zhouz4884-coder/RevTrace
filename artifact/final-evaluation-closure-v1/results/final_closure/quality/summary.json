@@ -2,15 +2,19 @@
   "claim_boundaries": [
     "quality is measured on a deterministic independent holdout manifest",
     "terminal exactness compares normalized text, not bitwise logits",
-    "zero observed outliers is empirical and paired-bootstrap bounded",
-    "FP32 is a distinct versioned observed-reproducible contract"
+    "zero observed outliers is empirical, not a population guarantee",
+    "0/64 terminal mismatch has a one-sided 95 percent upper bound of about 4.57 percent",
+    "deployed-path rows use the frozen headline thresholds: tau=0.05 for 0.6B and tau=0.10 for 1.7B",
+    "FP32 is a distinct versioned fixed contract; repeatability evidence comes from the separate 720/720 probe"
   ],
   "comparisons": [
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "Chinese",
-      "mode": "fp32_reproducible",
+      "mode": "deployed_revtrace_fixed_shape_authority",
       "model": "Qwen3-ASR-0.6B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -19,13 +23,34 @@
       },
       "paired_utterances": 64,
       "primary_metric": "cer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
+      "language": "Chinese",
+      "mode": "fp32_fixed_contract",
+      "model": "Qwen3-ASR-0.6B",
+      "observed_terminal_mismatches": 0,
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "cer",
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "Chinese",
       "mode": "revtrace_risk_limited",
       "model": "Qwen3-ASR-0.6B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -34,13 +59,16 @@
       },
       "paired_utterances": 64,
       "primary_metric": "cer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "Chinese",
       "mode": "unprotected_batch",
       "model": "Qwen3-ASR-0.6B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -49,13 +77,34 @@
       },
       "paired_utterances": 64,
       "primary_metric": "cer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "English",
-      "mode": "fp32_reproducible",
+      "mode": "deployed_revtrace_fixed_shape_authority",
       "model": "Qwen3-ASR-0.6B",
+      "observed_terminal_mismatches": 0,
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "wer",
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
+      "language": "English",
+      "mode": "fp32_fixed_contract",
+      "model": "Qwen3-ASR-0.6B",
+      "observed_terminal_mismatches": 1,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": -0.0023094688221708994,
@@ -64,13 +113,16 @@
       },
       "paired_utterances": 64,
       "primary_metric": "wer",
-      "terminal_exact_rate_vs_singleton": 0.984375
+      "terminal_exact_rate_vs_singleton": 0.984375,
+      "terminal_mismatch_rate_upper_95": null
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "English",
       "mode": "revtrace_risk_limited",
       "model": "Qwen3-ASR-0.6B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -79,13 +131,16 @@
       },
       "paired_utterances": 64,
       "primary_metric": "wer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "English",
       "mode": "unprotected_batch",
       "model": "Qwen3-ASR-0.6B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -94,13 +149,16 @@
       },
       "paired_utterances": 64,
       "primary_metric": "wer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "Chinese",
-      "mode": "fp32_reproducible",
+      "mode": "deployed_revtrace_fixed_shape_authority",
       "model": "Qwen3-ASR-1.7B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -109,13 +167,34 @@
       },
       "paired_utterances": 64,
       "primary_metric": "cer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
+      "language": "Chinese",
+      "mode": "fp32_fixed_contract",
+      "model": "Qwen3-ASR-1.7B",
+      "observed_terminal_mismatches": 0,
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "cer",
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "Chinese",
       "mode": "revtrace_risk_limited",
       "model": "Qwen3-ASR-1.7B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -124,13 +203,16 @@
       },
       "paired_utterances": 64,
       "primary_metric": "cer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "Chinese",
       "mode": "unprotected_batch",
       "model": "Qwen3-ASR-1.7B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -139,13 +221,16 @@
       },
       "paired_utterances": 64,
       "primary_metric": "cer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "English",
-      "mode": "fp32_reproducible",
+      "mode": "deployed_revtrace_fixed_shape_authority",
       "model": "Qwen3-ASR-1.7B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -154,13 +239,34 @@
       },
       "paired_utterances": 64,
       "primary_metric": "wer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
+      "language": "English",
+      "mode": "fp32_fixed_contract",
+      "model": "Qwen3-ASR-1.7B",
+      "observed_terminal_mismatches": 0,
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "wer",
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "English",
       "mode": "revtrace_risk_limited",
       "model": "Qwen3-ASR-1.7B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -169,13 +275,16 @@
       },
       "paired_utterances": 64,
       "primary_metric": "wer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     },
     {
       "catastrophic_outliers_delta_at_least_0.20": 0,
+      "interval_interpretation": "paired bootstrap interval describes observed empirical error-rate delta on this holdout; it is not a population-equivalence certificate",
       "language": "English",
       "mode": "unprotected_batch",
       "model": "Qwen3-ASR-1.7B",
+      "observed_terminal_mismatches": 0,
       "paired_bootstrap": {
         "ci95_high": 0.0,
         "ci95_low": 0.0,
@@ -184,7 +293,8 @@
       },
       "paired_utterances": 64,
       "primary_metric": "wer",
-      "terminal_exact_rate_vs_singleton": 1.0
+      "terminal_exact_rate_vs_singleton": 1.0,
+      "terminal_mismatch_rate_upper_95": 0.045729702330762456
     }
   ],
   "complete_model_language_cells": [
@@ -214,12 +324,36 @@
   "metrics": [
     {
       "cer": 0.027056277056277056,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "Chinese",
+      "margin_thresholds": [
+        0.05
+      ],
+      "mode": "deployed_revtrace_fixed_shape_authority",
+      "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.02727272727272727,
+      "online_selection_authority_violations": 0,
+      "partial_revision_edit_rate": 0.3162037718662329,
+      "terminal_verification_fraction": 1.0,
+      "utterances": 64,
+      "verification_fraction": 0.3850574712643678,
+      "wer": null
+    },
+    {
+      "cer": 0.027056277056277056,
       "configured_dtype": "float32",
       "fixed_batch_shape": 16,
       "language": "Chinese",
-      "mode": "fp32_reproducible",
+      "margin_thresholds": [
+        0.05
+      ],
+      "mode": "fp32_fixed_contract",
       "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.31606172641168745,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": null
@@ -229,9 +363,15 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 16,
       "language": "Chinese",
+      "margin_thresholds": [
+        0.05
+      ],
       "mode": "revtrace_risk_limited",
       "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.02727272727272727,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.3162037718662329,
+      "terminal_verification_fraction": 1.0,
       "utterances": 64,
       "verification_fraction": 0.3850574712643678,
       "wer": null
@@ -241,9 +381,15 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 1,
       "language": "Chinese",
+      "margin_thresholds": [
+        0.05
+      ],
       "mode": "singleton_authoritative",
       "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.3162037718662329,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": null
@@ -253,21 +399,51 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 16,
       "language": "Chinese",
+      "margin_thresholds": [
+        0.05
+      ],
       "mode": "unprotected_batch",
       "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.31606172641168745,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": null
+    },
+    {
+      "cer": 0.0055526635432934235,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "English",
+      "margin_thresholds": [
+        0.05
+      ],
+      "mode": "deployed_revtrace_fixed_shape_authority",
+      "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.024630541871921183,
+      "online_selection_authority_violations": 0,
+      "partial_revision_edit_rate": 0.25414453707603685,
+      "terminal_verification_fraction": 1.0,
+      "utterances": 64,
+      "verification_fraction": 0.25842696629213485,
+      "wer": 0.021488871834228703
     },
     {
       "cer": 0.0052056220718375845,
       "configured_dtype": "float32",
       "fixed_batch_shape": 16,
       "language": "English",
-      "mode": "fp32_reproducible",
+      "margin_thresholds": [
+        0.05
+      ],
+      "mode": "fp32_fixed_contract",
       "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.254111875316833,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": 0.02072141212586339
@@ -277,9 +453,15 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 16,
       "language": "English",
+      "margin_thresholds": [
+        0.05
+      ],
       "mode": "revtrace_risk_limited",
       "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.024630541871921183,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.25414453707603685,
+      "terminal_verification_fraction": 1.0,
       "utterances": 64,
       "verification_fraction": 0.25842696629213485,
       "wer": 0.021488871834228703
@@ -289,9 +471,15 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 1,
       "language": "English",
+      "margin_thresholds": [
+        0.05
+      ],
       "mode": "singleton_authoritative",
       "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.25414453707603685,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": 0.021488871834228703
@@ -301,21 +489,51 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 16,
       "language": "English",
+      "margin_thresholds": [
+        0.05
+      ],
       "mode": "unprotected_batch",
       "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.25414453707603685,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": 0.021488871834228703
     },
     {
       "cer": 0.021645021645021644,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "Chinese",
+      "margin_thresholds": [
+        0.1
+      ],
+      "mode": "deployed_revtrace_fixed_shape_authority",
+      "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.01818181818181818,
+      "online_selection_authority_violations": 0,
+      "partial_revision_edit_rate": 0.3182185002390232,
+      "terminal_verification_fraction": 1.0,
+      "utterances": 64,
+      "verification_fraction": 0.3793103448275862,
+      "wer": null
+    },
+    {
+      "cer": 0.021645021645021644,
       "configured_dtype": "float32",
       "fixed_batch_shape": 16,
       "language": "Chinese",
-      "mode": "fp32_reproducible",
+      "margin_thresholds": [
+        0.1
+      ],
+      "mode": "fp32_fixed_contract",
       "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.3182185002390232,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": null
@@ -325,9 +543,15 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 16,
       "language": "Chinese",
+      "margin_thresholds": [
+        0.1
+      ],
       "mode": "revtrace_risk_limited",
       "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.00909090909090909,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.3182185002390232,
+      "terminal_verification_fraction": 1.0,
       "utterances": 64,
       "verification_fraction": 0.3735632183908046,
       "wer": null
@@ -337,9 +561,15 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 1,
       "language": "Chinese",
+      "margin_thresholds": [
+        0.1
+      ],
       "mode": "singleton_authoritative",
       "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.3182185002390232,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": null
@@ -349,21 +579,51 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 16,
       "language": "Chinese",
+      "margin_thresholds": [
+        0.1
+      ],
       "mode": "unprotected_batch",
       "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.3182185002390232,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": null
     },
     {
       "cer": 0.007634912372028457,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "English",
+      "margin_thresholds": [
+        0.1
+      ],
+      "mode": "deployed_revtrace_fixed_shape_authority",
+      "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.06403940886699508,
+      "online_selection_authority_violations": 0,
+      "partial_revision_edit_rate": 0.24714250007514726,
+      "terminal_verification_fraction": 1.0,
+      "utterances": 64,
+      "verification_fraction": 0.2883895131086142,
+      "wer": 0.023023791250959325
+    },
+    {
+      "cer": 0.007634912372028457,
       "configured_dtype": "float32",
       "fixed_batch_shape": 16,
       "language": "English",
-      "mode": "fp32_reproducible",
+      "margin_thresholds": [
+        0.1
+      ],
+      "mode": "fp32_fixed_contract",
       "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.24713128262424516,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": 0.023023791250959325
@@ -373,9 +633,15 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 16,
       "language": "English",
+      "margin_thresholds": [
+        0.1
+      ],
       "mode": "revtrace_risk_limited",
       "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.06403940886699508,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.24714250007514726,
+      "terminal_verification_fraction": 1.0,
       "utterances": 64,
       "verification_fraction": 0.2883895131086142,
       "wer": 0.023023791250959325
@@ -385,9 +651,15 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 1,
       "language": "English",
+      "margin_thresholds": [
+        0.1
+      ],
       "mode": "singleton_authoritative",
       "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.24714250007514726,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": 0.023023791250959325
@@ -397,9 +669,15 @@
       "configured_dtype": "float16",
       "fixed_batch_shape": 16,
       "language": "English",
+      "margin_thresholds": [
+        0.1
+      ],
       "mode": "unprotected_batch",
       "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": 0.0,
+      "online_selection_authority_violations": 0,
       "partial_revision_edit_rate": 0.24714250007514726,
+      "terminal_verification_fraction": 0.0,
       "utterances": 64,
       "verification_fraction": 0.0,
       "wer": 0.023023791250959325

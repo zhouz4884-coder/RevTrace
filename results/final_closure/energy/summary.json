@@ -1,0 +1,160 @@
+{
+  "decision": "F6_MATCHED_ENERGY_MEASUREMENT_PASS",
+  "protocol": {
+    "boundary": "energy measurement closes the frontier; it does not require RevTrace to consume less total energy than a slower all-canonical execution; later canonical replay disagreements are reported separately from online authority",
+    "comparison": "paired within each run; model remains loaded; service and replay timing exclude one another; terminal all-canonical work executes only the fixed-shape authority and does not also execute a discarded singleton",
+    "final_runner_sha256": "0672906fbe962b22fdafcf57fa6248778e60b3813ed7fd90ac54edc8ad0c7a13",
+    "power_scope": "both reserved RTX 3090 devices sampled in both service and all-canonical replay intervals",
+    "provenance_boundary": "the remote project was not a Git checkout; raw runs retain their original code label, while the final runner hash and the change log identify the worktree source and reporting-only mid-run rename",
+    "raw_code_commit_labels": [
+      "UNRECORDED"
+    ],
+    "workload": "same c16, 30-second, synchronous mixed-language streams; headline tau=0.05 for 0.6B and tau=0.10 for 1.7B"
+  },
+  "rows": [
+    {
+      "all_canonical_audio_seconds_per_joule": {
+        "mean": 0.03643033480213235,
+        "std": 5.5057515968049304e-05
+      },
+      "all_canonical_gpu_normalized_slo_goodput_per_watt": {
+        "mean": 0.018215167401066174,
+        "std": 2.7528757984026556e-05
+      },
+      "all_canonical_joules_per_audio_second": {
+        "mean": 27.44969343166133,
+        "std": 0.04146386748083836
+      },
+      "all_canonical_slo_goodput_per_watt": {
+        "mean": 0.018215167401066174,
+        "std": 2.7528757984026556e-05
+      },
+      "canonical_replay_output_disagreements": 0,
+      "canonical_replay_state_disagreements": 0,
+      "deployed_wall_speedup": {
+        "mean": 5.890191104632213,
+        "std": 0.11072526049506871
+      },
+      "energy_ratio_revtrace_over_all_canonical": {
+        "mean": 0.19664057273134325,
+        "std": 0.003202364468871563
+      },
+      "gpu_normalized_speedup": {
+        "mean": 2.9450955523161064,
+        "std": 0.05536263024753436
+      },
+      "headline_threshold_match": true,
+      "margin_thresholds": [
+        0.05
+      ],
+      "model": "Qwen3-ASR-0.6B",
+      "nonterminal_verification_fraction": {
+        "mean": 0.013392857142857142,
+        "std": 0.0
+      },
+      "online_stale_or_replayed_result_events": 0,
+      "p99_seconds": {
+        "mean": 1.3704647856298833,
+        "std": 0.015288279533625668
+      },
+      "replicates": 3,
+      "revtrace_audio_seconds_per_joule": {
+        "mean": 0.18529962289939683,
+        "std": 0.0033205969964202127
+      },
+      "revtrace_gpu_normalized_slo_goodput_per_watt": {
+        "mean": 0.0463249057248492,
+        "std": 0.0008301492491050493
+      },
+      "revtrace_joules_per_audio_second": {
+        "mean": 5.397811652744018,
+        "std": 0.09597756707917793
+      },
+      "revtrace_slo_goodput_per_watt": {
+        "mean": 0.0926498114496984,
+        "std": 0.0016602984982100985
+      },
+      "terminal_verification_fraction": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "verification_fraction": {
+        "mean": 0.07916666666666666,
+        "std": 0.0
+      }
+    },
+    {
+      "all_canonical_audio_seconds_per_joule": {
+        "mean": 0.031936962890646604,
+        "std": 0.00019496858998904358
+      },
+      "all_canonical_gpu_normalized_slo_goodput_per_watt": {
+        "mean": 0.015968481445323306,
+        "std": 9.74842949945237e-05
+      },
+      "all_canonical_joules_per_audio_second": {
+        "mean": 31.312457485119793,
+        "std": 0.1907446733036927
+      },
+      "all_canonical_slo_goodput_per_watt": {
+        "mean": 0.015968481445323306,
+        "std": 9.74842949945237e-05
+      },
+      "canonical_replay_output_disagreements": 0,
+      "canonical_replay_state_disagreements": 0,
+      "deployed_wall_speedup": {
+        "mean": 4.756045961360224,
+        "std": 0.07122841973912707
+      },
+      "energy_ratio_revtrace_over_all_canonical": {
+        "mean": 0.26076619407227614,
+        "std": 0.002816435721778831
+      },
+      "gpu_normalized_speedup": {
+        "mean": 2.378022980680112,
+        "std": 0.03561420986956353
+      },
+      "headline_threshold_match": true,
+      "margin_thresholds": [
+        0.1
+      ],
+      "model": "Qwen3-ASR-1.7B",
+      "nonterminal_verification_fraction": {
+        "mean": 0.03125,
+        "std": 0.0
+      },
+      "online_stale_or_replayed_result_events": 0,
+      "p99_seconds": {
+        "mean": 1.5047621770917126,
+        "std": 0.022221062635724462
+      },
+      "replicates": 3,
+      "revtrace_audio_seconds_per_joule": {
+        "mean": 0.12248714233225036,
+        "std": 0.0019476759717792585
+      },
+      "revtrace_gpu_normalized_slo_goodput_per_watt": {
+        "mean": 0.03062178558306259,
+        "std": 0.00048691899294481413
+      },
+      "revtrace_joules_per_audio_second": {
+        "mean": 8.165506533143946,
+        "std": 0.13059049477442625
+      },
+      "revtrace_slo_goodput_per_watt": {
+        "mean": 0.06124357116612518,
+        "std": 0.0009738379858896283
+      },
+      "terminal_verification_fraction": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "verification_fraction": {
+        "mean": 0.09583333333333334,
+        "std": 0.0
+      }
+    }
+  ],
+  "schema_version": 1,
+  "study": "RevTrace F6 matched headline energy closure"
+}
