@@ -252,9 +252,30 @@
   seed-P99 upper bounds are 1.271 s and 1.748 s. The risk upper bound is
   0.499706%; this remains a statistical content contract rather than
   deterministic inference.
-- The 120-second age profile is a rejected duration extension: 20/60 release
-  rounds miss the 2-second deadline and the final 30-second bucket has
-  P99=5.295 s. The 30-second c12 contract is not extrapolated across duration.
+- The original cyclic/rolled 120-second profile (20/60 miss rounds and
+  P99=5.295 s in the final age bucket) is superseded for causal attribution.
+  It remains historical failure evidence, but its magnitude mixed real
+  long-history work with repaired input-construction, authority-shape, and
+  timing confounders.
+- Under the repaired natural-input protocol, continuous long-horizon service
+  still fails the two-second SLO (P99=2.393 s and 8/60 miss rounds). This is the
+  causal evidence for a real long-history capacity problem.
+- The independently confirmed Checkpoint-and-Rebase run restores the deployed
+  two-second SLO (P99=1.937 s and 0/60 miss rounds), with a dynamically learned
+  threshold of 0.031251, zero observed output/state/authority violations, and
+  certificate/replay one-sided 95% upper bounds of 0.4997%/0.4152%.
+- Checkpoint-and-Rebase does not pass the stricter preregistered 1.9-second
+  admission guard: the final age bucket is 1.937 s, 0.037 s above the guard.
+  This 100 ms headroom failure is retained and is not repaired by further seed
+  selection.
+- The 1.937 s peak is one nonterminal 110-second round: the proposer takes
+  0.607 s and the current worker serializes two required low-margin singleton
+  canonical checks for 1.283 s. There is no cross-round verifier backlog,
+  checkpoint boundary, or thermal-throttling signature. This identifies a
+  selective-verification burst, not renewed full-history growth.
+- The paired quality gate contains four sessions per language. Its WER/CER
+  deltas (0.155/0.550 percentage points) and zero catastrophic outliers support
+  the mechanism death gate, not population-level quality equivalence.
 - Version and epoch fencing linearize online state mutations. Later
   canonical-replay disagreements are repeatability evidence and do not
   retroactively change which online result held selection authority.

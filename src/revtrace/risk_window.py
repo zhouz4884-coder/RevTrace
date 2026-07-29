@@ -29,6 +29,47 @@ def zero_error_upper_bound(sample_size: int, alpha: float) -> float:
     return 1.0 - alpha ** (1.0 / sample_size)
 
 
+def binomial_upper_bound(
+    failures: int,
+    sample_size: int,
+    alpha: float = 0.05,
+) -> float:
+    """One-sided exact Clopper-Pearson upper bound for observed failures."""
+
+    if sample_size < 1 or not 0 <= failures <= sample_size:
+        raise ValueError("invalid binomial observations")
+    if not 0.0 < alpha < 1.0:
+        raise ValueError("alpha must lie in (0,1)")
+    if failures == 0:
+        return zero_error_upper_bound(sample_size, alpha)
+    if failures == sample_size:
+        return 1.0
+
+    def cdf(probability: float) -> float:
+        complement = 1.0 - probability
+        term = complement**sample_size
+        total = term
+        for index in range(failures):
+            term *= (
+                (sample_size - index)
+                / (index + 1)
+                * probability
+                / complement
+            )
+            total += term
+        return total
+
+    lower = failures / sample_size
+    upper = 1.0
+    for _ in range(100):
+        midpoint = (lower + upper) / 2.0
+        if cdf(midpoint) > alpha:
+            lower = midpoint
+        else:
+            upper = midpoint
+    return upper
+
+
 def certify_risk_window(
     records: Iterable[Mapping[str, object]],
     *,

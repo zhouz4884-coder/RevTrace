@@ -35,6 +35,10 @@ import numpy as np
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=Path, required=True)
+    parser.add_argument(
+        "--experiment-id",
+        default="revtrace-long-horizon-live",
+    )
     parser.add_argument("--model-name", required=True)
     parser.add_argument("--data-manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -50,6 +54,43 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--result-timeout-seconds", type=float, default=900.0)
     parser.add_argument("--episode-seed-base", type=int, default=20260729)
+    parser.add_argument(
+        "--service-mode",
+        choices=(
+            "full-selective",
+            "proposer-only",
+            "terminal-only",
+            "all-canonical",
+        ),
+        default="full-selective",
+    )
+    parser.add_argument(
+        "--intermediate-authority",
+        choices=("singleton", "fixed-shape"),
+        default="fixed-shape",
+        help=(
+            "singleton matches the headline intermediate authority; "
+            "fixed-shape preserves legacy experiments"
+        ),
+    )
+    parser.add_argument(
+        "--audio-construction",
+        choices=("cycle-roll", "distinct-sequence"),
+        default="cycle-roll",
+    )
+    parser.add_argument("--inter-utterance-silence-ms", type=int, default=250)
+    parser.add_argument(
+        "--checkpoint-seconds",
+        type=int,
+        default=0,
+        help=(
+            "authoritatively finalize and rebase the streaming state at this "
+            "fixed interval; zero preserves continuous full-history state"
+        ),
+    )
+    parser.add_argument("--declared-maximum-prefix-tokens", type=int, default=512)
+    parser.add_argument("--declared-maximum-input-tokens", type=int, default=4096)
+    parser.add_argument("--max-model-length", type=int, default=4096)
     parser.add_argument(
         "--phase6-asymmetric-memory",
         action="store_true",
@@ -119,6 +160,16 @@ def parse_args() -> argparse.Namespace:
         help=(
             "declare a stage as replay-audit adaptation rather than final "
             "validation; may be repeated"
+        ),
+    )
+    parser.add_argument(
+        "--non-gating-stage",
+        action="append",
+        default=[],
+        metavar="LABEL",
+        help=(
+            "run a declared calibration/warmup stage but exclude it from the "
+            "final service decision; all raw metrics remain reported"
         ),
     )
     parser.add_argument(
@@ -328,6 +379,13 @@ def main() -> int:
         LiveRiskWindowController,
         summarize_energy,
     )
+    from revtrace.long_horizon import (
+        append_checkpoint_history,
+        checkpoint_due,
+        concatenate_distinct_audio,
+        long_horizon_scope,
+    )
+    from revtrace.risk_window import binomial_upper_bound
 
     stages = parse_stages(args.stage)
     frozen_thresholds = parse_frozen_thresholds(args.frozen_threshold)
@@ -349,6 +407,35 @@ def main() -> int:
             f"{sorted(unknown_floors)}"
         )
     max_concurrency = max(item[1] for item in stages)
+    if args.canonical_batch_size < max_concurrency:
+        raise ValueError(
+            "--canonical-batch-size must cover every terminal concurrency"
+        )
+    if args.inter_utterance_silence_ms < 0:
+        raise ValueError("inter-utterance silence must be non-negative")
+    if (
+        args.checkpoint_seconds < 0
+        or (
+            args.checkpoint_seconds
+            and (
+                args.checkpoint_seconds % 2
+                or args.episode_seconds % args.checkpoint_seconds
+            )
+        )
+    ):
+        raise ValueError(
+            "checkpoint interval must be zero or an even divisor of episode"
+        )
+    if (
+        args.declared_maximum_prefix_tokens < 1
+        or args.declared_maximum_input_tokens < 1
+        or args.max_model_length < 1
+    ):
+        raise ValueError("declared token bounds must be positive")
+    if args.declared_maximum_input_tokens > args.max_model_length:
+        raise ValueError(
+            "declared input-token contract exceeds runtime model length"
+        )
     context = mp.get_context("spawn")
     command_queue = context.Queue()
     result_queue = context.Queue()
@@ -363,10 +450,10 @@ def main() -> int:
             "gpu_memory_utilization": 0.82,
             "data_manifest": str(args.data_manifest),
             "duration_seconds": args.episode_seconds,
-            "concurrency": max_concurrency,
+            "concurrency": args.canonical_batch_size,
             "worker_id": 0,
-            "max_model_len": 4096,
-            "terminal_canonical_batch_size": max_concurrency,
+            "max_model_len": args.max_model_length,
+            "terminal_canonical_batch_size": args.canonical_batch_size,
             "terminal_canonical_batch_invariant": (
                 args.canonical_dtype != "float32"
             ),
@@ -390,15 +477,32 @@ def main() -> int:
             if args.canonical_dtype != "float32"
             else "vllm-auto-unrecorded"
         ),
-        fixed_batch_shape=max_concurrency,
+        fixed_batch_shape=args.canonical_batch_size,
         batch_invariant_requested=args.canonical_dtype != "float32",
         temperature=0.0,
         max_tokens=32,
         terminal_and_intermediate_same_engine=True,
+        intermediate_authority=(
+            f"{args.canonical_dtype}_singleton"
+            if args.intermediate_authority == "singleton"
+            else (
+                f"{args.canonical_dtype}_fixed_b"
+                f"{args.canonical_batch_size}"
+            )
+        ),
+        terminal_authority=(
+            f"{args.canonical_dtype}_fixed_b{args.canonical_batch_size}"
+        ),
     )
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.proposer_gpu
-    asr = build_asr(str(args.model), "float16", 0.82)
+    asr = build_asr(
+        str(args.model),
+        "float16",
+        0.82,
+        max_model_len=args.max_model_length,
+        max_num_seqs=max_concurrency,
+    )
     sources = load_sources(args.data_manifest)
     smoke = official_smoke(asr, sources["English"][0])
     if not smoke["exact"]:
@@ -430,23 +534,46 @@ def main() -> int:
             concurrency=concurrency,
         )
         for position, stream in enumerate(streams):
-            if language != "mixed":
-                source = sources[language][position % len(sources[language])]
-                stream["language"] = language
-                stream["audio"] = cycle_audio(
-                    source,
-                    duration,
-                    offset=(position * 7919) % max(1, source.size),
-                )
-            audio = stream["audio"]
+            stream_language = (
+                stream["language"] if language == "mixed" else language
+            )
+            stream["language"] = stream_language
             salt = (
                 int(args.episode_seed_base)
                 + stage_index * 1_000_003
                 + episode * 10_007
                 + position * 101
             )
-            shift = salt % max(1, int(audio.shape[0]))
-            stream["audio"] = np.roll(audio, shift)
+            if args.audio_construction == "distinct-sequence":
+                stream["audio"], stream["audio_provenance"] = (
+                    concatenate_distinct_audio(
+                        sources[stream_language],
+                        target_samples=duration * SAMPLE_RATE,
+                        start_index=salt % len(sources[stream_language]),
+                        silence_samples=(
+                            args.inter_utterance_silence_ms
+                            * SAMPLE_RATE
+                            // 1000
+                        ),
+                    )
+                )
+            else:
+                source = sources[stream_language][
+                    position % len(sources[stream_language])
+                ]
+                audio = cycle_audio(
+                    source,
+                    duration,
+                    offset=(position * 7919) % max(1, source.size),
+                )
+                shift = salt % max(1, int(audio.shape[0]))
+                stream["audio"] = np.roll(audio, shift)
+                stream["audio_provenance"] = {
+                    "construction": "cycle_roll",
+                    "source_count": 1,
+                    "sample_level_roll": True,
+                    "source_repetition": duration * SAMPLE_RATE > source.size,
+                }
             stream["session_id"] = (
                 f"stage{stage_index:02d}-episode{episode:04d}-"
                 f"s{position:03d}"
@@ -457,7 +584,7 @@ def main() -> int:
         jobs: list[dict[str, Any]],
         *,
         fixed_shape: int,
-    ) -> tuple[int, int]:
+    ) -> tuple[int, int, str]:
         nonlocal batch_id
         if not jobs or len(jobs) > fixed_shape:
             raise ValueError("canonical dispatch must fit one fixed shape")
@@ -483,13 +610,43 @@ def main() -> int:
             }
         )
         batch_id += 1
-        return current_batch_id, len(items)
+        return current_batch_id, len(items), "fixed_shape"
+
+    def dispatch_singleton_verification(
+        jobs: list[dict[str, Any]],
+    ) -> tuple[int, int, str]:
+        nonlocal batch_id
+        if not jobs:
+            raise ValueError("singleton verification cannot be empty")
+        current_batch_id = batch_id
+        items = [
+            {
+                "ticket": {
+                    "session_id": f"canonical-{batch_id}-{position}",
+                    "revision_id": f"canonical-{batch_id}-{position}",
+                    "parent_version": 0,
+                    "next_version": 1,
+                },
+                "job": job,
+            }
+            for position, job in enumerate(jobs)
+        ]
+        command_queue.put(
+            {
+                "kind": "verify",
+                "batch_id": batch_id,
+                "items": items,
+            }
+        )
+        batch_id += 1
+        return current_batch_id, len(items), "singleton"
 
     def collect_canonical_batch(
-        dispatched: tuple[int, int],
+        dispatched: tuple[int, int, str],
     ) -> tuple[list[dict[str, Any]], float]:
-        expected_batch_id, item_count = dispatched
+        expected_batch_id, item_count, authority_lane = dispatched
         elapsed = 0.0
+        elapsed_fields: list[float] = []
         by_position: list[dict[str, Any] | None] = [
             None for _ in range(item_count)
         ]
@@ -505,9 +662,17 @@ def main() -> int:
                     f"unexpected canonical result: {message}"
                 )
             by_position[int(message["position"])] = message["record"]
-            elapsed += float(message["elapsed_seconds"])
+            item_elapsed = float(message["elapsed_seconds"])
+            elapsed_fields.append(item_elapsed)
+            elapsed += item_elapsed
         if any(record is None for record in by_position):
             raise AssertionError("incomplete canonical batch")
+        if authority_lane == "fixed_shape":
+            nonzero = [value for value in elapsed_fields if value > 0.0]
+            if len(nonzero) != 1:
+                raise AssertionError(
+                    "fixed-shape worker must report one batch wall time"
+                )
         return (
             [record for record in by_position if record is not None],
             elapsed,
@@ -523,6 +688,32 @@ def main() -> int:
                 jobs,
                 fixed_shape=fixed_shape,
             )
+        )
+
+    def singleton_canonical(
+        jobs: list[dict[str, Any]],
+    ) -> tuple[list[dict[str, Any]], float]:
+        return collect_canonical_batch(dispatch_singleton_verification(jobs))
+
+    def dispatch_authority(
+        jobs: list[dict[str, Any]],
+        *,
+        terminal: bool,
+    ) -> tuple[int, int, str]:
+        if terminal or args.intermediate_authority == "fixed-shape":
+            return dispatch_canonical_batch(
+                jobs,
+                fixed_shape=args.canonical_batch_size,
+            )
+        return dispatch_singleton_verification(jobs)
+
+    def run_authority(
+        jobs: list[dict[str, Any]],
+        *,
+        terminal: bool,
+    ) -> tuple[list[dict[str, Any]], float]:
+        return collect_canonical_batch(
+            dispatch_authority(jobs, terminal=terminal)
         )
 
     # Compile/profile every proposer and canonical contract shape before the
@@ -555,7 +746,7 @@ def main() -> int:
             warmup_jobs.append(job)
         dispatched = dispatch_canonical_batch(
             warmup_jobs,
-            fixed_shape=warmup_concurrency,
+            fixed_shape=args.canonical_batch_size,
         )
         asr.model.generate(
             warmup_jobs,
@@ -563,10 +754,13 @@ def main() -> int:
             use_tqdm=False,
         )
         collect_canonical_batch(dispatched)
+        if args.intermediate_authority == "singleton":
+            singleton_canonical([warmup_jobs[0]])
     warmup_seconds_excluded = time.perf_counter() - warmup_started
 
     stage_payloads: list[dict[str, Any]] = []
     audit_adaptation_stages = set(args.audit_adaptation_stage)
+    non_gating_stages = set(args.non_gating_stage)
     if audit_adaptation_stages and not args.promote_post_stage_audit_failures:
         raise ValueError(
             "--audit-adaptation-stage requires "
@@ -579,6 +773,14 @@ def main() -> int:
         raise ValueError(
             "unknown audit adaptation stage(s): "
             + ", ".join(sorted(unknown_adaptation_stages))
+        )
+    unknown_non_gating_stages = non_gating_stages.difference(
+        item[0] for item in stages
+    )
+    if unknown_non_gating_stages:
+        raise ValueError(
+            "unknown non-gating stage(s): "
+            + ", ".join(sorted(unknown_non_gating_stages))
         )
     global_event = 0
     for stage_index, (
@@ -594,6 +796,34 @@ def main() -> int:
             concurrency=concurrency,
             language=language,
             arrival="episode-sync",
+            contract_scope=long_horizon_scope(
+                duration_seconds=args.episode_seconds,
+                maximum_audio_samples=(
+                    args.checkpoint_seconds or args.episode_seconds
+                )
+                * SAMPLE_RATE,
+                maximum_session_age_seconds=(
+                    args.checkpoint_seconds or args.episode_seconds
+                ),
+                maximum_prefix_tokens=(
+                    args.declared_maximum_prefix_tokens
+                ),
+                maximum_input_tokens=args.declared_maximum_input_tokens,
+                service_mode=args.service_mode,
+                intermediate_authority=(
+                    f"{args.canonical_dtype}_singleton"
+                    if args.intermediate_authority == "singleton"
+                    else (
+                        f"{args.canonical_dtype}_fixed_b"
+                        f"{args.canonical_batch_size}"
+                    )
+                ),
+                terminal_authority=(
+                    f"{args.canonical_dtype}_fixed_b"
+                    f"{args.canonical_batch_size}"
+                ),
+                checkpoint_seconds=args.checkpoint_seconds,
+            ),
         )
         if args.phase6_asymmetric_memory and label in failure_floors:
             controller.seed_failure(fingerprint, failure_floors[label])
@@ -613,13 +843,13 @@ def main() -> int:
         stage_started = time.perf_counter()
         sampler = PowerSampler((int(args.proposer_gpu), int(args.verifier_gpu)))
         sampler.start()
-        service_seconds = 0.0
         proposer_seconds = 0.0
         required_verifier_seconds = 0.0
         service_events: list[dict[str, Any]] = []
         episode_snapshots: list[dict[str, Any]] = []
         stage_round_details: list[dict[str, Any]] = []
         selected_by_episode: list[list[dict[str, Any]]] = []
+        stage_audio_provenance: list[dict[str, Any]] = []
         certified_before_episode: int | None = (
             0
             if static_oracle_stage or epoch.certificate is not None
@@ -634,6 +864,14 @@ def main() -> int:
                 concurrency=concurrency,
                 language=language,
             )
+            if not stage_audio_provenance:
+                stage_audio_provenance = [
+                    {
+                        "session_id": stream["session_id"],
+                        **dict(stream["audio_provenance"]),
+                    }
+                    for stream in streams
+                ]
             states = [
                 asr.init_streaming_state(
                     language=stream["language"],
@@ -643,6 +881,8 @@ def main() -> int:
                 )
                 for stream in streams
             ]
+            checkpoint_histories = ["" for _ in streams]
+            checkpoint_epochs = [0 for _ in streams]
             chunk_samples = 2 * SAMPLE_RATE
             rounds = args.episode_seconds // 2
             episode_selected: list[dict[str, Any]] = []
@@ -652,9 +892,18 @@ def main() -> int:
                 round_execution_started = time.perf_counter()
                 canonical_execution_seconds = 0.0
                 verifier_collect_wall_seconds = 0.0
-                terminal = chunk_index == rounds - 1
+                projection_seconds = 0.0
+                apply_seconds = 0.0
+                controller_seconds = 0.0
+                session_terminal = chunk_index == rounds - 1
+                checkpoint_boundary = checkpoint_due(
+                    (chunk_index + 1) * 2,
+                    args.checkpoint_seconds,
+                )
+                terminal = session_terminal or checkpoint_boundary
                 jobs: list[dict[str, Any]] = []
                 prefixes: list[str] = []
+                prepare_started = time.perf_counter()
                 for stream, state in zip(streams, states):
                     begin = chunk_index * chunk_samples
                     end = begin + chunk_samples
@@ -662,35 +911,72 @@ def main() -> int:
                         asr,
                         state,
                         stream["audio"][begin:end],
-                        tail=False,
+                        tail=terminal,
                     )
                     jobs.append(job)
                     prefixes.append(prefix)
-                preverify_all = (
-                    (not static_oracle_stage and controller.fail_closed)
-                    or terminal
-                )
-                suppress_terminal_proposer = bool(
-                    terminal
-                    and (
-                        static_oracle_stage
-                        or epoch.certificate is not None
+                prepare_seconds = time.perf_counter() - prepare_started
+                accumulated_audio_samples = [
+                    int(job["multi_modal_data"]["audio"][0].shape[0])
+                    for job in jobs
+                ]
+                prefix_token_counts = [
+                    len(asr.processor.tokenizer.encode(prefix))
+                    if prefix
+                    else 0
+                    for prefix in prefixes
+                ]
+                prompt_token_counts = [
+                    len(asr.processor.tokenizer.encode(str(job["prompt"])))
+                    for job in jobs
+                ]
+                if (
+                    max(prefix_token_counts, default=0)
+                    > args.declared_maximum_prefix_tokens
+                ):
+                    raise RuntimeError(
+                        "observed prefix tokens exceed contract scope"
                     )
-                    and args.suppress_certified_terminal_proposer
+                if (
+                    max(prompt_token_counts, default=0)
+                    > args.declared_maximum_input_tokens
+                ):
+                    raise RuntimeError(
+                        "observed prompt tokens exceed contract scope"
+                    )
+                if args.service_mode == "all-canonical":
+                    preverify_all = True
+                elif args.service_mode in ("proposer-only", "terminal-only"):
+                    preverify_all = (
+                        args.service_mode == "terminal-only" and terminal
+                    )
+                else:
+                    preverify_all = (
+                        (not static_oracle_stage and controller.fail_closed)
+                        or terminal
+                    )
+                suppress_proposer = bool(
+                    args.service_mode == "all-canonical"
+                    or (
+                        terminal
+                        and (
+                            static_oracle_stage
+                            or epoch.certificate is not None
+                        )
+                        and args.suppress_certified_terminal_proposer
+                        and args.service_mode != "proposer-only"
+                    )
                 )
                 overlapped_dispatch = (
-                    dispatch_canonical_batch(
-                        jobs,
-                        fixed_shape=concurrency,
-                    )
+                    dispatch_authority(jobs, terminal=terminal)
                     if preverify_all
                     else None
                 )
                 verified_by_position: dict[int, dict[str, Any]] = {}
-                if suppress_terminal_proposer:
+                if suppress_proposer:
                     if overlapped_dispatch is None:
                         raise AssertionError(
-                            "terminal suppression requires canonical dispatch"
+                            "proposer suppression requires canonical dispatch"
                         )
                     collect_started = time.perf_counter()
                     verified, elapsed = collect_canonical_batch(
@@ -738,40 +1024,46 @@ def main() -> int:
                             zip(verify_positions, verified)
                         )
                     else:
-                        verify_positions = [
-                            position
-                            for position, proposal in enumerate(proposals)
-                            if (
-                                (
-                                    static_oracle_stage
-                                    and (
-                                        proposal["minimum_margin"] is None
-                                        or float(
-                                            proposal["minimum_margin"]
+                        if args.service_mode in (
+                            "proposer-only",
+                            "terminal-only",
+                        ):
+                            verify_positions = []
+                        else:
+                            verify_positions = [
+                                position
+                                for position, proposal in enumerate(proposals)
+                                if (
+                                    (
+                                        static_oracle_stage
+                                        and (
+                                            proposal["minimum_margin"] is None
+                                            or float(
+                                                proposal["minimum_margin"]
+                                            )
+                                            <= float(frozen_threshold)
                                         )
-                                        <= float(frozen_threshold)
+                                    )
+                                    or (
+                                        not static_oracle_stage
+                                        and controller.requires_verification(
+                                            minimum_margin=proposal[
+                                                "minimum_margin"
+                                            ],
+                                            terminal=terminal,
+                                        )
                                     )
                                 )
-                                or (
-                                    not static_oracle_stage
-                                    and controller.requires_verification(
-                                        minimum_margin=proposal[
-                                            "minimum_margin"
-                                        ],
-                                        terminal=terminal,
-                                    )
-                                )
-                            )
-                        ]
+                            ]
                 if (
                     verify_positions
                     and overlapped_dispatch is None
-                    and not suppress_terminal_proposer
+                    and not suppress_proposer
                 ):
                     collect_started = time.perf_counter()
-                    verified, elapsed = canonical_batch(
+                    verified, elapsed = run_authority(
                         [jobs[position] for position in verify_positions],
-                        fixed_shape=concurrency,
+                        terminal=terminal,
                     )
                     verifier_collect_wall_seconds += (
                         time.perf_counter() - collect_started
@@ -781,6 +1073,19 @@ def main() -> int:
                     verified_by_position.update(zip(verify_positions, verified))
                 round_started = time.perf_counter()
                 round_selected_records: list[dict[str, Any]] = []
+                observed_model_input_token_counts = [
+                    int(record["model_input_token_count"])
+                    for record in proposals
+                    if record.get("model_input_token_count") is not None
+                ]
+                if (
+                    observed_model_input_token_counts
+                    and max(observed_model_input_token_counts)
+                    > args.declared_maximum_input_tokens
+                ):
+                    raise RuntimeError(
+                        "observed model input tokens exceed contract scope"
+                    )
                 for position, (
                     stream,
                     state,
@@ -788,6 +1093,7 @@ def main() -> int:
                     proposal,
                 ) in enumerate(zip(streams, states, prefixes, proposals)):
                     selected = verified_by_position.get(position, proposal)
+                    projection_started = time.perf_counter()
                     proposal_projection = state_projection_record(
                         asr,
                         state,
@@ -796,20 +1102,28 @@ def main() -> int:
                         terminal=terminal,
                     )
                     proposal["state_projection"] = proposal_projection
-                    selected_projection = state_projection_record(
-                        asr,
-                        state,
-                        prefix,
-                        selected,
-                        terminal=terminal,
-                    )
+                    if selected is proposal:
+                        selected_projection = proposal_projection
+                    else:
+                        selected_projection = state_projection_record(
+                            asr,
+                            state,
+                            prefix,
+                            selected,
+                            terminal=terminal,
+                        )
                     selected["state_projection"] = selected_projection
+                    projection_seconds += (
+                        time.perf_counter() - projection_started
+                    )
                     round_selected_records.append(selected)
                     if (
                         position in verified_by_position
-                        and not suppress_terminal_proposer
+                        and not suppress_proposer
                         and not static_oracle_stage
+                        and args.service_mode == "full-selective"
                     ):
+                        controller_started = time.perf_counter()
                         comparison = compare_records(
                             verified_by_position[position],
                             proposal,
@@ -830,6 +1144,9 @@ def main() -> int:
                             and certified_before_episode is None
                         ):
                             certified_before_episode = episode
+                        controller_seconds += (
+                            time.perf_counter() - controller_started
+                        )
                     event = {
                         "stage": label,
                         "stage_index": stage_index,
@@ -838,12 +1155,19 @@ def main() -> int:
                         "chunk_index": chunk_index,
                         "global_event": global_event,
                         "terminal": terminal,
-                        "proposal_executed": not suppress_terminal_proposer,
+                        "session_terminal": session_terminal,
+                        "checkpoint_boundary": checkpoint_boundary,
+                        "checkpoint_epoch": checkpoint_epochs[position],
+                        "proposal_executed": not suppress_proposer,
                         "verified": position in verified_by_position,
                         "selected_authority": (
                             "canonical"
                             if position in verified_by_position
-                            else "risk_limited_fast_path"
+                            else (
+                                "unprotected_proposer"
+                                if args.service_mode == "proposer-only"
+                                else "risk_limited_fast_path"
+                            )
                         ),
                         "online_selection_authority_violation": bool(
                             position in verify_positions
@@ -851,7 +1175,10 @@ def main() -> int:
                         ),
                         "fail_closed": (
                             False
-                            if static_oracle_stage
+                            if (
+                                static_oracle_stage
+                                or args.service_mode != "full-selective"
+                            )
                             else epoch.certificate is None
                         ),
                         "threshold": (
@@ -861,17 +1188,17 @@ def main() -> int:
                         ),
                         "proposal_minimum_margin": (
                             proposal["minimum_margin"]
-                            if not suppress_terminal_proposer
+                            if not suppress_proposer
                             else None
                         ),
                         "proposal_token_ids": (
                             proposal["token_ids"]
-                            if not suppress_terminal_proposer
+                            if not suppress_proposer
                             else None
                         ),
                         "proposal_state_projection": (
                             proposal_projection
-                            if not suppress_terminal_proposer
+                            if not suppress_proposer
                             else None
                         ),
                         "selected_token_ids": selected["token_ids"],
@@ -880,7 +1207,8 @@ def main() -> int:
                     }
                     service_events.append(event)
                     episode_selected.append(event)
-                    if selected is proposal and not suppress_terminal_proposer:
+                    apply_started = time.perf_counter()
+                    if selected is proposal and not suppress_proposer:
                         assert outputs is not None
                         apply_output(state, outputs[position], prefix)
                     else:
@@ -889,10 +1217,48 @@ def main() -> int:
                         # Rebuild the selected state using the same helper as the
                         # deployed transaction engine.
                         apply_candidate_record(state, selected, prefix)
+                    apply_seconds += time.perf_counter() - apply_started
+                    if checkpoint_boundary:
+                        segment_text = str(selected["text"]).strip()
+                        checkpoint_histories[position] = (
+                            append_checkpoint_history(
+                                checkpoint_histories[position],
+                                segment_text,
+                            )
+                        )
+                        event["checkpoint_history"] = (
+                            checkpoint_histories[position]
+                        )
+                        if not session_terminal:
+                            checkpoint_epochs[position] += 1
+                            states[position] = asr.init_streaming_state(
+                                context=checkpoint_histories[position],
+                                language=stream["language"],
+                                unfixed_chunk_num=2,
+                                unfixed_token_num=5,
+                                chunk_size_sec=2.0,
+                            )
+                    else:
+                        event["checkpoint_history"] = (
+                            checkpoint_histories[position]
+                        )
                     global_event += 1
                 round_commit_elapsed = time.perf_counter() - round_started
                 round_state_entry_latency = (
                     time.perf_counter() - round_execution_started
+                )
+                bookkeeping_seconds = max(
+                    0.0,
+                    round_commit_elapsed
+                    - projection_seconds
+                    - controller_seconds
+                    - apply_seconds,
+                )
+                critical_path_accounted_seconds = (
+                    prepare_seconds
+                    + proposal_elapsed
+                    + verifier_collect_wall_seconds
+                    + round_commit_elapsed
                 )
                 round_finished = time.perf_counter()
                 active_threshold = (
@@ -902,7 +1268,7 @@ def main() -> int:
                 )
                 low_margin_count = (
                     None
-                    if suppress_terminal_proposer
+                    if suppress_proposer
                     or active_threshold is None
                     else sum(
                         record["minimum_margin"] is None
@@ -919,11 +1285,19 @@ def main() -> int:
                         "session_age_start_seconds": chunk_index * 2,
                         "session_age_end_seconds": (chunk_index + 1) * 2,
                         "terminal": terminal,
+                        "session_terminal": session_terminal,
+                        "checkpoint_boundary": checkpoint_boundary,
                         "preverify_all": preverify_all,
-                        "suppress_terminal_proposer": (
-                            suppress_terminal_proposer
+                        "suppress_proposer": suppress_proposer,
+                        "proposal_executed": not suppress_proposer,
+                        "service_mode": args.service_mode,
+                        "intermediate_authority": (
+                            args.intermediate_authority
                         ),
-                        "proposal_executed": not suppress_terminal_proposer,
+                        "terminal_authority_fixed_shape": (
+                            args.canonical_batch_size
+                        ),
+                        "prepare_seconds": prepare_seconds,
                         "proposal_seconds": proposal_elapsed,
                         "low_margin_count": low_margin_count,
                         "verified_count": len(verify_positions),
@@ -937,7 +1311,17 @@ def main() -> int:
                         "verifier_queue_depth_at_commit": 0,
                         "cross_round_verifier_backlog": False,
                         "canonical_fixed_shape": (
-                            concurrency if verify_positions else None
+                            (
+                                args.canonical_batch_size
+                                if (
+                                    terminal
+                                    or args.intermediate_authority
+                                    == "fixed-shape"
+                                )
+                                else 1
+                            )
+                            if verify_positions
+                            else None
                         ),
                         "canonical_execution_seconds": (
                             canonical_execution_seconds
@@ -946,6 +1330,56 @@ def main() -> int:
                             verifier_collect_wall_seconds
                         ),
                         "commit_seconds": round_commit_elapsed,
+                        "projection_seconds": projection_seconds,
+                        "controller_seconds": controller_seconds,
+                        "apply_seconds": apply_seconds,
+                        "bookkeeping_seconds": bookkeeping_seconds,
+                        "critical_path_accounted_seconds": (
+                            critical_path_accounted_seconds
+                        ),
+                        "critical_path_residual_seconds": (
+                            round_state_entry_latency
+                            - critical_path_accounted_seconds
+                        ),
+                        "maximum_accumulated_audio_samples": max(
+                            accumulated_audio_samples
+                        ),
+                        "mean_accumulated_audio_samples": statistics.mean(
+                            accumulated_audio_samples
+                        ),
+                        "maximum_prefix_token_count": max(
+                            prefix_token_counts
+                        ),
+                        "mean_prefix_token_count": statistics.mean(
+                            prefix_token_counts
+                        ),
+                        "maximum_prompt_token_count": max(
+                            prompt_token_counts
+                        ),
+                        "mean_prompt_token_count": statistics.mean(
+                            prompt_token_counts
+                        ),
+                        "maximum_model_input_token_count": (
+                            max(observed_model_input_token_counts)
+                            if observed_model_input_token_counts
+                            else None
+                        ),
+                        "mean_model_input_token_count": (
+                            statistics.mean(
+                                observed_model_input_token_counts
+                            )
+                            if observed_model_input_token_counts
+                            else None
+                        ),
+                        "audio_encoder_token_count": None,
+                        "audio_encoder_token_count_note": (
+                            "the frozen vLLM request output does not expose "
+                            "the post-processor audio token count; raw audio "
+                            "samples and actual model prompt token count are "
+                            "reported without inferring an unavailable value"
+                        ),
+                        "vllm_execution_mode": "enforce_eager",
+                        "maximum_model_length": args.max_model_length,
                         "state_entry_latency_seconds": (
                             round_state_entry_latency
                         ),
@@ -966,19 +1400,6 @@ def main() -> int:
                     event["state_entry_latency_seconds"] = (
                         round_state_entry_latency
                     )
-                service_seconds += (
-                    proposal_elapsed
-                    + (
-                        required_verifier_seconds
-                        - sum(
-                            snapshot["required_verifier_seconds"]
-                            for snapshot in episode_snapshots
-                        )
-                        if False
-                        else 0.0
-                    )
-                    + round_commit_elapsed
-                )
             episode_wall = time.perf_counter() - episode_service_started
             episode_snapshots.append(
                 {
@@ -1015,6 +1436,8 @@ def main() -> int:
                         else epoch.fast_path_window
                     ),
                     "required_verifier_seconds": required_verifier_seconds,
+                    "checkpoint_seconds": args.checkpoint_seconds,
+                    "final_checkpoint_histories": checkpoint_histories,
                 }
             )
             selected_by_episode.append(episode_selected)
@@ -1061,8 +1484,16 @@ def main() -> int:
                 )
                 for stream in streams
             ]
+            checkpoint_histories = ["" for _ in streams]
             for chunk_index in range(args.episode_seconds // 2):
-                terminal = chunk_index == args.episode_seconds // 2 - 1
+                session_terminal = (
+                    chunk_index == args.episode_seconds // 2 - 1
+                )
+                checkpoint_boundary = checkpoint_due(
+                    (chunk_index + 1) * 2,
+                    args.checkpoint_seconds,
+                )
+                terminal = session_terminal or checkpoint_boundary
                 jobs = []
                 prefixes = []
                 for stream, state in zip(streams, states):
@@ -1072,14 +1503,11 @@ def main() -> int:
                         asr,
                         state,
                         stream["audio"][begin:end],
-                        tail=False,
+                        tail=terminal,
                     )
                     jobs.append(job)
                     prefixes.append(prefix)
-                canonical, _ = canonical_batch(
-                    jobs,
-                    fixed_shape=concurrency,
-                )
+                canonical, _ = run_authority(jobs, terminal=terminal)
                 for state, prefix, record in zip(states, prefixes, canonical):
                     selected = service_events[selected_cursor]
                     record["state_projection"] = state_projection_record(
@@ -1145,10 +1573,33 @@ def main() -> int:
                                 ),
                             }
                         )
-                    apply_output(state, type("Output", (), {})(), prefix) if False else None
                     from run_revtrace_dual_gpu import apply_candidate_record
 
                     apply_candidate_record(state, record, prefix)
+                    if checkpoint_boundary:
+                        checkpoint_histories[selected_cursor % concurrency] = (
+                            append_checkpoint_history(
+                                checkpoint_histories[
+                                    selected_cursor % concurrency
+                                ],
+                                str(record["text"]),
+                            )
+                        )
+                        if not session_terminal:
+                            state_position = selected_cursor % concurrency
+                            states[state_position] = (
+                                asr.init_streaming_state(
+                                    context=checkpoint_histories[
+                                        state_position
+                                    ],
+                                    language=streams[state_position][
+                                        "language"
+                                    ],
+                                    unfixed_chunk_num=2,
+                                    unfixed_token_num=5,
+                                    chunk_size_sec=2.0,
+                                )
+                            )
                     selected_cursor += 1
                     audit_events += 1
         if (
@@ -1203,6 +1654,10 @@ def main() -> int:
             energy_samples,
             completed_audio_seconds=len(service_events) * 2.0,
         )
+        audit_root_state_mismatches = sum(
+            bool(row["is_root_state_mismatch"])
+            for row in audit_violation_rows
+        )
         stage_payloads.append(
             {
                 "label": label,
@@ -1211,6 +1666,30 @@ def main() -> int:
                 "language": language,
                 "episodes": episodes,
                 "events": len(service_events),
+                "service_mode": args.service_mode,
+                "episode_seconds": args.episode_seconds,
+                "audio_construction": args.audio_construction,
+                "audio_provenance": stage_audio_provenance,
+                "intermediate_authority": args.intermediate_authority,
+                "terminal_authority": (
+                    f"{args.canonical_dtype}_fixed_b"
+                    f"{args.canonical_batch_size}"
+                ),
+                "canonical_batch_size": args.canonical_batch_size,
+                "runtime_max_model_length": args.max_model_length,
+                "checkpoint_seconds": args.checkpoint_seconds,
+                "declared_contract_scope": {
+                    "maximum_audio_samples": (
+                        (args.checkpoint_seconds or args.episode_seconds)
+                        * SAMPLE_RATE
+                    ),
+                    "maximum_prefix_tokens": (
+                        args.declared_maximum_prefix_tokens
+                    ),
+                    "maximum_input_tokens": (
+                        args.declared_maximum_input_tokens
+                    ),
+                },
                 "switch_action": (
                     "none; frozen threshold loaded before service"
                     if static_oracle_stage
@@ -1228,9 +1707,18 @@ def main() -> int:
                     else None
                 ),
                 "policy": (
-                    "frozen_prior-certified_static_oracle"
-                    if static_oracle_stage
-                    else "live_adaptive_risk_window"
+                    {
+                        "proposer-only": "unprotected_proposer_lower_bound",
+                        "terminal-only": "terminal_only_canonical_control",
+                        "all-canonical": "all_canonical_control",
+                    }.get(
+                        args.service_mode,
+                        (
+                            "frozen_prior-certified_static_oracle"
+                            if static_oracle_stage
+                            else "live_adaptive_risk_window"
+                        ),
+                    )
                 ),
                 "certified_after_episode": certified_before_episode,
                 "certified_after_events": (
@@ -1288,9 +1776,14 @@ def main() -> int:
                 "state_violations": state_violations,
                 "audit_events": audit_events,
                 "audit_violation_rows": audit_violation_rows,
-                "audit_root_state_mismatches": sum(
-                    bool(row["is_root_state_mismatch"])
-                    for row in audit_violation_rows
+                "audit_root_state_mismatches": (
+                    audit_root_state_mismatches
+                ),
+                "independent_replay_risk_upper_bound": (
+                    binomial_upper_bound(
+                        audit_root_state_mismatches,
+                        audit_events,
+                    )
                 ),
                 "unverified_fast_path_replay_roots": sum(
                     bool(row["is_root_state_mismatch"])
@@ -1306,6 +1799,11 @@ def main() -> int:
                     "adaptation"
                     if label in audit_adaptation_stages
                     else "validation"
+                ),
+                "gating_role": (
+                    "calibration_excluded_from_final_decision"
+                    if label in non_gating_stages
+                    else "heldout_service_gate"
                 ),
                 "promoted_audit_root_count": len(promoted_audit_roots),
                 "promoted_audit_roots": promoted_audit_roots,
@@ -1341,7 +1839,14 @@ def main() -> int:
         raise ValueError(
             "static-oracle runs require one frozen threshold per stage"
         )
+    causal_baseline_run = args.service_mode != "full-selective"
+
     def stage_passes(stage: dict[str, Any]) -> bool:
+        if causal_baseline_run:
+            return bool(
+                stage["events"] > 0
+                and stage["online_selection_authority_violations"] == 0
+            )
         common = bool(
             stage["threshold"] is not None
             and (
@@ -1369,7 +1874,7 @@ def main() -> int:
                 and not bool(row["verified"])
             ]
             return bool(
-                len(unverified_replay_roots) / stage["events"] <= 0.005
+                stage["independent_replay_risk_upper_bound"] <= 0.005
                 and not any(
                     row["proposal_minimum_margin"] is not None
                     and stage["failure_floor"] is not None
@@ -1383,15 +1888,24 @@ def main() -> int:
             and stage["state_violations"] == 0
         )
 
-    passed = all(stage_passes(stage) for stage in stage_payloads)
-    payload = {
-        "schema_version": 1,
-        "study": (
+    gating_stage_payloads = [
+        stage
+        for stage in stage_payloads
+        if stage["label"] not in non_gating_stages
+    ]
+    if not gating_stage_payloads:
+        raise ValueError("at least one gating stage is required")
+    passed = all(stage_passes(stage) for stage in gating_stage_payloads)
+    if causal_baseline_run:
+        decision = "LONG_HORIZON_CAUSAL_BASELINE_COMPLETE"
+        study = "RevTrace long-horizon causal serving baseline"
+    else:
+        study = (
             "RevTrace Phase 5A independent static certified oracle"
             if static_oracle_run
             else "RevTrace Phase 5A persistent live adaptive controller"
-        ),
-        "decision": (
+        )
+        decision = (
             (
                 "PHASE5A_STATIC_CERTIFIED_ORACLE_PASS"
                 if static_oracle_run
@@ -1403,8 +1917,17 @@ def main() -> int:
                 if static_oracle_run
                 else "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL"
             )
-        ),
+        )
+    payload = {
+        "schema_version": 1,
+        "experiment_id": args.experiment_id,
+        "study": study,
+        "decision": decision,
         "model": args.model_name,
+        "service_mode": args.service_mode,
+        "episode_seconds": args.episode_seconds,
+        "audio_construction": args.audio_construction,
+        "checkpoint_seconds": args.checkpoint_seconds,
         "canonical_dtype": args.canonical_dtype,
         "canonical_runtime_provenance": {
             **asdict(canonical_provenance),
@@ -1417,6 +1940,7 @@ def main() -> int:
         },
         "phase6_asymmetric_memory": args.phase6_asymmetric_memory,
         "statistical_risk_gate": args.statistical_risk_gate,
+        "non_gating_stages": sorted(non_gating_stages),
         "cross_contract_certificate_reuse": getattr(
             controller, "cross_contract_certificate_reuse", None
         ),
@@ -1436,9 +1960,11 @@ def main() -> int:
             "verifier_gpu": args.verifier_gpu,
             "proposer_pid": os.getpid(),
             "verifier_pid": ready.get("pid"),
+            "proposer_max_model_length": args.max_model_length,
+            "verifier_max_model_length": args.max_model_length,
         },
         "claim_boundaries": [
-            "models remain loaded across the c16-c64-c16 sequence",
+            "models remain loaded across the declared stage sequence",
             "each fingerprint switch starts a fresh fail-closed epoch",
             (
                 "exact-contract returns require canary renewal; positive "
@@ -1448,6 +1974,23 @@ def main() -> int:
                 else "Phase 5 controller uses fresh epochs only"
             ),
             "post-stage replay is excluded from service timing",
+            (
+                "causal baseline modes measure execution cost and do not "
+                "claim a statistical fast-path certificate"
+                if causal_baseline_run
+                else "full-selective mode evaluates the declared risk policy"
+            ),
+            (
+                "long-horizon fingerprints include duration, session age, "
+                "accumulated audio, prefix/input bounds, service mode, and "
+                "the intermediate and terminal canonical authorities"
+            ),
+            (
+                "distinct-sequence audio concatenates distinct utterances "
+                "with silence and never uses sample-level roll or repetition"
+                if args.audio_construction == "distinct-sequence"
+                else "legacy cycle-roll audio is retained only for comparison"
+            ),
             "risk is statistical state-entry disagreement, not bitwise determinism",
             (
                 "a verified canonical draw that differs on a later replay is "

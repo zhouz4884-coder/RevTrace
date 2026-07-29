@@ -122,16 +122,27 @@ The F7 tail variance is closed without relabeling the rejected c14 result:
 - The conservative c12 reshape retains 87.7% of the rejected c14 mean
   goodput and increases mean J/audio-s by 9.6%, while reducing the cross-seed
   P99 upper bound from 2.079 to 1.868 s.
-- A conditional 120-second c12 profile establishes a duration boundary:
-  age-bucket P99 grows from 1.904 s (0--30 s) to 5.295 s (90--120 s), with
-  20/60 miss rounds. Online authority violations remain zero. The c12
-  30-second capacity certificate is therefore not extrapolated to long
-  sessions.
+- The original cyclic/rolled 120-second c12 profile reported a 5.295 s final
+  age-bucket P99, but protocol repair showed that number mixed a real
+  long-history cost with confounders in input construction, authority shape,
+  and timing attribution. It is retained as historical failure evidence, not
+  as the causal long-horizon estimate.
+- Under the repaired natural-input protocol, continuous service still fails
+  the two-second SLO (P99 2.393 s; 8/60 miss rounds). Checkpoint-and-Rebase
+  lowers independently confirmed P99 to 1.937 s with 0/60 miss rounds,
+  dynamically learns `tau=0.031251`, records zero observed output/state/
+  authority violations, and keeps certificate/replay 95% upper bounds at
+  0.4997%/0.4152%. It therefore restores the deployed two-second SLO, but
+  misses the preregistered 1.9-second admission guard by 0.037 s. The strict
+  guard is not relabeled as a pass.
 
 See the
 [tail-robust closure report](results/tail_robust/REPORT.md),
 [admission protocol](docs/protocols/TAIL_ROBUST_ADMISSION_CONTRACT.md), and
 [change/failure diagnosis](docs/reports/tail_robust_change_diagnosis.md).
+The repaired long-horizon evidence is in the
+[protocol-repair report](docs/reports/long_horizon_protocol_repair.md) and
+[machine-readable summary](results/long_horizon/long_horizon_summary.json).
 
 ## Phase 3B--3D bounded results
 

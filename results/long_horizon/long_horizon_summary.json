@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "study": "long_horizon_protocol_repair_and_checkpoint_rebase",
+  "decision": "CHECKPOINT_REBASE_SLO_RISK_PASS_GUARD_FAIL",
+  "protocol_repair": {
+    "tests_passed": 112,
+    "fingerprint_includes_age_duration_input_bounds": true,
+    "intermediate_singleton_terminal_fixed_shape_authority": true,
+    "terminal_tail_semantics": true,
+    "duplicate_projection_removed": true,
+    "component_timing_instrumented": true,
+    "canonical_batch_wall_invariant_checked": true,
+    "natural_distinct_audio_without_cycle_or_roll": true,
+    "actual_audio_samples_and_model_input_tokens_recorded": true,
+    "runtime_max_model_length_matches_telemetry": true
+  },
+  "proposer_only_decision": "CONCURRENCY_RESHAPING_REMAINS_PLAUSIBLE",
+  "frozen_matrix_decision": "CONCURRENCY_RESHAPING_CAN_RESTORE_SINGLE_STREAM_SLO",
+  "quality_decision": "CHECKPOINT_REBASE_QUALITY_PASS",
+  "continuous_slo_pass": false,
+  "rebase_adaptation_rounds": [
+    {
+      "artifact": "full_selective_rebase.json",
+      "threshold": 0.0,
+      "output_violations": 3,
+      "state_violations": 1,
+      "root_state_mismatches": 1,
+      "maximum_root_failure_margin": 0.015625,
+      "independent_replay_risk_upper_bound": 0.006571595493304606,
+      "role": "counterexample discovery only; excluded from the independent confirmation decision"
+    },
+    {
+      "artifact": "full_selective_rebase_confirmed.json",
+      "threshold": 0.015626,
+      "output_violations": 4,
+      "state_violations": 5,
+      "root_state_mismatches": 2,
+      "maximum_root_failure_margin": 0.03125,
+      "independent_replay_risk_upper_bound": 0.0087181088555513,
+      "role": "counterexample discovery only; excluded from the independent confirmation decision"
+    }
+  ],
+  "rebase_adaptation_pilot": {
+    "artifact": "full_selective_rebase.json",
+    "heldout_threshold": 0.0,
+    "heldout_output_violations": 3,
+    "heldout_state_violations": 1,
+    "heldout_root_state_mismatches": 1,
+    "heldout_independent_replay_risk_upper_bound": 0.006571595493304606,
+    "promoted_failure_margin": 0.015625,
+    "role": "counterexample discovery only; excluded from the independent confirmation decision"
+  },
+  "rebase_confirmation_artifact": "full_selective_rebase_confirmed_r2.json",
+  "rebase_effect": {
+    "relative_p99_reduction": 0.19044329603560006,
+    "relative_energy_reduction": 0.48857609383332845,
+    "deadline_miss_rounds_removed": 8,
+    "verification_fraction_increase": 0.03472222222222222
+  },
+  "rebase_two_second_slo_pass": true,
+  "rebase_strict_guard_pass": false,
+  "rebase_strict_guard_excess_seconds": 0.037447289004922,
+  "rebase_gate_checks": {
+    "each_age_bucket_p99_at_most_1p9_seconds": false,
+    "zero_deadline_miss_rounds": true,
+    "risk_upper_bound_at_most_0p5_percent": true,
+    "zero_output_state_authority_violations": true,
+    "paired_quality_gate": true
+  },
+  "services": [
+    {
+      "mode": "continuous",
+      "raw_decision": "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL",
+      "threshold": 0.0625,
+      "threshold_source": "current live epoch split-sample certificate",
+      "verification_fraction": 0.05277777777777778,
+      "risk_upper_bound": 0.004997058694246492,
+      "p50_seconds": 1.3327638856135309,
+      "p95_seconds": 2.310957780573516,
+      "p99_seconds": 2.393219992518425,
+      "deadline_miss_events": 96,
+      "deadline_miss_rounds": 8,
+      "output_violations": 0,
+      "state_violations": 0,
+      "authority_violations": 0,
+      "audit_events": 720,
+      "audit_root_state_mismatches": 0,
+      "independent_replay_root_rate": 0.0,
+      "independent_replay_risk_upper_bound": 0.0041520953856636345,
+      "joules_per_audio_second": 19.168013850828654,
+      "maximum_age_bucket_p99_seconds": 2.393219992518425,
+      "maximum_audio_samples": 1920000,
+      "maximum_model_input_tokens": 1978,
+      "peak_round_decomposition": {
+        "round_index": 60,
+        "session_age_end_seconds": 120,
+        "terminal": true,
+        "checkpoint_boundary": false,
+        "verified_count": 12,
+        "low_margin_count": null,
+        "prepare_seconds": 0.02140020951628685,
+        "proposal_seconds": 0.0,
+        "canonical_execution_seconds": 1.926460551097989,
+        "projection_seconds": 0.0432297307997942,
+        "apply_seconds": 0.09575131256133318,
+        "commit_seconds": 0.13912062719464302,
+        "critical_path_residual_seconds": 0.018282199278473854,
+        "cross_round_verifier_backlog": false,
+        "maximum_accumulated_audio_samples": 1920000,
+        "maximum_model_input_token_count": 1978,
+        "gpu_telemetry": {
+          "maximum_total_power_watts": 432.87,
+          "mean_total_power_watts": 352.25461538461536,
+          "per_gpu": {
+            "0": {
+              "maximum_temperature_c": 48.0,
+              "mean_power_watts": 136.40153846153848,
+              "minimum_sm_clock_mhz": 1725.0
+            },
+            "1": {
+              "maximum_temperature_c": 57.0,
+              "mean_power_watts": 215.8530769230769,
+              "minimum_sm_clock_mhz": 1770.0
+            }
+          },
+          "sample_count": 13
+        }
+      },
+      "age_buckets": [
+        {
+          "mode": "continuous",
+          "age_bucket": "000-030s",
+          "rounds": 15,
+          "p99_seconds": 1.9924468155950308,
+          "maximum_seconds": 1.9924468155950308,
+          "deadline_miss_rounds": 0,
+          "mean_prepare_seconds": 0.004348862667878469,
+          "mean_proposer_seconds": 0.6444871300210555,
+          "mean_canonical_seconds": 0.45072681208451587,
+          "mean_projection_apply_seconds": 0.018715653258065384,
+          "maximum_audio_samples": 480000,
+          "maximum_model_input_tokens": 505
+        },
+        {
+          "mode": "continuous",
+          "age_bucket": "030-060s",
+          "rounds": 15,
+          "p99_seconds": 2.3618696611374617,
+          "maximum_seconds": 2.3618696611374617,
+          "deadline_miss_rounds": 1,
+          "mean_prepare_seconds": 0.008699427979687849,
+          "mean_proposer_seconds": 0.8850900287429492,
+          "mean_canonical_seconds": 0.3059936879202724,
+          "mean_projection_apply_seconds": 0.04858727647612492,
+          "maximum_audio_samples": 960000,
+          "maximum_model_input_tokens": 998
+        },
+        {
+          "mode": "continuous",
+          "age_bucket": "060-090s",
+          "rounds": 15,
+          "p99_seconds": 1.9136975146830082,
+          "maximum_seconds": 1.9136975146830082,
+          "deadline_miss_rounds": 0,
+          "mean_prepare_seconds": 0.01378866129865249,
+          "mean_proposer_seconds": 1.1343104883407553,
+          "mean_canonical_seconds": 0.09367665567745766,
+          "mean_projection_apply_seconds": 0.0819950595498085,
+          "maximum_audio_samples": 1440000,
+          "maximum_model_input_tokens": 1491
+        },
+        {
+          "mode": "continuous",
+          "age_bucket": "090-120s",
+          "rounds": 15,
+          "p99_seconds": 2.393219992518425,
+          "maximum_seconds": 2.393219992518425,
+          "deadline_miss_rounds": 7,
+          "mean_prepare_seconds": 0.019738956913352014,
+          "mean_proposer_seconds": 1.2683045556147894,
+          "mean_canonical_seconds": 0.3909887686992685,
+          "mean_projection_apply_seconds": 0.1163023682932059,
+          "maximum_audio_samples": 1920000,
+          "maximum_model_input_tokens": 1978
+        }
+      ]
+    },
+    {
+      "mode": "checkpoint_rebase",
+      "raw_decision": "PHASE5A_LIVE_ADAPTIVE_CONTROL_PASS",
+      "threshold": 0.031251,
+      "threshold_source": "current live epoch split-sample certificate",
+      "verification_fraction": 0.0875,
+      "risk_upper_bound": 0.004997058694246492,
+      "p50_seconds": 0.6800259463489056,
+      "p95_seconds": 1.3536324650049194,
+      "p99_seconds": 1.937447289004922,
+      "deadline_miss_events": 0,
+      "deadline_miss_rounds": 0,
+      "output_violations": 0,
+      "state_violations": 0,
+      "authority_violations": 0,
+      "audit_events": 720,
+      "audit_root_state_mismatches": 0,
+      "independent_replay_root_rate": 0.0,
+      "independent_replay_risk_upper_bound": 0.0041520953856636345,
+      "joules_per_audio_second": 9.802980517047654,
+      "maximum_age_bucket_p99_seconds": 1.937447289004922,
+      "maximum_audio_samples": 480000,
+      "maximum_model_input_tokens": 542,
+      "peak_round_decomposition": {
+        "round_index": 55,
+        "session_age_end_seconds": 110,
+        "terminal": false,
+        "checkpoint_boundary": false,
+        "verified_count": 2,
+        "low_margin_count": 2,
+        "prepare_seconds": 0.004717252217233181,
+        "proposal_seconds": 0.6068408265709877,
+        "canonical_execution_seconds": 1.282552712596953,
+        "projection_seconds": 0.014671072363853455,
+        "apply_seconds": 0.007526910863816738,
+        "commit_seconds": 0.022405613213777542,
+        "critical_path_residual_seconds": 0.006104478612542152,
+        "cross_round_verifier_backlog": false,
+        "maximum_accumulated_audio_samples": 320000,
+        "maximum_model_input_token_count": 382,
+        "gpu_telemetry": {
+          "maximum_total_power_watts": 328.1,
+          "mean_total_power_watts": 293.9141666666667,
+          "per_gpu": {
+            "0": {
+              "maximum_temperature_c": 47.0,
+              "mean_power_watts": 178.09,
+              "minimum_sm_clock_mhz": 1920.0
+            },
+            "1": {
+              "maximum_temperature_c": 49.0,
+              "mean_power_watts": 115.82416666666667,
+              "minimum_sm_clock_mhz": 1725.0
+            }
+          },
+          "sample_count": 12
+        }
+      },
+      "age_buckets": [
+        {
+          "mode": "checkpoint_rebase",
+          "age_bucket": "000-030s",
+          "rounds": 15,
+          "p99_seconds": 1.352096845395863,
+          "maximum_seconds": 1.352096845395863,
+          "deadline_miss_rounds": 0,
+          "mean_prepare_seconds": 0.00484229444215695,
+          "mean_proposer_seconds": 0.5845040901874502,
+          "mean_canonical_seconds": 0.11091130636632443,
+          "mean_projection_apply_seconds": 0.017819125453631082,
+          "maximum_audio_samples": 480000,
+          "maximum_model_input_tokens": 509
+        },
+        {
+          "mode": "checkpoint_rebase",
+          "age_bucket": "030-060s",
+          "rounds": 15,
+          "p99_seconds": 1.4049187721684575,
+          "maximum_seconds": 1.4049187721684575,
+          "deadline_miss_rounds": 0,
+          "mean_prepare_seconds": 0.0053270880753795305,
+          "mean_proposer_seconds": 0.5634902471055587,
+          "mean_canonical_seconds": 0.19391789430131515,
+          "mean_projection_apply_seconds": 0.01721310062954823,
+          "maximum_audio_samples": 480000,
+          "maximum_model_input_tokens": 517
+        },
+        {
+          "mode": "checkpoint_rebase",
+          "age_bucket": "060-090s",
+          "rounds": 15,
+          "p99_seconds": 1.3828092375770211,
+          "maximum_seconds": 1.3828092375770211,
+          "deadline_miss_rounds": 0,
+          "mean_prepare_seconds": 0.005184825820227464,
+          "mean_proposer_seconds": 0.5655074197798967,
+          "mean_canonical_seconds": 0.2749115746468306,
+          "mean_projection_apply_seconds": 0.018089489080011845,
+          "maximum_audio_samples": 480000,
+          "maximum_model_input_tokens": 531
+        },
+        {
+          "mode": "checkpoint_rebase",
+          "age_bucket": "090-120s",
+          "rounds": 15,
+          "p99_seconds": 1.937447289004922,
+          "maximum_seconds": 1.937447289004922,
+          "deadline_miss_rounds": 0,
+          "mean_prepare_seconds": 0.004172378219664097,
+          "mean_proposer_seconds": 0.5602694905673464,
+          "mean_canonical_seconds": 0.23278277671585482,
+          "mean_projection_apply_seconds": 0.0175774438927571,
+          "maximum_audio_samples": 480000,
+          "maximum_model_input_tokens": 542
+        }
+      ]
+    }
+  ],
+  "quality": {
+    "sessions_per_language": 4,
+    "maximum_primary_error_delta": 0.02,
+    "maximum_catastrophic_outliers": 0,
+    "language_metrics": {
+      "Chinese": {
+        "catastrophic_outliers": 0,
+        "continuous_error_rate_mean": 0.026456979411524868,
+        "mean_delta": 0.00549613367795186,
+        "metric": "cer",
+        "rebase_error_rate_mean": 0.03195311308947672,
+        "sessions": 4
+      },
+      "English": {
+        "catastrophic_outliers": 0,
+        "continuous_error_rate_mean": 0.027193071048069093,
+        "mean_delta": 0.0015539439576317971,
+        "metric": "wer",
+        "rebase_error_rate_mean": 0.028747015005700892,
+        "sessions": 4
+      }
+    }
+  },
+  "claim_boundaries": [
+    "The historical cyclic/rolled 120-second result is retained but superseded for causal attribution by this repaired protocol.",
+    "Zero observed replay violations are empirical, not deterministic inference equivalence.",
+    "The risk upper bound is statistical and scoped to the full runtime fingerprint.",
+    "The paired quality gate has four sessions per language and is a death gate, not a population-level equivalence claim.",
+    "Audio encoder token counts are null because the frozen runtime does not expose them; raw audio samples and actual model input token counts are reported instead."
+  ]
+}

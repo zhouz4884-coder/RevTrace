@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from revtrace.risk_window import (
     additive_expansion_trace,
+    binomial_upper_bound,
     certify_risk_window,
     zero_error_upper_bound,
 )
@@ -20,6 +21,11 @@ def test_zero_error_bound_and_continuous_window() -> None:
     assert certificate.certified
     assert certificate.fast_path_window > 0.99
     assert zero_error_upper_bound(700, 0.05) < 0.005
+
+
+def test_independent_replay_bound_rejects_one_in_720() -> None:
+    assert binomial_upper_bound(0, 720) < 0.005
+    assert 0.0065 < binomial_upper_bound(1, 720) < 0.0067
 
 
 def test_caught_error_raises_failure_floor() -> None:

@@ -20,6 +20,8 @@ class CanonicalRuntimeProvenance:
     temperature: float
     max_tokens: int
     terminal_and_intermediate_same_engine: bool
+    intermediate_authority: str = "unspecified"
+    terminal_authority: str = "unspecified"
 
     @property
     def digest(self) -> str:
@@ -35,11 +37,20 @@ class CanonicalRuntimeProvenance:
         concurrency: int,
         language: str,
         arrival: str,
+        contract_scope: Mapping[str, str] | None = None,
     ) -> str:
-        return (
+        base = (
             f"{self.model}/proposer={proposer_dtype}/c={concurrency}/"
             f"language={language}/arrival={arrival}/canonical={self.digest}"
         )
+        if not contract_scope:
+            return base
+        normalized = []
+        for key, value in sorted(contract_scope.items()):
+            if not key or not value or "/" in key or "/" in value:
+                raise ValueError("contract-scope fields must be non-empty and slash-free")
+            normalized.append(f"{key}={value}")
+        return base + "/" + "/".join(normalized)
 
 
 def classify_postrun_disagreements(

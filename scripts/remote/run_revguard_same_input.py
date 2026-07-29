@@ -74,6 +74,7 @@ def job_digest(job: dict[str, Any]) -> str:
 def candidate_record(output: Any) -> dict[str, Any]:
     candidate = output.outputs[0]
     token_ids = [int(token) for token in candidate.token_ids]
+    prompt_token_ids = getattr(output, "prompt_token_ids", None)
     margins: list[float | None] = []
     chosen_logprobs: list[float | None] = []
     if candidate.logprobs is None:
@@ -96,6 +97,9 @@ def candidate_record(output: Any) -> dict[str, Any]:
         "chosen_logprobs": chosen_logprobs,
         "margins": margins,
         "minimum_margin": min(finite_margins) if finite_margins else None,
+        "model_input_token_count": (
+            len(prompt_token_ids) if prompt_token_ids is not None else None
+        ),
     }
 
 
