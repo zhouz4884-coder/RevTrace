@@ -230,3 +230,22 @@ def test_contract_and_policy_epoch_fence_stale_results() -> None:
     assert not ledger.can_commit(current)
     with pytest.raises(ValueError, match="stale"):
         ledger.commit(current)
+
+
+def test_competing_results_linearize_at_one_parent_version() -> None:
+    ledger = EpochFencedCommitLedger()
+    ledger.register("s-linear")
+    first = ledger.issue("s-linear", "r-first")
+    competing = ledger.issue("s-linear", "r-competing")
+
+    assert first.parent_version == competing.parent_version == 0
+    assert ledger.commit(first) == 1
+    assert ledger.version("s-linear") == 1
+    assert not ledger.can_commit(competing)
+    with pytest.raises(ValueError, match="stale"):
+        ledger.commit(competing)
+
+    successor = ledger.issue("s-linear", "r-successor")
+    assert successor.parent_version == 1
+    assert ledger.commit(successor) == 2
+    assert ledger.version("s-linear") == 2

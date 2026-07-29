@@ -97,6 +97,42 @@ See the
 [machine-readable summary](results/final_closure/summary.json), and
 [hash-audited compact artifact](artifact/final-evaluation-closure-v1).
 
+## Tail-robust admission closure
+
+The F7 tail variance is closed without relabeling the rejected c14 result:
+
+`TAIL_ROBUST_C12_PASS_WITH_120S_AGE_BOUNDARY`
+
+- An instrumented same-seed c14 run reproduced three rounds above the
+  preregistered 1.9-second admission guard. All three execute the proposer and
+  then a selective canonical batch serially. The selective-nonterminal P99 is
+  1.995 s, versus 1.308 s for terminal canonical rounds and 0.846 s for the
+  unverified fast path. No cross-round verifier backlog or thermal-throttling
+  signature was observed. The historical c14 point remains rejected.
+- A dedicated c12 calibration process issued the dynamic threshold
+  `tau=0.0625` after 1,369 audits, with anytime state-risk upper bound
+  `0.499706%`. Five subsequent processes froze that threshold and used
+  disjoint seeds.
+- Across 5,400 held-out events / 450 release rounds, seed P99 values are
+  1.704, 1.877, 1.756, 1.862, and 1.797 s. The maximum is 1.877 s and the
+  one-sided cross-seed 95% upper bound is 1.868 s, both below the 1.9-second
+  guard. The terminal and nonterminal upper bounds are 1.271 and 1.748 s,
+  respectively. Deadline-miss rounds, online selection-authority violations,
+  and unverified fast-path replay roots are all zero.
+- The conservative c12 reshape retains 87.7% of the rejected c14 mean
+  goodput and increases mean J/audio-s by 9.6%, while reducing the cross-seed
+  P99 upper bound from 2.079 to 1.868 s.
+- A conditional 120-second c12 profile establishes a duration boundary:
+  age-bucket P99 grows from 1.904 s (0--30 s) to 5.295 s (90--120 s), with
+  20/60 miss rounds. Online authority violations remain zero. The c12
+  30-second capacity certificate is therefore not extrapolated to long
+  sessions.
+
+See the
+[tail-robust closure report](results/tail_robust/REPORT.md),
+[admission protocol](docs/protocols/TAIL_ROBUST_ADMISSION_CONTRACT.md), and
+[change/failure diagnosis](docs/reports/tail_robust_change_diagnosis.md).
+
 ## Phase 3B--3D bounded results
 
 Phase 3B retrospectively replayed 2,000 audit schedules over 1,550 measured

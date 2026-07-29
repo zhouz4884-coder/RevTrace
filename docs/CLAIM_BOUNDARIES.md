@@ -239,3 +239,22 @@
   28 event-level misses because all 14 sessions share each round latency
   (P99 2.028 s). This is retained as cross-seed tail variance; it is not
   presented as an all-seed SLO pass or as a state-safety failure.
+- The follow-up tail-robust closure does not rehabilitate c14. An instrumented
+  same-seed run has no 2-second miss but still has three rounds above the
+  preregistered 1.9-second guard; all three serialize proposer and selective
+  canonical work.
+- The accepted c12 capacity contract is scoped to Qwen3-ASR-0.6B, FP16,
+  English, 30-second synchronized sessions, two RTX 3090 GPUs, the frozen
+  runtime digest, and `tau=0.0625`. It is supported by five independent
+  processes, not by duplicated per-session event counts.
+- The c12 maximum seed P99 is 1.877 s and its one-sided cross-seed 95% upper
+  bound is 1.868 s. The separately computed terminal and nonterminal
+  seed-P99 upper bounds are 1.271 s and 1.748 s. The risk upper bound is
+  0.499706%; this remains a statistical content contract rather than
+  deterministic inference.
+- The 120-second age profile is a rejected duration extension: 20/60 release
+  rounds miss the 2-second deadline and the final 30-second bucket has
+  P99=5.295 s. The 30-second c12 contract is not extrapolated across duration.
+- Version and epoch fencing linearize online state mutations. Later
+  canonical-replay disagreements are repeatability evidence and do not
+  retroactively change which online result held selection authority.

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "study": "RevTrace Tail-Robust Admission Closure",
+  "decision_boundary": "F7 c14 is calibration evidence and is never rerun to select a favorable seed",
+  "c14_diagnostic": {
+    "concurrency": 14,
+    "episode_seconds": 30,
+    "stages": 3,
+    "episodes_per_stage": 6,
+    "frozen_threshold": 0.062501,
+    "purpose": "instrumented same-seed reproduction for causal decomposition only"
+  },
+  "c12_calibration": {
+    "concurrency": 12,
+    "episode_seconds": 30,
+    "episodes": 8,
+    "minimum_audits": 1350,
+    "allowed_state_risk": 0.005,
+    "threshold_source": "fresh c12 split-sample controller evidence"
+  },
+  "c12_heldout": {
+    "independent_process_seeds": 5,
+    "episodes_per_seed": 6,
+    "episode_seconds": 30,
+    "threshold": "frozen from the disjoint c12 calibration process",
+    "maximum_seed_p99_seconds": 1.9,
+    "deadline_miss_rounds": 0,
+    "online_selection_authority_violations": 0,
+    "seed_p99_upper_confidence": 0.95
+  },
+  "capacity_certificate": {
+    "statistical_unit": "synchronous release round",
+    "deadline_seconds": 2.0,
+    "guard_seconds": 0.1,
+    "requires_terminal_nonterminal_stratification": true,
+    "requires_maximum_verification_overlap": true,
+    "requires_contract_digest": true
+  },
+  "age_profile": {
+    "enabled_only_if_c12_heldout_passes": true,
+    "session_seconds": 120,
+    "concurrency": 12,
+    "bucket_seconds": 30,
+    "mid_session_eviction": false,
+    "all_admitted_waiting_included": true
+  },
+  "claim_boundary": "cluster-aware bounds are empirical multi-seed capacity evidence, not a deterministic guarantee for unseen hardware or workloads"
+}

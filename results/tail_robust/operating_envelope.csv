@@ -1,0 +1,15 @@
+region,role,source,model,concurrency,session_seconds,risk_status,slo_status,gpu_normalized_goodput_speedup,p99_seconds,energy_joules_per_audio_second,claim
+certified_production_contract,headline,F6 matched energy Phase2 live Qwen3-ASR-0.6B c16,Qwen3-ASR-0.6B,16,30,formal_anytime_contract_pass,pass,2.9450955523161064,1.3704647856298833,5.397811652744018,main production result
+certified_production_contract,headline,F6 matched energy Phase2 live Qwen3-ASR-1.7B c16,Qwen3-ASR-1.7B,16,30,formal_anytime_contract_pass,pass,2.378022980680112,1.5047621770917126,8.165506533143946,main production result
+deliberate_boundary_probe,stress_or_capacity_boundary,Phase5C 0p6b-c16-d120-sync-mixed,Qwen3-ASR-0.6B,16,,pass,fail,2.320873474754004,4.858059530369937,15.58183192914897,measured operating boundary
+deliberate_boundary_probe,stress_or_capacity_boundary,Phase5C 0p6b-c16-d60-poisson-mixed,Qwen3-ASR-0.6B,16,,insufficient_statistical_evidence,fail,2.472678724923321,2.892535784225911,9.473136800134455,measured operating boundary
+deliberate_boundary_probe,stress_or_capacity_boundary,Phase5C 0p6b-c32-d120-burst-zh,Qwen3-ASR-0.6B,32,,observed_violation,fail,3.383362429906062,5.591171470219269,13.759882554717162,measured operating boundary
+deliberate_boundary_probe,stress_or_capacity_boundary,Phase5C 0p6b-c8-d30-sync-en,Qwen3-ASR-0.6B,8,30,insufficient_statistical_evidence,pass,2.166507111607348,1.4208972841873764,7.743110597556553,measured operating boundary
+deliberate_boundary_probe,stress_or_capacity_boundary,Phase5C 1p7b-c16-d120-poisson-mixed,Qwen3-ASR-1.7B,16,,pass,fail,1.6597415288400041,5.316730637522415,22.651630701375193,measured operating boundary
+deliberate_boundary_probe,stress_or_capacity_boundary,Phase5C 1p7b-c16-d30-sync-mixed,Qwen3-ASR-1.7B,16,30,insufficient_statistical_evidence,pass,2.60337973597158,1.4464329289086164,8.193447621187488,measured operating boundary
+deliberate_boundary_probe,stress_or_capacity_boundary,Phase5C 1p7b-c32-d60-burst-zh,Qwen3-ASR-1.7B,32,,pass,fail,2.6767127564141453,2.9834835664648542,9.29423842259252,measured operating boundary
+deliberate_boundary_probe,stress_or_capacity_boundary,Phase5C 1p7b-c8-d60-poisson-en,Qwen3-ASR-1.7B,8,,insufficient_statistical_evidence,fail,1.4660100803101412,2.671826888229698,18.227520844115144,measured operating boundary
+deliberate_boundary_probe,stress_or_capacity_boundary,Phase6 c32 Chinese burst repaired,Qwen3-ASR-0.6B,32,,observed_zero_after_repair,fail,2.9526763569394743,6.10702221195213,15.268162314378875,measured operating boundary
+rejected_multiseed_capacity_probe,calibration_boundary,Phase7.1 c14 certified capacity,Qwen3-ASR-0.6B,14,,split_sample_contract_pass,pass,,1.4126308765262365,12.586144329827635,measured operating boundary
+rejected_multiseed_capacity_probe,calibration_boundary,Final closure c14 steady-state,Qwen3-ASR-0.6B,14,,continued_split_sample_contract_pass,pass,,1.7659853640943766,10.00374397014357,measured operating boundary
+robust_reshape_contract,tail_robust_heldout,Tail closure c12 five-process heldout,Qwen3-ASR-0.6B,12,30,pass,pass,,1.876952457241714,,conservative reshape capacity contract

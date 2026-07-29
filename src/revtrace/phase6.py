@@ -559,3 +559,10 @@ class EpochFencedCommitLedger:
         self._session_versions[ticket.session_id] = ticket.next_version
         self._committed.add(ticket.revision_id)
         return ticket.next_version
+
+    def version(self, session_id: str) -> int:
+        """Return the committed session version, never a speculative version."""
+
+        if session_id not in self._session_versions:
+            raise KeyError(session_id)
+        return self._session_versions[session_id]

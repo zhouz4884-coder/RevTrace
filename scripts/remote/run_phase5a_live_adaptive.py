@@ -145,7 +145,7 @@ class PowerSampler:
     def __init__(self, gpu_ids: tuple[int, ...], interval: float = 0.1) -> None:
         self.gpu_ids = gpu_ids
         self.interval = interval
-        self.samples: list[dict[str, float]] = []
+        self.samples: list[dict[str, Any]] = []
         self._stop = threading.Event()
         self._thread: threading.Thread | None = None
 
@@ -157,7 +157,10 @@ class PowerSampler:
                 completed = subprocess.run(
                     [
                         "nvidia-smi",
-                        "--query-gpu=index,power.draw",
+                        (
+                            "--query-gpu=index,power.draw,clocks.sm,"
+                            "temperature.gpu"
+                        ),
                         "--format=csv,noheader,nounits",
                     ],
                     text=True,
@@ -165,15 +168,23 @@ class PowerSampler:
                     check=False,
                 )
                 total = 0.0
+                per_gpu: dict[str, dict[str, float]] = {}
                 if completed.returncode == 0:
                     for line in completed.stdout.splitlines():
                         fields = [item.strip() for item in line.split(",")]
-                        if len(fields) == 2 and int(fields[0]) in self.gpu_ids:
+                        if len(fields) == 4 and int(fields[0]) in self.gpu_ids:
                             total += float(fields[1])
+                            per_gpu[fields[0]] = {
+                                "power_watts": float(fields[1]),
+                                "sm_clock_mhz": float(fields[2]),
+                                "temperature_c": float(fields[3]),
+                            }
                     self.samples.append(
                         {
                             "time": time.perf_counter() - started,
+                            "monotonic_time": time.perf_counter(),
                             "power_watts": total,
+                            "per_gpu": per_gpu,
                         }
                     )
                 self._stop.wait(self.interval)
@@ -181,11 +192,60 @@ class PowerSampler:
         self._thread = threading.Thread(target=collect, daemon=True)
         self._thread.start()
 
-    def stop(self) -> list[dict[str, float]]:
+    def stop(self) -> list[dict[str, Any]]:
         self._stop.set()
         if self._thread is not None:
             self._thread.join(timeout=5.0)
         return self.samples
+
+
+def round_telemetry(
+    samples: list[dict[str, Any]],
+    *,
+    started: float,
+    finished: float,
+) -> dict[str, Any]:
+    """Summarize GPU telemetry whose sample instant falls inside one round."""
+
+    selected = [
+        sample
+        for sample in samples
+        if started <= float(sample.get("monotonic_time", -1.0)) <= finished
+    ]
+    by_gpu: dict[str, dict[str, list[float]]] = {}
+    for sample in selected:
+        for gpu, row in sample.get("per_gpu", {}).items():
+            target = by_gpu.setdefault(
+                gpu,
+                {
+                    "power_watts": [],
+                    "sm_clock_mhz": [],
+                    "temperature_c": [],
+                },
+            )
+            for field in target:
+                target[field].append(float(row[field]))
+    gpu_summary = {}
+    for gpu, values in sorted(by_gpu.items()):
+        gpu_summary[gpu] = {
+            "mean_power_watts": statistics.mean(values["power_watts"]),
+            "minimum_sm_clock_mhz": min(values["sm_clock_mhz"]),
+            "maximum_temperature_c": max(values["temperature_c"]),
+        }
+    return {
+        "sample_count": len(selected),
+        "mean_total_power_watts": (
+            statistics.mean(float(row["power_watts"]) for row in selected)
+            if selected
+            else None
+        ),
+        "maximum_total_power_watts": (
+            max(float(row["power_watts"]) for row in selected)
+            if selected
+            else None
+        ),
+        "per_gpu": gpu_summary,
+    }
 
 
 def parse_stages(
@@ -558,6 +618,7 @@ def main() -> int:
         required_verifier_seconds = 0.0
         service_events: list[dict[str, Any]] = []
         episode_snapshots: list[dict[str, Any]] = []
+        stage_round_details: list[dict[str, Any]] = []
         selected_by_episode: list[list[dict[str, Any]]] = []
         certified_before_episode: int | None = (
             0
@@ -589,6 +650,8 @@ def main() -> int:
             episode_service_started = time.perf_counter()
             for chunk_index in range(rounds):
                 round_execution_started = time.perf_counter()
+                canonical_execution_seconds = 0.0
+                verifier_collect_wall_seconds = 0.0
                 terminal = chunk_index == rounds - 1
                 jobs: list[dict[str, Any]] = []
                 prefixes: list[str] = []
@@ -629,9 +692,14 @@ def main() -> int:
                         raise AssertionError(
                             "terminal suppression requires canonical dispatch"
                         )
+                    collect_started = time.perf_counter()
                     verified, elapsed = collect_canonical_batch(
                         overlapped_dispatch
                     )
+                    verifier_collect_wall_seconds += (
+                        time.perf_counter() - collect_started
+                    )
+                    canonical_execution_seconds += elapsed
                     verify_positions = list(range(len(jobs)))
                     required_verifier_seconds += elapsed
                     verified_by_position.update(
@@ -656,9 +724,14 @@ def main() -> int:
                         candidate_record(output) for output in outputs
                     ]
                     if overlapped_dispatch is not None:
+                        collect_started = time.perf_counter()
                         verified, elapsed = collect_canonical_batch(
                             overlapped_dispatch
                         )
+                        verifier_collect_wall_seconds += (
+                            time.perf_counter() - collect_started
+                        )
+                        canonical_execution_seconds += elapsed
                         verify_positions = list(range(len(jobs)))
                         required_verifier_seconds += elapsed
                         verified_by_position.update(
@@ -695,13 +768,19 @@ def main() -> int:
                     and overlapped_dispatch is None
                     and not suppress_terminal_proposer
                 ):
+                    collect_started = time.perf_counter()
                     verified, elapsed = canonical_batch(
                         [jobs[position] for position in verify_positions],
                         fixed_shape=concurrency,
                     )
+                    verifier_collect_wall_seconds += (
+                        time.perf_counter() - collect_started
+                    )
+                    canonical_execution_seconds += elapsed
                     required_verifier_seconds += elapsed
                     verified_by_position.update(zip(verify_positions, verified))
                 round_started = time.perf_counter()
+                round_selected_records: list[dict[str, Any]] = []
                 for position, (
                     stream,
                     state,
@@ -725,6 +804,7 @@ def main() -> int:
                         terminal=terminal,
                     )
                     selected["state_projection"] = selected_projection
+                    round_selected_records.append(selected)
                     if (
                         position in verified_by_position
                         and not suppress_terminal_proposer
@@ -760,6 +840,15 @@ def main() -> int:
                         "terminal": terminal,
                         "proposal_executed": not suppress_terminal_proposer,
                         "verified": position in verified_by_position,
+                        "selected_authority": (
+                            "canonical"
+                            if position in verified_by_position
+                            else "risk_limited_fast_path"
+                        ),
+                        "online_selection_authority_violation": bool(
+                            position in verify_positions
+                            and position not in verified_by_position
+                        ),
                         "fail_closed": (
                             False
                             if static_oracle_stage
@@ -805,7 +894,74 @@ def main() -> int:
                 round_state_entry_latency = (
                     time.perf_counter() - round_execution_started
                 )
+                round_finished = time.perf_counter()
+                active_threshold = (
+                    frozen_threshold
+                    if static_oracle_stage
+                    else epoch.threshold
+                )
+                low_margin_count = (
+                    None
+                    if suppress_terminal_proposer
+                    or active_threshold is None
+                    else sum(
+                        record["minimum_margin"] is None
+                        or float(record["minimum_margin"])
+                        <= float(active_threshold)
+                        for record in proposals
+                    )
+                )
                 episode_round_latencies.append(round_state_entry_latency)
+                stage_round_details.append(
+                    {
+                        "episode": episode,
+                        "chunk_index": chunk_index,
+                        "session_age_start_seconds": chunk_index * 2,
+                        "session_age_end_seconds": (chunk_index + 1) * 2,
+                        "terminal": terminal,
+                        "preverify_all": preverify_all,
+                        "suppress_terminal_proposer": (
+                            suppress_terminal_proposer
+                        ),
+                        "proposal_executed": not suppress_terminal_proposer,
+                        "proposal_seconds": proposal_elapsed,
+                        "low_margin_count": low_margin_count,
+                        "verified_count": len(verify_positions),
+                        "verification_overlap_fraction": (
+                            len(verify_positions) / len(jobs) if jobs else 0.0
+                        ),
+                        "verifier_dispatch_count": (
+                            1 if verify_positions else 0
+                        ),
+                        "verifier_queue_depth_before_dispatch": 0,
+                        "verifier_queue_depth_at_commit": 0,
+                        "cross_round_verifier_backlog": False,
+                        "canonical_fixed_shape": (
+                            concurrency if verify_positions else None
+                        ),
+                        "canonical_execution_seconds": (
+                            canonical_execution_seconds
+                        ),
+                        "verifier_collect_wall_seconds": (
+                            verifier_collect_wall_seconds
+                        ),
+                        "commit_seconds": round_commit_elapsed,
+                        "state_entry_latency_seconds": (
+                            round_state_entry_latency
+                        ),
+                        "deadline_miss": round_state_entry_latency > 2.0,
+                        "maximum_selected_token_count": max(
+                            len(record["token_ids"])
+                            for record in round_selected_records
+                        ),
+                        "mean_selected_token_count": statistics.mean(
+                            len(record["token_ids"])
+                            for record in round_selected_records
+                        ),
+                        "_round_monotonic_started": round_execution_started,
+                        "_round_monotonic_finished": round_finished,
+                    }
+                )
                 for event in episode_selected[-len(streams) :]:
                     event["state_entry_latency_seconds"] = (
                         round_state_entry_latency
@@ -864,6 +1020,18 @@ def main() -> int:
             selected_by_episode.append(episode_selected)
 
         energy_samples = sampler.stop()
+        for detail in stage_round_details:
+            detail["gpu_telemetry"] = round_telemetry(
+                energy_samples,
+                started=float(detail.pop("_round_monotonic_started")),
+                finished=float(detail.pop("_round_monotonic_finished")),
+            )
+        for snapshot in episode_snapshots:
+            snapshot["rounds_detail"] = [
+                detail
+                for detail in stage_round_details
+                if detail["episode"] == snapshot["episode"]
+            ]
         stage_wall = time.perf_counter() - stage_started
 
         # Fresh canonical replay after the service interval.  This is excluded
@@ -1112,6 +1280,10 @@ def main() -> int:
                     event["verified"] for event in service_events
                 )
                 / len(service_events),
+                "online_selection_authority_violations": sum(
+                    bool(event["online_selection_authority_violation"])
+                    for event in service_events
+                ),
                 "output_violations": output_violations,
                 "state_violations": state_violations,
                 "audit_events": audit_events,
@@ -1149,6 +1321,7 @@ def main() -> int:
                 ),
                 "audit_seconds_excluded_from_service": audit_seconds,
                 "episodes_detail": episode_snapshots,
+                "rounds_detail": stage_round_details,
                 "energy": energy,
             }
         )

@@ -378,3 +378,15 @@ The repaired protocol promotes only the first unverified root per session in a
 declared adaptation split and evaluates the next independently seeded split.
 Verified canonical replay differences remain a repeatability boundary and are
 not counted as online selection-authority violations.
+
+## Tail-robust admission closure
+
+Status:
+
+`TAIL_ROBUST_C12_PASS_WITH_120S_AGE_BOUNDARY`
+
+The historical c14 point stays outside the admission envelope. The fixed c12
+reshape passes five-process, round-clustered 30-second admission with maximum
+seed P99 1.877 s, cross-seed U95 1.868 s, zero miss rounds, and risk upper
+bound 0.499706%. A complete 120-second profile fails the duration extension
+and is retained as an operating boundary rather than repaired post hoc.
