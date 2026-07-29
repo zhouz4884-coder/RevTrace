@@ -50,6 +50,16 @@ less than 20,000 MiB free and prints the occupying compute processes.
 This was a process-lifecycle failure, not evidence about c14 tail behavior or
 the RevTrace mechanism.
 
+## Post-processing defect
+
+The first local finalization attempt referenced GPU-telemetry variables from
+the wrong `stage_row` scope and raised `NameError`. All five held-out remote
+processes had already completed and their raw JSON files were intact. The
+scope was corrected in `scripts/finalize_tail_robust_closure.py`, the summary
+was regenerated from the same five files, and an integration regression test
+was added in `tests/test_tail_robust_finalizer.py`. No GPU cell was rerun, no
+seed was replaced, and no threshold or admission rule changed.
+
 ## Measured mechanism diagnosis
 
 The instrumented c14 rerun contains 270 release rounds. It does not reproduce
