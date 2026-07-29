@@ -7,7 +7,9 @@ canonical path, and expands the fast path only after the new epoch has enough
 split-sample evidence.  With Phase 6 asymmetric memory enabled, an exact
 contract return restores only behind renewal canaries, while unseen
 populations stay isolated. Post-stage canonical replay is excluded from
-service timing and checks every selected state transition.
+service timing and checks every selected state transition. When explicitly
+declared as an adaptation split, only its first mismatch per session may
+raise the dynamic failure floor before a later independent validation stage.
 """
 
 from __future__ import annotations
@@ -89,6 +91,34 @@ def parse_args() -> argparse.Namespace:
             "after an epoch is certified, execute terminal revisions only "
             "on the authoritative canonical path instead of co-running a "
             "discarded proposer"
+        ),
+    )
+    parser.add_argument(
+        "--continue-same-contract-stages",
+        action="store_true",
+        help=(
+            "when adjacent reporting stages have an identical fingerprint, "
+            "retain the live epoch and certificate instead of invoking a "
+            "contract switch; this separates post-certification steady state"
+        ),
+    )
+    parser.add_argument(
+        "--promote-post-stage-audit-failures",
+        action="store_true",
+        help=(
+            "conservatively feed the first replay-audit state mismatch for "
+            "each session back into the persistent failure floor; intended "
+            "only for an adaptation stage followed by independent validation"
+        ),
+    )
+    parser.add_argument(
+        "--audit-adaptation-stage",
+        action="append",
+        default=[],
+        metavar="LABEL",
+        help=(
+            "declare a stage as replay-audit adaptation rather than final "
+            "validation; may be repeated"
         ),
     )
     parser.add_argument(
@@ -476,6 +506,20 @@ def main() -> int:
     warmup_seconds_excluded = time.perf_counter() - warmup_started
 
     stage_payloads: list[dict[str, Any]] = []
+    audit_adaptation_stages = set(args.audit_adaptation_stage)
+    if audit_adaptation_stages and not args.promote_post_stage_audit_failures:
+        raise ValueError(
+            "--audit-adaptation-stage requires "
+            "--promote-post-stage-audit-failures"
+        )
+    unknown_adaptation_stages = audit_adaptation_stages.difference(
+        item[0] for item in stages
+    )
+    if unknown_adaptation_stages:
+        raise ValueError(
+            "unknown audit adaptation stage(s): "
+            + ", ".join(sorted(unknown_adaptation_stages))
+        )
     global_event = 0
     for stage_index, (
         label,
@@ -493,10 +537,19 @@ def main() -> int:
         )
         if args.phase6_asymmetric_memory and label in failure_floors:
             controller.seed_failure(fingerprint, failure_floors[label])
-        epoch = controller.switch(fingerprint)
-        switch_status_at_entry = getattr(
-            controller, "switch_status", "fresh_epoch"
+        continued_same_contract = bool(
+            args.continue_same_contract_stages
+            and getattr(controller, "current", None) is not None
+            and controller.current.fingerprint == fingerprint
         )
+        if continued_same_contract:
+            epoch = controller.current
+            switch_status_at_entry = "continued_same_contract_epoch"
+        else:
+            epoch = controller.switch(fingerprint)
+            switch_status_at_entry = getattr(
+                controller, "switch_status", "fresh_epoch"
+            )
         stage_started = time.perf_counter()
         sampler = PowerSampler((int(args.proposer_gpu), int(args.verifier_gpu)))
         sampler.start()
@@ -507,7 +560,9 @@ def main() -> int:
         episode_snapshots: list[dict[str, Any]] = []
         selected_by_episode: list[list[dict[str, Any]]] = []
         certified_before_episode: int | None = (
-            0 if static_oracle_stage else None
+            0
+            if static_oracle_stage or epoch.certificate is not None
+            else None
         )
 
         for episode in range(episodes):
@@ -818,6 +873,8 @@ def main() -> int:
         state_violations = 0
         audit_events = 0
         audit_violation_rows: list[dict[str, Any]] = []
+        audit_root_keys: set[tuple[int, str]] = set()
+        promoted_audit_roots: list[dict[str, Any]] = []
         selected_cursor = 0
         for episode in range(episodes):
             streams = make_stage_streams(
@@ -882,6 +939,13 @@ def main() -> int:
                         not comparison["token_exact"]
                         or not comparison["state_projection_token_exact"]
                     ):
+                        root_key = (episode, selected["session_id"])
+                        is_root_state_mismatch = bool(
+                            not comparison["state_projection_token_exact"]
+                            and root_key not in audit_root_keys
+                        )
+                        if is_root_state_mismatch:
+                            audit_root_keys.add(root_key)
                         audit_violation_rows.append(
                             {
                                 "stage": label,
@@ -908,6 +972,9 @@ def main() -> int:
                                     "state_projection"
                                 ],
                                 "comparison": comparison,
+                                "is_root_state_mismatch": (
+                                    is_root_state_mismatch
+                                ),
                             }
                         )
                     apply_output(state, type("Output", (), {})(), prefix) if False else None
@@ -916,6 +983,49 @@ def main() -> int:
                     apply_candidate_record(state, record, prefix)
                     selected_cursor += 1
                     audit_events += 1
+        if (
+            label in audit_adaptation_stages
+            and args.promote_post_stage_audit_failures
+        ):
+            for row in audit_violation_rows:
+                if (
+                    not row["is_root_state_mismatch"]
+                    or bool(row["verified"])
+                ):
+                    continue
+                margin = row["proposal_minimum_margin"]
+                if margin is None:
+                    raise RuntimeError(
+                        "cannot promote a replay-audit root without a "
+                        "proposal margin; fail closed instead of inventing "
+                        "a threshold"
+                    )
+                certificate = controller.observe(
+                    minimum_margin=float(margin),
+                    state_error=True,
+                )
+                promoted_audit_roots.append(
+                    {
+                        "episode": row["episode"],
+                        "session_id": row["session_id"],
+                        "chunk_index": row["chunk_index"],
+                        "proposal_minimum_margin": float(margin),
+                        "failure_floor_after_promotion": (
+                            controller.failure_floor(fingerprint)
+                            if args.phase6_asymmetric_memory
+                            else None
+                        ),
+                        "certificate_retained": bool(
+                            certificate is not None
+                            and certificate.certified
+                        ),
+                        "threshold_after_promotion": (
+                            None
+                            if controller.current is None
+                            else controller.current.threshold
+                        ),
+                    }
+                )
         audit_seconds = time.perf_counter() - audit_started
         latencies = [
             float(event["state_entry_latency_seconds"])
@@ -938,6 +1048,7 @@ def main() -> int:
                     if static_oracle_stage
                     else switch_status_at_entry
                 ),
+                "continued_same_contract_epoch": continued_same_contract,
                 "failure_floor": (
                     controller.failure_floor(fingerprint)
                     if args.phase6_asymmetric_memory
@@ -1005,6 +1116,37 @@ def main() -> int:
                 "state_violations": state_violations,
                 "audit_events": audit_events,
                 "audit_violation_rows": audit_violation_rows,
+                "audit_root_state_mismatches": sum(
+                    bool(row["is_root_state_mismatch"])
+                    for row in audit_violation_rows
+                ),
+                "unverified_fast_path_replay_roots": sum(
+                    bool(row["is_root_state_mismatch"])
+                    and not bool(row["verified"])
+                    for row in audit_violation_rows
+                ),
+                "verified_canonical_replay_roots": sum(
+                    bool(row["is_root_state_mismatch"])
+                    and bool(row["verified"])
+                    for row in audit_violation_rows
+                ),
+                "audit_role": (
+                    "adaptation"
+                    if label in audit_adaptation_stages
+                    else "validation"
+                ),
+                "promoted_audit_root_count": len(promoted_audit_roots),
+                "promoted_audit_roots": promoted_audit_roots,
+                "post_audit_failure_floor": (
+                    controller.failure_floor(fingerprint)
+                    if args.phase6_asymmetric_memory
+                    else None
+                ),
+                "post_audit_threshold": (
+                    None
+                    if controller.current is None
+                    else controller.current.threshold
+                ),
                 "audit_seconds_excluded_from_service": audit_seconds,
                 "episodes_detail": episode_snapshots,
                 "energy": energy,
@@ -1026,34 +1168,49 @@ def main() -> int:
         raise ValueError(
             "static-oracle runs require one frozen threshold per stage"
         )
-    passed = all(
-        stage["threshold"] is not None
-        and (
-            stage["risk_upper_bound"] is None
-            if static_oracle_run
-            else stage["risk_upper_bound"] <= 0.005
+    def stage_passes(stage: dict[str, Any]) -> bool:
+        common = bool(
+            stage["threshold"] is not None
+            and (
+                stage["risk_upper_bound"] is None
+                if static_oracle_run
+                else stage["risk_upper_bound"] <= 0.005
+            )
+            and stage["deadline_miss_events"] == 0
         )
-        and (
-            (
-                stage["state_violations"] / stage["events"] <= 0.005
+        if not common:
+            return False
+        if stage["audit_role"] == "adaptation":
+            return bool(
+                stage["promoted_audit_root_count"] > 0
+                and all(
+                    row["certificate_retained"]
+                    for row in stage["promoted_audit_roots"]
+                )
+            )
+        if args.statistical_risk_gate:
+            unverified_replay_roots = [
+                row
+                for row in stage["audit_violation_rows"]
+                if row["is_root_state_mismatch"]
+                and not bool(row["verified"])
+            ]
+            return bool(
+                len(unverified_replay_roots) / stage["events"] <= 0.005
                 and not any(
                     row["proposal_minimum_margin"] is not None
                     and stage["failure_floor"] is not None
                     and float(row["proposal_minimum_margin"])
                     <= float(stage["failure_floor"])
-                    and not bool(row["verified"])
-                    for row in stage["audit_violation_rows"]
+                    for row in unverified_replay_roots
                 )
             )
-            if args.statistical_risk_gate
-            else (
-                stage["output_violations"] == 0
-                and stage["state_violations"] == 0
-            )
+        return bool(
+            stage["output_violations"] == 0
+            and stage["state_violations"] == 0
         )
-        and stage["deadline_miss_events"] == 0
-        for stage in stage_payloads
-    )
+
+    passed = all(stage_passes(stage) for stage in stage_payloads)
     payload = {
         "schema_version": 1,
         "study": (
@@ -1120,6 +1277,12 @@ def main() -> int:
             "post-stage replay is excluded from service timing",
             "risk is statistical state-entry disagreement, not bitwise determinism",
             (
+                "a verified canonical draw that differs on a later replay is "
+                "reported as replay non-repeatability, not as an online "
+                "selection-authority violation or an unverified fast-path "
+                "counterexample"
+            ),
+            (
                 "static-oracle thresholds are frozen from prior independent "
                 "split-sample certificates and supply performance references"
                 if static_oracle_run
@@ -1135,6 +1298,15 @@ def main() -> int:
             (
                 "certified terminal revisions suppress discarded proposer "
                 "work when the corresponding flag is enabled"
+            ),
+            (
+                "declared audit-adaptation stages promote only the first "
+                "state mismatch per session into the persistent dynamic "
+                "failure floor; cascade descendants remain recorded but are "
+                "not double-counted, and a later stage supplies independent "
+                "validation"
+                if audit_adaptation_stages
+                else "post-stage replay evidence is not used for adaptation"
             ),
             (
                 "the canonical dtype is a versioned service reference and "

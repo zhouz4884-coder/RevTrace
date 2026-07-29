@@ -53,6 +53,38 @@ Current decision:
 
 `PHASE3A_ADAPTIVE_CONTROL_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED`
 
+## Final evaluation closure
+
+The submission-facing four-part closure is complete:
+
+`FINAL_EVALUATION_CLOSURE_PASS`
+
+- **Quality:** 1,024 real ASR executions cover two Qwen3-ASR models,
+  independent 64-utterance LibriSpeech test-clean and AISHELL-1 holdouts, and
+  four execution modes. RevTrace is terminal-text exact with the FP16
+  singleton authoritative baseline in all four model-language cells. Its
+  paired WER/CER delta and all 10,000-replicate bootstrap interval endpoints
+  are zero; no catastrophic primary-error outlier is observed.
+- **Cold versus steady:** one persistent c14 process certifies after 1,350
+  events (interpolated 102.635 s). A separate adaptation split raises the
+  learned threshold from `0.015626` to `0.062501` using two root
+  counterexamples. The independently seeded steady split verifies 9.05% of
+  events, sustains 14.99 state entries/s, remains below the 2 s SLO at
+  P99=1.766 s, and uses 10.00 J/audio-s.
+- **Guarantee boundary:** the steady split has zero unverified fast-path replay
+  roots, but three already-verified canonical draws differ when executed
+  again later. These are retained as FP16 replay non-repeatability, not
+  relabeled as online selection-authority failures.
+- **Evidence separation:** four canonical contracts are frozen separately.
+  The final Pareto table keeps two same-task end-to-end joint-feasible points,
+  two additional risk/SLO capacity-only points without a normalized baseline,
+  and nine infeasible or statistically uncertified points.
+
+See the
+[final closure report](results/final_closure/REPORT.md),
+[machine-readable summary](results/final_closure/summary.json), and
+[hash-audited compact artifact](artifact/final-evaluation-closure-v1).
+
 ## Phase 3B--3D bounded results
 
 Phase 3B retrospectively replayed 2,000 audit schedules over 1,550 measured

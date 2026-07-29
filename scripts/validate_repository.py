@@ -72,6 +72,12 @@ def main() -> int:
         "artifact/phase5-system-hardening-v1/MANIFEST.json",
         "results/phase6/summary.json",
         "artifact/phase6-submission-repairs-v1/MANIFEST.json",
+        "results/final_closure/summary.json",
+        "results/final_closure/quality/summary.json",
+        "results/final_closure/steady_state/summary.json",
+        "results/final_closure/canonical_contracts.json",
+        "results/final_closure/pareto.csv",
+        "artifact/final-evaluation-closure-v1/MANIFEST.json",
         "src/revtrace/core.py",
         "src/revtrace/risk.py",
         "src/revtrace/control.py",
@@ -181,6 +187,17 @@ def main() -> int:
             check_keyed_manifest(
                 ROOT / "artifact" / "phase6-submission-repairs-v1",
                 phase6_artifact_manifest,
+            )
+        )
+    final_artifact_manifest = (
+        ROOT / "artifact" / "final-evaluation-closure-v1" / "MANIFEST.json"
+    )
+    if final_artifact_manifest.exists():
+        failures.extend(
+            check_manifest(
+                ROOT / "artifact" / "final-evaluation-closure-v1",
+                final_artifact_manifest,
+                repo_relative=False,
             )
         )
     phase2_summary = json.loads(

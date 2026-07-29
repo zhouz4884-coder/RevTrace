@@ -1,0 +1,428 @@
+{
+  "claim_boundaries": [
+    "quality is measured on a deterministic independent holdout manifest",
+    "terminal exactness compares normalized text, not bitwise logits",
+    "zero observed outliers is empirical and paired-bootstrap bounded",
+    "FP32 is a distinct versioned observed-reproducible contract"
+  ],
+  "comparisons": [
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "Chinese",
+      "mode": "fp32_reproducible",
+      "model": "Qwen3-ASR-0.6B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "cer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "Chinese",
+      "mode": "revtrace_risk_limited",
+      "model": "Qwen3-ASR-0.6B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "cer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "Chinese",
+      "mode": "unprotected_batch",
+      "model": "Qwen3-ASR-0.6B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "cer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "English",
+      "mode": "fp32_reproducible",
+      "model": "Qwen3-ASR-0.6B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": -0.0023094688221708994,
+        "delta": -0.0007674597083653124,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "wer",
+      "terminal_exact_rate_vs_singleton": 0.984375
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "English",
+      "mode": "revtrace_risk_limited",
+      "model": "Qwen3-ASR-0.6B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "wer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "English",
+      "mode": "unprotected_batch",
+      "model": "Qwen3-ASR-0.6B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "wer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "Chinese",
+      "mode": "fp32_reproducible",
+      "model": "Qwen3-ASR-1.7B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "cer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "Chinese",
+      "mode": "revtrace_risk_limited",
+      "model": "Qwen3-ASR-1.7B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "cer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "Chinese",
+      "mode": "unprotected_batch",
+      "model": "Qwen3-ASR-1.7B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "cer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "English",
+      "mode": "fp32_reproducible",
+      "model": "Qwen3-ASR-1.7B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "wer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "English",
+      "mode": "revtrace_risk_limited",
+      "model": "Qwen3-ASR-1.7B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "wer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    },
+    {
+      "catastrophic_outliers_delta_at_least_0.20": 0,
+      "language": "English",
+      "mode": "unprotected_batch",
+      "model": "Qwen3-ASR-1.7B",
+      "paired_bootstrap": {
+        "ci95_high": 0.0,
+        "ci95_low": 0.0,
+        "delta": 0.0,
+        "replicates": 10000
+      },
+      "paired_utterances": 64,
+      "primary_metric": "wer",
+      "terminal_exact_rate_vs_singleton": 1.0
+    }
+  ],
+  "complete_model_language_cells": [
+    {
+      "language": "Chinese",
+      "model": "Qwen3-ASR-0.6B"
+    },
+    {
+      "language": "English",
+      "model": "Qwen3-ASR-0.6B"
+    },
+    {
+      "language": "Chinese",
+      "model": "Qwen3-ASR-1.7B"
+    },
+    {
+      "language": "English",
+      "model": "Qwen3-ASR-1.7B"
+    }
+  ],
+  "decision": "F1_QUALITY_PRESERVATION_PASS",
+  "metric_definitions": {
+    "catastrophic_outlier": "utterance primary error rate is at least 0.20 absolute worse than its paired singleton-authoritative run",
+    "normalization": "Unicode NFKC; lowercase; punctuation removal; English word spacing retained; Chinese scored as non-space characters with WER reported as undefined",
+    "partial_revision_edit_rate": "mean per-utterance sum of character edit distance between adjacent partials divided by summed maximum adjacent length"
+  },
+  "metrics": [
+    {
+      "cer": 0.027056277056277056,
+      "configured_dtype": "float32",
+      "fixed_batch_shape": 16,
+      "language": "Chinese",
+      "mode": "fp32_reproducible",
+      "model": "Qwen3-ASR-0.6B",
+      "partial_revision_edit_rate": 0.31606172641168745,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": null
+    },
+    {
+      "cer": 0.027056277056277056,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "Chinese",
+      "mode": "revtrace_risk_limited",
+      "model": "Qwen3-ASR-0.6B",
+      "partial_revision_edit_rate": 0.3162037718662329,
+      "utterances": 64,
+      "verification_fraction": 0.3850574712643678,
+      "wer": null
+    },
+    {
+      "cer": 0.027056277056277056,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 1,
+      "language": "Chinese",
+      "mode": "singleton_authoritative",
+      "model": "Qwen3-ASR-0.6B",
+      "partial_revision_edit_rate": 0.3162037718662329,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": null
+    },
+    {
+      "cer": 0.027056277056277056,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "Chinese",
+      "mode": "unprotected_batch",
+      "model": "Qwen3-ASR-0.6B",
+      "partial_revision_edit_rate": 0.31606172641168745,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": null
+    },
+    {
+      "cer": 0.0052056220718375845,
+      "configured_dtype": "float32",
+      "fixed_batch_shape": 16,
+      "language": "English",
+      "mode": "fp32_reproducible",
+      "model": "Qwen3-ASR-0.6B",
+      "partial_revision_edit_rate": 0.254111875316833,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": 0.02072141212586339
+    },
+    {
+      "cer": 0.0055526635432934235,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "English",
+      "mode": "revtrace_risk_limited",
+      "model": "Qwen3-ASR-0.6B",
+      "partial_revision_edit_rate": 0.25414453707603685,
+      "utterances": 64,
+      "verification_fraction": 0.25842696629213485,
+      "wer": 0.021488871834228703
+    },
+    {
+      "cer": 0.0055526635432934235,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 1,
+      "language": "English",
+      "mode": "singleton_authoritative",
+      "model": "Qwen3-ASR-0.6B",
+      "partial_revision_edit_rate": 0.25414453707603685,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": 0.021488871834228703
+    },
+    {
+      "cer": 0.0055526635432934235,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "English",
+      "mode": "unprotected_batch",
+      "model": "Qwen3-ASR-0.6B",
+      "partial_revision_edit_rate": 0.25414453707603685,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": 0.021488871834228703
+    },
+    {
+      "cer": 0.021645021645021644,
+      "configured_dtype": "float32",
+      "fixed_batch_shape": 16,
+      "language": "Chinese",
+      "mode": "fp32_reproducible",
+      "model": "Qwen3-ASR-1.7B",
+      "partial_revision_edit_rate": 0.3182185002390232,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": null
+    },
+    {
+      "cer": 0.021645021645021644,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "Chinese",
+      "mode": "revtrace_risk_limited",
+      "model": "Qwen3-ASR-1.7B",
+      "partial_revision_edit_rate": 0.3182185002390232,
+      "utterances": 64,
+      "verification_fraction": 0.3735632183908046,
+      "wer": null
+    },
+    {
+      "cer": 0.021645021645021644,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 1,
+      "language": "Chinese",
+      "mode": "singleton_authoritative",
+      "model": "Qwen3-ASR-1.7B",
+      "partial_revision_edit_rate": 0.3182185002390232,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": null
+    },
+    {
+      "cer": 0.021645021645021644,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "Chinese",
+      "mode": "unprotected_batch",
+      "model": "Qwen3-ASR-1.7B",
+      "partial_revision_edit_rate": 0.3182185002390232,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": null
+    },
+    {
+      "cer": 0.007634912372028457,
+      "configured_dtype": "float32",
+      "fixed_batch_shape": 16,
+      "language": "English",
+      "mode": "fp32_reproducible",
+      "model": "Qwen3-ASR-1.7B",
+      "partial_revision_edit_rate": 0.24713128262424516,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": 0.023023791250959325
+    },
+    {
+      "cer": 0.007634912372028457,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "English",
+      "mode": "revtrace_risk_limited",
+      "model": "Qwen3-ASR-1.7B",
+      "partial_revision_edit_rate": 0.24714250007514726,
+      "utterances": 64,
+      "verification_fraction": 0.2883895131086142,
+      "wer": 0.023023791250959325
+    },
+    {
+      "cer": 0.007634912372028457,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 1,
+      "language": "English",
+      "mode": "singleton_authoritative",
+      "model": "Qwen3-ASR-1.7B",
+      "partial_revision_edit_rate": 0.24714250007514726,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": 0.023023791250959325
+    },
+    {
+      "cer": 0.007634912372028457,
+      "configured_dtype": "float16",
+      "fixed_batch_shape": 16,
+      "language": "English",
+      "mode": "unprotected_batch",
+      "model": "Qwen3-ASR-1.7B",
+      "partial_revision_edit_rate": 0.24714250007514726,
+      "utterances": 64,
+      "verification_fraction": 0.0,
+      "wer": 0.023023791250959325
+    }
+  ],
+  "required_model_language_cells": [
+    {
+      "language": "Chinese",
+      "model": "Qwen3-ASR-0.6B"
+    },
+    {
+      "language": "English",
+      "model": "Qwen3-ASR-0.6B"
+    },
+    {
+      "language": "Chinese",
+      "model": "Qwen3-ASR-1.7B"
+    },
+    {
+      "language": "English",
+      "model": "Qwen3-ASR-1.7B"
+    }
+  ],
+  "schema_version": 1,
+  "study": "RevTrace Final Evaluation Closure F1 quality preservation"
+}

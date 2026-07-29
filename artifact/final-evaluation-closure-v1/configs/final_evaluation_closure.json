@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "study": "RevTrace Final Evaluation Closure",
+  "quality": {
+    "models": [
+      "Qwen3-ASR-0.6B",
+      "Qwen3-ASR-1.7B"
+    ],
+    "datasets": {
+      "English": "LibriSpeech test-clean deterministic 64-utterance holdout",
+      "Chinese": "AISHELL-1 deterministic 64-utterance holdout"
+    },
+    "modes": [
+      "singleton_authoritative",
+      "unprotected_batch",
+      "revtrace_risk_limited",
+      "fp32_reproducible"
+    ],
+    "fixed_batch_shape": 16,
+    "chunk_seconds": 2.0,
+    "risk_policy": {
+      "source": "previously certified Phase 7.1 static holdout policy",
+      "thresholds": {
+        "Qwen3-ASR-0.6B": 0.05,
+        "Qwen3-ASR-1.7B": 0.1
+      },
+      "boundary": "quality isolation only; the live F2 controller learns a dynamic threshold"
+    },
+    "bootstrap_replicates": 10000,
+    "catastrophic_primary_error_delta": 0.2
+  },
+  "steady_state": {
+    "model": "Qwen3-ASR-0.6B",
+    "concurrency": 14,
+    "episode_seconds": 30,
+    "cold_episodes": 7,
+    "audit_adaptation_episodes": 6,
+    "steady_episodes": 6,
+    "minimum_audits": 1350,
+    "canonical_dtype": "float16",
+    "canonical_fixed_shape": 14,
+    "same_process_and_epoch_required": true,
+    "audit_root_promotion": "first state mismatch per episode/session only",
+    "independent_validation_after_adaptation": true
+  },
+  "pareto": {
+    "deadline_seconds": 2.0,
+    "risk_upper_limit": 0.005,
+    "separate_infeasible_points": true,
+    "operator_only_results_excluded": true
+  }
+}

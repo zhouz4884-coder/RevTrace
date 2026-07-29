@@ -1,0 +1,84 @@
+{
+  "contracts": [
+    {
+      "attention_backend": "FLASH_ATTN",
+      "authoritative_draw": "float16 fixed-shape canonical",
+      "batch_invariant_requested": true,
+      "configured_weight_dtype": "float16",
+      "experiment": "Phase 2 headline",
+      "fixed_batch_shape": 16,
+      "proposer_dtype": "float16",
+      "replay_guarantee": "canonical-authoritative online commit; later replay not claimed bitwise deterministic"
+    },
+    {
+      "accumulation_dtype": "kernel-defined-unrecorded",
+      "attention_backend": "vllm-auto-unrecorded",
+      "authoritative_draw": "float32 fixed-shape b16",
+      "batch_invariant_requested": false,
+      "configured_weight_dtype": "float32",
+      "digest": "60b6386c8c0e246fc57402006c33c4723f25c824dd0750953e4ff43bdad4bc54",
+      "evidence": {
+        "raw_canonical_dtype": "float32",
+        "raw_fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float32-fixed-canonical-b16",
+        "runner_rule": "batch invariance requested only when dtype != float32"
+      },
+      "experiment": "Phase 6 adaptation",
+      "fixed_batch_shape": 16,
+      "max_tokens": 32,
+      "model": "Qwen3-ASR-0.6B",
+      "proposer_dtype": "float16",
+      "replay_guarantee": "720/720 observed stable in the frozen probe; contract-scoped, not a universal deterministic proof",
+      "sampling_dtype": "vllm-internal-unrecorded",
+      "temperature": 0.0,
+      "terminal_and_intermediate_same_engine": true
+    },
+    {
+      "accumulation_dtype": "kernel-defined-unrecorded",
+      "attention_backend": "FLASH_ATTN",
+      "authoritative_draw": "float16 fixed-shape b16",
+      "batch_invariant_requested": true,
+      "configured_weight_dtype": "float16",
+      "digest": "a50f729da783808b9fc273513259146e7e80912e7f4ba5bb41b2a2eedcbae73e",
+      "evidence": {
+        "raw_canonical_dtype": "float16",
+        "raw_fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float16-fixed-canonical-b16"
+      },
+      "experiment": "Phase 7 queue",
+      "fixed_batch_shape": 16,
+      "max_tokens": 32,
+      "model": "Qwen3-ASR-0.6B",
+      "proposer_dtype": "float16",
+      "replay_guarantee": "canonical-authoritative online commit; later replay not bitwise deterministic",
+      "sampling_dtype": "vllm-internal-unrecorded",
+      "temperature": 0.0,
+      "terminal_and_intermediate_same_engine": true
+    },
+    {
+      "accumulation_dtype": "kernel-defined-unrecorded",
+      "attention_backend": "FLASH_ATTN",
+      "authoritative_draw": "float16 fixed-shape b14",
+      "batch_invariant_requested": true,
+      "configured_weight_dtype": "float16",
+      "digest": "f152611e3d1a0de6439554b424a01f35113632879b2def3f2ead3ccba507ad66",
+      "experiment": "Phase 7.1 c14 capacity",
+      "fixed_batch_shape": 14,
+      "max_tokens": 32,
+      "model": "Qwen3-ASR-0.6B",
+      "note": "Accumulation and sampling dtypes were not exported by the frozen vLLM runtime and therefore remain explicitly unrecorded rather than inferred.",
+      "proposer_dtype": "float16",
+      "replay_guarantee": "canonical-authoritative online commit; replay audit is a separate draw",
+      "sampling_dtype": "vllm-internal-unrecorded",
+      "temperature": 0.0,
+      "terminal_and_intermediate_same_engine": true
+    }
+  ],
+  "decision": "FINAL_CANONICAL_CONTRACT_MATRIX_FROZEN",
+  "invariant": "Results from distinct digests, dtypes or fixed shapes are never merged into one canonical contract.",
+  "schema_version": 1,
+  "study": "RevTrace final canonical contract provenance",
+  "unknown_fields": [
+    "kernel-level accumulation dtype was not exported",
+    "vLLM internal sampling/log-softmax dtype was not exported",
+    "Phase 6 auto-selected attention backend was not logged"
+  ]
+}

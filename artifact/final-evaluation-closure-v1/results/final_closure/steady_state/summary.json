@@ -1,0 +1,181 @@
+{
+  "audit_adaptation": {
+    "certificate_retained": true,
+    "events": 1260,
+    "failure_floor_after_adaptation": 0.062501,
+    "promoted_roots": [
+      {
+        "certificate_retained": true,
+        "chunk_index": 6,
+        "episode": 0,
+        "failure_floor_after_promotion": 0.031251,
+        "proposal_minimum_margin": 0.03125,
+        "session_id": "stage01-episode0000-s007",
+        "threshold_after_promotion": 0.031251
+      },
+      {
+        "certificate_retained": true,
+        "chunk_index": 6,
+        "episode": 4,
+        "failure_floor_after_promotion": 0.062501,
+        "proposal_minimum_margin": 0.0625,
+        "session_id": "stage01-episode0004-s002",
+        "threshold_after_promotion": 0.062501
+      }
+    ],
+    "raw_state_violations": 18,
+    "root_counterexamples_promoted": 2,
+    "threshold_after_adaptation": 0.062501
+  },
+  "certified_after_events": 1350,
+  "claim_boundaries": [
+    "time-to-certify is interpolated within the certifying episode",
+    "the model, runtime, controller and certificate remain live between stages",
+    "post-stage replay is excluded from service timing",
+    "the middle split is adaptation only: first mismatch roots raise the dynamic failure floor; cascade descendants are recorded but not counted as independent counterexamples",
+    "all steady-state claims use the independently seeded third stage after adaptation",
+    "replay disagreements are conservative risk evidence, not proof of an online selection-authority violation",
+    "the raw runner decision is retained; final F2 applies the frozen Phase 7.1 taxonomy instead of overwriting raw evidence"
+  ],
+  "cold_start": {
+    "events": 1470,
+    "goodput_events_per_second": 13.321893136782865,
+    "joules_per_audio_second": 12.381212997925273,
+    "p99_seconds": 1.467901112511754,
+    "risk_upper_bound": 0.004931253844432049,
+    "verification_fraction": 0.9333333333333333
+  },
+  "continuity_checks": {
+    "adaptation_switch_action": "continued_same_contract_epoch",
+    "same_contract_epoch_continued": true,
+    "same_fingerprint": true,
+    "same_process": true,
+    "validation_switch_action": "continued_same_contract_epoch"
+  },
+  "decision": "F2_STEADY_STATE_DECOMPOSITION_PASS",
+  "decomposition": {
+    "goodput_gain": 1.1254573374262689,
+    "p99_reduction": -0.20306834639055804,
+    "verification_fraction_reduction": 0.8428571428571429
+  },
+  "initial_failed_run": {
+    "boundary": "a later canonical replay disagreement is conservatively treated as risk evidence; it does not prove that the original online authoritative draw was itself incorrect",
+    "cascade_descendants": 16,
+    "cause": "post-stage authoritative replay counterexamples were recorded but not assimilated into the persistent dynamic failure floor",
+    "classification": "mechanism_feedback_gap",
+    "decision": "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL",
+    "repair": "promote the first state-mismatch root per session during a declared adaptation split, retain cascade descendants only for audit, then evaluate a new independent validation split",
+    "root_counterexamples": 2,
+    "root_margins": [
+      0.03125,
+      0.0625
+    ],
+    "state_violation_rows": 18
+  },
+  "runner_gate_reclassification": {
+    "raw_runner_decision": "PHASE5A_LIVE_ADAPTIVE_CONTROL_FAIL",
+    "reason": "the legacy aggregate gate counted verified canonical replay non-repeatability as a state-entry authorization failure",
+    "replay_repeatability_gate": "observed_nonrepeatable",
+    "selection_authority_gate": "pass"
+  },
+  "schema_version": 1,
+  "steady_state": {
+    "canonical_replay_state_violation_rows": 29,
+    "events": 1260,
+    "goodput_events_per_second": 14.993222379200928,
+    "joules_per_audio_second": 10.00374397014357,
+    "p99_seconds": 1.7659853640943766,
+    "per_episode": [
+      {
+        "certified": true,
+        "deadline_miss_rounds": 0,
+        "episode": 0,
+        "events": 210,
+        "fast_path_window": 0.9765051395007343,
+        "goodput_events_per_second": 17.220727399345098,
+        "required_verifier_seconds": 2.847206935286522,
+        "state_entry_latency_seconds_p50": 0.7308206567540765,
+        "state_entry_latency_seconds_p95": 1.506103350035846,
+        "state_entry_latency_seconds_p99": 1.576591760329902,
+        "threshold": 0.062501,
+        "wall_seconds": 12.194606832228601
+      },
+      {
+        "certified": true,
+        "deadline_miss_rounds": 0,
+        "episode": 1,
+        "events": 210,
+        "fast_path_window": 0.9765051395007343,
+        "goodput_events_per_second": 14.715326645726519,
+        "required_verifier_seconds": 7.591400733217597,
+        "state_entry_latency_seconds_p50": 0.7587245479226112,
+        "state_entry_latency_seconds_p95": 1.6519670046865937,
+        "state_entry_latency_seconds_p99": 1.6689136730134488,
+        "threshold": 0.062501,
+        "wall_seconds": 14.270835099741817
+      },
+      {
+        "certified": true,
+        "deadline_miss_rounds": 0,
+        "episode": 2,
+        "events": 210,
+        "fast_path_window": 0.9765051395007343,
+        "goodput_events_per_second": 12.711564386164499,
+        "required_verifier_seconds": 14.76637121103704,
+        "state_entry_latency_seconds_p50": 1.041708566248417,
+        "state_entry_latency_seconds_p95": 1.637882420234382,
+        "state_entry_latency_seconds_p99": 1.638278346769512,
+        "threshold": 0.062501,
+        "wall_seconds": 16.520389907993376
+      },
+      {
+        "certified": true,
+        "deadline_miss_rounds": 0,
+        "episode": 3,
+        "events": 210,
+        "fast_path_window": 0.9765051395007343,
+        "goodput_events_per_second": 15.603486864462901,
+        "required_verifier_seconds": 18.86737500037998,
+        "state_entry_latency_seconds_p50": 0.741062842309475,
+        "state_entry_latency_seconds_p95": 1.7304145487025382,
+        "state_entry_latency_seconds_p99": 1.733997864611447,
+        "threshold": 0.062501,
+        "wall_seconds": 13.45853025186807
+      },
+      {
+        "certified": true,
+        "deadline_miss_rounds": 0,
+        "episode": 4,
+        "events": 210,
+        "fast_path_window": 0.9765051395007343,
+        "goodput_events_per_second": 14.991748147886232,
+        "required_verifier_seconds": 23.591176407411695,
+        "state_entry_latency_seconds_p50": 0.7486566854640841,
+        "state_entry_latency_seconds_p95": 1.6652416637167335,
+        "state_entry_latency_seconds_p99": 1.6998203391954303,
+        "threshold": 0.062501,
+        "wall_seconds": 14.007705967873335
+      },
+      {
+        "certified": true,
+        "deadline_miss_rounds": 0,
+        "episode": 5,
+        "events": 210,
+        "fast_path_window": 0.9765051395007343,
+        "goodput_events_per_second": 15.576264275533772,
+        "required_verifier_seconds": 27.55889888945967,
+        "state_entry_latency_seconds_p50": 0.7449722578749061,
+        "state_entry_latency_seconds_p95": 1.7408008125610648,
+        "state_entry_latency_seconds_p99": 1.7609484537877143,
+        "threshold": 0.062501,
+        "wall_seconds": 13.482051683589816
+      }
+    ],
+    "risk_upper_bound": 0.004988737202775151,
+    "unverified_fast_path_replay_roots": 0,
+    "verification_fraction": 0.09047619047619047,
+    "verified_canonical_replay_roots": 3
+  },
+  "study": "RevTrace Final Evaluation Closure F2 cold versus steady",
+  "time_to_certify_seconds_estimate": 102.63451251813343
+}

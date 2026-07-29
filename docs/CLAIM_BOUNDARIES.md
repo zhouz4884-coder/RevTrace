@@ -179,3 +179,30 @@
   proposer-admission disagreement process. It does not prove bitwise
   repeatability of two independent canonical-runtime executions; replay
   differences are reported separately.
+
+## Final evaluation closure boundaries
+
+- The independent quality result covers deterministic 64-utterance
+  LibriSpeech test-clean and AISHELL-1 holdouts. It is not a full-corpus WER
+  leaderboard or a production quality-prevalence estimate.
+- The quality-only risk-limited mode applies a previously certified frozen
+  policy to isolate transcript quality. The persistent steady-state experiment
+  is the evidence for dynamically learned threshold behavior.
+- The first steady-state attempt is retained as a mechanism-feedback failure.
+  Its replay-audit roots were recorded but not assimilated into the dynamic
+  failure floor. The repaired protocol uses a distinct adaptation split and
+  an independently seeded validation split in the same live contract epoch.
+- Only the first unverified replay mismatch per session is treated as a new
+  adaptation root. Later rows on that diverged replay trajectory are cascade
+  descendants, not independent counterexamples.
+- In steady validation, all three replay roots had already used authoritative
+  verification. They establish FP16 replay non-repeatability, not an
+  unverified fast-path state write or an online selection-authority violation.
+- The steady verification fraction is 9.05%, but its P99 is 1.766 s versus
+  1.468 s during cold certification. The lower verification rate improves
+  goodput and energy, not every latency quantile.
+- c14 capacity rows have risk, SLO, and energy evidence but no same-task
+  all-canonical normalized-goodput baseline. They are not plotted as
+  end-to-end Pareto speedup points.
+- Phase 2 FP16-b16, Phase 6 FP32-b16, Phase 7 FP16-b16, and Phase 7.1
+  FP16-b14 are distinct versioned canonical contracts and are never pooled.

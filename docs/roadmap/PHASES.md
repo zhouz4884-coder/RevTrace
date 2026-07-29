@@ -350,3 +350,31 @@ The finalizer emits compact summaries, source-trace hashes, paper-facing tables,
 claim boundaries, regression tests, and a hash-audited artifact. Large live
 traces stay on the designated experiment disk. Phase 6 ends mechanism
 expansion and begins the first submission freeze.
+
+## Final Evaluation Closure
+
+Status:
+
+`FINAL_EVALUATION_CLOSURE_PASS`.
+
+Four submission-facing evidence gaps are closed without adding a new mechanism
+phase:
+
+1. independent LibriSpeech and AISHELL quality evaluation reports WER/CER,
+   terminal exactness, partial churn, paired bootstrap intervals, and
+   catastrophic-outlier counts for four execution modes and two models;
+2. one persistent c14 runtime separates cold certification, replay-audit
+   adaptation, and independently seeded steady validation without restarting
+   the model or controller;
+3. Phase 2 FP16-b16, Phase 6 FP32-b16, Phase 7 FP16-b16, and Phase 7.1
+   FP16-b14 authoritative paths remain distinct versioned contracts;
+4. the final risk/SLO/performance table separates same-task Pareto points,
+   capacity-only observations, and infeasible or statistically uncertified
+   cells.
+
+The first steady-state attempt is retained as a mechanism failure: post-stage
+audit roots were recorded but not assimilated into the dynamic failure floor.
+The repaired protocol promotes only the first unverified root per session in a
+declared adaptation split and evaluates the next independently seeded split.
+Verified canonical replay differences remain a repeatability boundary and are
+not counted as online selection-authority violations.
