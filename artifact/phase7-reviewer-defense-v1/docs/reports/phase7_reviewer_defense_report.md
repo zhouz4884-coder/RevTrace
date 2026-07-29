@@ -76,14 +76,27 @@ admits four measured active-c16 waves.
 | completed audio goodput | 34.484 audio-s/wall-s |
 | completion goodput | 1.149 sessions/s |
 | energy | 8.765 J/completed-audio-s |
-| observed output / state violations | 3 / 1 |
+| legacy selected-vs-replay output / state | 3 / 1 |
 
-The one state violation in 960 events gives an exact one-sided 95% upper bound
-of 0.4932%, below the frozen 0.5% state-risk contract. It is not mathematical
-zero. Inspection shows that the violating event had already taken the
-canonical path; a later canonical replay differed, confirming that FP16
-canonical execution remains statistical rather than bitwise deterministic.
-This is why the paper must not claim a deterministic certificate.
+The corrected taxonomy is: zero online selection-authority violations; two
+canonical output replay disagreements, including one state disagreement; one
+unverified output-vs-replay disagreement with no state effect; and zero stale
+or wrong-epoch commits. The realized state replay-disagreement rate is 1/960.
+No iid Clopper-Pearson population bound is used because revisions share
+sessions, batches, audio, and state trajectories. Inspection confirms that the
+state-disagreement event had already used the online canonical result and a
+later canonical call differed.
+
+The active P99 meets the hard deadline, but `1.942 + 0.1 = 2.042` seconds, so
+it fails the frozen admission-headroom contract. This remains an
+overload/backpressure boundary, not a guarded-admission success.
+
+A fresh Phase 7.1 c14 run closes the registered headroom question without
+selecting a favorable repeat: 1,470 events over 98 session episodes produced
+P99 1.413 seconds, guarded P99 1.513 seconds, zero deadline miss, and zero
+observed output/state replay disagreement. It passes the 100 ms headroom
+contract. Because the pre-registered evidence window consumes 1,350 events,
+the run verifies 93.33% of events and is used only as a guarded-capacity point.
 
 ## E. Risk-contract sensitivity
 
@@ -103,7 +116,9 @@ explicitly a shared live-run reference, not three unrun measurements.
 2. **Code/config typo:** the first corrected rerun used unsupported language
    label `en`; the parser requires `English`. No result was produced; fixed and
    rerun.
-3. **Numerical mechanism:** FP16 fixed-shape canonical replay can still differ;
+3. **Numerical mechanism:** Phase 6D used float32 fixed-shape canonical
+   execution, whereas Phase 7D used float16 fixed-shape canonical execution.
+   The Phase 7D FP16 authoritative draw can still differ from a later replay;
    not a state-routing bug. The measured result is kept under a statistical
    risk contract.
 4. **Source compatibility:** vLLM, SGLang, LLM-42 and TBIK failures are
@@ -118,11 +133,10 @@ explicitly a shared live-run reference, not three unrun measurements.
 - `scripts/run_phase7_reviewer_defense.py`: frozen-evidence tables and source
   manifests.
 - `scripts/finalize_phase7_c64_queue.py`: admission, queue, end-to-end, energy,
-  and exact binomial-risk accounting.
+  corrected replay taxonomy, and guarded-capacity accounting.
 - `scripts/remote/run_phase7d_c64_queue.sh`: real two-GPU offered-load run.
 - `scripts/remote/run_phase7_*`: source probes for BIO, TBIK, vLLM, SGLang,
   and LLM-42.
 - `tests/test_phase6.py`, `tests/test_phase7.py`: semantic/property tests.
 
-Final validation: 77 tests pass.
-
+Phase 7.1 final validation: 80 tests pass.

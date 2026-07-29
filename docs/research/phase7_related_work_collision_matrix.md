@@ -24,4 +24,3 @@ revision becomes future model state. RevTrace combines contract-scoped
 statistical evidence, state-entry transaction fencing, asymmetric failure
 memory, and joint risk/SLO admission so an uncertified transition cannot
 silently contaminate later revisions.
-

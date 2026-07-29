@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
+import sys
 from pathlib import Path
 
 
@@ -17,21 +17,6 @@ def percentile(values: list[float], q: float) -> float:
     return values[lo] * (hi - pos) + values[hi] * (pos - lo)
 
 
-def binomial_upper(errors: int, trials: int, alpha: float = 0.05) -> float:
-    low, high = 0.0, 1.0
-    for _ in range(80):
-        p = (low + high) / 2
-        cdf = sum(
-            math.comb(trials, k) * p**k * (1 - p) ** (trials - k)
-            for k in range(errors + 1)
-        )
-        if cdf > alpha:
-            low = p
-        else:
-            high = p
-    return high
-
-
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("raw", type=Path)
@@ -39,6 +24,14 @@ def main() -> None:
     args = parser.parse_args()
     raw = json.loads(args.raw.read_text(encoding="utf-8"))
     stage = raw["stages"][0]
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root / "src"))
+    from revtrace.phase7_1 import (
+        classify_postrun_disagreements,
+        guarded_capacity,
+    )
+
+    taxonomy = classify_postrun_disagreements(stage)
     episodes = stage["episodes_detail"]
     offered = 64
     active = 16
@@ -81,14 +74,26 @@ def main() -> None:
         "energy_joules_per_completed_audio_second": stage["energy"]["joules_per_audio_second"],
         "output_violations": stage["output_violations"],
         "state_violations": stage["state_violations"],
-        "observed_state_violation_rate": stage["state_violations"] / stage["events"],
-        "state_violation_rate_95pct_upper": binomial_upper(
-            stage["state_violations"], stage["events"]
+        "legacy_field_mapping": (
+            "output_violations/state_violations compare selected results with "
+            "a later post-run replay; they are not transaction violations"
         ),
-        "risk_contract_delta": 0.005,
-        "risk_contract_met_by_current_95pct_upper": binomial_upper(
-            stage["state_violations"], stage["events"]
-        ) <= 0.005,
+        "violation_taxonomy": taxonomy,
+        "realized_postrun_state_disagreement_rate": (
+            stage["state_violations"] / stage["events"]
+        ),
+        "formal_time_uniform_risk_bound": None,
+        "risk_claim_boundary": (
+            "Finite correlated trace only. No iid Clopper-Pearson population "
+            "claim and no replacement for the Phase 2 anytime-risk audit."
+        ),
+        "capacity_contract": guarded_capacity(
+            measured_p99_seconds=stage[
+                "state_entry_latency_seconds_p99"
+            ],
+            guard_seconds=0.1,
+            deadline_seconds=2.0,
+        ),
         "claim_boundary": "Active P99 excludes admission wait; end-to-end P99 includes measured wave admission wait. This is finite-wave overload handling, not unconstrained c64 residency.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -2,22 +2,38 @@
 
 ## Guarantee taxonomy
 
-| Mechanism | Guarantee | Batch difference | Stale/epoch | Adaptive evidence | Joint SLO |
+| Mechanism | Guarantee | Authoritative state entry | Replay deterministic | Stale/epoch | Joint SLO |
 |---|---|---:|---:|---:|---:|
 | ordinary FP16 batch | none | no | no | no | no |
-| FP16 singleton | canonical execution | yes, relative to itself | no | no | no |
-| BIO/TBIK | operator arithmetic | yes, supported ops | no | no | no |
-| LLM-42-style revision | verify every feedback transition | yes | yes | no | no |
+| one canonical draw | authoritative for that commit | yes | no | no | no |
+| BIO/TBIK | supported-operator arithmetic | no | yes | no | no |
+| LLM-42-style revision | verify every feedback transition | yes | no | yes | no |
 | MarginGate-inspired | empirical low-margin verification | no | no | no | no |
-| owner/version-only | single-writer version | no | yes | no | no |
-| RevTrace strict | canonical state transition | yes | yes | no | yes |
-| RevTrace risk-limited | statistical state-risk contract | no | yes | yes | yes |
+| owner/version-only | single-writer version | no | no | yes | no |
+| RevTrace authoritative | online canonical draw controls commit | yes | no | yes | yes |
+| RevTrace risk-limited | statistical state-risk contract | yes | no | yes | yes |
 
 ## c64 offered-load
 
-| Offered | Active | Queued | Active P99 | E2E P99 | Audio goodput | Energy | State risk upper |
+| Offered | Active | Queued | Active P99 | Guarded P99 | E2E P99 | Audio goodput | Energy |
 |---:|---:|---:|---:|---:|---:|---:|---:|
-| 64 | 16 | 48 | 1.942 s | 44.797 s | 34.484 audio-s/s | 8.765 J/audio-s | 0.4932% |
+| 64 | 16 | 48 | 1.942 s | 2.042 s (fails guard) | 44.797 s | 34.484 audio-s/s | 8.765 J/audio-s |
+
+Legacy `state_violations=1` is a selected-vs-later-replay field. The corrected
+taxonomy is 0 online selection-authority violations, 1 canonical replay state
+disagreement, and 0 transaction/stale commits. The realized finite-trace rate
+is 1/960; no iid population upper bound is claimed.
+
+## Fresh guarded-capacity point
+
+| Active | Session episodes | Events | P99 | Guarded P99 | Miss | Replay state disagreement | Decision |
+|---:|---:|---:|---:|---:|---:|---:|---|
+| 14 | 98 | 1,470 | 1.413 s | 1.513 s | 0 | 0 | passes 100 ms headroom |
+
+This c14 run uses a fresh float16 fixed-shape authoritative contract. Its
+93.33% verification fraction is dominated by the pre-registered 1,350-event
+cold-start evidence window; it is a capacity measurement, not a steady-state
+throughput headline.
 
 ## Delta sensitivity
 
@@ -29,4 +45,3 @@
 
 Sensitivity performance values are offline/counterfactual except for the
 shared live c32 reference. The c64 row is a live two-GPU measurement.
-

@@ -1,0 +1,57 @@
+{
+  "phase7d_c16_wave": {
+    "measured_p99_seconds": 1.9418401885777712,
+    "guard_seconds": 0.1,
+    "guarded_p99_seconds": 2.0418401885777713,
+    "deadline_seconds": 2.0,
+    "hard_deadline_met": true,
+    "headroom_contract_met": false
+  },
+  "status": "c16 meets hard deadline but fails 100ms headroom",
+  "c14_live_result": {
+    "label": "c14_capacity",
+    "concurrency": 14,
+    "sessions": 98,
+    "events": 1470,
+    "goodput_events_per_second": 13.321462602671039,
+    "p99_seconds": 1.4126308765262365,
+    "deadline_misses": 0,
+    "verification_fraction": 0.9333333333333333,
+    "threshold": 0.031251,
+    "risk_upper_bound": 0.004947542039521191,
+    "guarded_capacity": {
+      "measured_p99_seconds": 1.4126308765262365,
+      "guard_seconds": 0.1,
+      "guarded_p99_seconds": 1.5126308765262366,
+      "deadline_seconds": 2.0,
+      "hard_deadline_met": true,
+      "headroom_contract_met": true
+    },
+    "violation_taxonomy": {
+      "legacy_output_violations_selected_vs_postrun": 0,
+      "legacy_state_violations_selected_vs_postrun": 0,
+      "online_selection_authority_violations": 0,
+      "canonical_replay_output_disagreements": 0,
+      "canonical_replay_state_disagreements": 0,
+      "unverified_selected_vs_postrun_output_disagreements": 0,
+      "unverified_selected_vs_postrun_state_disagreements": 0,
+      "transaction_stale_or_wrong_epoch_commits": 0,
+      "observability_boundary": "Unverified events have no paired online canonical draw; their post-run comparison is a replay audit, not E_selection."
+    },
+    "canonical_runtime_provenance": {
+      "accumulation_dtype": "kernel-defined-unrecorded",
+      "attention_backend": "FLASH_ATTN",
+      "batch_invariant_requested": true,
+      "configured_weight_dtype": "float16",
+      "digest": "f152611e3d1a0de6439554b424a01f35113632879b2def3f2ead3ccba507ad66",
+      "fixed_batch_shape": 14,
+      "max_tokens": 32,
+      "model": "Qwen3-ASR-0.6B",
+      "note": "Accumulation and sampling dtypes were not exported by the frozen vLLM runtime and therefore remain explicitly unrecorded rather than inferred.",
+      "sampling_dtype": "vllm-internal-unrecorded",
+      "temperature": 0.0,
+      "terminal_and_intermediate_same_engine": true
+    },
+    "claim_boundary": "fresh measured c14 capacity cell; the split-sample risk bound is statistical, and later replay is not the online authority"
+  }
+}

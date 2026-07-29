@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "decision": "P0_CANONICAL_PROVENANCE_AUDIT_COMPLETE",
+  "phase6d": {
+    "model": "Qwen3-ASR-0.6B",
+    "configured_weight_dtype": "float32",
+    "accumulation_dtype": "kernel-defined-unrecorded",
+    "sampling_dtype": "vllm-internal-unrecorded",
+    "attention_backend": "vllm-auto-unrecorded",
+    "fixed_batch_shape": 16,
+    "batch_invariant_requested": false,
+    "temperature": 0.0,
+    "max_tokens": 32,
+    "terminal_and_intermediate_same_engine": true,
+    "digest": "60b6386c8c0e246fc57402006c33c4723f25c824dd0750953e4ff43bdad4bc54",
+    "evidence": {
+      "raw_canonical_dtype": "float32",
+      "raw_fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float32-fixed-canonical-b16",
+      "runner_rule": "batch invariance requested only when dtype != float32"
+    }
+  },
+  "phase7d": {
+    "model": "Qwen3-ASR-0.6B",
+    "configured_weight_dtype": "float16",
+    "accumulation_dtype": "kernel-defined-unrecorded",
+    "sampling_dtype": "vllm-internal-unrecorded",
+    "attention_backend": "FLASH_ATTN",
+    "fixed_batch_shape": 16,
+    "batch_invariant_requested": true,
+    "temperature": 0.0,
+    "max_tokens": 32,
+    "terminal_and_intermediate_same_engine": true,
+    "digest": "a50f729da783808b9fc273513259146e7e80912e7f4ba5bb41b2a2eedcbae73e",
+    "evidence": {
+      "raw_canonical_dtype": "float16",
+      "raw_fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float16-fixed-canonical-b16"
+    }
+  },
+  "finding": "Phase 6D used float32 fixed-shape authoritative execution; Phase 7D used float16 fixed-shape authoritative execution. They are distinct versioned canonical contracts.",
+  "unknowns": [
+    "kernel-level accumulation dtype was not exported",
+    "vLLM internal sampling/log-softmax dtype was not exported",
+    "Phase 6D auto-selected attention backend was not logged"
+  ]
+}

@@ -159,13 +159,18 @@
 - State commits are fenced by session, contract, and policy epochs. A result
   from an earlier policy or contract cannot cross a mode switch.
 - Risk-limited mode is a statistical contract and may observe errors within
-  its declared bound. Canonical-consistent strict mode means equality to the
-  frozen canonical implementation, not mathematical truth.
+  its declared bound. Canonical-authoritative commit means equality to the
+  online authoritative draw used for that commit, not mathematical truth or
+  repeatability of a later independent canonical draw.
 - The c32 Chinese burst repair closes unsafe c16-certificate reuse. It does not
   convert an overloaded c32 workload into an SLO-admissible workload.
 - The c64 result is a capacity boundary. Its active concurrency must be
   reshaped, backpressured, or rejected; queued-session waiting is reported
   separately from active-session state-entry latency.
+- The fresh c14 point passes the registered 100 ms headroom contract
+  (1.413 s measured P99, 1.513 s guarded P99). Its high verification fraction
+  is cold-start evidence acquisition and is not a steady-state throughput
+  headline.
 - Exact return to a cached population is not cross-contract reuse. It still
   requires renewal canaries before the fast path is reopened.
 - Zero observed violations in a finite live run remains empirical evidence,

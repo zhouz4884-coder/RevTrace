@@ -182,14 +182,31 @@ probes, faithful MarginGate/RW-TTT/LLM-42 revision adaptations, a seven-step
 causal ablation, full c64 queue accounting, and delta sensitivity. The live
 64-offered/16-active run drains 1,920 audio-seconds in 55.678 seconds
 (34.484 audio-s/wall-s), with active P99 1.942 seconds and end-to-end P99
-44.797 seconds after queueing. One state violation in 960 events yields a
-one-sided 95% upper bound of 0.4932%, inside the frozen 0.5% statistical
-contract; it is explicitly not deterministic exactness.
+44.797 seconds after queueing. The legacy audit fields contain three selected
+vs later-replay output disagreements and one state disagreement. They decompose
+into zero online selection-authority violations, one canonical replay state
+disagreement, and zero stale/epoch commits. Because events are temporally and
+batch correlated, Phase 7D reports the realized 1/960 replay-disagreement rate
+without an iid population interval.
+
+The active P99 is below the hard two-second deadline, but adding the frozen
+100 ms capacity guard gives 2.042 seconds. This overload/backpressure result
+therefore does not pass the guarded admission contract.
+
+Phase 7.1 repaired the evidence taxonomy and added a fresh c14 capacity point.
+Across 1,470 live events, c14 measured P99 1.413 seconds and guarded P99
+1.513 seconds, with zero deadline miss and zero observed output/state replay
+disagreement. This passes the 100 ms headroom contract. Its 93.33% verifier
+fraction is dominated by the pre-registered 1,350-event cold-start evidence
+window, so it is a capacity point rather than a steady-state throughput
+headline. Phase 6D and Phase 7D are now explicitly recorded as distinct
+float32 and float16 authoritative-execution contracts, respectively.
 
 The failed mixed-language certificate-transfer run is retained because it
 demonstrates why an unobserved execution signature cannot inherit an English
 certificate. See the
 [Phase 7 report](docs/reports/phase7_reviewer_defense_report.md),
+[Phase 7.1 correction and performance report](docs/reports/phase7_1_corrections_and_performance.md),
 [collision matrix](docs/research/phase7_related_work_collision_matrix.md), and
 [paper tables](results/phase7/PAPER_TABLES.md).
 

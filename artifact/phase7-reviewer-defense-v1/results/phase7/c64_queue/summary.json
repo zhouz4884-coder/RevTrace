@@ -45,9 +45,28 @@
   "energy_joules_per_completed_audio_second": 8.765204066771565,
   "output_violations": 3,
   "state_violations": 1,
-  "observed_state_violation_rate": 0.0010416666666666667,
-  "state_violation_rate_95pct_upper": 0.004931900368786157,
-  "risk_contract_delta": 0.005,
-  "risk_contract_met_by_current_95pct_upper": true,
+  "legacy_field_mapping": "output_violations/state_violations compare selected results with a later post-run replay; they are not transaction violations",
+  "violation_taxonomy": {
+    "legacy_output_violations_selected_vs_postrun": 3,
+    "legacy_state_violations_selected_vs_postrun": 1,
+    "online_selection_authority_violations": 0,
+    "canonical_replay_output_disagreements": 2,
+    "canonical_replay_state_disagreements": 1,
+    "unverified_selected_vs_postrun_output_disagreements": 1,
+    "unverified_selected_vs_postrun_state_disagreements": 0,
+    "transaction_stale_or_wrong_epoch_commits": 0,
+    "observability_boundary": "Unverified events have no paired online canonical draw; their post-run comparison is a replay audit, not E_selection."
+  },
+  "realized_postrun_state_disagreement_rate": 0.0010416666666666667,
+  "formal_time_uniform_risk_bound": null,
+  "risk_claim_boundary": "Finite correlated trace only. No iid Clopper-Pearson population claim and no replacement for the Phase 2 anytime-risk audit.",
+  "capacity_contract": {
+    "measured_p99_seconds": 1.9418401885777712,
+    "guard_seconds": 0.1,
+    "guarded_p99_seconds": 2.0418401885777713,
+    "deadline_seconds": 2.0,
+    "hard_deadline_met": true,
+    "headroom_contract_met": false
+  },
   "claim_boundary": "Active P99 excludes admission wait; end-to-end P99 includes measured wave admission wait. This is finite-wave overload handling, not unconstrained c64 residency."
 }

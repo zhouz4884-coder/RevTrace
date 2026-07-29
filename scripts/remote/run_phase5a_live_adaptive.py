@@ -23,6 +23,7 @@ import subprocess
 import sys
 import threading
 import time
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
@@ -287,6 +288,25 @@ def main() -> int:
     if ready.get("kind") != "ready":
         raise RuntimeError(f"unexpected verifier ready message: {ready}")
 
+    from revtrace.phase7_1 import CanonicalRuntimeProvenance
+
+    canonical_provenance = CanonicalRuntimeProvenance(
+        model=args.model_name,
+        configured_weight_dtype=args.canonical_dtype,
+        accumulation_dtype="kernel-defined-unrecorded",
+        sampling_dtype="vllm-internal-unrecorded",
+        attention_backend=(
+            "FLASH_ATTN"
+            if args.canonical_dtype != "float32"
+            else "vllm-auto-unrecorded"
+        ),
+        fixed_batch_shape=max_concurrency,
+        batch_invariant_requested=args.canonical_dtype != "float32",
+        temperature=0.0,
+        max_tokens=32,
+        terminal_and_intermediate_same_engine=True,
+    )
+
     os.environ["CUDA_VISIBLE_DEVICES"] = args.proposer_gpu
     asr = build_asr(str(args.model), "float16", 0.82)
     sources = load_sources(args.data_manifest)
@@ -465,10 +485,11 @@ def main() -> int:
     ) in enumerate(stages):
         frozen_threshold = frozen_thresholds.get(label)
         static_oracle_stage = frozen_threshold is not None
-        fingerprint = (
-            f"{args.model_name}/fp16/c{concurrency}/"
-            f"language={language}/arrival=episode-sync/"
-            f"{args.canonical_dtype}-fixed-canonical-b{concurrency}"
+        fingerprint = canonical_provenance.contract_fingerprint(
+            proposer_dtype="float16",
+            concurrency=concurrency,
+            language=language,
+            arrival="episode-sync",
         )
         if args.phase6_asymmetric_memory and label in failure_floors:
             controller.seed_failure(fingerprint, failure_floors[label])
@@ -1055,6 +1076,15 @@ def main() -> int:
         ),
         "model": args.model_name,
         "canonical_dtype": args.canonical_dtype,
+        "canonical_runtime_provenance": {
+            **asdict(canonical_provenance),
+            "digest": canonical_provenance.digest,
+            "note": (
+                "Accumulation and sampling dtypes were not exported by the "
+                "frozen vLLM runtime and therefore remain explicitly "
+                "unrecorded rather than inferred."
+            ),
+        },
         "phase6_asymmetric_memory": args.phase6_asymmetric_memory,
         "statistical_risk_gate": args.statistical_risk_gate,
         "cross_contract_certificate_reuse": getattr(

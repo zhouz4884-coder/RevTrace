@@ -167,10 +167,9 @@ def main() -> None:
             "phase7b": "PASS_WITH_SOURCE_SCOPE_LABELS",
             "phase7c": "PASS",
             "phase7d": (
-                "PASS_FULL_QUEUE_ACCOUNTING_WITH_STATISTICAL_STATE_RISK"
+                "BOUNDARY_FULL_QUEUE_ACCOUNTING_HARD_DEADLINE_ONLY"
                 if c64_queue
-                and c64_queue["risk_contract_met_by_current_95pct_upper"]
-                else "PENDING_OR_RISK_GATE_FAIL"
+                else "PENDING"
             ),
             "phase7e": "PASS_STEADY_STATE_PLUS_LABELED_WARMUP_ESTIMATES",
         },

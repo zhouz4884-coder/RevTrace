@@ -16,7 +16,8 @@ from typing import Iterable, Mapping
 class GuaranteeRow:
     mechanism: str
     guarantee: str
-    prevents_batch_difference: bool
+    authoritative_state_entry: bool
+    replay_determinism: bool
     rejects_stale_or_wrong_epoch: bool
     adaptive_evidence: bool
     joint_risk_slo_admission: bool
@@ -121,14 +122,14 @@ def evaluate_threshold(
 
 def sota_rows() -> list[dict[str, object]]:
     rows = [
-        GuaranteeRow("ordinary FP16 batch", "none", False, False, False, False, "live ASR"),
-        GuaranteeRow("FP16 singleton canonical", "canonical execution", True, False, False, False, "live ASR"),
-        GuaranteeRow("batch-invariant ops / TBIK", "operator arithmetic", True, False, False, False, "source operator/subgraph"),
-        GuaranteeRow("LLM-42-style revision", "verify every feedback transition", True, True, False, False, "faithful revision adaptation"),
-        GuaranteeRow("MarginGate-inspired revision", "empirical low-margin verification", False, False, False, False, "faithful revision adaptation"),
-        GuaranteeRow("owner/version-only state", "single-writer state ownership", False, True, False, False, "faithful RW-TTT adaptation"),
-        GuaranteeRow("RevTrace strict", "canonical state transition", True, True, False, True, "live ASR"),
-        GuaranteeRow("RevTrace risk-limited", "statistical state-risk contract", False, True, True, True, "live ASR"),
+        GuaranteeRow("ordinary FP16 batch", "none", False, False, False, False, False, "live ASR"),
+        GuaranteeRow("one canonical draw", "authoritative draw; no replay guarantee", True, False, False, False, False, "live ASR"),
+        GuaranteeRow("batch-invariant ops / TBIK", "operator arithmetic on supported subgraph", False, True, False, False, False, "source operator/subgraph"),
+        GuaranteeRow("LLM-42-style revision", "verify every feedback transition", True, False, True, False, False, "faithful revision adaptation"),
+        GuaranteeRow("MarginGate-inspired revision", "empirical low-margin verification", False, False, False, False, False, "faithful revision adaptation"),
+        GuaranteeRow("owner/version-only state", "single-writer state ownership", False, False, True, False, False, "faithful RW-TTT adaptation"),
+        GuaranteeRow("RevTrace canonical-authoritative commit", "selected state equals that online authoritative draw", True, False, True, False, True, "live ASR"),
+        GuaranteeRow("RevTrace risk-limited", "statistical state-risk contract", True, False, True, True, True, "live ASR"),
     ]
     return [asdict(row) for row in rows]
 

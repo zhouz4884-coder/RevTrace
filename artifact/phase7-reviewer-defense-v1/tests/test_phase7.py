@@ -35,8 +35,9 @@ def test_failure_floor_catches_known_counterexample() -> None:
 def test_sota_guarantees_are_not_conflated() -> None:
     rows = {row["mechanism"]: row for row in sota_rows()}
     assert rows["owner/version-only state"]["rejects_stale_or_wrong_epoch"]
-    assert not rows["owner/version-only state"]["prevents_batch_difference"]
+    assert not rows["owner/version-only state"]["replay_determinism"]
     assert rows["RevTrace risk-limited"]["adaptive_evidence"]
+    assert not rows["RevTrace risk-limited"]["replay_determinism"]
 
 
 def test_ablation_is_monotone_on_frozen_counterexamples() -> None:

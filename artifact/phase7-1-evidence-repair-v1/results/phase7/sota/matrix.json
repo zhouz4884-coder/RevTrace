@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "study": "Phase 7 SOTA guarantee matrix",
+  "rows": [
+    {
+      "mechanism": "ordinary FP16 batch",
+      "guarantee": "none",
+      "authoritative_state_entry": false,
+      "replay_determinism": false,
+      "rejects_stale_or_wrong_epoch": false,
+      "adaptive_evidence": false,
+      "joint_risk_slo_admission": false,
+      "evidence_scope": "live ASR"
+    },
+    {
+      "mechanism": "one canonical draw",
+      "guarantee": "authoritative draw; no replay guarantee",
+      "authoritative_state_entry": true,
+      "replay_determinism": false,
+      "rejects_stale_or_wrong_epoch": false,
+      "adaptive_evidence": false,
+      "joint_risk_slo_admission": false,
+      "evidence_scope": "live ASR"
+    },
+    {
+      "mechanism": "batch-invariant ops / TBIK",
+      "guarantee": "operator arithmetic on supported subgraph",
+      "authoritative_state_entry": false,
+      "replay_determinism": true,
+      "rejects_stale_or_wrong_epoch": false,
+      "adaptive_evidence": false,
+      "joint_risk_slo_admission": false,
+      "evidence_scope": "source operator/subgraph"
+    },
+    {
+      "mechanism": "LLM-42-style revision",
+      "guarantee": "verify every feedback transition",
+      "authoritative_state_entry": true,
+      "replay_determinism": false,
+      "rejects_stale_or_wrong_epoch": true,
+      "adaptive_evidence": false,
+      "joint_risk_slo_admission": false,
+      "evidence_scope": "faithful revision adaptation"
+    },
+    {
+      "mechanism": "MarginGate-inspired revision",
+      "guarantee": "empirical low-margin verification",
+      "authoritative_state_entry": false,
+      "replay_determinism": false,
+      "rejects_stale_or_wrong_epoch": false,
+      "adaptive_evidence": false,
+      "joint_risk_slo_admission": false,
+      "evidence_scope": "faithful revision adaptation"
+    },
+    {
+      "mechanism": "owner/version-only state",
+      "guarantee": "single-writer state ownership",
+      "authoritative_state_entry": false,
+      "replay_determinism": false,
+      "rejects_stale_or_wrong_epoch": true,
+      "adaptive_evidence": false,
+      "joint_risk_slo_admission": false,
+      "evidence_scope": "faithful RW-TTT adaptation"
+    },
+    {
+      "mechanism": "RevTrace canonical-authoritative commit",
+      "guarantee": "selected state equals that online authoritative draw",
+      "authoritative_state_entry": true,
+      "replay_determinism": false,
+      "rejects_stale_or_wrong_epoch": true,
+      "adaptive_evidence": false,
+      "joint_risk_slo_admission": true,
+      "evidence_scope": "live ASR"
+    },
+    {
+      "mechanism": "RevTrace risk-limited",
+      "guarantee": "statistical state-risk contract",
+      "authoritative_state_entry": true,
+      "replay_determinism": false,
+      "rejects_stale_or_wrong_epoch": true,
+      "adaptive_evidence": true,
+      "joint_risk_slo_admission": true,
+      "evidence_scope": "live ASR"
+    }
+  ],
+  "claim_boundary": "Source operator and compatibility probes are not promoted to end-to-end serving results."
+}

@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "headline_revtrace": [
+    {
+      "scope": "Phase2 live Qwen3-ASR-0.6B c16",
+      "model": "Qwen3-ASR-0.6B",
+      "events": "240",
+      "verified_events": "19",
+      "verification_fraction": "0.07916666666666666",
+      "wall_speedup": "5.991819542828463",
+      "gpu_normalized_speedup": "2.9959097714142313",
+      "slo_goodput_speedup": "5.991819542828463",
+      "deadline_misses": "0",
+      "deadline_miss_rate": "0.0",
+      "p99_state_entry_seconds": "1.335885764537379",
+      "output_violations": "0",
+      "state_violations": "0",
+      "stale_or_replayed": "0",
+      "wall_improvement_over_phase1": "0.08293024053073683",
+      "p99_reduction_over_phase1": "0.5516256091771736",
+      "gate": "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS"
+    },
+    {
+      "scope": "Phase2 live Qwen3-ASR-1.7B c16",
+      "model": "Qwen3-ASR-1.7B",
+      "events": "240",
+      "verified_events": "23",
+      "verification_fraction": "0.09583333333333334",
+      "wall_speedup": "4.830174534082527",
+      "gpu_normalized_speedup": "2.4150872670412635",
+      "slo_goodput_speedup": "4.830174534082527",
+      "deadline_misses": "0",
+      "deadline_miss_rate": "0.0",
+      "p99_state_entry_seconds": "1.7301536003034563",
+      "output_violations": "0",
+      "state_violations": "0",
+      "stale_or_replayed": "0",
+      "wall_improvement_over_phase1": "0.01672039222298838",
+      "p99_reduction_over_phase1": "0.3311439429494283",
+      "gate": "TERMINAL_RESERVED_REVISION_TRANSACTION_GATE_PASS"
+    }
+  ],
+  "five_run_replication": {
+    "Qwen3-ASR-0.6B": {
+      "replicates": 5,
+      "wall_speedup_mean": 6.051633381351871,
+      "wall_speedup_minimum": 5.934700011756312,
+      "gpu_normalized_speedup_minimum": 2.967350005878156,
+      "p99_seconds_maximum": 1.5819763728883118,
+      "total_deadline_misses": 0,
+      "total_output_violations": 0,
+      "total_state_violations": 0,
+      "total_stale_results": 0
+    },
+    "Qwen3-ASR-1.7B": {
+      "replicates": 5,
+      "wall_speedup_mean": 4.949154462555822,
+      "wall_speedup_minimum": 4.830174534082527,
+      "gpu_normalized_speedup_minimum": 2.4150872670412635,
+      "p99_seconds_maximum": 1.7301536003034563,
+      "total_deadline_misses": 0,
+      "total_output_violations": 0,
+      "total_state_violations": 0,
+      "total_stale_results": 0
+    }
+  },
+  "formal_anytime_risk": [
+    {
+      "model": "Qwen3-ASR-0.6B",
+      "eligible_state_entries": 30025,
+      "base_audits": 660,
+      "caught_state_errors": 0,
+      "time_uniform_upper_risk": 0.0048
+    },
+    {
+      "model": "Qwen3-ASR-1.7B",
+      "eligible_state_entries": 30155,
+      "base_audits": 597,
+      "caught_state_errors": 0,
+      "time_uniform_upper_risk": 0.00478
+    }
+  ],
+  "same_task_c32": [
+    {
+      "mechanism": "MarginGate-inspired fixed 0.05",
+      "goodput_events_per_second": 3.910406488710022,
+      "p99_seconds": 5.591171470219269,
+      "energy_joules_per_audio_second": 13.759882554717162,
+      "selected_state_disagreements": 1
+    },
+    {
+      "mechanism": "RevTrace contract-scoped repair",
+      "goodput_events_per_second": 3.045945870829193,
+      "p99_seconds": 6.10702221195213,
+      "energy_joules_per_audio_second": 15.268162314378875,
+      "selected_state_disagreements": 0,
+      "wall_speedup_vs_all_canonical": 5.905352713878949,
+      "gpu_normalized_speedup_vs_all_canonical": 2.9526763569394743,
+      "slo_goodput_speedup_vs_all_canonical": 2.011510768165017,
+      "energy_efficiency_vs_all_canonical": 3.798766072666953
+    }
+  ],
+  "source_scope_only": [
+    {
+      "mechanism": "batch_invariant_ops Qwen3-ASR smoke",
+      "events": 8,
+      "speedup_over_singleton": 2.08603447755992,
+      "state_disagreements": 0,
+      "scope": "8-event integration smoke; not full dependency-path certification"
+    },
+    {
+      "mechanism": "batch_invariant_ops operator",
+      "ordinary_over_invariant_throughput_ratio": 0.21501992788577493,
+      "scope": "operator only"
+    },
+    {
+      "mechanism": "TBIK Triton fallback",
+      "ordinary_over_invariant_throughput_ratio": 0.37344311541521497,
+      "scope": "operator only"
+    }
+  ],
+  "live_overlap_ablation": {
+    "energy_reduction": 0.34433665329034724,
+    "evidence": "same c64 jobs, model, fixed canonical shape, and replay oracle; execution overlap is the only intervention",
+    "overlapped_deadline_misses": 0,
+    "overlapped_p99_seconds": 1.482556527480483,
+    "p99_reduction": 0.40328242272534154,
+    "sequential_deadline_misses": 128,
+    "sequential_p99_seconds": 2.484519618563354,
+    "wall_speedup": 1.68417849702625
+  },
+  "live_dynamic_contract_sequence": [
+    {
+      "certified_after_events": 1358,
+      "concurrency": 16,
+      "deadline_miss_events": 0,
+      "energy": {
+        "completed_audio_seconds": 2880.0,
+        "joules": 23383.964372372306,
+        "joules_per_audio_second": 8.119432073740384,
+        "sample_count": 373.0
+      },
+      "events": 1440,
+      "failure_floor": 0.031251,
+      "fast_path_window": 0.9712812960235641,
+      "fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float32-fixed-canonical-b16",
+      "goodput_events_per_second": 22.031927539002382,
+      "label": "c16_en_initial",
+      "language": "English",
+      "output_violations": 1,
+      "renewal_canaries_remaining": 0,
+      "risk_upper_bound": 0.004997058694246492,
+      "state_entry_latency_seconds_p99": 1.2966432916000485,
+      "state_violations": 0,
+      "switch_action": "new_contract_quarantine",
+      "threshold": 0.031251,
+      "verification_fraction": 0.95625
+    },
+    {
+      "certified_after_events": 1350,
+      "concurrency": 16,
+      "deadline_miss_events": 0,
+      "energy": {
+        "completed_audio_seconds": 2880.0,
+        "joules": 19337.144789396905,
+        "joules_per_audio_second": 6.7142863852072585,
+        "sample_count": 298.0
+      },
+      "events": 1440,
+      "failure_floor": 0.015626,
+      "fast_path_window": 0.9940740740740741,
+      "fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=Chinese/arrival=episode-sync/float32-fixed-canonical-b16",
+      "goodput_events_per_second": 28.051810990560863,
+      "label": "c16_zh_drift",
+      "language": "Chinese",
+      "output_violations": 0,
+      "renewal_canaries_remaining": 0,
+      "risk_upper_bound": 0.004947542039521191,
+      "state_entry_latency_seconds_p99": 0.8810207359492779,
+      "state_violations": 0,
+      "switch_action": "new_contract_quarantine",
+      "threshold": 0.015626,
+      "verification_fraction": 0.9555555555555556
+    },
+    {
+      "certified_after_events": 64,
+      "concurrency": 16,
+      "deadline_miss_events": 0,
+      "energy": {
+        "completed_audio_seconds": 640.0,
+        "joules": 4687.536310823613,
+        "joules_per_audio_second": 7.324275485661896,
+        "sample_count": 88.0
+      },
+      "events": 320,
+      "failure_floor": 0.031251,
+      "fast_path_window": 0.9712812960235641,
+      "fingerprint": "Qwen3-ASR-0.6B/fp16/c16/language=English/arrival=episode-sync/float32-fixed-canonical-b16",
+      "goodput_events_per_second": 21.54093102892686,
+      "label": "c16_en_return",
+      "language": "English",
+      "output_violations": 0,
+      "renewal_canaries_remaining": 0,
+      "risk_upper_bound": 0.004997058694246492,
+      "state_entry_latency_seconds_p99": 1.350290329195559,
+      "state_violations": 0,
+      "switch_action": "exact_restore_canary",
+      "threshold": 0.031251,
+      "verification_fraction": 0.409375
+    }
+  ],
+  "published_sota_context_only": [
+    {
+      "mechanism": "LLM-42",
+      "reported_metric": "2.2x decode throughput over deterministic SGLang at 1 deterministic request per 11; within 3% of nondeterministic best case",
+      "comparability": "text-LLM token decode, different hardware/workload; context only"
+    },
+    {
+      "mechanism": "MarginGate",
+      "reported_metric": "18.56%/15.05% verifier triggers on two text LLMs; 2.23x/1.99x lower latency increment than LLM-42",
+      "comparability": "text-LLM sequence determinism, different models and datasets; context only"
+    },
+    {
+      "mechanism": "RW-TTT",
+      "reported_metric": "9.31x over sequential and 3.44x over per-stream replicas for eight request-owned TTT streams",
+      "comparability": "request-owned training state, not numerical revision-feedback state; context only"
+    }
+  ],
+  "interpretation": {
+    "advantage": "RevTrace Phase2 retains 4.83x-5.99x wall/SLO speedup and 2.42x-3.00x GPU-normalized speedup while meeting the 2s SLO.",
+    "cost": "On the overloaded c32 repair cell, RevTrace is slower and uses more energy than the unsafe fixed-margin policy, buying removal of the observed state disagreement.",
+    "non_comparable": "BIO/TBIK numbers are operator or tiny integration scopes and cannot be ranked as end-to-end ASR serving throughput."
+  }
+}
