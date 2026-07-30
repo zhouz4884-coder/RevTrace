@@ -211,15 +211,16 @@ def main() -> int:
     }
     for name, payload in outputs.items():
         path = root / name
-        path.write_text(
-            json.dumps(
-                payload,
-                indent=2,
-                ensure_ascii=False,
-                sort_keys=True,
-            )
-            + "\n",
-            encoding="utf-8",
+        path.write_bytes(
+            (
+                json.dumps(
+                    payload,
+                    indent=2,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                )
+                + "\n"
+            ).encode("utf-8")
         )
     print(
         json.dumps(

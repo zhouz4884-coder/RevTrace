@@ -109,9 +109,16 @@ def main() -> int:
         "files": entries,
     }
     manifest_path = output / "MANIFEST.json"
-    manifest_path.write_text(
-        json.dumps(manifest, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
-        encoding="utf-8",
+    manifest_path.write_bytes(
+        (
+            json.dumps(
+                manifest,
+                indent=2,
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode("utf-8")
     )
     for relative, record in entries.items():
         if sha256(output / relative) != record["sha256"]:
