@@ -1,0 +1,302 @@
+{
+  "claim_boundaries": [
+    "The observed quality tolerance gate passed only if the paired sample mean delta stayed within 2 percentage points with no catastrophic outlier.",
+    "Population noninferiority is unresolved unless the paired bootstrap upper bound is also at most 2 percentage points.",
+    "The time-uniform risk statement concerns admitted state entries; margin is not a deterministic arithmetic certificate.",
+    "Provisional experience statistics describe this frozen natural workload, not production prevalence.",
+    "Legacy B=8 quality and the B=2 or dual-lane NO-GO branches are excluded from the selected contract."
+  ],
+  "decision": "CHECKPOINT20_HOLDBACK_SUBMISSION_EVIDENCE_PASS",
+  "deployed_quality": [
+    {
+      "catastrophic": 0,
+      "checkpoint_delta": 0.011759478494979117,
+      "checkpoint_holdback": 0.03768745936324374,
+      "checkpoint_verify": 0.037952724500779175,
+      "continuous": 0.026193246005800058,
+      "holdback_incremental_delta": -0.0002652651375354341,
+      "language": "Chinese",
+      "metric": "cer",
+      "sessions": 32,
+      "total_ci_high": 0.024618947124889358,
+      "total_ci_low": 0.0038318185133508174,
+      "total_delta": 0.011494213357443682
+    },
+    {
+      "catastrophic": 0,
+      "checkpoint_delta": 0.00901684752310243,
+      "checkpoint_holdback": 0.03519032039238291,
+      "checkpoint_verify": 0.034916955683796484,
+      "continuous": 0.025900108160694057,
+      "holdback_incremental_delta": 0.00027336470858642094,
+      "language": "English",
+      "metric": "wer",
+      "sessions": 32,
+      "total_ci_high": 0.02051080227592445,
+      "total_ci_low": 0.0027036538247051795,
+      "total_delta": 0.00929021223168885
+    }
+  ],
+  "evidence_sha256": {
+    "calibration": {
+      "path": "results/checkpoint20_holdback_authority/calibration.json",
+      "sha256": "8b01de024b899678d94ee783f2e755489ce1fede09623481c7f3a25ec258f016"
+    },
+    "contract_bindings": {
+      "path": "results/checkpoint20_holdback_authority/contract_bindings.json",
+      "sha256": "f0e6b606395bbc3a0d68b62139e6118b231fb15a8dd2c141e458cfb29ab7a505"
+    },
+    "contract_manifest": {
+      "path": "results/checkpoint20_holdback_authority/contract_manifest.json",
+      "sha256": "8ca075b7652ba7395abd93b29735d8653bfe0dec88c78b29bbe436c6a884697c"
+    },
+    "deployed_quality": {
+      "path": "results/checkpoint20_holdback_authority/deployed_b12_quality_32x2.json",
+      "sha256": "e5204a17cd8b4dfc335fe94a6335ef854a6b0d7297ef62a9d439d8e3f0573700"
+    },
+    "deployment_identity": {
+      "path": "results/checkpoint20_holdback_authority/deployment_identity.json",
+      "sha256": "5afb790a125948e2e96c46aad65fb84ae1bf8854d5917839f31afab313cb0843"
+    },
+    "formal_risk_audit": {
+      "path": "results/checkpoint20_holdback_authority/anytime_risk_audit.json",
+      "sha256": "ea24564460956be79807b9c70abd9f9cd28f3b78e70f719d27a52e5f25da9a7f"
+    },
+    "holdback_semantics": {
+      "path": "results/checkpoint20_holdback_authority/holdback_semantics_gate.json",
+      "sha256": "ea404d6785451367413059155ca37ae976f6028b2ecba8b67795bf04ea95495a"
+    },
+    "seed_20260840": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260840.json",
+      "sha256": "79d2167785dbf8a36711cc94c681b09d1ca63c8a23182ba5cc728257d5f27f99"
+    },
+    "seed_20260841": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260841.json",
+      "sha256": "a1ce1e0b703b03454d90f1ac6d2a03edc67cf461130001257c12a1e02ef125fc"
+    },
+    "seed_20260842": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260842.json",
+      "sha256": "e7b748e7cdb330679615848b015fe5548320a80f0473b7b5966b346250320c93"
+    },
+    "seed_20260843": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260843.json",
+      "sha256": "9a2de51c2a3e14fbcc86040ae4c2aa94ec3433224baa72fe15c14bd389ebe091"
+    },
+    "seed_20260844": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260844.json",
+      "sha256": "dc265d69e34db8a1d2be98e8209be63eb17eac77a038549f8e58f0360234f99a"
+    }
+  },
+  "excluded_mechanisms": {
+    "burst_b2": "NO_GO_EXCLUDED",
+    "checkpoint_rebase_holdback_quality_16x2.json": "legacy B=8 single-engine quality; not deployment matched",
+    "dual_lane": "NO_GO_EXCLUDED",
+    "provisional_forward_edit_metric": {
+      "decision": "METRIC_DEFINITION_REJECTED",
+      "path": "results/checkpoint20_holdback_authority/deployed_b12_quality_32x2_ux_metric_negative.json",
+      "reason": "counted normal appended text as an overwrite and used provisional length as denominator, so values could exceed 1",
+      "sha256": "b1bc505cf10c5d0ccc4d9fbad1661980b7bea8264afe550633ec04817194dcb5"
+    }
+  },
+  "five_seed": {
+    "maximum_p99_seconds": 1.413811020553112,
+    "mean_joules_per_audio_second": 8.669583208235355,
+    "mean_p99_seconds": 1.2781361546367407,
+    "rows": [
+      {
+        "authority_violations": 0,
+        "deadline_miss_events": 0,
+        "events": 720,
+        "holdbacks": 18,
+        "joules_per_audio_second": 9.239491412944338,
+        "p50_seconds": 0.6748525835573673,
+        "p95_seconds": 1.198569000279528,
+        "p99_seconds": 1.413811020553112,
+        "seed": 20260840,
+        "verification_fraction": 0.1
+      },
+      {
+        "authority_violations": 0,
+        "deadline_miss_events": 0,
+        "events": 720,
+        "holdbacks": 9,
+        "joules_per_audio_second": 8.531705018618974,
+        "p50_seconds": 0.6566475657746196,
+        "p95_seconds": 1.1544343891087918,
+        "p99_seconds": 1.3164224736392498,
+        "seed": 20260841,
+        "verification_fraction": 0.1
+      },
+      {
+        "authority_violations": 0,
+        "deadline_miss_events": 0,
+        "events": 720,
+        "holdbacks": 14,
+        "joules_per_audio_second": 8.525091844021832,
+        "p50_seconds": 0.6562467874027789,
+        "p95_seconds": 1.1799256137106544,
+        "p99_seconds": 1.2616910627111793,
+        "seed": 20260842,
+        "verification_fraction": 0.1
+      },
+      {
+        "authority_violations": 0,
+        "deadline_miss_events": 0,
+        "events": 720,
+        "holdbacks": 10,
+        "joules_per_audio_second": 8.644592577136558,
+        "p50_seconds": 0.6659765806980431,
+        "p95_seconds": 1.102561823371797,
+        "p99_seconds": 1.217335794121027,
+        "seed": 20260843,
+        "verification_fraction": 0.1
+      },
+      {
+        "authority_violations": 0,
+        "deadline_miss_events": 0,
+        "events": 720,
+        "holdbacks": 10,
+        "joules_per_audio_second": 8.407035188455072,
+        "p50_seconds": 0.6556919827125967,
+        "p95_seconds": 1.0539082436822318,
+        "p99_seconds": 1.1814204221591353,
+        "seed": 20260844,
+        "verification_fraction": 0.1
+      }
+    ],
+    "total_deadline_misses": 0
+  },
+  "gate_checks": {
+    "calibration": true,
+    "deployed_b12_quality": true,
+    "five_seed_tail": true,
+    "holdback_semantics": true,
+    "provisional_lifetime_bound": true,
+    "shared_content_addressed_contract": true,
+    "time_uniform_state_risk": true
+  },
+  "implementation_sha256": {
+    "binding_builder": {
+      "path": "scripts/bind_checkpoint20_evidence.py",
+      "sha256": "5f6fdaadbcdc55b25620d9db62b394acb308e6fcfd97b15bb67d5365c331e65d"
+    },
+    "contract_library": {
+      "path": "src/revtrace/contract_manifest.py",
+      "sha256": "86dbc0d393018fa62e12f1db46bc59339e31a621b5b7c226534436e779cd17d6"
+    },
+    "deployed_quality_runner": {
+      "path": "scripts/remote/run_deployed_checkpoint20_quality.py",
+      "sha256": "c54cb0b1c17b620f6ca308734742f27af544ad45a669f03d1c5ff7fb232fa649"
+    },
+    "finalizer": {
+      "path": "scripts/finalize_checkpoint20_submission.py",
+      "sha256": "5ca61d1302037848efa7ab6f7fc362becdce68485455b9ac168504fb1c7870f9"
+    },
+    "holdback_semantics": {
+      "path": "src/revtrace/long_horizon.py",
+      "sha256": "a5417b5bc8293d465c1b019c4c832cbb328229d1e151cc3a38007858e3965675"
+    },
+    "live_runner": {
+      "path": "scripts/remote/run_phase5a_live_adaptive.py",
+      "sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+    },
+    "risk_runner": {
+      "path": "scripts/remote/run_checkpoint_dual_lane_shadow_audit.py",
+      "sha256": "2c68d282c0608a07a939b3a4ba81827c4c94da44221bab3d2e4b67004f597137"
+    },
+    "semantic_runner": {
+      "path": "scripts/remote/run_holdback_semantics_gate.py",
+      "sha256": "14bbc005c1f5eae644a2ae7bcc16cacc309baf6c8a9c77bcb44cf9fe26dfe30e"
+    }
+  },
+  "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
+  "provisional_experience": {
+    "holdback_events": 75,
+    "holdback_rate": 0.021701388888888888,
+    "lifetime_bound_pass": true,
+    "lifetime_seconds": {
+      "maximum": 6.0,
+      "p50": 2.0,
+      "p95": 4.0
+    },
+    "maximum_allowed_lifetime_seconds": 20,
+    "provisional_overwrite_fraction": {
+      "definition": "fraction of already displayed normalized units no longer preserved as an exact prefix; appended text is free",
+      "maximum": 1.0,
+      "mean": 0.0719994139593981,
+      "p50": 0.0,
+      "p95": 0.46589473684210503,
+      "zero_overwrite_fraction": 0.6933333333333334
+    },
+    "provisional_to_authority_edit_rate": {
+      "definition": "legacy forward edit distance divided by provisional length; can exceed one because normal appended text is counted",
+      "maximum": 10.0,
+      "mean": 0.4441191213972083,
+      "p95": 0.8624999999999999
+    },
+    "resolution_counts": {
+      "checkpoint_authority": 5,
+      "next_high_margin": 70
+    },
+    "resolution_fractions": {
+      "checkpoint_authority": 0.06666666666666667,
+      "next_high_margin": 0.9333333333333333
+    }
+  },
+  "quality_decisions": {
+    "observed": "OBSERVED_QUALITY_TOLERANCE_PASS",
+    "population": "POPULATION_NONINFERIORITY_UNRESOLVED"
+  },
+  "risk_certificate": {
+    "confidence": 0.95,
+    "method": "fixed-probability mixture e-process inversion",
+    "target_delta": 0.005,
+    "upper_error_count": 144,
+    "upper_risk": 0.0047332610196233115
+  },
+  "schema_version": 2,
+  "selected_contract": "fp16_ordinary_b12_proposer__low_margin_provisional_holdback__fp16_batch_invariant_fixed_b12_checkpoint_authority",
+  "semantic_patterns": {
+    "consecutive_holdbacks": {
+      "audio_frontier_checks": 2,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 2,
+      "holdback_count": 2,
+      "reset_reconstruction_agreement": true
+    },
+    "hold_until_checkpoint": {
+      "audio_frontier_checks": 4,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 4,
+      "holdback_count": 4,
+      "reset_reconstruction_agreement": true
+    },
+    "holdback_then_catchup": {
+      "audio_frontier_checks": 1,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 1,
+      "holdback_count": 1,
+      "reset_reconstruction_agreement": true
+    },
+    "last_before_checkpoint": {
+      "audio_frontier_checks": 1,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 1,
+      "holdback_count": 1,
+      "reset_reconstruction_agreement": true
+    },
+    "single_holdback": {
+      "audio_frontier_checks": 1,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 1,
+      "holdback_count": 1,
+      "reset_reconstruction_agreement": true
+    }
+  },
+  "study": "checkpoint20_submission_evidence_closure"
+}

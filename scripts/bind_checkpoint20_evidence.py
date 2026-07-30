@@ -187,6 +187,9 @@ def main() -> int:
         },
     )
 
+    ux_negative = root / "deployed_b12_quality_32x2_ux_metric_negative.json"
+    if not ux_negative.is_file():
+        raise FileNotFoundError(ux_negative)
     payload = {
         "schema_version": 1,
         "mechanism_digest": digest,
@@ -203,6 +206,17 @@ def main() -> int:
             ),
             "burst_b2": "NO_GO_EXCLUDED",
             "dual_lane": "NO_GO_EXCLUDED",
+            "provisional_forward_edit_metric": {
+                "decision": "METRIC_DEFINITION_REJECTED",
+                "path": ux_negative.relative_to(
+                    Path.cwd().resolve()
+                ).as_posix(),
+                "sha256": sha256_file(ux_negative),
+                "reason": (
+                    "counted normal appended text as an overwrite and used "
+                    "provisional length as denominator, so values could exceed 1"
+                ),
+            },
         },
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

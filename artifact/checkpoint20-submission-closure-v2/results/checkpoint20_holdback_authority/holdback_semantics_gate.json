@@ -1,0 +1,60 @@
+{
+  "contract_manifest_sha256": "8ca075b7652ba7395abd93b29735d8653bfe0dec88c78b29bbe436c6a884697c",
+  "decision": "HOLDBACK_SEMANTICS_PASS",
+  "environment": {
+    "code_commit": "10a7ade69656df1816dad085ca9f26ef6c349919",
+    "python": "3.12.13",
+    "runner_sha256": "14bbc005c1f5eae644a2ae7bcc16cacc309baf6c8a9c77bcb44cf9fe26dfe30e"
+  },
+  "experiment_id": "checkpoint20-holdback-semantics",
+  "invariants": {
+    "checkpoint_payload_service_quality_replay_identical": true,
+    "checkpoint_reset_reconstructible": true,
+    "holdback_advances_audio_frontier": true,
+    "holdback_does_not_advance_text_chunk_or_language": true
+  },
+  "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
+  "patterns": {
+    "consecutive_holdbacks": {
+      "audio_frontier_checks": 2,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 2,
+      "holdback_count": 2,
+      "reset_reconstruction_agreement": true
+    },
+    "hold_until_checkpoint": {
+      "audio_frontier_checks": 4,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 4,
+      "holdback_count": 4,
+      "reset_reconstruction_agreement": true
+    },
+    "holdback_then_catchup": {
+      "audio_frontier_checks": 1,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 1,
+      "holdback_count": 1,
+      "reset_reconstruction_agreement": true
+    },
+    "last_before_checkpoint": {
+      "audio_frontier_checks": 1,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 1,
+      "holdback_count": 1,
+      "reset_reconstruction_agreement": true
+    },
+    "single_holdback": {
+      "audio_frontier_checks": 1,
+      "catchup_checks": 1,
+      "checkpoint_payload_agreement": true,
+      "feedback_immutability_checks": 1,
+      "holdback_count": 1,
+      "reset_reconstruction_agreement": true
+    }
+  },
+  "schema_version": 1
+}

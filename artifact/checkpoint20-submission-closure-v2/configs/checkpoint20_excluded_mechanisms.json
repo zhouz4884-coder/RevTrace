@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "selected_contract": "fp16_ordinary_b12_proposer__low_margin_provisional_holdback__fp16_batch_invariant_fixed_b12_checkpoint_authority",
+  "excluded": {
+    "fixed_b2_burst_authority": {
+      "decision": "NO_GO_EXCLUDED",
+      "reason": "Fixed B=2 authority was not cross-shape equivalent to the selected canonical authority."
+    },
+    "dual_lane_intermediate_authority": {
+      "decision": "NO_GO_EXCLUDED",
+      "reason": "The dual-lane repair did not close the selected tail/authority contract and is not used by final evidence."
+    },
+    "legacy_b8_quality": {
+      "decision": "EXCLUDED_FROM_DEPLOYMENT_CLAIMS",
+      "reason": "The legacy quality runner used a single engine and evaluation B=8 instead of deployed GPU0 proposer B=12 plus GPU1 fixed-B=12 authority."
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "identity_environment": {
+    "gpu_driver_and_name": [
+      "570.133.07, NVIDIA GeForce RTX 3090",
+      "570.133.07, NVIDIA GeForce RTX 3090"
+    ],
+    "python": "3.12.13"
+  },
+  "mechanism": {
+    "authority": {
+      "checkpoint_and_terminal_only": true,
+      "dtype": "float16",
+      "fixed_batch_size": 12,
+      "runtime_sha256": "94c5c1bc9302a12c5a9a24d09e6fd13ba909f21dfbb2ff520b82ea19f361d2f0"
+    },
+    "data": {
+      "audio_construction": "distinct_utterance_sequence_v1",
+      "manifest_sha256": "6a76ca46cc81248b12e4930589bf47b7ac075d9c79afa9c299240b531782fd6a"
+    },
+    "model": {
+      "fingerprint": {
+        "content_digest": "d279d8938c2c5c3d4647d71366af060940dc7de92703a119b7d92fff5c7c723f",
+        "files": {
+          "config.json": {
+            "bytes": 6193,
+            "sha256": "76d3ae4601ce939830b2517f4a6cadb86cc51316c3900af6b020b051c21a478c"
+          },
+          "generation_config.json": {
+            "bytes": 142,
+            "sha256": "1da527824d81e07118facff437e03f2e24a23311e3bdeb2368973fe77e5f275c"
+          },
+          "model.safetensors": {
+            "bytes": 1876091704,
+            "sha256": "79d6cbd4c98c7bbffe9db2edac07f56cd6637d0d5944b27f6c2b8353840323ea"
+          },
+          "preprocessor_config.json": {
+            "bytes": 330,
+            "sha256": "45e120a4eda2c20c5d7f2ea9354e63536bf35e27aa573fb7cdf78017b378770d"
+          },
+          "tokenizer_config.json": {
+            "bytes": 12487,
+            "sha256": "4942d005604266809309cabc9f4e9cb89ce855d59b14681fdc0e1cc62ea26c4c"
+          }
+        }
+      },
+      "name": "Qwen3-ASR-0.6B"
+    },
+    "proposer": {
+      "dtype": "float16",
+      "ordinary_batch_size": 12
+    },
+    "revision_contract": {
+      "checkpoint_payload": "terminal_state_projection_v1",
+      "checkpoint_seconds": 20,
+      "duration_seconds": 120,
+      "maximum_model_length": 4096
+    },
+    "risk_policy": {
+      "low_margin_policy": "provisional_holdback_v1",
+      "margin_is_deterministic_certificate": false,
+      "minimum_margin_threshold": 0.031251
+    },
+    "schema_version": 1
+  },
+  "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583"
+}

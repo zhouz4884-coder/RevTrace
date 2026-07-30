@@ -301,9 +301,9 @@ certificate. See the
 [collision matrix](docs/research/phase7_related_work_collision_matrix.md), and
 [paper tables](results/phase7/PAPER_TABLES.md).
 
-### Checkpoint-20 long-horizon tail closure
+### Checkpoint-20 submission evidence closure
 
-`CHECKPOINT20_HOLDBACK_FINAL_PASS`
+`CHECKPOINT20_HOLDBACK_SUBMISSION_EVIDENCE_PASS`
 
 The repaired long-horizon contract keeps low-margin nonterminal output
 provisional instead of synchronously selecting it as textual feedback state.
@@ -319,20 +319,40 @@ events and holds back 61 low-margin provisional candidates. A separate
 pre-outcome randomized audit covers 30,423 admitted high-margin state entries
 and yields a 95% time-uniform state-risk UCB of 0.4733%.
 
-The paired natural quality gate uses 16 English and 16 Chinese sessions.
-Observed mean deltas are +1.451 percentage points WER and +1.760 percentage
-points CER, with zero catastrophic outliers. Both observed means pass the
-pre-registered 2-point gate, but their bootstrap upper bounds exceed two
-points; this is not a population-equivalence or deterministic-exactness claim.
+The final paired quality gate uses the deployed GPU-0 ordinary FP16 B=12
+proposer and GPU-1 batch-invariant FP16 fixed-B=12 authority on 32 English and
+32 Chinese 120-second sessions. Relative to continuous full history, observed
+mean deltas are +0.929 percentage points WER and +1.149 percentage points CER,
+with zero catastrophic outliers. Holdback itself adds +0.027 points WER and
+-0.027 points CER relative to synchronous checkpoint verification. Both
+observed means pass the pre-registered 2-point gate, but the paired-bootstrap
+upper bounds are 2.051 and 2.462 points; the exact conclusion is
+`POPULATION_NONINFERIORITY_UNRESOLVED`.
+
+Five real-model semantic patterns pass: a holdback advances accumulated audio
+but cannot update text, language, or chunk version; service, quality, and
+replay checkpoint payloads agree; and checkpoint reset is reconstructible.
+The deployed quality trace contains 75 provisional holdbacks (2.170%). Their
+P50/P95/maximum lifetime is 2/4/6 seconds; 93.33% resolve at the next
+high-margin update, 69.33% preserve all already displayed normalized units,
+and mean displayed-text overwrite is 7.20%. Normal appended text is excluded
+from overwrite cost.
+
+Every selected artifact is content-addressed under mechanism digest
+`fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583`.
+The finalizer rejects changed raw files, runner-role changes, a different
+model/data/runtime fingerprint, legacy B=8 single-engine quality, and the
+fixed-B=2 or dual-lane NO-GO branches.
+
 The failed two-episode calibration is retained: it showed that the original
 split did not provide enough admitted validation events and contaminated the
 held-out service stage with fail-closed verification. The repaired calibration
 uses three episodes and freezes the threshold before held-out execution.
 
 See the
-[checkpoint-20 closure report](docs/reports/checkpoint20_holdback_closure.md),
+[submission evidence report](docs/reports/checkpoint20_submission_closure.md),
 [protocol](docs/protocols/checkpoint20_holdback_authority_closure.md), and
-[machine-readable summary](results/checkpoint20_holdback_authority/final_summary.json).
+[machine-readable summary](results/checkpoint20_holdback_authority/final_summary_v2.json).
 
 ## Phase map
 
