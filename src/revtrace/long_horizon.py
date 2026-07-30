@@ -9,6 +9,38 @@ from typing import Any
 import numpy as np
 
 
+def feedback_state_snapshot(state: Any) -> dict[str, Any]:
+    """Capture every field whose mutation changes future revision semantics."""
+
+    return {
+        "audio_samples": int(np.asarray(state.audio_accum).size),
+        "buffer_samples": int(np.asarray(state.buffer).size),
+        "raw_decoded": str(state._raw_decoded),
+        "text": str(state.text),
+        "language": state.language,
+        "chunk_id": int(state.chunk_id),
+    }
+
+
+def assert_provisional_holdback_transition(
+    before: dict[str, Any],
+    after_prepare: dict[str, Any],
+    *,
+    expected_audio_samples: int,
+) -> None:
+    """Prove that holdback advances audio but not textual feedback state."""
+
+    if after_prepare["audio_samples"] - before["audio_samples"] != int(
+        expected_audio_samples
+    ):
+        raise AssertionError("holdback audio frontier did not advance exactly")
+    for field in ("raw_decoded", "text", "language", "chunk_id"):
+        if after_prepare[field] != before[field]:
+            raise AssertionError(
+                f"holdback illegally changed feedback field {field}"
+            )
+
+
 def checkpoint_due(age_seconds: int, checkpoint_seconds: int) -> bool:
     """Return whether a positive age is an authoritative checkpoint."""
 
