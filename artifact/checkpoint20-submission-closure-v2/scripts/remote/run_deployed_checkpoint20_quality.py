@@ -760,9 +760,16 @@ def main() -> int:
             "Provisional UX metrics measure the frozen natural session sample, not production prevalence.",
         ],
     }
-    args.output.write_text(
-        json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
-        encoding="utf-8",
+    args.output.write_bytes(
+        (
+            json.dumps(
+                payload,
+                indent=2,
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode("utf-8")
     )
     command_queue.put({"kind": "stop"})
     stopped = receive_or_raise(result_queue, args.result_timeout_seconds)

@@ -551,7 +551,9 @@ def main() -> int:
         ]
     )
     args.report.parent.mkdir(parents=True, exist_ok=True)
-    args.report.write_bytes(("\n".join(lines) + "\n").encode("utf-8"))
+    args.report.write_bytes(
+        ("\n".join(lines).rstrip() + "\n").encode("utf-8")
+    )
     print(json.dumps({"decision": summary["decision"]}, sort_keys=True))
     return 0 if passed else 2
 

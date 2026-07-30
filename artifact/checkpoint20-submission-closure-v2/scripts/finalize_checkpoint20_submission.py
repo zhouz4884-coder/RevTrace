@@ -427,13 +427,24 @@ def main() -> int:
         ],
     }
     output = root / "final_summary_v2.json"
-    output.write_text(
-        json.dumps(summary, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
-        encoding="utf-8",
+    output.write_bytes(
+        (
+            json.dumps(
+                summary,
+                indent=2,
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode("utf-8")
     )
     csv_path = root / "deployed_quality_summary.csv"
     with csv_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(quality_rows[0]))
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=list(quality_rows[0]),
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(quality_rows)
 
@@ -540,7 +551,9 @@ def main() -> int:
         ]
     )
     args.report.parent.mkdir(parents=True, exist_ok=True)
-    args.report.write_text("\n".join(lines), encoding="utf-8")
+    args.report.write_bytes(
+        ("\n".join(lines).rstrip() + "\n").encode("utf-8")
+    )
     print(json.dumps({"decision": summary["decision"]}, sort_keys=True))
     return 0 if passed else 2
 
