@@ -5,6 +5,7 @@ import pytest
 
 from revtrace.long_horizon import (
     append_checkpoint_history,
+    checkpoint_payload,
     checkpoint_due,
     concatenate_distinct_audio,
     long_horizon_scope,
@@ -18,6 +19,40 @@ def test_checkpoint_helpers_are_explicit_and_monotone() -> None:
     assert not checkpoint_due(30, 0)
     assert append_checkpoint_history("", " first ") == "first"
     assert append_checkpoint_history("first", "second") == "first second"
+
+
+def test_checkpoint_payload_uses_complete_terminal_projection() -> None:
+    selected = {"text": "new suffix"}
+    projection = {
+        "terminal": True,
+        "projection_text": "stable prefix new suffix",
+    }
+    assert checkpoint_payload(
+        prefix="stable prefix ",
+        selected=selected,
+        selected_projection=projection,
+    ) == "stable prefix new suffix"
+
+
+def test_checkpoint_payload_rejects_suffix_only_or_nonterminal_state() -> None:
+    with pytest.raises(AssertionError, match="projection mismatch"):
+        checkpoint_payload(
+            prefix="stable prefix ",
+            selected={"text": "new suffix"},
+            selected_projection={
+                "terminal": True,
+                "projection_text": "new suffix",
+            },
+        )
+    with pytest.raises(ValueError, match="terminal"):
+        checkpoint_payload(
+            prefix="",
+            selected={"text": "suffix"},
+            selected_projection={
+                "terminal": False,
+                "projection_text": "suffix",
+            },
+        )
 
 
 def test_upper_bucket_is_inclusive_and_stable() -> None:
@@ -64,7 +99,7 @@ def test_checkpoint_scope_bounds_age_without_hiding_total_duration() -> None:
     )
     assert scoped["duration"] == "duration_le_120"
     assert scoped["session_age"] == "age_le_30"
-    assert scoped["checkpoint"] == "checkpoint_le_30"
+    assert scoped["checkpoint"] == "checkpoint_s_30"
 
 
 def test_concatenate_distinct_audio_has_no_roll_or_repetition() -> None:

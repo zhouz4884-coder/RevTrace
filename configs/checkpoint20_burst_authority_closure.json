@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "contract": "checkpoint20_ordinary_proposer_bi_b1_b2_authority_v1",
+  "checkpoint_seconds": 20,
+  "duration_seconds": 120,
+  "concurrency": 12,
+  "proposer": {
+    "gpu": 0,
+    "dtype": "float16",
+    "batch_invariant": false,
+    "shape": 12
+  },
+  "canonical_authority": {
+    "gpu": 1,
+    "dtype": "float16",
+    "batch_invariant": true,
+    "isolated_shape": 1,
+    "burst_shape": 2,
+    "terminal_shape": 12,
+    "burst_use": "nonterminal verification count >= 2"
+  },
+  "checkpoint_payload": "full_terminal_state_projection_v1",
+  "calibration": {
+    "failure_floor": 0.03125,
+    "threshold_is_dynamic": true,
+    "heldout_stage_is_independent": true
+  },
+  "formal_risk": {
+    "method": "fixed-probability mixture e-process inversion",
+    "target_risk_entries": 30000,
+    "delta": 0.005,
+    "confidence": 0.95
+  },
+  "performance_gate": {
+    "seeds": [20260830, 20260831, 20260832, 20260833, 20260834],
+    "maximum_seed_p99_seconds": 1.9,
+    "maximum_deadline_miss_events": 0,
+    "maximum_selected_authority_violations": 0
+  }
+}

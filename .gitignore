@@ -56,3 +56,12 @@ results/phase6/live_adaptation/c16-en-c16-zh-c16-en.json
 results/phase6/live_adaptation/c16-en-c16-zh-c16-en-first-fail.json
 results/phase6/live_adaptation/c16-en-c16-zh-c16-en-second-fail.json
 results/phase6/figures/
+
+# Local-only transfer bundles used to synchronize bounded remote artifacts.
+_sync_*.tgz
+_revtrace_*_results.tgz
+
+# Full remote engine logs contain transient topology details; compact JSON
+# evidence, exit codes, and hashes are the publication artifacts.
+results/checkpoint20_ordinary_authority/*.log
+results/checkpoint20_holdback_authority/*.log

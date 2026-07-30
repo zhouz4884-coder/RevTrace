@@ -1,0 +1,5822 @@
+{
+  "schema_version": 1,
+  "study": "Checkpoint/Rebase randomized base audit",
+  "decision": "CHECKPOINT_ANYTIME_RISK_PASS",
+  "model": "Qwen3-ASR-0.6B",
+  "contract": {
+    "duration_seconds": 120,
+    "checkpoint_seconds": 20,
+    "concurrency": 12,
+    "dtype": "float16",
+    "margin_threshold": 0.031251,
+    "intermediate_authority": "gpu1_singleton_v1",
+    "terminal_authority": "gpu1_fixed_b12",
+    "checkpoint_payload": "terminal_state_projection_v1",
+    "cross_lane_compatibility_sha256": null,
+    "batch_invariant_runtime_sha256": "94c5c1bc9302a12c5a9a24d09e6fd13ba909f21dfbb2ff520b82ea19f361d2f0",
+    "cross_lane_pairs": null
+  },
+  "audit_design": {
+    "audit_probability": 0.021,
+    "alpha": 0.05,
+    "delta": 0.005,
+    "coin_timing": "drawn before proposer and canonical outcomes",
+    "method": "fixed-probability mixture e-process inversion",
+    "dependence": "error events may depend arbitrarily across sessions, rounds, and checkpoints; only base audit coins are independent"
+  },
+  "counts": {
+    "episodes": 48,
+    "total_revision_events": 34560,
+    "risk_eligible_state_entries": 30455,
+    "base_audits": 639,
+    "mandatory_verifications": 4105,
+    "terminal_verifications": 3456,
+    "caught_output_errors": 0,
+    "caught_state_errors": 0,
+    "selected_authority_violations": 0
+  },
+  "risk_certificate": {
+    "upper_error_count": 144,
+    "upper_risk": 0.004728287637497948,
+    "confidence": 0.95,
+    "target_delta": 0.005,
+    "method": "fixed-probability mixture e-process inversion"
+  },
+  "lane_counts": {
+    "gpu0_singleton": 0,
+    "gpu1_singleton": 1288,
+    "gpu1_fixed": 3456
+  },
+  "verification_burst_histogram": {
+    "0": 1561,
+    "1": 802,
+    "2": 201,
+    "3": 28
+  },
+  "audit_records": [
+    {
+      "episode": 0,
+      "chunk_index": 1,
+      "session_id": "e0000-s02",
+      "minimum_margin": 2.9062499813735485,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 4,
+      "session_id": "e0000-s01",
+      "minimum_margin": 3.062500063329935,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 7,
+      "session_id": "e0000-s06",
+      "minimum_margin": 2.9531250447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 14,
+      "session_id": "e0000-s04",
+      "minimum_margin": 1.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 25,
+      "session_id": "e0000-s00",
+      "minimum_margin": 3.2187499441206455,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 27,
+      "session_id": "e0000-s05",
+      "minimum_margin": 4.124999918043613,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 28,
+      "session_id": "e0000-s05",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 35,
+      "session_id": "e0000-s03",
+      "minimum_margin": 1.7031249552965164,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 37,
+      "session_id": "e0000-s06",
+      "minimum_margin": 0.71875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 38,
+      "session_id": "e0000-s01",
+      "minimum_margin": 0.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 44,
+      "session_id": "e0000-s02",
+      "minimum_margin": 0.9687499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 48,
+      "session_id": "e0000-s06",
+      "minimum_margin": 1.125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 51,
+      "session_id": "e0000-s04",
+      "minimum_margin": 1.6562499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 54,
+      "session_id": "e0000-s04",
+      "minimum_margin": 1.8281249552965164,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 0,
+      "chunk_index": 58,
+      "session_id": "e0000-s01",
+      "minimum_margin": 0.9062499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 2,
+      "session_id": "e0001-s04",
+      "minimum_margin": 0.7187499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 5,
+      "session_id": "e0001-s04",
+      "minimum_margin": 2.4687500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 5,
+      "session_id": "e0001-s05",
+      "minimum_margin": 0.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 12,
+      "session_id": "e0001-s00",
+      "minimum_margin": 0.75,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 16,
+      "session_id": "e0001-s06",
+      "minimum_margin": 2.5937500670552254,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 18,
+      "session_id": "e0001-s04",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 20,
+      "session_id": "e0001-s06",
+      "minimum_margin": 0.484375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 22,
+      "session_id": "e0001-s05",
+      "minimum_margin": 1.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 23,
+      "session_id": "e0001-s11",
+      "minimum_margin": 0.8437499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 27,
+      "session_id": "e0001-s07",
+      "minimum_margin": 2.8437500558793545,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 31,
+      "session_id": "e0001-s07",
+      "minimum_margin": 0.390625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 42,
+      "session_id": "e0001-s09",
+      "minimum_margin": 0.3437499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 46,
+      "session_id": "e0001-s07",
+      "minimum_margin": 0.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 52,
+      "session_id": "e0001-s07",
+      "minimum_margin": 0.46875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 54,
+      "session_id": "e0001-s01",
+      "minimum_margin": 5.9062499566935,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 1,
+      "chunk_index": 55,
+      "session_id": "e0001-s00",
+      "minimum_margin": 4.01562518812716,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 1,
+      "session_id": "e0002-s06",
+      "minimum_margin": 1.5156249850988388,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 3,
+      "session_id": "e0002-s10",
+      "minimum_margin": 0.84375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 4,
+      "session_id": "e0002-s06",
+      "minimum_margin": 2.8749999180436134,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 4,
+      "session_id": "e0002-s10",
+      "minimum_margin": 2.5000000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 12,
+      "session_id": "e0002-s05",
+      "minimum_margin": 4.843750113621354,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 18,
+      "session_id": "e0002-s09",
+      "minimum_margin": 2.6562500968575478,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 24,
+      "session_id": "e0002-s10",
+      "minimum_margin": 0.7812500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 33,
+      "session_id": "e0002-s06",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 36,
+      "session_id": "e0002-s00",
+      "minimum_margin": 2.3437500074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 42,
+      "session_id": "e0002-s11",
+      "minimum_margin": 0.5625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 46,
+      "session_id": "e0002-s07",
+      "minimum_margin": 4.2812499441206455,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 51,
+      "session_id": "e0002-s10",
+      "minimum_margin": 1.6718750894069672,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 52,
+      "session_id": "e0002-s08",
+      "minimum_margin": 1.1562500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 55,
+      "session_id": "e0002-s01",
+      "minimum_margin": 2.0624999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 2,
+      "chunk_index": 55,
+      "session_id": "e0002-s02",
+      "minimum_margin": 2.156250037252903,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 3,
+      "session_id": "e0003-s02",
+      "minimum_margin": 4.078124882653356,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 5,
+      "session_id": "e0003-s01",
+      "minimum_margin": 1.3124999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 8,
+      "session_id": "e0003-s11",
+      "minimum_margin": 3.906250102445483,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 12,
+      "session_id": "e0003-s07",
+      "minimum_margin": 2.7499998807907104,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 22,
+      "session_id": "e0003-s09",
+      "minimum_margin": 2.8749999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 35,
+      "session_id": "e0003-s01",
+      "minimum_margin": 4.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 36,
+      "session_id": "e0003-s08",
+      "minimum_margin": 1.5,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 38,
+      "session_id": "e0003-s10",
+      "minimum_margin": 4.843749953433871,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 44,
+      "session_id": "e0003-s00",
+      "minimum_margin": 1.5312500447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 47,
+      "session_id": "e0003-s09",
+      "minimum_margin": 0.5,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 3,
+      "chunk_index": 53,
+      "session_id": "e0003-s04",
+      "minimum_margin": 2.968750022351742,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 2,
+      "session_id": "e0004-s00",
+      "minimum_margin": 3.546874973922968,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 4,
+      "session_id": "e0004-s08",
+      "minimum_margin": 2.6718749403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 10,
+      "session_id": "e0004-s00",
+      "minimum_margin": 1.2812500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 10,
+      "session_id": "e0004-s06",
+      "minimum_margin": 3.5781249552965164,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 16,
+      "session_id": "e0004-s06",
+      "minimum_margin": 4.343750228174031,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 24,
+      "session_id": "e0004-s10",
+      "minimum_margin": 0.21874994039535522,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 28,
+      "session_id": "e0004-s03",
+      "minimum_margin": 0.46875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 32,
+      "session_id": "e0004-s06",
+      "minimum_margin": 0.875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 34,
+      "session_id": "e0004-s11",
+      "minimum_margin": 1.1406250596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 41,
+      "session_id": "e0004-s08",
+      "minimum_margin": 0.4843749403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 50,
+      "session_id": "e0004-s00",
+      "minimum_margin": 0.8124999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 51,
+      "session_id": "e0004-s04",
+      "minimum_margin": 0.4375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 54,
+      "session_id": "e0004-s05",
+      "minimum_margin": 2.5312499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 4,
+      "chunk_index": 55,
+      "session_id": "e0004-s06",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 5,
+      "chunk_index": 15,
+      "session_id": "e0005-s01",
+      "minimum_margin": 1.4531249403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 5,
+      "chunk_index": 21,
+      "session_id": "e0005-s01",
+      "minimum_margin": 0.109375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 5,
+      "chunk_index": 30,
+      "session_id": "e0005-s03",
+      "minimum_margin": 0.34375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 5,
+      "chunk_index": 35,
+      "session_id": "e0005-s06",
+      "minimum_margin": 1.0156250298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 5,
+      "chunk_index": 41,
+      "session_id": "e0005-s03",
+      "minimum_margin": 1.921875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 5,
+      "chunk_index": 50,
+      "session_id": "e0005-s11",
+      "minimum_margin": 5.609375050058588,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 1,
+      "session_id": "e0006-s04",
+      "minimum_margin": 1.03125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 1,
+      "session_id": "e0006-s08",
+      "minimum_margin": 5.062500133179128,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 4,
+      "session_id": "e0006-s00",
+      "minimum_margin": 0.109375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 8,
+      "session_id": "e0006-s01",
+      "minimum_margin": 0.7812500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 8,
+      "session_id": "e0006-s11",
+      "minimum_margin": 5.500000238418579,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 13,
+      "session_id": "e0006-s11",
+      "minimum_margin": 2.6250000074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 14,
+      "session_id": "e0006-s06",
+      "minimum_margin": 2.484374925494194,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 14,
+      "session_id": "e0006-s08",
+      "minimum_margin": 0.5,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 15,
+      "session_id": "e0006-s04",
+      "minimum_margin": 0.625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 17,
+      "session_id": "e0006-s04",
+      "minimum_margin": 2.5624999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 22,
+      "session_id": "e0006-s08",
+      "minimum_margin": 1.4375000149011612,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 27,
+      "session_id": "e0006-s11",
+      "minimum_margin": 1.3125000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 28,
+      "session_id": "e0006-s07",
+      "minimum_margin": 1.3124999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 30,
+      "session_id": "e0006-s01",
+      "minimum_margin": 5.250000039115548,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 31,
+      "session_id": "e0006-s10",
+      "minimum_margin": 1.7812501192092896,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 37,
+      "session_id": "e0006-s11",
+      "minimum_margin": 1.8437499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 46,
+      "session_id": "e0006-s01",
+      "minimum_margin": 1.2812499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 48,
+      "session_id": "e0006-s11",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 50,
+      "session_id": "e0006-s02",
+      "minimum_margin": 0.828125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 55,
+      "session_id": "e0006-s07",
+      "minimum_margin": 0.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 6,
+      "chunk_index": 57,
+      "session_id": "e0006-s06",
+      "minimum_margin": 3.3124999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 1,
+      "session_id": "e0007-s08",
+      "minimum_margin": 4.468750085681677,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 4,
+      "session_id": "e0007-s11",
+      "minimum_margin": 0.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 8,
+      "session_id": "e0007-s10",
+      "minimum_margin": 0.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 21,
+      "session_id": "e0007-s04",
+      "minimum_margin": 0.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 23,
+      "session_id": "e0007-s01",
+      "minimum_margin": 2.031249910593033,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 27,
+      "session_id": "e0007-s02",
+      "minimum_margin": 2.218749962747097,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 28,
+      "session_id": "e0007-s07",
+      "minimum_margin": 0.5624999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 32,
+      "session_id": "e0007-s02",
+      "minimum_margin": 2.531249985098839,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 37,
+      "session_id": "e0007-s00",
+      "minimum_margin": 0.5468750596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 41,
+      "session_id": "e0007-s03",
+      "minimum_margin": 6.124999803723767,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 43,
+      "session_id": "e0007-s04",
+      "minimum_margin": 2.5312499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 48,
+      "session_id": "e0007-s09",
+      "minimum_margin": 4.906250061001629,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 7,
+      "chunk_index": 57,
+      "session_id": "e0007-s01",
+      "minimum_margin": 4.156250158324838,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 3,
+      "session_id": "e0008-s04",
+      "minimum_margin": 6.765625039464794,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 4,
+      "session_id": "e0008-s10",
+      "minimum_margin": 1.4375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 6,
+      "session_id": "e0008-s09",
+      "minimum_margin": 0.8125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 8,
+      "session_id": "e0008-s02",
+      "minimum_margin": 0.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 15,
+      "session_id": "e0008-s00",
+      "minimum_margin": 0.1875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 15,
+      "session_id": "e0008-s07",
+      "minimum_margin": 4.93749978672713,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 17,
+      "session_id": "e0008-s00",
+      "minimum_margin": 0.8749999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 20,
+      "session_id": "e0008-s06",
+      "minimum_margin": 1.2500000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 21,
+      "session_id": "e0008-s00",
+      "minimum_margin": 2.9374999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 24,
+      "session_id": "e0008-s05",
+      "minimum_margin": 2.4687501043081284,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 26,
+      "session_id": "e0008-s07",
+      "minimum_margin": 0.7187499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 28,
+      "session_id": "e0008-s02",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 31,
+      "session_id": "e0008-s00",
+      "minimum_margin": 3.2500000670552254,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 41,
+      "session_id": "e0008-s09",
+      "minimum_margin": 3.0937499031424522,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 43,
+      "session_id": "e0008-s11",
+      "minimum_margin": 4.937499878928065,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 8,
+      "chunk_index": 46,
+      "session_id": "e0008-s07",
+      "minimum_margin": 1.2812500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 0,
+      "session_id": "e0009-s04",
+      "minimum_margin": 0.7656250596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 10,
+      "session_id": "e0009-s08",
+      "minimum_margin": 0.5625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 11,
+      "session_id": "e0009-s03",
+      "minimum_margin": 0.5625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 11,
+      "session_id": "e0009-s09",
+      "minimum_margin": 3.3593750074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 15,
+      "session_id": "e0009-s10",
+      "minimum_margin": 7.062500224041287,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 20,
+      "session_id": "e0009-s04",
+      "minimum_margin": 4.156249847263098,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 24,
+      "session_id": "e0009-s04",
+      "minimum_margin": 0.265625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 27,
+      "session_id": "e0009-s00",
+      "minimum_margin": 1.3124999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 33,
+      "session_id": "e0009-s06",
+      "minimum_margin": 2.5937501043081284,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 33,
+      "session_id": "e0009-s07",
+      "minimum_margin": 3.7812498826533556,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 33,
+      "session_id": "e0009-s10",
+      "minimum_margin": 5.218749946914613,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 40,
+      "session_id": "e0009-s11",
+      "minimum_margin": 0.6875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 44,
+      "session_id": "e0009-s06",
+      "minimum_margin": 1.9374999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 45,
+      "session_id": "e0009-s06",
+      "minimum_margin": 0.53125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 46,
+      "session_id": "e0009-s10",
+      "minimum_margin": 2.078125052154064,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 50,
+      "session_id": "e0009-s03",
+      "minimum_margin": 0.703125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 50,
+      "session_id": "e0009-s11",
+      "minimum_margin": 0.171875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 9,
+      "chunk_index": 56,
+      "session_id": "e0009-s02",
+      "minimum_margin": 0.4374999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 3,
+      "session_id": "e0010-s08",
+      "minimum_margin": 0.5937500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 5,
+      "session_id": "e0010-s11",
+      "minimum_margin": 3.3124999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 6,
+      "session_id": "e0010-s05",
+      "minimum_margin": 0.0625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 7,
+      "session_id": "e0010-s05",
+      "minimum_margin": 0.5937499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 12,
+      "session_id": "e0010-s05",
+      "minimum_margin": 1.625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 15,
+      "session_id": "e0010-s08",
+      "minimum_margin": 0.9687499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 18,
+      "session_id": "e0010-s06",
+      "minimum_margin": 0.46875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 24,
+      "session_id": "e0010-s01",
+      "minimum_margin": 2.4687499552965164,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 28,
+      "session_id": "e0010-s05",
+      "minimum_margin": 0.125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 32,
+      "session_id": "e0010-s10",
+      "minimum_margin": 1.0312499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 33,
+      "session_id": "e0010-s02",
+      "minimum_margin": 0.53125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 33,
+      "session_id": "e0010-s04",
+      "minimum_margin": 0.890625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 40,
+      "session_id": "e0010-s01",
+      "minimum_margin": 0.5624999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 10,
+      "chunk_index": 43,
+      "session_id": "e0010-s07",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 1,
+      "session_id": "e0011-s03",
+      "minimum_margin": 0.78125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 2,
+      "session_id": "e0011-s09",
+      "minimum_margin": 0.625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 3,
+      "session_id": "e0011-s03",
+      "minimum_margin": 1.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 4,
+      "session_id": "e0011-s08",
+      "minimum_margin": 1.9218751043081284,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 4,
+      "session_id": "e0011-s09",
+      "minimum_margin": 6.296874815132469,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 6,
+      "session_id": "e0011-s08",
+      "minimum_margin": 0.34375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 7,
+      "session_id": "e0011-s11",
+      "minimum_margin": 3.4062499031424522,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 8,
+      "session_id": "e0011-s07",
+      "minimum_margin": 0.5624999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 14,
+      "session_id": "e0011-s00",
+      "minimum_margin": 6.156250117113814,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 16,
+      "session_id": "e0011-s01",
+      "minimum_margin": 1.6093750298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 17,
+      "session_id": "e0011-s11",
+      "minimum_margin": 1.0625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 20,
+      "session_id": "e0011-s02",
+      "minimum_margin": 2.203124977648258,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 21,
+      "session_id": "e0011-s08",
+      "minimum_margin": 2.578125022351742,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 22,
+      "session_id": "e0011-s02",
+      "minimum_margin": 3.50000006146729,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 23,
+      "session_id": "e0011-s05",
+      "minimum_margin": 3.640624951571226,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 24,
+      "session_id": "e0011-s01",
+      "minimum_margin": 4.18750003632158,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 32,
+      "session_id": "e0011-s06",
+      "minimum_margin": 0.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 33,
+      "session_id": "e0011-s06",
+      "minimum_margin": 0.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 40,
+      "session_id": "e0011-s01",
+      "minimum_margin": 1.3437499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 41,
+      "session_id": "e0011-s05",
+      "minimum_margin": 2.6874998956918716,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 42,
+      "session_id": "e0011-s07",
+      "minimum_margin": 0.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 43,
+      "session_id": "e0011-s06",
+      "minimum_margin": 0.484375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 44,
+      "session_id": "e0011-s01",
+      "minimum_margin": 0.125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 44,
+      "session_id": "e0011-s10",
+      "minimum_margin": 2.7187500447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 46,
+      "session_id": "e0011-s03",
+      "minimum_margin": 3.8593749217689037,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 47,
+      "session_id": "e0011-s01",
+      "minimum_margin": 1.5312500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 11,
+      "chunk_index": 55,
+      "session_id": "e0011-s06",
+      "minimum_margin": 1.8124999850988388,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 5,
+      "session_id": "e0012-s10",
+      "minimum_margin": 0.53125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 15,
+      "session_id": "e0012-s09",
+      "minimum_margin": 2.953125011175871,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 16,
+      "session_id": "e0012-s06",
+      "minimum_margin": 8.343750088417437,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 18,
+      "session_id": "e0012-s09",
+      "minimum_margin": 2.9687499180436134,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 24,
+      "session_id": "e0012-s00",
+      "minimum_margin": 2.093750089406967,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 24,
+      "session_id": "e0012-s10",
+      "minimum_margin": 1.9843751043081284,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 26,
+      "session_id": "e0012-s11",
+      "minimum_margin": 0.359375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 31,
+      "session_id": "e0012-s07",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 31,
+      "session_id": "e0012-s10",
+      "minimum_margin": 1.078125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 32,
+      "session_id": "e0012-s08",
+      "minimum_margin": 0.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 45,
+      "session_id": "e0012-s03",
+      "minimum_margin": 1.1406249403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 45,
+      "session_id": "e0012-s08",
+      "minimum_margin": 0.265625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 52,
+      "session_id": "e0012-s11",
+      "minimum_margin": 0.125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 12,
+      "chunk_index": 56,
+      "session_id": "e0012-s02",
+      "minimum_margin": 2.4999999031424522,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 2,
+      "session_id": "e0013-s10",
+      "minimum_margin": 0.390625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 5,
+      "session_id": "e0013-s06",
+      "minimum_margin": 6.687499944353476,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 7,
+      "session_id": "e0013-s00",
+      "minimum_margin": 0.71875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 12,
+      "session_id": "e0013-s11",
+      "minimum_margin": 0.9687500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 26,
+      "session_id": "e0013-s07",
+      "minimum_margin": 2.3749999329447746,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 28,
+      "session_id": "e0013-s03",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 32,
+      "session_id": "e0013-s03",
+      "minimum_margin": 5.078125102445483,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 32,
+      "session_id": "e0013-s09",
+      "minimum_margin": 1.5937500447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 34,
+      "session_id": "e0013-s04",
+      "minimum_margin": 2.6562499180436134,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 38,
+      "session_id": "e0013-s04",
+      "minimum_margin": 0.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 41,
+      "session_id": "e0013-s03",
+      "minimum_margin": 4.484374822117388,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 50,
+      "session_id": "e0013-s00",
+      "minimum_margin": 4.500000162981451,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 51,
+      "session_id": "e0013-s04",
+      "minimum_margin": 0.5937499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 52,
+      "session_id": "e0013-s07",
+      "minimum_margin": 0.71875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 13,
+      "chunk_index": 57,
+      "session_id": "e0013-s10",
+      "minimum_margin": 1.9687500894069672,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 0,
+      "session_id": "e0014-s02",
+      "minimum_margin": 7.609374779101927,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 1,
+      "session_id": "e0014-s08",
+      "minimum_margin": 0.8124999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 5,
+      "session_id": "e0014-s01",
+      "minimum_margin": 1.15625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 5,
+      "session_id": "e0014-s07",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 7,
+      "session_id": "e0014-s07",
+      "minimum_margin": 1.9687499105930328,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 13,
+      "session_id": "e0014-s00",
+      "minimum_margin": 1.1250000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 13,
+      "session_id": "e0014-s08",
+      "minimum_margin": 1.4062500447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 18,
+      "session_id": "e0014-s02",
+      "minimum_margin": 0.4374999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 30,
+      "session_id": "e0014-s11",
+      "minimum_margin": 0.5624999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 35,
+      "session_id": "e0014-s03",
+      "minimum_margin": 1.0937499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 44,
+      "session_id": "e0014-s09",
+      "minimum_margin": 1.109375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 14,
+      "chunk_index": 56,
+      "session_id": "e0014-s07",
+      "minimum_margin": 7.281249880208634,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 3,
+      "session_id": "e0015-s03",
+      "minimum_margin": 0.046875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 5,
+      "session_id": "e0015-s02",
+      "minimum_margin": 0.7187499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 5,
+      "session_id": "e0015-s11",
+      "minimum_margin": 4.18750012293458,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 7,
+      "session_id": "e0015-s05",
+      "minimum_margin": 2.0624999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 8,
+      "session_id": "e0015-s02",
+      "minimum_margin": 0.34375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 11,
+      "session_id": "e0015-s06",
+      "minimum_margin": 3.0937501192092896,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 12,
+      "session_id": "e0015-s03",
+      "minimum_margin": 2.1250000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 21,
+      "session_id": "e0015-s10",
+      "minimum_margin": 0.15625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 37,
+      "session_id": "e0015-s04",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 42,
+      "session_id": "e0015-s07",
+      "minimum_margin": 0.7500000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 42,
+      "session_id": "e0015-s11",
+      "minimum_margin": 7.515624791791197,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 48,
+      "session_id": "e0015-s09",
+      "minimum_margin": 1.640625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 51,
+      "session_id": "e0015-s08",
+      "minimum_margin": 1.7500000149011612,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 56,
+      "session_id": "e0015-s00",
+      "minimum_margin": 1.9531250596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 15,
+      "chunk_index": 57,
+      "session_id": "e0015-s07",
+      "minimum_margin": 2.468749910593033,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 15,
+      "session_id": "e0016-s07",
+      "minimum_margin": 0.53125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 20,
+      "session_id": "e0016-s10",
+      "minimum_margin": 1.8750000894069672,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 21,
+      "session_id": "e0016-s06",
+      "minimum_margin": 7.578125019615982,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 23,
+      "session_id": "e0016-s00",
+      "minimum_margin": 1.1562500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 27,
+      "session_id": "e0016-s05",
+      "minimum_margin": 3.6562500167638063,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 31,
+      "session_id": "e0016-s00",
+      "minimum_margin": 2.8125000670552254,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 31,
+      "session_id": "e0016-s06",
+      "minimum_margin": 1.65625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 32,
+      "session_id": "e0016-s03",
+      "minimum_margin": 2.390625037252903,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 33,
+      "session_id": "e0016-s11",
+      "minimum_margin": 2.718749925494194,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 38,
+      "session_id": "e0016-s03",
+      "minimum_margin": 0.640625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 41,
+      "session_id": "e0016-s05",
+      "minimum_margin": 0.5937500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 44,
+      "session_id": "e0016-s01",
+      "minimum_margin": 1.4062499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 45,
+      "session_id": "e0016-s01",
+      "minimum_margin": 7.375000197731424,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 52,
+      "session_id": "e0016-s09",
+      "minimum_margin": 1.4218749701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 53,
+      "session_id": "e0016-s09",
+      "minimum_margin": 0.7500000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 53,
+      "session_id": "e0016-s10",
+      "minimum_margin": 5.875000182073563,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 16,
+      "chunk_index": 58,
+      "session_id": "e0016-s10",
+      "minimum_margin": 0.34375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 13,
+      "session_id": "e0017-s10",
+      "minimum_margin": 4.874999854713678,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 15,
+      "session_id": "e0017-s10",
+      "minimum_margin": 2.046875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 21,
+      "session_id": "e0017-s00",
+      "minimum_margin": 2.656250022351742,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 22,
+      "session_id": "e0017-s04",
+      "minimum_margin": 1.9062500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 23,
+      "session_id": "e0017-s08",
+      "minimum_margin": 0.421875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 24,
+      "session_id": "e0017-s00",
+      "minimum_margin": 1.921874925494194,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 33,
+      "session_id": "e0017-s00",
+      "minimum_margin": 3.374999988824129,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 36,
+      "session_id": "e0017-s00",
+      "minimum_margin": 0.5781250596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 42,
+      "session_id": "e0017-s07",
+      "minimum_margin": 3.1250000074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 44,
+      "session_id": "e0017-s02",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 50,
+      "session_id": "e0017-s11",
+      "minimum_margin": 0.0625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 17,
+      "chunk_index": 56,
+      "session_id": "e0017-s03",
+      "minimum_margin": 0.640625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 1,
+      "session_id": "e0018-s07",
+      "minimum_margin": 7.015625089930836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 1,
+      "session_id": "e0018-s08",
+      "minimum_margin": 4.328125035390258,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 6,
+      "session_id": "e0018-s01",
+      "minimum_margin": 0.7499999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 11,
+      "session_id": "e0018-s04",
+      "minimum_margin": 1.7031250447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 12,
+      "session_id": "e0018-s01",
+      "minimum_margin": 4.0312501434236765,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 16,
+      "session_id": "e0018-s05",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 20,
+      "session_id": "e0018-s09",
+      "minimum_margin": 2.093749925494194,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 23,
+      "session_id": "e0018-s03",
+      "minimum_margin": 1.1718749403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 25,
+      "session_id": "e0018-s05",
+      "minimum_margin": 0.59375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 31,
+      "session_id": "e0018-s09",
+      "minimum_margin": 3.437500100582838,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 33,
+      "session_id": "e0018-s10",
+      "minimum_margin": 0.8124999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 38,
+      "session_id": "e0018-s01",
+      "minimum_margin": 2.625000111758709,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 38,
+      "session_id": "e0018-s10",
+      "minimum_margin": 6.796875074971467,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 18,
+      "chunk_index": 42,
+      "session_id": "e0018-s11",
+      "minimum_margin": 1.8281249701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 5,
+      "session_id": "e0019-s05",
+      "minimum_margin": 0.6874999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 18,
+      "session_id": "e0019-s04",
+      "minimum_margin": 0.515625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 18,
+      "session_id": "e0019-s08",
+      "minimum_margin": 1.0937499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 30,
+      "session_id": "e0019-s00",
+      "minimum_margin": 0.5,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 32,
+      "session_id": "e0019-s01",
+      "minimum_margin": 0.59375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 33,
+      "session_id": "e0019-s00",
+      "minimum_margin": 1.5624999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 41,
+      "session_id": "e0019-s10",
+      "minimum_margin": 4.921874916180968,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 46,
+      "session_id": "e0019-s10",
+      "minimum_margin": 2.7343751043081284,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 51,
+      "session_id": "e0019-s04",
+      "minimum_margin": 0.3125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 51,
+      "session_id": "e0019-s11",
+      "minimum_margin": 3.5312499552965164,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 58,
+      "session_id": "e0019-s04",
+      "minimum_margin": 1.4374999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 19,
+      "chunk_index": 58,
+      "session_id": "e0019-s08",
+      "minimum_margin": 0.46875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 0,
+      "session_id": "e0020-s08",
+      "minimum_margin": 1.2187499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 2,
+      "session_id": "e0020-s02",
+      "minimum_margin": 3.6250000465661287,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 3,
+      "session_id": "e0020-s09",
+      "minimum_margin": 4.671874980442226,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 11,
+      "session_id": "e0020-s01",
+      "minimum_margin": 0.9375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 18,
+      "session_id": "e0020-s02",
+      "minimum_margin": 0.765625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 18,
+      "session_id": "e0020-s09",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 31,
+      "session_id": "e0020-s01",
+      "minimum_margin": 1.4687499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 33,
+      "session_id": "e0020-s04",
+      "minimum_margin": 0.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 34,
+      "session_id": "e0020-s06",
+      "minimum_margin": 5.031249829102308,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 37,
+      "session_id": "e0020-s06",
+      "minimum_margin": 1.125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 44,
+      "session_id": "e0020-s03",
+      "minimum_margin": 0.546875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 20,
+      "chunk_index": 57,
+      "session_id": "e0020-s04",
+      "minimum_margin": 0.9375000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 4,
+      "session_id": "e0021-s07",
+      "minimum_margin": 6.468749870778993,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 7,
+      "session_id": "e0021-s03",
+      "minimum_margin": 0.125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 7,
+      "session_id": "e0021-s08",
+      "minimum_margin": 1.0,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 14,
+      "session_id": "e0021-s09",
+      "minimum_margin": 2.812500026077032,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 31,
+      "session_id": "e0021-s03",
+      "minimum_margin": 0.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 46,
+      "session_id": "e0021-s09",
+      "minimum_margin": 1.0625000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 50,
+      "session_id": "e0021-s01",
+      "minimum_margin": 3.1874999180436134,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 52,
+      "session_id": "e0021-s04",
+      "minimum_margin": 2.4374998956918716,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 55,
+      "session_id": "e0021-s01",
+      "minimum_margin": 0.8281249403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 21,
+      "chunk_index": 57,
+      "session_id": "e0021-s00",
+      "minimum_margin": 1.3437500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 12,
+      "session_id": "e0022-s03",
+      "minimum_margin": 2.687499888241291,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 12,
+      "session_id": "e0022-s07",
+      "minimum_margin": 0.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 14,
+      "session_id": "e0022-s09",
+      "minimum_margin": 5.343750125728548,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 22,
+      "session_id": "e0022-s09",
+      "minimum_margin": 3.5312500428408384,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 25,
+      "session_id": "e0022-s03",
+      "minimum_margin": 0.125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 27,
+      "session_id": "e0022-s09",
+      "minimum_margin": 0.265625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 42,
+      "session_id": "e0022-s08",
+      "minimum_margin": 1.265625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 43,
+      "session_id": "e0022-s01",
+      "minimum_margin": 0.046875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 43,
+      "session_id": "e0022-s05",
+      "minimum_margin": 0.0625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 45,
+      "session_id": "e0022-s05",
+      "minimum_margin": 2.062499962747097,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 22,
+      "chunk_index": 54,
+      "session_id": "e0022-s01",
+      "minimum_margin": 1.1875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 1,
+      "session_id": "e0023-s10",
+      "minimum_margin": 0.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 15,
+      "session_id": "e0023-s08",
+      "minimum_margin": 1.9531250596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 17,
+      "session_id": "e0023-s03",
+      "minimum_margin": 1.2656250298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 22,
+      "session_id": "e0023-s04",
+      "minimum_margin": 3.687500098720193,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 26,
+      "session_id": "e0023-s06",
+      "minimum_margin": 2.234374947845936,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 28,
+      "session_id": "e0023-s11",
+      "minimum_margin": 5.625000124564394,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 34,
+      "session_id": "e0023-s11",
+      "minimum_margin": 2.5000000074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 42,
+      "session_id": "e0023-s09",
+      "minimum_margin": 1.5156250596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 46,
+      "session_id": "e0023-s04",
+      "minimum_margin": 3.1562500074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 23,
+      "chunk_index": 55,
+      "session_id": "e0023-s00",
+      "minimum_margin": 3.203124977648258,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 5,
+      "session_id": "e0024-s05",
+      "minimum_margin": 5.234375180210918,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 7,
+      "session_id": "e0024-s00",
+      "minimum_margin": 1.906249925494194,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 10,
+      "session_id": "e0024-s00",
+      "minimum_margin": 0.5624999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 17,
+      "session_id": "e0024-s03",
+      "minimum_margin": 2.59375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 25,
+      "session_id": "e0024-s07",
+      "minimum_margin": 1.90625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 26,
+      "session_id": "e0024-s10",
+      "minimum_margin": 0.5937500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 30,
+      "session_id": "e0024-s09",
+      "minimum_margin": 5.749999986030161,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 31,
+      "session_id": "e0024-s10",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 34,
+      "session_id": "e0024-s05",
+      "minimum_margin": 5.234374788589776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 41,
+      "session_id": "e0024-s06",
+      "minimum_margin": 0.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 43,
+      "session_id": "e0024-s09",
+      "minimum_margin": 0.7812500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 45,
+      "session_id": "e0024-s06",
+      "minimum_margin": 2.406250089406967,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 46,
+      "session_id": "e0024-s11",
+      "minimum_margin": 1.5624999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 48,
+      "session_id": "e0024-s01",
+      "minimum_margin": 0.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 24,
+      "chunk_index": 52,
+      "session_id": "e0024-s02",
+      "minimum_margin": 1.5312500149011612,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 25,
+      "chunk_index": 0,
+      "session_id": "e0025-s00",
+      "minimum_margin": 0.7187499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 25,
+      "chunk_index": 25,
+      "session_id": "e0025-s03",
+      "minimum_margin": 5.406250074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 25,
+      "chunk_index": 46,
+      "session_id": "e0025-s05",
+      "minimum_margin": 0.265625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 25,
+      "chunk_index": 47,
+      "session_id": "e0025-s11",
+      "minimum_margin": 0.5000000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 25,
+      "chunk_index": 57,
+      "session_id": "e0025-s09",
+      "minimum_margin": 0.6874999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 25,
+      "chunk_index": 58,
+      "session_id": "e0025-s07",
+      "minimum_margin": 0.5,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 26,
+      "chunk_index": 7,
+      "session_id": "e0026-s05",
+      "minimum_margin": 0.5000000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 26,
+      "chunk_index": 8,
+      "session_id": "e0026-s02",
+      "minimum_margin": 0.5000000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 26,
+      "chunk_index": 45,
+      "session_id": "e0026-s02",
+      "minimum_margin": 5.031250163912773,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 26,
+      "chunk_index": 50,
+      "session_id": "e0026-s11",
+      "minimum_margin": 2.6875000819563866,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 2,
+      "session_id": "e0027-s00",
+      "minimum_margin": 1.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 2,
+      "session_id": "e0027-s01",
+      "minimum_margin": 0.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 4,
+      "session_id": "e0027-s06",
+      "minimum_margin": 5.375000134110451,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 11,
+      "session_id": "e0027-s04",
+      "minimum_margin": 0.3125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 15,
+      "session_id": "e0027-s06",
+      "minimum_margin": 1.0156249403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 16,
+      "session_id": "e0027-s02",
+      "minimum_margin": 0.59375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 17,
+      "session_id": "e0027-s09",
+      "minimum_margin": 1.8125000149011612,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 33,
+      "session_id": "e0027-s03",
+      "minimum_margin": 2.7499999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 34,
+      "session_id": "e0027-s04",
+      "minimum_margin": 6.5781250591389835,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 42,
+      "session_id": "e0027-s00",
+      "minimum_margin": 8.796875150146661,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 43,
+      "session_id": "e0027-s09",
+      "minimum_margin": 0.15625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 50,
+      "session_id": "e0027-s06",
+      "minimum_margin": 0.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 52,
+      "session_id": "e0027-s07",
+      "minimum_margin": 0.0625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 27,
+      "chunk_index": 58,
+      "session_id": "e0027-s03",
+      "minimum_margin": 1.6562500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 11,
+      "session_id": "e0028-s02",
+      "minimum_margin": 1.5781250447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 12,
+      "session_id": "e0028-s05",
+      "minimum_margin": 0.78125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 12,
+      "session_id": "e0028-s11",
+      "minimum_margin": 0.0625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 13,
+      "session_id": "e0028-s08",
+      "minimum_margin": 1.90625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 14,
+      "session_id": "e0028-s00",
+      "minimum_margin": 0.265625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 14,
+      "session_id": "e0028-s08",
+      "minimum_margin": 2.515625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 24,
+      "session_id": "e0028-s00",
+      "minimum_margin": 4.468749894760549,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 31,
+      "session_id": "e0028-s08",
+      "minimum_margin": 1.5312499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 42,
+      "session_id": "e0028-s01",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 45,
+      "session_id": "e0028-s06",
+      "minimum_margin": 2.687500052154064,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 50,
+      "session_id": "e0028-s00",
+      "minimum_margin": 1.5468750596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 50,
+      "session_id": "e0028-s02",
+      "minimum_margin": 2.8593750558793545,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 28,
+      "chunk_index": 51,
+      "session_id": "e0028-s11",
+      "minimum_margin": 0.6562499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 0,
+      "session_id": "e0029-s01",
+      "minimum_margin": 5.531250089406967,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 3,
+      "session_id": "e0029-s00",
+      "minimum_margin": 3.0156250409781933,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 5,
+      "session_id": "e0029-s05",
+      "minimum_margin": 0.5937499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 6,
+      "session_id": "e0029-s11",
+      "minimum_margin": 1.7500000149011612,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 8,
+      "session_id": "e0029-s02",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 16,
+      "session_id": "e0029-s08",
+      "minimum_margin": 0.6249999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 18,
+      "session_id": "e0029-s11",
+      "minimum_margin": 2.218749888241291,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 36,
+      "session_id": "e0029-s07",
+      "minimum_margin": 6.6093751195585355,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 37,
+      "session_id": "e0029-s10",
+      "minimum_margin": 3.3125000707805157,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 53,
+      "session_id": "e0029-s06",
+      "minimum_margin": 0.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 54,
+      "session_id": "e0029-s11",
+      "minimum_margin": 3.9843749310821295,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 56,
+      "session_id": "e0029-s10",
+      "minimum_margin": 0.0625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 29,
+      "chunk_index": 57,
+      "session_id": "e0029-s08",
+      "minimum_margin": 3.624999899417162,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 5,
+      "session_id": "e0030-s01",
+      "minimum_margin": 3.8124999944120646,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 7,
+      "session_id": "e0030-s01",
+      "minimum_margin": 0.59375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 11,
+      "session_id": "e0030-s01",
+      "minimum_margin": 1.0312500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 11,
+      "session_id": "e0030-s09",
+      "minimum_margin": 0.9374999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 12,
+      "session_id": "e0030-s09",
+      "minimum_margin": 0.046875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 20,
+      "session_id": "e0030-s05",
+      "minimum_margin": 3.7031249590218067,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 20,
+      "session_id": "e0030-s09",
+      "minimum_margin": 0.078125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 22,
+      "session_id": "e0030-s01",
+      "minimum_margin": 2.0312499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 28,
+      "session_id": "e0030-s09",
+      "minimum_margin": 2.656249977648258,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 33,
+      "session_id": "e0030-s03",
+      "minimum_margin": 0.9531250298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 41,
+      "session_id": "e0030-s02",
+      "minimum_margin": 1.2187499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 43,
+      "session_id": "e0030-s07",
+      "minimum_margin": 2.6875001043081284,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 44,
+      "session_id": "e0030-s01",
+      "minimum_margin": 1.3125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 51,
+      "session_id": "e0030-s04",
+      "minimum_margin": 1.9218750596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 51,
+      "session_id": "e0030-s08",
+      "minimum_margin": 6.265624986379407,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 30,
+      "chunk_index": 52,
+      "session_id": "e0030-s04",
+      "minimum_margin": 2.062499910593033,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 2,
+      "session_id": "e0031-s06",
+      "minimum_margin": 0.7500000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 7,
+      "session_id": "e0031-s10",
+      "minimum_margin": 2.750000037252903,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 14,
+      "session_id": "e0031-s05",
+      "minimum_margin": 5.468749771825969,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 17,
+      "session_id": "e0031-s10",
+      "minimum_margin": 3.578125013038516,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 21,
+      "session_id": "e0031-s02",
+      "minimum_margin": 0.4999999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 21,
+      "session_id": "e0031-s09",
+      "minimum_margin": 0.828125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 22,
+      "session_id": "e0031-s01",
+      "minimum_margin": 0.53125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 32,
+      "session_id": "e0031-s07",
+      "minimum_margin": 0.75,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 35,
+      "session_id": "e0031-s06",
+      "minimum_margin": 0.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 42,
+      "session_id": "e0031-s03",
+      "minimum_margin": 0.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 48,
+      "session_id": "e0031-s10",
+      "minimum_margin": 0.4375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 54,
+      "session_id": "e0031-s01",
+      "minimum_margin": 1.6718749701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 31,
+      "chunk_index": 54,
+      "session_id": "e0031-s09",
+      "minimum_margin": 1.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 32,
+      "chunk_index": 12,
+      "session_id": "e0032-s04",
+      "minimum_margin": 1.3437499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 32,
+      "chunk_index": 16,
+      "session_id": "e0032-s05",
+      "minimum_margin": 0.84375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 32,
+      "chunk_index": 30,
+      "session_id": "e0032-s01",
+      "minimum_margin": 0.5624999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 32,
+      "chunk_index": 30,
+      "session_id": "e0032-s11",
+      "minimum_margin": 3.265624925494194,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 32,
+      "chunk_index": 32,
+      "session_id": "e0032-s10",
+      "minimum_margin": 3.6718749925494194,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 32,
+      "chunk_index": 38,
+      "session_id": "e0032-s11",
+      "minimum_margin": 0.34375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 32,
+      "chunk_index": 48,
+      "session_id": "e0032-s02",
+      "minimum_margin": 3.484375014901161,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 1,
+      "session_id": "e0033-s03",
+      "minimum_margin": 5.828125165076926,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 1,
+      "session_id": "e0033-s06",
+      "minimum_margin": 0.046875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 11,
+      "session_id": "e0033-s07",
+      "minimum_margin": 0.5937500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 17,
+      "session_id": "e0033-s04",
+      "minimum_margin": 0.9218750596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 24,
+      "session_id": "e0033-s01",
+      "minimum_margin": 0.6718749403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 30,
+      "session_id": "e0033-s02",
+      "minimum_margin": 1.796875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 30,
+      "session_id": "e0033-s07",
+      "minimum_margin": 4.624999890103936,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 31,
+      "session_id": "e0033-s11",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 33,
+      "session_id": "e0033-s08",
+      "minimum_margin": 0.24999994039535522,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 34,
+      "session_id": "e0033-s04",
+      "minimum_margin": 3.0000000335276127,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 34,
+      "session_id": "e0033-s11",
+      "minimum_margin": 0.6562500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 36,
+      "session_id": "e0033-s10",
+      "minimum_margin": 2.156250074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 46,
+      "session_id": "e0033-s00",
+      "minimum_margin": 1.1562500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 48,
+      "session_id": "e0033-s04",
+      "minimum_margin": 4.156250080093741,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 53,
+      "session_id": "e0033-s04",
+      "minimum_margin": 2.6874999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 54,
+      "session_id": "e0033-s01",
+      "minimum_margin": 6.406250191037543,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 57,
+      "session_id": "e0033-s02",
+      "minimum_margin": 1.968750074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 33,
+      "chunk_index": 58,
+      "session_id": "e0033-s09",
+      "minimum_margin": 6.875000113737769,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 2,
+      "session_id": "e0034-s04",
+      "minimum_margin": 5.468750209547579,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 4,
+      "session_id": "e0034-s05",
+      "minimum_margin": 0.4687499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 14,
+      "session_id": "e0034-s02",
+      "minimum_margin": 5.250000177882612,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 22,
+      "session_id": "e0034-s00",
+      "minimum_margin": 1.4218750596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 24,
+      "session_id": "e0034-s03",
+      "minimum_margin": 2.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 30,
+      "session_id": "e0034-s11",
+      "minimum_margin": 5.359374762978405,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 34,
+      "session_id": "e0034-s01",
+      "minimum_margin": 3.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 36,
+      "session_id": "e0034-s03",
+      "minimum_margin": 1.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 41,
+      "session_id": "e0034-s05",
+      "minimum_margin": 1.5937499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 43,
+      "session_id": "e0034-s06",
+      "minimum_margin": 1.6874999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 50,
+      "session_id": "e0034-s02",
+      "minimum_margin": 3.6718749031424522,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 34,
+      "chunk_index": 51,
+      "session_id": "e0034-s07",
+      "minimum_margin": 0.8125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 5,
+      "session_id": "e0035-s09",
+      "minimum_margin": 1.9375000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 10,
+      "session_id": "e0035-s09",
+      "minimum_margin": 5.296875197440386,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 17,
+      "session_id": "e0035-s00",
+      "minimum_margin": 3.1875001080334187,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 18,
+      "session_id": "e0035-s06",
+      "minimum_margin": 2.0,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 21,
+      "session_id": "e0035-s11",
+      "minimum_margin": 1.5312499850988388,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 24,
+      "session_id": "e0035-s00",
+      "minimum_margin": 1.6250000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 25,
+      "session_id": "e0035-s00",
+      "minimum_margin": 0.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 26,
+      "session_id": "e0035-s07",
+      "minimum_margin": 0.34375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 28,
+      "session_id": "e0035-s08",
+      "minimum_margin": 8.06250033172546,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 34,
+      "session_id": "e0035-s10",
+      "minimum_margin": 2.9999999068677425,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 36,
+      "session_id": "e0035-s05",
+      "minimum_margin": 0.15625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 41,
+      "session_id": "e0035-s04",
+      "minimum_margin": 0.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 47,
+      "session_id": "e0035-s09",
+      "minimum_margin": 1.5312500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 53,
+      "session_id": "e0035-s01",
+      "minimum_margin": 2.5624999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 53,
+      "session_id": "e0035-s02",
+      "minimum_margin": 3.5937500670552254,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 53,
+      "session_id": "e0035-s09",
+      "minimum_margin": 2.843749936670065,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 55,
+      "session_id": "e0035-s09",
+      "minimum_margin": 1.6249999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 58,
+      "session_id": "e0035-s01",
+      "minimum_margin": 1.0312499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 35,
+      "chunk_index": 58,
+      "session_id": "e0035-s05",
+      "minimum_margin": 2.531250022351742,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 2,
+      "session_id": "e0036-s02",
+      "minimum_margin": 1.5312499850988388,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 7,
+      "session_id": "e0036-s01",
+      "minimum_margin": 1.0312499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 10,
+      "session_id": "e0036-s09",
+      "minimum_margin": 6.218749893363565,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 12,
+      "session_id": "e0036-s05",
+      "minimum_margin": 1.9531249403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 18,
+      "session_id": "e0036-s08",
+      "minimum_margin": 0.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 21,
+      "session_id": "e0036-s00",
+      "minimum_margin": 1.1250000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 24,
+      "session_id": "e0036-s07",
+      "minimum_margin": 6.062499984400347,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 28,
+      "session_id": "e0036-s05",
+      "minimum_margin": 0.3125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 36,
+      "session_id": "e0036-s09",
+      "minimum_margin": 1.375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 36,
+      "session_id": "e0036-s11",
+      "minimum_margin": 3.375000022351742,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 37,
+      "session_id": "e0036-s10",
+      "minimum_margin": 1.5937501192092896,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 43,
+      "session_id": "e0036-s04",
+      "minimum_margin": 2.187500089406967,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 46,
+      "session_id": "e0036-s09",
+      "minimum_margin": 1.2499999403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 36,
+      "chunk_index": 52,
+      "session_id": "e0036-s10",
+      "minimum_margin": 6.390625028172508,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 10,
+      "session_id": "e0037-s04",
+      "minimum_margin": 0.15625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 11,
+      "session_id": "e0037-s05",
+      "minimum_margin": 1.1562500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 13,
+      "session_id": "e0037-s09",
+      "minimum_margin": 0.7187500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 16,
+      "session_id": "e0037-s00",
+      "minimum_margin": 0.7187500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 17,
+      "session_id": "e0037-s07",
+      "minimum_margin": 2.9375000037252903,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 18,
+      "session_id": "e0037-s05",
+      "minimum_margin": 0.625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 18,
+      "session_id": "e0037-s09",
+      "minimum_margin": 2.6874999031424522,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 22,
+      "session_id": "e0037-s03",
+      "minimum_margin": 4.4687499003484845,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 25,
+      "session_id": "e0037-s07",
+      "minimum_margin": 0.046875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 27,
+      "session_id": "e0037-s07",
+      "minimum_margin": 0.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 28,
+      "session_id": "e0037-s00",
+      "minimum_margin": 4.046875046566129,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 36,
+      "session_id": "e0037-s05",
+      "minimum_margin": 5.656250011175871,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 40,
+      "session_id": "e0037-s11",
+      "minimum_margin": 2.9687500447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 45,
+      "session_id": "e0037-s09",
+      "minimum_margin": 0.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 53,
+      "session_id": "e0037-s07",
+      "minimum_margin": 2.5624999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 56,
+      "session_id": "e0037-s09",
+      "minimum_margin": 1.0937499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 37,
+      "chunk_index": 58,
+      "session_id": "e0037-s02",
+      "minimum_margin": 2.2656249701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 2,
+      "session_id": "e0038-s04",
+      "minimum_margin": 0.40625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 12,
+      "session_id": "e0038-s06",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 15,
+      "session_id": "e0038-s10",
+      "minimum_margin": 0.109375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 20,
+      "session_id": "e0038-s00",
+      "minimum_margin": 2.249999910593033,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 20,
+      "session_id": "e0038-s01",
+      "minimum_margin": 4.499999966472387,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 25,
+      "session_id": "e0038-s03",
+      "minimum_margin": 2.656250052154064,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 27,
+      "session_id": "e0038-s00",
+      "minimum_margin": 2.187499985098839,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 33,
+      "session_id": "e0038-s00",
+      "minimum_margin": 5.312499834224582,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 33,
+      "session_id": "e0038-s05",
+      "minimum_margin": 2.1250000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 33,
+      "session_id": "e0038-s06",
+      "minimum_margin": 0.8125000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 37,
+      "session_id": "e0038-s07",
+      "minimum_margin": 0.5,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 40,
+      "session_id": "e0038-s01",
+      "minimum_margin": 2.2187500074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 44,
+      "session_id": "e0038-s05",
+      "minimum_margin": 1.8750000447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 38,
+      "chunk_index": 57,
+      "session_id": "e0038-s08",
+      "minimum_margin": 0.5625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 22,
+      "session_id": "e0039-s04",
+      "minimum_margin": 4.718749783933163,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 26,
+      "session_id": "e0039-s02",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 38,
+      "session_id": "e0039-s06",
+      "minimum_margin": 3.093749910593033,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 38,
+      "session_id": "e0039-s07",
+      "minimum_margin": 1.1874999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 48,
+      "session_id": "e0039-s01",
+      "minimum_margin": 0.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 54,
+      "session_id": "e0039-s00",
+      "minimum_margin": 2.343749985098839,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 54,
+      "session_id": "e0039-s05",
+      "minimum_margin": 2.624999947845936,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 55,
+      "session_id": "e0039-s06",
+      "minimum_margin": 2.109375022351742,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 55,
+      "session_id": "e0039-s11",
+      "minimum_margin": 0.5,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 39,
+      "chunk_index": 58,
+      "session_id": "e0039-s09",
+      "minimum_margin": 0.9062499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 0,
+      "session_id": "e0040-s08",
+      "minimum_margin": 1.6875001192092896,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 16,
+      "session_id": "e0040-s03",
+      "minimum_margin": 0.9062500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 16,
+      "session_id": "e0040-s06",
+      "minimum_margin": 5.093749866820872,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 22,
+      "session_id": "e0040-s09",
+      "minimum_margin": 1.3437499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 23,
+      "session_id": "e0040-s08",
+      "minimum_margin": 1.1562500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 26,
+      "session_id": "e0040-s02",
+      "minimum_margin": 5.468749838881195,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 26,
+      "session_id": "e0040-s11",
+      "minimum_margin": 4.21874984819442,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 32,
+      "session_id": "e0040-s11",
+      "minimum_margin": 2.406250014901161,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 47,
+      "session_id": "e0040-s04",
+      "minimum_margin": 5.156249974388629,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 40,
+      "chunk_index": 57,
+      "session_id": "e0040-s00",
+      "minimum_margin": 0.9218750298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 1,
+      "session_id": "e0041-s03",
+      "minimum_margin": 6.656249995343387,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 2,
+      "session_id": "e0041-s03",
+      "minimum_margin": 3.375000014901161,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 11,
+      "session_id": "e0041-s03",
+      "minimum_margin": 1.4375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 13,
+      "session_id": "e0041-s11",
+      "minimum_margin": 0.1875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 18,
+      "session_id": "e0041-s11",
+      "minimum_margin": 0.53125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 22,
+      "session_id": "e0041-s03",
+      "minimum_margin": 0.1875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 22,
+      "session_id": "e0041-s08",
+      "minimum_margin": 2.4999998956918716,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 41,
+      "session_id": "e0041-s06",
+      "minimum_margin": 9.421874884399585,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 46,
+      "session_id": "e0041-s11",
+      "minimum_margin": 2.1874999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 47,
+      "session_id": "e0041-s07",
+      "minimum_margin": 0.125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 50,
+      "session_id": "e0041-s02",
+      "minimum_margin": 4.734374961815774,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 50,
+      "session_id": "e0041-s04",
+      "minimum_margin": 1.1562499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 51,
+      "session_id": "e0041-s03",
+      "minimum_margin": 1.7187500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 41,
+      "chunk_index": 55,
+      "session_id": "e0041-s03",
+      "minimum_margin": 2.4375000447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 42,
+      "chunk_index": 5,
+      "session_id": "e0042-s09",
+      "minimum_margin": 0.09375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 42,
+      "chunk_index": 16,
+      "session_id": "e0042-s09",
+      "minimum_margin": 0.9062500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 42,
+      "chunk_index": 24,
+      "session_id": "e0042-s09",
+      "minimum_margin": 0.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 42,
+      "chunk_index": 34,
+      "session_id": "e0042-s10",
+      "minimum_margin": 3.7187500167638063,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 42,
+      "chunk_index": 38,
+      "session_id": "e0042-s10",
+      "minimum_margin": 3.2968750074505806,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 42,
+      "chunk_index": 42,
+      "session_id": "e0042-s05",
+      "minimum_margin": 1.046875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 42,
+      "chunk_index": 47,
+      "session_id": "e0042-s06",
+      "minimum_margin": 0.28125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 42,
+      "chunk_index": 53,
+      "session_id": "e0042-s06",
+      "minimum_margin": 2.687500014901161,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 42,
+      "chunk_index": 53,
+      "session_id": "e0042-s08",
+      "minimum_margin": 1.3281249701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 0,
+      "session_id": "e0043-s05",
+      "minimum_margin": 0.265625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 6,
+      "session_id": "e0043-s05",
+      "minimum_margin": 1.71875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 8,
+      "session_id": "e0043-s00",
+      "minimum_margin": 6.078125192783773,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 14,
+      "session_id": "e0043-s05",
+      "minimum_margin": 1.5312499552965164,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 16,
+      "session_id": "e0043-s07",
+      "minimum_margin": 3.124999985098839,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 21,
+      "session_id": "e0043-s01",
+      "minimum_margin": 5.875000162050128,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 22,
+      "session_id": "e0043-s02",
+      "minimum_margin": 0.8750000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 27,
+      "session_id": "e0043-s03",
+      "minimum_margin": 7.687500184169039,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 28,
+      "session_id": "e0043-s11",
+      "minimum_margin": 4.406250204890966,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 30,
+      "session_id": "e0043-s04",
+      "minimum_margin": 1.2343749403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 31,
+      "session_id": "e0043-s10",
+      "minimum_margin": 1.1874999701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 32,
+      "session_id": "e0043-s09",
+      "minimum_margin": 0.5781250596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 33,
+      "session_id": "e0043-s09",
+      "minimum_margin": 1.2968749701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 35,
+      "session_id": "e0043-s06",
+      "minimum_margin": 1.1562499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 36,
+      "session_id": "e0043-s01",
+      "minimum_margin": 0.109375,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 40,
+      "session_id": "e0043-s07",
+      "minimum_margin": 1.0937499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 42,
+      "session_id": "e0043-s02",
+      "minimum_margin": 1.5312500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 42,
+      "session_id": "e0043-s09",
+      "minimum_margin": 0.25,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 46,
+      "session_id": "e0043-s09",
+      "minimum_margin": 2.9687500968575478,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 50,
+      "session_id": "e0043-s00",
+      "minimum_margin": 1.8125000149011612,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 50,
+      "session_id": "e0043-s06",
+      "minimum_margin": 0.921875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 43,
+      "chunk_index": 53,
+      "session_id": "e0043-s09",
+      "minimum_margin": 6.656250107684173,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 10,
+      "session_id": "e0044-s03",
+      "minimum_margin": 5.609374904073775,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 16,
+      "session_id": "e0044-s01",
+      "minimum_margin": 4.484374888241291,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 17,
+      "session_id": "e0044-s00",
+      "minimum_margin": 1.3125000298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 21,
+      "session_id": "e0044-s07",
+      "minimum_margin": 3.8749999292194843,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 34,
+      "session_id": "e0044-s01",
+      "minimum_margin": 5.218749888706952,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 41,
+      "session_id": "e0044-s01",
+      "minimum_margin": 1.96875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 42,
+      "session_id": "e0044-s00",
+      "minimum_margin": 2.6562500298023224,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 43,
+      "session_id": "e0044-s05",
+      "minimum_margin": 0.7812499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 51,
+      "session_id": "e0044-s01",
+      "minimum_margin": 0.90625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 55,
+      "session_id": "e0044-s07",
+      "minimum_margin": 1.140625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 44,
+      "chunk_index": 55,
+      "session_id": "e0044-s08",
+      "minimum_margin": 2.0156250447034836,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 45,
+      "chunk_index": 17,
+      "session_id": "e0045-s04",
+      "minimum_margin": 4.609375027939677,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 45,
+      "chunk_index": 17,
+      "session_id": "e0045-s09",
+      "minimum_margin": 2.8124999552965164,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 45,
+      "chunk_index": 18,
+      "session_id": "e0045-s08",
+      "minimum_margin": 0.21875,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 45,
+      "chunk_index": 21,
+      "session_id": "e0045-s11",
+      "minimum_margin": 4.984374976716936,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 45,
+      "chunk_index": 26,
+      "session_id": "e0045-s01",
+      "minimum_margin": 4.031249897554517,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 45,
+      "chunk_index": 37,
+      "session_id": "e0045-s01",
+      "minimum_margin": 5.515625138767064,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 45,
+      "chunk_index": 47,
+      "session_id": "e0045-s11",
+      "minimum_margin": 0.6562500596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 45,
+      "chunk_index": 53,
+      "session_id": "e0045-s05",
+      "minimum_margin": 1.9687501043081284,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 46,
+      "chunk_index": 4,
+      "session_id": "e0046-s09",
+      "minimum_margin": 5.437499814201146,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 46,
+      "chunk_index": 20,
+      "session_id": "e0046-s04",
+      "minimum_margin": 1.5312499403953552,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 46,
+      "chunk_index": 31,
+      "session_id": "e0046-s04",
+      "minimum_margin": 3.4687498845160007,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 46,
+      "chunk_index": 37,
+      "session_id": "e0046-s10",
+      "minimum_margin": 1.7187499552965164,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 46,
+      "chunk_index": 42,
+      "session_id": "e0046-s03",
+      "minimum_margin": 1.765625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 46,
+      "chunk_index": 48,
+      "session_id": "e0046-s05",
+      "minimum_margin": 2.515625052154064,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 46,
+      "chunk_index": 53,
+      "session_id": "e0046-s10",
+      "minimum_margin": 6.57812492409721,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 1,
+      "session_id": "e0047-s09",
+      "minimum_margin": 3.906249912455678,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 6,
+      "session_id": "e0047-s06",
+      "minimum_margin": 1.3124999552965164,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 11,
+      "session_id": "e0047-s11",
+      "minimum_margin": 1.125,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 22,
+      "session_id": "e0047-s07",
+      "minimum_margin": 1.3750000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 30,
+      "session_id": "e0047-s04",
+      "minimum_margin": 3.421875089406967,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 30,
+      "session_id": "e0047-s08",
+      "minimum_margin": 0.5937499701976776,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 38,
+      "session_id": "e0047-s04",
+      "minimum_margin": 3.3124999329447746,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 38,
+      "session_id": "e0047-s05",
+      "minimum_margin": 2.218750052154064,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 51,
+      "session_id": "e0047-s11",
+      "minimum_margin": 1.4843749850988388,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 52,
+      "session_id": "e0047-s07",
+      "minimum_margin": 1.6875000149011612,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 54,
+      "session_id": "e0047-s00",
+      "minimum_margin": 1.7500000596046448,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 55,
+      "session_id": "e0047-s00",
+      "minimum_margin": 0.265625,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    },
+    {
+      "episode": 47,
+      "chunk_index": 56,
+      "session_id": "e0047-s02",
+      "minimum_margin": 4.390625108033419,
+      "output_error": false,
+      "state_error": false,
+      "lane": "gpu1_singleton"
+    }
+  ],
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3090, GPU-ef01d441-985f-50b3-6e64-5d4c3e2def3a, 570.133.07\n1, NVIDIA GeForce RTX 3090, GPU-a696ce9a-7137-cf6f-b4d3-deb992a72f28, 570.133.07",
+    "code_commit": "C0_C6_CLOSURE",
+    "runner_sha256": "f9a33a1aa38bdc2ddcdb48758d6493e50aa6279675be10457376744ece3ad859"
+  },
+  "claim_boundaries": [
+    "The time-uniform risk statement uses independent fixed-probability base-audit coins; revision events themselves need not be iid.",
+    "Post-stage replay is not used to construct the formal risk bound.",
+    "This is a statistical state-disagreement contract relative to the frozen canonical runtime, not deterministic arithmetic proof.",
+    "The audit is diagnostic evidence and is not a service-latency run."
+  ]
+}

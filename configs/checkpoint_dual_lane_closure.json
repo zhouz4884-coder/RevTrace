@@ -1,0 +1,57 @@
+{
+  "experiment_id": "CHECKPOINT-DUAL-LANE-CLOSURE-20260730",
+  "model": "Qwen3-ASR-0.6B",
+  "duration_seconds": 120,
+  "checkpoint_seconds": 30,
+  "concurrency": 12,
+  "dtype": "float16",
+  "checkpoint_payload": "terminal_state_projection_v1",
+  "intermediate_authority": "dual_singleton_gpu0_gpu1_v1",
+  "terminal_authority": "gpu1_fixed_b12",
+  "cross_lane_gate": {
+    "pairs": 720,
+    "required_token_mismatches": 0,
+    "required_text_mismatches": 0,
+    "required_state_projection_mismatches": 0,
+    "gpu0_engine_logprobs": 20,
+    "gpu0_singleton_logprobs": null,
+    "gpu1_singleton_logprobs": null,
+    "gpu0_batch_invariant_runtime": true,
+    "gpu1_batch_invariant_runtime": true
+  },
+  "risk_audit": {
+    "target_eligible_entries": 30000,
+    "base_audit_probability": 0.021,
+    "alpha": 0.05,
+    "maximum_upper_risk": 0.005,
+    "method": "fixed-probability mixture e-process inversion"
+  },
+  "five_seed_gate": {
+    "seeds": [
+      20260811,
+      20260812,
+      20260813,
+      20260814,
+      20260815
+    ],
+    "maximum_seed_p99_seconds": 1.9,
+    "maximum_deadline_miss_events": 0,
+    "maximum_authority_violations": 0
+  },
+  "quality_gate": {
+    "sessions_per_language": 16,
+    "languages": [
+      "English",
+      "Chinese"
+    ],
+    "maximum_mean_primary_error_delta": 0.02,
+    "maximum_catastrophic_outliers": 0,
+    "paired_bootstrap_replicates": 10000
+  },
+  "claim_boundaries": [
+    "Post-stage replay is an observed dependent trace and is not assigned an iid Clopper-Pearson population bound.",
+    "Cross-lane compatibility is scoped to the frozen hardware and runtime fingerprint.",
+    "The formal risk statement is statistical rather than deterministic arithmetic equivalence.",
+    "All five frozen seeds are included in the final decision."
+  ]
+}

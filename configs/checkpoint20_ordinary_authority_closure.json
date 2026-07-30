@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "contract_name": "checkpoint20_ordinary_proposer_gpu1_singleton_authority_v1",
+  "duration_seconds": 120,
+  "checkpoint_seconds": 20,
+  "concurrency": 12,
+  "proposer": {
+    "dtype": "float16",
+    "batch_invariant_runtime": false,
+    "gpu": 0
+  },
+  "intermediate_authority": {
+    "policy": "gpu1_singleton_v1",
+    "dtype": "float16",
+    "batch_invariant_runtime": true,
+    "gpu": 1
+  },
+  "terminal_authority": {
+    "policy": "gpu1_fixed_b12",
+    "dtype": "float16",
+    "batch_invariant_runtime": true,
+    "gpu": 1
+  },
+  "checkpoint_payload": "terminal_state_projection_v1",
+  "adaptation_failure_floor": 0.03125,
+  "freeze_gates": {
+    "maximum_seed_p99_seconds": 1.9,
+    "deadline_miss_events": 0,
+    "maximum_time_uniform_state_risk": 0.005,
+    "authority_violations": 0,
+    "minimum_quality_sessions_per_language": 16
+  },
+  "claim_boundary": [
+    "The 0.03125 failure floor is adaptation evidence from the exact contract, not held-out evidence.",
+    "The randomized base audit supplies the formal time-uniform risk statement; post-stage replay is observed evidence only.",
+    "The dual-lane batch-invariant contract is retained as a negative causal ablation because its proposer tax dominated rare two-request verification bursts."
+  ]
+}

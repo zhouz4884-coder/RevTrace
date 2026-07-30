@@ -301,6 +301,39 @@ certificate. See the
 [collision matrix](docs/research/phase7_related_work_collision_matrix.md), and
 [paper tables](results/phase7/PAPER_TABLES.md).
 
+### Checkpoint-20 long-horizon tail closure
+
+`CHECKPOINT20_HOLDBACK_FINAL_PASS`
+
+The repaired long-horizon contract keeps low-margin nonterminal output
+provisional instead of synchronously selecting it as textual feedback state.
+Every 20 seconds, a fixed-B=12 FP16 canonical checkpoint reconstructs the
+authoritative segment; terminal revisions use the same canonical authority.
+This removes the rare singleton-verification stall that caused the earlier
+120-second tail regression without calling the provisional candidate exact.
+
+Across five frozen 120-second seeds (3,600 state-entry events), the worst
+per-session event P99 is 1.414 seconds, total deadline misses are zero, and
+online selection-authority violations are zero. The service verifies 10% of
+events and holds back 61 low-margin provisional candidates. A separate
+pre-outcome randomized audit covers 30,423 admitted high-margin state entries
+and yields a 95% time-uniform state-risk UCB of 0.4733%.
+
+The paired natural quality gate uses 16 English and 16 Chinese sessions.
+Observed mean deltas are +1.451 percentage points WER and +1.760 percentage
+points CER, with zero catastrophic outliers. Both observed means pass the
+pre-registered 2-point gate, but their bootstrap upper bounds exceed two
+points; this is not a population-equivalence or deterministic-exactness claim.
+The failed two-episode calibration is retained: it showed that the original
+split did not provide enough admitted validation events and contaminated the
+held-out service stage with fail-closed verification. The repaired calibration
+uses three episodes and freezes the threshold before held-out execution.
+
+See the
+[checkpoint-20 closure report](docs/reports/checkpoint20_holdback_closure.md),
+[protocol](docs/protocols/checkpoint20_holdback_authority_closure.md), and
+[machine-readable summary](results/checkpoint20_holdback_authority/final_summary.json).
+
 ## Phase map
 
 - **Phase 0 — discovery and causal controls:** RevBatch performance opportunity,

@@ -15,6 +15,8 @@ raise the dynamic failure floor before a later independent validation stage.
 from __future__ import annotations
 
 import argparse
+import atexit
+import hashlib
 import json
 import multiprocessing as mp
 import os
@@ -71,6 +73,30 @@ def parse_args() -> argparse.Namespace:
         help=(
             "singleton matches the headline intermediate authority; "
             "fixed-shape preserves legacy experiments"
+        ),
+    )
+    parser.add_argument(
+        "--dual-lane-intermediate-authority",
+        action="store_true",
+        help=(
+            "split nonterminal selective singleton checks across the proposer "
+            "GPU and verifier GPU while preserving singleton request shapes"
+        ),
+    )
+    parser.add_argument(
+        "--cross-lane-compatibility-artifact",
+        type=Path,
+        help=(
+            "required PASS artifact for dual-lane intermediate authority"
+        ),
+    )
+    parser.add_argument(
+        "--burst-b2-compatibility-artifact",
+        type=Path,
+        help=(
+            "PASS artifact authorizing batch-invariant fixed-B=2 authority "
+            "for nonterminal verification bursts while retaining B=1 for "
+            "isolated checks"
         ),
     )
     parser.add_argument(
@@ -170,6 +196,27 @@ def parse_args() -> argparse.Namespace:
         help=(
             "run a declared calibration/warmup stage but exclude it from the "
             "final service decision; all raw metrics remain reported"
+        ),
+    )
+    parser.add_argument(
+        "--skip-post-stage-replay",
+        action="store_true",
+        help=(
+            "omit the dependent full canonical replay from pure performance "
+            "seeds; legal only because it is not service timing or formal "
+            "risk evidence, and a separate randomized audit supplies the "
+            "risk contract"
+        ),
+    )
+    parser.add_argument(
+        "--low-margin-policy",
+        choices=("verify", "holdback"),
+        default="verify",
+        help=(
+            "verify selects a canonical replacement; holdback leaves a "
+            "low-margin nonterminal proposal provisional and prevents it "
+            "from entering revision state once a threshold certificate is "
+            "available"
         ),
     )
     parser.add_argument(
@@ -345,8 +392,135 @@ def parse_label_values(values: list[str]) -> dict[str, float]:
     return result
 
 
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def validate_cross_lane_artifact(
+    path: Path,
+    *,
+    current_runtime_sha256: str | None = None,
+) -> dict[str, Any]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if payload.get("decision") != "CROSS_LANE_SINGLETON_COMPATIBILITY_PASS":
+        raise ValueError("cross-lane compatibility artifact did not pass")
+    counts = payload.get("counts", {})
+    if int(counts.get("pairs", 0)) < 720:
+        raise ValueError("cross-lane artifact has fewer than 720 pairs")
+    config = payload.get("config", {})
+    if (
+        config.get("gpu0_batch_invariant_runtime") is not True
+        or config.get("gpu1_batch_invariant_runtime") is not True
+    ):
+        raise ValueError(
+            "cross-lane artifact does not match the deployed two-lane "
+            "batch-invariant runtime"
+        )
+    if (
+        config.get("gpu0_engine_logprobs") != 20
+        or config.get("gpu0_singleton_logprobs") is not None
+        or config.get("gpu1_singleton_logprobs") is not None
+    ):
+        raise ValueError(
+            "cross-lane artifact does not match deployed lane logprob settings"
+        )
+    mismatch_fields = (
+        "token_exact_mismatches",
+        "text_exact_mismatches",
+        "state_projection_token_exact_mismatches",
+        "state_projection_text_exact_mismatches",
+    )
+    if any(int(counts.get(field, -1)) != 0 for field in mismatch_fields):
+        raise ValueError("cross-lane artifact contains a semantic mismatch")
+    if current_runtime_sha256 is not None:
+        from revtrace.runtime_contract import require_runtime_sha256
+
+        require_runtime_sha256(payload, current_runtime_sha256)
+    return payload
+
+
+def validate_burst_b2_artifact(
+    path: Path,
+    *,
+    current_runtime_sha256: str | None = None,
+) -> dict[str, Any]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    counts = payload.get("counts", {})
+    if payload.get("decision") != "BURST_B2_AUTHORITY_COMPATIBILITY_PASS":
+        raise ValueError("B1/B2 authority gate did not pass")
+    if int(counts.get("pairs", 0)) < 720:
+        raise ValueError("B1/B2 authority gate is undersized")
+    config = payload.get("config", {})
+    if (
+        config.get("batch_invariant_runtime") is not True
+        or int(config.get("singleton_shape", 0)) != 1
+        or int(config.get("burst_fixed_shape", 0)) != 2
+    ):
+        raise ValueError("B1/B2 artifact has an incompatible runtime contract")
+    if any(
+        int(counts.get(field, -1)) != 0
+        for field in (
+            "token_exact_mismatches",
+            "text_exact_mismatches",
+            "state_projection_token_exact_mismatches",
+            "state_projection_text_exact_mismatches",
+        )
+    ):
+        raise ValueError("B1/B2 artifact contains a semantic mismatch")
+    if current_runtime_sha256 is not None:
+        from revtrace.runtime_contract import require_runtime_sha256
+
+        require_runtime_sha256(
+            {
+                "environment": {
+                    "batch_invariant_runtime_sha256": config[
+                        "batch_invariant_runtime_sha256"
+                    ]
+                }
+            },
+            current_runtime_sha256,
+        )
+    return payload
+
+
 def main() -> int:
     args = parse_args()
+    cross_lane_artifact: dict[str, Any] | None = None
+    cross_lane_artifact_sha256: str | None = None
+    burst_b2_artifact: dict[str, Any] | None = None
+    burst_b2_artifact_sha256: str | None = None
+    if args.dual_lane_intermediate_authority:
+        if args.intermediate_authority != "singleton":
+            raise ValueError("dual-lane authority requires singleton authority")
+        if args.cross_lane_compatibility_artifact is None:
+            raise ValueError(
+                "dual-lane authority requires a compatibility artifact"
+            )
+        cross_lane_artifact = validate_cross_lane_artifact(
+            args.cross_lane_compatibility_artifact
+        )
+        cross_lane_artifact_sha256 = sha256(
+            args.cross_lane_compatibility_artifact
+        )
+    elif args.cross_lane_compatibility_artifact is not None:
+        raise ValueError(
+            "cross-lane artifact supplied without dual-lane authority"
+        )
+    if args.burst_b2_compatibility_artifact is not None:
+        if args.intermediate_authority != "singleton":
+            raise ValueError("B2 burst authority requires singleton authority")
+        if args.dual_lane_intermediate_authority:
+            raise ValueError("B2 burst authority and dual lane are exclusive")
+        burst_b2_artifact = validate_burst_b2_artifact(
+            args.burst_b2_compatibility_artifact
+        )
+        burst_b2_artifact_sha256 = sha256(
+            args.burst_b2_compatibility_artifact
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     script_dir = str(Path(__file__).resolve().parent)
     source_dir = str(Path(__file__).resolve().parents[2] / "src")
@@ -354,6 +528,19 @@ def main() -> int:
         sys.path.insert(0, script_dir)
     if source_dir not in sys.path:
         sys.path.insert(0, source_dir)
+    from revtrace.runtime_contract import batch_invariant_runtime_sha256
+
+    runtime_sha256 = batch_invariant_runtime_sha256()
+    if cross_lane_artifact is not None:
+        validate_cross_lane_artifact(
+            args.cross_lane_compatibility_artifact,
+            current_runtime_sha256=runtime_sha256,
+        )
+    if burst_b2_artifact is not None:
+        validate_burst_b2_artifact(
+            args.burst_b2_compatibility_artifact,
+            current_runtime_sha256=runtime_sha256,
+        )
 
     from run_revbatch_gate import (
         SAMPLE_RATE,
@@ -381,11 +568,11 @@ def main() -> int:
     )
     from revtrace.long_horizon import (
         append_checkpoint_history,
+        checkpoint_payload,
         checkpoint_due,
         concatenate_distinct_audio,
         long_horizon_scope,
     )
-    from revtrace.risk_window import binomial_upper_bound
 
     stages = parse_stages(args.stage)
     frozen_thresholds = parse_frozen_thresholds(args.frozen_threshold)
@@ -461,12 +648,47 @@ def main() -> int:
         name="phase5a-canonical-verifier",
     )
     verifier.start()
+
+    def emergency_verifier_cleanup() -> None:
+        """Prevent a failed proposer startup from orphaning GPU1 authority."""
+
+        if verifier.is_alive():
+            verifier.terminate()
+            verifier.join(timeout=10.0)
+
+    atexit.register(emergency_verifier_cleanup)
     ready = receive_or_raise(result_queue, args.result_timeout_seconds)
     if ready.get("kind") != "ready":
         raise RuntimeError(f"unexpected verifier ready message: {ready}")
 
     from revtrace.phase7_1 import CanonicalRuntimeProvenance
 
+    base_intermediate_authority_contract = (
+        (
+            "float16_dual_singleton_bi_gpu0_gpu1_v1_gate_"
+            f"{cross_lane_artifact_sha256[:16]}"
+        )
+        if args.dual_lane_intermediate_authority
+        else (
+            (
+                "float16_singleton_bi_burst_b2_v1_gate_"
+                f"{burst_b2_artifact_sha256[:16]}"
+            )
+            if burst_b2_artifact is not None
+            else
+            f"{args.canonical_dtype}_singleton"
+            if args.intermediate_authority == "singleton"
+            else (
+                f"{args.canonical_dtype}_fixed_b"
+                f"{args.canonical_batch_size}"
+            )
+        )
+    )
+    intermediate_authority_contract = (
+        f"{base_intermediate_authority_contract}_low_margin_holdback_v1"
+        if args.low_margin_policy == "holdback"
+        else base_intermediate_authority_contract
+    )
     canonical_provenance = CanonicalRuntimeProvenance(
         model=args.model_name,
         configured_weight_dtype=args.canonical_dtype,
@@ -482,26 +704,29 @@ def main() -> int:
         temperature=0.0,
         max_tokens=32,
         terminal_and_intermediate_same_engine=True,
-        intermediate_authority=(
-            f"{args.canonical_dtype}_singleton"
-            if args.intermediate_authority == "singleton"
-            else (
-                f"{args.canonical_dtype}_fixed_b"
-                f"{args.canonical_batch_size}"
-            )
-        ),
+        intermediate_authority=intermediate_authority_contract,
         terminal_authority=(
             f"{args.canonical_dtype}_fixed_b{args.canonical_batch_size}"
         ),
     )
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.proposer_gpu
+    if args.dual_lane_intermediate_authority:
+        os.environ["VLLM_BATCH_INVARIANT"] = "1"
+        os.environ["VLLM_ATTENTION_BACKEND"] = "FLASH_ATTN"
     asr = build_asr(
         str(args.model),
         "float16",
         0.82,
         max_model_len=args.max_model_length,
         max_num_seqs=max_concurrency,
+    )
+    from vllm import SamplingParams
+
+    local_singleton_sampling_params = SamplingParams(
+        temperature=0.0,
+        max_tokens=32,
+        logprobs=None,
     )
     sources = load_sources(args.data_manifest)
     smoke = official_smoke(asr, sources["English"][0])
@@ -756,6 +981,8 @@ def main() -> int:
         collect_canonical_batch(dispatched)
         if args.intermediate_authority == "singleton":
             singleton_canonical([warmup_jobs[0]])
+        if burst_b2_artifact is not None:
+            canonical_batch(warmup_jobs[:2], fixed_shape=2)
     warmup_seconds_excluded = time.perf_counter() - warmup_started
 
     stage_payloads: list[dict[str, Any]] = []
@@ -810,19 +1037,13 @@ def main() -> int:
                 ),
                 maximum_input_tokens=args.declared_maximum_input_tokens,
                 service_mode=args.service_mode,
-                intermediate_authority=(
-                    f"{args.canonical_dtype}_singleton"
-                    if args.intermediate_authority == "singleton"
-                    else (
-                        f"{args.canonical_dtype}_fixed_b"
-                        f"{args.canonical_batch_size}"
-                    )
-                ),
+                intermediate_authority=intermediate_authority_contract,
                 terminal_authority=(
                     f"{args.canonical_dtype}_fixed_b"
                     f"{args.canonical_batch_size}"
                 ),
                 checkpoint_seconds=args.checkpoint_seconds,
+                batch_invariant_runtime_sha256=runtime_sha256,
             ),
         )
         if args.phase6_asymmetric_memory and label in failure_floors:
@@ -973,6 +1194,8 @@ def main() -> int:
                     else None
                 )
                 verified_by_position: dict[int, dict[str, Any]] = {}
+                verified_lane_by_position: dict[int, str] = {}
+                holdback_positions: list[int] = []
                 if suppress_proposer:
                     if overlapped_dispatch is None:
                         raise AssertionError(
@@ -990,6 +1213,10 @@ def main() -> int:
                     required_verifier_seconds += elapsed
                     verified_by_position.update(
                         zip(verify_positions, verified)
+                    )
+                    verified_lane_by_position.update(
+                        (position, "gpu1_fixed_shape")
+                        for position in verify_positions
                     )
                     outputs = None
                     proposal_elapsed = 0.0
@@ -1022,6 +1249,10 @@ def main() -> int:
                         required_verifier_seconds += elapsed
                         verified_by_position.update(
                             zip(verify_positions, verified)
+                        )
+                        verified_lane_by_position.update(
+                            (position, "gpu1_preverified")
+                            for position in verify_positions
                         )
                     else:
                         if args.service_mode in (
@@ -1056,21 +1287,126 @@ def main() -> int:
                                 )
                             ]
                 if (
+                    args.low_margin_policy == "holdback"
+                    and not terminal
+                    and (
+                        static_oracle_stage
+                        or epoch.certificate is not None
+                    )
+                ):
+                    holdback_positions = list(verify_positions)
+                    verify_positions = []
+                if (
                     verify_positions
                     and overlapped_dispatch is None
                     and not suppress_proposer
                 ):
-                    collect_started = time.perf_counter()
-                    verified, elapsed = run_authority(
-                        [jobs[position] for position in verify_positions],
-                        terminal=terminal,
-                    )
-                    verifier_collect_wall_seconds += (
-                        time.perf_counter() - collect_started
-                    )
-                    canonical_execution_seconds += elapsed
-                    required_verifier_seconds += elapsed
-                    verified_by_position.update(zip(verify_positions, verified))
+                    if (
+                        args.dual_lane_intermediate_authority
+                        and not terminal
+                        and len(verify_positions) >= 2
+                    ):
+                        verification_started = time.perf_counter()
+                        remote_positions = verify_positions[::2]
+                        local_positions = verify_positions[1::2]
+                        remote_dispatch = dispatch_singleton_verification(
+                            [jobs[position] for position in remote_positions]
+                        )
+                        local_records = []
+                        local_elapsed = 0.0
+                        for position in local_positions:
+                            local_started = time.perf_counter()
+                            local_output = asr.model.generate(
+                                [jobs[position]],
+                                sampling_params=local_singleton_sampling_params,
+                                use_tqdm=False,
+                            )[0]
+                            local_elapsed += (
+                                time.perf_counter() - local_started
+                            )
+                            local_records.append(
+                                candidate_record(local_output)
+                            )
+                        remote_records, remote_elapsed = (
+                            collect_canonical_batch(remote_dispatch)
+                        )
+                        verifier_collect_wall_seconds += (
+                            time.perf_counter() - verification_started
+                        )
+                        canonical_execution_seconds += (
+                            local_elapsed + remote_elapsed
+                        )
+                        required_verifier_seconds += (
+                            local_elapsed + remote_elapsed
+                        )
+                        verified_by_position.update(
+                            zip(remote_positions, remote_records)
+                        )
+                        verified_by_position.update(
+                            zip(local_positions, local_records)
+                        )
+                        verified_lane_by_position.update(
+                            (position, "gpu1_singleton")
+                            for position in remote_positions
+                        )
+                        verified_lane_by_position.update(
+                            (position, "gpu0_singleton")
+                            for position in local_positions
+                        )
+                    elif (
+                        burst_b2_artifact is not None
+                        and not terminal
+                        and len(verify_positions) >= 2
+                    ):
+                        verification_started = time.perf_counter()
+                        cursor = 0
+                        while cursor < len(verify_positions):
+                            wave_positions = verify_positions[cursor : cursor + 2]
+                            wave_jobs = [
+                                jobs[position] for position in wave_positions
+                            ]
+                            if len(wave_positions) == 2:
+                                wave_records, wave_elapsed = canonical_batch(
+                                    wave_jobs,
+                                    fixed_shape=2,
+                                )
+                                lane = "gpu1_burst_b2"
+                            else:
+                                wave_records, wave_elapsed = (
+                                    singleton_canonical(wave_jobs)
+                                )
+                                lane = "gpu1_singleton"
+                            canonical_execution_seconds += wave_elapsed
+                            required_verifier_seconds += wave_elapsed
+                            verified_by_position.update(
+                                zip(wave_positions, wave_records)
+                            )
+                            verified_lane_by_position.update(
+                                (position, lane)
+                                for position in wave_positions
+                            )
+                            cursor += len(wave_positions)
+                        verifier_collect_wall_seconds += (
+                            time.perf_counter() - verification_started
+                        )
+                    else:
+                        collect_started = time.perf_counter()
+                        verified, elapsed = run_authority(
+                            [jobs[position] for position in verify_positions],
+                            terminal=terminal,
+                        )
+                        verifier_collect_wall_seconds += (
+                            time.perf_counter() - collect_started
+                        )
+                        canonical_execution_seconds += elapsed
+                        required_verifier_seconds += elapsed
+                        verified_by_position.update(
+                            zip(verify_positions, verified)
+                        )
+                        verified_lane_by_position.update(
+                            (position, "gpu1_singleton")
+                            for position in verify_positions
+                        )
                 round_started = time.perf_counter()
                 round_selected_records: list[dict[str, Any]] = []
                 observed_model_input_token_counts = [
@@ -1092,6 +1428,7 @@ def main() -> int:
                     prefix,
                     proposal,
                 ) in enumerate(zip(streams, states, prefixes, proposals)):
+                    held_back = position in holdback_positions
                     selected = verified_by_position.get(position, proposal)
                     projection_started = time.perf_counter()
                     proposal_projection = state_projection_record(
@@ -1160,13 +1497,22 @@ def main() -> int:
                         "checkpoint_epoch": checkpoint_epochs[position],
                         "proposal_executed": not suppress_proposer,
                         "verified": position in verified_by_position,
+                        "state_entry_committed": not held_back,
+                        "provisional_holdback": held_back,
                         "selected_authority": (
-                            "canonical"
-                            if position in verified_by_position
+                            "provisional_holdback"
+                            if held_back
                             else (
-                                "unprotected_proposer"
-                                if args.service_mode == "proposer-only"
-                                else "risk_limited_fast_path"
+                                verified_lane_by_position.get(
+                                    position,
+                                    "canonical",
+                                )
+                                if position in verified_by_position
+                                else (
+                                    "unprotected_proposer"
+                                    if args.service_mode == "proposer-only"
+                                    else "risk_limited_fast_path"
+                                )
                             )
                         ),
                         "online_selection_authority_violation": bool(
@@ -1208,7 +1554,13 @@ def main() -> int:
                     service_events.append(event)
                     episode_selected.append(event)
                     apply_started = time.perf_counter()
-                    if selected is proposal and not suppress_proposer:
+                    if held_back:
+                        # prepare_job has already appended this chunk to
+                        # audio_accum.  Keep the proposal user-visible and
+                        # provisional, but do not let its text or chunk_id
+                        # enter the feedback state.
+                        pass
+                    elif selected is proposal and not suppress_proposer:
                         assert outputs is not None
                         apply_output(state, outputs[position], prefix)
                     else:
@@ -1219,7 +1571,11 @@ def main() -> int:
                         apply_candidate_record(state, selected, prefix)
                     apply_seconds += time.perf_counter() - apply_started
                     if checkpoint_boundary:
-                        segment_text = str(selected["text"]).strip()
+                        segment_text = checkpoint_payload(
+                            prefix=prefix,
+                            selected=selected,
+                            selected_projection=selected_projection,
+                        )
                         checkpoint_histories[position] = (
                             append_checkpoint_history(
                                 checkpoint_histories[position],
@@ -1292,7 +1648,7 @@ def main() -> int:
                         "proposal_executed": not suppress_proposer,
                         "service_mode": args.service_mode,
                         "intermediate_authority": (
-                            args.intermediate_authority
+                            intermediate_authority_contract
                         ),
                         "terminal_authority_fixed_shape": (
                             args.canonical_batch_size
@@ -1301,11 +1657,26 @@ def main() -> int:
                         "proposal_seconds": proposal_elapsed,
                         "low_margin_count": low_margin_count,
                         "verified_count": len(verify_positions),
+                        "holdback_count": len(holdback_positions),
                         "verification_overlap_fraction": (
                             len(verify_positions) / len(jobs) if jobs else 0.0
                         ),
                         "verifier_dispatch_count": (
-                            1 if verify_positions else 0
+                            len(
+                                {
+                                    lane
+                                    for lane in verified_lane_by_position.values()
+                                    if lane.startswith("gpu")
+                                }
+                            )
+                        ),
+                        "gpu0_singleton_verified_count": sum(
+                            lane == "gpu0_singleton"
+                            for lane in verified_lane_by_position.values()
+                        ),
+                        "gpu1_singleton_verified_count": sum(
+                            lane == "gpu1_singleton"
+                            for lane in verified_lane_by_position.values()
                         ),
                         "verifier_queue_depth_before_dispatch": 0,
                         "verifier_queue_depth_at_commit": 0,
@@ -1467,7 +1838,8 @@ def main() -> int:
         audit_root_keys: set[tuple[int, str]] = set()
         promoted_audit_roots: list[dict[str, Any]] = []
         selected_cursor = 0
-        for episode in range(episodes):
+        audit_episodes = 0 if args.skip_post_stage_replay else episodes
+        for episode in range(audit_episodes):
             streams = make_stage_streams(
                 stage_index=stage_index,
                 episode=episode,
@@ -1577,12 +1949,17 @@ def main() -> int:
 
                     apply_candidate_record(state, record, prefix)
                     if checkpoint_boundary:
+                        segment_text = checkpoint_payload(
+                            prefix=prefix,
+                            selected=record,
+                            selected_projection=record["state_projection"],
+                        )
                         checkpoint_histories[selected_cursor % concurrency] = (
                             append_checkpoint_history(
                                 checkpoint_histories[
                                     selected_cursor % concurrency
                                 ],
-                                str(record["text"]),
+                                segment_text,
                             )
                         )
                         if not session_terminal:
@@ -1670,7 +2047,37 @@ def main() -> int:
                 "episode_seconds": args.episode_seconds,
                 "audio_construction": args.audio_construction,
                 "audio_provenance": stage_audio_provenance,
-                "intermediate_authority": args.intermediate_authority,
+                "intermediate_authority": intermediate_authority_contract,
+                "low_margin_policy": args.low_margin_policy,
+                "dual_lane_intermediate_authority": (
+                    args.dual_lane_intermediate_authority
+                ),
+                "cross_lane_compatibility_artifact": (
+                    None
+                    if args.cross_lane_compatibility_artifact is None
+                    else str(args.cross_lane_compatibility_artifact)
+                ),
+                "cross_lane_compatibility_artifact_sha256": (
+                    cross_lane_artifact_sha256
+                ),
+                "cross_lane_compatibility_pairs": (
+                    None
+                    if cross_lane_artifact is None
+                    else cross_lane_artifact["counts"]["pairs"]
+                ),
+                "burst_b2_compatibility_artifact": (
+                    None
+                    if args.burst_b2_compatibility_artifact is None
+                    else str(args.burst_b2_compatibility_artifact)
+                ),
+                "burst_b2_compatibility_artifact_sha256": (
+                    burst_b2_artifact_sha256
+                ),
+                "burst_b2_compatibility_pairs": (
+                    None
+                    if burst_b2_artifact is None
+                    else burst_b2_artifact["counts"]["pairs"]
+                ),
                 "terminal_authority": (
                     f"{args.canonical_dtype}_fixed_b"
                     f"{args.canonical_batch_size}"
@@ -1779,11 +2186,15 @@ def main() -> int:
                 "audit_root_state_mismatches": (
                     audit_root_state_mismatches
                 ),
-                "independent_replay_risk_upper_bound": (
-                    binomial_upper_bound(
-                        audit_root_state_mismatches,
-                        audit_events,
-                    )
+                "independent_replay_risk_upper_bound": None,
+                "independent_replay_observed_root_rate": (
+                    audit_root_state_mismatches / audit_events
+                    if audit_events
+                    else None
+                ),
+                "independent_replay_statistical_scope": (
+                    "observed count only; revisions share session history and "
+                    "batch context, so no iid binomial population bound is used"
                 ),
                 "unverified_fast_path_replay_roots": sum(
                     bool(row["is_root_state_mismatch"])
@@ -1812,6 +2223,9 @@ def main() -> int:
                     if args.phase6_asymmetric_memory
                     else None
                 ),
+                "post_stage_replay_executed": (
+                    not args.skip_post_stage_replay
+                ),
                 "post_audit_threshold": (
                     None
                     if controller.current is None
@@ -1832,7 +2246,9 @@ def main() -> int:
     if verifier.is_alive():
         verifier.terminate()
         verifier.join(timeout=10.0)
-        raise RuntimeError("verifier did not stop")
+        if verifier.is_alive():
+            raise RuntimeError("verifier did not stop")
+    atexit.unregister(emergency_verifier_cleanup)
 
     static_oracle_run = bool(frozen_thresholds)
     if static_oracle_run and len(frozen_thresholds) != len(stages):
@@ -1874,7 +2290,7 @@ def main() -> int:
                 and not bool(row["verified"])
             ]
             return bool(
-                stage["independent_replay_risk_upper_bound"] <= 0.005
+                not unverified_replay_roots
                 and not any(
                     row["proposal_minimum_margin"] is not None
                     and stage["failure_floor"] is not None

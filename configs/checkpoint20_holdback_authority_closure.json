@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "contract_name": "checkpoint20_low_margin_state_holdback_v1",
+  "duration_seconds": 120,
+  "checkpoint_seconds": 20,
+  "concurrency": 12,
+  "proposer": {
+    "dtype": "float16",
+    "batch_invariant_runtime": false,
+    "gpu": 0
+  },
+  "state_entry": {
+    "high_margin_policy": "statistical_admission_v1",
+    "low_margin_policy": "provisional_holdback_v1",
+    "terminal_policy": "always_canonical",
+    "claim": "statistical_state-disagreement contract, not deterministic arithmetic exactness"
+  },
+  "terminal_authority": {
+    "policy": "gpu1_fixed_b12",
+    "dtype": "float16",
+    "batch_invariant_runtime": true,
+    "gpu": 1
+  },
+  "checkpoint_payload": "terminal_state_projection_v1",
+  "adaptation_failure_floor": 0.03125,
+  "freeze_gates": {
+    "maximum_seed_p99_seconds": 1.9,
+    "deadline_miss_events": 0,
+    "maximum_time_uniform_state_risk": 0.005,
+    "authority_violations": 0,
+    "minimum_quality_sessions_per_language": 16,
+    "maximum_mean_quality_delta": 0.02,
+    "maximum_catastrophic_quality_outliers": 0
+  },
+  "claim_boundary": [
+    "Low-margin proposals may be user-visible provisional text but never update textual revision feedback state.",
+    "The audio frontier still advances, and a fixed-shape canonical checkpoint reconstructs the authoritative segment.",
+    "High-margin state entries are covered by a pre-outcome randomized audit and time-uniform e-process, not an iid Clopper-Pearson interval.",
+    "Zero observed violations is an empirical count, not deterministic arithmetic proof."
+  ]
+}

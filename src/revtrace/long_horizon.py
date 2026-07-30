@@ -27,6 +27,33 @@ def append_checkpoint_history(history: str, segment_text: str) -> str:
     )
 
 
+def checkpoint_payload(
+    *,
+    prefix: str,
+    selected: dict[str, Any],
+    selected_projection: dict[str, Any],
+) -> str:
+    """Return the unique authoritative text stored at a checkpoint.
+
+    A checkpoint is a terminal transition for the current segment.  Its
+    payload must therefore be the full terminal state projection, not merely
+    the newly generated candidate suffix.
+    """
+
+    if not bool(selected_projection.get("terminal")):
+        raise ValueError("checkpoint requires a terminal state projection")
+    if "text" not in selected or "projection_text" not in selected_projection:
+        raise ValueError("checkpoint payload is missing authoritative text")
+    expected = (str(prefix) + str(selected["text"])).strip()
+    actual = str(selected_projection["projection_text"]).strip()
+    if actual != expected:
+        raise AssertionError(
+            "checkpoint projection mismatch: "
+            f"{actual!r} != {expected!r}"
+        )
+    return actual
+
+
 def upper_bucket(value: int, *, quantum: int, prefix: str) -> str:
     """Return a stable inclusive upper bucket such as ``age_le_60``."""
 
@@ -47,13 +74,14 @@ def long_horizon_scope(
     terminal_authority: str,
     maximum_session_age_seconds: int | None = None,
     checkpoint_seconds: int = 0,
+    batch_invariant_runtime_sha256: str | None = None,
 ) -> dict[str, str]:
     """Build the population fields that prevent 30 s evidence reuse at 120 s."""
 
     if duration_seconds <= 0:
         raise ValueError("duration must be positive")
     maximum_age = maximum_session_age_seconds or duration_seconds
-    return {
+    scope = {
         "duration": upper_bucket(
             duration_seconds, quantum=30, prefix="duration"
         ),
@@ -77,11 +105,16 @@ def long_horizon_scope(
         "checkpoint": (
             "none"
             if checkpoint_seconds <= 0
-            else upper_bucket(
-                checkpoint_seconds, quantum=30, prefix="checkpoint"
-            )
+            else f"checkpoint_s_{checkpoint_seconds}"
         ),
     }
+    if batch_invariant_runtime_sha256 is not None:
+        if len(batch_invariant_runtime_sha256) != 64:
+            raise ValueError("runtime SHA-256 must contain 64 hex characters")
+        scope["batch_invariant_runtime_sha256"] = (
+            batch_invariant_runtime_sha256
+        )
+    return scope
 
 
 def concatenate_distinct_audio(

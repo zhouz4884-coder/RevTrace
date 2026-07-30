@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "study": "checkpoint20_low_margin_state_holdback_closure",
+  "decision": "CHECKPOINT20_HOLDBACK_FINAL_PASS",
+  "selected_contract": "ordinary_fp16_batched_proposer__low_margin_provisional_holdback__fixed_b12_checkpoint_authority",
+  "frozen_threshold": 0.031251,
+  "gate_checks": {
+    "recalibration": true,
+    "time_uniform_state_risk": true,
+    "five_seed_tail": true,
+    "paired_quality": true
+  },
+  "risk_certificate": {
+    "upper_error_count": 144,
+    "upper_risk": 0.0047332610196233115,
+    "confidence": 0.95,
+    "target_delta": 0.005,
+    "method": "fixed-probability mixture e-process inversion"
+  },
+  "matched_seed_repair_comparison": {
+    "seed": 20260824,
+    "frozen_controls": [
+      "concurrency",
+      "episodes",
+      "episode_seconds",
+      "checkpoint_seconds",
+      "canonical_batch_size",
+      "threshold",
+      "audio_construction",
+      "service_mode",
+      "terminal_authority"
+    ],
+    "only_declared_mechanism_change": "low-margin synchronous singleton verification -> provisional state holdback",
+    "ordinary_p99_seconds": 2.337703075259924,
+    "holdback_p99_seconds": 1.8411045921966434,
+    "p99_reduction_fraction": 0.2124300935900788,
+    "ordinary_deadline_miss_events": 12,
+    "holdback_deadline_miss_events": 0,
+    "ordinary_verification_fraction": 0.11666666666666667,
+    "holdback_verification_fraction": 0.1,
+    "ordinary_joules_per_audio_second": 10.38619652609908,
+    "holdback_joules_per_audio_second": 9.235710087036527,
+    "energy_reduction_fraction": 0.11077071728534504
+  },
+  "evidence_sha256": {
+    "calibration": {
+      "path": "results/checkpoint20_holdback_authority/calibration.json",
+      "sha256": "8b01de024b899678d94ee783f2e755489ce1fede09623481c7f3a25ec258f016"
+    },
+    "formal_risk_audit": {
+      "path": "results/checkpoint20_holdback_authority/anytime_risk_audit.json",
+      "sha256": "ea24564460956be79807b9c70abd9f9cd28f3b78e70f719d27a52e5f25da9a7f"
+    },
+    "matched_ordinary_baseline": {
+      "path": "results/checkpoint20_ordinary_authority/seed_20260824.json",
+      "sha256": "987298f99cc3ddcc4f4a6205cc075b27a7bb65283843922dea054a28b97c82d9"
+    },
+    "matched_holdback_probe": {
+      "path": "results/checkpoint20_holdback_authority/perf_probe_seed_20260824.json",
+      "sha256": "ac6edb1b3c134e42cd13d03466e304d9c713b3933f2df24d464e9a7049c70978"
+    },
+    "paired_quality": {
+      "path": "results/checkpoint20_holdback_authority/checkpoint_rebase_holdback_quality_16x2.json",
+      "sha256": "284905fd050bf2af1a28429a0d9f1079a82d191918b963d77f5bdd112d9b2095"
+    },
+    "seed_20260840": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260840.json",
+      "sha256": "79d2167785dbf8a36711cc94c681b09d1ca63c8a23182ba5cc728257d5f27f99"
+    },
+    "seed_20260841": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260841.json",
+      "sha256": "a1ce1e0b703b03454d90f1ac6d2a03edc67cf461130001257c12a1e02ef125fc"
+    },
+    "seed_20260842": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260842.json",
+      "sha256": "e7b748e7cdb330679615848b015fe5548320a80f0473b7b5966b346250320c93"
+    },
+    "seed_20260843": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260843.json",
+      "sha256": "9a2de51c2a3e14fbcc86040ae4c2aa94ec3433224baa72fe15c14bd389ebe091"
+    },
+    "seed_20260844": {
+      "path": "results/checkpoint20_holdback_authority/seed_20260844.json",
+      "sha256": "dc265d69e34db8a1d2be98e8209be63eb17eac77a038549f8e58f0360234f99a"
+    }
+  },
+  "implementation_sha256": {
+    "live_runner": {
+      "path": "scripts/remote/run_phase5a_live_adaptive.py",
+      "sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+    },
+    "formal_audit_runner": {
+      "path": "scripts/remote/run_checkpoint_dual_lane_shadow_audit.py",
+      "sha256": "2c68d282c0608a07a939b3a4ba81827c4c94da44221bab3d2e4b67004f597137"
+    },
+    "quality_runner": {
+      "path": "scripts/remote/run_checkpoint_rebase_quality.py",
+      "sha256": "10f77a38223f2b819fbadd7b63ee87bd4f5265941e9e1619a148611533c204fc"
+    },
+    "launcher": {
+      "path": "scripts/remote/launch_checkpoint20_holdback_authority.sh",
+      "sha256": "06a471430a640eefe28b5df8d309472a58287159e4f4bb412cb4e3d8e9eaf3ad"
+    },
+    "pipeline": {
+      "path": "scripts/remote/run_checkpoint20_holdback_c0_c6_pipeline.sh",
+      "sha256": "8f5e6fd16950c43a1d00fbaf89d2d0feeb0b5af67c1b0a9057fa5151803c7ab4"
+    },
+    "checkpoint_semantics": {
+      "path": "src/revtrace/long_horizon.py",
+      "sha256": "ac656780c18ae9928ac1d2c9b09237e0dc712c9b028d4bf17c6d000110be44bf"
+    },
+    "runtime_contract": {
+      "path": "src/revtrace/runtime_contract.py",
+      "sha256": "df58be717bd8cb8f66d42521fcc5d90c955aa6b0e354952616383618307a2d6f"
+    },
+    "finalizer": {
+      "path": "scripts/finalize_checkpoint20_holdback_closure.py",
+      "sha256": "d2c2808c60982df4382d10a01019db37c85945869d34fce245c4d598678e57b3"
+    }
+  },
+  "five_seed": {
+    "seeds": [
+      20260840,
+      20260841,
+      20260842,
+      20260843,
+      20260844
+    ],
+    "maximum_seed_p99_seconds": 1.413811020553112,
+    "mean_p99_seconds": 1.2781361546367407,
+    "total_deadline_miss_events": 0,
+    "total_online_authority_violations": 0,
+    "total_provisional_holdbacks": 61,
+    "mean_energy_joules_per_audio_second": 8.669583208235355,
+    "rows": [
+      {
+        "seed": 20260840,
+        "events": 720,
+        "p50_seconds": 0.6748525835573673,
+        "p95_seconds": 1.198569000279528,
+        "p99_seconds": 1.413811020553112,
+        "deadline_miss_events": 0,
+        "verification_fraction": 0.1,
+        "provisional_holdbacks": 18,
+        "online_authority_violations": 0,
+        "joules_per_audio_second": 9.239491412944338
+      },
+      {
+        "seed": 20260841,
+        "events": 720,
+        "p50_seconds": 0.6566475657746196,
+        "p95_seconds": 1.1544343891087918,
+        "p99_seconds": 1.3164224736392498,
+        "deadline_miss_events": 0,
+        "verification_fraction": 0.1,
+        "provisional_holdbacks": 9,
+        "online_authority_violations": 0,
+        "joules_per_audio_second": 8.531705018618974
+      },
+      {
+        "seed": 20260842,
+        "events": 720,
+        "p50_seconds": 0.6562467874027789,
+        "p95_seconds": 1.1799256137106544,
+        "p99_seconds": 1.2616910627111793,
+        "deadline_miss_events": 0,
+        "verification_fraction": 0.1,
+        "provisional_holdbacks": 14,
+        "online_authority_violations": 0,
+        "joules_per_audio_second": 8.525091844021832
+      },
+      {
+        "seed": 20260843,
+        "events": 720,
+        "p50_seconds": 0.6659765806980431,
+        "p95_seconds": 1.102561823371797,
+        "p99_seconds": 1.217335794121027,
+        "deadline_miss_events": 0,
+        "verification_fraction": 0.1,
+        "provisional_holdbacks": 10,
+        "online_authority_violations": 0,
+        "joules_per_audio_second": 8.644592577136558
+      },
+      {
+        "seed": 20260844,
+        "events": 720,
+        "p50_seconds": 0.6556919827125967,
+        "p95_seconds": 1.0539082436822318,
+        "p99_seconds": 1.1814204221591353,
+        "deadline_miss_events": 0,
+        "verification_fraction": 0.1,
+        "provisional_holdbacks": 10,
+        "online_authority_violations": 0,
+        "joules_per_audio_second": 8.407035188455072
+      }
+    ]
+  },
+  "paired_quality": {
+    "state_entry_policy": {
+      "low_margin_policy": "holdback",
+      "margin_threshold": 0.031251,
+      "rebase_provisional_holdbacks": 35
+    },
+    "sessions_per_language": 16,
+    "language_metrics": {
+      "Chinese": {
+        "catastrophic_outliers": 0,
+        "checkpoint_boundary_analysis": {
+          "100": {
+            "maximum_continuous_rebase_edit_rate": 0.23745819397993312,
+            "mean_continuous_rebase_edit_rate": 0.027421263543738944
+          },
+          "120": {
+            "maximum_continuous_rebase_edit_rate": 0.19559228650137742,
+            "mean_continuous_rebase_edit_rate": 0.025123275843318277
+          },
+          "20": {
+            "maximum_continuous_rebase_edit_rate": 0.0,
+            "mean_continuous_rebase_edit_rate": 0.0
+          },
+          "40": {
+            "maximum_continuous_rebase_edit_rate": 0.5546218487394958,
+            "mean_continuous_rebase_edit_rate": 0.042668473053534176
+          },
+          "60": {
+            "maximum_continuous_rebase_edit_rate": 0.3621621621621622,
+            "mean_continuous_rebase_edit_rate": 0.03265376682940754
+          },
+          "80": {
+            "maximum_continuous_rebase_edit_rate": 0.27235772357723576,
+            "mean_continuous_rebase_edit_rate": 0.027502374596727806
+          }
+        },
+        "continuous_error_rate_mean": 0.02644314969832306,
+        "mean_delta": 0.017604701083963763,
+        "metric": "cer",
+        "paired_bootstrap": {
+          "ci95_high": 0.042696025418226306,
+          "ci95_low": 0.0034869192651699257,
+          "observed_mean_delta": 0.017604701083963763,
+          "replicates": 10000,
+          "seed": 20260840
+        },
+        "rebase_error_rate_mean": 0.044047850782286825,
+        "sessions": 16
+      },
+      "English": {
+        "catastrophic_outliers": 0,
+        "checkpoint_boundary_analysis": {
+          "100": {
+            "maximum_continuous_rebase_edit_rate": 0.2029520295202952,
+            "mean_continuous_rebase_edit_rate": 0.024138342495622838
+          },
+          "120": {
+            "maximum_continuous_rebase_edit_rate": 0.175,
+            "mean_continuous_rebase_edit_rate": 0.022792423134835753
+          },
+          "20": {
+            "maximum_continuous_rebase_edit_rate": 0.015625,
+            "mean_continuous_rebase_edit_rate": 0.0009765625
+          },
+          "40": {
+            "maximum_continuous_rebase_edit_rate": 0.05747126436781609,
+            "mean_continuous_rebase_edit_rate": 0.011562351643881585
+          },
+          "60": {
+            "maximum_continuous_rebase_edit_rate": 0.03816793893129771,
+            "mean_continuous_rebase_edit_rate": 0.009943203251916952
+          },
+          "80": {
+            "maximum_continuous_rebase_edit_rate": 0.248868778280543,
+            "mean_continuous_rebase_edit_rate": 0.02655763501267127
+          }
+        },
+        "continuous_error_rate_mean": 0.025351740057402962,
+        "mean_delta": 0.014506383981159592,
+        "metric": "wer",
+        "paired_bootstrap": {
+          "ci95_high": 0.0361561830829326,
+          "ci95_low": 0.00213563678729086,
+          "observed_mean_delta": 0.014506383981159592,
+          "replicates": 10000,
+          "seed": 20260839
+        },
+        "rebase_error_rate_mean": 0.03985812403856256,
+        "sessions": 16
+      }
+    }
+  },
+  "claim_boundaries": [
+    "Low-margin nonterminal output is provisional and is not a selected state authority.",
+    "The formal risk statement covers admitted high-margin state entries and is time-uniform under pre-outcome randomized audit coins.",
+    "The contract is not deterministic arithmetic equivalence to singleton execution.",
+    "Observed mean quality deltas at the frozen sample size do not establish population equivalence unless the reported confidence interval also supports it."
+  ]
+}
