@@ -14,6 +14,7 @@ FILES = (
     "README.md",
     "configs/checkpoint20_excluded_mechanisms.json",
     "docs/protocols/checkpoint20_holdback_authority_closure.md",
+    "docs/reports/checkpoint20_source_audit.md",
     "docs/reports/checkpoint20_submission_closure.md",
     "results/checkpoint20_holdback_authority/contract_manifest.json",
     "results/checkpoint20_holdback_authority/contract_bindings.json",
