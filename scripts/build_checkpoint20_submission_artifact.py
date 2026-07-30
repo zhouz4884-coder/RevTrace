@@ -30,6 +30,7 @@ FILES = (
     "src/revtrace/contract_manifest.py",
     "src/revtrace/long_horizon.py",
 )
+TEXT_SUFFIXES = {".csv", ".json", ".md", ".py"}
 
 
 def sha256(path: Path) -> str:
@@ -65,7 +66,12 @@ def main() -> int:
             raise FileNotFoundError(source)
         target = output / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
+        if source.suffix.lower() in TEXT_SUFFIXES:
+            target.write_bytes(
+                source.read_bytes().replace(b"\r\n", b"\n")
+            )
+        else:
+            shutil.copy2(source, target)
         entries[relative] = {
             "bytes": target.stat().st_size,
             "sha256": sha256(target),
