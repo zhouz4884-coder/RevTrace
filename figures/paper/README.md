@@ -16,16 +16,18 @@ submission formats.
 Rebuild and validate the redesigned main figures from the repository root:
 
 ```powershell
-python scripts/figures/plot_revtrace_paper_figures_v2.py
-python scripts/figures/validate_revtrace_paper_figures_v2.py
+python scripts/figures/plot_revtrace_paper_figures_v3.py
+python scripts/figures/validate_revtrace_paper_figures_v3.py
 ```
 
 The exact plotting tables, including a `source` provenance column, are under
 `figures/source_data/`. Figure contracts and complete manuscript legends are
 under `docs/figures/`.
 
-The earlier `plot_revtrace_paper_figures.py` is retained as the provenance
-extractor and first-layout reference. The v2 renderer consumes the frozen CSV
-tables and produces the submission candidates. The experimental evidence atlas
-is an exploratory composite and is not part of the numbered main-figure
-sequence.
+The earlier `plot_revtrace_paper_figures.py` and v2 renderer are retained as
+provenance and layout references. The v3 renderer consumes the frozen CSV
+tables, adds the architecture-generality ledger, and produces the submission
+candidates. The v3 validator checks vector editability, embedded-raster
+absence, raster DPI, evidence sentinels, and panel occupancy. The experimental
+evidence atlas is an exploratory composite and is not part of the numbered
+main-figure sequence.

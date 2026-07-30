@@ -1,0 +1,4 @@
+family,checkpoints,role,execution_scope,feedback_pairs,propagating_on,propagating_off,protection_result,performance_boundary,source
+Qwen3-ASR,"0.6B;1.7B",primary deployed system,"8 workload cells; 10 replicated deployment runs",,,,"state-certified serving","4.95x-6.05x mean deployed wall speedup",README.md
+Whisper-feedback,"tiny.en;base.en",cross-family causal transfer,"200 disjoint 90-second streams",21,8,0,"0 observed output/state violations on 21 known pairs","1.00x when every feedback-bearing state entry is canonical",results/phase4/whisper_feedback_expanded
+Voxtral Realtime,"Mini 4B",append-only architecture boundary,"10 growing-prefix revisions; 120 execution rows",0,0,0,"certification bypass is causally appropriate","0 observed cross-shape drift; not a deterministic certificate",results/phase3/voxtral
