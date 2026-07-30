@@ -166,11 +166,18 @@ def execution_binding(
 def validate_binding(binding: dict[str, Any], *, raw_path: Path) -> None:
     """Fail closed when a binding or its raw result has changed."""
 
-    supplied = dict(binding)
-    execution_digest = supplied.pop("execution_digest", None)
+    signed_fields = (
+        "schema_version",
+        "mechanism_digest",
+        "role",
+        "runner_sha256",
+        "raw_result_sha256",
+        "execution_profile",
+    )
+    supplied = {field: binding[field] for field in signed_fields}
+    execution_digest = binding.get("execution_digest")
     if execution_digest != digest_value(supplied):
         raise ValueError(f"execution digest mismatch for {raw_path}")
     actual = sha256_file(raw_path)
     if actual != binding.get("raw_result_sha256"):
         raise ValueError(f"raw result digest mismatch for {raw_path}")
-

@@ -17,9 +17,11 @@ import json
 import multiprocessing as mp
 import os
 import platform
+import re
 import statistics
 import sys
 import time
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -48,6 +50,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--maximum-catastrophic-outliers", type=int, default=0)
     parser.add_argument("--bootstrap-replicates", type=int, default=10_000)
     parser.add_argument("--bootstrap-seed", type=int, default=20260830)
+    parser.add_argument(
+        "--resume-quality",
+        type=Path,
+        help=(
+            "Reuse the frozen continuous and checkpoint+verify paths and "
+            "rerun only holdback to repair/audit provisional UX metrics."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -68,6 +78,40 @@ def percentile(values: list[float], q: float) -> float:
     upper = min(lower + 1, len(ordered) - 1)
     weight = index - lower
     return ordered[lower] * (1.0 - weight) + ordered[upper] * weight
+
+
+def visible_units(text: str, language: str) -> list[str]:
+    value = unicodedata.normalize("NFKC", text).lower()
+    if language == "Chinese":
+        return [
+            character
+            for character in value
+            if not character.isspace()
+            and not unicodedata.category(character).startswith("P")
+        ]
+    value = re.sub(r"[^\w\s']", " ", value)
+    return " ".join(value.split()).split()
+
+
+def provisional_overwrite_fraction(
+    provisional: str,
+    authoritative: str,
+    language: str,
+) -> float:
+    """Fraction of already displayed units that cease to be an exact prefix.
+
+    Text appended after the provisional hypothesis is not an overwrite and
+    therefore carries zero cost.  The metric is always in [0, 1].
+    """
+
+    left = visible_units(provisional, language)
+    right = visible_units(authoritative, language)
+    common = 0
+    for a, b in zip(left, right):
+        if a != b:
+            break
+        common += 1
+    return 1.0 - common / max(1, len(left))
 
 
 def main() -> int:
@@ -284,6 +328,14 @@ def main() -> int:
                         authoritative_text,
                         language,
                     ),
+                    "provisional_overwrite_fraction": (
+                        provisional_overwrite_fraction(
+                            item["provisional_text"],
+                            authoritative_text,
+                            language,
+                        )
+                    ),
+                    "authoritative_text": authoritative_text,
                 }
             )
         pending[position].clear()
@@ -492,8 +544,39 @@ def main() -> int:
                 combined["boundary_snapshots"].setdefault(age, []).extend(values)
         return combined
 
-    continuous = run_all("continuous")
-    checkpoint_verify = run_all("checkpoint_verify")
+    resumed_from: dict[str, Any] | None = None
+    if args.resume_quality is None:
+        continuous = run_all("continuous")
+        checkpoint_verify = run_all("checkpoint_verify")
+    else:
+        resumed_from = json.loads(
+            args.resume_quality.read_text(encoding="utf-8")
+        )
+        by_session = {
+            row["session_id"]: row for row in resumed_from["paired_sessions"]
+        }
+        if set(by_session) != {stream["session_id"] for stream in streams}:
+            raise ValueError("resume artifact uses a different session set")
+        continuous = {
+            "finals": [
+                by_session[stream["session_id"]]["transcripts"]["continuous"]
+                for stream in streams
+            ],
+            "rounds": resumed_from["rounds"]["continuous"],
+            "wall_seconds": resumed_from["mode_wall_seconds"]["continuous"],
+        }
+        checkpoint_verify = {
+            "finals": [
+                by_session[stream["session_id"]]["transcripts"][
+                    "checkpoint_verify"
+                ]
+                for stream in streams
+            ],
+            "rounds": resumed_from["rounds"]["checkpoint_verify"],
+            "wall_seconds": resumed_from["mode_wall_seconds"][
+                "checkpoint_verify"
+            ],
+        }
     checkpoint_holdback = run_all("checkpoint_holdback")
 
     paired: list[dict[str, Any]] = []
@@ -576,6 +659,9 @@ def main() -> int:
     ux = checkpoint_holdback["ux_events"]
     lifetimes = [float(row["lifetime_seconds"]) for row in ux]
     edit_rates = [float(row["provisional_to_authority_edit_rate"]) for row in ux]
+    overwrite_fractions = [
+        float(row["provisional_overwrite_fraction"]) for row in ux
+    ]
     resolution_counts = {
         reason: sum(row["resolution"] == reason for row in ux)
         for reason in ("next_high_margin", "checkpoint_authority")
@@ -594,9 +680,31 @@ def main() -> int:
             "maximum": max(lifetimes, default=0.0),
         },
         "provisional_to_authority_edit_rate": {
+            "definition": (
+                "legacy forward edit distance divided by provisional length; "
+                "can exceed one because normal appended text is counted"
+            ),
             "mean": statistics.mean(edit_rates) if edit_rates else 0.0,
             "p95": percentile(edit_rates, 0.95),
             "maximum": max(edit_rates, default=0.0),
+        },
+        "provisional_overwrite_fraction": {
+            "definition": (
+                "fraction of already displayed normalized units no longer "
+                "preserved as an exact prefix; appended text is free"
+            ),
+            "mean": (
+                statistics.mean(overwrite_fractions)
+                if overwrite_fractions
+                else 0.0
+            ),
+            "p50": percentile(overwrite_fractions, 0.50),
+            "p95": percentile(overwrite_fractions, 0.95),
+            "maximum": max(overwrite_fractions, default=0.0),
+            "zero_overwrite_fraction": (
+                sum(value == 0.0 for value in overwrite_fractions)
+                / max(1, len(overwrite_fractions))
+            ),
         },
         "maximum_allowed_lifetime_seconds": args.checkpoint_seconds,
         "lifetime_bound_pass": max(lifetimes, default=0.0) <= args.checkpoint_seconds,
@@ -646,6 +754,11 @@ def main() -> int:
             "code_commit": os.environ.get("REVTRACE_CODE_COMMIT", "UNRECORDED"),
             "runner_sha256": sha256(Path(__file__)),
             "authority_ready": ready,
+            "resumed_from_quality_sha256": (
+                sha256(args.resume_quality)
+                if args.resume_quality is not None
+                else None
+            ),
         },
         "claim_boundaries": [
             "Observed paired mean quality tolerance is distinct from population noninferiority.",

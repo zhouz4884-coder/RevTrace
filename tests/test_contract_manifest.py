@@ -25,6 +25,7 @@ def test_binding_fails_closed_after_raw_mutation(tmp_path: Path) -> None:
         raw_result_sha256=sha256_file(raw),
         execution_profile={"shape": 12},
     )
+    binding["path"] = "raw.json"
     validate_binding(binding, raw_path=raw)
     raw.write_text('{"value":2}\n', encoding="utf-8")
     with pytest.raises(ValueError, match="raw result digest mismatch"):

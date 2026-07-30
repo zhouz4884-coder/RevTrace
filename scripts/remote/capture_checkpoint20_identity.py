@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import platform
 import subprocess
@@ -24,7 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--data-manifest", type=Path, required=True)
-    parser.add_argument("--runtime", type=Path, required=True)
+    parser.add_argument("--runtime", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args()
 
@@ -56,12 +57,21 @@ def main() -> int:
         ).strip().splitlines()
     except Exception:
         driver = []
+    runtime = args.runtime
+    if runtime is None:
+        spec = importlib.util.find_spec(
+            "vllm.model_executor.layers.batch_invariant"
+        )
+        if spec is None or spec.origin is None:
+            raise RuntimeError("cannot locate deployed batch-invariant runtime")
+        runtime = Path(spec.origin)
     payload = {
         "schema_version": 1,
         "model_root_label": args.model.name,
         "model_fingerprint": model,
         "data_manifest_sha256": sha256_file(args.data_manifest),
-        "authority_runtime_sha256": sha256_file(args.runtime),
+        "authority_runtime_path": str(runtime.resolve()),
+        "authority_runtime_sha256": sha256_file(runtime),
         "environment": {
             "python": platform.python_version(),
             "gpu_driver_and_name": driver,
@@ -78,4 +88,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
