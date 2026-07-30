@@ -18,6 +18,10 @@ REQUIRED_BINDINGS = {
     "formal_risk_audit",
     "semantic_integration",
     "deployed_quality",
+    "identity_extension",
+    "resume_lineage",
+    "continuous_provisional_ux",
+    "quality_dependency",
     *(f"live_seed_{seed}" for seed in SEEDS),
 }
 
@@ -83,22 +87,53 @@ def main() -> int:
     risk = load(root / "anytime_risk_audit.json")
     semantics = load(root / "holdback_semantics_gate.json")
     quality = load(root / "deployed_b12_quality_32x2.json")
+    identity = load(root / "deployment_identity_v2.json")
+    resume = load(root / "resume_quality_attestation.json")
+    ux_audit = load(root / "provisional_experience_audit.json")
+    dependency = load(root / "quality_dependency_audit.json")
     threshold = float(contract["mechanism"]["risk_policy"]["minimum_margin_threshold"])
     seed_rows: list[dict[str, Any]] = []
     for seed in SEEDS:
         stage = heldout(load(root / f"seed_{seed}.json"))
+        checkpoint_rounds = sum(
+            bool(row["checkpoint_boundary"])
+            for row in stage["rounds_detail"]
+        )
+        checkpoint_events = checkpoint_rounds * int(stage["concurrency"])
+        holdbacks = sum(
+            int(row.get("holdback_count", 0))
+            for row in stage["rounds_detail"]
+        )
+        synchronous_low_margin_verifications = sum(
+            int(row.get("verified_count", 0))
+            for row in stage["rounds_detail"]
+            if not row["checkpoint_boundary"]
+        )
+        revision_opportunities = int(stage["events"])
         seed_rows.append(
             {
                 "seed": seed,
-                "events": int(stage["events"]),
+                "revision_opportunities": revision_opportunities,
+                "committed_state_transitions": (
+                    revision_opportunities - holdbacks
+                ),
                 "p50_seconds": float(stage["state_entry_latency_seconds_p50"]),
                 "p95_seconds": float(stage["state_entry_latency_seconds_p95"]),
                 "p99_seconds": float(stage["state_entry_latency_seconds_p99"]),
                 "deadline_miss_events": int(stage["deadline_miss_events"]),
-                "verification_fraction": float(stage["verification_fraction"]),
-                "holdbacks": sum(
-                    int(row.get("holdback_count", 0))
-                    for row in stage["rounds_detail"]
+                "authority_checkpoint_fraction": (
+                    checkpoint_events / revision_opportunities
+                ),
+                "recorded_verification_fraction": float(
+                    stage["verification_fraction"]
+                ),
+                "synchronous_low_margin_verifications": (
+                    synchronous_low_margin_verifications
+                ),
+                "holdbacks": holdbacks,
+                "provisional_holdback_fraction": (
+                    holdbacks
+                    / max(1, revision_opportunities - checkpoint_events)
                 ),
                 "authority_violations": int(
                     stage["online_selection_authority_violations"]
@@ -127,6 +162,27 @@ def main() -> int:
             and sum(row["deadline_miss_events"] for row in seed_rows) == 0
             and sum(row["authority_violations"] for row in seed_rows) == 0
         ),
+        "five_seed_event_accounting": bool(
+            sum(row["revision_opportunities"] for row in seed_rows) == 3_600
+            and sum(
+                row["committed_state_transitions"] for row in seed_rows
+            )
+            == 3_539
+            and sum(row["holdbacks"] for row in seed_rows) == 61
+            and all(
+                abs(
+                    row["authority_checkpoint_fraction"]
+                    - row["recorded_verification_fraction"]
+                )
+                <= 1e-12
+                for row in seed_rows
+            )
+            and sum(
+                row["synchronous_low_margin_verifications"]
+                for row in seed_rows
+            )
+            == 0
+        ),
         "holdback_semantics": semantics["decision"] == "HOLDBACK_SEMANTICS_PASS",
         "deployed_b12_quality": bool(
             quality["decision"] == "OBSERVED_QUALITY_TOLERANCE_PASS"
@@ -138,6 +194,37 @@ def main() -> int:
         ),
         "provisional_lifetime_bound": bool(
             quality["provisional_experience"]["lifetime_bound_pass"]
+        ),
+        "resume_lineage": bool(
+            resume["decision"] == "RESUME_QUALITY_ATTESTATION_PASS"
+            and all(resume["checks"].values())
+            and all(resume["reused_transcript_checks"].values())
+        ),
+        "continuous_provisional_ux": bool(
+            ux_audit["decision"] == "CONTINUOUS_PROVISIONAL_UX_AUDIT_PASS"
+            and float(
+                ux_audit["audit"][
+                    "empty_provisional_overwrite_boundary"
+                ]
+            )
+            == 0.0
+            and int(ux_audit["audit"]["transition_counts"]["all"])
+            == int(ux_audit["audit"]["holdback_events"])
+        ),
+        "quality_dependence_documented": bool(
+            dependency["decision"] == "QUALITY_DEPENDENCE_AUDIT_COMPLETE"
+            and dependency["audit"]["cross_session_source_dependence"]
+        ),
+        "artifact_identity_extension": bool(
+            int(identity["schema_version"]) == 2
+            and identity["data_manifest_sha256"]
+            == contract["mechanism"]["data"]["manifest_sha256"]
+            and identity["model_fingerprint"]["content_digest"]
+            == contract["mechanism"]["model"]["fingerprint"][
+                "content_digest"
+            ]
+            and identity["authority_runtime_sha256"]
+            == contract["mechanism"]["authority"]["runtime_sha256"]
         ),
     }
     passed = all(checks.values())
@@ -163,6 +250,16 @@ def main() -> int:
                         "observed_mean_delta"
                     ]
                 ),
+                "holdback_incremental_ci_low": float(
+                    row["components"]["holdback_incremental_delta"][
+                        "ci95_low"
+                    ]
+                ),
+                "holdback_incremental_ci_high": float(
+                    row["components"]["holdback_incremental_delta"][
+                        "ci95_high"
+                    ]
+                ),
                 "total_delta": float(
                     row["components"]["total_delta"]["observed_mean_delta"]
                 ),
@@ -180,10 +277,16 @@ def main() -> int:
         "contract_manifest": contract_path,
         "contract_bindings": binding_path,
         "deployment_identity": root / "deployment_identity.json",
+        "deployment_identity_v2": root / "deployment_identity_v2.json",
         "calibration": root / "calibration.json",
         "formal_risk_audit": root / "anytime_risk_audit.json",
         "holdback_semantics": root / "holdback_semantics_gate.json",
         "deployed_quality": root / "deployed_b12_quality_32x2.json",
+        "resume_quality_attestation": root
+        / "resume_quality_attestation.json",
+        "provisional_experience_audit": root
+        / "provisional_experience_audit.json",
+        "quality_dependency_audit": root / "quality_dependency_audit.json",
         **{f"seed_{seed}": root / f"seed_{seed}.json" for seed in SEEDS},
     }
     implementation_paths = {
@@ -204,16 +307,23 @@ def main() -> int:
         "binding_builder": Path(
             "scripts/bind_checkpoint20_evidence.py"
         ).resolve(),
+        "offline_evidence_auditor": Path(
+            "scripts/audit_checkpoint20_submission_evidence.py"
+        ).resolve(),
+        "evidence_audit_library": Path(
+            "src/revtrace/evidence_audit.py"
+        ).resolve(),
+        "provenance_library": Path("src/revtrace/provenance.py").resolve(),
         "finalizer": Path(__file__).resolve(),
     }
     ux = quality["provisional_experience"]
     summary = {
-        "schema_version": 2,
+        "schema_version": 3,
         "study": "checkpoint20_submission_evidence_closure",
         "decision": (
-            "CHECKPOINT20_HOLDBACK_SUBMISSION_EVIDENCE_PASS"
+            "REVTRACE_EXPERIMENTAL_EVIDENCE_COMPLETE_FOR_FGCS_SUBMISSION"
             if passed
-            else "CHECKPOINT20_HOLDBACK_SUBMISSION_EVIDENCE_FAIL"
+            else "REVTRACE_EXPERIMENTAL_EVIDENCE_INCOMPLETE"
         ),
         "mechanism_digest": mechanism_digest,
         "selected_contract": (
@@ -227,6 +337,15 @@ def main() -> int:
         },
         "risk_certificate": risk["risk_certificate"],
         "five_seed": {
+            "revision_opportunities": sum(
+                row["revision_opportunities"] for row in seed_rows
+            ),
+            "committed_state_transitions": sum(
+                row["committed_state_transitions"] for row in seed_rows
+            ),
+            "provisional_holdbacks": sum(
+                row["holdbacks"] for row in seed_rows
+            ),
             "maximum_p99_seconds": max(row["p99_seconds"] for row in seed_rows),
             "mean_p99_seconds": statistics.mean(
                 row["p99_seconds"] for row in seed_rows
@@ -243,6 +362,35 @@ def main() -> int:
         "provisional_experience": {
             key: value for key, value in ux.items() if key != "events"
         },
+        "continuous_provisional_experience": {
+            key: value
+            for key, value in ux_audit["audit"].items()
+            if key not in {"episodes", "per_session"}
+        },
+        "quality_dependency": dependency["audit"],
+        "resume_lineage": {
+            key: value
+            for key, value in resume.items()
+            if key != "identity_source_checks"
+        },
+        "artifact_identity_extension": {
+            "identity_extension_digest": identity[
+                "identity_extension_digest"
+            ],
+            "audio_file_count": identity["data_content"][
+                "audio_file_count"
+            ],
+            "audio_content_digest": identity["data_content"][
+                "content_digest"
+            ],
+            "gpu_identity": identity["environment"]["gpu_identity"],
+            "software": identity["environment"]["software"],
+            "claim_boundary": identity["claim_boundary"],
+        },
+        "runner_provenance": {
+            name: binding["execution_profile"]["source_provenance"]
+            for name, binding in bindings["bindings"].items()
+        },
         "semantic_patterns": semantics["patterns"],
         "excluded_mechanisms": bindings["excluded_evidence"],
         "evidence_sha256": {
@@ -252,7 +400,7 @@ def main() -> int:
             }
             for name, path in evidence_paths.items()
         },
-        "implementation_sha256": {
+        "current_reproduction_implementation_sha256": {
             name: {
                 "path": path.relative_to(Path.cwd().resolve()).as_posix(),
                 "sha256": sha256_file(path),
@@ -264,6 +412,9 @@ def main() -> int:
             "Population noninferiority is unresolved unless the paired bootstrap upper bound is also at most 2 percentage points.",
             "The time-uniform risk statement concerns admitted state entries; margin is not a deterministic arithmetic certificate.",
             "Provisional experience statistics describe this frozen natural workload, not production prevalence.",
+            "The paired bootstrap resamples fixed constructed sessions; cross-session source reuse prevents interpreting it as an independent-source population interval.",
+            "The identity extension is a post-run content attestation and does not retroactively alter the frozen mechanism digest.",
+            "Live seed runner source is a retrospectively frozen repository snapshot because those raw JSON files did not embed a runner SHA; quality and semantic runners have at-run SHA provenance.",
             "Legacy B=8 quality and the B=2 or dual-lane NO-GO branches are excluded from the selected contract.",
         ],
     }
@@ -293,15 +444,21 @@ def main() -> int:
         "",
         "## Five-seed service",
         "",
-        "| Seed | P50 | P95 | P99 | misses | verify | holdbacks | J/audio-s |",
-        "|---:|---:|---:|---:|---:|---:|---:|---:|",
+        f"- Five seeds contain {summary['five_seed']['revision_opportunities']} revision opportunities, {summary['five_seed']['committed_state_transitions']} committed state transitions, and {summary['five_seed']['provisional_holdbacks']} provisional holdbacks.",
+        "- The recorded 10% verification field is exactly the fixed checkpoint-authority fraction (6 of 60 rounds); synchronous low-margin verification is zero under holdback.",
+        "",
+        "| Seed | P50 | P95 | P99 | misses | checkpoint authority | sync low-margin verify | holdbacks | holdback rate | J/audio-s |",
+        "|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in seed_rows:
         lines.append(
             f"| {row['seed']} | {row['p50_seconds']:.3f} | "
             f"{row['p95_seconds']:.3f} | {row['p99_seconds']:.3f} | "
             f"{row['deadline_miss_events']} | "
-            f"{pct(row['verification_fraction'])} | {row['holdbacks']} | "
+            f"{pct(row['authority_checkpoint_fraction'])} | "
+            f"{row['synchronous_low_margin_verifications']} | "
+            f"{row['holdbacks']} | "
+            f"{pct(row['provisional_holdback_fraction'])} | "
             f"{row['joules_per_audio_second']:.3f} |"
         )
     lines.extend(
@@ -309,8 +466,8 @@ def main() -> int:
             "",
             "## Deployed B=12 paired quality",
             "",
-            "| Language | n | continuous | checkpoint+verify | checkpoint+holdback | checkpoint delta | holdback incremental | total delta | total 95% CI | catastrophic |",
-            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+            "| Language | n | continuous | checkpoint+verify | checkpoint+holdback | checkpoint delta | holdback incremental | incremental 95% CI | total delta | total 95% CI | catastrophic |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
         ]
     )
     for row in quality_rows:
@@ -318,7 +475,10 @@ def main() -> int:
             f"| {row['language']} ({row['metric'].upper()}) | {row['sessions']} | "
             f"{pct(row['continuous'])} | {pct(row['checkpoint_verify'])} | "
             f"{pct(row['checkpoint_holdback'])} | {pct(row['checkpoint_delta'])} | "
-            f"{pct(row['holdback_incremental_delta'])} | {pct(row['total_delta'])} | "
+            f"{pct(row['holdback_incremental_delta'])} | "
+            f"[{pct(row['holdback_incremental_ci_low'])}, "
+            f"{pct(row['holdback_incremental_ci_high'])}] | "
+            f"{pct(row['total_delta'])} | "
             f"[{pct(row['total_ci_low'])}, {pct(row['total_ci_high'])}] | "
             f"{row['catastrophic']} |"
         )
@@ -340,7 +500,24 @@ def main() -> int:
             f"{pct(ux['provisional_overwrite_fraction']['maximum'])}.",
             f"- Zero-overwrite resolutions: "
             f"{pct(ux['provisional_overwrite_fraction']['zero_overwrite_fraction'])}.",
+            f"- Continuous display reconstruction: {ux_audit['audit']['resolution_episodes']} resolution episodes, {ux_audit['audit']['multi_holdback_episodes']} multi-holdback episodes, and maximum burst length {ux_audit['audit']['episode_burst_length']['maximum']:.0f}.",
+            f"- Actual P1->P2->...->authority transition overwrite mean/P95/max: "
+            f"{pct(ux_audit['audit']['transition_overwrite_fraction']['mean'])}/"
+            f"{pct(ux_audit['audit']['transition_overwrite_fraction']['p95'])}/"
+            f"{pct(ux_audit['audit']['transition_overwrite_fraction']['maximum'])}.",
+            f"- Episode cumulative churn mean/P95/max: "
+            f"{ux_audit['audit']['episode_cumulative_churn']['mean']:.3f}/"
+            f"{ux_audit['audit']['episode_cumulative_churn']['p95']:.3f}/"
+            f"{ux_audit['audit']['episode_cumulative_churn']['maximum']:.3f}.",
+            f"- Empty provisional events: {ux_audit['audit']['empty_provisional_events']}; their defined overwrite boundary is exactly zero.",
             "- The legacy forward edit metric is retained in raw JSON only; it counts normal appended text and can exceed 100%, so it is not used as the UX claim.",
+            "",
+            "## Quality dependence and identity",
+            "",
+            f"- Cross-session source reuse: {dependency['audit']['cross_session_source_dependence']}; cluster bootstrap status: **{dependency['audit']['cluster_bootstrap_status']}**.",
+            "- Both language-specific session-source graphs form one connected component, so the paired bootstrap is reported only for the frozen constructed-session sample.",
+            f"- Post-run identity extension covers {identity['data_content']['audio_file_count']} byte-hashed audio files, GPU UUIDs, package versions, Qwen-ASR source, the model fingerprint, and the authority runtime.",
+            f"- Resume lineage audit: **{resume['decision']}**; continuous and checkpoint+verify transcripts are byte-for-byte inherited from the declared source artifact.",
             "",
             "## Excluded branches",
             "",

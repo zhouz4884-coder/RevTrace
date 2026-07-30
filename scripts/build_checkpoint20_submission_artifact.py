@@ -18,17 +18,25 @@ FILES = (
     "results/checkpoint20_holdback_authority/contract_manifest.json",
     "results/checkpoint20_holdback_authority/contract_bindings.json",
     "results/checkpoint20_holdback_authority/deployment_identity.json",
+    "results/checkpoint20_holdback_authority/deployment_identity_v2.json",
     "results/checkpoint20_holdback_authority/holdback_semantics_gate.json",
     "results/checkpoint20_holdback_authority/deployed_b12_quality_32x2.json",
+    "results/checkpoint20_holdback_authority/deployed_b12_quality_32x2_ux_metric_negative.json",
     "results/checkpoint20_holdback_authority/deployed_quality_summary.csv",
+    "results/checkpoint20_holdback_authority/resume_quality_attestation.json",
+    "results/checkpoint20_holdback_authority/provisional_experience_audit.json",
+    "results/checkpoint20_holdback_authority/quality_dependency_audit.json",
     "results/checkpoint20_holdback_authority/final_summary_v2.json",
+    "scripts/audit_checkpoint20_submission_evidence.py",
     "scripts/bind_checkpoint20_evidence.py",
     "scripts/finalize_checkpoint20_submission.py",
     "scripts/remote/capture_checkpoint20_identity.py",
     "scripts/remote/run_deployed_checkpoint20_quality.py",
     "scripts/remote/run_holdback_semantics_gate.py",
     "src/revtrace/contract_manifest.py",
+    "src/revtrace/evidence_audit.py",
     "src/revtrace/long_horizon.py",
+    "src/revtrace/provenance.py",
 )
 TEXT_SUFFIXES = {".csv", ".json", ".md", ".py"}
 
@@ -81,15 +89,19 @@ def main() -> int:
         .read_text(encoding="utf-8")
     )
     manifest = {
-        "schema_version": 1,
+        "schema_version": 2,
         "artifact": "checkpoint20-submission-closure-v2",
         "decision": final["decision"],
         "mechanism_digest": final["mechanism_digest"],
         "scope": (
-            "bounded paper-facing evidence and exact source snapshots; "
+            "bounded paper-facing evidence, current reproduction source, and "
+            "Git-resolved historical runner provenance; "
             "large calibration/service raw traces remain content-addressed "
             "by final_summary_v2.json"
         ),
+        "identity_extension_digest": final["artifact_identity_extension"][
+            "identity_extension_digest"
+        ],
         "files": entries,
     }
     manifest_path = output / "MANIFEST.json"

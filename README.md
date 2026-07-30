@@ -303,7 +303,7 @@ certificate. See the
 
 ### Checkpoint-20 submission evidence closure
 
-`CHECKPOINT20_HOLDBACK_SUBMISSION_EVIDENCE_PASS`
+`REVTRACE_EXPERIMENTAL_EVIDENCE_COMPLETE_FOR_FGCS_SUBMISSION`
 
 The repaired long-horizon contract keeps low-margin nonterminal output
 provisional instead of synchronously selecting it as textual feedback state.
@@ -312,10 +312,13 @@ authoritative segment; terminal revisions use the same canonical authority.
 This removes the rare singleton-verification stall that caused the earlier
 120-second tail regression without calling the provisional candidate exact.
 
-Across five frozen 120-second seeds (3,600 state-entry events), the worst
+Across five frozen 120-second seeds (3,600 revision opportunities and 3,539
+committed state transitions), the worst
 per-session event P99 is 1.414 seconds, total deadline misses are zero, and
-online selection-authority violations are zero. The service verifies 10% of
-events and holds back 61 low-margin provisional candidates. A separate
+online selection-authority violations are zero. Fixed checkpoint authority
+runs on 10% of opportunities (6 of 60 rounds), synchronous low-margin
+verification is zero, and the service holds back 61 low-margin provisional
+candidates (1.883% of non-checkpoint opportunities). A separate
 pre-outcome randomized audit covers 30,423 admitted high-margin state entries
 and yields a 95% time-uniform state-risk UCB of 0.4733%.
 
