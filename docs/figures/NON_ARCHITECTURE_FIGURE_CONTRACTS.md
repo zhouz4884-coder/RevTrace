@@ -5,71 +5,70 @@ Backend: Python/matplotlib only.
 Target: double-column systems/ML journal figures, 183 mm wide, editable SVG and
 PDF plus 600 dpi TIFF and 300 dpi PNG previews. All quantitative panels are
 traceable to frozen repository data. Red denotes a failed boundary, not a
-method family. Green denotes a passed guard, not statistical significance.
+method family. Teal denotes a passed guard, not statistical significance.
+Figure 1 is intentionally excluded from this renderer.
 
 ## Figure 2 — Batching creates both the opportunity and the state risk
 
-- Core conclusion: low-precision batching delivers large throughput gains but
-  changes revision outputs, and previous-text feedback converts some local
-  execution differences into persistent state differences.
-- Archetype: quantitative grid.
-- Panel a: median and maximum audio-throughput speedup for both Qwen3-ASR
-  models.
-- Panel b: token, partial-transcript, and final-transcript exactness under
-  ordinary batching.
-- Panel c: same-input controls separating singleton repeatability from
-  batch-repeat and cross-shape mismatches.
-- Panel d: Whisper feedback-on versus feedback-off propagation under fixed
-  future audio.
-- Reviewer risk: throughput and exactness share a workload matrix but are not a
-  deterministic-error-rate estimate; Whisper pair yield is not production
-  prevalence.
+- Core conclusion: low-precision batching exposes a large performance envelope
+  but is not a semantics-preserving transform; same-input and feedback controls
+  isolate execution shape and revision feedback as the causal chain.
+- Archetype: asymmetric mechanism/analysis composite.
+- Panel a: median-to-maximum speedup envelopes for both Qwen3-ASR models.
+- Panel b: a fully vectorized exactness matrix reporting token, partial, and
+  final exactness together with distance from deterministic execution.
+- Panel c: a same-input causal chain reporting singleton-repeat, batch-repeat,
+  and singleton-versus-batch mismatches over 720 revision events.
+- Panel d: two 21-pair counterfactual dot matrices showing propagation with
+  feedback enabled and disabled.
+- Reviewer risk: the performance envelope and exactness matrix share a frozen
+  workload matrix but do not estimate a production error rate; the 21-pair
+  suite is causal evidence, not prevalence evidence.
 
 ## Figure 3 — RevTrace converts the opportunity into efficient serving
 
-- Core conclusion: state-certified revision serving achieves approximately
-  5–6x wall-clock speedup, remains below the two-second SLO, sharply reduces
-  energy, and keeps the time-uniform state-risk bound below 0.5%.
-- Archetype: asymmetric quantitative grid with the replicated wall-speedup
-  panel as hero evidence.
-- Panel a: five real two-GPU wall-speedup replicates per model with mean and
-  95% t interval.
-- Panel b: matching state-entry P99 replicates with the two-second deadline.
-- Panel c: matched two-GPU energy for RevTrace and all-canonical execution.
-- Panel d: randomized anytime risk upper bounds against the frozen budget.
-- Reviewer risk: risk events are correlated execution events, not independent
-  utterances; matched energy and service replication use different repeat
-  counts and are labelled separately.
+- Core conclusion: replicated RevTrace deployment jointly occupies the fast
+  and sub-SLO region, reduces matched energy, and stays inside the time-uniform
+  0.5% risk budget.
+- Archetype: asymmetric quantitative figure with a hero phase-space panel.
+- Panel a: speedup-versus-P99 replicate phase space with open run markers,
+  means, covariance ellipses, energy reduction, and risk UCB annotations.
+- Panel b: matched all-canonical-to-RevTrace energy slopegraph for both models.
+- Panel c: risk-budget bullet chart with audit counts and observed violations.
+- Reviewer risk: covariance ellipses summarize replicate geometry and are not
+  population confidence regions; risk events are correlated execution events.
 
 ## Figure 4 — Adaptation is contract-scoped and jointly risk/SLO aware
 
-- Core conclusion: RevTrace adapts evidence to exact execution contracts,
-  preserves safe performance across heterogeneous workloads, and refuses
-  unsafe or overloaded contracts rather than transferring a convenient
-  threshold.
-- Archetype: asymmetric mixed quantitative figure.
-- Panel a: live c16→c64→c16 controller trajectory showing learned thresholds,
-  risk bounds, and the c64 SLO failure.
-- Panel b: eight-cell workload frontier, wall speedup versus P99, with deadline
-  and state-safety status encoded independently.
-- Panel c: exact-contract renewal versus flat recertification.
-- Panel d: feedback-on/off causal propagation in a second model family.
-- Reviewer risk: the controller trajectory and workload matrix are distinct
-  protocols; markers communicate boundaries rather than imply a pooled fit.
+- Core conclusion: the safe operating surface depends jointly on concurrency,
+  horizon, model, latency, energy, and state safety; RevTrace adapts to exact
+  contracts rather than transferring a fixed threshold.
+- Archetype: 3D hero landscape plus subordinate contract evidence.
+- Panel a: 3D configuration landscape; height encodes wall speedup, marker
+  shape encodes model, color encodes joint-contract outcome, and labels report
+  P99 and energy.
+- Panel b: live risk–latency phase trajectory for c16→c64→c16; point area
+  encodes goodput and labels report learned thresholds.
+- Panel c: recertification funnel from 1,358 flat-relearning events to 64
+  exact-contract-renewal events.
+- Panel d: second-family counterfactual feedback dot matrices.
+- Reviewer risk: the controller trajectory and workload frontier are distinct
+  protocols; the 3D view encodes measured cells rather than a fitted surface.
 
 ## Figure 5 — Checkpoint-20 Holdback closes the long-session tail
 
-- Core conclusion: withholding low-margin text authority while advancing audio
-  removes synchronized verification stalls, restores the long-session SLO,
-  and adds little incremental ASR degradation.
-- Archetype: quantitative grid.
-- Panel a: sequential long-session mechanism outcomes—continuous,
-  checkpoint/rebase, and the final holdback contract—with the 1.9 s guard and
-  2.0 s deadline.
-- Panel b: five independent 120 s seed latency quantiles and energy.
-- Panel c: paired quality forest plot for checkpoint total and holdback-only
-  incremental deltas.
-- Panel d: actual provisional display-transition overwrite distributions.
-- Reviewer risk: panel a is a mechanism progression, not a paired estimator;
-  the quality interval is descriptive for the frozen constructed-session
-  sample because source audio is reused across sessions.
+- Core conclusion: withholding low-margin display authority while advancing
+  audio removes synchronized verification stalls, repeats across held-out
+  seeds, and preserves quality and observable display-authority behavior.
+- Archetype: asymmetric long-horizon validation composite.
+- Panel a: mechanism trajectory from continuous execution through checkpoint/
+  rebase to Checkpoint-20 Holdback, with guard/deadline bands and causal
+  annotations.
+- Panel b: five-seed P50–P95–P99 latency fan with per-seed energy labels.
+- Panel c: paired quality forest separating total checkpoint+holdback change
+  from the holdback-only increment.
+- Panel d: provisional-transition overwrite raincloud/rug with means, medians,
+  and sample counts.
+- Reviewer risk: panel a is a sequential mechanism progression rather than a
+  paired estimator; quality intervals are descriptive for the frozen
+  constructed-session sample because source audio is reused.
