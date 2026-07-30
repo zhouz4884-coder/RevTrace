@@ -17,15 +17,20 @@ import json
 import multiprocessing as mp
 import os
 import platform
-import re
 import statistics
 import sys
 import time
-import unicodedata
 from pathlib import Path
 from typing import Any
 
 import numpy as np
+
+SOURCE_DIR = Path(__file__).resolve().parents[2] / "src"
+sys.path.insert(0, str(SOURCE_DIR))
+from revtrace.evidence_audit import (  # noqa: E402
+    provisional_overwrite_fraction,
+    validate_resume_quality,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -80,40 +85,6 @@ def percentile(values: list[float], q: float) -> float:
     return ordered[lower] * (1.0 - weight) + ordered[upper] * weight
 
 
-def visible_units(text: str, language: str) -> list[str]:
-    value = unicodedata.normalize("NFKC", text).lower()
-    if language == "Chinese":
-        return [
-            character
-            for character in value
-            if not character.isspace()
-            and not unicodedata.category(character).startswith("P")
-        ]
-    value = re.sub(r"[^\w\s']", " ", value)
-    return " ".join(value.split()).split()
-
-
-def provisional_overwrite_fraction(
-    provisional: str,
-    authoritative: str,
-    language: str,
-) -> float:
-    """Fraction of already displayed units that cease to be an exact prefix.
-
-    Text appended after the provisional hypothesis is not an overwrite and
-    therefore carries zero cost.  The metric is always in [0, 1].
-    """
-
-    left = visible_units(provisional, language)
-    right = visible_units(authoritative, language)
-    common = 0
-    for a, b in zip(left, right):
-        if a != b:
-            break
-        common += 1
-    return 1.0 - common / max(1, len(left))
-
-
 def main() -> int:
     args = parse_args()
     if (
@@ -123,6 +94,11 @@ def main() -> int:
         or args.sessions_per_language < 16
     ):
         raise ValueError("frozen gate requires B=12, >=16 sessions/language")
+    if (
+        args.resume_quality is not None
+        and args.resume_quality.resolve() == args.output.resolve()
+    ):
+        raise ValueError("resume source and output must be different files")
     args.output.parent.mkdir(parents=True, exist_ok=True)
     script_dir = Path(__file__).resolve().parent
     sys.path.insert(0, str(script_dir))
@@ -222,6 +198,27 @@ def main() -> int:
         for language in ("English", "Chinese")
         for index in range(args.sessions_per_language)
     ]
+    resumed_from: dict[str, Any] | None = None
+    resume_validation: dict[str, Any] | None = None
+    if args.resume_quality is not None:
+        resumed_from = json.loads(
+            args.resume_quality.read_text(encoding="utf-8")
+        )
+        expected_deployment = {
+            "proposer": "gpu0_fp16_ordinary_fixed_b12",
+            "authority": "gpu1_fp16_batch_invariant_fixed_b12",
+            "duration_seconds": args.duration_seconds,
+            "checkpoint_seconds": args.checkpoint_seconds,
+            "margin_threshold": args.margin_threshold,
+            "sessions_per_language": args.sessions_per_language,
+        }
+        resume_validation = validate_resume_quality(
+            resumed=resumed_from,
+            expected_sessions=streams,
+            mechanism_digest=contract["mechanism_digest"],
+            contract_manifest_sha256=sha256(args.contract_manifest),
+            expected_deployment=expected_deployment,
+        )
 
     context = mp.get_context("spawn")
     command_queue = context.Queue()
@@ -544,19 +541,14 @@ def main() -> int:
                 combined["boundary_snapshots"].setdefault(age, []).extend(values)
         return combined
 
-    resumed_from: dict[str, Any] | None = None
     if args.resume_quality is None:
         continuous = run_all("continuous")
         checkpoint_verify = run_all("checkpoint_verify")
     else:
-        resumed_from = json.loads(
-            args.resume_quality.read_text(encoding="utf-8")
-        )
+        assert resumed_from is not None
         by_session = {
             row["session_id"]: row for row in resumed_from["paired_sessions"]
         }
-        if set(by_session) != {stream["session_id"] for stream in streams}:
-            raise ValueError("resume artifact uses a different session set")
         continuous = {
             "finals": [
                 by_session[stream["session_id"]]["transcripts"]["continuous"]
@@ -759,6 +751,7 @@ def main() -> int:
                 if args.resume_quality is not None
                 else None
             ),
+            "resume_validation": resume_validation,
         },
         "claim_boundaries": [
             "Observed paired mean quality tolerance is distinct from population noninferiority.",

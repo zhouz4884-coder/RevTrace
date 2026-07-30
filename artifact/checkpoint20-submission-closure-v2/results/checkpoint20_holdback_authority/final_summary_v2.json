@@ -1,12 +1,210 @@
 {
+  "artifact_identity_extension": {
+    "audio_content_digest": "5c331a27d48a81f652ce156d6695ff8cdcd7fe86200ff7ade52a8d2f860b9875",
+    "audio_file_count": 128,
+    "claim_boundary": "This post-run content attestation strengthens artifact identity. Only identities already embedded in the frozen mechanism digest are claimed as at-run contract fields.",
+    "gpu_identity": [
+      "0, GPU-ef01d441-985f-50b3-6e64-5d4c3e2def3a, 00000000:06:00.0, 570.133.07, NVIDIA GeForce RTX 3090",
+      "1, GPU-a696ce9a-7137-cf6f-b4d3-deb992a72f28, 00000000:21:00.0, 570.133.07, NVIDIA GeForce RTX 3090"
+    ],
+    "identity_extension_digest": "d5613401f95f0c9b381e0d01488b26a2b683c07b77063ca097d978de7335a8eb",
+    "software": {
+      "packages": {
+        "accelerate": "1.12.0",
+        "numpy": "2.2.6",
+        "qwen-asr": "0.0.6",
+        "tokenizers": "0.22.2",
+        "torch": "2.9.1",
+        "transformers": "4.57.6",
+        "triton": "3.5.1",
+        "vllm": "0.14.0"
+      },
+      "qwen_asr_source": {
+        "available": true,
+        "content_digest": "c8da90afa66a6c6a7a60e6e4bb862335fb10008f56ca4c8f2b75f256b1416418",
+        "files": {
+          "__init__.py": {
+            "bytes": 861,
+            "sha256": "26897071129fd175b1851cb3407be711f79b912efaefb9dc4a19fe3e88427e94"
+          },
+          "__main__.py": {
+            "bytes": 871,
+            "sha256": "4a340eacab567a4c5ce672d38b9b8c695088947d7e2759299266076db8791c8d"
+          },
+          "cli/demo.py": {
+            "bytes": 17978,
+            "sha256": "e129ab41de33554091786b9bf3e6c18f8a65a17ff9eb738149b5f54354d881b8"
+          },
+          "cli/demo_streaming.py": {
+            "bytes": 13945,
+            "sha256": "5c92e769c8b4b5dd5b2a95ab2c218c1cf476ecff86ac48863d28d0a4c9f02fa3"
+          },
+          "cli/serve.py": {
+            "bytes": 1562,
+            "sha256": "d599a02e977b05d9bd625d539e39889060822c64cfd1c12b614ece62c3c42c80"
+          },
+          "core/transformers_backend/__init__.py": {
+            "bytes": 807,
+            "sha256": "6de5cac018e0c994e04e855ef7fe9ed142383e88ffdcdf80463cbc7d5028b21d"
+          },
+          "core/transformers_backend/configuration_qwen3_asr.py": {
+            "bytes": 20164,
+            "sha256": "acf6c3f1cb3dc1ea0df621a11f7df6ccca109be73b6bf51508b5052942f5bec1"
+          },
+          "core/transformers_backend/modeling_qwen3_asr.py": {
+            "bytes": 57850,
+            "sha256": "2fb5d98da1933748f5117ee05ce4e7150c9ead8154fb8e25f7af3968b853adc7"
+          },
+          "core/transformers_backend/processing_qwen3_asr.py": {
+            "bytes": 8545,
+            "sha256": "a61f1fbfc06e3dfc63a2b8d15e3b29e98b032792c3fb7d0e01c04ca9c2181ffb"
+          },
+          "core/vllm_backend/__init__.py": {
+            "bytes": 694,
+            "sha256": "45401be955b08e1135df6ec40f5c1dc05951b17868366f8d0bf0df06cf9e7720"
+          },
+          "core/vllm_backend/qwen3_asr.py": {
+            "bytes": 36090,
+            "sha256": "dad51cde09bef35fae5304ba1e5d4cc02a199845128d9bbb7717c4206584aa60"
+          },
+          "inference/qwen3_asr.py": {
+            "bytes": 31163,
+            "sha256": "0b1770f8e907b6c5a0a1e9ebce037cb63f48555f3cd15eaf6ea2078e9df41a7b"
+          },
+          "inference/qwen3_forced_aligner.py": {
+            "bytes": 16411,
+            "sha256": "fb586127507c5980d11c6d848b530e652afad3ae0707cba6eb0c90377b2a2111"
+          },
+          "inference/utils.py": {
+            "bytes": 13915,
+            "sha256": "b37fb4140e6d9be85f2ecb1552ed16136eb98a57f44b402f8b0b213cb6df2a82"
+          }
+        },
+        "module": "qwen_asr",
+        "source_root_label": "qwen_asr"
+      },
+      "revtrace_code_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+      "torch_runtime": {
+        "cudnn": 91002,
+        "torch": "2.9.1+cu128",
+        "torch_cuda": "12.8"
+      }
+    }
+  },
   "claim_boundaries": [
     "The observed quality tolerance gate passed only if the paired sample mean delta stayed within 2 percentage points with no catastrophic outlier.",
     "Population noninferiority is unresolved unless the paired bootstrap upper bound is also at most 2 percentage points.",
     "The time-uniform risk statement concerns admitted state entries; margin is not a deterministic arithmetic certificate.",
     "Provisional experience statistics describe this frozen natural workload, not production prevalence.",
+    "The paired bootstrap resamples fixed constructed sessions; cross-session source reuse prevents interpreting it as an independent-source population interval.",
+    "The identity extension is a post-run content attestation and does not retroactively alter the frozen mechanism digest.",
+    "Live seed runner source is a retrospectively frozen repository snapshot because those raw JSON files did not embed a runner SHA; quality and semantic runners have at-run SHA provenance.",
     "Legacy B=8 quality and the B=2 or dual-lane NO-GO branches are excluded from the selected contract."
   ],
-  "decision": "CHECKPOINT20_HOLDBACK_SUBMISSION_EVIDENCE_PASS",
+  "continuous_provisional_experience": {
+    "definition": "Actual display transitions are reconstructed per resolution episode as P1->P2->...->authority. Appended units are free; an empty provisional display has zero overwrite.",
+    "empty_provisional_events": 0,
+    "empty_provisional_overwrite_boundary": 0.0,
+    "episode_burst_length": {
+      "maximum": 3.0,
+      "mean": 1.0869565217391304,
+      "p50": 1.0,
+      "p95": 1.0
+    },
+    "episode_cumulative_churn": {
+      "maximum": 1.3991596638655461,
+      "mean": 0.0870605930273277,
+      "p50": 0.0,
+      "p95": 0.6545263157894725
+    },
+    "episode_maximum_single_visible_modification": {
+      "maximum": 1.0,
+      "mean": 0.06954157601981965,
+      "p50": 0.0,
+      "p95": 0.49178947368421005
+    },
+    "holdback_events": 75,
+    "multi_holdback_episodes": 3,
+    "provisional_to_authority_overwrite_fraction": {
+      "maximum": 1.0,
+      "mean": 0.06954157601981965,
+      "p50": 0.0,
+      "p95": 0.49178947368421005
+    },
+    "provisional_to_provisional_overwrite_fraction": {
+      "maximum": 0.47058823529411764,
+      "mean": 0.20146869558634264,
+      "p50": 0.19054054054054054,
+      "p95": 0.4422268907563025
+    },
+    "resolution_episodes": 69,
+    "schema_version": 1,
+    "session_maximum_burst_length": {
+      "maximum": 3.0,
+      "mean": 1.1428571428571428,
+      "p50": 1.0,
+      "p95": 2.8999999999999915
+    },
+    "sessions_with_holdback": 42,
+    "transition_counts": {
+      "all": 75,
+      "provisional_to_authority": 69,
+      "provisional_to_provisional": 6
+    },
+    "transition_overwrite_fraction": {
+      "maximum": 1.0,
+      "mean": 0.08009574558514149,
+      "p50": 0.0,
+      "p95": 0.4873065015479875
+    }
+  },
+  "current_reproduction_implementation_sha256": {
+    "binding_builder": {
+      "path": "scripts/bind_checkpoint20_evidence.py",
+      "sha256": "048ccb3cb74062eda08c4a9034c5389c3754173a9bdc7ab19b4fa45ba9226f5d"
+    },
+    "contract_library": {
+      "path": "src/revtrace/contract_manifest.py",
+      "sha256": "86dbc0d393018fa62e12f1db46bc59339e31a621b5b7c226534436e779cd17d6"
+    },
+    "deployed_quality_runner": {
+      "path": "scripts/remote/run_deployed_checkpoint20_quality.py",
+      "sha256": "ecc4062affae8fd5bc79d4552cb887c420f77d5e8e25113f92c2c29bcfd5fdce"
+    },
+    "evidence_audit_library": {
+      "path": "src/revtrace/evidence_audit.py",
+      "sha256": "07a7ad8a80a787ce716f650f9523dc9947b8a3f3af5459ef67e51a07aa3488ff"
+    },
+    "finalizer": {
+      "path": "scripts/finalize_checkpoint20_submission.py",
+      "sha256": "94937799810f7e94a2dfb602f31934ee7aaa17ebbe96fc14bdc39cc4fc453d69"
+    },
+    "holdback_semantics": {
+      "path": "src/revtrace/long_horizon.py",
+      "sha256": "a5417b5bc8293d465c1b019c4c832cbb328229d1e151cc3a38007858e3965675"
+    },
+    "live_runner": {
+      "path": "scripts/remote/run_phase5a_live_adaptive.py",
+      "sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+    },
+    "offline_evidence_auditor": {
+      "path": "scripts/audit_checkpoint20_submission_evidence.py",
+      "sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c"
+    },
+    "provenance_library": {
+      "path": "src/revtrace/provenance.py",
+      "sha256": "3271c9f0d27de97d5f81cfa179d872cfbbd0b6eb06bff5083721559b0803bcda"
+    },
+    "risk_runner": {
+      "path": "scripts/remote/run_checkpoint_dual_lane_shadow_audit.py",
+      "sha256": "2c68d282c0608a07a939b3a4ba81827c4c94da44221bab3d2e4b67004f597137"
+    },
+    "semantic_runner": {
+      "path": "scripts/remote/run_holdback_semantics_gate.py",
+      "sha256": "14bbc005c1f5eae644a2ae7bcc16cacc309baf6c8a9c77bcb44cf9fe26dfe30e"
+    }
+  },
+  "decision": "REVTRACE_EXPERIMENTAL_EVIDENCE_COMPLETE_FOR_FGCS_SUBMISSION",
   "deployed_quality": [
     {
       "catastrophic": 0,
@@ -14,6 +212,8 @@
       "checkpoint_holdback": 0.03768745936324374,
       "checkpoint_verify": 0.037952724500779175,
       "continuous": 0.026193246005800058,
+      "holdback_incremental_ci_high": 0.0,
+      "holdback_incremental_ci_low": -0.0007106455488460843,
       "holdback_incremental_delta": -0.0002652651375354341,
       "language": "Chinese",
       "metric": "cer",
@@ -28,6 +228,8 @@
       "checkpoint_holdback": 0.03519032039238291,
       "checkpoint_verify": 0.034916955683796484,
       "continuous": 0.025900108160694057,
+      "holdback_incremental_ci_high": 0.0010268750313793176,
+      "holdback_incremental_ci_low": -0.0004887039551137078,
       "holdback_incremental_delta": 0.00027336470858642094,
       "language": "English",
       "metric": "wer",
@@ -44,7 +246,7 @@
     },
     "contract_bindings": {
       "path": "results/checkpoint20_holdback_authority/contract_bindings.json",
-      "sha256": "f0e6b606395bbc3a0d68b62139e6118b231fb15a8dd2c141e458cfb29ab7a505"
+      "sha256": "3d8c2f4ca76441e132b2ed344f9e935b17f5e207fb2b92a602e4570b50f271fc"
     },
     "contract_manifest": {
       "path": "results/checkpoint20_holdback_authority/contract_manifest.json",
@@ -58,6 +260,10 @@
       "path": "results/checkpoint20_holdback_authority/deployment_identity.json",
       "sha256": "5afb790a125948e2e96c46aad65fb84ae1bf8854d5917839f31afab313cb0843"
     },
+    "deployment_identity_v2": {
+      "path": "results/checkpoint20_holdback_authority/deployment_identity_v2.json",
+      "sha256": "47c3da45d47619744809439d3f717736e8b7a9f1e27be67ba88000cbba3d241b"
+    },
     "formal_risk_audit": {
       "path": "results/checkpoint20_holdback_authority/anytime_risk_audit.json",
       "sha256": "ea24564460956be79807b9c70abd9f9cd28f3b78e70f719d27a52e5f25da9a7f"
@@ -65,6 +271,18 @@
     "holdback_semantics": {
       "path": "results/checkpoint20_holdback_authority/holdback_semantics_gate.json",
       "sha256": "ea404d6785451367413059155ca37ae976f6028b2ecba8b67795bf04ea95495a"
+    },
+    "provisional_experience_audit": {
+      "path": "results/checkpoint20_holdback_authority/provisional_experience_audit.json",
+      "sha256": "f30028dd8ab59d426870955e9d9ebbb0c7494e41914428f76433342da8b9f0a4"
+    },
+    "quality_dependency_audit": {
+      "path": "results/checkpoint20_holdback_authority/quality_dependency_audit.json",
+      "sha256": "db5b6f9e21fb55edc911d417bfc453b02728d64b03e808a73f753fe697cc3741"
+    },
+    "resume_quality_attestation": {
+      "path": "results/checkpoint20_holdback_authority/resume_quality_attestation.json",
+      "sha256": "980e400e7de43692635f17a642ee61775ad65596b0c00fedaab8755949d6cb0e"
     },
     "seed_20260840": {
       "path": "results/checkpoint20_holdback_authority/seed_20260840.json",
@@ -99,115 +317,109 @@
     }
   },
   "five_seed": {
+    "committed_state_transitions": 3539,
     "maximum_p99_seconds": 1.413811020553112,
     "mean_joules_per_audio_second": 8.669583208235355,
     "mean_p99_seconds": 1.2781361546367407,
+    "provisional_holdbacks": 61,
+    "revision_opportunities": 3600,
     "rows": [
       {
+        "authority_checkpoint_fraction": 0.1,
         "authority_violations": 0,
+        "committed_state_transitions": 702,
         "deadline_miss_events": 0,
-        "events": 720,
         "holdbacks": 18,
         "joules_per_audio_second": 9.239491412944338,
         "p50_seconds": 0.6748525835573673,
         "p95_seconds": 1.198569000279528,
         "p99_seconds": 1.413811020553112,
+        "provisional_holdback_fraction": 0.027777777777777776,
+        "recorded_verification_fraction": 0.1,
+        "revision_opportunities": 720,
         "seed": 20260840,
-        "verification_fraction": 0.1
+        "synchronous_low_margin_verifications": 0
       },
       {
+        "authority_checkpoint_fraction": 0.1,
         "authority_violations": 0,
+        "committed_state_transitions": 711,
         "deadline_miss_events": 0,
-        "events": 720,
         "holdbacks": 9,
         "joules_per_audio_second": 8.531705018618974,
         "p50_seconds": 0.6566475657746196,
         "p95_seconds": 1.1544343891087918,
         "p99_seconds": 1.3164224736392498,
+        "provisional_holdback_fraction": 0.013888888888888888,
+        "recorded_verification_fraction": 0.1,
+        "revision_opportunities": 720,
         "seed": 20260841,
-        "verification_fraction": 0.1
+        "synchronous_low_margin_verifications": 0
       },
       {
+        "authority_checkpoint_fraction": 0.1,
         "authority_violations": 0,
+        "committed_state_transitions": 706,
         "deadline_miss_events": 0,
-        "events": 720,
         "holdbacks": 14,
         "joules_per_audio_second": 8.525091844021832,
         "p50_seconds": 0.6562467874027789,
         "p95_seconds": 1.1799256137106544,
         "p99_seconds": 1.2616910627111793,
+        "provisional_holdback_fraction": 0.021604938271604937,
+        "recorded_verification_fraction": 0.1,
+        "revision_opportunities": 720,
         "seed": 20260842,
-        "verification_fraction": 0.1
+        "synchronous_low_margin_verifications": 0
       },
       {
+        "authority_checkpoint_fraction": 0.1,
         "authority_violations": 0,
+        "committed_state_transitions": 710,
         "deadline_miss_events": 0,
-        "events": 720,
         "holdbacks": 10,
         "joules_per_audio_second": 8.644592577136558,
         "p50_seconds": 0.6659765806980431,
         "p95_seconds": 1.102561823371797,
         "p99_seconds": 1.217335794121027,
+        "provisional_holdback_fraction": 0.015432098765432098,
+        "recorded_verification_fraction": 0.1,
+        "revision_opportunities": 720,
         "seed": 20260843,
-        "verification_fraction": 0.1
+        "synchronous_low_margin_verifications": 0
       },
       {
+        "authority_checkpoint_fraction": 0.1,
         "authority_violations": 0,
+        "committed_state_transitions": 710,
         "deadline_miss_events": 0,
-        "events": 720,
         "holdbacks": 10,
         "joules_per_audio_second": 8.407035188455072,
         "p50_seconds": 0.6556919827125967,
         "p95_seconds": 1.0539082436822318,
         "p99_seconds": 1.1814204221591353,
+        "provisional_holdback_fraction": 0.015432098765432098,
+        "recorded_verification_fraction": 0.1,
+        "revision_opportunities": 720,
         "seed": 20260844,
-        "verification_fraction": 0.1
+        "synchronous_low_margin_verifications": 0
       }
     ],
     "total_deadline_misses": 0
   },
   "gate_checks": {
+    "artifact_identity_extension": true,
     "calibration": true,
+    "continuous_provisional_ux": true,
     "deployed_b12_quality": true,
+    "five_seed_event_accounting": true,
     "five_seed_tail": true,
     "holdback_semantics": true,
     "provisional_lifetime_bound": true,
+    "quality_dependence_documented": true,
+    "resume_lineage": true,
     "shared_content_addressed_contract": true,
     "time_uniform_state_risk": true
-  },
-  "implementation_sha256": {
-    "binding_builder": {
-      "path": "scripts/bind_checkpoint20_evidence.py",
-      "sha256": "5f6fdaadbcdc55b25620d9db62b394acb308e6fcfd97b15bb67d5365c331e65d"
-    },
-    "contract_library": {
-      "path": "src/revtrace/contract_manifest.py",
-      "sha256": "86dbc0d393018fa62e12f1db46bc59339e31a621b5b7c226534436e779cd17d6"
-    },
-    "deployed_quality_runner": {
-      "path": "scripts/remote/run_deployed_checkpoint20_quality.py",
-      "sha256": "c54cb0b1c17b620f6ca308734742f27af544ad45a669f03d1c5ff7fb232fa649"
-    },
-    "finalizer": {
-      "path": "scripts/finalize_checkpoint20_submission.py",
-      "sha256": "5ca61d1302037848efa7ab6f7fc362becdce68485455b9ac168504fb1c7870f9"
-    },
-    "holdback_semantics": {
-      "path": "src/revtrace/long_horizon.py",
-      "sha256": "a5417b5bc8293d465c1b019c4c832cbb328229d1e151cc3a38007858e3965675"
-    },
-    "live_runner": {
-      "path": "scripts/remote/run_phase5a_live_adaptive.py",
-      "sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
-    },
-    "risk_runner": {
-      "path": "scripts/remote/run_checkpoint_dual_lane_shadow_audit.py",
-      "sha256": "2c68d282c0608a07a939b3a4ba81827c4c94da44221bab3d2e4b67004f597137"
-    },
-    "semantic_runner": {
-      "path": "scripts/remote/run_holdback_semantics_gate.py",
-      "sha256": "14bbc005c1f5eae644a2ae7bcc16cacc309baf6c8a9c77bcb44cf9fe26dfe30e"
-    }
   },
   "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
   "provisional_experience": {
@@ -247,6 +459,107 @@
     "observed": "OBSERVED_QUALITY_TOLERANCE_PASS",
     "population": "POPULATION_NONINFERIORITY_UNRESOLVED"
   },
+  "quality_dependency": {
+    "bootstrap_scope": "The existing paired bootstrap resamples fixed constructed sessions. It is descriptive for this frozen sample and is not an independent-source population interval.",
+    "cluster_bootstrap_status": "NOT_IDENTIFIABLE_FROM_THIS_DESIGN",
+    "cross_session_source_dependence": true,
+    "languages": {
+      "Chinese": {
+        "component_sizes": [
+          32
+        ],
+        "maximum_source_multiplicity": 16,
+        "pair_overlap_count": {
+          "maximum": 25.0,
+          "mean": 9.288306451612904,
+          "p50": 10.0,
+          "p95": 23.0
+        },
+        "pair_source_jaccard": {
+          "maximum": 0.9259259259259259,
+          "mean": 0.28571417506141045,
+          "p50": 0.25,
+          "p95": 0.8628571428571428
+        },
+        "session_pairs": 496,
+        "session_pairs_with_any_overlap": 383,
+        "sessions": 32,
+        "source_assignments": 797,
+        "source_overlap_connected_components": 1,
+        "sources_reused_across_sessions": 64,
+        "unique_sources": 64,
+        "within_session_duplicate_source_events": 0
+      },
+      "English": {
+        "component_sizes": [
+          32
+        ],
+        "maximum_source_multiplicity": 12,
+        "pair_overlap_count": {
+          "maximum": 18.0,
+          "mean": 4.036290322580645,
+          "p50": 1.0,
+          "p95": 14.25
+        },
+        "pair_source_jaccard": {
+          "maximum": 0.8888888888888888,
+          "mean": 0.18318433714866367,
+          "p50": 0.034482758620689655,
+          "p95": 0.7777777777777778
+        },
+        "session_pairs": 496,
+        "session_pairs_with_any_overlap": 295,
+        "sessions": 32,
+        "source_assignments": 529,
+        "source_overlap_connected_components": 1,
+        "sources_reused_across_sessions": 64,
+        "unique_sources": 64,
+        "within_session_duplicate_source_events": 0
+      }
+    },
+    "schema_version": 1,
+    "sessions": 64
+  },
+  "resume_lineage": {
+    "checks": {
+      "contract_manifest_sha256": true,
+      "deployment": true,
+      "mechanism_digest": true,
+      "reusable_rounds_present": true,
+      "reusable_transcripts_present": true,
+      "reusable_wall_times_present": true,
+      "session_set": true,
+      "source_ids_and_references": true,
+      "unique_resume_sessions": true
+    },
+    "claim_boundary": "This is an offline fail-closed validation of the recorded resume relation. It does not rerun model inference.",
+    "contract_manifest_sha256": "8ca075b7652ba7395abd93b29735d8653bfe0dec88c78b29bbe436c6a884697c",
+    "decision": "RESUME_QUALITY_ATTESTATION_PASS",
+    "environment": {
+      "code_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+      "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c"
+    },
+    "expected_deployment": {
+      "authority": "gpu1_fp16_batch_invariant_fixed_b12",
+      "checkpoint_seconds": 20,
+      "duration_seconds": 120,
+      "margin_threshold": 0.031251,
+      "proposer": "gpu0_fp16_ordinary_fixed_b12",
+      "sessions_per_language": 32
+    },
+    "identity_extension_sha256": "47c3da45d47619744809439d3f717736e8b7a9f1e27be67ba88000cbba3d241b",
+    "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
+    "quality_artifact_sha256": "e5204a17cd8b4dfc335fe94a6335ef854a6b0d7297ef62a9d439d8e3f0573700",
+    "resume_artifact": "results/checkpoint20_holdback_authority/deployed_b12_quality_32x2_ux_metric_negative.json",
+    "resume_artifact_sha256": "b1bc505cf10c5d0ccc4d9fbad1661980b7bea8264afe550633ec04817194dcb5",
+    "reused_transcript_checks": {
+      "checkpoint_verify": true,
+      "continuous": true
+    },
+    "schema_version": 1,
+    "sessions": 64,
+    "source_reference_digest": "b42c9161e88bafd3947fc8eb07b1247af95ef8cab49b05e7a6c35b04a0b7e649"
+  },
   "risk_certificate": {
     "confidence": 0.95,
     "method": "fixed-probability mixture e-process inversion",
@@ -254,7 +567,113 @@
     "upper_error_count": 144,
     "upper_risk": 0.0047332610196233115
   },
-  "schema_version": 2,
+  "runner_provenance": {
+    "calibration": {
+      "at_run_source_attested": false,
+      "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+      "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+      "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+      "recorded_commit_label": "UNRECORDED",
+      "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+      "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+    },
+    "continuous_provisional_ux": {
+      "at_run_source_attested": true,
+      "git_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+      "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+      "runner_path": "scripts/audit_checkpoint20_submission_evidence.py",
+      "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c"
+    },
+    "deployed_quality": {
+      "at_run_source_attested": true,
+      "git_commit": "ec73d80d06cbedca6ed829b5ed7d3b956707fa53",
+      "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+      "runner_path": "scripts/remote/run_deployed_checkpoint20_quality.py",
+      "runner_sha256": "c54cb0b1c17b620f6ca308734742f27af544ad45a669f03d1c5ff7fb232fa649"
+    },
+    "formal_risk_audit": {
+      "at_run_source_attested": true,
+      "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+      "provenance_kind": "AT_RUN_SHA_COMMIT_RECOVERED_FROM_GIT",
+      "recorded_commit_label": "HOLDBACK_CLOSURE",
+      "runner_path": "scripts/remote/run_checkpoint_dual_lane_shadow_audit.py",
+      "runner_sha256": "2c68d282c0608a07a939b3a4ba81827c4c94da44221bab3d2e4b67004f597137"
+    },
+    "identity_extension": {
+      "at_run_source_attested": true,
+      "git_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+      "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+      "runner_path": "scripts/remote/capture_checkpoint20_identity.py",
+      "runner_sha256": "c0bbc7f10c296923625502b3bdb542ced44b314b24d18761f1947c4a41d2f8f6"
+    },
+    "live_seed_20260840": {
+      "at_run_source_attested": false,
+      "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+      "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+      "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+      "recorded_commit_label": "HOLDBACK_CLOSURE",
+      "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+      "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+    },
+    "live_seed_20260841": {
+      "at_run_source_attested": false,
+      "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+      "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+      "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+      "recorded_commit_label": "HOLDBACK_CLOSURE",
+      "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+      "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+    },
+    "live_seed_20260842": {
+      "at_run_source_attested": false,
+      "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+      "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+      "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+      "recorded_commit_label": "HOLDBACK_CLOSURE",
+      "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+      "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+    },
+    "live_seed_20260843": {
+      "at_run_source_attested": false,
+      "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+      "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+      "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+      "recorded_commit_label": "HOLDBACK_CLOSURE",
+      "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+      "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+    },
+    "live_seed_20260844": {
+      "at_run_source_attested": false,
+      "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+      "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+      "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+      "recorded_commit_label": "HOLDBACK_CLOSURE",
+      "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+      "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+    },
+    "quality_dependency": {
+      "at_run_source_attested": true,
+      "git_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+      "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+      "runner_path": "scripts/audit_checkpoint20_submission_evidence.py",
+      "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c"
+    },
+    "resume_lineage": {
+      "at_run_source_attested": true,
+      "git_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+      "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+      "runner_path": "scripts/audit_checkpoint20_submission_evidence.py",
+      "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c"
+    },
+    "semantic_integration": {
+      "at_run_source_attested": true,
+      "git_commit": "10a7ade69656df1816dad085ca9f26ef6c349919",
+      "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+      "runner_path": "scripts/remote/run_holdback_semantics_gate.py",
+      "runner_sha256": "14bbc005c1f5eae644a2ae7bcc16cacc309baf6c8a9c77bcb44cf9fe26dfe30e"
+    }
+  },
+  "schema_version": 3,
   "selected_contract": "fp16_ordinary_b12_proposer__low_margin_provisional_holdback__fp16_batch_invariant_fixed_b12_checkpoint_authority",
   "semantic_patterns": {
     "consecutive_holdbacks": {

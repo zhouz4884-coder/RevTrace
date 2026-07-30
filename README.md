@@ -338,14 +338,28 @@ replay checkpoint payloads agree; and checkpoint reset is reconstructible.
 The deployed quality trace contains 75 provisional holdbacks (2.170%). Their
 P50/P95/maximum lifetime is 2/4/6 seconds; 93.33% resolve at the next
 high-margin update, 69.33% preserve all already displayed normalized units,
-and mean displayed-text overwrite is 7.20%. Normal appended text is excluded
-from overwrite cost.
+and the original provisional-to-authority overwrite mean is 7.20%. A
+continuous display audit reconstructs 69 resolution episodes, including three
+multi-holdback bursts with maximum length three. Across the actual
+P1->P2->...->authority transitions, overwrite mean/P95/max is
+8.01%/48.73%/100%; episode cumulative churn mean/P95/max is
+0.087/0.655/1.399. Normal appended text is excluded from overwrite cost, and
+an empty provisional display has overwrite zero.
 
 Every selected artifact is content-addressed under mechanism digest
 `fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583`.
 The finalizer rejects changed raw files, runner-role changes, a different
 model/data/runtime fingerprint, legacy B=8 single-engine quality, and the
 fixed-B=2 or dual-lane NO-GO branches.
+
+The final audit also byte-hashes all 128 source audio files and records both
+GPU UUIDs, package versions, the Qwen-ASR source tree, and the authority
+runtime. This identity extension is a post-run attestation, not a retroactive
+change to the mechanism digest. Quality sessions contain no within-session
+source repetition, but all 64 sources per language are reused across sessions
+and each language forms one connected source-overlap component. Consequently,
+the paired bootstrap is descriptive for the frozen constructed-session sample;
+it is not an independent-source population interval.
 
 The failed two-episode calibration is retained: it showed that the original
 split did not provide enough admitted validation events and contaminated the

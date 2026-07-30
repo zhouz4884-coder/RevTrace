@@ -56,6 +56,7 @@ def main() -> int:
         execution_binding,
         sha256_file,
     )
+    from revtrace.provenance import resolve_runner_provenance
 
     contract = load(args.contract_manifest.resolve())
     mechanism = contract["mechanism"]
@@ -73,6 +74,12 @@ def main() -> int:
         "quality": Path(
             "scripts/remote/run_deployed_checkpoint20_quality.py"
         ).resolve(),
+        "identity": Path(
+            "scripts/remote/capture_checkpoint20_identity.py"
+        ).resolve(),
+        "offline_audit": Path(
+            "scripts/audit_checkpoint20_submission_evidence.py"
+        ).resolve(),
     }
     for path in runner_paths.values():
         if not path.is_file():
@@ -88,14 +95,23 @@ def main() -> int:
     ) -> None:
         if not raw.is_file():
             raise FileNotFoundError(raw)
+        raw_payload = load(raw)
+        provenance = resolve_runner_provenance(
+            repo=Path.cwd(),
+            runner_path=runner_paths[runner_role],
+            raw_payload=raw_payload,
+        )
         entries[name] = {
             "path": raw.relative_to(Path.cwd().resolve()).as_posix(),
             **execution_binding(
                 mechanism_digest=digest,
                 role=name,
-                runner_sha256=sha256_file(runner_paths[runner_role]),
+                runner_sha256=provenance["runner_sha256"],
                 raw_result_sha256=sha256_file(raw),
-                execution_profile=profile,
+                execution_profile={
+                    **profile,
+                    "source_provenance": provenance,
+                },
             ),
         }
 
@@ -186,6 +202,63 @@ def main() -> int:
             "distinct_gpu_roles": True,
         },
     )
+
+    identity_path = root / "deployment_identity_v2.json"
+    identity = load(identity_path)
+    if (
+        int(identity["schema_version"]) != 2
+        or identity["data_manifest_sha256"]
+        != mechanism["data"]["manifest_sha256"]
+        or identity["model_fingerprint"]["content_digest"]
+        != mechanism["model"]["fingerprint"]["content_digest"]
+        or identity["authority_runtime_sha256"]
+        != mechanism["authority"]["runtime_sha256"]
+        or int(identity["data_content"]["audio_file_count"]) <= 0
+    ):
+        raise ValueError("identity extension does not match frozen mechanism")
+    bind(
+        "identity_extension",
+        identity_path,
+        "identity",
+        {
+            "role": "post_run_content_identity_extension",
+            "at_run_contract_change": False,
+            "identity_extension_digest": identity[
+                "identity_extension_digest"
+            ],
+        },
+    )
+
+    offline_roles = {
+        "resume_lineage": (
+            root / "resume_quality_attestation.json",
+            "offline_resume_lineage_validation",
+        ),
+        "continuous_provisional_ux": (
+            root / "provisional_experience_audit.json",
+            "offline_continuous_display_reconstruction",
+        ),
+        "quality_dependency": (
+            root / "quality_dependency_audit.json",
+            "offline_source_reuse_dependence_audit",
+        ),
+    }
+    for name, (path, role) in offline_roles.items():
+        payload = load(path)
+        if (
+            payload["mechanism_digest"] != digest
+            or payload["quality_artifact_sha256"]
+            != sha256_file(quality_path)
+            or payload["identity_extension_sha256"]
+            != sha256_file(identity_path)
+        ):
+            raise ValueError(f"{name} is not linked to frozen evidence")
+        bind(
+            name,
+            path,
+            "offline_audit",
+            {"role": role, "model_inference_executed": False},
+        )
 
     ux_negative = root / "deployed_b12_quality_32x2_ux_metric_negative.json"
     if not ux_negative.is_file():

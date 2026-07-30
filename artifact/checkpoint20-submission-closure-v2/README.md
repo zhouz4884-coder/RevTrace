@@ -303,7 +303,7 @@ certificate. See the
 
 ### Checkpoint-20 submission evidence closure
 
-`CHECKPOINT20_HOLDBACK_SUBMISSION_EVIDENCE_PASS`
+`REVTRACE_EXPERIMENTAL_EVIDENCE_COMPLETE_FOR_FGCS_SUBMISSION`
 
 The repaired long-horizon contract keeps low-margin nonterminal output
 provisional instead of synchronously selecting it as textual feedback state.
@@ -312,10 +312,13 @@ authoritative segment; terminal revisions use the same canonical authority.
 This removes the rare singleton-verification stall that caused the earlier
 120-second tail regression without calling the provisional candidate exact.
 
-Across five frozen 120-second seeds (3,600 state-entry events), the worst
+Across five frozen 120-second seeds (3,600 revision opportunities and 3,539
+committed state transitions), the worst
 per-session event P99 is 1.414 seconds, total deadline misses are zero, and
-online selection-authority violations are zero. The service verifies 10% of
-events and holds back 61 low-margin provisional candidates. A separate
+online selection-authority violations are zero. Fixed checkpoint authority
+runs on 10% of opportunities (6 of 60 rounds), synchronous low-margin
+verification is zero, and the service holds back 61 low-margin provisional
+candidates (1.883% of non-checkpoint opportunities). A separate
 pre-outcome randomized audit covers 30,423 admitted high-margin state entries
 and yields a 95% time-uniform state-risk UCB of 0.4733%.
 
@@ -335,14 +338,28 @@ replay checkpoint payloads agree; and checkpoint reset is reconstructible.
 The deployed quality trace contains 75 provisional holdbacks (2.170%). Their
 P50/P95/maximum lifetime is 2/4/6 seconds; 93.33% resolve at the next
 high-margin update, 69.33% preserve all already displayed normalized units,
-and mean displayed-text overwrite is 7.20%. Normal appended text is excluded
-from overwrite cost.
+and the original provisional-to-authority overwrite mean is 7.20%. A
+continuous display audit reconstructs 69 resolution episodes, including three
+multi-holdback bursts with maximum length three. Across the actual
+P1->P2->...->authority transitions, overwrite mean/P95/max is
+8.01%/48.73%/100%; episode cumulative churn mean/P95/max is
+0.087/0.655/1.399. Normal appended text is excluded from overwrite cost, and
+an empty provisional display has overwrite zero.
 
 Every selected artifact is content-addressed under mechanism digest
 `fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583`.
 The finalizer rejects changed raw files, runner-role changes, a different
 model/data/runtime fingerprint, legacy B=8 single-engine quality, and the
 fixed-B=2 or dual-lane NO-GO branches.
+
+The final audit also byte-hashes all 128 source audio files and records both
+GPU UUIDs, package versions, the Qwen-ASR source tree, and the authority
+runtime. This identity extension is a post-run attestation, not a retroactive
+change to the mechanism digest. Quality sessions contain no within-session
+source repetition, but all 64 sources per language are reused across sessions
+and each language forms one connected source-overlap component. Consequently,
+the paired bootstrap is descriptive for the frozen constructed-session sample;
+it is not an independent-source population interval.
 
 The failed two-episode calibration is retained: it showed that the original
 split did not provide enough admitted validation events and contaminated the

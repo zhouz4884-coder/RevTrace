@@ -56,6 +56,14 @@ def pct(value: float) -> str:
     return f"{100 * value:.3f}%"
 
 
+def display_path(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(Path.cwd().resolve()).as_posix()
+    except ValueError:
+        return resolved.as_posix()
+
+
 def main() -> int:
     args = parse_args()
     root = args.results_dir.resolve()
@@ -395,14 +403,14 @@ def main() -> int:
         "excluded_mechanisms": bindings["excluded_evidence"],
         "evidence_sha256": {
             name: {
-                "path": path.relative_to(Path.cwd().resolve()).as_posix(),
+                "path": display_path(path),
                 "sha256": sha256_file(path),
             }
             for name, path in evidence_paths.items()
         },
         "current_reproduction_implementation_sha256": {
             name: {
-                "path": path.relative_to(Path.cwd().resolve()).as_posix(),
+                "path": display_path(path),
                 "sha256": sha256_file(path),
             }
             for name, path in implementation_paths.items()

@@ -37,6 +37,24 @@ nonterminal serialization without weakening state-entry authority.
 - per-language observed mean WER/CER increase at most 2 percentage points;
 - zero catastrophic quality outliers.
 
+## Event and evidence terminology
+
+- A `revision opportunity` is one session-round pair presented to the
+  controller.
+- A `committed state transition` occurs only when an authoritative or admitted
+  result updates textual feedback state.
+- A `provisional holdback` advances audio but does not commit generated text.
+- The recorded 10% `verification_fraction` in the frozen service JSON is the
+  fixed checkpoint-authority fraction (6 of 60 rounds), not synchronous
+  low-margin verification. Under holdback, the latter is zero.
+
+Resume-based quality repair must match the mechanism digest, exact contract
+file, B=12 deployment parameters, session set, ordered source IDs, references,
+and inherited transcripts before any GPU worker starts. The final evidence
+also records a post-run content identity extension with audio byte hashes,
+GPU UUIDs, software versions, and source fingerprints. That extension does not
+retroactively strengthen fields absent from the at-run mechanism contract.
+
 ## Calibration sufficiency repair
 
 The first two-episode run produced 1,440 audited events but did not certify:

@@ -1,10 +1,19 @@
 {
   "bindings": {
     "calibration": {
-      "execution_digest": "9a00e93c11465f2424a759bf0a800de1f16fa8a423d28a403fda42397f6177b5",
+      "execution_digest": "53e0014c9724ff072d2fa73a10fa08c8bab07a792cc61ae1bb9c1d119b6cbb3d",
       "execution_profile": {
         "heldout": true,
-        "role": "threshold_calibration"
+        "role": "threshold_calibration",
+        "source_provenance": {
+          "at_run_source_attested": false,
+          "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+          "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+          "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+          "recorded_commit_label": "UNRECORDED",
+          "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+          "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+        }
       },
       "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
       "path": "results/checkpoint20_holdback_authority/calibration.json",
@@ -13,13 +22,40 @@
       "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a",
       "schema_version": 1
     },
+    "continuous_provisional_ux": {
+      "execution_digest": "bed50dee372024caeaa0581a6b49b23a9334c75c602111b5e5a4855d9f25e945",
+      "execution_profile": {
+        "model_inference_executed": false,
+        "role": "offline_continuous_display_reconstruction",
+        "source_provenance": {
+          "at_run_source_attested": true,
+          "git_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+          "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+          "runner_path": "scripts/audit_checkpoint20_submission_evidence.py",
+          "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c"
+        }
+      },
+      "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
+      "path": "results/checkpoint20_holdback_authority/provisional_experience_audit.json",
+      "raw_result_sha256": "f30028dd8ab59d426870955e9d9ebbb0c7494e41914428f76433342da8b9f0a4",
+      "role": "continuous_provisional_ux",
+      "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c",
+      "schema_version": 1
+    },
     "deployed_quality": {
-      "execution_digest": "86c66fcafcfaceebec18647452417f4d427b0e14fc59c4f8ac6d163d3d8a85e2",
+      "execution_digest": "2b77d920cf8a9592491f6b278514cf4da8eef087003891bf8304dffb01ef576b",
       "execution_profile": {
         "authority_batch_size": 12,
         "distinct_gpu_roles": true,
         "proposer_batch_size": 12,
-        "role": "paired_deployed_quality_and_ux"
+        "role": "paired_deployed_quality_and_ux",
+        "source_provenance": {
+          "at_run_source_attested": true,
+          "git_commit": "ec73d80d06cbedca6ed829b5ed7d3b956707fa53",
+          "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+          "runner_path": "scripts/remote/run_deployed_checkpoint20_quality.py",
+          "runner_sha256": "c54cb0b1c17b620f6ca308734742f27af544ad45a669f03d1c5ff7fb232fa649"
+        }
       },
       "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
       "path": "results/checkpoint20_holdback_authority/deployed_b12_quality_32x2.json",
@@ -29,9 +65,17 @@
       "schema_version": 1
     },
     "formal_risk_audit": {
-      "execution_digest": "7fd1a57ca1c49f230d133ac903addbfc17d4a0e5c825ce99cf283f05f3c37f4a",
+      "execution_digest": "d7ea5390a1d2bb77cd35182d8e3ff1bff6c9af0ccb84fc3d1303ac400361ad06",
       "execution_profile": {
-        "role": "pre_outcome_anytime_risk_audit"
+        "role": "pre_outcome_anytime_risk_audit",
+        "source_provenance": {
+          "at_run_source_attested": true,
+          "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+          "provenance_kind": "AT_RUN_SHA_COMMIT_RECOVERED_FROM_GIT",
+          "recorded_commit_label": "HOLDBACK_CLOSURE",
+          "runner_path": "scripts/remote/run_checkpoint_dual_lane_shadow_audit.py",
+          "runner_sha256": "2c68d282c0608a07a939b3a4ba81827c4c94da44221bab3d2e4b67004f597137"
+        }
       },
       "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
       "path": "results/checkpoint20_holdback_authority/anytime_risk_audit.json",
@@ -40,11 +84,41 @@
       "runner_sha256": "2c68d282c0608a07a939b3a4ba81827c4c94da44221bab3d2e4b67004f597137",
       "schema_version": 1
     },
+    "identity_extension": {
+      "execution_digest": "3728ea083a8e81b08a3a135cd800304c2132cdf7332b39d9e26e0cfa8cd5c5b2",
+      "execution_profile": {
+        "at_run_contract_change": false,
+        "identity_extension_digest": "d5613401f95f0c9b381e0d01488b26a2b683c07b77063ca097d978de7335a8eb",
+        "role": "post_run_content_identity_extension",
+        "source_provenance": {
+          "at_run_source_attested": true,
+          "git_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+          "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+          "runner_path": "scripts/remote/capture_checkpoint20_identity.py",
+          "runner_sha256": "c0bbc7f10c296923625502b3bdb542ced44b314b24d18761f1947c4a41d2f8f6"
+        }
+      },
+      "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
+      "path": "results/checkpoint20_holdback_authority/deployment_identity_v2.json",
+      "raw_result_sha256": "47c3da45d47619744809439d3f717736e8b7a9f1e27be67ba88000cbba3d241b",
+      "role": "identity_extension",
+      "runner_sha256": "c0bbc7f10c296923625502b3bdb542ced44b314b24d18761f1947c4a41d2f8f6",
+      "schema_version": 1
+    },
     "live_seed_20260840": {
-      "execution_digest": "4f474bf2295f1539d7fcf731f7c9c38b3569c21ea722cda7d04c1f8bf8442427",
+      "execution_digest": "b9d7612dedc7f404b7abd036a86ec5b6e36f74fbcd2924a832e2779415e0f5d9",
       "execution_profile": {
         "role": "live_service_tail",
-        "seed": 20260840
+        "seed": 20260840,
+        "source_provenance": {
+          "at_run_source_attested": false,
+          "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+          "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+          "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+          "recorded_commit_label": "HOLDBACK_CLOSURE",
+          "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+          "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+        }
       },
       "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
       "path": "results/checkpoint20_holdback_authority/seed_20260840.json",
@@ -54,10 +128,19 @@
       "schema_version": 1
     },
     "live_seed_20260841": {
-      "execution_digest": "5e0d1249b0dfa6d025002a925dbab432a5e04020df389ddf16ee252c96f644c2",
+      "execution_digest": "b3601f655e41047a16def8700d7b18331dca4668814d8b4188f9945e949b779f",
       "execution_profile": {
         "role": "live_service_tail",
-        "seed": 20260841
+        "seed": 20260841,
+        "source_provenance": {
+          "at_run_source_attested": false,
+          "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+          "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+          "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+          "recorded_commit_label": "HOLDBACK_CLOSURE",
+          "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+          "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+        }
       },
       "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
       "path": "results/checkpoint20_holdback_authority/seed_20260841.json",
@@ -67,10 +150,19 @@
       "schema_version": 1
     },
     "live_seed_20260842": {
-      "execution_digest": "58ce3929675442d53ee813afcdabec0d912a136eefcf2e35e95c00ffdd89b026",
+      "execution_digest": "6ffc76fc4ef60b75aed5137d6084908ba22694db6933e6a6cd7d5dbc9d1fe072",
       "execution_profile": {
         "role": "live_service_tail",
-        "seed": 20260842
+        "seed": 20260842,
+        "source_provenance": {
+          "at_run_source_attested": false,
+          "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+          "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+          "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+          "recorded_commit_label": "HOLDBACK_CLOSURE",
+          "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+          "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+        }
       },
       "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
       "path": "results/checkpoint20_holdback_authority/seed_20260842.json",
@@ -80,10 +172,19 @@
       "schema_version": 1
     },
     "live_seed_20260843": {
-      "execution_digest": "d4d5a0f4f51ff93f9675f01e875f604b5dd6ed3e269abb3efb11ca958a439065",
+      "execution_digest": "b2ca951a6acebd49438b1058d1bac4e7c0d0eee2cd4990386e650c9456b92130",
       "execution_profile": {
         "role": "live_service_tail",
-        "seed": 20260843
+        "seed": 20260843,
+        "source_provenance": {
+          "at_run_source_attested": false,
+          "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+          "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+          "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+          "recorded_commit_label": "HOLDBACK_CLOSURE",
+          "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+          "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+        }
       },
       "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
       "path": "results/checkpoint20_holdback_authority/seed_20260843.json",
@@ -93,10 +194,19 @@
       "schema_version": 1
     },
     "live_seed_20260844": {
-      "execution_digest": "eaaa0662164451ac83a8387f4a557a6a65d955f1870e186df547acf994915271",
+      "execution_digest": "f62ab793ebd14382847aa00604710aa3e245ead7d7b5aa80aa58855545b760ce",
       "execution_profile": {
         "role": "live_service_tail",
-        "seed": 20260844
+        "seed": 20260844,
+        "source_provenance": {
+          "at_run_source_attested": false,
+          "claim_boundary": "The raw artifact did not record a runner SHA. This exact Git snapshot is the retrospectively frozen analysis source, not an at-run cryptographic attestation.",
+          "git_commit": "5e36f768ca5b989d1db521c52868e6194bf483a0",
+          "provenance_kind": "RETROSPECTIVE_REPOSITORY_SNAPSHOT",
+          "recorded_commit_label": "HOLDBACK_CLOSURE",
+          "runner_path": "scripts/remote/run_phase5a_live_adaptive.py",
+          "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a"
+        }
       },
       "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
       "path": "results/checkpoint20_holdback_authority/seed_20260844.json",
@@ -105,11 +215,58 @@
       "runner_sha256": "88b34bec1292de647b1458d87c860038013510afa063933a70d3762ec343b53a",
       "schema_version": 1
     },
+    "quality_dependency": {
+      "execution_digest": "40384396d6f03e3ee47e9379cae1c1d98a13c6c4e22e19a81b06e036e4ae588a",
+      "execution_profile": {
+        "model_inference_executed": false,
+        "role": "offline_source_reuse_dependence_audit",
+        "source_provenance": {
+          "at_run_source_attested": true,
+          "git_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+          "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+          "runner_path": "scripts/audit_checkpoint20_submission_evidence.py",
+          "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c"
+        }
+      },
+      "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
+      "path": "results/checkpoint20_holdback_authority/quality_dependency_audit.json",
+      "raw_result_sha256": "db5b6f9e21fb55edc911d417bfc453b02728d64b03e808a73f753fe697cc3741",
+      "role": "quality_dependency",
+      "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c",
+      "schema_version": 1
+    },
+    "resume_lineage": {
+      "execution_digest": "4a37160bb32e494735b0f613c0fb52dd554f9718a52ed3a4d49c01f57f9e283f",
+      "execution_profile": {
+        "model_inference_executed": false,
+        "role": "offline_resume_lineage_validation",
+        "source_provenance": {
+          "at_run_source_attested": true,
+          "git_commit": "df18a94ff6ee0dde4bb70d7fb8a4fefe8eb38bc7",
+          "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+          "runner_path": "scripts/audit_checkpoint20_submission_evidence.py",
+          "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c"
+        }
+      },
+      "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
+      "path": "results/checkpoint20_holdback_authority/resume_quality_attestation.json",
+      "raw_result_sha256": "980e400e7de43692635f17a642ee61775ad65596b0c00fedaab8755949d6cb0e",
+      "role": "resume_lineage",
+      "runner_sha256": "2881b5403fe839ced47b5176c1fc60993f3b25224bc9dffe5113a4257b8e6f9c",
+      "schema_version": 1
+    },
     "semantic_integration": {
-      "execution_digest": "fde52ba009a3edf9bf2613cf06514610bd9819120d003b30127ad684442f5244",
+      "execution_digest": "67cc2565f3347879b0c1f18612210eeadd1e2aee3d4e50ea373b221aa1fffbab",
       "execution_profile": {
         "fixed_batch_size": 12,
-        "role": "real_model_state_semantics"
+        "role": "real_model_state_semantics",
+        "source_provenance": {
+          "at_run_source_attested": true,
+          "git_commit": "10a7ade69656df1816dad085ca9f26ef6c349919",
+          "provenance_kind": "AT_RUN_SHA_AND_COMMIT_ATTESTED",
+          "runner_path": "scripts/remote/run_holdback_semantics_gate.py",
+          "runner_sha256": "14bbc005c1f5eae644a2ae7bcc16cacc309baf6c8a9c77bcb44cf9fe26dfe30e"
+        }
       },
       "mechanism_digest": "fa7c07c28da4bf24a52e87a9d83d4671066ee9c1744b4aa21eeddf69c2476583",
       "path": "results/checkpoint20_holdback_authority/holdback_semantics_gate.json",

@@ -29,7 +29,9 @@ FILES = (
     "results/checkpoint20_holdback_authority/final_summary_v2.json",
     "scripts/audit_checkpoint20_submission_evidence.py",
     "scripts/bind_checkpoint20_evidence.py",
+    "scripts/build_checkpoint20_submission_artifact.py",
     "scripts/finalize_checkpoint20_submission.py",
+    "scripts/verify_checkpoint20_submission_artifact.py",
     "scripts/remote/capture_checkpoint20_identity.py",
     "scripts/remote/run_deployed_checkpoint20_quality.py",
     "scripts/remote/run_holdback_semantics_gate.py",
@@ -37,6 +39,8 @@ FILES = (
     "src/revtrace/evidence_audit.py",
     "src/revtrace/long_horizon.py",
     "src/revtrace/provenance.py",
+    "tests/test_checkpoint20_submission_finalizer.py",
+    "tests/test_provisional_experience.py",
 )
 TEXT_SUFFIXES = {".csv", ".json", ".md", ".py"}
 
