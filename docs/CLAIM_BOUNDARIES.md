@@ -279,3 +279,102 @@
 - Version and epoch fencing linearize online state mutations. Later
   canonical-replay disagreements are repeatability evidence and do not
   retroactively change which online result held selection authority.
+
+## Whisper W0-W7 cross-family closure
+
+- The full paper remains a method-driven state-consistency systems paper.
+  Whisper is an independent feedback architecture and scale closure, not a
+  new paper identity or a model-specific optimization claim.
+- Whisper's state-entry projection is the start-of-previous marker plus the
+  bounded raw generated-token suffix of all confirmed prior segments admitted
+  to the next window.  This follows long-form `condition_on_prev_tokens`
+  semantics: it neither retains only the immediately preceding segment nor
+  decodes and re-tokenizes history.  LocalAgreement-2 protects confirmed
+  display text; it does not certify equality of that future prompt state.
+- The raw Whisper history budget is derived from the checkpoint's
+  `max_target_positions // 2` (224 total prompt tokens for base.en/small.en,
+  including the start-of-previous marker), rather than a hand-set context
+  length.
+- The W-suite canonical path is the same distinct-prompt executor at FP16 and
+  batch size one.  Dtype, model weights, decoder, audio, and hardware are held
+  fixed within causal system comparisons.
+- Margin is a pre-outcome admission signal, not a deterministic arithmetic
+  certificate.  Policy selection uses calibration-only evidence, and the
+  paper-facing content guarantee comes from independent fixed-probability
+  audits and a time-uniform upper bound.
+- Policy thresholds may change only at a versioned policy epoch.  They are
+  frozen inside each performance comparison, so dynamic control is not
+  confounded with seed-specific post-outcome tuning.
+- Independent audits and repeat-controlled W5 replays showed that one scalar
+  margin is not a sufficient contract: later feedback states and high
+  prior-prompt loads admitted higher-margin errors after earlier failure floors
+  had been covered.  The renewed policy is therefore a contextual
+  margin-by-state-age-and-prompt-load frontier.  Caught rows only select the
+  next epoch; the final certificate comes from a new independent seed.
+- A terminal transcript has no successor previous-text state.  The final W5
+  contract therefore does not claim terminal singleton exactness and does not
+  spend state-authority work on terminal revisions.  Terminal batch quality is
+  governed by the disjoint paired W6 gate against a 96-token singleton
+  reference, including mean and bootstrap-upper WER deltas, per-split bounds,
+  catastrophic outliers, and provisional UX.  A W6 failure blocks the strong
+  W7 decision; it may not be hidden by the state-entry result.
+- The W5 RevTrace path uses deferred state authority: a low-margin batched
+  transcript may be shown provisionally, but its raw tokens do not enter the
+  next-window prompt. The queued FP16 singleton canonical result selects the
+  authoritative next prompt state. This is a state-authority intervention,
+  not LocalAgreement display confirmation and not an unverified holdback.
+- Prompt state is capacity-safely rebased before the declared 96-token
+  next-segment budget would exceed the checkpoint-derived 224-token history
+  bound.  Rebase only discards feedback authority; it never admits an
+  uncertified token.  Its paired quality cost is measured in W6.
+- Paper-facing state-entry P99 and deadline misses include every nonterminal
+  transition that updates feedback state, including deferred risk-authority
+  transitions.  Provisional display latency is measured from readiness to the
+  completion of the batch proposal and is reported independently.  The faster
+  display clock cannot substitute for stable state-entry latency.  Terminal
+  output has no state-entry edge and is evaluated by W6 quality rather than
+  being relabeled as a state transition.
+- W4 randomized canonical audits run only as a shadow side channel and never
+  replace the proposal in live feedback state. Earlier protocol-development
+  audits that canonicalized audited or low-margin rows are excluded because
+  the audit itself changed the state distribution being certified.
+- The final W4 contracts use 180-second sessions so their audit distribution
+  includes the post-checkpoint state regime exercised by long W5 cells.
+- W4 policy calibration applies the same declared-budget capacity rebase
+  before each decode. Long calibration runs that reached the raw 224-token
+  cap without this pre-decode rebase are excluded as protocol-development
+  artifacts.
+- Every formal W5 RevTrace fast-path state write is exhaustively replayed
+  against the same-state FP16 singleton canonical after wall-clock and energy
+  timing. A first mismatch is followed by a same-input repeated-singleton
+  control: only a mismatch against a repeat-stable canonical result is
+  attributed to the fast path, while a repeat-unstable result is reported as
+  finite-precision ambiguity. This validation cost is excluded from serving
+  performance by construction.
+- Production W5 cells offer exactly their certified active concurrency
+  (16 sessions for c16 and 8 sessions for c8). The separate B1 boundary is the
+  only cell that offers 32 sessions and reshapes them to active c16; the
+  superseded sessions=32 production epoch is excluded because it measured
+  overload queueing rather than the registered production contract.
+- The initial Poisson implementation only permuted ready sessions and is
+  excluded from W5.  Frozen W5 evidence uses actual initial session release
+  times and includes queue wait in event latency.
+- The small.en energy result must sample the GPU on which the executor
+  actually runs.  Any pre-repair GPU-0-hard-coded energy smoke is excluded.
+- Risk evidence is not pooled across base.en and small.en or across c8 and c16
+  execution fingerprints.
+- The offered c32 burst boundary is either independently certified or
+  explicitly reshaped to the certified c16 contract.  It never silently uses
+  a c16 certificate at active c32.
+- The final base.en/c8 r5 policy passes two fixed, independent 180-second
+  state-risk certificates (60,032 eligible entries, 1,235 pre-outcome
+  canonical audits, zero caught errors, maximum time-uniform 95% upper risk
+  0.4798%).  This does not make c8 a production-performance success.  Across
+  dual-GPU lane counts 1/2/4 and corrected single-GPU colocation, no topology
+  passes the complete wall, GPU-normalized, display-SLO, latency, verification
+  and energy gate.  The paper must report c8 as a low-load capacity boundary,
+  not pool it with successful c16 evidence.
+- Resource accounting counts distinct physical CUDA devices rather than
+  logical proposer/verifier roles.  The pre-repair colocated result that
+  divided GPU-normalized speedup by two and sampled one GPU's power twice is
+  excluded.  Dual-GPU measurements are unaffected by this repair.

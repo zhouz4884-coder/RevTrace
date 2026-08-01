@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "study": "RevTrace Whisper cross-family and cross-scale closure",
+  "paper_identity": {
+    "problem": "batch-dependent numerical choices can enter feedback state and alter future revision trajectories",
+    "method": [
+      "architecture-specific state-entry projection",
+      "contract-scoped dynamic risk admission",
+      "canonical state authority",
+      "versioned transactional commit and stale-result rejection",
+      "deferred singleton authority for risky state and work-budget saturation"
+    ],
+    "non_contribution_substrate": [
+      "ordinary batching",
+      "dtype selection",
+      "queue implementation",
+      "model-specific decoding adapter"
+    ]
+  },
+  "models": {
+    "regression": ["openai/whisper-tiny.en"],
+    "headline": ["openai/whisper-base.en", "openai/whisper-small.en"]
+  },
+  "state_contract": {
+    "projection": "start-of-previous marker plus bounded raw generated-token suffix from all canonical-authorized or contract-admitted prior segments",
+    "prompt_state_semantics": "raw-segment-token-history-v5-deferred-authority",
+    "window_seconds": 10,
+    "canonical": "same executor, FP16 batch-size-one",
+    "terminal_policy": "terminal output has no successor feedback edge; it is governed by an independent paired target-quality contract, while a proposal that exhausts its smaller decoder budget is replaced by the extended singleton authority",
+    "low_margin_policy": "display batched text provisionally; singleton canonical owns future prompt-state entry",
+    "state_control_protocol": "prompt-state-deferred-authority-checkpoint10-capacity-rebase-v2",
+    "work_authority_protocol": "decoder-step-saturation-extended-canonical-v1",
+    "target_capacity_protocol": "target-canonical-declared-work-v1",
+    "capacity_rebase": "discard prompt history before the declared next-segment budget would exceed the checkpoint-derived prompt bound",
+    "state_entry_metric": "nonterminal committed feedback transitions only; risky state and terminal stable output require deferred singleton authority",
+    "checkpoint_revisions": 10,
+    "revision_work_budget": {
+      "whisper-base.en": {"c16": 96, "c8": 80},
+      "whisper-small.en": {"c16": 80, "c8": 80}
+    },
+    "revision_work_budget_semantics": "the proposer may use a predeclared smaller decode cap, but exhausting that cap cannot define canonical state or output; an extended 96-step singleton authority selects the result, and prompt-history capacity is rebased against the target authority budget rather than the speculative budget",
+    "arrival_scale_seconds": 0.02
+  },
+  "risk_contract": {
+    "calibration_seeds": [20260730, 20260731],
+    "audit_seeds": {"c16": 20260733, "c8": 20260734},
+    "audit_probability": 0.021,
+    "audit_interference": "shadow-canonical-no-state-mutation",
+    "threshold_rule": "per model and concurrency, select the lowest-cost contract-scoped frontier over decision margin, feedback-state age, and prior-prompt load whose one-sided 95% calibration upper risk is at most 0.5%, whose synchronous verification fraction is at most 20%, and which covers every adaptation-only root",
+    "renewal_rule": "if an independent audit or repeat-stable post-timing replay catches an unsafe fast-path transition, reject that policy epoch, add the root to a contextual failure ledger, select a new margin-by-state-age-and-load frontier from frozen calibration data, and validate it on a new independent seed; never count adaptation rows as validation",
+    "risk_eligible_entries_per_contract": 30000,
+    "audit_duration_seconds": 180,
+    "minimum_random_audits_per_contract": 500,
+    "time_uniform_alpha": 0.05,
+    "maximum_upper_risk": 0.005
+  },
+  "production_cells": [
+    {"id": "W1", "seconds": 90, "sessions": 16, "concurrency": 16, "arrival": "sync", "seeds": 5},
+    {"id": "W2", "seconds": 90, "sessions": 16, "concurrency": 16, "arrival": "poisson", "seeds": 3},
+    {"id": "W3", "seconds": 180, "sessions": 8, "concurrency": 8, "arrival": "sync", "seeds": 5},
+    {"id": "W4", "seconds": 180, "sessions": 8, "concurrency": 8, "arrival": "poisson", "seeds": 3}
+  ],
+  "formal_seed_protocol": {
+    "included_epoch": 202730,
+    "recovery_certificate_epochs": [202727, 202729, 202731, 202733],
+    "excluded_epochs": {
+      "202726": "fail-closed repeat-stable base/c16 state-entry root; all completed rows excluded rather than seed-selected",
+      "202728": "fail-closed repeat-stable base/c8 long-state root; all completed rows excluded rather than seed-selected"
+    }
+  },
+  "boundary_cells": [
+    {"id": "B1", "seconds": 90, "sessions": 32, "offered_concurrency": 32, "active_concurrency": 16, "arrival": "burst", "admission": "reshape to certified c16", "seeds": 1},
+    {"id": "B2", "seconds": 180, "sessions": 16, "concurrency": 16, "arrival": "sync", "seeds": 1}
+  ],
+  "same_executor_baselines": [
+    "all-canonical",
+    "unprotected-batch",
+    "feedback-off-batch",
+    "fixed-margin synchronous verification",
+    "LocalAgreement-2",
+    "RevTrace Prompt-State Holdback"
+  ],
+  "execution_order": "cyclic Latin-square rotation across systems and seeds",
+  "gates": {
+    "median_wall_speedup_min": 2.0,
+    "median_gpu_normalized_speedup_min": 1.0,
+    "median_display_slo_goodput_speedup_min": 2.0,
+    "feedback_off_display_goodput_recovery_min": 0.45,
+    "maximum_state_entry_p99_seconds": 4.0,
+    "maximum_display_p99_seconds": 1.9,
+    "state_authority_violations": 0,
+    "stale_commits": 0,
+    "synchronous_verification_fraction_max": 0.20,
+    "minimum_energy_reduction": 0.15,
+    "production_cells_pass_min": 6,
+    "production_cells_total": 8,
+    "mean_wer_delta_pp_max": 1.0,
+    "wer_delta_bootstrap_95_upper_pp_max": 2.0,
+    "catastrophic_quality_outliers": 0
+  },
+  "claim_boundaries": [
+    "The paper is a state-consistency method paper, not a Whisper optimization paper.",
+    "LocalAgreement protects display stability; RevTrace protects future model-state write authority.",
+    "Zero observed violations is not deterministic exactness and is reported with a time-uniform statistical bound.",
+    "The test suite does not estimate population prevalence of numerical divergence.",
+    "Formal W5 performance timing excludes post-timing validation. Every fast-path state write is replayed against the same-state singleton canonical; any first mismatch receives a same-input repeated-singleton control before attribution to the fast path.",
+    "Terminal output is never counted as future-state authority. Its quality is evaluated against the independently declared target-work contract; decoder-budget saturation always invokes extended singleton authority."
+  ]
+}

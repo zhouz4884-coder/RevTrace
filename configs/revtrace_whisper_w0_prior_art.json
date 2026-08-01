@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "study": "Whisper W0 prior-art and semantic-boundary audit",
+  "decision": "W0_NO_DIRECT_COLLISION",
+  "checked_systems": [
+    {
+      "name": "Whisper long-form condition_on_prev_tokens",
+      "source": "https://github.com/openai/whisper/blob/main/whisper/transcribe.py",
+      "boundary": "defines accumulated previous-token prompting but not state-certified multi-session batching"
+    },
+    {
+      "name": "Whisper-Streaming LocalAgreement-2",
+      "source": "https://arxiv.org/abs/2307.14743",
+      "boundary": "stabilizes displayed transcript prefixes but does not certify future prompt-state write authority"
+    },
+    {
+      "name": "SimulStreaming",
+      "source": "https://github.com/ufal/SimulStreaming",
+      "boundary": "low-latency streaming implementation without RevTrace's contract-scoped state authority"
+    },
+    {
+      "name": "LLM-42",
+      "source": "https://arxiv.org/abs/2601.17768",
+      "boundary": "general deterministic and verified LLM serving prior art; it does not define architecture-specific feedback-state projections or revision transactions"
+    },
+    {
+      "name": "vLLM Qwen3-ASR realtime abstraction issue",
+      "source": "https://github.com/vllm-project/vllm/issues/35908",
+      "boundary": "tracks realtime ASR runtime abstraction, not certification of generated state before future feedback"
+    },
+    {
+      "name": "vLLM Qwen3-ASR degraded-output issue",
+      "source": "https://github.com/vllm-project/vllm/issues/35767",
+      "boundary": "documents a correctness symptom but does not provide a state-entry risk contract and transactional authority protocol"
+    }
+  ],
+  "frozen_claim": "Whisper is independent cross-family and cross-scale evidence for a model-agnostic state-consistency method; it is not the paper identity or a model-specific optimization."
+}

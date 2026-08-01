@@ -1,0 +1,89 @@
+{
+  "claim_boundary": "The frozen r5 state-risk contract passes two independent certificates. No tested c8 deployment topology passes the complete production performance gate; c8 is a low-load capacity boundary, not a Whisper-wide or RevTrace-wide failure.",
+  "decision": "R5_RISK_PASS_C8_PERFORMANCE_BOUNDARY",
+  "production_gate": {
+    "display_slo_goodput_speedup_min": 2.0,
+    "energy_reduction_min": 0.15,
+    "gpu_normalized_speedup_min": 1.0,
+    "state_latency_p99_seconds_max": 4.0,
+    "verification_fraction_max": 0.2,
+    "wall_speedup_min": 2.0
+  },
+  "risk": {
+    "adaptation_roots": 5,
+    "calibration_verification_fraction": 0.1132352941176471,
+    "caught_state_errors": 0,
+    "certificate_sources": [
+      {
+        "path": "results\\whisper_w0_w7\\c8_boundary_r5\\w4-risk-base-c8-m80-workv1-fixed-r5-seed20273400.json",
+        "sha256": "4a825e4b63089ea7d050c4cc445b789d6d38039d0bbb788ca4af3c979163939b"
+      },
+      {
+        "path": "results\\whisper_w0_w7\\c8_boundary_r5\\w4-risk-base-c8-m80-workv1-fixed-r5-seed20273450.json",
+        "sha256": "2ce8974a3ccc19097609a710ca971f5ec096a4f4af62ab60c58e70b9c2bd9f89"
+      }
+    ],
+    "maximum_time_uniform_upper_risk": 0.004797920900942925,
+    "policy_sha256": "434db6fb445f9594d114e1152b89af32fb607eee866acf1b761f6aff5f22e608",
+    "random_audits": 1235,
+    "risk_entries": 60032
+  },
+  "schema_version": 1,
+  "study": "Whisper base/c8 r5 risk closure and capacity boundary",
+  "variant_pass": {
+    "colocated_lane1": false,
+    "dual_lane1": false,
+    "dual_lane2": false,
+    "dual_lane4": false
+  },
+  "variants": {
+    "colocated_lane1": {
+      "display_latency_p99_seconds": 0.7290413866750896,
+      "display_slo_goodput_speedup": 1.7275174432599558,
+      "energy_reduction": 0.3673983916958763,
+      "gpu_normalized_speedup": 1.631544251967736,
+      "physical_gpu_count": 1,
+      "source": "results\\whisper_w0_w7\\c8_boundary_r5\\w5-base-c8-r5-colocated-accountingfix-seed20273519.json",
+      "source_sha256": "2c5e873d304074243d4c2cffecca976448d5ceee5fd78d4d8c40255f68f651c2",
+      "state_latency_p99_seconds": 3.0468859390821326,
+      "verification_fraction": 0.19444444444444445,
+      "wall_speedup": 1.631544251967736
+    },
+    "dual_lane1": {
+      "display_latency_p99_seconds": 0.7223861695919185,
+      "display_slo_goodput_speedup": 1.7839537117730522,
+      "energy_reduction": -0.06303761932361707,
+      "gpu_normalized_speedup": 0.8424225861150524,
+      "physical_gpu_count": 2,
+      "source": "results\\whisper_w0_w7\\c8_boundary_r5\\w5-base-c8-r5-fixed-preflight-seed20273519.json",
+      "source_sha256": "af6b917db32c10e10cd109b03c5fde1c35b3e2637c88c2ba62425de898dc792b",
+      "state_latency_p99_seconds": 3.099090552749113,
+      "verification_fraction": 0.1875,
+      "wall_speedup": 1.6848451722301048
+    },
+    "dual_lane2": {
+      "display_latency_p99_seconds": 1.040954895298928,
+      "display_slo_goodput_speedup": 1.6842427150960815,
+      "energy_reduction": -0.1610321929415588,
+      "gpu_normalized_speedup": 0.7953368376842607,
+      "physical_gpu_count": 2,
+      "source": "results\\whisper_w0_w7\\c8_boundary_r5\\w5-base-c8-r5-lanes2-seed20273519.json",
+      "source_sha256": "a03f8a68b43e974929420262602701412e7a2d850c56e295a257e6ebe068dc8a",
+      "state_latency_p99_seconds": 3.2770926406607077,
+      "verification_fraction": 0.1875,
+      "wall_speedup": 1.5906736753685213
+    },
+    "dual_lane4": {
+      "display_latency_p99_seconds": 1.6178613829053938,
+      "display_slo_goodput_speedup": 1.5824631194336374,
+      "energy_reduction": -0.23414158604844282,
+      "gpu_normalized_speedup": 0.7472742508436621,
+      "physical_gpu_count": 2,
+      "source": "results\\whisper_w0_w7\\c8_boundary_r5\\w5-base-c8-r5-lanes4-seed20273519.json",
+      "source_sha256": "84a4ff270891809d4df800fd8c55d9abdd303826595bc7f58939e210cd52401a",
+      "state_latency_p99_seconds": 3.6889496935531496,
+      "verification_fraction": 0.19444444444444445,
+      "wall_speedup": 1.4945485016873241
+    }
+  }
+}
