@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "study": "RevTrace Phase R7 EFSC closure",
+  "decision": "QWEN_R7_PASS__WHISPER_PERFORMANCE_PASS_QUALITY_TAIL_FAIL__FROZEN_EFSC_STOP",
+  "qwen": {
+    "models": 2,
+    "live_events_per_model": 10080,
+    "semantic_violations": 0,
+    "formal_repeats_per_model": 5,
+    "qwen3_asr_0_6b": {
+      "median_wall_seconds": 7.169425857253373,
+      "median_p99_seconds": 0.7482819519937038,
+      "median_events_per_second": 33.47548391998361,
+      "median_joules_per_audio_second": 2.073252859583118
+    },
+    "qwen3_asr_1_7b": {
+      "median_wall_seconds": 7.916055219247937,
+      "median_p99_seconds": 0.8641949146986008,
+      "median_events_per_second": 30.318131108590364,
+      "median_joules_per_audio_second": 3.0560424660831758
+    }
+  },
+  "whisper_performance": {
+    "decision": "PASS_R7_3_EFSC_PREFLIGHT",
+    "w1": {
+      "repeats": 5,
+      "median_wall_speedup": 4.060456696909915,
+      "maximum_display_p99_seconds": 1.2937684461195023,
+      "maximum_committed_state_p99_seconds": 1.2930850783269852,
+      "minimum_energy_reduction": 0.7285554545227209,
+      "semantic_violations": 0
+    },
+    "w2": {
+      "repeats": 5,
+      "median_wall_speedup": 4.196374811061269,
+      "maximum_display_p99_seconds": 1.3031681762449443,
+      "maximum_committed_state_p99_seconds": 1.3031706111319363,
+      "minimum_energy_reduction": 0.7234878364567467,
+      "semantic_violations": 0
+    }
+  },
+  "whisper_quality": {
+    "decision": "FAIL_R7_5_QUALITY",
+    "sessions": 128,
+    "unique_utterances": 1645,
+    "utterance_reuse": 0,
+    "canonical_mean_wer": 32.328593872273316,
+    "efsc_mean_wer": 30.859409083750684,
+    "mean_wer_delta_pp": -1.4691847885226306,
+    "paired_bootstrap_95_upper_pp": 0.10877531863346959,
+    "catastrophic_outliers": 11,
+    "semantic_violations": 0
+  },
+  "causal_diagnosis": {
+    "same_input_cutset_events": 528,
+    "ordinary_batch_projection_mismatches": 5,
+    "mismatches_in_catastrophic_sessions": 0,
+    "reference_aware_two_view_oracle_catastrophic_outliers": 5,
+    "root_cause": "context starvation after safe authority erasure",
+    "projection_cutset_repairs_tail": false,
+    "frozen_action_space_can_close_tail": false
+  },
+  "next_mechanism": "verified context capsule / authoritative acoustic reanchor",
+  "claim_boundary": "Whisper EFSC has strong serving performance and favorable mean WER but fails the frozen zero-catastrophic-tail gate; no unexecuted risk or matrix script is claimed as evidence"
+}

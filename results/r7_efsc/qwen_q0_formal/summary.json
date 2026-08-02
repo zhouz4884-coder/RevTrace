@@ -1,0 +1,47 @@
+{
+  "models": {
+    "Qwen3-ASR-0.6B": {
+      "all_pass": true,
+      "median_events_per_second": 33.47548391998361,
+      "median_joules_per_audio_second": 2.073252859583118,
+      "median_latency_p99_seconds": 0.7482819519937038,
+      "median_wall_seconds": 7.169425857253373,
+      "replicates": 5,
+      "semantic_violations": 0
+    },
+    "Qwen3-ASR-1.7B": {
+      "all_pass": true,
+      "median_events_per_second": 30.318131108590364,
+      "median_joules_per_audio_second": 3.0560424660831758,
+      "median_latency_p99_seconds": 0.8641949146986008,
+      "median_wall_seconds": 7.916055219247937,
+      "replicates": 5,
+      "semantic_violations": 0
+    }
+  },
+  "replicates": [
+    {
+      "decision": "PASS_R7_Q0_LIVE_MODEL",
+      "events_per_second": 33.47548391998361,
+      "joules_per_audio_second": 2.073252859583118,
+      "latency_p99_seconds": 0.7482819519937038,
+      "model": "Qwen3-ASR-0.6B",
+      "path": "qwen06-seed2026080221.json",
+      "semantic_violations": 0,
+      "wall_seconds": 7.169425857253373
+    },
+    {
+      "decision": "PASS_R7_Q0_LIVE_MODEL",
+      "events_per_second": 30.318131108590364,
+      "joules_per_audio_second": 3.0560424660831758,
+      "latency_p99_seconds": 0.8641949146986008,
+      "model": "Qwen3-ASR-1.7B",
+      "path": "qwen17-seed2026080231.json",
+      "semantic_violations": 0,
+      "wall_seconds": 7.916055219247937
+    }
+  ],
+  "resource_protocol": "one model at a time; GPU0 active; GPU1 and competing model idle",
+  "schema_version": 1,
+  "study": "RevTrace R7.Q0 five-seed isolated-host performance gate"
+}

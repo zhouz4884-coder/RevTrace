@@ -1,0 +1,35 @@
+{
+  "evidence": {
+    "adaptation": {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/whisper_w0_w7/w1-calibration-final-base-c16-seed20260731.json",
+      "rows": 900,
+      "sha256": "d4ebb7be61475dbd17dd60fe2f69194312ba48db02af333275e2f9d4424da84a"
+    },
+    "calibration": {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/whisper_w0_w7/w4-calibration-long-base-c16-seed20260730.json",
+      "rows": 720,
+      "sha256": "01403beb42b0027fff1ac25f30f0bdf2909200729341db169fa72d9e3de23ea0"
+    },
+    "eligible_margins": 1620,
+    "exit_quantile": 0.75,
+    "failure_roots": 30,
+    "known_failure_ceiling": 0.10546875
+  },
+  "frozen_boundaries": {
+    "calibration_and_adaptation_are_excluded_from_formal_audit": true,
+    "model_specific_controller_branches": false,
+    "performance_and_quality_seeds_may_not_update_this_policy": true
+  },
+  "model": "whisper-base.en",
+  "schema_version": 1,
+  "selected_policy": {
+    "enter_margin": 0.10546875,
+    "exit_margin": 0.484375,
+    "maximum_feedback_debt": 3,
+    "maximum_influence_windows": 3,
+    "maximum_quarantine_windows": 3,
+    "minimum_hold_windows": 1,
+    "safe_streak_required": 2
+  },
+  "study": "RevTrace R7.2 frozen Whisper EFSC policy"
+}

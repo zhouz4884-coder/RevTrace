@@ -87,6 +87,7 @@ def run_batched_quality(
     off_pieces: list[list[str]] = [[] for _ in sessions]
     efsc_segments: list[list[str]] = [[] for _ in sessions]
     off_segments: list[list[str]] = [[] for _ in sessions]
+    session_traces: list[list[dict[str, Any]]] = [[] for _ in sessions]
     actions = {action.value: 0 for action in FeedbackAction}
     preparations = {action.value: 0 for action in FeedbackAction}
     violations = 0
@@ -102,7 +103,10 @@ def run_batched_quality(
     for window_index in range(windows_per_session):
         for begin in range(0, len(sessions), concurrency):
             ids = list(range(begin, min(begin + concurrency, len(sessions))))
+            preparation_debug: dict[int, dict[str, Any]] = {}
             for session_id in ids:
+                prompt_before_prepare = prompts[session_id]
+                state_before_prepare = states[session_id]
                 state, preparation = controller.prepare_for_proposal(
                     states[session_id], adapter
                 )
@@ -114,6 +118,17 @@ def run_batched_quality(
                     preparations[preparation.action.value] += 1
                     if preparation.action == FeedbackAction.SAFE_RESET:
                         reset_at[session_id] = window_index
+                preparation_debug[session_id] = {
+                    "prompt_tokens_before_prepare": len(prompt_before_prepare),
+                    "state_version_before_prepare": (
+                        state_before_prepare.identity.state_version
+                    ),
+                    "prepare_action": (
+                        preparation.action.value
+                        if preparation.action is not None else None
+                    ),
+                    "prepare_reason": preparation.reason,
+                }
             audio = [windows[index][window_index] for index in ids]
             prompt_rows = [prompts[index] for index in ids]
             proposed = executor.generate(audio, prompt_rows)
@@ -171,6 +186,28 @@ def run_batched_quality(
                 off_pieces[session_id].append(off_record.text)
                 efsc_segments[session_id].append(record.text)
                 off_segments[session_id].append(off_record.text)
+                debug = preparation_debug[session_id]
+                session_traces[session_id].append({
+                    "window_index": window_index,
+                    **debug,
+                    "prompt_tokens_for_proposal": len(prompt_rows[position]),
+                    "minimum_margin": record.minimum_margin,
+                    "generation_steps": record.generation_steps,
+                    "terminated_by_eos": record.terminated_by_eos,
+                    "candidate_token_ids": list(record.token_ids),
+                    "candidate_text": record.text,
+                    "feedback_off_text": off_record.text,
+                    "decision_action": decision.action.value,
+                    "decision_reason": decision.reason,
+                    "candidate_became_ancestor": (
+                        decision.candidate_became_ancestor
+                    ),
+                    "prompt_tokens_after_decision": len(prompts[session_id]),
+                    "feedback_debt_after_decision": next_state.feedback_debt,
+                    "oldest_ancestor_age_after_decision": (
+                        next_state.oldest_ancestor_age
+                    ),
+                })
 
     repetition = [longest_equal_run(row) for row in efsc_segments]
     repetition_off = [longest_equal_run(row) for row in off_segments]
@@ -212,6 +249,7 @@ def run_batched_quality(
             "feedback_amplification_factor_mean": (
                 statistics.fmean(amplification) if amplification else 0.0
             ),
+            "session_traces": session_traces,
         },
     )
 
@@ -294,6 +332,8 @@ def main() -> int:
             "efsc_text": efsc[index],
             "feedback_off_text": feedback_off[index],
             "canonical_repetition_run": canonical_repetition[index],
+            "canonical_trace": canonical_traces[index],
+            "efsc_trace": runtime["session_traces"][index],
         })
     mean_delta = statistics.fmean(deltas)
     upper = bootstrap_upper(
@@ -382,7 +422,10 @@ def main() -> int:
             "canonical_longest_repetition_run": max(
                 canonical_repetition, default=0
             ),
-            **runtime,
+            **{
+                key: value for key, value in runtime.items()
+                if key != "session_traces"
+            },
         },
         "sessions": rows,
         "claim_boundary": (

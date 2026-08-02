@@ -21,6 +21,7 @@ systems=(
   unprotected-batch
   feedback-off-batch
   fixed-margin-sync
+  revtrace
   holdback-only
   efsc
 )
@@ -51,6 +52,8 @@ run_cell() {
     local extra_system=()
     if [[ "${system}" == "efsc" ]]; then
       extra_system=(--efsc-exit-margin "${EXIT_MARGIN}")
+    elif [[ "${system}" == "revtrace" ]]; then
+      extra_system=(--low-margin-policy verify --verifier-lanes 1)
     fi
     "${PYTHON_BIN}" "${RUNNER}" workload \
       --model "${MODEL}" --model-name whisper-base.en \
@@ -83,7 +86,7 @@ import sys
 root = pathlib.Path(sys.argv[1])
 systems = (
     "unprotected-batch", "feedback-off-batch", "fixed-margin-sync",
-    "holdback-only", "efsc",
+    "revtrace", "holdback-only", "efsc",
 )
 summary = {"schema_version": 1, "study": "R7.3 Whisper c16 baseline matrix", "cells": {}}
 for cell in ("w1", "w2"):

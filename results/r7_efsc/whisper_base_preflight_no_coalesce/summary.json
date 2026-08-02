@@ -1,0 +1,56 @@
+{
+  "cells": {
+    "w1": {
+      "gates": {
+        "authority": true,
+        "committed_state_p99": true,
+        "display_p99": true,
+        "energy": true,
+        "occupancy": true,
+        "semantics": true,
+        "wall_speedup": true
+      },
+      "maximum_committed_state_p99_seconds": 1.35438835198991,
+      "maximum_display_p99_seconds": 1.3545630358438938,
+      "maximum_feedback_debt": 3,
+      "maximum_feedback_resolution_p99_seconds": 1.3545630358438938,
+      "maximum_prompt_state_age": 3,
+      "median_gpu_normalized_speedup": 4.1429870362761285,
+      "median_wall_speedup": 4.1429870362761285,
+      "minimum_energy_reduction": 0.7140392604013138,
+      "minimum_occupancy_fraction": 1.0,
+      "passed": true,
+      "pending_critical_path_authorities": 0,
+      "replicates": 5,
+      "semantic_violations": 0
+    },
+    "w2": {
+      "gates": {
+        "authority": true,
+        "committed_state_p99": true,
+        "display_p99": true,
+        "energy": true,
+        "occupancy": false,
+        "semantics": true,
+        "wall_speedup": true
+      },
+      "maximum_committed_state_p99_seconds": 1.5211459676921368,
+      "maximum_display_p99_seconds": 1.5007780742365866,
+      "maximum_feedback_debt": 3,
+      "maximum_feedback_resolution_p99_seconds": 1.5007780742365866,
+      "maximum_prompt_state_age": 3,
+      "median_gpu_normalized_speedup": 3.9067932007920665,
+      "median_wall_speedup": 3.9067932007920665,
+      "minimum_energy_reduction": 0.7003392266557316,
+      "minimum_occupancy_fraction": 0.75,
+      "passed": false,
+      "pending_critical_path_authorities": 0,
+      "replicates": 5,
+      "semantic_violations": 0
+    }
+  },
+  "claim_boundary": "one-GPU authority-free steady-state serving; embedded singleton baseline is paired per seed",
+  "decision": "FAIL_R7_3_EFSC_PREFLIGHT",
+  "schema_version": 1,
+  "study": "RevTrace R7.3 Whisper base.en c16 EFSC death gate"
+}
