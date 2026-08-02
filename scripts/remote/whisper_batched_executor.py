@@ -16,7 +16,9 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import statistics
 import time
+import zlib
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Sequence
@@ -41,6 +43,9 @@ class WhisperCandidate:
     prompt_token_ids: tuple[int, ...]
     generation_steps: int = 0
     terminated_by_eos: bool = False
+    first_step_no_speech_probability: float | None = None
+    average_token_log_probability: float | None = None
+    compression_ratio: float | None = None
 
     @property
     def token_sha256(self) -> str:
@@ -87,6 +92,9 @@ class DistinctPromptWhisper:
             self.processor.tokenizer.convert_tokens_to_ids(
                 "<|startofprev|>"
             )
+        )
+        self.no_speech = int(
+            self.processor.tokenizer.convert_tokens_to_ids("<|nospeech|>")
         )
         self.suppress = tuple(
             int(value)
@@ -204,6 +212,8 @@ class DistinctPromptWhisper:
         self,
         audio: Sequence[np.ndarray],
         prompts: Sequence[str | Sequence[int]],
+        *,
+        max_steps: int | None = None,
     ) -> list[WhisperCandidate]:
         if len(audio) != len(prompts) or not audio:
             raise ValueError("audio and prompts must be non-empty and aligned")
@@ -235,14 +245,29 @@ class DistinctPromptWhisper:
         )
         generated: list[list[int]] = [[] for _ in audio]
         margins: list[list[float]] = [[] for _ in audio]
+        token_log_probabilities: list[list[float]] = [[] for _ in audio]
+        no_speech_probabilities: list[float | None] = [None for _ in audio]
         real_lengths = decoder_mask.sum(dim=1)
 
-        for step in range(self.max_new_tokens):
+        step_budget = int(
+            self.max_new_tokens if max_steps is None else max_steps
+        )
+        if not 0 < step_budget <= self.max_new_tokens:
+            raise ValueError("max_steps must lie in [1, max_new_tokens]")
+        for step in range(step_budget):
+            raw_logits = output.logits[:, -1, :].float()
+            if step == 0 and self.no_speech >= 0:
+                probabilities = torch.softmax(raw_logits, dim=-1)
+                for row in range(len(audio)):
+                    no_speech_probabilities[row] = float(
+                        probabilities[row, self.no_speech].item()
+                    )
             logits = self._filter_logits(
-                output.logits[:, -1, :],
+                raw_logits,
                 first_step=step == 0,
                 finished=finished,
             )
+            log_probabilities = torch.log_softmax(logits, dim=-1)
             top = torch.topk(logits, k=2, dim=-1)
             next_tokens = top.indices[:, 0]
             step_margins = top.values[:, 0] - top.values[:, 1]
@@ -251,6 +276,9 @@ class DistinctPromptWhisper:
                     continue
                 token = int(next_tokens[row].item())
                 margins[row].append(float(step_margins[row].item()))
+                token_log_probabilities[row].append(float(
+                    log_probabilities[row, token].item()
+                ))
                 if token == self.eos:
                     finished[row] = True
                 else:
@@ -288,16 +316,22 @@ class DistinctPromptWhisper:
         torch.cuda.current_stream(self.device).synchronize()
         elapsed = time.perf_counter() - started
         records: list[WhisperCandidate] = []
-        for ids, row_margins, prompt in zip(
-            generated, margins, prompt_rows
+        for ids, row_margins, row_log_probs, no_speech, prompt in zip(
+            generated,
+            margins,
+            token_log_probabilities,
+            no_speech_probabilities,
+            prompt_rows,
         ):
+            text = self.processor.decode(
+                ids,
+                skip_special_tokens=True,
+            ).strip()
+            encoded_text = text.encode("utf-8")
             records.append(
                 WhisperCandidate(
                     token_ids=tuple(ids),
-                    text=self.processor.decode(
-                        ids,
-                        skip_special_tokens=True,
-                    ).strip(),
+                    text=text,
                     minimum_margin=(
                         min(row_margins) if row_margins else None
                     ),
@@ -310,6 +344,15 @@ class DistinctPromptWhisper:
                     # number of decoder decisions for the authority protocol.
                     generation_steps=len(row_margins),
                     terminated_by_eos=(len(ids) < len(row_margins)),
+                    first_step_no_speech_probability=no_speech,
+                    average_token_log_probability=(
+                        statistics.fmean(row_log_probs)
+                        if row_log_probs else None
+                    ),
+                    compression_ratio=(
+                        len(encoded_text) / max(1, len(zlib.compress(encoded_text)))
+                        if encoded_text else 0.0
+                    ),
                 )
             )
         return records
@@ -320,6 +363,95 @@ class DistinctPromptWhisper:
         prompt: str | Sequence[int],
     ) -> WhisperCandidate:
         return self.generate([audio], [prompt])[0]
+
+    @torch.inference_mode()
+    def acoustic_candidate_scores(
+        self,
+        audio: np.ndarray,
+        candidates: Sequence[Sequence[int]],
+    ) -> list[dict[str, float]]:
+        """Teacher-force candidate transcripts without previous-text context.
+
+        The score is deliberately conditioned only on the current acoustic
+        window.  It therefore cannot reward a recovery candidate merely for
+        repeating its capsule prompt.  This is a selection signal, not a
+        correctness certificate or a replacement for the EFSC authority
+        contract.
+        """
+
+        if not candidates:
+            raise ValueError("at least one candidate is required")
+        input_features, attention_mask = self._features([audio])
+        encoder = self.model.model.encoder(
+            input_features,
+            attention_mask=attention_mask,
+            return_dict=True,
+        )
+        rows = [
+            (
+                self.decoder_start,
+                self.no_timestamps,
+                *(int(token) for token in candidate),
+                self.eos,
+            )
+            for candidate in candidates
+        ]
+        maximum = max(len(row) for row in rows)
+        decoder_ids = torch.full(
+            (len(rows), maximum - 1),
+            self.pad,
+            dtype=torch.long,
+            device=self.device,
+        )
+        targets = torch.full_like(decoder_ids, self.pad)
+        decoder_mask = torch.zeros_like(decoder_ids)
+        score_mask = torch.zeros_like(decoder_ids, dtype=torch.bool)
+        decoder_positions = torch.zeros_like(decoder_ids)
+        for index, row in enumerate(rows):
+            inputs = row[:-1]
+            outputs = row[1:]
+            offset = maximum - len(row)
+            decoder_ids[index, offset:] = torch.tensor(
+                inputs, dtype=torch.long, device=self.device
+            )
+            targets[index, offset:] = torch.tensor(
+                outputs, dtype=torch.long, device=self.device
+            )
+            decoder_mask[index, offset:] = 1
+            decoder_positions[index, offset:] = torch.arange(
+                len(inputs), dtype=torch.long, device=self.device
+            )
+            # The first scored target follows the fixed decoder control
+            # prefix; include every transcript token and terminal EOS.
+            score_mask[index, offset + 1:] = True
+        repeated_encoder = BaseModelOutput(
+            last_hidden_state=encoder.last_hidden_state.repeat(
+                len(rows), 1, 1
+            )
+        )
+        repeated_attention = attention_mask.repeat(len(rows), 1)
+        output = self.model(
+            encoder_outputs=repeated_encoder,
+            attention_mask=repeated_attention,
+            decoder_input_ids=decoder_ids,
+            decoder_attention_mask=decoder_mask,
+            decoder_position_ids=decoder_positions,
+            use_cache=False,
+            return_dict=True,
+        )
+        log_probabilities = torch.log_softmax(output.logits.float(), dim=-1)
+        selected = log_probabilities.gather(
+            -1, targets.clamp_min(0).unsqueeze(-1)
+        ).squeeze(-1)
+        results: list[dict[str, float]] = []
+        for index in range(len(rows)):
+            values = selected[index][score_mask[index]]
+            results.append({
+                "mean_log_probability": float(values.mean().item()),
+                "sum_log_probability": float(values.sum().item()),
+                "scored_tokens": float(values.numel()),
+            })
+        return results
 
     @torch.inference_mode()
     def official_canonical(

@@ -194,6 +194,13 @@ def run_batched_quality(
                     "minimum_margin": record.minimum_margin,
                     "generation_steps": record.generation_steps,
                     "terminated_by_eos": record.terminated_by_eos,
+                    "first_step_no_speech_probability": (
+                        record.first_step_no_speech_probability
+                    ),
+                    "average_token_log_probability": (
+                        record.average_token_log_probability
+                    ),
+                    "compression_ratio": record.compression_ratio,
                     "candidate_token_ids": list(record.token_ids),
                     "candidate_text": record.text,
                     "feedback_off_text": off_record.text,

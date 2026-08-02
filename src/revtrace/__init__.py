@@ -1,6 +1,15 @@
 """RevTrace: state-certified serving for revision-generative models."""
 
 from .core import RevisionCommitLedger, RevisionTicket
+from .context_reanchor import (
+    CapsuleRejected,
+    ContextCapsule,
+    RecoveryState,
+    RecoveryVersion,
+    advance_audio_frontier,
+    install_context_capsule,
+    publish_provisional,
+)
 from .control import (
     AdaptiveCertificationController,
     ContractFingerprint,
@@ -16,6 +25,7 @@ from .feedback_coherence import (
     FeedbackIdentity,
     QwenRollbackAdapter,
     WhisperHistoryAdapter,
+    install_authoritative_feedback_capsule,
 )
 from .phase6 import (
     ContractEvidenceMemory,
@@ -24,6 +34,7 @@ from .phase6 import (
     RuntimeContract,
     joint_risk_slo_admission,
 )
+from .sufficiency import csm_forest_score, csm_requires_reanchor
 
 __all__ = [
     "AdaptiveCertificationController",
@@ -41,8 +52,18 @@ __all__ = [
     "QwenRollbackAdapter",
     "RevisionCommitLedger",
     "RevisionTicket",
+    "CapsuleRejected",
+    "ContextCapsule",
+    "RecoveryState",
+    "RecoveryVersion",
+    "advance_audio_frontier",
+    "install_context_capsule",
+    "install_authoritative_feedback_capsule",
+    "publish_provisional",
     "ReshapeCandidate",
     "RuntimeContract",
     "WhisperHistoryAdapter",
     "joint_risk_slo_admission",
+    "csm_forest_score",
+    "csm_requires_reanchor",
 ]

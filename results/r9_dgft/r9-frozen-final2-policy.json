@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "study": "R9 DGFT second untouched confirmation policy",
+  "policy_version": "r9-dgft-v3-boundary-transport",
+  "frozen_before_final2_execution": true,
+  "first_confirmation_role": "validation_after_one_base-scale_miss",
+  "holdout_manifest_sha256": "d8b311e79d9cff005e459f1486ed44bdb6715280a4aac58db2f50e9a2fffab9c",
+  "holdout_prior_id_overlap": 0,
+  "holdout_prior_ids_audited": 10953,
+  "policy": {
+    "adaptive_min_seconds": 15.0,
+    "adaptive_max_seconds": 30.0,
+    "coverage_threshold": 0.2,
+    "coverage_asymmetry_margin": 0.1,
+    "structural_coverage_threshold": 0.2,
+    "adjacent_boundary_transport_cancellation": true,
+    "repair_mode": "display-segment",
+    "post_repair_forward_threshold": 0.2,
+    "post_repair_reverse_ceiling": 0.2,
+    "full_session_escalation": "only_after_failed_local_salvage_or_persistent_asymmetric_omission"
+  },
+  "claim_boundary": "All coverage scores are reference-free empirical scheduling witnesses. Transaction validation protects state installation, but the risk score is not a deterministic numerical certificate."
+}

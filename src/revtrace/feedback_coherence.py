@@ -280,6 +280,31 @@ class StaleFeedbackCandidate(ValueError):
     """Raised when a candidate does not own the current policy state."""
 
 
+def install_authoritative_feedback_capsule(
+    state: ElasticFeedbackState,
+    token_ids: Sequence[int],
+) -> ElasticFeedbackState:
+    """Atomically replace feedback with canonical, ancestry-free context.
+
+    Capsule admission (session, epoch, audio frontier, digest, and freshness)
+    is checked by :mod:`revtrace.context_reanchor` before this projection is
+    called.  Canonical capsule tokens do not inherit provisional ancestors.
+    """
+
+    next_identity = state.identity.child()
+    return ElasticFeedbackState(
+        identity=next_identity,
+        atoms=tuple(
+            FeedbackAtom(int(token), frozenset()) for token in token_ids
+        ),
+        mode=CoherenceMode.COHERENT,
+        feedback_debt=0,
+        hold_age=0,
+        safe_streak=0,
+        last_reset_version=next_identity.state_version,
+    )
+
+
 class ElasticFeedbackController:
     """Debt-bounded hysteresis controller with no critical-path authority."""
 

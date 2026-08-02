@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "study": "R9 DGFT third untouched confirmation policy",
+  "policy_version": "r9-dgft-v4-semantic-escalation",
+  "frozen_before_final3_execution": true,
+  "prior_confirmation_roles": {
+    "first": "validation after one base-scale omission",
+    "second": "validation after service-tail structural escalation failure"
+  },
+  "holdout_manifest_sha256": "7af1c7dd65b88edfd0f5748e7d363af2dda6d418fea3a3bcb4a928ddd2a1d95c",
+  "holdout_prior_id_overlap": 0,
+  "holdout_prior_ids_audited": 11091,
+  "policy": {
+    "adaptive_min_seconds": 15.0,
+    "adaptive_max_seconds": 30.0,
+    "coverage_threshold": 0.2,
+    "coverage_asymmetry_margin": 0.15,
+    "structural_coverage_threshold": 0.2,
+    "adjacent_boundary_transport_cancellation": true,
+    "repair_mode": "singleton display-segment replay with canonical feedback-state isolation",
+    "post_repair_forward_threshold": 0.2,
+    "post_repair_reverse_ceiling": 0.2,
+    "degeneracy_repeated_4gram_fraction": 0.25,
+    "full_session_escalation": "persistent asymmetric omission or explicit post-salvage phrase loop only"
+  },
+  "claim_boundary": "Coverage and repetition scores are reference-free empirical scheduling witnesses. Transaction validation protects state installation; neither score is a deterministic numerical certificate."
+}

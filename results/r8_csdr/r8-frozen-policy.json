@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "study": "RevTrace R8 frozen cross-session independent replay policy",
+  "frozen_before_final_holdout": true,
+  "mechanism": {
+    "selector": "canonical-replay",
+    "paper_name": "batched independent replay authority",
+    "csm_trigger_threshold": 0.79,
+    "structural_rule_mode": "absolute",
+    "absolute_rule": "token_count <= 2",
+    "lease": "from first trigger through terminal",
+    "replay_batch_concurrency": 16,
+    "state_installation": "only the selected independent replay transition may update recovered feedback state",
+    "terminal_rule": "a recovered session receives an independent terminal closure"
+  },
+  "quality_gate": {
+    "catastrophic_outliers": 0,
+    "mean_delta_pp_max": 1.0,
+    "bootstrap_95_upper_pp_max": 2.0,
+    "split_mean_delta_pp_max": 1.0,
+    "split_bootstrap_95_upper_pp_max": 2.0,
+    "maximum_repetition_run_exclusive": 3,
+    "semantic_violations": 0,
+    "estimated_energy_reduction_min": 0.4
+  },
+  "development_evidence": {
+    "file": "r8-independent-replay-calibrated-dev.json",
+    "sha256": "6902c5857013ca0d97040ecf4019f15a3425f7c45e811fadfde8b345572c2773",
+    "sessions": 128,
+    "catastrophic_outliers": 0,
+    "mean_delta_pp": -2.635134280521092,
+    "bootstrap_95_upper_pp": -1.397147596720842,
+    "estimated_energy_reduction": 0.4443790994127146
+  },
+  "adaptation_evidence": {
+    "file": "r8-independent-replay-calibrated-adaptation.json",
+    "sha256": "8336a20e9ebe71d68f1092481682156dc159ffa2bfe3bc53da3d74a1c68954d6",
+    "sessions": 128,
+    "catastrophic_outliers": 0,
+    "mean_delta_pp": -2.2390524848266202,
+    "bootstrap_95_upper_pp": -1.250416214751721,
+    "estimated_energy_reduction": 0.44118309136900535
+  },
+  "csm_policy_sha256": "2c3099a76ba3bd3ec6b48e002da0ba1644161f1666b6452e5b68074a2f9bf3ef",
+  "final_holdout": {
+    "manifest_sha256": "fc803cadaf3202bbbb78ffd3930dd8ae6d21244d3993d4a4298e224cbcb156aa",
+    "seed": 2026082101,
+    "bootstrap_seed": 2026082102,
+    "status": "untouched_at_freeze"
+  },
+  "claim_boundary": "The replay branch is causally independent of unsafe feedback state, but ordinary batched arithmetic is not a bitwise singleton certificate. Zero observed quality catastrophes must be reported with finite-sample uncertainty, not as deterministic exactness."
+}
