@@ -46,7 +46,8 @@
   "architecture_adapters": {
     "qwen3_asr": {
       "input": "exact projection_token_ids from the official rollback/tokenizer path",
-      "update": "replace the next rollback-prefix state",
+      "update": "replace the next rollback-prefix state; every HOLD, DECAY, or RESET also advances the cumulative-audio replay frontier so denied text is not regenerated from old audio",
+      "effective_state": "rollback text plus cumulative-audio replay frontier",
       "models": ["Qwen3-ASR-0.6B", "Qwen3-ASR-1.7B"]
     },
     "whisper": {
@@ -111,6 +112,7 @@
         "feedback-off"
       ],
       "replicates_per_cell": 5,
+      "poisson_batch_coalesce_seconds": 0.5,
       "gates": {
         "median_wall_speedup_min": 2.5,
         "display_p99_seconds_max": 1.9,

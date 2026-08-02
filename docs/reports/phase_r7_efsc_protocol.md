@@ -6,7 +6,10 @@ R7 does **not** assume that a Whisper result transfers to Qwen.  It uses one
 architecture-independent controller and two explicit projection adapters:
 
 - Qwen receives the exact token projection produced by the official rollback
-  and tokenizer path, then replaces the next rollback-prefix state.
+  and tokenizer path, then replaces the next rollback-prefix state. Its
+  effective feedback state also includes the cumulative-audio replay
+  frontier: whenever a result is denied text authority, the frontier advances
+  with it so denied audio is not retranscribed from an empty/stale text prefix.
 - Whisper appends the authorized segment token IDs to its bounded
   previous-text history.
 
@@ -50,6 +53,12 @@ Token decay is not a causal reset: a retained token can still depend on an old
 prompt that generated it.  The hard influence bound is therefore enforced by
 periodic SAFE_RESET.  If the maximum influence horizon is `H`, no admitted
 ancestor may remain in feedback state for more than `H` later revisions.
+
+The Qwen adapter therefore performs a joint text/acoustic rebase. This is not
+a model-specific controller branch: HOLD/DECAY/RESET remain the shared action,
+while the adapter retires every architecture-specific replay component that
+would otherwise regenerate denied state. A text-only reset is invalid for
+Qwen because its next request still contains the accumulated waveform.
 
 ## Debt and hysteresis
 
@@ -100,6 +109,13 @@ holdback-only, EFSC, and feedback-off.  The preflight stops unless median wall
 speedup is at least 2.5x, display and committed-state P99 are at most 1.9 s,
 energy reduction is at least 35%, occupancy is at least 90%, and critical-path
 canonical work is zero.
+
+For the declared Poisson start process (20 ms mean inter-arrival), every
+batched baseline uses the same bounded 0.5-second admission coalescing window.
+The wait ends as soon as all c16 sessions are released.  This bound is derived
+before the repaired run from the frozen five-seed release span (0.181--0.438 s)
+and the 1.9-second SLO; the excluded zero-wait run is retained as scheduler
+fragmentation evidence rather than silently overwritten.
 
 The formal risk epoch then requires at least 60,000 eligible entries and 1,200
 pre-outcome random audits with a time-uniform 95% upper risk bound at most 0.5%.

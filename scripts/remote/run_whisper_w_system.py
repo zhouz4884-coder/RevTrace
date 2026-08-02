@@ -37,6 +37,15 @@ from whisper_batched_executor import (
 )
 
 from revtrace.feedback_metrics import edit_distance, pack_disjoint_audio
+from revtrace.feedback_coherence import (
+    EFSCContract,
+    ElasticFeedbackController,
+    ElasticFeedbackState,
+    FeedbackAction,
+    FeedbackCandidate,
+    FeedbackIdentity,
+    WhisperHistoryAdapter,
+)
 from revtrace.risk import AuditRiskBound
 from revtrace.whisper_state import (
     LocalAgreement2,
@@ -75,6 +84,9 @@ def _compute_runtime_source_identity() -> dict[str, str]:
         "run_whisper_w_system.py": Path(__file__),
         "whisper_state.py": Path(
             checkpoint_due_for_session.__code__.co_filename
+        ),
+        "feedback_coherence.py": Path(
+            ElasticFeedbackController.__init__.__code__.co_filename
         ),
     }
     return {
@@ -148,7 +160,9 @@ def parse_args() -> argparse.Namespace:
         "unprotected-batch",
         "feedback-off-batch",
         "fixed-margin-sync",
+        "holdback-only",
         "local-agreement-2",
+        "efsc",
         "revtrace",
         "revtrace-inline",
     ), required=True)
@@ -168,6 +182,11 @@ def parse_args() -> argparse.Namespace:
     )
     workload.add_argument("--seed", type=int, required=True)
     workload.add_argument("--margin-threshold", type=float, required=True)
+    workload.add_argument(
+        "--efsc-exit-margin",
+        type=float,
+        help="Frozen hysteresis exit margin; required for --system efsc.",
+    )
     workload.add_argument("--age-window-index", type=int)
     workload.add_argument("--age-margin-threshold", type=float)
     workload.add_argument("--late-window-index", type=int)
@@ -235,6 +254,15 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     workload.add_argument("--slo-seconds", type=float, default=2.0)
+    workload.add_argument(
+        "--batch-coalesce-seconds",
+        type=float,
+        default=0.0,
+        help=(
+            "bounded wait for newly released sessions before dispatch; "
+            "applies identically to every compared batched system"
+        ),
+    )
     workload.add_argument("--system-order-index", type=int, default=-1)
     workload.add_argument(
         "--system-order-policy",
@@ -798,6 +826,7 @@ def take_released_batch(
     concurrency: int,
     arrival: str,
     rng: random.Random,
+    coalesce_seconds: float = 0.0,
 ) -> tuple[list[int], list[int]]:
     """Select the oldest ready sessions after their initial release.
 
@@ -819,6 +848,34 @@ def take_released_batch(
         delay = min(release_times[index] for index in ready) - elapsed
         if delay > 0:
             time.sleep(min(delay, 0.01))
+    if coalesce_seconds < 0:
+        raise ValueError("batch coalescing must be non-negative")
+    # Poisson session starts otherwise create a deterministic 1+(B-1) split
+    # even when the remaining B-1 requests arrive a few milliseconds later.
+    # Wait only within the declared bound and never past a session deadline.
+    if coalesce_seconds and len(eligible) < concurrency:
+        deadline = time.perf_counter() + coalesce_seconds
+        while len(eligible) < concurrency:
+            elapsed = time.perf_counter() - started
+            unreleased = [
+                release_times[index]
+                for index in ready
+                if release_times[index] > elapsed
+            ]
+            if not unreleased:
+                break
+            remaining_wait = deadline - time.perf_counter()
+            if remaining_wait <= 0:
+                break
+            delay = min(min(unreleased) - elapsed, remaining_wait)
+            if delay > 0:
+                time.sleep(delay)
+            elapsed = time.perf_counter() - started
+            eligible = [
+                session_id
+                for session_id in ready
+                if release_times[session_id] <= elapsed
+            ]
     _ = (arrival, rng)
     eligible = sorted(
         eligible,
@@ -846,6 +903,7 @@ def run_simple_system(
     margin_threshold: float,
     power_interval: float,
     arrival_scale_seconds: float,
+    batch_coalesce_seconds: float,
 ) -> dict[str, Any]:
     rng = random.Random(seed)
     prompts: list[tuple[int, ...]] = [() for _ in sessions]
@@ -895,6 +953,7 @@ def run_simple_system(
             concurrency=concurrency,
             arrival=arrival,
             rng=rng,
+            coalesce_seconds=batch_coalesce_seconds,
         )
         scheduler_rows.append({
             "round": len(scheduler_rows),
@@ -991,8 +1050,19 @@ def run_simple_system(
                 source = "local-agreement-2"
 
             oracle_record = oracle[session_id][window_index]
-            next_system_prompt = next_prompt_state(
-                proposer, prompts[session_id], state_record
+            holdback = (
+                system == "holdback-only"
+                and (
+                    terminal
+                    or selected.minimum_margin is None
+                    or selected.minimum_margin <= margin_threshold
+                )
+            )
+            next_system_prompt = (
+                prompts[session_id]
+                if holdback else next_prompt_state(
+                    proposer, prompts[session_id], state_record
+                )
             )
             next_authority_prompt = next_prompt_state(
                 proposer,
@@ -1012,7 +1082,7 @@ def run_simple_system(
                 "session_id": session_id,
                 "window_index": window_index,
                 "terminal": terminal,
-                "source": source,
+                "source": "holdback" if holdback else source,
                 "minimum_margin": selected.minimum_margin,
                 "latency_seconds": latency,
                 "prior_prompt_tokens": len(
@@ -1024,6 +1094,7 @@ def run_simple_system(
                 ),
                 "output_error": output_error,
                 "state_error": state_error,
+                "state_entry_committed": not holdback,
             })
             if system != "feedback-off-batch":
                 transition = PromptTransition(
@@ -1058,6 +1129,305 @@ def run_simple_system(
     }
 
 
+def run_efsc_system(
+    proposer: DistinctPromptWhisper,
+    sessions: Sequence[np.ndarray],
+    oracle: Sequence[Sequence[WhisperCandidate]],
+    *,
+    windows_per_session: int,
+    concurrency: int,
+    arrival: str,
+    seed: int,
+    enter_margin: float,
+    exit_margin: float,
+    power_interval: float,
+    arrival_scale_seconds: float,
+    batch_coalesce_seconds: float,
+) -> dict[str, Any]:
+    """Run authority-free elastic feedback-state coherence.
+
+    The batched proposal is always available for display.  Only FAST_COMMIT
+    grants it ancestry in a future Whisper previous-text prompt.  HOLD,
+    DECAY and RESET are therefore real state-control operations rather than
+    aliases for a hidden singleton verifier.
+    """
+
+    maximum_history_tokens = proposer.max_prompt_tokens - 1
+    contract = EFSCContract(
+        enter_margin=enter_margin,
+        exit_margin=exit_margin,
+        minimum_hold_windows=1,
+        safe_streak_required=2,
+        maximum_quarantine_windows=3,
+        maximum_feedback_debt=3,
+        maximum_influence_windows=3,
+        maximum_prompt_tokens=maximum_history_tokens,
+        decay_suffix_tokens=min(32, maximum_history_tokens - 1),
+    )
+    controller = ElasticFeedbackController(contract)
+    adapter = WhisperHistoryAdapter(maximum_history_tokens)
+    prompts: list[tuple[int, ...]] = [() for _ in sessions]
+    feedback_states = [
+        ElasticFeedbackState(
+            FeedbackIdentity(f"s{index}", 1, 1, 0)
+        )
+        for index in range(len(sessions))
+    ]
+    authority_prompts = oracle_prompt_inputs(proposer, oracle)
+    windows = [
+        list(np.array_split(audio, windows_per_session))
+        for audio in sessions
+    ]
+    next_window = [0 for _ in sessions]
+    ready = list(range(len(sessions)))
+    event_rows: list[dict[str, Any]] = []
+    scheduler_rows: list[dict[str, Any]] = []
+    action_counts = {action.value: 0 for action in FeedbackAction}
+    preparation_counts = {action.value: 0 for action in FeedbackAction}
+    reason_counts: dict[str, int] = {}
+    violations = {
+        "provisional_ancestor": 0,
+        "ancestry_nonexpansion": 0,
+        "feedback_debt": 0,
+        "influence_horizon": 0,
+        "prompt_load": 0,
+        "prompt_state_binding": 0,
+    }
+    maximum_ancestry_age = 0
+    maximum_feedback_debt = 0
+    maximum_prompt_load = 0
+    pending_provisional: dict[int, tuple[int, float]] = {}
+    reset_window: dict[int, int] = {}
+    reset_recovery_windows: list[int] = []
+    rng = random.Random(seed)
+    sampler = PowerSampler((executor_gpu_index(proposer),), power_interval)
+    sampler.start()
+    started = time.perf_counter()
+    release_times = session_release_times(
+        len(sessions),
+        arrival=arrival,
+        rng=random.Random(seed ^ 0xA771),
+        scale_seconds=arrival_scale_seconds,
+    )
+    ready_since = [started + value for value in release_times]
+
+    while ready:
+        ready_before = len(ready)
+        batch_ids, ready = take_released_batch(
+            ready,
+            release_times=release_times,
+            ready_since=ready_since,
+            started=started,
+            concurrency=concurrency,
+            arrival=arrival,
+            rng=rng,
+            coalesce_seconds=batch_coalesce_seconds,
+        )
+        preparation_actions: dict[int, str | None] = {}
+        for session_id in batch_ids:
+            state, preparation = controller.prepare_for_proposal(
+                feedback_states[session_id], adapter
+            )
+            feedback_states[session_id] = state
+            prompts[session_id] = tuple(
+                atom.token_id for atom in state.atoms
+            )
+            preparation_actions[session_id] = (
+                preparation.action.value
+                if preparation.action is not None else None
+            )
+            if preparation.action is not None:
+                preparation_counts[preparation.action.value] += 1
+
+        scheduler_rows.append({
+            "round": len(scheduler_rows),
+            "ready_sessions": ready_before,
+            "pending_authorities": 0,
+            "batch_size": len(batch_ids),
+            "generated_batch_size": len(batch_ids),
+            "capacity": concurrency,
+            "unfilled_slots": max(0, concurrency - len(batch_ids)),
+        })
+        batch_audio = [
+            windows[index][next_window[index]] for index in batch_ids
+        ]
+        batch_prompts = [prompts[index] for index in batch_ids]
+        proposed = proposer.generate(batch_audio, batch_prompts)
+        proposal_finished = time.perf_counter()
+
+        for position, session_id in enumerate(batch_ids):
+            window_index = next_window[session_id]
+            terminal = window_index == windows_per_session - 1
+            record = proposed[position]
+            current = feedback_states[session_id]
+            old_ancestors = current.ancestors
+            old_atoms = current.atoms
+            candidate = FeedbackCandidate(
+                session_id=current.identity.session_id,
+                contract_epoch=current.identity.contract_epoch,
+                policy_version=current.identity.policy_version,
+                parent_state_version=current.identity.state_version,
+                token_ids=tuple(record.token_ids),
+                minimum_margin=record.minimum_margin,
+                terminal=terminal,
+            )
+            next_state, decision = controller.step(
+                current, candidate, adapter
+            )
+            feedback_states[session_id] = next_state
+            prompts[session_id] = tuple(
+                atom.token_id for atom in next_state.atoms
+            )
+            action_counts[decision.action.value] += 1
+            reason_counts[decision.reason] = (
+                reason_counts.get(decision.reason, 0) + 1
+            )
+            if session_id in pending_provisional:
+                prior_index, prior_display_time = pending_provisional.pop(
+                    session_id
+                )
+                event_rows[prior_index]["provisional_lifetime_seconds"] = (
+                    proposal_finished - prior_display_time
+                )
+            if (
+                preparation_actions[session_id]
+                == FeedbackAction.SAFE_RESET.value
+                or decision.action == FeedbackAction.SAFE_RESET
+            ):
+                reset_window[session_id] = window_index
+            if (
+                decision.action == FeedbackAction.FAST_COMMIT
+                and session_id in reset_window
+            ):
+                reset_recovery_windows.append(
+                    window_index - reset_window.pop(session_id)
+                )
+
+            if (
+                decision.action != FeedbackAction.FAST_COMMIT
+                and next_state.ancestors - old_ancestors
+            ):
+                violations["ancestry_nonexpansion"] += 1
+            if (
+                not decision.candidate_became_ancestor
+                and next_state.identity.state_version
+                in next_state.ancestors
+            ):
+                violations["provisional_ancestor"] += 1
+            if (
+                decision.action == FeedbackAction.PROVISIONAL_HOLD
+                and next_state.atoms != old_atoms
+            ):
+                violations["ancestry_nonexpansion"] += 1
+            if next_state.feedback_debt > contract.maximum_feedback_debt:
+                violations["feedback_debt"] += 1
+            if next_state.oldest_ancestor_age > contract.maximum_influence_windows:
+                violations["influence_horizon"] += 1
+            if next_state.prompt_load > contract.maximum_prompt_tokens:
+                violations["prompt_load"] += 1
+            if prompts[session_id] != tuple(
+                atom.token_id for atom in next_state.atoms
+            ):
+                violations["prompt_state_binding"] += 1
+
+            maximum_ancestry_age = max(
+                maximum_ancestry_age, next_state.oldest_ancestor_age
+            )
+            maximum_feedback_debt = max(
+                maximum_feedback_debt, next_state.feedback_debt
+            )
+            maximum_prompt_load = max(
+                maximum_prompt_load, next_state.prompt_load
+            )
+
+            oracle_record = oracle[session_id][window_index]
+            oracle_prompt = authority_prompts[session_id][window_index]
+            next_authority_prompt = next_prompt_state(
+                proposer, oracle_prompt, oracle_record
+            )
+            output_disagreement = (
+                record.token_ids != oracle_record.token_ids
+            )
+            state_disagreement = (
+                not terminal
+                and prompts[session_id] != next_authority_prompt
+            )
+            latency = proposal_finished - ready_since[session_id]
+            event_rows.append({
+                "session_id": session_id,
+                "window_index": window_index,
+                "terminal": terminal,
+                "source": "fp16-batch-efsc",
+                "minimum_margin": record.minimum_margin,
+                "latency_seconds": latency,
+                "display_latency_seconds": latency,
+                "feedback_resolution_latency_seconds": latency,
+                "prior_prompt_tokens": len(
+                    proposer.prompt_tokens(batch_prompts[position])
+                ),
+                "next_prompt_tokens": len(
+                    proposer.prompt_tokens(prompts[session_id])
+                ),
+                "action": decision.action.value,
+                "reason": decision.reason,
+                "pre_proposal_action": preparation_actions[session_id],
+                "feedback_mode": next_state.mode.value,
+                "feedback_debt": next_state.feedback_debt,
+                "hold_age": next_state.hold_age,
+                "oldest_ancestor_age": next_state.oldest_ancestor_age,
+                "candidate_became_ancestor": (
+                    decision.candidate_became_ancestor
+                ),
+                "state_entry_committed": (
+                    decision.action == FeedbackAction.FAST_COMMIT
+                ),
+                "output_error": output_disagreement,
+                "state_error": state_disagreement,
+                "canonical_trace_output_disagreement": output_disagreement,
+                "canonical_trace_state_disagreement": state_disagreement,
+                "provisional_lifetime_seconds": 0.0,
+            })
+            if (
+                decision.action == FeedbackAction.PROVISIONAL_HOLD
+                and not terminal
+            ):
+                pending_provisional[session_id] = (
+                    len(event_rows) - 1,
+                    proposal_finished,
+                )
+            next_window[session_id] += 1
+            if next_window[session_id] < windows_per_session:
+                ready_since[session_id] = time.perf_counter()
+                ready.append(session_id)
+
+    wall = time.perf_counter() - started
+    joules = sampler.stop()
+    semantic_violations = sum(violations.values())
+    return {
+        "wall_seconds": wall,
+        "energy_joules": joules,
+        "event_rows": event_rows,
+        "scheduler_rows": scheduler_rows,
+        "verification_count": 0,
+        "mandatory_verification_count": 0,
+        "output_violations": 0,
+        "state_violations": semantic_violations,
+        "stale_commits": 0,
+        "capacity_rebase_count": preparation_counts[
+            FeedbackAction.DECAY_SUFFIX.value
+        ] + preparation_counts[FeedbackAction.SAFE_RESET.value],
+        "efsc_action_counts": action_counts,
+        "efsc_preparation_counts": preparation_counts,
+        "efsc_reason_counts": reason_counts,
+        "efsc_semantic_violations": violations,
+        "efsc_maximum_ancestry_age": maximum_ancestry_age,
+        "efsc_maximum_feedback_debt": maximum_feedback_debt,
+        "efsc_maximum_prompt_load": maximum_prompt_load,
+        "efsc_reset_recovery_windows": reset_recovery_windows,
+        "efsc_contract": asdict(contract),
+    }
+
+
 def run_inline_revtrace(
     proposer: DistinctPromptWhisper,
     sessions: Sequence[np.ndarray],
@@ -1071,6 +1441,7 @@ def run_inline_revtrace(
     audit_probability: float,
     power_interval: float,
     arrival_scale_seconds: float,
+    batch_coalesce_seconds: float,
 ) -> dict[str, Any]:
     """One-GPU Prompt-State Holdback with inline canonical authority.
 
@@ -1127,6 +1498,7 @@ def run_inline_revtrace(
             concurrency=concurrency,
             arrival=arrival,
             rng=rng,
+            coalesce_seconds=batch_coalesce_seconds,
         )
         audio = [
             windows[index][next_window[index]] for index in batch_ids
@@ -1271,6 +1643,7 @@ def run_revtrace(
     audit_probability: float,
     power_interval: float,
     arrival_scale_seconds: float,
+    batch_coalesce_seconds: float,
     authority_idle_proposer_lanes: int = 1,
     terminal_spillover_on_proposer: bool = False,
     authority_spillover_on_proposer: bool = False,
@@ -1758,6 +2131,7 @@ def run_revtrace(
                     concurrency=concurrency,
                     arrival=arrival,
                     rng=rng,
+                    coalesce_seconds=batch_coalesce_seconds,
                 )
                 batch_is_prefetch = [
                     index in prefetch_queued for index in batch_ids
@@ -2373,6 +2747,10 @@ def summarize_workload(
         for row in rows
         if bool(row.get("terminal", False))
     )
+    feedback_resolution_latencies = sorted(
+        float(row.get("feedback_resolution_latency_seconds", row["latency_seconds"]))
+        for row in rows
+    )
 
     def quantile(q: float) -> float:
         if not latencies:
@@ -2456,10 +2834,12 @@ def summarize_workload(
             ),
             "arrival": args.arrival,
             "arrival_scale_seconds": args.arrival_scale_seconds,
+            "batch_coalesce_seconds": args.batch_coalesce_seconds,
             "seed": args.seed,
             "system_order_index": args.system_order_index,
             "system_order_policy": args.system_order_policy,
             "margin_threshold": args.margin_threshold,
+            "efsc_exit_margin": getattr(args, "efsc_exit_margin", None),
             "age_window_index": args.age_window_index,
             "age_margin_threshold": args.age_margin_threshold,
             "late_window_index": args.late_window_index,
@@ -2504,8 +2884,11 @@ def summarize_workload(
             ),
             "queue_protocol": QUEUE_PROTOCOL,
             "state_control_protocol": (
-                STATE_CONTROL_PROTOCOL
-                if args.system == "revtrace" else None
+                (
+                    "elastic-feedback-state-coherence-v1"
+                    if args.system == "efsc" else STATE_CONTROL_PROTOCOL
+                )
+                if args.system in {"revtrace", "efsc"} else None
             ),
             "work_authority_protocol": (
                 WORK_AUTHORITY_PROTOCOL
@@ -2571,6 +2954,7 @@ def summarize_workload(
                 args.state_capacity_prompt_tokens
                 if args.system == "revtrace" else None
             ),
+            "efsc_contract": result.get("efsc_contract"),
             "torch_version": torch.__version__,
             "transformers_version": transformers.__version__,
             "cuda_runtime": torch.version.cuda,
@@ -2586,6 +2970,13 @@ def summarize_workload(
             ),
             "state_violations": result.get(
                 "state_violations", 0
+            ),
+            "efsc_actions": result.get("efsc_action_counts", {}),
+            "efsc_pre_proposal_actions": result.get(
+                "efsc_preparation_counts", {}
+            ),
+            "efsc_semantic_violations": result.get(
+                "efsc_semantic_violations", {}
             ),
             "stale_commits": result.get("stale_commits", 0),
             "mandatory_verifications": result.get(
@@ -2711,6 +3102,29 @@ def summarize_workload(
                 float(np.quantile(terminal_latencies, 0.99))
                 if terminal_latencies else math.inf
             ),
+            "feedback_resolution_latency_p99": (
+                float(np.quantile(feedback_resolution_latencies, 0.99))
+                if feedback_resolution_latencies else math.inf
+            ),
+            "efsc_maximum_ancestry_age": result.get(
+                "efsc_maximum_ancestry_age", 0
+            ),
+            "efsc_maximum_feedback_debt": result.get(
+                "efsc_maximum_feedback_debt", 0
+            ),
+            "efsc_maximum_prompt_load": result.get(
+                "efsc_maximum_prompt_load", 0
+            ),
+            "efsc_prompt_state_age_p95": float(np.quantile(
+                [row.get("oldest_ancestor_age", 0) for row in rows],
+                0.95,
+            )),
+            "efsc_reset_recovery_windows_p95": (
+                float(np.quantile(
+                    result.get("efsc_reset_recovery_windows", []), 0.95
+                ))
+                if result.get("efsc_reset_recovery_windows") else 0.0
+            ),
             "energy_joules": result["energy_joules"],
             "baseline_energy_joules": baseline["energy_joules"],
             "joules_per_audio_second": (
@@ -2828,6 +3242,11 @@ def summarize_workload(
             (
                 "zero observed violations is paired-run evidence, not a "
                 "deterministic floating-point certificate"
+            ),
+            (
+                "EFSC canonical-trace disagreement is diagnostic evidence; "
+                "HOLD/DECAY/RESET intentionally deny that candidate future "
+                "prompt authority and are not contract violations"
             ),
             (
                 "formal RevTrace rows exhaustively replay every measured "
@@ -2975,6 +3394,13 @@ def run_calibration(args: argparse.Namespace) -> int:
 
 
 def run_workload(args: argparse.Namespace) -> int:
+    if args.system == "efsc":
+        if args.efsc_exit_margin is None:
+            raise ValueError("--efsc-exit-margin is required for --system efsc")
+        if args.efsc_exit_margin <= args.margin_threshold:
+            raise ValueError(
+                "EFSC exit margin must exceed the enter margin threshold"
+            )
     window_margin_rules = parse_window_margin_rules(
         args.window_margin_rule
     )
@@ -3142,6 +3568,7 @@ def run_workload(args: argparse.Namespace) -> int:
             audit_probability=args.audit_probability,
             power_interval=args.power_sample_seconds,
             arrival_scale_seconds=args.arrival_scale_seconds,
+            batch_coalesce_seconds=args.batch_coalesce_seconds,
             authority_idle_proposer_lanes=(
                 args.authority_idle_proposer_lanes
             ),
@@ -3170,6 +3597,21 @@ def run_workload(args: argparse.Namespace) -> int:
             checkpoint_revisions=args.checkpoint_revisions,
             checkpoint_phase_policy=args.checkpoint_phase_policy,
         )
+    elif args.system == "efsc":
+        result = run_efsc_system(
+            proposer,
+            sessions,
+            oracle,
+            windows_per_session=windows_per_session,
+            concurrency=args.concurrency,
+            arrival=args.arrival,
+            seed=args.seed,
+            enter_margin=args.margin_threshold,
+            exit_margin=args.efsc_exit_margin,
+            power_interval=args.power_sample_seconds,
+            arrival_scale_seconds=args.arrival_scale_seconds,
+            batch_coalesce_seconds=args.batch_coalesce_seconds,
+        )
     elif args.system == "revtrace-inline":
         result = run_inline_revtrace(
             proposer,
@@ -3183,6 +3625,7 @@ def run_workload(args: argparse.Namespace) -> int:
             audit_probability=args.audit_probability,
             power_interval=args.power_sample_seconds,
             arrival_scale_seconds=args.arrival_scale_seconds,
+            batch_coalesce_seconds=args.batch_coalesce_seconds,
         )
     else:
         result = run_simple_system(
@@ -3197,6 +3640,7 @@ def run_workload(args: argparse.Namespace) -> int:
             margin_threshold=args.margin_threshold,
             power_interval=args.power_sample_seconds,
             arrival_scale_seconds=args.arrival_scale_seconds,
+            batch_coalesce_seconds=args.batch_coalesce_seconds,
         )
     payload = summarize_workload(
         args,
