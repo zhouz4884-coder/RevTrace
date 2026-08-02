@@ -53,14 +53,23 @@ def verify(
     row: dict[str, Any],
     *,
     threshold: float,
+    age_window_index: int | None,
+    age_margin_threshold: float | None,
     late_window_index: int | None,
     late_margin_threshold: float | None,
     high_load_prompt_tokens: int | None,
     high_load_margin_threshold: float | None,
+    window_margin_rules: list[dict[str, Any]],
 ) -> bool:
     margin = row.get("minimum_margin")
     if margin is None or float(margin) <= threshold:
         return True
+    age = (
+        age_window_index is not None
+        and age_margin_threshold is not None
+        and int(row["window_index"]) == age_window_index
+        and float(margin) <= age_margin_threshold
+    )
     late = (
         late_window_index is not None
         and late_margin_threshold is not None
@@ -75,7 +84,12 @@ def verify(
         >= high_load_prompt_tokens
         and float(margin) <= high_load_margin_threshold
     )
-    return late or high_load
+    window_rule = any(
+        int(row["window_index"]) == int(rule["window_index"])
+        and float(margin) <= float(rule["margin_threshold"])
+        for rule in window_margin_rules
+    )
+    return age or late or high_load or window_rule
 
 
 def select_recovery_policy(
@@ -89,6 +103,15 @@ def select_recovery_policy(
             row["fast_path_state_errors"],
             row["verification_fraction"],
             row["calibration_upper_risk"],
+            len(row.get("window_margin_rules", [])),
+            (
+                -1 if row.get("age_window_index") is None
+                else row["age_window_index"]
+            ),
+            (
+                -1.0 if row.get("age_margin_threshold") is None
+                else row["age_margin_threshold"]
+            ),
             (
                 -1 if row["late_window_index"] is None
                 else row["late_window_index"]
@@ -133,7 +156,8 @@ def main() -> int:
     if not roots:
         raise ValueError("no caught state-error roots")
 
-    original = float(policy["selected_policy"]["threshold"])
+    original_policy = policy["selected_policy"]
+    original = float(original_policy["threshold"])
     base_candidates = sorted({
         original,
         *(
@@ -141,93 +165,109 @@ def main() -> int:
             for row in roots
         ),
     })
-    late_windows: list[int | None] = [None, *sorted({
+    age_windows: list[int | None] = [None, *sorted({
         int(row["window_index"]) for row in roots
     })]
-    late_thresholds: list[float | None] = [None, *sorted({
+    age_thresholds: list[float | None] = [None, *sorted({
         float(row["minimum_margin"]) + 1e-6 for row in roots
     })]
-    high_load_prompts: list[int | None] = [None, *sorted({
-        int(row.get("prior_prompt_tokens", 0))
-        for row in roots
-        if int(row.get("prior_prompt_tokens", 0)) > 0
-    })]
-    high_load_thresholds: list[float | None] = [None, *sorted({
-        float(row["minimum_margin"]) + 1e-6 for row in roots
-    })]
+    late_windows: list[int | None] = [None, *sorted(
+        value for value in ({
+            int(row["window_index"]) for row in roots
+        } | {original_policy.get("late_window_index")})
+        if value is not None
+    )]
+    late_thresholds: list[float | None] = [None, *sorted(
+        value for value in ({
+            float(row["minimum_margin"]) + 1e-6 for row in roots
+        } | {original_policy.get("late_margin_threshold")})
+        if value is not None
+    )]
+    high_load_prompts: list[int | None] = [None, *sorted(
+        value for value in ({
+            int(row.get("prior_prompt_tokens", 0))
+            for row in roots
+            if int(row.get("prior_prompt_tokens", 0)) > 0
+        } | {original_policy.get("high_load_prompt_tokens")})
+        if value is not None
+    )]
+    high_load_thresholds: list[float | None] = [None, *sorted(
+        value for value in ({
+            float(row["minimum_margin"]) + 1e-6 for row in roots
+        } | {original_policy.get("high_load_margin_threshold")})
+        if value is not None
+    )]
 
     evaluations: list[dict[str, Any]] = []
     for threshold in base_candidates:
-        for late_window in late_windows:
-            for late_threshold in late_thresholds:
-                if (late_window is None) != (late_threshold is None):
+        for age_window in age_windows:
+            for age_threshold in age_thresholds:
+                if (age_window is None) != (age_threshold is None):
                     continue
-                if (
-                    late_threshold is not None
-                    and late_threshold < threshold
-                ):
+                if age_threshold is not None and age_threshold < threshold:
                     continue
-                for high_load_prompt in high_load_prompts:
-                    for high_load_threshold in high_load_thresholds:
-                        if (
-                            (high_load_prompt is None)
-                            != (high_load_threshold is None)
-                        ):
+                for late_window in late_windows:
+                    for late_threshold in late_thresholds:
+                        if (late_window is None) != (late_threshold is None):
                             continue
-                        if (
-                            high_load_threshold is not None
-                            and high_load_threshold < threshold
-                        ):
+                        if late_threshold is not None and late_threshold < threshold:
                             continue
-                        if not all(verify(
-                            row,
-                            threshold=threshold,
-                            late_window_index=late_window,
-                            late_margin_threshold=late_threshold,
-                            high_load_prompt_tokens=high_load_prompt,
-                            high_load_margin_threshold=high_load_threshold,
-                        ) for row in roots):
-                            continue
-                        admitted = [
-                            row for row in rows if not verify(
-                                row,
-                                threshold=threshold,
-                                late_window_index=late_window,
-                                late_margin_threshold=late_threshold,
-                                high_load_prompt_tokens=high_load_prompt,
-                                high_load_margin_threshold=(
-                                    high_load_threshold
-                                ),
-                            )
-                        ]
-                        errors = sum(
-                            bool(row["state_error"]) for row in admitted
-                        )
-                        verification_fraction = (
-                            1.0 - len(admitted) / len(rows)
-                        )
-                        risk_upper = upper(
-                            errors, len(admitted), args.alpha
-                        )
-                        evaluations.append({
-                            "threshold": threshold,
-                            "late_window_index": late_window,
-                            "late_margin_threshold": late_threshold,
-                            "high_load_prompt_tokens": high_load_prompt,
-                            "high_load_margin_threshold": (
-                                high_load_threshold
-                            ),
-                            "fast_path_entries": len(admitted),
-                            "fast_path_state_errors": errors,
-                            "calibration_upper_risk": risk_upper,
-                            "verification_fraction": verification_fraction,
-                            "caught_roots_covered": len(roots),
-                            "feasible": (
-                                risk_upper <= args.delta
-                                and verification_fraction
-                                <= args.maximum_verification_fraction
-                            ),
-                        })
+                        for high_load_prompt in high_load_prompts:
+                            for high_load_threshold in high_load_thresholds:
+                                if ((high_load_prompt is None) != (high_load_threshold is None)):
+                                    continue
+                                if high_load_threshold is not None and high_load_threshold < threshold:
+                                    continue
+                                kwargs = {
+                                    "threshold": threshold,
+                                    "age_window_index": age_window,
+                                    "age_margin_threshold": age_threshold,
+                                    "late_window_index": late_window,
+                                    "late_margin_threshold": late_threshold,
+                                    "high_load_prompt_tokens": high_load_prompt,
+                                    "high_load_margin_threshold": high_load_threshold,
+                                    "window_margin_rules": [],
+                                }
+                                uncovered = [
+                                    row for row in roots
+                                    if not verify(row, **kwargs)
+                                ]
+                                per_window: dict[int, float] = {}
+                                for root in uncovered:
+                                    window = int(root["window_index"])
+                                    per_window[window] = max(
+                                        per_window.get(window, threshold),
+                                        float(root["minimum_margin"]) + 1e-6,
+                                    )
+                                kwargs["window_margin_rules"] = [
+                                    {
+                                        "window_index": window,
+                                        "margin_threshold": margin,
+                                    }
+                                    for window, margin in sorted(
+                                        per_window.items()
+                                    )
+                                ]
+                                if not all(
+                                    verify(row, **kwargs) for row in roots
+                                ):
+                                    continue
+                                admitted = [row for row in rows if not verify(row, **kwargs)]
+                                errors = sum(bool(row["state_error"]) for row in admitted)
+                                verification_fraction = 1.0 - len(admitted) / len(rows)
+                                risk_upper = upper(errors, len(admitted), args.alpha)
+                                evaluations.append({
+                                    **kwargs,
+                                    "fast_path_entries": len(admitted),
+                                    "fast_path_state_errors": errors,
+                                    "calibration_upper_risk": risk_upper,
+                                    "verification_fraction": verification_fraction,
+                                    "caught_roots_covered": len(roots),
+                                    "feasible": (
+                                        risk_upper <= args.delta
+                                        and verification_fraction <= args.maximum_verification_fraction
+                                    ),
+                                })
     feasible = [row for row in evaluations if row["feasible"]]
     # Recovery is fail-closed: within the predeclared verification budget,
     # first minimize observed state-entry errors and only then minimize

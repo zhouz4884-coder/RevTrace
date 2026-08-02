@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Final c16 closure: dynamic-risk singleton state authority, batched display,
+# state-only terminal contract, and matching-distribution risk certificates.
+set -euo pipefail
+ROOT="${1:-/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9}"
+PROJ="$ROOT/projects/revtrace"; PY="$ROOT/envs/streamtxn-cu128/bin/python"
+MODEL="$ROOT/models/whisper-base.en"
+MANIFEST="$ROOT/datasets/revtrace/librispeech/phase4b-test-clean-full.json"
+OUT="$ROOT/results/revtrace/whisper_p0_p3"
+RUNNER="$PROJ/scripts/remote/run_whisper_w_system.py"
+POLICY="$OUT/p0/c16-policy.json"
+mkdir -p "$OUT/p3/c16_w1_verify" "$OUT/p3/c16_w2_verify" \
+ "$OUT/p3/risk_c16_verify" "$OUT/oracle" "$OUT/logs"
+cd "$PROJ"; export PYTHONPATH="$PROJ/src"
+mapfile -t P < <("$PY" - "$POLICY" <<'PY'
+import json,sys
+p=json.load(open(sys.argv[1]))['selected_policy']
+for k in ('threshold','age_window_index','age_margin_threshold','late_window_index','late_margin_threshold','high_load_prompt_tokens','high_load_margin_threshold'):
+ v=p.get(k); print('NONE' if v is None else v)
+PY
+)
+ARGS=(--margin-threshold "${P[0]}" --policy-source "$POLICY")
+[[ "${P[1]}" == NONE ]] || ARGS+=(--age-window-index "${P[1]}")
+[[ "${P[2]}" == NONE ]] || ARGS+=(--age-margin-threshold "${P[2]}")
+[[ "${P[3]}" == NONE ]] || ARGS+=(--late-window-index "${P[3]}")
+[[ "${P[4]}" == NONE ]] || ARGS+=(--late-margin-threshold "${P[4]}")
+[[ "${P[5]}" == NONE ]] || ARGS+=(--high-load-prompt-tokens "${P[5]}")
+[[ "${P[6]}" == NONE ]] || ARGS+=(--high-load-margin-threshold "${P[6]}")
+
+run_perf() {
+ local arrival="$1" seed="$2" output="$3" oracle="$4" log="$5"
+ local extra=(); [[ "$arrival" == poisson ]] && extra=(--arrival-scale-seconds 0.02)
+ "$PY" "$RUNNER" workload --model "$MODEL" --model-name whisper-base.en \
+  --manifest "$MANIFEST" --output "$output" --oracle-cache "$oracle" \
+  --sessions 16 --duration-seconds 90 --window-seconds 10 --concurrency 16 \
+  --arrival "$arrival" "${extra[@]}" --seed "$seed" --max-new-tokens 96 \
+  --authority-max-new-tokens 96 --terminal-contract state-only \
+  --verifier-lanes 1 --slo-seconds 1.9 --system revtrace \
+  --low-margin-policy verify --proposer-device cuda:0 --verifier-device cuda:1 \
+  "${ARGS[@]}" >"$OUT/logs/$log.log" 2>&1
+}
+for seed in 20275701 20275702 20275703 20275704 20275705; do
+ run_perf sync "$seed" "$OUT/p3/c16_w1_verify/seed${seed}.json" \
+  "$OUT/oracle/base-c16-w1-verify-seed${seed}.json" "p3-c16-W1-verify-seed${seed}"
+done
+for seed in 20275801 20275802 20275803 20275804 20275805; do
+ run_perf poisson "$seed" "$OUT/p3/c16_w2_verify/seed${seed}.json" \
+  "$OUT/oracle/base-c16-w2-verify-seed${seed}.json" "p3-c16-W2-verify-seed${seed}"
+done
+
+pids=()
+for spec in "0:20275900" "1:20275950"; do
+ gpu=${spec%%:*}; seed=${spec##*:}
+ CUDA_VISIBLE_DEVICES="$gpu" "$PY" "$RUNNER" audit \
+  --model "$MODEL" --model-name whisper-base.en --manifest "$MANIFEST" \
+  --output "$OUT/p3/risk_c16_verify/c16-seed${seed}.json" --sessions 32 \
+  --duration-seconds 90 --window-seconds 10 --concurrency 16 \
+  --seed "$seed" --max-new-tokens 96 --authority-max-new-tokens 96 \
+  --target-risk-entries 30000 --minimum-audits 500 --audit-probability 0.021 \
+  --low-margin-policy verify --proposer-device cuda:0 --verifier-device cuda:0 \
+  "${ARGS[@]}" >"$OUT/logs/risk-c16-verify-seed${seed}.log" 2>&1 &
+ pids+=("$!")
+done
+for pid in "${pids[@]}"; do wait "$pid"; done
+touch "$OUT/.c16-verify-closure-complete"

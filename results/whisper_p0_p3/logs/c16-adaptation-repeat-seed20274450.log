@@ -1,0 +1,33 @@
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 26.366646835580468, "episode": 1, "risk_entries": 216}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 52.88227568566799, "episode": 2, "risk_entries": 428}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 79.39607963524759, "episode": 3, "risk_entries": 642}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 105.18343940284103, "episode": 4, "risk_entries": 860}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 131.60022395011038, "episode": 5, "risk_entries": 1075}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 157.08521021530032, "episode": 6, "risk_entries": 1293}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 183.3180777411908, "episode": 7, "risk_entries": 1508}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 209.369375359267, "episode": 8, "risk_entries": 1724}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 235.83633980806917, "episode": 9, "risk_entries": 1936}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 262.0346973557025, "episode": 10, "risk_entries": 2150}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 288.53175141103566, "episode": 11, "risk_entries": 2363}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 314.87700788956136, "episode": 12, "risk_entries": 2576}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 341.31122740823776, "episode": 13, "risk_entries": 2790}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 367.03746984526515, "episode": 14, "risk_entries": 3008}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 393.5987654514611, "episode": 15, "risk_entries": 3220}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 419.90628039930016, "episode": 16, "risk_entries": 3435}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 445.48511184565723, "episode": 17, "risk_entries": 3654}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 470.83789016865194, "episode": 18, "risk_entries": 3871}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 497.1016454985365, "episode": 19, "risk_entries": 4085}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 522.5220805024728, "episode": 20, "risk_entries": 4302}
+{"audits": 0, "caught_state_errors": 0, "elapsed_seconds": 547.8361814441159, "episode": 21, "risk_entries": 4519}
+{"audits": 1, "caught_state_errors": 1, "elapsed_seconds": 553.9259586585686, "episode": 22, "risk_entries": 4597}
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/scripts/remote/run_whisper_w_system.py", line 3548, in <module>
+    raise SystemExit(main())
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/scripts/remote/run_whisper_w_system.py", line 3543, in main
+    return run_audit(args)
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/scripts/remote/run_whisper_w_system.py", line 3414, in run_audit
+    bound = AuditRiskBound(args.audit_probability, args.alpha)
+  File "<string>", line 7, in __init__
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace/src/revtrace/risk.py", line 57, in __post_init__
+    raise ValueError("audit_probability must lie in (0, 1)")
+ValueError: audit_probability must lie in (0, 1)

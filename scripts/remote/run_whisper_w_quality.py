@@ -25,6 +25,7 @@ from revtrace.whisper_state import (
     WhisperStateAction,
     WhisperStateRiskPolicy,
     capacity_rebase_required,
+    checkpoint_due_for_session,
     prompt_state_action,
     work_budget_requires_authority,
 )
@@ -35,6 +36,42 @@ from whisper_batched_executor import DistinctPromptWhisper, SAMPLE_RATE
 
 
 WORDS = re.compile(r"[a-z0-9]+(?:'[a-z0-9]+)?")
+
+
+def _compute_runtime_source_identity() -> dict[str, str]:
+    """Capture the loaded quality runner and state-contract source build."""
+
+    paths = {
+        "run_whisper_w_quality.py": Path(__file__),
+        "whisper_state.py": Path(
+            checkpoint_due_for_session.__code__.co_filename
+        ),
+    }
+    return {
+        name: hashlib.sha256(path.read_bytes()).hexdigest()
+        for name, path in paths.items()
+    }
+
+
+_RUNTIME_SOURCE_IDENTITY = _compute_runtime_source_identity()
+
+
+def runtime_source_identity() -> dict[str, str]:
+    return dict(_RUNTIME_SOURCE_IDENTITY)
+
+
+def parse_window_margin_rules(
+    values: Sequence[str],
+) -> tuple[tuple[int, float], ...]:
+    rules = []
+    for raw in values:
+        window_raw, separator, margin_raw = raw.partition(":")
+        if not separator:
+            raise ValueError(
+                "window margin rules use WINDOW_INDEX:MARGIN"
+            )
+        rules.append((int(window_raw), float(margin_raw)))
+    return tuple(sorted(rules))
 
 
 @dataclass
@@ -57,16 +94,31 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--window-seconds", type=int, default=10)
     parser.add_argument("--concurrency", type=int, default=16)
     parser.add_argument("--margin-threshold", type=float, required=True)
+    parser.add_argument("--policy-source", type=Path, required=True)
+    parser.add_argument("--age-window-index", type=int)
+    parser.add_argument("--age-margin-threshold", type=float)
     parser.add_argument("--late-window-index", type=int)
     parser.add_argument("--late-margin-threshold", type=float)
     parser.add_argument("--high-load-prompt-tokens", type=int)
     parser.add_argument("--high-load-margin-threshold", type=float)
+    parser.add_argument(
+        "--window-margin-rule",
+        action="append",
+        default=[],
+        metavar="WINDOW_INDEX:MARGIN",
+    )
     parser.add_argument("--seed", type=int, default=20260811)
     parser.add_argument("--bootstrap-seed", type=int, default=20260812)
     parser.add_argument("--bootstrap-replicates", type=int, default=10_000)
     parser.add_argument("--max-new-tokens", type=int, default=96)
     parser.add_argument("--authority-max-new-tokens", type=int)
     parser.add_argument("--reference-max-new-tokens", type=int, default=96)
+    parser.add_argument("--checkpoint-revisions", type=int, default=10)
+    parser.add_argument(
+        "--checkpoint-phase-policy",
+        choices=("synchronized", "session-staggered"),
+        default="synchronized",
+    )
     parser.add_argument(
         "--deferred-risk-authority",
         action=argparse.BooleanOptionalAction,
@@ -119,25 +171,35 @@ def build_sessions(
 ) -> list[QualitySession]:
     rows = [row for row in records if row["split"] == split]
     random.Random(seed).shuffle(rows)
+    available = list(rows)
     target = duration_seconds * SAMPLE_RATE
     separator = np.zeros(SAMPLE_RATE // 10, dtype=np.float32)
     sessions: list[QualitySession] = []
-    cursor = 0
-    while cursor < len(rows) and len(sessions) < count:
+    while available and len(sessions) < count:
         chunks: list[np.ndarray] = []
         texts: list[str] = []
         utterances: list[str] = []
         speakers: list[str] = []
         samples = 0
-        while cursor < len(rows) and samples < target:
-            row = rows[cursor]
-            audio = load_audio(row["path"])
-            increment = audio.size + (
-                separator.size if chunks else 0
-            )
+        scan = 0
+        while scan < len(available) and samples < target:
+            row = available[scan]
+            row_samples = int(row.get("samples", 0))
+            if row_samples <= 0:
+                row_samples = int(sf.info(row["path"]).frames)
+            increment = row_samples + (separator.size if chunks else 0)
             if chunks and samples + increment > target:
-                break
-            cursor += 1
+                scan += 1
+                continue
+            # Deterministic first-fit packing avoids the old cursor dead-end:
+            # one long utterance no longer prevents all later short records
+            # from filling the current 90-second session.
+            row = available.pop(scan)
+            audio = load_audio(row["path"])
+            if audio.size != row_samples:
+                raise ValueError(
+                    f"manifest sample count mismatch: {row['path']}"
+                )
             if chunks:
                 chunks.append(separator)
                 samples += separator.size
@@ -225,6 +287,8 @@ def batched_systems(
     *,
     deferred_risk_authority: bool,
     deferred_terminal_authority: bool,
+    checkpoint_revisions: int,
+    checkpoint_phase_policy: str,
 ) -> tuple[
     list[str],
     list[str],
@@ -246,6 +310,7 @@ def batched_systems(
     deferred_risk_authorities = 0
     deferred_terminal_authorities = 0
     work_budget_authorities = 0
+    checkpoint_authorities = 0
     capacity_rebases = 0
     local_agreement_capacity_rebases = 0
     terminal = 0
@@ -294,9 +359,21 @@ def batched_systems(
                     window_index=window_index,
                     prompt_tokens=prior_prompt_tokens,
                     terminal=is_terminal,
-                    checkpoint_due=False,
+                    checkpoint_due=checkpoint_due_for_session(
+                        window_index,
+                        session_id,
+                        revisions=checkpoint_revisions,
+                        phase_policy=checkpoint_phase_policy,
+                        terminal=is_terminal,
+                        total_nonterminal_revisions=(
+                            windows_per_session - 1
+                        ),
+                    ),
                 )
                 risky = action == WhisperStateAction.RISK_AUTHORITY
+                checkpoint = (
+                    action == WhisperStateAction.CHECKPOINT_AUTHORITY
+                )
                 work_budget_saturated = work_budget_requires_authority(
                     record.generation_steps,
                     proposer_max_new_tokens=executor.max_new_tokens,
@@ -318,6 +395,8 @@ def batched_systems(
                     and is_terminal
                 ) or (
                     work_budget_saturated
+                ) or (
+                    checkpoint
                 )
                 if needs_authority:
                     # The batched result is an immediately displayable
@@ -329,14 +408,15 @@ def batched_systems(
                     )
                     authority_finished = time.perf_counter()
                     selected = authority
-                    if risky and not is_terminal:
+                    if (risky or checkpoint) and not is_terminal:
                         rev_prompts[session_id] = (
                             executor.advance_prompt(
                                 rev_prompts[session_id],
                                 authority.token_ids,
                             )
                         )
-                        deferred_risk_authorities += 1
+                        deferred_risk_authorities += int(risky)
+                        checkpoint_authorities += int(checkpoint)
                     if is_terminal:
                         deferred_terminal_authorities += 1
                     if work_budget_saturated:
@@ -358,7 +438,7 @@ def batched_systems(
                 terminal += int(is_terminal)
                 state_latency = time.perf_counter() - proposed_at
                 rev_pieces[session_id].append(selected.text)
-                if not is_terminal and not risky:
+                if not is_terminal and not risky and not checkpoint:
                     rev_prompts[session_id] = executor.advance_prompt(
                         rev_prompts[session_id], selected.token_ids
                     )
@@ -459,6 +539,7 @@ def batched_systems(
                 deferred_terminal_authorities
             ),
             "work_budget_authorities": work_budget_authorities,
+            "checkpoint_authorities": checkpoint_authorities,
             "capacity_rebases": capacity_rebases,
             "local_agreement_capacity_rebases": (
                 local_agreement_capacity_rebases
@@ -547,6 +628,45 @@ def bootstrap_upper(
 
 def main() -> int:
     args = parse_args()
+    window_margin_rules = parse_window_margin_rules(
+        args.window_margin_rule
+    )
+    selected = json.loads(
+        args.policy_source.read_text(encoding="utf-8")
+    ).get("selected_policy", {})
+    expected = {
+        "threshold": args.margin_threshold,
+        "age_window_index": args.age_window_index,
+        "age_margin_threshold": args.age_margin_threshold,
+        "late_window_index": args.late_window_index,
+        "late_margin_threshold": args.late_margin_threshold,
+        "high_load_prompt_tokens": args.high_load_prompt_tokens,
+        "high_load_margin_threshold": args.high_load_margin_threshold,
+        "window_margin_rules": [
+            {
+                "window_index": window,
+                "margin_threshold": margin,
+            }
+            for window, margin in window_margin_rules
+        ],
+    }
+    mismatches = {
+        key: {
+            "policy": selected.get(
+                key, [] if key == "window_margin_rules" else None
+            ),
+            "runtime": value,
+        }
+        for key, value in expected.items()
+        if selected.get(
+            key, [] if key == "window_margin_rules" else None
+        ) != value
+    }
+    if mismatches:
+        raise ValueError(
+            "quality risk parameters do not match frozen policy: "
+            + json.dumps(mismatches, sort_keys=True)
+        )
     if args.duration_seconds % args.window_seconds:
         raise ValueError("duration must be divisible by window size")
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
@@ -625,15 +745,20 @@ def main() -> int:
         args.concurrency,
         WhisperStateRiskPolicy(
             margin_threshold=args.margin_threshold,
+            age_window_index=args.age_window_index,
+            age_margin_threshold=args.age_margin_threshold,
             late_window_index=args.late_window_index,
             late_margin_threshold=args.late_margin_threshold,
             high_load_prompt_tokens=args.high_load_prompt_tokens,
             high_load_margin_threshold=args.high_load_margin_threshold,
+            window_margin_rules=window_margin_rules,
         ),
         deferred_risk_authority=args.deferred_risk_authority,
         deferred_terminal_authority=(
             args.deferred_terminal_authority
         ),
+        checkpoint_revisions=args.checkpoint_revisions,
+        checkpoint_phase_policy=args.checkpoint_phase_policy,
     )
     diagnostic = None
     if args.diagnostic_post_timing_state:
@@ -737,23 +862,42 @@ def main() -> int:
             "window_seconds": args.window_seconds,
             "concurrency": args.concurrency,
             "margin_threshold": args.margin_threshold,
+            "policy_source": str(args.policy_source.resolve()),
+            "policy_sha256": hashlib.sha256(
+                args.policy_source.read_bytes()
+            ).hexdigest(),
+            "age_window_index": args.age_window_index,
+            "age_margin_threshold": args.age_margin_threshold,
             "late_window_index": args.late_window_index,
             "late_margin_threshold": args.late_margin_threshold,
             "high_load_prompt_tokens": args.high_load_prompt_tokens,
             "high_load_margin_threshold": (
                 args.high_load_margin_threshold
             ),
+            "window_margin_rules": [
+                {
+                    "window_index": window,
+                    "margin_threshold": margin,
+                }
+                for window, margin in window_margin_rules
+            ],
             "seed": args.seed,
             "bootstrap_seed": args.bootstrap_seed,
             "bootstrap_replicates": args.bootstrap_replicates,
             "model_path": str(args.model.resolve()),
             "precision": "float16",
             "prompt_state_semantics": (
-                "raw-segment-token-history-v5-deferred-authority"
+                "raw-segment-token-history-v5-holdback"
+                if not args.deferred_risk_authority
+                else "raw-segment-token-history-v5-deferred-authority"
             ),
             "state_control_protocol": (
-                "prompt-state-deferred-authority-checkpoint10-"
-                "capacity-rebase-v2"
+                "prompt-state-holdback-checkpoint10-capacity-rebase-v2"
+                if not args.deferred_risk_authority
+                else (
+                    "prompt-state-deferred-authority-checkpoint10-"
+                    "capacity-rebase-v2"
+                )
             ),
             "work_authority_protocol": WORK_AUTHORITY_PROTOCOL,
             "target_capacity_protocol": TARGET_CAPACITY_PROTOCOL,
@@ -768,9 +912,15 @@ def main() -> int:
                 authority_executor.max_new_tokens
             ),
             "deferred_risk_authority": args.deferred_risk_authority,
+            "low_margin_policy": (
+                "verify" if args.deferred_risk_authority else "holdback"
+            ),
             "deferred_terminal_authority": (
                 args.deferred_terminal_authority
             ),
+            "checkpoint_revisions": args.checkpoint_revisions,
+            "checkpoint_phase_policy": args.checkpoint_phase_policy,
+            "runtime_source_identity": runtime_source_identity(),
             "diagnostic_post_timing_state": (
                 args.diagnostic_post_timing_state
             ),

@@ -15,6 +15,80 @@ from enum import Enum
 from typing import Iterable, Sequence
 
 
+def paired_slo_goodput_speedup(
+    baseline_latencies: Sequence[float],
+    baseline_wall_seconds: float,
+    method_latencies: Sequence[float],
+    method_wall_seconds: float,
+    slo_seconds: float,
+) -> tuple[float, float, float]:
+    """Return paired baseline/method goodput and their speedup.
+
+    Both sides consume event sets with the same semantic scope.  Keeping the
+    pairing in one function prevents a terminal display event from being
+    included only on the method side, which previously inflated the reported
+    display-SLO speedup by ``windows / (windows - 1)``.
+    """
+
+    if baseline_wall_seconds <= 0 or method_wall_seconds <= 0:
+        raise ValueError("wall-clock durations must be positive")
+    baseline = sum(
+        float(value) <= slo_seconds for value in baseline_latencies
+    ) / baseline_wall_seconds
+    method = sum(
+        float(value) <= slo_seconds for value in method_latencies
+    ) / method_wall_seconds
+    return baseline, method, method / baseline if baseline > 0 else float("inf")
+
+
+def checkpoint_due_for_session(
+    window_index: int,
+    session_id: int,
+    *,
+    revisions: int,
+    phase_policy: str,
+    terminal: bool,
+    total_nonterminal_revisions: int | None = None,
+) -> bool:
+    """Schedule bounded checkpoints without forcing a synchronized burst.
+
+    A naive ``session_id % revisions`` phase increases the number of
+    checkpoints in a finite trace.  When the nonterminal horizon is known, the
+    staggered policy instead chooses among the phases that (1) preserve the
+    maximum ``revisions``-step authority age and (2) use the same minimum
+    number of checkpoints per session as the synchronized policy.
+    """
+
+    if revisions <= 0 or window_index < 0 or session_id < 0:
+        raise ValueError("checkpoint indices and period must be valid")
+    if phase_policy not in {"synchronized", "session-staggered"}:
+        raise ValueError("unsupported checkpoint phase policy")
+    if terminal:
+        return False
+    revision_number = window_index + 1
+    if phase_policy == "synchronized":
+        return revision_number % revisions == 0
+    if total_nonterminal_revisions is None:
+        raise ValueError(
+            "staggered checkpoints require the finite nonterminal horizon"
+        )
+    if total_nonterminal_revisions < 0:
+        raise ValueError("nonterminal revision horizon must be non-negative")
+    checkpoint_count = total_nonterminal_revisions // revisions
+    if checkpoint_count == 0:
+        return False
+    first_phase = max(
+        1,
+        total_nonterminal_revisions - checkpoint_count * revisions + 1,
+    )
+    phase_slots = revisions - first_phase + 1
+    phase = first_phase + (session_id % phase_slots)
+    return (
+        revision_number >= phase
+        and (revision_number - phase) % revisions == 0
+    )
+
+
 def cuda_device_index(device: str) -> int:
     """Return the process-local CUDA index for a configured device.
 
@@ -243,12 +317,30 @@ class WhisperStateRiskPolicy:
     """
 
     margin_threshold: float
+    age_window_index: int | None = None
+    age_margin_threshold: float | None = None
     late_window_index: int | None = None
     late_margin_threshold: float | None = None
     high_load_prompt_tokens: int | None = None
     high_load_margin_threshold: float | None = None
+    window_margin_rules: tuple[tuple[int, float], ...] = ()
 
     def __post_init__(self) -> None:
+        if (self.age_window_index is None) != (
+            self.age_margin_threshold is None
+        ):
+            raise ValueError(
+                "state-age window and margin must be specified together"
+            )
+        if self.age_window_index is not None and self.age_window_index < 0:
+            raise ValueError("state-age window index must be non-negative")
+        if (
+            self.age_margin_threshold is not None
+            and self.age_margin_threshold < self.margin_threshold
+        ):
+            raise ValueError(
+                "state-age margin cannot be lower than the base margin"
+            )
         if (self.late_window_index is None) != (
             self.late_margin_threshold is None
         ):
@@ -282,6 +374,17 @@ class WhisperStateRiskPolicy:
             raise ValueError(
                 "high-load margin cannot be lower than the base margin"
             )
+        seen_windows: set[int] = set()
+        for window_index, threshold in self.window_margin_rules:
+            if window_index < 0:
+                raise ValueError("window margin index must be non-negative")
+            if threshold < self.margin_threshold:
+                raise ValueError(
+                    "window margin cannot be lower than the base margin"
+                )
+            if window_index in seen_windows:
+                raise ValueError("window margin indices must be unique")
+            seen_windows.add(window_index)
 
     def reason(
         self,
@@ -294,6 +397,19 @@ class WhisperStateRiskPolicy:
             return "missing-margin"
         if minimum_margin <= self.margin_threshold:
             return "base-margin"
+        for rule_window, rule_threshold in self.window_margin_rules:
+            if (
+                window_index == rule_window
+                and minimum_margin <= rule_threshold
+            ):
+                return "window-state-margin"
+        if (
+            self.age_window_index is not None
+            and self.age_margin_threshold is not None
+            and window_index == self.age_window_index
+            and minimum_margin <= self.age_margin_threshold
+        ):
+            return "state-age-margin"
         if (
             self.late_window_index is not None
             and self.late_margin_threshold is not None

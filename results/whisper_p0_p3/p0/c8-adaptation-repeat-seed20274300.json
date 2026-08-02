@@ -1,0 +1,137 @@
+{
+  "adaptation_only_stop_on_caught_error": true,
+  "audit_rows": [
+    {
+      "audio_sha256": "db95a58c0fa1166d630ce8a182c349ab99dc06bb0d00cbf5309db1217bc5be18",
+      "canonical_repeat_stable": true,
+      "canonical_repeat_token_sha256": [
+        "4ec308a86927b5455193f71ed63ddefb06069cc0575c2ad34e4899f6ba5abd05",
+        "4ec308a86927b5455193f71ed63ddefb06069cc0575c2ad34e4899f6ba5abd05"
+      ],
+      "canonical_token_sha256": "4ec308a86927b5455193f71ed63ddefb06069cc0575c2ad34e4899f6ba5abd05",
+      "episode": 8,
+      "forced_audit": true,
+      "minimum_margin": 0.0390625,
+      "next_prompt_tokens": 69,
+      "prior_prompt_tokens": 35,
+      "prompt_token_sha256": "1e6b59bc91427e0bb92e2088d54cf12366ebca8ad5d4b3b8dc7cc0e2e7d847e7",
+      "proposed_token_sha256": "4329d579ecce1b1603baabc4a671744946e75c52652585ef35fb7d034af6e575",
+      "risk_reason": null,
+      "session_id": 0,
+      "state_error": true,
+      "window_index": 3,
+      "work_budget_saturated": false
+    }
+  ],
+  "claim_boundaries": [
+    "30k entries are correlated execution events, not utterances",
+    "audit coins are drawn before canonical outcomes",
+    "shadow canonical audits never replace or otherwise mutate the live proposal state",
+    "the certificate covers fast-path state writes under the frozen deferred-authority, checkpoint and capacity-rebase protocol",
+    "certificate is model-specific and is not pooled"
+  ],
+  "config": {
+    "age_margin_threshold": null,
+    "age_window_index": null,
+    "alpha": 0.05,
+    "audit_interference": "shadow-canonical-no-state-mutation",
+    "audit_probability": 0.0,
+    "authority_max_new_tokens": 96,
+    "checkpoint_phase_policy": "synchronized",
+    "checkpoint_revisions": 10,
+    "command": "audit",
+    "concurrency": 8,
+    "cuda_runtime": "12.8",
+    "delta": 0.005,
+    "duration_seconds": 180,
+    "forced_audit_root": [
+      "8:0:3",
+      "21:19:11"
+    ],
+    "gpu_name": "NVIDIA GeForce RTX 3090",
+    "high_load_margin_threshold": 0.062501,
+    "high_load_prompt_tokens": 58,
+    "late_margin_threshold": 0.0234385,
+    "late_window_index": 3,
+    "low_margin_policy": "holdback",
+    "manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/datasets/revtrace/librispeech/phase4b-test-clean-full.json",
+    "margin_threshold": 0.015626,
+    "max_new_tokens": 80,
+    "max_prompt_tokens": 224,
+    "minimum_audits": 500,
+    "model": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/whisper-base.en",
+    "model_name": "whisper-base.en",
+    "output": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/whisper_p0_p3/p0/c8-adaptation-repeat-seed20274300.json",
+    "policy_sha256": "434db6fb445f9594d114e1152b89af32fb607eee866acf1b761f6aff5f22e608",
+    "policy_source": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/whisper_w0_w7/w4-state-age-policy-base-c8-m80-recovery-r5.json",
+    "precision": "float16",
+    "prompt_checkpoint_revisions": 10,
+    "prompt_state_semantics": "raw-segment-token-history-v5-deferred-authority",
+    "proposer_device": "cuda:0",
+    "proposer_max_new_tokens": 80,
+    "runtime_source_identity": {
+      "run_whisper_w_system.py": "23ccd9b25bf219277ac1d8e555ff3dd9db425d40bc5c6a801ac9d6cdb09a14fc",
+      "whisper_state.py": "3bbd89d5c70871b8ee90251e9be2f622731b94e980eb949c2769a08774a71af1"
+    },
+    "seed": 20274300,
+    "sessions": 32,
+    "state_control_protocol": "prompt-state-deferred-authority-checkpoint10-capacity-rebase-v2",
+    "stop_on_caught_error": true,
+    "target_capacity_protocol": "target-canonical-declared-work-v1",
+    "target_risk_entries": 30000,
+    "torch_version": "2.8.0+cu128",
+    "transformers_version": "4.55.2",
+    "verifier_device": "cuda:0",
+    "window_seconds": 10,
+    "work_authority_protocol": "decoder-step-saturation-extended-canonical-v1"
+  },
+  "counts": {
+    "capacity_rebases": 576,
+    "caught_state_errors": 1,
+    "checkpoint_authorities": 288,
+    "episodes": 9,
+    "high_load_state_authorities": 278,
+    "late_state_authorities": 69,
+    "low_margin_authorities": 0,
+    "low_margin_holdbacks": 658,
+    "pre_outcome_randomized_audits": 1,
+    "protected_state_violations": 0,
+    "risk_eligible_entries": 3941,
+    "terminal_authorities": 288,
+    "terminal_display_only": 0,
+    "total_events": 5184,
+    "work_budget_authorities": 11
+  },
+  "decision": "W4_RISK_CERTIFICATE_FAIL",
+  "forced_audit_roots": [
+    [
+      8,
+      0,
+      3
+    ],
+    [
+      21,
+      19,
+      11
+    ]
+  ],
+  "forced_audit_roots_seen": [
+    [
+      8,
+      0,
+      3
+    ]
+  ],
+  "model": "whisper-base.en",
+  "risk_certificate": {
+    "confidence": 0.95,
+    "method": "not-computed-forced-adaptation-replay",
+    "target_delta": 0.005,
+    "upper_error_count": 3941,
+    "upper_risk": 1.0
+  },
+  "schema_version": 1,
+  "stop_on_caught_error_enabled": true,
+  "study": "Whisper W-suite independent time-uniform risk audit",
+  "wall_seconds": 603.3338250713423
+}

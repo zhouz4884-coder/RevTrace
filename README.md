@@ -187,6 +187,18 @@ disabled. Whisper-base contained six pairs still different at the two-window
 horizon, including RAF values up to `153`. No preregistered application
 catastrophe occurred, so RevTrace does not claim hallucination-loop prevention.
 
+The subsequent Whisper P0-P3 production closure is deliberately stricter than
+this causal result. Five-seed c16 W1/W2 medians remain 2.709x/2.347x wall speedup
+with display P99 below 1.9 seconds, but W1 reaches 4.782-second state P99 and
+10.3% minimum energy reduction; W2 reaches 4.222-second state P99 and records
+two state violations. An independent risk run also catches one repeat-stable
+state error. The frozen decision is therefore
+`P0_P3_PAPER_THREATENING_C16_HEADLINE_FAIL`: Whisper supports the
+cross-architecture feedback mechanism, not the paper's current performance
+headline. See the
+[Whisper P0-P3 closure report](docs/reports/whisper_p0_p3_closure.md) and
+[machine summary](results/whisper_p0_p3/summary.json).
+
 Phase 4C freezes full-request SlackGuard as a physical NO-GO: the measured
 309.9 ms audit quantum is `11.27x` the 27.5 ms P99 intrusion budget, and CUDA
 stream priority cannot preempt a running kernel. Phase 4D completed the

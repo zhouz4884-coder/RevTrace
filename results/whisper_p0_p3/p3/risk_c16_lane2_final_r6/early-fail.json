@@ -1,0 +1,53 @@
+{
+  "caught_rows": [
+    {
+      "audio_sha256": "e946b4fef95d6a569ad9d160633b55c54ec2aa0b7fc03a978ee919c55a00b3d0",
+      "canonical_repeat_stable": true,
+      "canonical_repeat_token_sha256": [
+        "c8805ca339c1975d63c835e44b9d135446ef4c6ad594aa0ed5d5410bcc859131",
+        "c8805ca339c1975d63c835e44b9d135446ef4c6ad594aa0ed5d5410bcc859131"
+      ],
+      "canonical_token_sha256": "c8805ca339c1975d63c835e44b9d135446ef4c6ad594aa0ed5d5410bcc859131",
+      "episode": 3,
+      "forced_audit": false,
+      "minimum_margin": 0.09375,
+      "next_prompt_tokens": 76,
+      "prior_prompt_tokens": 39,
+      "prompt_token_sha256": "692e53824b495b8847771d02cecf7b9be40416b7f415d99ea71c4740f26cd91f",
+      "proposed_token_sha256": "61b2b121ac2698bb3756aea50e9accb7e99dfb87fc5d5575057dc3ae5c2759bc",
+      "risk_reason": null,
+      "session_id": 23,
+      "state_error": true,
+      "window_index": 7,
+      "work_budget_saturated": false
+    }
+  ],
+  "claim_boundary": "The target 30k entries per stream was not completed because one repeat-stable caught error irreversibly violated the predeclared zero-caught-error gate. This is failure evidence, not a risk certificate.",
+  "counts": {
+    "caught_state_errors": 1,
+    "pre_outcome_randomized_audits": 121,
+    "risk_eligible_entries": 5166,
+    "streams": 2
+  },
+  "decision": "RISK_GATE_EARLY_FAIL",
+  "predeclared_gate": "caught_state_errors == 0",
+  "schema_version": 1,
+  "source_files": [
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/whisper_p0_p3/p3/risk_c16_lane2_final_r6/c16-seed20276900.checkpoint.json",
+      "role": "audit-checkpoint",
+      "sha256": "5e136ac62e101e526ca729f22a49113a1b2a1a5f697fda802e837f82329859c5"
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/whisper_p0_p3/p3/risk_c16_lane2_final_r6/c16-seed20276950.checkpoint.json",
+      "role": "audit-checkpoint",
+      "sha256": "8eea1647353ff877f8e5cf34e5945f21cc5c35f6bc27b57150363f38aa42eef5"
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/whisper_p0_p3/p0/c16-policy.json",
+      "role": "policy",
+      "sha256": "f09b34efa1219ec51cb7e8ca39f9286bfb8ed163a9856bc37b80b5f3bd61a10c"
+    }
+  ],
+  "study": "Whisper c16 R6 independent risk audit early stop"
+}

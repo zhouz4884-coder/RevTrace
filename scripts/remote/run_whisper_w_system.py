@@ -46,8 +46,10 @@ from revtrace.whisper_state import (
     WhisperStateAction,
     WhisperVersion,
     capacity_rebase_required,
+    checkpoint_due_for_session,
     commit_prompt_transition,
     physical_cuda_device_count,
+    paired_slo_goodput_speedup,
     proposer_authority_spillover_eligible,
     prompt_state_action,
     work_budget_requires_authority,
@@ -64,6 +66,44 @@ STATE_CONTROL_PROTOCOL = (
 )
 WORK_AUTHORITY_PROTOCOL = "decoder-step-saturation-extended-canonical-v1"
 TARGET_CAPACITY_PROTOCOL = "target-canonical-declared-work-v1"
+
+
+def _compute_runtime_source_identity() -> dict[str, str]:
+    """Capture the loaded runner and state-contract source build."""
+
+    paths = {
+        "run_whisper_w_system.py": Path(__file__),
+        "whisper_state.py": Path(
+            checkpoint_due_for_session.__code__.co_filename
+        ),
+    }
+    return {
+        name: hashlib.sha256(path.read_bytes()).hexdigest()
+        for name, path in paths.items()
+    }
+
+
+_RUNTIME_SOURCE_IDENTITY = _compute_runtime_source_identity()
+
+
+def runtime_source_identity() -> dict[str, str]:
+    # Return the import-time identity. Reading source files at result-write
+    # time can falsely bind a long-running process to a later on-disk edit.
+    return dict(_RUNTIME_SOURCE_IDENTITY)
+
+
+def parse_window_margin_rules(
+    values: Sequence[str],
+) -> tuple[tuple[int, float], ...]:
+    rules: list[tuple[int, float]] = []
+    for raw in values:
+        window_raw, separator, margin_raw = raw.partition(":")
+        if not separator:
+            raise ValueError(
+                "window margin rules use WINDOW_INDEX:MARGIN"
+            )
+        rules.append((int(window_raw), float(margin_raw)))
+    return tuple(sorted(rules))
 
 
 def parse_args() -> argparse.Namespace:
@@ -128,10 +168,19 @@ def parse_args() -> argparse.Namespace:
     )
     workload.add_argument("--seed", type=int, required=True)
     workload.add_argument("--margin-threshold", type=float, required=True)
+    workload.add_argument("--age-window-index", type=int)
+    workload.add_argument("--age-margin-threshold", type=float)
     workload.add_argument("--late-window-index", type=int)
     workload.add_argument("--late-margin-threshold", type=float)
     workload.add_argument("--high-load-prompt-tokens", type=int)
     workload.add_argument("--high-load-margin-threshold", type=float)
+    workload.add_argument(
+        "--window-margin-rule",
+        action="append",
+        default=[],
+        metavar="WINDOW_INDEX:MARGIN",
+        help="Piecewise state-age margin frontier; may be repeated.",
+    )
     workload.add_argument(
         "--state-capacity-prompt-tokens",
         type=int,
@@ -142,6 +191,49 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     workload.add_argument("--audit-probability", type=float, default=0.021)
+    workload.add_argument(
+        "--policy-source",
+        type=Path,
+        help=(
+            "Frozen contextual-risk policy used to configure this run.  The "
+            "path and SHA-256 are embedded in the result for fail-closed "
+            "evidence binding."
+        ),
+    )
+    workload.add_argument(
+        "--low-margin-policy",
+        choices=("verify", "holdback"),
+        default="verify",
+        help=(
+            "verify grants risky state transitions only after singleton "
+            "authority; holdback displays the proposal but denies its "
+            "previous-text prompt write."
+        ),
+    )
+    workload.add_argument(
+        "--disable-risk-authority",
+        action="store_true",
+        help="Diagnostic cost ablation; unsafe as a deployment policy.",
+    )
+    workload.add_argument(
+        "--disable-checkpoint-authority",
+        action="store_true",
+        help="Diagnostic cost ablation; not a certified deployment policy.",
+    )
+    workload.add_argument(
+        "--checkpoint-revisions",
+        type=int,
+        default=PROMPT_CHECKPOINT_REVISIONS,
+    )
+    workload.add_argument(
+        "--checkpoint-phase-policy",
+        choices=("synchronized", "session-staggered"),
+        default="synchronized",
+        help=(
+            "session-staggered preserves the per-session checkpoint bound "
+            "while dispersing authority bursts across revision windows."
+        ),
+    )
     workload.add_argument("--slo-seconds", type=float, default=2.0)
     workload.add_argument("--system-order-index", type=int, default=-1)
     workload.add_argument(
@@ -156,6 +248,15 @@ def parse_args() -> argparse.Namespace:
         help=(
             "Independent batch-size-one canonical lanes used only by the "
             "two-device RevTrace system."
+        ),
+    )
+    workload.add_argument(
+        "--share-verifier-weights",
+        action="store_true",
+        help=(
+            "Use one read-only model instance across isolated BS=1 CUDA-stream "
+            "verifier lanes. The warmup exactness gate fails closed if shared "
+            "execution changes the serial canonical output."
         ),
     )
     workload.add_argument(
@@ -201,6 +302,25 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     workload.add_argument(
+        "--cohort-commit-barrier",
+        action="store_true",
+        help=(
+            "Release the next revision of a proposal cohort only after every "
+            "state-entry decision in that cohort has resolved. This preserves "
+            "the certified proposal batch shape without executing from an "
+            "uncertified parent."
+        ),
+    )
+    workload.add_argument(
+        "--pad-proposals-to-concurrency",
+        action="store_true",
+        help=(
+            "Pad an underfilled proposal round with discarded replica rows "
+            "so every real transition executes under the certified active "
+            "concurrency shape. Padding never updates session state."
+        ),
+    )
+    workload.add_argument(
         "--terminal-contract",
         choices=("canonical-output", "state-only"),
         default="canonical-output",
@@ -235,12 +355,49 @@ def parse_args() -> argparse.Namespace:
     audit.add_argument("--duration-seconds", type=int, default=90)
     audit.add_argument("--concurrency", type=int, default=32)
     audit.add_argument("--margin-threshold", type=float, required=True)
+    audit.add_argument("--age-window-index", type=int)
+    audit.add_argument("--age-margin-threshold", type=float)
     audit.add_argument("--policy-source", type=Path, required=True)
+    audit.add_argument(
+        "--low-margin-policy",
+        choices=("verify", "holdback"),
+        default="holdback",
+        help=(
+            "Live transition used for risky proposals during the independent "
+            "audit. holdback advances audio without mutating prompt text."
+        ),
+    )
+    audit.add_argument(
+        "--checkpoint-revisions",
+        type=int,
+        default=PROMPT_CHECKPOINT_REVISIONS,
+    )
+    audit.add_argument(
+        "--checkpoint-phase-policy",
+        choices=("synchronized", "session-staggered"),
+        default="synchronized",
+    )
     audit.add_argument("--late-window-index", type=int)
     audit.add_argument("--late-margin-threshold", type=float)
     audit.add_argument("--high-load-prompt-tokens", type=int)
     audit.add_argument("--high-load-margin-threshold", type=float)
+    audit.add_argument(
+        "--window-margin-rule",
+        action="append",
+        default=[],
+        metavar="WINDOW_INDEX:MARGIN",
+    )
     audit.add_argument("--audit-probability", type=float, default=0.021)
+    audit.add_argument(
+        "--forced-audit-root",
+        action="append",
+        default=[],
+        metavar="EPISODE:SESSION:WINDOW",
+        help=(
+            "Adaptation-only same-input control. The listed pre-outcome "
+            "event is audited regardless of its random audit coin."
+        ),
+    )
     audit.add_argument("--seed", type=int, default=20260731)
     audit.add_argument("--alpha", type=float, default=0.05)
     audit.add_argument("--delta", type=float, default=0.005)
@@ -708,6 +865,7 @@ def run_simple_system(
     next_window = [0 for _ in sessions]
     ready = list(range(len(sessions)))
     event_rows: list[dict[str, Any]] = []
+    scheduler_rows: list[dict[str, Any]] = []
     state_violations = 0
     output_violations = 0
     verifications = 0
@@ -728,6 +886,7 @@ def run_simple_system(
     ]
 
     while ready:
+        ready_before = len(ready)
         batch_ids, ready = take_released_batch(
             ready,
             release_times=release_times,
@@ -737,6 +896,15 @@ def run_simple_system(
             arrival=arrival,
             rng=rng,
         )
+        scheduler_rows.append({
+            "round": len(scheduler_rows),
+            "ready_sessions": ready_before,
+            "pending_authorities": 0,
+            "batch_size": len(batch_ids),
+            "generated_batch_size": len(batch_ids),
+            "capacity": concurrency,
+            "unfilled_slots": max(0, concurrency - len(batch_ids)),
+        })
         batch_audio = [
             windows[index][next_window[index]] for index in batch_ids
         ]
@@ -882,6 +1050,7 @@ def run_simple_system(
         "wall_seconds": wall,
         "energy_joules": joules,
         "event_rows": event_rows,
+        "scheduler_rows": scheduler_rows,
         "verification_count": verifications,
         "output_violations": output_violations,
         "state_violations": state_violations,
@@ -1106,8 +1275,15 @@ def run_revtrace(
     terminal_spillover_on_proposer: bool = False,
     authority_spillover_on_proposer: bool = False,
     speculative_prefetch_depth: int = 0,
+    cohort_commit_barrier: bool = False,
+    pad_proposals_to_concurrency: bool = False,
     terminal_contract: str = "canonical-output",
     state_capacity_prompt_tokens: int | None = None,
+    low_margin_policy: str = "verify",
+    disable_risk_authority: bool = False,
+    disable_checkpoint_authority: bool = False,
+    checkpoint_revisions: int = PROMPT_CHECKPOINT_REVISIONS,
+    checkpoint_phase_policy: str = "synchronized",
 ) -> dict[str, Any]:
     """Run risk-governed deferred canonical authority with checkpoints.
 
@@ -1123,8 +1299,25 @@ def run_revtrace(
         raise ValueError("authority-idle proposer lanes must be 1 or 2")
     if speculative_prefetch_depth not in (0, 1):
         raise ValueError("speculative prefetch depth must be zero or one")
+    if cohort_commit_barrier and speculative_prefetch_depth:
+        raise ValueError(
+            "cohort commit barriers and speculative prefetch are mutually "
+            "exclusive execution distributions"
+        )
+    if pad_proposals_to_concurrency and authority_idle_proposer_lanes != 1:
+        raise ValueError(
+            "shape-preserving proposal padding requires one proposal lane"
+        )
     if terminal_contract not in {"canonical-output", "state-only"}:
         raise ValueError("unsupported terminal contract")
+    if low_margin_policy not in {"verify", "holdback"}:
+        raise ValueError("unsupported low-margin policy")
+    if checkpoint_revisions <= 0:
+        raise ValueError("checkpoint revisions must be positive")
+    if checkpoint_phase_policy not in {
+        "synchronized", "session-staggered"
+    }:
+        raise ValueError("unsupported checkpoint phase policy")
     rng = random.Random(seed)
     prompts: list[tuple[int, ...]] = [() for _ in sessions]
     authority_executor = verifier_lanes[0].executor
@@ -1153,6 +1346,7 @@ def run_revtrace(
     prefetch_ready_since: dict[int, float] = {}
     prefetched: dict[int, dict[str, Any]] = {}
     event_rows: list[dict[str, Any]] = []
+    scheduler_rows: list[dict[str, Any]] = []
     state_violations = 0
     output_violations = 0
     stale_commits = 0
@@ -1172,6 +1366,11 @@ def run_revtrace(
     speculative_prefetches = 0
     speculative_prefetch_reuses = 0
     speculative_prefetch_discards = 0
+    proposal_padding_rows = 0
+    cohort_sequence = 0
+    cohort_remaining: dict[int, int] = {}
+    cohort_release_sessions: dict[int, list[int]] = {}
+    cohort_release_count = 0
     post_timing_candidates: list[dict[str, Any]] = []
     sampler = PowerSampler(
         (
@@ -1197,6 +1396,25 @@ def run_revtrace(
     # Terminal-only work may reclaim the proposer device while no proposal is
     # ready. Serialize both paths so later readiness cannot introduce overlap.
     proposer_device_lock = threading.Lock()
+
+    def finish_cohort_event(
+        cohort_id: int,
+        session_id: int,
+    ) -> None:
+        """Release a proposal cohort after every state decision resolves."""
+
+        nonlocal cohort_release_count
+        if next_window[session_id] < windows_per_session:
+            cohort_release_sessions[cohort_id].append(session_id)
+        cohort_remaining[cohort_id] -= 1
+        if cohort_remaining[cohort_id] != 0:
+            return
+        released_at = time.perf_counter()
+        for released_session in cohort_release_sessions.pop(cohort_id):
+            ready_since[released_session] = released_at
+            ready.append(released_session)
+        del cohort_remaining[cohort_id]
+        cohort_release_count += 1
 
     proposal_lanes = (
         (proposer, verifier_lanes[0].executor)
@@ -1325,11 +1543,14 @@ def run_revtrace(
         state_entry_committed: bool = True,
         risk_reason: str | None = None,
         enqueue_next: bool = True,
+        cohort_id: int | None = None,
     ) -> None:
         nonlocal state_violations, output_violations, stale_commits
         terminal = window_index == windows_per_session - 1
         if states[session_id].version != parent:
             stale_commits += 1
+            if cohort_id is not None:
+                finish_cohort_event(cohort_id, session_id)
             return
         oracle_record = oracle[session_id][window_index]
         proposed_next_prompt = next_prompt_state(
@@ -1440,7 +1661,9 @@ def run_revtrace(
                 else 0.0
             ),
         })
-        if enqueue_next and next_window[session_id] < windows_per_session:
+        if cohort_id is not None:
+            finish_cohort_event(cohort_id, session_id)
+        elif enqueue_next and next_window[session_id] < windows_per_session:
             ready_since[session_id] = time.perf_counter()
             ready.append(session_id)
 
@@ -1502,6 +1725,7 @@ def run_revtrace(
                         "state_entry_committed"
                     ],
                     enqueue_next=not prefetch_requested,
+                    cohort_id=metadata.get("cohort_id"),
                 )
                 if prefetch_requested:
                     cached = prefetched.get(session_id)
@@ -1524,6 +1748,8 @@ def run_revtrace(
                         else time.perf_counter()
                     )
             if ready:
+                ready_before = len(ready)
+                pending_before = len(pending)
                 batch_ids, ready = take_released_batch(
                     ready,
                     release_times=release_times,
@@ -1550,6 +1776,12 @@ def run_revtrace(
                         batch_ids, batch_is_prefetch
                     )
                 ]
+                batch_cohort_id: int | None = None
+                if cohort_commit_barrier:
+                    batch_cohort_id = cohort_sequence
+                    cohort_sequence += 1
+                    cohort_remaining[batch_cohort_id] = len(batch_ids)
+                    cohort_release_sessions[batch_cohort_id] = []
                 # A decoder prompt that cannot accommodate the declared
                 # worst-case next segment is rebased before execution.  The
                 # operation only discards feedback state, so it cannot grant
@@ -1604,6 +1836,15 @@ def run_revtrace(
                     for position, session_id in enumerate(batch_ids)
                     if session_id not in prefetched
                 ]
+                scheduler_rows.append({
+                    "round": len(scheduler_rows),
+                    "ready_sessions": ready_before,
+                    "pending_authorities": pending_before,
+                    "batch_size": len(batch_ids),
+                    "generated_batch_size": len(generated_positions),
+                    "capacity": concurrency,
+                    "unfilled_slots": max(0, concurrency - len(batch_ids)),
+                })
                 proposed: list[WhisperCandidate | None] = [
                     None for _ in batch_ids
                 ]
@@ -1612,19 +1853,38 @@ def run_revtrace(
                 proposal_lane_count = 1
                 if generated_positions:
                     event_started = time.perf_counter()
+                    proposal_audio = [
+                        windows[batch_ids[position]][
+                            batch_window_indices[position]
+                        ]
+                        for position in generated_positions
+                    ]
+                    proposal_prompts = [
+                        batch_prompt_values[position]
+                        for position in generated_positions
+                    ]
+                    real_proposal_count = len(proposal_audio)
+                    if (
+                        pad_proposals_to_concurrency
+                        and real_proposal_count < concurrency
+                    ):
+                        padding = concurrency - real_proposal_count
+                        proposal_audio.extend(
+                            [proposal_audio[-1]] * padding
+                        )
+                        proposal_prompts.extend(
+                            [proposal_prompts[-1]] * padding
+                        )
+                        proposal_padding_rows += padding
                     generated, proposal_lane_count = propose(
-                        [
-                            windows[batch_ids[position]][
-                                batch_window_indices[position]
-                            ]
-                            for position in generated_positions
-                        ],
-                        [
-                            batch_prompt_values[position]
-                            for position in generated_positions
-                        ],
+                        proposal_audio,
+                        proposal_prompts,
                         authority_queue_empty=not pending,
                         pool=proposal_pool,
+                    )
+                    generated = generated[:real_proposal_count]
+                    scheduler_rows[-1]["execution_batch_size"] = len(
+                        proposal_audio
                     )
                     proposal_finished = time.perf_counter()
                     for position, record in zip(
@@ -1679,10 +1939,17 @@ def run_revtrace(
                         prompt_tokens=prior_prompt_tokens,
                     )
                     checkpoint_due = (
-                        not terminal
-                        and (window_index + 1)
-                        % PROMPT_CHECKPOINT_REVISIONS
-                        == 0
+                        checkpoint_due_for_session(
+                            window_index,
+                            session_id,
+                            revisions=checkpoint_revisions,
+                            phase_policy=checkpoint_phase_policy,
+                            terminal=terminal,
+                            total_nonterminal_revisions=(
+                                windows_per_session - 1
+                            ),
+                        )
+                        and not disable_checkpoint_authority
                     )
                     action = prompt_state_action(
                         risk_policy,
@@ -1706,6 +1973,11 @@ def run_revtrace(
                     # output authority. A revision-count checkpoint supplies
                     # the periodic authority refresh.
                     audited = False
+                    risk_holdback = (
+                        action == WhisperStateAction.RISK_AUTHORITY
+                        and low_margin_policy == "holdback"
+                        and not work_budget_saturated
+                    )
                     should_verify = (
                         work_budget_saturated
                         or (
@@ -1715,6 +1987,13 @@ def run_revtrace(
                                 WhisperStateAction.RISK_AUTHORITY,
                                 WhisperStateAction.TERMINAL_AUTHORITY,
                             }
+                            and not (
+                                action == WhisperStateAction.RISK_AUTHORITY
+                                and (
+                                    low_margin_policy == "holdback"
+                                    or disable_risk_authority
+                                )
+                            )
                             and not (
                                 terminal
                                 and terminal_contract == "state-only"
@@ -1823,10 +2102,14 @@ def run_revtrace(
                                 )
                             ),
                             "state_entry_committed": not terminal,
+                            "cohort_id": batch_cohort_id,
                         }
                     else:
-                        safe_commits += int(not terminal)
-                        if not terminal:
+                        safe_commits += int(
+                            not terminal
+                            and action == WhisperStateAction.FAST_COMMIT
+                        )
+                        if not terminal and not risk_holdback:
                             post_timing_candidates.append({
                                 "session_id": session_id,
                                 "window_index": window_index,
@@ -1840,7 +2123,10 @@ def run_revtrace(
                             record,
                             source=(
                                 "batch-terminal-quality"
-                                if terminal else "batch"
+                                if terminal else (
+                                    "batch-risk-holdback"
+                                    if risk_holdback else "batch"
+                                )
                             ),
                             proposed=record,
                             event_started=event_started_rows[position],
@@ -1849,8 +2135,11 @@ def run_revtrace(
                             ),
                             parent=states[session_id].version,
                             audited=False,
-                            state_entry_committed=not terminal,
+                            state_entry_committed=(
+                                not terminal and not risk_holdback
+                            ),
                             risk_reason=risk_reason,
+                            cohort_id=batch_cohort_id,
                         )
                 continue
             if pending:
@@ -1859,6 +2148,8 @@ def run_revtrace(
                     return_when=concurrent.futures.FIRST_COMPLETED,
                 )
 
+    if cohort_remaining or cohort_release_sessions:
+        raise RuntimeError("cohort barrier exited with unresolved revisions")
     wall = time.perf_counter() - started
     joules = sampler.stop()
     validation_started = time.perf_counter()
@@ -1987,6 +2278,7 @@ def run_revtrace(
         "wall_seconds": wall,
         "energy_joules": joules,
         "event_rows": event_rows,
+        "scheduler_rows": scheduler_rows,
         "mandatory_verification_count": (
             mandatory_nonterminal_authorities
         ),
@@ -1996,7 +2288,10 @@ def run_revtrace(
         ),
         "low_margin_authority_count": low_margin_authorities,
         "work_budget_authority_count": work_budget_authorities,
-        "low_margin_holdback_count": 0,
+        "low_margin_holdback_count": sum(
+            row.get("source") == "batch-risk-holdback"
+            for row in event_rows
+        ),
         "checkpoint_authority_count": mandatory,
         "capacity_rebase_count": capacity_rebases,
         "authority_idle_dual_proposal_rounds": (
@@ -2011,6 +2306,8 @@ def run_revtrace(
         "speculative_prefetches": speculative_prefetches,
         "speculative_prefetch_reuses": speculative_prefetch_reuses,
         "speculative_prefetch_discards": speculative_prefetch_discards,
+        "proposal_padding_rows": proposal_padding_rows,
+        "cohort_releases": cohort_release_count,
         "post_timing_fast_path_audit_count": len(
             post_timing_candidates
         ),
@@ -2098,19 +2395,42 @@ def summarize_workload(
         if (index + 1) % (args.duration_seconds // args.window_seconds)
         != 0
     ]
-    baseline_good = sum(
-        value <= args.slo_seconds
-        for value in baseline_state_entry_latencies
-    ) / baseline["wall_seconds"]
+    baseline_display_latencies = [
+        float(value) for value in baseline["event_latencies"]
+    ]
     baseline_latencies = sorted(
         baseline_state_entry_latencies
     )
-    method_good = sum(
-        value <= args.slo_seconds for value in latencies
-    ) / result["wall_seconds"]
-    method_display_good = sum(
-        value <= args.slo_seconds for value in display_latencies
-    ) / result["wall_seconds"]
+    baseline_good, method_good, state_goodput_speedup = (
+        paired_slo_goodput_speedup(
+            baseline_state_entry_latencies,
+            baseline["wall_seconds"],
+            latencies,
+            result["wall_seconds"],
+            args.slo_seconds,
+        )
+    )
+    (
+        baseline_display_good,
+        method_display_good,
+        display_goodput_speedup,
+    ) = paired_slo_goodput_speedup(
+        baseline_display_latencies,
+        baseline["wall_seconds"],
+        display_latencies,
+        result["wall_seconds"],
+        args.slo_seconds,
+    )
+    scheduler_rows = list(result.get("scheduler_rows", []))
+    batch_size_histogram: dict[str, int] = {}
+    for row in scheduler_rows:
+        key = str(int(row["batch_size"]))
+        batch_size_histogram[key] = batch_size_histogram.get(key, 0) + 1
+    policy_source = getattr(args, "policy_source", None)
+    policy_sha256 = (
+        hashlib.sha256(policy_source.read_bytes()).hexdigest()
+        if policy_source is not None else None
+    )
     payload = {
         "schema_version": 1,
         "study": "Whisper cross-architecture system-performance closure",
@@ -2140,13 +2460,37 @@ def summarize_workload(
             "system_order_index": args.system_order_index,
             "system_order_policy": args.system_order_policy,
             "margin_threshold": args.margin_threshold,
+            "age_window_index": args.age_window_index,
+            "age_margin_threshold": args.age_margin_threshold,
             "late_window_index": args.late_window_index,
             "late_margin_threshold": args.late_margin_threshold,
             "high_load_prompt_tokens": args.high_load_prompt_tokens,
             "high_load_margin_threshold": (
                 args.high_load_margin_threshold
             ),
+            "window_margin_rules": [
+                {
+                    "window_index": window,
+                    "margin_threshold": margin,
+                }
+                for window, margin in parse_window_margin_rules(
+                    getattr(args, "window_margin_rule", [])
+                )
+            ],
             "audit_probability": args.audit_probability,
+            "policy_source": (
+                str(policy_source.resolve())
+                if policy_source is not None else None
+            ),
+            "policy_sha256": policy_sha256,
+            "runtime_source_identity": runtime_source_identity(),
+            "low_margin_policy": args.low_margin_policy,
+            "checkpoint_revisions": args.checkpoint_revisions,
+            "checkpoint_phase_policy": args.checkpoint_phase_policy,
+            "disable_risk_authority": bool(args.disable_risk_authority),
+            "disable_checkpoint_authority": bool(
+                args.disable_checkpoint_authority
+            ),
             "slo_seconds": args.slo_seconds,
             "canonical": (
                 "W-suite FP16 batch-size-one executor with bounded raw "
@@ -2191,6 +2535,10 @@ def summarize_workload(
             "verifier_lanes": (
                 args.verifier_lanes if args.system == "revtrace" else 0
             ),
+            "share_verifier_weights": (
+                bool(args.share_verifier_weights)
+                if args.system == "revtrace" else False
+            ),
             "authority_idle_proposer_lanes": (
                 args.authority_idle_proposer_lanes
                 if args.system == "revtrace" else 1
@@ -2206,6 +2554,14 @@ def summarize_workload(
             "speculative_prefetch_depth": (
                 int(args.speculative_prefetch_depth)
                 if args.system == "revtrace" else 0
+            ),
+            "cohort_commit_barrier": (
+                bool(args.cohort_commit_barrier)
+                if args.system == "revtrace" else False
+            ),
+            "pad_proposals_to_concurrency": (
+                bool(args.pad_proposals_to_concurrency)
+                if args.system == "revtrace" else False
             ),
             "terminal_contract": (
                 args.terminal_contract
@@ -2277,6 +2633,10 @@ def summarize_workload(
             "speculative_prefetch_discards": result.get(
                 "speculative_prefetch_discards", 0
             ),
+            "cohort_releases": result.get("cohort_releases", 0),
+            "proposal_padding_rows": result.get(
+                "proposal_padding_rows", 0
+            ),
             "post_timing_fast_path_audits": result.get(
                 "post_timing_fast_path_audit_count", 0
             ),
@@ -2322,6 +2682,7 @@ def summarize_workload(
             "wall_speedup": wall_speedup,
             "gpu_normalized_speedup": gpu_normalized,
             "baseline_goodput": baseline_good,
+            "baseline_display_goodput": baseline_display_good,
             "baseline_latency_p50": float(
                 np.quantile(baseline_latencies, 0.50)
             ),
@@ -2333,13 +2694,11 @@ def summarize_workload(
             ),
             "slo_goodput": method_good,
             "slo_goodput_speedup": (
-                method_good / baseline_good
-                if baseline_good > 0 else math.inf
+                state_goodput_speedup
             ),
             "display_slo_goodput": method_display_good,
             "display_slo_goodput_speedup": (
-                method_display_good / baseline_good
-                if baseline_good > 0 else math.inf
+                display_goodput_speedup
             ),
             "latency_p50": quantile(0.50),
             "latency_p95": quantile(0.95),
@@ -2418,6 +2777,42 @@ def summarize_workload(
             )),
             "post_timing_validation_seconds": result.get(
                 "post_timing_validation_seconds", 0.0
+            ),
+        },
+        "scheduler": {
+            "proposal_rounds": len(scheduler_rows),
+            "batch_size_histogram": batch_size_histogram,
+            "mean_batch_size": (
+                statistics.mean(
+                    float(row["batch_size"]) for row in scheduler_rows
+                )
+                if scheduler_rows else 0.0
+            ),
+            "mean_occupancy_fraction": (
+                statistics.mean(
+                    float(row["batch_size"])
+                    / max(1.0, float(row["capacity"]))
+                    for row in scheduler_rows
+                )
+                if scheduler_rows else 0.0
+            ),
+            "maximum_pending_authorities": max(
+                (
+                    int(row.get("pending_authorities", 0))
+                    for row in scheduler_rows
+                ),
+                default=0,
+            ),
+            "mean_pending_authorities": (
+                statistics.mean(
+                    int(row.get("pending_authorities", 0))
+                    for row in scheduler_rows
+                )
+                if scheduler_rows else 0.0
+            ),
+            "unfilled_batch_slots": sum(
+                int(row.get("unfilled_slots", 0))
+                for row in scheduler_rows
             ),
         },
         "events": rows,
@@ -2580,6 +2975,47 @@ def run_calibration(args: argparse.Namespace) -> int:
 
 
 def run_workload(args: argparse.Namespace) -> int:
+    window_margin_rules = parse_window_margin_rules(
+        args.window_margin_rule
+    )
+    if args.policy_source is not None:
+        policy_payload = json.loads(
+            args.policy_source.read_text(encoding="utf-8")
+        )
+        selected = policy_payload.get("selected_policy", {})
+        expected = {
+            "threshold": args.margin_threshold,
+            "age_window_index": args.age_window_index,
+            "age_margin_threshold": args.age_margin_threshold,
+            "late_window_index": args.late_window_index,
+            "late_margin_threshold": args.late_margin_threshold,
+            "high_load_prompt_tokens": args.high_load_prompt_tokens,
+            "high_load_margin_threshold": args.high_load_margin_threshold,
+            "window_margin_rules": [
+                {
+                    "window_index": window,
+                    "margin_threshold": margin,
+                }
+                for window, margin in window_margin_rules
+            ],
+        }
+        mismatches = {
+            key: {
+                "policy": selected.get(
+                    key, [] if key == "window_margin_rules" else None
+                ),
+                "runtime": value,
+            }
+            for key, value in expected.items()
+            if selected.get(
+                key, [] if key == "window_margin_rules" else None
+            ) != value
+        }
+        if mismatches:
+            raise ValueError(
+                "runtime risk parameters do not match frozen policy: "
+                + json.dumps(mismatches, sort_keys=True)
+            )
     sessions = build_sessions(
         args.manifest,
         duration_seconds=args.duration_seconds,
@@ -2600,14 +3036,22 @@ def run_workload(args: argparse.Namespace) -> int:
         raise ValueError("verifier-lanes must be positive")
     verifier_lanes: tuple[CanonicalLane, ...] = ()
     if args.system == "revtrace":
-        lane_executors = tuple(
-            DistinctPromptWhisper(
+        if args.share_verifier_weights:
+            shared_executor = DistinctPromptWhisper(
                 args.model,
                 device=args.verifier_device,
                 max_new_tokens=authority_max_new_tokens,
             )
-            for _ in range(args.verifier_lanes)
-        )
+            lane_executors = (shared_executor,) * args.verifier_lanes
+        else:
+            lane_executors = tuple(
+                DistinctPromptWhisper(
+                    args.model,
+                    device=args.verifier_device,
+                    max_new_tokens=authority_max_new_tokens,
+                )
+                for _ in range(args.verifier_lanes)
+            )
         verifier_lanes = tuple(
             CanonicalLane(
                 lane_id=lane_id,
@@ -2628,10 +3072,13 @@ def run_workload(args: argparse.Namespace) -> int:
     )
     risk_policy = WhisperStateRiskPolicy(
         margin_threshold=args.margin_threshold,
+        age_window_index=args.age_window_index,
+        age_margin_threshold=args.age_margin_threshold,
         late_window_index=args.late_window_index,
         late_margin_threshold=args.late_margin_threshold,
         high_load_prompt_tokens=args.high_load_prompt_tokens,
         high_load_margin_threshold=args.high_load_margin_threshold,
+        window_margin_rules=window_margin_rules,
     )
     oracle_contract = {
         "model": args.model_name,
@@ -2707,10 +3154,21 @@ def run_workload(args: argparse.Namespace) -> int:
             speculative_prefetch_depth=(
                 args.speculative_prefetch_depth
             ),
+            cohort_commit_barrier=args.cohort_commit_barrier,
+            pad_proposals_to_concurrency=(
+                args.pad_proposals_to_concurrency
+            ),
             terminal_contract=args.terminal_contract,
             state_capacity_prompt_tokens=(
                 args.state_capacity_prompt_tokens
             ),
+            low_margin_policy=args.low_margin_policy,
+            disable_risk_authority=args.disable_risk_authority,
+            disable_checkpoint_authority=(
+                args.disable_checkpoint_authority
+            ),
+            checkpoint_revisions=args.checkpoint_revisions,
+            checkpoint_phase_policy=args.checkpoint_phase_policy,
         )
     elif args.system == "revtrace-inline":
         result = run_inline_revtrace(
@@ -2763,6 +3221,24 @@ def run_workload(args: argparse.Namespace) -> int:
 
 
 def run_audit(args: argparse.Namespace) -> int:
+    window_margin_rules = parse_window_margin_rules(
+        args.window_margin_rule
+    )
+    forced_roots: set[tuple[int, int, int]] = set()
+    for raw in args.forced_audit_root:
+        try:
+            episode_raw, session_raw, window_raw = raw.split(":")
+            root = (
+                int(episode_raw), int(session_raw), int(window_raw)
+            )
+        except (TypeError, ValueError) as exc:
+            raise ValueError(
+                "forced audit roots use EPISODE:SESSION:WINDOW"
+            ) from exc
+        if min(root) < 0:
+            raise ValueError("forced audit root indices must be non-negative")
+        forced_roots.add(root)
+    forced_roots_seen: set[tuple[int, int, int]] = set()
     """Audit only fast-path writes under the deployed state-control protocol.
 
     Canonical audit outcomes are computed in a shadow path and never replace
@@ -2771,6 +3247,43 @@ def run_audit(args: argparse.Namespace) -> int:
     capacity rebases discard feedback before execution.  This makes the W4
     event distribution match the W5 RevTrace transition semantics.
     """
+    policy_payload = json.loads(
+        args.policy_source.read_text(encoding="utf-8")
+    )
+    selected = policy_payload.get("selected_policy", {})
+    expected = {
+        "threshold": args.margin_threshold,
+        "age_window_index": args.age_window_index,
+        "age_margin_threshold": args.age_margin_threshold,
+        "late_window_index": args.late_window_index,
+        "late_margin_threshold": args.late_margin_threshold,
+        "high_load_prompt_tokens": args.high_load_prompt_tokens,
+        "high_load_margin_threshold": args.high_load_margin_threshold,
+        "window_margin_rules": [
+            {
+                "window_index": window,
+                "margin_threshold": margin,
+            }
+            for window, margin in window_margin_rules
+        ],
+    }
+    mismatches = {
+        key: {
+            "policy": selected.get(
+                key, [] if key == "window_margin_rules" else None
+            ),
+            "runtime": value,
+        }
+        for key, value in expected.items()
+        if selected.get(
+            key, [] if key == "window_margin_rules" else None
+        ) != value
+    }
+    if mismatches:
+        raise ValueError(
+            "audit risk parameters do not match frozen policy: "
+            + json.dumps(mismatches, sort_keys=True)
+        )
     rng = random.Random(args.seed)
     sessions = build_sessions(
         args.manifest,
@@ -2798,10 +3311,13 @@ def run_audit(args: argparse.Namespace) -> int:
     windows_per_session = args.duration_seconds // args.window_seconds
     risk_policy = WhisperStateRiskPolicy(
         margin_threshold=args.margin_threshold,
+        age_window_index=args.age_window_index,
+        age_margin_threshold=args.age_margin_threshold,
         late_window_index=args.late_window_index,
         late_margin_threshold=args.late_margin_threshold,
         high_load_prompt_tokens=args.high_load_prompt_tokens,
         high_load_margin_threshold=args.high_load_margin_threshold,
+        window_margin_rules=window_margin_rules,
     )
     split = [
         list(np.array_split(audio, windows_per_session))
@@ -2823,10 +3339,22 @@ def run_audit(args: argparse.Namespace) -> int:
     episode = 0
     started = time.perf_counter()
 
-    while (
-        risk_entries < args.target_risk_entries
-        or audits < args.minimum_audits
-    ):
+    def audit_complete() -> bool:
+        if forced_roots:
+            return forced_roots_seen >= forced_roots
+        return (
+            risk_entries >= args.target_risk_entries
+            and audits >= args.minimum_audits
+        )
+
+    def adaptation_stop_ready() -> bool:
+        if not args.stop_on_caught_error:
+            return False
+        if forced_roots:
+            return forced_roots_seen >= forced_roots
+        return caught_state_errors > 0
+
+    while not audit_complete():
         prompts: list[tuple[int, ...]] = [() for _ in sessions]
         order = list(range(len(sessions)))
         rng.shuffle(order)
@@ -2863,11 +3391,15 @@ def run_audit(args: argparse.Namespace) -> int:
                         prompt_tokens=prior_prompt_tokens,
                     )
                     low_margin = risk_reason is not None
-                    checkpoint_due = (
-                        not terminal
-                        and (window_index + 1)
-                        % PROMPT_CHECKPOINT_REVISIONS
-                        == 0
+                    checkpoint_due = checkpoint_due_for_session(
+                        window_index,
+                        session_id,
+                        revisions=args.checkpoint_revisions,
+                        phase_policy=args.checkpoint_phase_policy,
+                        terminal=terminal,
+                        total_nonterminal_revisions=(
+                            windows_per_session - 1
+                        ),
                     )
                     action = prompt_state_action(
                         risk_policy,
@@ -2886,10 +3418,18 @@ def run_audit(args: argparse.Namespace) -> int:
                         action == WhisperStateAction.FAST_COMMIT
                         and not work_budget_saturated
                     )
-                    audited = (
-                        eligible
-                        and rng.random() < args.audit_probability
+                    audit_coin = rng.random() if eligible else None
+                    forced_root = (
+                        episode, session_id, window_index
+                    ) in forced_roots
+                    audited = eligible and (
+                        bool(audit_coin < args.audit_probability)
+                        or forced_root
                     )
+                    if forced_root and audited:
+                        forced_roots_seen.add(
+                            (episode, session_id, window_index)
+                        )
                     risk_entries += int(eligible)
                     audits += int(audited)
                     checkpoint_authorities += int(
@@ -2937,7 +3477,7 @@ def run_audit(args: argparse.Namespace) -> int:
                         )
                         if audited:
                             caught_state_errors += int(state_error)
-                            audit_rows.append({
+                            caught_row = {
                                 "episode": episode,
                                 "session_id": session_id,
                                 "window_index": window_index,
@@ -2957,7 +3497,56 @@ def run_audit(args: argparse.Namespace) -> int:
                                     )
                                 ),
                                 "state_error": state_error,
-                            })
+                                "forced_audit": forced_root,
+                                "audio_sha256": hashlib.sha256(
+                                    np.asarray(
+                                        audio[position], dtype=np.float32
+                                    ).tobytes()
+                                ).hexdigest(),
+                                "prompt_token_sha256": hashlib.sha256(
+                                    json.dumps(
+                                        list(prompt_rows[position]),
+                                        separators=(",", ":"),
+                                    ).encode("utf-8")
+                                ).hexdigest(),
+                                "proposed_token_sha256": (
+                                    record.token_sha256
+                                ),
+                                "canonical_token_sha256": (
+                                    canonical.token_sha256
+                                    if canonical is not None else None
+                                ),
+                            }
+                            if state_error:
+                                # A caught policy root is actionable only
+                                # after same-input singleton repeats separate
+                                # a stable fast-path miss from an unstable
+                                # canonical oracle.
+                                canonical_repeats = [
+                                    verifier.canonical(
+                                        audio[position],
+                                        prompt_rows[position],
+                                    )
+                                    for _ in range(2)
+                                ]
+                                repeat_digests = [
+                                    item.token_sha256
+                                    for item in canonical_repeats
+                                ]
+                                caught_row.update({
+                                    "canonical_repeat_token_sha256": (
+                                        repeat_digests
+                                    ),
+                                    "canonical_repeat_stable": (
+                                        canonical is not None
+                                        and all(
+                                            digest
+                                            == canonical.token_sha256
+                                            for digest in repeat_digests
+                                        )
+                                    ),
+                                })
+                            audit_rows.append(caught_row)
                     # Shadow audits are deliberately non-interfering: an
                     # audited safe proposal follows the same state transition
                     # it would have taken without selection into the audit.
@@ -2973,34 +3562,39 @@ def run_audit(args: argparse.Namespace) -> int:
                         assert canonical_next_prompt is not None
                         prompts[session_id] = canonical_next_prompt
                     elif action == WhisperStateAction.RISK_AUTHORITY:
-                        assert canonical_next_prompt is not None
-                        prompts[session_id] = canonical_next_prompt
+                        if args.low_margin_policy == "verify":
+                            assert canonical_next_prompt is not None
+                            prompts[session_id] = canonical_next_prompt
+                        else:
+                            # The proposal remains display-visible, but the
+                            # previous-text prompt state is unchanged.  This
+                            # is the deployed holdback transition whose future
+                            # state distribution the certificate must cover.
+                            assert args.low_margin_policy == "holdback"
                     else:
                         assert (
                             action == WhisperStateAction.TERMINAL_AUTHORITY
                         )
                     total_events += 1
-                    if (
-                        args.stop_on_caught_error
-                        and caught_state_errors > 0
-                    ):
+                    if adaptation_stop_ready():
                         break
-                if (
-                    args.stop_on_caught_error
-                    and caught_state_errors > 0
-                ):
+                if adaptation_stop_ready():
                     break
-            if (
-                args.stop_on_caught_error
-                and caught_state_errors > 0
-            ):
+            if adaptation_stop_ready():
                 break
-            if (
-                risk_entries >= args.target_risk_entries
-                and audits >= args.minimum_audits
-            ):
+            if audit_complete():
                 break
         episode += 1
+        if (
+            forced_roots
+            and episode > max(row[0] for row in forced_roots)
+            and forced_roots_seen < forced_roots
+        ):
+            missing = sorted(forced_roots - forced_roots_seen)
+            raise RuntimeError(
+                "forced audit roots were not fast-path eligible: "
+                + json.dumps(missing)
+            )
         progress = {
             "episode": episode,
             "risk_entries": risk_entries,
@@ -3031,17 +3625,29 @@ def run_audit(args: argparse.Namespace) -> int:
         ):
             break
 
-    bound = AuditRiskBound(args.audit_probability, args.alpha)
-    upper_count = bound.upper_error_count(
-        risk_entries, caught_state_errors
-    )
-    upper_risk = upper_count / risk_entries
-    passed = (
-        risk_entries >= args.target_risk_entries
-        and audits >= args.minimum_audits
-        and upper_risk <= args.delta
-        and protected_state_violations == 0
-    )
+    adaptation_only = bool(forced_roots)
+    if adaptation_only:
+        # A forced same-input root replay is diagnostic evidence, never a
+        # randomized certificate.  In particular audit_probability=0 is
+        # legal here and must not be passed to AuditRiskBound, whose domain is
+        # deliberately (0, 1).
+        upper_count = risk_entries
+        upper_risk = 1.0
+        passed = False
+        risk_method = "not-computed-forced-adaptation-replay"
+    else:
+        bound = AuditRiskBound(args.audit_probability, args.alpha)
+        upper_count = bound.upper_error_count(
+            risk_entries, caught_state_errors
+        )
+        upper_risk = upper_count / risk_entries
+        passed = (
+            risk_entries >= args.target_risk_entries
+            and audits >= args.minimum_audits
+            and upper_risk <= args.delta
+            and protected_state_violations == 0
+        )
+        risk_method = "fixed-probability mixture e-process inversion"
     payload = {
         "schema_version": 1,
         "study": "Whisper W-suite independent time-uniform risk audit",
@@ -3058,6 +3664,15 @@ def run_audit(args: argparse.Namespace) -> int:
             "policy_sha256": hashlib.sha256(
                 args.policy_source.read_bytes()
             ).hexdigest(),
+            "runtime_source_identity": runtime_source_identity(),
+            "low_margin_policy": args.low_margin_policy,
+            "window_margin_rules": [
+                {
+                    "window_index": window,
+                    "margin_threshold": margin,
+                }
+                for window, margin in window_margin_rules
+            ],
             "precision": "float16",
             "prompt_state_semantics": PROMPT_STATE_SEMANTICS,
             "state_control_protocol": STATE_CONTROL_PROTOCOL,
@@ -3067,8 +3682,9 @@ def run_audit(args: argparse.Namespace) -> int:
                 "shadow-canonical-no-state-mutation"
             ),
             "prompt_checkpoint_revisions": (
-                PROMPT_CHECKPOINT_REVISIONS
+                args.checkpoint_revisions
             ),
+            "checkpoint_phase_policy": args.checkpoint_phase_policy,
             "max_prompt_tokens": proposer.max_prompt_tokens,
             "proposer_max_new_tokens": proposer.max_new_tokens,
             "authority_max_new_tokens": verifier.max_new_tokens,
@@ -3083,9 +3699,15 @@ def run_audit(args: argparse.Namespace) -> int:
             "risk_eligible_entries": risk_entries,
             "pre_outcome_randomized_audits": audits,
             "checkpoint_authorities": checkpoint_authorities,
-            "low_margin_authorities": low_margin_holdbacks,
+            "low_margin_authorities": (
+                low_margin_holdbacks
+                if args.low_margin_policy == "verify" else 0
+            ),
             "work_budget_authorities": work_budget_authorities,
-            "low_margin_holdbacks": 0,
+            "low_margin_holdbacks": (
+                low_margin_holdbacks
+                if args.low_margin_policy == "holdback" else 0
+            ),
             "late_state_authorities": late_state_mandatory,
             "high_load_state_authorities": high_load_state_mandatory,
             "capacity_rebases": capacity_rebases,
@@ -3099,9 +3721,13 @@ def run_audit(args: argparse.Namespace) -> int:
             "upper_risk": upper_risk,
             "confidence": 1.0 - args.alpha,
             "target_delta": args.delta,
-            "method": "fixed-probability mixture e-process inversion",
+            "method": risk_method,
         },
         "stop_on_caught_error_enabled": args.stop_on_caught_error,
+        "forced_audit_roots": [list(row) for row in sorted(forced_roots)],
+        "forced_audit_roots_seen": [
+            list(row) for row in sorted(forced_roots_seen)
+        ],
         "adaptation_only_stop_on_caught_error": (
             args.stop_on_caught_error
             and caught_state_errors > 0
