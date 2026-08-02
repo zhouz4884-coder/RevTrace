@@ -390,3 +390,23 @@ reshape passes five-process, round-clustered 30-second admission with maximum
 seed P99 1.877 s, cross-seed U95 1.868 s, zero miss rounds, and risk upper
 bound 0.499706%. A complete 120-second profile fails the duration extension
 and is retained as an operating boundary rather than repaired post hoc.
+
+## R7 — Elastic Feedback-State Coherence
+
+Status:
+
+`R7_1_CROSS_ARCHITECTURE_SEMANTIC_GATE_PASS_EXPERIMENTS_NOT_YET_RUN`
+
+The previous Whisper P0-P3 result is frozen as
+`SYNCHRONOUS_AUTHORITY_WHISPER_NO_GO`. R7 replaces the critical-path authority
+queue with an architecture-independent feedback-authority controller. It can
+fast-commit, hold, decay, or reset feedback state; only fast commit may add a
+candidate to future state ancestry. A hard reset horizon, rather than token
+truncation, bounds the lifetime of causal feedback influence.
+
+The same controller has deterministic semantic coverage for the Qwen rollback
+adapter and Whisper previous-text adapter. This is state-machine evidence, not
+GPU serving evidence. A mandatory Qwen held-out replay/non-regression gate now
+precedes the Whisper performance preflight, so a Whisper-only success cannot
+be promoted as cross-architecture EFSC. The complete preregistered protocol is
+in `configs/revtrace_r7_efsc_gate.json`.

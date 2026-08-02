@@ -7,6 +7,15 @@ low-precision batching can change a generated revision, and a revision model
 feeds that result back into its future state. A locally small numerical flip can
 therefore become a persistent trajectory change.
 
+The current R7 development branch adds **Elastic Feedback-State Coherence**:
+one shared controller can withhold, decay, or reset future feedback authority
+without blocking on singleton execution. Qwen rollback state and Whisper
+previous-text state are represented by separate projection adapters, while the
+action controller is shared. The deterministic R7.1 semantic gate passes; R7
+GPU performance, formal risk, and quality gates remain unexecuted and are not
+paper results yet. See
+[the R7 protocol](docs/reports/phase_r7_efsc_protocol.md).
+
 The core execution contract is:
 
 > A transition may enter future revision state only when its parent version

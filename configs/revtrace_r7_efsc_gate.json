@@ -1,0 +1,210 @@
+{
+  "experiment_id": "revtrace-r7-efsc-v1",
+  "title": "Elastic Feedback-State Coherence with Bounded Influence",
+  "decision_predecessor": "SYNCHRONOUS_AUTHORITY_WHISPER_NO_GO",
+  "paper_claim_boundary": {
+    "allowed": [
+      "One architecture-independent controller governs feedback write authority.",
+      "Whisper and Qwen differ only in their feedback projection adapters and calibrated thresholds.",
+      "HOLD, DECAY, and RESET never add a provisional output to future feedback ancestry.",
+      "Periodic SAFE_RESET bounds feedback influence independently of margin accuracy.",
+      "Random sentinel audits certify the current frozen epoch; triggered probes only design a later epoch."
+    ],
+    "forbidden_without_results": [
+      "EFSC is deterministic numerical certification.",
+      "Margin alone proves exactness.",
+      "DECAY erases causal ancestry.",
+      "EFSC prevents hallucination.",
+      "Whisper performance implies Qwen applicability."
+    ]
+  },
+  "shared_controller": {
+    "modes": ["COHERENT", "QUARANTINE", "REANCHOR"],
+    "actions": [
+      "FAST_COMMIT",
+      "PROVISIONAL_HOLD",
+      "DECAY_SUFFIX",
+      "SAFE_RESET"
+    ],
+    "frozen_non_threshold_parameters": {
+      "minimum_hold_windows": 1,
+      "safe_streak_required": 2,
+      "maximum_quarantine_windows": 3,
+      "maximum_feedback_debt": 3,
+      "maximum_influence_windows": 3
+    },
+    "threshold_rule": {
+      "type": "calibration-derived-hysteresis",
+      "model_specific_values_allowed": true,
+      "model_specific_control_branches_allowed": false,
+      "enter_margin": "maximum known failure margin in the frozen calibration epoch",
+      "exit_margin": "max(75th percentile eligible margin, enter_margin + epsilon)",
+      "constraint": "exit_margin > enter_margin",
+      "epochs": ["calibration", "one adaptation", "frozen audit"]
+    }
+  },
+  "architecture_adapters": {
+    "qwen3_asr": {
+      "input": "exact projection_token_ids from the official rollback/tokenizer path",
+      "update": "replace the next rollback-prefix state",
+      "models": ["Qwen3-ASR-0.6B", "Qwen3-ASR-1.7B"]
+    },
+    "whisper": {
+      "input": "raw generated segment token IDs",
+      "update": "append and truncate the bounded previous-text history",
+      "models": ["whisper-base.en", "whisper-small.en"]
+    }
+  },
+  "phases": {
+    "R7.0": {
+      "name": "freeze synchronous-authority boundary",
+      "requirements": [
+        "P0-P3 artifacts remain immutable",
+        "negative decision is not reinterpreted using R7 evidence"
+      ]
+    },
+    "R7.1": {
+      "name": "shared semantics and architecture adapters",
+      "requirements": [
+        "HOLD leaves feedback unchanged",
+        "DECAY only deletes authorized state",
+        "RESET creates empty feedback state",
+        "provisional output never becomes a future ancestor",
+        "stale session, contract, policy, and parent results fail closed",
+        "feedback debt never exceeds the frozen bound",
+        "every fast-commit ancestor is erased by the hard reset horizon",
+        "the same action sequence is produced for Qwen and Whisper under the same normalized risk trace"
+      ]
+    },
+    "R7.Q0": {
+      "name": "early Qwen applicability gate",
+      "must_complete_before": "R7.3",
+      "requirements": [
+        "Replay at least 10000 held-out Qwen state-entry events per model through the shared controller.",
+        "Include every previously known Qwen mismatch root as a stress event.",
+        "Observe FAST_COMMIT, HOLD, and RESET on each Qwen model; DECAY may be absent if prompt load never reaches its calibrated bound.",
+        "Provisional-ancestor violations equal zero.",
+        "State/contract/policy stale-result violations equal zero.",
+        "Maximum observed ancestry age is at most maximum_influence_windows.",
+        "Five-seed c16 service non-regression is within 5 percent of the frozen Qwen RevTrace wall-clock and SLO goodput results.",
+        "If Qwen semantics or quality fail, cross-architecture EFSC is rejected even if Whisper later passes."
+      ]
+    },
+    "R7.2": {
+      "name": "calibration, one adaptation, freeze",
+      "requirements": [
+        "Calibration and adaptation roots are excluded from the audit certificate.",
+        "Each model may have different enter and exit margins.",
+        "The state machine and action implementation remain byte-identical across models.",
+        "Policy and contract digests are frozen before any formal audit."
+      ]
+    },
+    "R7.3": {
+      "name": "Whisper base.en c16 performance preflight",
+      "cells": ["W1-sync", "W2-poisson"],
+      "baselines": [
+        "all-canonical",
+        "unprotected-batch",
+        "synchronous-authority-verify",
+        "holdback-only",
+        "EFSC",
+        "feedback-off"
+      ],
+      "replicates_per_cell": 5,
+      "gates": {
+        "median_wall_speedup_min": 2.5,
+        "display_p99_seconds_max": 1.9,
+        "committed_state_p99_seconds_max": 1.9,
+        "minimum_energy_reduction_percent": 35.0,
+        "proposer_occupancy_percent_min": 90.0,
+        "pending_critical_path_authorities": 0
+      },
+      "stop_rule": "Stop EFSC if either cell clearly fails after protocol-valid reruns."
+    },
+    "R7.4": {
+      "name": "independent frozen-epoch risk contract",
+      "minimum_risk_eligible_entries": 60000,
+      "minimum_pre_outcome_random_audits": 1200,
+      "audit_probability": 0.021,
+      "time_uniform_confidence": 0.95,
+      "upper_risk_percent_max": 0.5,
+      "evidence_channels": {
+        "random_sentinel": "certifies the current epoch and never mutates service state",
+        "triggered_diagnostic": "biased diagnostic evidence that may only design the next epoch"
+      }
+    },
+    "R7.5": {
+      "name": "quality and feedback-amplification containment",
+      "sessions": 128,
+      "duration_seconds": 90,
+      "corpora": {"test-clean": 64, "test-other": 64},
+      "gates": {
+        "mean_wer_delta_pp_max": 1.0,
+        "bootstrap_95_upper_wer_delta_pp_max": 2.0,
+        "catastrophic_outliers": 0,
+        "repetition_loop_rate_noninferior_to_canonical": true
+      },
+      "required_metrics": [
+        "repetition_loop_rate",
+        "longest_repetition_run",
+        "feedback_amplification_factor",
+        "provisional_lifetime",
+        "reset_recovery_time",
+        "prompt_state_age_p95",
+        "prompt_state_age_max"
+      ]
+    },
+    "R7.6": {
+      "name": "Whisper small.en cross-scale confirmation",
+      "precondition": "base.en passes R7.3-R7.5",
+      "requirements": [
+        "independent risk certificate",
+        "five fresh seeds for W1 and W2",
+        "128 long-session quality pairs",
+        "same controller and action implementation as base.en",
+        "only calibrated thresholds may differ"
+      ]
+    }
+  },
+  "headline_gates": {
+    "base_w1_median_wall_speedup_min": 2.7,
+    "base_w2_median_wall_speedup_min": 2.5,
+    "small_w1_w2_median_wall_speedup_min": 2.5,
+    "gpu_normalized_steady_state_speedup_min": 2.0,
+    "display_p99_seconds_max": 1.9,
+    "committed_state_p99_seconds_max": 1.9,
+    "minimum_energy_reduction_percent": 35.0,
+    "proposer_occupancy_percent_min": 90.0,
+    "risk_ucb_percent_max": 0.5,
+    "quality_upper_wer_delta_pp_max": 2.0,
+    "catastrophic_outliers": 0,
+    "online_authority_events": 0,
+    "stale_state_violations": 0
+  },
+  "artifact_binding_required": [
+    "model_repository_and_revision",
+    "model_weight_digest",
+    "duration_seconds",
+    "concurrency_and_arrival_process",
+    "proposer_max_new_tokens",
+    "background_profiler_max_new_tokens",
+    "device_topology",
+    "terminal_contract",
+    "controller_source_sha256",
+    "adapter_source_sha256",
+    "policy_digest",
+    "contract_digest",
+    "random_seed",
+    "code_commit",
+    "raw_event_manifest_and_sha256"
+  ],
+  "fallback": {
+    "name": "projection replay cutset",
+    "activate_only_if": "EFSC quality fails after the formal gate",
+    "gates": {
+      "known_root_projection_mismatches": 0,
+      "held_out_events_per_scale_min": 10000,
+      "cutset_time_fraction_of_full_canonical_max": 0.25
+    }
+  }
+}
