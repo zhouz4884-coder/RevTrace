@@ -1,0 +1,288 @@
+{
+  "architectures": [
+    {
+      "action_coverage": [
+        "decay-suffix",
+        "fast-commit",
+        "provisional-hold",
+        "safe-reset"
+      ],
+      "action_sequence": [
+        "fast-commit",
+        "provisional-hold",
+        "provisional-hold",
+        "decay-suffix",
+        "safe-reset",
+        "fast-commit",
+        "fast-commit"
+      ],
+      "adapter": "qwen-rollback-prefix",
+      "all_actions_observed": true,
+      "events": [
+        {
+          "action": "fast-commit",
+          "ancestor_versions": [
+            1
+          ],
+          "candidate_became_ancestor": true,
+          "feedback_debt": 1,
+          "index": 0,
+          "margin": 0.2,
+          "mode": "coherent",
+          "oldest_ancestor_age": 0,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "certified-fast-entry"
+        },
+        {
+          "action": "provisional-hold",
+          "ancestor_versions": [
+            1
+          ],
+          "candidate_became_ancestor": false,
+          "feedback_debt": 1,
+          "index": 1,
+          "margin": 0.01,
+          "mode": "quarantine",
+          "oldest_ancestor_age": 1,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "enter-quarantine"
+        },
+        {
+          "action": "provisional-hold",
+          "ancestor_versions": [
+            1
+          ],
+          "candidate_became_ancestor": false,
+          "feedback_debt": 1,
+          "index": 2,
+          "margin": 0.2,
+          "mode": "quarantine",
+          "oldest_ancestor_age": 2,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "quarantine-hold"
+        },
+        {
+          "action": "decay-suffix",
+          "ancestor_versions": [
+            1
+          ],
+          "candidate_became_ancestor": false,
+          "feedback_debt": 1,
+          "index": 3,
+          "margin": 0.2,
+          "mode": "reanchor",
+          "oldest_ancestor_age": 3,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "hysteresis-reanchor"
+        },
+        {
+          "action": "safe-reset",
+          "ancestor_versions": [],
+          "candidate_became_ancestor": false,
+          "feedback_debt": 0,
+          "index": "4:prepare",
+          "margin": null,
+          "mode": "reanchor",
+          "oldest_ancestor_age": 0,
+          "pre_inference": true,
+          "prompt_load": 0,
+          "reason": "bounded-influence-horizon"
+        },
+        {
+          "action": "fast-commit",
+          "ancestor_versions": [
+            6
+          ],
+          "candidate_became_ancestor": true,
+          "feedback_debt": 1,
+          "index": 4,
+          "margin": 0.2,
+          "mode": "coherent",
+          "oldest_ancestor_age": 0,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "reanchor-safe-entry"
+        },
+        {
+          "action": "fast-commit",
+          "ancestor_versions": [
+            6,
+            7
+          ],
+          "candidate_became_ancestor": true,
+          "feedback_debt": 2,
+          "index": 5,
+          "margin": 0.2,
+          "mode": "coherent",
+          "oldest_ancestor_age": 1,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "certified-fast-entry"
+        }
+      ],
+      "maximum_ancestor_age": 3,
+      "maximum_feedback_debt": 2,
+      "pass": true,
+      "stale_candidate_rejected": true,
+      "violations": []
+    },
+    {
+      "action_coverage": [
+        "decay-suffix",
+        "fast-commit",
+        "provisional-hold",
+        "safe-reset"
+      ],
+      "action_sequence": [
+        "fast-commit",
+        "provisional-hold",
+        "provisional-hold",
+        "decay-suffix",
+        "safe-reset",
+        "fast-commit",
+        "fast-commit"
+      ],
+      "adapter": "whisper-previous-text",
+      "all_actions_observed": true,
+      "events": [
+        {
+          "action": "fast-commit",
+          "ancestor_versions": [
+            1
+          ],
+          "candidate_became_ancestor": true,
+          "feedback_debt": 1,
+          "index": 0,
+          "margin": 0.2,
+          "mode": "coherent",
+          "oldest_ancestor_age": 0,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "certified-fast-entry"
+        },
+        {
+          "action": "provisional-hold",
+          "ancestor_versions": [
+            1
+          ],
+          "candidate_became_ancestor": false,
+          "feedback_debt": 1,
+          "index": 1,
+          "margin": 0.01,
+          "mode": "quarantine",
+          "oldest_ancestor_age": 1,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "enter-quarantine"
+        },
+        {
+          "action": "provisional-hold",
+          "ancestor_versions": [
+            1
+          ],
+          "candidate_became_ancestor": false,
+          "feedback_debt": 1,
+          "index": 2,
+          "margin": 0.2,
+          "mode": "quarantine",
+          "oldest_ancestor_age": 2,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "quarantine-hold"
+        },
+        {
+          "action": "decay-suffix",
+          "ancestor_versions": [
+            1
+          ],
+          "candidate_became_ancestor": false,
+          "feedback_debt": 1,
+          "index": 3,
+          "margin": 0.2,
+          "mode": "reanchor",
+          "oldest_ancestor_age": 3,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "hysteresis-reanchor"
+        },
+        {
+          "action": "safe-reset",
+          "ancestor_versions": [],
+          "candidate_became_ancestor": false,
+          "feedback_debt": 0,
+          "index": "4:prepare",
+          "margin": null,
+          "mode": "reanchor",
+          "oldest_ancestor_age": 0,
+          "pre_inference": true,
+          "prompt_load": 0,
+          "reason": "bounded-influence-horizon"
+        },
+        {
+          "action": "fast-commit",
+          "ancestor_versions": [
+            6
+          ],
+          "candidate_became_ancestor": true,
+          "feedback_debt": 1,
+          "index": 4,
+          "margin": 0.2,
+          "mode": "coherent",
+          "oldest_ancestor_age": 0,
+          "pre_inference": false,
+          "prompt_load": 2,
+          "reason": "reanchor-safe-entry"
+        },
+        {
+          "action": "fast-commit",
+          "ancestor_versions": [
+            6,
+            7
+          ],
+          "candidate_became_ancestor": true,
+          "feedback_debt": 2,
+          "index": 5,
+          "margin": 0.2,
+          "mode": "coherent",
+          "oldest_ancestor_age": 1,
+          "pre_inference": false,
+          "prompt_load": 4,
+          "reason": "certified-fast-entry"
+        }
+      ],
+      "maximum_ancestor_age": 3,
+      "maximum_feedback_debt": 2,
+      "pass": true,
+      "stale_candidate_rejected": true,
+      "violations": []
+    }
+  ],
+  "config_path": "configs\\revtrace_r7_efsc_gate.json",
+  "config_sha256": "4155948f0157aac7c53393494b9e33db97800d4418f2f5622f47b24c68e83640",
+  "controller_class_source_sha256": "a031fd544e06a9519544c1beaa761b94a332a24f6e2e9871f053d4aafbae5a02",
+  "controller_source_path": "src\\revtrace\\feedback_coherence.py",
+  "controller_source_sha256": "1a136c17bdc53ea5f51b9db20287cee5f6d952105cfac88242414549e88a5b3f",
+  "decision": "PASS_R7_1_SEMANTICS",
+  "evidence_tier": "deterministic semantic state-machine test",
+  "experiment_id": "revtrace-r7.1-cross-architecture-semantic-gate",
+  "git_commit_at_run": "ce401cd4bdfe330302c3d61a3c9af2be83bcc620",
+  "git_worktree_dirty_at_run": false,
+  "not_serving_evidence": true,
+  "qwen_gate_is_mandatory_before_whisper_performance": true,
+  "semantic_contract": {
+    "decay_suffix_tokens": 32,
+    "enter_margin": 0.05,
+    "exit_margin": 0.1,
+    "maximum_feedback_debt": 3,
+    "maximum_influence_windows": 3,
+    "maximum_prompt_tokens": 224,
+    "maximum_quarantine_windows": 3,
+    "minimum_hold_windows": 1,
+    "safe_streak_required": 2
+  },
+  "shared_action_sequence": true
+}

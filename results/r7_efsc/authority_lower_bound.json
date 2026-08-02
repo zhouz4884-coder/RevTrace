@@ -1,0 +1,66 @@
+{
+  "authority_tax_seconds": {
+    "checkpoint_only_increment": 2.519666683860123,
+    "full_authority_increment": 6.580799761228263,
+    "nonadditive_interaction": 0.2239228170365095,
+    "risk_only_increment": 3.8372102603316307
+  },
+  "baseline_wall_seconds": 26.535958220250905,
+  "decision": "PASS_X0_HEADROOM_FOR_2_5X",
+  "evidence_tier": "paired real-serving attribution from frozen P1",
+  "experiment_id": "revtrace-r7-x0-authority-cost-attribution",
+  "interpretation": "The paired c8/180 s experiment contains enough measured physical headroom for a 2.5x authority-free design, but it does not prove the R7 c16/90 s performance gate. The 2.7x target leaves almost no overhead relative to the measured unprotected path.",
+  "measured_headroom": {
+    "feedback_off_energy_reduction": 0.7030336116280027,
+    "feedback_off_wall_speedup": 3.5827078834359947,
+    "incremental_budget_over_unprotected_for_2_5x": 0.8658453881740567,
+    "incremental_budget_over_unprotected_for_2_7x": 0.07959477424069661,
+    "unprotected_energy_reduction": 0.6255889417092735,
+    "unprotected_wall_speedup": 2.7220449356258345,
+    "wall_budget_for_2_5x": 10.614383288100361,
+    "wall_budget_for_2_7x": 9.828132674167001
+  },
+  "not_efsc_serving_result": true,
+  "paired_wall_seconds": {
+    "checkpoint-only": 12.268204583786428,
+    "feedback-off": 7.406676481477916,
+    "full-verify": 16.329337661154568,
+    "risk-only": 13.585748160257936,
+    "unprotected": 9.748537899926305
+  },
+  "scope": {
+    "arrival": "sync",
+    "concurrency": 8,
+    "duration_seconds": 180,
+    "precision": "float16",
+    "seed": 20274001,
+    "window_seconds": 10
+  },
+  "source_files": [
+    {
+      "path": "results/whisper_p0_p3/p1/unprotected.json",
+      "role": "unprotected",
+      "sha256": "7843cf60411e1e60976c2fa6e17ff33de367cd49f29ac54fc5ededb40f0fa0fa"
+    },
+    {
+      "path": "results/whisper_p0_p3/p1/risk-only.json",
+      "role": "risk-only",
+      "sha256": "8ea294804483e35d000b613b8a4d37e03991de8df191c6ca05613a039a1d4247"
+    },
+    {
+      "path": "results/whisper_p0_p3/p1/checkpoint-only.json",
+      "role": "checkpoint-only",
+      "sha256": "552be01f9ebe4f6eef5e95d4c2c171f75d58ccb28c22b19891ecc0a167e70f55"
+    },
+    {
+      "path": "results/whisper_p0_p3/p1/full-verify.json",
+      "role": "full-verify",
+      "sha256": "40d12a48b9525240dbffeac2e9dd7fe8311b59cbd50819adfe86f2a86c662808"
+    },
+    {
+      "path": "results/whisper_p0_p3/p1/feedback-off.json",
+      "role": "feedback-off",
+      "sha256": "67ee59fcfa80705ee1c6ff0c19a4291546e9bdb154509d7a236bf07f674c5aed"
+    }
+  ]
+}
