@@ -176,11 +176,11 @@ continues to carry the paper's performance headline.
 
 ## Core code
 
-- `src/revtrace/feedback.py`: architecture-independent EFSC state machine.
-- `src/revtrace/qwen_feedback.py`: Qwen joint text/acoustic rebase adapter.
-- `src/revtrace/whisper_feedback.py`: Whisper bounded-text projection adapter.
-- `scripts/remote/run_r7_qwen_live.py`: live Qwen semantic/performance runner.
-- `scripts/remote/run_r7_whisper_workload.py`: Whisper serving workload runner.
+- `src/revtrace/feedback_coherence.py`: shared EFSC state machine plus Qwen
+  rollback and Whisper history adapters.
+- `scripts/remote/run_r7_qwen_efsc.py`: live Qwen semantic/performance runner.
+- `scripts/remote/run_r7_whisper_base_preflight.sh`: frozen Whisper serving
+  preflight orchestration.
 - `scripts/remote/run_r7_whisper_quality.py`: paired quality and per-window trace runner.
 - `scripts/remote/run_r7_whisper_cutset.py`: four-way causal encoder/decoder cutset.
 - `scripts/analyze_r7_quality_lattice_oracle.py`: two-view mechanism upper bound.
