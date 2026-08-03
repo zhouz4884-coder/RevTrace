@@ -18,6 +18,7 @@ from revtrace.dgft import (
     digest_tokens,
     digest_bytes,
     fixed_segment_plan,
+    coverage_units,
 )
 
 
@@ -80,6 +81,18 @@ def test_cross_granularity_coverage_is_reference_free_and_order_sensitive():
     assert cross_granularity_coverage_deficit(
         "one two three", "three two one"
     ) > 0.0
+
+
+def test_cross_granularity_coverage_preserves_bilingual_source_order():
+    assert coverage_units("Alpha 配置 beta 测试") == [
+        "alpha", "配", "置", "beta", "测", "试"
+    ]
+    assert abs(cross_granularity_coverage_deficit(
+        "模型配置完成", "模型完成"
+    ) - 2 / 6) < 1e-12
+    assert classify_coverage_conflict(
+        "模型配置完成", "模型完成", threshold=0.25
+    ).fallback_required
 
 
 def test_asymmetric_omission_escalates_but_mutual_disagreement_does_not():

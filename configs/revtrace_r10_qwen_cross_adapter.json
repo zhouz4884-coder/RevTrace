@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "study": "R10 Qwen DGFT and RevOCC cross-adapter gate",
+  "purpose": "Test whether the common RevTrace transaction core admits a legal directional-granularity authority on Qwen without forcing one adapter to be universally optimal.",
+  "models": ["Qwen3-ASR-0.6B", "Qwen3-ASR-1.7B"],
+  "modes": ["dgft", "hybrid"],
+  "workload": {
+    "duration_seconds": 30,
+    "concurrency": 16,
+    "fine_window_seconds": 2,
+    "windows_per_segment": 3,
+    "languages": ["English", "Chinese"]
+  },
+  "policy": {
+    "forward_threshold": 0.20,
+    "reverse_ceiling": 0.20,
+    "risk_margin": 0.05,
+    "hybrid_terminal_fine_replay": true
+  },
+  "gates": {
+    "transaction_install_violations": 0,
+    "minimum_wall_speedup": 2.0,
+    "minimum_gpu_normalized_speedup": 1.0,
+    "maximum_median_unit_edit_rate": 0.05,
+    "maximum_p95_unit_edit_rate": 0.20,
+    "maximum_catastrophic_sessions_over_0_25": 0
+  },
+  "claim_boundary": "A negative cross-adapter result is an adapter boundary, not a failure of the common transaction core."
+}

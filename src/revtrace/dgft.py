@@ -18,6 +18,29 @@ import numpy as np
 
 
 _WORD = re.compile(r"[A-Za-z0-9']+")
+_CJK = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
+
+
+def coverage_units(text: str) -> list[str]:
+    """Return deterministic mixed-script units for directional coverage.
+
+    R9 originally evaluated English Whisper streams and therefore used word
+    tokens only.  The Qwen cross-adapter gate is bilingual.  Silently
+    discarding CJK text would make every Chinese comparison appear perfectly
+    covered, so contiguous Latin/digit words and individual CJK characters
+    are now emitted in source order.  Punctuation remains outside the
+    semantic-coverage witness.
+    """
+
+    units: list[tuple[int, str]] = []
+    units.extend(
+        (match.start(), match.group(0).lower())
+        for match in _WORD.finditer(text)
+    )
+    units.extend(
+        (match.start(), match.group(0)) for match in _CJK.finditer(text)
+    )
+    return [value for _, value in sorted(units, key=lambda item: item[0])]
 
 
 def digest_tokens(values: Sequence[int]) -> str:
@@ -41,8 +64,8 @@ def cross_granularity_coverage_deficit(
     revisions.  This is not a strict longest-common-subsequence algorithm.
     """
 
-    fine = [match.group(0).lower() for match in _WORD.finditer(fine_text)]
-    coarse = [match.group(0).lower() for match in _WORD.finditer(coarse_text)]
+    fine = coverage_units(fine_text)
+    coarse = coverage_units(coarse_text)
     if not fine:
         return 0.0
     matched = sum(
@@ -80,7 +103,7 @@ def boundary_adjusted_coverage_deficit(
         raise IndexError("segment index out of range")
 
     def tokens(value: str) -> list[str]:
-        return [match.group(0).lower() for match in _WORD.finditer(value)]
+        return coverage_units(value)
 
     def missing(fine: Sequence[str], coarse: Sequence[str]) -> int:
         matched = sum(
