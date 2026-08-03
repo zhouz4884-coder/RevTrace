@@ -443,6 +443,20 @@ remains valid.
 See the [R9.E closure report](docs/reports/r9e_online_submission_closure.md) and
 [machine-readable final report](results/r9_dgft/FINAL_REPORT_ONLINE.json).
 
+## R10 Qwen cross-adapter closure
+
+R10 verifies that the common RevTrace state-certifying transaction core can
+admit a DGFT-style coarse authority on Qwen3-ASR instead of creating a separate
+serving system.  Four 30-second, concurrency-16 production cells across 0.6B
+and 1.7B all pass: 0 transaction violations, 0 authority invariance mismatches,
+3.92--6.88x wall speedup, 1.96--3.44x GPU-normalized speedup, and 33.2--59.8%
+energy reduction.  Hybrid native replay consumes 5.00--8.75% of events.
+
+See the [R10 closure report](docs/reports/r10_qwen_cross_adapter.md) and the
+[machine-readable matrix](results/r10_qwen_cross_adapter/summary.json).  The
+FP32 batched authority is a versioned canonical execution path; it is not
+claimed to reproduce the original FP16 singleton trajectory bit-for-bit.
+
 ## Repository layout
 
 ```text

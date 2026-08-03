@@ -17,3 +17,9 @@ results/<phase>/<experiment_id>/
 Large request-level traces, model outputs, GPU profiles, and logs stay on the
 experiment disk. Paper-facing aggregates are copied only after validation and
 must include hashes pointing back to the raw run.
+
+`results/r10_qwen_cross_adapter` is the compact exception containing the four
+complete per-event JSON records for the final Qwen cross-adapter gate.  Its
+`summary.json` records SHA-256 hashes, code commit, per-cell gates, and the
+fail-closed matrix decision.  Failed/smoke realizations are retained under
+`diagnostics` and are not mixed into the production aggregate.

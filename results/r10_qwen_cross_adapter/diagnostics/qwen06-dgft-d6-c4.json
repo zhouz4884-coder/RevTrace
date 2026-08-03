@@ -1,0 +1,190 @@
+{
+  "claim_boundary": {
+    "authority": "coarse FP16 singleton segment or native fine singleton replay",
+    "coverage_signal": "reference-free scheduler, not a correctness certificate",
+    "reference": "fresh official 2-second FP16 singleton trajectory",
+    "scope": "bounded cross-adapter compatibility gate, not production prevalence"
+  },
+  "contract": {
+    "contract_epoch": 10,
+    "fine_window_seconds": 2,
+    "forward_threshold": 0.2,
+    "mode": "dgft",
+    "model": "Qwen3-ASR-0.6B",
+    "policy_version": "r10-qwen-cross-v1",
+    "reverse_ceiling": 0.2,
+    "risk_margin": 0.05,
+    "windows_per_segment": 3
+  },
+  "contract_digest": "fe07ec1530ca213de4e1f43650fc2bf1addab7932e37ec2169512977699660cb",
+  "decision": "FAIL_QWEN_CROSS_ADAPTER_GATE",
+  "environment": {
+    "authority_gpu": "1",
+    "authority_pid": 1216022,
+    "code_commit": "6d534a33e8970718ba771a8f1f5495c44b2160a9",
+    "proposer_gpu": "0",
+    "python": "3.12.13",
+    "source_sha256": {
+      "cross_adapter": "e44836c34842f41636f1df375b877cec1733c8a91d854a12bdcff555e3e9e4ee",
+      "dgft": "ef7a693dd0f859b621f6be3a3ae4c67d10fda529728def0dcf35336d6dd51d90",
+      "runner": "38639c5450231d7fe2f04b331e9b8f733086040fc7a588e68a2d7abb8aab767d"
+    }
+  },
+  "events": [
+    {
+      "audio_end_seconds": 6,
+      "audio_start_seconds": 0,
+      "coarse_text": "Hmm. Oh, yeah, yeah. He wasn't even that big when I started listening to him.",
+      "committed_checkpoint_id": 1,
+      "fine_minimum_margin": 0.125,
+      "fine_text": "Hmm. Oh, yeah, yeah. He wasn't even that big when I started listening to him.",
+      "forward_deficit": 0.0,
+      "reasons": [
+        "terminal-finalization"
+      ],
+      "replay_seconds": 0.0,
+      "reverse_deficit": 0.0,
+      "segment_index": 0,
+      "selected_authority": "coarse-segment",
+      "selected_text": "Hmm. Oh, yeah, yeah. He wasn't even that big when I started listening to him.",
+      "session_id": "s000",
+      "transaction_certificate_digest": "acfef0853e505caebcbaf9670a8bfd9aa9552f34f81451fae427e67eeb1a9f51"
+    },
+    {
+      "audio_end_seconds": 6,
+      "audio_start_seconds": 0,
+      "coarse_text": "甚至出现交易几乎停滞的情况，甚至出现。",
+      "committed_checkpoint_id": 1,
+      "fine_minimum_margin": 1.2812499552965164,
+      "fine_text": "甚至出现交易几乎停滞的情况，甚至出现。",
+      "forward_deficit": 0.0,
+      "reasons": [
+        "terminal-finalization"
+      ],
+      "replay_seconds": 0.0,
+      "reverse_deficit": 0.0,
+      "segment_index": 0,
+      "selected_authority": "coarse-segment",
+      "selected_text": "甚至出现交易几乎停滞的情况，甚至出现。",
+      "session_id": "s001",
+      "transaction_certificate_digest": "1def2454a90ffe6940bec3aba07eede9c8cd99e47c5bf97ad6db13ba11553a5b"
+    },
+    {
+      "audio_end_seconds": 6,
+      "audio_start_seconds": 0,
+      "coarse_text": "People. Mhm. Oh yeah, yeah. He wasn't even that big when I started listening.",
+      "committed_checkpoint_id": 1,
+      "fine_minimum_margin": 0.7187499701976776,
+      "fine_text": "People. Mhm. Oh yeah, yeah. He wasn't even that big when I started listening.",
+      "forward_deficit": 0.0,
+      "reasons": [
+        "terminal-finalization"
+      ],
+      "replay_seconds": 0.0,
+      "reverse_deficit": 0.0,
+      "segment_index": 0,
+      "selected_authority": "coarse-segment",
+      "selected_text": "People. Mhm. Oh yeah, yeah. He wasn't even that big when I started listening.",
+      "session_id": "s002",
+      "transaction_certificate_digest": "37edd22c5311c3ee78388211e5525174d65e030d8802ef3c774eb68c8ebf8ef9"
+    },
+    {
+      "audio_end_seconds": 6,
+      "audio_start_seconds": 0,
+      "coarse_text": "滞的情况，甚至出现交易几乎停滞的情况。",
+      "committed_checkpoint_id": 1,
+      "fine_minimum_margin": 0.046875,
+      "fine_text": "质的情况，甚至出现交易几乎停滞的情况。",
+      "forward_deficit": 0.05882352941176472,
+      "reasons": [
+        "fine-numerical-risk",
+        "terminal-finalization"
+      ],
+      "replay_seconds": 0.0,
+      "reverse_deficit": 0.05882352941176472,
+      "segment_index": 0,
+      "selected_authority": "coarse-segment",
+      "selected_text": "滞的情况，甚至出现交易几乎停滞的情况。",
+      "session_id": "s003",
+      "transaction_certificate_digest": "d352487c1f335c0f277ddb443d01d3f427518502d31a1c2537eb3746d35d2144"
+    }
+  ],
+  "final_comparison": [
+    {
+      "exact": true,
+      "language": "English",
+      "reference_text": "Hmm. Oh, yeah, yeah. He wasn't even that big when I started listening to him.",
+      "selected_text": "Hmm. Oh, yeah, yeah. He wasn't even that big when I started listening to him.",
+      "session_id": "s000",
+      "unit_edit_rate": 0.0
+    },
+    {
+      "exact": true,
+      "language": "Chinese",
+      "reference_text": "甚至出现交易几乎停滞的情况，甚至出现。",
+      "selected_text": "甚至出现交易几乎停滞的情况，甚至出现。",
+      "session_id": "s001",
+      "unit_edit_rate": 0.0
+    },
+    {
+      "exact": true,
+      "language": "English",
+      "reference_text": "People. Mhm. Oh yeah, yeah. He wasn't even that big when I started listening.",
+      "selected_text": "People. Mhm. Oh yeah, yeah. He wasn't even that big when I started listening.",
+      "session_id": "s002",
+      "unit_edit_rate": 0.0
+    },
+    {
+      "exact": false,
+      "language": "Chinese",
+      "reference_text": "质的情况，甚至出现交易几乎停滞的情况。",
+      "selected_text": "滞的情况，甚至出现交易几乎停滞的情况。",
+      "session_id": "s003",
+      "unit_edit_rate": 0.058823529411764705
+    }
+  ],
+  "mode": "dgft",
+  "model": "Qwen3-ASR-0.6B",
+  "schema_version": 1,
+  "study": "R10 Qwen DGFT/RevOCC cross-adapter gate",
+  "summary": {
+    "authority_to_proposer_ratio": 1.312180184860851,
+    "catastrophic_sessions_over_0_25": 0,
+    "coarse_authority_fraction": 1.0,
+    "coarse_authority_service_seconds": 1.8873355090618134,
+    "deployed_wall_speedup": 1.7692364816040214,
+    "directional_omission_events": 0,
+    "display_latency_seconds_p99": 0.5210354812443256,
+    "energy_reduction_fraction": 0.031372421911192494,
+    "events": 4,
+    "final_exact_sessions": 3,
+    "final_sessions": 4,
+    "final_unit_edit_rate_max": 0.058823529411764705,
+    "final_unit_edit_rate_median": 0.0,
+    "final_unit_edit_rate_p95": 0.049999999999999975,
+    "fine_replay_fraction": 0.0,
+    "fine_replay_service_seconds": 0.0,
+    "gpu_normalized_speedup": 0.8846182408020107,
+    "numerical_risk_events": 1,
+    "proposer_service_seconds": 1.4383203852921724,
+    "reference_energy": {
+      "completed_audio_seconds": 24.0,
+      "joules": 422.01078048141204,
+      "joules_per_audio_second": 17.583782520058836,
+      "sample_count": 20.0
+    },
+    "reference_request_seconds_p99": 0.4890263077709824,
+    "reference_singleton_seconds": 3.39320623036474,
+    "segment_commit_latency_seconds_p99": 1.9178225928917527,
+    "segments": 1,
+    "service_energy": {
+      "completed_audio_seconds": 24.0,
+      "joules": 408.7712802250776,
+      "joules_per_audio_second": 17.0321366760449,
+      "sample_count": 12.0
+    },
+    "service_wall_seconds": 1.9178929813206196,
+    "terminal_finalization_events": 4,
+    "transaction_install_violations": 0
+  }
+}
