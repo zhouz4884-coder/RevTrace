@@ -258,10 +258,12 @@ class DistinctPromptWhisper:
             raw_logits = output.logits[:, -1, :].float()
             if step == 0 and self.no_speech >= 0:
                 probabilities = torch.softmax(raw_logits, dim=-1)
-                for row in range(len(audio)):
-                    no_speech_probabilities[row] = float(
-                        probabilities[row, self.no_speech].item()
-                    )
+                no_speech_probabilities = [
+                    float(value)
+                    for value in probabilities[
+                        :, self.no_speech
+                    ].detach().cpu().tolist()
+                ]
             logits = self._filter_logits(
                 raw_logits,
                 first_step=step == 0,
@@ -271,22 +273,38 @@ class DistinctPromptWhisper:
             top = torch.topk(logits, k=2, dim=-1)
             next_tokens = top.indices[:, 0]
             step_margins = top.values[:, 0] - top.values[:, 1]
-            for row in range(len(audio)):
-                if bool(finished[row]):
+            selected_log_probabilities = log_probabilities.gather(
+                1, next_tokens.reshape(-1, 1)
+            ).reshape(-1)
+            # One host transfer per vector avoids O(batch) CUDA synchronizes
+            # from scalar ``item()`` calls.  Token selection and all model
+            # arithmetic remain unchanged.
+            finished_host = finished.detach().cpu().tolist()
+            next_tokens_host = next_tokens.detach().cpu().tolist()
+            margins_host = step_margins.detach().cpu().tolist()
+            selected_log_probs_host = (
+                selected_log_probabilities.detach().cpu().tolist()
+            )
+            for row, (was_finished, token, margin, token_log_prob) in enumerate(
+                zip(
+                    finished_host,
+                    next_tokens_host,
+                    margins_host,
+                    selected_log_probs_host,
+                )
+            ):
+                if bool(was_finished):
                     continue
-                token = int(next_tokens[row].item())
-                margins[row].append(float(step_margins[row].item()))
-                token_log_probabilities[row].append(float(
-                    log_probabilities[row, token].item()
-                ))
-                if token == self.eos:
-                    finished[row] = True
-                else:
+                token = int(token)
+                margins[row].append(float(margin))
+                token_log_probabilities[row].append(float(token_log_prob))
+                if token != self.eos:
                     # HF Whisper's short-form wrapper removes the terminal
                     # EOS from returned transcription ids.  Keep the EOS
                     # decision in the margin audit, but normalize the exposed
                     # candidate sequence to that upstream contract.
                     generated[row].append(token)
+            finished = finished | next_tokens.eq(self.eos)
             if bool(finished.all()):
                 break
             decoder_mask = torch.cat(

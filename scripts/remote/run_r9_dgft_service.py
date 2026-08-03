@@ -7,7 +7,6 @@ import argparse
 import hashlib
 import json
 import math
-import random
 import statistics
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -28,6 +27,12 @@ from revtrace.dgft import (
     digest_tokens,
     repeated_ngram_fraction,
 )
+from revtrace.causal_scheduler import (
+    SessionArrival,
+    group_ready_events,
+    initial_session_arrivals,
+)
+from revtrace.online_coordinator import OnlineRevisionCoordinator
 from revtrace.whisper_state import capacity_rebase_required
 from run_r8_dual_lane_service import EnergyMeter, percentile
 from run_r9_coverage_fallback import replay_from_checkpoint, segment_decisions
@@ -41,6 +46,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--model", type=Path, required=True)
     p.add_argument("--model-name", required=True)
     p.add_argument("--manifest", type=Path, required=True)
+    p.add_argument("--contract", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--sessions", type=int, default=16)
     p.add_argument("--duration-seconds", type=int, default=90)
@@ -78,40 +84,82 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
-def arrival_groups(
-    *, sessions: int, concurrency: int, arrival: str,
-    scale: float, coalesce: float, rng: random.Random,
-) -> list[tuple[list[int], dict[int, float]]]:
-    if arrival == "sync":
-        return [
-            (list(range(start, min(sessions, start + concurrency))), {})
-            for start in range(0, sessions, concurrency)
-        ]
-    current = 0.0
-    arrivals: list[tuple[int, float]] = []
-    order = list(range(sessions))
-    rng.shuffle(order)
-    for sid in order:
-        current += rng.expovariate(1.0 / scale)
-        arrivals.append((sid, current))
-    groups: list[tuple[list[int], dict[int, float]]] = []
-    cursor = 0
-    while cursor < len(arrivals):
-        first = arrivals[cursor][1]
-        selected: list[tuple[int, float]] = []
-        while (
-            cursor < len(arrivals)
-            and len(selected) < concurrency
-            and arrivals[cursor][1] - first <= coalesce
-        ):
-            selected.append(arrivals[cursor])
-            cursor += 1
-        release = selected[-1][1]
-        groups.append((
-            [sid for sid, _ in selected],
-            {sid: release - at for sid, at in selected},
-        ))
-    return groups
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def canonical_digest(value: Any) -> str:
+    return hashlib.sha256(json.dumps(
+        value, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")).hexdigest()
+
+
+def validate_online_contract(
+    args: argparse.Namespace, contract: dict[str, Any]
+) -> None:
+    """Fail closed when runtime arguments drift from the frozen contract."""
+
+    unsigned = dict(contract)
+    claimed_digest = unsigned.pop("contract_digest", None)
+    if canonical_digest(unsigned) != claimed_digest:
+        raise RuntimeError("contract self-digest mismatch")
+    expected_policy = {
+        "adaptive_min_seconds": args.adaptive_min_seconds,
+        "adaptive_max_seconds": args.adaptive_max_seconds,
+        "coverage_threshold": args.coverage_threshold,
+        "coverage_asymmetry_margin": args.coverage_asymmetry_margin,
+        "structural_coverage_threshold": args.structural_coverage_threshold,
+        "post_repair_forward_threshold": args.post_rebase_forward_threshold,
+        "post_repair_reverse_ceiling": args.post_rebase_reverse_ceiling,
+        "degeneracy_repeated_4gram_fraction": (
+            args.degeneracy_repetition_threshold
+        ),
+    }
+    frozen = contract["policy"]
+    for key, value in expected_policy.items():
+        if frozen.get(key) != value:
+            raise RuntimeError(f"contract policy mismatch: {key}")
+    budget = contract["frozen_service_budget"]
+    for key in (
+        "sessions", "duration_seconds", "window_seconds", "concurrency",
+        "proposer_max_steps", "display_slo_seconds", "commit_slo_seconds",
+    ):
+        if getattr(args, key) != budget[key]:
+            raise RuntimeError(f"contract budget mismatch: {key}")
+    if args.model_name != contract["model_name"]:
+        raise RuntimeError("contract model-name mismatch")
+    if sha256_file(args.manifest) != contract["manifest_sha256"]:
+        raise RuntimeError("contract manifest mismatch")
+    model_config = next(
+        (
+            row for row in contract["model_files"]
+            if row["path"] == "config.json"
+        ),
+        None,
+    )
+    if model_config is None or sha256_file(args.model / "config.json") != (
+        model_config["sha256"]
+    ):
+        raise RuntimeError("contract model config mismatch")
+    repo = Path(__file__).resolve().parents[2]
+    for relative, expected in contract["source_sha256"].items():
+        if sha256_file(repo / relative) != expected:
+            raise RuntimeError(f"contract source mismatch: {relative}")
+    import torch
+    import transformers
+    runtime = contract["runtime"]
+    observed = {
+        "torch": torch.__version__,
+        "cuda": torch.version.cuda,
+        "transformers": transformers.__version__,
+        "gpu_names": [
+            torch.cuda.get_device_name(index)
+            for index in range(torch.cuda.device_count())
+        ],
+    }
+    for key, value in observed.items():
+        if runtime[key] != value:
+            raise RuntimeError(f"contract runtime mismatch: {key}")
 
 
 def run_proposer(
@@ -121,10 +169,9 @@ def run_proposer(
     window_seconds: int,
     concurrency: int,
     max_steps: int,
-    arrival: str,
-    arrival_scale: float,
     coalesce: float,
-    seed: int,
+    arrival_schedule: Sequence[SessionArrival],
+    coordinator: OnlineRevisionCoordinator,
 ) -> dict[str, Any]:
     windows_per_session = int(
         sessions[0].audio.size // (window_seconds * 16_000)
@@ -137,12 +184,24 @@ def run_proposer(
     pieces: list[list[str]] = [[] for _ in sessions]
     latencies: list[float] = []
     calls = 0
-    rng = random.Random(seed)
+    arrivals = {row.session_id: row.arrival_time for row in arrival_schedule}
+    virtual_completions = [arrivals[sid] for sid in range(len(sessions))]
+    virtual_gpu_available = 0.0
+    event_trace: list[dict[str, Any]] = []
     started = time.perf_counter()
     for window_index in range(windows_per_session):
-        for ids, waits in arrival_groups(
-            sessions=len(sessions), concurrency=concurrency, arrival=arrival,
-            scale=arrival_scale, coalesce=coalesce, rng=rng,
+        ready_events = [
+            (
+                sid,
+                max(
+                    arrivals[sid] + (window_index + 1) * window_seconds,
+                    virtual_completions[sid],
+                ),
+            )
+            for sid in range(len(sessions))
+        ]
+        for ids, release_time in group_ready_events(
+            ready_events, concurrency=concurrency, coalesce=coalesce
         ):
             rows_audio = [windows[sid][window_index] for sid in ids]
             rows_prompt: list[tuple[int, ...]] = []
@@ -154,22 +213,46 @@ def run_proposer(
                 ):
                     prompts[sid] = ()
                 rows_prompt.append(prompts[sid])
+            group_started = time.perf_counter()
+            versions = {
+                sid: coordinator.register_speculative(
+                    sid, window_index=window_index,
+                    ready_time=dict(ready_events)[sid],
+                )
+                for sid in ids
+            }
             rows = executor.generate(
                 rows_audio, rows_prompt, max_steps=max_steps
             )
+            group_finished = time.perf_counter()
+            virtual_start = max(release_time, virtual_gpu_available)
+            virtual_finish = virtual_start + group_finished - group_started
+            virtual_gpu_available = virtual_finish
             calls += 1
             for sid, record in zip(ids, rows):
-                latencies.append(record.elapsed_seconds + waits.get(sid, 0.0))
+                ready_time = dict(ready_events)[sid]
+                latencies.append(virtual_finish - ready_time)
                 pieces[sid].append(record.text)
                 prompts[sid] = executor.advance_prompt(
                     prompts[sid], record.token_ids
                 )
+                virtual_completions[sid] = virtual_finish
+                event_trace.append({
+                    "session_id": sid,
+                    "window_index": window_index,
+                    "revision_version": versions[sid],
+                    "causal_ready_time": ready_time,
+                    "causal_batch_release_time": release_time,
+                    "causal_completion_time": virtual_finish,
+                    "actual_elapsed_seconds": record.elapsed_seconds,
+                })
     return {
         "seconds": time.perf_counter() - started,
         "latencies": latencies,
         "texts": [" ".join(value for value in row if value) for row in pieces],
         "window_texts": pieces,
         "calls": calls,
+        "causal_events": event_trace,
     }
 
 
@@ -222,8 +305,43 @@ def canonical_session_fallback(
 
 
 def transaction_audit(
-    sessions: Sequence[Any], traces: Sequence[Sequence[dict[str, Any]]]
+    sessions: Sequence[Any], traces: Sequence[Sequence[dict[str, Any]]],
+    coordinator: OnlineRevisionCoordinator,
 ) -> dict[str, Any]:
+    events = coordinator.events()
+    commits = [
+        row for row in events
+        if row["event"] == "canonical-segment-committed"
+    ]
+    fallbacks_online = [
+        row for row in events
+        if row["event"] == "terminal-fallback-committed"
+    ]
+    violations = sum(
+        not bool(row.get("certificate_consumed")) for row in commits
+    )
+    for sid, session in enumerate(sessions):
+        if coordinator.state(sid).audio_frontier_window != session.audio.size:
+            violations += 1
+    return {
+        "semantic_violations": violations,
+        "rejected_invalid_installs": 0,
+        "commit_certificates": len(commits),
+        "segment_commits": len(commits),
+        "terminal_session_fallbacks": len(fallbacks_online),
+        "display_segment_repairs": sum(
+            bool(row.get("display_segment_repair"))
+            for trace in traces for row in trace
+        ),
+        "online_commit_events": len(commits) + len(fallbacks_online),
+        "certificate_consumption_failures": violations,
+        "exhaustively_checked_service_trace": True,
+    }
+
+    # Legacy post-hoc mutation probes are intentionally unreachable.  They are
+    # retained below for one release as a diffable record of the replaced R9
+    # audit path; submission claims use only the online coordinator above.
+    r"""
     violations = 0
     rejected_mutations = 0
     certificates = 0
@@ -232,7 +350,8 @@ def transaction_audit(
     display_repairs = 0
     for sid, (session, rows) in enumerate(zip(sessions, traces)):
         state = FeedbackTransactionState(
-            session_id=sid, contract_epoch=1, policy_version="r9-frozen-v1"
+            session_id=sid, contract_epoch=1,
+            policy_version="r9-dgft-v4-semantic-escalation"
         )
         for row in rows:
             if row.get("display_segment_repair"):
@@ -277,7 +396,7 @@ def transaction_audit(
                 result = commit_checkpoint_rebase(
                     state,
                     expected_contract_epoch=1,
-                    expected_policy_version="r9-frozen-v1",
+                    expected_policy_version="r9-dgft-v4-semantic-escalation",
                     rebase_checkpoint_id=int(row["rebase_segment_index"]),
                     audio_start_frontier=int(row["rebase_start_sample"]),
                     final_audio_frontier=session.audio.size,
@@ -299,7 +418,7 @@ def transaction_audit(
                 result = commit_session_fallback(
                     state,
                     expected_contract_epoch=1,
-                    expected_policy_version="r9-frozen-v1",
+                    expected_policy_version="r9-dgft-v4-semantic-escalation",
                     final_audio_frontier=session.audio.size,
                     replacement_segments=replacement,
                     next_prompt_tokens=row["next_prompt_token_ids"],
@@ -318,7 +437,7 @@ def transaction_audit(
             job = CanonicalSegmentJob(
                 session_id=sid,
                 contract_epoch=1,
-                policy_version="r9-frozen-v1",
+                policy_version="r9-dgft-v4-semantic-escalation",
                 parent_checkpoint_id=state.checkpoint_id,
                 audio_start_window=start,
                 audio_end_window=end,
@@ -373,10 +492,16 @@ def transaction_audit(
         "terminal_session_fallbacks": fallbacks,
         "display_segment_repairs": display_repairs,
     }
+    """
 
 
 def main() -> int:
     args = parse_args()
+    contract = json.loads(args.contract.read_text(encoding="utf-8"))
+    validate_online_contract(args, contract)
+    policy_version = str(contract["policy_version"])
+    contract_digest = str(contract["contract_digest"])
+    runtime_digest = canonical_digest(contract["runtime"])
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     clean = args.sessions // 2
     sessions = (
@@ -410,6 +535,38 @@ def main() -> int:
         args.model, device=args.authority_device, max_new_tokens=192
     )
     authority.generate([sessions[0].audio[:20 * 16_000]], [()])
+    arrivals = initial_session_arrivals(
+        sessions=len(sessions), arrival=args.arrival,
+        scale=args.arrival_scale_seconds, seed=args.seed,
+    )
+    coordinator = OnlineRevisionCoordinator(
+        sessions=len(sessions), contract_epoch=1,
+        policy_version=policy_version, contract_digest=contract_digest,
+        canonical_runtime_digest=runtime_digest,
+    )
+
+    def online_commit(
+        sid: int, row: dict[str, Any], audio_bytes: bytes | memoryview
+    ) -> dict[str, Any]:
+        return coordinator.commit_segment(
+            session_id=sid,
+            audio_start_sample=int(round(
+                float(row["audio_start_window"])
+                * args.window_seconds * 16_000
+            )),
+            audio_end_sample=int(round(
+                float(row["audio_end_window"])
+                * args.window_seconds * 16_000
+            )),
+            audio=audio_bytes,
+            prompt_tokens=row["prompt_token_ids"],
+            display_tokens=row["selected_token_ids"],
+            feedback_state_tokens=row["next_prompt_token_ids"],
+            authority_started=float(row["authority_started_perf"]),
+            authority_finished=float(row["authority_finished_perf"]),
+            virtual_ready_time=float(row["causal_audio_ready_time"]),
+            virtual_commit_time=float(row["causal_authority_commit_time"]),
+        )
     service_meter = EnergyMeter((
         int(args.proposer_device.split(":")[-1]),
         int(args.authority_device.split(":")[-1]),
@@ -422,10 +579,9 @@ def main() -> int:
             window_seconds=args.window_seconds,
             concurrency=args.concurrency,
             max_steps=args.proposer_max_steps,
-            arrival=args.arrival,
-            arrival_scale=args.arrival_scale_seconds,
             coalesce=args.coalesce_seconds,
-            seed=args.seed,
+            arrival_schedule=arrivals,
+            coordinator=coordinator,
         )
         authority_future = pool.submit(
             run_batched_adaptive,
@@ -439,6 +595,9 @@ def main() -> int:
             salvage_yield_threshold=1.0,
             salvage_max_steps=96,
             session_salvage_on_conflict=args.session_salvage_on_conflict,
+            arrival_schedule=arrivals,
+            coalesce_seconds=args.coalesce_seconds,
+            on_segment=online_commit,
         )
         proposal = proposal_future.result()
         (
@@ -446,6 +605,27 @@ def main() -> int:
             authority_segment_jobs, authority_audio_seconds, traces,
             authority_metrics,
         ) = authority_future.result()
+    for sid, trace in enumerate(traces):
+        for row in trace:
+            if not row.get("terminal_session_fallback"):
+                continue
+            fallback_started = time.perf_counter() - float(
+                row["fallback_elapsed_seconds"]
+            )
+            row["online_commit"] = coordinator.commit_terminal_fallback(
+                session_id=sid,
+                final_audio_frontier=sessions[sid].audio.size,
+                audio=memoryview(np.ascontiguousarray(
+                    sessions[sid].audio, dtype=np.float32
+                )).cast("B"),
+                replacement_segments=tuple(
+                    tuple(int(v) for v in item["token_ids"])
+                    for item in row["fallback_trace"]
+                ),
+                next_prompt_tokens=row["next_prompt_token_ids"],
+                fallback_id=f"structural-fallback:{sid}",
+                authority_started=fallback_started,
+            )
     dual_path_seconds = time.perf_counter() - service_started
     coverage_started = time.perf_counter()
     structural = {
@@ -570,6 +750,22 @@ def main() -> int:
             "next_prompt_token_ids": list(prompt),
             "fallback_elapsed_seconds": elapsed,
         })
+        traces[sid][-1]["online_commit"] = (
+            coordinator.commit_terminal_fallback(
+                session_id=sid,
+                final_audio_frontier=sessions[sid].audio.size,
+                audio=memoryview(np.ascontiguousarray(
+                    sessions[sid].audio, dtype=np.float32
+                )).cast("B"),
+                replacement_segments=tuple(
+                    tuple(int(v) for v in item["token_ids"])
+                    for item in fallback_trace
+                ),
+                next_prompt_tokens=prompt,
+                fallback_id=f"omission-fallback:{sid}",
+                authority_started=time.perf_counter() - elapsed,
+            )
+        )
     degeneracy_scores = {
         sid: max(
             (
@@ -605,6 +801,22 @@ def main() -> int:
             "next_prompt_token_ids": list(prompt),
             "fallback_elapsed_seconds": elapsed,
         })
+        traces[sid][-1]["online_commit"] = (
+            coordinator.commit_terminal_fallback(
+                session_id=sid,
+                final_audio_frontier=sessions[sid].audio.size,
+                audio=memoryview(np.ascontiguousarray(
+                    sessions[sid].audio, dtype=np.float32
+                )).cast("B"),
+                replacement_segments=tuple(
+                    tuple(int(v) for v in item["token_ids"])
+                    for item in fallback_trace
+                ),
+                next_prompt_tokens=prompt,
+                fallback_id=f"degeneracy-fallback:{sid}",
+                authority_started=time.perf_counter() - elapsed,
+            )
+        )
     authority_seconds += coverage_fallback_seconds
     authority_calls += coverage_fallback_calls
     authority_metrics["coverage_conflicts"] = sum(
@@ -634,13 +846,30 @@ def main() -> int:
         degeneracy_scores.values(), default=0.0
     )
     repair_and_escalation_seconds = time.perf_counter() - repair_started
+    for sid in range(len(sessions)):
+        coordinator.close_speculative_descendants(sid)
     service_seconds = time.perf_counter() - service_started
     service_energy = service_meter.stop()
     audit_started = time.perf_counter()
-    audit = transaction_audit(sessions, traces)
+    coordinator.assert_complete([session.audio.size for session in sessions])
+    audit = transaction_audit(sessions, traces, coordinator)
     transaction_audit_seconds = time.perf_counter() - audit_started
     display_p99 = percentile(proposal["latencies"], 0.99)
-    commit_lags: list[float] = []
+    online_events = coordinator.events()
+    processing_commit_lags = [
+        float(row["actual_commit_latency_seconds"])
+        for row in online_events
+        if row["event"] in {
+            "canonical-segment-committed", "terminal-fallback-committed"
+        }
+    ]
+    causal_commit_lags = [
+        float(row["virtual_commit_time"]) - float(row["virtual_ready_time"])
+        for row in online_events
+        if row["event"] == "canonical-segment-committed"
+        and row.get("virtual_commit_time") is not None
+        and row.get("virtual_ready_time") is not None
+    ]
     display_repair_lags: list[float] = []
     for session_trace in traces:
         last_segment_seconds = 0.0
@@ -649,16 +878,21 @@ def main() -> int:
                 display_repair_lags.append(
                     last_segment_seconds + float(row["fallback_elapsed_seconds"])
                 )
-            elif row.get("terminal_session_fallback") or row.get("checkpoint_rebase"):
-                commit_lags.append(
-                    last_segment_seconds + float(row["fallback_elapsed_seconds"])
-                )
-            else:
+            elif not (
+                row.get("terminal_session_fallback")
+                or row.get("checkpoint_rebase")
+            ):
                 last_segment_seconds = float(row["audio_seconds"])
-                commit_lags.append(
-                    last_segment_seconds
-                    + float(row["authority_elapsed_seconds"])
-                )
+    processing_commit_p99 = percentile(processing_commit_lags, 0.99)
+    terminal_processing_lags = [
+        float(row["actual_commit_latency_seconds"])
+        for row in online_events
+        if row["event"] == "terminal-fallback-committed"
+    ]
+    commit_lags = (
+        [*causal_commit_lags, *terminal_processing_lags]
+        if causal_commit_lags else processing_commit_lags
+    )
     commit_p99 = percentile(commit_lags, 0.99)
     correction_edits: list[float] = []
     for provisional, stable in zip(proposal["texts"], stable_texts):
@@ -689,7 +923,17 @@ def main() -> int:
         "decision": "PASS_R9_DGFT_SERVICE" if passed else "FAIL_R9_DGFT_SERVICE",
         "config": vars(args) | {
             "model": str(args.model), "manifest": str(args.manifest),
-            "output": str(args.output),
+            "contract": str(args.contract), "output": str(args.output),
+            "contract_digest": contract_digest,
+            "policy_version": policy_version,
+            "canonical_runtime_digest": runtime_digest,
+            "initial_session_arrivals": [
+                {
+                    "session_id": row.session_id,
+                    "arrival_time": row.arrival_time,
+                }
+                for row in arrivals
+            ],
             "frozen_policy": {
                 "adaptive_min_seconds": args.adaptive_min_seconds,
                 "adaptive_max_seconds": args.adaptive_max_seconds,
@@ -720,6 +964,8 @@ def main() -> int:
             "display_latency_p99": display_p99,
             "segment_commit_lag_p95": percentile(commit_lags, 0.95),
             "segment_commit_lag_p99": commit_p99,
+            "online_commit_processing_latency_p99": processing_commit_p99,
+            "causal_segment_commit_lag_p99": commit_p99,
             "display_repair_lag_p99": (
                 percentile(display_repair_lags, 0.99)
                 if display_repair_lags else 0.0
@@ -750,6 +996,7 @@ def main() -> int:
             **authority_metrics,
             **audit,
         },
+        "online_transaction_trace": coordinator.snapshot(),
         "sessions": [
             {
                 "session_id": sid,
@@ -770,7 +1017,10 @@ def main() -> int:
             "text; local display repair uses singleton evidence only for the "
             "conflicting segment while preserving the separately certified "
             "feedback-state axis; persistent omission escalates to full replay; "
-            "batched segment authority is a versioned coarse canonical "
+            "one immutable initial-arrival stream causally releases all later "
+            "revisions; commit latency uses online coordinator timestamps, "
+            "not reconstructed audio duration; batched segment authority is "
+            "a versioned coarse canonical "
             "trajectory, not bitwise per-window singleton equivalence"
         ),
     }

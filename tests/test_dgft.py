@@ -1,8 +1,11 @@
+from dataclasses import replace
+
 from revtrace.dgft import (
     boundary_adjusted_coverage_deficit,
     adaptive_audio_plan,
     balanced_replay_plan,
     build_dual_axis_certificate,
+    build_terminal_fallback_certificate,
     CanonicalSegmentJob,
     FeedbackTransactionState,
     commit_canonical_segment,
@@ -13,6 +16,7 @@ from revtrace.dgft import (
     classify_coverage_conflict,
     cross_granularity_coverage_deficit,
     digest_tokens,
+    digest_bytes,
     fixed_segment_plan,
 )
 
@@ -39,6 +43,13 @@ def test_boundary_adjustment_preserves_true_omission() -> None:
     assert adjusted == 1 / 3
 
 
+def test_boundary_adjustment_empty_fine_has_zero_missing_mass() -> None:
+    adjusted, raw, residual = boundary_adjusted_coverage_deficit(
+        ["", "spoken words"], ["unexpected coarse text", "spoken words"], 0
+    )
+    assert (adjusted, raw, residual) == (0.0, 0, 0)
+
+
 def test_repeated_ngram_fraction_detects_phrase_loop() -> None:
     loop = (
         "he was a man of the same kind and was a man of the same kind "
@@ -62,7 +73,7 @@ def test_directional_cross_granularity_coverage_detects_omission():
 
 def test_cross_granularity_coverage_is_reference_free_and_order_sensitive():
     assert cross_granularity_coverage_deficit("", "") == 0.0
-    assert cross_granularity_coverage_deficit("", "hallucination") == 1.0
+    assert cross_granularity_coverage_deficit("", "hallucination") == 0.0
     assert cross_granularity_coverage_deficit(
         "one two three", "one two three"
     ) == 0.0
@@ -111,6 +122,8 @@ def _state():
         session_id=7,
         contract_epoch=3,
         policy_version="frozen-r9",
+        contract_digest="contract-v1",
+        canonical_runtime_digest="runtime-v1",
         prompt_tokens=(4, 5),
         speculative_version=10,
     )
@@ -126,13 +139,37 @@ def _job(**overrides):
         audio_end_window=3,
         segment_id="7:0:3",
         prompt_digest=digest_tokens((4, 5)),
+        contract_digest="contract-v1",
+        canonical_runtime_digest="runtime-v1",
+        audio_sha256=digest_bytes(b"audio"),
     )
     values.update(overrides)
     return CanonicalSegmentJob(**values)
 
 
+def _commit(state, job, *, segment_tokens, next_prompt_tokens,
+            descendant_versions=()):
+    audio = b"audio"
+    certificate = build_dual_axis_certificate(
+        job=job,
+        audio=audio,
+        display_tokens=segment_tokens,
+        feedback_state_tokens=next_prompt_tokens,
+        canonical_runtime_digest="runtime-v1",
+    )
+    return commit_canonical_segment(
+        state,
+        job,
+        certificate=certificate,
+        display_tokens=segment_tokens,
+        segment_tokens=segment_tokens,
+        next_prompt_tokens=next_prompt_tokens,
+        descendant_versions=descendant_versions,
+    )
+
+
 def test_atomic_segment_commit_advances_all_authoritative_fields():
-    result = commit_canonical_segment(
+    result = _commit(
         _state(), _job(), segment_tokens=(8, 9),
         next_prompt_tokens=(4, 5, 8, 9),
         descendant_versions=(9, 11, 12),
@@ -154,7 +191,7 @@ def test_segment_commit_rejects_stale_and_gap_jobs_without_mutation():
         (_job(session_id=8), "cross-session"),
         (_job(prompt_digest="bad"), "prompt-digest-mismatch"),
     ):
-        result = commit_canonical_segment(
+        result = _commit(
             state, job, segment_tokens=(1,), next_prompt_tokens=(1,)
         )
         assert not result.accepted
@@ -163,10 +200,10 @@ def test_segment_commit_rejects_stale_and_gap_jobs_without_mutation():
 
 
 def test_duplicate_segment_is_idempotently_rejected():
-    first = commit_canonical_segment(
+    first = _commit(
         _state(), _job(), segment_tokens=(1,), next_prompt_tokens=(4, 5, 1)
     )
-    duplicate = commit_canonical_segment(
+    duplicate = _commit(
         first.state,
         _job(parent_checkpoint_id=1, audio_start_window=3, audio_end_window=4,
              prompt_digest=digest_tokens((4, 5, 1))),
@@ -181,11 +218,14 @@ def test_checkpoint_rebase_preserves_prefix_and_replaces_descendants():
         session_id=7,
         contract_epoch=3,
         policy_version="frozen-r9",
+        contract_digest="contract-v1",
+        canonical_runtime_digest="runtime-v1",
         checkpoint_id=3,
         audio_frontier_window=90,
         prompt_tokens=(99,),
         stable_token_segments=((1,), (2,), (3,)),
         committed_segment_ids=("s0", "s1", "s2"),
+        checkpoint_audio_frontiers=(0, 20, 50, 90),
         speculative_version=10,
     )
     result = commit_checkpoint_rebase(
@@ -228,9 +268,14 @@ def test_checkpoint_rebase_rejects_invalid_cut_without_mutation():
 
 
 def test_terminal_fallback_atomically_replaces_coarse_branch():
-    coarse = commit_canonical_segment(
+    coarse = _commit(
         _state(), _job(), segment_tokens=(99,), next_prompt_tokens=(4, 5, 99)
     ).state
+    certificate = build_terminal_fallback_certificate(
+        state=coarse, fallback_id="fallback:7", audio=b"full-audio",
+        replacement_segments=((1, 2), (3, 4)),
+        feedback_state_tokens=(1, 2, 3, 4),
+    )
     result = commit_session_fallback(
         coarse,
         expected_contract_epoch=3,
@@ -239,6 +284,8 @@ def test_terminal_fallback_atomically_replaces_coarse_branch():
         replacement_segments=((1, 2), (3, 4)),
         next_prompt_tokens=(1, 2, 3, 4),
         fallback_id="fallback:7",
+        certificate=certificate,
+        audio=b"full-audio",
         descendant_versions=(11, 12),
     )
     assert result.accepted
@@ -254,6 +301,45 @@ def test_dual_axis_certificate_separates_display_and_feedback_state():
     )
     assert certificate.display_sha256 != certificate.feedback_state_sha256
     assert certificate.audio_sha256
+
+
+def test_commit_consumes_certificate_and_rejects_tampering():
+    state = _state()
+    job = _job()
+    certificate = build_dual_axis_certificate(
+        job=job, audio=b"audio", display_tokens=(1, 2),
+        feedback_state_tokens=(4, 5, 1, 2),
+        canonical_runtime_digest="runtime-v1",
+    )
+    certificate = replace(
+        certificate, audio_sha256=digest_bytes(b"tampered")
+    )
+    result = commit_canonical_segment(
+        state, job, certificate=certificate,
+        display_tokens=(1, 2), segment_tokens=(1, 2),
+        next_prompt_tokens=(4, 5, 1, 2),
+    )
+    assert not result.accepted
+    assert result.reason == "certificate-audio"
+
+
+def test_checkpoint_rebase_rejects_unbound_audio_frontier():
+    state = FeedbackTransactionState(
+        session_id=7, contract_epoch=3, policy_version="frozen-r9",
+        contract_digest="contract-v1", canonical_runtime_digest="runtime-v1",
+        checkpoint_id=1, audio_frontier_window=20,
+        stable_token_segments=((1,),), committed_segment_ids=("s0",),
+        checkpoint_audio_frontiers=(0, 20),
+    )
+    result = commit_checkpoint_rebase(
+        state, expected_contract_epoch=3,
+        expected_policy_version="frozen-r9", rebase_checkpoint_id=1,
+        audio_start_frontier=19, final_audio_frontier=40,
+        replacement_segments=((2,),), next_prompt_tokens=(1, 2),
+        fallback_id="rebase",
+    )
+    assert not result.accepted
+    assert result.reason == "rebase-frontier-mismatch"
 
 
 def test_adaptive_audio_plan_is_gap_free_and_uses_late_silence():

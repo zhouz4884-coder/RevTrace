@@ -1,5 +1,10 @@
 # Phase R9 Final Report: Directional Granularity Feedback Transactions
 
+> Historical pre-R9.E report. Its 15/16 service matrix has been superseded by
+> the fresh 16/16 online, contract-bound matrix in
+> [R9.E Online Evidence and Submission Closure](r9e_online_submission_closure.md).
+> Do not use the historical service numbers below as submission claims.
+
 ## Decision
 
 `QUALIFIED_R9_EVIDENCE_15_OF_16_STRICT_CELLS`

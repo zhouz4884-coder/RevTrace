@@ -429,6 +429,20 @@ hidden by new thresholds or relaxed pair definitions.
 See [the phase roadmap](docs/roadmap/PHASES.md) and
 [claim boundaries](docs/CLAIM_BOUNDARIES.md).
 
+## R9.E online submission closure
+
+The final Whisper closure passes all 16 frozen real two-GPU service cells.
+Median wall speedup is 2.841x (2.633--3.849x), median GPU-normalized speedup is
+1.421x, and median energy reduction is 31.13%. Display P99 is at most 1.492
+seconds and causal commit P99 is at most 24.564 seconds. Across 1,048 online
+certificate-consuming commits, the complete traces contain zero observed
+transaction-install violations. All optimized stable-output hashes match the
+prior quality-bound artifacts, so the three-model untouched quality evidence
+remains valid.
+
+See the [R9.E closure report](docs/reports/r9e_online_submission_closure.md) and
+[machine-readable final report](results/r9_dgft/FINAL_REPORT_ONLINE.json).
+
 ## Repository layout
 
 ```text

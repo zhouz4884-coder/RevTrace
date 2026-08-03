@@ -14,10 +14,11 @@ import json
 import statistics
 import time
 from pathlib import Path
-from typing import Any, Sequence
+from typing import Any, Callable, Sequence
 
 import numpy as np
 
+from revtrace.causal_scheduler import SessionArrival, group_ready_events
 from revtrace.dgft import adaptive_audio_plan, fixed_segment_plan
 from revtrace.whisper_state import capacity_rebase_required
 from run_whisper_w_quality import bootstrap_upper, build_sessions, word_error
@@ -275,6 +276,10 @@ def run_batched_adaptive(
     salvage_yield_threshold: float,
     salvage_max_steps: int,
     session_salvage_on_conflict: bool,
+    arrival_schedule: Sequence[SessionArrival] | None = None,
+    coalesce_seconds: float = 0.5,
+    on_segment: Callable[[int, dict[str, Any], bytes | memoryview], Any]
+    | None = None,
 ) -> tuple[
     list[str], float, int, int, float,
     list[list[dict[str, Any]]], dict[str, Any]
@@ -302,10 +307,43 @@ def run_batched_adaptive(
     conflict_sessions: set[int] = set()
     failed_salvage_sessions: set[int] = set()
     started = time.perf_counter()
+    initial_arrivals = {
+        row.session_id: row.arrival_time for row in (arrival_schedule or ())
+    }
+    virtual_commits = [
+        initial_arrivals.get(sid, 0.0) for sid in range(len(sessions))
+    ]
+    virtual_gpu_available = 0.0
     for wave in range(max(len(plan) for plan in plans)):
         ready = [sid for sid, plan in enumerate(plans) if wave < len(plan)]
-        for offset in range(0, len(ready), concurrency):
-            group = ready[offset:offset + concurrency]
+        ready_events: list[tuple[int, float]] = []
+        for sid in ready:
+            _, end = plans[sid][wave]
+            audio_ready = initial_arrivals.get(sid, 0.0) + end / SAMPLE_RATE
+            ready_events.append((sid, max(audio_ready, virtual_commits[sid])))
+        # Authority segments have a 36 s commit budget, unlike the 0.5 s
+        # proposer display coalescer.  Within one dependency wave it is legal
+        # and substantially more efficient to wait for the latest independent
+        # member of a full group.  Release remains causal: no job executes
+        # before every member's audio and parent state are ready.
+        # Preserve the frozen session-id lane assignment.  Arrival timestamps
+        # determine when a group may start, not which arithmetic slot a
+        # session occupies; otherwise the scheduler itself changes the model
+        # trajectory under Poisson load.
+        ordered_ready = list(ready_events)
+        groups = [
+            (
+                [sid for sid, _ in ordered_ready[offset:offset + concurrency]],
+                max(
+                    ready_time
+                    for _, ready_time in ordered_ready[
+                        offset:offset + concurrency
+                    ]
+                ),
+            )
+            for offset in range(0, len(ordered_ready), concurrency)
+        ]
+        for group, release_time in groups:
             audio_rows: list[np.ndarray] = []
             prompt_rows: list[tuple[int, ...]] = []
             metadata: list[tuple[int, int, int]] = []
@@ -319,7 +357,14 @@ def run_batched_adaptive(
                 prompt_rows.append(prompts[sid])
                 metadata.append((sid, start, end))
                 audio_seconds += (end - start) / SAMPLE_RATE
+            authority_started_perf = time.perf_counter()
             records = executor.generate(audio_rows, prompt_rows)
+            authority_finished_perf = time.perf_counter()
+            virtual_start = max(release_time, virtual_gpu_available)
+            virtual_finish = (
+                virtual_start + authority_finished_perf - authority_started_perf
+            )
+            virtual_gpu_available = virtual_finish
             batch_calls += 1
             segment_jobs += len(group)
             for (sid, start, end), before, record in zip(
@@ -401,7 +446,7 @@ def run_batched_adaptive(
                         prompts[sid], record.token_ids
                     )
                 pieces[sid].append(selected_text)
-                traces[sid].append({
+                row = {
                     "segment_index": wave,
                     "audio_start_window": start / (window_seconds * SAMPLE_RATE),
                     "audio_end_window": end / (window_seconds * SAMPLE_RATE),
@@ -439,7 +484,24 @@ def run_batched_adaptive(
                     "text": selected_text,
                     "salvage_trace": salvage_trace,
                     "salvage_failed": salvage_failed,
-                })
+                    "causal_audio_ready_time": (
+                        initial_arrivals.get(sid, 0.0) + end / SAMPLE_RATE
+                    ),
+                    "causal_authority_start_time": virtual_start,
+                    "causal_authority_commit_time": virtual_finish,
+                    "authority_started_perf": authority_started_perf,
+                    "authority_finished_perf": authority_finished_perf,
+                }
+                traces[sid].append(row)
+                if on_segment is not None:
+                    row["online_commit"] = on_segment(
+                        sid,
+                        row,
+                        memoryview(np.ascontiguousarray(
+                            sessions[sid].audio[start:end], dtype=np.float32
+                        )).cast("B"),
+                    )
+                virtual_commits[sid] = virtual_finish
     session_fallback_invocations = 0
     if session_salvage_on_conflict:
         for sid in sorted(failed_salvage_sessions):
