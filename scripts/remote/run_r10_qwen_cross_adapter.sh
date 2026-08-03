@@ -30,6 +30,9 @@ run_one() {
     --forward-threshold 0.20 \
     --reverse-ceiling 0.20 \
     --risk-margin 0.05 \
+    --authority-dtype float32 \
+    --authority-execution batch \
+    --audit-first-authority-segment \
     --proposer-gpu 0 \
     --authority-gpu 1 \
     >"${LOG_ROOT}/${short}-${mode}.log" 2>&1 || true

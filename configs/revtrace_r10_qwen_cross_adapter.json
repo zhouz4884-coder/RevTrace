@@ -15,10 +15,15 @@
     "forward_threshold": 0.20,
     "reverse_ceiling": 0.20,
     "risk_margin": 0.05,
-    "hybrid_terminal_fine_replay": true
+    "hybrid_terminal_fine_replay": false,
+    "primary_authority_dtype": "float32",
+    "primary_authority_execution": "batch",
+    "first_segment_batch_repeat_and_singleton_audit": true
   },
   "gates": {
     "transaction_install_violations": 0,
+    "authority_batch_repeat_mismatches": 0,
+    "authority_batch_vs_singleton_mismatches": 0,
     "minimum_wall_speedup": 2.0,
     "minimum_gpu_normalized_speedup": 1.0,
     "maximum_median_unit_edit_rate": 0.05,

@@ -47,6 +47,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--risk-margin", type=float, default=0.05)
     parser.add_argument("--proposer-gpu", default="0")
     parser.add_argument("--authority-gpu", default="1")
+    parser.add_argument(
+        "--authority-dtype", choices=("float16", "float32"), default="float16"
+    )
+    parser.add_argument(
+        "--authority-execution", choices=("singleton", "batch"),
+        default="singleton",
+    )
+    parser.add_argument(
+        "--audit-first-authority-segment", action="store_true",
+        help="repeat the first authority batch and compare every row with singleton",
+    )
+    parser.add_argument(
+        "--hybrid-terminal-fine-replay", action="store_true",
+        help="require the native fine singleton path at terminal boundaries",
+    )
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.82)
     parser.add_argument("--authority-memory-utilization", type=float, default=0.82)
     parser.add_argument("--result-timeout-seconds", type=float, default=900.0)
@@ -81,6 +96,9 @@ def authority_worker(
     gpu: str,
     memory_utilization: float,
     data_manifest: str,
+    dtype: str,
+    execution: str,
+    audit_first_segment: bool,
 ) -> None:
     try:
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu
@@ -93,7 +111,7 @@ def authority_worker(
         from run_revguard_same_input import candidate_record
         from run_revtrace_dual_gpu import build_asr, singleton_records
 
-        asr = build_asr(model, "float16", memory_utilization, logprobs=20)
+        asr = build_asr(model, dtype, memory_utilization, logprobs=20)
         sources = load_sources(Path(data_manifest))
         smoke = official_smoke(asr, sources["English"][0])
         if not smoke["exact"]:
@@ -106,15 +124,55 @@ def authority_worker(
                 return
             if message["kind"] != "segment":
                 raise ValueError(f"unknown authority command: {message['kind']}")
-            outputs, elapsed, request_seconds = singleton_records(
-                asr, message["jobs"]
-            )
+            jobs = message["jobs"]
+            if execution == "singleton":
+                outputs, elapsed, request_seconds = singleton_records(asr, jobs)
+            else:
+                started = time.perf_counter()
+                outputs = asr.model.generate(
+                    jobs, sampling_params=asr.sampling_params, use_tqdm=False
+                )
+                elapsed = time.perf_counter() - started
+                request_seconds = [elapsed / len(jobs) for _ in jobs]
+            records = [candidate_record(output) for output in outputs]
+            invariance = {
+                "audited": False,
+                "batch_repeat_mismatches": 0,
+                "batch_vs_singleton_mismatches": 0,
+            }
+            if (
+                audit_first_segment
+                and execution == "batch"
+                and int(message["segment_index"]) == 0
+            ):
+                repeat_outputs = asr.model.generate(
+                    jobs, sampling_params=asr.sampling_params, use_tqdm=False
+                )
+                repeat_records = [
+                    candidate_record(output) for output in repeat_outputs
+                ]
+                singleton_outputs, _, _ = singleton_records(asr, jobs)
+                singleton_rows = [
+                    candidate_record(output) for output in singleton_outputs
+                ]
+                invariance = {
+                    "audited": True,
+                    "batch_repeat_mismatches": sum(
+                        left["token_ids"] != right["token_ids"]
+                        for left, right in zip(records, repeat_records)
+                    ),
+                    "batch_vs_singleton_mismatches": sum(
+                        left["token_ids"] != right["token_ids"]
+                        for left, right in zip(records, singleton_rows)
+                    ),
+                }
             result_queue.put({
                 "kind": "segment-result",
                 "segment_index": message["segment_index"],
                 "elapsed_seconds": elapsed,
                 "request_seconds": request_seconds,
-                "records": [candidate_record(output) for output in outputs],
+                "records": records,
+                "invariance": invariance,
             })
     except BaseException as exc:
         result_queue.put({
@@ -161,6 +219,9 @@ def main() -> int:
             "gpu": args.authority_gpu,
             "memory_utilization": args.authority_memory_utilization,
             "data_manifest": str(args.data_manifest),
+            "dtype": args.authority_dtype,
+            "execution": args.authority_execution,
+            "audit_first_segment": args.audit_first_authority_segment,
         },
         name="qwen-dgft-authority",
     )
@@ -229,9 +290,17 @@ def main() -> int:
         "risk_margin": args.risk_margin,
         "policy_version": args.policy_version,
         "contract_epoch": args.contract_epoch,
+        "authority_dtype": args.authority_dtype,
+        "authority_execution": args.authority_execution,
+        "authority_first_segment_invariance_audit": (
+            args.audit_first_authority_segment
+        ),
+        "hybrid_terminal_fine_replay": args.hybrid_terminal_fine_replay,
     }
     contract_digest = canonical_digest(contract)
-    runtime_digest = "qwen-fp16-singleton-segment-v1"
+    runtime_digest = (
+        f"qwen-{args.authority_dtype}-{args.authority_execution}-segment-v1"
+    )
     for index, stream in enumerate(streams):
         ledger.register(stream["session_id"])
         tx_states.append(FeedbackTransactionState(
@@ -256,6 +325,8 @@ def main() -> int:
     replay_seconds = 0.0
     replay_segments = 0
     transaction_violations = 0
+    authority_batch_repeat_mismatches = 0
+    authority_batch_vs_singleton_mismatches = 0
 
     service_power = NvidiaPowerSampler(
         [int(args.proposer_gpu), int(args.authority_gpu)],
@@ -337,6 +408,13 @@ def main() -> int:
         authority_request_seconds.extend(
             float(value) for value in authority["request_seconds"]
         )
+        invariance = authority.get("invariance", {})
+        authority_batch_repeat_mismatches += int(
+            invariance.get("batch_repeat_mismatches", 0)
+        )
+        authority_batch_vs_singleton_mismatches += int(
+            invariance.get("batch_vs_singleton_mismatches", 0)
+        )
 
         for index, (stream, boundary, fine_state, coarse_state, prefix,
                     coarse_record, audio) in enumerate(zip(
@@ -365,7 +443,7 @@ def main() -> int:
                 forward_threshold=args.forward_threshold,
                 reverse_ceiling=args.reverse_ceiling,
                 risk_margin=args.risk_margin,
-                terminal=terminal,
+                terminal=(terminal and args.hybrid_terminal_fine_replay),
             )
 
             selected_state = coarse_state
@@ -538,6 +616,8 @@ def main() -> int:
     decision = (
         "PASS_QWEN_CROSS_ADAPTER_GATE"
         if transaction_violations == 0
+        and authority_batch_repeat_mismatches == 0
+        and authority_batch_vs_singleton_mismatches == 0
         and wall_speedup >= 2.0
         and gpu_normalized >= 1.0
         and statistics.median(errors) <= 0.05
@@ -557,6 +637,12 @@ def main() -> int:
             "segments": segments,
             "events": len(events),
             "transaction_install_violations": transaction_violations,
+            "authority_batch_repeat_mismatches": (
+                authority_batch_repeat_mismatches
+            ),
+            "authority_batch_vs_singleton_mismatches": (
+                authority_batch_vs_singleton_mismatches
+            ),
             "coarse_authority_fraction": sum(
                 row["selected_authority"] == "coarse-segment" for row in events
             ) / len(events),
@@ -606,6 +692,8 @@ def main() -> int:
             "proposer_gpu": args.proposer_gpu,
             "authority_gpu": args.authority_gpu,
             "authority_pid": ready["pid"],
+            "authority_dtype": args.authority_dtype,
+            "authority_execution": args.authority_execution,
             "source_sha256": {
                 "runner": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 "cross_adapter": hashlib.sha256(
@@ -617,7 +705,10 @@ def main() -> int:
             },
         },
         "claim_boundary": {
-            "authority": "coarse FP16 singleton segment or native fine singleton replay",
+            "authority": (
+                f"coarse {args.authority_dtype} {args.authority_execution} "
+                "segment or native fine singleton replay"
+            ),
             "reference": "fresh official 2-second FP16 singleton trajectory",
             "coverage_signal": "reference-free scheduler, not a correctness certificate",
             "scope": "bounded cross-adapter compatibility gate, not production prevalence",
