@@ -149,7 +149,7 @@ def authority_worker(
             if (
                 audit_first_segment
                 and execution == "batch"
-                and int(message["segment_index"]) == 0
+                and bool(message.get("audit", False))
             ):
                 repeat_outputs = asr.model.generate(
                     jobs, sampling_params=asr.sampling_params, use_tqdm=False
@@ -335,6 +335,45 @@ def main() -> int:
     transaction_violations = 0
     authority_batch_repeat_mismatches = 0
     authority_batch_vs_singleton_mismatches = 0
+    authority_preflight_seconds = 0.0
+
+    if args.audit_first_authority_segment:
+        preflight_jobs: list[dict[str, Any]] = []
+        preflight_end = segment_seconds * SAMPLE_RATE
+        for stream, original in zip(streams, states):
+            state = copy.deepcopy(original)
+            audio = np.asarray(
+                stream["audio"][:preflight_end], dtype=np.float32
+            )
+            state.audio_accum = audio.copy()
+            prefix = rollback_prefix(proposer, state, tail=False)
+            preflight_jobs.append({
+                "prompt": state.prompt_raw + prefix,
+                "multi_modal_data": {"audio": [state.audio_accum]},
+            })
+        preflight_started = time.perf_counter()
+        command_queue.put({
+            "kind": "segment",
+            "segment_index": -1,
+            "jobs": preflight_jobs,
+            "audit": True,
+        })
+        preflight = receive(result_queue, args.result_timeout_seconds)
+        authority_preflight_seconds = time.perf_counter() - preflight_started
+        invariance = preflight.get("invariance", {})
+        authority_batch_repeat_mismatches = int(
+            invariance.get("batch_repeat_mismatches", 0)
+        )
+        authority_batch_vs_singleton_mismatches = int(
+            invariance.get("batch_vs_singleton_mismatches", 0)
+        )
+        if (
+            authority_batch_repeat_mismatches
+            or authority_batch_vs_singleton_mismatches
+        ):
+            raise AssertionError(
+                "coarse authority failed the pre-service invariance audit"
+            )
 
     service_power = NvidiaPowerSampler(
         [int(args.proposer_gpu), int(args.authority_gpu)],
@@ -370,6 +409,7 @@ def main() -> int:
             "kind": "segment",
             "segment_index": segment_index,
             "jobs": coarse_jobs,
+            "audit": False,
         })
 
         fine_states = [copy.deepcopy(state) for state in boundary_states]
@@ -650,6 +690,9 @@ def main() -> int:
             ),
             "authority_batch_vs_singleton_mismatches": (
                 authority_batch_vs_singleton_mismatches
+            ),
+            "authority_preflight_seconds_excluded_from_service": (
+                authority_preflight_seconds
             ),
             "coarse_authority_fraction": sum(
                 row["selected_authority"] == "coarse-segment" for row in events
