@@ -1,0 +1,186 @@
+%% Section 3: DGFT --- Theory and Mechanism. The theoretical core.
+%% Theorem statements and proofs are drafted from the protocol invariants
+%% actually enforced by the RevTrace runtime (exhaustive online validation:
+%% 320 Qwen revision events + 1,048 Whisper commits, 0 violations).
+
+\subsection{Transactions, certificates, and commits}\label{sec:dgft:tx}
+
+DGFT wraps every state projection in a transaction.
+
+\begin{definition}[DGFT transaction]\label{def:tx}
+A transaction is the object
+\[
+  \tx_t = \bigl(\mathrm{sid},\, e,\, p,\, v_{\mathrm{parent}},\,
+  [a_s,a_e),\, \out_t,\, \proj(\out_t;\state_t),\, \mathrm{cert}_t\bigr),
+\]
+comprising the session id, contract epoch $e$, policy $p$, the parent state
+version read, the audio frontier interval covered, the generated output,
+its state projection, and a certificate record. The proposal granularity
+$g_p$ (fine window) and the authority granularity $g_a$ (coarse canonical
+segment) define the granularity ratio $\granratio = g_a/g_p \ge 1$.
+\end{definition}
+
+\begin{definition}[Commit tuple and validity]\label{def:commit}
+An authority commit is a tuple
+\[
+  \commit_j = (\mathrm{sid}_j,\, e_j,\, p_j,\, v_j,\, [f_j,f_{j+1}),\, \cert_j)
+\]
+with $\cert_j \in \{0,1\}$. $\commit_j$ is \emph{valid}, written
+$\mathrm{Valid}(\commit_j)$, iff (i) session, contract epoch, and policy
+match the live session fence; (ii) $v_j$ equals the currently committed
+parent version; (iii) $[f_j,f_{j+1})$ continues the committed frontier
+without gap or overlap; and (iv) $\cert_j = 1$, i.e.\ the projection passed
+the contract's authority checks. Only valid commits mutate committed state.
+\end{definition}
+
+Definitions~\ref{def:tx}--\ref{def:commit} realize requirements
+R1--R4 (Section~\ref{sec:model:reqs}) structurally: display never produces
+a commit (R1), $v_j$ enforces parent ownership (R2), $[f_j,f_{j+1})$
+enforces frontier monotonicity (R3), and $\cert_j$ is granted only by
+authority checks, never by risk signals (R4).
+Table~\ref{tab:guarantees} previews how these properties separate DGFT from
+weaker protection regimes; the guarantee claims are evaluated in
+Section~\ref{sec:eval} (H2, H5).
+
+\tbl{t5_guarantees}
+
+\subsection{Theorem 1: uncertified-ancestry exclusion}\label{sec:dgft:thm1}
+
+\begin{theorem}[Uncertified-Ancestry Exclusion]\label{thm:ancestry}
+If future feedback state is updated exclusively through authority commits
+satisfying $\mathrm{Valid}$ (Definition~\ref{def:commit}), then no fine
+proposal whose output is absent from an authority certificate can become an
+ancestor of any future committed state.
+\end{theorem}
+
+\begin{proof}
+By induction over the commit sequence $\commit_1,\commit_2,\ldots$
+Base: the initial committed state $\state_0$ is contract-defined, so its
+ancestry contains no fine proposal. Step: assume committed state $\state_j$
+has ancestry containing only certificate-covered outputs. The next state
+$\state_{j+1}$ arises only from a valid $\commit_{j+1}$; validity requires
+$\cert_{j+1}=1$, and the certificate enumerates the outputs whose projections
+the commit installs. Any fine proposal not covered by that certificate is
+therefore absent from the ancestry of $\state_{j+1}$. Provisional display
+never mutates committed state by construction of the runtime
+(Section~\ref{sec:system}), completing the induction.
+\end{proof}
+
+Theorem~\ref{thm:ancestry} is deliberately architecture-agnostic: it depends
+on the commit protocol, not on margin accuracy, model determinism,
+FP16/FP32 agreement, or the choice of ASR family.
+
+\subsection{Theorem 2: committed-state linearizability}\label{sec:dgft:thm2}
+
+\begin{theorem}[Committed-State Linearizability]\label{thm:linear}
+Under parent-version checking (Definition~\ref{def:commit}(ii)) and
+frontier-continuity checking (Definition~\ref{def:commit}(iii)), the
+accepted commits of a session form a fork-free, gap-free, overlap-free
+linear history of feedback state.
+\end{theorem}
+
+\begin{proof}
+Parent-version checking makes the accepted commits a tree of height at most
+one per version: two distinct commits cannot both satisfy
+$v_j = \mathrm{version}(\state)$ against the same committed state, so the
+history is fork-free. Frontier-continuity checking orders accepted intervals
+$[f_j,f_{j+1})$ into a sequence with $f_{j+1} = f'_{j}$ for consecutive
+commits, excluding gaps and overlaps. Hence the accepted commits are a
+single linear sequence.
+\end{proof}
+
+\begin{corollary}[Stale-descendant rejection]\label{cor:stale}
+A revision computed against $v_{\mathrm{parent}} \neq
+\mathrm{version}(\state_j)$ cannot legally commit: it fails
+Definition~\ref{def:commit}(ii) and is rejected without mutating state.
+\end{corollary}
+
+\subsection{Theorem 3: granularity-independent safety}\label{sec:dgft:thm3}
+
+\begin{theorem}[Granularity-Independent Transaction Safety]\label{thm:gran}
+For any granularity ratio $\granratio \ge 1$, if every authority segment
+starts at the committed parent, covers a contiguous audio frontier, yields a
+legal state projection, and passes the certificate and version checks of
+Definition~\ref{def:commit}, then the conclusions of
+Theorems~\ref{thm:ancestry} and~\ref{thm:linear} hold.
+\end{theorem}
+
+\begin{proof}
+The proofs of Theorems~\ref{thm:ancestry} and~\ref{thm:linear} use only the
+validity predicate of Definition~\ref{def:commit}; none of their steps
+depends on the size of $[f_j,f_{j+1})$ relative to the fine window. Varying
+$\granratio$ changes how much audio a single certificate covers, not which
+commits are admissible.
+\end{proof}
+
+\begin{corollary}[Same-granularity certification as $\granratio=1$]\label{cor:sg}
+Setting $\granratio = 1$ makes proposal and authority granularities
+coincide: the directional coverage witness degenerates to the identity and
+fine replay degenerates into risk-triggered re-verification. The
+same-granularity (SG) configuration is therefore a reduction of DGFT under
+the same protocol, not a separate mechanism.
+\end{corollary}
+
+\begin{remark}[Canonical-path boundary]\label{rem:canonical}
+Corollary~\ref{cor:sg} identifies the protocol, not the arithmetic path: in
+our contracts SG runs an FP16 singleton authority while Coarse/Hybrid run an
+FP32 batched authority. These are distinct canonical paths; we claim
+protocol equivalence, never bitwise identity.
+\end{remark}
+
+\subsection{Authority-cost decomposition}\label{sec:dgft:cost}
+
+The safety results above are silent about cost; the following analysis is a
+proposition with explicit assumptions, whose predictions we test
+(Section~\ref{sec:eval}, H3). Let $B$ be the number of concurrent sessions,
+$q$ the SG verification fraction, $r$ the Hybrid selective-replay fraction,
+$C_s$ the singleton authority cost per covered region, $C_c(\granratio,B)$
+the batched coarse authority cost per segment, $C_{\mathrm{commit}}$ the
+transaction/commit overhead, and $Q_s$ the queueing/fragmentation cost of
+singleton authority. Then
+\begin{align}
+  T_{\mathrm{SG}}^{a} &\approx q\,B\,\granratio\,C_s \;+\; Q_s, \label{eq:cost-sg}\\
+  T_{\mathrm{DGFT}}^{a} &\approx C_c(\granratio,B) \;+\;
+    r\,B\,\granratio\,C_s \;+\; C_{\mathrm{commit}}, \label{eq:cost-dgft}
+\end{align}
+and end-to-end service time is governed by the slower lane plus repair:
+\begin{equation}\label{eq:cost-service}
+  T_{\mathrm{service}} \approx \max(T_p, T^{a}) + T_{\mathrm{repair}},
+\end{equation}
+with proposer and authority running concurrently on separate GPUs.
+
+\begin{proposition}[When coarse authority wins]\label{prop:coarse}
+Coarse-DGFT improves service throughput over SG when
+\[
+  C_c(\granratio,B) + rB\granratio C_s + C_{\mathrm{commit}}
+  \;<\; qB\granratio C_s + Q_s .
+\]
+In particular, even a small verification fraction $q$ leaves SG paying
+singleton invocation and queueing costs across all $B$ sessions, while a
+batched coarse authority amortizes them into $C_c$.
+\end{proposition}
+
+Equations~\eqref{eq:cost-sg}--\eqref{eq:cost-dgft} predict, without fitting:
+(P1) SG terminal-burst tail failures even at 8--10\% verification;
+(P2) coarse authority amortizes invocation/queue costs into higher
+throughput; (P3) Hybrid trades replay fraction $r$ for quality at a
+performance and energy cost; (P4) the ordering may reverse across models
+because $C_c(\granratio,B)$ is model-dependent. Section~\ref{sec:eval}
+checks each prediction against the same-workload ladder.
+
+\subsection{Operating-point trade-offs}\label{sec:dgft:tradeoff}
+
+A deployment selects a configuration policy
+$\pi \in \{\mathrm{SG},\,\mathrm{Coarse},\,\mathrm{Hybrid}\}$ trading
+latency, energy, and quality subject to hard safety:
+\[
+  \max_{\pi}\; J(\pi) \quad \text{s.t.}\quad
+  \mathrm{TxViolation}(\pi) = 0,\;\;
+  \text{display/quality caps of the contract},
+\]
+where $J$ aggregates the contract's latency, energy, and quality objectives.
+DGFT supplies the safety-constrained operating envelope; the three evaluated
+contracts instantiate three operating points. We do not solve this
+optimization online and do not claim any single operating point dominates:
+the measured ordering is workload- and model-dependent
+(Section~\ref{sec:eval}, H3).

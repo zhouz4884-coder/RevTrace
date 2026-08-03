@@ -1,0 +1,34 @@
+%% T1: claim-contract map. Anti-pooling device from page one.
+\begin{table}[t]
+\centering
+\small
+\caption{Claim contracts. Every number in this paper is bound to one row;
+nothing is pooled across rows. Authority paths and quality references are
+per-contract by design (Section~\ref{sec:eval:setup}).}
+\label{tab:contracts}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}p{1.5cm}p{2.0cm}p{2.6cm}p{2.6cm}p{3.2cm}p{2.6cm}p{2.4cm}@{}}
+\toprule
+Family & Model & Proposal path & Authority path & Workload contract &
+Quality reference & Main claim \\
+\midrule
+Qwen3-ASR & 0.6B / 1.7B &
+  fine FP16 batched proposer &
+  FP32 batched (Coarse/Hybrid, $\granratio=3$); FP16 singleton (SG,
+  $\granratio=1$) &
+  shared c16: 16 bilingual 30\,s sessions (480\,s audio), online causal
+  arrivals, 2$\times$RTX 3090 &
+  mixed-unit edit rate vs independent fresh FP16 singleton replay &
+  throughput/energy/latency; transaction safety; bounded edit rate \\
+\addlinespace
+Whisper & tiny / base / small.en &
+  fine FP16 batched proposer &
+  per-cell authority of the R9.E production contract &
+  R9.E production cells (16 cells, per model/arrival group), stable-output
+  hash equivalence &
+  paired WER delta vs unprotected feedback (dev + untouched split) &
+  production wall/GPU/energy; WER improvement; certificate safety \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

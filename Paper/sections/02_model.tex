@@ -1,0 +1,146 @@
+%% Section 2: Model and Problem Formulation. Owns all math objects.
+%% Notation locked in outline v2 Section 1 ledger.
+
+\begin{figure}[t]
+  \centering
+  \figplaceholder{F1 diptych (outline v2 sec.4): (a) ordinary batching ---
+    audio revision, locally differing batched proposal displayed, output
+    enters feedback state, trajectories diverge; corner annotation
+    ``8/21 legal pairs propagate with feedback; 0/21 without; tail RAF up
+    to 153 measured on the 6 persistent pairs''. (b) DGFT on the identical
+    scenario --- local difference retained at display, state write denied,
+    coarse authority later produces certificate, frontier advances.}
+  {State-entry contamination under ordinary batching (a) and the same
+  scenario under DGFT (b). DGFT does not require every provisional output
+  to be identical; it prevents uncertified outputs from becoming
+  future-state parents.}
+  \label{fig:motivation}
+\end{figure}
+
+\subsection{Revision-generative state machines}\label{sec:model:rsm}
+
+\begin{definition}[Revision-generative serving round]\label{def:rsm}
+A serving round $t$ of a revision-generative system is a tuple
+$(\state_t,\audio_t,\out_t)$ where $\state_t$ is the committed feedback
+state entering the round, $\audio_t$ is the exogenous input (audio frontier),
+and $\out_t$ is the generated output. The state update is
+\begin{equation}\label{eq:state-update}
+  \state_{t+1} = \mathcal{T}(\state_t,\audio_t,\out_t),
+\end{equation}
+where $\mathcal{T}$ is the model/adapter state-update function. The system is
+\emph{revision-generative} when $\mathcal{T}$ depends on $\out_t$, i.e.\ the
+output of round $t$ participates in the state read by round $t{+}1$.
+\end{definition}
+
+Not every byte of $\out_t$ enters future state. We isolate exactly the part
+that does:
+
+\begin{definition}[State projection]\label{def:projection}
+The state projection $\proj(\out_t;\state_t)$ is the component of $\out_t$
+that $\mathcal{T}$ consumes when forming $\state_{t+1}$. For Qwen3-ASR it is
+the rollback prefix re-prompted at the next revision~\cite{shi2026qwen3asr};
+for Whisper with previous-text conditioning it is the conditioning
+prompt~\cite{radford2023whisper}.
+\end{definition}
+
+Ordinary batched serving makes an implicit assumption we name explicitly:
+\begin{equation}\label{eq:implicit}
+  \state_{t+1} = \proj(\out_t^{\mathrm{batch}};\state_t),
+\end{equation}
+i.e.\ whatever the batched forward pass produced may write state.
+Equation~\eqref{eq:implicit} conflates ``was generated'' with ``may write
+future state''.
+
+\subsection{Display output versus state projection}\label{sec:model:display}
+
+The user-facing display function may surface output that carries no
+future-state authority: display-only suffixes, hold-back regions, and
+provisional hypotheses are shown but excluded from
+$\proj(\out_t;\state_t)$ by the adapter (Section~\ref{sec:system}). The
+paper's central invariant separates the two permissions:
+\begin{equation}\label{eq:invariant}
+  \boxed{\;\mathrm{Display}(\out_t)\;\not\Rightarrow\;
+  \mathrm{Authorize}\bigl(\proj(\out_t;\state_t)\bigr)\;}
+\end{equation}
+
+\subsection{State-entry divergence and contamination}\label{sec:model:divergence}
+
+Let $\out_t^{f}$ be the fine (batched, proposer) output and $\out_t^{a}$ the
+canonical authority output for the same round.
+
+\begin{definition}[Local output divergence]\label{def:eps}
+$\varepsilon_t = d_{\out}(\out_t^{f},\out_t^{a})$, with $d_{\out}$ an
+output-space distance (mixed-unit edit distance in our contracts).
+\end{definition}
+
+\begin{definition}[State-entry divergence]\label{def:e}
+$\ediv_t = d_{\state}\bigl(\proj(\out_t^{f};\state_t),\,
+\proj(\out_t^{a};\state_t)\bigr)$, with $d_{\state}$ the state-space
+distance induced by the same mixed-unit metric.
+\end{definition}
+
+\begin{definition}[Contamination event]\label{def:contamination}
+Round $t$ is a contamination event $\cont_t$ iff the state projection of a
+fine proposal is installed into committed state while $\ediv_t > 0$:
+\[
+  \cont_t \;:\Longleftrightarrow\; \ediv_t > 0 \;\wedge\;
+  \proj(\out_t^{f};\state_t) \text{ installed into } \state_{t+1}.
+\]
+\end{definition}
+
+Definition~\ref{def:contamination} upgrades the problem statement from
+``outputs differ'' to ``a differing output acquired future-state write
+permission''. Display-level instability literature observes the former;
+this paper targets the latter.
+
+\subsection{Feedback amplification}\label{sec:model:amplification}
+
+Let $\dist_t = d_{\state}(\state_t^{f},\state_t^{a})$ be the trajectory
+distance between the batched-served state trajectory and the canonical one.
+A local perturbation decomposition gives
+\begin{equation}\label{eq:recurrence}
+  \dist_{t+1} \;\le\; L_t\,\dist_t \;+\; \beta_t\,\ediv_t ,
+\end{equation}
+where $L_t$ measures propagation of pre-existing difference and $\beta_t$
+measures coupling of the round-$t$ state-entry divergence into the next
+state. We make \emph{no} global Lipschitz claim: \eqref{eq:recurrence} is a
+per-round decomposition with unknown coefficients, used only to identify
+channels.
+
+\begin{remark}[Causal prediction]\label{rem:causal}
+Removing the feedback edge sets $\beta_t \equiv 0$, so a local state-entry
+divergence can no longer enter $\dist_{t+1}$ through the revision channel.
+Section~\ref{sec:eval} (H1) tests this prediction by intervention.
+\end{remark}
+
+\begin{definition}[Revision amplification factor]\label{def:raf}
+For horizon $K$, the measured trajectory amplification factor is
+\[
+  \mathrm{RAF}_{t,K} \;=\; \frac{\dist_{t+K}}{\ediv_t + \epsilon_0},
+\]
+an empirical indicator of how one state-entry divergence propagates through
+subsequent revisions. RAF is reported as a measured trajectory quantity, not
+as a theoretical bound.
+\end{definition}
+
+\subsection{Design requirements derived from the model}\label{sec:model:reqs}
+
+The model above forces four requirements on any serving mechanism that
+claims to certify feedback state:
+\begin{description}
+  \item[R1 (Authority separation).] Display permission and state-write
+    permission are distinct grants; Eq.~\eqref{eq:invariant}.
+  \item[R2 (Parent ownership).] A state projection commits only onto the
+    parent version it was computed against; otherwise staleness is
+    undetectable.
+  \item[R3 (Frontier monotonicity).] Committed audio frontiers advance
+    monotonically---no gap, no overlap---so the committed history is a
+    single sequence.
+  \item[R4 (Evidence non-authority).] Statistical evidence (margins,
+    coverage, repetition signals) schedules verification; it never
+    authorizes installation.
+\end{description}
+R1--R4 reappear as protocol properties of DGFT
+(Section~\ref{sec:dgft}), labels on the system diagram
+(Figure~\ref{fig:arch}), and columns of the guarantee taxonomy
+(Table~\ref{tab:guarantees}).

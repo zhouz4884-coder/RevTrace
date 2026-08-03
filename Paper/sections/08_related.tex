@@ -1,0 +1,62 @@
+%% Section 8: Related Work. Collision-matrix framing; synthesize, do not
+%% list. (outline v2 sec.3.8)
+
+\paragraph{Streaming ASR and confirmation policies.}
+Streaming decoders must decide when displayed text becomes final.
+Whisper-based streaming maintains confirmed/unconfirmed prefixes and commits
+a prefix only after repeated decoding passes agree
+(LocalAgreement)~\cite{machacek2023whisperstreaming,radford2023whisper};
+chunk-based adaptations add truncation
+detection~\cite{wang2024simulwhisper}. These policies protect \emph{display}
+stability; none of them constrains which outputs may become parents of
+future model state, which is exactly the gap
+Eq.~\eqref{eq:invariant} names.
+
+\paragraph{Speculative execution with verification.}
+Speculative decoding verifies draft tokens against a target model so that
+acceleration preserves the output
+distribution~\cite{leviathan2023specdec,chen2023specsample}. The analogy is
+structural---propose fast, verify before accepting---but the verified object
+differs: tokens of a single response, rather than a state projection that
+conditions all future rounds.
+
+\paragraph{LLM serving systems.}
+Modern serving systems optimize memory, scheduling, and parallelism for
+throughput and latency: paged KV-cache management~\cite{kwon2023vllm},
+iteration-level scheduling~\cite{yu2022orca}, structured-program
+runtimes~\cite{zheng2024sglang}, prefill-decode
+chunking~\cite{agrawal2024sarathi}, phase
+disaggregation~\cite{zhong2024distserve}, and dynamic request
+migration~\cite{sun2024llumnix} (surveyed
+in~\cite{miao2023servingsurvey}). All treat generated output as terminal:
+none models the case where outputs are written back into the state that
+conditions future generation. RevTrace is complementary to, not competitive
+with, these efficiency mechanisms.
+
+\paragraph{Determinism and reproducibility of inference.}
+Training- and inference-time nondeterminism from nondeterministic kernels
+and atomic accumulation is well
+documented~\cite{xu2022deterministic,antunes2024reprohpc}. DGFT takes the
+opposite position: instead of promising bitwise determinism of batched
+execution, it treats batch-created divergence as given and governs which
+divergent outputs may write future state.
+
+\paragraph{Concurrency control.}
+Optimistic concurrency control validates transactions at
+commit~\cite{kung1981occ}; multiversion schemes track data
+lineage~\cite{bernstein1983mvcc}. DGFT borrows the transactional
+discipline---parent ownership, version fencing, linearizable commit
+history---but the validated object is a model-generated state projection
+whose legality is certified by the serving contract, not by stored-data
+consistency alone.
+
+\paragraph{Anytime-valid statistics.}
+Confidence sequences and e-value-based testing provide evidence measures
+valid under optional stopping~\cite{howard2021confidence,ramdas2023savi,
+grunwald2024safetesting}. RevTrace uses them in exactly one stratum: to
+bound the numerical risk of the SG adapter's randomized audits, with the
+bound explicitly scoped to that path.
+
+%% Pre-submission sweep: extend this section (or an appendix table) with
+%% any streaming/stateful-serving work found to jointly handle
+%% batch-created divergence + feedback propagation + state-entry authority.

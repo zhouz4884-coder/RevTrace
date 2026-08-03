@@ -1,0 +1,151 @@
+{
+  "checks": {
+    "distinct_pair_hashes": true,
+    "feedback_off_propagating_pairs_is_0": true,
+    "feedback_on_propagating_pairs_is_8": true,
+    "legal_pair_denominator_is_21": true,
+    "no_manuscript_8_over_8_claim": true,
+    "persistent_maximum_raf_is_153": true,
+    "persistent_pairs_is_6": true
+  },
+  "counts": {
+    "feedback_off_propagating_pairs": 0,
+    "feedback_on_propagating_pairs": 8,
+    "legal_pairs": 21,
+    "persistent_maximum_raf": 153.0,
+    "persistent_pairs": 6
+  },
+  "decision": "PASS_PAPER_DENOMINATOR_AUDIT",
+  "manuscript_scan": {
+    "boundary_warnings": [
+      {
+        "line": 42,
+        "path": "Paper/README.md",
+        "text": "- Denominator is 8/21 legal pairs (never 8/8); RAF 153 is measured on the"
+      }
+    ],
+    "files": 20,
+    "forbidden_claims": []
+  },
+  "persistent_pair_sources": [
+    {
+      "feedback_off_distances": [
+        0,
+        0
+      ],
+      "feedback_on_distances": [
+        29,
+        3,
+        1
+      ],
+      "model": "whisper-base.en",
+      "pair_sha256": "c6a7147861b2f7597ee108e75b126ff628e127c5b0e96e3a1dffca4065013f21",
+      "raf": 1.1379310344827587
+    },
+    {
+      "feedback_off_distances": [
+        0,
+        0
+      ],
+      "feedback_on_distances": [
+        4,
+        10,
+        21
+      ],
+      "model": "whisper-base.en",
+      "pair_sha256": "62f50d6409001592465140ea8ec3a3e5433aea74d6685c3559de4c350d6b8e2f",
+      "raf": 8.75
+    },
+    {
+      "feedback_off_distances": [
+        0,
+        0
+      ],
+      "feedback_on_distances": [
+        2,
+        103,
+        13
+      ],
+      "model": "whisper-base.en",
+      "pair_sha256": "fd13d77eea6f1d75adb04fc90000e351e70f1020c6d7421ebe76f5cae49dae84",
+      "raf": 59.0
+    },
+    {
+      "feedback_off_distances": [
+        0,
+        0
+      ],
+      "feedback_on_distances": [
+        1,
+        64,
+        88
+      ],
+      "model": "whisper-base.en",
+      "pair_sha256": "0a2f833cfd13a22c2db95d5802a95e8e672fd90fe6d644541c2f9b11d2a16122",
+      "raf": 153.0
+    },
+    {
+      "feedback_off_distances": [
+        0,
+        0
+      ],
+      "feedback_on_distances": [
+        6,
+        8,
+        21
+      ],
+      "model": "whisper-base.en",
+      "pair_sha256": "18c1507078fe2dbddeec5d15cc554bdab02e51e3a261244aaf74156dafa2412f",
+      "raf": 5.833333333333333
+    },
+    {
+      "feedback_off_distances": [
+        0,
+        0
+      ],
+      "feedback_on_distances": [
+        21,
+        3,
+        6
+      ],
+      "model": "whisper-base.en",
+      "pair_sha256": "cdc22e1fca2f7280c7fb92944f7f2a133d6df6b534c6823517df5c6dc4b90d3f",
+      "raf": 1.4285714285714286
+    }
+  ],
+  "schema_version": 1,
+  "selection_boundary": "Pair yield is a targeted causal stress sample, not a production prevalence estimate. RAF is summarized only on pairs persistent at the measured horizon.",
+  "sources": [
+    {
+      "model": "whisper-base.en",
+      "pairs": 16,
+      "path": "results/phase4/whisper_feedback_expanded/whisper-base-en.json",
+      "selection": {
+        "batch_sizes": [
+          8,
+          16
+        ],
+        "future_windows": 2,
+        "max_candidates": 100,
+        "singleton_repeat_mismatches": 0
+      },
+      "sha256": "8b1b28870b0b3bace3d702d7fb99665c64b2196bded63889ba404711e065fca7"
+    },
+    {
+      "model": "whisper-tiny.en",
+      "pairs": 5,
+      "path": "results/phase4/whisper_feedback_expanded/whisper-tiny-en.json",
+      "selection": {
+        "batch_sizes": [
+          8,
+          16
+        ],
+        "future_windows": 2,
+        "max_candidates": 100,
+        "singleton_repeat_mismatches": 0
+      },
+      "sha256": "3d1882f1927a1767de23367fb13cc25ef5df4cf6d721acb1fa117e85dae475bd"
+    }
+  ],
+  "statistical_unit": "a distinct legal singleton-versus-batch state pair produced by an execution-shape intervention, with future audio held fixed"
+}

@@ -1,0 +1,252 @@
+% RevTrace/FGCS references. All entries verified against CrossRef/arXiv/OpenAlex
+% or primary program pages on 2026-08-03 (see docs/reports/revtrace_paper_outline_v2.md).
+
+@article{kwon2023vllm,
+  author  = { Kwon, Woosuk and Li, Zhuohan and Zhuang, Siyuan and Sheng, Ying and Zheng, Lianmin and Yu, Cody Hao and Gonzalez, Joseph and Zhang, Hao and Stoica, Ion },
+  title   = {{Efficient Memory Management for Large Language Model Serving with PagedAttention}},
+  journal = {Proceedings of the 29th Symposium on Operating Systems Principles},
+  year    = {2023},
+  pages   = {611--626},
+  doi     = {10.1145/3600006.3613165},
+}
+
+@article{kung1981occ,
+  author  = { Kung, H. T. and Robinson, John T. },
+  title   = {{On optimistic methods for concurrency control}},
+  journal = {ACM Transactions on Database Systems},
+  year    = {1981},
+  volume  = {6},
+  number  = {2},
+  pages   = {213--226},
+  doi     = {10.1145/319566.319567},
+  abstract = {Most current approaches to concurrency control in database systems rely on locking of data objects as a control mechanism. In this paper, two families of nonlocking concurrency controls are presented. The methods used are “optimistic” in the sense that they rely mainly on transaction backup as a control mechanism, “hoping” that conflicts between transactions will not occur. Applications for which these methods should be more efficient than locking are discussed.},
+}
+
+@article{bernstein1983mvcc,
+  author  = { Bernstein, Philip A. and Goodman, Nathan },
+  title   = {{Multiversion concurrency control—theory and algorithms}},
+  journal = {ACM Transactions on Database Systems},
+  year    = {1983},
+  volume  = {8},
+  number  = {4},
+  pages   = {465--483},
+  doi     = {10.1145/319996.319998},
+  abstract = {
+            Concurrency control is the activity of synchronizing operations issued by concurrently executing programs on a shared database. The goal is to produce an execution that has the same effect as a serial (noninterleaved) one. In a multiversion database system, each write on a data item produces a new copy (or
+            version
+            ) of that data item. This paper presents a theory for analyzing the correctness of concurrency control algorithms for multiversion database systems. We use the theory to analyze some new algorithms and some previously published ones.
+          },
+}
+
+@article{howard2021confidence,
+  author  = { Howard, Steven R. and Ramdas, Aaditya and McAuliffe, Jon and Sekhon, Jasjeet },
+  title   = {{Time-uniform, nonparametric, nonasymptotic confidence sequences}},
+  journal = {The Annals of Statistics},
+  year    = {2021},
+  volume  = {49},
+  number  = {2},
+  doi     = {10.1214/20-aos1991},
+}
+
+@article{ramdas2023savi,
+  author  = { Ramdas, Aaditya and Grünwald, Peter and Vovk, Vladimir and Shafer, Glenn },
+  title   = {{Game-Theoretic Statistics and Safe Anytime-Valid Inference}},
+  journal = {Statistical Science},
+  year    = {2023},
+  volume  = {38},
+  number  = {4},
+  doi     = {10.1214/23-sts894},
+}
+
+@article{grunwald2024safetesting,
+  author  = { Grünwald, Peter and de Heide, Rianne and Koolen, Wouter },
+  title   = {{Safe testing}},
+  journal = {Journal of the Royal Statistical Society Series B: Statistical Methodology},
+  year    = {2024},
+  volume  = {86},
+  number  = {5},
+  pages   = {1091--1128},
+  doi     = {10.1093/jrsssb/qkae011},
+  abstract = {Abstract
+               We develop the theory of hypothesis testing based on the e-value, a notion of evidence that, unlike the p-value, allows for effortlessly combining results from several studies in the common scenario where the decision to perform a new study may depend on previous outcomes. Tests based on e-values are safe, i.e. they preserve type-I error guarantees, under such optional continuation. We define growth rate optimality (GRO) as an analogue of power in an optional continuation context, and we show how to construct GRO e-variables for general testing problems with composite null and alternative, emphasizing models with nuisance parameters. GRO e-values take the form of Bayes factors with special priors. We illustrate the theory using several classic examples including a 1-sample safe t-test and the 2×2 contingency table. Sharing Fisherian, Neymanian, and Jeffreys–Bayesian interpretations, e-values may provide a methodology acceptable to adherents of all three schools.},
+}
+
+@article{antunes2024reprohpc,
+  author  = { Antunes, Benjamin and Hill, David R.C. },
+  title   = {{Reproducibility, Replicability and Repeatability: A survey of reproducible research with a focus on high performance computing}},
+  journal = {Computer Science Review},
+  year    = {2024},
+  volume  = {53},
+  pages   = {100655},
+  doi     = {10.1016/j.cosrev.2024.100655},
+}
+
+@article{xu2022deterministic,
+  author  = { Xu, Xiangzhe and Liu, Hongyu and Tao, Guanhong and Xuan, Zhou and Zhang, Xiangyu },
+  title   = {{Checkpointing and deterministic training for deep learning}},
+  journal = {Proceedings of the 1st International Conference on AI Engineering: Software Engineering for AI},
+  year    = {2022},
+  pages   = {65--76},
+  doi     = {10.1145/3522664.3528605},
+}
+
+@article{machacek2023whisperstreaming,
+  author  = { Macháček, Dominik and Dabre, Raj and Bojar, Ondřej },
+  title   = {{Turning Whisper into Real-Time Transcription System}},
+  journal = {Proceedings of the 13th International Joint Conference on Natural Language Processing and the 3rd Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics: System Demonstrations},
+  year    = {2023},
+  pages   = {17--24},
+  doi     = {10.18653/v1/2023.ijcnlp-demo.3},
+}
+
+@article{zheng2024sglang,
+  author  = { Zheng, Lianmin and Yin, Liangsheng and Xie, Zhiqiang and Sun, Chuyue and Huang, Jeff and Yu, Cody Hao and Cao, Shiyi and Kozyrakis, Christos and Stoica, Ion and Gonzalez, Joseph E. and Barrett, Clark and Sheng, Ying },
+  title   = {{SGLang: Efficient Execution of Structured Language Model Programs}},
+  journal = {arXiv preprint},
+  year    = {2023},
+  url     = {https://arxiv.org/abs/2312.07104v2},
+  abstract = {Large language models (LLMs) are increasingly used for complex tasks that require multiple generation calls, advanced prompting techniques, control flow, and structured inputs/outputs. However, efficient systems are lacking for programming and executing these applications. We introduce SGLang, a system for efficient execution of complex language model programs. SGLang consists of a frontend language and a runtime. The frontend simplifies programming with primitives for generation and parallelism control. The runtime accelerates execution with novel optimizations like RadixAttention for KV cache reuse and compressed finite state machines for faster structured output decoding. Experiments show that SGLang achieves up to 6.4x higher throughput compared to state-of-the-art inference systems on various large language and multi-modal models on tasks including agent control, logical reasoning, few-shot learning benchmarks, JSON decoding, retrieval-augmented generation pipelines, and multi-turn chat. The code is publicly available at https://github.com/sgl-project/sglang},
+  eprint = {2312.07104},
+  archivePrefix = {arXiv},
+}
+
+
+@article{agrawal2024sarathi,
+  author  = { Agrawal, Amey and Kedia, Nitin and Panwar, Ashish and Mohan, Jayashree and Kwatra, Nipun and Gulavani, Bhargav S. and Tumanov, Alexey and Ramjee, Ramachandran },
+  title   = {{Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve}},
+  journal = {arXiv preprint},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2403.02310v3},
+  abstract = {Each LLM serving request goes through two phases. The first is prefill which processes the entire input prompt and produces the first output token and the second is decode which generates the rest of output tokens, one-at-a-time. Prefill iterations have high latency but saturate GPU compute due to parallel processing of the input prompt. In contrast, decode iterations have low latency but also low compute utilization because a decode iteration processes only a single token per request. This makes batching highly effective for decodes and consequently for overall throughput. However, batching multiple requests leads to an interleaving of prefill and decode iterations which makes it challenging to achieve both high throughput and low latency.
+  We introduce an efficient LLM inference scheduler, Sarathi-Serve, to address this throughput-latency tradeoff. Sarathi-Serve introduces chunked-prefills which splits a prefill request into near equal sized chunks and creates stall-free schedules that adds new requests in a batch without pausing ongoing decodes. Stall-free scheduling unlocks the opportunity to improve throughput with large batch sizes while minimizing the effect of batching on latency. Furthermore, uniform batches in Sarathi-Serve ameliorate the imbalance between iterations resulting in minimal pipeline bubbles.
+  Our techniques yield significant improvements in inference performance across models and hardware under tail latency constraints. For Mistral-7B on single A100 GPUs, we achieve 2.6x higher serving capacity and up to 3.7x higher serving capacity for the Yi-34B model on two A100 GPUs as compared to vLLM. When used with pipeline parallelism on Falcon-180B, Sarathi-Serve provides up to 5.6x gain in the end-to-end serving capacity. The source code for Sarathi-Serve is available at https://github.com/microsoft/sarathi-serve.},
+  eprint = {2403.02310},
+  archivePrefix = {arXiv},
+}
+
+
+@article{zhong2024distserve,
+  author  = { Zhong, Yinmin and Liu, Shengyu and Chen, Junda and Hu, Jianbo and Zhu, Yibo and Liu, Xuanzhe and Jin, Xin and Zhang, Hao },
+  title   = {{DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving}},
+  journal = {arXiv preprint},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2401.09670v3},
+  abstract = {DistServe improves the performance of large language models (LLMs) serving by disaggregating the prefill and decoding computation. Existing LLM serving systems colocate the two phases and batch the computation of prefill and decoding across all users and requests. We find that this strategy not only leads to strong prefill-decoding interferences but also couples the resource allocation and parallelism plans for both phases. LLM applications often emphasize individual latency for each phase: time to first token (TTFT) for the prefill phase and time per output token (TPOT) of each request for the decoding phase. In the presence of stringent latency requirements, existing systems have to prioritize one latency over the other, or over-provision compute resources to meet both.
+  DistServe assigns prefill and decoding computation to different GPUs, hence eliminating prefill-decoding interferences. Given the application's TTFT and TPOT requirements, DistServe co-optimizes the resource allocation and parallelism strategy tailored for each phase. DistServe also places the two phases according to the serving cluster's bandwidth to minimize the communication caused by disaggregation. As a result, DistServe significantly improves LLM serving performance in terms of the maximum rate that can be served within both TTFT and TPOT constraints on each GPU. Our evaluations show that on various popular LLMs, applications, and latency requirements, DistServe can serve 7.4x more requests or 12.6x tighter SLO, compared to state-of-the-art systems, while staying within latency constraints for > 90% of requests.},
+  eprint = {2401.09670},
+  archivePrefix = {arXiv},
+}
+
+
+@article{sun2024llumnix,
+  author  = { Sun, Biao and Huang, Ziming and Zhao, Hanyu and Xiao, Wencong and Zhang, Xinyi and Li, Yong and Lin, Wei },
+  title   = {{Llumnix: Dynamic Scheduling for Large Language Model Serving}},
+  journal = {arXiv preprint},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2406.03243v1},
+  abstract = {Inference serving for large language models (LLMs) is the key to unleashing their potential in people's daily lives. However, efficient LLM serving remains challenging today because the requests are inherently heterogeneous and unpredictable in terms of resource and latency requirements, as a result of the diverse applications and the dynamic execution nature of LLMs. Existing systems are fundamentally limited in handling these characteristics and cause problems such as severe queuing delays, poor tail latencies, and SLO violations.
+  We introduce Llumnix, an LLM serving system that reacts to such heterogeneous and unpredictable requests by runtime rescheduling across multiple model instances. Similar to context switching across CPU cores in modern operating systems, Llumnix reschedules requests to improve load balancing and isolation, mitigate resource fragmentation, and differentiate request priorities and SLOs. Llumnix implements the rescheduling with an efficient and scalable live migration mechanism for requests and their in-memory states, and exploits it in a dynamic scheduling policy that unifies the multiple rescheduling scenarios elegantly. Our evaluations show that Llumnix improves tail latencies by an order of magnitude, accelerates high-priority requests by up to 1.5x, and delivers up to 36% cost savings while achieving similar tail latencies, compared against state-of-the-art LLM serving systems. Llumnix is publicly available at https://github.com/AlibabaPAI/llumnix.},
+  eprint = {2406.03243},
+  archivePrefix = {arXiv},
+}
+
+
+@article{leviathan2023specdec,
+  author  = { Leviathan, Yaniv and Kalman, Matan and Matias, Yossi },
+  title   = {{Fast Inference from Transformers via Speculative Decoding}},
+  journal = {arXiv preprint},
+  year    = {2022},
+  url     = {https://arxiv.org/abs/2211.17192v2},
+  abstract = {Inference from large autoregressive models like Transformers is slow - decoding K tokens takes K serial runs of the model. In this work we introduce speculative decoding - an algorithm to sample from autoregressive models faster without any changes to the outputs, by computing several tokens in parallel. At the heart of our approach lie the observations that (1) hard language-modeling tasks often include easier subtasks that can be approximated well by more efficient models, and (2) using speculative execution and a novel sampling method, we can make exact decoding from the large models faster, by running them in parallel on the outputs of the approximation models, potentially generating several tokens concurrently, and without changing the distribution. Our method can accelerate existing off-the-shelf models without retraining or architecture changes. We demonstrate it on T5-XXL and show a 2X-3X acceleration compared to the standard T5X implementation, with identical outputs.},
+  eprint = {2211.17192},
+  archivePrefix = {arXiv},
+}
+
+
+@article{chen2023specsample,
+  author  = { Chen, Charlie and Borgeaud, Sebastian and Irving, Geoffrey and Lespiau, Jean-Baptiste and Sifre, Laurent and Jumper, John },
+  title   = {{Accelerating Large Language Model Decoding with Speculative Sampling}},
+  journal = {arXiv preprint},
+  year    = {2023},
+  url     = {https://arxiv.org/abs/2302.01318v1},
+  abstract = {We present speculative sampling, an algorithm for accelerating transformer decoding by enabling the generation of multiple tokens from each transformer call. Our algorithm relies on the observation that the latency of parallel scoring of short continuations, generated by a faster but less powerful draft model, is comparable to that of sampling a single token from the larger target model. This is combined with a novel modified rejection sampling scheme which preserves the distribution of the target model within hardware numerics. We benchmark speculative sampling with Chinchilla, a 70 billion parameter language model, achieving a 2-2.5x decoding speedup in a distributed setup, without compromising the sample quality or making modifications to the model itself.},
+  eprint = {2302.01318},
+  archivePrefix = {arXiv},
+}
+
+
+@article{radford2023whisper,
+  author  = { Radford, Alec and Kim, Jong Wook and Xu, Tao and Brockman, Greg and McLeavey, Christine and Sutskever, Ilya },
+  title   = {{Robust Speech Recognition via Large-Scale Weak Supervision}},
+  journal = {arXiv preprint},
+  year    = {2022},
+  url     = {https://arxiv.org/abs/2212.04356v1},
+  abstract = {We study the capabilities of speech processing systems trained simply to predict large amounts of transcripts of audio on the internet. When scaled to 680,000 hours of multilingual and multitask supervision, the resulting models generalize well to standard benchmarks and are often competitive with prior fully supervised results but in a zero-shot transfer setting without the need for any fine-tuning. When compared to humans, the models approach their accuracy and robustness. We are releasing models and inference code to serve as a foundation for further work on robust speech processing.},
+  eprint = {2212.04356},
+  archivePrefix = {arXiv},
+}
+
+
+@article{shi2026qwen3asr,
+  author  = { Shi, Xian and Wang, Xiong and Guo, Zhifang and Wang, Yongqi and Zhang, Pei and Zhang, Xinyu and Guo, Zishan and Hao, Hongkun and Xi, Yu and Yang, Baosong and Xu, Jin and Zhou, Jingren and Lin, Junyang },
+  title   = {{Qwen3-ASR Technical Report}},
+  journal = {arXiv preprint},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2601.21337v2},
+  abstract = {In this report, we introduce Qwen3-ASR family, which includes two powerful all-in-one speech recognition models and a novel non-autoregressive speech forced alignment model. Qwen3-ASR-1.7B and Qwen3-ASR-0.6B are ASR models that support language identification and ASR for 52 languages and dialects. Both of them leverage large-scale speech training data and the strong audio understanding ability of their foundation model Qwen3-Omni. We conduct comprehensive internal evaluation besides the open-sourced benchmarks as ASR models might differ little on open-sourced benchmark scores but exhibit significant quality differences in real-world scenarios. The experiments reveal that the 1.7B version achieves SOTA performance among open-sourced ASR models and is competitive with the strongest proprietary APIs while the 0.6B version offers the best accuracy-efficiency trade-off. Qwen3-ASR-0.6B can achieve an average TTFT as low as 92ms and transcribe 2000 seconds speech in 1 second at a concurrency of 128. Qwen3-ForcedAligner-0.6B is an LLM based NAR timestamp predictor that is able to align text-speech pairs in 11 languages. Timestamp accuracy experiments show that the proposed model outperforms the three strongest force alignment models and takes more advantages in efficiency and versatility. To further accelerate the community research of ASR and audio understanding, we release these models under the Apache 2.0 license.},
+  eprint = {2601.21337},
+  archivePrefix = {arXiv},
+}
+
+
+@article{mistral2025voxtral,
+  author  = { Liu, Alexander H. and Ehrenberg, Andy and Lo, Andy and Denoix, Clément and Barreau, Corentin and Lample, Guillaume and Delignon, Jean-Malo and Chandu, Khyathi Raghavi and Platen, Patrick von and Muddireddy, Pavankumar Reddy and Gandhi, Sanchit and Ghosh, Soham and Mishra, Srijan and Foubert, Thomas and Rastogi, Abhinav and Yang, Adam and Jiang, Albert Q. and Sablayrolles, Alexandre and Héliou, Amélie and Martin, Amélie and Agarwal, Anmol and Roux, Antoine and Darcet, Arthur and Mensch, Arthur and Bout, Baptiste and Rozière, Baptiste and Monicault, Baudouin De and Bamford, Chris and Wallenwein, Christian and Renaudin, Christophe and Lanfranchi, Clémence and Dabert, Darius and Chaplot, Devendra Singh and Mizelle, Devon and Casas, Diego de las and Chane-Sane, Elliot and Fugier, Emilien and Hanna, Emma Bou and Berrada, Gabrielle and Delerce, Gauthier and Guinet, Gauthier and Novikov, Georgii and Martin, Guillaume and Jaju, Himanshu and Ludziejewski, Jan and Rute, Jason and Chabran, Jean-Hadrien and Chudnovsky, Jessica and Studnia, Joachim and Barmentlo, Joep and Amar, Jonas and Roberts, Josselin Somerville and Denize, Julien and Saxena, Karan and Yadav, Karmesh and Khandelwal, Kartik and Jain, Kush and Lavaud, Lélio Renard and Blier, Léonard and Zhao, Lingxiao and Martin, Louis and Saulnier, Lucile and Gao, Luyu and Pellat, Marie and Guillaumin, Mathilde and Felardos, Mathis and Dinot, Matthieu and Darrin, Maxime and Augustin, Maximilian and Seznec, Mickaël and Gupta, Neha and Raghuraman, Nikhil and Duchenne, Olivier and Wang, Patricia and Saffer, Patryk and Jacob, Paul and Wambergue, Paul and Kurylowicz, Paula and Chagniot, Philomène and Stock, Pierre and Agrawal, Pravesh and Delacourt, Rémi and Sauvestre, Romain and Soletskyi, Roman and Vaze, Sagar and Subramanian, Sandeep and Garg, Saurabh and Dalal, Shashwat and Gandhi, Siddharth and Aithal, Sumukh and Antoniak, Szymon and Scao, Teven Le and Schueller, Thibault and Lavril, Thibaut and Robert, Thomas and Wang, Thomas and Lacroix, Timothée and Bewley, Tom and Nemychnikova, Valeriia and Paltz, Victor and Richard, Virgile and Li, Wen-Ding and Marshall, William and Zhang, Xuanyu and Wan, Yihan and Tang, Yunhao },
+  title   = {{Voxtral}},
+  journal = {arXiv preprint},
+  year    = {2025},
+  url     = {https://arxiv.org/abs/2507.13264v1},
+  abstract = {We present Voxtral Mini and Voxtral Small, two multimodal audio chat models. Voxtral is trained to comprehend both spoken audio and text documents, achieving state-of-the-art performance across a diverse range of audio benchmarks, while preserving strong text capabilities. Voxtral Small outperforms a number of closed-source models, while being small enough to run locally. A 32K context window enables the model to handle audio files up to 40 minutes in duration and long multi-turn conversations. We also contribute three benchmarks for evaluating speech understanding models on knowledge and trivia. Both Voxtral models are released under Apache 2.0 license.},
+  eprint = {2507.13264},
+  archivePrefix = {arXiv},
+}
+
+
+@inproceedings{yu2022orca,
+  author    = {Yu, Gyeong-In and Jeong, Joo Seong and Kim, Geon-Woo and Kim, Soojeong and Chun, Byung-Gon},
+  title     = {{Orca: A Distributed Serving System for Transformer-Based Generative Models}},
+  booktitle = {16th USENIX Symposium on Operating Systems Design and Implementation (OSDI '22)},
+  address   = {Carlsbad, CA, USA},
+  publisher = {USENIX Association},
+  year      = {2022},
+  url       = {https://www.usenix.org/conference/osdi22/presentation/yu},
+}
+
+@misc{miao2023servingsurvey,
+  title         = {Towards Efficient Generative Large Language Model Serving: A Survey from Algorithms to Systems},
+  author        = {Miao, Xupeng and Oliaro, Gabriele and Zhang, Zhihao and Cheng, Xinhao and Jin, Hongyi and others},
+  year          = {2023},
+  eprint        = {2312.15234},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2312.15234},
+}
+
+@misc{wang2024simulwhisper,
+  title         = {Simul-Whisper: Attention-Guided Streaming Whisper with Truncation Detection},
+  author        = {Wang, Haoyu and Hu, Guoqiang and Guodong, Lin and Zhang, Wei-Qiang and Li, Jian and Wang, Shaojun and Xiao, Jingdong},
+  year          = {2024},
+  eprint        = {2406.10052},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2406.10052},
+}
+
+@article{mistral2026voxtralrealtime,
+  author  = {{Mistral-AI} and Liu, Alexander H. and Ehrenberg, Andy and Lo, Andy and Sun, Chen-Yo and Lample, Guillaume and others},
+  title   = {{Voxtral Realtime}},
+  journal = {arXiv preprint},
+  year    = {2026},
+  doi     = {10.48550/arXiv.2602.11298},
+  url     = {https://arxiv.org/abs/2602.11298v3},
+  eprint  = {2602.11298},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.AI},
+}

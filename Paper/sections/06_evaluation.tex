@@ -1,0 +1,166 @@
+%% Section 6: Evaluation as five hypothesis tests. Each subsection:
+%% theory prediction -> experiment -> numbers -> verdict.
+%% Every number below is audited: results/r10_qwen_cross_adapter/
+%% ablation_summary.json (G1); R10 cross-adapter report; R9.E closure
+%% report and results/r9_dgft/FINAL_REPORT_ONLINE.json; Phase 4B causal
+%% experiment. Scopes are stated with every number.
+
+\subsection{Experimental setup and claim contracts}\label{sec:eval:setup}
+
+Table~\ref{tab:contracts} fixes, per family and per model, the proposal
+path, authority path, workload contract, quality reference, and the claims
+each contract supports; no number is ever pooled across these contracts.
+Hardware: two RTX 3090 GPUs. Workloads: the shared bilingual 30\,s
+16-session contract (c16, 480\,s audio) for the same-workload ladder, and
+the per-family production contracts for cross-architecture evidence.
+
+\tbl{t1_claim_contract}
+
+\subsection{H1: state divergence propagates through the feedback edge}
+\label{sec:eval:h1}
+
+\emph{Prediction} (Remark~\ref{rem:causal}): setting $\beta_t \equiv 0$ by
+removing the feedback edge eliminates propagation of batch-created
+state-entry divergence.
+\emph{Experiment.} On the Whisper family we enumerated the 21 legal state
+pairs and intervened causally: the identical perturbation was applied with
+the feedback edge present and with it removed.
+\emph{Result.} With feedback, 8 of 21 legal pairs propagate the divergence;
+without feedback, 0 of 21. On the 6 persistent pairs the measured tail RAF
+(Definition~\ref{def:raf}) reaches 153.
+\emph{Verdict.} The prediction is confirmed: the feedback edge is the
+propagation channel, and contamination is therefore a state-authority
+problem, not a display problem.
+
+\subsection{H2: transaction invariants exclude uncertified ancestry}
+\label{sec:eval:h2}
+
+\emph{Prediction} (Theorems~\ref{thm:ancestry}--\ref{thm:gran}): if the
+runtime enforces Definition~\ref{def:commit}, no install violation,
+fork, gap, or overlap occurs in any completed trace.
+\emph{Experiment.} Exhaustive online validation of every transaction install
+attempt: 320 Qwen revision events (R10 cross-adapter matrix, four cells) and
+1{,}048 Whisper commits (R9.E, 16 cells), including stale-descendant
+attempts and terminal frontier closure.
+\emph{Result.} Zero transaction-install violations, zero output/state
+violations, zero batch-repeat mismatches, zero batch-vs-singleton mismatches;
+stale commits: 0 accepted (rejection exercised, Corollary~\ref{cor:stale});
+all sessions closed with monotone terminal frontiers.
+\emph{Verdict.} The invariants hold exhaustively on the evaluated traces.
+We report this as exhaustive-trace protocol validation; it is not a
+failure-probability-zero claim for unobserved workloads.
+
+\subsection{H3: authority granularity drives performance}\label{sec:eval:h3}
+
+\emph{Prediction} (Proposition~\ref{prop:coarse}, P1--P4): coarse authority
+beats SG on throughput; SG shows terminal-burst tail failures even at
+8--10\% verification; Hybrid pays for quality in performance and energy; the
+energy ordering may reverse across models.
+
+\begin{figure}[t]
+  \centering
+  \figplaceholder{F3 double panel (outline v2 sec.4): (a) Pareto scatter,
+    x = wall speedup, y = P95 edit rate, size = service energy (J), color =
+    SG/Coarse/Hybrid, markers for 0.6B and 1.7B; (b) latency-scope
+    dumbbells --- SG state-entry P99 vs DGFT display P99 and segment-commit
+    P99, axes labeled by latency semantics.}
+  {Same-workload operating points (c16). Coarse-DGFT is the throughput
+  point, Hybrid the quality-conservative point, and SG the same-granularity
+  certification point; latency scopes are never mixed on one axis.}
+  \label{fig:ablation}
+\end{figure}
+\emph{Experiment.} Same-workload ladder on the identical 16 bilingual 30\,s
+sessions (c16): SG ($\granratio=1$, FP16 singleton authority, verification
+fractions 8.3\%/9.6\%), Coarse-DGFT ($\granratio=3$, FP32 batched authority,
+$r=0$), Hybrid-DGFT ($\granratio=3$, $r>0$), on Qwen3-ASR 0.6B and 1.7B.
+\emph{Result} (Table~\ref{tab:ladder}, Figure~\ref{fig:ablation}).
+Coarse-DGFT improves service throughput by $1.39\times$ (0.6B) and
+$1.28\times$ (1.7B) over SG while cutting wall-clock service time by
+27.8\% and 21.6\%. SG fails the 2\,s state-entry deadline at the session
+terminal (miss rates 3.33\%/4.17\%; state-entry P99 2.735/2.964\,s) and is
+SLO-failed, whereas Coarse/Hybrid pass with display P99
+$\le 1.018$\,s. Hybrid holds throughput near SG ($1.03\times$ on 0.6B) at
+lower edit rate (2.15\% vs 3.43\% P95) but costs energy
+($+16.8\%$ vs SG on 0.6B; $+54.2\%$ on 1.7B, where Hybrid also loses
+throughput, $0.85\times$). The direct energy comparison against SG reverses
+between models: Coarse saves 4.4\% on 0.6B but consumes 15.1\% more on
+1.7B.
+\emph{Verdict.} Predictions P1--P4 are all confirmed, including the
+model-dependent reversal of the energy ordering. The SG configuration
+remains the same-granularity certification point (Corollary~\ref{cor:sg}),
+not a dominated baseline.
+
+\tbl{t2_ladder}
+
+\subsection{H4: one invariant holds across adapters}\label{sec:eval:h4}
+
+\emph{Prediction} (Section~\ref{sec:sys:adapters}): the protocol needs only
+projection/authority/certificate interfaces, so one runtime serves
+structurally different revision semantics.
+\emph{Experiment and result.} On Qwen3-ASR (rollback, holdback, growing
+buffer), the R10 production matrix reaches $6.88\times$ wall-clock and
+$3.44\times$ GPU-normalized speedup with 59.8\% energy reduction
+(0.6B, Coarse-DGFT), and $6.06\times/3.03\times$ with 51.0\% energy
+reduction (1.7B), at P95 mixed-unit edit rates $\le 3.43\%$ against an
+independent FP16 singleton reference and display P99 $\le 1.018$\,s. On
+Whisper (previous-text conditioning), the identical runtime passes 16/16
+production cells with median wall-clock speedup $2.841\times$
+(2.633--3.849 across cells), $1.421\times$ GPU-normalized, 31.13\% energy
+reduction, display P99 $\le 1.492$\,s, and 1{,}048 certificates with zero
+violations.
+\emph{Verdict.} Confirmed: the invariant transfers across two architecture
+families through adapters; performance magnitudes are family- and
+model-dependent and are reported per contract.
+
+\begin{figure}[t]
+  \centering
+  \figplaceholder{F4 cross-architecture production matrix (outline v2
+    sec.4): Qwen 4 operating points + Whisper 16 cells (per model/arrival
+    group); wall-clock, GPU-normalized, and energy bars or panels.}
+  {Cross-family production evidence under per-contract baselines.}
+  \label{fig:production}
+\end{figure}
+
+\tbl{t3_production}
+
+\subsection{H5: each certification layer guarantees only its scope}
+\label{sec:eval:h5}
+
+\emph{Prediction} (R4, Section~\ref{sec:sys:cert}): evidence strata are
+non-transferable; each yields a bounded statement about its own scope.
+\emph{Result, by stratum.}
+(i) SG numerical risk: randomized audits of the SG authority path
+($\approx$30k audits, checkpoints 20\,s/120\,s) give anytime-valid UCBs of
+0.480\%/0.478\%; this bound belongs to the SG adapter path only and is not
+transferred to DGFT paths~\cite{howard2021confidence}.
+(ii) Authority implementation: the contract-scoped FP32 preflight records
+zero batch-repeat and zero batch-vs-singleton mismatches on the frozen Qwen
+contract (10.7--11.1\,s, excluded from service timing).
+(iii) Transaction integrity: H2's exhaustive validation (0 violations on
+320 events + 1{,}048 commits).
+(iv) Semantic quality, per family and never pooled: Qwen mixed-unit edit
+rate against the independent FP16 singleton reference has P95 $\le 3.43\%$
+(worst 5.41\%, zero catastrophic cases; exact sessions rise from 11/16 to
+13/16 on 0.6B Hybrid and from 9/16 to 10/16 on 1.7B); Whisper paired WER
+deltas against unprotected feedback are all negative, $-12.23$/$-18.21$/$-25.27$
+points on dev for tiny/base/small.en (bootstrap uppers
+$-10.48$/$-16.17$/$-22.15$) and $-8.26$/$-11.03$/$-13.76$ on 214 untouched
+utterances (uppers $-5.15$/$-7.51$/$-9.09$)
+(Figure~\ref{fig:quality}).
+
+\begin{figure}[t]
+  \centering
+  \figplaceholder{F5 double panel (outline v2 sec.4): (a) Qwen edit-rate
+    CDF against the FP16 singleton reference with exact-session counts;
+    (b) Whisper paired WER deltas (dev + untouched) with bootstrap upper
+    bounds. Two estimands, two panels, no pooled axis.}
+  {Per-family quality contracts. Qwen measures distance to an independent
+  canonical reference; Whisper measures improvement over unprotected
+  feedback.}
+  \label{fig:quality}
+\end{figure}
+\emph{Verdict.} Each layer produces exactly one scope-limited guarantee;
+no stratum's evidence is used to authorize another's installation
+decisions.
+
+\tbl{t4_quality}

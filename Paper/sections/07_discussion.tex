@@ -1,0 +1,44 @@
+%% Section 7: Discussion and Boundaries. (outline v2 sec.3.7)
+
+\paragraph{FP32 authority is a canonical path, not a repair.}
+The FP32 batched authority defines a new canonical reference for the
+contract; it is not a bitwise repair of FP16 arithmetic. FP16 remains the
+proposer and SG-authority precision. Quality estimands are defined against
+the FP16 singleton reference (Qwen) and against unprotected feedback
+(Whisper); neither claims bitwise equivalence across precisions.
+
+\paragraph{Risk evidence does not transfer.}
+The SG-path UCB of 0.480\% bounds the numerical risk of the SG adapter's
+randomized audits. It is never applied to Coarse/Hybrid paths, whose safety
+rests on Theorems~\ref{thm:ancestry}--\ref{thm:gran} and exhaustive
+transaction validation instead.
+
+\paragraph{Quality estimands differ by family.}
+Qwen edit rates measure distance to an independent canonical reference;
+Whisper WER deltas measure improvement over unprotected feedback. The two
+answer different questions and are never pooled into a single quality
+number.
+
+\paragraph{Virtual arrival versus wall clock.}
+Production cells schedule virtual causal arrivals; service wall-clock and
+energy meters measure real GPU work. Latency columns are labeled by
+semantics (display vs state-entry/segment-commit) wherever they appear.
+
+\paragraph{Preflight amortization.}
+The one-time contract preflight costs 10.7--11.1\,s. With per-session
+steady-state savings $\Delta T = T_{\mathrm{baseline}} - T_{\mathrm{DGFT}}$,
+the break-even point is
+$N = \lceil T_{\mathrm{preflight}} / \Delta T \rceil$ sessions; we report
+the one-time cost, the break-even session count, and steady-state results
+separately, and exclude the preflight from all service timing.
+
+\paragraph{Not every ASR system needs DGFT.}
+The original Voxtral report studies multimodal audio understanding and
+long-context transcription~\cite{mistral2025voxtral}; Voxtral Realtime instead
+uses a natively streaming delayed-stream design~\cite{mistral2026voxtralrealtime}.
+Such append-only semantics expose no rollback-style feedback write path, so
+the contamination channel of
+Section~\ref{sec:model:amplification} is absent; at low concurrency (our c8
+capacity probe) batching pressure is small. DGFT targets the
+revision-generative operating regime where feedback writes and batching
+coexist.

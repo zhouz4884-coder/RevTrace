@@ -1,0 +1,34 @@
+%% T4: quality contracts. Two zones, two estimands, never pooled.
+%% Sources: R10 cross-adapter report (Qwen); results/r9_dgft/
+%% FINAL_REPORT_ONLINE.json (Whisper paired WER deltas + bootstrap).
+\begin{table}[t]
+\centering
+\small
+\caption{Per-family quality contracts. The two zones answer different
+questions and are never pooled: Qwen measures distance to an independent
+canonical reference; Whisper measures improvement over unprotected
+feedback. Bootstrap upper bounds are one-sided 95\%.}
+\label{tab:quality}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Zone & Quantity & Value & Scope \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Qwen3-ASR --- mixed-unit edit rate vs
+independent FP16 singleton reference}} \\
+& P95 edit rate (worst cell) & $\le 3.43\%$ (worst 5.41\%) &
+  R10 cells, c16 \\
+& catastrophic cases & 0 & R10 cells \\
+& exact sessions, 0.6B Hybrid & 11/16 $\to$ 13/16 & c16 \\
+& exact sessions, 1.7B Hybrid & 9/16 $\to$ 10/16 & c16 \\
+\addlinespace
+\multicolumn{4}{@{}l}{\emph{Whisper --- paired WER delta vs unprotected
+feedback (points; negative = better)}} \\
+& dev, tiny / base / small.en & $-12.23$ / $-18.21$ / $-25.27$ &
+  uppers $-10.48$ / $-16.17$ / $-22.15$ \\
+& untouched ($n{=}214$) & $-8.26$ / $-11.03$ / $-13.76$ &
+  uppers $-5.15$ / $-7.51$ / $-9.09$ \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

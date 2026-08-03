@@ -1,0 +1,39 @@
+%% T2: same-workload SG/Coarse/Hybrid ladder (the central table).
+%% Source: results/r10_qwen_cross_adapter/ablation_summary.json (G1).
+\begin{table}[t]
+\centering
+\small
+\caption{Same-workload ladder on the identical 16 bilingual 30\,s sessions
+(c16, 480\,s audio; 2$\times$RTX 3090). $\granratio$: granularity ratio;
+$q/r$: SG verification / Hybrid replay fraction. Energy $\Delta$ is measured
+against SG on the same workload; the energy-reduction fractions of SG
+against the all-singleton no-serving baseline are 69.1\% (0.6B) and 66.1\%
+(1.7B). Commit P99 is the state-entry/segment-commit scope; Display P99 is
+the display scope; the two scopes are never compared across columns. SG
+fails the 2\,s state-entry SLO at the session terminal on both models.}
+\label{tab:ladder}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llccccccccccc@{}}
+\toprule
+Config & Model & $\granratio$ & $q/r$ & Wall & GPU-norm &
+$E$ (J) & $\Delta E$ vs SG & Commit P99 (s) & Display P99 (s) &
+2\,s miss & P95 edit & SLO \\
+\midrule
+SG        & 0.6B & 1 & $q{=}8.3\%$ & $5.10\times$ & $2.55\times$ &
+  4249.4 & --- & 2.735 & n/a & 3.33\% & 0.00\% & fail \\
+SG        & 1.7B & 1 & $q{=}9.6\%$ & $4.68\times$ & $2.34\times$ &
+  5215.7 & --- & 2.964 & n/a & 4.17\% & 0.00\% & fail \\
+\addlinespace
+Coarse-DGFT & 0.6B & 3 & $r{=}0$ & $6.88\times$ & $3.44\times$ &
+  4062.2 & $-4.4\%$ & 2.582 & 0.826 & n/a & 3.43\% & pass \\
+Coarse-DGFT & 1.7B & 3 & $r{=}0$ & $6.06\times$ & $3.03\times$ &
+  6001.9 & $+15.1\%$ & 3.219 & 1.018 & n/a & 1.79\% & pass \\
+\addlinespace
+Hybrid-DGFT & 0.6B & 3 & $r{=}5.0\%$ & $5.19\times$ & $2.60\times$ &
+  4961.6 & $+16.8\%$ & 3.853 & 0.782 & n/a & 2.15\% & pass \\
+Hybrid-DGFT & 1.7B & 3 & $r{=}8.8\%$ & $3.92\times$ & $1.96\times$ &
+  8045.0 & $+54.2\%$ & 4.437 & 0.990 & n/a & 1.79\% & pass \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

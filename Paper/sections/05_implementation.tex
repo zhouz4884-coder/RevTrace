@@ -1,0 +1,20 @@
+%% Section 5: Implementation. Keep short; cite artifacts.
+
+RevTrace is implemented as a serving runtime for revision-generative ASR
+models. The Qwen rollback adapter maintains a growing audio buffer with
+prefix rollback and holdback semantics; the Whisper prompt adapter maintains
+previous-text conditioning state~\cite{shi2026qwen3asr,radford2023whisper}.
+The coarse authority executes in FP32 with a 4{,}096-token KV-cache bound
+per session; the one-time contract preflight (batch-repeat and
+batch-vs-singleton invariance) takes 10.7--11.1\,s and is excluded from
+steady-state service timing, reported separately
+(Section~\ref{sec:discussion}). Sessions arrive online and are scheduled
+with causal arrival ordering; decoder outputs are transferred to the host
+via vectorized paths. Experiments use two NVIDIA RTX 3090 GPUs, one
+hosting the proposer lane and one the authority lane. Prior defects found
+and repaired during closure are documented with the artifacts: an FP16
+singleton coarse-authority candidate was rejected after failing its quality
+contract, the FP32 KV-cache bound was reduced from 65{,}536 to 4{,}096
+tokens, and a per-row CUDA-synchronization defect in the online submission
+path was fixed before the R9.E closure. All evaluated numbers are bound to
+code commit, contract digest, and result hashes in the release.

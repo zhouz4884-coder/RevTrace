@@ -1,0 +1,39 @@
+%% T5: guarantee taxonomy. Design-level separation of protection regimes;
+%% the DGFT rows' claims are evaluated in H2/H5.
+\begin{table}[t]
+\centering
+\small
+\caption{Guarantee taxonomy. \checkmark: guaranteed within the stated scope.
+$\sim$: evidence-limited --- for Coarse/Hybrid DGFT the risk column holds
+contract-scoped preflight invariance evidence, not a probabilistic bound;
+anytime-valid bounds belong to the SG path only and do not transfer
+(Section~\ref{sec:sys:cert}). Margin/confidence gates are treated as
+scheduling signals, not calibrated risk bounds. Rows 2--4 isolate
+single-protection regimes; they are not strawmen but the actual components
+of existing practice.}
+\label{tab:guarantees}
+\setlength{\tabcolsep}{3.2pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+Regime & Display stable & Feedback ancestry & Canonical authority &
+Stale rejection & Risk quantified & Semantic reference &
+Critical-path check \\
+\midrule
+Unprotected FP16 batching & $\times$ & $\times$ & $\times$ & $\times$ &
+  $\times$ & $\times$ & $\times$ \\
+Owner/version check only & $\times$ & $\times$ & $\times$ & \checkmark &
+  $\times$ & $\times$ & \checkmark \\
+LocalAgreement-style confirmation & \checkmark & $\times$ & $\times$ &
+  $\times$ & $\times$ & $\times$ & $\times$ \\
+Margin/confidence gate & $\times$ & $\times$ & $\times$ & $\times$ &
+  $\times$ & $\times$ & \checkmark \\
+\addlinespace
+SG-DGFT ($\granratio=1$) & \checkmark & \checkmark & \checkmark &
+  \checkmark & \checkmark & \checkmark & \checkmark \\
+Coarse/Hybrid DGFT ($\granratio>1$) & \checkmark & \checkmark & \checkmark &
+  \checkmark & $\sim$ & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

@@ -1,0 +1,74 @@
+%% Section 1: Introduction. Jobs: field stake -> bottleneck -> prior
+%% attempts -> what this paper does -> contributions. (outline v2 sec.3.1)
+
+Streaming speech services are increasingly built on \emph{revision-generative}
+models: a Whisper-style decoder is conditioned on its own previously generated
+text~\cite{radford2023whisper,machacek2023whisperstreaming}, and ASR-capable
+large language models such as Qwen3-ASR re-prompt themselves with rollback
+prefixes of their prior output~\cite{shi2026qwen3asr}. In these systems the
+generated text is not merely displayed; it is written back into the state that
+conditions future generation. Serving systems, however, are still built on the
+opposite assumption: a generated output is terminal, and its only consumer is
+the user~\cite{kwon2023vllm,yu2022orca,zheng2024sglang}.
+
+Batching is the standard mechanism by which serving systems buy throughput:
+independent sessions share one forward pass~\cite{kwon2023vllm,agrawal2024sarathi,zhong2024distserve,sun2024llumnix}.
+But batched execution perturbs floating-point arithmetic relative to singleton
+execution, so batched outputs can differ locally from their canonical
+single-session counterparts. In terminal-output systems this difference is
+display noise. In revision-generative systems it is worse: once a perturbed
+output is written into feedback state, the divergence is inherited by every
+future revision. Section~\ref{sec:model} makes this precise; our causal
+experiment confirms the prediction: with the feedback edge present, 8 of 21
+legal state pairs propagate a batch-created divergence, and with the edge
+removed, none do; on the persistent pairs the measured revision amplification
+factor (RAF) reaches 153.
+
+Prior mechanisms do not cover this failure mode. Streaming-ASR confirmation
+policies such as LocalAgreement commit stable display prefixes but never
+constrain which outputs may become future-state
+parents~\cite{machacek2023whisperstreaming}. Speculative decoding verifies
+draft tokens against a target distribution, not state-write
+authority~\cite{leviathan2023specdec,chen2023specsample}. Deterministic-inference
+work repairs arithmetic reproducibility but not feedback
+semantics~\cite{xu2022deterministic,antunes2024reprohpc}. Optimistic
+concurrency control supplies the closest analogy~\cite{kung1981occ,bernstein1983mvcc},
+yet classical transactions commit reads and writes of stored data, whereas
+here the ``write'' is a model-generated projection whose legality must be
+certified by the serving contract itself.
+
+This paper takes one position: \emph{revision outputs are speculative writes
+to future model state, not merely user-visible responses}, and
+\[
+\mathrm{Display}(\out_t)\;\not\Rightarrow\;\mathrm{Authorize}\bigl(\proj(\out_t;\state_t)\bigr).
+\]
+We introduce \textbf{Dual-Granularity Feedback Transactions} (DGFT): a fine
+proposal path serves low-latency display, while only a coarse canonical
+authority may install state projections, and only as a certificate-bearing
+transaction. DGFT is formalized in Section~\ref{sec:dgft}, where
+same-granularity certification appears as the degenerate $\granratio=1$ case,
+three transaction invariants are proved, and an authority-cost decomposition
+predicts when coarse authority outperforms same-granularity verification.
+\textbf{RevTrace} (Sections~\ref{sec:system}--\ref{sec:impl}) implements the
+transaction runtime with a stratified, contract-scoped certification layer.
+
+Contributions:
+\begin{enumerate}
+  \item A problem characterization of feedback-state contamination in
+    revision-generative serving, with a causal verification that the feedback
+    edge is the propagation channel (Section~\ref{sec:model},
+    Section~\ref{sec:eval}, H1).
+  \item DGFT, a dual-granularity transaction mechanism with provable
+    invariants---uncertified-ancestry exclusion, committed-state
+    linearizability, and granularity-independent safety---and a cost analysis
+    whose predictions we test (Section~\ref{sec:dgft}, H3).
+  \item RevTrace, a runtime with contract-scoped stratified certification:
+    randomized audits and anytime-valid bounds on the same-granularity path,
+    FP32 preflight invariance checks, exhaustive transaction validation, and
+    independent quality references (Section~\ref{sec:system}, H2, H5).
+  \item A cross-family evaluation on two architecture families and five
+    checkpoints (Qwen3-ASR 0.6B/1.7B; Whisper tiny/base/small.en) on two
+    RTX 3090 GPUs: same-workload SG/Coarse/Hybrid ablation, production
+    performance, per-family quality contracts, and boundary evidence
+    (Section~\ref{sec:eval}, H1--H5).
+\end{enumerate}

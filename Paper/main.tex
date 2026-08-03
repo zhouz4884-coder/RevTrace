@@ -1,0 +1,132 @@
+%% RevTrace/FGCS manuscript skeleton (elsarticle, numbered references)
+%% Decision: OUTLINE_V2_THEORY_GUIDED (docs/reports/revtrace_paper_outline_v2.md)
+%% Claim discipline: no claim may exceed docs/CLAIM_BOUNDARIES.md.
+%% Compile: pdflatex main && bibtex main && pdflatex main x2  (or Overleaf)
+\documentclass[review]{elsarticle}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,multirow,array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+%% --- theorem environments (Section 3) ---------------------------------
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%% --- notation shortcuts (locked in outline v2, Section 1 ledger) ------
+\newcommand{\state}{S}
+\newcommand{\audio}{A}
+\newcommand{\out}{Y}
+\newcommand{\proj}{\Phi}
+\newcommand{\ediv}{e}
+\newcommand{\cont}{C}
+\newcommand{\dist}{D}
+\newcommand{\tx}{\tau}
+\newcommand{\commit}{\Gamma}
+\newcommand{\cert}{\mathrm{cert}}
+\newcommand{\granratio}{\rho}
+
+%% --- drafting aids (remove before submission) --------------------------
+\newcommand{\todowrite}[1]{\textcolor{red}{[WRITE: #1]}}
+\newcommand{\figplaceholder}[2]{%
+  \fbox{\parbox[c][0.32\textheight][c]{\linewidth}{\centering\color{gray}FIGURE PLACEHOLDER --- #1}}%
+  \caption{#2}}
+
+%% --- table input path ---------------------------------------------------
+\newcommand{\tbl}[1]{\input{tables/#1}}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{RevTrace: Dual-Granularity Feedback Transactions for
+State-Certified Streaming ASR Serving}
+
+%% Authors and affiliations: to be filled before submission.
+\author{Author One\corref{cor1}}
+\ead{author@example.org}
+\cortext[cor1]{Corresponding author.}
+\affiliation{organization={Affiliation}, country={Country}}
+
+\begin{abstract}
+%% Seven-sentence skeleton (outline v2). DRAFT v0 --- numbers are the
+%% audited ones; wording will be polished in the final pass.
+Streaming serving systems for revision-generative models treat generated
+output as terminal, even when that output is written back into future model
+state.
+We formalize this class as revision-generative state machines and show that
+batching-created output divergence becomes persistent state contamination
+exactly when the feedback edge is present: with feedback, 8 of 21 legal
+state pairs propagate divergence, and without it, none do.
+We introduce Dual-Granularity Feedback Transactions (DGFT), which separate
+low-latency display authority from coarse-grained state-write authority and
+admit a revision to future state only as a certificate-bearing transaction;
+same-granularity certification appears as the degenerate $\granratio=1$ case.
+We prove three transaction invariants (uncertified-ancestry exclusion,
+committed-state linearizability, granularity-independent safety) and derive
+an authority-cost decomposition that predicts when coarse authority beats
+same-granularity verification.
+RevTrace, a runtime implementing DGFT with contract-scoped stratified
+certification, is evaluated on two architecture families: Qwen3-ASR 0.6B/1.7B
+and Whisper tiny/base/small.en, on two RTX 3090 GPUs.
+On a shared bilingual workload, coarse-DGFT improves service throughput by
+$1.39\times$ and $1.28\times$ over the same-granularity configuration while
+the latter fails the 2\,s state-entry SLO at the session terminal; across
+production contracts, DGFT reaches up to $6.88\times$ wall-clock speedup on
+Qwen3-ASR-0.6B and passes all 16 Whisper serving cells, with zero
+transaction-install violations in 320 Qwen revision events and 1{,}048
+Whisper commits.
+Risk signals schedule verification but never authorize state installation;
+quality is measured against independent references per family and is never
+pooled across contracts.
+\end{abstract}
+
+\begin{keyword}
+streaming ASR serving \sep LLM inference \sep optimistic concurrency control
+\sep state certification \sep transactional memory
+\end{keyword}
+
+\end{frontmatter}
+
+%% =======================================================================
+\section{Introduction}\label{sec:intro}
+\input{sections/01_introduction}
+
+\section{Model and Problem Formulation}\label{sec:model}
+\input{sections/02_model}
+
+\section{DGFT: Theory and Mechanism}\label{sec:dgft}
+\input{sections/03_dgft}
+
+\section{The RevTrace System}\label{sec:system}
+\input{sections/04_system}
+
+\section{Implementation}\label{sec:impl}
+\input{sections/05_implementation}
+
+\section{Evaluation}\label{sec:eval}
+\input{sections/06_evaluation}
+
+\section{Discussion and Boundaries}\label{sec:discussion}
+\input{sections/07_discussion}
+
+\section{Related Work}\label{sec:related}
+\input{sections/08_related}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/09_conclusion}
+
+%% =======================================================================
+\bibliographystyle{elsarticle-num}
+\bibliography{refs}
+
+\end{document}

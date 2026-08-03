@@ -1,0 +1,18 @@
+%% Section 9: Conclusion. (outline v2 sec.3.9)
+
+Revision-generative serving turns generated outputs into speculative writes
+to future model state. This paper formalized the resulting contamination
+channel, proved that separating display authority from state-write authority
+via certificate-bearing transactions excludes uncertified ancestry at any
+granularity ratio, and showed that the cost of that separation is governed
+by an authority decomposition whose predictions we confirmed
+experimentally. On two architecture families and five checkpoints, DGFT in
+RevTrace reaches up to $6.88\times$ wall-clock speedup with zero
+transaction-install violations across 320 Qwen revision events and
+1{,}048 Whisper commits, while same-granularity certification appears as the
+$\granratio=1$ reduction of the same protocol. Certification is
+contract-scoped: risk signals schedule verification but never authorize
+installation, and quality evidence never transfers across estimands.
+Extending the transaction discipline to other feedback-driven revision
+models---including text-LLM and multimodal settings with stateful
+generation---is the natural next step.
