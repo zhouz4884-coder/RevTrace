@@ -64,6 +64,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.82)
     parser.add_argument("--authority-memory-utilization", type=float, default=0.82)
+    parser.add_argument("--authority-max-model-len", type=int, default=4096)
     parser.add_argument("--result-timeout-seconds", type=float, default=900.0)
     parser.add_argument("--contract-epoch", type=int, default=10)
     parser.add_argument("--policy-version", default="r10-qwen-cross-v1")
@@ -99,6 +100,7 @@ def authority_worker(
     dtype: str,
     execution: str,
     audit_first_segment: bool,
+    max_model_len: int,
 ) -> None:
     try:
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu
@@ -111,7 +113,11 @@ def authority_worker(
         from run_revguard_same_input import candidate_record
         from run_revtrace_dual_gpu import build_asr, singleton_records
 
-        asr = build_asr(model, dtype, memory_utilization, logprobs=20)
+        asr = build_asr(
+            model, dtype, memory_utilization,
+            max_model_len=max_model_len, logprobs=20,
+            max_num_seqs=128,
+        )
         sources = load_sources(Path(data_manifest))
         smoke = official_smoke(asr, sources["English"][0])
         if not smoke["exact"]:
@@ -222,6 +228,7 @@ def main() -> int:
             "dtype": args.authority_dtype,
             "execution": args.authority_execution,
             "audit_first_segment": args.audit_first_authority_segment,
+            "max_model_len": args.authority_max_model_len,
         },
         name="qwen-dgft-authority",
     )
@@ -295,6 +302,7 @@ def main() -> int:
         "authority_first_segment_invariance_audit": (
             args.audit_first_authority_segment
         ),
+        "authority_max_model_len": args.authority_max_model_len,
         "hybrid_terminal_fine_replay": args.hybrid_terminal_fine_replay,
     }
     contract_digest = canonical_digest(contract)
@@ -694,6 +702,7 @@ def main() -> int:
             "authority_pid": ready["pid"],
             "authority_dtype": args.authority_dtype,
             "authority_execution": args.authority_execution,
+            "authority_max_model_len": args.authority_max_model_len,
             "source_sha256": {
                 "runner": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 "cross_adapter": hashlib.sha256(
