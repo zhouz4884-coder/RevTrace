@@ -457,6 +457,22 @@ See the [R10 closure report](docs/reports/r10_qwen_cross_adapter.md) and the
 FP32 batched authority is a versioned canonical execution path; it is not
 claimed to reproduce the original FP16 singleton trajectory bit-for-bit.
 
+The same-workload ablation adds SG-DGFT under the identical 16-session,
+30-second bilingual workload. SG preserves zero observed output/state/stale
+violations and reaches 5.10x/4.68x wall speedup, but synchronized terminal
+verification causes 3.33%/4.17% two-second state-entry misses. This negative
+tail boundary is retained rather than hidden. See the
+[same-workload ablation](docs/reports/r10_same_workload_dgft_ablation.md) and
+[machine-readable audit](results/r10_qwen_cross_adapter/ablation_summary.json).
+
+The submission narrative is frozen as **state-entry invariant -> DGFT ->
+RevTrace runtime + certification layer**. See the
+[paper identity](docs/reports/revtrace_paper_identity.md),
+[DGFT blueprint](docs/reports/revtrace_dgft_paper_blueprint.md), and
+[claim boundaries](docs/CLAIM_BOUNDARIES.md). Same-granularity certification
+is the coinciding-granularity DGFT special case; it is not a second named
+paper mechanism.
+
 ## Repository layout
 
 ```text

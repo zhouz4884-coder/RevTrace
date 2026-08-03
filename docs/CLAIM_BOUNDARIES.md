@@ -1,5 +1,63 @@
 # Claim boundaries
 
+## Submission claim set: invariant -> DGFT -> RevTrace
+
+- **Paper invariant.** Generated output may be displayed provisionally, but it
+  may not acquire write authority over future feedback state until the active
+  execution contract certifies that state transition.
+- **Mechanism.** Dual-Granularity Feedback Transactions (DGFT) decouple a
+  fine-grained proposal lane from a coarser canonical-authority lane. A
+  directional coverage witness determines when the coarse result covers the
+  fine state entry; uncovered regions are selectively replayed at fine
+  granularity.
+- **System.** RevTrace implements DGFT with parent-version binding, atomic
+  state installation, stale-descendant invalidation, architecture-specific
+  rebase adapters, and fail-closed authority-invariance preflight.
+- **Certification layer.** Contract fingerprints, policy epochs,
+  pre-outcome audits, and anytime-valid risk bounds remain a named part of the
+  system. Risk signals schedule authority work; they never serve as
+  deterministic floating-point certificates.
+
+SG certification is the coinciding-granularity special case of DGFT. Proposal
+and authority units are identical, the directional-coverage witness
+degenerates, and selective fine replay becomes risk-triggered
+re-verification. This relation is semantic, not arithmetic: the legacy FP16
+singleton SG authority and the FP32 batched DGFT authority are two distinct,
+versioned canonical paths. No bitwise identity is claimed between them.
+
+## Quality-contract vocabulary
+
+The paper defines two non-interchangeable quality questions and never pools
+their values:
+
+1. **Canonical-reference deviation** asks how far the deployed output is from
+   an independent authority reference under the declared contract. Qwen
+   reports mixed-unit edit rate against a fresh FP16 singleton reference
+   (R10 P95 at most 3.43%; worst session 5.41%).
+2. **Unprotected-feedback delta** asks whether protection improves or harms
+   task quality relative to the same model with unsafe feedback admitted.
+   Whisper reports paired WER delta against unprotected feedback execution;
+   all frozen R9.E deltas are negative.
+
+The first quantity is a reference-fidelity contract; the second is an
+application-benefit comparison. Neither may be relabeled as the other.
+
+## Certification-evidence scope
+
+- The deepest statistical audit (about 30,000 audited decisions and the
+  reported 0.48% anytime-valid upper bound) was collected through the SG
+  adapter. It is evidence that the certification layer can be stress-audited,
+  not an audit performed inside every DGFT production cell.
+- The checkpoint-20, 120-second long-horizon evidence was also collected on
+  the SG adapter. DGFT currently contributes fail-closed preflight invariance
+  plus exhaustive-trajectory zero transaction-install violations under its
+  frozen production contracts.
+- The certification layer is adapter-independent by construction, but these
+  empirical scopes must remain visible. Adapter independence is not a license
+  to transfer a numerical bound between canonical paths or contract digests.
+- Finite zero observed violations remain empirical evidence. They are not a
+  deterministic arithmetic certificate or a claim of zero population risk.
+
 ## Phase 3A adaptive-control boundary
 
 - A contract fingerprint change invalidates all old evidence and starts a new

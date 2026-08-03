@@ -7,8 +7,9 @@
 R10 answers a narrow but important submission question: can the directional
 granularity mechanism used for Whisper be installed on Qwen without creating a
 second, unrelated serving system?  The answer is yes.  RevTrace remains the
-single state-certifying transaction runtime.  DGFT and RevOCC are evidence
-adapters that propose different authorities for that same commit protocol.
+single state-certifying transaction runtime. The paper-facing mechanism is
+DGFT. The legacy same-granularity path is retained as the coinciding-granularity
+SG-DGFT special case, not promoted as a second named mechanism.
 
 The four production cells all pass the predeclared correctness, quality, and
 performance gates.  Across 320 live revision events, there are zero observed
@@ -48,6 +49,33 @@ GPUs have different roles, so GPU-normalized speedup divides the deployed wall
 speedup by two.  Even the slowest hybrid cell retains 1.96x GPU-normalized
 throughput and 33.2% lower energy per processed audio second.
 
+## Same-workload SG ablation
+
+The historical SG headline came from a different Phase 3A contract and is not
+used in the paper ablation. Two new SG cells use the same 16 bilingual
+30-second sessions, c16 synchronized arrival, and two GPUs as R10. Their
+authority is the FP16 2-second singleton path.
+
+| Model | Wall | GPU-normalized | Energy reduction | Verify fraction | State-entry P99 | 2s miss | Output/state/stale violations |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Qwen3-ASR-0.6B | 5.10x | 2.55x | 69.1% | 8.33% | 2.735 s | 3.33% | 0/0/0 |
+| Qwen3-ASR-1.7B | 4.68x | 2.34x | 66.1% | 9.58% | 2.964 s | 4.17% | 0/0/0 |
+
+The SG mechanism is correct on every independently replayed revision but fails
+the preregistered tail gate because all synchronized terminal revisions require
+singleton authority. This is a tail-latency boundary, not a transaction-safety
+failure. Coarse-DGFT increases wall speedup to 6.88x/6.06x and exposes
+provisional display at 0.826/1.018 s P99; its 6-second authority-segment commit
+latency (2.582/3.219 s) is reported separately and must not be relabeled as the
+same latency quantity as SG's 2-second state entry.
+
+Using raw service wall time on the identical 480-second audio workload,
+coarse-DGFT is 1.385x and 1.276x faster than SG (27.8%/21.6% less wall time).
+Its service energy is 4.4% lower than SG on 0.6B but 15.1% higher on 1.7B.
+Hybrid is deliberately quality-oriented: it is nearly wall-neutral on 0.6B
+(1.033x versus SG) and slower/more energy intensive on 1.7B. These direct
+comparisons are kept separate from each cell's baseline-normalized headline.
+
 ## What the comparison says
 
 DGFT is the throughput-oriented adapter.  It accepts the invariant coarse
@@ -59,13 +87,17 @@ P95 or worst edit rate; the 3.92x speedup is therefore a measurable cost for a
 smaller quality gain.  The paper should report both operating points rather
 than claim hybrid universally dominates DGFT.
 
-This result does not replace the stronger RevOCC Qwen headline.  It establishes
-adapter composability: one transaction core supports a numerical-risk adapter
-(RevOCC) and a granularity authority adapter (DGFT).  The manuscript should
-lead with the common state-entry contract and transaction semantics, then show
-the adapters as architecture-specific evidence providers.  Presenting RevOCC
-and DGFT as two co-equal end-to-end systems would unnecessarily fragment the
-paper.
+This result establishes adapter composability inside one mechanism: DGFT can
+operate with coinciding proposal/authority granularity (SG), a coarse
+authority, or a hybrid coarse authority plus selective fine replay. The
+manuscript leads with the state-entry invariant, then DGFT, then the RevTrace
+runtime and certification layer. It does not present the historical SG label
+as a co-equal end-to-end system.
+
+The FP16 singleton SG authority and the FP32 batched coarse authority are
+distinct versioned canonical paths. The special-case relationship concerns
+granularity and control flow; it does not assert bitwise identity between
+those arithmetic paths.
 
 ## Problems found and repaired
 

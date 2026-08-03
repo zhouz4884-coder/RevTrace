@@ -23,3 +23,9 @@ complete per-event JSON records for the final Qwen cross-adapter gate.  Its
 `summary.json` records SHA-256 hashes, code commit, per-cell gates, and the
 fail-closed matrix decision.  Failed/smoke realizations are retained under
 `diagnostics` and are not mixed into the production aggregate.
+
+The same directory also contains two `sg/` cells rerun on the R10 workload and
+`ablation_summary.json`. Together with the four coarse/hybrid cells, these form
+the six-cell ceteris-paribus SG/Coarse-DGFT/Hybrid-DGFT ablation. The SG raw
+records retain their failed tail-SLO decisions even though all independently
+replayed output, state, and version checks are exact.
