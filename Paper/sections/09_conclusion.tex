@@ -2,17 +2,27 @@
 
 Revision-generative serving turns generated outputs into speculative writes
 to future model state. This paper formalized the resulting contamination
-channel, proved that separating display authority from state-write authority
-via certificate-bearing transactions excludes uncertified ancestry at any
-granularity ratio, and showed that the cost of that separation is governed
-by an authority decomposition whose predictions we confirmed
-experimentally. On two architecture families and five checkpoints, DGFT in
-RevTrace reaches up to $6.88\times$ wall-clock speedup with zero
-transaction-install violations across 320 Qwen revision events and
-1{,}048 Whisper commits, while same-granularity certification appears as the
-$\granratio=1$ reduction of the same protocol. Certification is
-contract-scoped: risk signals schedule verification but never authorize
-installation, and quality evidence never transfers across estimands.
+channel and introduced certificate-bearing transactions that separate
+display authority from state-write authority. Under the stated trust and
+binding assumptions, the protocol excludes uncertified ancestry, produces a
+single fork-free committed revision history, and remains safe for any
+granularity ratio. Its cost is governed by the complete authority path---not
+granularity alone---and the measurements identify when coarse authority is
+worthwhile. Across two architecture families and five checkpoints, RevTrace
+reaches up to $6.88\times$ wall-clock speedup. We observe no output/state or
+transaction-install violations in 800 Qwen revision events (480 SG and 320
+DGFT) and 1{,}048 Whisper commits; these finite traces support the declared
+contracts but are not a proof of zero implementation faults. Same-granularity
+certification is the $\granratio=1$ reduction of the protocol. Risk signals
+schedule verification but never authorize installation, and quality evidence
+does not transfer across estimands or canonical paths.
+On an independent single-node 8$\times$V100 contract, balanced
+four-proposer/four-authority scaling sustains $147.1\times/114.5\times$ audio
+real-time throughput for Qwen3-ASR 0.6B/1.7B at c64, with display P99
+1.115/1.471\,s and nominal scale efficiency 91.1/100.7\%. The c128 points fail
+the 2\,s SLO and are retained as the measured capacity boundary. These values
+extend the evidence to high-concurrency single-node serving without being
+pooled with the RTX~3090/vLLM contract.
 Extending the transaction discipline to other feedback-driven revision
 models---including text-LLM and multimodal settings with stateful
 generation---is the natural next step.

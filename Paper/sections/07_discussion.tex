@@ -13,6 +13,17 @@ randomized audits. It is never applied to Coarse/Hybrid paths, whose safety
 rests on Theorems~\ref{thm:ancestry}--\ref{thm:gran} and exhaustive
 transaction validation instead.
 
+\paragraph{The authority plane is trusted and versioned.}
+The current contract assumes a non-Byzantine authority coordinator, atomic
+certificate consumption and version comparison, immutable audio bytes during
+a transaction, and collision-resistant digests. A certificate binds the
+parent version, audio and projection digests, and the complete canonical-path
+configuration; it is not a standalone proof against a compromised authority.
+Our production traces contain no stale-install attempt. Their zero observed
+install violations therefore validate accepted-history integrity, whereas
+the stale-result rejection rule is supported by the protocol argument rather
+than a fault-injection denominator.
+
 \paragraph{Quality estimands differ by family.}
 Qwen edit rates measure distance to an independent canonical reference;
 Whisper WER deltas measure improvement over unprotected feedback. The two
@@ -22,15 +33,39 @@ number.
 \paragraph{Virtual arrival versus wall clock.}
 Production cells schedule virtual causal arrivals; service wall-clock and
 energy meters measure real GPU work. Latency columns are labeled by
-semantics (display vs state-entry/segment-commit) wherever they appear.
+semantics (display, state-entry, or segment-commit) wherever they appear.
+Consequently, the SG certified state-entry deadline and the DGFT provisional
+display/segment-commit measurements are reported separately; the manuscript
+does not transfer an SLO pass label between them.
+
+\paragraph{Why coarse authority improves throughput.}
+The same-workload ablation supports the cost decomposition rather than a
+granularity-only explanation. SG repeatedly invokes an FP16 singleton
+authority and accumulates a synchronized terminal burst; Coarse amortizes
+authority work through an FP32 batch, while Hybrid pays selective replay to
+recover a more conservative quality point. This explains why Coarse has the
+shortest absolute wall time, why Hybrid is not uniformly dominant, and why the
+ordering may change with model-specific FP16/FP32 cost. Unlike token-level
+verified speculation such as LLM-42~\cite{zhang2026llm42}, the saved work here
+is measured at a revision-state authorization boundary; unlike stateful cache
+reuse~\cite{yu2025pensieve,gao2024cachedattention}, the protected object is the
+transition that creates reusable state.
+
+\paragraph{The cost equations are a decomposition, not a fitted oracle.}
+Equations~\eqref{eq:cost-sg}--\eqref{eq:cost-service} identify the complete
+authority-path terms and yield a sufficient operating condition; they do not
+claim a workload-independent numerical predictor. H3 therefore compares
+complete configurations on one frozen workload and reports the model-dependent
+ordering reversal. Risk-bound sensitivity is evaluated separately and is
+never converted into fabricated per-setting GPU times.
 
 \paragraph{Preflight amortization.}
 The one-time contract preflight costs 10.7--11.1\,s. With per-session
 steady-state savings $\Delta T = T_{\mathrm{baseline}} - T_{\mathrm{DGFT}}$,
-the break-even point is
-$N = \lceil T_{\mathrm{preflight}} / \Delta T \rceil$ sessions; we report
-the one-time cost, the break-even session count, and steady-state results
-separately, and exclude the preflight from all service timing.
+we define the break-even point as
+$N = \lceil T_{\mathrm{preflight}} / \Delta T \rceil$ sessions. We report
+the one-time cost and steady-state results separately, and exclude the
+preflight from all service timing.
 
 \paragraph{Not every ASR system needs DGFT.}
 The original Voxtral report studies multimodal audio understanding and
@@ -42,3 +77,17 @@ Section~\ref{sec:model:amplification} is absent; at low concurrency (our c8
 capacity probe) batching pressure is small. DGFT targets the
 revision-generative operating regime where feedback writes and batching
 coexist.
+
+\paragraph{Scale boundary.}
+Under the stated trust and atomicity assumptions, safety is independent of
+adapter and granularity, but performance remains hardware- and
+backend-specific. The RTX~3090 results establish cross-architecture mechanism
+portability over five checkpoints. The independent 8$\times$V100 experiment
+adds single-node replica scaling and identifies c64 as the largest measured
+point satisfying the 2\,s display SLO; c128 saturates and fails that SLO.
+Neither experiment establishes multi-node scalability or a data-center
+production claim. The V100 result also shows that even FP32 batching need not
+match singleton output, so its authority contract is platform-scoped rather
+than assumed from precision alone. Higher-end accelerators and distributed
+authority ledgers may change the cost ordering without changing the
+state-write authorization problem.

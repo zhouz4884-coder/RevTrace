@@ -2,61 +2,108 @@
 %% list. (outline v2 sec.3.8)
 
 \paragraph{Streaming ASR and confirmation policies.}
-Streaming decoders must decide when displayed text becomes final.
-Whisper-based streaming maintains confirmed/unconfirmed prefixes and commits
-a prefix only after repeated decoding passes agree
-(LocalAgreement)~\cite{machacek2023whisperstreaming,radford2023whisper};
-chunk-based adaptations add truncation
-detection~\cite{wang2024simulwhisper}. These policies protect \emph{display}
-stability; none of them constrains which outputs may become parents of
-future model state, which is exactly the gap
-Eq.~\eqref{eq:invariant} names.
+Partial-hypothesis stability has long been recognized as distinct from final
+recognition quality~\cite{selfridge2011stability,shangguan2020stability}.
+Modern streaming decoders therefore manage revision at the display layer:
+transducers emit and revise hypotheses as audio arrives
+~\cite{graves2012transduction}, while Whisper-based streaming maintains
+confirmed and unconfirmed prefixes and commits text after repeated decoding
+passes agree~\cite{machacek2023whisperstreaming,radford2023whisper};
+chunk-based adaptations additionally detect truncation
+~\cite{wang2024simulwhisper}. These policies reduce visible flicker. RevTrace
+addresses a different boundary: whether a generated projection is authorized
+to become a parent of future model state. A display-confirmed prefix need not
+be certified against an independent authority path, and a provisional display
+need not be allowed to update feedback state.
 
-\paragraph{Speculative execution with verification.}
+\paragraph{Speculative execution and numerical verification.}
 Speculative decoding verifies draft tokens against a target model so that
-acceleration preserves the output
-distribution~\cite{leviathan2023specdec,chen2023specsample}. The analogy is
-structural---propose fast, verify before accepting---but the verified object
-differs: tokens of a single response, rather than a state projection that
-conditions all future rounds.
+acceleration preserves the target distribution
+~\cite{leviathan2023specdec,chen2023specsample}; Medusa, EAGLE, and SpecInfer
+increase the accepted work per verification step
+~\cite{cai2024medusa,li2024eagle,miao2024specinfer}. More directly,
+LLM-42 combines a fast nondeterministic path with a fixed arithmetic
+verification path and rollback~\cite{zhang2026llm42}. RevTrace shares the
+propose--verify pattern but changes both the verified object and the safety
+condition: it certifies a revision transition whose projection can condition
+all later rounds, binds that certificate to parent provenance, and prevents
+uncertified descendants from entering committed state. Thus token acceptance
+and revision-state installation are related but non-interchangeable contracts.
+MarginGate sparsifies LLM-42-style verification using low token margins and
+repairs the current KV column~\cite{chu2026margingate}; its risk signal does
+not itself define feedback-state authority, certificate binding, or
+parent-version installation. H6 evaluates a clearly labeled revision-level
+adaptation rather than attributing those semantics to the original system.
 
-\paragraph{LLM serving systems.}
-Modern serving systems optimize memory, scheduling, and parallelism for
-throughput and latency: paged KV-cache management~\cite{kwon2023vllm},
-iteration-level scheduling~\cite{yu2022orca}, structured-program
-runtimes~\cite{zheng2024sglang}, prefill-decode
-chunking~\cite{agrawal2024sarathi}, phase
-disaggregation~\cite{zhong2024distserve}, and dynamic request
-migration~\cite{sun2024llumnix} (surveyed
-in~\cite{miao2023servingsurvey}). All treat generated output as terminal:
-none models the case where outputs are written back into the state that
-conditions future generation. RevTrace is complementary to, not competitive
-with, these efficiency mechanisms.
+\paragraph{LLM serving and materialized state.}
+Throughput-oriented serving systems optimize request execution through paged
+KV-cache management~\cite{kwon2023vllm}, iteration-level scheduling
+~\cite{yu2022orca}, structured-program runtimes~\cite{zheng2024sglang},
+chunked prefill~\cite{agrawal2024sarathi}, phase disaggregation
+~\cite{zhong2024distserve}, and request migration~\cite{sun2024llumnix}.
+Stateful systems further preserve, place, or reuse materialized state:
+Pensieve and CachedAttention reuse or transport multi-turn KV state
+~\cite{yu2025pensieve,gao2024cachedattention}, Parrot schedules application
+dataflow with semantic variables~\cite{lin2024parrot}, Agentix manages
+cross-agent KV reuse~\cite{luo2026agentix}, and Mooncake disaggregates KV-cache
+storage~\cite{qin2024mooncake}. These mechanisms reason about the identity,
+residency, transfer, or dependency of already materialized state. They do not
+generally expose a separate authorization point at which a batch-created,
+model-generated revision projection must be certified before it becomes
+future feedback. RevTrace is therefore complementary: it governs state-entry
+authority before downstream cache placement or reuse.
 
-\paragraph{Determinism and reproducibility of inference.}
-Training- and inference-time nondeterminism from nondeterministic kernels
-and atomic accumulation is well
-documented~\cite{xu2022deterministic,antunes2024reprohpc}. DGFT takes the
-opposite position: instead of promising bitwise determinism of batched
-execution, it treats batch-created divergence as given and governs which
-divergent outputs may write future state.
+\paragraph{Revision-generative and self-correcting models.}
+Language models also revise outputs through explicit application loops such as
+self-refinement~\cite{madaan2023selfrefine} and verbal feedback retained by
+agents~\cite{shinn2023reflexion}. RevTrace targets the narrower systems case in
+which generated text is fed back automatically by the serving pipeline. Under
+this feedback edge, a numerically induced output difference is not merely a
+different terminal answer: it can change the next request and create an
+ancestry of dependent revisions.
 
-\paragraph{Concurrency control.}
-Optimistic concurrency control validates transactions at
-commit~\cite{kung1981occ}; multiversion schemes track data
-lineage~\cite{bernstein1983mvcc}. DGFT borrows the transactional
-discipline---parent ownership, version fencing, linearizable commit
-history---but the validated object is a model-generated state projection
-whose legality is certified by the serving contract, not by stored-data
-consistency alone.
+\paragraph{Numerical variation.}
+Parallel reductions, kernel selection, and low-precision arithmetic can make
+mathematically equivalent LLM inference paths numerically non-identical
+~\cite{yuan2025numerical,antunes2024reprohpc}. Reproducible reductions are
+possible, often with implementation or performance cost
+~\cite{demmel2013reprosum,mueller2018reproagg}. RevTrace does not claim to make
+the proposer bitwise deterministic. It instead names a canonical authority
+path, treats proposer divergence as a first-class possibility, and restricts
+state installation to certificate-bearing transitions. This distinction is
+important because a small one-round numerical difference can become a durable
+causal difference only when the serving state machine feeds it forward.
+
+\paragraph{Concurrency control and recovery.}
+RevTrace borrows validation and version fencing from optimistic concurrency
+control~\cite{kung1981occ} and provenance tracking from multiversion
+concurrency control~\cite{bernstein1983mvcc}. Cascading invalidation is
+reminiscent of optimistic simulation rollback in Time Warp
+~\cite{jefferson1985virtualtime}, while partial external effects motivate the
+longstanding distinction between rollback and compensating actions in Sagas
+~\cite{garciamolina1987sagas}. The resulting guarantee is deliberately
+narrower than Herlihy--Wing linearizability~\cite{herlihy1990linearizability}:
+RevTrace proves a single fork-free committed revision history under its
+certificate and parent-version rules, not a real-time specification for every
+client invocation and response. The validated object is also unusual---a
+model-generated state projection rather than a conventional database write.
 
 \paragraph{Anytime-valid statistics.}
-Confidence sequences and e-value-based testing provide evidence measures
-valid under optional stopping~\cite{howard2021confidence,ramdas2023savi,
-grunwald2024safetesting}. RevTrace uses them in exactly one stratum: to
-bound the numerical risk of the SG adapter's randomized audits, with the
-bound explicitly scoped to that path.
+Confidence sequences and e-value-based tests remain valid under optional
+stopping~\cite{howard2021confidence,ramdas2023savi,grunwald2024safetesting}.
+RevTrace uses them only to monitor the randomized audits of the SG adapter.
+They neither certify individual DGFT transitions nor replace the deterministic
+transaction invariant; each statistical statement is scoped to its declared
+adapter, sampling process, and estimand.
 
-%% Pre-submission sweep: extend this section (or an appendix table) with
-%% any streaming/stateful-serving work found to jointly handle
-%% batch-created divergence + feedback propagation + state-entry authority.
+\paragraph{Synthesis and gap.}
+The closest lines therefore solve complementary parts of the problem:
+streaming confirmation governs display stability, verified speculation governs
+token acceptance, stateful serving governs reuse, and concurrency control
+governs conventional writes. To our knowledge, prior work does not jointly
+define (i) a projection from generated revision output into future feedback
+state, (ii) a certificate that authorizes that projection against a canonical
+path, and (iii) parent-version rules that exclude uncertified descendants.
+RevTrace contributes this intersection and evaluates its cost under two
+revision-generative architecture families; it does not claim to supersede the
+numerical, caching, or scheduling mechanisms above.

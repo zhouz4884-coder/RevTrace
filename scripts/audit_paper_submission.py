@@ -233,6 +233,39 @@ def contract_inventory() -> dict[str, Any]:
             ],
         },
         {
+            "id": "v100_qwen_scaleout",
+            "scope": {
+                "family": "Qwen3-ASR",
+                "models": ["0.6B", "1.7B"],
+                "mechanism": "SG and DGFT replica scale-out",
+                "workload": "bilingual 30 s sessions, c16--c128",
+                "hardware": "one 8xTesla-V100-32GB PCIe node",
+                "backend": "Transformers eager; PyTorch 2.4.1/CUDA 12.1",
+                "claim_boundary": (
+                    "independent of RTX3090/vLLM; single-node scale-out only; "
+                    "c64 is the measured 2 s-SLO capacity and c128 is overload"
+                ),
+            },
+            "artifacts": [
+                artifact(
+                    "results/v100_v1_v4/results/v0/178164.manager/smoke.json",
+                    role="V100 legality and repeated-input smoke",
+                ),
+                artifact(
+                    "results/v100_v1_v4/results/v1_v4/178168.manager/environment.json",
+                    role="V100 environment and runner fingerprint",
+                ),
+                artifact(
+                    "results/v100_v1_v4/results/v1_v4/178168.manager/v1_v4_summary.json",
+                    role="complete 84-cell V1--V4 matrix",
+                ),
+                artifact(
+                    "results/v100_v1_v4/results/v1_v4/178168.manager/AUDIT.json",
+                    role="independent 479-check matrix audit",
+                ),
+            ],
+        },
+        {
             "id": "sg_anytime_risk",
             "scope": {
                 "family": "Qwen3-ASR",

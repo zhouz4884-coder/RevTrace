@@ -1,0 +1,50 @@
+REVTRACE_V100_SETUP_BEGIN
+2026-08-05T22:41:08+0800
+gpu2
+GPU 0: Tesla V100-PCIE-32GB (UUID: GPU-a33df1c6-2d3e-b7b7-7e83-a3271c1bf1b6)
+GPU 1: Tesla V100-PCIE-32GB (UUID: GPU-1c4e6728-a23f-7748-aaca-5d13271da81a)
+GPU 2: Tesla V100-PCIE-32GB (UUID: GPU-30bac2b6-060e-b182-3ec6-9c1002db141e)
+GPU 3: Tesla V100-PCIE-32GB (UUID: GPU-0add3221-babe-cd77-583c-d28532e1bfbc)
+GPU 4: Tesla V100-PCIE-32GB (UUID: GPU-ba861c75-bc72-eed6-10c8-2c625fc3616d)
+GPU 5: Tesla V100-PCIE-32GB (UUID: GPU-f94c3c2d-22a1-c5a7-7b69-a02fcb23a6b1)
+GPU 6: Tesla V100-PCIE-32GB (UUID: GPU-2a3210bd-3037-799f-928c-7aac85bf3f28)
+GPU 7: Tesla V100-PCIE-32GB (UUID: GPU-64942489-09c7-2229-d780-ac68bcef9d71)
+	[4mGPU0	GPU1	GPU2	GPU3	GPU4	GPU5	GPU6	GPU7	CPU Affinity	NUMA Affinity[0m
+GPU0	 X 	PIX	NODE	NODE	SYS	SYS	SYS	SYS	0-17	0
+GPU1	PIX	 X 	NODE	NODE	SYS	SYS	SYS	SYS	0-17	0
+GPU2	NODE	NODE	 X 	PIX	SYS	SYS	SYS	SYS	0-17	0
+GPU3	NODE	NODE	PIX	 X 	SYS	SYS	SYS	SYS	0-17	0
+GPU4	SYS	SYS	SYS	SYS	 X 	PIX	NODE	NODE	18-35	1
+GPU5	SYS	SYS	SYS	SYS	PIX	 X 	NODE	NODE	18-35	1
+GPU6	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PIX	18-35	1
+GPU7	SYS	SYS	SYS	SYS	NODE	NODE	PIX	 X 	18-35	1
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+MODEL_PRESENT /data/home/zhoubin/revtrace_v100/models/Qwen3-ASR-0.6B
+MODEL_PRESENT /data/home/zhoubin/revtrace_v100/models/Qwen3-ASR-1.7B
+{"records": 2, "manifest": "/data/home/zhoubin/revtrace_v100/datasets/revbatch/manifest.json"}
+/tmp/zhoubin/revtrace-v100-runtime/revtrace-v100-cu121/lib/python3.10/site-packages/torch/cuda/__init__.py:58: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/tmp/zhoubin/revtrace-v100-runtime/revtrace-v100-cu121/lib/python3.10/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Setting `pad_token_id` to `eos_token_id`:151645 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:151645 for open-end generation.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.53s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.69s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.96s/it]
+Setting `pad_token_id` to `eos_token_id`:151645 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:151645 for open-end generation.
+{"claim_boundary": "Transformers/eager V100 runtime; this establishes a separate V100 contract and is not pooled with the RTX 3090 vLLM contract.", "decision": "PASS_V100_HF_LEGALITY_SMOKE", "gpu": "Tesla V100-PCIE-32GB", "hostname": "gpu2", "rows": [{"first_text": "Mhm. Oh yeah, yeah.", "load_seconds": 7.331081323325634, "model": "Qwen3-ASR-0.6B", "model_config_sha256": "76d3ae4601ce939830b2517f4a6cadb86cc51316c3900af6b020b051c21a478c", "repeat_exact": true, "second_text": "Mhm. Oh yeah, yeah.", "two_inferences_seconds": 1.560026690363884}, {"first_text": "Uh huh. Oh yeah. Yeah.", "load_seconds": 4.835001766681671, "model": "Qwen3-ASR-1.7B", "model_config_sha256": "2e74a751548b8ad7d7526d29365ad8144c345d8b412b1152d25dc6698452712f", "repeat_exact": true, "second_text": "Uh huh. Oh yeah. Yeah.", "two_inferences_seconds": 0.5585611760616302}], "schema_version": 1, "study": "RevTrace V100 Transformers-backend legality smoke", "torch": "2.4.1", "torch_cuda": "12.1"}
+/tmp/zhoubin/revtrace-v100-runtime/revtrace-v100-cu121/lib/python3.10/site-packages/torch/cuda/__init__.py:58: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/tmp/zhoubin/revtrace-v100-runtime/revtrace-v100-cu121/lib/python3.10/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+REVTRACE_V100_SETUP_COMPLETE

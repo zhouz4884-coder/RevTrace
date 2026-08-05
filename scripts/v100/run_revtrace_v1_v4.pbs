@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#PBS -N revtrace-v100-v1v4
+#PBS -q GPUDefq
+#PBS -l nodes=gpu2:ppn=36:gpus=8
+#PBS -j oe
+
+set -euo pipefail
+
+ROOT="/data/home/${USER}/revtrace_v100"
+SRC="$ROOT/code/RevTrace"
+PERSISTENT_ENV="$ROOT/env/revtrace-v100-cu121"
+LOCAL_ROOT="/tmp/${USER}/revtrace-v100-runtime"
+ENV="$LOCAL_ROOT/revtrace-v100-cu121"
+JOB_TAG="${PBS_JOBID:-manual}"
+OUT="$ROOT/results/v1_v4/$JOB_TAG"
+LOG="$ROOT/logs/v1_v4/$JOB_TAG.log"
+
+mkdir -p "$OUT" "$(dirname "$LOG")" "$LOCAL_ROOT"
+exec > >(tee "$LOG") 2>&1
+[[ "$(hostname -s)" == "gpu2" ]] || exit 42
+[[ -x "$PERSISTENT_ENV/bin/python" ]] || {
+  echo "Persistent V100 environment missing; run setup first" >&2
+  exit 2
+}
+
+rm -rf "$ENV"
+tar -C "$(dirname "$PERSISTENT_ENV")" -cf - "$(basename "$PERSISTENT_ENV")" | \
+  tar -C "$LOCAL_ROOT" -xf -
+
+export PYTHONPATH="$SRC/src:$SRC/scripts/remote:$SRC/scripts/v100"
+export HF_HOME="$ROOT/cache/hf"
+export TRANSFORMERS_CACHE="$HF_HOME/transformers"
+export TOKENIZERS_PARALLELISM=false
+export OMP_NUM_THREADS=2
+export MKL_NUM_THREADS=2
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+echo "REVTRACE_V1_V4_BEGIN"
+date -Is
+nvidia-smi -L
+"$ENV/bin/python" "$SRC/scripts/v100/run_v100_matrix.py" \
+  --root "$ROOT" --output "$OUT"
+echo "REVTRACE_V1_V4_COMPLETE"

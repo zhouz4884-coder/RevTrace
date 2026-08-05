@@ -1,7 +1,7 @@
 %% Section 2: Model and Problem Formulation. Owns all math objects.
 %% Notation locked in outline v2 Section 1 ledger.
 
-\begin{figure}[t]
+\begin{figure*}[t]
   \centering
   \figplaceholder{F1 diptych (outline v2 sec.4): (a) ordinary batching ---
     audio revision, locally differing batched proposal displayed, output
@@ -15,7 +15,7 @@
   to be identical; it prevents uncertified outputs from becoming
   future-state parents.}
   \label{fig:motivation}
-\end{figure}
+\end{figure*}
 
 \subsection{Revision-generative state machines}\label{sec:model:rsm}
 
@@ -32,22 +32,39 @@ where $\mathcal{T}$ is the model/adapter state-update function. The system is
 output of round $t$ participates in the state read by round $t{+}1$.
 \end{definition}
 
-Not every byte of $\out_t$ enters future state. We isolate exactly the part
-that does:
+Not every byte of $\out_t$ enters future state. We therefore isolate the
+feedback sub-state from the exogenous and runtime conditions held fixed in a
+causal comparison.
 
-\begin{definition}[State projection]\label{def:projection}
-The state projection $\proj(\out_t;\state_t)$ is the component of $\out_t$
-that $\mathcal{T}$ consumes when forming $\state_{t+1}$. For Qwen3-ASR it is
-the rollback prefix re-prompted at the next revision~\cite{shi2026qwen3asr};
-for Whisper with previous-text conditioning it is the conditioning
-prompt~\cite{radford2023whisper}.
+\begin{definition}[Feedback sub-state and state projection]\label{def:projection}
+Write $\state_t = (\state_t^{x}, H_t)$, where $H_t$ is the \emph{feedback
+sub-state} written from generated output and $\state_t^{x}$ denotes the
+exogenous/runtime state conditioned on in the comparison (model and decoder
+configuration, input schedule, and batch assignment). We require paired
+causal executions to hold $\state_t^{x}$ fixed; we do not claim that every
+cache or runtime buffer is invariant in an arbitrary deployment. The state projection
+$\proj(\out_t;H_t)$ is the adapter map that turns the round-$t$ output into
+the next feedback sub-state,
+\begin{equation}\label{eq:feedback-update}
+  H_{t+1} = \proj(\out_t;H_t),
+\end{equation}
+so that the full update of Eq.~\eqref{eq:state-update} factors as
+\begin{equation}\label{eq:state-update-h}
+  \state_{t+1} = \mathcal{G}(\state_t^{x},H_{t+1},\audio_t),
+\end{equation}
+with generated output affecting the compared future state through
+$H_{t+1}$. For
+Qwen3-ASR, $H_t$ is the rollback prefix re-prompted at the next
+revision~\cite{shi2026qwen3asr}; for Whisper with previous-text
+conditioning it is the conditioning prompt~\cite{radford2023whisper}.
 \end{definition}
 
 Ordinary batched serving makes an implicit assumption we name explicitly:
 \begin{equation}\label{eq:implicit}
-  \state_{t+1} = \proj(\out_t^{\mathrm{batch}};\state_t),
+  H_{t+1} = \proj(\out_t^{\mathrm{batch}};H_t),
 \end{equation}
-i.e.\ whatever the batched forward pass produced may write state.
+i.e.\ whatever the batched forward pass produced may write the feedback
+sub-state, with no authorization step between generation and state write.
 Equation~\eqref{eq:implicit} conflates ``was generated'' with ``may write
 future state''.
 
@@ -56,11 +73,11 @@ future state''.
 The user-facing display function may surface output that carries no
 future-state authority: display-only suffixes, hold-back regions, and
 provisional hypotheses are shown but excluded from
-$\proj(\out_t;\state_t)$ by the adapter (Section~\ref{sec:system}). The
+$\proj(\out_t;H_t)$ by the adapter (Section~\ref{sec:system}). The
 paper's central invariant separates the two permissions:
 \begin{equation}\label{eq:invariant}
   \boxed{\;\mathrm{Display}(\out_t)\;\not\Rightarrow\;
-  \mathrm{Authorize}\bigl(\proj(\out_t;\state_t)\bigr)\;}
+  \mathrm{Authorize}\bigl(\proj(\out_t;H_t)\bigr)\;}
 \end{equation}
 
 \subsection{State-entry divergence and contamination}\label{sec:model:divergence}
@@ -68,23 +85,24 @@ paper's central invariant separates the two permissions:
 Let $\out_t^{f}$ be the fine (batched, proposer) output and $\out_t^{a}$ the
 canonical authority output for the same round.
 
-\begin{definition}[Local output divergence]\label{def:eps}
+\begin{definition}[Output divergence]\label{def:eps}
 $\varepsilon_t = d_{\out}(\out_t^{f},\out_t^{a})$, with $d_{\out}$ an
 output-space distance (mixed-unit edit distance in our contracts).
 \end{definition}
 
 \begin{definition}[State-entry divergence]\label{def:e}
-$\ediv_t = d_{\state}\bigl(\proj(\out_t^{f};\state_t),\,
-\proj(\out_t^{a};\state_t)\bigr)$, with $d_{\state}$ the state-space
-distance induced by the same mixed-unit metric.
+Let $P_t^f:=\proj(\out_t^{f};H_t)$ and
+$P_t^a:=\proj(\out_t^{a};H_t)$. State-entry divergence is
+$\ediv_t=d_{\state}(P_t^f,P_t^a)$, where $d_{\state}$ is the distance on
+feedback sub-states induced by the same mixed-unit metric.
 \end{definition}
 
 \begin{definition}[Contamination event]\label{def:contamination}
 Round $t$ is a contamination event $\cont_t$ iff the state projection of a
-fine proposal is installed into committed state while $\ediv_t > 0$:
+fine proposal is installed into the feedback sub-state while $\ediv_t > 0$:
 \[
   \cont_t \;:\Longleftrightarrow\; \ediv_t > 0 \;\wedge\;
-  \proj(\out_t^{f};\state_t) \text{ installed into } \state_{t+1}.
+  \proj(\out_t^{f};H_t) \text{ installed into } H_{t+1}.
 \]
 \end{definition}
 
@@ -95,22 +113,40 @@ this paper targets the latter.
 
 \subsection{Feedback amplification}\label{sec:model:amplification}
 
-Let $\dist_t = d_{\state}(\state_t^{f},\state_t^{a})$ be the trajectory
-distance between the batched-served state trajectory and the canonical one.
-A local perturbation decomposition gives
+Let
+\[
+  \dist_t := d_H(H_t^{f},H_t^{a})
+\]
+be the feedback-trajectory distance between the batched-served and canonical
+executions under identical future exogenous inputs and runtime assignments.
+This definition deliberately makes no claim that the distance between full
+runtime states is carried entirely by $H_t$.
+
+\begin{assumption}[Local sensitivity]\label{ass:local}
+In a neighborhood of the canonical trajectory, the state update has finite
+per-round sensitivity: there exist finite coefficients $L_t$ and $\beta_t$
+such that the decomposition~\eqref{eq:recurrence} below holds for
+trajectories inside that neighborhood. We make no global Lipschitz claim,
+do not assume $L_t,\beta_t$ are known in advance, and use them only to
+identify propagation channels.
+\end{assumption}
+
+Under Assumption~\ref{ass:local}, a local perturbation decomposition gives
 \begin{equation}\label{eq:recurrence}
   \dist_{t+1} \;\le\; L_t\,\dist_t \;+\; \beta_t\,\ediv_t ,
 \end{equation}
 where $L_t$ measures propagation of pre-existing difference and $\beta_t$
 measures coupling of the round-$t$ state-entry divergence into the next
-state. We make \emph{no} global Lipschitz claim: \eqref{eq:recurrence} is a
-per-round decomposition with unknown coefficients, used only to identify
-channels.
+state. Equation~\eqref{eq:recurrence} is a per-round decomposition with
+unknown coefficients, used only to identify channels.
 
 \begin{remark}[Causal prediction]\label{rem:causal}
-Removing the feedback edge sets $\beta_t \equiv 0$, so a local state-entry
-divergence can no longer enter $\dist_{t+1}$ through the revision channel.
-Section~\ref{sec:eval} (H1) tests this prediction by intervention.
+Removing the feedback edge sets $\beta_t \equiv 0$, so an isolated round-$t$
+state-entry perturbation can no longer propagate through that revision edge,
+provided subsequent exogenous inputs, batch assignments, and arithmetic
+realizations are held equal. This intervention does not rule out a fresh,
+independent divergence in a later round. Section~\ref{sec:eval} (H1) tests
+the scoped prediction.
 \end{remark}
 
 \begin{definition}[Revision amplification factor]\label{def:raf}
@@ -134,8 +170,8 @@ claims to certify feedback state:
     parent version it was computed against; otherwise staleness is
     undetectable.
   \item[R3 (Frontier monotonicity).] Committed audio frontiers advance
-    monotonically---no gap, no overlap---so the committed history is a
-    single sequence.
+    monotonically, with no gap and no overlap, so that the committed
+    history is a single sequence.
   \item[R4 (Evidence non-authority).] Statistical evidence (margins,
     coverage, repetition signals) schedules verification; it never
     authorizes installation.

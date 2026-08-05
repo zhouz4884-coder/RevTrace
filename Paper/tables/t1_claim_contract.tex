@@ -1,5 +1,5 @@
 %% T1: claim-contract map. Anti-pooling device from page one.
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \small
 \caption{Claim contracts. Every number in this paper is bound to one row;
@@ -19,7 +19,16 @@ Qwen3-ASR & 0.6B / 1.7B &
   shared c16: 16 bilingual 30\,s sessions (480\,s audio), online causal
   arrivals, 2$\times$RTX 3090 &
   mixed-unit edit rate vs independent fresh FP16 singleton replay &
-  throughput/energy/latency; transaction safety; bounded edit rate \\
+  throughput, energy, latency; transaction safety; bounded edit rate \\
+\addlinespace
+Qwen3-ASR (scale-out) & 0.6B / 1.7B &
+  FP16 batched proposer replicas &
+  FP16/FP32 authority replicas under the V100 matrix contract &
+  c16--c128 bilingual 30\,s sessions, one 8$\times$V100 PCIe node,
+  Transformers-eager &
+  per-cell independent singleton replay where applicable &
+  normal-load speedup, bottleneck attribution, single-node SLO capacity and
+  replica scale efficiency \\
 \addlinespace
 Whisper & tiny / base / small.en &
   fine FP16 batched proposer &
@@ -27,8 +36,8 @@ Whisper & tiny / base / small.en &
   R9.E production cells (16 cells, per model/arrival group), stable-output
   hash equivalence &
   paired WER delta vs unprotected feedback (dev + untouched split) &
-  production wall/GPU/energy; WER improvement; certificate safety \\
+  production wall, GPU, energy; WER improvement; certificate safety \\
 \bottomrule
 \end{tabular}
 }
-\end{table}
+\end{table*}

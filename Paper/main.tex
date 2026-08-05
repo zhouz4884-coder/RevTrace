@@ -2,8 +2,9 @@
 %% Decision: OUTLINE_V2_THEORY_GUIDED (docs/reports/revtrace_paper_outline_v2.md)
 %% Claim discipline: no claim may exceed docs/CLAIM_BOUNDARIES.md.
 %% Compile: pdflatex main && bibtex main && pdflatex main x2  (or Overleaf)
-\documentclass[review]{elsarticle}
+\documentclass[5p,times]{elsarticle}
 
+\usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs,multirow,array}
 \usepackage{graphicx}
@@ -11,6 +12,8 @@
 \usepackage{subcaption}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
+\usepackage{lineno}  %% continuous line numbers for review submissions
+\setlength{\emergencystretch}{2em}
 
 %% --- theorem environments (Section 3) ---------------------------------
 \newtheorem{definition}{Definition}[section]
@@ -38,7 +41,7 @@
 %% --- drafting aids (remove before submission) --------------------------
 \newcommand{\todowrite}[1]{\textcolor{red}{[WRITE: #1]}}
 \newcommand{\figplaceholder}[2]{%
-  \fbox{\parbox[c][0.32\textheight][c]{\linewidth}{\centering\color{gray}FIGURE PLACEHOLDER --- #1}}%
+  \noindent\fbox{\parbox[c][0.32\textheight][c]{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\centering\color{gray}FIGURE PLACEHOLDER --- #1}}%
   \caption{#2}}
 
 %% --- table input path ---------------------------------------------------
@@ -51,51 +54,58 @@
 \title{RevTrace: Dual-Granularity Feedback Transactions for
 State-Certified Streaming ASR Serving}
 
-%% Authors and affiliations: to be filled before submission.
-\author{Author One\corref{cor1}}
-\ead{author@example.org}
-\cortext[cor1]{Corresponding author.}
-\affiliation{organization={Affiliation}, country={Country}}
+%% Authors and affiliations: from the provided title page (2026-08-05).
+%% Authorship and order confirmed by the first author: Bin Zhou (first,
+%% experiment design and overall execution), Jiyuan Miao (second),
+%% Xi Cao (corresponding, supervisor).
+\author[1]{Bin Zhou}
+\ead{2025200800@buct.edu.cn}
+\author[1]{Jiyuan Miao}
+\ead{2024200822@buct.edu.cn}
+\author[1]{Xi Cao\corref{cor1}}
+\ead{caoxi@buct.edu.cn}
+\cortext[cor1]{Corresponding author. Postal address: Beijing University of
+Chemical Technology, 29\# Nanjian Road, Changping, Beijing, China.}
+\affiliation[1]{organization={Beijing University of Chemical Technology},
+city={Beijing}, country={China}}
 
 \begin{abstract}
-%% Seven-sentence skeleton (outline v2). DRAFT v0 --- numbers are the
-%% audited ones; wording will be polished in the final pass.
-Streaming serving systems for revision-generative models treat generated
-output as terminal, even when that output is written back into future model
-state.
-We formalize this class as revision-generative state machines and show that
-batching-created output divergence becomes persistent state contamination
-exactly when the feedback edge is present: with feedback, 8 of 21 legal
-state pairs propagate divergence, and without it, none do.
-We introduce Dual-Granularity Feedback Transactions (DGFT), which separate
-low-latency display authority from coarse-grained state-write authority and
-admit a revision to future state only as a certificate-bearing transaction;
-same-granularity certification appears as the degenerate $\granratio=1$ case.
-We prove three transaction invariants (uncertified-ancestry exclusion,
-committed-state linearizability, granularity-independent safety) and derive
-an authority-cost decomposition that predicts when coarse authority beats
-same-granularity verification.
-RevTrace, a runtime implementing DGFT with contract-scoped stratified
-certification, is evaluated on two architecture families: Qwen3-ASR 0.6B/1.7B
-and Whisper tiny/base/small.en, on two RTX 3090 GPUs.
-On a shared bilingual workload, coarse-DGFT improves service throughput by
-$1.39\times$ and $1.28\times$ over the same-granularity configuration while
-the latter fails the 2\,s state-entry SLO at the session terminal; across
-production contracts, DGFT reaches up to $6.88\times$ wall-clock speedup on
-Qwen3-ASR-0.6B and passes all 16 Whisper serving cells, with zero
-transaction-install violations in 320 Qwen revision events and 1{,}048
-Whisper commits.
-Risk signals schedule verification but never authorize state installation;
-quality is measured against independent references per family and is never
-pooled across contracts.
+Streaming ASR systems often feed generated text into later rounds, turning a
+displayed revision into a write to future model state. Batching-induced output
+differences can therefore persist beyond one response. We formalize this
+feedback-state contamination channel and confirm it causally: among 21 legal
+paired interventions, 8 propagate with feedback and none do when the edge is
+removed. We introduce Dual-Granularity Feedback Transactions (DGFT), which
+decouple low-latency proposal and display from coarse canonical state-write
+authority. A revision enters future state only through a certificate-bearing,
+versioned transaction; same-granularity certification is the
+$\granratio=1$ case. We prove exclusion of uncertified ancestry, fork-free
+committed histories, and safety independent of granularity, and derive an
+authority-path cost decomposition. RevTrace implements DGFT and is evaluated
+on Qwen3-ASR 0.6B/1.7B and Whisper tiny/base/small.en on two RTX~3090 GPUs,
+plus an independent eight-V100 scale-out contract. On a matched Qwen workload,
+coarse authority improves throughput by $1.39\times$/$1.28\times$ over
+same-granularity configurations; across production contracts RevTrace reaches
+up to $6.88\times$ wall-clock speedup and passes all 16 Whisper cells. We
+observe no output/state or transaction-install violation over 800 Qwen
+revisions and 1{,}048 Whisper commits; a 250{,}000-attempt fuzzer accepts all
+10{,}000 valid commits and rejects all 240{,}000 mutations/replays. On the
+V100 contract, four proposal and four authority replicas sustain
+147.1$\times$/114.5$\times$ audio real-time throughput at c64 with display
+P99 1.115/1.471\,s; c128 is retained as the measured 2\,s-SLO boundary. These
+results establish state-write authority as a separate contract for safe,
+high-throughput revision serving; risk signals may schedule verification but
+never authorize installation.
 \end{abstract}
 
 \begin{keyword}
 streaming ASR serving \sep LLM inference \sep optimistic concurrency control
-\sep state certification \sep transactional memory
+\sep state certification \sep transactional runtime
 \end{keyword}
 
 \end{frontmatter}
+
+\linenumbers  %% remove or comment out for camera-ready
 
 %% =======================================================================
 \section{Introduction}\label{sec:intro}
@@ -124,6 +134,58 @@ streaming ASR serving \sep LLM inference \sep optimistic concurrency control
 
 \section{Conclusion}\label{sec:conclusion}
 \input{sections/09_conclusion}
+
+%% =======================================================================
+%% End matter (Elsevier statements; wording from the provided title page
+%% where available; CRediT roles and repository confirmed 2026-08-05).
+\section*{CRediT authorship contribution statement}
+\textbf{Bin Zhou:} Conceptualization, Methodology, Software, Validation,
+Investigation, Writing -- original draft.
+\textbf{Jiyuan Miao:} Visualization.
+\textbf{Xi Cao:} Supervision, Project administration, Writing -- review \&
+editing.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests
+or personal relationships that could have appeared to influence the work
+reported in this paper.
+
+\section*{Declaration of Generative AI and AI-assisted technologies in the
+writing process}
+OpenAI ChatGPT was used as an auxiliary tool for language editing and
+\LaTeX{} formatting assistance. It was not used to generate experimental
+measurements. All technical ideas, implementations, numerical results,
+claims, figures, and final manuscript decisions were independently reviewed
+and verified by the authors.
+
+\section*{Acknowledgments}
+This work received no specific grant from any funding agency in the public,
+commercial, or not-for-profit sectors.
+
+\section*{Data availability}
+The source code, frozen audited result artifacts, replay manifests, and
+analysis scripts supporting this study are publicly available in the
+RevTrace repository at
+\url{https://github.com/zhouz4884-coder/RevTrace}.
+
+%% =======================================================================
+%% Appendix: closure history moved out of Section 5 (review round
+%% 2026-08-04). Facts unchanged; only the presentation location moves.
+\appendix
+
+\section{Rejected realizations and measurement repairs}\label{app:repairs}
+Three deviations were found and resolved during closure, and are documented
+with the frozen artifacts.
+(i) An FP16 singleton coarse-authority candidate was rejected after failing
+its quality contract; FP32 was adopted as the coarse-authority precision
+instead (the SG path retains its own FP16 singleton authority under the
+$\granratio=1$ protocol, Corollary~\ref{cor:sg}).
+(ii) The FP32 KV-cache bound was reduced from 65{,}536 to 4{,}096 tokens
+per session.
+(iii) A per-row CUDA-synchronization defect in the online submission path
+was fixed before the R9.E closure.
+All numbers reported in this paper were re-audited after these repairs and
+are bound to the release's code commit, contract digest, and result hashes.
 
 %% =======================================================================
 \bibliographystyle{elsarticle-num}

@@ -5,64 +5,123 @@
 
 \subsection{Transactions, certificates, and commits}\label{sec:dgft:tx}
 
-DGFT wraps every state projection in a transaction.
+DGFT wraps every state projection in a transaction. Throughout this section,
+``committed state'' means the committed feedback sub-state $H$ of
+Section~\ref{sec:model}; the remaining serving state $\state^{x}$ is never
+written by generated output and therefore needs no certification.
+
+\paragraph{Trust model.}
+The authority coordinator and versioned ledger are trusted runtime
+components; proposers and clients cannot mint or modify certificates. We
+assume collision resistance of $h$, atomic certificate consumption with the
+ledger compare-and-swap, and immutable session audio bytes once covered by a
+certificate. The threat model excludes a Byzantine authority or compromised
+ledger. A digest provides content binding, not standalone authentication;
+authenticity follows from issuance inside the protected coordinator.
+
+The protocol theorems do not assume a deterministic proposer, greedy
+decoding, synchronous GPU kernels, or equality of proposer KV caches. The
+authority may use greedy, beam, or sampled decoding provided that the realized
+projection and the complete decoding/runtime configuration (including any
+randomness policy needed by the contract) are bound by $\chi_j$. Asynchrony is
+allowed because the parent-version compare-and-swap serializes installation.
+The theorems certify provenance and installation legality, not semantic
+correctness of the authority output or repeatability of an independently
+rerun stochastic authority.
 
 \begin{definition}[DGFT transaction]\label{def:tx}
 A transaction is the object
 \[
   \tx_t = \bigl(\mathrm{sid},\, e,\, p,\, v_{\mathrm{parent}},\,
-  [a_s,a_e),\, \out_t,\, \proj(\out_t;\state_t),\, \mathrm{cert}_t\bigr),
+  [a_s,a_e),\, \out_t,\, \proj(\out_t;H_t),\, \mathrm{cert}_t\bigr),
 \]
 comprising the session id, contract epoch $e$, policy $p$, the parent state
 version read, the audio frontier interval covered, the generated output,
-its state projection, and a certificate record. The proposal granularity
+its state projection, and the certificate it carries (pending for fine
+proposals, issued for authority commits). The proposal granularity
 $g_p$ (fine window) and the authority granularity $g_a$ (coarse canonical
 segment) define the granularity ratio $\granratio = g_a/g_p \ge 1$.
 \end{definition}
 
-\begin{definition}[Commit tuple and validity]\label{def:commit}
+\begin{definition}[Certificate]\label{def:cert}
+An authority certificate is a binding record
+\[
+\begin{aligned}
+  \cert_j = \mathrm{Bind}\bigl(&\mathrm{sid}_j,e_j,p_j,v_j,
+  [f_j,f_{j+1}),\\[-2pt]
+  &h(\audio_{[f_j,f_{j+1})}),h(\proj_j^{a}),\chi_j\bigr),
+\end{aligned}
+\]
+where $\proj_j^{a} = \proj(\out_j^{a};H_{v_j})$ is the canonical state
+projection computed by the authority against parent version $v_j$, and
+$h(\cdot)$ is a content digest over immutable bytes. The configuration
+digest $\chi_j$ binds the model checkpoint, tokenizer, decoding parameters,
+projection adapter, numerical precision, and authority-runtime version. A
+certificate therefore binds
+exactly one canonical projection to exactly one commit tuple; it is issued
+only when the contract's authority checks pass, and it is single-use:
+consumed by the commit that presents it.
+\end{definition}
+
+\begin{definition}[Commit validity]\label{def:commit}
 An authority commit is a tuple
 \[
-  \commit_j = (\mathrm{sid}_j,\, e_j,\, p_j,\, v_j,\, [f_j,f_{j+1}),\, \cert_j)
+  \commit_j = (\mathrm{sid}_j,\, e_j,\, p_j,\, v_j,\, [f_j,f_{j+1}),\,
+  \proj_j^{a},\, \cert_j).
 \]
-with $\cert_j \in \{0,1\}$. $\commit_j$ is \emph{valid}, written
-$\mathrm{Valid}(\commit_j)$, iff (i) session, contract epoch, and policy
-match the live session fence; (ii) $v_j$ equals the currently committed
-parent version; (iii) $[f_j,f_{j+1})$ continues the committed frontier
-without gap or overlap; and (iv) $\cert_j = 1$, i.e.\ the projection passed
-the contract's authority checks. Only valid commits mutate committed state.
+$\commit_j$ is \emph{valid}, written $\mathrm{Valid}(\commit_j)$, iff
+(i) session, contract epoch, and policy match the live session fence;
+(ii) $v_j$ equals the currently committed parent version;
+(iii) $[f_j,f_{j+1})$ continues the committed frontier without gap or
+overlap; and
+(iv) certificate binding: $\cert_j$ binds exactly the presented fields, the
+digest $h(\proj_j^{a})$ recomputes from the presented projection, and the
+certificate has not been consumed before. Only valid commits mutate
+committed state.
 \end{definition}
 
 Definitions~\ref{def:tx}--\ref{def:commit} realize requirements
 R1--R4 (Section~\ref{sec:model:reqs}) structurally: display never produces
-a commit (R1), $v_j$ enforces parent ownership (R2), $[f_j,f_{j+1})$
-enforces frontier monotonicity (R3), and $\cert_j$ is granted only by
-authority checks, never by risk signals (R4).
+a commit (R1), $v_j$ enforced inside the certificate binding gives parent
+ownership (R2), $[f_j,f_{j+1})$ enforces frontier monotonicity (R3), and
+$\cert_j$ is issued only by authority checks, never by risk signals (R4).
 Table~\ref{tab:guarantees} previews how these properties separate DGFT from
 weaker protection regimes; the guarantee claims are evaluated in
 Section~\ref{sec:eval} (H2, H5).
 
 \tbl{t5_guarantees}
 
+\begin{definition}[Committed provenance ancestry]\label{def:ancestry}
+A projection $P$ is an ancestor of committed state $H_j$ iff $P$ labels an
+accepted ledger transition on the unique path
+$H_0\rightarrow H_1\rightarrow\cdots\rightarrow H_j$. Displayed proposals
+and rejected transactions are not ancestors.
+\end{definition}
+
 \subsection{Theorem 1: uncertified-ancestry exclusion}\label{sec:dgft:thm1}
 
 \begin{theorem}[Uncertified-Ancestry Exclusion]\label{thm:ancestry}
-If future feedback state is updated exclusively through authority commits
-satisfying $\mathrm{Valid}$ (Definition~\ref{def:commit}), then no fine
-proposal whose output is absent from an authority certificate can become an
-ancestor of any future committed state.
+If committed state is updated exclusively through commits satisfying
+$\mathrm{Valid}$ (Definition~\ref{def:commit}), then no fine projection
+that is not bound by a valid certificate can become part of the ancestry of
+any future committed state in the sense of Definition~\ref{def:ancestry}.
 \end{theorem}
 
 \begin{proof}
-By induction over the commit sequence $\commit_1,\commit_2,\ldots$
-Base: the initial committed state $\state_0$ is contract-defined, so its
-ancestry contains no fine proposal. Step: assume committed state $\state_j$
-has ancestry containing only certificate-covered outputs. The next state
-$\state_{j+1}$ arises only from a valid $\commit_{j+1}$; validity requires
-$\cert_{j+1}=1$, and the certificate enumerates the outputs whose projections
-the commit installs. Any fine proposal not covered by that certificate is
-therefore absent from the ancestry of $\state_{j+1}$. Provisional display
-never mutates committed state by construction of the runtime
+By induction over the commit sequence $\commit_1,\commit_2,\ldots$.
+Base: the initial committed state $H_0$ is contract-defined, so its
+ancestry contains no generated output. Step: assume committed state $H_j$
+has ancestry containing only certificate-bound projections. The next state
+$H_{j+1}$ arises only from a valid $\commit_{j+1}$; by
+Definition~\ref{def:commit}(iv), commit application installs exactly the
+projection whose digest is bound by $\cert_{j+1}$, since any other content
+fails the binding check and is rejected. A fine projection
+$\proj(\out^{f};H)$ that differs from the certified canonical projection
+$\proj_{j+1}^{a}$ therefore cannot be installed by $\commit_{j+1}$; if a
+fine proposal happens to coincide bitwise with $\proj_{j+1}^{a}$, what
+enters state is the certified content, attributable to the authority's
+certificate rather than to the uncertified fine generation. Provisional
+display never mutates committed state by construction of the runtime
 (Section~\ref{sec:system}), completing the induction.
 \end{proof}
 
@@ -70,34 +129,49 @@ Theorem~\ref{thm:ancestry} is deliberately architecture-agnostic: it depends
 on the commit protocol, not on margin accuracy, model determinism,
 FP16/FP32 agreement, or the choice of ASR family.
 
-\subsection{Theorem 2: committed-state linearizability}\label{sec:dgft:thm2}
+\subsection{Theorem 2: fork-free committed-state linearity}\label{sec:dgft:thm2}
 
-\begin{theorem}[Committed-State Linearizability]\label{thm:linear}
-Under parent-version checking (Definition~\ref{def:commit}(ii)) and
-frontier-continuity checking (Definition~\ref{def:commit}(iii)), the
-accepted commits of a session form a fork-free, gap-free, overlap-free
-linear history of feedback state.
+\begin{theorem}[Fork-Free Committed-State Linearity]\label{thm:linear}
+Assume commit application is atomic: the validity checks of
+Definition~\ref{def:commit} and the state installation execute as one
+indivisible compare-and-swap against the committed state, and each
+certificate is consumed by at most one commit. Then, under parent-version
+checking (Definition~\ref{def:commit}(ii)) and frontier-continuity checking
+(Definition~\ref{def:commit}(iii)), the accepted commits of a session form
+a fork-free, gap-free, overlap-free linear history of feedback state.
 \end{theorem}
 
 \begin{proof}
-Parent-version checking makes the accepted commits a tree of height at most
-one per version: two distinct commits cannot both satisfy
-$v_j = \mathrm{version}(\state)$ against the same committed state, so the
-history is fork-free. Frontier-continuity checking orders accepted intervals
-$[f_j,f_{j+1})$ into a sequence with $f_{j+1} = f'_{j}$ for consecutive
-commits, excluding gaps and overlaps. Hence the accepted commits are a
-single linear sequence.
+Atomicity closes the check-then-act race: two distinct commits cannot both
+observe the same committed state, both pass the checks, and both install.
+Parent-version checking then makes the accepted commits a tree of height at
+most one per version: two distinct commits cannot both satisfy
+$v_j = \mathrm{version}(H)$ against the same committed state, so the
+history is fork-free. Single-use consumption excludes replay of an
+already-consumed certificate against a later parent. Frontier-continuity
+checking orders accepted intervals $[f_j,f_{j+1})$ into a sequence with
+$f_{j+1} = f'_{j}$ for consecutive commits, excluding gaps and overlaps.
+Hence the accepted commits are a single linear sequence.
 \end{proof}
 
+\begin{remark}[Scope of the concurrency claim]\label{rem:not-linearizable}
+Theorem~\ref{thm:linear} proves a serial accepted-commit history with the
+ledger compare-and-swap as its serialization point. It is not a claim of
+full Herlihy--Wing linearizability for every client invocation and response;
+such a claim would require a separate concurrent-object history and
+real-time-order specification~\cite{herlihy1990linearizability}.
+\end{remark}
+
 \begin{corollary}[Stale-descendant rejection]\label{cor:stale}
-A revision computed against $v_{\mathrm{parent}} \neq
-\mathrm{version}(\state_j)$ cannot legally commit: it fails
-Definition~\ref{def:commit}(ii) and is rejected without mutating state.
+A revision computed against a stale parent, i.e.\
+$v_{\mathrm{parent}} \neq \mathrm{version}(H_j)$, cannot legally commit.
+It fails Definition~\ref{def:commit}(ii) and is rejected without mutating
+state.
 \end{corollary}
 
 \subsection{Theorem 3: granularity-independent safety}\label{sec:dgft:thm3}
 
-\begin{theorem}[Granularity-Independent Transaction Safety]\label{thm:gran}
+\begin{theorem}[Granularity-Independent Safety]\label{thm:gran}
 For any granularity ratio $\granratio \ge 1$, if every authority segment
 starts at the committed parent, covers a contiguous audio frontier, yields a
 legal state projection, and passes the certificate and version checks of
@@ -107,10 +181,11 @@ Theorems~\ref{thm:ancestry} and~\ref{thm:linear} hold.
 
 \begin{proof}
 The proofs of Theorems~\ref{thm:ancestry} and~\ref{thm:linear} use only the
-validity predicate of Definition~\ref{def:commit}; none of their steps
-depends on the size of $[f_j,f_{j+1})$ relative to the fine window. Varying
-$\granratio$ changes how much audio a single certificate covers, not which
-commits are admissible.
+certificate binding of Definition~\ref{def:cert}, the validity predicate of
+Definition~\ref{def:commit}, and atomic commit application; none of their
+steps depends on the size of $[f_j,f_{j+1})$ relative to the fine window.
+Varying $\granratio$ changes how much audio a single certificate covers,
+not which commits are admissible.
 \end{proof}
 
 \begin{corollary}[Same-granularity certification as $\granratio=1$]\label{cor:sg}
@@ -149,36 +224,56 @@ and end-to-end service time is governed by the slower lane plus repair:
 \end{equation}
 with proposer and authority running concurrently on separate GPUs.
 
-\begin{proposition}[When coarse authority wins]\label{prop:coarse}
-Coarse-DGFT improves service throughput over SG when
+\begin{proposition}[Model-based operating condition]\label{prop:coarse}
+Let end-to-end service time be given by
+Eq.~\eqref{eq:cost-service}. Coarse-DGFT improves service throughput over
+SG whenever
 \[
-  C_c(\granratio,B) + rB\granratio C_s + C_{\mathrm{commit}}
-  \;<\; qB\granratio C_s + Q_s .
+\begin{split}
+  &\max\bigl(T_p,\; C_c(\granratio,B) + rB\granratio C_s +
+  C_{\mathrm{commit}}\bigr) + T_{\mathrm{repair}}^{D} \\
+  &\quad <\; \max\bigl(T_p,\; qB\granratio C_s + Q_s\bigr)
+  + T_{\mathrm{repair}}^{S}.
+\end{split}
+\]
+A simplified sufficient condition, applicable when the authority lane is on
+or near the critical path in both configurations ($T^{a} \ge T_p$) and the
+repair costs are comparable, is
+\[
+\begin{split}
+  &C_c(\granratio,B) + rB\granratio C_s + C_{\mathrm{commit}} \\
+  &\quad <\; qB\granratio C_s + Q_s .
+\end{split}
 \]
 In particular, even a small verification fraction $q$ leaves SG paying
 singleton invocation and queueing costs across all $B$ sessions, while a
 batched coarse authority amortizes them into $C_c$.
 \end{proposition}
 
-Equations~\eqref{eq:cost-sg}--\eqref{eq:cost-dgft} predict, without fitting:
-(P1) SG terminal-burst tail failures even at 8--10\% verification;
-(P2) coarse authority amortizes invocation/queue costs into higher
-throughput; (P3) Hybrid trades replay fraction $r$ for quality at a
-performance and energy cost; (P4) the ordering may reverse across models
-because $C_c(\granratio,B)$ is model-dependent. Section~\ref{sec:eval}
-checks each prediction against the same-workload ladder.
+Equations~\eqref{eq:cost-sg}--\eqref{eq:cost-dgft} motivate four empirical
+hypotheses rather than determine them without fitted costs: (P1) a burst of
+singleton authority work can create an SG tail even at 8--10\% verification;
+(P2) a batched coarse authority can amortize invocation and queueing costs;
+(P3) Hybrid may trade replay fraction $r$ for quality at a performance and
+energy cost; and (P4) the ordering can reverse across models because the
+complete authority paths---including precision and execution mode---have
+model-dependent costs. Section~\ref{sec:eval} tests these hypotheses on the
+same workload. Because SG and Coarse/Hybrid use different canonical
+arithmetic paths in our implementation (Remark~\ref{rem:canonical}), the
+comparison identifies integrated operating points, not a precision-independent
+causal effect of $\granratio$ alone.
 
 \subsection{Operating-point trade-offs}\label{sec:dgft:tradeoff}
 
-A deployment selects a configuration policy
-$\pi \in \{\mathrm{SG},\,\mathrm{Coarse},\,\mathrm{Hybrid}\}$ trading
-latency, energy, and quality subject to hard safety:
+A deployment selects SG, Coarse, or Hybrid as configuration policy $\pi$,
+trading latency, energy, and quality subject to hard safety:
 \[
-  \max_{\pi}\; J(\pi) \quad \text{s.t.}\quad
-  \mathrm{TxViolation}(\pi) = 0,\;\;
-  \text{display/quality caps of the contract},
+  \max_{\pi}\ J(\pi)
+  \quad\text{s.t.}\quad V(\pi)=0,\ C(\pi)\leq B,
 \]
-where $J$ aggregates the contract's latency, energy, and quality objectives.
+where $J$ aggregates the deployment objective, $V$ counts transaction
+violations, and $C(\pi)\leq B$ denotes the contract's display and quality
+caps.
 DGFT supplies the safety-constrained operating envelope; the three evaluated
 contracts instantiate three operating points. We do not solve this
 optimization online and do not claim any single operating point dominates:

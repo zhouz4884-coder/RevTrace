@@ -40,6 +40,7 @@ def test_submission_contract_inventory_binds_all_evidence_strata() -> None:
     assert {group["id"] for group in inventory["groups"]} == {
         "r9e_whisper_service",
         "r10_qwen_service",
+        "v100_qwen_scaleout",
         "sg_anytime_risk",
         "qwen_quality",
         "whisper_quality",

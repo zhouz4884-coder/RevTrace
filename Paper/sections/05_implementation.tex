@@ -11,10 +11,19 @@ steady-state service timing, reported separately
 (Section~\ref{sec:discussion}). Sessions arrive online and are scheduled
 with causal arrival ordering; decoder outputs are transferred to the host
 via vectorized paths. Experiments use two NVIDIA RTX 3090 GPUs, one
-hosting the proposer lane and one the authority lane. Prior defects found
-and repaired during closure are documented with the artifacts: an FP16
-singleton coarse-authority candidate was rejected after failing its quality
-contract, the FP32 KV-cache bound was reduced from 65{,}536 to 4{,}096
-tokens, and a per-row CUDA-synchronization defect in the online submission
-path was fixed before the R9.E closure. All evaluated numbers are bound to
-code commit, contract digest, and result hashes in the release.
+hosting the proposer lane and one the authority lane. Realizations rejected
+during closure and measurement repairs are documented in
+\ref{app:repairs}. All evaluated numbers are bound to code commit,
+contract digest, and result hashes in the release. The source
+code, frozen audited artifacts, and analysis scripts are publicly available
+in the RevTrace repository
+(\url{https://github.com/zhouz4884-coder/RevTrace}).
+
+The independent scale-out contract uses one RHEL~7.6 node with eight
+Tesla V100 PCIe GPUs (32\,GB each), PyTorch 2.4.1, CUDA 12.1, and the
+Transformers-eager backend. It runs replicas rather than distributed model
+parallelism: up to four proposal workers and four authority workers share a
+versioned commit queue. Input audio is deterministically resampled to 16\,kHz.
+This contract has its own environment fingerprint, raw cell records, worker
+diagnostics, and result hashes; its absolute timing is never pooled with the
+RTX~3090/vLLM contract.

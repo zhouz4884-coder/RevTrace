@@ -436,3 +436,30 @@ application-benefit comparison. Neither may be relabeled as the other.
   logical proposer/verifier roles.  The pre-repair colocated result that
   divided GPU-normalized speedup by two and sampled one GPU's power twice is
   excluded.  Dual-GPU measurements are unaffected by this repair.
+
+## Independent V100 V1--V4 scale-out boundary
+
+- The V100 study is a separate RHEL 7.6, 8xTesla-V100-32GB,
+  Transformers-eager contract. Its absolute timings and speedups are never
+  pooled with RTX3090/vLLM measurements.
+- V3 is single-node replica scale-out, not model parallelism and not
+  multi-node scaling. The p4a4 c64 cells are the largest measured points that
+  satisfy the 2 s display SLO for both Qwen sizes; c128 is retained as an
+  overload boundary.
+- Nominal scale efficiency compares p4a4 against p1a1 at the same c64 load and
+  normalizes by the 4x physical-GPU increase. The 100.7% 1.7B value is not a
+  statistical claim of superlinear scaling.
+- Batched repeatability and batch-to-singleton equivalence are distinct.
+  V1 observes zero repeat mismatches but nonzero batch-to-singleton
+  mismatches in both FP16 and FP32; FP32 is not treated as an unconditional
+  arithmetic certificate on V100.
+- V2 SG final edit is measured against the independent FP16 singleton
+  reference. The 1.7B Coarse/Hybrid P95 edit boundary is 3.18% and remains
+  visible wherever their speedup is reported.
+- V4 authority/proposer ratios are bottleneck-attribution measurements.
+  Increasing the granularity ratio amortizes FP32 authority work but increases
+  segment-commit latency; low provisional-display P99 does not relabel that
+  commit latency.
+- Zero transaction-install, ancestry, and directional-omission violations are
+  exhaustive observations over the finite 84-cell matrix, not a deterministic
+  zero-risk or population failure-rate claim.

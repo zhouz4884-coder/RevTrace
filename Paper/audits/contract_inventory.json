@@ -313,6 +313,59 @@
     {
       "artifacts": [
         {
+          "bytes": 1104,
+          "decision": "PASS_V100_HF_LEGALITY_SMOKE",
+          "embedded_digests": {
+            "rows[0].model_config_sha256": "76d3ae4601ce939830b2517f4a6cadb86cc51316c3900af6b020b051c21a478c",
+            "rows[1].model_config_sha256": "2e74a751548b8ad7d7526d29365ad8144c345d8b412b1152d25dc6698452712f"
+          },
+          "path": "results/v100_v1_v4/results/v0/178164.manager/smoke.json",
+          "role": "V100 legality and repeated-input smoke",
+          "sha256": "1d566a07127afae7f0704a6409ba3754e7bf56117359ca08e93885dff3199976"
+        },
+        {
+          "bytes": 497,
+          "embedded_digests": {
+            "runner_sha256": "7eaad6f648ab9abd5c81080f0382741d9392c18395b10bb64de57424ab531dc1"
+          },
+          "path": "results/v100_v1_v4/results/v1_v4/178168.manager/environment.json",
+          "role": "V100 environment and runner fingerprint",
+          "sha256": "2f54ca41c28ac9404f7c81e2c65916c520cdb36e24c4f78fe0f3cba8bb872fbc"
+        },
+        {
+          "bytes": 2889080,
+          "embedded_digests": {
+            "environment.runner_sha256": "7eaad6f648ab9abd5c81080f0382741d9392c18395b10bb64de57424ab531dc1"
+          },
+          "path": "results/v100_v1_v4/results/v1_v4/178168.manager/v1_v4_summary.json",
+          "role": "complete 84-cell V1--V4 matrix",
+          "sha256": "9abd271f094260cc18f06018172498e524c33ad4ecb340b979a2479366f1f296"
+        },
+        {
+          "bytes": 68320,
+          "decision": "PASS",
+          "path": "results/v100_v1_v4/results/v1_v4/178168.manager/AUDIT.json",
+          "role": "independent 479-check matrix audit",
+          "sha256": "cfecfae7f85713e7f5aabb2d0dee228f6e2c8b7be3653e1de2ee40c12f8ec57d"
+        }
+      ],
+      "id": "v100_qwen_scaleout",
+      "scope": {
+        "backend": "Transformers eager; PyTorch 2.4.1/CUDA 12.1",
+        "claim_boundary": "independent of RTX3090/vLLM; single-node scale-out only; c64 is the measured 2 s-SLO capacity and c128 is overload",
+        "family": "Qwen3-ASR",
+        "hardware": "one 8xTesla-V100-32GB PCIe node",
+        "mechanism": "SG and DGFT replica scale-out",
+        "models": [
+          "0.6B",
+          "1.7B"
+        ],
+        "workload": "bilingual 30 s sessions, c16--c128"
+      }
+    },
+    {
+      "artifacts": [
+        {
           "bytes": 10829,
           "decision": "PHASE2_RISK_AND_TAIL_GATE_PASS_DETERMINISTIC_CERTIFICATE_UNRESOLVED",
           "path": "results/phase2/risk_v1/summary.json",
@@ -4479,6 +4532,6 @@
     }
   ],
   "invariant": "Evidence groups have separate execution contracts and estimands. Hashes bind artifacts; no risk or quality guarantee transfers between groups unless explicitly stated.",
-  "inventory_digest": "ec126bcbb119ff5294a1b0df91298b3fd9024d289b753c9b4715e785a8b0c64d",
+  "inventory_digest": "b9a35dcdf395e101673596cd02f32ea5fc208ad8ecbbf0b63321d0460db22203",
   "schema_version": 1
 }

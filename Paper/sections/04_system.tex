@@ -1,11 +1,11 @@
 %% Section 4: The RevTrace System. Three-element pattern per module:
 %% motivation / mechanism / evidence hook. (outline v2 sec.3.4)
 
-RevTrace implements DGFT as a transaction runtime with per-family adapters,
-a versioned ledger, and a stratified certification layer
+RevTrace implements DGFT as a transaction runtime: per-family adapters, a
+versioned ledger, and a stratified certification layer
 (Figure~\ref{fig:arch}).
 
-\begin{figure}[t]
+\begin{figure*}[t]
   \centering
   \figplaceholder{F2 double panel (outline v2 sec.4): top --- architecture
     with fine proposal lane, evidence adapter, coarse canonical authority,
@@ -20,14 +20,14 @@ a versioned ledger, and a stratified certification layer
   certificate-bearing transaction whose parent version and frontier checks
   pass may advance committed state.}
   \label{fig:arch}
-\end{figure}
+\end{figure*}
 
 \subsection{Architecture-specific adapters}\label{sec:sys:adapters}
 
 \emph{Motivation.} The safety proofs of Section~\ref{sec:dgft} require only
 three interfaces; everything family-specific must stay out of the protocol.
 \emph{Mechanism.} Each family provides (i) a state-projection adapter
-computing $\proj(\out_t;\state_t)$ (Qwen rollback prefix; Whisper
+computing $\proj(\out_t;H_t)$ (Qwen rollback prefix; Whisper
 previous-text prompt), (ii) an authority adapter executing the canonical
 path (FP16 singleton for SG; FP32 batched for Coarse/Hybrid), and
 (iii) an evidence adapter collecting risk signals (margins, directional
@@ -73,7 +73,7 @@ certificates, versions, and frontier continuity;
 A risk signal from any stratum may schedule verification but never authorize
 installation (R4).
 
-\begin{figure}[t]
+\begin{figure*}[t]
   \centering
   \figplaceholder{F6 four-rung ladder or matrix (outline v2 sec.4):
     strata (i) SG randomized audits + anytime UCB, (ii) FP32 contract
@@ -84,7 +84,7 @@ installation (R4).
   scope-limited guarantee; no rung's evidence authorizes another's
   installation decisions.}
   \label{fig:cert}
-\end{figure}
+\end{figure*}
 
 \subsection{Online coordinator}\label{sec:sys:coord}
 

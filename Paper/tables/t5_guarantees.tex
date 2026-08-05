@@ -1,39 +1,49 @@
 %% T5: guarantee taxonomy. Design-level separation of protection regimes;
-%% the DGFT rows' claims are evaluated in H2/H5.
-\begin{table}[t]
+%% the DGFT rows' claims are evaluated in H2/H5. The four evidence columns
+%% mirror the certification strata of Section 4.4 / H5 and never transfer.
+\begin{table*}[t]
 \centering
 \small
-\caption{Guarantee taxonomy. \checkmark: guaranteed within the stated scope.
-$\sim$: evidence-limited --- for Coarse/Hybrid DGFT the risk column holds
-contract-scoped preflight invariance evidence, not a probabilistic bound;
-anytime-valid bounds belong to the SG path only and do not transfer
-(Section~\ref{sec:sys:cert}). Margin/confidence gates are treated as
-scheduling signals, not calibrated risk bounds. Rows 2--4 isolate
-single-protection regimes; they are not strawmen but the actual components
-of existing practice.}
+\caption{Guarantee taxonomy. \checkmark: guaranteed within the stated
+scope; ``display only'' means that a policy stabilizes what the user sees
+without defining feedback-state write authority. Rows 2--4 isolate
+single-protection regimes; they are not strawmen
+but the actual components of existing practice. The last four columns are
+the certification strata of Section~\ref{sec:sys:cert}, each with a
+non-transferable scope (H5): \emph{statistical risk bound} = anytime-valid
+UCB from randomized audits, SG adapter path only
+(Section~\ref{sec:eval:h5}(i)); \emph{preflight invariance} =
+contract-scoped FP32 batch-repeat and batch-vs-singleton checks
+(Section~\ref{sec:eval:h5}(ii)), not applicable to the singleton SG
+authority; \emph{exhaustive tx validation} = exhaustive online validation
+of certificates, parent versions, and frontier continuity
+(Section~\ref{sec:eval:h2}); \emph{semantic reference} = independent
+per-family quality reference (Section~\ref{sec:eval:h5}(iv)). Margin and
+confidence signals schedule verification but authorize nothing (R4), so the
+margin-gate row carries no evidence column.}
 \label{tab:guarantees}
-\setlength{\tabcolsep}{3.2pt}
+\setlength{\tabcolsep}{2.8pt}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}lccccccc@{}}
+\begin{tabular}{@{}lcccccccc@{}}
 \toprule
-Regime & Display stable & Feedback ancestry & Canonical authority &
-Stale rejection & Risk quantified & Semantic reference &
-Critical-path check \\
+Regime & Display/state-write authority split & Feedback ancestry & Canonical authority &
+Stale rejection & Statistical risk bound & Preflight invariance &
+Exhaustive tx validation & Semantic reference \\
 \midrule
 Unprotected FP16 batching & $\times$ & $\times$ & $\times$ & $\times$ &
-  $\times$ & $\times$ & $\times$ \\
-Owner/version check only & $\times$ & $\times$ & $\times$ & \checkmark &
-  $\times$ & $\times$ & \checkmark \\
-LocalAgreement-style confirmation & \checkmark & $\times$ & $\times$ &
   $\times$ & $\times$ & $\times$ & $\times$ \\
+Owner/version check only & $\times$ & $\times$ & $\times$ & \checkmark &
+  $\times$ & $\times$ & $\times$ & $\times$ \\
+LocalAgreement-style confirmation & display only & $\times$ & $\times$ &
+  $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
 Margin/confidence gate & $\times$ & $\times$ & $\times$ & $\times$ &
-  $\times$ & $\times$ & \checkmark \\
+  $\times$ & $\times$ & $\times$ & $\times$ \\
 \addlinespace
 SG-DGFT ($\granratio=1$) & \checkmark & \checkmark & \checkmark &
-  \checkmark & \checkmark & \checkmark & \checkmark \\
+  \checkmark & \checkmark & $\times$ & \checkmark & \checkmark \\
 Coarse/Hybrid DGFT ($\granratio>1$) & \checkmark & \checkmark & \checkmark &
-  \checkmark & $\sim$ & \checkmark & \checkmark \\
+  \checkmark & $\times$ & \checkmark & \checkmark & \checkmark \\
 \bottomrule
 \end{tabular}
 }
-\end{table}
+\end{table*}

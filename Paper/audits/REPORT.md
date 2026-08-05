@@ -23,7 +23,7 @@ Overall: **PASS**
 ## C. Contract inventory
 
 - Decision: `PASS_PAPER_CONTRACT_INVENTORY`
-- Evidence groups: 5.
-- Inventory digest: `ec126bcbb119ff5294a1b0df91298b3fd9024d289b753c9b4715e785a8b0c64d`.
+- Evidence groups: 6.
+- Inventory digest: `b9a35dcdf395e101673596cd02f32ea5fc208ad8ecbbf0b63321d0460db22203`.
 - Groups: R9.E Whisper service, R10 Qwen service/ablation, SG anytime risk, Qwen quality, Whisper quality.
 - Risk and quality estimands remain family/path scoped and are not pooled.

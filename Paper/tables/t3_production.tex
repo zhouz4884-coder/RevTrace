@@ -1,19 +1,20 @@
 %% T3: cross-architecture production summary (aggregates only).
 %% Sources: R10 cross-adapter report (Qwen, 4 cells, 320 events);
 %% R9.E closure report (Whisper, 16 cells, 1,048 certificates).
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \small
 \caption{Cross-family production evidence, per contract. Qwen energy
 reduction is against the all-singleton FP16 no-serving baseline of the R10
 contract; Whisper figures are medians/ranges across the 16 R9.E cells.
-Zero-violation counts are exhaustive over the evaluated traces.}
+Violation counts are exhaustive observations over the evaluated traces, not
+a mathematical claim of an error-free implementation.}
 \label{tab:production}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}llcccccc@{}}
 \toprule
 Family & Operating point & Wall & GPU-norm & Energy &
-P95 edit / WER & Display P99 & Install violations \\
+P95 edit / WER & Display P99 & Observed install violations \\
 \midrule
 Qwen3-ASR-0.6B & Coarse-DGFT & $6.88\times$ & $3.44\times$ & $-59.8\%$ &
   3.43\% & 0.826\,s & 0 / 80 \\
@@ -31,4 +32,4 @@ Whisper (16 cells) & production DGFT & $2.841\times$ median
 \bottomrule
 \end{tabular}
 }
-\end{table}
+\end{table*}
