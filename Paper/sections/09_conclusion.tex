@@ -23,6 +23,7 @@ real-time throughput for Qwen3-ASR 0.6B/1.7B at c64, with display P99
 the 2\,s SLO and are retained as the measured capacity boundary. These values
 extend the evidence to high-concurrency single-node serving without being
 pooled with the RTX~3090/vLLM contract.
-Extending the transaction discipline to other feedback-driven revision
-models---including text-LLM and multimodal settings with stateful
-generation---is the natural next step.
+Implementing the session-partitioned ledger across nodes and measuring its
+consensus/commit cost, and extending the transaction discipline to other
+feedback-driven text and multimodal revision models, are the natural next
+steps.

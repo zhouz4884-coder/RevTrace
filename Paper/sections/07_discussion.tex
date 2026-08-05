@@ -7,6 +7,17 @@ proposer and SG-authority precision. Quality estimands are defined against
 the FP16 singleton reference (Qwen) and against unprotected feedback
 (Whisper); neither claims bitwise equivalence across precisions.
 
+\paragraph{Authority is an interface, not a precision.}
+DGFT requires an authority path that emits a contract-bound canonical
+projection and certificate; it does not require FP32. FP32 was the conservative
+choice that passed the frozen implementation's preflight and quality checks.
+A deterministic BF16/FP16 path with fixed reductions, a certified kernel
+portfolio, or canonical replay can instantiate the same interface after a
+new contract epoch is declared and validated. Merely lowering precision or
+substituting a distilled predictor is not a certificate: unless that path is
+itself promoted to the versioned canonical authority, it cannot authorize a
+state write.
+
 \paragraph{Risk evidence does not transfer.}
 The SG-path UCB of 0.480\% bounds the numerical risk of the SG adapter's
 randomized audits. It is never applied to Coarse/Hybrid paths, whose safety
@@ -91,3 +102,17 @@ match singleton output, so its authority contract is platform-scoped rather
 than assumed from precision alone. Higher-end accelerators and distributed
 authority ledgers may change the cost ordering without changing the
 state-write authorization problem.
+
+\paragraph{Distributed realization.}
+DGFT's commit history is session-local, so a multi-node implementation can
+partition sessions across authority coordinators and store each session's
+epoch, parent version, frontier, and single-use certificate state under one
+linearizable ledger key. Certificate consumption and parent-version
+comparison then become a conditional write on that key; a replicated KV store
+or consensus-backed log can implement this operation without placing the
+provisional display path on the consensus critical path. Network and consensus
+latency would instead extend authority/commit latency, while proposer display
+can remain local. Failover must preserve the contract epoch and prevent
+certificate reuse. This is a design mapping, not an evaluated multi-node
+result: the present measurements do not quantify cross-node commit latency,
+failover cost, or distributed throughput, and those remain future work.

@@ -182,7 +182,8 @@ $-10.48$/$-16.17$/$-22.15$) and $-8.26$/$-11.03$/$-13.76$ on the untouched
 cohort (40 long sessions per model, deterministically assembled from 214
 previously unused source utterances; uppers $-5.15$/$-7.51$/$-9.09$)
 (Figure~\ref{fig:quality}).
-On the independent 64-utterance-per-model-language closure, deployed Qwen
+On the independent 64-utterance-per-model-language closure (deployed
+fixed-shape authority configuration, deterministic holdout), deployed Qwen
 records English WER 2.15\%/2.30\% (0.6B/1.7B), Chinese CER
 2.71\%/2.16\%, terminal exactness 256/256 against singleton authority, zero
 catastrophic outliers, and partial-revision edit rates 24.7--31.8\%.
@@ -207,8 +208,29 @@ decisions.
 \label{sec:eval:h6}
 
 Published systems target different semantic objects, so their headline
-numbers are not an apples-to-apples leaderboard. We instead run faithful
-\emph{revision-level adaptations} on the same frozen overloaded c32 trace
+numbers are not an apples-to-apples leaderboard. We therefore separate a
+normal-load performance comparison from a flip-rich safety-cost stress test.
+
+\emph{Normal-load comparison.} On the independent V100 c16 workload, all
+240 display events per cell meet the 2\,s SLO
+(Table~\ref{tab:normal-adaptations}). Relative to the LLM-42-style adaptation
+that verifies every revision, Coarse-DGFT improves audio throughput by
+$6.91\times/5.64\times$ on 0.6B/1.7B; Hybrid-DGFT improves it by
+$6.56\times/5.37\times$. The comparison with MarginGate-inspired gating is
+deliberately less one-sided: Coarse-DGFT is 5.6\% slower on 0.6B and 11.5\%
+faster on 1.7B. MarginGate verifies 0\%/3.33\% of revisions on these benign
+traces and has no state-write authority contract; consequently this result
+measures its low normal-load cost, not safety on a state-changing flip. All
+0.6B modes are exact against the independent singleton reference. On 1.7B,
+MarginGate, LLM-42-style, and SG are 16/16 exact, whereas the declared
+Coarse/Hybrid quality boundary is 3.18\% P95 final edit with 8/16 exact
+sessions. Thus RevTrace is not claimed to dominate heuristic gating on every
+model; it minimizes the cost of an explicit state-write contract.
+
+\tbl{t8_normal_slo_adaptations}
+
+\emph{Flip-rich stress.} We then run faithful revision-level adaptations on
+the same frozen overloaded c32 trace
 (Table~\ref{tab:external-adaptations}). A MarginGate-inspired fixed threshold
 verifies 3.02\% of events but misses the known state-changing flip; an
 owner/version-only baseline rejects stale work but still accepts that legal
@@ -243,8 +265,12 @@ accumulates 62 batch--singleton request mismatches across FP16/FP32 and batch
 sizes 1--32. FP32 is therefore not an unconditional singleton-equivalence
 certificate on this platform. Second, under the normal-load c16 contract,
 SG reaches $4.682\times/3.248\times$ wall speedup with 6.67\%/10.00\%
-verification and 0\% P95 final edit; Hybrid reaches
-$5.764\times/4.657\times$ (Table~\ref{tab:v100-scaling}). Third, p4a4 at c64
+verification and 0\% P95 final edit (16/16 exact final sessions against the
+independent FP16 singleton reference); Hybrid reaches
+$5.764\times/4.657\times$ and Coarse-DGFT $6.072\times/4.893\times$
+(Table~\ref{tab:v100-scaling}). On 0.6B every V2 mode is exact (0\% P95
+final edit); on 1.7B the Coarse/Hybrid quality boundary is a P95 final edit
+rate of 3.18\% with 8/16 exact sessions, while SG remains at 0\%. Third, p4a4 at c64
 sustains $147.138\times/114.488\times$ audio real-time throughput with display
 P99 1.115/1.471\,s, zero misses among 960 display events per model, and nominal
 scale efficiency 91.1\%/100.7\% relative to p1a1 at the same load. At c128,

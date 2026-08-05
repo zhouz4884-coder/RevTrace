@@ -1,9 +1,18 @@
 # Paper workspace
 
-Current locally compiled review draft: `rev_v6.pdf`. This revision adds the
-independent 84-cell 8xV100 scale-out contract, c64 SLO-valid capacity, c128
-overload boundary, proposer/authority bottleneck attribution, and the
-250,000-attempt CPU transaction-state fuzz. The point-by-point author audit is in
+Current locally compiled draft: `main.pdf` (build `rev_v9`, elsarticle
+`[5p]` camera-style preview). This revision adds a normal-load c16 comparison
+against MarginGate- and LLM-42-style revision adaptations, makes the authority
+interface explicitly precision-independent, and maps the single-node ledger
+to a bounded multi-node realization without claiming measured multi-node
+scaling. It retains the independent 84-cell 8xV100 scale-out contract, c64
+SLO-valid capacity, c128 overload boundary,
+proposer/authority bottleneck attribution, and the 250,000-attempt CPU
+transaction-state fuzz. Post-commit repairs (2026-08-06): the `[times]`
+class option reintroduced Type 3 fonts and was replaced by
+`newtxtext`/`newtxmath` (zero Type 3 verified), and the 1.7B Coarse/Hybrid
+P95-edit boundary (3.18%, 8/16 exact sessions) is now visible in H7/T7
+wherever their speedups are reported. The point-by-point author audit is in
 `submission/REVIEW_TRIAGE_2026-08-05.md`.
 
 Manuscript: **RevTrace: Dual-Granularity Feedback Transactions for
@@ -19,10 +28,11 @@ exceed `docs/CLAIM_BOUNDARIES.md`.
 
 - `main.tex` — preamble, abstract (DRAFT v0), section inputs, bibliography.
 - `sections/01..09_*.tex` — one file per section (outline v2 structure).
-- `tables/t1..t7_*.tex` — T1 claim contracts, T2 same-workload ladder,
+- `tables/t1..t8_*.tex` — T1 claim contracts, T2 same-workload ladder,
   T3 production summary, T4 quality contracts, T5 guarantee taxonomy, and
-  T6 same-trace revision adaptations; T7 is the independent 8xV100
-  single-node scale-out contract.
+  T6 flip-rich revision adaptations; T7 is the independent 8xV100
+  single-node scale-out contract; T8 is the normal-load c16 comparison of
+  revision-level MarginGate/LLM-42 adaptations and RevTrace configurations.
   All numbers come from audited results (see captions for sources).
 - `figures/` — figure PDFs. The three data/performance figures are rendered
   and reproducible: F3 `f3_pareto_latency.pdf`, F4 `f4_production.pdf`,
@@ -35,11 +45,13 @@ exceed `docs/CLAIM_BOUNDARIES.md`.
   TIFF, and `figures/FIGURE_QA_V2.json`; the original renderer is retained as
   provenance. F1/F2/F6 (architecture/timeline/ladder diagrams)
   remain placeholders pending drawing requirements.
-- `refs.bib` — 37 entries, checked against primary indexes (arXiv API,
-  OpenAlex, CrossRef) on 2026-08-04 (original 22 verified 2026-08-03,
-  15 Related-Work additions verified 2026-08-04). Voxtral Realtime is bound
-  directly to its arXiv record because OpenAlex did not expose a usable
-  arXiv identifier. Raw records are kept in `references/`.
+- `refs.bib` — 49 entries, checked against primary indexes (arXiv API,
+  OpenAlex, CrossRef) across 2026-08-03..06 (original 22 verified
+  2026-08-03, 15 Related-Work additions 2026-08-04, the 2026 LLM-42 and
+  MarginGate preprints re-verified against the arXiv API 2026-08-06).
+  Voxtral Realtime is bound directly to its arXiv record because OpenAlex
+  did not expose a usable arXiv identifier. Raw records are kept in
+  `references/`.
 - `elsarticle-num.bst` — vendored numbered bibliography style used by the
   reproducible local build. The local CTAN template bundle is intentionally
   excluded from version control because it is upstream material, not a
@@ -69,10 +81,14 @@ format; switch to `\documentclass[3p]{elsarticle}` for camera-style preview.
 This machine compiles the paper with MiKTeX via the explicit
 `pdflatex -> bibtex -> pdflatex -> pdflatex` recipe; `latexmk` is not used
 because the local MiKTeX wrapper requires a separate Perl installation.
-Fonts: the preamble loads `\usepackage[T1]{fontenc}` + `\usepackage{lmodern}`
-so the built PDF contains no Type 3 fonts (verified with `pdffonts`; Latin
-Modern embedded Type 1 only, plus CID TrueType fonts embedded by the
-matplotlib figure PDFs).
+Fonts: the preamble loads `\usepackage[T1]{fontenc}` plus
+`newtxtext`/`newtxmath` (Times-style, full T1/AMS glyph coverage) so the
+built PDF contains no Type 3 fonts (verified with `pdffonts`; TeX Gyre
+Termes/NewTX embedded Type 1 only, plus CID TrueType fonts embedded by the
+matplotlib figure PDFs). The invariant arrow is `\nRightarrow`; never use
+`\not\Rightarrow`, and do not re-enable the legacy `[times]` class option —
+its mathptm-era setup reintroduces Type 3 bitmap fallbacks for symbols and
+accented bibliography names.
 
 ## Claim discipline reminders
 
@@ -85,6 +101,8 @@ matplotlib figure PDFs).
 - The 8xV100/Transformers-eager contract is independent of the
   RTX3090/vLLM contract; report c64 as the 2 s-SLO capacity and c128 as the
   measured overload boundary, never pool their absolute timings.
+- The V100 1.7B Coarse/Hybrid P95 final-edit boundary (3.18%, 8/16 exact
+  sessions) must stay visible wherever their speedups are reported (H7, T7).
 - Preflight (10.7-11.1 s) is excluded from all service timing.
 - Untouched-cohort sample unit: 40 long sessions per model, deterministically
   assembled from 214 previously unused source utterances. The statistical
@@ -136,6 +154,7 @@ python scripts/audit_r9_coverage_replay.py \
   --manifest results/r9_dgft/online_closure/coverage-replay.json \
   --output results/r9_dgft/online_closure/coverage-replay.json
 python scripts/audit_paper_submission.py
+python scripts/audit_h6_normal_load.py
 ```
 
 Audited outputs are frozen under `Paper/audits/`:
@@ -145,6 +164,8 @@ Audited outputs are frozen under `Paper/audits/`:
 - `contract_inventory.json`: path/hash/digest binding for R9.E, R10, SG risk,
   Qwen quality, and Whisper quality;
 - `REPORT.md`: human-readable audit summary.
+- `h6_normal_load_v100.json`: direct recomputation of the ten normal-load
+  c16 comparison cells, SLO/install checks, and RevTrace-to-adaptation ratios.
 
 The Voxtral Realtime boundary now cites its own report,
 arXiv:2602.11298 (first submitted 2026-02-11), rather than the 2025 Voxtral

@@ -8,7 +8,11 @@ The coarse authority executes in FP32 with a 4{,}096-token KV-cache bound
 per session; the one-time contract preflight (batch-repeat and
 batch-vs-singleton invariance) takes 10.7--11.1\,s and is excluded from
 steady-state service timing, reported separately
-(Section~\ref{sec:discussion}). Sessions arrive online and are scheduled
+(Section~\ref{sec:discussion}). FP32 is the authority realization selected
+for this frozen implementation, not a DGFT protocol requirement: another
+precision or deterministic kernel path can replace it only after defining a
+new canonical contract and passing the same preflight and quality checks.
+Sessions arrive online and are scheduled
 with causal arrival ordering; decoder outputs are transferred to the host
 via vectorized paths. Experiments use two NVIDIA RTX 3090 GPUs, one
 hosting the proposer lane and one the authority lane. Realizations rejected

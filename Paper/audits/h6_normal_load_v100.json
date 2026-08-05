@@ -1,0 +1,226 @@
+{
+  "decision": "PASS_H6_NORMAL_LOAD_RECOMPUTE",
+  "scope": "single-node 8xV100, c16, 16 bilingual 30 s sessions per cell",
+  "cells": {
+    "Qwen3-ASR-0.6B": {
+      "margingate": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-0.6B-margingate-c16.json",
+        "mechanism": "MarginGate-inspired",
+        "audio_xrt": 40.50139564345742,
+        "display_p99_s": 1.1045264676213264,
+        "commit_p99_s": 1.1053653880953789,
+        "verification_fraction": 0.0,
+        "p95_final_edit_rate": 0.0,
+        "exact_sessions": 16,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      },
+      "llm42": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-0.6B-llm42-c16.json",
+        "mechanism": "LLM-42-style revision",
+        "audio_xrt": 5.53530632776989,
+        "display_p99_s": 1.0996997579932213,
+        "commit_p99_s": 6.933672152459621,
+        "verification_fraction": 1.0,
+        "p95_final_edit_rate": 0.0,
+        "exact_sessions": 16,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      },
+      "revtrace-sg": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-0.6B-revtrace-sg-c16.json",
+        "mechanism": "RevTrace SG",
+        "audio_xrt": 29.473527760721925,
+        "display_p99_s": 1.0945492759346962,
+        "commit_p99_s": 5.52175697684288,
+        "verification_fraction": 0.06666666666666667,
+        "p95_final_edit_rate": 0.0,
+        "exact_sessions": 16,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      },
+      "coarse-dgft": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-0.6B-coarse-dgft-c16.json",
+        "mechanism": "RevTrace Coarse",
+        "audio_xrt": 38.222734344379354,
+        "display_p99_s": 1.1061851531267166,
+        "commit_p99_s": 3.091370165348053,
+        "verification_fraction": null,
+        "p95_final_edit_rate": 0.0,
+        "exact_sessions": 16,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      },
+      "hybrid-dgft": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-0.6B-hybrid-dgft-c16.json",
+        "mechanism": "RevTrace Hybrid",
+        "audio_xrt": 36.28468635941469,
+        "display_p99_s": 1.0862800404429436,
+        "commit_p99_s": 3.3340963646769524,
+        "verification_fraction": null,
+        "p95_final_edit_rate": 0.0,
+        "exact_sessions": 16,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      }
+    },
+    "Qwen3-ASR-1.7B": {
+      "margingate": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-1.7B-margingate-c16.json",
+        "mechanism": "MarginGate-inspired",
+        "audio_xrt": 26.207918179103377,
+        "display_p99_s": 1.4334896355867386,
+        "commit_p99_s": 5.060813874006271,
+        "verification_fraction": 0.03333333333333333,
+        "p95_final_edit_rate": 0.0,
+        "exact_sessions": 16,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      },
+      "llm42": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-1.7B-llm42-c16.json",
+        "mechanism": "LLM-42-style revision",
+        "audio_xrt": 5.180481101756632,
+        "display_p99_s": 1.393377311527729,
+        "commit_p99_s": 7.836633212864399,
+        "verification_fraction": 1.0,
+        "p95_final_edit_rate": 0.0,
+        "exact_sessions": 16,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      },
+      "revtrace-sg": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-1.7B-revtrace-sg-c16.json",
+        "mechanism": "RevTrace SG",
+        "audio_xrt": 19.395474332644117,
+        "display_p99_s": 1.4399680197238922,
+        "commit_p99_s": 7.890564434230328,
+        "verification_fraction": 0.1,
+        "p95_final_edit_rate": 0.0,
+        "exact_sessions": 16,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      },
+      "coarse-dgft": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-1.7B-coarse-dgft-c16.json",
+        "mechanism": "RevTrace Coarse",
+        "audio_xrt": 29.223024196161074,
+        "display_p99_s": 1.6092874705791473,
+        "commit_p99_s": 4.492162853479385,
+        "verification_fraction": null,
+        "p95_final_edit_rate": 0.03183023872679045,
+        "exact_sessions": 8,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      },
+      "hybrid-dgft": {
+        "source": "results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-Qwen3-ASR-1.7B-hybrid-dgft-c16.json",
+        "mechanism": "RevTrace Hybrid",
+        "audio_xrt": 27.81074973138367,
+        "display_p99_s": 1.4660465195775032,
+        "commit_p99_s": 4.810727499425411,
+        "verification_fraction": null,
+        "p95_final_edit_rate": 0.03183023872679045,
+        "exact_sessions": 8,
+        "sessions": 16,
+        "display_events": 240,
+        "display_slo_2s_misses": 0,
+        "transaction_install_violations": 0
+      }
+    }
+  },
+  "throughput_ratios": {
+    "Qwen3-ASR-0.6B": {
+      "coarse_vs_llm42": 6.905260898140545,
+      "hybrid_vs_llm42": 6.555136104641451,
+      "coarse_vs_margingate": 0.9437386968306569,
+      "hybrid_vs_margingate": 0.8958873091395828
+    },
+    "Qwen3-ASR-1.7B": {
+      "coarse_vs_llm42": 5.640986545873497,
+      "hybrid_vs_llm42": 5.368372007370786,
+      "coarse_vs_margingate": 1.1150456131789117,
+      "hybrid_vs_margingate": 1.0611582935098711
+    }
+  },
+  "assertions": [
+    {
+      "cell": "Qwen3-ASR-0.6B/margingate",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    },
+    {
+      "cell": "Qwen3-ASR-0.6B/llm42",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    },
+    {
+      "cell": "Qwen3-ASR-0.6B/revtrace-sg",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    },
+    {
+      "cell": "Qwen3-ASR-0.6B/coarse-dgft",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    },
+    {
+      "cell": "Qwen3-ASR-0.6B/hybrid-dgft",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    },
+    {
+      "cell": "Qwen3-ASR-1.7B/margingate",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    },
+    {
+      "cell": "Qwen3-ASR-1.7B/llm42",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    },
+    {
+      "cell": "Qwen3-ASR-1.7B/revtrace-sg",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    },
+    {
+      "cell": "Qwen3-ASR-1.7B/coarse-dgft",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    },
+    {
+      "cell": "Qwen3-ASR-1.7B/hybrid-dgft",
+      "display_events_240": true,
+      "display_slo_misses_zero": true,
+      "install_violations_zero": true
+    }
+  ]
+}

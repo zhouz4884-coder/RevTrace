@@ -1,0 +1,37 @@
+%% T8: normal-load c16 revision adaptations on the independent V100 contract.
+%% Source: results/v100_v1_v4/results/v1_v4/178168.manager/raw/v2-*.json.
+\begin{table*}[t]
+\centering
+\small
+\caption{Normal-load c16 comparison on the independent V100 contract. Each
+cell contains 16 bilingual 30\,s sessions and 240 display events; every cell
+has zero 2\,s display-SLO misses and zero observed transaction-install
+violations. ``Schedule'' is a revision verification fraction for the first
+three mechanisms but a coarse authority ratio for DGFT, so these entries are
+not interchangeable. P95 edit and exactness use the independent FP16
+singleton reference. These are faithful revision-level adaptations, not
+end-to-end reproductions of the original text-only systems.}
+\label{tab:normal-adaptations}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llcccccc@{}}
+\toprule
+Model & Mechanism & Verify/authority schedule & Audio xRT & Display P99 &
+Commit P99 & P95 edit & Exact sessions \\
+\midrule
+\multirow{5}{*}{Qwen3-ASR-0.6B}
+ & MarginGate-inspired & 0.00\% & $40.501\times$ & 1.105\,s & 1.105\,s & 0.00\% & 16/16 \\
+ & LLM-42-style revision & 100\% & $5.535\times$ & 1.100\,s & 6.934\,s & 0.00\% & 16/16 \\
+ & RevTrace SG & 6.67\% & $29.474\times$ & 1.095\,s & 5.522\,s & 0.00\% & 16/16 \\
+ & RevTrace Coarse & $\granratio=3$ & $38.223\times$ & 1.106\,s & 3.091\,s & 0.00\% & 16/16 \\
+ & RevTrace Hybrid & $\granratio=3$ + replay & $36.285\times$ & 1.086\,s & 3.334\,s & 0.00\% & 16/16 \\
+\midrule
+\multirow{5}{*}{Qwen3-ASR-1.7B}
+ & MarginGate-inspired & 3.33\% & $26.208\times$ & 1.433\,s & 5.061\,s & 0.00\% & 16/16 \\
+ & LLM-42-style revision & 100\% & $5.180\times$ & 1.393\,s & 7.837\,s & 0.00\% & 16/16 \\
+ & RevTrace SG & 10.00\% & $19.395\times$ & 1.440\,s & 7.891\,s & 0.00\% & 16/16 \\
+ & RevTrace Coarse & $\granratio=3$ & $29.223\times$ & 1.609\,s & 4.492\,s & 3.18\% & 8/16 \\
+ & RevTrace Hybrid & $\granratio=3$ + replay & $27.811\times$ & 1.466\,s & 4.811\,s & 3.18\% & 8/16 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}

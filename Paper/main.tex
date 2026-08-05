@@ -2,10 +2,15 @@
 %% Decision: OUTLINE_V2_THEORY_GUIDED (docs/reports/revtrace_paper_outline_v2.md)
 %% Claim discipline: no claim may exceed docs/CLAIM_BOUNDARIES.md.
 %% Compile: pdflatex main && bibtex main && pdflatex main x2  (or Overleaf)
-\documentclass[5p,times]{elsarticle}
+\documentclass[5p]{elsarticle}
 
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm}
+%% Times-style text+math with full T1/AMS glyph coverage. The legacy
+%% [times] class option reintroduced Type 3 bitmap fallbacks (e.g.\ for
+%% \not\Rightarrow and accented bibliography names); NewTX avoids them.
+\usepackage{newtxtext}
+\usepackage[varg]{newtxmath}
 \usepackage{booktabs,multirow,array}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -70,32 +75,31 @@ Chemical Technology, 29\# Nanjian Road, Changping, Beijing, China.}
 city={Beijing}, country={China}}
 
 \begin{abstract}
-Streaming ASR systems often feed generated text into later rounds, turning a
-displayed revision into a write to future model state. Batching-induced output
-differences can therefore persist beyond one response. We formalize this
+Streaming ASR often feeds generated text into later rounds, so a displayed
+revision becomes a write to future model state and batch-induced differences
+can persist beyond one response. We formalize this
 feedback-state contamination channel and confirm it causally: among 21 legal
 paired interventions, 8 propagate with feedback and none do when the edge is
 removed. We introduce Dual-Granularity Feedback Transactions (DGFT), which
 decouple low-latency proposal and display from coarse canonical state-write
-authority. A revision enters future state only through a certificate-bearing,
-versioned transaction; same-granularity certification is the
-$\granratio=1$ case. We prove exclusion of uncertified ancestry, fork-free
-committed histories, and safety independent of granularity, and derive an
-authority-path cost decomposition. RevTrace implements DGFT and is evaluated
+authority. Only a certificate-bearing, versioned transaction can enter future
+state; same-granularity certification is the $\granratio=1$ case. We prove
+exclusion of uncertified ancestry, fork-free committed histories, and safety
+independent of granularity. RevTrace implements DGFT and is evaluated
 on Qwen3-ASR 0.6B/1.7B and Whisper tiny/base/small.en on two RTX~3090 GPUs,
 plus an independent eight-V100 scale-out contract. On a matched Qwen workload,
 coarse authority improves throughput by $1.39\times$/$1.28\times$ over
 same-granularity configurations; across production contracts RevTrace reaches
 up to $6.88\times$ wall-clock speedup and passes all 16 Whisper cells. We
 observe no output/state or transaction-install violation over 800 Qwen
-revisions and 1{,}048 Whisper commits; a 250{,}000-attempt fuzzer accepts all
-10{,}000 valid commits and rejects all 240{,}000 mutations/replays. On the
+revision events and 1{,}048 Whisper commits; a 250{,}000-attempt fuzzer accepts
+all 10{,}000 valid commits and rejects all 240{,}000 mutations/replays. On the
 V100 contract, four proposal and four authority replicas sustain
 147.1$\times$/114.5$\times$ audio real-time throughput at c64 with display
 P99 1.115/1.471\,s; c128 is retained as the measured 2\,s-SLO boundary. These
 results establish state-write authority as a separate contract for safe,
-high-throughput revision serving; risk signals may schedule verification but
-never authorize installation.
+high-throughput revision serving; risk may schedule verification but cannot
+authorize installation.
 \end{abstract}
 
 \begin{keyword}
