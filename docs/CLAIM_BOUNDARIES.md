@@ -437,7 +437,7 @@ application-benefit comparison. Neither may be relabeled as the other.
   divided GPU-normalized speedup by two and sampled one GPU's power twice is
   excluded.  Dual-GPU measurements are unaffected by this repair.
 
-## Independent V100 V1--V4 scale-out boundary
+## Independent V100 V1--V5 scale-out boundary
 
 - The V100 study is a separate RHEL 7.6, 8xTesla-V100-32GB,
   Transformers-eager contract. Its absolute timings and speedups are never
@@ -460,6 +460,14 @@ application-benefit comparison. Neither may be relabeled as the other.
   Increasing the granularity ratio amortizes FP32 authority work but increases
   segment-commit latency; low provisional-display P99 does not relabel that
   commit latency.
+- V5 repeats only the frozen headline and allocation-sensitivity cells three
+  times. Report medians and min--max ranges, not significance claims. At
+  p4a4-c64, display P99 is 1.089/1.394 s while six-second certified-segment
+  commit P99 is 3.080/4.890 s; the 2 s SLO applies only to display. The p3a5
+  result is a cost-model sensitivity, not a new scheduler contribution.
+- V5 observes no transaction-install or uncertified-ancestry violation across
+  30 completed cells. This is a finite exhaustive-trace observation, not a
+  probability-zero or unbounded-queue guarantee.
 - Zero transaction-install, ancestry, and directional-omission violations are
   exhaustive observations over the finite 84-cell matrix, not a deterministic
   zero-risk or population failure-rate claim.

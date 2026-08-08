@@ -1,18 +1,26 @@
 # Paper workspace
 
-Current locally compiled draft: `main.pdf` (build `rev_v9`, elsarticle
-`[5p]` camera-style preview). This revision adds a normal-load c16 comparison
+Current locally compiled draft: `main.pdf` (build `rev_v11`, elsarticle
+`[5p]` camera-style preview, 18 pages including references). The full-length
+article now satisfies FGCS's strict 18-page limit; closure-repair history stays
+in the public audit rather than expanding the scientific narrative. This
+revision adds a normal-load c16 comparison
 against MarginGate- and LLM-42-style revision adaptations, makes the authority
 interface explicitly precision-independent, and maps the single-node ledger
 to a bounded multi-node realization without claiming measured multi-node
-scaling. It retains the independent 84-cell 8xV100 scale-out contract, c64
-SLO-valid capacity, c128 overload boundary,
-proposer/authority bottleneck attribution, and the 250,000-attempt CPU
-transaction-state fuzz. Post-commit repairs (2026-08-06): the `[times]`
+scaling. It retains the independent 84-cell 8xV100 scale-out contract and adds
+a 30-cell, three-repeat headline matrix that separates c64 display-SLO capacity
+from certified-segment commit latency, keeps c128 as the measured display
+overload boundary, and includes an authority-heavy allocation sensitivity.
+It also retains proposer/authority bottleneck attribution and the
+250,000-attempt CPU transaction-state fuzz. Post-commit repairs (2026-08-06):
+the `[times]`
 class option reintroduced Type 3 fonts and was replaced by
-`newtxtext`/`newtxmath` (zero Type 3 verified), and the 1.7B Coarse/Hybrid
+`newtxtext`/`newtxmath` (zero Type 3 verified), the 1.7B Coarse/Hybrid
 P95-edit boundary (3.18%, 8/16 exact sessions) is now visible in H7/T7
-wherever their speedups are reported. The point-by-point author audit is in
+wherever their speedups are reported, and the abstract/highlights restore the
+480 SG / 320 DGFT scope split on the 800 Qwen revision events. The
+point-by-point author audit is in
 `submission/REVIEW_TRIAGE_2026-08-05.md`.
 
 Manuscript: **RevTrace: Dual-Granularity Feedback Transactions for
@@ -30,20 +38,24 @@ exceed `docs/CLAIM_BOUNDARIES.md`.
 - `sections/01..09_*.tex` — one file per section (outline v2 structure).
 - `tables/t1..t8_*.tex` — T1 claim contracts, T2 same-workload ladder,
   T3 production summary, T4 quality contracts, T5 guarantee taxonomy, and
-  T6 flip-rich revision adaptations; T7 is the independent 8xV100
-  single-node scale-out contract; T8 is the normal-load c16 comparison of
+  T6 flip-rich revision adaptations; T7 is the retained source table for the
+  independent 8xV100 contract; T8 is the normal-load c16 comparison of
   revision-level MarginGate/LLM-42 adaptations and RevTrace configurations.
   All numbers come from audited results (see captions for sources).
 - `figures/` — figure PDFs. The three data/performance figures are rendered
   and reproducible: F3 `f3_pareto_latency.pdf`, F4 `f4_production.pdf`,
-  F5 `f5_quality.pdf` (PNG previews alongside). Regenerate with
+  F5 `f5_quality.pdf`, and F7 `f7_v100_dual_plane.pdf` (PNG previews
+  alongside). Regenerate F3--F5 with
   `python Paper/scripts/plot_paper_figures_v2.py` — the refined submission
   renderer reads the frozen audited JSONs
   (`results/r10_qwen_cross_adapter/*`,
   `results/r9_dgft/FINAL_REPORT_ONLINE.json`) at runtime, so no plotted
   number is hardcoded. It exports editable SVG, PDF, 300 dpi PNG, 600 dpi
   TIFF, and `figures/FIGURE_QA_V2.json`; the original renderer is retained as
-  provenance. F1/F2/F6 (architecture/timeline/ladder diagrams)
+  provenance. Regenerate F7 with
+  `python Paper/scripts/plot_v100_dual_plane.py`; it consumes the frozen
+  V1--V4 summary and independently repeated V5 summary and writes its own
+  source CSV and QA manifest. F1/F2/F6 (architecture/timeline/ladder diagrams)
   remain placeholders pending drawing requirements.
 - `refs.bib` — 49 entries, checked against primary indexes (arXiv API,
   OpenAlex, CrossRef) across 2026-08-03..06 (original 22 verified
@@ -99,8 +111,9 @@ accented bibliography names.
 - Zero-violation statements are exhaustive-trace validations, not
   probability-zero claims.
 - The 8xV100/Transformers-eager contract is independent of the
-  RTX3090/vLLM contract; report c64 as the 2 s-SLO capacity and c128 as the
-  measured overload boundary, never pool their absolute timings.
+  RTX3090/vLLM contract; report c64 as the 2 s display-SLO capacity and c128
+  as the measured display overload boundary. Certified-segment commit latency
+  is a separate estimand; never pool either contract's absolute timings.
 - The V100 1.7B Coarse/Hybrid P95 final-edit boundary (3.18%, 8/16 exact
   sessions) must stay visible wherever their speedups are reported (H7, T7).
 - Preflight (10.7-11.1 s) is excluded from all service timing.

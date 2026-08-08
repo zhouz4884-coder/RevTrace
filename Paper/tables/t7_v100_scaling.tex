@@ -1,29 +1,31 @@
 %% T7: independent V100 scale-out contract.
-%% Source: results/v100_v1_v4/results/v1_v4/178168.manager.
+%% Sources: results/v100_v1_v4/results/v1_v4/178168.manager and
+%% results/v100_v5_headline/178169.manager.
 \begin{table*}[t]
 \centering
 \small
-\caption{Independent single-node V100 results. V2 uses the same c16 bilingual
-30\,s workload for all modes; speedups are against the V100 FP16
+\caption{Independent single-node V100 results. The method ladder uses the same
+c16 bilingual 30\,s workload for all modes; speedups are against the V100 FP16
 all-singleton baseline. Hybrid P95 edit is the final-state edit rate against
 the independent FP16 singleton replay: on 1.7B the Coarse/Hybrid boundary is
 3.18\% (8/16 exact sessions) while SG stays at 0\% (16/16); on 0.6B all
-modes are exact. V3 reports the SLO-valid p4a4 c64 point; nominal scale
-efficiency compares p4a4 with p1a1 at c64 and normalizes by the $4\times$ GPU
-count increase. A value near 100\% is not a claim of statistically significant
-superlinear scaling. V100/Transformers-eager numbers are not pooled with the
-RTX~3090/vLLM contract.}
+modes are exact. The p4a4 c64 columns report medians and min--max ranges over
+three independently repeated cells. Display and six-second certified-segment
+commit latency are distinct estimands. V100/Transformers-eager numbers are not
+pooled with the RTX~3090/vLLM contract.}
 \label{tab:v100-scaling}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}lccccccccc@{}}
 \toprule
 Model & SG wall & SG display P99 & SG verify & Coarse wall & Hybrid wall &
-Hybrid P95 edit & c64 audio xRT & c64 display P99 & Scale eff. \\
+Hybrid P95 edit & c64 audio xRT & c64 display P99 & c64 commit P99 \\
 \midrule
 Qwen3-ASR-0.6B & $4.682\times$ & 1.095\,s & 6.67\% & $6.072\times$ &
-$5.764\times$ & 0.00\% & $147.138\times$ & 1.115\,s & 91.1\% \\
+$5.764\times$ & 0.00\% & 157.786 [157.577,157.869]$\times$ &
+1.089 [1.078,1.095]\,s & 3.080 [3.064,3.088]\,s \\
 Qwen3-ASR-1.7B & $3.248\times$ & 1.440\,s & 10.00\% & $4.893\times$ &
-$4.657\times$ & 3.18\% & $114.488\times$ & 1.471\,s & 100.7\% \\
+$4.657\times$ & 3.18\% & 111.722 [110.009,116.384]$\times$ &
+1.394 [1.361,1.430]\,s & 4.890 [4.665,4.960]\,s \\
 \bottomrule
 \end{tabular}
 }

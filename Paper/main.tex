@@ -85,26 +85,27 @@ decouple low-latency proposal and display from coarse canonical state-write
 authority. Only a certificate-bearing, versioned transaction can enter future
 state; same-granularity certification is the $\granratio=1$ case. We prove
 exclusion of uncertified ancestry, fork-free committed histories, and safety
-independent of granularity. RevTrace implements DGFT and is evaluated
+independent of granularity. We evaluate RevTrace
 on Qwen3-ASR 0.6B/1.7B and Whisper tiny/base/small.en on two RTX~3090 GPUs,
-plus an independent eight-V100 scale-out contract. On a matched Qwen workload,
+and an independent eight-V100 contract. On a matched Qwen workload,
 coarse authority improves throughput by $1.39\times$/$1.28\times$ over
 same-granularity configurations; across production contracts RevTrace reaches
 up to $6.88\times$ wall-clock speedup and passes all 16 Whisper cells. We
 observe no output/state or transaction-install violation over 800 Qwen
-revision events and 1{,}048 Whisper commits; a 250{,}000-attempt fuzzer accepts
+revision events (480 SG, 320 DGFT) and 1{,}048 Whisper commits; a
+250{,}000-attempt fuzzer accepts
 all 10{,}000 valid commits and rejects all 240{,}000 mutations/replays. On the
 V100 contract, four proposal and four authority replicas sustain
-147.1$\times$/114.5$\times$ audio real-time throughput at c64 with display
-P99 1.115/1.471\,s; c128 is retained as the measured 2\,s-SLO boundary. These
-results establish state-write authority as a separate contract for safe,
-high-throughput revision serving; risk may schedule verification but cannot
-authorize installation.
+median 157.8$\times$/111.7$\times$ audio real-time throughput at c64 with
+display P99 1.089/1.394\,s; certified-segment commit P99 is separately
+3.080/4.890\,s, and c128 is retained as the failed display-SLO boundary.
+State-write authority therefore enables safe, high-throughput revision
+serving; risk schedules verification but cannot authorize installation.
 \end{abstract}
 
 \begin{keyword}
 streaming ASR serving \sep LLM inference \sep optimistic concurrency control
-\sep state certification \sep transactional runtime
+\sep state certification \sep transactional runtime \sep feedback state
 \end{keyword}
 
 \end{frontmatter}
@@ -171,25 +172,6 @@ The source code, frozen audited result artifacts, replay manifests, and
 analysis scripts supporting this study are publicly available in the
 RevTrace repository at
 \url{https://github.com/zhouz4884-coder/RevTrace}.
-
-%% =======================================================================
-%% Appendix: closure history moved out of Section 5 (review round
-%% 2026-08-04). Facts unchanged; only the presentation location moves.
-\appendix
-
-\section{Rejected realizations and measurement repairs}\label{app:repairs}
-Three deviations were found and resolved during closure, and are documented
-with the frozen artifacts.
-(i) An FP16 singleton coarse-authority candidate was rejected after failing
-its quality contract; FP32 was adopted as the coarse-authority precision
-instead (the SG path retains its own FP16 singleton authority under the
-$\granratio=1$ protocol, Corollary~\ref{cor:sg}).
-(ii) The FP32 KV-cache bound was reduced from 65{,}536 to 4{,}096 tokens
-per session.
-(iii) A per-row CUDA-synchronization defect in the online submission path
-was fixed before the R9.E closure.
-All numbers reported in this paper were re-audited after these repairs and
-are bound to the release's code commit, contract digest, and result hashes.
 
 %% =======================================================================
 \bibliographystyle{elsarticle-num}

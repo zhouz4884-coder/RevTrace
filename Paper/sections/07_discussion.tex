@@ -96,6 +96,10 @@ backend-specific. The RTX~3090 results establish cross-architecture mechanism
 portability over five checkpoints. The independent 8$\times$V100 experiment
 adds single-node replica scaling and identifies c64 as the largest measured
 point satisfying the 2\,s display SLO; c128 saturates and fails that SLO.
+Three frozen repeats further separate the planes: c64 display P99 remains
+1.089/1.394\,s while six-second certified-segment commit P99 is
+3.080/4.890\,s. Hence the capacity statement is explicitly display-scoped;
+the certified frontier remains bounded but is not assigned the display SLO.
 Neither experiment establishes multi-node scalability or a data-center
 production claim. The V100 result also shows that even FP32 batching need not
 match singleton output, so its authority contract is platform-scoped rather

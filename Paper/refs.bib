@@ -104,7 +104,6 @@
   title   = {{SGLang: Efficient Execution of Structured Language Model Programs}},
   journal = {arXiv preprint},
   year    = {2023},
-  url     = {https://arxiv.org/abs/2312.07104v2},
   abstract = {Large language models (LLMs) are increasingly used for complex tasks that require multiple generation calls, advanced prompting techniques, control flow, and structured inputs/outputs. However, efficient systems are lacking for programming and executing these applications. We introduce SGLang, a system for efficient execution of complex language model programs. SGLang consists of a frontend language and a runtime. The frontend simplifies programming with primitives for generation and parallelism control. The runtime accelerates execution with novel optimizations like RadixAttention for KV cache reuse and compressed finite state machines for faster structured output decoding. Experiments show that SGLang achieves up to 6.4x higher throughput compared to state-of-the-art inference systems on various large language and multi-modal models on tasks including agent control, logical reasoning, few-shot learning benchmarks, JSON decoding, retrieval-augmented generation pipelines, and multi-turn chat. The code is publicly available at https://github.com/sgl-project/sglang},
   eprint = {2312.07104},
   archivePrefix = {arXiv},
@@ -116,7 +115,6 @@
   title   = {{Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve}},
   journal = {arXiv preprint},
   year    = {2024},
-  url     = {https://arxiv.org/abs/2403.02310v3},
   abstract = {Each LLM serving request goes through two phases. The first is prefill which processes the entire input prompt and produces the first output token and the second is decode which generates the rest of output tokens, one-at-a-time. Prefill iterations have high latency but saturate GPU compute due to parallel processing of the input prompt. In contrast, decode iterations have low latency but also low compute utilization because a decode iteration processes only a single token per request. This makes batching highly effective for decodes and consequently for overall throughput. However, batching multiple requests leads to an interleaving of prefill and decode iterations which makes it challenging to achieve both high throughput and low latency.
   We introduce an efficient LLM inference scheduler, Sarathi-Serve, to address this throughput-latency tradeoff. Sarathi-Serve introduces chunked-prefills which splits a prefill request into near equal sized chunks and creates stall-free schedules that adds new requests in a batch without pausing ongoing decodes. Stall-free scheduling unlocks the opportunity to improve throughput with large batch sizes while minimizing the effect of batching on latency. Furthermore, uniform batches in Sarathi-Serve ameliorate the imbalance between iterations resulting in minimal pipeline bubbles.
   Our techniques yield significant improvements in inference performance across models and hardware under tail latency constraints. For Mistral-7B on single A100 GPUs, we achieve 2.6x higher serving capacity and up to 3.7x higher serving capacity for the Yi-34B model on two A100 GPUs as compared to vLLM. When used with pipeline parallelism on Falcon-180B, Sarathi-Serve provides up to 5.6x gain in the end-to-end serving capacity. The source code for Sarathi-Serve is available at https://github.com/microsoft/sarathi-serve.},
@@ -130,7 +128,6 @@
   title   = {{DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving}},
   journal = {arXiv preprint},
   year    = {2024},
-  url     = {https://arxiv.org/abs/2401.09670v3},
   abstract = {DistServe improves the performance of large language models (LLMs) serving by disaggregating the prefill and decoding computation. Existing LLM serving systems colocate the two phases and batch the computation of prefill and decoding across all users and requests. We find that this strategy not only leads to strong prefill-decoding interferences but also couples the resource allocation and parallelism plans for both phases. LLM applications often emphasize individual latency for each phase: time to first token (TTFT) for the prefill phase and time per output token (TPOT) of each request for the decoding phase. In the presence of stringent latency requirements, existing systems have to prioritize one latency over the other, or over-provision compute resources to meet both.
   DistServe assigns prefill and decoding computation to different GPUs, hence eliminating prefill-decoding interferences. Given the application's TTFT and TPOT requirements, DistServe co-optimizes the resource allocation and parallelism strategy tailored for each phase. DistServe also places the two phases according to the serving cluster's bandwidth to minimize the communication caused by disaggregation. As a result, DistServe significantly improves LLM serving performance in terms of the maximum rate that can be served within both TTFT and TPOT constraints on each GPU. Our evaluations show that on various popular LLMs, applications, and latency requirements, DistServe can serve 7.4x more requests or 12.6x tighter SLO, compared to state-of-the-art systems, while staying within latency constraints for > 90% of requests.},
   eprint = {2401.09670},
@@ -143,7 +140,6 @@
   title   = {{Llumnix: Dynamic Scheduling for Large Language Model Serving}},
   journal = {arXiv preprint},
   year    = {2024},
-  url     = {https://arxiv.org/abs/2406.03243v1},
   abstract = {Inference serving for large language models (LLMs) is the key to unleashing their potential in people's daily lives. However, efficient LLM serving remains challenging today because the requests are inherently heterogeneous and unpredictable in terms of resource and latency requirements, as a result of the diverse applications and the dynamic execution nature of LLMs. Existing systems are fundamentally limited in handling these characteristics and cause problems such as severe queuing delays, poor tail latencies, and SLO violations.
   We introduce Llumnix, an LLM serving system that reacts to such heterogeneous and unpredictable requests by runtime rescheduling across multiple model instances. Similar to context switching across CPU cores in modern operating systems, Llumnix reschedules requests to improve load balancing and isolation, mitigate resource fragmentation, and differentiate request priorities and SLOs. Llumnix implements the rescheduling with an efficient and scalable live migration mechanism for requests and their in-memory states, and exploits it in a dynamic scheduling policy that unifies the multiple rescheduling scenarios elegantly. Our evaluations show that Llumnix improves tail latencies by an order of magnitude, accelerates high-priority requests by up to 1.5x, and delivers up to 36% cost savings while achieving similar tail latencies, compared against state-of-the-art LLM serving systems. Llumnix is publicly available at https://github.com/AlibabaPAI/llumnix.},
   eprint = {2406.03243},
@@ -156,7 +152,6 @@
   title   = {{Fast Inference from Transformers via Speculative Decoding}},
   journal = {arXiv preprint},
   year    = {2022},
-  url     = {https://arxiv.org/abs/2211.17192v2},
   abstract = {Inference from large autoregressive models like Transformers is slow - decoding K tokens takes K serial runs of the model. In this work we introduce speculative decoding - an algorithm to sample from autoregressive models faster without any changes to the outputs, by computing several tokens in parallel. At the heart of our approach lie the observations that (1) hard language-modeling tasks often include easier subtasks that can be approximated well by more efficient models, and (2) using speculative execution and a novel sampling method, we can make exact decoding from the large models faster, by running them in parallel on the outputs of the approximation models, potentially generating several tokens concurrently, and without changing the distribution. Our method can accelerate existing off-the-shelf models without retraining or architecture changes. We demonstrate it on T5-XXL and show a 2X-3X acceleration compared to the standard T5X implementation, with identical outputs.},
   eprint = {2211.17192},
   archivePrefix = {arXiv},
@@ -168,7 +163,6 @@
   title   = {{Accelerating Large Language Model Decoding with Speculative Sampling}},
   journal = {arXiv preprint},
   year    = {2023},
-  url     = {https://arxiv.org/abs/2302.01318v1},
   abstract = {We present speculative sampling, an algorithm for accelerating transformer decoding by enabling the generation of multiple tokens from each transformer call. Our algorithm relies on the observation that the latency of parallel scoring of short continuations, generated by a faster but less powerful draft model, is comparable to that of sampling a single token from the larger target model. This is combined with a novel modified rejection sampling scheme which preserves the distribution of the target model within hardware numerics. We benchmark speculative sampling with Chinchilla, a 70 billion parameter language model, achieving a 2-2.5x decoding speedup in a distributed setup, without compromising the sample quality or making modifications to the model itself.},
   eprint = {2302.01318},
   archivePrefix = {arXiv},
@@ -180,7 +174,6 @@
   title   = {{Robust Speech Recognition via Large-Scale Weak Supervision}},
   journal = {arXiv preprint},
   year    = {2022},
-  url     = {https://arxiv.org/abs/2212.04356v1},
   abstract = {We study the capabilities of speech processing systems trained simply to predict large amounts of transcripts of audio on the internet. When scaled to 680,000 hours of multilingual and multitask supervision, the resulting models generalize well to standard benchmarks and are often competitive with prior fully supervised results but in a zero-shot transfer setting without the need for any fine-tuning. When compared to humans, the models approach their accuracy and robustness. We are releasing models and inference code to serve as a foundation for further work on robust speech processing.},
   eprint = {2212.04356},
   archivePrefix = {arXiv},
@@ -192,7 +185,6 @@
   title   = {{Qwen3-ASR Technical Report}},
   journal = {arXiv preprint},
   year    = {2026},
-  url     = {https://arxiv.org/abs/2601.21337v2},
   abstract = {In this report, we introduce Qwen3-ASR family, which includes two powerful all-in-one speech recognition models and a novel non-autoregressive speech forced alignment model. Qwen3-ASR-1.7B and Qwen3-ASR-0.6B are ASR models that support language identification and ASR for 52 languages and dialects. Both of them leverage large-scale speech training data and the strong audio understanding ability of their foundation model Qwen3-Omni. We conduct comprehensive internal evaluation besides the open-sourced benchmarks as ASR models might differ little on open-sourced benchmark scores but exhibit significant quality differences in real-world scenarios. The experiments reveal that the 1.7B version achieves SOTA performance among open-sourced ASR models and is competitive with the strongest proprietary APIs while the 0.6B version offers the best accuracy-efficiency trade-off. Qwen3-ASR-0.6B can achieve an average TTFT as low as 92ms and transcribe 2000 seconds speech in 1 second at a concurrency of 128. Qwen3-ForcedAligner-0.6B is an LLM based NAR timestamp predictor that is able to align text-speech pairs in 11 languages. Timestamp accuracy experiments show that the proposed model outperforms the three strongest force alignment models and takes more advantages in efficiency and versatility. To further accelerate the community research of ASR and audio understanding, we release these models under the Apache 2.0 license.},
   eprint = {2601.21337},
   archivePrefix = {arXiv},
@@ -204,7 +196,6 @@
   title   = {{Voxtral}},
   journal = {arXiv preprint},
   year    = {2025},
-  url     = {https://arxiv.org/abs/2507.13264v1},
   abstract = {We present Voxtral Mini and Voxtral Small, two multimodal audio chat models. Voxtral is trained to comprehend both spoken audio and text documents, achieving state-of-the-art performance across a diverse range of audio benchmarks, while preserving strong text capabilities. Voxtral Small outperforms a number of closed-source models, while being small enough to run locally. A 32K context window enables the model to handle audio files up to 40 minutes in duration and long multi-turn conversations. We also contribute three benchmarks for evaluating speech understanding models on knowledge and trivia. Both Voxtral models are released under Apache 2.0 license.},
   eprint = {2507.13264},
   archivePrefix = {arXiv},
@@ -218,7 +209,6 @@
   address   = {Carlsbad, CA, USA},
   publisher = {USENIX Association},
   year      = {2022},
-  url       = {https://www.usenix.org/conference/osdi22/presentation/yu},
 }
 
 @misc{miao2023servingsurvey,
@@ -227,7 +217,6 @@
   year          = {2023},
   eprint        = {2312.15234},
   archivePrefix = {arXiv},
-  url           = {https://arxiv.org/abs/2312.15234},
 }
 
 @misc{wang2024simulwhisper,
@@ -236,7 +225,6 @@
   year          = {2024},
   eprint        = {2406.10052},
   archivePrefix = {arXiv},
-  url           = {https://arxiv.org/abs/2406.10052},
 }
 
 @article{mistral2026voxtralrealtime,
@@ -245,7 +233,6 @@
   journal = {arXiv preprint},
   year    = {2026},
   doi     = {10.48550/arXiv.2602.11298},
-  url     = {https://arxiv.org/abs/2602.11298v3},
   eprint  = {2602.11298},
   archivePrefix = {arXiv},
   primaryClass = {cs.AI},

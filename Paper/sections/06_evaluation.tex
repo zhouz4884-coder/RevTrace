@@ -242,10 +242,20 @@ outside the 2\,s SLO (P99 6.107\,s), so the comparison isolates safety cost
 rather than serving capacity. These are adaptations, not end-to-end claims
 about the original text-only systems~\cite{chu2026margingate,zhang2026llm42}.
 
+The single causal flip is complemented by an execution-shape stress suite
+that changes only legal scheduling variables (batch size, request slot,
+co-runner composition, and repeat), without mutating the model input or
+injecting logit noise. Across 1{,}848 target-row evaluations, these controls
+induce 613/408 real proposal--canonical mismatches on 0.6B/1.7B
+(1{,}021 total); the frozen risk scheduler has 0 observed false-safe events.
+This result measures failure-coverage under stress, not production mismatch
+prevalence, and it does not turn the margin signal into a deterministic
+certificate.
+
 \tbl{t6_external_adaptations}
 
-\subsection{H7: proposer--authority scale-out preserves the SLO until the
-measured capacity boundary}\label{sec:eval:h7}
+\subsection{H7: proposer--authority scale-out preserves the display SLO until
+the measured capacity boundary}\label{sec:eval:h7}
 
 \emph{Prediction} (Equation~\eqref{eq:cost-service}): authority-only scaling
 cannot remove a proposer bottleneck; balanced proposal/authority replication
@@ -258,9 +268,13 @@ c16 baselines, 32 scale cells over c16/c32/c64/c128 and p1a1/p1a2/p2a2/p4a4,
 and 12 FP16/FP32 authority-attribution cells at
 $\granratio\in\{1,3,5\}$. Each 30\,s c16 baseline contains 240 display events;
 each c64 cell contains 960. The complete raw matrix and worker diagnostics are
-audited separately from the RTX~3090 contract.
+audited separately from the RTX~3090 contract. We then freeze the headline
+configurations and run an independent 30-cell repeat matrix: three repetitions
+per model for p1a1-c64, p4a4-c32/c64/c128, and the model-predicted
+authority-heavy p3a5-c64 sensitivity. Warm-up events are excluded; ranges in
+Figure~\ref{fig:v100-dual-plane} are min--max over the three repetitions.
 
-\emph{Result.} First, all repeated batched V1 executions agree, yet each model
+\emph{Result.} First, all repeated batched executions agree, yet each model
 accumulates 62 batch--singleton request mismatches across FP16/FP32 and batch
 sizes 1--32. FP32 is therefore not an unconditional singleton-equivalence
 certificate on this platform. Second, under the normal-load c16 contract,
@@ -268,15 +282,26 @@ SG reaches $4.682\times/3.248\times$ wall speedup with 6.67\%/10.00\%
 verification and 0\% P95 final edit (16/16 exact final sessions against the
 independent FP16 singleton reference); Hybrid reaches
 $5.764\times/4.657\times$ and Coarse-DGFT $6.072\times/4.893\times$
-(Table~\ref{tab:v100-scaling}). On 0.6B every V2 mode is exact (0\% P95
+(Figure~\ref{fig:v100-dual-plane}a). On 0.6B every normal-load mode is exact (0\% P95
 final edit); on 1.7B the Coarse/Hybrid quality boundary is a P95 final edit
 rate of 3.18\% with 8/16 exact sessions, while SG remains at 0\%. Third, p4a4 at c64
-sustains $147.138\times/114.488\times$ audio real-time throughput with display
-P99 1.115/1.471\,s, zero misses among 960 display events per model, and nominal
-scale efficiency 91.1\%/100.7\% relative to p1a1 at the same load. At c128,
-throughput saturates at $148.930\times/111.133\times$ while P99 rises to
-2.266/2.799\,s; c64 is therefore the measured 2\,s-SLO capacity for both
-models. Finally, at $\granratio=1$ the FP32 authority/proposer service ratios
+sustains median $157.786\times/111.722\times$ audio real-time throughput
+(ranges 157.577--157.869 and 110.009--116.384) with display P99
+1.089/1.394\,s and zero misses among 2{,}880 repeated display events per model.
+The corresponding certified-segment commit P99 is 3.080/4.890\,s: the
+six-second authority plane remains bounded, but it is a distinct estimand and
+does not inherit the 2\,s display SLO. At c128, throughput saturates at
+$161.927\times$ and falls to $107.305\times$, while display P99 becomes
+2.079/2.730\,s and commit P99 6.012/10.153\,s. Energy per audio second also
+rises from 6.08/10.56\,J at c64 to 6.36/10.89\,J at c128. Thus c64 is the
+largest measured point satisfying the display SLO for both models, rather
+than a claim that every internal plane commits within 2\,s.
+
+Finally, p3a5-c64 lowers the authority/proposer ratio to 0.595/0.604 but also
+reduces throughput to $93.788\times/77.704\times$ and yields display P99
+1.756/2.209\,s. More authority replicas therefore do not repair a proposer
+bottleneck; balanced p4a4 dominates this allocation. At $\granratio=1$ the
+FP32 authority/proposer service ratios
 are 2.216/2.669 and throughput falls to $18.603\times/12.294\times$; at
 $\granratio=5$ these ratios fall below one (0.759/0.841), restoring
 $40.630\times/33.909\times$ at c16. Across the matrix we observe no
@@ -285,7 +310,23 @@ transaction-install, uncertified-ancestry, or directional-omission violation.
 \emph{Verdict.} The scale and attribution results support the two-stage cost
 model: balanced replication, rather than authority replicas alone, expands
 capacity, and coarse authority becomes economical only after sufficient
-amortization. The result closes the single-node high-concurrency gap but does
-not establish multi-node scaling; c128 is reported as a failed SLO boundary.
+amortization. The repeated dual-plane result closes the single-node
+high-concurrency gap without redefining display as certification. It does not
+establish multi-node scaling; c128 is retained as a failed display-SLO
+boundary.
 
-\tbl{t7_v100_scaling}
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/f7_v100_dual_plane.pdf}
+  \caption{Independent V100 replication and dual-plane capacity. (a) The
+  normal-load c16 method ladder remains faster than all-singleton serving.
+  (b) Balanced 4+4 proposer/authority replication scales throughput to c64;
+  c32--c128 points are
+  medians with min--max ranges over three frozen repeats, whereas c16 is the
+  separately frozen baseline. (c) Display and certified-segment commit latency
+  are reported separately; the 2\,s line applies only to display. (d) At c64,
+  an authority-heavy 3+5 allocation reduces the authority/proposer ratio but loses
+  throughput, supporting the two-stage cost model. V100/Transformers-eager
+  measurements are not pooled with RTX~3090/vLLM results.}
+  \label{fig:v100-dual-plane}
+\end{figure*}
