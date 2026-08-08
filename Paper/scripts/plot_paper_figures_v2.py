@@ -147,6 +147,14 @@ def finalize(fig, stem):
         if dpi:
             kwargs["dpi"] = dpi
         fig.savefig(OUT / f"{stem}.{suffix}", **kwargs)
+    # Matplotlib formats multi-line SVG path data with trailing spaces.  Strip
+    # them so regenerated vector artifacts remain reviewable in Git.
+    svg_path = OUT / f"{stem}.svg"
+    svg_text = svg_path.read_text(encoding="utf-8")
+    svg_path.write_text(
+        "\n".join(line.rstrip() for line in svg_text.splitlines()) + "\n",
+        encoding="utf-8",
+    )
     plt.close(fig)
 
 
@@ -289,8 +297,8 @@ def figure4():
 
     # Family headers act as evidence cards and make contract scopes explicit.
     headers = [
-        (fig.add_subplot(gs[0, 0]), COARSE, "QWEN3-ASR · R10 CANONICAL CONTRACT", f"peak {q_peak:.2f}×  ·  two scales  ·  Coarse + Hybrid"),
-        (fig.add_subplot(gs[0, 1]), BASE, "WHISPER · R9.E PROTECTED-FEEDBACK CONTRACT", f"16/16 cells pass  ·  median {np.median(w_wall):.2f}×  ·  median energy −{np.median(w_energy):.1f}%"),
+        (fig.add_subplot(gs[0, 0]), COARSE, "QWEN3-ASR · INDEPENDENT-CANONICAL CONTRACT", f"peak {q_peak:.2f}×  ·  two scales  ·  Coarse + Hybrid"),
+        (fig.add_subplot(gs[0, 1]), BASE, "WHISPER · PROTECTED-FEEDBACK CONTRACT", f"16/16 cells pass  ·  median {np.median(w_wall):.2f}×  ·  median energy −{np.median(w_energy):.1f}%"),
     ]
     for ax, color, heading, detail in headers:
         ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")

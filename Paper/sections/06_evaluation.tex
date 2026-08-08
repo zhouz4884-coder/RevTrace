@@ -79,14 +79,14 @@ coarse authority path can beat SG on throughput; SG can show terminal-burst
 tails even at 8--10\% verification; Hybrid may pay for quality in performance
 and energy; and the ordering may reverse across models.
 
-\begin{figure*}[t]
+\begin{figure}[t]
   \centering
-  \includegraphics[width=\textwidth]{figures/f3_pareto_latency.pdf}
+  \includegraphics[width=\columnwidth]{figures/f3_authority_frontier_column.pdf}
   \caption{Same-workload operating points (c16). Coarse-DGFT is the throughput
   point, Hybrid the quality-conservative point, and SG the same-granularity
   certification point; latency scopes are never mixed on one axis.}
   \label{fig:ablation}
-\end{figure*}
+\end{figure}
 \emph{Experiment.} Same-workload ladder on the identical 16 bilingual 30\,s
 sessions (c16): SG ($\granratio=1$, FP16 singleton authority, verification
 fractions 8.3\%/9.6\%), Coarse-DGFT ($\granratio=3$, FP32 batched authority,
@@ -188,21 +188,19 @@ records English WER 2.15\%/2.30\% (0.6B/1.7B), Chinese CER
 2.71\%/2.16\%, terminal exactness 256/256 against singleton authority, zero
 catastrophic outliers, and partial-revision edit rates 24.7--31.8\%.
 
-\begin{figure*}[t]
+\begin{figure}[t]
   \centering
-  \includegraphics[width=\textwidth]{figures/f5_quality.pdf}
+  \includegraphics[width=\columnwidth]{figures/f5_quality_column.pdf}
   \caption{Per-family quality contracts. Qwen measures distance to an independent
   canonical reference; Whisper measures improvement over unprotected
   feedback. Open markers: untouched cohort, $n=40$ long sessions per model,
   deterministically assembled from 214 previously unused source utterances
   (bootstrap unit: long session).}
   \label{fig:quality}
-\end{figure*}
+\end{figure}
 \emph{Verdict.} Each layer produces exactly one scope-limited guarantee;
 no stratum's evidence is used to authorize another's installation
 decisions.
-
-\tbl{t4_quality}
 
 \subsection{H6: faithful revision adaptations expose the missing contract}
 \label{sec:eval:h6}
@@ -230,8 +228,7 @@ model; it minimizes the cost of an explicit state-write contract.
 \tbl{t8_normal_slo_adaptations}
 
 \emph{Flip-rich stress.} We then run faithful revision-level adaptations on
-the same frozen overloaded c32 trace
-(Table~\ref{tab:external-adaptations}). A MarginGate-inspired fixed threshold
+the same frozen overloaded c32 trace. A MarginGate-inspired fixed threshold
 verifies 3.02\% of events but misses the known state-changing flip; an
 owner/version-only baseline rejects stale work but still accepts that legal
 current-owner flip. An LLM-42-style adaptation verifies every revision and
@@ -243,7 +240,7 @@ rather than serving capacity. These are adaptations, not end-to-end claims
 about the original text-only systems~\cite{chu2026margingate,zhang2026llm42}.
 
 The single causal flip is complemented by an execution-shape stress suite
-that changes only legal scheduling variables (batch size, request slot,
+that changes only legal scheduling variables (batch size, batch slot,
 co-runner composition, and repeat), without mutating the model input or
 injecting logit noise. Across 1{,}848 target-row evaluations, these controls
 induce 613/408 real proposal--canonical mismatches on 0.6B/1.7B
@@ -251,8 +248,6 @@ induce 613/408 real proposal--canonical mismatches on 0.6B/1.7B
 This result measures failure-coverage under stress, not production mismatch
 prevalence, and it does not turn the margin signal into a deterministic
 certificate.
-
-\tbl{t6_external_adaptations}
 
 \subsection{H7: proposer--authority scale-out preserves the display SLO until
 the measured capacity boundary}\label{sec:eval:h7}
@@ -319,7 +314,10 @@ boundary.
   \centering
   \includegraphics[width=\textwidth]{figures/f7_v100_dual_plane.pdf}
   \caption{Independent V100 replication and dual-plane capacity. (a) The
-  normal-load c16 method ladder remains faster than all-singleton serving.
+  normal-load c16 method ladder remains faster than all-singleton serving;
+  on 1.7B the Coarse/Hybrid quality boundary is 3.18\% P95 final edit
+  (8/16 exact sessions) while SG stays at 0\%, and on 0.6B all modes are
+  exact.
   (b) Balanced 4+4 proposer/authority replication scales throughput to c64;
   c32--c128 points are
   medians with min--max ranges over three frozen repeats, whereas c16 is the

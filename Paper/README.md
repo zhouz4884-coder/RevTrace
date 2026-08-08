@@ -1,8 +1,8 @@
 # Paper workspace
 
-Current locally compiled draft: `main.pdf` (build `rev_v11`, elsarticle
-`[5p]` camera-style preview, 18 pages including references). The full-length
-article now satisfies FGCS's strict 18-page limit; closure-repair history stays
+Current locally compiled draft: `main.pdf` (mixed-width layout candidate,
+elsarticle `[5p]` camera-style preview, 17 pages including references). The
+full-length article stays below FGCS's strict 18-page limit; closure-repair history stays
 in the public audit rather than expanding the scientific narrative. This
 revision adds a normal-load c16 comparison
 against MarginGate- and LLM-42-style revision adaptations, makes the authority
@@ -17,8 +17,8 @@ It also retains proposer/authority bottleneck attribution and the
 the `[times]`
 class option reintroduced Type 3 fonts and was replaced by
 `newtxtext`/`newtxmath` (zero Type 3 verified), the 1.7B Coarse/Hybrid
-P95-edit boundary (3.18%, 8/16 exact sessions) is now visible in H7/T7
-wherever their speedups are reported, and the abstract/highlights restore the
+P95-edit boundary (3.18%, 8/16 exact sessions) is now visible in the H7
+prose and the F7 figure caption wherever their speedups are reported, and the abstract/highlights restore the
 480 SG / 320 DGFT scope split on the 800 Qwen revision events. The
 point-by-point author audit is in
 `submission/REVIEW_TRIAGE_2026-08-05.md`.
@@ -37,21 +37,34 @@ exceed `docs/CLAIM_BOUNDARIES.md`.
 - `main.tex` — preamble, abstract (DRAFT v0), section inputs, bibliography.
 - `sections/01..09_*.tex` — one file per section (outline v2 structure).
 - `tables/t1..t8_*.tex` — T1 claim contracts, T2 same-workload ladder,
-  T3 production summary, T4 quality contracts, T5 guarantee taxonomy, and
-  T6 flip-rich revision adaptations; T7 is the retained source table for the
-  independent 8xV100 contract; T8 is the normal-load c16 comparison of
+  T3 production summary, T5 guarantee taxonomy, and T8 normal-load c16
+  comparison of
   revision-level MarginGate/LLM-42 adaptations and RevTrace configurations.
+  T4 (quality contracts) and T6 (flip-rich revision adaptations) are retained
+  as auditable source tables but are not `\input` in the paper because their
+  values are already carried by Figure F6/H5 and the H6 stress-test prose;
+  omitting the duplicate floats prevents adjacent table strips.
+  T7 (`t7_v100_scaling.tex`) is retained as source provenance for the
+  independent 8xV100 contract but is not `\input` in the paper: its numbers
+  are carried by Figure F7 and the H7 prose. Float convention: the retained
+  wide tables T2/T3 use `table*[b]` (via `stfloats`) so the float strip alternates
+  top/bottom instead of stacking two floats at one page top.
   All numbers come from audited results (see captions for sources).
-- `figures/` — figure PDFs. The three data/performance figures are rendered
-  and reproducible: F3 `f3_pareto_latency.pdf`, F4 `f4_production.pdf`,
-  F5 `f5_quality.pdf`, and F7 `f7_v100_dual_plane.pdf` (PNG previews
-  alongside). Regenerate F3--F5 with
-  `python Paper/scripts/plot_paper_figures_v2.py` — the refined submission
+- `figures/` — figure PDFs. The paper uses a mixed-width evidence hierarchy:
+  the authority-frontier and quality-contract composites are single-column,
+  while the cross-family production and V100 scale-out summaries remain
+  double-column hero figures. The reproducible sources are
+  `f3_authority_frontier_column.pdf`, F4 `f4_production.pdf`,
+  F5 `f5_quality_column.pdf`, and F7 `f7_v100_dual_plane.pdf` (PNG previews
+  alongside). Regenerate the wide production source with
+  `python Paper/scripts/plot_paper_figures_v2.py` and the two single-column
+  composites with `python Paper/scripts/plot_single_column_figures.py`. The refined submission
   renderer reads the frozen audited JSONs
   (`results/r10_qwen_cross_adapter/*`,
   `results/r9_dgft/FINAL_REPORT_ONLINE.json`) at runtime, so no plotted
   number is hardcoded. It exports editable SVG, PDF, 300 dpi PNG, 600 dpi
-  TIFF, and `figures/FIGURE_QA_V2.json`; the original renderer is retained as
+  TIFF, `figures/FIGURE_QA_V2.json`, and `figures/FIGURE_COLUMN_QA.json`;
+  the original renderer is retained as
   provenance. Regenerate F7 with
   `python Paper/scripts/plot_v100_dual_plane.py`; it consumes the frozen
   V1--V4 summary and independently repeated V5 summary and writes its own
@@ -115,7 +128,8 @@ accented bibliography names.
   as the measured display overload boundary. Certified-segment commit latency
   is a separate estimand; never pool either contract's absolute timings.
 - The V100 1.7B Coarse/Hybrid P95 final-edit boundary (3.18%, 8/16 exact
-  sessions) must stay visible wherever their speedups are reported (H7, T7).
+  sessions) must stay visible wherever their speedups are reported (H7
+  prose, F7 caption).
 - Preflight (10.7-11.1 s) is excluded from all service timing.
 - Untouched-cohort sample unit: 40 long sessions per model, deterministically
   assembled from 214 previously unused source utterances. The statistical
