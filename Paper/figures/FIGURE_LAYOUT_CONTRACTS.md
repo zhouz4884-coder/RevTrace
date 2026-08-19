@@ -1,5 +1,41 @@
 # Figure layout contracts
 
+## State-entry motivation (double column)
+
+- Core conclusion: Batch-created output differences become durable only when
+  an uncertified projection is allowed to enter feedback state; DGFT preserves
+  provisional display while denying that write.
+- Figure archetype: two-panel causal contrast.
+- Target/output: FGCS, 183 mm double column, editable Visio and vector PDF/SVG.
+- Hero evidence: 8/21 legal state pairs propagate with feedback, 0/21 without,
+  and measured tail RAF up to 153.
+- Reviewer risk: DGFT does not promise bitwise-identical provisional output;
+  the protected object is the future-state parent.
+
+## RevTrace architecture and timeline (double column)
+
+- Core conclusion: Display and state-write permission are separate; only a
+  certificate-bearing, version-valid transaction advances committed state.
+- Figure archetype: architecture plus dual-clock commit timeline.
+- Target/output: FGCS, 183 mm double column, editable Visio and vector PDF/SVG.
+- Required modules: proposer, projection adapter, contract-specific canonical
+  authority, risk/coverage witness, certificate, version/frontier checks,
+  ledger, and committed feedback state.
+- Reviewer risk: FP32 is an evaluated authority implementation, not a protocol
+  requirement; risk evidence schedules verification but never authorizes a
+  commit.
+
+## Contract-scoped certification (single column)
+
+- Core conclusion: Numerical risk, implementation invariance, transaction
+  integrity, and semantic quality provide non-transferable guarantees.
+- Figure archetype: native-column four-card ladder.
+- Target/output: FGCS, 89 mm single column, editable Visio and vector PDF/SVG.
+- Evidence: SG anytime UCB at most 0.48%, frozen FP32 preflight, exhaustive
+  accepted-commit checks, and separate per-family quality references.
+- Reviewer risk: Qwen reference edit rate and Whisper paired WER delta must
+  never be pooled or described as the same quality estimand.
+
 ## Authority frontier (single column)
 
 - Core conclusion: Authority granularity creates a measurable speed-quality

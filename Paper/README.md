@@ -52,10 +52,15 @@ exceed `docs/CLAIM_BOUNDARIES.md`.
   All numbers come from audited results (see captions for sources).
 - `figures/` — figure PDFs. The paper uses a mixed-width evidence hierarchy:
   the authority-frontier and quality-contract composites are single-column,
-  while the cross-family production and V100 scale-out summaries remain
-  double-column hero figures. The reproducible sources are
-  `f3_authority_frontier_column.pdf`, F4 `f4_production.pdf`,
-  F5 `f5_quality_column.pdf`, and F7 `f7_v100_dual_plane.pdf` (PNG previews
+  while the motivation, architecture, cross-family production, and V100
+  scale-out summaries remain double-column hero figures. Figures 1--3 are
+  editable Visio redraws under `figures/visio/`: each directory contains the
+  staged senior-author source, semantic `scene.json`, editable `.vsdx`, SVG,
+  and PNG review export. Their submission PDFs are
+  `f1_motivation_visio.pdf`, `f2_architecture_visio.pdf`, and
+  `f3_certification_visio.pdf`. The quantitative reproducible sources are
+  `f3_authority_frontier_column.pdf`, F5 `f4_production.pdf`,
+  F6 `f5_quality_column.pdf`, and F7 `f7_v100_dual_plane.pdf` (PNG previews
   alongside). Regenerate the wide production source with
   `python Paper/scripts/plot_paper_figures_v2.py` and the two single-column
   composites with `python Paper/scripts/plot_single_column_figures.py`. The refined submission
@@ -68,8 +73,11 @@ exceed `docs/CLAIM_BOUNDARIES.md`.
   provenance. Regenerate F7 with
   `python Paper/scripts/plot_v100_dual_plane.py`; it consumes the frozen
   V1--V4 summary and independently repeated V5 summary and writes its own
-  source CSV and QA manifest. F1/F2/F6 (architecture/timeline/ladder diagrams)
-  remain placeholders pending drawing requirements.
+  source CSV and QA manifest. The Visio redraws intentionally correct three
+  submission-facing risks in the original drafts: the authority interface is
+  contract-specific rather than intrinsically FP32, only risk evidence (not a
+  certificate) is non-authorizing, and Qwen/Whisper quality estimands remain
+  separate.
 - `refs.bib` — 49 entries, checked against primary indexes (arXiv API,
   OpenAlex, CrossRef) across 2026-08-03..06 (original 22 verified
   2026-08-03, 15 Related-Work additions 2026-08-04, the 2026 LLM-42 and

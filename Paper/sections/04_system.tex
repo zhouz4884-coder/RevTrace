@@ -7,18 +7,12 @@ versioned ledger, and a stratified certification layer
 
 \begin{figure*}[t]
   \centering
-  \figplaceholder{F2 double panel (outline v2 sec.4): top --- architecture
-    with fine proposal lane, evidence adapter, coarse canonical authority,
-    certificate/ledger, feedback state, provisional display surface,
-    protocol properties R1--R4 labeled; bottom --- commit timeline with
-    fine revisions p1--p3, provisional display, coarse authority covering
-    the same frontier, certificate consumption, parent-version check,
-    commit or selective replay, stale-descendant invalidation. Risk/coverage
-    witness arrows point to the verification scheduler, never to commit.}
-  {RevTrace architecture (top) and the DGFT commit timeline (bottom).
+  \includegraphics[width=\textwidth]{figures/f2_architecture_visio.pdf}
+  \caption{RevTrace architecture (top) and the DGFT commit timeline (bottom).
   Provisional display and state write are separate permissions; only a
   certificate-bearing transaction whose parent version and frontier checks
-  pass may advance committed state.}
+  pass may advance committed state. Risk and coverage evidence may schedule
+  verification but cannot authorize installation.}
   \label{fig:arch}
 \end{figure*}
 
@@ -75,12 +69,8 @@ installation (R4).
 
 \begin{figure}[t]
   \centering
-  \figplaceholder{F6 four-rung ladder or matrix (outline v2 sec.4):
-    strata (i) SG randomized audits + anytime UCB, (ii) FP32 contract
-    preflight invariance, (iii) exhaustive transaction validation,
-    (iv) independent quality references; each rung labeled with its evidence
-    and scope; explicit no-transfer separators between rungs.}
-  {Stratified, contract-scoped certification. Each rung yields exactly one
+  \includegraphics[width=\columnwidth]{figures/f3_certification_visio.pdf}
+  \caption{Stratified, contract-scoped certification. Each rung yields exactly one
   scope-limited guarantee; no rung's evidence authorizes another's
   installation decisions.}
   \label{fig:cert}
