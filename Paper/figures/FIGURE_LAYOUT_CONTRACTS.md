@@ -6,7 +6,7 @@
   an uncertified projection is allowed to enter feedback state; DGFT preserves
   provisional display while denying that write.
 - Figure archetype: two-panel causal contrast.
-- Target/output: FGCS, 183 mm double column, editable Visio and vector PDF/SVG.
+- Target/output: FGCS, 0.96 text width, senior-author PNG artwork.
 - Hero evidence: 8/21 legal state pairs propagate with feedback, 0/21 without,
   and measured tail RAF up to 153.
 - Reviewer risk: DGFT does not promise bitwise-identical provisional output;
@@ -17,7 +17,7 @@
 - Core conclusion: Display and state-write permission are separate; only a
   certificate-bearing, version-valid transaction advances committed state.
 - Figure archetype: architecture plus dual-clock commit timeline.
-- Target/output: FGCS, 183 mm double column, editable Visio and vector PDF/SVG.
+- Target/output: FGCS, 0.94 text width, senior-author 300 dpi JPEG artwork.
 - Required modules: proposer, projection adapter, contract-specific canonical
   authority, risk/coverage witness, certificate, version/frontier checks,
   ledger, and committed feedback state.
@@ -29,8 +29,8 @@
 
 - Core conclusion: Numerical risk, implementation invariance, transaction
   integrity, and semantic quality provide non-transferable guarantees.
-- Figure archetype: native-column four-card ladder.
-- Target/output: FGCS, 89 mm single column, editable Visio and vector PDF/SVG.
+- Figure archetype: full-width four-stratum ladder with aligned scope column.
+- Target/output: FGCS, 0.92 text width, senior-author 300 dpi JPEG artwork.
 - Evidence: SG anytime UCB at most 0.48%, frozen FP32 preflight, exhaustive
   accepted-commit checks, and separate per-family quality references.
 - Reviewer risk: Qwen reference edit rate and Whisper paired WER delta must

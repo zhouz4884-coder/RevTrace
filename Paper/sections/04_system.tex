@@ -7,12 +7,14 @@ versioned ledger, and a stratified certification layer
 
 \begin{figure*}[t]
   \centering
-  \includegraphics[width=\textwidth]{figures/f2_architecture_visio.pdf}
+  \includegraphics[width=0.94\textwidth]{figures/f2_architecture_senior.jpg}
   \caption{RevTrace architecture (top) and the DGFT commit timeline (bottom).
   Provisional display and state write are separate permissions; only a
   certificate-bearing transaction whose parent version and frontier checks
   pass may advance committed state. Risk and coverage evidence may schedule
-  verification but cannot authorize installation.}
+  verification but cannot authorize installation. FP32 denotes the evaluated
+  coarse-authority implementation, not a DGFT protocol requirement; R4 applies
+  to risk and coverage evidence, not to a valid certificate.}
   \label{fig:arch}
 \end{figure*}
 
@@ -67,14 +69,16 @@ certificates, versions, and frontier continuity;
 A risk signal from any stratum may schedule verification but never authorize
 installation (R4).
 
-\begin{figure}[t]
+\begin{figure*}[t]
   \centering
-  \includegraphics[width=\columnwidth]{figures/f3_certification_visio.pdf}
+  \includegraphics[width=0.92\textwidth]{figures/f3_certification_senior.jpg}
   \caption{Stratified, contract-scoped certification. Each rung yields exactly one
   scope-limited guarantee; no rung's evidence authorizes another's
-  installation decisions.}
+  installation decisions. Semantic-quality estimands remain family-specific:
+  Qwen uses an independent FP16 reference, whereas Whisper reports paired WER
+  deltas against unprotected feedback; the two are never pooled.}
   \label{fig:cert}
-\end{figure}
+\end{figure*}
 
 \subsection{Online coordinator}\label{sec:sys:coord}
 
