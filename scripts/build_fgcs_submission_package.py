@@ -36,6 +36,12 @@ ACK = (
     "This work received no specific grant from any funding agency in the "
     "public, commercial, or not-for-profit sectors."
 )
+AI_DECLARATION = (
+    "During the preparation of this work, the authors used OpenAI ChatGPT "
+    "for language polishing and writing assistance. The authors reviewed and "
+    "edited the output as needed and take full responsibility for the content "
+    "of the published article."
+)
 
 
 def sha256(path: Path) -> str:
@@ -164,6 +170,8 @@ def build_title_page(src: Path, dst: Path, phone: str | None) -> None:
             paragraph.text = paragraph.text.replace(
                 "\nPostal address:", f"\n{phone_line}\nPostal address:"
             )
+        if paragraph.text.strip().startswith("OpenAI ChatGPT"):
+            paragraph.text = AI_DECLARATION
     dst.parent.mkdir(parents=True, exist_ok=True)
     doc.save(dst)
 
@@ -209,13 +217,10 @@ def build_package(phone: str | None, figures_final: bool) -> None:
         OUT / "05_figures" / "Figure_1.png",
         OUT / "05_figures" / "FIGURE_CORRECTIONS_PENDING.md",
         OUT / "06_latex_source" / "figures" / "f1_motivation_senior.png",
+        OUT / "02_title_page" / "title_page_source_original.docx",
     ):
         stale.unlink(missing_ok=True)
     copy_file(PAPER / "main.pdf", OUT / "01_manuscript" / "RevTrace_FGCS_manuscript.pdf")
-    copy_file(
-        PAPER / "submission" / "title_page_revtrace.docx",
-        OUT / "02_title_page" / "title_page_source_original.docx",
-    )
     build_title_page(
         PAPER / "submission" / "title_page_revtrace.docx",
         OUT / "02_title_page" / "RevTrace_title_page.docx",
@@ -277,7 +282,7 @@ def build_package(phone: str | None, figures_final: bool) -> None:
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 Generative AI declaration
-OpenAI ChatGPT was used as an auxiliary tool for language editing and LaTeX formatting assistance. It was not used to generate experimental measurements. All technical ideas, implementations, numerical results, claims, figures, and final manuscript decisions were independently reviewed and verified by the authors.
+During the preparation of this work, the authors used OpenAI ChatGPT for language polishing and writing assistance. The authors reviewed and edited the output as needed and take full responsibility for the content of the published article.
 
 Acknowledgments
 The computations in this work were supported by the High Performance Computing Platform of BUCT (Beijing University of Chemical Technology). This work received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
