@@ -220,7 +220,9 @@ def build_package(phone: str | None, figures_final: bool) -> None:
         OUT / "02_title_page" / "title_page_source_original.docx",
     ):
         stale.unlink(missing_ok=True)
-    copy_file(PAPER / "main.pdf", OUT / "01_manuscript" / "RevTrace_FGCS_manuscript.pdf")
+    # Editorial Manager requires the manuscript file to be double-blind.
+    # Author identities remain in the separate title page and in main.pdf.
+    copy_file(PAPER / "main_blind.pdf", OUT / "01_manuscript" / "RevTrace_FGCS_manuscript.pdf")
     build_title_page(
         PAPER / "submission" / "title_page_revtrace.docx",
         OUT / "02_title_page" / "RevTrace_title_page.docx",
@@ -329,14 +331,15 @@ Do not upload an AI-generated graphical abstract.
         OUT / "SUBMISSION_CHECKLIST.md",
         """# FGCS submission checklist
 
-- [x] Elsevier `elsarticle` double-column manuscript.
+- [x] Elsevier `elsarticle` double-column, double-blind manuscript.
 - [x] 18 pages including figures, tables, and references.
 - [x] Abstract below 250 words; six English keywords.
 - [x] Five highlights, each no more than 85 characters.
 - [x] Cover letter and separate title page.
 - [x] Competing-interest, AI-use, acknowledgments, and data statements.
 - [x] Seven figures supplied as separate logically named files.
-- [x] LaTeX source archive with editable tables and bibliography.
+- [x] LaTeX source archive retained for production; do not upload the
+  author-identifying source during double-blind review unless requested.
 - [x] CJK replay, denominator, and contract-inventory audits pass.
 - [x] Corrected senior-author Figure 2 inserted.
 """ + (
@@ -356,9 +359,11 @@ This directory is upload-structured but **not yet final**. It becomes ready
 after the final PDF, cover letter, and declarations are approved by all
 authors.
 
-The manuscript is frozen at 18 pages. The package contains the manuscript PDF,
-title page, cover letter, highlights, separate figures, LaTeX source zip,
-declarations, audit evidence, and editorial-input templates.
+The manuscript is frozen at 18 pages. The upload-facing manuscript PDF is the
+double-blind build (`main_blind.pdf`). Author names, affiliations, and contact
+details appear only in the separate title page. The LaTeX source zip retains
+the author-identifying production source and must not be uploaded during
+double-blind review unless the editorial office explicitly requests it.
 
 Build command:
 
@@ -386,9 +391,8 @@ replace the existing files without changing manuscript layout.
         "Figure 5,05_figures/Figure_5.pdf,ready\n"
         "Figure 6,05_figures/Figure_6.pdf,ready\n"
         "Figure 7,05_figures/Figure_7.pdf,ready\n"
-        "LaTeX Source,06_latex_source.zip," +
-        ("ready\n" if figures_final else "ready after figure replacement\n") +
-        "Declarations,08_declarations/declarations.txt,ready\n",
+        "LaTeX Source,06_latex_source.zip,internal only during double-blind review\n"
+        "Declarations,08_declarations/declarations.txt,wording ready; official Elsevier form still required\n",
     )
 
     if figures_final and phone:

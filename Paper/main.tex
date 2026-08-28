@@ -50,6 +50,19 @@
 %% --- table input path ---------------------------------------------------
 \newcommand{\tbl}[1]{\input{tables/#1}}
 
+%% Review-mode identity guard. Compile main_blind.tex for the double-blind
+%% manuscript requested by Editorial Manager; compile main.tex for the
+%% author-identifying archive/camera-ready version.
+\ifdefined\blindreview
+  \newcommand{\artifactavailability}{Code and audited artifacts will be made
+  publicly available upon acceptance.}
+\else
+  \newcommand{\artifactavailability}{The source code, frozen audited result
+  artifacts, replay manifests, and analysis scripts supporting this study are
+  publicly available in the RevTrace repository at
+  \url{https://github.com/zhouz4884-coder/RevTrace}.}
+\fi
+
 \begin{document}
 
 \begin{frontmatter}
@@ -57,20 +70,24 @@
 \title{RevTrace: Dual-Granularity Feedback Transactions for
 State-Certified Streaming ASR Serving}
 
-%% Authors and affiliations: from the provided title page (2026-08-05).
-%% Authorship and order confirmed by the first author: Bin Zhou (first,
-%% experiment design and overall execution), Jiyuan Miao (second),
-%% Xi Cao (corresponding, supervisor).
-\author[1]{Bin Zhou}
-\ead{2025200800@buct.edu.cn}
-\author[1]{Jiyuan Miao}
-\ead{2024200822@buct.edu.cn}
-\author[1]{Xi Cao\corref{cor1}}
-\ead{caoxi@buct.edu.cn}
-\cortext[cor1]{Corresponding author. Postal address: Beijing University of
-Chemical Technology, 29\# Nanjian Road, Changping, Beijing, China.}
-\affiliation[1]{organization={Beijing University of Chemical Technology},
-city={Beijing}, country={China}}
+\ifdefined\blindreview
+  \author{Anonymous Author(s)}
+\else
+  %% Authors and affiliations: from the provided title page (2026-08-05).
+  %% Authorship and order confirmed by the first author: Bin Zhou (first,
+  %% experiment design and overall execution), Jiyuan Miao (second),
+  %% Xi Cao (corresponding, supervisor).
+  \author[1]{Bin Zhou}
+  \ead{2025200800@buct.edu.cn}
+  \author[1]{Jiyuan Miao}
+  \ead{2024200822@buct.edu.cn}
+  \author[1]{Xi Cao\corref{cor1}}
+  \ead{caoxi@buct.edu.cn}
+  \cortext[cor1]{Corresponding author. Postal address: Beijing University of
+  Chemical Technology, 29\# Nanjian Road, Changping, Beijing, China.}
+  \affiliation[1]{organization={Beijing University of Chemical Technology},
+  city={Beijing}, country={China}}
+\fi
 
 \begin{abstract}
 Streaming ASR often feeds generated text into later rounds, so a displayed
@@ -141,12 +158,14 @@ streaming ASR serving \sep LLM inference \sep optimistic concurrency control
 %% =======================================================================
 %% End matter (Elsevier statements; wording from the provided title page
 %% where available; CRediT roles and repository confirmed 2026-08-05).
-\section*{CRediT authorship contribution statement}
-\textbf{Bin Zhou:} Conceptualization, Methodology, Software, Validation,
-Investigation, Writing -- original draft.
-\textbf{Jiyuan Miao:} Visualization.
-\textbf{Xi Cao:} Supervision, Project administration, Writing -- review \&
-editing.
+\ifdefined\blindreview\else
+  \section*{CRediT authorship contribution statement}
+  \textbf{Bin Zhou:} Conceptualization, Methodology, Software, Validation,
+  Investigation, Writing -- original draft.
+  \textbf{Jiyuan Miao:} Visualization.
+  \textbf{Xi Cao:} Supervision, Project administration, Writing -- review \&
+  editing.
+\fi
 
 \section*{Declaration of competing interest}
 The authors declare that they have no known competing financial interests
@@ -160,17 +179,16 @@ language polishing and writing assistance. The authors reviewed and edited
 the output as needed and take full responsibility for the content of the
 published article.
 
-\section*{Acknowledgments}
-The computations in this work were supported by the High Performance
-Computing Platform of BUCT (Beijing University of Chemical Technology).
-This work received no specific grant from any funding agency in the public,
-commercial, or not-for-profit sectors.
+\ifdefined\blindreview\else
+  \section*{Acknowledgments}
+  The computations in this work were supported by the High Performance
+  Computing Platform of BUCT (Beijing University of Chemical Technology).
+  This work received no specific grant from any funding agency in the public,
+  commercial, or not-for-profit sectors.
+\fi
 
 \section*{Data availability}
-The source code, frozen audited result artifacts, replay manifests, and
-analysis scripts supporting this study are publicly available in the
-RevTrace repository at
-\url{https://github.com/zhouz4884-coder/RevTrace}.
+\artifactavailability
 
 %% =======================================================================
 \bibliographystyle{elsarticle-num}
