@@ -3,8 +3,9 @@
 The paper provisionally uses the supplied senior-author artwork for Figures 1--3. The
 alternative Visio redraws were rejected because they reduced the information
 density and visual hierarchy of the supplied figures. Before final upload,
-the local text corrections in `SENIOR_FIGURE_CHANGE_REQUEST.md` should be
-applied to the senior-author source files.
+the remaining Figure 1/3 text corrections in
+`SENIOR_FIGURE_CHANGE_REQUEST.md` should be applied to the senior-author
+source files. The revised Figure 2 supplied on 2026-08-27 is accepted.
 
 ## Technical review
 
@@ -18,10 +19,9 @@ applied to the senior-author source files.
   a vector or at-least-2160-pixel-wide export is preferred before final upload.
 - **Figure 2:** proposer/authority separation, projection adapter, certificate,
   version check, ledger, and dual display/commit clocks match the system. The
-  in-figure labels must qualify FP16/FP32 as evaluated implementations, qualify
-  R4 as applying to risk/coverage evidence, and bind authorization to a
-  certificate and parent version. The caption currently supplies these
-  boundaries while the artwork is being corrected. The
+  revised artwork qualifies FP16/FP32 as evaluated implementations, scopes R4
+  to risk/coverage evidence, and binds authorization to certificate and parent
+  version. The
   supplied 2400x1792 JPEG is about 357 ppi at the frozen layout.
 - **Figure 3:** four certification strata and the no-transfer rule match H5.
   The Stratum IV body must replace the inaccurate generic `WER/CER reference`

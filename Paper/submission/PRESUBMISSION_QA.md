@@ -32,8 +32,8 @@
 
 ## Remaining author actions
 
-1. Replace Figures 1--3 with corrected senior-author exports.
-2. Supply the corresponding-author phone number.
-3. Fill suggested reviewers if Editorial Manager requests them.
-4. Obtain final approval from all authors and inspect the generated submission
+1. Replace Figures 1 and 3 with corrected senior-author exports; revised
+   Figure 2 has passed technical and page-layout review.
+2. Fill suggested reviewers if Editorial Manager requests them.
+3. Obtain final approval from all authors and inspect the generated submission
    PDF in Editorial Manager before clicking Submit.

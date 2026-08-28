@@ -299,13 +299,14 @@ Do not upload an AI-generated graphical abstract.
 """,
     )
     pending = [
-        "Replace Figures 1--3 with the corrected senior-author exports listed in Paper/figures/SENIOR_FIGURE_CHANGE_REQUEST.md.",
+        "Replace Figures 1 and 3 with the corrected senior-author exports listed in Paper/figures/SENIOR_FIGURE_CHANGE_REQUEST.md.",
         "Supply the corresponding-author phone number on the title page.",
         "Have all authors approve the final PDF, cover letter, and declarations.",
     ]
+    active_pending = pending if not phone else [pending[0], pending[2]]
     write_text(
         OUT / "PENDING_BEFORE_UPLOAD.md",
-        "# Pending before upload\n\n" + "\n".join(f"- [ ] {item}" for item in pending),
+        "# Pending before upload\n\n" + "\n".join(f"- [ ] {item}" for item in active_pending),
     )
     write_text(
         OUT / "SUBMISSION_CHECKLIST.md",
@@ -320,7 +321,8 @@ Do not upload an AI-generated graphical abstract.
 - [x] Seven figures supplied as separate logically named files.
 - [x] LaTeX source archive with editable tables and bibliography.
 - [x] CJK replay, denominator, and contract-inventory audits pass.
-- [ ] Corrected senior-author Figures 1--3 inserted and package rebuilt.
+- [x] Corrected senior-author Figure 2 inserted.
+- [ ] Corrected senior-author Figures 1 and 3 inserted and package rebuilt.
 - [ ] Corresponding-author phone supplied.
 - [ ] Suggested reviewers completed if requested by Editorial Manager.
 - [ ] Final author approval and generated-PDF inspection.
@@ -331,8 +333,8 @@ Do not upload an AI-generated graphical abstract.
         """# RevTrace FGCS submission staging package
 
 This directory is upload-structured but **not yet final**. It becomes ready
-after the three corrected senior-author figures and the corresponding-author
-phone number are supplied, the package builder is rerun, and the final PDF is
+after the corrected senior-author Figures 1 and 3 are supplied, the package
+builder is rerun, and the final PDF is
 visually approved.
 
 The manuscript is frozen at 18 pages. The package contains the manuscript PDF,
@@ -353,11 +355,12 @@ replace the existing files without changing manuscript layout.
         OUT / "UPLOAD_MAPPING.csv",
         "editorial_manager_item,file,upload_status\n"
         "Manuscript,01_manuscript/RevTrace_FGCS_manuscript.pdf,ready after figure replacement\n"
-        "Title Page,02_title_page/RevTrace_title_page.docx,pending phone\n"
+        "Title Page,02_title_page/RevTrace_title_page.docx," +
+        ("ready\n" if phone else "pending phone\n") +
         "Cover Letter,03_cover_letter/RevTrace_cover_letter.docx,ready\n"
         "Highlights,04_highlights/RevTrace_highlights.txt,ready\n"
         "Figure 1,05_figures/Figure_1.png,pending corrected export\n"
-        "Figure 2,05_figures/Figure_2.jpg,pending corrected export\n"
+        "Figure 2,05_figures/Figure_2.jpg,ready\n"
         "Figure 3,05_figures/Figure_3.jpg,pending corrected export\n"
         "Figure 4,05_figures/Figure_4.pdf,ready\n"
         "Figure 5,05_figures/Figure_5.pdf,ready\n"
@@ -374,7 +377,7 @@ replace the existing files without changing manuscript layout.
         "article_type": "Regular research article",
         "manuscript_pages": 18,
         "highlights": len(highlights),
-        "pending": pending if not phone else [pending[0], pending[2]],
+        "pending": active_pending,
     }
     write_text(OUT / "STATUS.json", json.dumps(status, indent=2))
 
