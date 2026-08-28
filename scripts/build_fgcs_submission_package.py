@@ -184,7 +184,7 @@ def build_source_tree() -> None:
         for path in sorted((PAPER / dirname).glob("*.tex")):
             copy_file(path, target / path.name)
     figures = [
-        "f1_motivation_senior.png",
+        "f1_motivation_senior.jpg",
         "f2_architecture_senior.jpg",
         "f3_certification_senior.jpg",
         "f3_authority_frontier_column.pdf",
@@ -201,8 +201,16 @@ def build_source_tree() -> None:
                 archive.write(path, path.relative_to(source.parent))
 
 
-def build_package(phone: str | None) -> None:
+def build_package(phone: str | None, figures_final: bool) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
+    # Remove only known superseded staging artifacts; never recursively clear
+    # the package because authors may keep local Editorial Manager notes there.
+    for stale in (
+        OUT / "05_figures" / "Figure_1.png",
+        OUT / "05_figures" / "FIGURE_CORRECTIONS_PENDING.md",
+        OUT / "06_latex_source" / "figures" / "f1_motivation_senior.png",
+    ):
+        stale.unlink(missing_ok=True)
     copy_file(PAPER / "main.pdf", OUT / "01_manuscript" / "RevTrace_FGCS_manuscript.pdf")
     copy_file(
         PAPER / "submission" / "title_page_revtrace.docx",
@@ -231,7 +239,7 @@ def build_package(phone: str | None) -> None:
     )
 
     for number, source_name in (
-        (1, "f1_motivation_senior.png"),
+        (1, "f1_motivation_senior.jpg"),
         (2, "f2_architecture_senior.jpg"),
         (3, "f3_certification_senior.jpg"),
         (4, "f3_authority_frontier_column.pdf"),
@@ -244,10 +252,11 @@ def build_package(phone: str | None) -> None:
             PAPER / "figures" / source_name,
             OUT / "05_figures" / f"Figure_{number}{ext}",
         )
-    copy_file(
-        PAPER / "figures" / "SENIOR_FIGURE_CHANGE_REQUEST.md",
-        OUT / "05_figures" / "FIGURE_CORRECTIONS_PENDING.md",
-    )
+    if not figures_final:
+        copy_file(
+            PAPER / "figures" / "SENIOR_FIGURE_CHANGE_REQUEST.md",
+            OUT / "05_figures" / "FIGURE_CORRECTIONS_PENDING.md",
+        )
     copy_file(
         PAPER / "figures" / "SENIOR_FIGURE_QA.md",
         OUT / "05_figures" / "FIGURE_QA.md",
@@ -298,12 +307,15 @@ source and export a dedicated 1328x531-pixel-or-larger graphical abstract.
 Do not upload an AI-generated graphical abstract.
 """,
     )
-    pending = [
-        "Replace Figures 1 and 3 with the corrected senior-author exports listed in Paper/figures/SENIOR_FIGURE_CHANGE_REQUEST.md.",
-        "Supply the corresponding-author phone number on the title page.",
-        "Have all authors approve the final PDF, cover letter, and declarations.",
-    ]
-    active_pending = pending if not phone else [pending[0], pending[2]]
+    figure_action = "Replace Figures 1 and 3 with corrected senior-author exports."
+    phone_action = "Supply the corresponding-author phone number on the title page."
+    approval_action = "Have all authors approve the final PDF, cover letter, and declarations."
+    active_pending = []
+    if not figures_final:
+        active_pending.append(figure_action)
+    if not phone:
+        active_pending.append(phone_action)
+    active_pending.append(approval_action)
     write_text(
         OUT / "PENDING_BEFORE_UPLOAD.md",
         "# Pending before upload\n\n" + "\n".join(f"- [ ] {item}" for item in active_pending),
@@ -322,8 +334,11 @@ Do not upload an AI-generated graphical abstract.
 - [x] LaTeX source archive with editable tables and bibliography.
 - [x] CJK replay, denominator, and contract-inventory audits pass.
 - [x] Corrected senior-author Figure 2 inserted.
-- [ ] Corrected senior-author Figures 1 and 3 inserted and package rebuilt.
-- [ ] Corresponding-author phone supplied.
+""" + (
+            "- [x] Corrected senior-author Figures 1 and 3 inserted.\n"
+            if figures_final else
+            "- [ ] Corrected senior-author Figures 1 and 3 inserted and package rebuilt.\n"
+        ) + """- [x] Corresponding-author phone supplied.
 - [ ] Suggested reviewers completed if requested by Editorial Manager.
 - [ ] Final author approval and generated-PDF inspection.
 """,
@@ -333,9 +348,8 @@ Do not upload an AI-generated graphical abstract.
         """# RevTrace FGCS submission staging package
 
 This directory is upload-structured but **not yet final**. It becomes ready
-after the corrected senior-author Figures 1 and 3 are supplied, the package
-builder is rerun, and the final PDF is
-visually approved.
+after the final PDF, cover letter, and declarations are approved by all
+authors.
 
 The manuscript is frozen at 18 pages. The package contains the manuscript PDF,
 title page, cover letter, highlights, separate figures, LaTeX source zip,
@@ -344,7 +358,7 @@ declarations, audit evidence, and editorial-input templates.
 Build command:
 
 ```powershell
-python scripts/build_fgcs_submission_package.py --phone "<phone>"
+python scripts/build_fgcs_submission_package.py --phone "<phone>" --figures-final
 ```
 
 The figure filenames referenced by LaTeX are stable, so corrected artwork can
@@ -354,25 +368,35 @@ replace the existing files without changing manuscript layout.
     write_text(
         OUT / "UPLOAD_MAPPING.csv",
         "editorial_manager_item,file,upload_status\n"
-        "Manuscript,01_manuscript/RevTrace_FGCS_manuscript.pdf,ready after figure replacement\n"
+        "Manuscript,01_manuscript/RevTrace_FGCS_manuscript.pdf," +
+        ("ready\n" if figures_final else "ready after figure replacement\n") +
         "Title Page,02_title_page/RevTrace_title_page.docx," +
         ("ready\n" if phone else "pending phone\n") +
         "Cover Letter,03_cover_letter/RevTrace_cover_letter.docx,ready\n"
         "Highlights,04_highlights/RevTrace_highlights.txt,ready\n"
-        "Figure 1,05_figures/Figure_1.png,pending corrected export\n"
+        "Figure 1,05_figures/Figure_1.jpg," + ("ready\n" if figures_final else "pending corrected export\n") +
         "Figure 2,05_figures/Figure_2.jpg,ready\n"
-        "Figure 3,05_figures/Figure_3.jpg,pending corrected export\n"
+        "Figure 3,05_figures/Figure_3.jpg," + ("ready\n" if figures_final else "pending corrected export\n") +
         "Figure 4,05_figures/Figure_4.pdf,ready\n"
         "Figure 5,05_figures/Figure_5.pdf,ready\n"
         "Figure 6,05_figures/Figure_6.pdf,ready\n"
         "Figure 7,05_figures/Figure_7.pdf,ready\n"
-        "LaTeX Source,06_latex_source.zip,ready after figure replacement\n"
+        "LaTeX Source,06_latex_source.zip," +
+        ("ready\n" if figures_final else "ready after figure replacement\n") +
         "Declarations,08_declarations/declarations.txt,ready\n",
     )
 
+    if figures_final and phone:
+        decision = "READY_FOR_AUTHOR_APPROVAL"
+    elif figures_final:
+        decision = "STAGING_PENDING_PHONE"
+    elif phone:
+        decision = "STAGING_PENDING_FIGURES"
+    else:
+        decision = "STAGING_PENDING_FIGURES_AND_PHONE"
     status = {
         "schema_version": 1,
-        "decision": "STAGING_PENDING_FIGURES_AND_PHONE" if not phone else "STAGING_PENDING_FIGURES",
+        "decision": decision,
         "journal": "Future Generation Computer Systems",
         "article_type": "Regular research article",
         "manuscript_pages": 18,
@@ -410,8 +434,9 @@ replace the existing files without changing manuscript layout.
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--phone", default=None)
+    parser.add_argument("--figures-final", action="store_true")
     args = parser.parse_args()
-    build_package(args.phone)
+    build_package(args.phone, args.figures_final)
     return 0
 
 

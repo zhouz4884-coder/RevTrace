@@ -55,15 +55,13 @@ exceed `docs/CLAIM_BOUNDARIES.md`.
   while the motivation, architecture, certification, cross-family production,
   and V100 scale-out summaries remain double-column hero figures. Figures
   1--3 use the senior-author artwork directly:
-  `f1_motivation_senior.png`, `f2_architecture_senior.jpg`, and
+  `f1_motivation_senior.jpg`, `f2_architecture_senior.jpg`, and
   `f3_certification_senior.jpg`. Their captions bind two implementation
   details that must not be inferred more broadly: FP32 is the evaluated
   coarse-authority implementation rather than a DGFT protocol requirement,
   and R4 applies to risk/coverage evidence rather than to a valid certificate.
-  At the frozen layout, Figures 2/3 have effective raster densities above
-  350 ppi. Figure 1 is visually readable but its supplied 1536-pixel PNG is
-  approximately 224 ppi at 0.96 text width; replace it with the senior
-  author's original vector or a width-at-least-2160-pixel export when available.
+  At the frozen layout, all three senior-author figures have effective raster
+  densities above 350 ppi.
   The quantitative reproducible sources are
   `f3_authority_frontier_column.pdf`, F5 `f4_production.pdf`,
   F6 `f5_quality_column.pdf`, and F7 `f7_v100_dual_plane.pdf` (PNG previews

@@ -6,7 +6,7 @@
   an uncertified projection is allowed to enter feedback state; DGFT preserves
   provisional display while denying that write.
 - Figure archetype: two-panel causal contrast.
-- Target/output: FGCS, 0.96 text width, senior-author PNG artwork.
+- Target/output: FGCS, 0.96 text width, senior-author 2400-pixel JPEG artwork.
 - Hero evidence: 8/21 legal state pairs propagate with feedback, 0/21 without,
   and measured tail RAF up to 153.
 - Reviewer risk: DGFT does not promise bitwise-identical provisional output;

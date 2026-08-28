@@ -26,14 +26,11 @@
   journal volume/page/DOI fields; they are not missing-citation errors.
 - The format checker reports macro/spacing heuristics around custom LaTeX
   commands. The final LaTeX build has no blocking formatting diagnostic.
-- Figure 1 is about 224 effective ppi in the current staging package; replace
-  it with a corrected vector or at-least-2160-pixel-wide export. Figures 2/3
-  exceed 350 effective ppi but still require the listed text corrections.
+- Corrected Figures 1--3 are each 2400x1792 pixels, exceed 350 effective ppi at
+  their frozen widths, and pass the technical text and page-layout review.
 
 ## Remaining author actions
 
-1. Replace Figures 1 and 3 with corrected senior-author exports; revised
-   Figure 2 has passed technical and page-layout review.
-2. Fill suggested reviewers if Editorial Manager requests them.
-3. Obtain final approval from all authors and inspect the generated submission
+1. Fill suggested reviewers if Editorial Manager requests them.
+2. Obtain final approval from all authors and inspect the generated submission
    PDF in Editorial Manager before clicking Submit.

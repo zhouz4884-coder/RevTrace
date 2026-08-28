@@ -3,8 +3,8 @@
 Current paper staging bundle: `Paper/submission/FGCS_RevTrace_STAGING.zip`.
 It contains the manuscript PDF, title page, cover letter, highlights, separate
 figures, LaTeX source, declarations, audits, upload mapping, and checksums.
-Its status is now `STAGING_PENDING_FIGURES`: the corresponding-author phone
-and revised Figure 2 are bound; corrected senior-author Figures 1 and 3 remain.
+Its status is now `READY_FOR_AUTHOR_APPROVAL`: the corresponding-author phone
+and corrected senior-author Figures 1--3 are bound.
 
 Submission packages belong here only after:
 
