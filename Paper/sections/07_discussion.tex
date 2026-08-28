@@ -1,13 +1,13 @@
 %% Section 7: Discussion and Boundaries. (outline v2 sec.3.7)
 
-\paragraph{FP32 authority is a canonical path, not a repair.}
+\paragraph{FP32 authority is a canonical path, not a repair}
 The FP32 batched authority defines a new canonical reference for the
 contract; it is not a bitwise repair of FP16 arithmetic. FP16 remains the
 proposer and SG-authority precision. Quality estimands are defined against
 the FP16 singleton reference (Qwen) and against unprotected feedback
 (Whisper); neither claims bitwise equivalence across precisions.
 
-\paragraph{Authority is an interface, not a precision.}
+\paragraph{Authority is an interface, not a precision}
 DGFT requires an authority path that emits a contract-bound canonical
 projection and certificate; it does not require FP32. FP32 was the conservative
 choice that passed the frozen implementation's preflight and quality checks.
@@ -18,13 +18,13 @@ substituting a distilled predictor is not a certificate: unless that path is
 itself promoted to the versioned canonical authority, it cannot authorize a
 state write.
 
-\paragraph{Risk evidence does not transfer.}
+\paragraph{Risk evidence does not transfer}
 The SG-path UCB of 0.480\% bounds the numerical risk of the SG adapter's
 randomized audits. It is never applied to Coarse/Hybrid paths, whose safety
 rests on Theorems~\ref{thm:ancestry}--\ref{thm:gran} and exhaustive
 transaction validation instead.
 
-\paragraph{The authority plane is trusted and versioned.}
+\paragraph{The authority plane is trusted and versioned}
 The current contract assumes a non-Byzantine authority coordinator, atomic
 certificate consumption and version comparison, immutable audio bytes during
 a transaction, and collision-resistant digests. A certificate binds the
@@ -35,13 +35,13 @@ install violations therefore validate accepted-history integrity, whereas
 the stale-result rejection rule is supported by the protocol argument rather
 than a fault-injection denominator.
 
-\paragraph{Quality estimands differ by family.}
+\paragraph{Quality estimands differ by family}
 Qwen edit rates measure distance to an independent canonical reference;
 Whisper WER deltas measure improvement over unprotected feedback. The two
 answer different questions and are never pooled into a single quality
 number.
 
-\paragraph{Virtual arrival versus wall clock.}
+\paragraph{Virtual arrival versus wall clock}
 Production cells schedule virtual causal arrivals; service wall-clock and
 energy meters measure real GPU work. Latency columns are labeled by
 semantics (display, state-entry, or segment-commit) wherever they appear.
@@ -49,7 +49,7 @@ Consequently, the SG certified state-entry deadline and the DGFT provisional
 display/segment-commit measurements are reported separately; the manuscript
 does not transfer an SLO pass label between them.
 
-\paragraph{Why coarse authority improves throughput.}
+\paragraph{Why coarse authority improves throughput}
 The same-workload ablation supports the cost decomposition rather than a
 granularity-only explanation. SG repeatedly invokes an FP16 singleton
 authority and accumulates a synchronized terminal burst; Coarse amortizes
@@ -62,7 +62,7 @@ is measured at a revision-state authorization boundary; unlike stateful cache
 reuse~\cite{yu2025pensieve,gao2024cachedattention}, the protected object is the
 transition that creates reusable state.
 
-\paragraph{The cost equations are a decomposition, not a fitted oracle.}
+\paragraph{The cost equations are a decomposition, not a fitted oracle}
 Equations~\eqref{eq:cost-sg}--\eqref{eq:cost-service} identify the complete
 authority-path terms and yield a sufficient operating condition; they do not
 claim a workload-independent numerical predictor. H3 therefore compares
@@ -70,7 +70,7 @@ complete configurations on one frozen workload and reports the model-dependent
 ordering reversal. Risk-bound sensitivity is evaluated separately and is
 never converted into fabricated per-setting GPU times.
 
-\paragraph{Preflight amortization.}
+\paragraph{Preflight amortization}
 The one-time contract preflight costs 10.7--11.1\,s. With per-session
 steady-state savings $\Delta T = T_{\mathrm{baseline}} - T_{\mathrm{DGFT}}$,
 we define the break-even point as
@@ -78,7 +78,7 @@ $N = \lceil T_{\mathrm{preflight}} / \Delta T \rceil$ sessions. We report
 the one-time cost and steady-state results separately, and exclude the
 preflight from all service timing.
 
-\paragraph{Not every ASR system needs DGFT.}
+\paragraph{Not every ASR system needs DGFT}
 The original Voxtral report studies multimodal audio understanding and
 long-context transcription~\cite{mistral2025voxtral}; Voxtral Realtime instead
 uses a natively streaming delayed-stream design~\cite{mistral2026voxtralrealtime}.
@@ -89,7 +89,7 @@ capacity probe) batching pressure is small. DGFT targets the
 revision-generative operating regime where feedback writes and batching
 coexist.
 
-\paragraph{Scale boundary.}
+\paragraph{Scale boundary}
 Under the stated trust and atomicity assumptions, safety is independent of
 adapter and granularity, but performance remains hardware- and
 backend-specific. The RTX~3090 results establish cross-architecture mechanism
@@ -107,7 +107,7 @@ than assumed from precision alone. Higher-end accelerators and distributed
 authority ledgers may change the cost ordering without changing the
 state-write authorization problem.
 
-\paragraph{Distributed realization.}
+\paragraph{Distributed realization}
 DGFT's commit history is session-local, so a multi-node implementation can
 partition sessions across authority coordinators and store each session's
 epoch, parent version, frontier, and single-use certificate state under one

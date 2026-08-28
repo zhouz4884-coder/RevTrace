@@ -1,7 +1,7 @@
 %% Section 8: Related Work. Collision-matrix framing; synthesize, do not
 %% list. (outline v2 sec.3.8)
 
-\paragraph{Streaming ASR and confirmation policies.}
+\paragraph{Streaming ASR and confirmation policies}
 Partial-hypothesis stability has long been recognized as distinct from final
 recognition quality~\cite{selfridge2011stability,shangguan2020stability}.
 Modern streaming decoders therefore manage revision at the display layer:
@@ -16,7 +16,7 @@ to become a parent of future model state. A display-confirmed prefix need not
 be certified against an independent authority path, and a provisional display
 need not be allowed to update feedback state.
 
-\paragraph{Speculative execution and numerical verification.}
+\paragraph{Speculative execution and numerical verification}
 Speculative decoding verifies draft tokens against a target model so that
 acceleration preserves the target distribution
 ~\cite{leviathan2023specdec,chen2023specsample}; Medusa, EAGLE, and SpecInfer
@@ -35,7 +35,7 @@ not itself define feedback-state authority, certificate binding, or
 parent-version installation. H6 evaluates a clearly labeled revision-level
 adaptation rather than attributing those semantics to the original system.
 
-\paragraph{LLM serving and materialized state.}
+\paragraph{LLM serving and materialized state}
 Throughput-oriented serving systems optimize request execution through paged
 KV-cache management~\cite{kwon2023vllm}, iteration-level scheduling
 ~\cite{yu2022orca}, structured-program runtimes~\cite{zheng2024sglang},
@@ -53,7 +53,7 @@ model-generated revision projection must be certified before it becomes
 future feedback. RevTrace is therefore complementary: it governs state-entry
 authority before downstream cache placement or reuse.
 
-\paragraph{Revision-generative and self-correcting models.}
+\paragraph{Revision-generative and self-correcting models}
 Language models also revise outputs through explicit application loops such as
 self-refinement~\cite{madaan2023selfrefine} and verbal feedback retained by
 agents~\cite{shinn2023reflexion}. RevTrace targets the narrower systems case in
@@ -62,7 +62,7 @@ this feedback edge, a numerically induced output difference is not merely a
 different terminal answer: it can change the next request and create an
 ancestry of dependent revisions.
 
-\paragraph{Numerical variation.}
+\paragraph{Numerical variation}
 Parallel reductions, kernel selection, and low-precision arithmetic can make
 mathematically equivalent LLM inference paths numerically non-identical
 ~\cite{yuan2025numerical,antunes2024reprohpc}. Reproducible reductions are
@@ -74,7 +74,7 @@ state installation to certificate-bearing transitions. This distinction is
 important because a small one-round numerical difference can become a durable
 causal difference only when the serving state machine feeds it forward.
 
-\paragraph{Concurrency control and recovery.}
+\paragraph{Concurrency control and recovery}
 RevTrace borrows validation and version fencing from optimistic concurrency
 control~\cite{kung1981occ} and provenance tracking from multiversion
 concurrency control~\cite{bernstein1983mvcc}. Cascading invalidation is
@@ -88,7 +88,7 @@ certificate and parent-version rules, not a real-time specification for every
 client invocation and response. The validated object is also unusual---a
 model-generated state projection rather than a conventional database write.
 
-\paragraph{Anytime-valid statistics.}
+\paragraph{Anytime-valid statistics}
 Confidence sequences and e-value-based tests remain valid under optional
 stopping~\cite{howard2021confidence,ramdas2023savi,grunwald2024safetesting}.
 RevTrace uses them only to monitor the randomized audits of the SG adapter.
@@ -96,7 +96,7 @@ They neither certify individual DGFT transitions nor replace the deterministic
 transaction invariant; each statistical statement is scoped to its declared
 adapter, sampling process, and estimand.
 
-\paragraph{Synthesis and gap.}
+\paragraph{Synthesis and gap}
 The closest lines therefore solve complementary parts of the problem:
 streaming confirmation governs display stability, verified speculation governs
 token acceptance, stateful serving governs reuse, and concurrency control
