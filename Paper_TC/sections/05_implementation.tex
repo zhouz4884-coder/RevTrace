@@ -1,0 +1,22 @@
+%% Section 5: Implementation.
+
+RevTrace supports Qwen rollback-prefix and Whisper previous-text adapters with
+growing audio and holdback semantics~\cite{shi2026qwen3asr,radford2023whisper}.
+In the frozen implementation, SG uses FP16 singleton authority and
+Coarse/Hybrid use FP32 batched authority with a 4{,}096-token per-session
+KV-cache bound. The latter's 10.7--11.1\,s one-time fail-closed preflight is
+reported separately and excluded from steady-state timing. FP32 is not a DGFT
+requirement: replacing it requires a new canonical contract and the same
+preflight and quality checks.
+
+The primary deployment uses two RTX~3090 GPUs, one per plane, causal arrivals,
+and vectorized host transfer. The independent scale contract uses one
+RHEL~7.6 node with eight 32-GB V100 PCIe GPUs, PyTorch~2.4.1, CUDA~12.1, and
+Transformers eager execution. It runs up to four proposer and four authority
+replicas over a shared versioned commit queue---not distributed model
+parallelism. Audio is deterministically resampled to 16\,kHz. Contract
+fingerprints, rejected realizations, raw records, and result hashes remain in
+the release; timing is never pooled across hardware contracts. Each reported
+run is bound to a code revision and contract digest so that protocol changes
+cannot be mixed with frozen measurements.
+\artifactavailability

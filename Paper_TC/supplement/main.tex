@@ -1,0 +1,37 @@
+\documentclass[journal,10pt]{IEEEtran}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\audio}{A}
+\newcommand{\out}{Y}
+\newcommand{\proj}{\Phi}
+\newcommand{\tx}{\tau}
+\newcommand{\commit}{\Gamma}
+\newcommand{\cert}{\mathrm{cert}}
+\newcommand{\granratio}{\rho}
+
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thesubsection}{S\arabic{section}.\arabic{subsection}}
+\renewcommand{\thedefinition}{S\arabic{section}.\arabic{definition}}
+\renewcommand{\thetheorem}{S\arabic{section}.\arabic{theorem}}
+
+\begin{document}
+
+\title{Supplementary Material for RevTrace: A Transactional Runtime for
+Feedback-State Integrity in Revision-Generative ASR Serving}
+\author{Bin Zhou, Jiyuan Miao, and Xi Cao}
+\maketitle
+
+\input{dgft_details}
+
+\end{document}

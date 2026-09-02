@@ -1,0 +1,61 @@
+%% TC adaptation: runtime stake -> feedback-write failure -> mechanism -> evidence.
+
+Accelerator-backed generative services usually treat a returned sequence as an
+endpoint. Revision-generative ASR does not: Whisper-style decoders condition on
+previously generated text~\cite{radford2023whisper,machacek2023whisperstreaming},
+and Qwen3-ASR re-prompts itself with rollback prefixes from earlier
+revisions~\cite{shi2026qwen3asr}. A generated hypothesis therefore mutates the
+state of later execution. Yet throughput-oriented runtimes optimize request
+scheduling and output delivery without exposing an authorization boundary
+between model generation and this feedback write~\cite{kwon2023vllm,yu2022orca,zheng2024sglang}.
+
+Batching improves accelerator utilization by sharing execution across
+sessions~\cite{kwon2023vllm,agrawal2024sarathi,zhong2024distserve,sun2024llumnix},
+but it can change floating-point reduction order and hence a greedy token
+sequence relative to singleton execution~\cite{yuan2025numerical}. A terminal
+service contains that difference within one response. In a revision-generative
+service, the differing output can become the parent of every later revision
+(Fig.~\ref{fig:motivation}). Controlled paired interventions establish that
+this is a feedback-channel failure, not merely display variation: 8 of 21
+legal state pairs propagate when the feedback edge is present, none propagate
+when it is removed, and the measured revision amplification factor (RAF)
+reaches 153.
+
+Existing mechanisms regulate different boundaries. LocalAgreement stabilizes
+display prefixes but does not authorize feedback parents~\cite{machacek2023whisperstreaming};
+speculative decoding verifies draft tokens against a target
+distribution~\cite{leviathan2023specdec,chen2023specsample}; and LLM-42 provides
+verify--rollback for deterministic token generation, not revision-state
+installation~\cite{zhang2026llm42}. Numerical reproducibility repairs execution
+rather than state provenance~\cite{yuan2025numerical}. Optimistic concurrency
+control supplies a useful analogy~\cite{kung1981occ,bernstein1983mvcc}, but here
+the speculative write is a model-generated projection whose legality must be
+established by the serving runtime.
+
+We accordingly treat each revision output as a speculative state write:
+$\mathrm{Display}(\out_t)\nRightarrow
+\mathrm{Authorize}(\proj(\out_t;H_t))$. We introduce \textbf{Dual-Granularity
+Feedback Transactions} (DGFT), which decouples a fine-grained proposal/display
+path from a coarse canonical authority. Only a certificate bound to the parent
+version, input frontier, projection, and execution contract can install state;
+same-granularity certification is the $\granratio=1$ case. \textbf{RevTrace}
+implements DGFT as a two-plane parallel runtime with contract-scoped
+certification. The abstraction targets feedback-driven generation, while all
+empirical generality claimed here is explicitly limited to the evaluated
+revision-generative ASR pipelines.
+
+This paper contributes:
+\begin{enumerate}
+  \item a formal feedback-state contamination model and causal evidence that
+    identifies the feedback edge as the propagation channel
+    (Sections~\ref{sec:model} and~\ref{sec:eval});
+  \item DGFT and the RevTrace runtime, with certificate-, version-, and
+    frontier-bound commits, three state-history invariants, and a cost model
+    for selecting authority granularity
+    (Sections~\ref{sec:dgft}--\ref{sec:impl}); and
+  \item a contract-bounded evaluation on Qwen3-ASR 0.6B/1.7B and Whisper
+    tiny/base/small.en, using two RTX~3090 GPUs and an independent
+    8$\times$V100 platform. It covers matched-workload throughput, display and
+    commit latency, energy, family-specific quality, protocol fuzzing, and the
+    measured single-node capacity boundary (Section~\ref{sec:eval}).
+\end{enumerate}

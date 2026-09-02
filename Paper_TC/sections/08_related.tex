@@ -1,0 +1,60 @@
+%% TC adaptation: four comparative clusters replace the paper-by-paper survey.
+
+\paragraph{Streaming revision and feedback}
+Streaming ASR distinguishes partial-hypothesis stability from final recognition
+quality~\cite{selfridge2011stability,shangguan2020stability}. Transducers revise
+hypotheses as audio arrives~\cite{graves2012transduction}; Whisper-based systems
+confirm prefixes after repeated agreement, and chunked variants detect
+truncation~\cite{machacek2023whisperstreaming,radford2023whisper,wang2024simulwhisper}.
+These policies control visible flicker. Self-refinement and agent loops also
+retain generated feedback~\cite{madaan2023selfrefine,shinn2023reflexion}, but do
+not define when a numerically divergent revision may become an ancestor of
+future serving state. RevTrace separates display permission from this
+state-write authorization decision.
+
+\paragraph{Verified and reproducible execution}
+Speculative decoding preserves a target distribution by verifying draft tokens
+~\cite{leviathan2023specdec,chen2023specsample}; Medusa, EAGLE, and SpecInfer
+increase accepted work per verification step
+~\cite{cai2024medusa,li2024eagle,miao2024specinfer}. LLM-42 instead combines a
+fast nondeterministic path with fixed-path verification and rollback, while
+MarginGate uses token margins to schedule that verification
+~\cite{zhang2026llm42,chu2026margingate}. RevTrace verifies a different object:
+a revision projection that may condition all later rounds, bound to parent
+provenance and an input frontier. Numerical nonidentity from reductions, kernel
+selection, and low precision is well documented
+~\cite{yuan2025numerical,antunes2024reprohpc}; reproducible reductions can impose
+implementation or performance costs~\cite{demmel2013reprosum,mueller2018reproagg}.
+Rather than require a bitwise-deterministic proposer, RevTrace names a canonical
+authority and gates state installation. Anytime-valid statistics
+~\cite{howard2021confidence,ramdas2023savi,grunwald2024safetesting} monitor one
+declared SG audit process; they do not certify individual transitions.
+
+\paragraph{Serving and materialized state}
+Contemporary serving systems improve throughput through paged KV management,
+iteration scheduling, structured runtimes, chunked prefill, phase
+disaggregation, and migration
+~\cite{kwon2023vllm,yu2022orca,zheng2024sglang,agrawal2024sarathi,zhong2024distserve,sun2024llumnix}.
+Stateful systems additionally reuse, transport, or schedule materialized KV and
+application state
+~\cite{yu2025pensieve,gao2024cachedattention,lin2024parrot,luo2026agentix,qin2024mooncake}.
+These mechanisms govern execution, residency, and reuse after state exists.
+RevTrace is complementary: it controls whether a batch-created model projection
+is authorized to enter that reusable state in the first place.
+
+\paragraph{Concurrency-control basis and remaining gap}
+DGFT adapts validation and version fencing from optimistic and multiversion
+concurrency control~\cite{kung1981occ,bernstein1983mvcc}. Its invalidation model
+is related to Time Warp rollback, while provisional external effects recall the
+rollback/compensation distinction in Sagas
+~\cite{jefferson1985virtualtime,garciamolina1987sagas}. The guarantee is narrower
+than general linearizability~\cite{herlihy1990linearizability}: it proves one
+fork-free committed revision history under certificate and parent-version
+rules, not a real-time specification for all client operations. The adjacent
+lines thus protect display stability, token acceptance, numerical execution,
+or already materialized state. This leaves an unresolved systems gap: to our
+knowledge, they do not jointly bind a generated feedback projection to
+canonical authority, its parent version, and its input frontier before
+installation. RevTrace targets precisely this
+intersection without claiming to replace those numerical, caching, or
+scheduling mechanisms.

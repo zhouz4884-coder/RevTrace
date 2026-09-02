@@ -1,0 +1,1121 @@
+{
+  "claim_boundary": "LOCAL host-side CPU protocol microbenchmark using production RevTrace transaction functions; not GPU, model inference, service goodput, tail latency, or end-to-end speedup evidence",
+  "conclusion": {
+    "decision": "CLOSES_HOST_PROTOCOL_ATTRIBUTION_WITHOUT_NEW_GPU_RUN",
+    "gpu_run_required_for_this_narrow_question": false,
+    "reason": "the production-function CPU microbenchmark isolates validation from the same raw state materialization, while existing online timestamps remain only a mixed deployed-path upper envelope"
+  },
+  "environment": {
+    "git_commit": "eeca911090b1a1bd01be234246f690331484c874",
+    "git_dirty": true,
+    "logical_cpu_count": 24,
+    "machine": "AMD64",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "processor_identifier": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "production_source": "src/revtrace/dgft.py",
+    "production_source_sha256": "ef7a693dd0f859b621f6be3a3ae4c67d10fda529728def0dcf35336d6dd51d90",
+    "python_executable": "E:\\Anaconda\\python.exe",
+    "python_implementation": "CPython",
+    "python_version": "3.13.5",
+    "release": "11",
+    "script_sha256": "0201d362dd3a4c637cb6da487fef2a83ee598eb601d8f504ce01e4c60870a9ac",
+    "system": "Windows",
+    "timer": {
+      "adjustable": false,
+      "implementation": "QueryPerformanceCounter()",
+      "monotonic": true,
+      "resolution_seconds": 1e-07
+    }
+  },
+  "existing_instrumentation_audit": {
+    "eligible_as_isolated_attribution": false,
+    "event_count": 1048,
+    "file_count": 16,
+    "interpretation": "observed online coordinator critical section; includes lock waiting, input conversion, job/certificate construction, hashing, validation, state materialization, and pending-version update",
+    "interval": "committed_perf - certified_perf",
+    "is_pure_protocol_measure": false,
+    "source_glob": "D:\\VLA_QWEN\\RevTrace\\results\\r9_dgft\\service\\online_closure_matrix\\*.json",
+    "summary_us": {
+      "max": 6908.731535077095,
+      "mean": 1472.4181973880143,
+      "median": 1317.7013024687767,
+      "min": 768.1902498006821,
+      "p95": 2716.59786812961,
+      "p99": 3784.0379122644645
+    }
+  },
+  "generated_at_utc": "2026-09-02T17:57:04.584591+00:00",
+  "parameters": {
+    "descendant_versions": 8,
+    "display_tokens": 32,
+    "fixed_audio_bytes": 65536,
+    "garbage_collection_disabled_during_timing": true,
+    "iterations": 20000,
+    "next_prompt_tokens": 288,
+    "prompt_tokens": 256,
+    "repeats": 31,
+    "seed": 20260903,
+    "variant_order_randomized_per_repeat": true,
+    "warmup_iterations": 2000
+  },
+  "raw_samples": [
+    {
+      "elapsed_ns": 1607803100,
+      "iterations": 20000,
+      "ns_per_operation": 80390.155,
+      "order_index": 0,
+      "repeat": 0,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 378806300,
+      "iterations": 20000,
+      "ns_per_operation": 18940.315,
+      "order_index": 1,
+      "repeat": 0,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 498196000,
+      "iterations": 20000,
+      "ns_per_operation": 24909.8,
+      "order_index": 2,
+      "repeat": 0,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 2017420700,
+      "iterations": 20000,
+      "ns_per_operation": 100871.035,
+      "order_index": 3,
+      "repeat": 0,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 381005700,
+      "iterations": 20000,
+      "ns_per_operation": 19050.285,
+      "order_index": 0,
+      "repeat": 1,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1610658500,
+      "iterations": 20000,
+      "ns_per_operation": 80532.925,
+      "order_index": 1,
+      "repeat": 1,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 2051786900,
+      "iterations": 20000,
+      "ns_per_operation": 102589.345,
+      "order_index": 2,
+      "repeat": 1,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 502559600,
+      "iterations": 20000,
+      "ns_per_operation": 25127.98,
+      "order_index": 3,
+      "repeat": 1,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 381549500,
+      "iterations": 20000,
+      "ns_per_operation": 19077.475,
+      "order_index": 0,
+      "repeat": 2,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1594137100,
+      "iterations": 20000,
+      "ns_per_operation": 79706.855,
+      "order_index": 1,
+      "repeat": 2,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 2036643200,
+      "iterations": 20000,
+      "ns_per_operation": 101832.16,
+      "order_index": 2,
+      "repeat": 2,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 498213900,
+      "iterations": 20000,
+      "ns_per_operation": 24910.695,
+      "order_index": 3,
+      "repeat": 2,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 2045922000,
+      "iterations": 20000,
+      "ns_per_operation": 102296.1,
+      "order_index": 0,
+      "repeat": 3,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 379521800,
+      "iterations": 20000,
+      "ns_per_operation": 18976.09,
+      "order_index": 1,
+      "repeat": 3,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1611967300,
+      "iterations": 20000,
+      "ns_per_operation": 80598.365,
+      "order_index": 2,
+      "repeat": 3,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 493503000,
+      "iterations": 20000,
+      "ns_per_operation": 24675.15,
+      "order_index": 3,
+      "repeat": 3,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 2012199900,
+      "iterations": 20000,
+      "ns_per_operation": 100609.995,
+      "order_index": 0,
+      "repeat": 4,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 382976400,
+      "iterations": 20000,
+      "ns_per_operation": 19148.82,
+      "order_index": 1,
+      "repeat": 4,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1618035900,
+      "iterations": 20000,
+      "ns_per_operation": 80901.795,
+      "order_index": 2,
+      "repeat": 4,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 489106800,
+      "iterations": 20000,
+      "ns_per_operation": 24455.34,
+      "order_index": 3,
+      "repeat": 4,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 1606990800,
+      "iterations": 20000,
+      "ns_per_operation": 80349.54,
+      "order_index": 0,
+      "repeat": 5,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 495171600,
+      "iterations": 20000,
+      "ns_per_operation": 24758.58,
+      "order_index": 1,
+      "repeat": 5,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 384858000,
+      "iterations": 20000,
+      "ns_per_operation": 19242.9,
+      "order_index": 2,
+      "repeat": 5,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2058286300,
+      "iterations": 20000,
+      "ns_per_operation": 102914.315,
+      "order_index": 3,
+      "repeat": 5,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1604698800,
+      "iterations": 20000,
+      "ns_per_operation": 80234.94,
+      "order_index": 0,
+      "repeat": 6,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 381459900,
+      "iterations": 20000,
+      "ns_per_operation": 19072.995,
+      "order_index": 1,
+      "repeat": 6,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 490892600,
+      "iterations": 20000,
+      "ns_per_operation": 24544.63,
+      "order_index": 2,
+      "repeat": 6,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 2014940000,
+      "iterations": 20000,
+      "ns_per_operation": 100747.0,
+      "order_index": 3,
+      "repeat": 6,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1628437700,
+      "iterations": 20000,
+      "ns_per_operation": 81421.885,
+      "order_index": 0,
+      "repeat": 7,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 2011753600,
+      "iterations": 20000,
+      "ns_per_operation": 100587.68,
+      "order_index": 1,
+      "repeat": 7,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 481931300,
+      "iterations": 20000,
+      "ns_per_operation": 24096.565,
+      "order_index": 2,
+      "repeat": 7,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 375496700,
+      "iterations": 20000,
+      "ns_per_operation": 18774.835,
+      "order_index": 3,
+      "repeat": 7,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1600676500,
+      "iterations": 20000,
+      "ns_per_operation": 80033.825,
+      "order_index": 0,
+      "repeat": 8,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 379707600,
+      "iterations": 20000,
+      "ns_per_operation": 18985.38,
+      "order_index": 1,
+      "repeat": 8,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2019768500,
+      "iterations": 20000,
+      "ns_per_operation": 100988.425,
+      "order_index": 2,
+      "repeat": 8,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 507366000,
+      "iterations": 20000,
+      "ns_per_operation": 25368.3,
+      "order_index": 3,
+      "repeat": 8,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 500689900,
+      "iterations": 20000,
+      "ns_per_operation": 25034.495,
+      "order_index": 0,
+      "repeat": 9,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 376838800,
+      "iterations": 20000,
+      "ns_per_operation": 18841.94,
+      "order_index": 1,
+      "repeat": 9,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1625418300,
+      "iterations": 20000,
+      "ns_per_operation": 81270.915,
+      "order_index": 2,
+      "repeat": 9,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 2051887300,
+      "iterations": 20000,
+      "ns_per_operation": 102594.365,
+      "order_index": 3,
+      "repeat": 9,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 2018047000,
+      "iterations": 20000,
+      "ns_per_operation": 100902.35,
+      "order_index": 0,
+      "repeat": 10,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 489530100,
+      "iterations": 20000,
+      "ns_per_operation": 24476.505,
+      "order_index": 1,
+      "repeat": 10,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 380567400,
+      "iterations": 20000,
+      "ns_per_operation": 19028.37,
+      "order_index": 2,
+      "repeat": 10,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1615919900,
+      "iterations": 20000,
+      "ns_per_operation": 80795.995,
+      "order_index": 3,
+      "repeat": 10,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 2008130500,
+      "iterations": 20000,
+      "ns_per_operation": 100406.525,
+      "order_index": 0,
+      "repeat": 11,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1612081200,
+      "iterations": 20000,
+      "ns_per_operation": 80604.06,
+      "order_index": 1,
+      "repeat": 11,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 370936200,
+      "iterations": 20000,
+      "ns_per_operation": 18546.81,
+      "order_index": 2,
+      "repeat": 11,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 489336400,
+      "iterations": 20000,
+      "ns_per_operation": 24466.82,
+      "order_index": 3,
+      "repeat": 11,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 481910200,
+      "iterations": 20000,
+      "ns_per_operation": 24095.51,
+      "order_index": 0,
+      "repeat": 12,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 1995165900,
+      "iterations": 20000,
+      "ns_per_operation": 99758.295,
+      "order_index": 1,
+      "repeat": 12,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 385741000,
+      "iterations": 20000,
+      "ns_per_operation": 19287.05,
+      "order_index": 2,
+      "repeat": 12,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1617279300,
+      "iterations": 20000,
+      "ns_per_operation": 80863.965,
+      "order_index": 3,
+      "repeat": 12,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 1635117400,
+      "iterations": 20000,
+      "ns_per_operation": 81755.87,
+      "order_index": 0,
+      "repeat": 13,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 377985400,
+      "iterations": 20000,
+      "ns_per_operation": 18899.27,
+      "order_index": 1,
+      "repeat": 13,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2029190200,
+      "iterations": 20000,
+      "ns_per_operation": 101459.51,
+      "order_index": 2,
+      "repeat": 13,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 495177400,
+      "iterations": 20000,
+      "ns_per_operation": 24758.87,
+      "order_index": 3,
+      "repeat": 13,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 379157100,
+      "iterations": 20000,
+      "ns_per_operation": 18957.855,
+      "order_index": 0,
+      "repeat": 14,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1612483900,
+      "iterations": 20000,
+      "ns_per_operation": 80624.195,
+      "order_index": 1,
+      "repeat": 14,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 2000804900,
+      "iterations": 20000,
+      "ns_per_operation": 100040.245,
+      "order_index": 2,
+      "repeat": 14,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 492614600,
+      "iterations": 20000,
+      "ns_per_operation": 24630.73,
+      "order_index": 3,
+      "repeat": 14,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 494454000,
+      "iterations": 20000,
+      "ns_per_operation": 24722.7,
+      "order_index": 0,
+      "repeat": 15,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 1600285400,
+      "iterations": 20000,
+      "ns_per_operation": 80014.27,
+      "order_index": 1,
+      "repeat": 15,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 381763900,
+      "iterations": 20000,
+      "ns_per_operation": 19088.195,
+      "order_index": 2,
+      "repeat": 15,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2041134300,
+      "iterations": 20000,
+      "ns_per_operation": 102056.715,
+      "order_index": 3,
+      "repeat": 15,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 495978500,
+      "iterations": 20000,
+      "ns_per_operation": 24798.925,
+      "order_index": 0,
+      "repeat": 16,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 385219100,
+      "iterations": 20000,
+      "ns_per_operation": 19260.955,
+      "order_index": 1,
+      "repeat": 16,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2022147900,
+      "iterations": 20000,
+      "ns_per_operation": 101107.395,
+      "order_index": 2,
+      "repeat": 16,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1596895800,
+      "iterations": 20000,
+      "ns_per_operation": 79844.79,
+      "order_index": 3,
+      "repeat": 16,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 374695100,
+      "iterations": 20000,
+      "ns_per_operation": 18734.755,
+      "order_index": 0,
+      "repeat": 17,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2000244100,
+      "iterations": 20000,
+      "ns_per_operation": 100012.205,
+      "order_index": 1,
+      "repeat": 17,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1618120300,
+      "iterations": 20000,
+      "ns_per_operation": 80906.015,
+      "order_index": 2,
+      "repeat": 17,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 498078300,
+      "iterations": 20000,
+      "ns_per_operation": 24903.915,
+      "order_index": 3,
+      "repeat": 17,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 496368900,
+      "iterations": 20000,
+      "ns_per_operation": 24818.445,
+      "order_index": 0,
+      "repeat": 18,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 385506200,
+      "iterations": 20000,
+      "ns_per_operation": 19275.31,
+      "order_index": 1,
+      "repeat": 18,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2014043200,
+      "iterations": 20000,
+      "ns_per_operation": 100702.16,
+      "order_index": 2,
+      "repeat": 18,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1602094900,
+      "iterations": 20000,
+      "ns_per_operation": 80104.745,
+      "order_index": 3,
+      "repeat": 18,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 2014493700,
+      "iterations": 20000,
+      "ns_per_operation": 100724.685,
+      "order_index": 0,
+      "repeat": 19,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 502682800,
+      "iterations": 20000,
+      "ns_per_operation": 25134.14,
+      "order_index": 1,
+      "repeat": 19,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 384332200,
+      "iterations": 20000,
+      "ns_per_operation": 19216.61,
+      "order_index": 2,
+      "repeat": 19,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1601294000,
+      "iterations": 20000,
+      "ns_per_operation": 80064.7,
+      "order_index": 3,
+      "repeat": 19,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 1615232600,
+      "iterations": 20000,
+      "ns_per_operation": 80761.63,
+      "order_index": 0,
+      "repeat": 20,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 2038166800,
+      "iterations": 20000,
+      "ns_per_operation": 101908.34,
+      "order_index": 1,
+      "repeat": 20,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 397365700,
+      "iterations": 20000,
+      "ns_per_operation": 19868.285,
+      "order_index": 2,
+      "repeat": 20,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 511396800,
+      "iterations": 20000,
+      "ns_per_operation": 25569.84,
+      "order_index": 3,
+      "repeat": 20,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 519322700,
+      "iterations": 20000,
+      "ns_per_operation": 25966.135,
+      "order_index": 0,
+      "repeat": 21,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 2090426700,
+      "iterations": 20000,
+      "ns_per_operation": 104521.335,
+      "order_index": 1,
+      "repeat": 21,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 385710200,
+      "iterations": 20000,
+      "ns_per_operation": 19285.51,
+      "order_index": 2,
+      "repeat": 21,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1638283800,
+      "iterations": 20000,
+      "ns_per_operation": 81914.19,
+      "order_index": 3,
+      "repeat": 21,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 2033087900,
+      "iterations": 20000,
+      "ns_per_operation": 101654.395,
+      "order_index": 0,
+      "repeat": 22,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1624546100,
+      "iterations": 20000,
+      "ns_per_operation": 81227.305,
+      "order_index": 1,
+      "repeat": 22,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 385326900,
+      "iterations": 20000,
+      "ns_per_operation": 19266.345,
+      "order_index": 2,
+      "repeat": 22,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 505416600,
+      "iterations": 20000,
+      "ns_per_operation": 25270.83,
+      "order_index": 3,
+      "repeat": 22,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 1742577800,
+      "iterations": 20000,
+      "ns_per_operation": 87128.89,
+      "order_index": 0,
+      "repeat": 23,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 397847200,
+      "iterations": 20000,
+      "ns_per_operation": 19892.36,
+      "order_index": 1,
+      "repeat": 23,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 514043400,
+      "iterations": 20000,
+      "ns_per_operation": 25702.17,
+      "order_index": 2,
+      "repeat": 23,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 2089926600,
+      "iterations": 20000,
+      "ns_per_operation": 104496.33,
+      "order_index": 3,
+      "repeat": 23,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1611894100,
+      "iterations": 20000,
+      "ns_per_operation": 80594.705,
+      "order_index": 0,
+      "repeat": 24,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 380674800,
+      "iterations": 20000,
+      "ns_per_operation": 19033.74,
+      "order_index": 1,
+      "repeat": 24,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2030310900,
+      "iterations": 20000,
+      "ns_per_operation": 101515.545,
+      "order_index": 2,
+      "repeat": 24,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 503880700,
+      "iterations": 20000,
+      "ns_per_operation": 25194.035,
+      "order_index": 3,
+      "repeat": 24,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 496708900,
+      "iterations": 20000,
+      "ns_per_operation": 24835.445,
+      "order_index": 0,
+      "repeat": 25,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 2004530000,
+      "iterations": 20000,
+      "ns_per_operation": 100226.5,
+      "order_index": 1,
+      "repeat": 25,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1605555900,
+      "iterations": 20000,
+      "ns_per_operation": 80277.795,
+      "order_index": 2,
+      "repeat": 25,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 387418300,
+      "iterations": 20000,
+      "ns_per_operation": 19370.915,
+      "order_index": 3,
+      "repeat": 25,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2089514600,
+      "iterations": 20000,
+      "ns_per_operation": 104475.73,
+      "order_index": 0,
+      "repeat": 26,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1658365900,
+      "iterations": 20000,
+      "ns_per_operation": 82918.295,
+      "order_index": 1,
+      "repeat": 26,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 379528700,
+      "iterations": 20000,
+      "ns_per_operation": 18976.435,
+      "order_index": 2,
+      "repeat": 26,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 508583600,
+      "iterations": 20000,
+      "ns_per_operation": 25429.18,
+      "order_index": 3,
+      "repeat": 26,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 1986188800,
+      "iterations": 20000,
+      "ns_per_operation": 99309.44,
+      "order_index": 0,
+      "repeat": 27,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 1657715800,
+      "iterations": 20000,
+      "ns_per_operation": 82885.79,
+      "order_index": 1,
+      "repeat": 27,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 499181400,
+      "iterations": 20000,
+      "ns_per_operation": 24959.07,
+      "order_index": 2,
+      "repeat": 27,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 383989600,
+      "iterations": 20000,
+      "ns_per_operation": 19199.48,
+      "order_index": 3,
+      "repeat": 27,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2034361600,
+      "iterations": 20000,
+      "ns_per_operation": 101718.08,
+      "order_index": 0,
+      "repeat": 28,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 502957500,
+      "iterations": 20000,
+      "ns_per_operation": 25147.875,
+      "order_index": 1,
+      "repeat": 28,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 1641668500,
+      "iterations": 20000,
+      "ns_per_operation": 82083.425,
+      "order_index": 2,
+      "repeat": 28,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 395170400,
+      "iterations": 20000,
+      "ns_per_operation": 19758.52,
+      "order_index": 3,
+      "repeat": 28,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2057620200,
+      "iterations": 20000,
+      "ns_per_operation": 102881.01,
+      "order_index": 0,
+      "repeat": 29,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 381567300,
+      "iterations": 20000,
+      "ns_per_operation": 19078.365,
+      "order_index": 1,
+      "repeat": 29,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 1602539000,
+      "iterations": 20000,
+      "ns_per_operation": 80126.95,
+      "order_index": 2,
+      "repeat": 29,
+      "variant": "full_certificate_validation"
+    },
+    {
+      "elapsed_ns": 496470600,
+      "iterations": 20000,
+      "ns_per_operation": 24823.53,
+      "order_index": 3,
+      "repeat": 29,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 381222300,
+      "iterations": 20000,
+      "ns_per_operation": 19061.115,
+      "order_index": 0,
+      "repeat": 30,
+      "variant": "raw_state_materialization_no_validation"
+    },
+    {
+      "elapsed_ns": 2017606900,
+      "iterations": 20000,
+      "ns_per_operation": 100880.345,
+      "order_index": 1,
+      "repeat": 30,
+      "variant": "commit_canonical_segment"
+    },
+    {
+      "elapsed_ns": 496041000,
+      "iterations": 20000,
+      "ns_per_operation": 24802.05,
+      "order_index": 2,
+      "repeat": 30,
+      "variant": "owner_version_frontier_job_validation"
+    },
+    {
+      "elapsed_ns": 1602048200,
+      "iterations": 20000,
+      "ns_per_operation": 80102.41,
+      "order_index": 3,
+      "repeat": 30,
+      "variant": "full_certificate_validation"
+    }
+  ],
+  "schema_version": 1,
+  "summary": {
+    "commit_canonical_segment": {
+      "max_ns_per_operation": 104521.335,
+      "mean_ns_per_operation": 101509.27596774194,
+      "median_delta_ns_vs_raw": 81959.56,
+      "median_ns_per_operation": 101107.395,
+      "median_ratio_vs_raw": 5.319273303984434,
+      "min_ns_per_operation": 99309.44,
+      "p95_delta_ns_vs_raw": 84919.8975,
+      "p95_ns_per_operation": 104486.03,
+      "p99_ns_per_operation": 104513.83350000001,
+      "ratio_of_medians_vs_raw": 5.299831083516032,
+      "repeat_count": 31.0,
+      "stdev_ns_per_operation": 1348.0888646725164
+    },
+    "full_certificate_validation": {
+      "max_ns_per_operation": 87128.89,
+      "mean_ns_per_operation": 81001.32870967741,
+      "median_delta_ns_vs_raw": 61576.91499999999,
+      "median_ns_per_operation": 80604.06,
+      "median_ratio_vs_raw": 4.224897147709362,
+      "min_ns_per_operation": 79706.855,
+      "p95_delta_ns_vs_raw": 63814.085,
+      "p95_ns_per_operation": 82902.0425,
+      "p99_ns_per_operation": 85865.71149999999,
+      "ratio_of_medians_vs_raw": 4.225090584576837,
+      "repeat_count": 31.0,
+      "stdev_ns_per_operation": 1399.0275433814538
+    },
+    "owner_version_frontier_job_validation": {
+      "max_ns_per_operation": 25966.135,
+      "mean_ns_per_operation": 24915.75016129032,
+      "median_delta_ns_vs_raw": 5745.164999999997,
+      "median_ns_per_operation": 24835.445,
+      "median_ratio_vs_raw": 1.3003284659800833,
+      "min_ns_per_operation": 24095.51,
+      "p95_delta_ns_vs_raw": 6417.832499999999,
+      "p95_ns_per_operation": 25636.004999999997,
+      "p99_ns_per_operation": 25886.945499999998,
+      "ratio_of_medians_vs_raw": 1.3018203404800688,
+      "repeat_count": 31.0,
+      "stdev_ns_per_operation": 422.258788306973
+    },
+    "raw_state_materialization_no_validation": {
+      "max_ns_per_operation": 19892.36,
+      "mean_ns_per_operation": 19135.39629032258,
+      "median_delta_ns_vs_raw": 0.0,
+      "median_ns_per_operation": 19077.475,
+      "median_ratio_vs_raw": 1.0,
+      "min_ns_per_operation": 18546.81,
+      "p95_delta_ns_vs_raw": 0.0,
+      "p95_ns_per_operation": 19813.4025,
+      "p99_ns_per_operation": 19885.1375,
+      "ratio_of_medians_vs_raw": 1.0,
+      "repeat_count": 31.0,
+      "stdev_ns_per_operation": 296.8257829293354
+    }
+  },
+  "variant_definitions": {
+    "commit_canonical_segment": "production commit_canonical_segment, including job and dual-axis certificate validation plus immutable-state installation",
+    "full_certificate_validation": "cumulative production validate_segment_job followed by validate_dual_axis_certificate",
+    "owner_version_frontier_job_validation": "production validate_segment_job: session/owner, epoch, policy, contract/runtime bindings, checkpoint/frontier, audio/prompt digests, and duplicate-segment checks",
+    "raw_state_materialization_no_validation": "same dataclass replace, tuple conversion, ledger append and descendant invalidation as the production install, with no checks"
+  }
+}

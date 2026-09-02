@@ -1,0 +1,44 @@
+%% TC adaptation: compact interpretation and explicit scope boundaries.
+
+\paragraph{Authority semantics and evidence boundaries}
+FP32 batching is the canonical authority for the declared Coarse/Hybrid
+contract, not a bitwise repair of the FP16 proposer. DGFT requires an authority
+that emits a contract-bound projection and certificate; it does not require a
+particular precision. A deterministic low-precision kernel portfolio or
+canonical replay could replace FP32 only after a new contract epoch passes its
+own validation. The 10.7--11.1\,s Qwen preflight is therefore reported once and
+excluded from service timing. Likewise, the SG adapter's 0.480\% anytime-valid
+UCB over approximately 30{,}000 randomized audits does not transfer to
+Coarse/Hybrid, and Qwen edit distance to canonical
+replay is not pooled with Whisper WER change from unprotected feedback. Risk
+evidence may schedule verification, but only authority can certify a write.
+
+\paragraph{Why the frontier is model dependent}
+The matched results support the complete cost decomposition rather than a
+granularity-only explanation. SG repeatedly invokes singleton authority and
+accumulates a synchronized terminal burst; Coarse amortizes authority work in a
+batch; Hybrid pays selective replay for a more conservative quality point.
+This mechanism explains the $1.39\times/1.28\times$ Coarse gains and the
+cross-model energy reversal. SG therefore remains the exact
+same-granularity point, not a dominated baseline. Unlike token-level verified
+speculation~\cite{zhang2026llm42}, RevTrace authorizes a revision projection
+that can condition later rounds; unlike stateful cache reuse
+~\cite{yu2025pensieve,gao2024cachedattention}, it governs the transition that
+creates reusable state. Display and certification also have distinct clocks:
+the c64 V100 point meets the 2-s display SLO while certified-segment commit P99
+is 3.080/4.890\,s. We state both rather than transferring the display label.
+
+\paragraph{Applicability and limitations}
+DGFT targets pipelines where generated revisions are automatically fed back;
+append-only streaming designs without this edge need no such transaction
+boundary~\cite{mistral2025voxtral,mistral2026voxtralrealtime}. The current
+proof assumes a non-Byzantine authority coordinator, immutable transaction
+inputs, collision-resistant digests, atomic certificate consumption, and
+parent-version comparison. Production traces contain no stale-install attempt,
+so stale rejection is guaranteed by the protocol and exercised by fuzzing, not
+estimated from production frequency. Evaluation covers two ASR architecture
+families and single-node accelerator systems; it establishes neither arbitrary
+generative-model generality nor multi-node throughput. A distributed
+realization can partition the session-local ledger and implement certificate
+consumption as a conditional write, but consensus latency, failover, and
+cross-node commit capacity remain future work.

@@ -1,0 +1,36 @@
+%% Guarantee taxonomy used by the theory section.
+\begin{table*}[t]
+\centering
+\small
+\caption{Guarantee scope. \checkmark denotes a guarantee within the declared
+contract; ``display only'' does not authorize feedback-state installation.
+The four evidence columns are non-transferable: SG risk UCB, authority
+preflight, transaction validation, and family-specific quality answer
+different questions. Margin signals schedule verification but authorize no
+write.}
+\label{tab:guarantees}
+\setlength{\tabcolsep}{2.8pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+Regime & Display/state-write authority split & Feedback ancestry & Canonical authority &
+Stale rejection & Statistical risk bound & Preflight invariance &
+Exhaustive tx validation & Semantic reference \\
+\midrule
+Unprotected FP16 batching & $\times$ & $\times$ & $\times$ & $\times$ &
+  $\times$ & $\times$ & $\times$ & $\times$ \\
+Owner/version check only & $\times$ & $\times$ & $\times$ & \checkmark &
+  $\times$ & $\times$ & $\times$ & $\times$ \\
+LocalAgreement-style confirmation & display only & $\times$ & $\times$ &
+  $\times$ & $\times$ & $\times$ & $\times$ & $\times$ \\
+Margin/confidence gate & $\times$ & $\times$ & $\times$ & $\times$ &
+  $\times$ & $\times$ & $\times$ & $\times$ \\
+\addlinespace
+SG-DGFT ($\granratio=1$) & \checkmark & \checkmark & \checkmark &
+  \checkmark & \checkmark & $\times$ & \checkmark & \checkmark \\
+Coarse/Hybrid DGFT ($\granratio>1$) & \checkmark & \checkmark & \checkmark &
+  \checkmark & $\times$ & \checkmark & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}

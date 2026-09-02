@@ -1,0 +1,18 @@
+Revision-generative ASR turns an output difference into a speculative write to
+future model state. RevTrace addresses this failure mode with DGFT: proposal
+and display remain fast, while only a certificate bound to canonical authority,
+parent version, and input frontier can install feedback state. The protocol
+excludes uncertified ancestry and forked committed histories under its stated
+trust assumptions. Causal intervention confirms the feedback channel (8/21
+legal pairs propagate versus 0/21 without feedback), and the evaluated traces
+show no installation violation across 800 Qwen events and 1{,}048 Whisper
+commits; a 250{,}000-attempt fuzzer rejects every invalid/replayed mutation.
+Coarse authority improves matched throughput by $1.39\times/1.28\times$, while
+family-specific production contracts reach up to $6.88\times$ wall speedup.
+Independent 8$\times$V100 results identify c64 as the largest measured
+display-SLO-valid point, sustaining $157.8\times/111.7\times$ audio real-time
+throughput. These results show that state-write authorization can be both a
+formal runtime contract and a practical parallel-serving primitive. Current
+evidence is limited to two ASR families and single-node systems; evaluating a
+session-partitioned ledger under multi-node consensus and additional
+feedback-driven model classes is future work.

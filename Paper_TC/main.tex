@@ -1,0 +1,122 @@
+%% IEEE Transactions on Computers adaptation of the frozen FGCS manuscript.
+%% The rejected FGCS source under ../Paper is preserved unchanged.
+\documentclass[journal,10pt]{IEEEtran}
+
+\usepackage{cite}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,multirow,array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\usepackage{stfloats}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\state}{S}
+\newcommand{\audio}{A}
+\newcommand{\out}{Y}
+\newcommand{\proj}{\Phi}
+\newcommand{\ediv}{e}
+\newcommand{\cont}{C}
+\newcommand{\dist}{D}
+\newcommand{\tx}{\tau}
+\newcommand{\commit}{\Gamma}
+\newcommand{\cert}{\mathrm{cert}}
+\newcommand{\granratio}{\rho}
+\newcommand{\tbl}[1]{\input{tables/#1}}
+\newcommand{\artifactavailability}{A review artifact containing source code,
+frozen audited results, and analysis scripts accompanies this submission; a
+public archive will be released upon acceptance.}
+
+\begin{document}
+
+\title{RevTrace: A Transactional Runtime for Feedback-State Integrity in
+Revision-Generative ASR Serving}
+
+\author{Bin Zhou, Jiyuan Miao, and Xi Cao
+\thanks{The authors are with Beijing University of Chemical Technology,
+Beijing, China (e-mail: 2025200800@buct.edu.cn;
+2024200822@buct.edu.cn; caoxi@buct.edu.cn).}
+\thanks{Corresponding author: Xi Cao.}}
+
+\markboth{IEEE Transactions on Computers, Submitted 2026}{}
+\maketitle
+\bstctlcite{IEEEexample:BSTcontrol}
+
+\begin{abstract}
+Revision-generative automatic speech recognition (ASR) pipelines feed model
+outputs back into later execution
+state. Under batched accelerator execution, a local numerical difference can
+therefore become persistent state contamination. We formalize this failure mode
+and introduce Dual-Granularity Feedback Transactions (DGFT), a runtime protocol
+that separates low-latency proposal and display from canonical state-write
+authority. Each accepted projection is bound to a certificate, parent version,
+input frontier, and runtime configuration; same-granularity certification is
+the $\granratio=1$ case. RevTrace implements DGFT as a two-plane parallel
+runtime with independently replicated proposers and authorities. Across
+Qwen3-ASR and Whisper on two RTX~3090 GPUs, coarse authority improves
+matched-workload throughput by $1.39\times$/$1.28\times$ and reaches up to
+$6.88\times$ wall-clock speedup over per-path all-singleton references, with
+no observed installation violation in
+800 Qwen events and 1{,}048 Whisper commits. A 250{,}000-attempt protocol
+fuzzer rejects every mutation and replay. On eight V100 GPUs, balanced
+replication sustains $157.8\times$/$111.7\times$ audio real-time throughput at
+the largest measured concurrency satisfying the 2-s display service-level
+objective (SLO). These results establish
+state-write authorization as a distinct runtime contract for feedback-driven
+ASR serving.
+\end{abstract}
+
+\begin{IEEEkeywords}
+runtime systems, generative model serving, streaming ASR, state certification,
+transactional consistency
+\end{IEEEkeywords}
+
+\section{Introduction}\label{sec:intro}
+\input{sections/01_introduction}
+
+\section{Model and Problem Formulation}\label{sec:model}
+\input{sections/02_model}
+
+\section{DGFT: Theory and Mechanism}\label{sec:dgft}
+\input{sections/03_dgft}
+
+\section{The RevTrace Runtime}\label{sec:system}
+\input{sections/04_system}
+
+\section{Implementation}\label{sec:impl}
+\input{sections/05_implementation}
+
+\section{Evaluation}\label{sec:eval}
+\input{sections/06_evaluation}
+
+\section{Discussion and Boundaries}\label{sec:discussion}
+\input{sections/07_discussion}
+
+\section{Related Work}\label{sec:related}
+\input{sections/08_related}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/09_conclusion}
+
+\section*{Acknowledgment}
+The computations in this work were supported by the High Performance
+Computing Platform of BUCT (Beijing University of Chemical Technology).
+OpenAI ChatGPT was used for language polishing and writing assistance; the
+authors reviewed and edited all resulting text and take responsibility for the
+article.
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}
