@@ -1,0 +1,7 @@
+# 文本绑定边界：修复前
+
+旧 certificate绑定选择token Z及状态投影P，不绑定或在owner重建人类可读text。Worker从rollback-prefix+decode(Z)经parse_asr_output得到累计修订转录；owner在WAL event中直接接受result.text。对文件frame做checksum不能认证此前选择了正确文本。
+
+`R0_TEXT_TAMPER_BEFORE.json`：Fake Executor仅替换authority的text，保持Z/P不变，4/4 canonical publications带篡改文本。这是人工CPU接口注入，不是自然GPU故障率。正常实际GPU的3393文本可被独立离线重建，与在线fail-closed是两件事。
+
+D1将采用owner独立Tokenizer/parse的确定性重建，校验完整Z的终止/预算、P与text逐字节一致，在WAL前失败。Tokenizer/adapter/config属于可信计算基；不证明GPU选择本身无错误。恢复须从同契约的WAL选择证据重建而非只相信存下的text。完整Render成本和consumer队列成本必须实测。

@@ -1,0 +1,100 @@
+{
+  "status": "PASS_INDEPENDENT_F2_REALIZATION_AND_CRASH_RECOVERY",
+  "F2": {
+    "sources": 16,
+    "consumed_faults": 16,
+    "target_output_changed": 14,
+    "future_changed_among_changed_targets": 9,
+    "target_changed_denominator": 14,
+    "same_input_repeats_all_equal": true,
+    "native_errors": 169,
+    "fault_errors": 260,
+    "reference_words": 770,
+    "scope": "controlled consumed-history intervention, not natural fault incidence"
+  },
+  "realization": [
+    {
+      "source_id": "chinese-05",
+      "language": "Chinese",
+      "waveform_equal": true,
+      "processed_ids_equal": false,
+      "singleton_length": 523,
+      "batch_length": 524,
+      "recorded_layout_length": 524,
+      "recorded_layout_rows": 3,
+      "Z_equal_across_layouts": true,
+      "P_equal_across_layouts": true,
+      "within_layout_repeats_equal": true
+    },
+    {
+      "source_id": "chinese-00",
+      "language": "Chinese",
+      "waveform_equal": true,
+      "processed_ids_equal": true,
+      "singleton_length": 516,
+      "batch_length": 516,
+      "recorded_layout_length": 516,
+      "recorded_layout_rows": 13,
+      "Z_equal_across_layouts": true,
+      "P_equal_across_layouts": true,
+      "within_layout_repeats_equal": true
+    },
+    {
+      "source_id": "english-00",
+      "language": "English",
+      "waveform_equal": true,
+      "processed_ids_equal": true,
+      "singleton_length": 538,
+      "batch_length": 538,
+      "recorded_layout_length": 538,
+      "recorded_layout_rows": 13,
+      "Z_equal_across_layouts": true,
+      "P_equal_across_layouts": true,
+      "within_layout_repeats_equal": true
+    },
+    {
+      "source_id": "english-01",
+      "language": "English",
+      "waveform_equal": true,
+      "processed_ids_equal": true,
+      "singleton_length": 681,
+      "batch_length": 681,
+      "recorded_layout_length": 681,
+      "recorded_layout_rows": 2,
+      "Z_equal_across_layouts": true,
+      "P_equal_across_layouts": true,
+      "within_layout_repeats_equal": true
+    }
+  ],
+  "recovery": [
+    {
+      "repeat": 0,
+      "unique_admissions": 8,
+      "recovered_snapshots_observed": 2,
+      "ledger_recovery_seconds": 0.02366015315055847,
+      "model_initialization_seconds": 16.571481878869236,
+      "restart_to_first_certified_consumer_seconds": 31.213484472595155,
+      "restore_process_full_wall_seconds": 53.13281830586493
+    },
+    {
+      "repeat": 1,
+      "unique_admissions": 8,
+      "recovered_snapshots_observed": 2,
+      "ledger_recovery_seconds": 0.02274089865386486,
+      "model_initialization_seconds": 16.93705939874053,
+      "restart_to_first_certified_consumer_seconds": 31.160488336347044,
+      "restore_process_full_wall_seconds": 52.95369226299226
+    },
+    {
+      "repeat": 2,
+      "unique_admissions": 8,
+      "recovered_snapshots_observed": 2,
+      "ledger_recovery_seconds": 0.06414883583784103,
+      "model_initialization_seconds": 17.184465483762324,
+      "restart_to_first_certified_consumer_seconds": 31.6834650458768,
+      "restore_process_full_wall_seconds": 53.766383381560445
+    }
+  ],
+  "V0_V1_NO_GO_preserved": true,
+  "no_V2_or_new_KV_fallback": true
+}

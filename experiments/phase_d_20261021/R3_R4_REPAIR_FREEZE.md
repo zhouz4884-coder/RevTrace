@@ -1,0 +1,9 @@
+# 强基线与严格输入边界修复（GPU执行前冻结）
+
+CPU反例确认LA v1在等待第二次更新时清空primary显示，即使canonical全文已经显示。这不是正确的稳定化基线，不得拿它的擦除/迟延支持优越性。保留其所有旧GPU数据，只作实现缺口，最终比较采用新完整词级LocalAgreement2/3：未达到agreement不清空/回撤已有确认显示，只有新的canonical纠正可覆盖。它仍是同protected engine上的署名显示策略适配，不是Whisper-Streaming原生完整系统复现。无词音对齐，不能凭部分稳定词把整个音频前沿标为覆盖。
+
+新carrier同时将worker warmup改成合成零音频，明确不消费任务录音。旧carrier的首录音warmup输出未进任何服务状态，但与最严格测试音频隔离不同。旧R4留作pre-fix比较/负载选择；最终容量强比较在同一新carrier上完整重测54cells，保留旧scout已选sync c8、uniform-stagger c4和2s/8s阈值，不为结果改负载。
+
+新54组包括Fine/Coarse×Barrier/Decoupled四组、two-lane、具备同样retention和D保障的Standard Safe Async、同样可用retention的LocalAgreement2/3、naive缺失协调消融。加上同carrier的proposed Retention+TwoLane迁移6组，提供公平强对照。CPU390tests及额外独立adversarial6tests通过；源码/输入/版本独立归档。
+
+新增54重测回答的是“修复正确的ASR稳定化和严格输入隔离后，容量/稳定性结论是否仍成立”，不是为了刷更高吞吐。若不成立如实降级，不追加阈值搜索。总continuity补充90cells=24机制因子+6强异步开发池正控+6独立池迁移+54完整同carrier容量。
