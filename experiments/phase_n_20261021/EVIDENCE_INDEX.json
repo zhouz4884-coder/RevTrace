@@ -1,0 +1,137 @@
+{
+  "phase": "REVTRACE_DSN_PHASE_N",
+  "execution_start_date": "2026-10-21",
+  "protocol_sha256": "2299551f6750d37d9f56dd5386d946578a1ba8200da28816cb945c9c755b4eae",
+  "source_identities": {
+    "T1": {
+      "code_commit": "e73115c66d42a15fc3a6907e7161e37ea5e07662",
+      "archive_sha256": "237a03b4af6682796b6096c47bd33a975de56fa847faa051949627a8eb287169",
+      "manifest_sha256": "b4c8deecfa8af58c9da43b74226127528d635069e436996c95b3d40cd9eec359",
+      "files": 104
+    },
+    "V1": {
+      "code_commit": "6f25cf818341f6e1c27991ee4208b4d40f99a51e",
+      "archive_sha256": "181adc2321120fe5168a84aa3a6bc9ea57589628468a777e5c309a84067857f4",
+      "source_manifest_sha256": "fbb2e2baf1ee17f9df2fa964d75cd8b7e8664255917512534e863c7179c51f30",
+      "files": 105
+    },
+    "C3_PREP": {
+      "code_commit": "e98be1997c480797acec240a4d81de4bf88ac75d",
+      "archive_sha256": "1f25ebb5a69b5a9013c3f26ae8740685de658a28b8b2dd2f9db18aae08815f98",
+      "source_manifest_sha256": "1ff42a3086047e7059a9941b4bc666488da37a488b215a1bc99945c640321dd8",
+      "files": 107
+    },
+    "T3": {
+      "code_commit": "8916c3ccfdc2c1344316e51c145339f8120e2685",
+      "archive_sha256": "5360da596c52dd574d0c8fa5b09a97a10d5bcf37172d67ef7c3a8a01001dee2d",
+      "source_manifest_sha256": "98739771e5c5b6cfb7bf7c9e0297421693c753110abc7b50f7dc054da20d0c63",
+      "files": 106
+    },
+    "CALIBRATION": {
+      "code_commit": "47f8786f64ed42c5df884d649b4d519a6ace75ea",
+      "archive_sha256": "753f678280f05d976c01b297643a9716b6e4604f41ea7a57c71c4b2f74b176b0",
+      "source_manifest_sha256": "4a97a3e2d04f80ce0929a1bccb64854e2c588c8352ac0ba9329895b2829c4aa7",
+      "files": 106
+    }
+  },
+  "checks": {
+    "full_calibration_final_audit": 0,
+    "t1_v2_full_history": 0,
+    "t1_v3_full_history": 0,
+    "t1_v4_full_history": 0,
+    "t1_v4_text_projection": 0,
+    "t1_v4_visibility": 0,
+    "root_readiness_v1_full_history": 0,
+    "root_readiness_v1_text_projection": 0,
+    "root_readiness_v1_visibility": 0,
+    "t3_formal_full_history": 0,
+    "t3_formal_text_projection": 0,
+    "t3_formal_visibility": 0,
+    "full_hook_calibration_v1_full_history": 0,
+    "full_hook_calibration_v1_text_projection": 0,
+    "full_hook_calibration_v1_visibility": 0,
+    "t3_final_aggregation": 0
+  },
+  "raw_index": {
+    "path": "RAW_EVIDENCE_INDEX.json",
+    "files": 1504,
+    "sha256": "9e1a33ab0390b421da945f032e5a3d87381c83bbe73d8ef8789a308e12df26ef"
+  },
+  "raw_large_evidence_location": "designated 8TB disk/results/revtrace/phaseN_20261021; model/audio not in GitHub",
+  "bounded_archive": {
+    "file": "PHASE_N_BOUNDED_AUDIT_EVIDENCE.tar.gz",
+    "sha256": "dbd966428fa08bee2a8ede61eba280a3c258ac040f287667c45c87f1138c0471",
+    "files": 649
+  },
+  "evidence_tiers": {
+    "T1": "controlled real GPU no injected delivery hold; not production prevalence",
+    "V0": "read-only actual-input/receipt audit; C3 prep is separate live GPU preparation-only probe",
+    "V1": "real GPU fixed-state operators and independent FP32 references; NOT deployed serving",
+    "T3": "real GPU serving under artificial post-completion delivery holds; scouts separate",
+    "CPU_COUNTERFACTUALS": "Fake Clock/Executor only; no GPU efficacy claims",
+    "PROCESSOR_REPLAY": "CPU reconstruction of recorded real batch inputs; no model generation"
+  },
+  "v2_decision": "NO_GO_ONLINE_SELECTOR_AS_TESTED",
+  "new_kv_fallback": false,
+  "paper_modified": false,
+  "sources": "all full source archives preserve code commits and per-file identities; runtime/ is exact calibration SDK",
+  "documents": [
+    "SOURCE_AND_PROTOCOL_AUDIT.md",
+    "PROPERTIES_ABC.md",
+    "T1_FACTORIAL_AND_BLOCKING.md",
+    "V0_ALIGNMENT.md",
+    "V1_VERIFICATION_AND_COST.md",
+    "T3_HOLD_SENSITIVITY.md",
+    "CLAIM_EVIDENCE_MATRIX.md",
+    "FINAL_DECISION.md",
+    "README.md"
+  ],
+  "tables": [
+    "C3_ROOT_LIVE_READINESS.csv",
+    "C3_ROOT_PREPARATION_COST.csv",
+    "FULL_HOOK_CALIBRATION_CELLS.csv",
+    "FULL_HOOK_CALIBRATION_PAIRS.csv",
+    "PROCESSOR_CPU_CONTROLS.csv",
+    "RAW_EVIDENCE_FILE_HASHES.csv",
+    "T1_BLOCKING_OCCUPANCY.csv",
+    "T1_CELLS.csv",
+    "T1_FACTORIAL_PAIRS.csv",
+    "T1_STAGE_QUANTILES.csv",
+    "T3_CELLS.csv",
+    "T3_GROUPS.csv",
+    "T3_PAIRED.csv",
+    "V0_HINDSIGHT_P_VS_Z_READY.csv",
+    "V0_NATIVE_ALIGNMENT.csv",
+    "V1_CANDIDATE_CERTIFICATION.csv",
+    "V1_CAP_CONTROLS.csv",
+    "V1_FIXED_STATE_COSTS.csv",
+    "V1_ORACLE_SELF_CONTROLS.csv",
+    "VISIBILITY_AND_RETIRED_WORK.csv"
+  ],
+  "metadata_files": [
+    {
+      "file": "INTAKE.json",
+      "sha256": "a2d22e5cdf69c8b3f568e151202731ef8aa8d1899a41ca796bfded1faac3608c"
+    },
+    {
+      "file": "SOURCE_DIFFS.json",
+      "sha256": "c05286361accf2552782fa880a334619135bfca4c21520bbc8418d5bb8d9604d"
+    },
+    {
+      "file": "PAPER_UNCHANGED.json",
+      "sha256": "b15e0d6291193800edb71bb9fdcff7736e97a538085642dc8dfd3933ab0c43d8"
+    },
+    {
+      "file": "CPU_COUNTERFACTUAL_PROVENANCE.json",
+      "sha256": "0cd217bbde0a3693f228cfb41eb98ff28de32bf8e3407d27979848ad007c9162"
+    },
+    {
+      "file": "CPU_BLOCKING_COUNTERFACTUALS.json",
+      "sha256": "4b6cf3274f48fe789cf68065101bde4e4cb4f182041dca4ad6cb594a6ed72943"
+    },
+    {
+      "file": "V2_STAGE_DECISION.json",
+      "sha256": "477f26de5620d2f1c4e1292631c34f4ac5519a6a9aac6d2c2b1a51fb12b7fe5d"
+    }
+  ]
+}
