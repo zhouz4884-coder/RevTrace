@@ -37,7 +37,10 @@ coordination algorithm.
   show mixed/negative effects. DGFT fsync10→42 is a real cost. These pilots
   are not promoted to formal repeats or evidence of independent novelty.
 * One real GPU owner SIGKILL after early WAL install and before physical drain:
-  the acknowledged admission survives,59 unique final admissions,0 duplicates.
+  the durably installed transition survives,59 unique final admissions,0 duplicates.
+  The kill is before Canonical publication/client acknowledgement;the historical
+  raw summary's `acknowledged` field names an internal synchronization marker.
+  See `protocol/RECOVERY_EVENT_SCOPE_CORRECTION.md` and its raw-event audit.
   Cold restart→first certified consumer36.216s;kill→consumer39.151s. Not host
   power-loss,millisecond service recovery or warm-worker adoption evidence.
 * R3:8 independent30–33s native sources,two adapters,two full repeats,652 actual
