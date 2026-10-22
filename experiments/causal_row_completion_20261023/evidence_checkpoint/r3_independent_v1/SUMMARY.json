@@ -1,0 +1,54 @@
+{
+  "status": "PASS_INDEPENDENT_R3_CALL_TRAJECTORY_ENDPOINT_AUDIT",
+  "calls": 652,
+  "cases": 32,
+  "unique_subjects": 8,
+  "groups": [
+    {
+      "family": "Qwen",
+      "independent_sources": 8,
+      "repeat_count_not_extra_subjects": 2,
+      "actual_context_changed": 8,
+      "root_P_changed": 8,
+      "P_first_equal_observed": 6,
+      "Z_first_equal_observed": 8,
+      "Y_first_equal_observed": 6,
+      "quality_worse_equal_better": [
+        2,
+        6,
+        0
+      ],
+      "word_errors_clean": 5,
+      "word_errors_fault": 21,
+      "reference_words": 631,
+      "caps_clean": 0,
+      "caps_fault": 0
+    },
+    {
+      "family": "Whisper",
+      "independent_sources": 8,
+      "repeat_count_not_extra_subjects": 2,
+      "actual_context_changed": 8,
+      "root_P_changed": 7,
+      "P_first_equal_observed": 1,
+      "Z_first_equal_observed": 5,
+      "Y_first_equal_observed": 1,
+      "quality_worse_equal_better": [
+        7,
+        1,
+        0
+      ],
+      "word_errors_clean": 71,
+      "word_errors_fault": 218,
+      "reference_words": 631,
+      "caps_clean": 0,
+      "caps_fault": 0
+    }
+  ],
+  "all_full_repeats_equal": true,
+  "effective_input_vs_supplied_P_separated": true,
+  "intermediate_full_reference_delta_not_prefix_accuracy": true,
+  "no_permanent_recovery_or_irrecoverability_claim": true,
+  "new_model_calls": 0,
+  "script_sha256": "930934f6f07acc82c459bdfb3a73606dd3236d97f9348fc4fbf3f7eb8b2a40f5"
+}

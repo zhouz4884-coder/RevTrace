@@ -1,0 +1,24 @@
+{
+  "experiment_id": "REVTRACE-R3-NATIVE-LONG-v2",
+  "source_commit": "01c50961d5da27cce33c88e078d455abd457341c",
+  "source_selection_manifest_sha256": "039699a6cf8e3c4cb478ec9f05d5026c127de21efb9aeb9a75f514bb9e938bf5",
+  "runtime_manifest_sha256": "1721d4d39f244dc58ee0f0c7f3e49fd6eb1bbfa28ccad708b7212bb3ac83440c",
+  "protocol_sha256": "a3988a8fcacdae104ce802fa9efb68a46910d21c445150f3ee55dbf9e834231a",
+  "v1_schema_failure_and_zero_trajectory_calls_retained": true,
+  "subjects": 8,
+  "repeats": 2,
+  "families": [
+    "Qwen3-ASR-1.7B",
+    "Whisper-small.en"
+  ],
+  "dtype": "float32",
+  "physical_layout": "singleton per arm; alternating call order; fixed native audio",
+  "evidence_tier": "controlled_neural_trajectories_not_deployed_serving",
+  "fault": "one wrong-context neural call followed by declared-history field normalization, then actual consumption of resulting P",
+  "Qwen_step_s": 2,
+  "Qwen_fault_window": 6,
+  "Whisper_step_s": 10,
+  "Whisper_fault_window": 2,
+  "per_window_quality": "partial hypothesis versus full reference diagnostic; only endpoint is full-source WER/CER",
+  "source_ending_and_budget_limits_not_permanent_nonconvergence": true
+}
