@@ -1,0 +1,26 @@
+{
+  "experiment_id": "REVTRACE-ELASTIC-20261022",
+  "decision": "NO_GO_C2_ELASTIC_ALGORITHM_UPGRADE",
+  "source_commit": "998550ce8ce07dc9139a3453b0972e920d68606f",
+  "runtime_export": "RUNTIME_EXPORT_MANIFEST.json",
+  "source_histories": "sources/SOURCE_HISTORY.json",
+  "all_GPU_configs_envs_runs_raw_hashes": "BOUNDED_EVIDENCE.tar.gz -> collected/{fixed_scout,stress_scout,formal}/",
+  "formal_statistics": "FORMAL_DECISION.json",
+  "main_statistics_pre_diagnostics": "BOUNDED_EVIDENCE.tar.gz -> FORMAL_DECISION_INITIAL.json",
+  "full_raw_index": "RAW_EVIDENCE_INDEX.json",
+  "bounded_archive": {
+    "path": "BOUNDED_EVIDENCE.tar.gz",
+    "sha256": "63d2d9ef80cbaf994756eb62dae552457d7323e80659a86737d9510912fe0e7c",
+    "files_hashed_on_collection": 453
+  },
+  "large_raw_stays_on_8TB": true,
+  "audit_scope": "separate CPU read-only recomputation, not external reviewer",
+  "paper_or_credentials_or_models_or_audio_uploaded": false,
+  "source_anchors": "SOURCE_ANCHORS.json",
+  "retained_initial_CPU_postflight_failure_log": "ADMIN_LOG_SUPPLEMENT.json",
+  "no_more_GPU_work": "FINAL_RESOURCE_CHECK.json",
+  "clock_definitions": {
+    "Display": "real FIFO consumer applied frontier minus audio release",
+    "Commit": "WAL-complete owner installed frontier minus audio release, not later canonical consumer receipt"
+  }
+}

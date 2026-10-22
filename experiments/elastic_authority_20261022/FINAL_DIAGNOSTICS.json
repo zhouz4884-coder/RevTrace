@@ -1,0 +1,379 @@
+{
+  "two_plane_costs": [
+    {
+      "method": "fixed1",
+      "role": "proposal",
+      "n_runs": 4,
+      "distinct_model_calls": 41.0,
+      "dedup_worker_seconds": 43.041471427772194,
+      "dedup_model_seconds": 38.4684900813736,
+      "high_window_model_interval_fraction": 0.8146393240385805
+    },
+    {
+      "method": "fixed1",
+      "role": "authority",
+      "n_runs": 4,
+      "distinct_model_calls": 35.25,
+      "dedup_worker_seconds": 51.118403997737914,
+      "dedup_model_seconds": 46.095138708129525,
+      "high_window_model_interval_fraction": 0.8203147788153728
+    },
+    {
+      "method": "fixed2",
+      "role": "proposal",
+      "n_runs": 4,
+      "distinct_model_calls": 38.75,
+      "dedup_worker_seconds": 40.00942724221386,
+      "dedup_model_seconds": 35.745713085867465,
+      "high_window_model_interval_fraction": 0.7895556946023135
+    },
+    {
+      "method": "fixed2",
+      "role": "authority",
+      "n_runs": 4,
+      "distinct_model_calls": 23.0,
+      "dedup_worker_seconds": 35.69659699918702,
+      "dedup_model_seconds": 32.971339555224404,
+      "high_window_model_interval_fraction": 0.792835561594984
+    },
+    {
+      "method": "fixed3",
+      "role": "proposal",
+      "n_runs": 4,
+      "distinct_model_calls": 37.25,
+      "dedup_worker_seconds": 37.24625914939679,
+      "dedup_model_seconds": 33.32360938680358,
+      "high_window_model_interval_fraction": 0.7163820155910798
+    },
+    {
+      "method": "fixed3",
+      "role": "authority",
+      "n_runs": 4,
+      "distinct_model_calls": 17.25,
+      "dedup_worker_seconds": 29.27891365881078,
+      "dedup_model_seconds": 27.272342428797856,
+      "high_window_model_interval_fraction": 0.6761603416089201
+    },
+    {
+      "method": "backlog",
+      "role": "proposal",
+      "n_runs": 4,
+      "distinct_model_calls": 38.0,
+      "dedup_worker_seconds": 38.54625803674571,
+      "dedup_model_seconds": 34.6338515880052,
+      "high_window_model_interval_fraction": 0.7500172337240656
+    },
+    {
+      "method": "backlog",
+      "role": "authority",
+      "n_runs": 4,
+      "distinct_model_calls": 28.0,
+      "dedup_worker_seconds": 34.42454540799372,
+      "dedup_model_seconds": 31.646313034463674,
+      "high_window_model_interval_fraction": 0.6583043752325466
+    },
+    {
+      "method": "deadline",
+      "role": "proposal",
+      "n_runs": 4,
+      "distinct_model_calls": 36.75,
+      "dedup_worker_seconds": 37.88637446379289,
+      "dedup_model_seconds": 33.68124014604837,
+      "high_window_model_interval_fraction": 0.7212932930124225
+    },
+    {
+      "method": "deadline",
+      "role": "authority",
+      "n_runs": 4,
+      "distinct_model_calls": 18.0,
+      "dedup_worker_seconds": 30.167705190135166,
+      "dedup_model_seconds": 28.035149747738615,
+      "high_window_model_interval_fraction": 0.6999758165038656
+    },
+    {
+      "method": "joint",
+      "role": "proposal",
+      "n_runs": 4,
+      "distinct_model_calls": 38.25,
+      "dedup_worker_seconds": 40.46098308311775,
+      "dedup_model_seconds": 36.00238932413049,
+      "high_window_model_interval_fraction": 0.795030795961793
+    },
+    {
+      "method": "joint",
+      "role": "authority",
+      "n_runs": 4,
+      "distinct_model_calls": 30.25,
+      "dedup_worker_seconds": 38.861126233357936,
+      "dedup_model_seconds": 35.86206646962091,
+      "high_window_model_interval_fraction": 0.7857977899766411
+    }
+  ],
+  "forecast_errors": [
+    {
+      "method": "backlog",
+      "transitions": 572,
+      "install_minus_forecast_mean_s": 0.13987195396379054,
+      "install_minus_forecast_median_s": 0.041107592172920704,
+      "install_minus_forecast_p95_s": 0.8241184451617298,
+      "positive_error_fraction": 0.5402097902097902,
+      "absolute_error_p95_s": 1.0556396895553914
+    },
+    {
+      "method": "deadline",
+      "transitions": 536,
+      "install_minus_forecast_mean_s": 0.2831365101077636,
+      "install_minus_forecast_median_s": -0.01038519898429513,
+      "install_minus_forecast_p95_s": 2.9055867698043585,
+      "positive_error_fraction": 0.47761194029850745,
+      "absolute_error_p95_s": 2.9055867698043585
+    },
+    {
+      "method": "joint",
+      "transitions": 692,
+      "install_minus_forecast_mean_s": 0.6455025766758151,
+      "install_minus_forecast_median_s": 0.04734648996964097,
+      "install_minus_forecast_p95_s": 4.317924298066646,
+      "positive_error_fraction": 0.5332369942196532,
+      "absolute_error_p95_s": 4.317924298066646
+    }
+  ],
+  "choices_and_overhead": [
+    {
+      "method": "fixed1",
+      "total_planned_intervals_4_runs": 1280,
+      "selected_rho_counts": {
+        "1": 1280
+      },
+      "selector_host_wall_mean_s": 0.0,
+      "canonical_commits_mean": 320,
+      "consumer_display_P99_all_runs_fail_2s": true,
+      "commit_P99_all_runs_fail_8s": true
+    },
+    {
+      "method": "fixed2",
+      "total_planned_intervals_4_runs": 680,
+      "selected_rho_counts": {
+        "2": 680
+      },
+      "selector_host_wall_mean_s": 0.0,
+      "canonical_commits_mean": 170,
+      "consumer_display_P99_all_runs_fail_2s": true,
+      "commit_P99_all_runs_fail_8s": true
+    },
+    {
+      "method": "fixed3",
+      "total_planned_intervals_4_runs": 464,
+      "selected_rho_counts": {
+        "3": 464
+      },
+      "selector_host_wall_mean_s": 0.0,
+      "canonical_commits_mean": 116,
+      "consumer_display_P99_all_runs_fail_2s": true,
+      "commit_P99_all_runs_fail_8s": true
+    },
+    {
+      "method": "backlog",
+      "total_planned_intervals_4_runs": 572,
+      "selected_rho_counts": {
+        "1": 200,
+        "3": 372
+      },
+      "selector_host_wall_mean_s": 0.0978581237141043,
+      "canonical_commits_mean": 143,
+      "consumer_display_P99_all_runs_fail_2s": true,
+      "commit_P99_all_runs_fail_8s": true
+    },
+    {
+      "method": "deadline",
+      "total_planned_intervals_4_runs": 536,
+      "selected_rho_counts": {
+        "3": 360,
+        "2": 160,
+        "1": 16
+      },
+      "selector_host_wall_mean_s": 0.1215946723241359,
+      "canonical_commits_mean": 134,
+      "consumer_display_P99_all_runs_fail_2s": true,
+      "commit_P99_all_runs_fail_8s": true
+    },
+    {
+      "method": "joint",
+      "total_planned_intervals_4_runs": 692,
+      "selected_rho_counts": {
+        "1": 268,
+        "2": 122,
+        "3": 302
+      },
+      "selector_host_wall_mean_s": 0.149889022577554,
+      "canonical_commits_mean": 173,
+      "consumer_display_P99_all_runs_fail_2s": true,
+      "commit_P99_all_runs_fail_8s": true
+    }
+  ],
+  "phase_frontier_diagnostics": [
+    {
+      "method": "fixed1",
+      "phase_by_frontier_release": "low_initial",
+      "observed_frontiers_4_repeats": 32,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 16.0,
+      "conditional_pooled_display_p99_s": 0.9013146559614689,
+      "conditional_pooled_commit_p99_s": 0.9008362120110541,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "fixed1",
+      "phase_by_frontier_release": "high",
+      "observed_frontiers_4_repeats": 1160,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 39.0,
+      "conditional_pooled_display_p99_s": 12.784954194543893,
+      "conditional_pooled_commit_p99_s": 24.22641015117988,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "fixed1",
+      "phase_by_frontier_release": "low_final",
+      "observed_frontiers_4_repeats": 88,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 36.5049375,
+      "conditional_pooled_display_p99_s": 1.1757114313542842,
+      "conditional_pooled_commit_p99_s": 10.44839490509592,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "fixed2",
+      "phase_by_frontier_release": "low_initial",
+      "observed_frontiers_4_repeats": 32,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 16.0,
+      "conditional_pooled_display_p99_s": 1.1184263051114982,
+      "conditional_pooled_commit_p99_s": 3.2409939761832356,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "fixed2",
+      "phase_by_frontier_release": "high",
+      "observed_frontiers_4_repeats": 1160,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 73.5,
+      "conditional_pooled_display_p99_s": 10.079921780195834,
+      "conditional_pooled_commit_p99_s": 11.832882903674617,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "fixed2",
+      "phase_by_frontier_release": "low_final",
+      "observed_frontiers_4_repeats": 88,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 41.5049375,
+      "conditional_pooled_display_p99_s": 1.0591322096716609,
+      "conditional_pooled_commit_p99_s": 3.14932363724336,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "fixed3",
+      "phase_by_frontier_release": "low_initial",
+      "observed_frontiers_4_repeats": 32,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 16.0,
+      "conditional_pooled_display_p99_s": 1.0609705256298188,
+      "conditional_pooled_commit_p99_s": 6.310569349154831,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "fixed3",
+      "phase_by_frontier_release": "high",
+      "observed_frontiers_4_repeats": 1160,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 86.5,
+      "conditional_pooled_display_p99_s": 7.921174125671391,
+      "conditional_pooled_commit_p99_s": 9.931055785436183,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "fixed3",
+      "phase_by_frontier_release": "low_final",
+      "observed_frontiers_4_repeats": 88,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 41.5049375,
+      "conditional_pooled_display_p99_s": 0.8965410026628511,
+      "conditional_pooled_commit_p99_s": 5.5467523505818095,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "backlog",
+      "phase_by_frontier_release": "low_initial",
+      "observed_frontiers_4_repeats": 32,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 16.0,
+      "conditional_pooled_display_p99_s": 0.8507578053884208,
+      "conditional_pooled_commit_p99_s": 0.8768887034617364,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "backlog",
+      "phase_by_frontier_release": "high",
+      "observed_frontiers_4_repeats": 1160,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 54.0,
+      "conditional_pooled_display_p99_s": 8.871572881890462,
+      "conditional_pooled_commit_p99_s": 11.690867363475263,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "backlog",
+      "phase_by_frontier_release": "low_final",
+      "observed_frontiers_4_repeats": 88,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 41.5049375,
+      "conditional_pooled_display_p99_s": 0.8497590587846935,
+      "conditional_pooled_commit_p99_s": 0.8961358299292624,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "deadline",
+      "phase_by_frontier_release": "low_initial",
+      "observed_frontiers_4_repeats": 32,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 16.0,
+      "conditional_pooled_display_p99_s": 1.1694780029263347,
+      "conditional_pooled_commit_p99_s": 5.503165655229241,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "deadline",
+      "phase_by_frontier_release": "high",
+      "observed_frontiers_4_repeats": 1160,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 96.0,
+      "conditional_pooled_display_p99_s": 8.647466631531723,
+      "conditional_pooled_commit_p99_s": 11.325036092428505,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "deadline",
+      "phase_by_frontier_release": "low_final",
+      "observed_frontiers_4_repeats": 88,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 41.5049375,
+      "conditional_pooled_display_p99_s": 0.899495256356895,
+      "conditional_pooled_commit_p99_s": 5.554999587042257,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "joint",
+      "phase_by_frontier_release": "low_initial",
+      "observed_frontiers_4_repeats": 32,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 16.0,
+      "conditional_pooled_display_p99_s": 0.8671956263482571,
+      "conditional_pooled_commit_p99_s": 0.866607133122161,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "joint",
+      "phase_by_frontier_release": "high",
+      "observed_frontiers_4_repeats": 1160,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 80.0,
+      "conditional_pooled_display_p99_s": 10.741523517043149,
+      "conditional_pooled_commit_p99_s": 14.502714798152446,
+      "not_additional_independent_audio": true
+    },
+    {
+      "method": "joint",
+      "phase_by_frontier_release": "low_final",
+      "observed_frontiers_4_repeats": 88,
+      "mean_audio_seconds_meeting_both_deadlines_per_run": 41.5049375,
+      "conditional_pooled_display_p99_s": 0.862259432952851,
+      "conditional_pooled_commit_p99_s": 0.8967006100621074,
+      "not_additional_independent_audio": true
+    }
+  ],
+  "scope": "descriptive after formal; no policy tuning; no causal claim; model-call elapsed intervals are not CUDA kernel busy utilization; install minus ETA includes Render/WAL and waiting; phase is by release clock, not instantaneous occupancy"
+}

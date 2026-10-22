@@ -1,0 +1,306 @@
+........................................................................ [ 48%]
+.........................................................FFFFFF.......FF [ 97%]
+FF..                                                                     [100%]
+================================== FAILURES ===================================
+_________ test_finite_complete_admission_and_no_future_audio[fixed1] __________
+
+kind = 'fixed1'
+
+    @pytest.mark.parametrize('kind',['fixed1','fixed2','fixed3','backlog','deadline','joint'])
+    def test_finite_complete_admission_and_no_future_audio(kind):
+>    s=make(kind);result=s.run()
+
+tests\test_elastic_authority.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB722660>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+_________ test_finite_complete_admission_and_no_future_audio[fixed2] __________
+
+kind = 'fixed2'
+
+    @pytest.mark.parametrize('kind',['fixed1','fixed2','fixed3','backlog','deadline','joint'])
+    def test_finite_complete_admission_and_no_future_audio(kind):
+>    s=make(kind);result=s.run()
+
+tests\test_elastic_authority.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB72B110>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+_________ test_finite_complete_admission_and_no_future_audio[fixed3] __________
+
+kind = 'fixed3'
+
+    @pytest.mark.parametrize('kind',['fixed1','fixed2','fixed3','backlog','deadline','joint'])
+    def test_finite_complete_admission_and_no_future_audio(kind):
+>    s=make(kind);result=s.run()
+
+tests\test_elastic_authority.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB729A90>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+_________ test_finite_complete_admission_and_no_future_audio[backlog] _________
+
+kind = 'backlog'
+
+    @pytest.mark.parametrize('kind',['fixed1','fixed2','fixed3','backlog','deadline','joint'])
+    def test_finite_complete_admission_and_no_future_audio(kind):
+>    s=make(kind);result=s.run()
+
+tests\test_elastic_authority.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB72A490>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+________ test_finite_complete_admission_and_no_future_audio[deadline] _________
+
+kind = 'deadline'
+
+    @pytest.mark.parametrize('kind',['fixed1','fixed2','fixed3','backlog','deadline','joint'])
+    def test_finite_complete_admission_and_no_future_audio(kind):
+>    s=make(kind);result=s.run()
+
+tests\test_elastic_authority.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB72BC50>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+__________ test_finite_complete_admission_and_no_future_audio[joint] __________
+
+kind = 'joint'
+
+    @pytest.mark.parametrize('kind',['fixed1','fixed2','fixed3','backlog','deadline','joint'])
+    def test_finite_complete_admission_and_no_future_audio(kind):
+>    s=make(kind);result=s.run()
+
+tests\test_elastic_authority.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB964190>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+_____ test_nonuniform_WAL_resume_and_contract_change_fail_closed[backlog] _____
+
+tmp_path = WindowsPath('C:/Users/LENOVO/AppData/Local/Temp/pytest-of-LENOVO/pytest-877/test_nonuniform_WAL_resume_and0')
+kind = 'backlog'
+
+    @pytest.mark.parametrize('kind',['backlog','deadline','joint'])
+    def test_nonuniform_WAL_resume_and_contract_change_fail_closed(tmp_path,kind):
+     path=tmp_path/'state.wal';stop={'fired':False}
+     def emit(e):
+      if e['kind']=='commit' and not stop['fired']:stop['fired']=True;raise RuntimeError('CPU owner interruption fixture')
+     old=make(kind,path,emit)
+     with pytest.raises(RuntimeError):old.run()
+     old.close()
+>    restored=make(kind,path);r=restored.run();assert all(s.state.audio_frontier_window==960 and s.state.contract_epoch==2 for s in restored.sessions.values());restored.close()
+
+tests\test_elastic_authority.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB9656D0>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+____ test_nonuniform_WAL_resume_and_contract_change_fail_closed[deadline] _____
+
+tmp_path = WindowsPath('C:/Users/LENOVO/AppData/Local/Temp/pytest-of-LENOVO/pytest-877/test_nonuniform_WAL_resume_and1')
+kind = 'deadline'
+
+    @pytest.mark.parametrize('kind',['backlog','deadline','joint'])
+    def test_nonuniform_WAL_resume_and_contract_change_fail_closed(tmp_path,kind):
+     path=tmp_path/'state.wal';stop={'fired':False}
+     def emit(e):
+      if e['kind']=='commit' and not stop['fired']:stop['fired']=True;raise RuntimeError('CPU owner interruption fixture')
+     old=make(kind,path,emit)
+     with pytest.raises(RuntimeError):old.run()
+     old.close()
+>    restored=make(kind,path);r=restored.run();assert all(s.state.audio_frontier_window==960 and s.state.contract_epoch==2 for s in restored.sessions.values());restored.close()
+
+tests\test_elastic_authority.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB72B4D0>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+______ test_nonuniform_WAL_resume_and_contract_change_fail_closed[joint] ______
+
+tmp_path = WindowsPath('C:/Users/LENOVO/AppData/Local/Temp/pytest-of-LENOVO/pytest-877/test_nonuniform_WAL_resume_and2')
+kind = 'joint'
+
+    @pytest.mark.parametrize('kind',['backlog','deadline','joint'])
+    def test_nonuniform_WAL_resume_and_contract_change_fail_closed(tmp_path,kind):
+     path=tmp_path/'state.wal';stop={'fired':False}
+     def emit(e):
+      if e['kind']=='commit' and not stop['fired']:stop['fired']=True;raise RuntimeError('CPU owner interruption fixture')
+     old=make(kind,path,emit)
+     with pytest.raises(RuntimeError):old.run()
+     old.close()
+>    restored=make(kind,path);r=restored.run();assert all(s.state.audio_frontier_window==960 and s.state.contract_epoch==2 for s in restored.sessions.values());restored.close()
+
+tests\test_elastic_authority.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB964F50>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+________________ test_pending_jobs_immutable_across_new_plans _________________
+
+    def test_pending_jobs_immutable_across_new_plans():
+     s=make('joint');snapshots={}
+     for group in s.executors.values():
+      for worker in group:
+       submit=worker.submit;poll=worker.poll
+       def wrapped_submit(js,submit=submit):
+        for j in js:snapshots[j['job_id']]=copy.deepcopy(j)
+        submit(js)
+       def wrapped_poll(poll=poll):
+        for jid,j in snapshots.items():assert s.jobs[jid]==j
+        return poll()
+       worker.submit=wrapped_submit;worker.poll=wrapped_poll
+>    s.run()
+
+tests\test_elastic_authority.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\revtrace\live_qwen.py:672: in run
+    self._commit_ready()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <revtrace.elastic_authority.ElasticAuthorityScheduler object at 0x0000024AFB9642D0>
+
+    def _commit_ready(self):
+        for s in self.sessions.values():
+            if s.auth_result is None:continue
+            j=self.jobs[s.auth_result['job_id']];p=self.plans.get(s.sid)
+            if not p or p['selected_rho'] not in self.rule['allowed'] or j['parent']!=p['parent'] or j['chunk_id']!=p['start_window'] or j['end_window']!=p['end_window']:raise ValueError('authority result not in frozen declared plan')
+            expected_end=min(round(p['end_window']*self.fine*self.sample_rate),len(s.audio)//4)
+>           if j['audio_start_sample']!=s.state.audio_frontier_window or j['audio_end_sample']!=expected_end or j['chunk_advance']!=p['end_window']-p['start_window']:raise ValueError('authority sample interval differs from frozen plan')
+E           ValueError: authority sample interval differs from frozen plan
+
+src\revtrace\elastic_authority.py:100: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_elastic_authority.py::test_finite_complete_admission_and_no_future_audio[fixed1]
+FAILED tests/test_elastic_authority.py::test_finite_complete_admission_and_no_future_audio[fixed2]
+FAILED tests/test_elastic_authority.py::test_finite_complete_admission_and_no_future_audio[fixed3]
+FAILED tests/test_elastic_authority.py::test_finite_complete_admission_and_no_future_audio[backlog]
+FAILED tests/test_elastic_authority.py::test_finite_complete_admission_and_no_future_audio[deadline]
+FAILED tests/test_elastic_authority.py::test_finite_complete_admission_and_no_future_audio[joint]
+FAILED tests/test_elastic_authority.py::test_nonuniform_WAL_resume_and_contract_change_fail_closed[backlog]
+FAILED tests/test_elastic_authority.py::test_nonuniform_WAL_resume_and_contract_change_fail_closed[deadline]
+FAILED tests/test_elastic_authority.py::test_nonuniform_WAL_resume_and_contract_change_fail_closed[joint]
+FAILED tests/test_elastic_authority.py::test_pending_jobs_immutable_across_new_plans
+10 failed, 138 passed in 2.01s
+

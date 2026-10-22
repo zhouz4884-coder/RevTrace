@@ -1,0 +1,337 @@
+{
+  "decision": "NO_GO_C2_ELASTIC_ALGORITHM_UPGRADE",
+  "primary_pass": false,
+  "secondary_commit_pass": false,
+  "secondary_energy_pass": false,
+  "quality_pass": true,
+  "quality": {
+    "WER_delta_point_pp": -0.19059720457433316,
+    "CER_delta_point_pp": -0.041952174521046014,
+    "WER_delta_CI_pp": [
+      -0.42945444342759886,
+      0.0
+    ],
+    "CER_delta_CI_pp": [
+      -0.09494648625737674,
+      0.0
+    ],
+    "caps_joint": 0
+  },
+  "primary_comparisons": {
+    "best_fixed": {
+      "point_comparator": "fixed3",
+      "mean_goodput_gain": -0.04173870260035706,
+      "bootstrap_reselect_best_CI": [
+        -0.20922152050635567,
+        0.1451173716224828
+      ],
+      "paired_repeat_differences": [
+        -0.297278776781571,
+        0.16005767677648364,
+        -0.2995428410089662,
+        0.0682538790779934
+      ],
+      "primary_pass": false
+    },
+    "best_simple": {
+      "point_comparator": "deadline",
+      "mean_goodput_gain": -0.10125413900310598,
+      "bootstrap_reselect_best_CI": [
+        -0.22380187480349922,
+        -0.018166454070633643
+      ],
+      "paired_repeat_differences": [
+        -0.23771517333996695,
+        -0.23823747383467397,
+        -0.23793805501353882,
+        -0.23927901239818983
+      ],
+      "primary_pass": false
+    }
+  },
+  "secondary_comparisons": {
+    "fixed": {
+      "commit_comparator": "fixed3",
+      "commit_gain": -0.45312013255552275,
+      "commit_bootstrap_reselect_CI": [
+        -0.4699359551862237,
+        -0.2931324581566203
+      ],
+      "Goodput_noninferiority_CI": [
+        -0.20922152050635567,
+        0.1451173716224828
+      ],
+      "commit_pass": false,
+      "energy_comparator": "fixed3",
+      "energy_gain": -0.09582321639842828,
+      "energy_run_bootstrap_reselect_CI": [
+        -0.10368839176523537,
+        -0.0894185798829581
+      ],
+      "display_and_commit_noninferior_2pct": false,
+      "energy_pass": false
+    },
+    "simple": {
+      "commit_comparator": "deadline",
+      "commit_gain": -0.27063850228086794,
+      "commit_bootstrap_reselect_CI": [
+        -0.4773711791728585,
+        -0.17920616962633476
+      ],
+      "Goodput_noninferiority_CI": [
+        -0.22380187480349922,
+        -0.018166454070633643
+      ],
+      "commit_pass": false,
+      "energy_comparator": "deadline",
+      "energy_gain": -0.08024793707509348,
+      "energy_run_bootstrap_reselect_CI": [
+        -0.09005739966855009,
+        -0.06988538722991056
+      ],
+      "display_and_commit_noninferior_2pct": false,
+      "energy_pass": false
+    }
+  },
+  "simple_dynamic_vs_fixed_diagnostics": {
+    "backlog": {
+      "mean_Goodput_gain_vs_best_fixed": -0.22309307324238903,
+      "paired_reselect_best_fixed_CI": [
+        -0.3998590759688637,
+        -0.11779786896102454
+      ],
+      "WER_delta_CI_pp": [
+        -0.2656042496679948,
+        0.12987012987012975
+      ],
+      "CER_delta_CI_pp": [
+        -0.055587016498267736,
+        0.08792561511391836
+      ],
+      "point_quality_eligible": true,
+      "not_an_additional_posthoc_joint_success_exit": true
+    },
+    "deadline": {
+      "mean_Goodput_gain_vs_best_fixed": 0.0662205401833329,
+      "paired_reselect_best_fixed_CI": [
+        -0.07440748784422967,
+        0.27904910816533707
+      ],
+      "WER_delta_CI_pp": [
+        -0.19620667102681483,
+        0.0
+      ],
+      "CER_delta_CI_pp": [
+        -0.042076031469439654,
+        0.04158594951334473
+      ],
+      "point_quality_eligible": true,
+      "not_an_additional_posthoc_joint_success_exit": true
+    }
+  },
+  "summary": [
+    {
+      "method": "fixed1",
+      "n_runs": 4,
+      "n_unique_sources": 32,
+      "point_quality_eligible": true,
+      "Goodput_mean": 1.4075592947099709,
+      "Goodput_each_run": [
+        1.2528961817593878,
+        1.4385212168103207,
+        1.438165239533349,
+        1.5006545407368257
+      ],
+      "Display_P99_mean": 12.637238842386006,
+      "Commit_P99_mean": 23.655920718121713,
+      "Commit_P99_each_run": [
+        24.751013702200726,
+        23.12220564488992,
+        23.702735258561745,
+        23.04772826683447
+      ],
+      "GPU_window_J_audio_s_mean": 43.73162409423333,
+      "GPU_window_J_audio_s_each_run": [
+        43.955050437661875,
+        43.71801427356571,
+        43.784795665320146,
+        43.46863600038561
+      ],
+      "WER_mean": 0.020330368487928845,
+      "CER_mean": 0.005034260942525521,
+      "caps": 0,
+      "power_min_coverage": 1.0
+    },
+    {
+      "method": "fixed2",
+      "n_runs": 4,
+      "n_unique_sources": 32,
+      "point_quality_eligible": true,
+      "Goodput_mean": 2.012126998325664,
+      "Goodput_each_run": [
+        2.050617902197528,
+        1.9889617564437554,
+        1.9585373000400614,
+        2.0503910346213123
+      ],
+      "Display_P99_mean": 10.032955601951855,
+      "Commit_P99_mean": 11.8705250042025,
+      "Commit_P99_each_run": [
+        11.83140322316438,
+        12.038368537882343,
+        12.112565079545602,
+        11.499763176217675
+      ],
+      "GPU_window_J_audio_s_mean": 38.447184348426404,
+      "GPU_window_J_audio_s_each_run": [
+        38.43611907001394,
+        38.61752899183058,
+        38.622906885299614,
+        38.1121824465615
+      ],
+      "WER_mean": 0.020330368487928845,
+      "CER_mean": 0.0051741015242623405,
+      "caps": 0,
+      "power_min_coverage": 1.0
+    },
+    {
+      "method": "fixed3",
+      "n_runs": 4,
+      "n_unique_sources": 32,
+      "point_quality_eligible": true,
+      "Goodput_mean": 2.2072443498334,
+      "Goodput_each_run": [
+        2.412868355462095,
+        1.9549824731015486,
+        2.4150257654826173,
+        2.046100805287339
+      ],
+      "Display_P99_mean": 7.836333808454219,
+      "Commit_P99_mean": 9.905063282363116,
+      "Commit_P99_each_run": [
+        9.928695858484135,
+        9.933449046965688,
+        9.873753312909976,
+        9.884354911092668
+      ],
+      "GPU_window_J_audio_s_mean": 36.07186581953267,
+      "GPU_window_J_audio_s_each_run": [
+        35.99165404229306,
+        36.05141030379962,
+        36.0616939605121,
+        36.1827049715259
+      ],
+      "WER_mean": 0.019695044472681066,
+      "CER_mean": 0.0051741015242623405,
+      "caps": 0,
+      "power_min_coverage": 1.0
+    },
+    {
+      "method": "backlog",
+      "n_runs": 4,
+      "n_unique_sources": 32,
+      "point_quality_eligible": true,
+      "Goodput_mean": 1.7148234244321678,
+      "Goodput_each_run": [
+        1.928897638414707,
+        1.4382094653399429,
+        1.9308174489106915,
+        1.5613691450633305
+      ],
+      "Display_P99_mean": 8.713532571554557,
+      "Commit_P99_mean": 11.611666553607211,
+      "Commit_P99_each_run": [
+        11.690653228275478,
+        11.495819015307353,
+        11.566257992871106,
+        11.693935977974906
+      ],
+      "GPU_window_J_audio_s_mean": 37.771567128618244,
+      "GPU_window_J_audio_s_each_run": [
+        38.03630343081556,
+        37.64126259441966,
+        37.6938161238294,
+        37.71488636540836
+      ],
+      "WER_mean": 0.019695044472681066,
+      "CER_mean": 0.0051741015242623405,
+      "caps": 0,
+      "power_min_coverage": 1.0
+    },
+    {
+      "method": "deadline",
+      "n_runs": 4,
+      "n_unique_sources": 32,
+      "point_quality_eligible": true,
+      "Goodput_mean": 2.353409262995977,
+      "Goodput_each_run": [
+        2.353304752020491,
+        2.353277623712706,
+        2.35342097948719,
+        2.3536336967635223
+      ],
+      "Display_P99_mean": 8.329259725018218,
+      "Commit_P99_mean": 11.327570228669792,
+      "Commit_P99_each_run": [
+        11.42798381765373,
+        11.436973903141915,
+        11.192919174879789,
+        11.252404019003734
+      ],
+      "GPU_window_J_audio_s_mean": 36.59195881538165,
+      "GPU_window_J_audio_s_each_run": [
+        36.4192111065049,
+        36.42889296077744,
+        36.81103573011448,
+        36.708695464129775
+      ],
+      "WER_mean": 0.019695044472681066,
+      "CER_mean": 0.005034260942525521,
+      "caps": 0,
+      "power_min_coverage": 1.0
+    },
+    {
+      "method": "joint",
+      "n_runs": 4,
+      "n_unique_sources": 32,
+      "point_quality_eligible": true,
+      "Goodput_mean": 2.115116834349385,
+      "Goodput_each_run": [
+        2.115589578680524,
+        2.1150401498780322,
+        2.115482924473651,
+        2.1143546843653325
+      ],
+      "Display_P99_mean": 10.52518416853212,
+      "Commit_P99_mean": 14.393246869838332,
+      "Commit_P99_each_run": [
+        14.34525917983614,
+        14.141026283511891,
+        14.582485104948283,
+        14.50421691105701
+      ],
+      "GPU_window_J_audio_s_mean": 39.52838802385281,
+      "GPU_window_J_audio_s_each_run": [
+        39.83669605946611,
+        39.45014718139837,
+        39.22512023988093,
+        39.60158861466583
+      ],
+      "WER_mean": 0.018424396442185513,
+      "CER_mean": 0.004614739197315061,
+      "caps": 0,
+      "power_min_coverage": 1.0
+    }
+  ],
+  "bootstrap": {
+    "iterations": 10000,
+    "seed": 20261022,
+    "paired_run_clusters": 4,
+    "paired_source_clusters": 32,
+    "performance_source_bootstrap_is_conditional_on_observed_queues": true,
+    "energy_only_run_bootstrap": true
+  },
+  "no_output_splicing_or_reference_guided_online_selection": true,
+  "C1_C3_original_contributions_retained": true,
+  "scouts_not_counted_as_formal_repeats": true
+}
