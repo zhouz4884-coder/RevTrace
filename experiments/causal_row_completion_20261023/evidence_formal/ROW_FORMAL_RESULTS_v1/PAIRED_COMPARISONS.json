@@ -1,0 +1,2510 @@
+[
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "fine-batch",
+    "new": "fine-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.01827052344589819,
+        "display": -0.0946165128223454,
+        "commit": -0.11568218348182058,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.004090875272869443
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.1897522382035241,
+          0.07929303213257972
+        ],
+        "display": [
+          -0.19330688201082502,
+          0.34642516456521644
+        ],
+        "commit": [
+          -0.12276500836156412,
+          0.14049764278255483
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.01092166805796424,
+          0.011275761365464376
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "dgft-batch",
+    "new": "dgft-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.040949690709416675,
+        "display": -0.015979939057916503,
+        "commit": -0.022403075373017334,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.0005244494819700574
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.01994478326936013,
+          0.08891153377944046
+        ],
+        "display": [
+          -0.42200663969857,
+          0.4421347618362801
+        ],
+        "commit": [
+          -0.05441276421856214,
+          0.015424162830216304
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.0037337659862355377,
+          0.001838997707024559
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "standard-batch",
+    "new": "standard-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.059845739979750734,
+        "display": 0.08064283890678237,
+        "commit": -0.03561611382595231,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.0019921821706666565
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.12257038557099952,
+          0.10574928356605218
+        ],
+        "display": [
+          -0.15570485687051105,
+          0.5070885897484385
+        ],
+        "commit": [
+          -0.06417769725524103,
+          -0.004837619975793808
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.008429330894634046,
+          0.014288881860866853
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "strict-batch",
+    "new": "strict-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.014000340437328562,
+        "display": 0.21631590889768781,
+        "commit": 0.10551415901331285,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.0205942602117708
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.11372322896477709,
+          0.05239237075541653
+        ],
+        "display": [
+          -0.09902060909208177,
+          0.5685202188836305
+        ],
+        "commit": [
+          -0.13644506129079703,
+          0.3752178848710641
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          0.015444012655947637,
+          0.02829137397283854
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "score-batch",
+    "new": "score-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.02789348175346107,
+        "display": 0.001958862832439179,
+        "commit": -0.04738506754941341,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.010018603089850808
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.06646785274257487,
+          0.08882557724139473
+        ],
+        "display": [
+          -0.17872608370058143,
+          0.35654832912690265
+        ],
+        "commit": [
+          -0.14035311580323706,
+          0.28418394838719363
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          0.0037413033469293477,
+          0.02630696560276813
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "fine-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.047703632126679274,
+        "display": -0.0998180642773836,
+        "commit": 0.5014182298960641,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.1423575753183457
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.014200788858763202,
+          0.3081769625020654
+        ],
+        "display": [
+          -0.4093612582886829,
+          0.3881403047335561
+        ],
+        "commit": [
+          0.3096391092833329,
+          0.8481947182864786
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.14258716251389247,
+          -0.13479798528198306
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "standard-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.04870400934646679,
+        "display": -0.1158789789096859,
+        "commit": 0.008460797622413807,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.003612156921928289
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.007253551162036733,
+          0.19674342646427434
+        ],
+        "display": [
+          -0.4606825538543401,
+          0.15738841782543345
+        ],
+        "commit": [
+          -0.005785820108915485,
+          0.01807093794825909
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.0027393738106887833,
+          0.007244656349080447
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "strict-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.0796020008894276,
+        "display": -0.2849078339014999,
+        "commit": 0.7101395131313406,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.06170049782762177
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.031411780367701404,
+          0.1559004069544709
+        ],
+        "display": [
+          -0.4077731639126577,
+          0.428141887786166
+        ],
+        "commit": [
+          0.39972027228070317,
+          1.2601065978333406
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.06307639003304055,
+          -0.04749325385127967
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "score-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.025608618237723535,
+        "display": -0.12410278757303905,
+        "commit": 0.9915684931577524,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.05302132511377522
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.011943398698205881,
+          0.06349649897090712
+        ],
+        "display": [
+          -0.33567867453496764,
+          0.4384646820033655
+        ],
+        "commit": [
+          0.4907525201516538,
+          1.3257635419471188
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.0688161762834043,
+          -0.052000432895101145
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "fine-batch",
+    "new": "fine-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.03653965949037019,
+        "display": -0.07527000708272646,
+        "commit": -0.09740800302163899,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.0057903020462960475
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.0011026937148594929,
+          0.3559802048983484
+        ],
+        "display": [
+          -0.38908560298567296,
+          0.27825344175924327
+        ],
+        "commit": [
+          -0.13938375293685035,
+          -0.05709015854992083
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.010838558156502476,
+          -0.0020172933399699167
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "dgft-batch",
+    "new": "dgft-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.535590468895476,
+        "display": -0.013398980170549635,
+        "commit": -0.015960120467271577,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.0030107805042906
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.16936809173865766,
+          0.6738182781430955
+        ],
+        "display": [
+          -0.45803137042857944,
+          0.17256352027460858
+        ],
+        "commit": [
+          -0.13482483018406538,
+          0.012963955079381733
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.008518614470892971,
+          0.009431184910992485
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": true,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "standard-batch",
+    "new": "standard-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.43710643663578974,
+        "display": -0.07394143456985969,
+        "commit": -0.013959937693760582,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.009468553170849603
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.2733443446468254,
+          0.8340987673364921
+        ],
+        "display": [
+          -0.3257030442153995,
+          0.0016650826452317968
+        ],
+        "commit": [
+          -0.040347777954920644,
+          0.023547497295160355
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.009726702908192664,
+          0.010814603184664318
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": true,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "strict-batch",
+    "new": "strict-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.08778020848831947,
+        "display": 0.008544442663002583,
+        "commit": 0.009879208155415098,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.04694418079303331
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.01129992346701969,
+          0.30931842212260885
+        ],
+        "display": [
+          -0.2428991215978298,
+          0.06681213042363199
+        ],
+        "commit": [
+          -0.038035532003378045,
+          0.09853641096899346
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          0.030138443664084358,
+          0.06286585484504892
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "score-batch",
+    "new": "score-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.13463082858601605,
+        "display": -0.036207208581310546,
+        "commit": -0.040299454064158136,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.004599060259915744
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.021545725490884765,
+          0.20744817780007851
+        ],
+        "display": [
+          -0.13156440293908034,
+          0.07246602949771508
+        ],
+        "commit": [
+          -0.13105859414815568,
+          0.07169923027853328
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.004522542005465313,
+          0.031083482213033475
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": true,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "fine-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.034769456429857404,
+        "display": 0.6853883679116695,
+        "commit": 0.539950128966111,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.13579376831517842
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.12955972258575948,
+          0.023048104180750935
+        ],
+        "display": [
+          -0.10834538450605175,
+          0.8781448721009112
+        ],
+        "commit": [
+          0.44989965284654,
+          0.8429519009438685
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.138227296329968,
+          -0.13223230263828423
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "standard-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.00021790390046294572,
+        "display": -0.007886925040697212,
+        "commit": -0.01566286428332575,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.0015878386299345015
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.0604001801916198,
+          0.08945696796133422
+        ],
+        "display": [
+          -0.43281212163780647,
+          0.042880190215865976
+        ],
+        "commit": [
+          -0.04795948886426438,
+          0.013923063123993495
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.0026316140720776815,
+          0.012883447738693654
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "strict-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.9107061266420997,
+        "display": -0.6066822856520633,
+        "commit": -0.3312335223180001,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.3066157911720725
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.7087062853141649,
+          1.1542249251383994
+        ],
+        "display": [
+          -0.7823665623259292,
+          -0.5178916537936037
+        ],
+        "commit": [
+          -0.4031320782462494,
+          -0.2810062504010598
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.3082984313989029,
+          -0.29102222604118066
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "score-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.7839472080980017,
+        "display": -0.5980907198604428,
+        "commit": -0.29567584961256865,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.2725864203344063
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.655162023191213,
+          0.9834394586537556
+        ],
+        "display": [
+          -0.7798797728134738,
+          -0.5542055958207803
+        ],
+        "commit": [
+          -0.36388745400722744,
+          -0.2356814766144119
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.29130222276280937,
+          -0.2663931040113934
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "clean",
+    "baseline": "fine-batch",
+    "new": "fine-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.0015442283028634929,
+        "display": -0.06422141636771572,
+        "commit": -0.0802485305275864,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.005478140305782309
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.0011876915134387822,
+          0.008509319512333099
+        ],
+        "display": [
+          -0.2089408445623152,
+          0.03513937023463704
+        ],
+        "commit": [
+          -0.2519364554883071,
+          0.04916350587807905
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.006808811425096484,
+          -0.0017233292478774365
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "clean",
+    "baseline": "dgft-batch",
+    "new": "dgft-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.0016678178560023404,
+        "display": -0.14115158665750627,
+        "commit": -0.01940139246868111,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.00781019141478434
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.030143792570566832,
+          0.034477679337133825
+        ],
+        "display": [
+          -0.268473791263967,
+          0.027832801025047038
+        ],
+        "commit": [
+          -0.04313250156153603,
+          0.018297777845729613
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.009508000888192925,
+          0.002318006888287316
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "clean",
+    "baseline": "standard-batch",
+    "new": "standard-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.0026946489648436156,
+        "display": -0.05909261157474277,
+        "commit": -0.023103300519292103,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.0016638103259538628
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.012779814721967177,
+          0.035075992682150545
+        ],
+        "display": [
+          -0.4903224966789102,
+          0.036243383396763695
+        ],
+        "commit": [
+          -0.04159168338595087,
+          0.011763443994494693
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.001004292748665092,
+          0.004932956139043876
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "clean",
+    "baseline": "strict-batch",
+    "new": "strict-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.0009269562566027734,
+        "display": -0.018430547538926145,
+        "commit": -0.1562692194535813,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.011997235351006719
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.012421938098070984,
+          0.015500555489101042
+        ],
+        "display": [
+          -0.17662110727122945,
+          0.09007611283050278
+        ],
+        "commit": [
+          -0.25127389415535784,
+          0.015077979573837386
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          0.008941979417633972,
+          0.01232974824710098
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "clean",
+    "baseline": "score-batch",
+    "new": "score-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 6.735308099004023e-05,
+        "display": -0.08777288754166945,
+        "commit": -0.11702220872815239,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.009030794038077161
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.001614839581610128,
+          0.031911513671116595
+        ],
+        "display": [
+          -0.21767948996945807,
+          0.042199800399695064
+        ],
+        "commit": [
+          -0.24020169181207143,
+          0.06448358425985128
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          0.005740348097857728,
+          0.01342326723298326
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "clean",
+    "baseline": "fine-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.0076976994824417,
+        "display": 0.09963979501838138,
+        "commit": 1.9625325429126912,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.10554973544854851
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.054416227680560154,
+          0.0020643059502813976
+        ],
+        "display": [
+          -0.08166525982888302,
+          1.0466966222567577
+        ],
+        "commit": [
+          1.6808040692696666,
+          2.250972599944957
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.1065860319530505,
+          -0.09426292658309798
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "clean",
+    "baseline": "standard-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.0009644728868822838,
+        "display": 0.07900370508221033,
+        "commit": -0.00043553824848407974,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.0018173716933425066
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.049887817484497776,
+          0.02808874352699151
+        ],
+        "display": [
+          -0.16090335819006063,
+          1.059016913530911
+        ],
+        "commit": [
+          -0.023947524902322326,
+          0.03025274798484423
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.010439679523666645,
+          0.0037454804404060127
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "clean",
+    "baseline": "strict-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.008281576780409416,
+        "display": 0.08062219839422258,
+        "commit": 2.259841452902129,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": 0.008058090571322118
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.0584568049459661,
+          0.008917132519303875
+        ],
+        "display": [
+          -0.11112024288301392,
+          0.9945522021107136
+        ],
+        "commit": [
+          1.8221254170284955,
+          2.663581328692795
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          0.003989529119338586,
+          0.013785506046731566
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "clean",
+    "baseline": "score-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.009435853322804721,
+        "display": 0.006543512478174751,
+        "commit": 2.009428513745218,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": 0.008929951234950328
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.0564699212350449,
+          -0.0011713384681536043
+        ],
+        "display": [
+          -0.18974197009617985,
+          0.9976468821558536
+        ],
+        "commit": [
+          1.5089706347794252,
+          2.6049991849838867
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          0.005414699753420127,
+          0.016458767879405034
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "F2",
+    "baseline": "fine-batch",
+    "new": "fine-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.005083035234765276,
+        "display": -0.0691859409987482,
+        "commit": -0.06724435876782797,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.0026288749555444246
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.0017251817988969242,
+          0.03352141078241293
+        ],
+        "display": [
+          -0.27841266139348686,
+          0.037443612837288365
+        ],
+        "commit": [
+          -0.22995477308875123,
+          0.08729936036605945
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.007334013058084898,
+          0.001462793021951514
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "F2",
+    "baseline": "dgft-batch",
+    "new": "dgft-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.06955265984551873,
+        "display": -0.11483433511198471,
+        "commit": -0.01978786501821339,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.009657030655892407
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.03537791108571068,
+          0.17193286122304835
+        ],
+        "display": [
+          -0.3766016327570327,
+          0.054039780657269734
+        ],
+        "commit": [
+          -0.035583313608193556,
+          -0.0008923750423619369
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.013062835820298324,
+          -0.0010110696298905042
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": true,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "F2",
+    "baseline": "standard-batch",
+    "new": "standard-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.03938932569992004,
+        "display": -0.0953666068551936,
+        "commit": -0.016493556537819143,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.002729554049842875
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.007273825815247728,
+          0.08646625393403395
+        ],
+        "display": [
+          -0.27958464496537433,
+          0.1579029559506775
+        ],
+        "commit": [
+          -0.04386108808554393,
+          0.011221299596224865
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          0.0020994132698166634,
+          0.01597081108881615
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "F2",
+    "baseline": "strict-batch",
+    "new": "strict-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.10128994170991446,
+        "display": -0.065945765018259,
+        "commit": -0.18115199922767522,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.009979430703536685
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.013899107767981554,
+          0.22271803780895244
+        ],
+        "display": [
+          -0.19127788445349603,
+          0.08104177609173115
+        ],
+        "commit": [
+          -0.26485457826717085,
+          -0.07571718407088002
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.04095816710634681,
+          0.009813696306294473
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": true,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "F2",
+    "baseline": "score-batch",
+    "new": "score-row",
+    "kind": "shared_executor_return",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.15585839513234,
+        "display": -0.07604031826044233,
+        "commit": -0.15705789207304321,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.016589881465716827
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.13612504573617895,
+          0.29512721908205675
+        ],
+        "display": [
+          -0.23244424546292797,
+          0.44506023059822697
+        ],
+        "commit": [
+          -0.2506317720648178,
+          0.21691431936504957
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.02490914908984254,
+          0.05043217860951499
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "F2",
+    "baseline": "fine-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.06963033494292625,
+        "display": 0.37523478509866903,
+        "commit": 1.8861689837406241,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.10451414913780832
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.11258248473707524,
+          -0.040155698792774266
+        ],
+        "display": [
+          0.20847690981322092,
+          1.05085152191285
+        ],
+        "commit": [
+          1.620326346081836,
+          2.289935502129123
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.10532519045576305,
+          -0.09446936267833472
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "F2",
+    "baseline": "standard-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.0015245624584001582,
+        "display": -0.096325976293138,
+        "commit": -0.0018253770871151653,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": -0.003248386565330774
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.04517432086579264,
+          0.048622257855288425
+        ],
+        "display": [
+          -0.30095227722440876,
+          0.3892430125291939
+        ],
+        "commit": [
+          -0.02883449101682789,
+          0.02141144954940155
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.009944209695052275,
+          0.003298843155750797
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "F2",
+    "baseline": "strict-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.14000818059311704,
+        "display": -0.2307018171104248,
+        "commit": 0.772392990714732,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.042950907674741745
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.03256103982469612,
+          0.23486082042327813
+        ],
+        "display": [
+          -0.3780686161578466,
+          0.1420524394194227
+        ],
+        "commit": [
+          0.6684225231375585,
+          1.2083794803899504
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.06888664314684934,
+          -0.03619874319775407
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "core",
+    "load": "cohort8",
+    "traffic": "F2",
+    "baseline": "score-row",
+    "new": "dgft-row",
+    "kind": "equally_equipped_cross_policy",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.13208966596194216,
+        "display": -0.2585323175682216,
+        "commit": 0.7717431438723528,
+        "WER": 0.0013089005235602073,
+        "CER": 0.0008500991782374612,
+        "energy": -0.06521546606281314
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.04888762870420512,
+          0.23188507515229662
+        ],
+        "display": [
+          -0.3588965199682289,
+          0.11124937235813635
+        ],
+        "commit": [
+          0.678744419866846,
+          1.1191773717622082
+        ],
+        "WER": [
+          -0.002801120448179272,
+          0.005340453938584778
+        ],
+        "CER": [
+          -0.0016260824660363866,
+          0.0037551363008012143
+        ],
+        "energy": [
+          -0.07185917045726475,
+          -0.04414647463984045
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "validation",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "fine-row",
+    "new": "dgft-row",
+    "kind": "independent_validation_same_capability",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.030980786095661128,
+        "display": 0.09856309575977584,
+        "commit": 0.8599370976422192,
+        "WER": 0.002911208151382825,
+        "CER": 0.0022566086395873633,
+        "energy": -0.10579893753107983
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.11402824083604955,
+          -0.006251697619484409
+        ],
+        "display": [
+          -0.009617459201299241,
+          0.9358603657680098
+        ],
+        "commit": [
+          0.5247287848327842,
+          0.9706279677946394
+        ],
+        "WER": [
+          0.0,
+          0.009569377990430622
+        ],
+        "CER": [
+          0.0,
+          0.0074866310160427805
+        ],
+        "energy": [
+          -0.1159640676624698,
+          -0.100459378944732
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "validation",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "standard-row",
+    "new": "dgft-row",
+    "kind": "independent_validation_same_capability",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.01645321505078101,
+        "display": -0.006410232879285993,
+        "commit": -0.0080270307814021,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 2.418467322784501e-05
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.005530971762843118,
+          0.07401822255046299
+        ],
+        "display": [
+          -0.38351372639347003,
+          0.5000840928778827
+        ],
+        "commit": [
+          -0.034826845275414686,
+          0.01237510158478876
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.005017774304872824,
+          0.00849414944343252
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "validation",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "strict-row",
+    "new": "dgft-row",
+    "kind": "independent_validation_same_capability",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.01842706822509743,
+        "display": -0.17831704399793913,
+        "commit": 1.0094127424158543,
+        "WER": 0.002911208151382825,
+        "CER": 0.0022566086395873633,
+        "energy": -0.02854929377633031
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.10474790194400539,
+          0.05569962501553321
+        ],
+        "display": [
+          -0.33747298233086753,
+          0.4545981783082014
+        ],
+        "commit": [
+          0.6648224274460841,
+          1.3831764230760906
+        ],
+        "WER": [
+          0.0,
+          0.009569377990430622
+        ],
+        "CER": [
+          0.0,
+          0.0074866310160427805
+        ],
+        "energy": [
+          -0.031357905434065025,
+          -0.023825436537629918
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "validation",
+    "load": "sync16",
+    "traffic": "clean",
+    "baseline": "score-row",
+    "new": "dgft-row",
+    "kind": "independent_validation_same_capability",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.1031303221975306,
+        "display": -0.35983703281789736,
+        "commit": 0.546425027677776,
+        "WER": 0.002911208151382825,
+        "CER": 0.0022566086395873633,
+        "energy": -0.022905601549077947
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.0015687193646824738,
+          0.1749294679386575
+        ],
+        "display": [
+          -0.44865786418684805,
+          0.32075299276079944
+        ],
+        "commit": [
+          0.3608914384085202,
+          1.2221841220261753
+        ],
+        "WER": [
+          0.0,
+          0.009569377990430622
+        ],
+        "CER": [
+          0.0,
+          0.0074866310160427805
+        ],
+        "energy": [
+          -0.026974116682107585,
+          -0.020380026969504583
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "validation",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "fine-row",
+    "new": "dgft-row",
+    "kind": "independent_validation_same_capability",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.4113442062164534,
+        "display": 0.9576630253385898,
+        "commit": 0.9151033442939156,
+        "WER": 0.002911208151382825,
+        "CER": 0.0022566086395873633,
+        "energy": 0.05074709231179497
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.4730773468198435,
+          -0.32299724089104004
+        ],
+        "display": [
+          0.6417721527112754,
+          1.2752957809061272
+        ],
+        "commit": [
+          0.7989726420273258,
+          1.0590117215773784
+        ],
+        "WER": [
+          0.0,
+          0.009569377990430622
+        ],
+        "CER": [
+          0.0,
+          0.0074866310160427805
+        ],
+        "energy": [
+          0.04390063610944983,
+          0.06110945722340544
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "validation",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "standard-row",
+    "new": "dgft-row",
+    "kind": "independent_validation_same_capability",
+    "effect": {
+      "paired_median": {
+        "goodput": -0.008690399074231636,
+        "display": -0.0260985385255178,
+        "commit": -0.018063147690889125,
+        "WER": 0.0,
+        "CER": 0.0,
+        "energy": 0.008826157532489276
+      },
+      "paired_95_interval": {
+        "goodput": [
+          -0.010466780403728504,
+          -0.0033740884121873527
+        ],
+        "display": [
+          -0.048616798730352295,
+          0.020014013093373695
+        ],
+        "commit": [
+          -0.04006905456555987,
+          0.014787652450915732
+        ],
+        "WER": [
+          0.0,
+          0.0
+        ],
+        "CER": [
+          0.0,
+          0.0
+        ],
+        "energy": [
+          -0.001392061422570201,
+          0.011342859909342584
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": true,
+      "all_three_paired_Goodput_deltas_positive": false,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "validation",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "strict-row",
+    "new": "dgft-row",
+    "kind": "independent_validation_same_capability",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.3208676696342201,
+        "display": -0.5916623007191671,
+        "commit": -0.6090362880305755,
+        "WER": 0.002911208151382825,
+        "CER": 0.0022566086395873633,
+        "energy": -0.26272757001510494
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.28227253185694773,
+          0.3689605465319667
+        ],
+        "display": [
+          -0.6531972131003503,
+          -0.5686538402684481
+        ],
+        "commit": [
+          -0.619506347841752,
+          -0.5838435416766644
+        ],
+        "WER": [
+          0.0,
+          0.009569377990430622
+        ],
+        "CER": [
+          0.0,
+          0.0074866310160427805
+        ],
+        "energy": [
+          -0.2665309187775713,
+          -0.25924576300679014
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  },
+  {
+    "cohort": "validation",
+    "load": "sync16",
+    "traffic": "F2",
+    "baseline": "score-row",
+    "new": "dgft-row",
+    "kind": "independent_validation_same_capability",
+    "effect": {
+      "paired_median": {
+        "goodput": 0.3096677253271076,
+        "display": -0.5906859706827987,
+        "commit": -0.6038348724026383,
+        "WER": 0.002911208151382825,
+        "CER": 0.0022566086395873633,
+        "energy": -0.2575468005527862
+      },
+      "paired_95_interval": {
+        "goodput": [
+          0.27445228650195136,
+          0.36250671881249147
+        ],
+        "display": [
+          -0.649094803620482,
+          -0.5689805125963221
+        ],
+        "commit": [
+          -0.6150757193645476,
+          -0.5854283930702411
+        ],
+        "WER": [
+          0.0,
+          0.009569377990430622
+        ],
+        "CER": [
+          0.0,
+          0.0074866310160427805
+        ],
+        "energy": [
+          -0.26649890902257656,
+          -0.2565164541161651
+        ]
+      },
+      "samples": 10000,
+      "seed": 20261022,
+      "energy_resampling": "paired repeats only",
+      "schedule_interpretation": "conditional on observed per-source frontiers",
+      "implementation": "vectorized exact conceptual frontier replication, tested against archived pure-Python convention"
+    },
+    "gates": {
+      "quality_noninferiority_0_5pp": false,
+      "all_three_paired_Goodput_deltas_positive": true,
+      "primary_Goodput_gate": false,
+      "zero_new_predicate_or_consumer_violations_in_independent_audit": true,
+      "no_unfinished_requests": true,
+      "all_both_population_P99_passes": false
+    }
+  }
+]
