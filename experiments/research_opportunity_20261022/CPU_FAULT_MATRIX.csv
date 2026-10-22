@@ -1,0 +1,35 @@
+case,observed,expected,evidence
+legal prior computation under current parent,eligible-for-new-epoch-authorization,eligible-for-new-epoch-authorization,CPU_FIXTURE_NO_GPU
+supervisor_id,wrong-supervisor,wrong-supervisor,CPU_FIXTURE_NO_GPU
+worker_incarnation,wrong-worker-incarnation,wrong-worker-incarnation,CPU_FIXTURE_NO_GPU
+manifest_digest,manifest-mismatch,manifest-mismatch,CPU_FIXTURE_NO_GPU
+source_role,not-authority-source,not-authority-source,CPU_FIXTURE_NO_GPU
+dispatch_epoch,not-prior-epoch,not-prior-epoch,CPU_FIXTURE_NO_GPU
+worker died,worker-dead,worker-dead,CPU_FIXTURE_NO_GPU
+old owner raced after recovery,not-current-owner,not-current-owner,CPU_FIXTURE_NO_GPU
+ledger parent advanced while old work still runs,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+session_id mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+parent mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+prompt_tokens mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+audio_end_sample mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+contract_digest mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+runtime_digest mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+source_id mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+prefix_audio_sha256 mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+interval_audio_sha256 mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+chunk_id mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+language mismatch,not-current-logical-job,not-current-logical-job,CPU_FIXTURE_NO_GPU
+dispatch mutated,mutated-dispatch,mutated-dispatch,CPU_FIXTURE_NO_GPU
+result mutated,mutated-result,mutated-result,CPU_FIXTURE_NO_GPU
+job_id result,result-job-mismatch,result-job-mismatch,CPU_FIXTURE_NO_GPU
+runtime_digest result,result-runtime-mismatch,result-runtime-mismatch,CPU_FIXTURE_NO_GPU
+prefix_audio_sha256 result,result-audio-mismatch,result-audio-mismatch,CPU_FIXTURE_NO_GPU
+still executing with trusted dispatch,pending,pending,CPU_FIXTURE_NO_GPU
+concurrent owner WAL lock,rejected,rejected,CPU_ACTUAL_WAL
+real FIFO fresh publication schema,consumed valid certificate,consumed valid certificate,CPU_REAL_CONSUMER_NOT_GPU
+real FIFO recovered publication schema,consumed valid certificate,consumed valid certificate,CPU_REAL_CONSUMER_NOT_GPU
+already committed duplicate after install,already-durable,already-durable,CPU_FIXTURE_NO_GPU
+old result second,already-durable,already-durable,CPU_FIXTURE_NO_GPU
+new result second,already-durable,already-durable,CPU_FIXTURE_NO_GPU
+already WAL committed but never published,already-durable,already-durable,CPU_FIXTURE_NO_GPU
+new epoch original admission + persistent replay,one install survives epoch3,one install survives epoch3,CPU_ACTUAL_WAL

@@ -1,0 +1,212 @@
+{
+  "status": "PASS_CPU_FAULT_MATRIX",
+  "cases": [
+    {
+      "case": "legal prior computation under current parent",
+      "observed": "eligible-for-new-epoch-authorization",
+      "expected": "eligible-for-new-epoch-authorization",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "supervisor_id",
+      "observed": "wrong-supervisor",
+      "expected": "wrong-supervisor",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "worker_incarnation",
+      "observed": "wrong-worker-incarnation",
+      "expected": "wrong-worker-incarnation",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "manifest_digest",
+      "observed": "manifest-mismatch",
+      "expected": "manifest-mismatch",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "source_role",
+      "observed": "not-authority-source",
+      "expected": "not-authority-source",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "dispatch_epoch",
+      "observed": "not-prior-epoch",
+      "expected": "not-prior-epoch",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "worker died",
+      "observed": "worker-dead",
+      "expected": "worker-dead",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "old owner raced after recovery",
+      "observed": "not-current-owner",
+      "expected": "not-current-owner",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "ledger parent advanced while old work still runs",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "session_id mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "parent mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "prompt_tokens mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "audio_end_sample mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "contract_digest mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "runtime_digest mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "source_id mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "prefix_audio_sha256 mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "interval_audio_sha256 mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "chunk_id mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "language mismatch",
+      "observed": "not-current-logical-job",
+      "expected": "not-current-logical-job",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "dispatch mutated",
+      "observed": "mutated-dispatch",
+      "expected": "mutated-dispatch",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "result mutated",
+      "observed": "mutated-result",
+      "expected": "mutated-result",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "job_id result",
+      "observed": "result-job-mismatch",
+      "expected": "result-job-mismatch",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "runtime_digest result",
+      "observed": "result-runtime-mismatch",
+      "expected": "result-runtime-mismatch",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "prefix_audio_sha256 result",
+      "observed": "result-audio-mismatch",
+      "expected": "result-audio-mismatch",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "still executing with trusted dispatch",
+      "observed": "pending",
+      "expected": "pending",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "concurrent owner WAL lock",
+      "observed": "rejected",
+      "expected": "rejected",
+      "evidence": "CPU_ACTUAL_WAL"
+    },
+    {
+      "case": "real FIFO fresh publication schema",
+      "observed": "consumed valid certificate",
+      "expected": "consumed valid certificate",
+      "evidence": "CPU_REAL_CONSUMER_NOT_GPU"
+    },
+    {
+      "case": "real FIFO recovered publication schema",
+      "observed": "consumed valid certificate",
+      "expected": "consumed valid certificate",
+      "evidence": "CPU_REAL_CONSUMER_NOT_GPU"
+    },
+    {
+      "case": "already committed duplicate after install",
+      "observed": "already-durable",
+      "expected": "already-durable",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "old result second",
+      "observed": "already-durable",
+      "expected": "already-durable",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "new result second",
+      "observed": "already-durable",
+      "expected": "already-durable",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "already WAL committed but never published",
+      "observed": "already-durable",
+      "expected": "already-durable",
+      "evidence": "CPU_FIXTURE_NO_GPU"
+    },
+    {
+      "case": "new epoch original admission + persistent replay",
+      "observed": "one install survives epoch3",
+      "expected": "one install survives epoch3",
+      "evidence": "CPU_ACTUAL_WAL"
+    }
+  ],
+  "cpu_guard_calls": 20000,
+  "cpu_guard_mean_seconds": 1.337028999987524e-05,
+  "does_not_measure_IPC_or_GPU_or_production_tail": true
+}
