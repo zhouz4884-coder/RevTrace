@@ -1,0 +1,18 @@
+..........................F............................................. [ 47%]
+........................................................................ [ 94%]
+.........                                                                [100%]
+================================== FAILURES ===================================
+____________ test_consumer_failure_still_closes_only_owned_workers ____________
+tests\test_online_admission.py:95: in test_consumer_failure_still_closes_only_owned_workers
+    spec=importlib.util.spec_from_file_location('online_cli_cleanup',path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+<frozen importlib._bootstrap_external>:1026: in exec_module
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+scripts\run_tc_live_qwen.py:19: in <module>
+    from tc_live_worker import GPUExecutor
+E   ModuleNotFoundError: No module named 'tc_live_worker'
+=========================== short test summary info ===========================
+FAILED tests/test_online_admission.py::test_consumer_failure_still_closes_only_owned_workers
+1 failed, 152 passed in 1.94s
+

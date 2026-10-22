@@ -1,0 +1,482 @@
+--- phaseD/scripts/online_selection_worker.py
++++ measured_online/scripts/online_selection_worker.py
+@@ -0,0 +1,99 @@
++"""FP32 correct-context selection + paid full-layout fallback, real worker only."""
++import hashlib,time
++from revtrace.online_admission import gate_candidate,target_identity,complete_candidate,fallback_row_plan
++
++def select_online(*,model,processor,moved,jobs,prefixes,contexts,audits,config,start,results):
++    import torch
++    from qwen_asr import parse_asr_output
++    mode=config['online_selection_mode'];budget=int(config['max_new_tokens']);tok=processor.tokenizer
++    eos=model.generation_config.eos_token_id;eos=[eos] if isinstance(eos,int) else list(eos or [])
++    candidates=[list(j['candidate_token_ids']) for j in jobs]
++    malformed=[not c or len(c)>budget for c in candidates]
++    n=len(jobs);length=moved['input_ids'].shape[1];device=moved['input_ids'].device
++    predicted=[[] for _ in jobs];margins=[[] for _ in jobs];verify_seconds=fallback_seconds=0.;oracle={}
++    phases=[]
++    def measured(name,fn,indices=None):
++        indices=list(range(n)) if indices is None else indices;job_ids=[jobs[i]['job_id'] for i in indices]
++        torch.cuda.synchronize();a=time.perf_counter();results.put({'kind':'model-started','started_perf':a,'job_ids':job_ids,'online_phase':name})
++        answer=fn();torch.cuda.synchronize();b=time.perf_counter();results.put({'kind':'model-completed','completed_perf':b,'job_ids':job_ids,'online_phase':name});phases.append({'phase':name,'started_perf':a,'completed_perf':b,'physical_batch_rows':len(indices),'executed_job_ids':job_ids})
++        return answer,b-a
++    def verify(rows,data=None):
++        data=moved if data is None else data;size=len(rows);prompt_width=data['input_ids'].shape[1]
++        w=max(map(len,rows));pad=tok.pad_token_id if tok.pad_token_id is not None else 0
++        ids=torch.full((size,w),pad,dtype=torch.long,device=device);mask=torch.zeros_like(ids)
++        for i,c in enumerate(rows):ids[i,:len(c)]=torch.tensor(c,device=device);mask[i,:len(c)]=1
++        checked=dict(data,input_ids=torch.cat((data['input_ids'],ids),1),attention_mask=torch.cat((data['attention_mask'],mask),1))
++        def restrict(_module,values):return (values[0][:,prompt_width-1:prompt_width+w-1,:],)
++        hook=model.thinker.lm_head.register_forward_pre_hook(restrict)
++        try:
++            with torch.inference_mode():
++                logits=model.thinker(**checked,use_cache=False,return_dict=True).logits
++                pred=logits.argmax(-1).cpu().tolist()
++                if mode=='score':
++                    top=logits.topk(2,-1);chosen=logits.gather(-1,ids.unsqueeze(-1)).squeeze(-1).float();other=torch.where(top.indices[:,:,0]==ids,top.values[:,:,1],top.values[:,:,0]).float();margin=(chosen-other).cpu().tolist()
++                else:margin=[[0.]*len(c) for c in rows]
++                return pred,margin
++        finally:hook.remove()
++    def generate(data=None):
++        data=moved if data is None else data
++        with torch.inference_mode():out=model.generate(**data,do_sample=False,max_new_tokens=budget,output_scores=False)
++        rows=out.sequences[:,data['input_ids'].shape[1]:].cpu().tolist();ans=[]
++        for row in rows:
++            end=next((i+1 for i,t in enumerate(row) if t in eos),len(row));ans.append(row[:end])
++        return ans
++    if mode!='unprotected' and not all(malformed):
++        safe_rows=[c if not bad else [eos[0]] for c,bad in zip(candidates,malformed)]
++        (predicted,margins),verify_seconds=measured('correct-context-'+mode,lambda:verify(safe_rows))
++    checks=[gate_candidate(mode,c,p,m,eos=eos,budget=budget,threshold=config['score_threshold']) for c,p,m in zip(candidates,predicted,margins)]
++    failed=[i for i,c in enumerate(checks) if not c[0]];repaired=None;fallback_data=None;fallback_indices=[];fallback_rows={}
++    if failed:
++        fallback_indices=fallback_row_plan({k:list(v.shape) for k,v in moved.items()},n,failed,config.get('fallback_layout','full'))
++        if fallback_indices==list(range(n)):fallback_data=moved
++        else:
++            indices=torch.tensor(fallback_indices,dtype=torch.long,device=device);fallback_data={k:v.index_select(0,indices) for k,v in moved.items()}
++        repaired,fallback_seconds=measured('fresh-FP32-fallback',lambda:generate(fallback_data),fallback_indices)
++        fallback_rows=dict(zip(fallback_indices,repaired))
++    if config.get('online_oracle_diagnostic',False) and mode!='unprotected':
++        expected=repaired if repaired is not None and fallback_indices==list(range(n)) else None
++        if expected is None:expected,_=measured('pilot-independent-greedy-oracle',generate)
++        repeated,_=measured('pilot-greedy-oracle-repeat',generate)
++        (op,_),_=measured('pilot-oracle-as-candidate',lambda:verify(expected))
++        stable=expected==repeated;selfchecks=[complete_candidate(c,p,eos=eos,budget=budget)[0] for c,p in zip(expected,op)]
++        accepted_exact=[not checks[i][0] or candidates[i]==expected[i] for i in range(n)]
++        oracle={'same_input_repeat_equal':stable,'oracle_selfchecks':selfchecks,'accepted_equal_independent_greedy':accepted_exact,'oracle_token_ids':expected,'repeat_token_ids':repeated}
++        if failed:
++            fbrepeat,_=measured('pilot-fallback-layout-repeat',lambda:generate(fallback_data),fallback_indices)
++            (fbpred,_),_=measured('pilot-fallback-layout-selfcheck',lambda:verify(repaired,fallback_data),fallback_indices)
++            fbchecks=[complete_candidate(c,p,eos=eos,budget=budget)[0] for c,p in zip(repaired,fbpred)]
++            oracle.update(fallback_layout_repeat_equal=repaired==fbrepeat,fallback_layout_selfchecks=fbchecks,fallback_equal_original_full_batch=[fallback_rows[i]==expected[i] for i in failed])
++            if repaired!=fbrepeat or not all(fbchecks):raise AssertionError('fresh fallback-layout repeat/selfcheck disagreed')
++        if not stable or not all(selfchecks) or not all(accepted_exact):raise AssertionError('pilot target-operation numerical/verification disagreement; no formal launch')
++    fallback_input_ids=fallback_data['input_ids'].detach().cpu().tolist() if failed else None
++    rows=[]
++    for i,j in enumerate(jobs):
++        selected=fallback_rows[i] if i in failed else candidates[i]
++        shape,reason=complete_candidate(selected,selected,eos=eos,budget=budget)
++        if not shape:raise ValueError('selected sequence violates complete shape: '+reason)
++        raw=prefixes[i]+tok.decode(selected,skip_special_tokens=True,clean_up_tokenization_spaces=False);lang,text=parse_asr_output(raw,user_language=j['language']);P=list(tok.encode(raw))
++        a=audits[i]
++        proof={'mode':mode,'target_identity':target_identity(j),'dtype':config['dtype'],
++            'executed_prompt_tokens':contexts[i]['executed_prompt_tokens'],
++            'actual_audio_sha256':contexts[i]['actual_audio_sha256'],
++            'context_override_used':contexts[i]['fault_override'],
++            'candidate_origin_job_id':j['candidate_origin_job_id'],'candidate_accepted':checks[i][0],
++            'reason':checks[i][1],'predicted_token_ids':predicted[i][:len(candidates[i])],
++            'candidate_margins':margins[i][:len(candidates[i])],'eos_token_ids':eos,
++            'verify_batch_seconds':verify_seconds,'fallback_used':i in failed,
++            'fallback_generated':repaired is not None,'fallback_batch_seconds':fallback_seconds,
++            'fallback_requested_layout':config.get('fallback_layout','full'),
++            'fallback_row_indices':fallback_indices,'fallback_executed_job_ids':[jobs[z]['job_id'] for z in fallback_indices],
++            'fallback_batch_rows':len(fallback_indices),'row_index_in_original_batch':i,
++            'fallback_input_ids':fallback_input_ids,
++            'fallback_input_row_origins':[audits[z] for z in fallback_indices],
++            'offered_projection_equal_target_render':P==j['candidate_state_tokens'],
++            'physical_batch_rows':n,'phases':phases,'pilot_oracle':oracle,
++            'unsafe_no_FP32_selection':mode=='unprotected','processor_input_audit':a}
++        rows.append({'job_id':j['job_id'],'runtime_digest':config['runtime_digest'],'prefix_audio_sha256':j['prefix_audio_sha256'],'started_perf':start,'model_started_perf':phases[0]['started_perf'] if phases else None,'model_completed_perf':phases[-1]['completed_perf'] if phases else None,'token_ids':selected,'state_tokens':P,'text':text,'language':lang,'generated_tokens':len(selected),'hit_token_limit':len(selected)==budget and selected[-1] not in eos,'terminated_by_eos':selected[-1] in eos,'execution_context_audit':contexts[i],'model_input_audit':a,'online_verification':proof})
++    completed=time.perf_counter()
++    for r in rows:r['completed_perf']=completed
++    return rows
+--- phaseD/scripts/run_tc_live_qwen.py
++++ measured_online/scripts/run_tc_live_qwen.py
+@@ -32,6 +32,17 @@
+         for b in iter(lambda:f.read(4*1024*1024),b""):
+             h.update(b)
+     return h.hexdigest()
++
++def close_owned_components(consumer,scheduler,workers):
++    """A rejected consumer must not leak this run's own GPU processes."""
++    try:
++        if consumer is not None:consumer.close()
++    finally:
++        try:
++            if scheduler is not None:scheduler.close()
++        finally:
++            for group in workers.values():
++                for worker in group:worker.close()
+ 
+ 
+ def main():
+@@ -73,9 +84,28 @@
+         help="grouped authority batch size; zero follows proposer microbatch")
+     p.add_argument("--grouped-speculative",action="store_true")
+     p.add_argument("--retain-verified-private-prefix",action="store_true")
++    p.add_argument('--online-study-method',choices=['fine','unprotected','score','strict','dgft','standard'])
++    p.add_argument('--online-traffic',choices=['clean','F2'],default='clean')
++    p.add_argument('--online-donors',type=Path)
++    p.add_argument('--online-oracle-diagnostic',action='store_true')
++    p.add_argument('--online-fallback-layout',choices=['full','selective'],default='full')
++    p.add_argument('--online-arrival-cohort',type=int,default=0)
+     p.add_argument("--crash-after-commits",type=int,default=0,
+         help="fault harness only: pause after writing an ACK marker; parent driver must SIGKILL the owned process group")
+     a=p.parse_args()
++    online=None
++    if a.online_study_method:
++        if not a.online_donors or not a.trusted_text_binding:raise ValueError('online study requires pinned donors and D1 renderer')
++        online={'schema':'online-admission-study-v1','method':a.online_study_method,'traffic':a.online_traffic,
++            'score_threshold':.05,'donors':json.loads(a.online_donors.read_text())['donors'],
++            'donor_file_sha256':file_sha(a.online_donors),'injection_rule':'first actual private end>=5/chunk>=2 once per session',
++            'oracle_diagnostic':a.online_oracle_diagnostic,'unsafe_negative_contract':a.online_study_method=='unprotected'}
++        online['fallback_layout']=a.online_fallback_layout
++        online['arrival_cohort']=a.online_arrival_cohort
++        a.mode='coarse' if a.online_study_method in ['dgft','standard'] else 'fine_certified'
++        a.async_implementation='standard' if a.online_study_method=='standard' else 'revtrace'
++        a.proposal_reconciliation='lazy';a.proposal_barrier='decoupled'
++        a.display_protocol='canonical-snapshot-v1';a.publish_canonical_display=True
+     if a.output.exists():
+         raise FileExistsError("unique experiment output required")
+     a.output.mkdir(parents=True)
+@@ -109,6 +139,12 @@
+             'processor_source_sha256':file_sha(Path(inspect.getfile(type(renderer_processor)))),
+             'tokenizers_version':importlib.metadata.version('tokenizers'),'published_text_encoding':'UTF-8 byte exact'}
+     proposal={**runtime,"dtype":"float16"}
++    if online:
++        runtime['online_selection_mode']=a.online_study_method if a.online_study_method in ['unprotected','score','strict'] else None
++        runtime['score_threshold']=online['score_threshold'];runtime['online_oracle_diagnostic']=a.online_oracle_diagnostic
++        runtime['fallback_layout']=a.online_fallback_layout
++        proposal['allow_execution_context_override']=a.online_traffic=='F2'
++        proposal['F2_field_normalization']='declared-parent reconstruction of actual GPU-generated Z; no new generation'
+     if a.mode == "grouped_replay":
+         runtime["verification_policy"] = "grouped_replay"
+         runtime["verification_rows"] = a.verification_rows or a.microbatch
+@@ -141,6 +177,10 @@
+         "journal_sync_mode":a.journal_sync_mode,
+         "manifest_sha256":file_sha(a.manifest),"timeout_seconds":a.timeout,
+         "evidence_type":"real_gpu_wall_clock_arrival_certified_runtime"}
++    if online:
++        config['online_study']=online
++        if a.online_study_method in ['unprotected','score','strict']:
++            config['verification_policy']='online_'+a.online_study_method
+     save(a.output/"config.json",config)
+     save(a.output/"provenance.json",{"code_commit":a.code_commit,
+         "source_sha256":{str(path.relative_to(ROOT)):file_sha(path) for path in
+@@ -169,6 +209,9 @@
+             audio=audio[:int(a.duration_limit*rate)]
+         sessions.append({"session_id":sid,"audio":audio.tobytes(),"source_id":row["source_id"],
+             "language":row["language"],"offset":0.0 if a.arrival=="sync" else sid*0.25})
++        if online and a.online_arrival_cohort:
++            from revtrace.online_admission import cohort_offset
++            sessions[-1]['offset']=cohort_offset(sid,a.online_arrival_cohort)
+     save(a.output/"sessions.json",[{k:v for k,v in s.items() if k!="audio"}|
+         {"audio_sha256":hashlib.sha256(s["audio"]).hexdigest(),"duration":len(s["audio"])/64000}
+         for s in sessions])
+@@ -205,6 +248,7 @@
+         save(a.output/"workers.json",[w.ready for group in workers.values() for w in group])
+         worker_initialization_seconds=time.perf_counter()-initialization_started
+         sampler.start()
++        if online:time.sleep(.25)  # Sampling padding, outside serving clock.
+         with (a.output/"events.jsonl").open("w",encoding="utf-8") as trace:
+             from revtrace.certified_display import RealtimeConsumer
+             consumer=RealtimeConsumer(a.output/'consumer.jsonl',a.consumer_policy,strict_bound=a.trusted_text_binding)
+@@ -227,13 +271,21 @@
+                         print("ACK_FOR_KILL_READY",flush=True)
+                         while True:
+                             time.sleep(.1)  # Injection harness kills, no clean close.
+-            scheduler=LiveQwenScheduler(sessions=sessions,contract=config,executors=workers,emit=emit,
++            scheduler_type=LiveQwenScheduler
++            if online:
++                from revtrace.online_admission import OnlineAdmissionScheduler
++                scheduler_type=OnlineAdmissionScheduler
++            scheduler=scheduler_type(sessions=sessions,contract=config,executors=workers,emit=emit,
+                 durable_journal_path=a.durable_journal_path,trusted_render=trusted_render)
+             save(a.output/"initial_states.json",[{"session_id":s.sid,"state":__import__('dataclasses').asdict(s.state)} for s in scheduler.sessions.values()])
+             result=scheduler.run()
+-        result["consumer"]=consumer.close();consumer=None
++        result["consumer"]=consumer.close()
++        result['actual_consumer_last_application_seconds']=max((r['observed'] for r in consumer.rows),default=0.)
++        result['wall_seconds_including_arrival_and_drain']=max(result['wall_seconds_including_arrival_and_drain'],result['actual_consumer_last_application_seconds'])
++        consumer=None
+         result["worker_initialization_seconds"]=worker_initialization_seconds
+         result["journal_recovery_seconds"]=scheduler.journal_recovery_seconds
++        if online:time.sleep(.25)  # Enclose strict serving window for integration.
+         result["power"]=sampler.stop()
+         save(a.output/"power_samples.json",{"measurement_start_perf":scheduler.t0,
+             "measurement_end_perf":scheduler.t0+result["wall_seconds_including_arrival_and_drain"],
+@@ -258,12 +310,7 @@
+             # Rich JSON serialization is outside the serving/power interval.
+             with (a.output/'worker_records.jsonl').open('w',encoding='utf-8') as stream:
+                 for row in deferred_worker_records:stream.write(json.dumps(row,allow_nan=False)+'\n')
+-        if consumer is not None:consumer.close()
+-        if scheduler is not None:
+-            scheduler.close()
+-        for group in workers.values():
+-            for worker in group:
+-                worker.close()
++        close_owned_components(consumer,scheduler,workers)
+ 
+ if __name__=="__main__":
+     raise SystemExit(main())
+--- phaseD/scripts/tc_live_worker.py
++++ measured_online/scripts/tc_live_worker.py
+@@ -132,6 +132,8 @@
+                 prefixes.append(prefix)
+                 contexts.append({'declared_prompt_digest':digest_tokens(job['prompt_tokens']),
+                     'executed_prompt_digest':digest_tokens(actual_tokens),
++                    'executed_prompt_tokens':list(actual_tokens),
++                    'actual_audio_sha256':digests[-1],
+                     'conditioning_prefix_sha256':hashlib.sha256(prefix.encode()).hexdigest(),
+                     'fault_override': 'fault_actual_prompt_tokens' in job,
+                     'scope':'Observer instrumentation; not a trusted execution attestation'})
+@@ -139,7 +141,7 @@
+                 wavs.append(wav)
+             inputs = processor(text=prompts, audio=wavs, return_tensors="pt", padding=True)
+             audits=[]
+-            if config.get('capture_model_inputs',False) and not warmup:
++            if (config.get('capture_model_inputs',False) or config.get('online_selection_mode')) and not warmup:
+                 def tensor_identity(x):
+                     y=x.detach().cpu().contiguous()
+                     return {'shape':list(y.shape),'dtype':str(y.dtype),'sha256':hashlib.sha256(y.numpy().tobytes()).hexdigest()}
+@@ -162,6 +164,11 @@
+             moved = {k: v.to("cuda:0", dtype=dtype) if torch.is_floating_point(v)
+                      else v.to("cuda:0") for k,v in inputs.items()}
+             length = moved["input_ids"].shape[1]
++            if not warmup and config.get('online_selection_mode'):
++                if any('fault_actual_prompt_tokens' in j for j in jobs):raise ValueError('target verifier must not consume a fault override')
++                from online_selection_worker import select_online
++                return select_online(model=model,processor=processor,moved=moved,jobs=jobs,
++                    prefixes=prefixes,contexts=contexts,audits=audits,config=config,start=start,results=results)
+             if not warmup and any('audit_rescore_tokens' in job for job in jobs):
+                 assert all('audit_rescore_tokens' in job for job in jobs)
+                 candidates=[job['audit_rescore_tokens'] for job in jobs]
+@@ -296,6 +303,17 @@
+                                       not any(t in stops for t in tokens)})
+                 if margins is not None:
+                     rows[-1]["minimum_margin"]=min(margins[row_index][:len(tokens)])
++                if 'fault_actual_prompt_tokens' in job:
++                    # Real wrong-context GPU Z with declared-parent fields.
++                    # This reconstruction is not correct-context generation.
++                    from revtrace.certified_display import TrustedQwenRender
++                    renderer=TrustedQwenRender(tokenizer,parse_asr_output,stops,config['max_new_tokens'])
++                    normalize_start=time.perf_counter();P,text=renderer(job,tokens)
++                    rows[-1]['F2_raw_execution_state_tokens']=list(rows[-1]['state_tokens'])
++                    rows[-1]['F2_raw_execution_text']=rows[-1]['text']
++                    rows[-1]['state_tokens']=P;rows[-1]['text']=text
++                    rows[-1]['F2_field_normalization_seconds']=time.perf_counter()-normalize_start
++                    rows[-1]['F2_normalization_scope']='deterministic fields of wrong-context GPU Z, not regeneration'
+             completed = time.perf_counter()
+             for row in rows:
+                 row["completed_perf"] = completed
+--- phaseD/src/revtrace/online_admission.py
++++ measured_online/src/revtrace/online_admission.py
+@@ -0,0 +1,73 @@
++"""Minimal online candidate protection, not an availability selector or KV cache."""
++import math
++from .sequence_verifier import token_stop_certificate
++from .live_qwen import LiveQwenScheduler,fingerprint
++
++def complete_candidate(row,predicted,*,eos,budget):
++    return token_stop_certificate(row,predicted,eos_token_ids=eos,max_new_tokens=budget)
++
++def gate_candidate(mode,row,predicted,margins,*,eos,budget,threshold=.05):
++    exact,reason=complete_candidate(row,predicted,eos=eos,budget=budget)
++    # Shape/termination is independently required by common D1, not supplied by
++    # a high score. Full-token correct-context scoring is intentionally strong.
++    shape,shape_reason=complete_candidate(row,row,eos=eos,budget=budget)
++    if mode=='strict':return exact,reason
++    if mode=='score':
++        good=len(margins)>=len(row) and all(math.isfinite(x) and x>=threshold for x in margins[:len(row)])
++        return bool(shape and good),'score-and-D1-shape' if shape and good else shape_reason if not shape else 'low-correct-context-score'
++    if mode=='unprotected':return shape,shape_reason
++    raise ValueError('undeclared online selection rule')
++
++def target_identity(job):
++    return fingerprint({k:job[k] for k in ['session_id','parent','prompt_tokens','chunk_id','audio_start_sample','audio_end_sample','prefix_audio_sha256','contract_digest','runtime_digest']})
++
++def fallback_row_plan(shapes,batch_rows,failed,policy):
++    if policy not in ['full','selective']:raise ValueError('undeclared fallback layout')
++    if len(set(failed))!=len(failed) or any(type(i) is not int or not 0<=i<batch_rows for i in failed):raise ValueError('invalid failed-row set')
++    if policy=='selective' and all(shape and shape[0]==batch_rows for shape in shapes.values()):return list(failed)
++    return list(range(batch_rows))
++
++def cohort_offset(sid,cohort,gap=32.,stagger=.25):
++    if cohort<1:raise ValueError('positive cohort required')
++    return (sid//cohort)*gap+(sid%cohort)*stagger
++
++class OnlineAdmissionScheduler(LiveQwenScheduler):
++    def __init__(self,**kwargs):
++        self.online=kwargs['contract']['online_study'];self.mode=self.online['method'];self.injected=set()
++        self.needs_candidate=self.mode in ['unprotected','score','strict']
++        super().__init__(**kwargs)
++    def _make_job(self,s,role):
++        job=super()._make_job(s,role)
++        if role=='proposal' and self.online['traffic']=='F2' and s.sid not in self.injected and job['end_window']>=5 and job['chunk_id']>=2:
++            donors=self.online['donors'];donor=donors[s.sid%len(donors)]
++            job['fault_actual_prompt_tokens']=list(donor['tokens']);job['fault_donor_id']=donor['id'];self.injected.add(s.sid)
++            self._event('F2-injection-issued',job_id=job['job_id'],session_id=s.sid,donor_id=donor['id'],end_window=job['end_window'],chunk_id=job['chunk_id'],declared_prompt_tokens=job['prompt_tokens'],executed_prompt_tokens=job['fault_actual_prompt_tokens'],controlled_fault=True)
++        if role=='authority' and self.needs_candidate:
++            candidate=self._proposal_results.get((s.sid,s.segment_end))
++            if candidate is None:raise AssertionError('online verifier cannot invent a ready candidate')
++            origin=self.jobs[candidate['job_id']]
++            if origin['audio_end_sample']!=job['audio_end_sample']:raise ValueError('candidate target audio mismatch')
++            job.update(candidate_token_ids=list(candidate['token_ids']),candidate_state_tokens=list(candidate['state_tokens']),candidate_text=candidate['text'],candidate_origin_job_id=origin['job_id'],candidate_origin_parent=origin['parent'],candidate_origin_prompt_tokens=origin['prompt_tokens'],candidate_ready_perf=candidate['completed_perf'],online_selection_mode=self.mode)
++            self._event('online-candidate-attached',job_id=job['job_id'],session_id=s.sid,candidate_job_id=origin['job_id'],candidate_completed=candidate['completed_perf'],authority_enqueue=job['enqueue_perf'],same_parent=origin['parent']==job['parent'],same_prompt=origin['prompt_tokens']==job['prompt_tokens'])
++        return job
++    def _ready(self,role):
++        values=super()._ready(role)
++        if role=='authority' and self.needs_candidate:
++            return [s for s in values if (s.sid,s.segment_end) in self._proposal_results]
++        return values
++    def _commit_ready(self):
++        if self.needs_candidate:
++            for s in self.sessions.values():
++                if s.done or s.auth_done or s.auth_result is None:continue
++                r=s.auth_result;j=self.jobs[r['job_id']];proof=r.get('online_verification')
++                if not proof or proof['mode']!=self.mode or proof['target_identity']!=target_identity(j):raise ValueError('missing/wrong online selection receipt')
++                if proof['executed_prompt_tokens']!=j['prompt_tokens'] or proof['actual_audio_sha256']!=j['prefix_audio_sha256']:raise ValueError('verification did not consume current target context/audio')
++                if self.mode!='unprotected':
++                    if proof['dtype']!='float32' or proof['context_override_used']:raise ValueError('untrusted target execution')
++                    if proof['fallback_used']:
++                        if not proof['fallback_generated'] or proof['fallback_batch_seconds']<=0:raise ValueError('unpaid/absent fallback')
++                        if j['job_id'] not in proof['fallback_executed_job_ids']:raise ValueError('fallback did not execute this row')
++                    else:
++                        ok,_=gate_candidate(self.mode,j['candidate_token_ids'],proof['predicted_token_ids'],proof['candidate_margins'],eos=proof['eos_token_ids'],budget=self.contract['authority_runtime']['max_new_tokens'],threshold=self.online['score_threshold'])
++                        if not ok or r['token_ids']!=j['candidate_token_ids']:raise ValueError('invalid verified candidate installation')
++        return super()._commit_ready()
+--- phaseD/tests/test_online_admission.py
++++ measured_online/tests/test_online_admission.py
+@@ -0,0 +1,122 @@
++"""CPU deterministic protocol controls; not model/fault prevalence evidence."""
++import copy
++import numpy as np
++import pytest
++from test_live_qwen import Clock,Fake
++from revtrace.online_admission import OnlineAdmissionScheduler,gate_candidate,target_identity,fallback_row_plan,cohort_offset
++
++@pytest.mark.parametrize('mode',['strict','score'])
++@pytest.mark.parametrize('row,pred,margin,eos,budget,expected',[
++ ([1,9],[1,9],[.1,.1],[9],8,True),
++ ([1],[1],[1.],[9],8,False),
++ ([1,9,2],[1,9,2],[1.,1.,1.],[9],8,False),
++ ([],[],[],[9],8,False),
++ ([1,2,3],[1,2,3],[1.,1.,1.],[9],2,False),
++ ([1,2],[1,2],[1.,1.],[9],2,True),
++ ])
++def test_full_sequence_not_just_scored_prefix(mode,row,pred,margin,eos,budget,expected):
++ assert gate_candidate(mode,row,pred,margin,eos=eos,budget=budget)[0]==expected
++
++def test_high_own_context_margin_is_not_correct_context_evidence():
++ assert not gate_candidate('strict',[1,9],[2,9],[.9,.9],eos=[9],budget=8)[0]
++ assert not gate_candidate('score',[1,9],[2,9],[-.1,.9],eos=[9],budget=8)[0]
++ assert not gate_candidate('score',[1,9],[1,9],[float('nan'),.9],eos=[9],budget=8)[0]
++
++class CheckedFake(Fake):
++ def poll(self):
++  rs=super().poll()
++  if rs is None:return rs
++  for r in rs:
++   j=self.saved[r['job_id']]
++   if j['role']=='authority':
++    mode=j['online_selection_mode'];z=j['candidate_token_ids']
++    r['token_ids']=z;r['state_tokens']=z
++    r['online_verification']={'mode':mode,'target_identity':target_identity(j),'executed_prompt_tokens':j['prompt_tokens'],'actual_audio_sha256':j['prefix_audio_sha256'],'dtype':'float32','context_override_used':False,'fallback_used':False,'fallback_generated':False,'fallback_batch_seconds':0.,'predicted_token_ids':z,'candidate_margins':[.1]*len(z),'eos_token_ids':[]}
++  return rs
++ def submit(self,jobs):
++  self.saved={j['job_id']:copy.deepcopy(j) for j in jobs};super().submit(jobs)
++
++def build(mode='strict',path=None,corrupt=None,traffic='clean'):
++ clock=Clock();cfg={'policy':'fine_certified','rho':1,'fine_seconds':.01,'sample_rate':16000,'authority_runtime':{'dtype':'float32','max_new_tokens':1},'proposal_runtime':{'dtype':'float16'},'microbatch':2,'timeout_seconds':5,'proposal_barrier':'decoupled','proposal_reconciliation':'lazy','verification_policy':'online_'+mode,'journal_sync_mode':'group_ready','retain_verified_private_prefix':True,'online_study':{'method':mode,'traffic':traffic,'score_threshold':.05,'donors':[{'id':'known-CPU-donor','tokens':[30,31,32,33,34,35]}]},'evidence_type':'cpu_deterministic_online_fixture_not_GPU'}
++ ss=[{'session_id':i,'audio':np.zeros(1920,dtype='<f4').tobytes(),'source_id':str(i),'language':'English','offset':i*.004} for i in range(2)]
++ p=Fake('p',clock,.008);p.same_projection=True;a=CheckedFake('a',clock,.009)
++ s=OnlineAdmissionScheduler(sessions=ss,contract=cfg,executors={'proposal':[p],'authority':[a]},emit=lambda e:None,clock=clock,sleep=clock.sleep,durable_journal_path=path)
++ if corrupt:
++  orig=a.poll
++  def poll():
++   rs=orig()
++   if rs:
++    for r in rs:corrupt(r['online_verification'])
++   return rs
++  a.poll=poll
++ return s
++
++@pytest.mark.parametrize('mode',['unprotected','score','strict'])
++def test_ready_candidate_audio_and_same_WAL_pipeline(mode,tmp_path):
++ s=build(mode,tmp_path/'w.wal');r=s.run();assert r['fine_window_accounting_complete']
++ for e in s.events:
++  if e['kind']=='online-candidate-attached':assert e['candidate_completed']<=e['authority_enqueue']
++ for j in s.jobs.values():
++  assert j['audio_ready_perf']<=j['enqueue_perf']
++  if j['role']=='authority':assert 'candidate_token_ids' in j
++ assert all(x.state.audio_frontier_window==1920 for x in s.sessions.values());s.close()
++
++@pytest.mark.parametrize('corrupt',[
++ lambda x:x.update(target_identity='wrong-parent-context'),
++ lambda x:x.update(executed_prompt_tokens=[999]),
++ lambda x:x.update(actual_audio_sha256='wrong-audio'),
++ lambda x:x.update(dtype='float16'),
++ lambda x:x.update(context_override_used=True),
++ lambda x:x.update(predicted_token_ids=[888]),
++ lambda x:x.update(fallback_used=True,fallback_generated=False,fallback_batch_seconds=0),
++ ])
++def test_protected_receipt_fail_closed(corrupt):
++ s=build(corrupt=corrupt)
++ with pytest.raises(ValueError):s.run()
++ assert not any(e['kind']=='commit' for e in s.events)
++
++def test_F2_only_after_consumed_chunk_and_once_per_session():
++ s=build(traffic='F2');s.run();faults=[e for e in s.events if e['kind']=='F2-injection-issued']
++ assert len(faults)==2 and all(e['chunk_id']>=2 and e['end_window']>=5 for e in faults)
++ assert len({e['session_id'] for e in faults})==2
++
++def test_no_candidate_no_authority_dispatch():
++ s=build();s.clock.sleep(.02)
++ assert not s._ready('authority') and not s._proposal_results
++
++def test_long_sequence_checks_beyond64():
++ z=[1]*130+[9];p=z.copy();p[100]=2
++ assert not gate_candidate('strict',z,p,[],eos=[9],budget=256)[0]
++
++def test_consumer_failure_still_closes_only_owned_workers(monkeypatch):
++ import importlib.util
++ from pathlib import Path
++ path=Path(__file__).resolve().parents[1]/'scripts/run_tc_live_qwen.py'
++ monkeypatch.syspath_prepend(str(path.parent))
++ spec=importlib.util.spec_from_file_location('online_cli_cleanup',path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
++ closed=[]
++ class Component:
++  def __init__(self,name,fail=False):self.name=name;self.fail=fail
++  def close(self):
++   closed.append(self.name)
++   if self.fail:raise RuntimeError('consumer correctly failed closed')
++ with pytest.raises(RuntimeError):m.close_owned_components(Component('consumer',True),Component('WAL'),{'proposal':[Component('owned-p')],'authority':[Component('owned-a')]})
++ assert closed==['consumer','WAL','owned-p','owned-a']
++
++@pytest.mark.parametrize('shapes,failed,policy,expected',[
++ ({'ids':[4,40],'features':[4,128,400]},[1,3],'selective',[1,3]),
++ ({'ids':[4,40],'features':[5,128,400]},[1,3],'selective',[0,1,2,3]),
++ ({'ids':[4,40],'scalar':[]},[1],'selective',[0,1,2,3]),
++ ({'ids':[4,40]},[1],'full',[0,1,2,3]),
++ ({'ids':[4,40]},[0,1,2,3],'selective',[0,1,2,3]),
++ ])
++def test_fallback_row_mapping_fail_closed(shapes,failed,policy,expected):
++ assert fallback_row_plan(shapes,4,failed,policy)==expected
++
++@pytest.mark.parametrize('bad',[[4],[-1],[1,1],[True]])
++def test_fallback_cannot_select_unsubmitted_or_duplicate_rows(bad):
++ with pytest.raises(ValueError):fallback_row_plan({'ids':[4,40]},4,bad,'selective')
++
++def test_cohort_arrivals_are_explicit_and_same_for_all_policies():
++ assert [cohort_offset(i,8) for i in [0,7,8,15]]==[0.,1.75,32.,33.75]
++ with pytest.raises(ValueError):cohort_offset(1,0)
