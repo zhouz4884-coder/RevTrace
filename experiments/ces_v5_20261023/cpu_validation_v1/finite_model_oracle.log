@@ -1,0 +1,407 @@
+{
+  "generation_split": {
+    "single_batch": {
+      "evidence_tier": "deterministic_CPU_scheduling_model_only",
+      "model_optimal": true,
+      "real_GPU_optimality_or_gain_claimed": false,
+      "objective": "goodput",
+      "new_credit_audio": 2.0,
+      "new_wall_seconds": 1.0,
+      "commit_late_audio": 0.0,
+      "finite_run_rate": 2.0,
+      "common_cut": [
+        0,
+        1
+      ],
+      "steps": [
+        {
+          "operation": "generate",
+          "tasks": [
+            0,
+            1
+          ],
+          "start": 0.0,
+          "lease_end": 1.0,
+          "row_finishes": {
+            "0": 1.0,
+            "1": 1.0
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        }
+      ],
+      "candidate_transitions_evaluated": 1,
+      "dominated_labels_rejected": 0,
+      "peak_labels_per_completed_set": 1,
+      "final_labels": 1,
+      "assumptions": [
+        "finite declared homogeneous actions",
+        "deterministic time-independent costs",
+        "fixed legal transition outcomes",
+        "all tasks in common cut complete",
+        "no additional Worker dispatch before physical lease drains",
+        "candidate availability fixed in fixture"
+      ]
+    },
+    "full_action_set": {
+      "evidence_tier": "deterministic_CPU_scheduling_model_only",
+      "model_optimal": true,
+      "real_GPU_optimality_or_gain_claimed": false,
+      "objective": "goodput",
+      "new_credit_audio": 4.0,
+      "new_wall_seconds": 0.4,
+      "commit_late_audio": 0.0,
+      "finite_run_rate": 10.0,
+      "common_cut": [
+        0,
+        1
+      ],
+      "steps": [
+        {
+          "operation": "generate",
+          "tasks": [
+            0
+          ],
+          "start": 0.0,
+          "lease_end": 0.2,
+          "row_finishes": {
+            "0": 0.2
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        },
+        {
+          "operation": "generate",
+          "tasks": [
+            1
+          ],
+          "start": 0.2,
+          "lease_end": 0.4,
+          "row_finishes": {
+            "1": 0.4
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        }
+      ],
+      "candidate_transitions_evaluated": 5,
+      "dominated_labels_rejected": 1,
+      "peak_labels_per_completed_set": 1,
+      "final_labels": 1,
+      "assumptions": [
+        "finite declared homogeneous actions",
+        "deterministic time-independent costs",
+        "fixed legal transition outcomes",
+        "all tasks in common cut complete",
+        "no additional Worker dispatch before physical lease drains",
+        "candidate availability fixed in fixture"
+      ]
+    }
+  },
+  "verification_split": {
+    "single_batch": {
+      "evidence_tier": "deterministic_CPU_scheduling_model_only",
+      "model_optimal": true,
+      "real_GPU_optimality_or_gain_claimed": false,
+      "objective": "goodput",
+      "new_credit_audio": 2.0,
+      "new_wall_seconds": 0.7,
+      "commit_late_audio": 0.0,
+      "finite_run_rate": 2.857142857142857,
+      "common_cut": [
+        0,
+        1
+      ],
+      "steps": [
+        {
+          "operation": "verify",
+          "tasks": [
+            0,
+            1
+          ],
+          "start": 0.0,
+          "lease_end": 0.7,
+          "row_finishes": {
+            "0": 0.7,
+            "1": 0.7
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        }
+      ],
+      "candidate_transitions_evaluated": 1,
+      "dominated_labels_rejected": 0,
+      "peak_labels_per_completed_set": 1,
+      "final_labels": 1,
+      "assumptions": [
+        "finite declared homogeneous actions",
+        "deterministic time-independent costs",
+        "fixed legal transition outcomes",
+        "all tasks in common cut complete",
+        "no additional Worker dispatch before physical lease drains",
+        "candidate availability fixed in fixture"
+      ]
+    },
+    "full_action_set": {
+      "evidence_tier": "deterministic_CPU_scheduling_model_only",
+      "model_optimal": true,
+      "real_GPU_optimality_or_gain_claimed": false,
+      "objective": "goodput",
+      "new_credit_audio": 4.0,
+      "new_wall_seconds": 0.7,
+      "commit_late_audio": 0.0,
+      "finite_run_rate": 5.714285714285714,
+      "common_cut": [
+        0,
+        1
+      ],
+      "steps": [
+        {
+          "operation": "verify",
+          "tasks": [
+            0
+          ],
+          "start": 0.0,
+          "lease_end": 0.1,
+          "row_finishes": {
+            "0": 0.1
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        },
+        {
+          "operation": "verify",
+          "tasks": [
+            1
+          ],
+          "start": 0.1,
+          "lease_end": 0.7,
+          "row_finishes": {
+            "1": 0.7
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        }
+      ],
+      "candidate_transitions_evaluated": 5,
+      "dominated_labels_rejected": 1,
+      "peak_labels_per_completed_set": 1,
+      "final_labels": 1,
+      "assumptions": [
+        "finite declared homogeneous actions",
+        "deterministic time-independent costs",
+        "fixed legal transition outcomes",
+        "all tasks in common cut complete",
+        "no additional Worker dispatch before physical lease drains",
+        "candidate availability fixed in fixture"
+      ]
+    }
+  },
+  "commit_priority": {
+    "commit_first": {
+      "evidence_tier": "deterministic_CPU_scheduling_model_only",
+      "model_optimal": true,
+      "real_GPU_optimality_or_gain_claimed": false,
+      "objective": "commit_first",
+      "new_credit_audio": 0.0,
+      "new_wall_seconds": 1.2,
+      "commit_late_audio": 0.0,
+      "finite_run_rate": 0.0,
+      "common_cut": [
+        0,
+        1
+      ],
+      "steps": [
+        {
+          "operation": "verify",
+          "tasks": [
+            0
+          ],
+          "start": 0.0,
+          "lease_end": 1.0,
+          "row_finishes": {
+            "0": 1.0
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        },
+        {
+          "operation": "generate",
+          "tasks": [
+            1
+          ],
+          "start": 1.0,
+          "lease_end": 1.2,
+          "row_finishes": {
+            "1": 1.2
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        }
+      ],
+      "candidate_transitions_evaluated": 4,
+      "dominated_labels_rejected": 0,
+      "peak_labels_per_completed_set": 2,
+      "final_labels": 2,
+      "assumptions": [
+        "finite declared homogeneous actions",
+        "deterministic time-independent costs",
+        "fixed legal transition outcomes",
+        "all tasks in common cut complete",
+        "no additional Worker dispatch before physical lease drains",
+        "candidate availability fixed in fixture"
+      ]
+    },
+    "goodput_first": {
+      "evidence_tier": "deterministic_CPU_scheduling_model_only",
+      "model_optimal": true,
+      "real_GPU_optimality_or_gain_claimed": false,
+      "objective": "goodput",
+      "new_credit_audio": 2.0,
+      "new_wall_seconds": 1.2,
+      "commit_late_audio": 2.0,
+      "finite_run_rate": 1.6666666666666667,
+      "common_cut": [
+        0,
+        1
+      ],
+      "steps": [
+        {
+          "operation": "generate",
+          "tasks": [
+            1
+          ],
+          "start": 0.0,
+          "lease_end": 0.2,
+          "row_finishes": {
+            "1": 0.2
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        },
+        {
+          "operation": "verify",
+          "tasks": [
+            0
+          ],
+          "start": 0.2,
+          "lease_end": 1.2,
+          "row_finishes": {
+            "0": 1.2
+          },
+          "evidence_note": "declared deterministic CPU scheduling fixture"
+        }
+      ],
+      "candidate_transitions_evaluated": 4,
+      "dominated_labels_rejected": 0,
+      "peak_labels_per_completed_set": 2,
+      "final_labels": 2,
+      "assumptions": [
+        "finite declared homogeneous actions",
+        "deterministic time-independent costs",
+        "fixed legal transition outcomes",
+        "all tasks in common cut complete",
+        "no additional Worker dispatch before physical lease drains",
+        "candidate availability fixed in fixture"
+      ]
+    }
+  },
+  "parent_unlock": {
+    "evidence_tier": "deterministic_CPU_scheduling_model_only",
+    "model_optimal": true,
+    "real_GPU_optimality_or_gain_claimed": false,
+    "objective": "goodput",
+    "new_credit_audio": 4.0,
+    "new_wall_seconds": 2.2,
+    "commit_late_audio": 0.0,
+    "finite_run_rate": 1.8181818181818181,
+    "common_cut": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "steps": [
+      {
+        "operation": "generate",
+        "tasks": [
+          0,
+          2
+        ],
+        "start": 0.0,
+        "lease_end": 0.8,
+        "row_finishes": {
+          "0": 0.8,
+          "2": 0.8
+        },
+        "evidence_note": "declared deterministic CPU scheduling fixture"
+      },
+      {
+        "operation": "generate",
+        "tasks": [
+          1,
+          3
+        ],
+        "start": 0.8,
+        "lease_end": 1.6,
+        "row_finishes": {
+          "1": 1.6,
+          "3": 1.6
+        },
+        "evidence_note": "declared deterministic CPU scheduling fixture"
+      },
+      {
+        "operation": "generate",
+        "tasks": [
+          4
+        ],
+        "start": 1.6,
+        "lease_end": 2.2,
+        "row_finishes": {
+          "4": 2.2
+        },
+        "evidence_note": "declared deterministic CPU scheduling fixture"
+      }
+    ],
+    "candidate_transitions_evaluated": 7,
+    "dominated_labels_rejected": 1,
+    "peak_labels_per_completed_set": 1,
+    "final_labels": 1,
+    "assumptions": [
+      "finite declared homogeneous actions",
+      "deterministic time-independent costs",
+      "fixed legal transition outcomes",
+      "all tasks in common cut complete",
+      "no additional Worker dispatch before physical lease drains",
+      "candidate availability fixed in fixture"
+    ]
+  },
+  "ratio_of_expectations_counterexample": {
+    "A_outcomes_equal_probability": [
+      [
+        2,
+        1
+      ],
+      [
+        8,
+        10
+      ]
+    ],
+    "A_Ecredit_over_Ewall": 0.9090909090909091,
+    "A_Ecredit_over_wall": 1.4,
+    "B_constant_credit_wall": [
+      1,
+      1
+    ],
+    "B_both_objectives": 1.0
+  },
+  "prefix_ratio_counterexample": {
+    "prefix_credit": 0,
+    "prefix_wall": 10,
+    "A_delta_credit_wall": [
+      2,
+      1
+    ],
+    "B_delta_credit_wall": [
+      3,
+      2
+    ],
+    "A_local_rate": 2.0,
+    "B_local_rate": 1.5,
+    "A_completed_rate": 0.18181818181818182,
+    "B_completed_rate": 0.25
+  }
+}
+

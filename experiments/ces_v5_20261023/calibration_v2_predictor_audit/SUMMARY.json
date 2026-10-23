@@ -1,0 +1,40 @@
+{
+  "status": "EXACT_SCENARIO_PREDICTOR_AUDITED",
+  "schema": "historical-calibration-check-v1",
+  "summary": {
+    "development_generate": {
+      "physical_batches": 1240,
+      "median_absolute_mean_error_s": 0.10839830309346621,
+      "empirical_q90_coverage": 0.9379032258064516,
+      "mean_row_CDF_decile_MAE": 0.0640798353893944
+    },
+    "development_verify": {
+      "physical_batches": 760,
+      "median_absolute_mean_error_s": 0.16585349925447157,
+      "empirical_q90_coverage": 0.9171052631578948,
+      "mean_row_CDF_decile_MAE": 0.11720269907549151
+    },
+    "validation_generate": {
+      "physical_batches": 1130,
+      "median_absolute_mean_error_s": 0.10632027502061103,
+      "empirical_q90_coverage": 0.9053097345132743,
+      "mean_row_CDF_decile_MAE": 0.0726608431643723
+    },
+    "validation_verify": {
+      "physical_batches": 620,
+      "median_absolute_mean_error_s": 0.14679402729811344,
+      "empirical_q90_coverage": 0.864516129032258,
+      "mean_row_CDF_decile_MAE": 0.13751043095553062
+    }
+  },
+  "actual_batches": 3750,
+  "calibration_sha256": "bc81b5bac754997222c598caa94265bb7c0ea27a3b4cb990dfc213ca7fc45fe2",
+  "policy_sha256": "0a92ac9015908731d1ecd8217aba8d2771740e4d33fc812bdff77871c7bff986",
+  "script_sha256": "2e95d1dad9ad63b637d4c5cb8cbb8edde7cd9e4094d2fd61a63e39aa66299557",
+  "GPU_calls": 0,
+  "scope": "Historical V4 selected physical batches; old validation is diagnostic and no new V5 online result",
+  "row_CDF_metric": "Predicted exchangeable row service CDF compared with observed rows at 9 retrospective lease-relative thresholds; not Display Goodput",
+  "in_sample_development": true,
+  "validation_excluded_from_cost_fit": true,
+  "actual_batch_choice_counterfactual_executed": false
+}
