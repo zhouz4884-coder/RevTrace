@@ -1,0 +1,32 @@
+{
+  "status": "PASS_NAMED_SDK_SAFETY_SUBSTRATE_UNCHANGED",
+  "source_commit": "e0aeae1b418644c378dde331c59b55fc5948b40f",
+  "base_sdk_commit": "2bc71af5457de5d065ff9e771d2fad428c5c6ed9",
+  "protected_byte_identical": {
+    "src/revtrace/dgft.py": "070d93c406efcc86db218712fffea2d532775d87269e63a78762eb8771de0f4b",
+    "src/revtrace/live_qwen.py": "9c4de0bebe9b9006c713d9d74cf0b728cc253ad5f9841095178f34543002baf2",
+    "src/revtrace/durable_journal.py": "874a4aedd0aae6ffd67131d120a3476ab71246a302f1e8aec366b2725f28e323",
+    "src/revtrace/certified_display.py": "9dbb94dc9a3acaa9cf53cb152c8451fea9b01a300472852cc9a44a5e6c0d5e15",
+    "src/revtrace/continuity_proof.py": "b1cab992b3109abaac1c07ba3414b022740f1a0387c6695e478a4fb0397989ac",
+    "src/revtrace/standard_safe_async.py": "8e15e8d479f9ba91d4f46bac5f44e7374c05ac4b47c90df69b56ba496a12e572",
+    "src/revtrace/sequence_verifier.py": "7cc4973831b4c92b664783434a91fe2e23ad5a4fb72d9d72e6d01e9864dbe22f",
+    "src/revtrace/online_admission.py": "a4d10b6361f0d01e15e70ee3a9ff9fc2b102ba1ae06c5e1a5e4c4255477cd981",
+    "src/revtrace/row_lifecycle.py": "56ee3609fca5bfab3a613857fc04f80ab3e3b66a3b9043ad549d8c9bb126824f",
+    "src/revtrace/row_stream.py": "2974dc5c64ab4fd6f71b2e1c57da1ecc594220cfafe1da3b0fa0f3e82a4800b9",
+    "scripts/online_selection_worker.py": "5748f52f3ca07babed1fce2122959e9654c62a2fe2275bd0b080376a96405e97"
+  },
+  "modified_existing_paths": [
+    "scripts/row_delivery_executor.py",
+    "scripts/row_delivery_worker.py",
+    "scripts/run_tc_live_qwen.py",
+    "scripts/tc_live_worker.py"
+  ],
+  "new_paths": [
+    ".gitignore",
+    "src/revtrace/ces_policy.py",
+    "src/revtrace/ces_runtime.py",
+    "tests/test_ces.py"
+  ],
+  "features_do_not_read_fault_or_donor_fields": true,
+  "not_a_formal_novelty_or_performance_proof": true
+}
