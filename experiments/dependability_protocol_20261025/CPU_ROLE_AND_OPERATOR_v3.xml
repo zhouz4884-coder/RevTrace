@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="8" failures="0" skipped="0" tests="19" time="1.688" timestamp="2026-10-26T04:21:43.702165+08:00" hostname="LAPTOP-OE488K9P"><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_coherent_own_row_and_drain_pass_transport_not_selection" time="0.001" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_corrupting_only_row_without_drain_manifest_fails_closed" time="0.001" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_authority_capability_forbidden" time="0.000" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_payload_shape_budget_and_stop[z0]" time="0.000" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_payload_shape_budget_and_stop[z1]" time="0.001" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_payload_shape_budget_and_stop[z2]" time="0.000" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_payload_shape_budget_and_stop[z3]" time="0.000" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_payload_shape_budget_and_stop[z4]" time="0.000" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_wrong_target_and_duplicate_have_no_second_injection" time="0.000" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_mutated_identity_cannot_borrow_own_channel" time="0.000" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_role_channel" name="test_consistent_duplicate_does_not_create_an_extra_row" time="0.001" /><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_operator_controller" name="test_cpu_prepared_trace_parent_and_selection[False-renderer_only]" time="0.027"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries&quot;">cls = &lt;class '_pytest.runner.CallInfo'&gt;
+func = &lt;function call_and_report.&lt;locals&gt;.&lt;lambda&gt; at 0x0000021A5B985580&gt;
+when = 'setup'
+reraise = (&lt;class '_pytest.outcomes.Exit'&gt;, &lt;class 'KeyboardInterrupt'&gt;)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -&gt; CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        start = timing.time()
+        precise_start = timing.perf_counter()
+        try:
+&gt;           result: TResult | None = func()
+
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:341: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:242: in &lt;lambda&gt;
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:90: in pytest_runtest_setup
+    yield from unraisable_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:70: in unraisable_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:840: in pytest_runtest_setup
+    yield from self._runtest_for(item, "setup")
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:829: in _runtest_for
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\capture.py:875: in pytest_runtest_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:87: in pytest_runtest_setup
+    yield from thread_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:68: in thread_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:160: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:514: in setup
+    col.setup()
+E:\Anaconda\Lib\site-packages\_pytest\python.py:1630: in setup
+    self._request._fillfixtures()
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:697: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:532: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:617: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1091: in execute
+    result = ihook.pytest_fixture_setup(fixturedef=self, request=request)
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1140: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:891: in call_fixture_func
+    fixture_result = next(generator)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:265: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:252: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:131: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:112: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:187: in getbasetemp
+    basetemp = make_numbered_dir_with_cleanup(
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:407: in make_numbered_dir_with_cleanup
+    raise e
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:388: in make_numbered_dir_with_cleanup
+    p = make_numbered_dir(root, prefix, mode)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/LENOVO/AppData/Local/Packages/sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}/AC/Temp/pytest-of-LENOVO')
+prefix = 'pytest-', mode = 448
+
+    def make_numbered_dir(root: Path, prefix: str, mode: int = 0o700) -&gt; Path:
+        """Create a directory with an increased number as suffix for the given prefix."""
+        for i in range(10):
+            # try up to 10 times to create the folder
+            max_existing = max(map(parse_num, find_suffixes(root, prefix)), default=-1)
+            new_number = max_existing + 1
+            new_path = root.joinpath(f"{prefix}{new_number}")
+            try:
+                new_path.mkdir(mode=mode)
+            except Exception:
+                pass
+            else:
+                _force_symlink(root, prefix + "current", new_path)
+                return new_path
+        else:
+&gt;           raise OSError(
+                "could not create numbered dir with prefix "
+                f"{prefix} in {root} after 10 tries"
+            )
+E           OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries
+
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:240: OSError</error></testcase><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_operator_controller" name="test_cpu_prepared_trace_parent_and_selection[False-strict]" time="0.022"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries&quot;">cls = &lt;class '_pytest.runner.CallInfo'&gt;
+func = &lt;function call_and_report.&lt;locals&gt;.&lt;lambda&gt; at 0x0000021A5B9876A0&gt;
+when = 'setup'
+reraise = (&lt;class '_pytest.outcomes.Exit'&gt;, &lt;class 'KeyboardInterrupt'&gt;)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -&gt; CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        start = timing.time()
+        precise_start = timing.perf_counter()
+        try:
+&gt;           result: TResult | None = func()
+
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:341: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:242: in &lt;lambda&gt;
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:90: in pytest_runtest_setup
+    yield from unraisable_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:70: in unraisable_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:840: in pytest_runtest_setup
+    yield from self._runtest_for(item, "setup")
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:829: in _runtest_for
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\capture.py:875: in pytest_runtest_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:87: in pytest_runtest_setup
+    yield from thread_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:68: in thread_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:160: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:514: in setup
+    col.setup()
+E:\Anaconda\Lib\site-packages\_pytest\python.py:1630: in setup
+    self._request._fillfixtures()
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:697: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:532: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:617: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1091: in execute
+    result = ihook.pytest_fixture_setup(fixturedef=self, request=request)
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1140: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:891: in call_fixture_func
+    fixture_result = next(generator)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:265: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:252: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:131: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:112: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:187: in getbasetemp
+    basetemp = make_numbered_dir_with_cleanup(
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:407: in make_numbered_dir_with_cleanup
+    raise e
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:388: in make_numbered_dir_with_cleanup
+    p = make_numbered_dir(root, prefix, mode)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/LENOVO/AppData/Local/Packages/sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}/AC/Temp/pytest-of-LENOVO')
+prefix = 'pytest-', mode = 448
+
+    def make_numbered_dir(root: Path, prefix: str, mode: int = 0o700) -&gt; Path:
+        """Create a directory with an increased number as suffix for the given prefix."""
+        for i in range(10):
+            # try up to 10 times to create the folder
+            max_existing = max(map(parse_num, find_suffixes(root, prefix)), default=-1)
+            new_number = max_existing + 1
+            new_path = root.joinpath(f"{prefix}{new_number}")
+            try:
+                new_path.mkdir(mode=mode)
+            except Exception:
+                pass
+            else:
+                _force_symlink(root, prefix + "current", new_path)
+                return new_path
+        else:
+&gt;           raise OSError(
+                "could not create numbered dir with prefix "
+                f"{prefix} in {root} after 10 tries"
+            )
+E           OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries
+
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:240: OSError</error></testcase><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_operator_controller" name="test_cpu_prepared_trace_parent_and_selection[False-revtrace]" time="0.025"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries&quot;">cls = &lt;class '_pytest.runner.CallInfo'&gt;
+func = &lt;function call_and_report.&lt;locals&gt;.&lt;lambda&gt; at 0x0000021A5B987A60&gt;
+when = 'setup'
+reraise = (&lt;class '_pytest.outcomes.Exit'&gt;, &lt;class 'KeyboardInterrupt'&gt;)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -&gt; CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        start = timing.time()
+        precise_start = timing.perf_counter()
+        try:
+&gt;           result: TResult | None = func()
+
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:341: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:242: in &lt;lambda&gt;
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:90: in pytest_runtest_setup
+    yield from unraisable_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:70: in unraisable_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:840: in pytest_runtest_setup
+    yield from self._runtest_for(item, "setup")
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:829: in _runtest_for
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\capture.py:875: in pytest_runtest_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:87: in pytest_runtest_setup
+    yield from thread_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:68: in thread_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:160: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:514: in setup
+    col.setup()
+E:\Anaconda\Lib\site-packages\_pytest\python.py:1630: in setup
+    self._request._fillfixtures()
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:697: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:532: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:617: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1091: in execute
+    result = ihook.pytest_fixture_setup(fixturedef=self, request=request)
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1140: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:891: in call_fixture_func
+    fixture_result = next(generator)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:265: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:252: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:131: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:112: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:187: in getbasetemp
+    basetemp = make_numbered_dir_with_cleanup(
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:407: in make_numbered_dir_with_cleanup
+    raise e
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:388: in make_numbered_dir_with_cleanup
+    p = make_numbered_dir(root, prefix, mode)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/LENOVO/AppData/Local/Packages/sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}/AC/Temp/pytest-of-LENOVO')
+prefix = 'pytest-', mode = 448
+
+    def make_numbered_dir(root: Path, prefix: str, mode: int = 0o700) -&gt; Path:
+        """Create a directory with an increased number as suffix for the given prefix."""
+        for i in range(10):
+            # try up to 10 times to create the folder
+            max_existing = max(map(parse_num, find_suffixes(root, prefix)), default=-1)
+            new_number = max_existing + 1
+            new_path = root.joinpath(f"{prefix}{new_number}")
+            try:
+                new_path.mkdir(mode=mode)
+            except Exception:
+                pass
+            else:
+                _force_symlink(root, prefix + "current", new_path)
+                return new_path
+        else:
+&gt;           raise OSError(
+                "could not create numbered dir with prefix "
+                f"{prefix} in {root} after 10 tries"
+            )
+E           OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries
+
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:240: OSError</error></testcase><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_operator_controller" name="test_cpu_prepared_trace_parent_and_selection[False-standard]" time="0.023"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries&quot;">cls = &lt;class '_pytest.runner.CallInfo'&gt;
+func = &lt;function call_and_report.&lt;locals&gt;.&lt;lambda&gt; at 0x0000021A5B987920&gt;
+when = 'setup'
+reraise = (&lt;class '_pytest.outcomes.Exit'&gt;, &lt;class 'KeyboardInterrupt'&gt;)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -&gt; CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        start = timing.time()
+        precise_start = timing.perf_counter()
+        try:
+&gt;           result: TResult | None = func()
+
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:341: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:242: in &lt;lambda&gt;
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:90: in pytest_runtest_setup
+    yield from unraisable_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:70: in unraisable_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:840: in pytest_runtest_setup
+    yield from self._runtest_for(item, "setup")
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:829: in _runtest_for
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\capture.py:875: in pytest_runtest_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:87: in pytest_runtest_setup
+    yield from thread_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:68: in thread_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:160: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:514: in setup
+    col.setup()
+E:\Anaconda\Lib\site-packages\_pytest\python.py:1630: in setup
+    self._request._fillfixtures()
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:697: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:532: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:617: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1091: in execute
+    result = ihook.pytest_fixture_setup(fixturedef=self, request=request)
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1140: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:891: in call_fixture_func
+    fixture_result = next(generator)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:265: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:252: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:131: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:112: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:187: in getbasetemp
+    basetemp = make_numbered_dir_with_cleanup(
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:407: in make_numbered_dir_with_cleanup
+    raise e
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:388: in make_numbered_dir_with_cleanup
+    p = make_numbered_dir(root, prefix, mode)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/LENOVO/AppData/Local/Packages/sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}/AC/Temp/pytest-of-LENOVO')
+prefix = 'pytest-', mode = 448
+
+    def make_numbered_dir(root: Path, prefix: str, mode: int = 0o700) -&gt; Path:
+        """Create a directory with an increased number as suffix for the given prefix."""
+        for i in range(10):
+            # try up to 10 times to create the folder
+            max_existing = max(map(parse_num, find_suffixes(root, prefix)), default=-1)
+            new_number = max_existing + 1
+            new_path = root.joinpath(f"{prefix}{new_number}")
+            try:
+                new_path.mkdir(mode=mode)
+            except Exception:
+                pass
+            else:
+                _force_symlink(root, prefix + "current", new_path)
+                return new_path
+        else:
+&gt;           raise OSError(
+                "could not create numbered dir with prefix "
+                f"{prefix} in {root} after 10 tries"
+            )
+E           OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries
+
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:240: OSError</error></testcase><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_operator_controller" name="test_cpu_prepared_trace_parent_and_selection[True-renderer_only]" time="0.023"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries&quot;">cls = &lt;class '_pytest.runner.CallInfo'&gt;
+func = &lt;function call_and_report.&lt;locals&gt;.&lt;lambda&gt; at 0x0000021A5C3404A0&gt;
+when = 'setup'
+reraise = (&lt;class '_pytest.outcomes.Exit'&gt;, &lt;class 'KeyboardInterrupt'&gt;)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -&gt; CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        start = timing.time()
+        precise_start = timing.perf_counter()
+        try:
+&gt;           result: TResult | None = func()
+
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:341: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:242: in &lt;lambda&gt;
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:90: in pytest_runtest_setup
+    yield from unraisable_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:70: in unraisable_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:840: in pytest_runtest_setup
+    yield from self._runtest_for(item, "setup")
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:829: in _runtest_for
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\capture.py:875: in pytest_runtest_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:87: in pytest_runtest_setup
+    yield from thread_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:68: in thread_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:160: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:514: in setup
+    col.setup()
+E:\Anaconda\Lib\site-packages\_pytest\python.py:1630: in setup
+    self._request._fillfixtures()
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:697: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:532: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:617: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1091: in execute
+    result = ihook.pytest_fixture_setup(fixturedef=self, request=request)
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1140: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:891: in call_fixture_func
+    fixture_result = next(generator)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:265: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:252: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:131: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:112: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:187: in getbasetemp
+    basetemp = make_numbered_dir_with_cleanup(
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:407: in make_numbered_dir_with_cleanup
+    raise e
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:388: in make_numbered_dir_with_cleanup
+    p = make_numbered_dir(root, prefix, mode)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/LENOVO/AppData/Local/Packages/sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}/AC/Temp/pytest-of-LENOVO')
+prefix = 'pytest-', mode = 448
+
+    def make_numbered_dir(root: Path, prefix: str, mode: int = 0o700) -&gt; Path:
+        """Create a directory with an increased number as suffix for the given prefix."""
+        for i in range(10):
+            # try up to 10 times to create the folder
+            max_existing = max(map(parse_num, find_suffixes(root, prefix)), default=-1)
+            new_number = max_existing + 1
+            new_path = root.joinpath(f"{prefix}{new_number}")
+            try:
+                new_path.mkdir(mode=mode)
+            except Exception:
+                pass
+            else:
+                _force_symlink(root, prefix + "current", new_path)
+                return new_path
+        else:
+&gt;           raise OSError(
+                "could not create numbered dir with prefix "
+                f"{prefix} in {root} after 10 tries"
+            )
+E           OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries
+
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:240: OSError</error></testcase><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_operator_controller" name="test_cpu_prepared_trace_parent_and_selection[True-strict]" time="0.022"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries&quot;">cls = &lt;class '_pytest.runner.CallInfo'&gt;
+func = &lt;function call_and_report.&lt;locals&gt;.&lt;lambda&gt; at 0x0000021A5C341440&gt;
+when = 'setup'
+reraise = (&lt;class '_pytest.outcomes.Exit'&gt;, &lt;class 'KeyboardInterrupt'&gt;)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -&gt; CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        start = timing.time()
+        precise_start = timing.perf_counter()
+        try:
+&gt;           result: TResult | None = func()
+
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:341: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:242: in &lt;lambda&gt;
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:90: in pytest_runtest_setup
+    yield from unraisable_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:70: in unraisable_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:840: in pytest_runtest_setup
+    yield from self._runtest_for(item, "setup")
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:829: in _runtest_for
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\capture.py:875: in pytest_runtest_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:87: in pytest_runtest_setup
+    yield from thread_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:68: in thread_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:160: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:514: in setup
+    col.setup()
+E:\Anaconda\Lib\site-packages\_pytest\python.py:1630: in setup
+    self._request._fillfixtures()
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:697: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:532: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:617: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1091: in execute
+    result = ihook.pytest_fixture_setup(fixturedef=self, request=request)
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1140: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:891: in call_fixture_func
+    fixture_result = next(generator)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:265: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:252: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:131: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:112: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:187: in getbasetemp
+    basetemp = make_numbered_dir_with_cleanup(
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:407: in make_numbered_dir_with_cleanup
+    raise e
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:388: in make_numbered_dir_with_cleanup
+    p = make_numbered_dir(root, prefix, mode)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/LENOVO/AppData/Local/Packages/sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}/AC/Temp/pytest-of-LENOVO')
+prefix = 'pytest-', mode = 448
+
+    def make_numbered_dir(root: Path, prefix: str, mode: int = 0o700) -&gt; Path:
+        """Create a directory with an increased number as suffix for the given prefix."""
+        for i in range(10):
+            # try up to 10 times to create the folder
+            max_existing = max(map(parse_num, find_suffixes(root, prefix)), default=-1)
+            new_number = max_existing + 1
+            new_path = root.joinpath(f"{prefix}{new_number}")
+            try:
+                new_path.mkdir(mode=mode)
+            except Exception:
+                pass
+            else:
+                _force_symlink(root, prefix + "current", new_path)
+                return new_path
+        else:
+&gt;           raise OSError(
+                "could not create numbered dir with prefix "
+                f"{prefix} in {root} after 10 tries"
+            )
+E           OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries
+
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:240: OSError</error></testcase><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_operator_controller" name="test_cpu_prepared_trace_parent_and_selection[True-revtrace]" time="0.025"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries&quot;">cls = &lt;class '_pytest.runner.CallInfo'&gt;
+func = &lt;function call_and_report.&lt;locals&gt;.&lt;lambda&gt; at 0x0000021A5C340900&gt;
+when = 'setup'
+reraise = (&lt;class '_pytest.outcomes.Exit'&gt;, &lt;class 'KeyboardInterrupt'&gt;)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -&gt; CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        start = timing.time()
+        precise_start = timing.perf_counter()
+        try:
+&gt;           result: TResult | None = func()
+
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:341: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:242: in &lt;lambda&gt;
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:90: in pytest_runtest_setup
+    yield from unraisable_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:70: in unraisable_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:840: in pytest_runtest_setup
+    yield from self._runtest_for(item, "setup")
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:829: in _runtest_for
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\capture.py:875: in pytest_runtest_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:87: in pytest_runtest_setup
+    yield from thread_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:68: in thread_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:160: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:514: in setup
+    col.setup()
+E:\Anaconda\Lib\site-packages\_pytest\python.py:1630: in setup
+    self._request._fillfixtures()
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:697: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:532: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:617: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1091: in execute
+    result = ihook.pytest_fixture_setup(fixturedef=self, request=request)
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1140: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:891: in call_fixture_func
+    fixture_result = next(generator)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:265: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:252: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:131: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:112: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:187: in getbasetemp
+    basetemp = make_numbered_dir_with_cleanup(
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:407: in make_numbered_dir_with_cleanup
+    raise e
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:388: in make_numbered_dir_with_cleanup
+    p = make_numbered_dir(root, prefix, mode)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/LENOVO/AppData/Local/Packages/sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}/AC/Temp/pytest-of-LENOVO')
+prefix = 'pytest-', mode = 448
+
+    def make_numbered_dir(root: Path, prefix: str, mode: int = 0o700) -&gt; Path:
+        """Create a directory with an increased number as suffix for the given prefix."""
+        for i in range(10):
+            # try up to 10 times to create the folder
+            max_existing = max(map(parse_num, find_suffixes(root, prefix)), default=-1)
+            new_number = max_existing + 1
+            new_path = root.joinpath(f"{prefix}{new_number}")
+            try:
+                new_path.mkdir(mode=mode)
+            except Exception:
+                pass
+            else:
+                _force_symlink(root, prefix + "current", new_path)
+                return new_path
+        else:
+&gt;           raise OSError(
+                "could not create numbered dir with prefix "
+                f"{prefix} in {root} after 10 tries"
+            )
+E           OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries
+
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:240: OSError</error></testcase><testcase classname="experiments.dependability_protocol_20261025.adversarial.test_operator_controller" name="test_cpu_prepared_trace_parent_and_selection[True-standard]" time="0.023"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries&quot;">cls = &lt;class '_pytest.runner.CallInfo'&gt;
+func = &lt;function call_and_report.&lt;locals&gt;.&lt;lambda&gt; at 0x0000021A5C340720&gt;
+when = 'setup'
+reraise = (&lt;class '_pytest.outcomes.Exit'&gt;, &lt;class 'KeyboardInterrupt'&gt;)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -&gt; CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        start = timing.time()
+        precise_start = timing.perf_counter()
+        try:
+&gt;           result: TResult | None = func()
+
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:341: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:242: in &lt;lambda&gt;
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:90: in pytest_runtest_setup
+    yield from unraisable_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\unraisableexception.py:70: in unraisable_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:840: in pytest_runtest_setup
+    yield from self._runtest_for(item, "setup")
+E:\Anaconda\Lib\site-packages\_pytest\logging.py:829: in _runtest_for
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\capture.py:875: in pytest_runtest_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:87: in pytest_runtest_setup
+    yield from thread_exception_runtest_hook()
+E:\Anaconda\Lib\site-packages\_pytest\threadexception.py:68: in thread_exception_runtest_hook
+    yield
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:160: in pytest_runtest_setup
+    item.session._setupstate.setup(item)
+E:\Anaconda\Lib\site-packages\_pytest\runner.py:514: in setup
+    col.setup()
+E:\Anaconda\Lib\site-packages\_pytest\python.py:1630: in setup
+    self._request._fillfixtures()
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:697: in _fillfixtures
+    item.funcargs[argname] = self.getfixturevalue(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:532: in getfixturevalue
+    fixturedef = self._get_active_fixturedef(argname)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:617: in _get_active_fixturedef
+    fixturedef.execute(request=subrequest)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1091: in execute
+    result = ihook.pytest_fixture_setup(fixturedef=self, request=request)
+E:\Anaconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+E:\Anaconda\Lib\site-packages\_pytest\setuponly.py:36: in pytest_fixture_setup
+    return (yield)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:1140: in pytest_fixture_setup
+    result = call_fixture_func(fixturefunc, request, kwargs)
+E:\Anaconda\Lib\site-packages\_pytest\fixtures.py:891: in call_fixture_func
+    fixture_result = next(generator)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:265: in tmp_path
+    path = _mk_tmp(request, tmp_path_factory)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:252: in _mk_tmp
+    return factory.mktemp(name, numbered=True)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:131: in mktemp
+    basename = self._ensure_relative_to_basetemp(basename)
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:112: in _ensure_relative_to_basetemp
+    if (self.getbasetemp() / basename).resolve().parent != self.getbasetemp():
+E:\Anaconda\Lib\site-packages\_pytest\tmpdir.py:187: in getbasetemp
+    basetemp = make_numbered_dir_with_cleanup(
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:407: in make_numbered_dir_with_cleanup
+    raise e
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:388: in make_numbered_dir_with_cleanup
+    p = make_numbered_dir(root, prefix, mode)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/LENOVO/AppData/Local/Packages/sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}/AC/Temp/pytest-of-LENOVO')
+prefix = 'pytest-', mode = 448
+
+    def make_numbered_dir(root: Path, prefix: str, mode: int = 0o700) -&gt; Path:
+        """Create a directory with an increased number as suffix for the given prefix."""
+        for i in range(10):
+            # try up to 10 times to create the folder
+            max_existing = max(map(parse_num, find_suffixes(root, prefix)), default=-1)
+            new_number = max_existing + 1
+            new_path = root.joinpath(f"{prefix}{new_number}")
+            try:
+                new_path.mkdir(mode=mode)
+            except Exception:
+                pass
+            else:
+                _force_symlink(root, prefix + "current", new_path)
+                return new_path
+        else:
+&gt;           raise OSError(
+                "could not create numbered dir with prefix "
+                f"{prefix} in {root} after 10 tries"
+            )
+E           OSError: could not create numbered dir with prefix pytest- in C:\Users\LENOVO\AppData\Local\Packages\sandbox.{c8de38ce-8ed7-4b16-9b85-c94ad074e104}\AC\Temp\pytest-of-LENOVO after 10 tries
+
+E:\Anaconda\Lib\site-packages\_pytest\pathlib.py:240: OSError</error></testcase></testsuite></testsuites>
