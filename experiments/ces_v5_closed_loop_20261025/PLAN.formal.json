@@ -1,0 +1,1002 @@
+{
+  "study_id": "REVTRACE-CES-V5-CLOSED-LOOP-20261025",
+  "implementation_gates_complete": true,
+  "formal_approved_after_smoke": true,
+  "independent_confirmation": false,
+  "output_relative": "results/revtrace/ces_v5_closed_loop_20261025",
+  "runtime_commit": "e45c66475ba1173a98b49b8c9e62f3e8cb45b333",
+  "runtime_manifest_sha256": "80633f359122e7a7bb379934511fe45b42d31e9adf6176015809670b14fbf81c",
+  "manifest_relative": "results/revtrace/row_completion_20261023/validation_source_v1/MANIFEST.json",
+  "manifest_sha256": "8904fa5b16cb5d2c1f75d101079c6b7f640c2817b873cb92e816eecb694ea1bc",
+  "donors_relative": "projects/revtrace_online_admission_20261022/DONORS.json",
+  "donors_sha256": "7841c0b837cf31cd79ebb58991e3d41de81deed098d875b385a38f3560bb1bb3",
+  "calibration_file": "CALIBRATION.json",
+  "calibration_sha256": "5ab06eabb4f295b59652c29c7ed1fa87121d623c3a0f6c78aad500ba7226a5fd",
+  "closed_config_file": "CLOSED_CONFIG.json",
+  "closed_config_sha256": "c744a3ef3e1dde49cbe5e79cb6bcd4502ca676b509c048cdf0fad25758c35c58",
+  "protocol_sha256": "8e02f1868ee715854361c2d927b197b72fb6a5dd16f906a4ef080072ee8ca1b9",
+  "model_relative": "models/Qwen3-ASR-1.7B",
+  "model_files": {
+    "chat_template.json": "75a8cfca24f00de72d796fbfed6858fc9614ef3dabd8696684cc3bc03a9c58ff",
+    "config.json": "2e74a751548b8ad7d7526d29365ad8144c345d8b412b1152d25dc6698452712f",
+    "configuration.json": "c57f6a580d63f7465c6a22ba95847aee05a1ae1181f5abddffb943d9febda061",
+    "generation_config.json": "1da527824d81e07118facff437e03f2e24a23311e3bdeb2368973fe77e5f275c",
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "model-00001-of-00002.safetensors": "a4cd1f1a04d90b757dc7f7dd26254e69a013b19e80efe590a83c6a3bde8608d6",
+    "model-00002-of-00002.safetensors": "6e0b9d9e09e2e0238e7ef3cc8a484ab387e91b90f1900bedf88bc92d7929ccfc",
+    "model.safetensors.index.json": "f994739fe38e5210b9e3e8ce6c6307315e2ceac3cb630e7b7414d69dce520f60",
+    "preprocessor_config.json": "45e120a4eda2c20c5d7f2ea9354e63536bf35e27aa573fb7cdf78017b378770d",
+    "tokenizer_config.json": "4942d005604266809309cabc9f4e9cb89ce855d59b14681fdc0e1cc62ea26c4c",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "cpu_gate_files": [
+    {
+      "path": "INDEPENDENT_CPU_GATE.json",
+      "sha256": "4c8ff62ef1092b200e67abaefd1562e47756466dafe0bd797ce966b3ef91aa70"
+    },
+    {
+      "path": "INDEPENDENT_CPU_REGRESSION_v7.xml",
+      "sha256": "24025c809488a5e31504fec8d27c929ef684cd278a192653694847dddef1753e"
+    },
+    {
+      "path": "FINAL_RUNTIME_REVIEW.md",
+      "sha256": "6e8f38b16ac82284aa7b1c6bbf8b8067a92f66b74f310d4a98efc62b423c0fb2"
+    },
+    {
+      "path": "FINAL_RUNTIME_REVIEW_FINAL.json",
+      "sha256": "d72665f34e39035fbc23e33bf8729c40f2a559d1a3d0c234ca5c71c7d4c861ef"
+    },
+    {
+      "path": "INDEPENDENT_PROFILE_AUDIT_v1.json",
+      "sha256": "1873f7b3d98e3eee0961badb6e951d89c425720dca03bb04866cff51eb6a94a7"
+    },
+    {
+      "path": "DESIGN_REVIEW.md",
+      "sha256": "0892ee67e61511e73bc9ec8213e8c0f8169f5f43578b8ebbf479a38155431a01"
+    },
+    {
+      "path": "PLANNER_IMPLEMENTATION.md",
+      "sha256": "2804935ced0000a17f105334350ffae5c9871e9c4b2a8e0b12fdbb5edf7e50d6"
+    }
+  ],
+  "profile_files": [
+    {
+      "path": "profiles_training_v1/SUMMARY.json",
+      "sha256": "e870cdd5d5c0cccc99c7fbff3624564840115ad6cd30f4bbddb3d9784815c631"
+    },
+    {
+      "path": "profiles_training_v1/INPUT_MANIFEST.json",
+      "sha256": "a7059961fce22c16a6fde549dae19923ba19a3dace642f36e6ceed6363240d51"
+    },
+    {
+      "path": "profiles_training_v1/PROPOSAL_ROWS.csv",
+      "sha256": "d56b1326e7d10da0977d9a5232adad1ef2ef670c98e786c40fe6e8f6f6db02fa"
+    },
+    {
+      "path": "profiles_training_v1/PROPOSAL_BATCHES.csv",
+      "sha256": "88f35c6e3175a858e6912062b14634c758d3f8b2aa16d32d42da279b8a031e14"
+    },
+    {
+      "path": "profiles_training_v1/ROOT_COMPATIBILITY.csv",
+      "sha256": "7e6e3eba519cdd7cc952323ad8b7bd324e4afced8152137e4ec2838debd5d78f"
+    },
+    {
+      "path": "profiles_training_v1/CELL_STATUS.csv",
+      "sha256": "ac5a267bbef065aca060761ec7acb7a52101793b961932b5db7ecac19861ebdb"
+    }
+  ],
+  "source_scope": "Previously used validation source pool, now reused diagnostic/development; not independent confirmation",
+  "stages": {
+    "smoke": {
+      "expected_repeats": 1,
+      "bootstrap_samples": 2000,
+      "oracles": [
+        {
+          "pool": "validation",
+          "label": "strict_oracle",
+          "method": "strict",
+          "sessions": 4,
+          "arrival": "staggered",
+          "traffic": "clean",
+          "repeat": 0,
+          "seed": 20261025,
+          "proposer_policy": "ready",
+          "oracle": true
+        },
+        {
+          "pool": "validation",
+          "label": "strict_oracle",
+          "method": "strict",
+          "sessions": 4,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025,
+          "proposer_policy": "ready",
+          "oracle": true
+        }
+      ],
+      "cells": [
+        {
+          "pool": "validation",
+          "label": "fine",
+          "method": "fine",
+          "sessions": 8,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025,
+          "proposer_policy": "shared_progress"
+        },
+        {
+          "pool": "validation",
+          "label": "causal",
+          "method": "causal",
+          "sessions": 8,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025,
+          "proposer_policy": "shared_progress"
+        },
+        {
+          "pool": "validation",
+          "label": "causal",
+          "method": "causal",
+          "sessions": 8,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025,
+          "proposer_policy": "shared_progress"
+        },
+        {
+          "pool": "validation",
+          "label": "fine",
+          "method": "fine",
+          "sessions": 8,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025,
+          "proposer_policy": "shared_progress"
+        }
+      ]
+    },
+    "formal": {
+      "status": "EXPLICIT_72_CELL_PROPOSAL_NOT_APPROVED_DO_NOT_AUTOMATICALLY_START",
+      "expected_repeats": 3,
+      "bootstrap_samples": 2000,
+      "main_cells": 48,
+      "single_factor_side_cells": 24,
+      "oracles": [],
+      "cells": [
+        {
+          "pool": "validation",
+          "label": "fine",
+          "method": "fine",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "standard",
+          "method": "standard",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "cost",
+          "method": "cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "strict",
+          "method": "strict",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "service_cost",
+          "method": "service_cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "reserved_progress",
+          "method": "reserved_progress",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "inherit",
+          "method": "inherit",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "causal",
+          "method": "causal",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "fine_shared_progress",
+          "method": "fine",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "standard_shared_progress",
+          "method": "standard",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "cost_joint",
+          "method": "cost",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "causal_joint",
+          "method": "causal",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "cost",
+          "method": "cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "strict",
+          "method": "strict",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "service_cost",
+          "method": "service_cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "reserved_progress",
+          "method": "reserved_progress",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "inherit",
+          "method": "inherit",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "causal",
+          "method": "causal",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "fine_shared_progress",
+          "method": "fine",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "standard_shared_progress",
+          "method": "standard",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "cost_joint",
+          "method": "cost",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "causal_joint",
+          "method": "causal",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "fine",
+          "method": "fine",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "standard",
+          "method": "standard",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 0,
+          "seed": 20261025
+        },
+        {
+          "pool": "validation",
+          "label": "strict",
+          "method": "strict",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "cost",
+          "method": "cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "standard",
+          "method": "standard",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "fine",
+          "method": "fine",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "causal_joint",
+          "method": "causal",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "cost_joint",
+          "method": "cost",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "standard_shared_progress",
+          "method": "standard",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "fine_shared_progress",
+          "method": "fine",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "causal",
+          "method": "causal",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "inherit",
+          "method": "inherit",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "reserved_progress",
+          "method": "reserved_progress",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "service_cost",
+          "method": "service_cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "reserved_progress",
+          "method": "reserved_progress",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "service_cost",
+          "method": "service_cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "strict",
+          "method": "strict",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "cost",
+          "method": "cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "standard",
+          "method": "standard",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "fine",
+          "method": "fine",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "causal_joint",
+          "method": "causal",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "cost_joint",
+          "method": "cost",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "standard_shared_progress",
+          "method": "standard",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "fine_shared_progress",
+          "method": "fine",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "causal",
+          "method": "causal",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "inherit",
+          "method": "inherit",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 1,
+          "seed": 20261026
+        },
+        {
+          "pool": "validation",
+          "label": "fine_shared_progress",
+          "method": "fine",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "standard_shared_progress",
+          "method": "standard",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "cost_joint",
+          "method": "cost",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "causal_joint",
+          "method": "causal",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "fine",
+          "method": "fine",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "standard",
+          "method": "standard",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "cost",
+          "method": "cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "strict",
+          "method": "strict",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "service_cost",
+          "method": "service_cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "reserved_progress",
+          "method": "reserved_progress",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "inherit",
+          "method": "inherit",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "causal",
+          "method": "causal",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "sync",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "cost_joint",
+          "method": "cost",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "causal_joint",
+          "method": "causal",
+          "proposer_policy": "causal_joint",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "fine",
+          "method": "fine",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "standard",
+          "method": "standard",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "cost",
+          "method": "cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "strict",
+          "method": "strict",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "service_cost",
+          "method": "service_cost",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "reserved_progress",
+          "method": "reserved_progress",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "inherit",
+          "method": "inherit",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "causal",
+          "method": "causal",
+          "proposer_policy": "ready",
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "fine_shared_progress",
+          "method": "fine",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        },
+        {
+          "pool": "validation",
+          "label": "standard_shared_progress",
+          "method": "standard",
+          "proposer_policy": "shared_progress",
+          "side_arm": true,
+          "sessions": 16,
+          "arrival": "staggered",
+          "traffic": "mixed",
+          "repeat": 2,
+          "seed": 20261027
+        }
+      ]
+    }
+  },
+  "post_smoke_decision": {
+    "decision": "GO_BOUNDED_IMPLEMENTATION_ABLATION_NOT_PERFORMANCE_CLAIM",
+    "same_raw_v2_summary_sha256": "bc18eef442d51568ad0fbe00ad0b813408a91a5c9fb9524384a8cb8573dc987d",
+    "prior_v1_false_positive_retained": true,
+    "audit_only_correction_did_not_rerun_models": true,
+    "parameters_cells_source_order_unchanged_from_prior_smoke_plan": true,
+    "smoke_performance_not_a_tuning_signal": true,
+    "scope": "Reused source diagnosis; no independent confirmatory claim"
+  }
+}

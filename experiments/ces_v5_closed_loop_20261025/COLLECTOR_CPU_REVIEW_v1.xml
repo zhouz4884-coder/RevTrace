@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="8" skipped="1" tests="15" time="1.232" timestamp="2026-10-25T15:11:49.825718+08:00" hostname="LAPTOP-OE488K9P"><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_relative_and_absolute_path_escapes_are_rejected[../outside]" time="0.004" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_relative_and_absolute_path_escapes_are_rejected[/absolute]" time="0.003" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_relative_and_absolute_path_escapes_are_rejected[nested/../../escape]" time="0.002" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_symlink_escape_is_not_resolved_outside_root" time="0.003"><skipped type="pytest.skip" message="Windows process has no symlink privilege; string containment controls still execute">D:\VLA_QWEN\RevTrace\experiments\ces_v5_closed_loop_20261025\test_collect_closed_bounded.py:38: Windows process has no symlink privilege; string containment controls still execute</skipped></testcase><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_multipart_order_sha_and_existing_parts_refuse_overwrite" time="0.030" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_changing_collector_self_log_is_not_in_raw_inventory" time="0.010" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_complete_gate_requires_exact72_before_packaging" time="0.098"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_complete_gate_requires_ex0\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'">tmp_path = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_complete_gate_requires_ex0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000015F6851CFC0&gt;
+
+    def test_complete_gate_requires_exact72_before_packaging(tmp_path, monkeypatch):
+&gt;       base, project, output, plan = fake_study(tmp_path, monkeypatch)
+
+test_collect_closed_bounded.py:165: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_collect_closed_bounded.py:139: in fake_study
+    put(cell/required, {})
+test_collect_closed_bounded.py:21: in put
+    path.write_text(json.dumps(value, indent=2)+'\n', encoding='utf8')
+E:\Anaconda\Lib\pathlib\_local.py:555: in write_text
+    return PathBase.write_text(self, data, encoding, errors, newline)
+E:\Anaconda\Lib\pathlib\_abc.py:651: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_complete_ga...lts/revtrace/ces_v5_closed_loop_20261025/formal/validation-sync-mixed-cpu-fixture-00-r0/worker_batch_accounting.jsonl')
+mode = 'w', buffering = -1, encoding = 'utf8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_complete_gate_requires_ex0\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'
+
+E:\Anaconda\Lib\pathlib\_local.py:537: FileNotFoundError</failure></testcase><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[plan_hash]" time="0.102"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_0\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'">tmp_path = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_or_incomplete_0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000015F6851D810&gt;
+mutation = 'plan_hash'
+
+    @pytest.mark.parametrize('mutation', ['plan_hash', 'audit_hash', 'missing_cell', 'source_hash', 'formal_stop'])
+    def test_wrong_hash_or_incomplete_scope_is_not_collected(tmp_path, monkeypatch, mutation):
+&gt;       base, project, output, plan = fake_study(tmp_path, monkeypatch)
+
+test_collect_closed_bounded.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_collect_closed_bounded.py:139: in fake_study
+    put(cell/required, {})
+test_collect_closed_bounded.py:21: in put
+    path.write_text(json.dumps(value, indent=2)+'\n', encoding='utf8')
+E:\Anaconda\Lib\pathlib\_local.py:555: in write_text
+    return PathBase.write_text(self, data, encoding, errors, newline)
+E:\Anaconda\Lib\pathlib\_abc.py:651: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_...lts/revtrace/ces_v5_closed_loop_20261025/formal/validation-sync-mixed-cpu-fixture-00-r0/worker_batch_accounting.jsonl')
+mode = 'w', buffering = -1, encoding = 'utf8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_0\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'
+
+E:\Anaconda\Lib\pathlib\_local.py:537: FileNotFoundError</failure></testcase><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[audit_hash]" time="0.099"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_1\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'">tmp_path = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_or_incomplete_1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000015F67B74170&gt;
+mutation = 'audit_hash'
+
+    @pytest.mark.parametrize('mutation', ['plan_hash', 'audit_hash', 'missing_cell', 'source_hash', 'formal_stop'])
+    def test_wrong_hash_or_incomplete_scope_is_not_collected(tmp_path, monkeypatch, mutation):
+&gt;       base, project, output, plan = fake_study(tmp_path, monkeypatch)
+
+test_collect_closed_bounded.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_collect_closed_bounded.py:139: in fake_study
+    put(cell/required, {})
+test_collect_closed_bounded.py:21: in put
+    path.write_text(json.dumps(value, indent=2)+'\n', encoding='utf8')
+E:\Anaconda\Lib\pathlib\_local.py:555: in write_text
+    return PathBase.write_text(self, data, encoding, errors, newline)
+E:\Anaconda\Lib\pathlib\_abc.py:651: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_...lts/revtrace/ces_v5_closed_loop_20261025/formal/validation-sync-mixed-cpu-fixture-00-r0/worker_batch_accounting.jsonl')
+mode = 'w', buffering = -1, encoding = 'utf8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_1\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'
+
+E:\Anaconda\Lib\pathlib\_local.py:537: FileNotFoundError</failure></testcase><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[missing_cell]" time="0.098"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_2\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'">tmp_path = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_or_incomplete_2')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000015F684D9E10&gt;
+mutation = 'missing_cell'
+
+    @pytest.mark.parametrize('mutation', ['plan_hash', 'audit_hash', 'missing_cell', 'source_hash', 'formal_stop'])
+    def test_wrong_hash_or_incomplete_scope_is_not_collected(tmp_path, monkeypatch, mutation):
+&gt;       base, project, output, plan = fake_study(tmp_path, monkeypatch)
+
+test_collect_closed_bounded.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_collect_closed_bounded.py:139: in fake_study
+    put(cell/required, {})
+test_collect_closed_bounded.py:21: in put
+    path.write_text(json.dumps(value, indent=2)+'\n', encoding='utf8')
+E:\Anaconda\Lib\pathlib\_local.py:555: in write_text
+    return PathBase.write_text(self, data, encoding, errors, newline)
+E:\Anaconda\Lib\pathlib\_abc.py:651: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_...lts/revtrace/ces_v5_closed_loop_20261025/formal/validation-sync-mixed-cpu-fixture-00-r0/worker_batch_accounting.jsonl')
+mode = 'w', buffering = -1, encoding = 'utf8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_2\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'
+
+E:\Anaconda\Lib\pathlib\_local.py:537: FileNotFoundError</failure></testcase><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[source_hash]" time="0.099"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_3\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'">tmp_path = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_or_incomplete_3')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000015F684DA9C0&gt;
+mutation = 'source_hash'
+
+    @pytest.mark.parametrize('mutation', ['plan_hash', 'audit_hash', 'missing_cell', 'source_hash', 'formal_stop'])
+    def test_wrong_hash_or_incomplete_scope_is_not_collected(tmp_path, monkeypatch, mutation):
+&gt;       base, project, output, plan = fake_study(tmp_path, monkeypatch)
+
+test_collect_closed_bounded.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_collect_closed_bounded.py:139: in fake_study
+    put(cell/required, {})
+test_collect_closed_bounded.py:21: in put
+    path.write_text(json.dumps(value, indent=2)+'\n', encoding='utf8')
+E:\Anaconda\Lib\pathlib\_local.py:555: in write_text
+    return PathBase.write_text(self, data, encoding, errors, newline)
+E:\Anaconda\Lib\pathlib\_abc.py:651: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_...lts/revtrace/ces_v5_closed_loop_20261025/formal/validation-sync-mixed-cpu-fixture-00-r0/worker_batch_accounting.jsonl')
+mode = 'w', buffering = -1, encoding = 'utf8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_3\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'
+
+E:\Anaconda\Lib\pathlib\_local.py:537: FileNotFoundError</failure></testcase><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[formal_stop]" time="0.103"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_4\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'">tmp_path = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_or_incomplete_4')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000015F68542750&gt;
+mutation = 'formal_stop'
+
+    @pytest.mark.parametrize('mutation', ['plan_hash', 'audit_hash', 'missing_cell', 'source_hash', 'formal_stop'])
+    def test_wrong_hash_or_incomplete_scope_is_not_collected(tmp_path, monkeypatch, mutation):
+&gt;       base, project, output, plan = fake_study(tmp_path, monkeypatch)
+
+test_collect_closed_bounded.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_collect_closed_bounded.py:139: in fake_study
+    put(cell/required, {})
+test_collect_closed_bounded.py:21: in put
+    path.write_text(json.dumps(value, indent=2)+'\n', encoding='utf8')
+E:\Anaconda\Lib\pathlib\_local.py:555: in write_text
+    return PathBase.write_text(self, data, encoding, errors, newline)
+E:\Anaconda\Lib\pathlib\_abc.py:651: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_wrong_hash_...lts/revtrace/ces_v5_closed_loop_20261025/formal/validation-sync-mixed-cpu-fixture-00-r0/worker_batch_accounting.jsonl')
+mode = 'w', buffering = -1, encoding = 'utf8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_wrong_hash_or_incomplete_4\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'
+
+E:\Anaconda\Lib\pathlib\_local.py:537: FileNotFoundError</failure></testcase><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_reference_manifest_sha_and_byte_exact_copy" time="0.109"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_reference_manifest_sha_an0\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'">tmp_path = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_reference_manifest_sha_an0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000015F68541750&gt;
+
+    def test_reference_manifest_sha_and_byte_exact_copy(tmp_path, monkeypatch):
+&gt;       base, project, output, plan = fake_study(tmp_path, monkeypatch)
+
+test_collect_closed_bounded.py:194: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_collect_closed_bounded.py:139: in fake_study
+    put(cell/required, {})
+test_collect_closed_bounded.py:21: in put
+    path.write_text(json.dumps(value, indent=2)+'\n', encoding='utf8')
+E:\Anaconda\Lib\pathlib\_local.py:555: in write_text
+    return PathBase.write_text(self, data, encoding, errors, newline)
+E:\Anaconda\Lib\pathlib\_abc.py:651: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_reference_m...lts/revtrace/ces_v5_closed_loop_20261025/formal/validation-sync-mixed-cpu-fixture-00-r0/worker_batch_accounting.jsonl')
+mode = 'w', buffering = -1, encoding = 'utf8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_reference_manifest_sha_an0\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'
+
+E:\Anaconda\Lib\pathlib\_local.py:537: FileNotFoundError</failure></testcase><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_pid_reuse_foreign_gpu_does_not_require_global_idle_or_kill" time="0.015" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_mocked_full_collection_preserves_negatives_refs_and_multipart_index" time="0.102"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_mocked_full_collection_pr0\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'">tmp_path = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_mocked_full_collection_pr0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000015F67C08050&gt;
+
+    def test_mocked_full_collection_preserves_negatives_refs_and_multipart_index(tmp_path, monkeypatch):
+&gt;       base, project, output, plan = fake_study(tmp_path, monkeypatch)
+
+test_collect_closed_bounded.py:244: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+test_collect_closed_bounded.py:139: in fake_study
+    put(cell/required, {})
+test_collect_closed_bounded.py:21: in put
+    path.write_text(json.dumps(value, indent=2)+'\n', encoding='utf8')
+E:\Anaconda\Lib\pathlib\_local.py:555: in write_text
+    return PathBase.write_text(self, data, encoding, errors, newline)
+E:\Anaconda\Lib\pathlib\_abc.py:651: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v1/test_mocked_full...lts/revtrace/ces_v5_closed_loop_20261025/formal/validation-sync-mixed-cpu-fixture-00-r0/worker_batch_accounting.jsonl')
+mode = 'w', buffering = -1, encoding = 'utf8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\VLA_QWEN\\RevTrace\\experiments\\ces_v5_closed_loop_20261025\\cpu_tmp_collector_review_v1\\test_mocked_full_collection_pr0\\fake-experiment-disk\\results\\revtrace\\ces_v5_closed_loop_20261025\\formal\\validation-sync-mixed-cpu-fixture-00-r0\\worker_batch_accounting.jsonl'
+
+E:\Anaconda\Lib\pathlib\_local.py:537: FileNotFoundError</failure></testcase></testsuite></testsuites>

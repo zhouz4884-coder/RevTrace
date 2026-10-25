@@ -1,0 +1,38 @@
+{
+  "status": "PASS_FRESH_ROW_SERVING_SAFETY_AND_METRIC_AUDIT",
+  "cells": 2,
+  "expected_cells": 2,
+  "failures": [],
+  "checks": [
+    {
+      "cell": "validation-staggered-clean-strict_oracle-r0",
+      "old_certificate_WAL_and_D1_checks": "PASS",
+      "actual_consumer_replay": "PASS",
+      "immutable_and_physical_lease_checks": "PASS",
+      "closed_loop_checks": {
+        "scope": "nonclosed_reference",
+        "closed_observations": 0
+      },
+      "generation_budget_boundary": "NO_CAP_HIT"
+    },
+    {
+      "cell": "validation-staggered-mixed-strict_oracle-r0",
+      "old_certificate_WAL_and_D1_checks": "PASS",
+      "actual_consumer_replay": "PASS",
+      "immutable_and_physical_lease_checks": "PASS",
+      "closed_loop_checks": {
+        "scope": "nonclosed_reference",
+        "closed_observations": 0
+      },
+      "generation_budget_boundary": "NO_CAP_HIT"
+    }
+  ],
+  "new_model_calls": 0,
+  "pilot_not_formal_superiority": true,
+  "actual_model_calls": 152,
+  "sources_reused_for_diagnosis": true,
+  "source_scope": "Reused sources: closed-loop diagnostic; not independent confirmation",
+  "all_failed_requested_cells_retained_no_partial_superiority_claim": true,
+  "TOKEN_LIMIT_BOUNDARY_is_retained_not_silently_filtered": true,
+  "script_sha256": "9a1aee9814c57448d0de50258a0e18cc8bb3e7afc36d34317497d57b23e81c4c"
+}

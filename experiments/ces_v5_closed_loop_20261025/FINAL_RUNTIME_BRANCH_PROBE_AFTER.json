@@ -1,0 +1,82 @@
+{
+  "evidence_type": "CPU_constructed_branch_semantics_no_GPU",
+  "policy_sha256": "e57f9d4b3e9dc731ef1e7817089d71dfa6515773dbc36afcb9812ee102842b06",
+  "owner_sha256": "0df77d0c2e7f204076e7e4f8c0d8384e065059de5088708e995f45154dd66e01",
+  "probe_sha256": "d88e378f46020dfb1868cee6e9e35f6fea02ca9cb051c2296214f74d5cc1e259",
+  "deep_private_hazard": {
+    "now": 6.1,
+    "current_root_completion": 6.6,
+    "first_successor_completion": 7.1,
+    "second_successor_completion": 9.1,
+    "actual_pending_private_completion_in_constructed_model": 6.9,
+    "second_successor_display_deadline": 8.0,
+    "all_deadlines_release_plus_2_and_8": true,
+    "root_retention_probability_explicitly_zero": true,
+    "correct_additional_private_credit": 0.0,
+    "implemented_additional_private_credit": 0.0,
+    "explanation": "A branch that cannot survive the first root update must not become unconditionally legal again before the later parent update."
+  },
+  "split_direct_fallback_profile": {
+    "direct_probability": 0.8,
+    "fallback_probability": 0.1,
+    "all_rejected_Verify_expected_retention": 0.1,
+    "implemented_retention": 0.1
+  },
+  "constructed_calibration": {
+    "global_reject": 0.0,
+    "causal_reject": {},
+    "cost_seconds": {
+      "generate": {
+        "1": 0.5
+      },
+      "verify": {
+        "1": 0.1
+      },
+      "fallback": {
+        "1": 0.5
+      },
+      "proposal": {
+        "1": 0.8
+      }
+    },
+    "contextual_cost_models": {
+      "generate": {
+        "coefficients": [
+          2.0,
+          0.0,
+          -11.25,
+          18.75,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "prediction_floor_s": 0.0001,
+        "prediction_ceiling_s": 10.0
+      }
+    },
+    "v5_risk_model": {
+      "min_bucket_samples": 1,
+      "owner_delivery_seconds": 0.0,
+      "generation_scenarios": {
+        "global": [
+          {
+            "weight": 1.0,
+            "lease_ratio": 1.0,
+            "row_fraction": 1.0
+          }
+        ]
+      },
+      "verification_scenarios": {
+        "global": [
+          {
+            "weight": 1.0,
+            "original_rows": 1,
+            "failed_count": 0,
+            "verify_ratio": 1.0
+          }
+        ]
+      }
+    }
+  },
+  "no_runtime_mutation": true
+}

@@ -1,0 +1,89 @@
+{
+  "evidence_type": "CPU_constructed_branch_semantics_no_GPU",
+  "policy_sha256": "91f827d0cc16053ae76754c33d4f489011071106bd3496b65d515788678ef977",
+  "owner_sha256": "0a4a75a91fd2836a110f6f626ce43d740ec237fb1a5c39de36d26dba57c8b540",
+  "probe_sha256": "03e6f631eac16f25bc57bf5e82b85e952e9dc738f193fd38217e64962e29eeb4",
+  "deep_private_hazard": {
+    "now": 6.1,
+    "current_root_completion": 6.6,
+    "first_successor_completion": 7.1,
+    "second_successor_completion": 9.1,
+    "actual_pending_private_completion_in_constructed_model": 6.9,
+    "second_successor_display_deadline": 8.0,
+    "all_deadlines_release_plus_2_and_8": true,
+    "root_retention_probability_explicitly_zero": true,
+    "correct_additional_private_credit": 0.0,
+    "implemented_additional_private_credit": 0.0,
+    "explanation": "A branch that cannot survive the first root update must not become unconditionally legal again before the later parent update."
+  },
+  "split_direct_fallback_profile": {
+    "direct_probability": 0.8,
+    "fallback_probability": 0.1,
+    "all_rejected_Verify_expected_retention": 0.1,
+    "implemented_retention": 0.1
+  },
+  "first_root_row_CDF_boundary": {
+    "known_root_update_at": 10.2,
+    "legal_private_at_10_1_credit_probability": 1.0,
+    "unretained_private_at_10_5_credit_probability": 0.0,
+    "exchangeable_root_updates_10_1_or_11_private_at_10_5_survival": 0.5,
+    "currently_illegal_private_before_root_is_not_buffered_for_republication": 0.0
+  },
+  "constructed_calibration": {
+    "global_reject": 0.0,
+    "causal_reject": {},
+    "cost_seconds": {
+      "generate": {
+        "1": 0.5
+      },
+      "verify": {
+        "1": 0.1
+      },
+      "fallback": {
+        "1": 0.5
+      },
+      "proposal": {
+        "1": 0.8
+      }
+    },
+    "contextual_cost_models": {
+      "generate": {
+        "coefficients": [
+          2.0,
+          0.0,
+          -11.25,
+          18.75,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "prediction_floor_s": 0.0001,
+        "prediction_ceiling_s": 10.0
+      }
+    },
+    "v5_risk_model": {
+      "min_bucket_samples": 1,
+      "owner_delivery_seconds": 0.0,
+      "generation_scenarios": {
+        "global": [
+          {
+            "weight": 1.0,
+            "lease_ratio": 1.0,
+            "row_fraction": 1.0
+          }
+        ]
+      },
+      "verification_scenarios": {
+        "global": [
+          {
+            "weight": 1.0,
+            "original_rows": 1,
+            "failed_count": 0,
+            "verify_ratio": 1.0
+          }
+        ]
+      }
+    }
+  },
+  "no_runtime_mutation": true
+}

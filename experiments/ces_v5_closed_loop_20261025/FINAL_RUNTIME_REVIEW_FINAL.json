@@ -1,0 +1,36 @@
+{
+  "status": "GO_BOUNDED_GPU_VALIDATION_SOURCE_AND_CPU_REVIEW",
+  "review_date": "2026-10-25",
+  "source_commit": "e45c66475ba1173a98b49b8c9e62f3e8cb45b333",
+  "runtime_clean": true,
+  "reviewer_executed_related_tests": 112,
+  "reviewer_related_tests_failed": 0,
+  "reviewer_related_tests_seconds": 1.72,
+  "reviewer_junit": "FINAL_RUNTIME_REVIEW_TESTS_v3.xml",
+  "reviewer_branch_probe": "FINAL_RUNTIME_BRANCH_PROBE_RELEASE.json",
+  "other_independent_full_suite": {
+    "tests": 367,
+    "failed": 0,
+    "gate": "INDEPENDENT_CPU_GATE.json",
+    "not_added_to_reviewer_count": true
+  },
+  "final_review": "FINAL_RUNTIME_REVIEW.md",
+  "previous_review_preserved": "FINAL_RUNTIME_REVIEW_v1_91f827.md",
+  "planner_delta_verified": "Restoring only the changed private_ancestor_survival_model output description in memory reproduces the prior 91f827 SHA256 exactly; current bytes were still reread and retested.",
+  "behavior_delta_reviewed": "All CES baseline commits now populate observed Q/T; only CLOSED modes retire service obligations. Actual Owner+ACK+commit tests cover Fine/Standard/Cost.",
+  "GPU_started_by_reviewer": false,
+  "GPU_performance_claim": false,
+  "source_or_paper_modified_by_reviewer": false,
+  "files_sha256": {
+    "FINAL_RUNTIME_REVIEW.md": "6e8f38b16ac82284aa7b1c6bbf8b8067a92f66b74f310d4a98efc62b423c0fb2",
+    "runtime/scripts/run_tc_live_qwen.py": "bce156e44e116fcf99fd4f56b5956f72d7f54432abe648037916d078884203e9",
+    "runtime/src/revtrace/ces_closed_loop.py": "2226264d46153f7db269f83364810d17fbe169386f9b48e5ff5b0d9cb0dda66e",
+    "FINAL_RUNTIME_BRANCH_PROBE_RELEASE.json": "3601fc6de35a3f84dc116af7c3cb95fa66ff6e35461a4428ff31c98c551a3cff",
+    "FINAL_RUNTIME_REVIEW_v1_91f827.md": "24368070588e72b4c2361bcdbcd9f91edfb9dba7807f5766155592a21ac59fda",
+    "FINAL_RUNTIME_REVIEW_TESTS_v3.xml": "9f25cf61c525f286d02a234ca46f98ef562476826601ba0da76ee1045a28c766",
+    "runtime/src/revtrace/ces_runtime.py": "32a65f852a39ea0fc1d96337e79ebc4ba7539d5582eac270a0ceb0f229b6e166",
+    "runtime/src/revtrace/ces_closed_loop_owner.py": "450ac323118968e904589f202283802c054569e25c1fbc81fbb129c196a7d9b0",
+    "INDEPENDENT_CPU_GATE.json": "4c8ff62ef1092b200e67abaefd1562e47756466dafe0bd797ce966b3ef91aa70",
+    "runtime/tests/test_closed_loop_independent.py": "b8529230cec548fd6ada456dce2a1e6affb721c96368ef9ac8f9526f7be46e02"
+  }
+}

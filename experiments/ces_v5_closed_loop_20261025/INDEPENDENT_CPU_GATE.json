@@ -1,0 +1,47 @@
+{
+  "experiment_id": "REVTRACE-CES-V5-CLOSED-LOOP-20261025",
+  "date": "2026-10-25",
+  "evidence_tier": "independent_CPU_constructed_and_actual_owner_fake_worker_regression",
+  "status": "PASS_CPU_IMPLEMENTATION_AND_SAFETY_GATE",
+  "GPU_performance_claim": false,
+  "tests": 367,
+  "failures": 0,
+  "pytest_execution_seconds": 3.97,
+  "independent_new_tests": 94,
+  "author_new_tests": 18,
+  "original_core_tests": 255,
+  "baseline_runtime_commit": "126dc815962e8f726b0cbdf214a19318b28a3629",
+  "tested_source_sha256": {
+    "runtime/src/revtrace/ces_closed_loop.py": "2226264d46153f7db269f83364810d17fbe169386f9b48e5ff5b0d9cb0dda66e",
+    "runtime/src/revtrace/ces_closed_loop_owner.py": "450ac323118968e904589f202283802c054569e25c1fbc81fbb129c196a7d9b0",
+    "runtime/src/revtrace/ces_runtime.py": "32a65f852a39ea0fc1d96337e79ebc4ba7539d5582eac270a0ceb0f229b6e166",
+    "runtime/tests/test_closed_loop_independent.py": "b8529230cec548fd6ada456dce2a1e6affb721c96368ef9ac8f9526f7be46e02"
+  },
+  "junit_file": "INDEPENDENT_CPU_REGRESSION_v7.xml",
+  "junit_sha256": "24025c809488a5e31504fec8d27c929ef684cd278a192653694847dddef1753e",
+  "previous_valid_checkpoint": {
+    "junit_file": "INDEPENDENT_CPU_REGRESSION_v6.xml",
+    "junit_sha256": "a9b99b5dc96342712f93948f6233642e5257aec94f268bb9600d148eaeaff550",
+    "tests": 364,
+    "pytest_execution_seconds": 3.75
+  },
+  "prior_valid_checkpoint": {
+    "junit_file": "INDEPENDENT_CPU_REGRESSION_v5.xml",
+    "junit_sha256": "129d9903d416e7ac972b13f3535244a0bd17c98fa82a5ea3dc726575e5358d37",
+    "tests": 336,
+    "pytest_execution_seconds": 3.64
+  },
+  "earlier_valid_checkpoint": {
+    "junit_file": "INDEPENDENT_CPU_REGRESSION_v4.xml",
+    "junit_sha256": "29cf8f46de987a2f1e5ff0a8ca142c4e448cedd113b232ad86b0dbaf5d150f63",
+    "tests": 336,
+    "pytest_execution_seconds": 3.73
+  },
+  "remaining_gate": "Separate source/config freeze, environment and model/data identity checks, bounded real GPU execution and independent actual-history audit.",
+  "limitations": [
+    "No real GPU, SIGKILL or power-loss experiment was run by this independent reviewer.",
+    "CPU costs and service bounds are declared fixtures, not deployed performance.",
+    "Original legacy packaging-dependent tests documented in CPU_SYSTEM_AUDIT.md are not counted as passing.",
+    "The service P90 promise is empirical, not an SLO guarantee or permission to bypass certification."
+  ]
+}

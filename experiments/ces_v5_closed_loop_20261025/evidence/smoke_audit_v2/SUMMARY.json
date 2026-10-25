@@ -1,0 +1,72 @@
+{
+  "status": "PASS_FRESH_ROW_SERVING_SAFETY_AND_METRIC_AUDIT",
+  "cells": 4,
+  "expected_cells": 4,
+  "failures": [],
+  "checks": [
+    {
+      "cell": "validation-staggered-mixed-causal-r0",
+      "old_certificate_WAL_and_D1_checks": "PASS",
+      "actual_consumer_replay": "PASS",
+      "immutable_and_physical_lease_checks": "PASS",
+      "closed_loop_checks": {
+        "scope": "actual_observation_identity_and_CPU_service_planner_replay",
+        "closed_observations": 29,
+        "physical_service_dispatches": 29,
+        "actual_commit_retirements": 66,
+        "residual_service_records": 0,
+        "future_execution_permissions_created": 0,
+        "unknown_Parent_predictions_not_installed": true,
+        "TOKEN_LIMIT_BOUNDARY_is_not_admission_failure": true
+      },
+      "generation_budget_boundary": "NO_CAP_HIT"
+    },
+    {
+      "cell": "validation-staggered-mixed-fine-r0",
+      "old_certificate_WAL_and_D1_checks": "PASS",
+      "actual_consumer_replay": "PASS",
+      "immutable_and_physical_lease_checks": "PASS",
+      "closed_loop_checks": {
+        "scope": "nonclosed_reference",
+        "closed_observations": 0
+      },
+      "generation_budget_boundary": "NO_CAP_HIT"
+    },
+    {
+      "cell": "validation-sync-mixed-causal-r0",
+      "old_certificate_WAL_and_D1_checks": "PASS",
+      "actual_consumer_replay": "PASS",
+      "immutable_and_physical_lease_checks": "PASS",
+      "closed_loop_checks": {
+        "scope": "actual_observation_identity_and_CPU_service_planner_replay",
+        "closed_observations": 13,
+        "physical_service_dispatches": 13,
+        "actual_commit_retirements": 66,
+        "residual_service_records": 0,
+        "future_execution_permissions_created": 0,
+        "unknown_Parent_predictions_not_installed": true,
+        "TOKEN_LIMIT_BOUNDARY_is_not_admission_failure": true
+      },
+      "generation_budget_boundary": "NO_CAP_HIT"
+    },
+    {
+      "cell": "validation-sync-mixed-fine-r0",
+      "old_certificate_WAL_and_D1_checks": "PASS",
+      "actual_consumer_replay": "PASS",
+      "immutable_and_physical_lease_checks": "PASS",
+      "closed_loop_checks": {
+        "scope": "nonclosed_reference",
+        "closed_observations": 0
+      },
+      "generation_budget_boundary": "NO_CAP_HIT"
+    }
+  ],
+  "new_model_calls": 0,
+  "pilot_not_formal_superiority": true,
+  "actual_model_calls": 165,
+  "sources_reused_for_diagnosis": true,
+  "source_scope": "Reused sources: closed-loop diagnostic; not independent confirmation",
+  "all_failed_requested_cells_retained_no_partial_superiority_claim": true,
+  "TOKEN_LIMIT_BOUNDARY_is_retained_not_silently_filtered": true,
+  "script_sha256": "9a1aee9814c57448d0de50258a0e18cc8bb3e7afc36d34317497d57b23e81c4c"
+}

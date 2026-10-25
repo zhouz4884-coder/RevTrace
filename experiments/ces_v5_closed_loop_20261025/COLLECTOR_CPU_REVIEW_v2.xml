@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="1" tests="15" time="30.781" timestamp="2026-10-25T15:12:35.939219+08:00" hostname="LAPTOP-OE488K9P"><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_relative_and_absolute_path_escapes_are_rejected[../outside]" time="0.004" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_relative_and_absolute_path_escapes_are_rejected[/absolute]" time="0.003" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_relative_and_absolute_path_escapes_are_rejected[nested/../../escape]" time="0.002" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_symlink_escape_is_not_resolved_outside_root" time="0.002"><skipped type="pytest.skip" message="Windows process has no symlink privilege; string containment controls still execute">D:\VLA_QWEN\RevTrace\experiments\ces_v5_closed_loop_20261025\test_collect_closed_bounded.py:38: Windows process has no symlink privilege; string containment controls still execute</skipped></testcase><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_multipart_order_sha_and_existing_parts_refuse_overwrite" time="0.034" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_changing_collector_self_log_is_not_in_raw_inventory" time="0.011" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_complete_gate_requires_exact72_before_packaging" time="2.609" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[plan_hash]" time="2.429" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[audit_hash]" time="2.455" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[missing_cell]" time="2.482" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[source_hash]" time="2.375" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_wrong_hash_or_incomplete_scope_is_not_collected[formal_stop]" time="2.406" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_reference_manifest_sha_and_byte_exact_copy" time="2.451" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_pid_reuse_foreign_gpu_does_not_require_global_idle_or_kill" time="0.014" /><testcase classname="experiments.ces_v5_closed_loop_20261025.test_collect_closed_bounded" name="test_mocked_full_collection_preserves_negatives_refs_and_multipart_index" time="13.370"><failure message="AssertionError: Oversized metadata needs a separately bounded representation">tmp_path = WindowsPath('D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v2/test_mocked_full_collection_pr0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001DB7A22A8A0&gt;
+
+    def test_mocked_full_collection_preserves_negatives_refs_and_multipart_index(tmp_path, monkeypatch):
+        base, project, output, plan = fake_study(tmp_path, monkeypatch)
+        put(output/'diagnosis_v1/LARGE_NEGATIVE.dat', random.Random(13).randbytes(700_000))
+        monkeypatch.setattr(c, 'resource_gate', lambda *_a, **_kw: {
+            'all_this_task_workers_released': True, 'CPU_fixture_not_process_check': True})
+        monkeypatch.setattr(c, 'MAX_PUBLISH_BYTES', 500_000)
+        monkeypatch.setattr(c, 'PART_BYTES', 64_000)
+&gt;       record = c.collect(base, 'bounded_cpu_fixture')
+
+test_collect_closed_bounded.py:255: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+base = WindowsPath('//?/D:/VLA_QWEN/RevTrace/experiments/ces_v5_closed_loop_20261025/cpu_tmp_collector_review_v2/test_mocked_full_collection_pr0/f')
+output_name = 'bounded_cpu_fixture', check_only = False
+
+    def collect(base, output_name, check_only=False):
+        base = Path(base).resolve()
+        assert base.is_dir() and base != Path(base.anchor), 'Explicit designated experiment disk required'
+        if (Path(output_name).name != output_name or output_name in ('.', '..', '')
+                or any(c in output_name for c in ('/', '\\'))):
+            raise ValueError('--output-dir is a new single directory name beneath this study')
+        project, output = within(base, PROJECT_RELATIVE), within(base, RAW_RELATIVE)
+        directory = within(output, output_name)
+        large = within(output, output_name+'_large_derived')
+        archive = within(output, output_name+'.tar.gz')
+        index_path = output/('BOUNDED_INDEX.json' if output_name == 'bounded_evidence_v1'
+                             else output_name+'_BOUNDED_INDEX.json')
+        self_log = output/(output_name+'_COLLECTOR.log')
+        assert not any(p.exists() for p in (directory, large, archive, index_path)), 'No overwrite/retry into existing collection'
+        plan, groups, gate = completed_gate(base, project, output)
+        resource = resource_gate(output, project, groups)
+        if check_only:
+            return {'status': 'PASS_COLLECTION_PRECONDITIONS_ONLY_NO_PACKAGE_WRITTEN',
+                    'gate': gate, 'resources': resource}
+        directory.mkdir()
+        # Own generated collection artifacts and live stdout self-log are excluded;
+        # old failures, CPU logs and all other study raw files remain indexed.
+        derived = [directory, large, archive, index_path, self_log]
+        try:
+            snapshot = inventory(base, project, output, derived)
+            hashes = {path: safe_snapshot_hash(path, stamp) for path, stamp in snapshot.items()}
+            collector = Collector(base, project, output, directory, large, hashes)
+            write_new(directory/'COLLECTION_GATE.json', gate)
+            write_new(directory/'RESOURCE_RELEASE.json', resource)
+            stages = set(groups)
+            known_cells = {output/stage/name for stage, names in groups.items() for name in names}
+            witnesses = []
+            journals = set()
+            for stage, names in groups.items():
+                for name in names:
+                    cell = output/stage/name
+                    for path in sorted(cell.rglob('*')):
+                        if not path.is_file() or path.name == 'worker_records.jsonl':
+                            continue
+                        folder = 'traces' if path.name in ('events.jsonl', 'consumer.jsonl',
+                            'worker_batch_accounting.jsonl') else 'cell_metadata'
+                        rel = f'{folder}/{stage}/{name}/{path.relative_to(cell).as_posix()}.gz'
+                        collector.add(path, rel, zipped=True)
+                    witnesses.append(canonical_witnesses(collector, stage, name))
+                    journal = Path(read(cell/'provenance.json')['durable_journal_path']).resolve()
+                    journals.add(journal)
+                for path in sorted((output/stage).iterdir()):
+                    if path.is_file():
+                        collector.add(path, f'cell_logs/{stage}/{path.name}.gz', zipped=True)
+            # Include every WAL, including an unexpected/failed prior history, not
+            # only the journals currently named by successful cells.
+            journals.update(output.rglob('*.wal'))
+            for path in sorted(journals):
+                if directory in path.parents or large in path.parents:
+                    continue
+                collector.add(path, 'journals/'+path.relative_to(output).as_posix()+'.gz', zipped=True)
+            # All auxiliary directories include failed v1 and corrected v2 audits,
+            # formal/smoke/oracle metrics, and any diagnosis_v1/CPU output already
+            # present. No selection by sign of result is made.
+            for path in sorted(output.rglob('*')):
+                if not path.is_file() or any(path == d or d in path.parents for d in derived):
+                    continue
+                relative = path.relative_to(output)
+                if path.suffix == '.wal':
+                    continue
+                if relative.parts[0] in stages:
+                    if path.parent == output/relative.parts[0] or any(c in path.parents for c in known_cells):
+                        continue
+                    # Unplanned/failed partial directories are retained as extra
+                    # bounded raw evidence, not re-labelled part of the72PASS set.
+                    if path.name == 'worker_records.jsonl':
+                        collector.omitted_binary.append({'path': path.relative_to(base).as_posix(),
+                            'reason': 'Extra raw worker-record/model-input arrays remain fully SHA-indexed8TB; negative scope is not removed'})
+                    else:
+                        collector.add(path, 'extra_cell_evidence/'+relative.as_posix()+'.gz', zipped=True)
+                    continue
+                if path.name == 'worker_records.jsonl':
+                    collector.omitted_binary.append({'path': path.relative_to(base).as_posix(),
+                        'reason': 'Auxiliary full worker arrays remain fully SHA-indexed8TB, not duplicated in bounded package'})
+                    continue
+                # Keep audit CSV/JSON paths byte-exact and directly usable by the
+                # local independent review. Only rich per-cell traces are gzipped.
+                collector.add(path, relative.as_posix(), zipped=False)
+            for path in sorted(project.rglob('*')):
+                if not path.is_file() or excluded_project(path, project):
+                    continue
+                # Source bundles stay indexed on8TB; frozen individual source,
+                # CPU logs/gates and profile data remain directly inspectable.
+                if path.name.endswith(('.tar.gz', '.zip', '.bundle')):
+                    continue
+                if path.name == 'remote_ops.py' or 'operations' in path.relative_to(project).parts:
+                    collector.omitted_binary.append({'path': path.relative_to(base).as_posix(),
+                        'reason': 'Credential-routing/transport artifacts stay indexed8TB, not publication payload'})
+                    continue
+                collector.add(path, 'project_artifacts/'+path.relative_to(project).as_posix(), zipped=False)
+            assets = external_assets(base, plan)
+            reference_path = within(base, plan['manifest_relative'])
+            collector.hashes[reference_path] = plan['manifest_sha256']
+            collector.add(reference_path, 'source_reference_manifest.json', zipped=False)
+            reference_rows = read(reference_path)['sessions']
+            assert all('source_id' in r and 'reference' in r for r in reference_rows)
+            write_new(directory/'SOURCE_REFERENCE_IDENTITY.json', {
+                'source_manifest_path': reference_path.relative_to(base).as_posix(),
+                'source_manifest_sha256': plan['manifest_sha256'],
+                'bounded_copy': 'source_reference_manifest.json', 'byte_exact': True,
+                'rows': len(reference_rows), 'unique_source_ids': len({r['source_id'] for r in reference_rows}),
+                'contains_reference_text_not_audio_or_weights': True})
+            raw_index = {'experiment_id': STUDY,
+                'scope': 'Every study-results file and project artifact at collection checkpoint, excluding only own collection products/self-log and project cache/Git/temporary fixture directories; unrelated8TB projects are not traversed.',
+                'files': [{'path': path.relative_to(base).as_posix(), 'bytes': stamp[0], 'sha256': hashes[path]}
+                          for path, stamp in sorted(snapshot.items())],
+                'external_audio_model_and_source_assets': assets,
+                'full_worker_records_and_model_input_arrays_stay_on8TB': True}
+            write_new(directory/'RAW_INDEX.json', raw_index)
+            write_new(directory/'CANONICAL_WITNESS_COUNTS.json', witnesses)
+            collector.split_large_payloads()
+            write_new(directory/'LOGICAL_PAYLOADS.json', {'files': collector.logical,
+                'excluded_binary_payloads_still_indexed': collector.omitted_binary,
+                'parts_reassemble': 'Concatenate each parts list in its listed order, verify payload_sha256, then gunzip if representation=gzip.'})
+            note = ('All archive/payload parts are ordered in their SHA indices. Concatenate archive publish_files before tar extraction and verify full_archive_sha256. '
+                'For any logical payload split into parts, concatenate LOGICAL_PAYLOADS.parts in order and verify payload_sha256 before gzip decoding. '
+                'Full worker result/model-input arrays, audio and weights remain on indexed8TB paths; bounded receipts are references, not a self-contained re-execution of the full raw audit. '
+                'Negative/capped results, original smoke v1 FAIL and corrected same-raw v2 PASS are retained. No models, SSH, process kills or new GPU work are performed.\n')
+            (directory/'RECONSTRUCTION.txt').write_text(note, encoding='utf8')
+            final_resource = resource_gate(output, project, groups, excluded=(directory, large))
+            assert final_resource['all_this_task_workers_released']
+            assert inventory(base, project, output, derived) == snapshot, 'Original data/project changed during collection'
+            manifest = [{'path': path.relative_to(directory).as_posix(),
+                         'bytes': path.stat().st_size, 'sha256': sha(path)}
+                        for path in sorted(directory.rglob('*')) if path.is_file()]
+&gt;           assert all(row['bytes'] &lt; MAX_PUBLISH_BYTES for row in manifest), 'Oversized metadata needs a separately bounded representation'
+E           AssertionError: Oversized metadata needs a separately bounded representation
+
+collect_closed_bounded.py:557: AssertionError</failure></testcase></testsuite></testsuites>

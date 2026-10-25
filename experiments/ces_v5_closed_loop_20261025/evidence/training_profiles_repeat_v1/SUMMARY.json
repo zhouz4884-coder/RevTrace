@@ -1,0 +1,99 @@
+{
+  "status": "PASS_ACTUAL_SELECTED_EXECUTION_PROFILES",
+  "created_utc": "2026-10-25T05:59:58.771776+00:00",
+  "source_commit": "126dc815962e8f726b0cbdf214a19318b28a3629",
+  "online_cells": 48,
+  "source_pool": "All prior V5 pilot sources are training/diagnostic for this extension, not held-out",
+  "actual_proposal_rows": 6205,
+  "actual_proposal_physical_batches": 798,
+  "actual_direct_fallback_transitions": 6125,
+  "excluded_denominators": {
+    "direct_no_completed_same_boundary_node": 5736,
+    "accepted_verify_not_used_for_direct_fallback_fit": 355
+  },
+  "cell_status_counts": {
+    "PASS_PROTOCOL_COMPLETENESS": 44,
+    "TOKEN_LIMIT_BOUNDARY": 4
+  },
+  "proposal_capped_rows": 4,
+  "authority_capped_rows": 0,
+  "capped_complete_runs_retained": true,
+  "new_GPU_calls": 0,
+  "source_calibration_sha256": "35aa67579c04018c42f65d8a180c79b60d1941ae53cc87b1177d3ddb49866e55",
+  "script_sha256": "e7cd196155f116895ba8edf00501d402a7c032be97cbb65150e0e79078248a36",
+  "compatibility": {
+    "direct": {
+      "same": {
+        "support": 127,
+        "matches": 108,
+        "probability": 0.84765625,
+        "lower": 0.7781297358041737,
+        "upper": 0.9020827962340554,
+        "unique_cells": 28,
+        "unique_source_frontiers": 45
+      },
+      "mismatch": {
+        "support": 235,
+        "matches": 214,
+        "probability": 0.9088983050847458,
+        "lower": 0.867258003961402,
+        "upper": 0.9408094101004558,
+        "unique_cells": 36,
+        "unique_source_frontiers": 52
+      }
+    },
+    "fallback": {
+      "same": {
+        "support": 6,
+        "matches": 0,
+        "probability": null,
+        "lower": 2.7755575615628914e-17,
+        "upper": 0.3903342879021653,
+        "unique_cells": 5,
+        "unique_source_frontiers": 3
+      },
+      "mismatch": {
+        "support": 21,
+        "matches": 12,
+        "probability": 0.5681818181818182,
+        "lower": 0.3654655436930671,
+        "upper": 0.7553003107462404,
+        "unique_cells": 8,
+        "unique_source_frontiers": 12
+      }
+    }
+  },
+  "held_cell_diagnostic": {
+    "physical_batches": 198,
+    "cells": 12,
+    "median_absolute_error_s": 0.11862758627256104,
+    "mean_absolute_error_s": 0.25098767064223304,
+    "scope": "Cell-held historical diagnostic; reused acoustic sources, not independent confirmation"
+  },
+  "outputs": {
+    "CALIBRATION.json": {
+      "sha256": "5ab06eabb4f295b59652c29c7ed1fa87121d623c3a0f6c78aad500ba7226a5fd",
+      "bytes": 1202985
+    },
+    "CELL_STATUS.csv": {
+      "sha256": "ac5a267bbef065aca060761ec7acb7a52101793b961932b5db7ecac19861ebdb",
+      "bytes": 4079
+    },
+    "INPUT_MANIFEST.json": {
+      "sha256": "a7059961fce22c16a6fde549dae19923ba19a3dace642f36e6ceed6363240d51",
+      "bytes": 65034
+    },
+    "PROPOSAL_BATCHES.csv": {
+      "sha256": "88f35c6e3175a858e6912062b14634c758d3f8b2aa16d32d42da279b8a031e14",
+      "bytes": 145559
+    },
+    "PROPOSAL_ROWS.csv": {
+      "sha256": "d56b1326e7d10da0977d9a5232adad1ef2ef670c98e786c40fe6e8f6f6db02fa",
+      "bytes": 1326782
+    },
+    "ROOT_COMPATIBILITY.csv": {
+      "sha256": "7e6e3eba519cdd7cc952323ad8b7bd324e4afced8152137e4ec2838debd5d78f",
+      "bytes": 1537519
+    }
+  }
+}

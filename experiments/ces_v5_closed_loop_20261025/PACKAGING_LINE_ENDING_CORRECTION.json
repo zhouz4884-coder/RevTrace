@@ -1,0 +1,10 @@
+{
+  "scope": "Packaging only; no GPU, source-runtime or measurement change",
+  "prior_output": "delivery",
+  "prior_manifest_sha256": "482987e64abe2f1ccba9b43743de871f767d0d9ccaa83fe4c9fff427b8304250",
+  "local_publication_preflight": "FAILED_BEFORE_ANY_NETWORK_OR_GIT_WRITE",
+  "reason": "Windows write_text emitted CRLF for .gitattributes; publisher requires exact LF bytes",
+  "repair": "Write .gitattributes with exact b'* -text\\n' using binary output; all artifact data remain byte-exact",
+  "next_output": "delivery_v2",
+  "prior_package_retained": true
+}

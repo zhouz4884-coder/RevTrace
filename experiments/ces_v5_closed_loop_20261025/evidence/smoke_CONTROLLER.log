@@ -1,0 +1,14 @@
+CELL_COMPLETE 1 validation-sync-mixed-fine-r0
+CELL_COMPLETE 2 validation-sync-mixed-causal-r0
+CELL_COMPLETE 3 validation-staggered-mixed-causal-r0
+CELL_COMPLETE 4 validation-staggered-mixed-fine-r0
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_ces_v5_closed_loop_20261025/run_closed_stage.py", line 383, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_ces_v5_closed_loop_20261025/run_closed_stage.py", line 362, in main
+    audited = audit(active_substage, completed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_ces_v5_closed_loop_20261025/run_closed_stage.py", line 344, in audit
+    raise AssertionError('Independent safety/denominator audit did not pass')
+AssertionError: Independent safety/denominator audit did not pass

@@ -1,0 +1,4615 @@
+{
+  "cell": "validation-staggered-mixed-causal-r0",
+  "decision_index": 12,
+  "event_index": 2237,
+  "observation": {
+    "kind": "closed-loop-observation",
+    "time": 12.874680635519326,
+    "observed_perf": 4662115.370509454,
+    "contexts": {
+      "4": {
+        "identity": {
+          "sid": 4,
+          "epoch": 1,
+          "parent_version": 3,
+          "parent_digest": "2d82258ff5e84ab7252ae22e138e5d28215fed3df99d75e8d5cb26f1aea76f15",
+          "frontier_start": 96000,
+          "frontier_end": 128000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "no-uncompleted-frozen-private-job"
+        },
+        "chain_preview": {
+          "status": "conditional-exact-chain-preview",
+          "candidate_job_id": "proposal-4-94",
+          "verify_success_projection_digest": "69e5678d7cd4f89c98f94622b65906e4e1a11045b910c1114dc706f07bd54e4e",
+          "verify_success_chain_eligible": true,
+          "verify_success_chain_proof": [
+            "proposal-4-94",
+            "proposal-4-121"
+          ],
+          "structural_chain_if_boundary_matches": true,
+          "structural_chain_proof": [
+            "proposal-4-94",
+            "proposal-4-121"
+          ],
+          "condition": "requires actual complete FP32 verification, D1, WAL install; no publication now"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 4,
+            "epoch": 1,
+            "parent_version": 3,
+            "parent_digest": "2d82258ff5e84ab7252ae22e138e5d28215fed3df99d75e8d5cb26f1aea76f15",
+            "frontier_start": 96000,
+            "frontier_end": 128000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [
+            {
+              "window": 5,
+              "frontier_end": 160000,
+              "release": 4662113.6549667,
+              "display_deadline": 4662115.6549667,
+              "commit_deadline": 4662121.6549667,
+              "audio_weight": 2.0,
+              "remaining_service_s": 0.8630317441908604,
+              "display_met": true,
+              "private_ready_delay_s": null,
+              "verify_private_compatible": true,
+              "unknown_private_probability": null,
+              "direct_private_probability": 0.84765625,
+              "fallback_private_probability": null,
+              "inherit_current_transition_model": true,
+              "parent_frontier_start": 128000,
+              "audio_seconds": 10.0,
+              "estimated_prompt_tokens": 21,
+              "interval_seconds": 2.0,
+              "private_delay_distribution": [],
+              "private_path_currently_legal": false,
+              "private_delay_includes_delivery": true
+            }
+          ],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": true,
+          "direct_private_probability": 0.84765625,
+          "fallback_private_probability": null,
+          "private_path_currently_legal": false,
+          "private_delay_distribution": [],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "empirical-selected-root-equality-only",
+          "class": "same",
+          "support": 127,
+          "probability": 0.84765625,
+          "lower": 0.7781297358041737,
+          "upper": 0.9020827962340554,
+          "not_a_same_target_counterfactual": true
+        },
+        "fallback_root_model": {
+          "status": "unknown-sparse",
+          "class": "same",
+          "support": 6,
+          "probability": null,
+          "lower": 2.7755575615628914e-17,
+          "upper": 0.3903342879021653,
+          "not_a_same_target_counterfactual": true
+        },
+        "released_successors": [
+          {
+            "window": 5,
+            "frontier_end": 160000,
+            "release": 4662113.6549667,
+            "display_deadline": 4662115.6549667,
+            "commit_deadline": 4662121.6549667,
+            "audio_weight": 2.0,
+            "remaining_service_s": 0.8630317441908604,
+            "display_met": true,
+            "private_ready_delay_s": null,
+            "verify_private_compatible": true,
+            "unknown_private_probability": null,
+            "direct_private_probability": 0.84765625,
+            "fallback_private_probability": null,
+            "inherit_current_transition_model": true,
+            "parent_frontier_start": 128000,
+            "audio_seconds": 10.0,
+            "estimated_prompt_tokens": 21,
+            "interval_seconds": 2.0,
+            "private_delay_distribution": [],
+            "private_path_currently_legal": false,
+            "private_delay_includes_delivery": true
+          }
+        ],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "12": {
+        "identity": {
+          "sid": 12,
+          "epoch": 1,
+          "parent_version": 2,
+          "parent_digest": "172019548c82b89b1b4c80681461daff45d1c3a9f537b95e85b27b5a78f261c4",
+          "frontier_start": 64000,
+          "frontier_end": 96000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "pending-actual-job",
+          "job_id": "proposal-12-122",
+          "physical_rows": 10,
+          "actual_lease_age_s": 0.9011085787788033,
+          "predicted_full_lease_s": 1.2615772142173858,
+          "row_CDF_size_bucket": "10/0-8",
+          "survival_conditioned_samples": 481,
+          "age_clock": "observed-worker-start",
+          "private_delay_includes_delivery": true,
+          "CDF_upper_endpoint_bins": 31,
+          "CDF_one_sided_error_bound": 0.031185031185031187,
+          "censored_beyond_empirical_support": false,
+          "current_path_legal": true,
+          "scope": "prediction only; no future result, fault label or free GPU reuse"
+        },
+        "chain_preview": {
+          "status": "conditional-exact-chain-preview",
+          "candidate_job_id": "proposal-12-95",
+          "verify_success_projection_digest": "4417d41ffb71f1ef3a6f09abb94ee2968f817de30e8bd31ed2fb2ec417681e2c",
+          "verify_success_chain_eligible": true,
+          "verify_success_chain_proof": [
+            "proposal-12-95"
+          ],
+          "structural_chain_if_boundary_matches": true,
+          "structural_chain_proof": [
+            "proposal-12-95"
+          ],
+          "condition": "requires actual complete FP32 verification, D1, WAL install; no publication now"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 12,
+            "epoch": 1,
+            "parent_version": 2,
+            "parent_digest": "172019548c82b89b1b4c80681461daff45d1c3a9f537b95e85b27b5a78f261c4",
+            "frontier_start": 64000,
+            "frontier_end": 96000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [
+            {
+              "window": 4,
+              "frontier_end": 128000,
+              "release": 4662113.6549667,
+              "display_deadline": 4662115.6549667,
+              "commit_deadline": 4662121.6549667,
+              "audio_weight": 2.0,
+              "remaining_service_s": 0.8445943465822368,
+              "display_met": false,
+              "private_ready_delay_s": null,
+              "verify_private_compatible": true,
+              "unknown_private_probability": null,
+              "direct_private_probability": 0.84765625,
+              "fallback_private_probability": null,
+              "inherit_current_transition_model": true,
+              "parent_frontier_start": 96000,
+              "audio_seconds": 8.0,
+              "estimated_prompt_tokens": 12,
+              "interval_seconds": 2.0,
+              "private_delay_distribution": [
+                [
+                  0.033264033264033266,
+                  0.12223788281551728
+                ],
+                [
+                  0.033264033264033266,
+                  0.12902624367938764
+                ],
+                [
+                  0.033264033264033266,
+                  0.14671317817946927
+                ],
+                [
+                  0.033264033264033266,
+                  0.18657110493450157
+                ],
+                [
+                  0.033264033264033266,
+                  0.19115893625705316
+                ],
+                [
+                  0.033264033264033266,
+                  0.20098342002282887
+                ],
+                [
+                  0.033264033264033266,
+                  0.24852269680443828
+                ],
+                [
+                  0.033264033264033266,
+                  0.252028393792433
+                ],
+                [
+                  0.033264033264033266,
+                  0.2562551315248218
+                ],
+                [
+                  0.033264033264033266,
+                  0.2599517048119666
+                ],
+                [
+                  0.033264033264033266,
+                  0.2644139784481949
+                ],
+                [
+                  0.033264033264033266,
+                  0.3053148410093973
+                ],
+                [
+                  0.033264033264033266,
+                  0.3080314742566026
+                ],
+                [
+                  0.033264033264033266,
+                  0.3108453501911612
+                ],
+                [
+                  0.033264033264033266,
+                  0.31373416561189527
+                ],
+                [
+                  0.033264033264033266,
+                  0.3169184834926111
+                ],
+                [
+                  0.033264033264033266,
+                  0.32055335301789567
+                ],
+                [
+                  0.033264033264033266,
+                  0.3618812748588143
+                ],
+                [
+                  0.033264033264033266,
+                  0.36515898984551787
+                ],
+                [
+                  0.033264033264033266,
+                  0.3701206746729859
+                ],
+                [
+                  0.033264033264033266,
+                  0.3721297926656557
+                ],
+                [
+                  0.033264033264033266,
+                  0.3735408559916784
+                ],
+                [
+                  0.033264033264033266,
+                  0.3752801571603124
+                ],
+                [
+                  0.033264033264033266,
+                  0.37819887518491946
+                ],
+                [
+                  0.033264033264033266,
+                  0.42788100468171053
+                ],
+                [
+                  0.033264033264033266,
+                  0.43038008112971937
+                ],
+                [
+                  0.033264033264033266,
+                  0.4320292679185762
+                ],
+                [
+                  0.033264033264033266,
+                  0.4341274807599529
+                ],
+                [
+                  0.033264033264033266,
+                  0.43460862190884697
+                ],
+                [
+                  0.033264033264033266,
+                  0.43622331901460476
+                ],
+                [
+                  0.002079002079002079,
+                  0.4371171370663234
+                ]
+              ],
+              "private_path_currently_legal": true,
+              "private_delay_includes_delivery": true
+            }
+          ],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": true,
+          "direct_private_probability": 0.84765625,
+          "fallback_private_probability": null,
+          "private_path_currently_legal": true,
+          "private_delay_distribution": [
+            [
+              0.033264033264033266,
+              0.12223788281551728
+            ],
+            [
+              0.033264033264033266,
+              0.12902624367938764
+            ],
+            [
+              0.033264033264033266,
+              0.14671317817946927
+            ],
+            [
+              0.033264033264033266,
+              0.18657110493450157
+            ],
+            [
+              0.033264033264033266,
+              0.19115893625705316
+            ],
+            [
+              0.033264033264033266,
+              0.20098342002282887
+            ],
+            [
+              0.033264033264033266,
+              0.24852269680443828
+            ],
+            [
+              0.033264033264033266,
+              0.252028393792433
+            ],
+            [
+              0.033264033264033266,
+              0.2562551315248218
+            ],
+            [
+              0.033264033264033266,
+              0.2599517048119666
+            ],
+            [
+              0.033264033264033266,
+              0.2644139784481949
+            ],
+            [
+              0.033264033264033266,
+              0.3053148410093973
+            ],
+            [
+              0.033264033264033266,
+              0.3080314742566026
+            ],
+            [
+              0.033264033264033266,
+              0.3108453501911612
+            ],
+            [
+              0.033264033264033266,
+              0.31373416561189527
+            ],
+            [
+              0.033264033264033266,
+              0.3169184834926111
+            ],
+            [
+              0.033264033264033266,
+              0.32055335301789567
+            ],
+            [
+              0.033264033264033266,
+              0.3618812748588143
+            ],
+            [
+              0.033264033264033266,
+              0.36515898984551787
+            ],
+            [
+              0.033264033264033266,
+              0.3701206746729859
+            ],
+            [
+              0.033264033264033266,
+              0.3721297926656557
+            ],
+            [
+              0.033264033264033266,
+              0.3735408559916784
+            ],
+            [
+              0.033264033264033266,
+              0.3752801571603124
+            ],
+            [
+              0.033264033264033266,
+              0.37819887518491946
+            ],
+            [
+              0.033264033264033266,
+              0.42788100468171053
+            ],
+            [
+              0.033264033264033266,
+              0.43038008112971937
+            ],
+            [
+              0.033264033264033266,
+              0.4320292679185762
+            ],
+            [
+              0.033264033264033266,
+              0.4341274807599529
+            ],
+            [
+              0.033264033264033266,
+              0.43460862190884697
+            ],
+            [
+              0.033264033264033266,
+              0.43622331901460476
+            ],
+            [
+              0.002079002079002079,
+              0.4371171370663234
+            ]
+          ],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "empirical-selected-root-equality-only",
+          "class": "same",
+          "support": 127,
+          "probability": 0.84765625,
+          "lower": 0.7781297358041737,
+          "upper": 0.9020827962340554,
+          "not_a_same_target_counterfactual": true
+        },
+        "fallback_root_model": {
+          "status": "unknown-sparse",
+          "class": "same",
+          "support": 6,
+          "probability": null,
+          "lower": 2.7755575615628914e-17,
+          "upper": 0.3903342879021653,
+          "not_a_same_target_counterfactual": true
+        },
+        "released_successors": [
+          {
+            "window": 4,
+            "frontier_end": 128000,
+            "release": 4662113.6549667,
+            "display_deadline": 4662115.6549667,
+            "commit_deadline": 4662121.6549667,
+            "audio_weight": 2.0,
+            "remaining_service_s": 0.8445943465822368,
+            "display_met": false,
+            "private_ready_delay_s": null,
+            "verify_private_compatible": true,
+            "unknown_private_probability": null,
+            "direct_private_probability": 0.84765625,
+            "fallback_private_probability": null,
+            "inherit_current_transition_model": true,
+            "parent_frontier_start": 96000,
+            "audio_seconds": 8.0,
+            "estimated_prompt_tokens": 12,
+            "interval_seconds": 2.0,
+            "private_delay_distribution": [
+              [
+                0.033264033264033266,
+                0.12223788281551728
+              ],
+              [
+                0.033264033264033266,
+                0.12902624367938764
+              ],
+              [
+                0.033264033264033266,
+                0.14671317817946927
+              ],
+              [
+                0.033264033264033266,
+                0.18657110493450157
+              ],
+              [
+                0.033264033264033266,
+                0.19115893625705316
+              ],
+              [
+                0.033264033264033266,
+                0.20098342002282887
+              ],
+              [
+                0.033264033264033266,
+                0.24852269680443828
+              ],
+              [
+                0.033264033264033266,
+                0.252028393792433
+              ],
+              [
+                0.033264033264033266,
+                0.2562551315248218
+              ],
+              [
+                0.033264033264033266,
+                0.2599517048119666
+              ],
+              [
+                0.033264033264033266,
+                0.2644139784481949
+              ],
+              [
+                0.033264033264033266,
+                0.3053148410093973
+              ],
+              [
+                0.033264033264033266,
+                0.3080314742566026
+              ],
+              [
+                0.033264033264033266,
+                0.3108453501911612
+              ],
+              [
+                0.033264033264033266,
+                0.31373416561189527
+              ],
+              [
+                0.033264033264033266,
+                0.3169184834926111
+              ],
+              [
+                0.033264033264033266,
+                0.32055335301789567
+              ],
+              [
+                0.033264033264033266,
+                0.3618812748588143
+              ],
+              [
+                0.033264033264033266,
+                0.36515898984551787
+              ],
+              [
+                0.033264033264033266,
+                0.3701206746729859
+              ],
+              [
+                0.033264033264033266,
+                0.3721297926656557
+              ],
+              [
+                0.033264033264033266,
+                0.3735408559916784
+              ],
+              [
+                0.033264033264033266,
+                0.3752801571603124
+              ],
+              [
+                0.033264033264033266,
+                0.37819887518491946
+              ],
+              [
+                0.033264033264033266,
+                0.42788100468171053
+              ],
+              [
+                0.033264033264033266,
+                0.43038008112971937
+              ],
+              [
+                0.033264033264033266,
+                0.4320292679185762
+              ],
+              [
+                0.033264033264033266,
+                0.4341274807599529
+              ],
+              [
+                0.033264033264033266,
+                0.43460862190884697
+              ],
+              [
+                0.033264033264033266,
+                0.43622331901460476
+              ],
+              [
+                0.002079002079002079,
+                0.4371171370663234
+              ]
+            ],
+            "private_path_currently_legal": true,
+            "private_delay_includes_delivery": true
+          }
+        ],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "13": {
+        "identity": {
+          "sid": 13,
+          "epoch": 1,
+          "parent_version": 2,
+          "parent_digest": "3addf3a38b803aff45ec523d08c292af006860799dab77256fa0644872f18f06",
+          "frontier_start": 64000,
+          "frontier_end": 96000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "pending-actual-job",
+          "job_id": "proposal-13-124",
+          "physical_rows": 10,
+          "actual_lease_age_s": 0.9011085787788033,
+          "predicted_full_lease_s": 1.2615772142173858,
+          "row_CDF_size_bucket": "10/0-8",
+          "survival_conditioned_samples": 481,
+          "age_clock": "observed-worker-start",
+          "private_delay_includes_delivery": true,
+          "CDF_upper_endpoint_bins": 31,
+          "CDF_one_sided_error_bound": 0.031185031185031187,
+          "censored_beyond_empirical_support": false,
+          "current_path_legal": true,
+          "scope": "prediction only; no future result, fault label or free GPU reuse"
+        },
+        "chain_preview": {
+          "status": "conditional-exact-chain-preview",
+          "candidate_job_id": "proposal-13-97",
+          "verify_success_projection_digest": "ac7d01228ad130f66e15e922ff7c5240121a7fde53bfc9ebdca8cb31a48f6ab5",
+          "verify_success_chain_eligible": true,
+          "verify_success_chain_proof": [
+            "proposal-13-97"
+          ],
+          "structural_chain_if_boundary_matches": true,
+          "structural_chain_proof": [
+            "proposal-13-97"
+          ],
+          "condition": "requires actual complete FP32 verification, D1, WAL install; no publication now"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 13,
+            "epoch": 1,
+            "parent_version": 2,
+            "parent_digest": "3addf3a38b803aff45ec523d08c292af006860799dab77256fa0644872f18f06",
+            "frontier_start": 64000,
+            "frontier_end": 96000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [
+            {
+              "window": 4,
+              "frontier_end": 128000,
+              "release": 4662113.9049667,
+              "display_deadline": 4662115.9049667,
+              "commit_deadline": 4662121.9049667,
+              "audio_weight": 2.0,
+              "remaining_service_s": 0.8445943465822368,
+              "display_met": false,
+              "private_ready_delay_s": null,
+              "verify_private_compatible": true,
+              "unknown_private_probability": null,
+              "direct_private_probability": 0.84765625,
+              "fallback_private_probability": null,
+              "inherit_current_transition_model": true,
+              "parent_frontier_start": 96000,
+              "audio_seconds": 8.0,
+              "estimated_prompt_tokens": 12,
+              "interval_seconds": 2.0,
+              "private_delay_distribution": [
+                [
+                  0.033264033264033266,
+                  0.12223788281551728
+                ],
+                [
+                  0.033264033264033266,
+                  0.12902624367938764
+                ],
+                [
+                  0.033264033264033266,
+                  0.14671317817946927
+                ],
+                [
+                  0.033264033264033266,
+                  0.18657110493450157
+                ],
+                [
+                  0.033264033264033266,
+                  0.19115893625705316
+                ],
+                [
+                  0.033264033264033266,
+                  0.20098342002282887
+                ],
+                [
+                  0.033264033264033266,
+                  0.24852269680443828
+                ],
+                [
+                  0.033264033264033266,
+                  0.252028393792433
+                ],
+                [
+                  0.033264033264033266,
+                  0.2562551315248218
+                ],
+                [
+                  0.033264033264033266,
+                  0.2599517048119666
+                ],
+                [
+                  0.033264033264033266,
+                  0.2644139784481949
+                ],
+                [
+                  0.033264033264033266,
+                  0.3053148410093973
+                ],
+                [
+                  0.033264033264033266,
+                  0.3080314742566026
+                ],
+                [
+                  0.033264033264033266,
+                  0.3108453501911612
+                ],
+                [
+                  0.033264033264033266,
+                  0.31373416561189527
+                ],
+                [
+                  0.033264033264033266,
+                  0.3169184834926111
+                ],
+                [
+                  0.033264033264033266,
+                  0.32055335301789567
+                ],
+                [
+                  0.033264033264033266,
+                  0.3618812748588143
+                ],
+                [
+                  0.033264033264033266,
+                  0.36515898984551787
+                ],
+                [
+                  0.033264033264033266,
+                  0.3701206746729859
+                ],
+                [
+                  0.033264033264033266,
+                  0.3721297926656557
+                ],
+                [
+                  0.033264033264033266,
+                  0.3735408559916784
+                ],
+                [
+                  0.033264033264033266,
+                  0.3752801571603124
+                ],
+                [
+                  0.033264033264033266,
+                  0.37819887518491946
+                ],
+                [
+                  0.033264033264033266,
+                  0.42788100468171053
+                ],
+                [
+                  0.033264033264033266,
+                  0.43038008112971937
+                ],
+                [
+                  0.033264033264033266,
+                  0.4320292679185762
+                ],
+                [
+                  0.033264033264033266,
+                  0.4341274807599529
+                ],
+                [
+                  0.033264033264033266,
+                  0.43460862190884697
+                ],
+                [
+                  0.033264033264033266,
+                  0.43622331901460476
+                ],
+                [
+                  0.002079002079002079,
+                  0.4371171370663234
+                ]
+              ],
+              "private_path_currently_legal": true,
+              "private_delay_includes_delivery": true
+            }
+          ],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": true,
+          "direct_private_probability": 0.84765625,
+          "fallback_private_probability": null,
+          "private_path_currently_legal": true,
+          "private_delay_distribution": [
+            [
+              0.033264033264033266,
+              0.12223788281551728
+            ],
+            [
+              0.033264033264033266,
+              0.12902624367938764
+            ],
+            [
+              0.033264033264033266,
+              0.14671317817946927
+            ],
+            [
+              0.033264033264033266,
+              0.18657110493450157
+            ],
+            [
+              0.033264033264033266,
+              0.19115893625705316
+            ],
+            [
+              0.033264033264033266,
+              0.20098342002282887
+            ],
+            [
+              0.033264033264033266,
+              0.24852269680443828
+            ],
+            [
+              0.033264033264033266,
+              0.252028393792433
+            ],
+            [
+              0.033264033264033266,
+              0.2562551315248218
+            ],
+            [
+              0.033264033264033266,
+              0.2599517048119666
+            ],
+            [
+              0.033264033264033266,
+              0.2644139784481949
+            ],
+            [
+              0.033264033264033266,
+              0.3053148410093973
+            ],
+            [
+              0.033264033264033266,
+              0.3080314742566026
+            ],
+            [
+              0.033264033264033266,
+              0.3108453501911612
+            ],
+            [
+              0.033264033264033266,
+              0.31373416561189527
+            ],
+            [
+              0.033264033264033266,
+              0.3169184834926111
+            ],
+            [
+              0.033264033264033266,
+              0.32055335301789567
+            ],
+            [
+              0.033264033264033266,
+              0.3618812748588143
+            ],
+            [
+              0.033264033264033266,
+              0.36515898984551787
+            ],
+            [
+              0.033264033264033266,
+              0.3701206746729859
+            ],
+            [
+              0.033264033264033266,
+              0.3721297926656557
+            ],
+            [
+              0.033264033264033266,
+              0.3735408559916784
+            ],
+            [
+              0.033264033264033266,
+              0.3752801571603124
+            ],
+            [
+              0.033264033264033266,
+              0.37819887518491946
+            ],
+            [
+              0.033264033264033266,
+              0.42788100468171053
+            ],
+            [
+              0.033264033264033266,
+              0.43038008112971937
+            ],
+            [
+              0.033264033264033266,
+              0.4320292679185762
+            ],
+            [
+              0.033264033264033266,
+              0.4341274807599529
+            ],
+            [
+              0.033264033264033266,
+              0.43460862190884697
+            ],
+            [
+              0.033264033264033266,
+              0.43622331901460476
+            ],
+            [
+              0.002079002079002079,
+              0.4371171370663234
+            ]
+          ],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "empirical-selected-root-equality-only",
+          "class": "same",
+          "support": 127,
+          "probability": 0.84765625,
+          "lower": 0.7781297358041737,
+          "upper": 0.9020827962340554,
+          "not_a_same_target_counterfactual": true
+        },
+        "fallback_root_model": {
+          "status": "unknown-sparse",
+          "class": "same",
+          "support": 6,
+          "probability": null,
+          "lower": 2.7755575615628914e-17,
+          "upper": 0.3903342879021653,
+          "not_a_same_target_counterfactual": true
+        },
+        "released_successors": [
+          {
+            "window": 4,
+            "frontier_end": 128000,
+            "release": 4662113.9049667,
+            "display_deadline": 4662115.9049667,
+            "commit_deadline": 4662121.9049667,
+            "audio_weight": 2.0,
+            "remaining_service_s": 0.8445943465822368,
+            "display_met": false,
+            "private_ready_delay_s": null,
+            "verify_private_compatible": true,
+            "unknown_private_probability": null,
+            "direct_private_probability": 0.84765625,
+            "fallback_private_probability": null,
+            "inherit_current_transition_model": true,
+            "parent_frontier_start": 96000,
+            "audio_seconds": 8.0,
+            "estimated_prompt_tokens": 12,
+            "interval_seconds": 2.0,
+            "private_delay_distribution": [
+              [
+                0.033264033264033266,
+                0.12223788281551728
+              ],
+              [
+                0.033264033264033266,
+                0.12902624367938764
+              ],
+              [
+                0.033264033264033266,
+                0.14671317817946927
+              ],
+              [
+                0.033264033264033266,
+                0.18657110493450157
+              ],
+              [
+                0.033264033264033266,
+                0.19115893625705316
+              ],
+              [
+                0.033264033264033266,
+                0.20098342002282887
+              ],
+              [
+                0.033264033264033266,
+                0.24852269680443828
+              ],
+              [
+                0.033264033264033266,
+                0.252028393792433
+              ],
+              [
+                0.033264033264033266,
+                0.2562551315248218
+              ],
+              [
+                0.033264033264033266,
+                0.2599517048119666
+              ],
+              [
+                0.033264033264033266,
+                0.2644139784481949
+              ],
+              [
+                0.033264033264033266,
+                0.3053148410093973
+              ],
+              [
+                0.033264033264033266,
+                0.3080314742566026
+              ],
+              [
+                0.033264033264033266,
+                0.3108453501911612
+              ],
+              [
+                0.033264033264033266,
+                0.31373416561189527
+              ],
+              [
+                0.033264033264033266,
+                0.3169184834926111
+              ],
+              [
+                0.033264033264033266,
+                0.32055335301789567
+              ],
+              [
+                0.033264033264033266,
+                0.3618812748588143
+              ],
+              [
+                0.033264033264033266,
+                0.36515898984551787
+              ],
+              [
+                0.033264033264033266,
+                0.3701206746729859
+              ],
+              [
+                0.033264033264033266,
+                0.3721297926656557
+              ],
+              [
+                0.033264033264033266,
+                0.3735408559916784
+              ],
+              [
+                0.033264033264033266,
+                0.3752801571603124
+              ],
+              [
+                0.033264033264033266,
+                0.37819887518491946
+              ],
+              [
+                0.033264033264033266,
+                0.42788100468171053
+              ],
+              [
+                0.033264033264033266,
+                0.43038008112971937
+              ],
+              [
+                0.033264033264033266,
+                0.4320292679185762
+              ],
+              [
+                0.033264033264033266,
+                0.4341274807599529
+              ],
+              [
+                0.033264033264033266,
+                0.43460862190884697
+              ],
+              [
+                0.033264033264033266,
+                0.43622331901460476
+              ],
+              [
+                0.002079002079002079,
+                0.4371171370663234
+              ]
+            ],
+            "private_path_currently_legal": true,
+            "private_delay_includes_delivery": true
+          }
+        ],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "6": {
+        "identity": {
+          "sid": 6,
+          "epoch": 1,
+          "parent_version": 3,
+          "parent_digest": "d22c3e3c2a28f5cc03850e9b7056ecaab587baa0be3506e8cdadeb594d4c2141",
+          "frontier_start": 96000,
+          "frontier_end": 128000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "no-uncompleted-frozen-private-job"
+        },
+        "chain_preview": {
+          "status": "conditional-exact-chain-preview",
+          "candidate_job_id": "proposal-6-98",
+          "verify_success_projection_digest": "3990f6800cf226ceee575d0ad0aed3091adbd46ce98c2378908362c8cfaf58d0",
+          "verify_success_chain_eligible": true,
+          "verify_success_chain_proof": [
+            "proposal-6-98",
+            "proposal-6-125"
+          ],
+          "structural_chain_if_boundary_matches": true,
+          "structural_chain_proof": [
+            "proposal-6-98",
+            "proposal-6-125"
+          ],
+          "condition": "requires actual complete FP32 verification, D1, WAL install; no publication now"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 6,
+            "epoch": 1,
+            "parent_version": 3,
+            "parent_digest": "d22c3e3c2a28f5cc03850e9b7056ecaab587baa0be3506e8cdadeb594d4c2141",
+            "frontier_start": 96000,
+            "frontier_end": 128000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [
+            {
+              "window": 5,
+              "frontier_end": 160000,
+              "release": 4662114.1549667,
+              "display_deadline": 4662116.1549667,
+              "commit_deadline": 4662122.1549667,
+              "audio_weight": 2.0,
+              "remaining_service_s": 0.8536891055340781,
+              "display_met": true,
+              "private_ready_delay_s": null,
+              "verify_private_compatible": true,
+              "unknown_private_probability": null,
+              "direct_private_probability": 0.84765625,
+              "fallback_private_probability": null,
+              "inherit_current_transition_model": true,
+              "parent_frontier_start": 128000,
+              "audio_seconds": 10.0,
+              "estimated_prompt_tokens": 19,
+              "interval_seconds": 2.0,
+              "private_delay_distribution": [],
+              "private_path_currently_legal": false,
+              "private_delay_includes_delivery": true
+            }
+          ],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": true,
+          "direct_private_probability": 0.84765625,
+          "fallback_private_probability": null,
+          "private_path_currently_legal": false,
+          "private_delay_distribution": [],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "empirical-selected-root-equality-only",
+          "class": "same",
+          "support": 127,
+          "probability": 0.84765625,
+          "lower": 0.7781297358041737,
+          "upper": 0.9020827962340554,
+          "not_a_same_target_counterfactual": true
+        },
+        "fallback_root_model": {
+          "status": "unknown-sparse",
+          "class": "same",
+          "support": 6,
+          "probability": null,
+          "lower": 2.7755575615628914e-17,
+          "upper": 0.3903342879021653,
+          "not_a_same_target_counterfactual": true
+        },
+        "released_successors": [
+          {
+            "window": 5,
+            "frontier_end": 160000,
+            "release": 4662114.1549667,
+            "display_deadline": 4662116.1549667,
+            "commit_deadline": 4662122.1549667,
+            "audio_weight": 2.0,
+            "remaining_service_s": 0.8536891055340781,
+            "display_met": true,
+            "private_ready_delay_s": null,
+            "verify_private_compatible": true,
+            "unknown_private_probability": null,
+            "direct_private_probability": 0.84765625,
+            "fallback_private_probability": null,
+            "inherit_current_transition_model": true,
+            "parent_frontier_start": 128000,
+            "audio_seconds": 10.0,
+            "estimated_prompt_tokens": 19,
+            "interval_seconds": 2.0,
+            "private_delay_distribution": [],
+            "private_path_currently_legal": false,
+            "private_delay_includes_delivery": true
+          }
+        ],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "14": {
+        "identity": {
+          "sid": 14,
+          "epoch": 1,
+          "parent_version": 2,
+          "parent_digest": "47d2dfc92107822b7dbe847fa1aedcf2e8c8674e39dd91b1d21a213224fbddee",
+          "frontier_start": 64000,
+          "frontier_end": 96000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "pending-actual-job",
+          "job_id": "proposal-14-126",
+          "physical_rows": 10,
+          "actual_lease_age_s": 0.9011085787788033,
+          "predicted_full_lease_s": 1.2615772142173858,
+          "row_CDF_size_bucket": "10/0-8",
+          "survival_conditioned_samples": 481,
+          "age_clock": "observed-worker-start",
+          "private_delay_includes_delivery": true,
+          "CDF_upper_endpoint_bins": 31,
+          "CDF_one_sided_error_bound": 0.031185031185031187,
+          "censored_beyond_empirical_support": false,
+          "current_path_legal": true,
+          "scope": "prediction only; no future result, fault label or free GPU reuse"
+        },
+        "chain_preview": {
+          "status": "conditional-exact-chain-preview",
+          "candidate_job_id": "proposal-14-99",
+          "verify_success_projection_digest": "616dc91bcb2b483c1478fce38c33e1fc5cf2552aa217a95166d2683551e27f58",
+          "verify_success_chain_eligible": true,
+          "verify_success_chain_proof": [
+            "proposal-14-99"
+          ],
+          "structural_chain_if_boundary_matches": true,
+          "structural_chain_proof": [
+            "proposal-14-99"
+          ],
+          "condition": "requires actual complete FP32 verification, D1, WAL install; no publication now"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 14,
+            "epoch": 1,
+            "parent_version": 2,
+            "parent_digest": "47d2dfc92107822b7dbe847fa1aedcf2e8c8674e39dd91b1d21a213224fbddee",
+            "frontier_start": 64000,
+            "frontier_end": 96000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [
+            {
+              "window": 4,
+              "frontier_end": 128000,
+              "release": 4662114.1549667,
+              "display_deadline": 4662116.1549667,
+              "commit_deadline": 4662122.1549667,
+              "audio_weight": 2.0,
+              "remaining_service_s": 0.8586083045674101,
+              "display_met": false,
+              "private_ready_delay_s": null,
+              "verify_private_compatible": true,
+              "unknown_private_probability": null,
+              "direct_private_probability": 0.84765625,
+              "fallback_private_probability": null,
+              "inherit_current_transition_model": true,
+              "parent_frontier_start": 96000,
+              "audio_seconds": 8.0,
+              "estimated_prompt_tokens": 15,
+              "interval_seconds": 2.0,
+              "private_delay_distribution": [
+                [
+                  0.033264033264033266,
+                  0.12223788281551728
+                ],
+                [
+                  0.033264033264033266,
+                  0.12902624367938764
+                ],
+                [
+                  0.033264033264033266,
+                  0.14671317817946927
+                ],
+                [
+                  0.033264033264033266,
+                  0.18657110493450157
+                ],
+                [
+                  0.033264033264033266,
+                  0.19115893625705316
+                ],
+                [
+                  0.033264033264033266,
+                  0.20098342002282887
+                ],
+                [
+                  0.033264033264033266,
+                  0.24852269680443828
+                ],
+                [
+                  0.033264033264033266,
+                  0.252028393792433
+                ],
+                [
+                  0.033264033264033266,
+                  0.2562551315248218
+                ],
+                [
+                  0.033264033264033266,
+                  0.2599517048119666
+                ],
+                [
+                  0.033264033264033266,
+                  0.2644139784481949
+                ],
+                [
+                  0.033264033264033266,
+                  0.3053148410093973
+                ],
+                [
+                  0.033264033264033266,
+                  0.3080314742566026
+                ],
+                [
+                  0.033264033264033266,
+                  0.3108453501911612
+                ],
+                [
+                  0.033264033264033266,
+                  0.31373416561189527
+                ],
+                [
+                  0.033264033264033266,
+                  0.3169184834926111
+                ],
+                [
+                  0.033264033264033266,
+                  0.32055335301789567
+                ],
+                [
+                  0.033264033264033266,
+                  0.3618812748588143
+                ],
+                [
+                  0.033264033264033266,
+                  0.36515898984551787
+                ],
+                [
+                  0.033264033264033266,
+                  0.3701206746729859
+                ],
+                [
+                  0.033264033264033266,
+                  0.3721297926656557
+                ],
+                [
+                  0.033264033264033266,
+                  0.3735408559916784
+                ],
+                [
+                  0.033264033264033266,
+                  0.3752801571603124
+                ],
+                [
+                  0.033264033264033266,
+                  0.37819887518491946
+                ],
+                [
+                  0.033264033264033266,
+                  0.42788100468171053
+                ],
+                [
+                  0.033264033264033266,
+                  0.43038008112971937
+                ],
+                [
+                  0.033264033264033266,
+                  0.4320292679185762
+                ],
+                [
+                  0.033264033264033266,
+                  0.4341274807599529
+                ],
+                [
+                  0.033264033264033266,
+                  0.43460862190884697
+                ],
+                [
+                  0.033264033264033266,
+                  0.43622331901460476
+                ],
+                [
+                  0.002079002079002079,
+                  0.4371171370663234
+                ]
+              ],
+              "private_path_currently_legal": true,
+              "private_delay_includes_delivery": true
+            }
+          ],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": true,
+          "direct_private_probability": 0.84765625,
+          "fallback_private_probability": null,
+          "private_path_currently_legal": true,
+          "private_delay_distribution": [
+            [
+              0.033264033264033266,
+              0.12223788281551728
+            ],
+            [
+              0.033264033264033266,
+              0.12902624367938764
+            ],
+            [
+              0.033264033264033266,
+              0.14671317817946927
+            ],
+            [
+              0.033264033264033266,
+              0.18657110493450157
+            ],
+            [
+              0.033264033264033266,
+              0.19115893625705316
+            ],
+            [
+              0.033264033264033266,
+              0.20098342002282887
+            ],
+            [
+              0.033264033264033266,
+              0.24852269680443828
+            ],
+            [
+              0.033264033264033266,
+              0.252028393792433
+            ],
+            [
+              0.033264033264033266,
+              0.2562551315248218
+            ],
+            [
+              0.033264033264033266,
+              0.2599517048119666
+            ],
+            [
+              0.033264033264033266,
+              0.2644139784481949
+            ],
+            [
+              0.033264033264033266,
+              0.3053148410093973
+            ],
+            [
+              0.033264033264033266,
+              0.3080314742566026
+            ],
+            [
+              0.033264033264033266,
+              0.3108453501911612
+            ],
+            [
+              0.033264033264033266,
+              0.31373416561189527
+            ],
+            [
+              0.033264033264033266,
+              0.3169184834926111
+            ],
+            [
+              0.033264033264033266,
+              0.32055335301789567
+            ],
+            [
+              0.033264033264033266,
+              0.3618812748588143
+            ],
+            [
+              0.033264033264033266,
+              0.36515898984551787
+            ],
+            [
+              0.033264033264033266,
+              0.3701206746729859
+            ],
+            [
+              0.033264033264033266,
+              0.3721297926656557
+            ],
+            [
+              0.033264033264033266,
+              0.3735408559916784
+            ],
+            [
+              0.033264033264033266,
+              0.3752801571603124
+            ],
+            [
+              0.033264033264033266,
+              0.37819887518491946
+            ],
+            [
+              0.033264033264033266,
+              0.42788100468171053
+            ],
+            [
+              0.033264033264033266,
+              0.43038008112971937
+            ],
+            [
+              0.033264033264033266,
+              0.4320292679185762
+            ],
+            [
+              0.033264033264033266,
+              0.4341274807599529
+            ],
+            [
+              0.033264033264033266,
+              0.43460862190884697
+            ],
+            [
+              0.033264033264033266,
+              0.43622331901460476
+            ],
+            [
+              0.002079002079002079,
+              0.4371171370663234
+            ]
+          ],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "empirical-selected-root-equality-only",
+          "class": "same",
+          "support": 127,
+          "probability": 0.84765625,
+          "lower": 0.7781297358041737,
+          "upper": 0.9020827962340554,
+          "not_a_same_target_counterfactual": true
+        },
+        "fallback_root_model": {
+          "status": "unknown-sparse",
+          "class": "same",
+          "support": 6,
+          "probability": null,
+          "lower": 2.7755575615628914e-17,
+          "upper": 0.3903342879021653,
+          "not_a_same_target_counterfactual": true
+        },
+        "released_successors": [
+          {
+            "window": 4,
+            "frontier_end": 128000,
+            "release": 4662114.1549667,
+            "display_deadline": 4662116.1549667,
+            "commit_deadline": 4662122.1549667,
+            "audio_weight": 2.0,
+            "remaining_service_s": 0.8586083045674101,
+            "display_met": false,
+            "private_ready_delay_s": null,
+            "verify_private_compatible": true,
+            "unknown_private_probability": null,
+            "direct_private_probability": 0.84765625,
+            "fallback_private_probability": null,
+            "inherit_current_transition_model": true,
+            "parent_frontier_start": 96000,
+            "audio_seconds": 8.0,
+            "estimated_prompt_tokens": 15,
+            "interval_seconds": 2.0,
+            "private_delay_distribution": [
+              [
+                0.033264033264033266,
+                0.12223788281551728
+              ],
+              [
+                0.033264033264033266,
+                0.12902624367938764
+              ],
+              [
+                0.033264033264033266,
+                0.14671317817946927
+              ],
+              [
+                0.033264033264033266,
+                0.18657110493450157
+              ],
+              [
+                0.033264033264033266,
+                0.19115893625705316
+              ],
+              [
+                0.033264033264033266,
+                0.20098342002282887
+              ],
+              [
+                0.033264033264033266,
+                0.24852269680443828
+              ],
+              [
+                0.033264033264033266,
+                0.252028393792433
+              ],
+              [
+                0.033264033264033266,
+                0.2562551315248218
+              ],
+              [
+                0.033264033264033266,
+                0.2599517048119666
+              ],
+              [
+                0.033264033264033266,
+                0.2644139784481949
+              ],
+              [
+                0.033264033264033266,
+                0.3053148410093973
+              ],
+              [
+                0.033264033264033266,
+                0.3080314742566026
+              ],
+              [
+                0.033264033264033266,
+                0.3108453501911612
+              ],
+              [
+                0.033264033264033266,
+                0.31373416561189527
+              ],
+              [
+                0.033264033264033266,
+                0.3169184834926111
+              ],
+              [
+                0.033264033264033266,
+                0.32055335301789567
+              ],
+              [
+                0.033264033264033266,
+                0.3618812748588143
+              ],
+              [
+                0.033264033264033266,
+                0.36515898984551787
+              ],
+              [
+                0.033264033264033266,
+                0.3701206746729859
+              ],
+              [
+                0.033264033264033266,
+                0.3721297926656557
+              ],
+              [
+                0.033264033264033266,
+                0.3735408559916784
+              ],
+              [
+                0.033264033264033266,
+                0.3752801571603124
+              ],
+              [
+                0.033264033264033266,
+                0.37819887518491946
+              ],
+              [
+                0.033264033264033266,
+                0.42788100468171053
+              ],
+              [
+                0.033264033264033266,
+                0.43038008112971937
+              ],
+              [
+                0.033264033264033266,
+                0.4320292679185762
+              ],
+              [
+                0.033264033264033266,
+                0.4341274807599529
+              ],
+              [
+                0.033264033264033266,
+                0.43460862190884697
+              ],
+              [
+                0.033264033264033266,
+                0.43622331901460476
+              ],
+              [
+                0.002079002079002079,
+                0.4371171370663234
+              ]
+            ],
+            "private_path_currently_legal": true,
+            "private_delay_includes_delivery": true
+          }
+        ],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "5": {
+        "identity": {
+          "sid": 5,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "c350d111bfcc01542e2193d295059a3ef7ee97c4d47bca4a46c9bc75908b3ca8",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "pending-actual-job",
+          "job_id": "proposal-5-123",
+          "physical_rows": 10,
+          "actual_lease_age_s": 0.9011085787788033,
+          "predicted_full_lease_s": 1.2615772142173858,
+          "row_CDF_size_bucket": "10/8-16",
+          "survival_conditioned_samples": 152,
+          "age_clock": "observed-worker-start",
+          "private_delay_includes_delivery": true,
+          "CDF_upper_endpoint_bins": 31,
+          "CDF_one_sided_error_bound": 0.02631578947368421,
+          "censored_beyond_empirical_support": false,
+          "current_path_legal": true,
+          "scope": "prediction only; no future result, fault label or free GPU reuse"
+        },
+        "chain_preview": {
+          "status": "no-actual-ready-boundary-candidate"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 5,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "c350d111bfcc01542e2193d295059a3ef7ee97c4d47bca4a46c9bc75908b3ca8",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": null,
+          "direct_private_probability": 0.0,
+          "fallback_private_probability": 0.0,
+          "private_path_currently_legal": true,
+          "private_delay_distribution": [
+            [
+              0.03289473684210526,
+              0.03699604216265939
+            ],
+            [
+              0.03289473684210526,
+              0.04839798157848563
+            ],
+            [
+              0.03289473684210526,
+              0.11602128121392141
+            ],
+            [
+              0.03289473684210526,
+              0.12145496699310421
+            ],
+            [
+              0.03289473684210526,
+              0.1593702383720803
+            ],
+            [
+              0.03289473684210526,
+              0.16870192568859643
+            ],
+            [
+              0.03289473684210526,
+              0.17583643799855575
+            ],
+            [
+              0.03289473684210526,
+              0.18231923894262847
+            ],
+            [
+              0.03289473684210526,
+              0.18389821734683465
+            ],
+            [
+              0.03289473684210526,
+              0.18541654953111775
+            ],
+            [
+              0.03289473684210526,
+              0.1899400334283885
+            ],
+            [
+              0.03289473684210526,
+              0.19205094001281653
+            ],
+            [
+              0.03289473684210526,
+              0.19675872481762968
+            ],
+            [
+              0.03289473684210526,
+              0.20784940068321922
+            ],
+            [
+              0.03289473684210526,
+              0.23537192906608562
+            ],
+            [
+              0.03289473684210526,
+              0.2731660710093753
+            ],
+            [
+              0.03289473684210526,
+              0.2773224776042593
+            ],
+            [
+              0.03289473684210526,
+              0.28484608655044696
+            ],
+            [
+              0.03289473684210526,
+              0.2934527919157168
+            ],
+            [
+              0.03289473684210526,
+              0.3060847555624471
+            ],
+            [
+              0.03289473684210526,
+              0.3505557883663166
+            ],
+            [
+              0.03289473684210526,
+              0.3579329081448672
+            ],
+            [
+              0.03289473684210526,
+              0.35976344370211066
+            ],
+            [
+              0.03289473684210526,
+              0.36150155338665924
+            ],
+            [
+              0.03289473684210526,
+              0.3634124309271476
+            ],
+            [
+              0.03289473684210526,
+              0.3762873126441444
+            ],
+            [
+              0.03289473684210526,
+              0.4257160044011272
+            ],
+            [
+              0.03289473684210526,
+              0.43072971925862125
+            ],
+            [
+              0.03289473684210526,
+              0.43217276368870894
+            ],
+            [
+              0.03289473684210526,
+              0.4326396510480983
+            ],
+            [
+              0.013157894736842105,
+              0.4334103143293706
+            ]
+          ],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "fallback_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "released_successors": [],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "7": {
+        "identity": {
+          "sid": 7,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "cac9963449bd935c17174d9a15e2d71943bcc457cc2664fb8de96a3499bed095",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "pending-actual-job",
+          "job_id": "proposal-7-127",
+          "physical_rows": 10,
+          "actual_lease_age_s": 0.9011085787788033,
+          "predicted_full_lease_s": 1.2615772142173858,
+          "row_CDF_size_bucket": "10/8-16",
+          "survival_conditioned_samples": 152,
+          "age_clock": "observed-worker-start",
+          "private_delay_includes_delivery": true,
+          "CDF_upper_endpoint_bins": 31,
+          "CDF_one_sided_error_bound": 0.02631578947368421,
+          "censored_beyond_empirical_support": false,
+          "current_path_legal": true,
+          "scope": "prediction only; no future result, fault label or free GPU reuse"
+        },
+        "chain_preview": {
+          "status": "no-actual-ready-boundary-candidate"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 7,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "cac9963449bd935c17174d9a15e2d71943bcc457cc2664fb8de96a3499bed095",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": null,
+          "direct_private_probability": 0.0,
+          "fallback_private_probability": 0.0,
+          "private_path_currently_legal": true,
+          "private_delay_distribution": [
+            [
+              0.03289473684210526,
+              0.03699604216265939
+            ],
+            [
+              0.03289473684210526,
+              0.04839798157848563
+            ],
+            [
+              0.03289473684210526,
+              0.11602128121392141
+            ],
+            [
+              0.03289473684210526,
+              0.12145496699310421
+            ],
+            [
+              0.03289473684210526,
+              0.1593702383720803
+            ],
+            [
+              0.03289473684210526,
+              0.16870192568859643
+            ],
+            [
+              0.03289473684210526,
+              0.17583643799855575
+            ],
+            [
+              0.03289473684210526,
+              0.18231923894262847
+            ],
+            [
+              0.03289473684210526,
+              0.18389821734683465
+            ],
+            [
+              0.03289473684210526,
+              0.18541654953111775
+            ],
+            [
+              0.03289473684210526,
+              0.1899400334283885
+            ],
+            [
+              0.03289473684210526,
+              0.19205094001281653
+            ],
+            [
+              0.03289473684210526,
+              0.19675872481762968
+            ],
+            [
+              0.03289473684210526,
+              0.20784940068321922
+            ],
+            [
+              0.03289473684210526,
+              0.23537192906608562
+            ],
+            [
+              0.03289473684210526,
+              0.2731660710093753
+            ],
+            [
+              0.03289473684210526,
+              0.2773224776042593
+            ],
+            [
+              0.03289473684210526,
+              0.28484608655044696
+            ],
+            [
+              0.03289473684210526,
+              0.2934527919157168
+            ],
+            [
+              0.03289473684210526,
+              0.3060847555624471
+            ],
+            [
+              0.03289473684210526,
+              0.3505557883663166
+            ],
+            [
+              0.03289473684210526,
+              0.3579329081448672
+            ],
+            [
+              0.03289473684210526,
+              0.35976344370211066
+            ],
+            [
+              0.03289473684210526,
+              0.36150155338665924
+            ],
+            [
+              0.03289473684210526,
+              0.3634124309271476
+            ],
+            [
+              0.03289473684210526,
+              0.3762873126441444
+            ],
+            [
+              0.03289473684210526,
+              0.4257160044011272
+            ],
+            [
+              0.03289473684210526,
+              0.43072971925862125
+            ],
+            [
+              0.03289473684210526,
+              0.43217276368870894
+            ],
+            [
+              0.03289473684210526,
+              0.4326396510480983
+            ],
+            [
+              0.013157894736842105,
+              0.4334103143293706
+            ]
+          ],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "fallback_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "released_successors": [],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "15": {
+        "identity": {
+          "sid": 15,
+          "epoch": 1,
+          "parent_version": 3,
+          "parent_digest": "6759dba67c97db6aee5f1adedfc019adf53429b26d41d2c1aa901d8e5b6c628d",
+          "frontier_start": 96000,
+          "frontier_end": 128000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "pending-actual-job",
+          "job_id": "proposal-15-128",
+          "physical_rows": 10,
+          "actual_lease_age_s": 0.9011085787788033,
+          "predicted_full_lease_s": 1.2615772142173858,
+          "row_CDF_size_bucket": "10/0-8",
+          "survival_conditioned_samples": 481,
+          "age_clock": "observed-worker-start",
+          "private_delay_includes_delivery": true,
+          "CDF_upper_endpoint_bins": 31,
+          "CDF_one_sided_error_bound": 0.031185031185031187,
+          "censored_beyond_empirical_support": false,
+          "current_path_legal": true,
+          "scope": "prediction only; no future result, fault label or free GPU reuse"
+        },
+        "chain_preview": {
+          "status": "no-actual-ready-boundary-candidate"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 15,
+            "epoch": 1,
+            "parent_version": 3,
+            "parent_digest": "6759dba67c97db6aee5f1adedfc019adf53429b26d41d2c1aa901d8e5b6c628d",
+            "frontier_start": 96000,
+            "frontier_end": 128000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": null,
+          "direct_private_probability": 0.0,
+          "fallback_private_probability": 0.0,
+          "private_path_currently_legal": true,
+          "private_delay_distribution": [
+            [
+              0.033264033264033266,
+              0.12223788281551728
+            ],
+            [
+              0.033264033264033266,
+              0.12902624367938764
+            ],
+            [
+              0.033264033264033266,
+              0.14671317817946927
+            ],
+            [
+              0.033264033264033266,
+              0.18657110493450157
+            ],
+            [
+              0.033264033264033266,
+              0.19115893625705316
+            ],
+            [
+              0.033264033264033266,
+              0.20098342002282887
+            ],
+            [
+              0.033264033264033266,
+              0.24852269680443828
+            ],
+            [
+              0.033264033264033266,
+              0.252028393792433
+            ],
+            [
+              0.033264033264033266,
+              0.2562551315248218
+            ],
+            [
+              0.033264033264033266,
+              0.2599517048119666
+            ],
+            [
+              0.033264033264033266,
+              0.2644139784481949
+            ],
+            [
+              0.033264033264033266,
+              0.3053148410093973
+            ],
+            [
+              0.033264033264033266,
+              0.3080314742566026
+            ],
+            [
+              0.033264033264033266,
+              0.3108453501911612
+            ],
+            [
+              0.033264033264033266,
+              0.31373416561189527
+            ],
+            [
+              0.033264033264033266,
+              0.3169184834926111
+            ],
+            [
+              0.033264033264033266,
+              0.32055335301789567
+            ],
+            [
+              0.033264033264033266,
+              0.3618812748588143
+            ],
+            [
+              0.033264033264033266,
+              0.36515898984551787
+            ],
+            [
+              0.033264033264033266,
+              0.3701206746729859
+            ],
+            [
+              0.033264033264033266,
+              0.3721297926656557
+            ],
+            [
+              0.033264033264033266,
+              0.3735408559916784
+            ],
+            [
+              0.033264033264033266,
+              0.3752801571603124
+            ],
+            [
+              0.033264033264033266,
+              0.37819887518491946
+            ],
+            [
+              0.033264033264033266,
+              0.42788100468171053
+            ],
+            [
+              0.033264033264033266,
+              0.43038008112971937
+            ],
+            [
+              0.033264033264033266,
+              0.4320292679185762
+            ],
+            [
+              0.033264033264033266,
+              0.4341274807599529
+            ],
+            [
+              0.033264033264033266,
+              0.43460862190884697
+            ],
+            [
+              0.033264033264033266,
+              0.43622331901460476
+            ],
+            [
+              0.002079002079002079,
+              0.4371171370663234
+            ]
+          ],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "fallback_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "released_successors": [],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "0": {
+        "identity": {
+          "sid": 0,
+          "epoch": 1,
+          "parent_version": 5,
+          "parent_digest": "efcd7ba09d9c14e200f85bc20fe60d6e8ae4409a1bec489c3878bdc5dbdb55a1",
+          "frontier_start": 160000,
+          "frontier_end": 192000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "no-uncompleted-frozen-private-job"
+        },
+        "chain_preview": {
+          "status": "no-actual-ready-boundary-candidate"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 0,
+            "epoch": 1,
+            "parent_version": 5,
+            "parent_digest": "efcd7ba09d9c14e200f85bc20fe60d6e8ae4409a1bec489c3878bdc5dbdb55a1",
+            "frontier_start": 160000,
+            "frontier_end": 192000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [
+            {
+              "window": 7,
+              "frontier_end": 195440,
+              "release": 4662114.8699667,
+              "display_deadline": 4662116.8699667,
+              "commit_deadline": 4662122.8699667,
+              "audio_weight": 0.215,
+              "remaining_service_s": 0.862077802514122,
+              "display_met": false,
+              "private_ready_delay_s": null,
+              "verify_private_compatible": null,
+              "unknown_private_probability": null,
+              "direct_private_probability": 0.0,
+              "fallback_private_probability": 0.0,
+              "inherit_current_transition_model": true,
+              "parent_frontier_start": 192000,
+              "audio_seconds": 12.215,
+              "estimated_prompt_tokens": 41,
+              "interval_seconds": 0.215,
+              "private_delay_distribution": [],
+              "private_path_currently_legal": false,
+              "private_delay_includes_delivery": true
+            }
+          ],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": null,
+          "direct_private_probability": 0.0,
+          "fallback_private_probability": 0.0,
+          "private_path_currently_legal": false,
+          "private_delay_distribution": [],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "fallback_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "released_successors": [
+          {
+            "window": 7,
+            "frontier_end": 195440,
+            "release": 4662114.8699667,
+            "display_deadline": 4662116.8699667,
+            "commit_deadline": 4662122.8699667,
+            "audio_weight": 0.215,
+            "remaining_service_s": 0.862077802514122,
+            "display_met": false,
+            "private_ready_delay_s": null,
+            "verify_private_compatible": null,
+            "unknown_private_probability": null,
+            "direct_private_probability": 0.0,
+            "fallback_private_probability": 0.0,
+            "inherit_current_transition_model": true,
+            "parent_frontier_start": 192000,
+            "audio_seconds": 12.215,
+            "estimated_prompt_tokens": 41,
+            "interval_seconds": 0.215,
+            "private_delay_distribution": [],
+            "private_path_currently_legal": false,
+            "private_delay_includes_delivery": true
+          }
+        ],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "8": {
+        "identity": {
+          "sid": 8,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "3eed47c4c69bce19eab4bf6252d0b77e56266b82c9bb0b9fbc81671e0d844cde",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "no-uncompleted-frozen-private-job"
+        },
+        "chain_preview": {
+          "status": "no-actual-ready-boundary-candidate"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 8,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "3eed47c4c69bce19eab4bf6252d0b77e56266b82c9bb0b9fbc81671e0d844cde",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": null,
+          "direct_private_probability": 0.0,
+          "fallback_private_probability": 0.0,
+          "private_path_currently_legal": false,
+          "private_delay_distribution": [],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "fallback_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "released_successors": [],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "1": {
+        "identity": {
+          "sid": 1,
+          "epoch": 1,
+          "parent_version": 5,
+          "parent_digest": "3c1c5dd551f694049262be7f53d838f152d3d8e84963fe94f71c3fcf0f692233",
+          "frontier_start": 160000,
+          "frontier_end": 192000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "no-uncompleted-frozen-private-job"
+        },
+        "chain_preview": {
+          "status": "no-actual-ready-boundary-candidate"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 1,
+            "epoch": 1,
+            "parent_version": 5,
+            "parent_digest": "3c1c5dd551f694049262be7f53d838f152d3d8e84963fe94f71c3fcf0f692233",
+            "frontier_start": 160000,
+            "frontier_end": 192000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": null,
+          "direct_private_probability": 0.0,
+          "fallback_private_probability": 0.0,
+          "private_path_currently_legal": false,
+          "private_delay_distribution": [],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "fallback_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "released_successors": [],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "9": {
+        "identity": {
+          "sid": 9,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "0022e5470a57cc14ab23e2a897f1ff640a7e8f9f1a3e0f899a67c33c7d67fe59",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "no-uncompleted-frozen-private-job"
+        },
+        "chain_preview": {
+          "status": "no-actual-ready-boundary-candidate"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 9,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "0022e5470a57cc14ab23e2a897f1ff640a7e8f9f1a3e0f899a67c33c7d67fe59",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": null,
+          "direct_private_probability": 0.0,
+          "fallback_private_probability": 0.0,
+          "private_path_currently_legal": false,
+          "private_delay_distribution": [],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "fallback_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "released_successors": [],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "2": {
+        "identity": {
+          "sid": 2,
+          "epoch": 1,
+          "parent_version": 5,
+          "parent_digest": "97780ab65f000ee3dfb770865c9b86ba07b5ca549db54b320836e411d2d3c745",
+          "frontier_start": 160000,
+          "frontier_end": 192000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "no-uncompleted-frozen-private-job"
+        },
+        "chain_preview": {
+          "status": "no-actual-ready-boundary-candidate"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 2,
+            "epoch": 1,
+            "parent_version": 5,
+            "parent_digest": "97780ab65f000ee3dfb770865c9b86ba07b5ca549db54b320836e411d2d3c745",
+            "frontier_start": 160000,
+            "frontier_end": 192000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": null,
+          "direct_private_probability": 0.0,
+          "fallback_private_probability": 0.0,
+          "private_path_currently_legal": false,
+          "private_delay_distribution": [],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "fallback_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "released_successors": [],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      },
+      "10": {
+        "identity": {
+          "sid": 10,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "11c3f00b0f6b35f7f693071871b42ded0902dab552cceeb940751845b095d903",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "private_path": {
+          "status": "no-uncompleted-frozen-private-job"
+        },
+        "chain_preview": {
+          "status": "no-actual-ready-boundary-candidate"
+        },
+        "target_context": {
+          "identity": {
+            "sid": 10,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "11c3f00b0f6b35f7f693071871b42ded0902dab552cceeb940751845b095d903",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "successors": [],
+          "private_ready_delay_s": null,
+          "verify_private_compatible": null,
+          "direct_private_probability": 0.0,
+          "fallback_private_probability": 0.0,
+          "private_path_currently_legal": false,
+          "private_delay_distribution": [],
+          "private_delay_includes_delivery": true
+        },
+        "direct_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "fallback_root_model": {
+          "status": "no-structurally-retainable-chain",
+          "support": 0
+        },
+        "released_successors": [],
+        "private_CDF_authority_scenarios_relation": "independent empirical approximation; no claimed joint oracle"
+      }
+    },
+    "service_book": {
+      "scope": [
+        4662102.6549667,
+        "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+      ],
+      "actual_dispatches": 12,
+      "records": [
+        {
+          "identity": {
+            "sid": 0,
+            "epoch": 1,
+            "parent_version": 5,
+            "parent_digest": "efcd7ba09d9c14e200f85bc20fe60d6e8ae4409a1bec489c3878bdc5dbdb55a1",
+            "frontier_start": 160000,
+            "frontier_end": 192000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662115.370509454,
+          "deferrals": 0,
+          "promised_finish": null,
+          "continuation_rank": null,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 1,
+            "epoch": 1,
+            "parent_version": 5,
+            "parent_digest": "3c1c5dd551f694049262be7f53d838f152d3d8e84963fe94f71c3fcf0f692233",
+            "frontier_start": 160000,
+            "frontier_end": 192000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662115.370509454,
+          "deferrals": 0,
+          "promised_finish": null,
+          "continuation_rank": null,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 2,
+            "epoch": 1,
+            "parent_version": 5,
+            "parent_digest": "97780ab65f000ee3dfb770865c9b86ba07b5ca549db54b320836e411d2d3c745",
+            "frontier_start": 160000,
+            "frontier_end": 192000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662115.370509454,
+          "deferrals": 0,
+          "promised_finish": null,
+          "continuation_rank": null,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 4,
+            "epoch": 1,
+            "parent_version": 3,
+            "parent_digest": "2d82258ff5e84ab7252ae22e138e5d28215fed3df99d75e8d5cb26f1aea76f15",
+            "frontier_start": 96000,
+            "frontier_end": 128000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662113.001206919,
+          "deferrals": 2,
+          "promised_finish": 4662115.10877319,
+          "continuation_rank": 1,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 5,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "c350d111bfcc01542e2193d295059a3ef7ee97c4d47bca4a46c9bc75908b3ca8",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662115.370509454,
+          "deferrals": 0,
+          "promised_finish": null,
+          "continuation_rank": null,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 6,
+            "epoch": 1,
+            "parent_version": 3,
+            "parent_digest": "d22c3e3c2a28f5cc03850e9b7056ecaab587baa0be3506e8cdadeb594d4c2141",
+            "frontier_start": 96000,
+            "frontier_end": 128000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662113.001206919,
+          "deferrals": 2,
+          "promised_finish": 4662115.10877319,
+          "continuation_rank": 1,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 7,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "cac9963449bd935c17174d9a15e2d71943bcc457cc2664fb8de96a3499bed095",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662115.370509454,
+          "deferrals": 0,
+          "promised_finish": null,
+          "continuation_rank": null,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 8,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "3eed47c4c69bce19eab4bf6252d0b77e56266b82c9bb0b9fbc81671e0d844cde",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662115.370509454,
+          "deferrals": 0,
+          "promised_finish": null,
+          "continuation_rank": null,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 9,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "0022e5470a57cc14ab23e2a897f1ff640a7e8f9f1a3e0f899a67c33c7d67fe59",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662115.370509454,
+          "deferrals": 0,
+          "promised_finish": null,
+          "continuation_rank": null,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 10,
+            "epoch": 1,
+            "parent_version": 4,
+            "parent_digest": "11c3f00b0f6b35f7f693071871b42ded0902dab552cceeb940751845b095d903",
+            "frontier_start": 128000,
+            "frontier_end": 160000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662115.370509454,
+          "deferrals": 0,
+          "promised_finish": null,
+          "continuation_rank": null,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 12,
+            "epoch": 1,
+            "parent_version": 2,
+            "parent_digest": "172019548c82b89b1b4c80681461daff45d1c3a9f537b95e85b27b5a78f261c4",
+            "frontier_start": 64000,
+            "frontier_end": 96000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662113.001206919,
+          "deferrals": 2,
+          "promised_finish": 4662115.10877319,
+          "continuation_rank": 1,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 13,
+            "epoch": 1,
+            "parent_version": 2,
+            "parent_digest": "3addf3a38b803aff45ec523d08c292af006860799dab77256fa0644872f18f06",
+            "frontier_start": 64000,
+            "frontier_end": 96000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662113.001206919,
+          "deferrals": 2,
+          "promised_finish": 4662115.10877319,
+          "continuation_rank": 1,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 14,
+            "epoch": 1,
+            "parent_version": 2,
+            "parent_digest": "47d2dfc92107822b7dbe847fa1aedcf2e8c8674e39dd91b1d21a213224fbddee",
+            "frontier_start": 64000,
+            "frontier_end": 96000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662113.001206919,
+          "deferrals": 2,
+          "promised_finish": 4662115.10877319,
+          "continuation_rank": 1,
+          "promise_breaches": 0
+        },
+        {
+          "identity": {
+            "sid": 15,
+            "epoch": 1,
+            "parent_version": 3,
+            "parent_digest": "6759dba67c97db6aee5f1adedfc019adf53429b26d41d2c1aa901d8e5b6c628d",
+            "frontier_start": 96000,
+            "frontier_end": 128000,
+            "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+          },
+          "first_seen": 4662115.370509454,
+          "deferrals": 0,
+          "promised_finish": null,
+          "continuation_rank": null,
+          "promise_breaches": 0
+        }
+      ],
+      "symbolic_continuation_intents": [
+        {
+          "sid": 4,
+          "epoch": 1,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f",
+          "frontier_end": 160000,
+          "promised_finish": 4662117.485292524,
+          "rank": 5,
+          "actual_parent_not_created": true
+        },
+        {
+          "sid": 12,
+          "epoch": 1,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f",
+          "frontier_end": 128000,
+          "promised_finish": 4662117.485292524,
+          "rank": 4,
+          "actual_parent_not_created": true
+        }
+      ],
+      "authorization_state": false
+    },
+    "observed_credit_audio": 118.0,
+    "elapsed_seconds": 12.715542754158378,
+    "prediction_not_authorization": true
+  },
+  "features": [
+    {
+      "sid": 4,
+      "window": 4,
+      "ready": 4662111.6549667,
+      "deadline": 4662119.6549667,
+      "candidate_ready": true,
+      "same_birth": true,
+      "previous_reject": false,
+      "candidate_tokens": 13,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 8.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 21,
+      "display_met": true,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 12,
+      "window": 3,
+      "ready": 4662111.6549667,
+      "deadline": 4662119.6549667,
+      "candidate_ready": true,
+      "same_birth": true,
+      "previous_reject": false,
+      "candidate_tokens": 12,
+      "descendant_count": 1,
+      "descendant_seconds": 0.9080071318894625,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 6.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 12,
+      "display_met": true,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 13,
+      "window": 3,
+      "ready": 4662111.9049667,
+      "deadline": 4662119.9049667,
+      "candidate_ready": true,
+      "same_birth": true,
+      "previous_reject": false,
+      "candidate_tokens": 14,
+      "descendant_count": 1,
+      "descendant_seconds": 0.9064105516299605,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 6.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 12,
+      "display_met": true,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 6,
+      "window": 4,
+      "ready": 4662112.1549667,
+      "deadline": 4662120.1549667,
+      "candidate_ready": true,
+      "same_birth": true,
+      "previous_reject": false,
+      "candidate_tokens": 11,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 8.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 19,
+      "display_met": true,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 14,
+      "window": 3,
+      "ready": 4662112.1549667,
+      "deadline": 4662120.1549667,
+      "candidate_ready": true,
+      "same_birth": true,
+      "previous_reject": false,
+      "candidate_tokens": 12,
+      "descendant_count": 1,
+      "descendant_seconds": 0.9047647416591644,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 6.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 15,
+      "display_met": true,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 5,
+      "window": 5,
+      "ready": 4662113.9049667,
+      "deadline": 4662121.9049667,
+      "candidate_ready": false,
+      "same_birth": false,
+      "previous_reject": false,
+      "candidate_tokens": 0,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": 0.25141693837940693,
+      "projection_compatible": false,
+      "audio_seconds": 10.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 31,
+      "display_met": false,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 7,
+      "window": 5,
+      "ready": 4662114.4049667,
+      "deadline": 4662122.4049667,
+      "candidate_ready": false,
+      "same_birth": false,
+      "previous_reject": false,
+      "candidate_tokens": 0,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": 0.25465977005660534,
+      "projection_compatible": false,
+      "audio_seconds": 10.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 28,
+      "display_met": false,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 15,
+      "window": 4,
+      "ready": 4662114.4049667,
+      "deadline": 4662122.4049667,
+      "candidate_ready": false,
+      "same_birth": false,
+      "previous_reject": false,
+      "candidate_tokens": 0,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": 0.2555068051442504,
+      "projection_compatible": false,
+      "audio_seconds": 8.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 18,
+      "display_met": false,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 0,
+      "window": 6,
+      "ready": 4662114.6549667,
+      "deadline": 4662122.6549667,
+      "candidate_ready": false,
+      "same_birth": false,
+      "previous_reject": false,
+      "candidate_tokens": 0,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 12.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 41,
+      "display_met": false,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 8,
+      "window": 5,
+      "ready": 4662114.6549667,
+      "deadline": 4662122.6549667,
+      "candidate_ready": false,
+      "same_birth": false,
+      "previous_reject": false,
+      "candidate_tokens": 0,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 10.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 31,
+      "display_met": false,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 1,
+      "window": 6,
+      "ready": 4662114.9049667,
+      "deadline": 4662122.9049667,
+      "candidate_ready": false,
+      "same_birth": false,
+      "previous_reject": false,
+      "candidate_tokens": 0,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 12.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 25,
+      "display_met": false,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 9,
+      "window": 5,
+      "ready": 4662114.9049667,
+      "deadline": 4662122.9049667,
+      "candidate_ready": false,
+      "same_birth": false,
+      "previous_reject": false,
+      "candidate_tokens": 0,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 10.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 24,
+      "display_met": false,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 2,
+      "window": 6,
+      "ready": 4662115.1549667,
+      "deadline": 4662123.1549667,
+      "candidate_ready": false,
+      "same_birth": false,
+      "previous_reject": false,
+      "candidate_tokens": 0,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 12.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 33,
+      "display_met": false,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    },
+    {
+      "sid": 10,
+      "window": 5,
+      "ready": 4662115.1549667,
+      "deadline": 4662123.1549667,
+      "candidate_ready": false,
+      "same_birth": false,
+      "previous_reject": false,
+      "candidate_tokens": 0,
+      "descendant_count": 0,
+      "descendant_seconds": 0,
+      "candidate_eta": null,
+      "projection_compatible": false,
+      "audio_seconds": 10.0,
+      "interval_seconds": 2.0,
+      "prompt_tokens": 25,
+      "display_met": false,
+      "display_expired": false,
+      "audio_weight": 2.0,
+      "reject_age_seconds": null
+    }
+  ],
+  "recorded_decision": {
+    "kind": "ces-decision",
+    "time": 12.876773438416421,
+    "features": [
+      {
+        "sid": 4,
+        "window": 4,
+        "ready": 4662111.6549667,
+        "deadline": 4662119.6549667,
+        "candidate_ready": true,
+        "same_birth": true,
+        "previous_reject": false,
+        "candidate_tokens": 13,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 8.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 21,
+        "display_met": true,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 12,
+        "window": 3,
+        "ready": 4662111.6549667,
+        "deadline": 4662119.6549667,
+        "candidate_ready": true,
+        "same_birth": true,
+        "previous_reject": false,
+        "candidate_tokens": 12,
+        "descendant_count": 1,
+        "descendant_seconds": 0.9080071318894625,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 6.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 12,
+        "display_met": true,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 13,
+        "window": 3,
+        "ready": 4662111.9049667,
+        "deadline": 4662119.9049667,
+        "candidate_ready": true,
+        "same_birth": true,
+        "previous_reject": false,
+        "candidate_tokens": 14,
+        "descendant_count": 1,
+        "descendant_seconds": 0.9064105516299605,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 6.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 12,
+        "display_met": true,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 6,
+        "window": 4,
+        "ready": 4662112.1549667,
+        "deadline": 4662120.1549667,
+        "candidate_ready": true,
+        "same_birth": true,
+        "previous_reject": false,
+        "candidate_tokens": 11,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 8.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 19,
+        "display_met": true,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 14,
+        "window": 3,
+        "ready": 4662112.1549667,
+        "deadline": 4662120.1549667,
+        "candidate_ready": true,
+        "same_birth": true,
+        "previous_reject": false,
+        "candidate_tokens": 12,
+        "descendant_count": 1,
+        "descendant_seconds": 0.9047647416591644,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 6.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 15,
+        "display_met": true,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 5,
+        "window": 5,
+        "ready": 4662113.9049667,
+        "deadline": 4662121.9049667,
+        "candidate_ready": false,
+        "same_birth": false,
+        "previous_reject": false,
+        "candidate_tokens": 0,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": 0.25141693837940693,
+        "projection_compatible": false,
+        "audio_seconds": 10.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 31,
+        "display_met": false,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 7,
+        "window": 5,
+        "ready": 4662114.4049667,
+        "deadline": 4662122.4049667,
+        "candidate_ready": false,
+        "same_birth": false,
+        "previous_reject": false,
+        "candidate_tokens": 0,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": 0.25465977005660534,
+        "projection_compatible": false,
+        "audio_seconds": 10.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 28,
+        "display_met": false,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 15,
+        "window": 4,
+        "ready": 4662114.4049667,
+        "deadline": 4662122.4049667,
+        "candidate_ready": false,
+        "same_birth": false,
+        "previous_reject": false,
+        "candidate_tokens": 0,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": 0.2555068051442504,
+        "projection_compatible": false,
+        "audio_seconds": 8.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 18,
+        "display_met": false,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 0,
+        "window": 6,
+        "ready": 4662114.6549667,
+        "deadline": 4662122.6549667,
+        "candidate_ready": false,
+        "same_birth": false,
+        "previous_reject": false,
+        "candidate_tokens": 0,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 12.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 41,
+        "display_met": false,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 8,
+        "window": 5,
+        "ready": 4662114.6549667,
+        "deadline": 4662122.6549667,
+        "candidate_ready": false,
+        "same_birth": false,
+        "previous_reject": false,
+        "candidate_tokens": 0,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 10.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 31,
+        "display_met": false,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 1,
+        "window": 6,
+        "ready": 4662114.9049667,
+        "deadline": 4662122.9049667,
+        "candidate_ready": false,
+        "same_birth": false,
+        "previous_reject": false,
+        "candidate_tokens": 0,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 12.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 25,
+        "display_met": false,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 9,
+        "window": 5,
+        "ready": 4662114.9049667,
+        "deadline": 4662122.9049667,
+        "candidate_ready": false,
+        "same_birth": false,
+        "previous_reject": false,
+        "candidate_tokens": 0,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 10.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 24,
+        "display_met": false,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 2,
+        "window": 6,
+        "ready": 4662115.1549667,
+        "deadline": 4662123.1549667,
+        "candidate_ready": false,
+        "same_birth": false,
+        "previous_reject": false,
+        "candidate_tokens": 0,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 12.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 33,
+        "display_met": false,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      },
+      {
+        "sid": 10,
+        "window": 5,
+        "ready": 4662115.1549667,
+        "deadline": 4662123.1549667,
+        "candidate_ready": false,
+        "same_birth": false,
+        "previous_reject": false,
+        "candidate_tokens": 0,
+        "descendant_count": 0,
+        "descendant_seconds": 0,
+        "candidate_eta": null,
+        "projection_compatible": false,
+        "audio_seconds": 10.0,
+        "interval_seconds": 2.0,
+        "prompt_tokens": 25,
+        "display_met": false,
+        "display_expired": false,
+        "audio_weight": 2.0,
+        "reject_age_seconds": null
+      }
+    ],
+    "operation": "verify",
+    "sids": [
+      4,
+      12,
+      13,
+      6,
+      14
+    ],
+    "reason": "closed-loop-causal",
+    "decision_token": "(4662102.6549667, 'dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f'):12:4662115.370509454049",
+    "score": 8.53877473267119,
+    "planned_seconds": 3.68486518154419,
+    "mode": "causal",
+    "common_cut_sids": [
+      4,
+      12,
+      13,
+      6,
+      14,
+      5,
+      7,
+      15,
+      0,
+      8,
+      1,
+      9,
+      2,
+      10
+    ],
+    "plan": [
+      {
+        "operation": "verify",
+        "sids": [
+          4,
+          12,
+          13,
+          6,
+          14
+        ]
+      },
+      {
+        "operation": "generate",
+        "sids": [
+          5,
+          7,
+          15,
+          0,
+          8,
+          1,
+          9,
+          2,
+          10
+        ]
+      }
+    ],
+    "continuation_ranks": {
+      "4": 0,
+      "12": 0,
+      "13": 0,
+      "6": 0,
+      "14": 0,
+      "5": 1,
+      "7": 1,
+      "15": 1,
+      "0": 1,
+      "8": 1,
+      "1": 1,
+      "9": 1,
+      "2": 1,
+      "10": 1
+    },
+    "symbolic_service_promises": [
+      {
+        "sid": 4,
+        "epoch": 1,
+        "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f",
+        "frontier_end": 160000,
+        "promised_finish": 4662117.771740529,
+        "rank": 5,
+        "actual_parent_not_created": true
+      },
+      {
+        "sid": 12,
+        "epoch": 1,
+        "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f",
+        "frontier_end": 128000,
+        "promised_finish": 4662117.771740529,
+        "rank": 4,
+        "actual_parent_not_created": true
+      },
+      {
+        "sid": 13,
+        "epoch": 1,
+        "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f",
+        "frontier_end": 128000,
+        "promised_finish": 4662117.771740529,
+        "rank": 4,
+        "actual_parent_not_created": true
+      },
+      {
+        "sid": 6,
+        "epoch": 1,
+        "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f",
+        "frontier_end": 160000,
+        "promised_finish": 4662117.771740529,
+        "rank": 5,
+        "actual_parent_not_created": true
+      },
+      {
+        "sid": 14,
+        "epoch": 1,
+        "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f",
+        "frontier_end": 128000,
+        "promised_finish": 4662117.771740529,
+        "rank": 4,
+        "actual_parent_not_created": true
+      },
+      {
+        "sid": 0,
+        "epoch": 1,
+        "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f",
+        "frontier_end": 195440,
+        "promised_finish": 4662119.979448192,
+        "rank": 7,
+        "actual_parent_not_created": true
+      }
+    ],
+    "service_guard_active": true,
+    "forced_sids": [
+      4,
+      6,
+      12,
+      13,
+      14
+    ],
+    "max_deferrals": 2,
+    "service_obligations": [
+      {
+        "identity": {
+          "sid": 4,
+          "epoch": 1,
+          "parent_version": 3,
+          "parent_digest": "2d82258ff5e84ab7252ae22e138e5d28215fed3df99d75e8d5cb26f1aea76f15",
+          "frontier_start": 96000,
+          "frontier_end": 128000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662113.001206919,
+        "deferrals": 2,
+        "promised_finish": 4662115.10877319,
+        "continuation_rank": 1,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 12,
+          "epoch": 1,
+          "parent_version": 2,
+          "parent_digest": "172019548c82b89b1b4c80681461daff45d1c3a9f537b95e85b27b5a78f261c4",
+          "frontier_start": 64000,
+          "frontier_end": 96000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662113.001206919,
+        "deferrals": 2,
+        "promised_finish": 4662115.10877319,
+        "continuation_rank": 1,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 13,
+          "epoch": 1,
+          "parent_version": 2,
+          "parent_digest": "3addf3a38b803aff45ec523d08c292af006860799dab77256fa0644872f18f06",
+          "frontier_start": 64000,
+          "frontier_end": 96000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662113.001206919,
+        "deferrals": 2,
+        "promised_finish": 4662115.10877319,
+        "continuation_rank": 1,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 6,
+          "epoch": 1,
+          "parent_version": 3,
+          "parent_digest": "d22c3e3c2a28f5cc03850e9b7056ecaab587baa0be3506e8cdadeb594d4c2141",
+          "frontier_start": 96000,
+          "frontier_end": 128000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662113.001206919,
+        "deferrals": 2,
+        "promised_finish": 4662115.10877319,
+        "continuation_rank": 1,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 14,
+          "epoch": 1,
+          "parent_version": 2,
+          "parent_digest": "47d2dfc92107822b7dbe847fa1aedcf2e8c8674e39dd91b1d21a213224fbddee",
+          "frontier_start": 64000,
+          "frontier_end": 96000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662113.001206919,
+        "deferrals": 2,
+        "promised_finish": 4662115.10877319,
+        "continuation_rank": 1,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 5,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "c350d111bfcc01542e2193d295059a3ef7ee97c4d47bca4a46c9bc75908b3ca8",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662115.370509454,
+        "deferrals": 0,
+        "promised_finish": null,
+        "continuation_rank": null,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 7,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "cac9963449bd935c17174d9a15e2d71943bcc457cc2664fb8de96a3499bed095",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662115.370509454,
+        "deferrals": 0,
+        "promised_finish": null,
+        "continuation_rank": null,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 15,
+          "epoch": 1,
+          "parent_version": 3,
+          "parent_digest": "6759dba67c97db6aee5f1adedfc019adf53429b26d41d2c1aa901d8e5b6c628d",
+          "frontier_start": 96000,
+          "frontier_end": 128000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662115.370509454,
+        "deferrals": 0,
+        "promised_finish": null,
+        "continuation_rank": null,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 0,
+          "epoch": 1,
+          "parent_version": 5,
+          "parent_digest": "efcd7ba09d9c14e200f85bc20fe60d6e8ae4409a1bec489c3878bdc5dbdb55a1",
+          "frontier_start": 160000,
+          "frontier_end": 192000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662115.370509454,
+        "deferrals": 0,
+        "promised_finish": null,
+        "continuation_rank": null,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 8,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "3eed47c4c69bce19eab4bf6252d0b77e56266b82c9bb0b9fbc81671e0d844cde",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662115.370509454,
+        "deferrals": 0,
+        "promised_finish": null,
+        "continuation_rank": null,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 1,
+          "epoch": 1,
+          "parent_version": 5,
+          "parent_digest": "3c1c5dd551f694049262be7f53d838f152d3d8e84963fe94f71c3fcf0f692233",
+          "frontier_start": 160000,
+          "frontier_end": 192000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662115.370509454,
+        "deferrals": 0,
+        "promised_finish": null,
+        "continuation_rank": null,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 9,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "0022e5470a57cc14ab23e2a897f1ff640a7e8f9f1a3e0f899a67c33c7d67fe59",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662115.370509454,
+        "deferrals": 0,
+        "promised_finish": null,
+        "continuation_rank": null,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 2,
+          "epoch": 1,
+          "parent_version": 5,
+          "parent_digest": "97780ab65f000ee3dfb770865c9b86ba07b5ca549db54b320836e411d2d3c745",
+          "frontier_start": 160000,
+          "frontier_end": 192000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662115.370509454,
+        "deferrals": 0,
+        "promised_finish": null,
+        "continuation_rank": null,
+        "promise_breaches": 0
+      },
+      {
+        "identity": {
+          "sid": 10,
+          "epoch": 1,
+          "parent_version": 4,
+          "parent_digest": "11c3f00b0f6b35f7f693071871b42ded0902dab552cceeb940751845b095d903",
+          "frontier_start": 128000,
+          "frontier_end": 160000,
+          "contract_digest": "dbfc9a1d00bfa558a02aa8f8d1de2c02f10e74a472391ba8a291f3e07a9e0a3f"
+        },
+        "first_seen": 4662115.370509454,
+        "deferrals": 0,
+        "promised_finish": null,
+        "continuation_rank": null,
+        "promise_breaches": 0
+      }
+    ],
+    "effective_deadlines": {
+      "4": {
+        "own_finish_deadline": 4662119.6549667,
+        "effective_finish_deadline": 4662119.6549667,
+        "inherited_from_windows": []
+      },
+      "12": {
+        "own_finish_deadline": 4662119.6549667,
+        "effective_finish_deadline": 4662114.8103723535,
+        "inherited_from_windows": [
+          4
+        ]
+      },
+      "13": {
+        "own_finish_deadline": 4662119.9049667,
+        "effective_finish_deadline": 4662115.0603723535,
+        "inherited_from_windows": [
+          4
+        ]
+      },
+      "6": {
+        "own_finish_deadline": 4662120.1549667,
+        "effective_finish_deadline": 4662120.1549667,
+        "inherited_from_windows": []
+      },
+      "14": {
+        "own_finish_deadline": 4662120.1549667,
+        "effective_finish_deadline": 4662115.296358395,
+        "inherited_from_windows": [
+          4
+        ]
+      },
+      "5": {
+        "own_finish_deadline": 4662115.9049667,
+        "effective_finish_deadline": 4662115.9049667,
+        "inherited_from_windows": []
+      },
+      "7": {
+        "own_finish_deadline": 4662116.4049667,
+        "effective_finish_deadline": 4662116.4049667,
+        "inherited_from_windows": []
+      },
+      "15": {
+        "own_finish_deadline": 4662116.4049667,
+        "effective_finish_deadline": 4662116.4049667,
+        "inherited_from_windows": []
+      },
+      "0": {
+        "own_finish_deadline": 4662116.6549667,
+        "effective_finish_deadline": 4662116.007888897,
+        "inherited_from_windows": [
+          7
+        ]
+      },
+      "8": {
+        "own_finish_deadline": 4662116.6549667,
+        "effective_finish_deadline": 4662116.6549667,
+        "inherited_from_windows": []
+      },
+      "1": {
+        "own_finish_deadline": 4662116.9049667,
+        "effective_finish_deadline": 4662116.9049667,
+        "inherited_from_windows": []
+      },
+      "9": {
+        "own_finish_deadline": 4662116.9049667,
+        "effective_finish_deadline": 4662116.9049667,
+        "inherited_from_windows": []
+      },
+      "2": {
+        "own_finish_deadline": 4662117.1549667,
+        "effective_finish_deadline": 4662117.1549667,
+        "inherited_from_windows": []
+      },
+      "10": {
+        "own_finish_deadline": 4662117.1549667,
+        "effective_finish_deadline": 4662117.1549667,
+        "inherited_from_windows": []
+      }
+    },
+    "symbolic_successors": [
+      {
+        "sid": 4,
+        "window": 5,
+        "frontier_end": 160000,
+        "release": 4662113.6549667,
+        "display_deadline": 4662115.6549667,
+        "commit_deadline": 4662121.6549667,
+        "audio_weight": 2.0,
+        "remaining_service_s": 0.8630317441908604,
+        "display_met": true,
+        "private_ready_delay_s": null,
+        "verify_private_compatible": true,
+        "unknown_private_probability": null,
+        "direct_private_probability": 0.84765625,
+        "fallback_private_probability": null,
+        "inherit_current_transition_model": true,
+        "parent_frontier_start": 128000,
+        "audio_seconds": 10.0,
+        "estimated_prompt_tokens": 21,
+        "interval_seconds": 2.0,
+        "private_delay_distribution": [],
+        "private_path_currently_legal": false,
+        "private_delay_includes_delivery": true,
+        "requires_actual_parent": true,
+        "creates_execution_permission": false
+      },
+      {
+        "sid": 12,
+        "window": 4,
+        "frontier_end": 128000,
+        "release": 4662113.6549667,
+        "display_deadline": 4662115.6549667,
+        "commit_deadline": 4662121.6549667,
+        "audio_weight": 2.0,
+        "remaining_service_s": 0.8445943465822368,
+        "display_met": false,
+        "private_ready_delay_s": null,
+        "verify_private_compatible": true,
+        "unknown_private_probability": null,
+        "direct_private_probability": 0.84765625,
+        "fallback_private_probability": null,
+        "inherit_current_transition_model": true,
+        "parent_frontier_start": 96000,
+        "audio_seconds": 8.0,
+        "estimated_prompt_tokens": 12,
+        "interval_seconds": 2.0,
+        "private_delay_distribution": [
+          [
+            0.033264033264033266,
+            0.12223788281551728
+          ],
+          [
+            0.033264033264033266,
+            0.12902624367938764
+          ],
+          [
+            0.033264033264033266,
+            0.14671317817946927
+          ],
+          [
+            0.033264033264033266,
+            0.18657110493450157
+          ],
+          [
+            0.033264033264033266,
+            0.19115893625705316
+          ],
+          [
+            0.033264033264033266,
+            0.20098342002282887
+          ],
+          [
+            0.033264033264033266,
+            0.24852269680443828
+          ],
+          [
+            0.033264033264033266,
+            0.252028393792433
+          ],
+          [
+            0.033264033264033266,
+            0.2562551315248218
+          ],
+          [
+            0.033264033264033266,
+            0.2599517048119666
+          ],
+          [
+            0.033264033264033266,
+            0.2644139784481949
+          ],
+          [
+            0.033264033264033266,
+            0.3053148410093973
+          ],
+          [
+            0.033264033264033266,
+            0.3080314742566026
+          ],
+          [
+            0.033264033264033266,
+            0.3108453501911612
+          ],
+          [
+            0.033264033264033266,
+            0.31373416561189527
+          ],
+          [
+            0.033264033264033266,
+            0.3169184834926111
+          ],
+          [
+            0.033264033264033266,
+            0.32055335301789567
+          ],
+          [
+            0.033264033264033266,
+            0.3618812748588143
+          ],
+          [
+            0.033264033264033266,
+            0.36515898984551787
+          ],
+          [
+            0.033264033264033266,
+            0.3701206746729859
+          ],
+          [
+            0.033264033264033266,
+            0.3721297926656557
+          ],
+          [
+            0.033264033264033266,
+            0.3735408559916784
+          ],
+          [
+            0.033264033264033266,
+            0.3752801571603124
+          ],
+          [
+            0.033264033264033266,
+            0.37819887518491946
+          ],
+          [
+            0.033264033264033266,
+            0.42788100468171053
+          ],
+          [
+            0.033264033264033266,
+            0.43038008112971937
+          ],
+          [
+            0.033264033264033266,
+            0.4320292679185762
+          ],
+          [
+            0.033264033264033266,
+            0.4341274807599529
+          ],
+          [
+            0.033264033264033266,
+            0.43460862190884697
+          ],
+          [
+            0.033264033264033266,
+            0.43622331901460476
+          ],
+          [
+            0.002079002079002079,
+            0.4371171370663234
+          ]
+        ],
+        "private_path_currently_legal": true,
+        "private_delay_includes_delivery": true,
+        "requires_actual_parent": true,
+        "creates_execution_permission": false
+      },
+      {
+        "sid": 13,
+        "window": 4,
+        "frontier_end": 128000,
+        "release": 4662113.9049667,
+        "display_deadline": 4662115.9049667,
+        "commit_deadline": 4662121.9049667,
+        "audio_weight": 2.0,
+        "remaining_service_s": 0.8445943465822368,
+        "display_met": false,
+        "private_ready_delay_s": null,
+        "verify_private_compatible": true,
+        "unknown_private_probability": null,
+        "direct_private_probability": 0.84765625,
+        "fallback_private_probability": null,
+        "inherit_current_transition_model": true,
+        "parent_frontier_start": 96000,
+        "audio_seconds": 8.0,
+        "estimated_prompt_tokens": 12,
+        "interval_seconds": 2.0,
+        "private_delay_distribution": [
+          [
+            0.033264033264033266,
+            0.12223788281551728
+          ],
+          [
+            0.033264033264033266,
+            0.12902624367938764
+          ],
+          [
+            0.033264033264033266,
+            0.14671317817946927
+          ],
+          [
+            0.033264033264033266,
+            0.18657110493450157
+          ],
+          [
+            0.033264033264033266,
+            0.19115893625705316
+          ],
+          [
+            0.033264033264033266,
+            0.20098342002282887
+          ],
+          [
+            0.033264033264033266,
+            0.24852269680443828
+          ],
+          [
+            0.033264033264033266,
+            0.252028393792433
+          ],
+          [
+            0.033264033264033266,
+            0.2562551315248218
+          ],
+          [
+            0.033264033264033266,
+            0.2599517048119666
+          ],
+          [
+            0.033264033264033266,
+            0.2644139784481949
+          ],
+          [
+            0.033264033264033266,
+            0.3053148410093973
+          ],
+          [
+            0.033264033264033266,
+            0.3080314742566026
+          ],
+          [
+            0.033264033264033266,
+            0.3108453501911612
+          ],
+          [
+            0.033264033264033266,
+            0.31373416561189527
+          ],
+          [
+            0.033264033264033266,
+            0.3169184834926111
+          ],
+          [
+            0.033264033264033266,
+            0.32055335301789567
+          ],
+          [
+            0.033264033264033266,
+            0.3618812748588143
+          ],
+          [
+            0.033264033264033266,
+            0.36515898984551787
+          ],
+          [
+            0.033264033264033266,
+            0.3701206746729859
+          ],
+          [
+            0.033264033264033266,
+            0.3721297926656557
+          ],
+          [
+            0.033264033264033266,
+            0.3735408559916784
+          ],
+          [
+            0.033264033264033266,
+            0.3752801571603124
+          ],
+          [
+            0.033264033264033266,
+            0.37819887518491946
+          ],
+          [
+            0.033264033264033266,
+            0.42788100468171053
+          ],
+          [
+            0.033264033264033266,
+            0.43038008112971937
+          ],
+          [
+            0.033264033264033266,
+            0.4320292679185762
+          ],
+          [
+            0.033264033264033266,
+            0.4341274807599529
+          ],
+          [
+            0.033264033264033266,
+            0.43460862190884697
+          ],
+          [
+            0.033264033264033266,
+            0.43622331901460476
+          ],
+          [
+            0.002079002079002079,
+            0.4371171370663234
+          ]
+        ],
+        "private_path_currently_legal": true,
+        "private_delay_includes_delivery": true,
+        "requires_actual_parent": true,
+        "creates_execution_permission": false
+      },
+      {
+        "sid": 6,
+        "window": 5,
+        "frontier_end": 160000,
+        "release": 4662114.1549667,
+        "display_deadline": 4662116.1549667,
+        "commit_deadline": 4662122.1549667,
+        "audio_weight": 2.0,
+        "remaining_service_s": 0.8536891055340781,
+        "display_met": true,
+        "private_ready_delay_s": null,
+        "verify_private_compatible": true,
+        "unknown_private_probability": null,
+        "direct_private_probability": 0.84765625,
+        "fallback_private_probability": null,
+        "inherit_current_transition_model": true,
+        "parent_frontier_start": 128000,
+        "audio_seconds": 10.0,
+        "estimated_prompt_tokens": 19,
+        "interval_seconds": 2.0,
+        "private_delay_distribution": [],
+        "private_path_currently_legal": false,
+        "private_delay_includes_delivery": true,
+        "requires_actual_parent": true,
+        "creates_execution_permission": false
+      },
+      {
+        "sid": 14,
+        "window": 4,
+        "frontier_end": 128000,
+        "release": 4662114.1549667,
+        "display_deadline": 4662116.1549667,
+        "commit_deadline": 4662122.1549667,
+        "audio_weight": 2.0,
+        "remaining_service_s": 0.8586083045674101,
+        "display_met": false,
+        "private_ready_delay_s": null,
+        "verify_private_compatible": true,
+        "unknown_private_probability": null,
+        "direct_private_probability": 0.84765625,
+        "fallback_private_probability": null,
+        "inherit_current_transition_model": true,
+        "parent_frontier_start": 96000,
+        "audio_seconds": 8.0,
+        "estimated_prompt_tokens": 15,
+        "interval_seconds": 2.0,
+        "private_delay_distribution": [
+          [
+            0.033264033264033266,
+            0.12223788281551728
+          ],
+          [
+            0.033264033264033266,
+            0.12902624367938764
+          ],
+          [
+            0.033264033264033266,
+            0.14671317817946927
+          ],
+          [
+            0.033264033264033266,
+            0.18657110493450157
+          ],
+          [
+            0.033264033264033266,
+            0.19115893625705316
+          ],
+          [
+            0.033264033264033266,
+            0.20098342002282887
+          ],
+          [
+            0.033264033264033266,
+            0.24852269680443828
+          ],
+          [
+            0.033264033264033266,
+            0.252028393792433
+          ],
+          [
+            0.033264033264033266,
+            0.2562551315248218
+          ],
+          [
+            0.033264033264033266,
+            0.2599517048119666
+          ],
+          [
+            0.033264033264033266,
+            0.2644139784481949
+          ],
+          [
+            0.033264033264033266,
+            0.3053148410093973
+          ],
+          [
+            0.033264033264033266,
+            0.3080314742566026
+          ],
+          [
+            0.033264033264033266,
+            0.3108453501911612
+          ],
+          [
+            0.033264033264033266,
+            0.31373416561189527
+          ],
+          [
+            0.033264033264033266,
+            0.3169184834926111
+          ],
+          [
+            0.033264033264033266,
+            0.32055335301789567
+          ],
+          [
+            0.033264033264033266,
+            0.3618812748588143
+          ],
+          [
+            0.033264033264033266,
+            0.36515898984551787
+          ],
+          [
+            0.033264033264033266,
+            0.3701206746729859
+          ],
+          [
+            0.033264033264033266,
+            0.3721297926656557
+          ],
+          [
+            0.033264033264033266,
+            0.3735408559916784
+          ],
+          [
+            0.033264033264033266,
+            0.3752801571603124
+          ],
+          [
+            0.033264033264033266,
+            0.37819887518491946
+          ],
+          [
+            0.033264033264033266,
+            0.42788100468171053
+          ],
+          [
+            0.033264033264033266,
+            0.43038008112971937
+          ],
+          [
+            0.033264033264033266,
+            0.4320292679185762
+          ],
+          [
+            0.033264033264033266,
+            0.4341274807599529
+          ],
+          [
+            0.033264033264033266,
+            0.43460862190884697
+          ],
+          [
+            0.033264033264033266,
+            0.43622331901460476
+          ],
+          [
+            0.002079002079002079,
+            0.4371171370663234
+          ]
+        ],
+        "private_path_currently_legal": true,
+        "private_delay_includes_delivery": true,
+        "requires_actual_parent": true,
+        "creates_execution_permission": false
+      },
+      {
+        "sid": 0,
+        "window": 7,
+        "frontier_end": 195440,
+        "release": 4662114.8699667,
+        "display_deadline": 4662116.8699667,
+        "commit_deadline": 4662122.8699667,
+        "audio_weight": 0.215,
+        "remaining_service_s": 0.862077802514122,
+        "display_met": false,
+        "private_ready_delay_s": null,
+        "verify_private_compatible": null,
+        "unknown_private_probability": null,
+        "direct_private_probability": 0.0,
+        "fallback_private_probability": 0.0,
+        "inherit_current_transition_model": true,
+        "parent_frontier_start": 192000,
+        "audio_seconds": 12.215,
+        "estimated_prompt_tokens": 41,
+        "interval_seconds": 0.215,
+        "private_delay_distribution": [],
+        "private_path_currently_legal": false,
+        "private_delay_includes_delivery": true,
+        "requires_actual_parent": true,
+        "creates_execution_permission": false
+      }
+    ],
+    "plans_considered_before_bound": 58,
+    "plans_evaluated": 15,
+    "promise_quantile": 0.9,
+    "service_promise_model": "scenario_quantile_of_physical_outcome_row_time_envelope_plus_owner_delivery",
+    "successor_cost_model": "shared_calibrated_homogeneous_generation_batches_with_historical_prompt_feature_estimates",
+    "prediction_only_not_authorization": true,
+    "objective_scope": "bounded finite-prefix scenario estimate with paid common released cut; not global GPU optimality",
+    "future_parent_model": "abstract_unknown_until_actual_trusted_admission",
+    "successor_reward_used": true,
+    "private_path_prediction_used": true,
+    "private_authority_joint_model": "remaining_private_row_CDF_independent_of_Authority_scenarios_without_joint_calibration",
+    "private_ancestor_survival_model": "joint_accepted_early_fallback_late_row_CDF_survival_through_all_ancestors_not_envelope_free_intervals",
+    "risk_model_shared": true,
+    "wait_seconds": 0.0,
+    "expected_credit_audio": 23.754469854469853,
+    "expected_current_credit_audio": 16.0,
+    "expected_successor_credit_audio": 7.754469854469853,
+    "expected_private_additional_credit_audio": 9.75446985446986,
+    "expected_commit_late_audio": 0.0,
+    "expected_cut_wall_seconds": 3.8963559297844768,
+    "expected_lease_seconds": 3.68486518154419,
+    "finite_prefix_goodput": 8.53877473267119,
+    "promise_violation_mass": 5.0,
+    "promise_tardy_seconds": 4.808411638368852,
+    "service_promises": {
+      "4": 4662116.860311101,
+      "12": 4662116.860311101,
+      "13": 4662116.860311101,
+      "6": 4662116.860311101,
+      "14": 4662116.860311101,
+      "5": 4662119.50129046,
+      "7": 4662119.50129046,
+      "15": 4662119.50129046,
+      "0": 4662119.50129046,
+      "8": 4662119.50129046,
+      "1": 4662119.50129046,
+      "9": 4662119.50129046,
+      "2": 4662119.50129046,
+      "10": 4662119.50129046
+    },
+    "scenario_combinations": 16,
+    "scenario_model": "bounded_weighted_stratified_scenario_quadrature",
+    "scenario_marginal_audit": [
+      {
+        "marginal_total_variation": 0.032608695652173905,
+        "fallback_mass_original": 0.3913043478260869,
+        "fallback_mass_quadrature": 0.375,
+        "largest_lease_outcome_mass_omitted": 0,
+        "original_scenarios": 8,
+        "represented_scenarios": 8
+      },
+      {
+        "marginal_total_variation": 0.0,
+        "fallback_mass_original": 0,
+        "fallback_mass_quadrature": 0,
+        "largest_lease_outcome_mass_omitted": 0,
+        "original_scenarios": 8,
+        "represented_scenarios": 8
+      },
+      {
+        "marginal_total_variation": 0.0394736842105263,
+        "fallback_mass_original": 0,
+        "fallback_mass_quadrature": 0,
+        "largest_lease_outcome_mass_omitted": 0,
+        "original_scenarios": 8,
+        "represented_scenarios": 8
+      },
+      {
+        "marginal_total_variation": 0.0036610878661087684,
+        "fallback_mass_original": 0,
+        "fallback_mass_quadrature": 0,
+        "largest_lease_outcome_mass_omitted": 0,
+        "original_scenarios": 8,
+        "represented_scenarios": 8
+      }
+    ],
+    "conditional_private_prediction_enabled": true,
+    "symbolic_steps": [
+      {
+        "operation": "verify",
+        "sids": [
+          4,
+          12,
+          13,
+          6,
+          14
+        ],
+        "windows": [
+          4,
+          3,
+          3,
+          4,
+          3
+        ],
+        "prediction_only": false
+      },
+      {
+        "operation": "generate",
+        "sids": [
+          4,
+          12,
+          13,
+          6,
+          14
+        ],
+        "windows": [
+          5,
+          4,
+          4,
+          5,
+          4
+        ],
+        "prediction_only": true
+      },
+      {
+        "operation": "generate",
+        "sids": [
+          5,
+          7,
+          15,
+          0,
+          8,
+          1,
+          9,
+          2,
+          10
+        ],
+        "windows": [
+          5,
+          5,
+          4,
+          6,
+          5,
+          6,
+          5,
+          6,
+          5
+        ],
+        "prediction_only": false
+      },
+      {
+        "operation": "generate",
+        "sids": [
+          0
+        ],
+        "windows": [
+          7
+        ],
+        "prediction_only": true
+      }
+    ],
+    "observed_perf": 4662115.370509454,
+    "planner_wall_seconds": 0.16081390995532274,
+    "feature_wall_seconds": 0.0003720829263329506
+  },
+  "replay_exact": true,
+  "only_CPU_no_counterfactual_serving": true
+}

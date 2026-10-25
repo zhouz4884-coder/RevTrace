@@ -1,0 +1,60 @@
+{
+  "status": "PASS_INDEPENDENT_EXTRACTED_PROFILE_ARITHMETIC_AND_FIT_AUDIT",
+  "evidence_tier": "CPU_recomputation_of_actual_old48_extracted_records_no_GPU",
+  "actual_cells": 48,
+  "actual_proposal_rows": 6205,
+  "actual_proposal_batches": 798,
+  "actual_selected_direct_fallback": 6125,
+  "available_root_denominator": 389,
+  "excluded_no_node": 5736,
+  "cell_status_counts": {
+    "PASS_PROTOCOL_COMPLETENESS": 44,
+    "TOKEN_LIMIT_BOUNDARY": 4
+  },
+  "compatibility": {
+    "direct": {
+      "same": {
+        "support": 127,
+        "matches": 108,
+        "probability": 0.84765625,
+        "lower": 0.7781297358041737,
+        "upper": 0.9020827962340554
+      },
+      "mismatch": {
+        "support": 235,
+        "matches": 214,
+        "probability": 0.9088983050847458,
+        "lower": 0.867258003961402,
+        "upper": 0.9408094101004558
+      }
+    },
+    "fallback": {
+      "same": {
+        "support": 6,
+        "matches": 0,
+        "probability": null,
+        "lower": 2.7755575615628914e-17,
+        "upper": 0.3903342879021653
+      },
+      "mismatch": {
+        "support": 21,
+        "matches": 12,
+        "probability": 0.5681818181818182,
+        "lower": 0.3654655436930671,
+        "upper": 0.7553003107462404
+      }
+    }
+  },
+  "same_input_repeat_byte_identical": true,
+  "authority_calibration_unchanged": true,
+  "held_cell_diagnostic": {
+    "physical_batches": 198,
+    "cells": 12,
+    "median_absolute_error_s": 0.11862758627256104,
+    "mean_absolute_error_s": 0.25098767064223304,
+    "scope": "Cell-held historical diagnostic; reused acoustic sources, not independent confirmation"
+  },
+  "profiles_sha256": "5ab06eabb4f295b59652c29c7ed1fa87121d623c3a0f6c78aad500ba7226a5fd",
+  "script_sha256": "e080dcdf8f02250486128118b253cbe32f2821dc368254106624bf1f558ad684",
+  "limitation": "Extracted CSV arithmetic and fit only; not fresh inference, full raw extraction rerun, source-independent validation or a retention/SLO theorem."
+}

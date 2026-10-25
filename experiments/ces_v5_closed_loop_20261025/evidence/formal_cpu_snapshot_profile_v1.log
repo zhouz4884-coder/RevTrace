@@ -1,0 +1,49 @@
+{
+  "status": "PASS_EXACT_BOUNDED_CPU_REPLAY",
+  "CPU_only": true,
+  "new_GPU_calls": 0,
+  "counterfactual_serving_claim": false,
+  "selection": "One declared r0 Mixed cell per mode; largest recorded actual planner wall, tie event order",
+  "arrival": "staggered",
+  "max_decisions_per_cell": 5,
+  "timing_scope": "Replay only choose_closed_loop; original timer also includes context build and observation logging",
+  "instrumentation_scope": "cProfile perturbs CPU time. Ordinary replay precedes profiled replay; warm shared function caches may differ from original run",
+  "runtime_commit": "e45c66475ba1173a98b49b8c9e62f3e8cb45b333",
+  "source_manifest_sha256": "80633f359122e7a7bb379934511fe45b42d31e9adf6176015809670b14fbf81c",
+  "script_sha256": "9ec2e780a099eff27bcb78838d16bfb7b622f708a2b6f86d1685f140a9f49b30",
+  "audit_helper_sha256": "28a77bac902a5c9cd903d4e5ae6301a039ad6e2b947f59cdc79a52aed18a5b8e",
+  "safety_audit_sha256": "34d91b354fb104c906dc46ad7695e9029351b224d1b413e0bda1734f269225f2",
+  "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+  "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+  "cells": [
+    {
+      "cell": "validation-staggered-mixed-service_cost-r0",
+      "actual_decisions": 23,
+      "profiled_decisions": 5,
+      "service_dispatches_reconstructed": 23,
+      "residual_records": 0
+    },
+    {
+      "cell": "validation-staggered-mixed-reserved_progress-r0",
+      "actual_decisions": 23,
+      "profiled_decisions": 5,
+      "service_dispatches_reconstructed": 23,
+      "residual_records": 0
+    },
+    {
+      "cell": "validation-staggered-mixed-inherit-r0",
+      "actual_decisions": 22,
+      "profiled_decisions": 5,
+      "service_dispatches_reconstructed": 22,
+      "residual_records": 0
+    },
+    {
+      "cell": "validation-staggered-mixed-causal-r0",
+      "actual_decisions": 23,
+      "profiled_decisions": 5,
+      "service_dispatches_reconstructed": 23,
+      "residual_records": 0
+    }
+  ],
+  "profiled_decisions": 20
+}

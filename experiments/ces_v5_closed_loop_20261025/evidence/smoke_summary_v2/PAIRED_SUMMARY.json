@@ -1,0 +1,459 @@
+{
+  "scope": "Reused sources: closed-loop diagnostic; not independent confirmation",
+  "expected_cells": 4,
+  "audited_pass_cells": 4,
+  "failed_or_missing_cells": [],
+  "all_requested_cells_retained": true,
+  "performance_decision_eligible": false,
+  "performance_point_estimates_available": true,
+  "paired_repeat_minimum_for_inference": 1,
+  "one_repeat_smoke_is_safety_feasibility_not_superiority": true,
+  "shared_model_and_execution_capabilities_required": true,
+  "sampling_unit": "Fresh-process paired run; shared source clusters separately resampled, never individual frontiers",
+  "comparisons": [
+    {
+      "pool": "validation",
+      "arrival": "staggered",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "fine",
+      "status": "SMOKE_SINGLE_REPEAT_POINT_ESTIMATES_NO_SUPERIORITY_CLAIM",
+      "metrics": {
+        "Audio_Goodput_2_8": {
+          "paired_values": [
+            -0.03089377866054166
+          ],
+          "paired_median": -0.03089377866054166,
+          "paired_run_95_interval": [
+            -0.03089377866054166,
+            -0.03089377866054166
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        },
+        "Audio_Goodput_certified_consumer_2_8": {
+          "paired_values": [
+            -0.03089377866054166
+          ],
+          "paired_median": -0.03089377866054166,
+          "paired_run_95_interval": [
+            -0.03089377866054166,
+            -0.03089377866054166
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        },
+        "Audio_Goodput_stable_2_8": {
+          "paired_values": [
+            -0.03334248388790917
+          ],
+          "paired_median": -0.03334248388790917,
+          "paired_run_95_interval": [
+            -0.03334248388790917,
+            -0.03334248388790917
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        },
+        "display_P99": {
+          "paired_values": [
+            0.7342391156982822
+          ],
+          "paired_median": 0.7342391156982822,
+          "paired_run_95_interval": [
+            0.7342391156982822,
+            0.7342391156982822
+          ],
+          "all_repeats_positive": true,
+          "runs": 1
+        },
+        "commit_P99": {
+          "paired_values": [
+            0.7477652075454422
+          ],
+          "paired_median": 0.7477652075454422,
+          "paired_run_95_interval": [
+            0.7477652075454422,
+            0.7477652075454422
+          ],
+          "all_repeats_positive": true,
+          "runs": 1
+        },
+        "GPU_J_audio_s": {
+          "paired_values": [
+            -0.020199129203260724
+          ],
+          "paired_median": -0.020199129203260724,
+          "paired_run_95_interval": [
+            -0.020199129203260724,
+            -0.020199129203260724
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        },
+        "WER": {
+          "paired_values": [
+            0.0
+          ],
+          "paired_median": 0.0,
+          "paired_run_95_interval": [
+            0.0,
+            0.0
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        },
+        "CER": {
+          "paired_values": [
+            0.0
+          ],
+          "paired_median": 0.0,
+          "paired_run_95_interval": [
+            0.0,
+            0.0
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        }
+      },
+      "source_clusters": {
+        "paired_median": {
+          "goodput": -0.03089377866054166,
+          "stable_goodput": -0.03334248388790917,
+          "WER": 0.0,
+          "CER": 0.0
+        },
+        "paired_source_run_95_interval": {
+          "goodput": [
+            -0.08084233197154828,
+            0.006085820620548521
+          ],
+          "stable_goodput": [
+            -0.08188558526251966,
+            0.006085820620548521
+          ],
+          "WER": [
+            0.0,
+            0.0
+          ],
+          "CER": [
+            0.0,
+            0.0
+          ]
+        },
+        "unique_sources": 8,
+        "repeats": 1,
+        "draws": 2000,
+        "interpretation": "Conditional on actual schedules. Resampled audio is not model/queue re-execution."
+      },
+      "baseline_dual_P99_passes": 1,
+      "treatment_dual_P99_passes": 0
+    },
+    {
+      "pool": "validation",
+      "arrival": "staggered",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "standard",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "staggered",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "cost",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "staggered",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "strict",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "staggered",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "service_cost",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "staggered",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "reserved_progress",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "staggered",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "inherit",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "staggered",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "causal_joint",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "sync",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "fine",
+      "status": "SMOKE_SINGLE_REPEAT_POINT_ESTIMATES_NO_SUPERIORITY_CLAIM",
+      "metrics": {
+        "Audio_Goodput_2_8": {
+          "paired_values": [
+            0.0007095383960242785
+          ],
+          "paired_median": 0.0007095383960242785,
+          "paired_run_95_interval": [
+            0.0007095383960242785,
+            0.0007095383960242785
+          ],
+          "all_repeats_positive": true,
+          "runs": 1
+        },
+        "Audio_Goodput_certified_consumer_2_8": {
+          "paired_values": [
+            0.0007095383960242785
+          ],
+          "paired_median": 0.0007095383960242785,
+          "paired_run_95_interval": [
+            0.0007095383960242785,
+            0.0007095383960242785
+          ],
+          "all_repeats_positive": true,
+          "runs": 1
+        },
+        "Audio_Goodput_stable_2_8": {
+          "paired_values": [
+            0.0007095383960242785
+          ],
+          "paired_median": 0.0007095383960242785,
+          "paired_run_95_interval": [
+            0.0007095383960242785,
+            0.0007095383960242785
+          ],
+          "all_repeats_positive": true,
+          "runs": 1
+        },
+        "display_P99": {
+          "paired_values": [
+            -0.0007317726773493627
+          ],
+          "paired_median": -0.0007317726773493627,
+          "paired_run_95_interval": [
+            -0.0007317726773493627,
+            -0.0007317726773493627
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        },
+        "commit_P99": {
+          "paired_values": [
+            0.0327853821229136
+          ],
+          "paired_median": 0.0327853821229136,
+          "paired_run_95_interval": [
+            0.0327853821229136,
+            0.0327853821229136
+          ],
+          "all_repeats_positive": true,
+          "runs": 1
+        },
+        "GPU_J_audio_s": {
+          "paired_values": [
+            -0.008328093979133144
+          ],
+          "paired_median": -0.008328093979133144,
+          "paired_run_95_interval": [
+            -0.008328093979133144,
+            -0.008328093979133144
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        },
+        "WER": {
+          "paired_values": [
+            0.0
+          ],
+          "paired_median": 0.0,
+          "paired_run_95_interval": [
+            0.0,
+            0.0
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        },
+        "CER": {
+          "paired_values": [
+            0.0
+          ],
+          "paired_median": 0.0,
+          "paired_run_95_interval": [
+            0.0,
+            0.0
+          ],
+          "all_repeats_positive": false,
+          "runs": 1
+        }
+      },
+      "source_clusters": {
+        "paired_median": {
+          "goodput": 0.0007095383960242785,
+          "stable_goodput": 0.0007095383960242785,
+          "WER": 0.0,
+          "CER": 0.0
+        },
+        "paired_source_run_95_interval": {
+          "goodput": [
+            0.0007095383960240564,
+            0.0007095383960242785
+          ],
+          "stable_goodput": [
+            0.0007095383960240564,
+            0.0007095383960242785
+          ],
+          "WER": [
+            0.0,
+            0.0
+          ],
+          "CER": [
+            0.0,
+            0.0
+          ]
+        },
+        "unique_sources": 8,
+        "repeats": 1,
+        "draws": 2000,
+        "interpretation": "Conditional on actual schedules. Resampled audio is not model/queue re-execution."
+      },
+      "baseline_dual_P99_passes": 1,
+      "treatment_dual_P99_passes": 1
+    },
+    {
+      "pool": "validation",
+      "arrival": "sync",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "standard",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "sync",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "cost",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "sync",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "strict",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "sync",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "service_cost",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "sync",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "reserved_progress",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "sync",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "inherit",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    },
+    {
+      "pool": "validation",
+      "arrival": "sync",
+      "traffic": "mixed",
+      "method": "causal",
+      "baseline": "causal_joint",
+      "status": "INCOMPLETE_NO_COMPARATIVE_CLAIM",
+      "baseline_repeats": [],
+      "treatment_repeats": [
+        0
+      ]
+    }
+  ]
+}

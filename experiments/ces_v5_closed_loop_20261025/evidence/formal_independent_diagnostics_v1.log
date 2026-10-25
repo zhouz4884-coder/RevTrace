@@ -1,0 +1,112 @@
+DIAGNOSED validation-sync-mixed-fine-r0
+DIAGNOSED validation-sync-mixed-standard-r0
+DIAGNOSED validation-sync-mixed-cost-r0
+DIAGNOSED validation-sync-mixed-strict-r0
+DIAGNOSED validation-sync-mixed-service_cost-r0
+DIAGNOSED validation-sync-mixed-reserved_progress-r0
+DIAGNOSED validation-sync-mixed-inherit-r0
+DIAGNOSED validation-sync-mixed-causal-r0
+DIAGNOSED validation-sync-mixed-fine_shared_progress-r0
+DIAGNOSED validation-sync-mixed-standard_shared_progress-r0
+DIAGNOSED validation-sync-mixed-cost_joint-r0
+DIAGNOSED validation-sync-mixed-causal_joint-r0
+DIAGNOSED validation-staggered-mixed-cost-r0
+DIAGNOSED validation-staggered-mixed-strict-r0
+DIAGNOSED validation-staggered-mixed-service_cost-r0
+DIAGNOSED validation-staggered-mixed-reserved_progress-r0
+DIAGNOSED validation-staggered-mixed-inherit-r0
+DIAGNOSED validation-staggered-mixed-causal-r0
+DIAGNOSED validation-staggered-mixed-fine_shared_progress-r0
+DIAGNOSED validation-staggered-mixed-standard_shared_progress-r0
+DIAGNOSED validation-staggered-mixed-cost_joint-r0
+DIAGNOSED validation-staggered-mixed-causal_joint-r0
+DIAGNOSED validation-staggered-mixed-fine-r0
+DIAGNOSED validation-staggered-mixed-standard-r0
+DIAGNOSED validation-sync-mixed-strict-r1
+DIAGNOSED validation-sync-mixed-cost-r1
+DIAGNOSED validation-sync-mixed-standard-r1
+DIAGNOSED validation-sync-mixed-fine-r1
+DIAGNOSED validation-sync-mixed-causal_joint-r1
+DIAGNOSED validation-sync-mixed-cost_joint-r1
+DIAGNOSED validation-sync-mixed-standard_shared_progress-r1
+DIAGNOSED validation-sync-mixed-fine_shared_progress-r1
+DIAGNOSED validation-sync-mixed-causal-r1
+DIAGNOSED validation-sync-mixed-inherit-r1
+DIAGNOSED validation-sync-mixed-reserved_progress-r1
+DIAGNOSED validation-sync-mixed-service_cost-r1
+DIAGNOSED validation-staggered-mixed-reserved_progress-r1
+DIAGNOSED validation-staggered-mixed-service_cost-r1
+DIAGNOSED validation-staggered-mixed-strict-r1
+DIAGNOSED validation-staggered-mixed-cost-r1
+DIAGNOSED validation-staggered-mixed-standard-r1
+DIAGNOSED validation-staggered-mixed-fine-r1
+DIAGNOSED validation-staggered-mixed-causal_joint-r1
+DIAGNOSED validation-staggered-mixed-cost_joint-r1
+DIAGNOSED validation-staggered-mixed-standard_shared_progress-r1
+DIAGNOSED validation-staggered-mixed-fine_shared_progress-r1
+DIAGNOSED validation-staggered-mixed-causal-r1
+DIAGNOSED validation-staggered-mixed-inherit-r1
+DIAGNOSED validation-sync-mixed-fine_shared_progress-r2
+DIAGNOSED validation-sync-mixed-standard_shared_progress-r2
+DIAGNOSED validation-sync-mixed-cost_joint-r2
+DIAGNOSED validation-sync-mixed-causal_joint-r2
+DIAGNOSED validation-sync-mixed-fine-r2
+DIAGNOSED validation-sync-mixed-standard-r2
+DIAGNOSED validation-sync-mixed-cost-r2
+DIAGNOSED validation-sync-mixed-strict-r2
+DIAGNOSED validation-sync-mixed-service_cost-r2
+DIAGNOSED validation-sync-mixed-reserved_progress-r2
+DIAGNOSED validation-sync-mixed-inherit-r2
+DIAGNOSED validation-sync-mixed-causal-r2
+DIAGNOSED validation-staggered-mixed-cost_joint-r2
+DIAGNOSED validation-staggered-mixed-causal_joint-r2
+DIAGNOSED validation-staggered-mixed-fine-r2
+DIAGNOSED validation-staggered-mixed-standard-r2
+DIAGNOSED validation-staggered-mixed-cost-r2
+DIAGNOSED validation-staggered-mixed-strict-r2
+DIAGNOSED validation-staggered-mixed-service_cost-r2
+DIAGNOSED validation-staggered-mixed-reserved_progress-r2
+DIAGNOSED validation-staggered-mixed-inherit-r2
+DIAGNOSED validation-staggered-mixed-causal-r2
+DIAGNOSED validation-staggered-mixed-fine_shared_progress-r2
+DIAGNOSED validation-staggered-mixed-standard_shared_progress-r2
+{
+  "status": "INCOMPLETE_OR_NOT_YET_SAFETY_AUDITED",
+  "expected_cells": 72,
+  "complete_cells": 72,
+  "failures": [
+    {
+      "status": "UNPLANNED_CELL_DIRECTORIES_RETAINED",
+      "cells": [
+        "journals"
+      ]
+    }
+  ],
+  "original_safety_audit_complete": true,
+  "performance_claim_eligible": false,
+  "comparisons_include_cost_joint_and_shared_proposer_controls": true,
+  "independent_confirmation": false,
+  "scope": "Reused-source diagnostic; actual traces, not counterfactual model execution",
+  "activation_is_not_causal_attribution": true,
+  "frontiers_are_not_IID_samples": true,
+  "prediction_residuals_include_future_replanning": true,
+  "host_timing_scope": "Actual observed Authority planner elapsed wall and snapshot-to-enqueue intervals; not GPU-active time or separately metered Owner CPU energy",
+  "guard_ablation_scope": "No same-new-model no-guard arm in the 72-cell plan; old48 only historical diagnosis",
+  "new_GPU_calls": 0,
+  "plan_sha256": "a21974de7dda66084ae946272b883001fecac89d95301ab11a4be4df70dd1dd5",
+  "script_sha256": "64bc6b85d67f7634d46602806c8bc822050dee959fd7680018419918ae52d0d0",
+  "safety_audit_summary_sha256": "34d91b354fb104c906dc46ad7695e9029351b224d1b413e0bda1734f269225f2",
+  "quality_input_sha256": "a50c8a8a668930be3d42af547c7baa3059113a453fdecfd51febf23aa3e2bd8b",
+  "outputs": {
+    "CELL_METRICS": 72,
+    "FRONTIERS": 9720,
+    "CRITICAL_PATHS": 9720,
+    "TARGET_DEFERRALS": 6480,
+    "DECISION_ACTIVATION": 1679,
+    "SERVICE_PROMISES": 4050,
+    "CUT_FORECAST_VS_ACTUAL": 1308,
+    "PRIVATE_FORECAST_VS_ACTUAL": 2985,
+    "PAID_PHYSICAL_BATCHES": 2556,
+    "PROPOSER_CHOICES": 394
+  }
+}
