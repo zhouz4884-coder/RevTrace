@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="0.074" timestamp="2026-10-26T02:35:26.820030+08:00" hostname="LAPTOP-OE488K9P"><testcase classname="experiments.dependability_protocol_20261025.test_n5_supervisor_v2" name="test_delayed_owned_release_waits_without_killing" time="0.001"><failure message="AttributeError: &lt;module 'os' (frozen)&gt; has no attribute 'killpg'">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002778876A650&gt;
+
+    def test_delayed_owned_release_waits_without_killing(monkeypatch):
+     answers=iter(['42\n','42\n','']);monkeypatch.setattr(m.subprocess,'check_output',lambda *a,**k:next(answers))
+     monkeypatch.setattr(m.time,'sleep',lambda n:None)
+     def forbidden(*a):raise AssertionError('no process deletion permitted by barrier')
+&gt;    monkeypatch.setattr(m.os,'killpg',forbidden)
+E    AttributeError: &lt;module 'os' (frozen)&gt; has no attribute 'killpg'
+
+experiments\dependability_protocol_20261025\test_n5_supervisor_v2.py:11: AttributeError</failure></testcase><testcase classname="experiments.dependability_protocol_20261025.test_n5_supervisor_v2" name="test_other_task_causes_immediate_stop" time="0.000" /><testcase classname="experiments.dependability_protocol_20261025.test_n5_supervisor_v2" name="test_empty_is_immediate" time="0.000" /></testsuite></testsuites>

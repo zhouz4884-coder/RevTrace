@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="12" time="1.531" timestamp="2026-10-26T00:47:31.393950+08:00" hostname="LAPTOP-OE488K9P"><testcase classname="tests.test_certified_envelope" name="test_all_safe_methods_conserve_actual_accepted_input_and_account_all_offered_windows[cde_age]" time="0.091" /><testcase classname="tests.test_certified_envelope" name="test_all_safe_methods_conserve_actual_accepted_input_and_account_all_offered_windows[cde_full]" time="0.085" /><testcase classname="tests.test_certified_envelope" name="test_all_safe_methods_conserve_actual_accepted_input_and_account_all_offered_windows[dgft_original]" time="0.097" /><testcase classname="tests.test_certified_envelope" name="test_all_safe_methods_conserve_actual_accepted_input_and_account_all_offered_windows[fine_fair]" time="0.148" /><testcase classname="tests.test_certified_envelope" name="test_all_safe_methods_conserve_actual_accepted_input_and_account_all_offered_windows[queue_expiry]" time="0.084" /><testcase classname="tests.test_certified_envelope" name="test_all_safe_methods_conserve_actual_accepted_input_and_account_all_offered_windows[standard_cde]" time="0.087" /><testcase classname="tests.test_certified_envelope" name="test_all_safe_methods_conserve_actual_accepted_input_and_account_all_offered_windows[standard_fair]" time="0.083" /><testcase classname="tests.test_certified_envelope" name="test_failure_after_input_ack_recovers_exact_debt_and_original_clock" time="0.092" /><testcase classname="tests.test_certified_envelope" name="test_rejection_is_persistent_and_never_moves_a_canonical_frontier" time="0.192"><failure message="KeyError: 'role'">tmp_path = WindowsPath('C:/Users/LENOVO/AppData/Local/Temp/pytest-of-LENOVO/pytest-906/test_rejection_is_persistent_a0')
+
+    def test_rejection_is_persistent_and_never_moves_a_canonical_frontier(tmp_path):
+        s,c,e=build(tmp_path,adelay=.3,count=5);r=s.run()
+        rejected=[sid for sid,b in s.book.sessions.items() if b.rejected]
+        assert rejected and all(s.sessions[sid].state.audio_frontier_window==0 for sid in rejected)
+&gt;       s.close();again,_,_=build(tmp_path,adelay=.3,count=5,clock=s.clock)
+
+tests\test_certified_envelope.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_certified_envelope.py:46: in build
+    s=CertifiedEnvelopeScheduler(consumer=consumer,input_journal_path=tmp/'input.wal',
+src\revtrace\certified_envelope.py:23: in __init__
+    super().__init__(**kwargs)
+src\revtrace\live_qwen.py:145: in __init__
+    try:replay_bound_text(self.trusted_render,event)
+src\revtrace\certified_display.py:37: in replay_bound_text
+    inp=proof['render_inputs'];P,text=render(inp,inp['token_ids'])
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+j = {'chunk_id': 0, 'language': 'English', 'prompt_tokens': [], 'state_tokens': [3], ...}
+z = [3]
+
+&gt;   def render(j,z):return [z[0]+(999 if j['role']=='proposal' else 0)],str(z[0])
+E   KeyError: 'role'
+
+tests\test_certified_envelope.py:41: KeyError</failure></testcase><testcase classname="tests.test_certified_envelope" name="test_snapshot_atomicity_restores_reservations_after_eof_and_rejection" time="0.123" /><testcase classname="tests.test_certified_envelope" name="test_changed_immutable_accepted_input_fails_closed" time="0.094" /><testcase classname="tests.test_certified_envelope" name="test_actual_feedback_and_lease_features_change_the_full_rule" time="0.026" /></testsuite></testsuites>

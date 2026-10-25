@@ -1,0 +1,3809 @@
+{
+  "status": "PYTHON_COMPLETE_PENDING_INDEPENDENT_JS_CHECK",
+  "bounds": "one canonical interval over two released frontiers, private depth<=2, one restart, immutable row before drain, one retry; seven cuts; finite complete BFS, not arbitrary history induction",
+  "state_fields": [
+    "mask",
+    "F",
+    "version",
+    "P",
+    "epoch",
+    "private_generation",
+    "authority_accepted",
+    "complete_WAL",
+    "durable_WAL",
+    "private_job_epoch",
+    "authority_job_epoch",
+    "publication_FIFO",
+    "consumer_F",
+    "consumer_P",
+    "whole_provisional_visible",
+    "property_monitor_bits"
+  ],
+  "results": [
+    {
+      "config": {
+        "case": "covered",
+        "omit": "none"
+      },
+      "complete": true,
+      "states": 1642,
+      "transitions": 6303,
+      "reachable_state_sha256": "d73b2c0959261fc90db54b3c324796ec89ebe29b42dfbc401f20849c412e5d62",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "covered",
+        "omit": "freshness"
+      },
+      "complete": true,
+      "states": 2826,
+      "transitions": 10383,
+      "reachable_state_sha256": "56d669ac2b9432765030ec3bab73dda20af2c20ba09f37734f4a762f8c9407eb",
+      "violations": [
+        "fresh_provisional_publication"
+      ],
+      "shortest_witnesses": {
+        "fresh_provisional_publication": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-private-frozen",
+            "state": [
+              5,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-private",
+            "state": [
+              13,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16397,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-private-and-publish",
+            "state": [
+              16429,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [
+                [
+                  "P",
+                  1,
+                  0,
+                  1,
+                  0,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "covered",
+        "omit": "chain"
+      },
+      "complete": true,
+      "states": 1642,
+      "transitions": 6303,
+      "reachable_state_sha256": "d73b2c0959261fc90db54b3c324796ec89ebe29b42dfbc401f20849c412e5d62",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "covered",
+        "omit": "render"
+      },
+      "complete": true,
+      "states": 1642,
+      "transitions": 6303,
+      "reachable_state_sha256": "d73b2c0959261fc90db54b3c324796ec89ebe29b42dfbc401f20849c412e5d62",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "covered",
+        "omit": "persist"
+      },
+      "complete": true,
+      "states": 2234,
+      "transitions": 8223,
+      "reachable_state_sha256": "52b414dca3a43b9f27694be4a5416c1de5a127fafa7cf80de780cc4c751d8d87",
+      "violations": [
+        "durable_certified_view"
+      ],
+      "shortest_witnesses": {
+        "durable_certified_view": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              65,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              193,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              705,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              4801,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "publish-certified",
+            "state": [
+              12993,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [
+                [
+                  "A",
+                  0,
+                  1,
+                  1,
+                  1,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "consume-FIFO",
+            "state": [
+              12993,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              1,
+              1,
+              false,
+              16
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "covered",
+        "omit": "epoch"
+      },
+      "complete": true,
+      "states": 2538,
+      "transitions": 9783,
+      "reachable_state_sha256": "6ce027d91e1fd76e3b712ce54bf84eac41c27844dce69402021673538ef7f26c",
+      "violations": [
+        "authorized_ancestry"
+      ],
+      "shortest_witnesses": {
+        "authorized_ancestry": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              65,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              193,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16577,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              17089,
+              0,
+              0,
+              0,
+              1,
+              1,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "append-WAL-incomplete",
+            "state": [
+              18113,
+              0,
+              0,
+              0,
+              1,
+              1,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "complete-frame-and-fsync",
+            "state": [
+              20161,
+              0,
+              0,
+              0,
+              1,
+              1,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              24257,
+              1,
+              1,
+              1,
+              1,
+              1,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "covered",
+        "omit": "row_identity"
+      },
+      "complete": true,
+      "states": 1642,
+      "transitions": 6303,
+      "reachable_state_sha256": "d73b2c0959261fc90db54b3c324796ec89ebe29b42dfbc401f20849c412e5d62",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "covered",
+        "omit": "parent"
+      },
+      "complete": true,
+      "states": 1642,
+      "transitions": 6303,
+      "reachable_state_sha256": "d73b2c0959261fc90db54b3c324796ec89ebe29b42dfbc401f20849c412e5d62",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "covered",
+        "omit": "frontier"
+      },
+      "complete": true,
+      "states": 1642,
+      "transitions": 6303,
+      "reachable_state_sha256": "d73b2c0959261fc90db54b3c324796ec89ebe29b42dfbc401f20849c412e5d62",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_equal",
+        "omit": "none"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "3e8efdecd0a3258f54bae2a9643f2cc2003671fc06c3205b6735b58661943752",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_equal",
+        "omit": "freshness"
+      },
+      "complete": true,
+      "states": 1458,
+      "transitions": 4600,
+      "reachable_state_sha256": "9abcdace01978ba8fe16cba985d8f9eef7ffbaee692ea5d8e54c446f37bec533",
+      "violations": [
+        "fresh_provisional_publication"
+      ],
+      "shortest_witnesses": {
+        "fresh_provisional_publication": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "release-2",
+            "state": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-private-frozen",
+            "state": [
+              7,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-private",
+            "state": [
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16399,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-private-and-publish",
+            "state": [
+              16431,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [
+                [
+                  "P",
+                  1,
+                  0,
+                  2,
+                  1,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "ahead_equal",
+        "omit": "chain"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "3e8efdecd0a3258f54bae2a9643f2cc2003671fc06c3205b6735b58661943752",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_equal",
+        "omit": "render"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "3e8efdecd0a3258f54bae2a9643f2cc2003671fc06c3205b6735b58661943752",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_equal",
+        "omit": "persist"
+      },
+      "complete": true,
+      "states": 1258,
+      "transitions": 3996,
+      "reachable_state_sha256": "6689a48b130c212ab54e316ed5058b42e37456249568ae32afb130ce009c0e48",
+      "violations": [
+        "durable_certified_view"
+      ],
+      "shortest_witnesses": {
+        "durable_certified_view": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              65,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              193,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              705,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              4801,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "publish-certified",
+            "state": [
+              12993,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [
+                [
+                  "A",
+                  0,
+                  1,
+                  1,
+                  1,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "consume-FIFO",
+            "state": [
+              12993,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              1,
+              1,
+              false,
+              16
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "ahead_equal",
+        "omit": "epoch"
+      },
+      "complete": true,
+      "states": 1418,
+      "transitions": 4742,
+      "reachable_state_sha256": "d6ef2a44c67b8f7df619c23dcbb27f08c848a6e507b029c063152fdab6f30d71",
+      "violations": [
+        "authorized_ancestry"
+      ],
+      "shortest_witnesses": {
+        "authorized_ancestry": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              65,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              193,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16577,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              17089,
+              0,
+              0,
+              0,
+              1,
+              1,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "append-WAL-incomplete",
+            "state": [
+              18113,
+              0,
+              0,
+              0,
+              1,
+              1,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "complete-frame-and-fsync",
+            "state": [
+              20161,
+              0,
+              0,
+              0,
+              1,
+              1,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              24257,
+              1,
+              1,
+              1,
+              1,
+              1,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "ahead_equal",
+        "omit": "row_identity"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "3e8efdecd0a3258f54bae2a9643f2cc2003671fc06c3205b6735b58661943752",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_equal",
+        "omit": "parent"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "3e8efdecd0a3258f54bae2a9643f2cc2003671fc06c3205b6735b58661943752",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_equal",
+        "omit": "frontier"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "3e8efdecd0a3258f54bae2a9643f2cc2003671fc06c3205b6735b58661943752",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_diff",
+        "omit": "none"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "8b373ba75138ff13fb244d0cf7ca532ad3a5fd232a982ba0c967964f9b66b8f4",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_diff",
+        "omit": "freshness"
+      },
+      "complete": true,
+      "states": 1426,
+      "transitions": 4528,
+      "reachable_state_sha256": "61e58a266a5dfdf2497de48590d390a6fb7f846f86ebbb48dbed22b82698d667",
+      "violations": [
+        "fresh_provisional_publication"
+      ],
+      "shortest_witnesses": {
+        "fresh_provisional_publication": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "release-2",
+            "state": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-private-frozen",
+            "state": [
+              7,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-private",
+            "state": [
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16399,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-private-and-publish",
+            "state": [
+              16431,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [
+                [
+                  "P",
+                  1,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "ahead_diff",
+        "omit": "chain"
+      },
+      "complete": true,
+      "states": 946,
+      "transitions": 3120,
+      "reachable_state_sha256": "a0058c8942f747e26a60cb8fb735fa0caf11eaffabc08e4c5bb55233969c4b40",
+      "violations": [
+        "exact_chain_private_continuity"
+      ],
+      "shortest_witnesses": {
+        "exact_chain_private_continuity": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "release-2",
+            "state": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-private-frozen",
+            "state": [
+              7,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-private",
+            "state": [
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-private-and-publish",
+            "state": [
+              47,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [
+                [
+                  "P",
+                  0,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              111,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              0,
+              [
+                [
+                  "P",
+                  0,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              239,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              0,
+              [
+                [
+                  "P",
+                  0,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              751,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              0,
+              0,
+              [
+                [
+                  "P",
+                  0,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "append-WAL-incomplete",
+            "state": [
+              1775,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              0,
+              0,
+              [
+                [
+                  "P",
+                  0,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "complete-frame-and-fsync",
+            "state": [
+              3823,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              true,
+              true,
+              0,
+              0,
+              [
+                [
+                  "P",
+                  0,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              7919,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              0,
+              0,
+              [
+                [
+                  "P",
+                  0,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "publish-certified",
+            "state": [
+              16111,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              0,
+              0,
+              [
+                [
+                  "P",
+                  0,
+                  0,
+                  2,
+                  3,
+                  false
+                ],
+                [
+                  "A",
+                  0,
+                  1,
+                  1,
+                  1,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "consume-FIFO",
+            "state": [
+              16111,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              0,
+              0,
+              [
+                [
+                  "A",
+                  0,
+                  1,
+                  1,
+                  1,
+                  false
+                ]
+              ],
+              0,
+              0,
+              true,
+              0
+            ]
+          },
+          {
+            "action": "consume-FIFO",
+            "state": [
+              16111,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              0,
+              0,
+              [],
+              1,
+              1,
+              true,
+              8
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "ahead_diff",
+        "omit": "render"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "8b373ba75138ff13fb244d0cf7ca532ad3a5fd232a982ba0c967964f9b66b8f4",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_diff",
+        "omit": "persist"
+      },
+      "complete": true,
+      "states": 1258,
+      "transitions": 3996,
+      "reachable_state_sha256": "4bc1b4e91efe1e438b02c40a3a3f0a7213deb1a4351962bbad38d9bd713667fc",
+      "violations": [
+        "durable_certified_view"
+      ],
+      "shortest_witnesses": {
+        "durable_certified_view": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              65,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              193,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              705,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              4801,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "publish-certified",
+            "state": [
+              12993,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [
+                [
+                  "A",
+                  0,
+                  1,
+                  1,
+                  1,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "consume-FIFO",
+            "state": [
+              12993,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              1,
+              1,
+              false,
+              16
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "ahead_diff",
+        "omit": "epoch"
+      },
+      "complete": true,
+      "states": 1418,
+      "transitions": 4742,
+      "reachable_state_sha256": "f721a2013207b104193852f3bd4486f21f41d696a1a3dfc8542b0f7b05698fee",
+      "violations": [
+        "authorized_ancestry"
+      ],
+      "shortest_witnesses": {
+        "authorized_ancestry": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              65,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              193,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16577,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              17089,
+              0,
+              0,
+              0,
+              1,
+              1,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "append-WAL-incomplete",
+            "state": [
+              18113,
+              0,
+              0,
+              0,
+              1,
+              1,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "complete-frame-and-fsync",
+            "state": [
+              20161,
+              0,
+              0,
+              0,
+              1,
+              1,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              24257,
+              1,
+              1,
+              1,
+              1,
+              1,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "ahead_diff",
+        "omit": "row_identity"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "8b373ba75138ff13fb244d0cf7ca532ad3a5fd232a982ba0c967964f9b66b8f4",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_diff",
+        "omit": "parent"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "8b373ba75138ff13fb244d0cf7ca532ad3a5fd232a982ba0c967964f9b66b8f4",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "ahead_diff",
+        "omit": "frontier"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "8b373ba75138ff13fb244d0cf7ca532ad3a5fd232a982ba0c967964f9b66b8f4",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "bad_render",
+        "omit": "none"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "bad_render",
+        "omit": "freshness"
+      },
+      "complete": true,
+      "states": 122,
+      "transitions": 286,
+      "reachable_state_sha256": "2a9df909c744f25b3f9f3f9f533e88ec069468ee3c1f31f06dec7374d2b9e715",
+      "violations": [
+        "fresh_provisional_publication"
+      ],
+      "shortest_witnesses": {
+        "fresh_provisional_publication": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "release-2",
+            "state": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-private-frozen",
+            "state": [
+              7,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-private",
+            "state": [
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16399,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-private-and-publish",
+            "state": [
+              16431,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [
+                [
+                  "P",
+                  1,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "bad_render",
+        "omit": "chain"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "bad_render",
+        "omit": "render"
+      },
+      "complete": true,
+      "states": 1018,
+      "transitions": 3372,
+      "reachable_state_sha256": "85c37bf1d9a6f90267d19ec17a375684886bfd37ad4e1b32f8f3dac8ad03c5c5",
+      "violations": [
+        "durable_certified_view"
+      ],
+      "shortest_witnesses": {
+        "durable_certified_view": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              65,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              193,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              705,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "append-WAL-incomplete",
+            "state": [
+              1729,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "complete-frame-and-fsync",
+            "state": [
+              3777,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              7873,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "publish-certified",
+            "state": [
+              16065,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [
+                [
+                  "A",
+                  0,
+                  1,
+                  1,
+                  1,
+                  true
+                ]
+              ],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "consume-FIFO",
+            "state": [
+              16065,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              1,
+              1,
+              false,
+              16
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "bad_render",
+        "omit": "persist"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "bad_render",
+        "omit": "epoch"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "bad_render",
+        "omit": "row_identity"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "bad_render",
+        "omit": "parent"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "bad_render",
+        "omit": "frontier"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "wrong_receipt",
+        "omit": "none"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "wrong_receipt",
+        "omit": "freshness"
+      },
+      "complete": true,
+      "states": 122,
+      "transitions": 286,
+      "reachable_state_sha256": "2a9df909c744f25b3f9f3f9f533e88ec069468ee3c1f31f06dec7374d2b9e715",
+      "violations": [
+        "fresh_provisional_publication"
+      ],
+      "shortest_witnesses": {
+        "fresh_provisional_publication": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "release-2",
+            "state": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-private-frozen",
+            "state": [
+              7,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-private",
+            "state": [
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16399,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-private-and-publish",
+            "state": [
+              16431,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [
+                [
+                  "P",
+                  1,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "wrong_receipt",
+        "omit": "chain"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "wrong_receipt",
+        "omit": "render"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "wrong_receipt",
+        "omit": "persist"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "wrong_receipt",
+        "omit": "epoch"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "wrong_receipt",
+        "omit": "row_identity"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "993473c165616e4440d0c86898e3699c26dcd0d6cf0dba5f1c10a22ce63a324e",
+      "violations": [
+        "authorized_ancestry"
+      ],
+      "shortest_witnesses": {
+        "authorized_ancestry": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              65,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              193,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              705,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "append-WAL-incomplete",
+            "state": [
+              1729,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "complete-frame-and-fsync",
+            "state": [
+              3777,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              7873,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "wrong_receipt",
+        "omit": "parent"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "wrong_receipt",
+        "omit": "frontier"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "e758b6155b7909e97c234fe8d6ed61cac30f34228301a47922df8fbf00b06f31",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "stale_parent",
+        "omit": "none"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "41e77642edd545747979c59bdb8d5773d394b10c6c768728b3abc6febf755464",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "stale_parent",
+        "omit": "freshness"
+      },
+      "complete": true,
+      "states": 122,
+      "transitions": 286,
+      "reachable_state_sha256": "746c343c6f90f7d27b93a13b0435242a7a3e96dd3d9f21b236d883202dae3ec2",
+      "violations": [
+        "fresh_provisional_publication"
+      ],
+      "shortest_witnesses": {
+        "fresh_provisional_publication": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "release-2",
+            "state": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-private-frozen",
+            "state": [
+              7,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-private",
+            "state": [
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16399,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-private-and-publish",
+            "state": [
+              16431,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [
+                [
+                  "P",
+                  1,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "stale_parent",
+        "omit": "chain"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "41e77642edd545747979c59bdb8d5773d394b10c6c768728b3abc6febf755464",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "stale_parent",
+        "omit": "render"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "41e77642edd545747979c59bdb8d5773d394b10c6c768728b3abc6febf755464",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "stale_parent",
+        "omit": "persist"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "41e77642edd545747979c59bdb8d5773d394b10c6c768728b3abc6febf755464",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "stale_parent",
+        "omit": "epoch"
+      },
+      "complete": true,
+      "states": 112,
+      "transitions": 261,
+      "reachable_state_sha256": "52cfd871c0b0265dd70b0b8e9147f37c02f95a6b8f72a874f7b4cd255f572ff9",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "stale_parent",
+        "omit": "row_identity"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "41e77642edd545747979c59bdb8d5773d394b10c6c768728b3abc6febf755464",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "stale_parent",
+        "omit": "parent"
+      },
+      "complete": true,
+      "states": 922,
+      "transitions": 3068,
+      "reachable_state_sha256": "993473c165616e4440d0c86898e3699c26dcd0d6cf0dba5f1c10a22ce63a324e",
+      "violations": [
+        "authorized_ancestry"
+      ],
+      "shortest_witnesses": {
+        "authorized_ancestry": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              65,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              193,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              705,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "append-WAL-incomplete",
+            "state": [
+              1729,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "complete-frame-and-fsync",
+            "state": [
+              3777,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              7873,
+              1,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "stale_parent",
+        "omit": "frontier"
+      },
+      "complete": true,
+      "states": 98,
+      "transitions": 242,
+      "reachable_state_sha256": "41e77642edd545747979c59bdb8d5773d394b10c6c768728b3abc6febf755464",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "gap",
+        "omit": "none"
+      },
+      "complete": true,
+      "states": 88,
+      "transitions": 216,
+      "reachable_state_sha256": "29498f4842a46de0bd4a03c97f07e0ffe0879f2459cb1d4d6283a5fe05cfa121",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "gap",
+        "omit": "freshness"
+      },
+      "complete": true,
+      "states": 112,
+      "transitions": 260,
+      "reachable_state_sha256": "692017f3714a8204f64324e19f2556ff8c44569afd109cb986e8dcbdd5348c1d",
+      "violations": [
+        "fresh_provisional_publication"
+      ],
+      "shortest_witnesses": {
+        "fresh_provisional_publication": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "release-2",
+            "state": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-private-frozen",
+            "state": [
+              7,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-private",
+            "state": [
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "crash-restart-new-stream",
+            "state": [
+              16399,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-private-and-publish",
+            "state": [
+              16431,
+              0,
+              0,
+              0,
+              1,
+              1,
+              false,
+              false,
+              false,
+              0,
+              -1,
+              [
+                [
+                  "P",
+                  1,
+                  0,
+                  2,
+                  3,
+                  false
+                ]
+              ],
+              0,
+              0,
+              false,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "config": {
+        "case": "gap",
+        "omit": "chain"
+      },
+      "complete": true,
+      "states": 88,
+      "transitions": 216,
+      "reachable_state_sha256": "29498f4842a46de0bd4a03c97f07e0ffe0879f2459cb1d4d6283a5fe05cfa121",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "gap",
+        "omit": "render"
+      },
+      "complete": true,
+      "states": 88,
+      "transitions": 216,
+      "reachable_state_sha256": "29498f4842a46de0bd4a03c97f07e0ffe0879f2459cb1d4d6283a5fe05cfa121",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "gap",
+        "omit": "persist"
+      },
+      "complete": true,
+      "states": 88,
+      "transitions": 216,
+      "reachable_state_sha256": "29498f4842a46de0bd4a03c97f07e0ffe0879f2459cb1d4d6283a5fe05cfa121",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "gap",
+        "omit": "epoch"
+      },
+      "complete": true,
+      "states": 100,
+      "transitions": 232,
+      "reachable_state_sha256": "8ffb879eed27f6ff4961c8cc557508ab3c2595b400fb3feebbc4c815e66b7cc9",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "gap",
+        "omit": "row_identity"
+      },
+      "complete": true,
+      "states": 88,
+      "transitions": 216,
+      "reachable_state_sha256": "29498f4842a46de0bd4a03c97f07e0ffe0879f2459cb1d4d6283a5fe05cfa121",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "gap",
+        "omit": "parent"
+      },
+      "complete": true,
+      "states": 88,
+      "transitions": 216,
+      "reachable_state_sha256": "29498f4842a46de0bd4a03c97f07e0ffe0879f2459cb1d4d6283a5fe05cfa121",
+      "violations": [],
+      "shortest_witnesses": {}
+    },
+    {
+      "config": {
+        "case": "gap",
+        "omit": "frontier"
+      },
+      "complete": true,
+      "states": 824,
+      "transitions": 2746,
+      "reachable_state_sha256": "e6660864dd9644819d922cc41c1c1429df18e9af7a424c159f6524829d0b1112",
+      "violations": [
+        "gap_free_commit"
+      ],
+      "shortest_witnesses": {
+        "gap_free_commit": [
+          {
+            "action": "release-1",
+            "state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "release-2",
+            "state": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              -1,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "dispatch-authority-frozen",
+            "state": [
+              67,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "row-complete-authority",
+            "state": [
+              195,
+              0,
+              0,
+              0,
+              0,
+              0,
+              false,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "receive-authority",
+            "state": [
+              707,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "append-WAL-incomplete",
+            "state": [
+              1731,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              false,
+              false,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "complete-frame-and-fsync",
+            "state": [
+              3779,
+              0,
+              0,
+              0,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              0
+            ]
+          },
+          {
+            "action": "install-canonical",
+            "state": [
+              7875,
+              2,
+              1,
+              1,
+              0,
+              0,
+              true,
+              true,
+              true,
+              -1,
+              0,
+              [],
+              0,
+              0,
+              false,
+              2
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

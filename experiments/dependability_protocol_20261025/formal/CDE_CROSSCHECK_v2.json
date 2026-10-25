@@ -1,0 +1,306 @@
+{
+  "status": "PASS_COMPLETE_CDE_FINITE_BFS_DFS_REACHABLE_STATE_CROSSCHECK",
+  "configurations": 20,
+  "summed_state_visits": 114487,
+  "summed_edges": 711406,
+  "bounds": "1session/3releasedunits and2sessions/2units, quantum2,budget2,one restart,5view modes,one staged observation; invariant-violation states terminal, unsafe continuations not searched",
+  "limits": "atomic input persistence and trusted canonical selection abstract actual I/O/base proof; no neural inference, no unbounded liveness or performance guarantee; explicit R logging is not uniquely necessary because derived reservation is a positive control",
+  "python_sha256": "ea4d4abecf2574c1e8e35ea3f1bc09628e50b85d4a018e453c1ff0cd9b3f6430",
+  "javascript_sha256": "c87cbc664181c21920a735a21ad8874965d50efe5266d3abb05736524cc14f7c",
+  "independence": "separate Python BFS and JavaScript DFS implementations, same shared specification, not independent authors or implementation refinement proof",
+  "positive_control": "correct policy/manifest-based reservation reconstruction also preserves invariants; explicit reservation logging is not uniquely necessary",
+  "results": [
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "none"
+      },
+      "complete": true,
+      "states": 1835,
+      "transitions": 10799,
+      "reachable_sha256": "56c5dbaa6d9bcff6d38eb4161ca3c29daaab6e473157fdd5d39853c99f4b1861",
+      "violations": []
+    },
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "input_sync"
+      },
+      "complete": true,
+      "states": 1549,
+      "transitions": 9096,
+      "reachable_sha256": "2e00fbb7edaf8add466e3017944ce3cdd0f135f0a5939245ee8f7c5641ddaa13",
+      "violations": [
+        "accepted_input_lost"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "zero_reservation_restore"
+      },
+      "complete": true,
+      "states": 1790,
+      "transitions": 10479,
+      "reachable_sha256": "43048eb4d8d8101118a068966fcc8602c600252954a286f62a373330c70c3e77",
+      "violations": [
+        "reservation_recovery_unavailable"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "derive_reservation_positive"
+      },
+      "complete": true,
+      "states": 1913,
+      "transitions": 11225,
+      "reachable_sha256": "2e117c0e9ab9a2feb3c27eb514048a044c06d332944f07b64e65b683a2a16e28",
+      "violations": []
+    },
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "mode_purge"
+      },
+      "complete": true,
+      "states": 1802,
+      "transitions": 8989,
+      "reachable_sha256": "d73c3de1c6434858dfc6affd52ae17931146a55b5dbe7d303b45c5533cef4bcc",
+      "violations": [
+        "certified_only_false_view"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "epoch_fence"
+      },
+      "complete": true,
+      "states": 1992,
+      "transitions": 10799,
+      "reachable_sha256": "15c3e416cd46c7531ce580f54be42cda43952773070796a08a75fb89f7351713",
+      "violations": [
+        "old_observation_relabelled_fresh"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "root_fence"
+      },
+      "complete": true,
+      "states": 2007,
+      "transitions": 10799,
+      "reachable_sha256": "59fde0611ed95780cf5e37776cf63beea6549b32dc383de06ab0e00326bc6c6d",
+      "violations": [
+        "old_root_observation_relabelled_fresh"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "admission_trust"
+      },
+      "complete": true,
+      "states": 2278,
+      "transitions": 11242,
+      "reachable_sha256": "d18627ec88a567c1ebcbd89e150b1e5ff3e51a216a444bbaca23cfa65e8edc7d",
+      "violations": [
+        "untrusted_canonical_admission"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "credit_limit"
+      },
+      "complete": true,
+      "states": 1949,
+      "transitions": 10913,
+      "reachable_sha256": "a140e74700241af5f322407397a7330f86fb47df311f107d6b19befbf7f25851",
+      "violations": [
+        "credit_bound_exceeded"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 1,
+        "frontiers": 3,
+        "budget": 2,
+        "omit": "forget_rejection"
+      },
+      "complete": true,
+      "states": 1838,
+      "transitions": 10799,
+      "reachable_sha256": "b430afd0421efb25981ecfcb112fa2540687e4135f77370ec32b6f272e4641dc",
+      "violations": [
+        "terminal_rejection_forgotten"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "none"
+      },
+      "complete": true,
+      "states": 9006,
+      "transitions": 60641,
+      "reachable_sha256": "27be1323d75a64a919e1569f677cf0ab5bd141c709af466dd4f1c76d6fdd6359",
+      "violations": []
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "input_sync"
+      },
+      "complete": true,
+      "states": 10782,
+      "transitions": 70395,
+      "reachable_sha256": "7767f0b2fc802be5af128efa93bfa2359dc8e8a0eb901b197124bbd5823a00ff",
+      "violations": [
+        "accepted_input_lost"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "zero_reservation_restore"
+      },
+      "complete": true,
+      "states": 8558,
+      "transitions": 57637,
+      "reachable_sha256": "e35045aff7361acdfd92a8598f2ff767b9b18b28c1cd49f4f60686a2a14255cf",
+      "violations": [
+        "reservation_recovery_unavailable"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "derive_reservation_positive"
+      },
+      "complete": true,
+      "states": 9350,
+      "transitions": 63005,
+      "reachable_sha256": "d00fd69cce435248cf92291289053cca57ead5034143cc7201497a8d096d8d09",
+      "violations": []
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "mode_purge"
+      },
+      "complete": true,
+      "states": 8774,
+      "transitions": 48777,
+      "reachable_sha256": "7241cd4447ae4c714c6033fa2c6a4dd9439df330e4ce39c66074973fa153fcdd",
+      "violations": [
+        "certified_only_false_view"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "epoch_fence"
+      },
+      "complete": true,
+      "states": 9822,
+      "transitions": 60641,
+      "reachable_sha256": "03b95a4c60bed1343736b4bf0d9f1f27bc5cb2f98fc422d31ee6c398eaf128c9",
+      "violations": [
+        "old_observation_relabelled_fresh"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "root_fence"
+      },
+      "complete": true,
+      "states": 9862,
+      "transitions": 60641,
+      "reachable_sha256": "a4661b1d472446839c5efbf98620a41777743c7e9af45efbe4374396a0242a25",
+      "violations": [
+        "old_root_observation_relabelled_fresh"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "admission_trust"
+      },
+      "complete": true,
+      "states": 10700,
+      "transitions": 62619,
+      "reachable_sha256": "c950cfe7349507ac265956dbd2125b8e6a60d31fecf05cdc3f874f04b31a5d36",
+      "violations": [
+        "untrusted_canonical_admission"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "credit_limit"
+      },
+      "complete": true,
+      "states": 9602,
+      "transitions": 61269,
+      "reachable_sha256": "d471a4fa7b0de4dc0e3eed32631e758d9d6abfab68e02503f668bc2a313ab18d",
+      "violations": [
+        "credit_bound_exceeded"
+      ]
+    },
+    {
+      "config": {
+        "sessions": 2,
+        "frontiers": 2,
+        "budget": 2,
+        "omit": "forget_rejection"
+      },
+      "complete": true,
+      "states": 9078,
+      "transitions": 60641,
+      "reachable_sha256": "1a3e6db5328ddaa38d6b7f47206e991b0ad439d07bfca4345cfff6998238e3f4",
+      "violations": [
+        "terminal_rejection_forgotten"
+      ]
+    }
+  ]
+}
