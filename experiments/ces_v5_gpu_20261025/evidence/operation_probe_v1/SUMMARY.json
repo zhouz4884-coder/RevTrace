@@ -1,0 +1,51 @@
+{
+  "status": "PASS_PAID_OPERATOR_REPEAT_AND_D1",
+  "same_layout_repeat_equal_full_Z_P_text_stop_inputs": {
+    "whole": true,
+    "split": true
+  },
+  "cross_layout_changed_rows": {
+    "token_ids": 0,
+    "state_tokens": 0,
+    "text": 0,
+    "terminated_by_eos": 0,
+    "model_input_audit": 4
+  },
+  "cross_layout_equality_not_required_or_assumed": true,
+  "scope": "GPU1 fixed-state operator; not serving",
+  "physical_batches": 6,
+  "results": [
+    {
+      "layout": "whole",
+      "repeat": 0,
+      "wall_s": 0.9757447661831975,
+      "worker_lease_s": 0.9589142668992281,
+      "model_call_s": 0.9258183389902115,
+      "physical_batches": 1
+    },
+    {
+      "layout": "split",
+      "repeat": 0,
+      "wall_s": 1.5131612606346607,
+      "worker_lease_s": 1.5003408258780837,
+      "model_call_s": 1.4770993841812015,
+      "physical_batches": 2
+    },
+    {
+      "layout": "split",
+      "repeat": 1,
+      "wall_s": 1.5380799742415547,
+      "worker_lease_s": 1.5263902125880122,
+      "model_call_s": 1.5018017180263996,
+      "physical_batches": 2
+    },
+    {
+      "layout": "whole",
+      "repeat": 1,
+      "wall_s": 0.8906748732551932,
+      "worker_lease_s": 0.8821962522342801,
+      "model_call_s": 0.8588588302955031,
+      "physical_batches": 1
+    }
+  ]
+}

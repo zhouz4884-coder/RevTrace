@@ -1,0 +1,524 @@
+{
+  "experiment_id": "REVTRACE-CES-V5-GPU-20261025",
+  "runtime_commit": "126dc815962e8f726b0cbdf214a19318b28a3629",
+  "runtime_manifest_sha256": "f6e4e4a139430cf14607b88be1f658261a2ec5684149cb5427fc61b5f76a8249",
+  "calibration_sha256": "35aa67579c04018c42f65d8a180c79b60d1941ae53cc87b1177d3ddb49866e55",
+  "controllers": {
+    "run_stage.py": "be4cf556802e84358acea48a67438b638a4a1d0bb4386aef5b12cfba62bb3c02",
+    "operation_probe.py": "87de63b53f042778b8de752546326b6f45e928e019fc3fd17f35eaebf869d0b8",
+    "audit_v5.py": "3c746c30edc5388680ad5419162b86f0317a871eaf7d9b03e95609eb645bfe6f",
+    "summarize_v5.py": "dbca2f0db5282bd957b4471f69f97b807e6759ff2c17ab4e5377d3d0526b4627"
+  },
+  "protocol_sha256": "6e970a19b816ead3b1eb2bef9ceed8eb2a7981c302177669a4f82be85c8bfc56",
+  "manifest_sha256": "8904fa5b16cb5d2c1f75d101079c6b7f640c2817b873cb92e816eecb694ea1bc",
+  "oracle_plan": [
+    {
+      "label": "strict",
+      "method": "strict",
+      "traffic": "clean",
+      "sessions": 4,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": true
+    },
+    {
+      "label": "strict",
+      "method": "strict",
+      "traffic": "mixed",
+      "sessions": 4,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": true
+    }
+  ],
+  "online_plan": [
+    {
+      "label": "fine",
+      "method": "fine",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "standard",
+      "method": "standard",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "cost",
+      "method": "cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "risk_cost",
+      "method": "risk_cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "progress",
+      "method": "progress",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "progress_joint",
+      "method": "progress_joint",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "fine_deadline",
+      "method": "fine",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "standard_deadline",
+      "method": "standard",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "standard",
+      "method": "standard",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "cost",
+      "method": "cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "risk_cost",
+      "method": "risk_cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "progress",
+      "method": "progress",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "progress_joint",
+      "method": "progress_joint",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "fine_deadline",
+      "method": "fine",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "standard_deadline",
+      "method": "standard",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "fine",
+      "method": "fine",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 0,
+      "oracle": false
+    },
+    {
+      "label": "cost",
+      "method": "cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "standard",
+      "method": "standard",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "fine",
+      "method": "fine",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "standard_deadline",
+      "method": "standard",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "fine_deadline",
+      "method": "fine",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "progress_joint",
+      "method": "progress_joint",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "progress",
+      "method": "progress",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "risk_cost",
+      "method": "risk_cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "risk_cost",
+      "method": "risk_cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "cost",
+      "method": "cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "standard",
+      "method": "standard",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "fine",
+      "method": "fine",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "standard_deadline",
+      "method": "standard",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "fine_deadline",
+      "method": "fine",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "progress_joint",
+      "method": "progress_joint",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "progress",
+      "method": "progress",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 1,
+      "oracle": false
+    },
+    {
+      "label": "fine_deadline",
+      "method": "fine",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "standard_deadline",
+      "method": "standard",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "fine",
+      "method": "fine",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "standard",
+      "method": "standard",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "cost",
+      "method": "cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "risk_cost",
+      "method": "risk_cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "progress",
+      "method": "progress",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "progress_joint",
+      "method": "progress_joint",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "sync",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "standard_deadline",
+      "method": "standard",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "fine",
+      "method": "fine",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "standard",
+      "method": "standard",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "cost",
+      "method": "cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "risk_cost",
+      "method": "risk_cost",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "progress",
+      "method": "progress",
+      "order": null,
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "progress_joint",
+      "method": "progress_joint",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 2,
+      "oracle": false
+    },
+    {
+      "label": "fine_deadline",
+      "method": "fine",
+      "order": "deadline",
+      "traffic": "mixed",
+      "sessions": 16,
+      "arrival": "staggered",
+      "repeat": 2,
+      "oracle": false
+    }
+  ],
+  "old_sources_reused_for_diagnosis": true,
+  "independent_confirmation": false,
+  "larger_formal_matrix": false,
+  "primary_slo_seconds": [
+    2,
+    8
+  ],
+  "all_unfinished_frontiers_retained": true
+}
