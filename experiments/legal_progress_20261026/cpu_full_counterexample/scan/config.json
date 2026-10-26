@@ -1,0 +1,41 @@
+{
+  "policy": "coarse",
+  "rho": 3,
+  "fine_seconds": 0.01,
+  "sample_rate": 16000,
+  "microbatch": 1,
+  "timeout_seconds": 5,
+  "authority_runtime": {
+    "dtype": "float32",
+    "model": "SCRIPTED_CPU_ORACLE_NOT_QWEN"
+  },
+  "proposal_runtime": {
+    "dtype": "float16",
+    "model": "SCRIPTED_CPU_ORACLE_NOT_QWEN"
+  },
+  "proposal_barrier": "decoupled",
+  "proposal_reconciliation": "lazy",
+  "verification_policy": "canonical_generate",
+  "trusted_text_binding": true,
+  "retain_verified_private_prefix": true,
+  "capture_worker_records": true,
+  "display_protocol": "canonical-snapshot-v1",
+  "manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "evidence_type": "cpu_scripted_adapter_full_protocol_not_neural",
+  "episode_origin_perf": 127389.7155033,
+  "envelope": {
+    "method": "dgft_original",
+    "budget_audio_seconds": 2.0,
+    "warning_age": 1.0,
+    "critical_age": 2.0,
+    "clear_age": 0.5,
+    "display_slo": 2.0,
+    "queue_threshold": 8,
+    "reject_new_after_seconds": 3.0,
+    "tick_seconds": 0.0005
+  },
+  "history_strategy": "scan",
+  "history_sealed_branches": true,
+  "history_revocation_contract": "owner-mode",
+  "kernel_copy_mode": "event-cow"
+}
