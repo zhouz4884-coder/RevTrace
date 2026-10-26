@@ -1,0 +1,85 @@
+{
+  "status": "PASS_CPU_EXECUTABLE_WITNESSES_AND_INFORMATION_PAIRS",
+  "witnesses": [
+    {
+      "cut": "trusted authority role at admission",
+      "result": "UNAUTHORIZED_CANONICAL_WRITE",
+      "trace": [
+        "private dispatch",
+        "complete Render",
+        "weakened prepare",
+        "real abstract sync",
+        "install"
+      ]
+    },
+    {
+      "cut": "accepted-input dispatch bound",
+      "result": "EXECUTION_OUTSIDE_ACCEPTED_OBLIGATION",
+      "trace": [
+        "accepted 1",
+        "dispatch end 2"
+      ]
+    },
+    {
+      "cut": "physical lease exclusion",
+      "result": "SECOND_SUBMIT_BEFORE_FIRST_DRAIN",
+      "trace": [
+        "submit j",
+        "submit j2 before row/drain"
+      ]
+    }
+  ],
+  "pairs": [
+    {
+      "observation": "self-described content/metadata/checksum only",
+      "same_observation": {
+        "Z": "Z",
+        "P": "P",
+        "text": "same"
+      },
+      "hidden_difference": "independent trusted authority selection vs coherent private output",
+      "required_actions": [
+        "allow after sync",
+        "deny canonical admission"
+      ]
+    },
+    {
+      "observation": "canonical WAL only",
+      "same_observation": {
+        "canonical_version": 1,
+        "canonical_P": "P1"
+      },
+      "hidden_difference": "actual private input chain roots at P1 vs unrelated P0",
+      "required_actions": [
+        "allow compatible provisional view",
+        "withdraw incompatible view"
+      ]
+    },
+    {
+      "observation": "canonical WAL only",
+      "same_observation": {
+        "canonical_version": 0,
+        "canonical_frontier": 0
+      },
+      "hidden_difference": "accepted unsatisfied input with original deadline vs no accepted input",
+      "required_actions": [
+        "retain and drain accepted obligation",
+        "no accepted obligation to resume"
+      ]
+    },
+    {
+      "observation": "row completion only",
+      "same_observation": {
+        "j": "complete"
+      },
+      "hidden_difference": "another physical row executing vs batch actually drained",
+      "required_actions": [
+        "retain worker lease",
+        "allow worker reuse"
+      ]
+    }
+  ],
+  "nontriviality": "declared legal work must be allowed; rejecting everything is not an alternative",
+  "alternatives": "equivalent trusted evidence/ordinary safe transactions/complete Standard can supply the same information",
+  "not_claimed": "universal minimality, new cryptography, natural fault prevalence, GPU performance"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "EXHAUSTED_FINITE_COMPOSED_PRODUCT",
+  "states": 1154,
+  "edges": 3429,
+  "illegal_events_rejected": 216,
+  "exact_state_set_sha256": "fd481326e5ed45886b1dafd731f1e674bb177c24873318dad6980d027dd14e85",
+  "legal_progress_states": 40,
+  "transition_counts": {
+    "input-synced": 8,
+    "worker-ready": 140,
+    "process-group-kill/replay": 561,
+    "dispatch": 68,
+    "row-complete": 200,
+    "batch-drained": 964,
+    "admission-request": 152,
+    "publish": 408,
+    "canonical-synced": 152,
+    "apply-request": 312,
+    "install": 152,
+    "view-applied": 312
+  },
+  "bounds": "one session; one canonical interval; one ahead private interval; two projections; two workers; one process-group restart; at most two view revisions",
+  "assumptions": "trusted complete selection and render receipts; intact durable storage; killed old workers; no full implementation refinement claim",
+  "BFS_DFS_crosscheck": "identical state/edge/transition counts; same transition specification",
+  "executed_kernel_sha256": "3006b628348a3bcf0979157ee3a60a89aba018ece4646a9c47e8384f2c4ecbb2"
+}
