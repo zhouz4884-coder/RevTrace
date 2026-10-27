@@ -1,0 +1,78 @@
+...................................................F.................... [ 21%]
+........................................................................ [ 43%]
+..............................................................FF........ [ 65%]
+................................................................ssssssss [ 87%]
+ssssssss................................                                 [100%]
+================================== FAILURES ===================================
+_________ test_actual_make_job_uses_current_parent_after_finite_wait __________
+
+    def test_actual_make_job_uses_current_parent_after_finite_wait():
+        q,_=run_policy('pending_eta')
+        waits=[e for e in q.events if e['kind']=='dispatch-wait-decision' and e['decision']=='wait']
+>       assert waits,'fixture must activate the mechanism'
+E       AssertionError: fixture must activate the mechanism
+E       assert []
+
+runtime\tests\test_dispatch_wait_integration.py:42: AssertionError
+__ test_real_scheduler_releases_logical_wait_before_other_session_gpu_drains __
+
+    def test_real_scheduler_releases_logical_wait_before_other_session_gpu_drains():
+>       q=make_waiting_scheduler();prior_ids=list(q.inflight['p'][1])
+
+runtime\tests\test_dispatch_wait_real_busy.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def make_waiting_scheduler():
+        old=build(rho=1,delay=.025,barrier='decoupled',count=2)
+        config=dict(old.contract,proposal_reconciliation='lazy',dispatch_wait={
+            'policy':'pending_eta','max_wait_seconds':.04,'fixed_wait_seconds':.006,
+            'private_cost_default_seconds':.001,'authority_cost_default_seconds':.025,
+            'display_slo_seconds':.1,'poll_floor_seconds':.001,
+            'initial_recent_wait_seconds':.006,'recent_step_seconds':.001})
+        specs=[dict(session_id=s.sid,audio=s.audio,source_id=s.source_id,
+            language=s.language,offset=s.offset) for s in old.sessions.values()]
+        q=LiveQwenScheduler(sessions=specs,contract=config,executors=old.executors,
+            clock=old.clock,sleep=old.sleep,emit=lambda row:None)
+        q.clock.now=q.t0+.010001;q._dispatch()  # session0 P/A; session1 not released
+        q.clock.now=q.t0+.012;q._receive()      # session0 P done, A pending
+        q.executors['proposal'][0].delay=.1
+        q.clock.now=q.t0+.020001;q._dispatch()  # wait session0; serve session1
+>       assert q._dispatch_wait_controller.waits[0,2].active
+E       assert False
+E        +  where False = Wait(sid=0, window=2, target=320, opened=100.020001, audio_ready=100.02, deadline=100.11999999999999, until=100.020001...put=None, actual_enqueue=None, actual_service=None, consumer_first_legal=None, input_logged=False, feedback_done=False).active
+
+runtime\tests\test_dispatch_wait_real_busy.py:21: AssertionError
+_____ test_pure_pre_wait_description_matches_actual_make_job_after_rebase _____
+
+    def test_pure_pre_wait_description_matches_actual_make_job_after_rebase():
+>       q=make_waiting_scheduler()
+
+runtime\tests\test_dispatch_wait_real_busy.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def make_waiting_scheduler():
+        old=build(rho=1,delay=.025,barrier='decoupled',count=2)
+        config=dict(old.contract,proposal_reconciliation='lazy',dispatch_wait={
+            'policy':'pending_eta','max_wait_seconds':.04,'fixed_wait_seconds':.006,
+            'private_cost_default_seconds':.001,'authority_cost_default_seconds':.025,
+            'display_slo_seconds':.1,'poll_floor_seconds':.001,
+            'initial_recent_wait_seconds':.006,'recent_step_seconds':.001})
+        specs=[dict(session_id=s.sid,audio=s.audio,source_id=s.source_id,
+            language=s.language,offset=s.offset) for s in old.sessions.values()]
+        q=LiveQwenScheduler(sessions=specs,contract=config,executors=old.executors,
+            clock=old.clock,sleep=old.sleep,emit=lambda row:None)
+        q.clock.now=q.t0+.010001;q._dispatch()  # session0 P/A; session1 not released
+        q.clock.now=q.t0+.012;q._receive()      # session0 P done, A pending
+        q.executors['proposal'][0].delay=.1
+        q.clock.now=q.t0+.020001;q._dispatch()  # wait session0; serve session1
+>       assert q._dispatch_wait_controller.waits[0,2].active
+E       assert False
+E        +  where False = Wait(sid=0, window=2, target=320, opened=100.020001, audio_ready=100.02, deadline=100.11999999999999, until=100.020001...put=None, actual_enqueue=None, actual_service=None, consumer_first_legal=None, input_logged=False, feedback_done=False).active
+
+runtime\tests\test_dispatch_wait_real_busy.py:21: AssertionError
+- generated xml file: D:\VLA_QWEN\RevTrace\experiments\input_freeze_20261027\cpu_v6\results.xml -
+=========================== short test summary info ===========================
+FAILED runtime/tests/test_dispatch_wait_integration.py::test_actual_make_job_uses_current_parent_after_finite_wait
+FAILED runtime/tests/test_dispatch_wait_real_busy.py::test_real_scheduler_releases_logical_wait_before_other_session_gpu_drains
+FAILED runtime/tests/test_dispatch_wait_real_busy.py::test_pure_pre_wait_description_matches_actual_make_job_after_rebase
+3 failed, 309 passed, 16 skipped in 13.02s

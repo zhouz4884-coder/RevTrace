@@ -1,0 +1,40 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 58 and seed -6006714575230058141 with 1 worker on 64 cores with 910MB heap and 64MB offheap memory [pid: 790017] (Linux 5.15.0-139-generic amd64, Eclipse Adoptium 17.0.17 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/formal/full_v5/wait-timing-not-guaranteed/BoundedWait.tla
+Parsing file /media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/formal/full_v5/tmp/Naturals.tla
+Semantic processing of module Naturals
+Semantic processing of module BoundedWait
+Starting... (2026-10-27 21:57:25)
+Implied-temporal checking--satisfiability problem has 1 branches.
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-10-27 21:57:25.
+Error: Invariant DeadlineAlwaysMet is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ canonical = 0
+/\ debt = 1
+/\ budget = 2
+/\ frozen = FALSE
+/\ dispatched = FALSE
+/\ clock = 0
+
+State 2: <ClockTick line 10, col 14 to line 11, col 69 of module BoundedWait>
+/\ canonical = 0
+/\ debt = 1
+/\ budget = 2
+/\ frozen = FALSE
+/\ dispatched = FALSE
+/\ clock = 1
+
+State 3: <ClockTick line 10, col 14 to line 11, col 69 of module BoundedWait>
+/\ canonical = 0
+/\ debt = 1
+/\ budget = 2
+/\ frozen = FALSE
+/\ dispatched = FALSE
+/\ clock = 2
+
+7 states generated, 6 distinct states found, 2 states left on queue.
+The depth of the complete state graph search is 3.
+The average outdegree of the complete state graph is 2 (minimum is 2, the maximum 2 and the 95th percentile is 2).
+Finished in 00s at (2026-10-27 21:57:25)

@@ -1,0 +1,69 @@
+{
+  "status": "FAILED_PINNED_INSTALL",
+  "base_unchanged": true,
+  "commands": [
+    {
+      "label": "base-freeze-before",
+      "argv": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+        "-m",
+        "pip",
+        "freeze"
+      ],
+      "returncode": 0,
+      "started_ns": 1793110235842559700,
+      "completed_ns": 1793110237364283065,
+      "stdout_sha256": "61055628805f2bd44125dd9550b825b5e9fd35228bb79949542b30b5b5ff9b29",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "create-venv",
+      "argv": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+        "-m",
+        "venv",
+        "--system-site-packages",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace_native_20261027"
+      ],
+      "returncode": 0,
+      "started_ns": 1793110237364520407,
+      "completed_ns": 1793110240397346780,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "install-pinned",
+      "argv": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace_native_20261027/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--disable-pip-version-check",
+        "--no-input",
+        "langgraph==1.0.3",
+        "langgraph-checkpoint-sqlite==3.0.0",
+        "langgraph-checkpoint==3.0.1",
+        "langchain-core==1.7.0"
+      ],
+      "returncode": 2,
+      "started_ns": 1793110240397818284,
+      "completed_ns": 1793110464659565955,
+      "stdout_sha256": "a16059fbddf2e879a201463abb23147e7dfb07371c31f6741024b532348d2eab",
+      "stderr_sha256": "b0a810e7a3707e6bd5d5dc6d27561ef060170cfa718b59ff8002855aacb9026f"
+    },
+    {
+      "label": "base-freeze-after",
+      "argv": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+        "-m",
+        "pip",
+        "freeze"
+      ],
+      "returncode": 0,
+      "started_ns": 1793110464659886287,
+      "completed_ns": 1793110465119276188,
+      "stdout_sha256": "61055628805f2bd44125dd9550b825b5e9fd35228bb79949542b30b5b5ff9b29",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

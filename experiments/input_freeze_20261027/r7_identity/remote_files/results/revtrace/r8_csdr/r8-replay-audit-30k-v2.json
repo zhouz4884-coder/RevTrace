@@ -1,0 +1,37 @@
+{
+  "caught_rows": [],
+  "claim_boundary": "random audit coins are drawn before canonical outcomes; zero caught errors is finite statistical evidence summarized by the time-uniform upper bound, not deterministic exactness",
+  "config": {
+    "alpha": 0.05,
+    "audit_probability": 0.04,
+    "concurrency": 32,
+    "delta": 0.005,
+    "device": "cuda:0",
+    "duration_seconds": 90,
+    "manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/datasets/revtrace/librispeech/whisper-w-quality.json",
+    "margin_threshold": 0.05,
+    "max_new_tokens": 96,
+    "minimum_sentinels": 1200,
+    "model": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/whisper-base.en",
+    "output": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/r8_csdr/r8-replay-audit-30k-v2.json",
+    "seed": 2026082701,
+    "sessions": 64,
+    "target_fast_commits": 30000,
+    "window_seconds": 10
+  },
+  "decision": "PASS_R8_6_AUDIT",
+  "metrics": {
+    "canonical_cache_hits": 10552,
+    "canonical_cache_misses": 552,
+    "capsule_lineage_violations": 0,
+    "caught_output_errors": 0,
+    "caught_state_errors": 0,
+    "episodes": 70,
+    "fast_commits": 30004,
+    "random_sentinels": 1204,
+    "stale_installs": 0,
+    "time_uniform_ucb": 0.002499666711105186
+  },
+  "schema_version": 1,
+  "study": "RevTrace R8 independent replay time-uniform audit"
+}

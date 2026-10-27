@@ -1,0 +1,336 @@
+{
+  "gate": "PASS_BOUNDED_RESULT_AND_SOURCE_RECOUNT",
+  "source_commit": "996430d24d110facb242b352ba69c2f42f26e69c",
+  "actual_TLC_configs": 21,
+  "positive_checks": 10,
+  "expected_counterexamples": 11,
+  "TLC": [
+    {
+      "id": "admission-safe",
+      "expected": "PASS",
+      "target": null,
+      "generated": 1179230,
+      "distinct": 175980,
+      "verified": true
+    },
+    {
+      "id": "admission-fair",
+      "expected": "PASS",
+      "target": null,
+      "generated": 1179230,
+      "distinct": 175980,
+      "verified": true
+    },
+    {
+      "id": "admission-without-GuardParent",
+      "expected": "VIOLATION",
+      "target": "Ancestry",
+      "generated": 25577,
+      "distinct": 9797,
+      "verified": true
+    },
+    {
+      "id": "admission-without-GuardEpoch",
+      "expected": "VIOLATION",
+      "target": "WriterFence",
+      "generated": 2204,
+      "distinct": 1241,
+      "verified": true
+    },
+    {
+      "id": "admission-without-GuardSource",
+      "expected": "VIOLATION",
+      "target": "SourceEligibility",
+      "generated": 500,
+      "distinct": 356,
+      "verified": true
+    },
+    {
+      "id": "admission-without-GuardContent",
+      "expected": "VIOLATION",
+      "target": "AuthorizedContent",
+      "generated": 578,
+      "distinct": 405,
+      "verified": true
+    },
+    {
+      "id": "admission-without-GuardProjection",
+      "expected": "VIOLATION",
+      "target": "TrustedProjection",
+      "generated": 586,
+      "distinct": 406,
+      "verified": true
+    },
+    {
+      "id": "admission-without-GuardComplete",
+      "expected": "VIOLATION",
+      "target": "CompleteSelection",
+      "generated": 601,
+      "distinct": 407,
+      "verified": true
+    },
+    {
+      "id": "admission-without-GuardDurability",
+      "expected": "VIOLATION",
+      "target": "VisibleDurable",
+      "generated": 149,
+      "distinct": 109,
+      "verified": true
+    },
+    {
+      "id": "admission-without-GuardDebtRecovery",
+      "expected": "VIOLATION",
+      "target": "InputDebtPreserved",
+      "generated": 49,
+      "distinct": 37,
+      "verified": true
+    },
+    {
+      "id": "selection-maximal-wrong-root",
+      "expected": "PASS",
+      "target": null,
+      "generated": 54,
+      "distinct": 25,
+      "verified": true
+    },
+    {
+      "id": "selection-maximal-incomplete",
+      "expected": "PASS",
+      "target": null,
+      "generated": 54,
+      "distinct": 25,
+      "verified": true
+    },
+    {
+      "id": "selection-maximal-wrong-session",
+      "expected": "PASS",
+      "target": null,
+      "generated": 54,
+      "distinct": 25,
+      "verified": true
+    },
+    {
+      "id": "selection-maximal-old-epoch",
+      "expected": "PASS",
+      "target": null,
+      "generated": 54,
+      "distinct": 25,
+      "verified": true
+    },
+    {
+      "id": "selection-maximal-broken-edge",
+      "expected": "PASS",
+      "target": null,
+      "generated": 54,
+      "distinct": 25,
+      "verified": true
+    },
+    {
+      "id": "selection-maximal-revoked",
+      "expected": "PASS",
+      "target": null,
+      "generated": 54,
+      "distinct": 25,
+      "verified": true
+    },
+    {
+      "id": "selection-maximal-complete",
+      "expected": "PASS",
+      "target": null,
+      "generated": 54,
+      "distinct": 25,
+      "verified": true
+    },
+    {
+      "id": "selection-latest-safe-negative",
+      "expected": "VIOLATION",
+      "target": "SelectionCompleteness",
+      "generated": 54,
+      "distinct": 25,
+      "verified": true
+    },
+    {
+      "id": "selection-unsafe-latest-negative",
+      "expected": "VIOLATION",
+      "target": "SafeChoice",
+      "generated": 54,
+      "distinct": 25,
+      "verified": true
+    },
+    {
+      "id": "wait-safe-fair",
+      "expected": "PASS",
+      "target": null,
+      "generated": 25,
+      "distinct": 16,
+      "verified": true
+    },
+    {
+      "id": "wait-timing-not-guaranteed",
+      "expected": "VIOLATION",
+      "target": "DeadlineAlwaysMet",
+      "generated": 7,
+      "distinct": 6,
+      "verified": true
+    }
+  ],
+  "TLAPS": {
+    "theorems": 10,
+    "proved_obligations": 20,
+    "backend": "SMT/Z3 via TLAPS1.5.0; no Isabelle-C flag",
+    "proof_module_sha256": "ad8e81d9d0fd59bcdf6354d9d1efea26334fda30b9b4d551b37eb1b544e68206"
+  },
+  "scope": "Independent log/source-byte recount, not a separately implemented logical proof or a GPU experiment",
+  "indexed_files": 321,
+  "indexed_bytes": 803284,
+  "excluded_scratch": [
+    {
+      "path": "pilot_v3/tlaps-ProtocolProofs/.tlacache",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v3/tmp",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v3/admission-safe/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/tlaps-ProtocolProofs/.tlacache",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/selection-unsafe-latest-negative/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/selection-maximal-revoked/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/wait-safe-fair/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/selection-maximal-old-epoch/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-without-GuardContent/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-without-GuardDebtRecovery/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-fair/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-without-GuardSource/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/tmp",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-without-GuardDurability/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-without-GuardParent/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-safe/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/wait-timing-not-guaranteed/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/selection-maximal-complete/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/selection-maximal-wrong-root/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/selection-maximal-incomplete/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/selection-latest-safe-negative/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/selection-maximal-broken-edge/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-without-GuardEpoch/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/selection-maximal-wrong-session/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-without-GuardProjection/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "full_v5/admission-without-GuardComplete/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v4/tlaps-ProtocolProofs/.tlacache",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v4/wait-safe-fair/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v4/tmp",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v4/admission-safe/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v4/selection-latest-safe-negative/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v2/tlaps-ProtocolProofs/.tlacache",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v2/tmp",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v2/admission-safe/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v1/tlaps-ProtocolProofs/.tlacache",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v1/tmp",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    },
+    {
+      "path": "pilot_v1/admission-safe/states",
+      "reason": "engine scratch/cache; scientific stdout/stderr, proofs/configs and counterexample text retained"
+    }
+  ]
+}

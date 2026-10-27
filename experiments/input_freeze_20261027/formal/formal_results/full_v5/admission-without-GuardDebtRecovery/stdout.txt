@@ -1,0 +1,114 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 63 and seed -124671142849543136 with 1 worker on 64 cores with 910MB heap and 64MB offheap memory [pid: 789517] (Linux 5.15.0-139-generic amd64, Eclipse Adoptium 17.0.17 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/formal/full_v5/admission-without-GuardDebtRecovery/AdmissionLifecycle.tla
+Parsing file /media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/formal/full_v5/tmp/Naturals.tla
+Parsing file /media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/formal/full_v5/tmp/Sequences.tla
+Parsing file /media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/formal/full_v5/tmp/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module AdmissionLifecycle
+Starting... (2026-10-27 21:57:13)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-10-27 21:57:13.
+Error: Invariant InputDebtPreserved is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ epoch = 1
+/\ durable = <<>>
+/\ visible = 0
+/\ running = TRUE
+/\ accepted = 0
+/\ restarted = FALSE
+/\ selected = (j0 :> nil @@ j1 :> nil)
+/\ frozen = (j0 :> nil @@ j1 :> nil)
+/\ receipt = nil
+/\ durableAccepted = 0
+/\ replayed = {}
+/\ offered = 0
+/\ source = 1
+/\ returned = (j0 :> nil @@ j1 :> nil)
+/\ installed = <<>>
+/\ complete = (j0 :> FALSE @@ j1 :> FALSE)
+/\ returnedP = (j0 :> nil @@ j1 :> nil)
+
+State 2: <Offer line 30, col 10 to line 32, col 104 of module AdmissionLifecycle>
+/\ epoch = 1
+/\ durable = <<>>
+/\ visible = 0
+/\ running = TRUE
+/\ accepted = 0
+/\ restarted = FALSE
+/\ selected = (j0 :> nil @@ j1 :> nil)
+/\ frozen = (j0 :> nil @@ j1 :> nil)
+/\ receipt = nil
+/\ durableAccepted = 0
+/\ replayed = {}
+/\ offered = 1
+/\ source = 1
+/\ returned = (j0 :> nil @@ j1 :> nil)
+/\ installed = <<>>
+/\ complete = (j0 :> FALSE @@ j1 :> FALSE)
+/\ returnedP = (j0 :> nil @@ j1 :> nil)
+
+State 3: <Accept line 33, col 11 to line 36, col 86 of module AdmissionLifecycle>
+/\ epoch = 1
+/\ durable = <<>>
+/\ visible = 0
+/\ running = TRUE
+/\ accepted = 1
+/\ restarted = FALSE
+/\ selected = (j0 :> nil @@ j1 :> nil)
+/\ frozen = (j0 :> nil @@ j1 :> nil)
+/\ receipt = nil
+/\ durableAccepted = 1
+/\ replayed = {}
+/\ offered = 1
+/\ source = 1
+/\ returned = (j0 :> nil @@ j1 :> nil)
+/\ installed = <<>>
+/\ complete = (j0 :> FALSE @@ j1 :> FALSE)
+/\ returnedP = (j0 :> nil @@ j1 :> nil)
+
+State 4: <Crash line 108, col 10 to line 111, col 49 of module AdmissionLifecycle>
+/\ epoch = 2
+/\ durable = <<>>
+/\ visible = 0
+/\ running = FALSE
+/\ accepted = 0
+/\ restarted = TRUE
+/\ selected = (j0 :> nil @@ j1 :> nil)
+/\ frozen = (j0 :> nil @@ j1 :> nil)
+/\ receipt = nil
+/\ durableAccepted = 1
+/\ replayed = {}
+/\ offered = 1
+/\ source = 1
+/\ returned = (j0 :> nil @@ j1 :> nil)
+/\ installed = <<>>
+/\ complete = (j0 :> FALSE @@ j1 :> FALSE)
+/\ returnedP = (j0 :> nil @@ j1 :> nil)
+
+State 5: <Recover line 112, col 12 to line 115, col 79 of module AdmissionLifecycle>
+/\ epoch = 2
+/\ durable = <<>>
+/\ visible = 0
+/\ running = TRUE
+/\ accepted = 0
+/\ restarted = TRUE
+/\ selected = (j0 :> nil @@ j1 :> nil)
+/\ frozen = (j0 :> nil @@ j1 :> nil)
+/\ receipt = nil
+/\ durableAccepted = 1
+/\ replayed = {}
+/\ offered = 1
+/\ source = 1
+/\ returned = (j0 :> nil @@ j1 :> nil)
+/\ installed = <<>>
+/\ complete = (j0 :> FALSE @@ j1 :> FALSE)
+/\ returnedP = (j0 :> nil @@ j1 :> nil)
+
+49 states generated, 37 distinct states found, 20 states left on queue.
+The depth of the complete state graph search is 5.
+The average outdegree of the complete state graph is 2 (minimum is 0, the maximum 6 and the 95th percentile is 6).
+Finished in 00s at (2026-10-27 21:57:13)

@@ -1,5 +1,11 @@
 # RevTrace
 
+## Latest research evidence — 2026-10-27
+
+The current research record is [the complete attempted-experiment checkpoint](experiments/input_freeze_20261027/README.md), including all seven frozen source versions, failures, twelve complete new GPU serving cells, raw Worker/Consumer/WAL records, native CPU lifecycle tests, formal tools and counterexamples, and the new R7/R8/R9 audit. The study remains in progress. The latest source passes 328 Linux CPU tests; its new GPU comparisons have not yet run. No new scheduling superiority is established by this checkpoint.
+
+For earlier phases and their different execution contracts, use the [global evidence map](experiments/input_freeze_20261027/analysis/GLOBAL_EVIDENCE_MAP.zh.md). Source checkout and full execution-commit rules are documented in [repository identity](experiments/repository_identity_20261027/README.md) and AGENTS.md. Historical speedups below retain their original precision, reference path and timing definitions.
+
 State-certified and risk-limited serving for revision-generative models.
 
 RevTrace studies a systems problem that ordinary LLM batching metrics miss:
@@ -7,14 +13,17 @@ low-precision batching can change a generated revision, and a revision model
 feeds that result back into its future state. A locally small numerical flip can
 therefore become a persistent trajectory change.
 
-The current R7 development branch adds **Elastic Feedback-State Coherence**:
+The historical R7 development branch added **Elastic Feedback-State Coherence**:
 one shared controller can withhold, decay, or reset future feedback authority
 without blocking on singleton execution. Qwen rollback state and Whisper
 previous-text state are represented by separate projection adapters, while the
-action controller is shared. The deterministic R7.1 semantic gate passes; R7
-GPU performance, formal risk, and quality gates remain unexecuted and are not
-paper results yet. See
-[the R7 protocol](docs/reports/phase_r7_efsc_protocol.md).
+action controller is shared. R7 GPU performance and quality were subsequently
+executed: performance passed but the Whisper quality-tail gate failed. Later
+R8/R9 work must be consulted before treating this as a current unresolved
+exact-runtime defect. See [the R7 closure](docs/reports/phase_r7_efsc_closure.md),
+[R9.E closure](docs/reports/r9e_online_submission_closure.md), and the latest
+research checkpoint above. The original [R7 protocol](docs/reports/phase_r7_efsc_protocol.md)
+remains the historical contract, not a current launch authorization.
 
 The core execution contract is:
 
@@ -22,7 +31,7 @@ The core execution contract is:
 > matches the committed version and its state-entry evidence satisfies the
 > selected certification mode.
 
-## Current paper-facing result
+## Historical Phase 3A paper-facing result
 
 The Phase 3A Qwen3-ASR deployment uses an FP16 batched proposer, an FP16
 singleton verifier for risky intermediate revisions, a fixed-shape terminal

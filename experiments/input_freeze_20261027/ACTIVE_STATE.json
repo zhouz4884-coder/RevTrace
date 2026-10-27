@@ -1,0 +1,102 @@
+{
+  "experiment_id": "REVTRACE-FREEZE-BOUNDARY-20261027",
+  "status": "SOURCE_V7_READY_ALL_ATTEMPTS_SYNC_CHECKPOINT",
+  "current_frozen_source": "e1511deb6766ce68084128436907b8e2b8e3d417",
+  "current_source_manifest": "SOURCE_v7.json",
+  "source_preflight_command": "python experiments/repository_identity_20261027/preflight.py --manifest experiments/input_freeze_20261027/SOURCE_v7.json",
+  "CPU_gate": {
+    "Windows_passed": 312,
+    "Windows_native_dependency_skipped": 16,
+    "Linux_passed": 328,
+    "Linux_subtests": 5,
+    "Linux_skipped": 0,
+    "GPU_calls": 0,
+    "actual_native_LangGraph_CPU_tests": 16
+  },
+  "failed_development_versions": [
+    {
+      "source": "c34e09ef8b60b4483cd791570998c0c816d8504f",
+      "record": "cpu_v1/GATE.json",
+      "cause": "pytest inherited legacy root pythonpath; 13 collection errors; fixed by explicit isolated pytest.ini, no GPU launched"
+    },
+    {
+      "source": "b466a7b79a9899cfdc144423e0de5d90e6d940af",
+      "record": "cpu_v5/GATE.json",
+      "cause": "new recovery test imported an unqualified temp-module path; collection failed, no GPU"
+    },
+    {
+      "source": "326623099623f6fe7585e262b1b19cbb31e18b87",
+      "record": "cpu_v6/GATE.json",
+      "cause": "three old millisecond timing fixtures no longer activate waits with production-scale cold ETA fallback; 309 passed/3failed/16dependency skips; fixed fixture scale and explicit fixed-wait safety test in v7, no GPU"
+    }
+  ],
+  "objective_file": "C:/Users/LENOVO/.codex/attachments/0be9347d-16dd-4405-9059-688c391d7d74/goal-objective.md",
+  "archive_baseline": "84c41fca5b2576d121e67b9273b2b72ea2b53b7c",
+  "source_baseline": "7c176556592c2a4fad436056b8b96be52cac9ea4",
+  "development_source": "D:/VLA_QWEN/RevTrace/.execution/lp1_runtime",
+  "development_branch": "codex/freeze-boundary-20261027",
+  "remote_project": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_freeze_boundary_20261027",
+  "remote_results": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027",
+  "gpu_stages_started": [
+    {
+      "stage": "pilot_c4_sync_r0_raw",
+      "status": "COMPLETE",
+      "cells": 6,
+      "worker_and_controller_exit_verified": true,
+      "conclusion": "feasibility only; same outputs, no measured control benefit"
+    },
+    {
+      "stage": "dev_v3_c16_staggered_r0_revtrace_raw_slack_b075",
+      "status": "COMPLETE",
+      "cells": 6,
+      "worker_and_controller_exit_verified": true,
+      "conclusion": "all whole-run D2/C8 P99 failed; state-aware advantage not established; independent raw diagnosis ongoing"
+    }
+  ],
+  "workpackages": {
+    "identity_and_full_evidence_map": "28_OF_30_FULL_SOURCE_OBJECTS_RESOLVE_TWO_RETAINED_UNKNOWN",
+    "bounded_wait_and_six_baselines": "V7_CONDITIONAL_ETA_AND_PRIOR_BANK_READY_OLD12_GPU_CELLS_RETAINED_NEW_GPU_NOT_STARTED",
+    "same_input_paid_mechanism_diagnostics": "NOT_STARTED",
+    "development_and_independent_GPU_confirmation": "NOT_STARTED",
+    "trusted_recovery_profile_and_repair": "V7_OWNED_LOGICAL_FAULT_FOUR_ARM_CONTROLLER_CPU_PASS_TRUE_RTO_COMPARISON_NOT_STARTED",
+    "native_two_family_multicycle_GPU": "V7_PROVIDER_CONTROLLER_AND_CHECKER_LINUX_CPU_PASS_ACTUAL_GPU_NOT_STARTED",
+    "TLC_parameterized_obligations_and_independent_checker": "21_TLC_CUTS_MATCHED_20_TLAPS_OBLIGATIONS_PROVED_BOUNDED_SCOPE_INDEPENDENT_SEMANTIC_REVIEW_COMPLETE",
+    "contribution_matrix_literature_and_paper_claims": "NOT_STARTED",
+    "R7_R8_trusted_context_recovery": "128_SESSION_INPUTS_RECONSTRUCTED_1645_AUDIO_HASHES_MATCH_HISTORICAL_EXECUTION_IDENTITY_UNKNOWN_R9_SUCCESSOR_CONTRACT_AUDIT_IN_PROGRESS"
+  },
+  "paper_changes_allowed_after": "implementation, diagnosis, repairs, real reruns, independent validation and evidence audit",
+  "completion": false,
+  "formal_result": {
+    "source": "996430d24d110facb242b352ba69c2f42f26e69c",
+    "local_package": "formal/",
+    "manifest_sha256": "b941ae8c6791aa7609d0220e5ef716cd5b5a1f3d5323706211f444eb2b792f11",
+    "scope": "no full Python/CUDA refinement, no D1 renderer proof, no unconditional deadline or completion theorem"
+  },
+  "user_goal_amendments": [
+    {
+      "file": "GOAL_AMENDMENT_R7_DISPATCH_20261027.md",
+      "source_attachment_sha256": "9524a84290983dead1867c5f1d0197e79992089f073be3ea51ad1637cf0356da",
+      "mode": "ADDITIVE_NOT_REPLACEMENT",
+      "new_priority": "R7_R8_CONTEXT_RECOVERY_OPPORTUNITY",
+      "success_alternative": "INDEPENDENT_FEEDBACK_DISPATCH_BEYOND_SIMPLE_STRONG_BASELINES",
+      "status": "SOURCE_AND_FAILURE_AUDIT_STARTED_NOT_SOLVED"
+    }
+  ],
+  "native_CPU_gate": {
+    "source": "8a875f66af0168c1f34438f156b877d9fe2a5a41",
+    "Linux_total": 275,
+    "Linux_skipped": 0,
+    "actual_LangGraph_CPU_cases": 16,
+    "GPU_calls": 0
+  },
+  "publication_checkpoint": {
+    "scope": "all attempted frozen versions, retained failures, 12 full GPU cells, formal tool/failure/evidence and native CPU/R7 input reconstructions",
+    "source_archive_baseline": "84c41fca5b2576d121e67b9273b2b72ea2b53b7c",
+    "new_results_not_yet_completed": [
+      "v7 wait GPU",
+      "new cold recovery GPU",
+      "native multi-cycle GPU",
+      "R7 exact-contract migration"
+    ]
+  }
+}

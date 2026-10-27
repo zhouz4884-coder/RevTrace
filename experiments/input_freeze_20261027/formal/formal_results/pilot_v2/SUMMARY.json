@@ -1,0 +1,37 @@
+{
+  "status": "INCOMPLETE_OR_FAILED",
+  "source_commit": "3b954d3892e00f150189b23147aac637bd0ff519",
+  "stage": "pilot",
+  "TLC": [
+    {
+      "label": "admission-safe",
+      "exit_code": 150,
+      "timed_out": false,
+      "elapsed_seconds": 0.471164608374238,
+      "stdout_sha256": "73832d1cc025243848d6682aa28080478eef64b8d331c09d16c044a389e3f728",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "admission-safe",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-safe.cfg",
+      "expected": "PASS",
+      "target": null,
+      "matched_expected": false
+    }
+  ],
+  "TLAPS": [
+    {
+      "label": "ProtocolProofs.tla",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.1768876621499658,
+      "stdout_sha256": "7cbf906ed63d89a44f3868db356726669ea83279f6f541ce41791d17bdabac4f",
+      "stderr_sha256": "3615a2b017a673ccac1ca19ce151580db6a21e9cd0b797a2871159772551a534",
+      "proved_obligations": [
+        0,
+        20
+      ],
+      "matched_expected": true
+    }
+  ],
+  "scope": "Proof checks are only of the named frozen TLA modules"
+}

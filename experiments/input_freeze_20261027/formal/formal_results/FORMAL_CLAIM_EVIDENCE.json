@@ -1,0 +1,70 @@
+{
+  "source_commit": "996430d24d110facb242b352ba69c2f42f26e69c",
+  "scope": "Actual finite TLC checks plus separately parameterized TLAPS lemmas; no GPU or production refinement",
+  "rows": [
+    {
+      "property": "Authorized contiguous unique history",
+      "required_information": "Current parent version and projection, contiguous interval, trusted selected Z, actual Phi, complete declared selection evidence, current write epoch/source, fresh transaction identity",
+      "parameterized_evidence": "GuardedAppendPreservesHistory and AppendFrame",
+      "bounded_evidence": "full_v5/admission-safe and eight named guard-removal configurations",
+      "checked_scope": "Arbitrary finite indexed history append lemma; concrete TLC two jobs/two audio units/one crash",
+      "not_proved": "Neural truth, universal FP32 equivalence, arbitrary host or GPU attestation, full runtime refinement"
+    },
+    {
+      "property": "Historical receipt survives owner rotation without new write authority",
+      "required_information": "Immutable operation identity, unique durable original record, separate current writer epoch",
+      "parameterized_evidence": "HistoricalReceiptReturnsUniqueOriginal, OldWriterCannotAppend, RecoveredPrefixPreservesOriginalFields",
+      "bounded_evidence": "admission-safe, admission-without-GuardEpoch; pilot_v3 terminal trace also shows epoch2 retrieving owner1 durable receipt",
+      "checked_scope": "Receipt is the exact original history record; old owner cannot append under a new writer epoch",
+      "not_proved": "A historical receipt alone authorizes a new current-source input, remote exactly-once delivery"
+    },
+    {
+      "property": "Accepted input debt is preserved separately from certified state",
+      "required_information": "Persistent acknowledged input frontier and actual durable Canonical frontier",
+      "parameterized_evidence": "Wait frame preserves input state; no independent TLAPS proof of the whole input ledger implementation",
+      "bounded_evidence": "InputDebtPreserved and InputCoverage in admission-safe; GuardDebtRecovery omission counterexample",
+      "checked_scope": "One abstract input prefix with two units, successful atomic persistence and one crash",
+      "not_proved": "All accepted work eventually completes, waveform broker durability, infinite-stream memory bounds"
+    },
+    {
+      "property": "Safe candidate choice differs from complete legal progress",
+      "required_information": "Received registered authorized complete nodes, session/epoch, actual root P/frontier and complete predecessor chain",
+      "parameterized_evidence": "EmptyScan and MaximumLegalScanStep",
+      "bounded_evidence": "Seven selection-maximal scenarios; latest-safe completeness counterexample and unsafe-latest safety counterexample",
+      "checked_scope": "Three explicit immutable nodes and paths of length at most3; fixed-snapshot generic scan lemma",
+      "not_proved": "Completeness over unobserved future candidates, arbitrary inferred ambiguous graphs, new indexing novelty"
+    },
+    {
+      "property": "Waiting does not grant Canonical authority",
+      "required_information": "Positive finite wait budget and unchanged Canonical/durable/input state at the wait action",
+      "parameterized_evidence": "BoundedWaitPreservesTrustedStateAndDecreasesBudget",
+      "bounded_evidence": "wait-safe-fair",
+      "checked_scope": "Local wait step and decreasing natural variant; fairness-dependent dispatch in bounded model",
+      "not_proved": "Actual waiting performance benefit, a fixed wall-clock bound, full concurrent scheduler refinement"
+    },
+    {
+      "property": "Fair recovery and already-durable visibility",
+      "required_information": "Persistent selected history, intact storage, eventual fair Recover/Install/Publish actions",
+      "parameterized_evidence": "Safe reconstructed history lemma; temporal result is bounded TLC only",
+      "bounded_evidence": "admission-fair verifies RecoveryProgress and DurableVisibility on175980 states",
+      "checked_scope": "At most one crash and finite durable history",
+      "not_proved": "Unbounded liveness, no-failure-deadline guarantee, deadlock freedom, all-input completion"
+    },
+    {
+      "property": "A deadline does not follow from finite waiting plus fairness",
+      "required_information": "Separate real-clock progress from scheduling-step fairness",
+      "parameterized_evidence": "No positive deadline theorem is claimed",
+      "bounded_evidence": "wait-timing-not-guaranteed violates DeadlineAlwaysMet",
+      "checked_scope": "Explicit allowed schedule with budget2, deadline1, clock bound3",
+      "not_proved": "Probability of deadline miss or performance of a GPU service"
+    },
+    {
+      "property": "Trusted rendering and complete termination remain external execution obligations",
+      "required_information": "Actual tokenizer/parser/assets and declared EOS/stop/budget contract",
+      "parameterized_evidence": "EntryOK binds Z/P only; no theorem for text-render implementation",
+      "bounded_evidence": "CompleteSelection omission shows missing selection evidence; runtime D1 tests and actual CPU/GPU records remain separate",
+      "checked_scope": "Model complete flag means the declared selection proof is complete",
+      "not_proved": "All capped ASR outputs are illegal, certified transcript is factually true or complete"
+    }
+  ]
+}

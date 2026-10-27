@@ -1,0 +1,98 @@
+[
+  {
+    "label": "download-wheels",
+    "argv": [
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace_native_20261027/bin/python",
+      "-m",
+      "pip",
+      "download",
+      "--disable-pip-version-check",
+      "--only-binary=:all:",
+      "--no-input",
+      "--timeout",
+      "25",
+      "--retries",
+      "1",
+      "--dest",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/cache/pip/native_wheelhouse_20261027",
+      "langgraph==1.0.3",
+      "langgraph-checkpoint-sqlite==3.0.0",
+      "langgraph-checkpoint==3.0.1",
+      "langchain-core==1.7.0"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "started_ns": 1793111400845126337,
+    "completed_ns": 1793111442366432572,
+    "stdout_sha256": "6cc8f1d0b95899eedf89ed818a02df57dc2b900f61be3bcabb23a4659ec1a81a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "offline-install",
+    "argv": [
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace_native_20261027/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "--disable-pip-version-check",
+      "--no-input",
+      "--no-index",
+      "--find-links",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/cache/pip/native_wheelhouse_20261027",
+      "langgraph==1.0.3",
+      "langgraph-checkpoint-sqlite==3.0.0",
+      "langgraph-checkpoint==3.0.1",
+      "langchain-core==1.7.0"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "started_ns": 1793111528606351225,
+    "completed_ns": 1793111533485056516,
+    "stdout_sha256": "b557ecdd9c0c26a8e5e5054b750972962311220ccadb307713b7bb8bda20fc42",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "native-import-smoke",
+    "argv": [
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace_native_20261027/bin/python",
+      "-c",
+      "import importlib.metadata as m,json,sys\nfrom langgraph.func import entrypoint,task\nfrom langgraph.types import Command,interrupt\nfrom langgraph.checkpoint.sqlite import SqliteSaver\nprint(json.dumps(dict(prefix=sys.prefix,packages={n:m.version(n) for n in ['langgraph','langgraph-checkpoint-sqlite','langgraph-checkpoint','langchain-core']},native_imports='PASS')))\n"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "started_ns": 1793111533485827312,
+    "completed_ns": 1793111534704554668,
+    "stdout_sha256": "94ccdca3e7b9dfa540899cb63b78c7af1f66c413bf02f5ca30bdca0653190c7d",
+    "stderr_sha256": "3dc6ed375cff712c88f288704200f745b8cbb28e3abeba5d95aa4c801a8c0258"
+  },
+  {
+    "label": "base-freeze-after",
+    "argv": [
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+      "-m",
+      "pip",
+      "freeze"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "started_ns": 1793111534705643707,
+    "completed_ns": 1793111535422763081,
+    "stdout_sha256": "61055628805f2bd44125dd9550b825b5e9fd35228bb79949542b30b5b5ff9b29",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "new-env-freeze",
+    "argv": [
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace_native_20261027/bin/python",
+      "-m",
+      "pip",
+      "freeze"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "started_ns": 1793111535423625748,
+    "completed_ns": 1793111536040729521,
+    "stdout_sha256": "ca09525548039e950363ab7629de85d68aa9236adb4da67dff2df2634bc9c7a8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

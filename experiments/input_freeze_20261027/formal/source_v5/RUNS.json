@@ -1,0 +1,156 @@
+{
+  "schema": "revtrace-formal-cuts-v1",
+  "runs": [
+    {
+      "id": "admission-safe",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-safe.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "admission-fair",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-fair.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "admission-without-GuardParent",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-without-GuardParent.cfg",
+      "expected": "VIOLATION",
+      "target": "Ancestry"
+    },
+    {
+      "id": "admission-without-GuardEpoch",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-without-GuardEpoch.cfg",
+      "expected": "VIOLATION",
+      "target": "WriterFence"
+    },
+    {
+      "id": "admission-without-GuardSource",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-without-GuardSource.cfg",
+      "expected": "VIOLATION",
+      "target": "SourceEligibility"
+    },
+    {
+      "id": "admission-without-GuardContent",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-without-GuardContent.cfg",
+      "expected": "VIOLATION",
+      "target": "AuthorizedContent"
+    },
+    {
+      "id": "admission-without-GuardProjection",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-without-GuardProjection.cfg",
+      "expected": "VIOLATION",
+      "target": "TrustedProjection"
+    },
+    {
+      "id": "admission-without-GuardComplete",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-without-GuardComplete.cfg",
+      "expected": "VIOLATION",
+      "target": "CompleteSelection"
+    },
+    {
+      "id": "admission-without-GuardDurability",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-without-GuardDurability.cfg",
+      "expected": "VIOLATION",
+      "target": "VisibleDurable"
+    },
+    {
+      "id": "admission-without-GuardDebtRecovery",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-without-GuardDebtRecovery.cfg",
+      "expected": "VIOLATION",
+      "target": "InputDebtPreserved"
+    },
+    {
+      "id": "selection-maximal-wrong-root",
+      "module": "LegalSelection.tla",
+      "config": "selection-maximal-wrong-root.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "selection-maximal-incomplete",
+      "module": "LegalSelection.tla",
+      "config": "selection-maximal-incomplete.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "selection-maximal-wrong-session",
+      "module": "LegalSelection.tla",
+      "config": "selection-maximal-wrong-session.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "selection-maximal-old-epoch",
+      "module": "LegalSelection.tla",
+      "config": "selection-maximal-old-epoch.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "selection-maximal-broken-edge",
+      "module": "LegalSelection.tla",
+      "config": "selection-maximal-broken-edge.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "selection-maximal-revoked",
+      "module": "LegalSelection.tla",
+      "config": "selection-maximal-revoked.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "selection-maximal-complete",
+      "module": "LegalSelection.tla",
+      "config": "selection-maximal-complete.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "selection-latest-safe-negative",
+      "module": "LegalSelection.tla",
+      "config": "selection-latest-safe-negative.cfg",
+      "expected": "VIOLATION",
+      "target": "SelectionCompleteness"
+    },
+    {
+      "id": "selection-unsafe-latest-negative",
+      "module": "LegalSelection.tla",
+      "config": "selection-unsafe-latest-negative.cfg",
+      "expected": "VIOLATION",
+      "target": "SafeChoice"
+    },
+    {
+      "id": "wait-safe-fair",
+      "module": "BoundedWait.tla",
+      "config": "wait-safe-fair.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "wait-timing-not-guaranteed",
+      "module": "BoundedWait.tla",
+      "config": "wait-timing-not-guaranteed.cfg",
+      "expected": "VIOLATION",
+      "target": "DeadlineAlwaysMet"
+    }
+  ],
+  "proof_modules": [
+    "ProtocolProofs.tla"
+  ],
+  "scope": "Finite TLC cuts and separate parameterized TLAPS lemmas; not complete Python/CUDA/OS refinement"
+}

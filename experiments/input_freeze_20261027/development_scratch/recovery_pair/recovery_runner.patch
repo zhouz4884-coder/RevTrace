@@ -1,0 +1,49 @@
+--- a/runtime/scripts/run_tc_live_qwen.py
++++ b/runtime/scripts/run_tc_live_qwen.py
+@@ -21,6 +21,7 @@
+ from tc_live_worker import GPUExecutor
+ from run_v100_matrix import PowerSampler
+ from revtrace.recovery_profile import RecoveryProfile,recovery_processor
++from revtrace.recovery_fault import parse_post_sync_target,target_in_synced_group
+ from revtrace.startup_overlap import (verify_prefrozen_renderer,load_native_qwen_context,
+     require_loaded_renderer_match,bootstrap_renderer_and_workers)
+ _RUNTIME_IMPORT_END=time.perf_counter()
+@@ -108,6 +109,7 @@
+     p.add_argument('--model-adapter',choices=['qwen','whisper'],default='qwen')
+     p.add_argument('--boundary-probe',choices=['clean','coherent'])
+     p.add_argument('--pause-post-sync-at',type=float,default=0.)
++    p.add_argument('--pause-post-sync-target',help='fault-harness session:sample_frontier, after real WAL sync before owner install')
+     p.add_argument('--envelope-config',type=Path)
+     p.add_argument('--arrival-schedule',type=Path)
+     p.add_argument('--episode-context',type=Path)
+@@ -122,6 +124,11 @@
+     p.add_argument("--crash-after-commits",type=int,default=0,
+         help="fault harness only: pause after writing an ACK marker; parent driver must SIGKILL the owned process group")
+     a=p.parse_args()
++    logical_fault_target=parse_post_sync_target(a.pause_post_sync_target)
++    if logical_fault_target is not None and a.pause_post_sync_at:
++        raise ValueError('select exactly one logical or time-based post-sync fault')
++    if logical_fault_target is not None and (not a.envelope_config or not a.protocol_kernel):
++        raise ValueError('logical post-sync fault requires the complete kernel/envelope run')
+     early_recovery=(a.recovery_readiness=='early' and a.episode_context is not None
+         and a.episode_context.exists())
+     envelope=json.loads(a.envelope_config.read_text()) if a.envelope_config else None
+@@ -505,12 +512,16 @@
+             _recovered={sid:s.state.audio_frontier_window for sid,s in scheduler.sessions.items()}
+             _accepted={sid:scheduler.book.session(sid).accepted for sid in scheduler.sessions} if envelope else dict(_recovered)
+             startup_profile.configure_recovery(recovered_frontiers=_recovered,accepted_frontiers=_accepted,owner_incarnation=scheduler.t0,original_origin_perf=scheduler.origin if envelope else scheduler.t0)
+-            if a.pause_post_sync_at and not early_recovery and scheduler.owner_epoch==1:
++            if (a.pause_post_sync_at or logical_fault_target is not None) and not early_recovery and scheduler.owner_epoch==1:
+                 actual_sync=scheduler._journal.commit_transitions
+                 def sync_then_pause(transitions):
+                     receipts=actual_sync(transitions)
+-                    if time.perf_counter()>=scheduler.origin+a.pause_post_sync_at:
++                    should_pause=(target_in_synced_group(transitions,logical_fault_target) if logical_fault_target is not None
++                        else time.perf_counter()>=scheduler.origin+a.pause_post_sync_at)
++                    if should_pause:
+                         save(a.output/'POST_SYNC_KILL_READY.json',dict(observed_perf=time.perf_counter(),
++                            logical_target=a.pause_post_sync_target,
++                            durable_sequences=[int(r[0]) for r in receipts],
+                             transactions=[t['transaction_id'] for t in transitions],
+                             durable_frontiers={str(s.session_id):s.audio_frontier_window for s in scheduler._journal.states()},
+                             point='actual fsync complete, owner installation/publication not yet executed'))

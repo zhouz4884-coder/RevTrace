@@ -1,0 +1,36 @@
+{
+  "experiment_id": "REVTRACE-FORMAL-20261027-pilot",
+  "source_commit": "210b373f9bc287ae71cf163fd97dcb8b1a95f879",
+  "source_manifest_sha256": "dbe7ca2b3d88f4820f554330472e3046abf636efab3d74abe8b3abbff9a0cf23",
+  "environment_sha256": "8a655f0bbb4054f4ee829b734ca932158512926733c595152e17ba061c9064ed",
+  "runs": [
+    {
+      "id": "admission-safe",
+      "module": "AdmissionLifecycle.tla",
+      "config": "admission-safe.cfg",
+      "expected": "PASS",
+      "target": null
+    },
+    {
+      "id": "selection-latest-safe-negative",
+      "module": "LegalSelection.tla",
+      "config": "selection-latest-safe-negative.cfg",
+      "expected": "VIOLATION",
+      "target": "SelectionCompleteness"
+    },
+    {
+      "id": "wait-safe-fair",
+      "module": "BoundedWait.tla",
+      "config": "wait-safe-fair.cfg",
+      "expected": "PASS",
+      "target": null
+    }
+  ],
+  "proof_modules": [
+    "ProtocolProofs.tla"
+  ],
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/formal/pilot_v3",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/formal/pilot_v3/SUMMARY.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/formal/pilot_v3/GATE.json",
+  "scope": "Actual TLC finite checks and separate parameterized TLAPS obligations; no GPU or production refinement"
+}

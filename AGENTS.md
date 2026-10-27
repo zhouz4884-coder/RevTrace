@@ -16,3 +16,23 @@
    are distinct evidence tiers and must never be merged.
 8. In exact mode, deadline pressure must never authorize an uncertified state
    commit.
+
+## Local source-identity launch gate
+
+- Preserve the legacy dirty checkout; do not treat its HEAD as the source of a
+  different frozen experiment. Do not pull/reset it to make provenance appear
+  current. The local checkout map and verified source refs are recorded in
+  `experiments/repository_identity_20261027/SETUP.json`.
+- Distinguish the GitHub evidence-archive commit from each actual execution
+  source commit. Archived bundles must be verified and imported so that the
+  full execution commit resolves locally; an archive's HEAD is not a substitute.
+- Before any new run, require a clean source checkout, a byte-matched complete
+  source manifest, and the full resolvable source commit. Run
+  `python experiments/repository_identity_20261027/preflight.py` from this root
+  for the current frozen source. A changed source must be committed and frozen
+  again, not relabelled with the old commit or manifest.
+- Rule 2 remains mandatory. Before launch, record the experiment ID, frozen
+  config and environment hashes, actual source commit, designated raw-result
+  path, and intended summary/decision paths. After completion, fill those paths
+  with real results and a gate decision. Passing source identity alone is not
+  a completed experiment, an environment validation, or GPU evidence.
