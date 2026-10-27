@@ -1,5 +1,10 @@
 # RevTrace
 
+## Trusted-render dependency completion — 2026-10-28
+
+[Real cold recovery result](experiments/trusted_render_dependency_20261028/RECOVERY_RESULTS.md) and [CPU conformance](experiments/trusted_render_dependency_20261028/CPU_RESULTS.md):268own-input observations,151705vocabulary IDs,4096random controls and7negative loader tests; four new explicitly shared-contract cold arms reduce old-fact visibility from~15.6s to~2.5s. First-new-fact and debt clocks do not improve in these single trials. Full Standard receives the same change. No cached transcript shortcut, old-WAL reinterpretation, new scheduling win or paper edit. Failed orchestration/code revisions and raw hashes are retained. Wider-goal integration remains active.
+
+
 ## Bounded phase terminal results — 2026-10-28
 
 [Complete research report](experiments/context_recovery_20261028/updates/20261028_bounded_terminal/FINAL_BOUNDED_REPORT.zh.md): R7/R8/R9 audit,48unused holdout sessions,512paid context calls, four real cold-recovery arms, native two-family model lifecycles, opposite input-cost effects and the repaired six-policy service check. New context/scheduling matrix gates are NO-GO; zero state-aware wait actions explain why a small Goodput point difference is not algorithm evidence. All model/checker failures remain. The bounded GPU queue is closed; no paper text was modified and no acceptance or topic-exhaustion claim is made.

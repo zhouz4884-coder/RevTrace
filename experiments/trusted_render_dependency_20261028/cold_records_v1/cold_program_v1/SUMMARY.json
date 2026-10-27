@@ -1,0 +1,740 @@
+{
+  "status": "COMPLETE_DEVELOPMENT_RECOVERY_PILOT",
+  "expected": 4,
+  "completed": [
+    "00-dgft_original-descriptor_workers_first-native-r0",
+    "01-dgft_original-descriptor_workers_first-light-r0",
+    "02-standard_fair-descriptor_workers_first-native-r0",
+    "03-standard_fair-descriptor_workers_first-light-r0"
+  ],
+  "rows": [
+    {
+      "cell": {
+        "method": "dgft_original",
+        "restart_startup_order": "descriptor_workers_first",
+        "repeat": 0,
+        "prefix_startup_order": "full_first",
+        "processor_mode": "reuse",
+        "prefix_owner_render_backend": "native",
+        "restart_owner_render_backend": "native"
+      },
+      "service": {
+        "episode": "00-dgft_original-descriptor_workers_first-native-r0",
+        "method": "dgft_original",
+        "status": "PASS_RECORDED_PREFIX_INPUT_CANONICAL_ACTUAL_VIEW_RECOVERY",
+        "unauthorized_admissions": 0,
+        "stale_as_fresh": 0,
+        "root_incompatible_views": 0,
+        "false_certified_mode_views": 0,
+        "logical_enqueued_without_physical_submission": [],
+        "original_deadlines_retained": true,
+        "server_input_ACKs": 28,
+        "prekill_ACKs": 26,
+        "acknowledged_input_loss_samples": 0,
+        "offered_frontiers": 34,
+        "certified_coverage": 1.0,
+        "paid_submitted_batches": 25,
+        "drained_batches": 24,
+        "actual_completed_rows": 53,
+        "abandoned_or_no_receipt_rows": 1,
+        "prekill_durable_commits": 5,
+        "total_unique_commits": 14,
+        "original_episode_wall_seconds": 38.21595930494368,
+        "resource_lifecycle_seconds_from_origin": 43.83678827434778,
+        "post_serving_log_and_process_teardown_seconds": 5.620828969404101,
+        "kill_to_all_previous_certified_consumed_seconds": 15.59231853671372,
+        "restart_process_launch_to_all_previous_certified_consumed_seconds": 14.84350460022688,
+        "canonical_journal_recovery_seconds": 0.029112000949680805,
+        "GPU_J_per_offered_audio_second": 130.42180390993252,
+        "GPU_joules_including_killed_work_and_reload": 8050.2858463405855,
+        "power_coverage": {
+          "0": 1.0,
+          "1": 1.0
+        },
+        "all_offered_audio_goodput_2_8": 0.6280098795503825,
+        "display_P50": 1.375520178116858,
+        "display_P95": 21.723529458092525,
+        "display_P99": 22.74484483559616,
+        "commit_P50": 19.66445068269968,
+        "commit_P95": 26.444747918797656,
+        "commit_P99": 26.59694234665483,
+        "whole_run_dual_P99_pass": false,
+        "WER_errors": 10,
+        "WER_reference_words": 165,
+        "all_offered_WER_percent": 6.0606060606060606,
+        "English_CER_percent": 1.8472906403940887,
+        "accepted_debt_peak_audio_seconds": 31.725,
+        "reserved_debt_peak_audio_seconds": 42.0,
+        "prekill_partial_input_tail_bytes": 0,
+        "prekill_partial_canonical_tail_bytes": 0,
+        "partial_diagnostic_tail_bytes": 0,
+        "scope": "frozen same-input development paired process-group cold restart; no power-loss, arbitrary-network, natural-rate or speedup claim"
+      },
+      "recovery": {
+        "RTO_old_all_durable_facts": 15.59231853671372,
+        "RTO_new_first_certified_fact": 19.714110368862748,
+        "RTO_precrash_accepted_debt": 21.68771404772997,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 15.588518185541034,
+          "1": 15.589966917410493,
+          "2": 15.59128250926733,
+          "3": 15.59231853671372
+        },
+        "debt_clear_per_session": {
+          "0": 19.714110368862748,
+          "1": 20.66414140164852,
+          "2": 21.68771404772997,
+          "3": 20.93352960702032
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "restart_cost": {
+        "input_fsync_calls": 1,
+        "input_fsync_seconds": 0.019298266619443893,
+        "consumer_cpu_seconds": 0.06433901999999983,
+        "input_journal_bytes": 38386,
+        "canonical_journal_bytes": 46254,
+        "startup_profile": {
+          "schema": "trusted-recovery-profile-v1",
+          "process_entry_perf": 4882863.161823289,
+          "startup_processor_mode": "reuse",
+          "clock": "host monotonic perf_counter",
+          "targets": {
+            "F": {
+              "0": 192000,
+              "1": 96000,
+              "2": 96000,
+              "3": 96000
+            },
+            "A": {
+              "0": 195440,
+              "1": 192000,
+              "2": 196720,
+              "3": 192000
+            },
+            "owner": 4882877.902472646,
+            "origin": 4882848.146972746
+          },
+          "applied_crossings_perf": {
+            "all-old-facts-consumed": 4882877.95998879,
+            "first-new-fact-consumed": 4882882.081780622,
+            "precrash-accepted-debt-consumed": 4882884.055384301
+          },
+          "has_old_facts": true,
+          "has_precrash_debt": true,
+          "open_spans": [],
+          "profile_write_wall_seconds": 0.010716375894844532,
+          "scope": "host/actual local Consumer observations; external kill timestamp required for RTO"
+        },
+        "scope": "attempt1 counters only; killed-prefix host counters are not reconstructed as measurements"
+      },
+      "fault_cut_sha256": "18b46a217aff36de3fc045b92edafba83c743fa620cf01f517babaa2d5c3951e"
+    },
+    {
+      "cell": {
+        "method": "dgft_original",
+        "restart_startup_order": "descriptor_workers_first",
+        "repeat": 0,
+        "prefix_startup_order": "full_first",
+        "processor_mode": "reuse",
+        "prefix_owner_render_backend": "native",
+        "restart_owner_render_backend": "light"
+      },
+      "service": {
+        "episode": "01-dgft_original-descriptor_workers_first-light-r0",
+        "method": "dgft_original",
+        "status": "PASS_RECORDED_PREFIX_INPUT_CANONICAL_ACTUAL_VIEW_RECOVERY",
+        "unauthorized_admissions": 0,
+        "stale_as_fresh": 0,
+        "root_incompatible_views": 0,
+        "false_certified_mode_views": 0,
+        "logical_enqueued_without_physical_submission": [],
+        "original_deadlines_retained": true,
+        "server_input_ACKs": 28,
+        "prekill_ACKs": 26,
+        "acknowledged_input_loss_samples": 0,
+        "offered_frontiers": 34,
+        "certified_coverage": 1.0,
+        "paid_submitted_batches": 25,
+        "drained_batches": 25,
+        "actual_completed_rows": 54,
+        "abandoned_or_no_receipt_rows": 0,
+        "prekill_durable_commits": 5,
+        "total_unique_commits": 14,
+        "original_episode_wall_seconds": 38.99159876536578,
+        "resource_lifecycle_seconds_from_origin": 43.372582944110036,
+        "post_serving_log_and_process_teardown_seconds": 4.3809841787442565,
+        "kill_to_all_previous_certified_consumed_seconds": 2.4714485621079803,
+        "restart_process_launch_to_all_previous_certified_consumed_seconds": 1.7851585634052753,
+        "canonical_journal_recovery_seconds": 0.014863689430058002,
+        "GPU_J_per_offered_audio_second": 132.4210553731228,
+        "GPU_joules_including_killed_work_and_reload": 8173.689642906006,
+        "power_coverage": {
+          "0": 1.0,
+          "1": 1.0
+        },
+        "all_offered_audio_goodput_2_8": 0.7181034091085013,
+        "display_P50": 1.4379161605611444,
+        "display_P95": 22.451947914110495,
+        "display_P99": 23.473828701954336,
+        "commit_P50": 19.571404265705496,
+        "commit_P95": 27.265982866892593,
+        "commit_P99": 27.41959155773744,
+        "whole_run_dual_P99_pass": false,
+        "WER_errors": 10,
+        "WER_reference_words": 165,
+        "all_offered_WER_percent": 6.0606060606060606,
+        "English_CER_percent": 1.8472906403940887,
+        "accepted_debt_peak_audio_seconds": 31.725,
+        "reserved_debt_peak_audio_seconds": 42.0,
+        "prekill_partial_input_tail_bytes": 0,
+        "prekill_partial_canonical_tail_bytes": 0,
+        "partial_diagnostic_tail_bytes": 0,
+        "scope": "frozen same-input development paired process-group cold restart; no power-loss, arbitrary-network, natural-rate or speedup claim"
+      },
+      "recovery": {
+        "RTO_old_all_durable_facts": 2.4714485621079803,
+        "RTO_new_first_certified_fact": 20.27181870676577,
+        "RTO_precrash_accepted_debt": 22.292200550436974,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 2.4676416916772723,
+          "1": 2.4690355407074094,
+          "2": 2.470314181409776,
+          "3": 2.4714485621079803
+        },
+        "debt_clear_per_session": {
+          "0": 20.27181870676577,
+          "1": 21.279167214408517,
+          "2": 22.292200550436974,
+          "3": 21.546836876310408
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "restart_cost": {
+        "input_fsync_calls": 1,
+        "input_fsync_seconds": 0.029394924640655518,
+        "consumer_cpu_seconds": 0.062251415000000025,
+        "input_journal_bytes": 38386,
+        "canonical_journal_bytes": 46268,
+        "startup_profile": {
+          "schema": "trusted-recovery-profile-v1",
+          "process_entry_perf": 4882937.907908494,
+          "startup_processor_mode": "reuse",
+          "clock": "host monotonic perf_counter",
+          "targets": {
+            "F": {
+              "0": 192000,
+              "1": 96000,
+              "2": 96000,
+              "3": 96000
+            },
+            "A": {
+              "0": 195440,
+              "1": 192000,
+              "2": 196720,
+              "3": 192000
+            },
+            "owner": 4882939.604380959,
+            "origin": 4882922.740396217
+          },
+          "applied_crossings_perf": {
+            "all-old-facts-consumed": 4882939.645069646,
+            "first-new-fact-consumed": 4882957.44543979,
+            "precrash-accepted-debt-consumed": 4882959.465821634
+          },
+          "has_old_facts": true,
+          "has_precrash_debt": true,
+          "open_spans": [],
+          "profile_write_wall_seconds": 0.007887898944318295,
+          "scope": "host/actual local Consumer observations; external kill timestamp required for RTO"
+        },
+        "scope": "attempt1 counters only; killed-prefix host counters are not reconstructed as measurements"
+      },
+      "fault_cut_sha256": "18b46a217aff36de3fc045b92edafba83c743fa620cf01f517babaa2d5c3951e"
+    },
+    {
+      "cell": {
+        "method": "standard_fair",
+        "restart_startup_order": "descriptor_workers_first",
+        "repeat": 0,
+        "prefix_startup_order": "full_first",
+        "processor_mode": "reuse",
+        "prefix_owner_render_backend": "native",
+        "restart_owner_render_backend": "native"
+      },
+      "service": {
+        "episode": "02-standard_fair-descriptor_workers_first-native-r0",
+        "method": "standard_fair",
+        "status": "PASS_RECORDED_PREFIX_INPUT_CANONICAL_ACTUAL_VIEW_RECOVERY",
+        "unauthorized_admissions": 0,
+        "stale_as_fresh": 0,
+        "root_incompatible_views": 0,
+        "false_certified_mode_views": 0,
+        "logical_enqueued_without_physical_submission": [],
+        "original_deadlines_retained": true,
+        "server_input_ACKs": 28,
+        "prekill_ACKs": 26,
+        "acknowledged_input_loss_samples": 0,
+        "offered_frontiers": 34,
+        "certified_coverage": 1.0,
+        "paid_submitted_batches": 20,
+        "drained_batches": 19,
+        "actual_completed_rows": 39,
+        "abandoned_or_no_receipt_rows": 1,
+        "prekill_durable_commits": 5,
+        "total_unique_commits": 14,
+        "original_episode_wall_seconds": 37.16568251606077,
+        "resource_lifecycle_seconds_from_origin": 42.59510323219001,
+        "post_serving_log_and_process_teardown_seconds": 5.429420716129243,
+        "kill_to_all_previous_certified_consumed_seconds": 15.806671448983252,
+        "restart_process_launch_to_all_previous_certified_consumed_seconds": 15.17615442816168,
+        "canonical_journal_recovery_seconds": 0.022807816974818707,
+        "GPU_J_per_offered_audio_second": 122.17597090110361,
+        "GPU_joules_including_killed_work_and_reload": 7541.311803870621,
+        "power_coverage": {
+          "0": 1.0,
+          "1": 1.0
+        },
+        "all_offered_audio_goodput_2_8": 0.6457570095646339,
+        "display_P50": 1.3466078457422554,
+        "display_P95": 21.76817585802637,
+        "display_P99": 22.148536600349473,
+        "commit_P50": 19.096743959002197,
+        "commit_P95": 25.64029533858411,
+        "commit_P99": 25.818211794300005,
+        "whole_run_dual_P99_pass": false,
+        "WER_errors": 10,
+        "WER_reference_words": 165,
+        "all_offered_WER_percent": 6.0606060606060606,
+        "English_CER_percent": 1.8472906403940887,
+        "accepted_debt_peak_audio_seconds": 31.725,
+        "reserved_debt_peak_audio_seconds": 42.0,
+        "prekill_partial_input_tail_bytes": 0,
+        "prekill_partial_canonical_tail_bytes": 0,
+        "partial_diagnostic_tail_bytes": 0,
+        "scope": "frozen same-input development paired process-group cold restart; no power-loss, arbitrary-network, natural-rate or speedup claim"
+      },
+      "recovery": {
+        "RTO_old_all_durable_facts": 15.806671448983252,
+        "RTO_new_first_certified_fact": 19.040710043162107,
+        "RTO_precrash_accepted_debt": 20.84434606321156,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 15.802444801665843,
+          "1": 15.80395753402263,
+          "2": 15.80543504562229,
+          "3": 15.806671448983252
+        },
+        "debt_clear_per_session": {
+          "0": 19.040710043162107,
+          "1": 19.900451628491282,
+          "2": 20.84434606321156,
+          "3": 20.131243512034416
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "restart_cost": {
+        "input_fsync_calls": 1,
+        "input_fsync_seconds": 0.017651367001235485,
+        "consumer_cpu_seconds": 0.045370301,
+        "input_journal_bytes": 38387,
+        "canonical_journal_bytes": 46397,
+        "startup_profile": {
+          "schema": "trusted-recovery-profile-v1",
+          "process_entry_perf": 4883011.518998306,
+          "startup_processor_mode": "reuse",
+          "clock": "host monotonic perf_counter",
+          "targets": {
+            "F": {
+              "0": 192000,
+              "1": 96000,
+              "2": 96000,
+              "3": 96000
+            },
+            "A": {
+              "0": 195440,
+              "1": 192000,
+              "2": 196720,
+              "3": 192000
+            },
+            "owner": 4883026.599956426,
+            "origin": 4882996.631243592
+          },
+          "applied_crossings_perf": {
+            "all-old-facts-consumed": 4883026.654039677,
+            "first-new-fact-consumed": 4883029.888078271,
+            "precrash-accepted-debt-consumed": 4883031.691714291
+          },
+          "has_old_facts": true,
+          "has_precrash_debt": true,
+          "open_spans": [],
+          "profile_write_wall_seconds": 0.010214955545961857,
+          "scope": "host/actual local Consumer observations; external kill timestamp required for RTO"
+        },
+        "scope": "attempt1 counters only; killed-prefix host counters are not reconstructed as measurements"
+      },
+      "fault_cut_sha256": "18b46a217aff36de3fc045b92edafba83c743fa620cf01f517babaa2d5c3951e"
+    },
+    {
+      "cell": {
+        "method": "standard_fair",
+        "restart_startup_order": "descriptor_workers_first",
+        "repeat": 0,
+        "prefix_startup_order": "full_first",
+        "processor_mode": "reuse",
+        "prefix_owner_render_backend": "native",
+        "restart_owner_render_backend": "light"
+      },
+      "service": {
+        "episode": "03-standard_fair-descriptor_workers_first-light-r0",
+        "method": "standard_fair",
+        "status": "PASS_RECORDED_PREFIX_INPUT_CANONICAL_ACTUAL_VIEW_RECOVERY",
+        "unauthorized_admissions": 0,
+        "stale_as_fresh": 0,
+        "root_incompatible_views": 0,
+        "false_certified_mode_views": 0,
+        "logical_enqueued_without_physical_submission": [],
+        "original_deadlines_retained": true,
+        "server_input_ACKs": 28,
+        "prekill_ACKs": 26,
+        "acknowledged_input_loss_samples": 0,
+        "offered_frontiers": 34,
+        "certified_coverage": 1.0,
+        "paid_submitted_batches": 20,
+        "drained_batches": 19,
+        "actual_completed_rows": 39,
+        "abandoned_or_no_receipt_rows": 1,
+        "prekill_durable_commits": 5,
+        "total_unique_commits": 14,
+        "original_episode_wall_seconds": 38.39865266159177,
+        "resource_lifecycle_seconds_from_origin": 42.705435992218554,
+        "post_serving_log_and_process_teardown_seconds": 4.306783330626786,
+        "kill_to_all_previous_certified_consumed_seconds": 2.5145027125254273,
+        "restart_process_launch_to_all_previous_certified_consumed_seconds": 1.7969408053904772,
+        "canonical_journal_recovery_seconds": 0.021151493303477764,
+        "GPU_J_per_offered_audio_second": 128.6959953974627,
+        "GPU_joules_including_killed_work_and_reload": 7943.760315908385,
+        "power_coverage": {
+          "0": 1.0,
+          "1": 1.0
+        },
+        "all_offered_audio_goodput_2_8": 0.729192251789787,
+        "display_P50": 1.3447567531839013,
+        "display_P95": 22.98443835955113,
+        "display_P99": 23.322229452393948,
+        "commit_P50": 19.01214848831296,
+        "commit_P95": 26.81149641899392,
+        "commit_P99": 26.979655240811407,
+        "whole_run_dual_P99_pass": false,
+        "WER_errors": 10,
+        "WER_reference_words": 165,
+        "all_offered_WER_percent": 6.0606060606060606,
+        "English_CER_percent": 1.8472906403940887,
+        "accepted_debt_peak_audio_seconds": 31.725,
+        "reserved_debt_peak_audio_seconds": 42.0,
+        "prekill_partial_input_tail_bytes": 0,
+        "prekill_partial_canonical_tail_bytes": 0,
+        "partial_diagnostic_tail_bytes": 0,
+        "scope": "frozen same-input development paired process-group cold restart; no power-loss, arbitrary-network, natural-rate or speedup claim"
+      },
+      "recovery": {
+        "RTO_old_all_durable_facts": 2.5145027125254273,
+        "RTO_new_first_certified_fact": 20.162324169650674,
+        "RTO_precrash_accepted_debt": 21.99024497065693,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 2.5109095769003034,
+          "1": 2.5122598223388195,
+          "2": 2.513472027145326,
+          "3": 2.5145027125254273
+        },
+        "debt_clear_per_session": {
+          "0": 20.162324169650674,
+          "1": 21.03722086828202,
+          "2": 21.99024497065693,
+          "3": 21.28241077531129
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "restart_cost": {
+        "input_fsync_calls": 1,
+        "input_fsync_seconds": 0.015647430904209614,
+        "consumer_cpu_seconds": 0.03544764599999992,
+        "input_journal_bytes": 38387,
+        "canonical_journal_bytes": 46397,
+        "startup_profile": {
+          "schema": "trusted-recovery-profile-v1",
+          "process_entry_perf": 4883084.776488121,
+          "startup_processor_mode": "reuse",
+          "clock": "host monotonic perf_counter",
+          "targets": {
+            "F": {
+              "0": 192000,
+              "1": 96000,
+              "2": 96000,
+              "3": 96000
+            },
+            "A": {
+              "0": 195440,
+              "1": 192000,
+              "2": 196720,
+              "3": 192000
+            },
+            "owner": 4883086.479459904,
+            "origin": 4883069.779406437
+          },
+          "applied_crossings_perf": {
+            "all-old-facts-consumed": 4883086.528125835,
+            "first-new-fact-consumed": 4883104.175947292,
+            "precrash-accepted-debt-consumed": 4883106.003868093
+          },
+          "has_old_facts": true,
+          "has_precrash_debt": true,
+          "open_spans": [],
+          "profile_write_wall_seconds": 0.0077744293957948685,
+          "scope": "host/actual local Consumer observations; external kill timestamp required for RTO"
+        },
+        "scope": "attempt1 counters only; killed-prefix host counters are not reconstructed as measurements"
+      },
+      "fault_cut_sha256": "18b46a217aff36de3fc045b92edafba83c743fa620cf01f517babaa2d5c3951e"
+    }
+  ],
+  "pairs": [
+    {
+      "method": "dgft_original",
+      "repeat": 0,
+      "exact_fault_cut_match": true,
+      "native": {
+        "RTO_old_all_durable_facts": 15.59231853671372,
+        "RTO_new_first_certified_fact": 19.714110368862748,
+        "RTO_precrash_accepted_debt": 21.68771404772997,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 15.588518185541034,
+          "1": 15.589966917410493,
+          "2": 15.59128250926733,
+          "3": 15.59231853671372
+        },
+        "debt_clear_per_session": {
+          "0": 19.714110368862748,
+          "1": 20.66414140164852,
+          "2": 21.68771404772997,
+          "3": 20.93352960702032
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "light": {
+        "RTO_old_all_durable_facts": 2.4714485621079803,
+        "RTO_new_first_certified_fact": 20.27181870676577,
+        "RTO_precrash_accepted_debt": 22.292200550436974,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 2.4676416916772723,
+          "1": 2.4690355407074094,
+          "2": 2.470314181409776,
+          "3": 2.4714485621079803
+        },
+        "debt_clear_per_session": {
+          "0": 20.27181870676577,
+          "1": 21.279167214408517,
+          "2": 22.292200550436974,
+          "3": 21.546836876310408
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "decision": "PAIRED_DESCRIPTIVE",
+      "paired_seconds_difference_light_minus_native": {
+        "RTO_old_all_durable_facts": -13.12086997460574,
+        "RTO_new_first_certified_fact": 0.5577083379030228,
+        "RTO_precrash_accepted_debt": 0.6044865027070045
+      }
+    },
+    {
+      "method": "standard_fair",
+      "repeat": 0,
+      "exact_fault_cut_match": true,
+      "native": {
+        "RTO_old_all_durable_facts": 15.806671448983252,
+        "RTO_new_first_certified_fact": 19.040710043162107,
+        "RTO_precrash_accepted_debt": 20.84434606321156,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 15.802444801665843,
+          "1": 15.80395753402263,
+          "2": 15.80543504562229,
+          "3": 15.806671448983252
+        },
+        "debt_clear_per_session": {
+          "0": 19.040710043162107,
+          "1": 19.900451628491282,
+          "2": 20.84434606321156,
+          "3": 20.131243512034416
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "light": {
+        "RTO_old_all_durable_facts": 2.5145027125254273,
+        "RTO_new_first_certified_fact": 20.162324169650674,
+        "RTO_precrash_accepted_debt": 21.99024497065693,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 2.5109095769003034,
+          "1": 2.5122598223388195,
+          "2": 2.513472027145326,
+          "3": 2.5145027125254273
+        },
+        "debt_clear_per_session": {
+          "0": 20.162324169650674,
+          "1": 21.03722086828202,
+          "2": 21.99024497065693,
+          "3": 21.28241077531129
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "decision": "PAIRED_DESCRIPTIVE",
+      "paired_seconds_difference_light_minus_native": {
+        "RTO_old_all_durable_facts": -13.292168736457825,
+        "RTO_new_first_certified_fact": 1.1216141264885664,
+        "RTO_precrash_accepted_debt": 1.1458989074453712
+      }
+    }
+  ]
+}

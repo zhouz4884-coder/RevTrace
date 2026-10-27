@@ -1,0 +1,71 @@
+{
+  "state": "missing",
+  "same_identity": false,
+  "GPU_apps": "",
+  "GATE.json": {
+    "gate": "GO_CPU_COMPONENT_CONFORMANCE_NOT_SERVING_RTO",
+    "source_commit": "973d4c66e2f4d8227ec5546f86da310e38151846",
+    "mismatched_fields": [],
+    "matched_fields": [
+      "case_count",
+      "record_digest",
+      "vocab_ids",
+      "vocab_digest",
+      "random_cases",
+      "synthetic_digest",
+      "parser_digest",
+      "valid_budget_termination_digest",
+      "invalid_stop_rejected"
+    ],
+    "case_count": 268,
+    "vocab_ids": 151705,
+    "random_cases": 4096,
+    "negative_cases": 7,
+    "native_load_seconds": 13.085923807695508,
+    "light_load_seconds": 1.8336943443864584,
+    "GPU_inference_calls": 0,
+    "scope": "conditional component equivalence and bounded conformance; does not change old WAL contract or establish deployed RTO/whole-program refinement"
+  },
+  "RESULT.json": {
+    "gate": "GO_CPU_COMPONENT_CONFORMANCE_NOT_SERVING_RTO",
+    "source_commit": "973d4c66e2f4d8227ec5546f86da310e38151846",
+    "mismatched_fields": [],
+    "matched_fields": [
+      "case_count",
+      "record_digest",
+      "vocab_ids",
+      "vocab_digest",
+      "random_cases",
+      "synthetic_digest",
+      "parser_digest",
+      "valid_budget_termination_digest",
+      "invalid_stop_rejected"
+    ],
+    "case_count": 268,
+    "vocab_ids": 151705,
+    "random_cases": 4096,
+    "negative_cases": 7,
+    "native_load_seconds": 13.085923807695508,
+    "light_load_seconds": 1.8336943443864584,
+    "GPU_inference_calls": 0,
+    "scope": "conditional component equivalence and bounded conformance; does not change old WAL contract or establish deployed RTO/whole-program refinement"
+  },
+  "progress": {
+    "completed": [
+      "prepare",
+      "bank",
+      "native",
+      "light",
+      "negative",
+      "compare"
+    ],
+    "expected": 6
+  },
+  "controller_tail": "{\"stage\": \"prepare\", \"status\": \"complete\"}\n{\"stage\": \"bank\", \"status\": \"complete\"}\n{\"stage\": \"native\", \"status\": \"complete\"}\n{\"stage\": \"light\", \"status\": \"complete\"}\n{\"stage\": \"negative\", \"status\": \"complete\"}\n{\"stage\": \"compare\", \"status\": \"complete\"}\n",
+  "prepare_tail": "The tokenizer you are loading from '/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-1.7B' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.\n{\"status\": \"PREPARED_FROM_ACTUAL_NATIVE_PROCESSOR\", \"descriptor_sha256\": \"4f11e48bc29cfe6c5e297ca4a346e899f703d78872b55f6ab9f9292e569e5d6d\", \"bundle\": \"/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_freeze_boundary_20261027/packages/light_render_program_v2\", \"program_bytes\": 5367432, \"default_empty_ids\": [], \"preparation_seconds\": 14.72473360132426, \"model_weight_loads\": 0, \"GPU_inference_calls\": 0, \"serving_use_permitted\": false}\n",
+  "bank_tail": "",
+  "native_tail": "The tokenizer you are loading from '/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-1.7B' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.\n{\"status\": \"PASS_CPU_CONFORMANCE_OPERATIONS\", \"worker\": \"native\", \"load_seconds\": 13.085923807695508, \"replay_seconds\": 0.16750418953597546, \"case_count\": 268, \"record_digest\": \"17355be8e8efb47851b2181b57237a1a9b78e08bd9ab9c43e36afd1a1d462bb7\", \"vocab_ids\": 151705, \"vocab_digest\": \"8eebc08e03e1e4d22316974ec940457ed62354fa66a06b8df351893817d5d623\", \"random_cases\": 4096, \"synthetic_digest\": \"cea252173278e9dbaeae651759174b32509d8324ac9cea794cbdb7233e9f2b52\", \"parser_digest\": \"c083895af164ed6d4e4f78aa46332bd7cda8af4836131b08c5762ade0a2e71f6\", \"valid_budget_termination_digest\": \"ab3811f733302844b76def0d99f950cca8b02b55f7f58076ee58906ae10256b7\", \"invalid_stop_rejected\": [true, true, true, true], \"modules_before\": {\"torch\": false, \"transformers\": false, \"qwen_asr\": false, \"librosa\": false}, \"modules_after\": {\"torch\": true, \"transformers\": true, \"qwen_asr\": true, \"librosa\": true}, \"model_weights_loaded\": 0, \"GPU_inference_calls\": 0, \"scope\": \"CPU conformance and component load clocks only; not serving RTO\"}\n",
+  "light_tail": "{\"status\": \"PASS_CPU_CONFORMANCE_OPERATIONS\", \"worker\": \"light\", \"load_seconds\": 1.8336943443864584, \"replay_seconds\": 0.1582274865359068, \"case_count\": 268, \"record_digest\": \"17355be8e8efb47851b2181b57237a1a9b78e08bd9ab9c43e36afd1a1d462bb7\", \"vocab_ids\": 151705, \"vocab_digest\": \"8eebc08e03e1e4d22316974ec940457ed62354fa66a06b8df351893817d5d623\", \"random_cases\": 4096, \"synthetic_digest\": \"cea252173278e9dbaeae651759174b32509d8324ac9cea794cbdb7233e9f2b52\", \"parser_digest\": \"c083895af164ed6d4e4f78aa46332bd7cda8af4836131b08c5762ade0a2e71f6\", \"valid_budget_termination_digest\": \"ab3811f733302844b76def0d99f950cca8b02b55f7f58076ee58906ae10256b7\", \"invalid_stop_rejected\": [true, true, true, true], \"modules_before\": {\"torch\": false, \"transformers\": false, \"qwen_asr\": false, \"librosa\": false}, \"modules_after\": {\"torch\": false, \"transformers\": false, \"qwen_asr\": false, \"librosa\": false}, \"model_weights_loaded\": 0, \"GPU_inference_calls\": 0, \"scope\": \"CPU conformance and component load clocks only; not serving RTO\"}\n",
+  "negative_tail": "",
+  "compare_tail": "{\"gate\": \"GO_CPU_COMPONENT_CONFORMANCE_NOT_SERVING_RTO\", \"source_commit\": \"973d4c66e2f4d8227ec5546f86da310e38151846\", \"mismatched_fields\": [], \"matched_fields\": [\"case_count\", \"record_digest\", \"vocab_ids\", \"vocab_digest\", \"random_cases\", \"synthetic_digest\", \"parser_digest\", \"valid_budget_termination_digest\", \"invalid_stop_rejected\"], \"case_count\": 268, \"vocab_ids\": 151705, \"random_cases\": 4096, \"negative_cases\": 7, \"native_load_seconds\": 13.085923807695508, \"light_load_seconds\": 1.8336943443864584, \"GPU_inference_calls\": 0, \"scope\": \"conditional component equivalence and bounded conformance; does not change old WAL contract or establish deployed RTO/whole-program refinement\"}\n"
+}

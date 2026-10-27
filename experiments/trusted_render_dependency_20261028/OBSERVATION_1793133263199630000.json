@@ -1,0 +1,70 @@
+{
+  "state": "missing",
+  "same_identity": false,
+  "GPU_apps": "",
+  "GATE.json": {
+    "gate": "PASS",
+    "analysis_commit": "539a1ef6be5f6db8d21744b46e1e46ef5f47d8fa",
+    "cells": 4,
+    "new_GPU_inference": 0
+  },
+  "RESULT.json": {
+    "status": "PASS_NATIVE_ASSET_INPUT_RENDER_AND_CLOCK_RECOUNT",
+    "cells": [
+      {
+        "cell": "00-dgft_original-descriptor_workers_first-native-r0",
+        "same_job_native_render_rows": 53,
+        "complete_batch_processed_input_reconstructions": 24,
+        "durable_text_bindings": 14,
+        "recounted_clocks": {
+          "RTO_old_all_durable_facts": 15.59231853671372,
+          "RTO_new_first_certified_fact": 19.714110368862748,
+          "RTO_precrash_accepted_debt": 21.68771404772997
+        },
+        "actual_model_loads": 0,
+        "new_GPU_inference": 0
+      },
+      {
+        "cell": "01-dgft_original-descriptor_workers_first-light-r0",
+        "same_job_native_render_rows": 54,
+        "complete_batch_processed_input_reconstructions": 25,
+        "durable_text_bindings": 14,
+        "recounted_clocks": {
+          "RTO_old_all_durable_facts": 2.4714485621079803,
+          "RTO_new_first_certified_fact": 20.27181870676577,
+          "RTO_precrash_accepted_debt": 22.292200550436974
+        },
+        "actual_model_loads": 0,
+        "new_GPU_inference": 0
+      },
+      {
+        "cell": "02-standard_fair-descriptor_workers_first-native-r0",
+        "same_job_native_render_rows": 39,
+        "complete_batch_processed_input_reconstructions": 19,
+        "durable_text_bindings": 14,
+        "recounted_clocks": {
+          "RTO_old_all_durable_facts": 15.806671448983252,
+          "RTO_new_first_certified_fact": 19.040710043162107,
+          "RTO_precrash_accepted_debt": 20.84434606321156
+        },
+        "actual_model_loads": 0,
+        "new_GPU_inference": 0
+      },
+      {
+        "cell": "03-standard_fair-descriptor_workers_first-light-r0",
+        "same_job_native_render_rows": 39,
+        "complete_batch_processed_input_reconstructions": 19,
+        "durable_text_bindings": 14,
+        "recounted_clocks": {
+          "RTO_old_all_durable_facts": 2.5145027125254273,
+          "RTO_new_first_certified_fact": 20.162324169650674,
+          "RTO_precrash_accepted_debt": 21.99024497065693
+        },
+        "actual_model_loads": 0,
+        "new_GPU_inference": 0
+      }
+    ],
+    "scope": "same-job CPU native reconstruction and direct Consumer clock recount; not new neural generation or proof of model truth"
+  },
+  "controller_tail": "W1028 04:33:41.887000 965552 site-packages/torch/utils/cpp_extension.py:117] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'\nThe tokenizer you are loading from '/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-1.7B' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.\nThe following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.\n"
+}

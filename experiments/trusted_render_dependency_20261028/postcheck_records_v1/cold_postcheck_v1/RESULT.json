@@ -1,0 +1,251 @@
+{
+  "gate": "PASS_DECLARED_RENDERER_REAL_COLD_AND_NATIVE_REPLAY",
+  "records": [
+    {
+      "cell": "00-dgft_original-descriptor_workers_first-native-r0",
+      "backend": "native",
+      "same_precrash_recovery_contract": true,
+      "modules": {
+        "librosa": true,
+        "qwen_asr": true,
+        "torch": true,
+        "transformers": true
+      },
+      "implementation_ready_before_old_fact": true,
+      "independent_native_rows": 53,
+      "durable_text_bindings": 14,
+      "recounted_clocks": {
+        "RTO_old_all_durable_facts": 15.59231853671372,
+        "RTO_new_first_certified_fact": 19.714110368862748,
+        "RTO_precrash_accepted_debt": 21.68771404772997
+      }
+    },
+    {
+      "cell": "01-dgft_original-descriptor_workers_first-light-r0",
+      "backend": "light",
+      "same_precrash_recovery_contract": true,
+      "modules": {
+        "librosa": false,
+        "qwen_asr": false,
+        "torch": false,
+        "transformers": false
+      },
+      "implementation_ready_before_old_fact": true,
+      "independent_native_rows": 54,
+      "durable_text_bindings": 14,
+      "recounted_clocks": {
+        "RTO_old_all_durable_facts": 2.4714485621079803,
+        "RTO_new_first_certified_fact": 20.27181870676577,
+        "RTO_precrash_accepted_debt": 22.292200550436974
+      }
+    },
+    {
+      "cell": "02-standard_fair-descriptor_workers_first-native-r0",
+      "backend": "native",
+      "same_precrash_recovery_contract": true,
+      "modules": {
+        "librosa": true,
+        "qwen_asr": true,
+        "torch": true,
+        "transformers": true
+      },
+      "implementation_ready_before_old_fact": true,
+      "independent_native_rows": 39,
+      "durable_text_bindings": 14,
+      "recounted_clocks": {
+        "RTO_old_all_durable_facts": 15.806671448983252,
+        "RTO_new_first_certified_fact": 19.040710043162107,
+        "RTO_precrash_accepted_debt": 20.84434606321156
+      }
+    },
+    {
+      "cell": "03-standard_fair-descriptor_workers_first-light-r0",
+      "backend": "light",
+      "same_precrash_recovery_contract": true,
+      "modules": {
+        "librosa": false,
+        "qwen_asr": false,
+        "torch": false,
+        "transformers": false
+      },
+      "implementation_ready_before_old_fact": true,
+      "independent_native_rows": 39,
+      "durable_text_bindings": 14,
+      "recounted_clocks": {
+        "RTO_old_all_durable_facts": 2.5145027125254273,
+        "RTO_new_first_certified_fact": 20.162324169650674,
+        "RTO_precrash_accepted_debt": 21.99024497065693
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "method": "dgft_original",
+      "repeat": 0,
+      "exact_fault_cut_match": true,
+      "native": {
+        "RTO_old_all_durable_facts": 15.59231853671372,
+        "RTO_new_first_certified_fact": 19.714110368862748,
+        "RTO_precrash_accepted_debt": 21.68771404772997,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 15.588518185541034,
+          "1": 15.589966917410493,
+          "2": 15.59128250926733,
+          "3": 15.59231853671372
+        },
+        "debt_clear_per_session": {
+          "0": 19.714110368862748,
+          "1": 20.66414140164852,
+          "2": 21.68771404772997,
+          "3": 20.93352960702032
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "light": {
+        "RTO_old_all_durable_facts": 2.4714485621079803,
+        "RTO_new_first_certified_fact": 20.27181870676577,
+        "RTO_precrash_accepted_debt": 22.292200550436974,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 2.4676416916772723,
+          "1": 2.4690355407074094,
+          "2": 2.470314181409776,
+          "3": 2.4714485621079803
+        },
+        "debt_clear_per_session": {
+          "0": 20.27181870676577,
+          "1": 21.279167214408517,
+          "2": 22.292200550436974,
+          "3": 21.546836876310408
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "decision": "PAIRED_DESCRIPTIVE",
+      "paired_seconds_difference_light_minus_native": {
+        "RTO_old_all_durable_facts": -13.12086997460574,
+        "RTO_new_first_certified_fact": 0.5577083379030228,
+        "RTO_precrash_accepted_debt": 0.6044865027070045
+      }
+    },
+    {
+      "method": "standard_fair",
+      "repeat": 0,
+      "exact_fault_cut_match": true,
+      "native": {
+        "RTO_old_all_durable_facts": 15.806671448983252,
+        "RTO_new_first_certified_fact": 19.040710043162107,
+        "RTO_precrash_accepted_debt": 20.84434606321156,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 15.802444801665843,
+          "1": 15.80395753402263,
+          "2": 15.80543504562229,
+          "3": 15.806671448983252
+        },
+        "debt_clear_per_session": {
+          "0": 19.040710043162107,
+          "1": 19.900451628491282,
+          "2": 20.84434606321156,
+          "3": 20.131243512034416
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "light": {
+        "RTO_old_all_durable_facts": 2.5145027125254273,
+        "RTO_new_first_certified_fact": 20.162324169650674,
+        "RTO_precrash_accepted_debt": 21.99024497065693,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 2.5109095769003034,
+          "1": 2.5122598223388195,
+          "2": 2.513472027145326,
+          "3": 2.5145027125254273
+        },
+        "debt_clear_per_session": {
+          "0": 20.162324169650674,
+          "1": 21.03722086828202,
+          "2": 21.99024497065693,
+          "3": 21.28241077531129
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "decision": "PAIRED_DESCRIPTIVE",
+      "paired_seconds_difference_light_minus_native": {
+        "RTO_old_all_durable_facts": -13.292168736457825,
+        "RTO_new_first_certified_fact": 1.1216141264885664,
+        "RTO_precrash_accepted_debt": 1.1458989074453712
+      }
+    }
+  ],
+  "GPU_inference_calls": 0,
+  "scope": "single-repeat four-arm descriptive result, same new contract/intact storage, actual local Consumer; shared optimization not an exclusive scheduler or transcript-quality guarantee"
+}

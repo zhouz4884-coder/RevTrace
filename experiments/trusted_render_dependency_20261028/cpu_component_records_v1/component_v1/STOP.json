@@ -1,0 +1,11 @@
+{
+  "status": "FAILED_BEFORE_COMPONENT_EXECUTION",
+  "orchestration_commit": "72e7e55cc9005654455f26408cbc44a9be729476",
+  "runtime_commit": "973d4c66e2f4d8227ec5546f86da310e38151846",
+  "error": "Traceback (most recent call last):\n  File \"/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_freeze_boundary_20261027/render_cpu_controller_v1/cpu_controller.py\", line 64, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_freeze_boundary_20261027/render_cpu_controller_v1/cpu_controller.py\", line 35, in main\n    env=dict(python=sys.version,platform=platform.platform(),packages={n:importlib.metadata.version(n) for n in ['torch','transformers','qwen-asr','tokenizers']})\n                                                                         ^^^^^^^^^\nUnboundLocalError: cannot access local variable 'importlib' where it is not associated with a value\n",
+  "environment_at_failure": "NOT_CAPTURED_ERROR_PRECEDED_ENVIRONMENT_WRITE",
+  "completed_stages": [],
+  "model_weight_loads": 0,
+  "GPU_inference_calls": 0,
+  "reported_by": "external terminal process/log inspection"
+}

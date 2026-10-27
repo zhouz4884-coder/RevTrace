@@ -1,0 +1,60 @@
+{
+  "experiment_id": "REVTRACE-TRUSTED-RECOVERY-PAIR-20261027",
+  "code_commit": "040fcc95f4cd3bbc4d918bc1dd4502b0b768990c",
+  "source_manifest_sha256": "2aa3527babbe0242533073e51019a3927eec1cea5fc44138297bfe1d0d9deda6",
+  "original_manifest_sha256": "8904fa5b16cb5d2c1f75d101079c6b7f640c2817b873cb92e816eecb694ea1bc",
+  "manifest_sha256": "ad5d456c91ac2c9f378e5776f10cf75974b36ef8240afc1ceef72415c2f084a4",
+  "descriptor_sha256": "541dfa058405dd7600c9800a9b96336f247e50c3b0db375e3e7ca85b152ebdc8",
+  "environment_sha256": "5ff79bdcf62a118c5847e6a734b6b73cd1b78ae89d956257c33ca3992659a98e",
+  "cells": [
+    {
+      "method": "dgft_original",
+      "restart_startup_order": "descriptor_workers_first",
+      "repeat": 0,
+      "prefix_startup_order": "full_first",
+      "processor_mode": "reuse",
+      "prefix_owner_render_backend": "native",
+      "restart_owner_render_backend": "native"
+    },
+    {
+      "method": "dgft_original",
+      "restart_startup_order": "descriptor_workers_first",
+      "repeat": 0,
+      "prefix_startup_order": "full_first",
+      "processor_mode": "reuse",
+      "prefix_owner_render_backend": "native",
+      "restart_owner_render_backend": "light"
+    },
+    {
+      "method": "standard_fair",
+      "restart_startup_order": "descriptor_workers_first",
+      "repeat": 0,
+      "prefix_startup_order": "full_first",
+      "processor_mode": "reuse",
+      "prefix_owner_render_backend": "native",
+      "restart_owner_render_backend": "native"
+    },
+    {
+      "method": "standard_fair",
+      "restart_startup_order": "descriptor_workers_first",
+      "repeat": 0,
+      "prefix_startup_order": "full_first",
+      "processor_mode": "reuse",
+      "prefix_owner_render_backend": "native",
+      "restart_owner_render_backend": "light"
+    }
+  ],
+  "expected": 4,
+  "fault_target": "0:192000",
+  "prefix": "full_first/reuse/native for every arm; shared workers-first restart; only declared owner backend changes",
+  "owner_renderer_study": true,
+  "render_program_sha256": "4f11e48bc29cfe6c5e297ca4a346e899f703d78872b55f6ab9f9292e569e5d6d",
+  "render_use_sha256": "6fd72f331306cb89125c94f5b09483d24cec5452f3cf33c33891232dc4ab0a63",
+  "renderer_intervention": "explicit common precrash allowlist; restart backend only; shared workers-first order",
+  "contract": "fine2s/rho3, P FP16 GPU0 + A FP32 GPU1, MB16, 256tokens, row, full kernel, D1, group-ready WAL, local Consumer, D2/C8",
+  "clock": "original arrival perf_counter preserved across SIGKILL; no deadline reset",
+  "gate": "logical target must be reached; exact full logical cuts required for paired inference",
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/trusted_render_dependency_20261028/cold_program_v1",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/trusted_render_dependency_20261028/cold_program_v1/SUMMARY.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/trusted_render_dependency_20261028/cold_program_v1/GATE.json"
+}

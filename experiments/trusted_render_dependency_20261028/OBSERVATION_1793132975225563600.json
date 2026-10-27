@@ -1,0 +1,114 @@
+{
+  "state": "S",
+  "same_identity": true,
+  "GPU_apps": "",
+  "progress": {
+    "status": "RUNNING",
+    "current": "02-standard_fair-descriptor_workers_first-native-r0",
+    "completed": [
+      "00-dgft_original-descriptor_workers_first-native-r0",
+      "01-dgft_original-descriptor_workers_first-light-r0"
+    ],
+    "expected": 4
+  },
+  "controller_tail": "",
+  "latest_runner_tail": "The tokenizer you are loading from '/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-ASR-1.7B' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.\nThe following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.\n",
+  "completed_audits": [
+    {
+      "cell": {
+        "method": "dgft_original",
+        "restart_startup_order": "descriptor_workers_first",
+        "repeat": 0,
+        "prefix_startup_order": "full_first",
+        "processor_mode": "reuse",
+        "prefix_owner_render_backend": "native",
+        "restart_owner_render_backend": "native"
+      },
+      "recovery": {
+        "RTO_old_all_durable_facts": 15.59231853671372,
+        "RTO_new_first_certified_fact": 19.714110368862748,
+        "RTO_precrash_accepted_debt": 21.68771404772997,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 15.588518185541034,
+          "1": 15.589966917410493,
+          "2": 15.59128250926733,
+          "3": 15.59231853671372
+        },
+        "debt_clear_per_session": {
+          "0": 19.714110368862748,
+          "1": 20.66414140164852,
+          "2": 21.68771404772997,
+          "3": 20.93352960702032
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "fault_cut_sha256": "18b46a217aff36de3fc045b92edafba83c743fa620cf01f517babaa2d5c3951e"
+    },
+    {
+      "cell": {
+        "method": "dgft_original",
+        "restart_startup_order": "descriptor_workers_first",
+        "repeat": 0,
+        "prefix_startup_order": "full_first",
+        "processor_mode": "reuse",
+        "prefix_owner_render_backend": "native",
+        "restart_owner_render_backend": "light"
+      },
+      "recovery": {
+        "RTO_old_all_durable_facts": 2.4714485621079803,
+        "RTO_new_first_certified_fact": 20.27181870676577,
+        "RTO_precrash_accepted_debt": 22.292200550436974,
+        "precrash_debt_audio_seconds": 18.51,
+        "recovered_frontiers": {
+          "0": 192000,
+          "1": 96000,
+          "2": 96000,
+          "3": 96000
+        },
+        "precrash_accepted_frontiers": {
+          "0": 195440,
+          "1": 192000,
+          "2": 196720,
+          "3": 192000
+        },
+        "old_facts_applied_before_workers_ready": true,
+        "old_facts_per_session": {
+          "0": 2.4676416916772723,
+          "1": 2.4690355407074094,
+          "2": 2.470314181409776,
+          "3": 2.4714485621079803
+        },
+        "debt_clear_per_session": {
+          "0": 20.27181870676577,
+          "1": 21.279167214408517,
+          "2": 22.292200550436974,
+          "3": 21.546836876310408
+        },
+        "no_precrash_debt_is_not_zero_rto": false,
+        "clock_origin": "kill request perf_counter before SIGKILL; same-host monotonic clock",
+        "old_fact_scope": "includes synchronized but unpublished facts; not new model work",
+        "new_fact_scope": "actual certified Consumer frontier strictly beyond recovered WAL frontier",
+        "debt_scope": "only input durably accepted before the crash, not EOF or newly accepted suffix"
+      },
+      "fault_cut_sha256": "18b46a217aff36de3fc045b92edafba83c743fa620cf01f517babaa2d5c3951e"
+    }
+  ]
+}
