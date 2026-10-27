@@ -17,7 +17,7 @@ Read [FINAL_REPORT.zh.md](FINAL_REPORT.zh.md), then:
 | Work | Actual full commit | Manifest / records |
 |---|---|---|
 |Primary native and paid-work read-only reconstruction|ca5e04bbb513b703f9aa46d03c6f6fcd08315909|SOURCE_v2.json; records_v2|
-|Second implementation over archived raw, no production admission imports|See SOURCE_v5.json, extending38e0097b55bd640c28f734e854e37366a4ec44fd|independent_check_v2; v5 also resolves the archive's update-directory layout|
+|Second implementation over archived raw, no production admission imports|53246842be8f51dcf4dc1aba488dda40a004bbc0|SOURCE_v5.json; independent_check_v2 and archive_layout_check_v1; resolves local and public archive update-directory layouts|
 |Public DOI metadata lookup|d60f076b4c9b73fda23f5393a293cacd9be24d23|SOURCE_v3.json; related_metadata_v1|
 |Current live runtime / last four cold trials|040fcc95f4cd3bbc4d918bc1dd4502b0b768990c|../trusted_render_dependency_20261028/runtime/SOURCE_v17.json in GitHub archive|
 |Existing formal execution|996430d24d110facb242b352ba69c2f42f26e69c|../input_freeze_20261027/formal/FORMAL_SOURCE_v5.json|
@@ -25,7 +25,8 @@ Read [FINAL_REPORT.zh.md](FINAL_REPORT.zh.md), then:
 Each analysis version has a standalone source tar, Git bundle, complete byte
 manifest and CPU gate. v1 is a retained preliminary successful recount, not a
 failed GPU run. v2 adds explicit prior validity and next-write consumption
-edges; v3 adds public metadata; v4 adds a separately implemented raw recount.
+edges; v3 adds public metadata; v4 adds a separately implemented raw recount;
+v5 adds portable resolution of the public archive's historical update paths.
 Each local version passed six CPU fixtures; these are repeated tests, not
 independent scientific samples. Zero GPU inference was launched by this package.
 
