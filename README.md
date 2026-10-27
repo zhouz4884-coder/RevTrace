@@ -1,5 +1,10 @@
 # RevTrace
 
+## Current bounded research delivery — 2026-10-28
+
+[Full report](experiments/final_evidence_integration_20261028/FINAL_REPORT.zh.md), [seven evidence products](experiments/final_evidence_integration_20261028/SEVEN_DELIVERABLES.md), and [decisions](experiments/final_evidence_integration_20261028/DECISIONS.json) supersede the historical progress entries below. Complete paid-work reconstruction covers181physical batches and810Authority paths; native two-family studies retain60offered cycles,36actual later-input edges and zero objective task successes. Exact trusted-render extraction reduces old-fact visibility by~84% but does not improve new-fact/debt recovery. R7/new waiting algorithm matrices are NO-GO. All failed versions and negative results remain; no paper rewrite or new GPU matrix.
+
+
 ## Trusted-render dependency completion — 2026-10-28
 
 [Real cold recovery result](experiments/trusted_render_dependency_20261028/RECOVERY_RESULTS.md) and [CPU conformance](experiments/trusted_render_dependency_20261028/CPU_RESULTS.md):268own-input observations,151705vocabulary IDs,4096random controls and7negative loader tests; four new explicitly shared-contract cold arms reduce old-fact visibility from~15.6s to~2.5s. First-new-fact and debt clocks do not improve in these single trials. Full Standard receives the same change. No cached transcript shortcut, old-WAL reinterpretation, new scheduling win or paper edit. Failed orchestration/code revisions and raw hashes are retained. Wider-goal integration remains active.
