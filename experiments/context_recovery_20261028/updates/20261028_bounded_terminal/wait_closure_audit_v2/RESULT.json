@@ -1,0 +1,143 @@
+{
+  "status": "PASS_ARCHIVE_WAL_WAIT_ACTION_RECOUNT",
+  "rows": [
+    {
+      "policy": "immediate",
+      "commits": 135,
+      "normalized_history_equal_to_immediate": true,
+      "history_sha256": "9faf967cc16cbcb3c09f8fbb4d3bcf23712668616ef1c3db5c2a26eb20af6f2e",
+      "actions": {
+        "actual_wait_targets": 0,
+        "waits_with_dispatched_input": 0,
+        "changed_declared_P": 0,
+        "changed_root": 0,
+        "releases": {}
+      },
+      "goodput": 2.00323868385699,
+      "display_P99": 8.583968770429491,
+      "commit_P99": 8.756637355424463,
+      "GPU_J_per_offered_audio_second": 42.04587909394197,
+      "whole_dual_P99_pass": false,
+      "WER_errors": 14,
+      "WER_reference_words": 687,
+      "unresolved_wait_feedback": 0
+    },
+    {
+      "policy": "fixed",
+      "commits": 135,
+      "normalized_history_equal_to_immediate": true,
+      "history_sha256": "9faf967cc16cbcb3c09f8fbb4d3bcf23712668616ef1c3db5c2a26eb20af6f2e",
+      "actions": {
+        "actual_wait_targets": 80,
+        "waits_with_dispatched_input": 28,
+        "changed_declared_P": 7,
+        "changed_root": 18,
+        "releases": {
+          "canonical-advanced": 23,
+          "finite-budget-expired": 57
+        }
+      },
+      "goodput": 1.8481353625155927,
+      "display_P99": 8.336668541319668,
+      "commit_P99": 8.927333981432017,
+      "GPU_J_per_offered_audio_second": 40.58603766401407,
+      "whole_dual_P99_pass": false,
+      "WER_errors": 14,
+      "WER_reference_words": 687,
+      "unresolved_wait_feedback": 0
+    },
+    {
+      "policy": "pending_eta",
+      "commits": 135,
+      "normalized_history_equal_to_immediate": true,
+      "history_sha256": "9faf967cc16cbcb3c09f8fbb4d3bcf23712668616ef1c3db5c2a26eb20af6f2e",
+      "actions": {
+        "actual_wait_targets": 3,
+        "waits_with_dispatched_input": 0,
+        "changed_declared_P": 0,
+        "changed_root": 0,
+        "releases": {
+          "canonical-advanced": 3
+        }
+      },
+      "goodput": 1.6174827783693584,
+      "display_P99": 8.550792977400125,
+      "commit_P99": 8.7381409814395,
+      "GPU_J_per_offered_audio_second": 42.31505548366122,
+      "whole_dual_P99_pass": false,
+      "WER_errors": 14,
+      "WER_reference_words": 687,
+      "unresolved_wait_feedback": 0
+    },
+    {
+      "policy": "backpressure",
+      "commits": 135,
+      "normalized_history_equal_to_immediate": true,
+      "history_sha256": "9faf967cc16cbcb3c09f8fbb4d3bcf23712668616ef1c3db5c2a26eb20af6f2e",
+      "actions": {
+        "actual_wait_targets": 50,
+        "waits_with_dispatched_input": 14,
+        "changed_declared_P": 2,
+        "changed_root": 9,
+        "releases": {
+          "canonical-advanced": 15,
+          "finite-budget-expired": 34,
+          "target-no-longer-pending": 1
+        }
+      },
+      "goodput": 1.4847039403149722,
+      "display_P99": 8.759432585407048,
+      "commit_P99": 8.759432585407048,
+      "GPU_J_per_offered_audio_second": 40.91617468387515,
+      "whole_dual_P99_pass": false,
+      "WER_errors": 14,
+      "WER_reference_words": 687,
+      "unresolved_wait_feedback": 0
+    },
+    {
+      "policy": "recent_gain",
+      "commits": 135,
+      "normalized_history_equal_to_immediate": true,
+      "history_sha256": "9faf967cc16cbcb3c09f8fbb4d3bcf23712668616ef1c3db5c2a26eb20af6f2e",
+      "actions": {
+        "actual_wait_targets": 0,
+        "waits_with_dispatched_input": 0,
+        "changed_declared_P": 0,
+        "changed_root": 0,
+        "releases": {}
+      },
+      "goodput": 1.8328659937492644,
+      "display_P99": 9.08148600803688,
+      "commit_P99": 9.08148600803688,
+      "GPU_J_per_offered_audio_second": 42.77714626445328,
+      "whole_dual_P99_pass": false,
+      "WER_errors": 14,
+      "WER_reference_words": 687,
+      "unresolved_wait_feedback": 0
+    },
+    {
+      "policy": "state_aware",
+      "commits": 135,
+      "normalized_history_equal_to_immediate": true,
+      "history_sha256": "9faf967cc16cbcb3c09f8fbb4d3bcf23712668616ef1c3db5c2a26eb20af6f2e",
+      "actions": {
+        "actual_wait_targets": 0,
+        "waits_with_dispatched_input": 0,
+        "changed_declared_P": 0,
+        "changed_root": 0,
+        "releases": {}
+      },
+      "goodput": 2.071076114721756,
+      "display_P99": 9.090793689489363,
+      "commit_P99": 9.118277220167219,
+      "GPU_J_per_offered_audio_second": 42.687923784166564,
+      "whole_dual_P99_pass": false,
+      "WER_errors": 14,
+      "WER_reference_words": 687,
+      "unresolved_wait_feedback": 0
+    }
+  ],
+  "raw_files_verified": 219,
+  "GPU_calls": 0,
+  "scope": "Single development repeat, not independent-source performance confirmation; existing separate Consumer observer supplied service metrics; this audit independently checks recorded WAL and actual wait actions, not neural selection truth"
+}

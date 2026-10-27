@@ -1,0 +1,54 @@
+{
+  "experiment_id": "REVTRACE-NATIVE-SCHEMA-CLARITY-PAID-PROBE-20261028",
+  "source_commit": "93022eb9c308681f980ef266ee01a0104f5c5ca5",
+  "runtime_commit": "ffaa7ab41dd8d6099efd0eb9abe2334951dc5932",
+  "source_manifest_sha256": "d4c230c76e41e4cbc4778b8c43bc5358a98fdaf6f448f6465dde2816d7e6b7b7",
+  "runtime_manifest_sha256": "487d8289e4eb24126b42f7526f0d1e68fa3afd79374669517cc9dea7518a69c8",
+  "environment_sha256": "89543d1e5092290b2b2cb355772b71d399bc6c0f32798a8f428f974746294087",
+  "config": {
+    "kind": "actual_model",
+    "module": "actual_provider",
+    "identity": "Qwen3-4B-native-planning-nonthinking-owned-selector-v1",
+    "experiment_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9",
+    "model_path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-4B",
+    "authority_device": 1,
+    "authority_dtype": "float32",
+    "proposer_device": 0,
+    "proposer_dtype": "bfloat16",
+    "max_new_tokens": 256,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "cpu_threads": 3,
+    "model_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_freeze_boundary_20261027/packages/NATIVE_QWEN3_4B_ASSETS_v1.json"
+  },
+  "model_manifest_sha256": "9d77926e1ad1a0e6cb74ec2dd6954bb47c67cc5ec5cbd47d9c2f1feff431c244",
+  "clarifications": {
+    "runbook": "Field semantics: dependencies maps an action to its prerequisite actions, not its successors. An empty prerequisite list is immediately eligible. A prerequisite must already be in the valid completed prefix before this request. The returned completed list must be that prefix plus exactly the chosen next action (if one is eligible). last_action must be the appended action, not an unrecorded future action. Do not append a prerequisite and its dependent in the same one-action request.",
+    "resource_plan": "Field semantics: cost consumes capacity and value is the objective. Maximize the SUM of values of newly added jobs, not their value/cost ratio. Compare feasible subsets containing at most max_new_jobs new jobs; the limit is a count of jobs, not a cost. The returned reserved list includes the preserved prefix followed by the chosen subset. remaining equals the declared capacity minus the total cost of all returned reservations."
+  },
+  "order": [
+    [
+      "original",
+      0
+    ],
+    [
+      "clarified",
+      0
+    ],
+    [
+      "clarified",
+      1
+    ],
+    [
+      "original",
+      1
+    ]
+  ],
+  "actual_expected_calls": 8,
+  "tasks": "two original development initial requests only; four validation instances untouched",
+  "scope": "single prospective prompt-schema control, not model/RevTrace innovation or deployed task results",
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/native_prompt_clarity_v1",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/native_prompt_clarity_v1/SUMMARY.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/native_prompt_clarity_v1/GATE.json"
+}

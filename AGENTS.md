@@ -23,6 +23,9 @@
   different frozen experiment. Do not pull/reset it to make provenance appear
   current. The local checkout map and verified source refs are recorded in
   `experiments/repository_identity_20261027/SETUP.json`.
+- The initial SETUP is historical. The current machine-local source pointer is
+  `experiments/repository_identity_20261027/CURRENT.json`; no-argument preflight
+  validates that pointer and its manifest hash. It does not relabel old runs.
 - Distinguish the GitHub evidence-archive commit from each actual execution
   source commit. Archived bundles must be verified and imported so that the
   full execution commit resolves locally; an archive's HEAD is not a substitute.

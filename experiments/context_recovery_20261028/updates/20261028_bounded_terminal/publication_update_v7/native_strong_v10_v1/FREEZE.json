@@ -1,0 +1,468 @@
+{
+  "experiment_id": "REVTRACE-NATIVE-STRONG-20261028",
+  "identity": {
+    "source_commit": "ffaa7ab41dd8d6099efd0eb9abe2334951dc5932",
+    "source_manifest_sha256": "487d8289e4eb24126b42f7526f0d1e68fa3afd79374669517cc9dea7518a69c8",
+    "config": {
+      "protocol_id": "REVTRACE_NATIVE_STRONG_MODEL_CONTROL_V1",
+      "experiment_id": "REVTRACE-NATIVE-STRONG-20261028",
+      "worker_timeout_seconds": 360,
+      "provider": {
+        "kind": "actual_model",
+        "module": "actual_provider",
+        "identity": "Qwen3-4B-native-planning-nonthinking-owned-selector-v1",
+        "experiment_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9",
+        "model_path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-4B",
+        "authority_device": 1,
+        "authority_dtype": "float32",
+        "proposer_device": 0,
+        "proposer_dtype": "bfloat16",
+        "max_new_tokens": 256,
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "cpu_threads": 3,
+        "model_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_freeze_boundary_20261027/packages/NATIVE_QWEN3_4B_ASSETS_v1.json"
+      },
+      "controlled_substitution": {
+        "kind": "fixed-json-return",
+        "on_cycles": [
+          0
+        ],
+        "by_family": {
+          "runbook": {
+            "completed": [
+              "restart"
+            ],
+            "last_action": "restart"
+          },
+          "resource_plan": {
+            "reserved": [
+              "nonexistent_reservation"
+            ],
+            "remaining": -1
+          }
+        }
+      },
+      "development_unique_tasks": 2,
+      "development_repeats": 2,
+      "strict_policy": "conditional_on_actual_same_input_self_replay_not_assumed_equivalent",
+      "validation_policy": "four existing structurally fixed tasks remain unused until clean quality/cost gate",
+      "stage_policy": "ten clean smoke cells first; no automatic matrix launch",
+      "cost_scope": "all arms share this model, budget, template and mode-required resources; both_GPU whole-cell power; all failed and repeated work retained",
+      "interpretation": "distinct stronger-model control after Qwen2.5-1.5B clean task failure and measured FP16 NaNs; not a performance repair attributed to RevTrace; no original failure is replaced"
+    },
+    "config_sha256": "c1409cc896f73f7f304ead2a7178e29061905150f7ea98e0737dead0110c24ad",
+    "model_manifest_sha256": "9d77926e1ad1a0e6cb74ec2dd6954bb47c67cc5ec5cbd47d9c2f1feff431c244",
+    "cpu_gate": {
+      "gate_sha256": "f55f0334cc580b3118b18fa7a8b77395f8c741749d343d0da10fb5cf5a8b06ab",
+      "report_sha256": "afec57f0a6150bcd9a8d140f538de2d2407fc13198711eb95da24f64f3ad8ad6",
+      "passed_cases": 336
+    },
+    "packages": {
+      "langgraph": "1.0.3",
+      "langgraph-checkpoint-sqlite": "3.0.0",
+      "langgraph-checkpoint": "3.0.1",
+      "langchain-core": "1.7.0",
+      "torch": "2.9.1",
+      "transformers": "4.57.6"
+    },
+    "development_tasks": [
+      {
+        "id": "ops-dev-0",
+        "family": "runbook",
+        "split": "development",
+        "source": {
+          "dependencies": {
+            "inspect": [],
+            "drain": [
+              "inspect"
+            ],
+            "restart": [
+              "drain"
+            ],
+            "probe": [
+              "restart"
+            ]
+          }
+        },
+        "initial_memory": {
+          "completed": [],
+          "last_action": null
+        },
+        "requests": [
+          {
+            "action_budget": 1
+          },
+          {
+            "action_budget": 1
+          },
+          {
+            "action_budget": 1
+          }
+        ],
+        "revised_source": {
+          "dependencies": {
+            "inspect": [
+              "isolate"
+            ],
+            "isolate": [],
+            "drain": [
+              "inspect"
+            ],
+            "restart": [
+              "drain"
+            ],
+            "probe": [
+              "restart"
+            ]
+          }
+        }
+      },
+      {
+        "id": "resource-dev-0",
+        "family": "resource_plan",
+        "split": "development",
+        "source": {
+          "capacity": 10,
+          "jobs": {
+            "alpha": {
+              "cost": 4,
+              "value": 7
+            },
+            "beta": {
+              "cost": 3,
+              "value": 5
+            },
+            "gamma": {
+              "cost": 2,
+              "value": 4
+            },
+            "delta": {
+              "cost": 5,
+              "value": 8
+            }
+          }
+        },
+        "initial_memory": {
+          "reserved": [],
+          "remaining": 10
+        },
+        "requests": [
+          {
+            "max_new_jobs": 1
+          },
+          {
+            "max_new_jobs": 1
+          },
+          {
+            "max_new_jobs": 1
+          }
+        ],
+        "revised_source": {
+          "capacity": 8,
+          "jobs": {
+            "alpha": {
+              "cost": 4,
+              "value": 7
+            },
+            "beta": {
+              "cost": 3,
+              "value": 5
+            },
+            "gamma": {
+              "cost": 2,
+              "value": 4
+            },
+            "delta": {
+              "cost": 5,
+              "value": 8
+            }
+          }
+        }
+      }
+    ],
+    "validation_tasks_frozen_not_run": [
+      {
+        "id": "ops-val-fanin",
+        "family": "runbook",
+        "split": "validation",
+        "source": {
+          "dependencies": {
+            "db_check": [],
+            "cache_check": [],
+            "backup": [
+              "db_check"
+            ],
+            "drain": [
+              "cache_check"
+            ],
+            "restart": [
+              "backup",
+              "drain"
+            ],
+            "probe": [
+              "restart"
+            ]
+          }
+        },
+        "initial_memory": {
+          "completed": [],
+          "last_action": null
+        },
+        "requests": [
+          {
+            "action_budget": 1
+          },
+          {
+            "action_budget": 1
+          },
+          {
+            "action_budget": 1
+          },
+          {
+            "action_budget": 1
+          }
+        ],
+        "revised_source": {
+          "dependencies": {
+            "db_check": [
+              "isolate"
+            ],
+            "isolate": [],
+            "cache_check": [],
+            "backup": [
+              "db_check"
+            ],
+            "drain": [
+              "cache_check"
+            ],
+            "restart": [
+              "backup",
+              "drain"
+            ],
+            "probe": [
+              "restart"
+            ]
+          }
+        }
+      },
+      {
+        "id": "ops-val-diamond",
+        "family": "runbook",
+        "split": "validation",
+        "source": {
+          "dependencies": {
+            "inventory": [],
+            "network": [
+              "inventory"
+            ],
+            "rollback": [
+              "inventory"
+            ],
+            "deploy": [
+              "network",
+              "rollback"
+            ],
+            "smoke": [
+              "deploy"
+            ],
+            "metrics": [
+              "deploy"
+            ]
+          }
+        },
+        "initial_memory": {
+          "completed": [
+            "inventory"
+          ],
+          "last_action": "inventory"
+        },
+        "requests": [
+          {
+            "action_budget": 1
+          },
+          {
+            "action_budget": 1
+          },
+          {
+            "action_budget": 1
+          },
+          {
+            "action_budget": 1
+          }
+        ],
+        "revised_source": {
+          "dependencies": {
+            "inventory": [],
+            "network": [
+              "inventory"
+            ],
+            "rollback": [
+              "inventory"
+            ],
+            "capacity": [
+              "inventory"
+            ],
+            "deploy": [
+              "network",
+              "rollback",
+              "capacity"
+            ],
+            "smoke": [
+              "deploy"
+            ],
+            "metrics": [
+              "deploy"
+            ]
+          }
+        }
+      },
+      {
+        "id": "resource-val-bundle",
+        "family": "resource_plan",
+        "split": "validation",
+        "source": {
+          "capacity": 11,
+          "jobs": {
+            "heavy": {
+              "cost": 7,
+              "value": 12
+            },
+            "east": {
+              "cost": 5,
+              "value": 9
+            },
+            "west": {
+              "cost": 6,
+              "value": 10
+            },
+            "tiny": {
+              "cost": 2,
+              "value": 2
+            },
+            "small": {
+              "cost": 3,
+              "value": 4
+            }
+          }
+        },
+        "initial_memory": {
+          "reserved": [],
+          "remaining": 11
+        },
+        "requests": [
+          {
+            "max_new_jobs": 2
+          },
+          {
+            "max_new_jobs": 1
+          },
+          {
+            "max_new_jobs": 1
+          }
+        ],
+        "revised_source": {
+          "capacity": 9,
+          "jobs": {
+            "heavy": {
+              "cost": 7,
+              "value": 12
+            },
+            "east": {
+              "cost": 5,
+              "value": 9
+            },
+            "west": {
+              "cost": 6,
+              "value": 10
+            },
+            "tiny": {
+              "cost": 2,
+              "value": 2
+            },
+            "small": {
+              "cost": 3,
+              "value": 4
+            }
+          }
+        }
+      },
+      {
+        "id": "resource-val-residual",
+        "family": "resource_plan",
+        "split": "validation",
+        "source": {
+          "capacity": 14,
+          "jobs": {
+            "large": {
+              "cost": 8,
+              "value": 13
+            },
+            "mid_a": {
+              "cost": 7,
+              "value": 12
+            },
+            "mid_b": {
+              "cost": 7,
+              "value": 12
+            },
+            "small_a": {
+              "cost": 3,
+              "value": 5
+            },
+            "small_b": {
+              "cost": 3,
+              "value": 5
+            }
+          }
+        },
+        "initial_memory": {
+          "reserved": [],
+          "remaining": 14
+        },
+        "requests": [
+          {
+            "max_new_jobs": 1
+          },
+          {
+            "max_new_jobs": 2
+          },
+          {
+            "max_new_jobs": 1
+          }
+        ],
+        "revised_source": {
+          "capacity": 13,
+          "jobs": {
+            "large": {
+              "cost": 8,
+              "value": 13
+            },
+            "mid_a": {
+              "cost": 7,
+              "value": 12
+            },
+            "mid_b": {
+              "cost": 7,
+              "value": 12
+            },
+            "small_a": {
+              "cost": 3,
+              "value": 5
+            },
+            "small_b": {
+              "cost": 3,
+              "value": 5
+            }
+          }
+        }
+      }
+    ]
+  },
+  "environment_sha256": "36da9d9001f41d9a07a1b789fbb3b1ef8c473c76f5cdab3dc7d626c791379bce",
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/native_strong_v10_v1",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/native_strong_v10_v1/SUMMARY.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/native_strong_v10_v1/GATE.json",
+  "scope": "actual-model native application lifecycle; not online ASR capacity"
+}

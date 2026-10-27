@@ -72,9 +72,15 @@ def main():
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()
     try:
-        setup = json.loads((HERE / 'SETUP.json').read_text())
+        pointer = HERE / 'CURRENT.json'
+        if not pointer.exists():pointer = HERE / 'SETUP.json'
+        setup = json.loads(pointer.read_text(encoding='utf-8'))
         result = check(args.source or Path(setup['source_worktree']),
                        args.manifest or Path(setup['source_manifest']), args.run_record)
+        if not args.source and not args.manifest and pointer.name=='CURRENT.json':
+            require(result['code_commit']==setup['source_commit'],'Current pointer commit mismatch')
+            require(result['manifest_sha256']==setup['source_manifest_sha256'],'Current pointer manifest hash mismatch')
+        result.update(setup_pointer=str(pointer),setup_pointer_sha256=sha256(pointer))
     except (AssertionError, KeyError, ValueError, OSError, subprocess.CalledProcessError) as exc:
         print(json.dumps(dict(gate='NO_GO_SOURCE_IDENTITY', error=str(exc)), ensure_ascii=False))
         return 1

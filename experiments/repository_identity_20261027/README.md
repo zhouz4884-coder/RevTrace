@@ -1,5 +1,11 @@
 # 开工前源码身份修复：REPO-IDENTITY-20261027
 
+> 下文是2026-10-27初始维护记录，保留其当时的commit和SETUP不改。
+> 最新机器本地入口见`CURRENT.json`；无参数`preflight.py`优先校验该入口、
+> 实际HEAD及完整manifest哈希，显式`--source/--manifest`仍可核查另一冻结版本。
+> 2026-10-28当前运行时为`ffaa7ab41dd8d6099efd0eb9abe2334951dc5932`。
+> 这不是将新源码重新标成旧实验，也不是将旧脏目录HEAD改为归档HEAD。
+
 ## 结论与入口
 
 本次是本地 Git 家务与 CPU 前置核验，不是新增 GPU 实验，也未修改论文。

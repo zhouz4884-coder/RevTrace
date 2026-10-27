@@ -1,5 +1,10 @@
 # RevTrace
 
+## Bounded phase terminal results — 2026-10-28
+
+[Complete research report](experiments/context_recovery_20261028/updates/20261028_bounded_terminal/FINAL_BOUNDED_REPORT.zh.md): R7/R8/R9 audit,48unused holdout sessions,512paid context calls, four real cold-recovery arms, native two-family model lifecycles, opposite input-cost effects and the repaired six-policy service check. New context/scheduling matrix gates are NO-GO; zero state-aware wait actions explain why a small Goodput point difference is not algorithm evidence. All model/checker failures remain. The bounded GPU queue is closed; no paper text was modified and no acceptance or topic-exhaustion claim is made.
+
+
 ## Paid context decision and input attribution — 2026-10-28
 
 [14source/512call paid result and decision](experiments/context_recovery_20261028/updates/20261028_context_paid_result/CONTEXT_FEASIBILITY_RESULT.md), [input-mediated physical work](experiments/context_recovery_20261028/updates/20261028_context_paid_result/PAID_INPUT_RESULT.md), and [seven evidence tables](experiments/context_recovery_20261028/updates/20261028_context_paid_result/EVIDENCE_SEVEN_TABLES.md). Full checkpoint restoration repeats the selected outputs; known reanchors have mixed quality, so a new context algorithm/formal matrix is NO-GO from this study. All failed checker versions and raw records remain. The native stronger-model clean study is still running: only completed cells are snapshotted here. Paper text is unchanged.

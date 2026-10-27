@@ -1,5 +1,6 @@
 """CPU negative controls for the new identity gate, not serving evidence."""
 import json
+import sys
 
 import pytest
 import preflight
@@ -84,3 +85,25 @@ def test_metadata_hash_and_disk_checked(frozen, tmp_path):
     record.write_text(json.dumps(data))
     with pytest.raises(ValueError, match='designated experiment disk'):
         preflight.check(source, manifest, record)
+
+
+def test_current_pointer_default_is_checked(frozen,tmp_path,monkeypatch,capsys):
+    source,manifest,_=frozen
+    pointer=dict(source_worktree=str(source),source_manifest=str(manifest),
+                 source_commit=COMMIT,source_manifest_sha256=preflight.sha256(manifest))
+    p=tmp_path/'CURRENT.json';p.write_text(json.dumps(pointer))
+    monkeypatch.setattr(preflight,'HERE',tmp_path);monkeypatch.setattr(sys,'argv',['preflight'])
+    assert preflight.main()==0
+    assert json.loads(capsys.readouterr().out)['setup_pointer']==str(p)
+    pointer['source_manifest_sha256']='0'*64;p.write_text(json.dumps(pointer))
+    assert preflight.main()==1
+    assert json.loads(capsys.readouterr().out)['gate']=='NO_GO_SOURCE_IDENTITY'
+
+
+def test_explicit_historical_inputs_do_not_inherit_current_commit(frozen,tmp_path,monkeypatch,capsys):
+    source,manifest,_=frozen
+    p=tmp_path/'CURRENT.json';p.write_text(json.dumps(dict(source_worktree=str(source),source_manifest=str(manifest),source_commit='b'*40,source_manifest_sha256='0'*64)))
+    monkeypatch.setattr(preflight,'HERE',tmp_path)
+    monkeypatch.setattr(sys,'argv',['preflight','--source',str(source),'--manifest',str(manifest)])
+    assert preflight.main()==0
+    assert json.loads(capsys.readouterr().out)['code_commit']==COMMIT
