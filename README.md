@@ -1,5 +1,9 @@
 # RevTrace
 
+## Latest context/recovery checkpoint — 2026-10-28
+
+See [the new context/recovery record](experiments/context_recovery_20261028/README.md): four actual cold-recovery cells and native input/render audit completed, a48-session/24-speaker untouched holdout frozen without inference, and ten native model smoke cells completed with model/numerical failures retained. The research remains active; no new context algorithm or large formal matrix is claimed. All raw snapshots, sources, failures and hashes are archived.
+
 ## Latest research evidence — 2026-10-27
 
 The current research record is [the complete attempted-experiment checkpoint](experiments/input_freeze_20261027/README.md), including all seven frozen source versions, failures, twelve complete new GPU serving cells, raw Worker/Consumer/WAL records, native CPU lifecycle tests, formal tools and counterexamples, and the new R7/R8/R9 audit. The study remains in progress. The latest source passes 328 Linux CPU tests; its new GPU comparisons have not yet run. No new scheduling superiority is established by this checkpoint.

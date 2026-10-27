@@ -1,0 +1,42 @@
+{
+  "experiment_id": "REVTRACE-UNTOUCHED-CONTEXT-HOLDOUT-20261028",
+  "source_commit": "f9be977bbedc920024ff9f7f8c68eb4244487c14",
+  "source_manifest_sha256": "4c38a5eb314c238d9cf5486ee944229955af6b61d1742c42293399f932acba09",
+  "data_spec": {
+    "dataset": "openslr/librispeech_asr",
+    "revision": "fed4943ea9bdc207dc01b65e0928dd100e18a2a1",
+    "split": "clean/train.100",
+    "primary_metadata": "https://huggingface.co/datasets/openslr/librispeech_asr/commit/fed4943ea9bdc207dc01b65e0928dd100e18a2a1",
+    "dataset_card": "https://huggingface.co/datasets/openslr/librispeech_asr",
+    "license": "CC-BY-4.0",
+    "files": [
+      {
+        "name": "0000.parquet",
+        "bytes": 469629285,
+        "sha256": "3098c6e44d1d49f8c62bd123775f1c492bda2cabd80f3ee70fe7800572371401"
+      },
+      {
+        "name": "0001.parquet",
+        "bytes": 481204796,
+        "sha256": "011cb76e296b2650bab3ea54044c57d10293dadb05e9e96605b37c88e4bc89bd"
+      }
+    ],
+    "selection": {
+      "speakers": 24,
+      "sessions_per_speaker": 2,
+      "target_seconds": 90,
+      "minimum_seconds": 67.5,
+      "separator_seconds": 0.1,
+      "grouping": "same-speaker same-chapter numeric utterance order; no reordering or word cropping",
+      "history_exclusion": "all retained archive identifier and speaker matches, conservative even for availability-only lists"
+    },
+    "claim_boundary": "experiment-untouched prospective holdout, not unseen in model pretraining; chronological reconstructed speech, not original continuous recordings; no model evaluation until separately frozen mechanism"
+  },
+  "data_spec_sha256": "e2fb356ac20407e2ebfd392e16417e0fb58c31852bab901057e5a6b99cec1956",
+  "history_registry_sha256": "38e5ce1b52f153525bcc42158c3a9f9267d2f8e831ce1653632f3cabf5805f65",
+  "environment_sha256": "75e1aa2f751b32bf0c18ef5b53a9ae90fcb3e5bf30bce4b354785517a1cfd5d3",
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/context_holdout_freeze_v1",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/context_holdout_freeze_v1/MANIFEST.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/freeze_boundary_20261027/context_holdout_freeze_v1/GATE.json",
+  "ASR_model_calls": 0
+}
