@@ -1,0 +1,235 @@
+{
+  "observed_unix": 1793125794.8369584,
+  "progress": {
+    "stage": "smoke",
+    "completed_plan_entries": 4,
+    "expected": 10,
+    "rows": [
+      {
+        "id": "ops-dev-0__clean__candidate_only__r0__unchanged",
+        "arm": "candidate_only",
+        "family": "runbook",
+        "condition": "clean",
+        "repeat": 0,
+        "schedule": "unchanged",
+        "execution_status": "COMPLETE",
+        "energy": {
+          "status": "MEASURED_BOTH_PHYSICAL_GPUS",
+          "GPU0_joules": 5544.820860701339,
+          "GPU1_joules": 2760.2268354947973,
+          "both_GPU_joules": 8305.047696196136,
+          "window_seconds": 98.88995296414942,
+          "samples": 306,
+          "peak_memory_MiB": {
+            "0": 8180.0,
+            "1": 27.0
+          },
+          "scope": "whole cell including required model loads, CPU/native/WAL waits and GPU idle power; not net inference-only energy"
+        },
+        "error": null,
+        "runtime": {
+          "status": "EXECUTION_FINISHED_OUTCOMES_REQUIRE_AUDIT",
+          "evidence_tier": "ACTUAL_GPU_MODEL",
+          "model_task_quality_not_asserted": true,
+          "offered_cycles": 3,
+          "committed_cycles": 3,
+          "unfulfilled_cycles": 0,
+          "rejected_install_attempts": 0,
+          "selection_attempts_including_fresh_retry": 3,
+          "actual_gpu_call_count": 3,
+          "all_execution_or_validation_operations": 3,
+          "completed_GPU_compute_seconds": 6.965120752342045,
+          "GPU_compute_cost_has_unknown_failure": false,
+          "asset_validation_seconds": 30.220488257,
+          "model_loading_seconds": 48.986396072999995,
+          "all_child_process_wall_seconds": 97.88636623229831,
+          "GPU_energy_joules": null,
+          "cost_scope": "all attempts retained; GPU compute differs from model loading and whole process wall; energy needs external recorded sampler"
+        },
+        "evaluation": {
+          "gate": "OBSERVED_UNPROTECTED_COUNTEREXAMPLE",
+          "audit_usable": true,
+          "protected": false,
+          "native_multicycle_complete": true,
+          "offered_cycles": 3,
+          "committed_cycles": 3,
+          "unfulfilled_cycles": 0,
+          "task_success_cycles": 0,
+          "current_output_valid_cycles": 0,
+          "fault_interpretation": "actual_candidate_path",
+          "verification_rejections": 0
+        },
+        "cost_evidence_complete": true
+      },
+      {
+        "id": "ops-dev-0__clean__standard_direct__r0__unchanged",
+        "arm": "standard_direct",
+        "family": "runbook",
+        "condition": "clean",
+        "repeat": 0,
+        "schedule": "unchanged",
+        "execution_status": "COMPLETE",
+        "energy": {
+          "status": "MEASURED_BOTH_PHYSICAL_GPUS",
+          "GPU0_joules": 5760.143696539313,
+          "GPU1_joules": 9793.364036481426,
+          "both_GPU_joules": 15553.507733020739,
+          "window_seconds": 191.03215231467038,
+          "samples": 583,
+          "peak_memory_MiB": {
+            "0": 27.0,
+            "1": 15942.0
+          },
+          "scope": "whole cell including required model loads, CPU/native/WAL waits and GPU idle power; not net inference-only energy"
+        },
+        "error": null,
+        "runtime": {
+          "status": "EXECUTION_FINISHED_OUTCOMES_REQUIRE_AUDIT",
+          "evidence_tier": "ACTUAL_GPU_MODEL",
+          "model_task_quality_not_asserted": true,
+          "offered_cycles": 3,
+          "committed_cycles": 3,
+          "unfulfilled_cycles": 0,
+          "rejected_install_attempts": 0,
+          "selection_attempts_including_fresh_retry": 3,
+          "actual_gpu_call_count": 3,
+          "all_execution_or_validation_operations": 3,
+          "completed_GPU_compute_seconds": 7.6338259456679225,
+          "GPU_compute_cost_has_unknown_failure": false,
+          "asset_validation_seconds": 31.949885285,
+          "model_loading_seconds": 119.98516913,
+          "all_child_process_wall_seconds": 190.00997882243246,
+          "GPU_energy_joules": null,
+          "cost_scope": "all attempts retained; GPU compute differs from model loading and whole process wall; energy needs external recorded sampler"
+        },
+        "evaluation": {
+          "gate": "PASS_PROTECTED_OBSERVATIONS",
+          "audit_usable": true,
+          "protected": true,
+          "native_multicycle_complete": true,
+          "offered_cycles": 3,
+          "committed_cycles": 3,
+          "unfulfilled_cycles": 0,
+          "task_success_cycles": 0,
+          "current_output_valid_cycles": 0,
+          "fault_interpretation": "not_exposed_no_rejection_claim",
+          "verification_rejections": 0
+        },
+        "cost_evidence_complete": true
+      },
+      {
+        "id": "ops-dev-0__clean__revtrace_direct__r0__unchanged",
+        "arm": "revtrace_direct",
+        "family": "runbook",
+        "condition": "clean",
+        "repeat": 0,
+        "schedule": "unchanged",
+        "execution_status": "COMPLETE",
+        "energy": {
+          "status": "MEASURED_BOTH_PHYSICAL_GPUS",
+          "GPU0_joules": 7432.599590266294,
+          "GPU1_joules": 11213.977785177132,
+          "both_GPU_joules": 18646.577375443427,
+          "window_seconds": 246.91904992703348,
+          "samples": 756,
+          "peak_memory_MiB": {
+            "0": 27.0,
+            "1": 15942.0
+          },
+          "scope": "whole cell including required model loads, CPU/native/WAL waits and GPU idle power; not net inference-only energy"
+        },
+        "error": null,
+        "runtime": {
+          "status": "EXECUTION_FINISHED_OUTCOMES_REQUIRE_AUDIT",
+          "evidence_tier": "ACTUAL_GPU_MODEL",
+          "model_task_quality_not_asserted": true,
+          "offered_cycles": 3,
+          "committed_cycles": 3,
+          "unfulfilled_cycles": 0,
+          "rejected_install_attempts": 0,
+          "selection_attempts_including_fresh_retry": 3,
+          "actual_gpu_call_count": 3,
+          "all_execution_or_validation_operations": 3,
+          "completed_GPU_compute_seconds": 8.619138269685209,
+          "GPU_compute_cost_has_unknown_failure": false,
+          "asset_validation_seconds": 50.504695075,
+          "model_loading_seconds": 148.841564256,
+          "all_child_process_wall_seconds": 245.92923933267593,
+          "GPU_energy_joules": null,
+          "cost_scope": "all attempts retained; GPU compute differs from model loading and whole process wall; energy needs external recorded sampler"
+        },
+        "evaluation": {
+          "gate": "PASS_PROTECTED_OBSERVATIONS",
+          "audit_usable": true,
+          "protected": true,
+          "native_multicycle_complete": true,
+          "offered_cycles": 3,
+          "committed_cycles": 3,
+          "unfulfilled_cycles": 0,
+          "task_success_cycles": 0,
+          "current_output_valid_cycles": 0,
+          "fault_interpretation": "not_exposed_no_rejection_claim",
+          "verification_rejections": 0
+        },
+        "cost_evidence_complete": true
+      },
+      {
+        "id": "ops-dev-0__clean__standard_strict__r0__unchanged",
+        "arm": "standard_strict",
+        "family": "runbook",
+        "condition": "clean",
+        "repeat": 0,
+        "schedule": "unchanged",
+        "execution_status": "COMPLETE",
+        "energy": {
+          "status": "MEASURED_BOTH_PHYSICAL_GPUS",
+          "GPU0_joules": 15680.832679224444,
+          "GPU1_joules": 14690.957723546346,
+          "both_GPU_joules": 30371.790402770792,
+          "window_seconds": 264.1131401974708,
+          "samples": 817,
+          "peak_memory_MiB": {
+            "0": 8180.0,
+            "1": 15892.0
+          },
+          "scope": "whole cell including required model loads, CPU/native/WAL waits and GPU idle power; not net inference-only energy"
+        },
+        "error": null,
+        "runtime": {
+          "status": "EXECUTION_FINISHED_OUTCOMES_REQUIRE_AUDIT",
+          "evidence_tier": "ACTUAL_GPU_MODEL",
+          "model_task_quality_not_asserted": true,
+          "offered_cycles": 3,
+          "committed_cycles": 3,
+          "unfulfilled_cycles": 0,
+          "rejected_install_attempts": 0,
+          "selection_attempts_including_fresh_retry": 3,
+          "actual_gpu_call_count": 6,
+          "all_execution_or_validation_operations": 6,
+          "completed_GPU_compute_seconds": 9.841278174892068,
+          "GPU_compute_cost_has_unknown_failure": false,
+          "asset_validation_seconds": 21.245984165,
+          "model_loading_seconds": 201.686713617,
+          "all_child_process_wall_seconds": 263.10229469370097,
+          "GPU_energy_joules": null,
+          "cost_scope": "all attempts retained; GPU compute differs from model loading and whole process wall; energy needs external recorded sampler"
+        },
+        "evaluation": {
+          "gate": "PASS_PROTECTED_OBSERVATIONS",
+          "audit_usable": true,
+          "protected": true,
+          "native_multicycle_complete": true,
+          "offered_cycles": 3,
+          "committed_cycles": 3,
+          "unfulfilled_cycles": 0,
+          "task_success_cycles": 0,
+          "current_output_valid_cycles": 0,
+          "fault_interpretation": "actual_candidate_path",
+          "verification_rejections": 0
+        },
+        "cost_evidence_complete": true
+      }
+    ]
+  },
+  "scope": "completed cell snapshot, not phase completion"
+}

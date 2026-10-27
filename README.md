@@ -1,5 +1,10 @@
 # RevTrace
 
+## Paid context decision and input attribution — 2026-10-28
+
+[14source/512call paid result and decision](experiments/context_recovery_20261028/updates/20261028_context_paid_result/CONTEXT_FEASIBILITY_RESULT.md), [input-mediated physical work](experiments/context_recovery_20261028/updates/20261028_context_paid_result/PAID_INPUT_RESULT.md), and [seven evidence tables](experiments/context_recovery_20261028/updates/20261028_context_paid_result/EVIDENCE_SEVEN_TABLES.md). Full checkpoint restoration repeats the selected outputs; known reanchors have mixed quality, so a new context algorithm/formal matrix is NO-GO from this study. All failed checker versions and raw records remain. The native stronger-model clean study is still running: only completed cells are snapshotted here. Paper text is unchanged.
+
+
 ## Capacity and native diagnosis checkpoint — 2026-10-28
 
 [Latest source/failure checkpoint](experiments/context_recovery_20261028/updates/20261028_capacity_diagnosis/CHECKPOINT_CAPACITY_DIAGNOSIS.md): all128R7 records re-counted,11anomalies cross-contract audited, paid Whisper capacity failure retained,12precision diagnostics, and explicit conventional repair sources/CPU gates. A14source paid control probe is running; no new context algorithm or formal-matrix success is claimed.
