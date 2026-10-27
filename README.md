@@ -1,5 +1,10 @@
 # RevTrace
 
+## Capacity and native diagnosis checkpoint — 2026-10-28
+
+[Latest source/failure checkpoint](experiments/context_recovery_20261028/updates/20261028_capacity_diagnosis/CHECKPOINT_CAPACITY_DIAGNOSIS.md): all128R7 records re-counted,11anomalies cross-contract audited, paid Whisper capacity failure retained,12precision diagnostics, and explicit conventional repair sources/CPU gates. A14source paid control probe is running; no new context algorithm or formal-matrix success is claimed.
+
+
 ## Latest context/recovery checkpoint — 2026-10-28
 
 See [the new context/recovery record](experiments/context_recovery_20261028/README.md): four actual cold-recovery cells and native input/render audit completed, a48-session/24-speaker untouched holdout frozen without inference, and ten native model smoke cells completed with model/numerical failures retained. The research remains active; no new context algorithm or large formal matrix is claimed. All raw snapshots, sources, failures and hashes are archived.

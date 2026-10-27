@@ -1,0 +1,34 @@
+{
+  "protocol_id": "REVTRACE_NATIVE_STRONG_MODEL_CONTROL_V1",
+  "experiment_id": "REVTRACE-NATIVE-STRONG-20261028",
+  "worker_timeout_seconds": 360,
+  "provider": {
+    "kind": "actual_model",
+    "module": "actual_provider",
+    "identity": "Qwen3-4B-native-planning-nonthinking-owned-selector-v1",
+    "experiment_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9",
+    "model_path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen3-4B",
+    "authority_device": 1,
+    "authority_dtype": "float32",
+    "proposer_device": 0,
+    "proposer_dtype": "bfloat16",
+    "max_new_tokens": 256,
+    "chat_template_kwargs": {"enable_thinking": false},
+    "cpu_threads": 3
+  },
+  "controlled_substitution": {
+    "kind": "fixed-json-return",
+    "on_cycles": [0],
+    "by_family": {
+      "runbook": {"completed": ["restart"], "last_action": "restart"},
+      "resource_plan": {"reserved": ["nonexistent_reservation"], "remaining": -1}
+    }
+  },
+  "development_unique_tasks": 2,
+  "development_repeats": 2,
+  "strict_policy": "conditional_on_actual_same_input_self_replay_not_assumed_equivalent",
+  "validation_policy": "four existing structurally fixed tasks remain unused until clean quality/cost gate",
+  "stage_policy": "ten clean smoke cells first; no automatic matrix launch",
+  "cost_scope": "all arms share this model, budget, template and mode-required resources; both_GPU whole-cell power; all failed and repeated work retained",
+  "interpretation": "distinct stronger-model control after Qwen2.5-1.5B clean task failure and measured FP16 NaNs; not a performance repair attributed to RevTrace; no original failure is replaced"
+}
