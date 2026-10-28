@@ -1,0 +1,65 @@
+{
+  "experiment_id": "REVTRACE-H3-V3-INDEPENDENT-ANALYSES-v1",
+  "actual_GPU_execution_commit": "f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf",
+  "plan": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/CONFIRMATION_PLAN_v3_FROZEN.json",
+  "plan_sha256": "8a62b6849842aee0baa432f83c260b11686e328746b3b7f5b3831f5bc652b9ec",
+  "jobs": [
+    {
+      "name": "aggregate",
+      "script": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/analysis_source_v1/aggregate_service_v4.py",
+      "script_sha256": "168bf74f14a8b04c8eeb194ad18e39093ea58c59f74892ccac538ca35bd8d242",
+      "argv": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+        "-B",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/analysis_source_v1/aggregate_service_v4.py",
+        "--plan",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/CONFIRMATION_PLAN_v3_FROZEN.json",
+        "--output",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/aggregate"
+      ],
+      "output": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/aggregate",
+      "summary": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/aggregate/SUMMARY.json",
+      "count_key": "accepted_cells",
+      "expected_count": 110
+    },
+    {
+      "name": "usefulness",
+      "script": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/analysis_source_v1/canonical_usefulness_v1.py",
+      "script_sha256": "72676a76fcebdabb0218d0e354b7181db04e27b6c2b53196fde034d5f4acb2c1",
+      "argv": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+        "-B",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/analysis_source_v1/canonical_usefulness_v1.py",
+        "--plan",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/CONFIRMATION_PLAN_v3_FROZEN.json",
+        "--output",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/usefulness"
+      ],
+      "output": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/usefulness",
+      "summary": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/usefulness/SUMMARY.json",
+      "count_key": "recounted_cells",
+      "expected_count": 110
+    },
+    {
+      "name": "opportunities",
+      "script": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/analysis_source_v1/interaction_opportunities_v1.py",
+      "script_sha256": "946b44e1ffca0226ff52ce91659b5a96e13f3dfd77bd21d1dc5f9d19692e90c0",
+      "argv": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+        "-B",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/analysis_source_v1/interaction_opportunities_v1.py",
+        "--plan",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/CONFIRMATION_PLAN_v3_FROZEN.json",
+        "--output",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/opportunities"
+      ],
+      "output": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/opportunities",
+      "summary": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/opportunities/ANALYSIS_RECORD.json",
+      "count_key": "cells_recounted",
+      "expected_count": 110
+    }
+  ],
+  "controller_source": "import hashlib,json,subprocess,time,traceback\nfrom pathlib import Path\nD=Path('/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1')\ndef put(p,v,replace=False):\n if replace:\n  q=p.with_name(p.name+'.tmp')\n  with q.open('x') as f:json.dump(v,f,indent=2);f.write('\\n')\n  q.replace(p)\n else:\n  with p.open('x') as f:json.dump(v,f,indent=2);f.write('\\n')\ncfg=json.loads((D/'CONFIG.json').read_text());results=[]\nfor job in cfg['jobs']:\n try:\n  assert hashlib.sha256(Path(job['script']).read_bytes()).hexdigest()==job['script_sha256']\n  assert not Path(job['output']).exists()\n  put(D/'PROGRESS.json',dict(status='RUNNING',completed=len(results),total=3,current=job['name']),True)\n  with (D/(job['name']+'.log')).open('x') as stream:\n   run=subprocess.run(job['argv'],stdout=stream,stderr=subprocess.STDOUT)\n  result=dict(name=job['name'],returncode=run.returncode,accepted=False,output=job['output'])\n  if run.returncode==0:\n   summary=json.loads(Path(job['summary']).read_text());result['summary']=summary if job['name']!='opportunities' else {k:v for k,v in summary.items() if k not in ['inputs','command','environment']}\n   result['accepted']=summary.get(job['count_key'])==job['expected_count']\n   if job['name']=='usefulness':result['accepted'] &= summary.get('formally_source_revalidated_cells')==110\n  results.append(result)\n except BaseException:\n  results.append(dict(name=job['name'],accepted=False,error=traceback.format_exc()))\naccepted=all(x['accepted'] for x in results)\nput(D/'SUMMARY.json',dict(status='COMPLETE_INDEPENDENT_ANALYSES' if accepted else 'INCOMPLETE_ANALYSIS_REPAIR_NEEDED',results=results,new_GPU_calls=0,interpretation='Scientific effects, uncertainty and competitiveness require reading the tables.'))\nput(D/'GATE.json',dict(gate='PASS_ALL_110_CELLS_IN_THREE_INDEPENDENT_RECOUNTS' if accepted else 'FAIL_ANALYSIS_PRESERVED',new_GPU_calls=0))\nput(D/'PROGRESS.json',dict(status='COMPLETE' if accepted else 'FAILED_PRESERVED',completed=3,total=3),True)\n",
+  "controller_sha256": "f499847af27769b8edf0d09071fd0cd62a1335461991176ef18ad706aaf94268",
+  "execution": "serial CPU analyses after neural workers have exited; bounded memory and no new inference"
+}

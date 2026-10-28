@@ -1,0 +1,2271 @@
+{
+  "analysis_id": "REVTRACE-WITNESSED-INTERACTION-OPPORTUNITIES-v1",
+  "evidence_tier": "offline recount of actual recorded views and complete result ancestry; not a new serving experiment",
+  "analysis_script_sha256": "946b44e1ffca0226ff52ce91659b5a96e13f3dfd77bd21d1dc5f9d19692e90c0",
+  "command": [
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/analysis_source_v1/interaction_opportunities_v1.py",
+    "--plan",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/CONFIRMATION_PLAN_v3_FROZEN.json",
+    "--output",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_analysis_v1/opportunities"
+  ],
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31"
+  },
+  "inputs": {
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/CONFIRMATION_PLAN_v3_FROZEN.json": {
+      "bytes": 372767,
+      "sha256": "8a62b6849842aee0baa432f83c260b11686e328746b3b7f5b3831f5bc652b9ec"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S0-r0/attempt0/config.json": {
+      "bytes": 6154,
+      "sha256": "7a5740646955bc0a85c0f78eae4e3d13716e2d3c0825ea9553dc8b4ed5b3db6c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1713191,
+      "sha256": "c029d4eb703699eaf3259e32c1ec8133274602c284ac41265c62fb5ffb2be8d3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3304692,
+      "sha256": "842a94d1bcc1361d6f2d4f41e14bd3fc74d5452921247db29b87d06d785302f6"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 399530,
+      "sha256": "8385cc5f91d670c11de247d20b323fef7a7a3e9e9fa7010f86b00c09d6d2a18c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S1-r0/attempt0/config.json": {
+      "bytes": 6138,
+      "sha256": "353d40be330f7b8c0f436d37a167f0f3d4d21225cc136ee81049d82f8aa4631a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1696659,
+      "sha256": "76c21d561a39db244a7ec4ef22becfe39747be9cfb456dae246a19362f1f8c2b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3304704,
+      "sha256": "2c977e706500808153a07083b50534fb73eb77760aa17ac4d664d7009ac2cd81"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 397401,
+      "sha256": "9685b3b518c229cc30f297672aa48570db22a18557df75b3873826ba958cf63c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S0-r0/attempt0/config.json": {
+      "bytes": 6153,
+      "sha256": "9a7d03f83deb865588d1a8d0816bbead7fb18af921f2daa313c4b7f5bd4be516"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1756129,
+      "sha256": "6b0d97c0d79782a5bf6d606491bc0fd0b03b1de91d3f8f07fa5d300c0bf99f05"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3304619,
+      "sha256": "8b323fdfb6a058558406ba9449500314aea40e8da0f4fa86b218362e10aa34df"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 399543,
+      "sha256": "56d4c0afaf5b8ad56f0e593a5b42be11c05b230edaf852d78e1099c314241198"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S1-r0/attempt0/config.json": {
+      "bytes": 6137,
+      "sha256": "24d94c22fc97d9a13f424fb8e9831c920501a642597eab341352e31a6e93a8d7"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1762672,
+      "sha256": "1f43ffb5d571205da9395ae088d6ab7d6b39c2a501bfee004c96259bbfde49bd"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3304596,
+      "sha256": "9a84907cf93230b46cabad66e26d547844bd7ed436a08b175ce35970652b7ebf"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 397389,
+      "sha256": "eaf4c950dd68e8dedcd2c207c9c54f1a9f83617d80a219c97ad598f44da853b0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 6137,
+      "sha256": "ee87ab5a566dfa0c2837343a28d6c131fcfa4e5afbe4b21c6bb7c452cc5646d5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 1762713,
+      "sha256": "7d88c0fefbafb33b1f8893dcc55c0ac3815332f291da84d87fa1e6cfad3f3e6b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3304605,
+      "sha256": "1398c2f7ec7774354423c21e403a0be548268a758744ae35cbc86ad80cbedb71"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 397381,
+      "sha256": "d433f0ab9b38cfd991c3fdccca436b5b1566d371e161a6238b06f8ffdfdb1ba5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CA-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S0-r0/attempt0/config.json": {
+      "bytes": 7029,
+      "sha256": "075830440a0a3bf3f2f4ffca9bdcc6ff56a6ce178cd11a2c6563be609b0691d5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2718238,
+      "sha256": "ab7fa9035c82853651ef2873b2f1aca69d6702cba161b9f8d663bcf350d8d095"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2291755,
+      "sha256": "30c30e1e31bd8e1bf8b4512a42003c17800b972ab871b5ce6df66f32e7e14d0f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 347583,
+      "sha256": "474ddba93b0877217430417b56ae060371e556707cde7642d08f02729487d91b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S1-r0/attempt0/config.json": {
+      "bytes": 7014,
+      "sha256": "bcb43676a2c770b762ad98af07aa3005929b7a608383ec4dd6ff0bb20d816a2a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2783535,
+      "sha256": "c4ca848b5e417c8595c9f3c710ce0acb327daac8aebea264dcd0d5417dc6f420"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2287399,
+      "sha256": "0cf5c5a64018aa4e438ecad8faeb5f76c8b91e62fcb49228325f8d486f20299f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 393391,
+      "sha256": "afe28be426af37b547a0a32eb83b8a85ae625116ce18df46280a5fab4451dd39"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S0-r0/attempt0/config.json": {
+      "bytes": 7029,
+      "sha256": "9385d917082ad68f3706dea2631534c32f2d9c86df5b7d201e955552bf706e56"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2813934,
+      "sha256": "bd46a5af00900c6bc982edd0ce3fc22e6354b87caebc2a0ff948465fd1dc9d44"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2293553,
+      "sha256": "ca4d1562352ec6a09bfd5ffa862e25adfb83ce7a47b25260b424fbd4ad24d686"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 396963,
+      "sha256": "df6bd8067883e3e07e74e6dd55f66b36cb83999498cd50ba7119786cb0563cf0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S1-r0/attempt0/config.json": {
+      "bytes": 7013,
+      "sha256": "882f10521b4c6983f1b63ff38117e9078c4a5dfbbe43b8a60de782a6569b67c7"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2820699,
+      "sha256": "4aac3119324960e3f2dbfc6468a64560a8fd64598a022287f4639e8ed0f7d7a6"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2293500,
+      "sha256": "1a1a60715bdf31bc4b6690ce34b0299feb0469073577ca0eb002daa3491f20b5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 385525,
+      "sha256": "0d90d4f04df082551ded60a14a6c44c8e2b85383973621c1639f57243f5d3190"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 7013,
+      "sha256": "6719506112c836befc30fc061f3667ed2325e46cae7bfc99942870c8507f521b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 2696775,
+      "sha256": "060e2b01e03320e950b8ab418393871758afd1aebbc030e324500664e9b6ff37"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2019306,
+      "sha256": "29c4e49ce53623cfc050913193836cd4a79a93fe242e157b9d0ff3131c111809"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 350428,
+      "sha256": "9b43e6a09bfa9e2e5e37742eadc274dc3c1a801e7e0a0c1837c83f5c7b5987d3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CA-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S1-r0/attempt0/config.json": {
+      "bytes": 7019,
+      "sha256": "0eab07ae0480bac6679e54779e723c72f93ecc96ca1c24cd221508554ad419b7"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2742619,
+      "sha256": "5644cec29c61cab65f5bc92aaf64f886aa61e22a4d1345047f548c8b837ece77"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2276275,
+      "sha256": "f583b1e247977994228543ffb78c349a1e2ac2faa37e43afc0fa29e15f54f248"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 377857,
+      "sha256": "bd42e908045bba13f93d645ac825780227deb6ce8a964937c99e8527f6837f5f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S0-r0/attempt0/config.json": {
+      "bytes": 7034,
+      "sha256": "41e9a49ea97ee8b4c247539d21fe079e519495641c03d7d64ed84dac1cb197b3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2801749,
+      "sha256": "41ac975859fe97f3d53c767aef3472911494163ea422080c60e76854841cc396"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2280727,
+      "sha256": "c7657ada4dbc7855af711749d5c368d83cb7d0f7880419a511140b93a8ca29fb"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 389015,
+      "sha256": "98045c969af2cc2e39020850f2c9e4adb819be177777dd7c9020b075dce76d91"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S1-r0/attempt0/config.json": {
+      "bytes": 7018,
+      "sha256": "6d839d2dbc6a1395e9887cd664b6a30668941de297cbbeae61e44136d5a4210e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2825603,
+      "sha256": "b29170695207d1c22661d9744f13ece711c484ae5e8815d9ad48c7cce1fb6742"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2267836,
+      "sha256": "6e66cfd2225624e00490b8b63a02eee7112b5624162e21cb86c001d7d3ad4acd"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 385979,
+      "sha256": "4f8752c38cea5c864c565f95d483d62a044c8fa03dcd67631812a6c7489c26ae"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 7018,
+      "sha256": "ff317682526007e273cfe6d803190629b9731fbded9b0c0559aa156239d249ab"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 2749751,
+      "sha256": "25d19ffa91a420d4adcbfaa1918c48977579cb0ff9bb30abd5ff6f48a66432c6"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2066298,
+      "sha256": "d479e9f29ad26f02ddb46a4f5bede9d1dff2428d110af14b034f0cd29cab105b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 361658,
+      "sha256": "c1cc996af90a6a35fd06e243bdd6e5d1071ec32474979558d01a9fa1d77e7905"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S0-r0/attempt0/config.json": {
+      "bytes": 7035,
+      "sha256": "d2dbdd8385f4586215880c0c3c6ad4d7f951ec967c4c08c66817eab5e02aecd3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2791195,
+      "sha256": "35f60b798f7460f8f6313f85ee0d5b29f4cfe4d92895c72b0cd74a9260263f02"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2276589,
+      "sha256": "4c0073acb2ed90a9b6a381da6537db42c23778e3532910743d77a3f0025dd4b0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 387478,
+      "sha256": "16604bd61b7221afa4518aadfb82953bd14e1dfb15363951c47c2590083c1fd9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CA-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S1-r0/attempt0/config.json": {
+      "bytes": 6143,
+      "sha256": "8f45d3aa82fd22ec1481add37695a92be3d050196de826c9f066ad7611d518d2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2470806,
+      "sha256": "b23db0ad05f68e929056410b52f8d4484b8064aff18541c770a95ceb88910ccc"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3285082,
+      "sha256": "aba9674ea77b6e8bb7d9513a4bc7d1ba427742af22ca2ad025d5e904a1646715"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 348393,
+      "sha256": "a78fa54d6b0137aa4ec8efda21d5226a7969eac668db3f6e61845667c6a0d6b2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S0-r0/attempt0/config.json": {
+      "bytes": 6157,
+      "sha256": "8aa1e70b0d9781340352410ae914e2ce2f5637b09622d5d2523dcd110f59cd4e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2591996,
+      "sha256": "87935158ee9444f56009a0092aa2e5e05029eb3464e051b6385c6f5fd8d07df7"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3310528,
+      "sha256": "ef0e95d3961a899f900ae8afed63f0c6c869742cb4205800dc49edea0a630277"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 349012,
+      "sha256": "65fb8e805996468a703e249b121183f68f5f3f6b6302ccf1a5d7b4cf57a62c63"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S1-r0/attempt0/config.json": {
+      "bytes": 6142,
+      "sha256": "e2f218c4a7ea2692f2c86be0d1326c7e329888bb79d3b8c98cc2f3581029fa33"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2541212,
+      "sha256": "14dd7dfe04c39113416f1edeff6d3d18dbbc3c37b121d80eaee8b7f732874bec"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3306013,
+      "sha256": "56016d107b3fef3eff493b7d338ebd7d524fd687875a98fbf67f8a9c28deccff"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 344666,
+      "sha256": "47dc5e5ea0c269940bde0eca8434e3b5110208f75ac0b49db246ba7b7ede871d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 6142,
+      "sha256": "b9fc4fe71519a524e9b676a9d356affaabb81a4e4aca2ab5c6b8f5bfb4c6311a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 2490867,
+      "sha256": "e80cddb3c852e6aae34951d843e973a0027fc89df5b2b8470c3c6c29f0897a6b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3308397,
+      "sha256": "6ff51385bca55b608f96881e69c4dba55dce6b92a7479098e08f26308be550c4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 368699,
+      "sha256": "8842c808da495e84a5285d8359b65a3fa01fe4ea95dc07050a76f992990f8d01"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S0-r0/attempt0/config.json": {
+      "bytes": 6158,
+      "sha256": "6315d2eacfd01bf6fc680e8a219e931556f27986820652e7d0c2dd2f37815ff4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2515291,
+      "sha256": "6dffc4b6e80c83389664721cbf1f2f6f1ccd8299375f7eb33514f158b58d14f8"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3301674,
+      "sha256": "e7fa2d9e222afe6f797dd54996f6807d26757bd738117477829e86d0578c95f8"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 357351,
+      "sha256": "cd5463f945fa200548bb67fc0729fc51d608da23fd02204d9bac6ba9e3ef56b1"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CA-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S0-r0/attempt0/config.json": {
+      "bytes": 6158,
+      "sha256": "0eb5eecadc53036edf8a588e976c6bba59a08711e6ce5e5efdb6ed978b4e39b9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2478598,
+      "sha256": "268706c3e618d0ac70ccf24dfbdeeb42dbb664feeeee3a277006b972f89a1138"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3179074,
+      "sha256": "735aebf61e1f8de93d97e82a102efeddba9ee7a287baea1e0d6503c813ad57e5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 344050,
+      "sha256": "2e209d5508b5a23d01fa1af3afe1704caa3534951de17921da64f2ef25a53297"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S1-r0/attempt0/config.json": {
+      "bytes": 6142,
+      "sha256": "0b5fd83270edc3bd45ba303d742ca8626d5ab2e5d02bdec0a964789575067849"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2508139,
+      "sha256": "e48da407bd53174bb78623e0fe1e06ee5332a9246d2269326de156ab8ac6cd8f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3180777,
+      "sha256": "18167ce27d7a707a58089e8b1c620369a8487fd71af3ed3f0345a5d49e07f52e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 345381,
+      "sha256": "379468fbe9de40d05da40f8152528e0eb28a63254c272e5cc5d6db41a692ffb4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 6142,
+      "sha256": "8730d68501242a6ec34297ebe0ab51998157f095cf5aa6671295efa04fbf0d2a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 2523742,
+      "sha256": "a31e5a49eabe53405e55dfcfc278820847736b605ba9848872fac2a7aa5272fb"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3180087,
+      "sha256": "fbf5a9dee214f449b3272024184d9b9f357e0b13d59a319c548190ec5ded5e0a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 346183,
+      "sha256": "efbf931f2d022e9602548dee6870d53fa3d1739ae6f3307141f0e052a939e589"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S0-r0/attempt0/config.json": {
+      "bytes": 6159,
+      "sha256": "f598757c53104bc5a4c7a346985a611950f5c579a053c4a4b087f615ea9edfb5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2501593,
+      "sha256": "faa17c70b5df1fc2573ebe4ebe69481343367d1176165c7fe2f94ad31cc2c1f9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3180387,
+      "sha256": "2998f9bd643d8b32d56d9fb2f12fcef3a2d07805287dbc2586f2478a535d1304"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 338363,
+      "sha256": "07e1c6dfb5e49e9acaec7897d850f4e3909719bcb65a36e6101999a494ea2cb0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S1-r0/attempt0/config.json": {
+      "bytes": 6143,
+      "sha256": "379c78590c08058277164fa9f95c2ae5f748a221271647a95c5f1a8220b01c6b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2466073,
+      "sha256": "eff3f9fe1c2716ef3cf39c955b32fdbdf7d01e2eef74d899461097106884f1c6"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3167520,
+      "sha256": "2f5d77e9566df1d64215340043d9c58350e193c7abf8d3fbb368b8d34d1db6f9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 355405,
+      "sha256": "83f991a0e9ca62023c9590d371954d9d7a2d31870b3dcc74f8e572b3b07b474f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CB-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S0-r0/attempt0/config.json": {
+      "bytes": 7032,
+      "sha256": "eee46cbc474ea3b2a2f9ec1c13bb5bcca024f86806a506be57b3257c5f4f0ced"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 3292210,
+      "sha256": "ba84275ffac6edacfd622324b410bb0a77ad2b8797398dd7306c1861e9566c2e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2236285,
+      "sha256": "964e319236426e016ae5976992583c8d784686b626a45d5887b73b3bf8e68e28"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 384083,
+      "sha256": "811286f6030a81713eab865ee71af163caeb04eb7c001a68a7ced97967d6ee3b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S1-r0/attempt0/config.json": {
+      "bytes": 7018,
+      "sha256": "19247eba4b29b856f3a7a1036311ab4273472f8503f9044b331480d637564d42"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 3269648,
+      "sha256": "a3ecbf1ce76cdf9c85bd0b285c01ebf8c03eb8490bfe1b8e2ba694e123bc7cd5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2236800,
+      "sha256": "b57283ee09377407587af91b39aed6a046e86887cca50dae6ee240708ef26f82"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 380470,
+      "sha256": "61305ef1bc427f21eb6113668f5bc42427a0d354c59bd48d1b38a89137bc9b13"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 7018,
+      "sha256": "c7b3532603781d29880f1be3c844dc29c15022f7c032f405542f25f48567771d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 3154972,
+      "sha256": "9ba799f05aaf6d6cb1529b0f7c01ea08678d1171d119691b7426e75843a86970"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2028163,
+      "sha256": "717afed12834a0870cd65b7abfb2af29e71ab00f4ea1e015eedfebdc30e2621d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 351892,
+      "sha256": "025c4c1aba70cd4f3528053b3309641ec10ceece82ed7b057bda3ad956ea5504"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S0-r0/attempt0/config.json": {
+      "bytes": 7035,
+      "sha256": "2e795e8c42d00ec2bfc1a6768eddd04090813bef5664de09781a2ebf2995c09b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 3218492,
+      "sha256": "7146cccfb6c9c2700977b6809da86b7a57b787b228178fc40d07afceff5e1848"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2224019,
+      "sha256": "792f15fe474536ba07487af26721ca4ac63d0e50ac3fbff1086b343283671ca1"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 376845,
+      "sha256": "2e38546611eed37f280aa15c1cc34753df1b330fd84b1965d8a084415eabb942"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S1-r0/attempt0/config.json": {
+      "bytes": 7019,
+      "sha256": "09394fded962cf5513a1805416c95c97ab65ed34fd22e20b5989ff44200d3cfe"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 3206515,
+      "sha256": "e44fe37150958b2f1050542cbbd0d362ab007d03a7e520f16210dd24bb6f9423"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2223661,
+      "sha256": "f15bfd770d13d8482c7f49446c20b20cc44064b1629ca0a702f6dc311bc0ab51"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 374978,
+      "sha256": "dbddd0e2a32fb98e0f896d92609b20bd00bead9f963c26577eaa2971f9444658"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CB-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1923,
+      "sha256": "a065790ac3ec3b6e07cef829fc085501d56ddacf5f1fe12d787664cbf04ffb0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S1-r0/attempt0/config.json": {
+      "bytes": 7013,
+      "sha256": "a700d0cf0ffcc629613d722203ec75241209daf9549ac7580e4670d375819d5d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 3399638,
+      "sha256": "10c2f43edfe3fce930db094e3ad7a6dcf2cd822ba25b4c30a82ebc8239b9e5e2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2236264,
+      "sha256": "16b3c087d49c19b334f6017b0106f9ab9183825d1025a004e16be984509bfe57"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 383387,
+      "sha256": "8dfdf82b941dac2d992a8c7427cfcf98c99d8747dc785fdeb1f6bd40fe1dd046"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 7013,
+      "sha256": "064cb2778cb872d232b84a8aecf65f3d98c9075e80c243be283a185ff2046372"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 3200971,
+      "sha256": "f1de4e5a81633152627238c99d9206241a0ab6a7475bdb86c56b5fd7d37b7448"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1935084,
+      "sha256": "5643ff710f8202e019c6490ba0ad50cb8fb724775646ce21414aa8da0e679266"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 333114,
+      "sha256": "e3595cd1f68ecd4e5f0dafe70b1dcb0b96d29f29429fe25dbc7b7f63b8685aef"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S0-r0/attempt0/config.json": {
+      "bytes": 7030,
+      "sha256": "79cb02004ccc9cc2285845ec6564003670379cd3019606ec6de42323d82adc80"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 3318715,
+      "sha256": "e6927c4ec467d84342140a0a7240b535e34108f34ce61c15bf0948d5a8f20445"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2232921,
+      "sha256": "b18deec495227f404928720ed969fad98d1831567fbb7f347aa78a3ca56edeb8"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 382142,
+      "sha256": "57513b959859db91b0c52f88d3ceafcb04498cb56655eccf816c10fefccd555e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S1-r0/attempt0/config.json": {
+      "bytes": 7014,
+      "sha256": "8a6ef4870a55b1748e3bf7026ade5d7589a08dde3d916d0207c40242413440ff"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 3333509,
+      "sha256": "8152b98530c40eaf93e6b5755e4cc47bc162f8132674755604f602233a6b893f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2231216,
+      "sha256": "5a72d893f2debb2b766ccef9a07aa645af830ea0bfe55f863c0c674b6d048e38"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 377019,
+      "sha256": "f3abbbd622c04a865eb082b47bc07e1ba4436f2a674cf286d690178a2074d5bf"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S0-r0/attempt0/config.json": {
+      "bytes": 7029,
+      "sha256": "a7d0df2c9b96443155aa33c91dc738184b093ea2b2969ca021556c398201c618"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 3388297,
+      "sha256": "ebb81d2ebea6032991eea41324d60d4f5056a905d1e03e6c646ae4ffaa0c8766"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2236311,
+      "sha256": "5ffefc1e22136e4af29fd5144d51b4dd439aac792000594af02cdda03220c963"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 382822,
+      "sha256": "c200211c0e9a78c4a216a717c13fa1e2658c4c8336838a1bf4d67706fc3fdc13"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CB-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S1-r0/attempt0/config.json": {
+      "bytes": 6137,
+      "sha256": "edf1073ed11ced6c95fde0393c008915ab40e6fba35b27aa620fe22f62f334be"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1696983,
+      "sha256": "122f6426a79fdc13c641c8a580fa8ae574324089491d4aa84da9d87cd01d5eb0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3199384,
+      "sha256": "231eb7a0e446153662cbb98a6e58ae36e8e259e341d7dd332e07830f81ccdf33"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 385989,
+      "sha256": "5a64779695eb22527afda75bb5461949062e828eac60562bdd1dcac093ba1d84"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 6137,
+      "sha256": "c5ede8727ebdbfe993c43b2e87acc228b50dbea218e17ddb908274915e9d6e91"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 1749474,
+      "sha256": "49fac0c684166fdc968853c212ab1c8e0cef988c09a66902b222fda49e836bbf"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3199108,
+      "sha256": "b00f9188264fb212f4409f3a127df389697569dd34eeacab40751e7c5ebbd704"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 385956,
+      "sha256": "4e8174cf2e8913dea0cd26d1334f018292303a231b1361eb1fe82256087e7e44"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S0-r0/attempt0/config.json": {
+      "bytes": 6154,
+      "sha256": "433f04a97c117aae925bb46bd9b8b77c235fc703fc06d6d92c95241534ef90f6"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1713528,
+      "sha256": "c58b6515a814fff1ecff60395984085e4ba022054ea43552adf1da41c96408a1"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3199341,
+      "sha256": "25d070024fb72a6bb3d583963e049664188437cbf1d21b0955b5daaee3a376ce"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 388017,
+      "sha256": "401160d2d1ce5f80a03d7263e307ee161a4da39224712c50a60b2f9dc145529c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S1-r0/attempt0/config.json": {
+      "bytes": 6138,
+      "sha256": "c2cf07ac4852e907887ac1cde041ebbd588c68f21e3e181a165c6a373ae34672"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1694976,
+      "sha256": "d3756676601b92ff6abc8dcddd5c15c0553133fb789e2c73fb26166bdf3b9b2a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3198978,
+      "sha256": "6fed0de9b8b4b2173ee08959a8b9d1026c83607607ba4d292b7f8b624862deec"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 385928,
+      "sha256": "0d9bb2d009f400029c283df7d55653acc9a99baad4388efe6b2265392f5c206e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S0-r0/attempt0/config.json": {
+      "bytes": 6153,
+      "sha256": "c5c5cc513c4223e7dbd80412bd7f6c1b2bed43fd33eb6c1ba63d5b120abf8c1c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1712721,
+      "sha256": "342b18d01641bedbe91037842664da7aef07d45df1926e083d8ccb51f1209195"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3199437,
+      "sha256": "0f8d26b3b91cd25dca16d413db7bf4a8396b3d17f96b9a2c941063ec5c5512aa"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 386256,
+      "sha256": "aaa6bce4978bc1c57fc867d400cc1da2f289467cef4daf353fde64d46e89fe07"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CB-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 6137,
+      "sha256": "31c05ce42e27d1c0b463431daf31b7015f4cbe5bbc49cee7c81be6e6728d16c4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 1776283,
+      "sha256": "85a9112a86592ccdc2c42aed49a5c448e41a9c35cb3e840f687610ad0337870e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3195233,
+      "sha256": "ff8ff9c088acc0c7e7b04815bb15fc3226d95c560e3092c187d4431827dfc3a3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 385919,
+      "sha256": "83e6259f0997ffeb647337f57b8089143b514454959aa8f307dc41d45033e8db"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S0-r0/attempt0/config.json": {
+      "bytes": 6154,
+      "sha256": "44c569383db363a6aa9c07adc5dfa73e0f4a711010a8619674b3f4dde5dd902c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1746101,
+      "sha256": "298715da837ddabf4b2920eba8a4c57d74067b94f265cf45188b6e80cdf20e5e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3195266,
+      "sha256": "a6d20f5c309bbc4101027816880c47ebf0a7f45a8e6ec5434adc2393c9e6d88f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 388013,
+      "sha256": "b92c22643107c65542250d65662820a54ec51bfabf608d02af8d071f9d773afc"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S1-r0/attempt0/config.json": {
+      "bytes": 6138,
+      "sha256": "9f3edc49790391b1b735f9b2883f07acb308cd8fcbca919ceea827f6c584863f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1708950,
+      "sha256": "e4a173ab636ebf8854a5fa598f8409e999933475e0d193d5032c7bce613f9ae4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3195276,
+      "sha256": "b5ae23547d48ed7cec305908f6d786a4325cd810ce359a2436c4d2a10ee3221f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 385932,
+      "sha256": "340d576c8808ed28931f8d435a8c42814b608b8ec2c1a218100eb2afc1f6a8ff"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S0-r0/attempt0/config.json": {
+      "bytes": 6153,
+      "sha256": "e02b9073c98d5c721a86bb888e01b5110adc2b458051051c502f6c08d3f05e26"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1820456,
+      "sha256": "b366ec0eea665815345ef1fc335f9989fd31deee2863c36fad634723295a9945"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3195195,
+      "sha256": "cb2e340abff35c7048396ae737b412a13ac1c9ca7d4dbdcc7f80acbdff248d55"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 387984,
+      "sha256": "0d54882f4b9d85194b0c6051c43fc1f24f3cad19a65d281f4d815ed36a9d75b4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S1-r0/attempt0/config.json": {
+      "bytes": 6136,
+      "sha256": "378e1f7071fa0c39beb5f327ffd4f56621e913489e5a2e06e1f9236dd9b20e0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1766050,
+      "sha256": "f3d6279454cd8d418b492aa794fba669dac27df58de5a667bbaa1ab7c8437058"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3195022,
+      "sha256": "c2aa5976bc4a2f87b2fc9e786b9234ad4cf1c2ff27af30f3fcb45eb227719679"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 385933,
+      "sha256": "08aa6238b499ef11bfd6161c78f8ebbe54e7d6a6ab321049c3c5fdf2c8c95c36"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-sync-CC-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 7013,
+      "sha256": "80f5727fc3d6ce9effe4ff687e018de7b92f8cab3580ccee8f13afb81f7970a9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 3448921,
+      "sha256": "77b20868ad02dfd57a690814b85f468aeed9164d12b04162e277e58d486ccbb3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2342019,
+      "sha256": "cebb5aeb5f57f03bb6a6e1ba50b82950404fb521715f1dcffd12162b899decc9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 410803,
+      "sha256": "a2568b71f6ee0556284c48c8b5f50b66cf07c5f3d33b99ddef2945d0ff429f86"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S0-r0/attempt0/config.json": {
+      "bytes": 7030,
+      "sha256": "e08d3e9a74570c1c99dd788b70b86df5f33c00f5d5f47056622b28467ef3f94d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 3554821,
+      "sha256": "c36e84ea4b2e42c9b97764577a4cb954cc9de8048c81185654b0b687f848ebcf"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2893380,
+      "sha256": "40a1ccb398453f3684ba5132ecfda5652917884108b09ce3681d30b86617ddff"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 475693,
+      "sha256": "1e883b4c68379e6e3e171af6ee171976629f95031ce74759e1e7cd1fc5c73f18"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S1-r0/attempt0/config.json": {
+      "bytes": 7014,
+      "sha256": "de85075101cc87fca475d26205b0b331024ef669bc011b07cabb7bdbe6d73ef9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 3562165,
+      "sha256": "062dd2a1d3b576b6dae3f563d7cb74a32a554a11b000ae2472f5a1811f125b91"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2892010,
+      "sha256": "eaf9f835d7700566f775f73866626ff0088582d2a25092f9f9ccf29031eaed8d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 494912,
+      "sha256": "25bc68399c581113cce7529ba25aa23ab504b8bd63030d3968d819abd91b74b4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S0-r0/attempt0/config.json": {
+      "bytes": 7029,
+      "sha256": "6f36d665ff762fb49ef0cb4f120eccbb6ed829ac44b395cfdc68bf620213a3e2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 3615726,
+      "sha256": "63f0a2e99adafac1e3bd66698e3a5ba97f8c323a15420e1e11326ce3dbdacd39"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2898093,
+      "sha256": "3974516d3c03420ec1971dd3a53cd5f82605b262b93c99481693ba1cb7623847"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 494823,
+      "sha256": "422882a44aabe6fccaefc7ba6426a949ba9d51b9de3ad1615ec010e8753b05f3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S1-r0/attempt0/config.json": {
+      "bytes": 7013,
+      "sha256": "f74fa04a81818b13819c0071ee40b61af588c8eca71bc874542e18d2b3b6baae"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 3610830,
+      "sha256": "6c342964f5a48c9c55ff3aad385abdf11200b38d5d0be7ca9f76af1030d930cc"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2898085,
+      "sha256": "9d5ab6c8bcc67b2f5440d1d1493c115cee3946eaf6f4736241870df1cdd84349"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 480201,
+      "sha256": "4d256ed0f585981291b6553537240448f85ef0ddde6f1f4cdc0ea5e8accd2943"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-sync-CC-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 7018,
+      "sha256": "a679ee1b711b418bb27bc8e142edfb2f1221f6a1f4e4966545cb6c333b0c05e9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 3353151,
+      "sha256": "cfa41cd188fc8e4c16d7b10f1e4b7230792980691cf952a559ea5f1fccb5bd7a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2276510,
+      "sha256": "961eccfa859df7300b70780d673c6e4e185226119663b53a3efff159d7bb0dbc"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 400151,
+      "sha256": "34f07a97326ed79419cf7b4c2d81b44f8fe009c80ebbbbf840fa0c9a186bd82f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S1-r0/attempt0/config.json": {
+      "bytes": 7018,
+      "sha256": "6a19af376d325802d55f74f8c5160e89744c58709cc1eb99980a6e247101b14a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 3651554,
+      "sha256": "0b151e3c4925d8dc8872ac8a9cfaca633ea0d50111e1c13e118341c8bf1d9163"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2898592,
+      "sha256": "de42aa887e00a93491dbb789e8b6dd51e49a28a498574ceca0ca51e543a6e09d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 496632,
+      "sha256": "62cbbd8ddee94a8efb7cfbe7861ab9fb67310b28b43b1436026b7f776db488fe"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S0-r0/attempt0/config.json": {
+      "bytes": 7034,
+      "sha256": "07d505a92ae90b0ab3519e8fb396a8d9658dc72ecce19fb4b0ea7637c272678d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 3545777,
+      "sha256": "0ec49924ec3528cfc9ff8934d40babcab41f075be02e651788761fbba7303a7f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2898644,
+      "sha256": "7000e7fd2e9be17d17306ff9c4b6897a580415c3fe30470a85601fb093d0940c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 475142,
+      "sha256": "a06b42049e0d5eb6463217d179191b2c8a1ce73257183d3bb1ca8b3906f4dd0c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S1-r0/attempt0/config.json": {
+      "bytes": 7019,
+      "sha256": "0b496f29847497f8f03ca395186e38d975f840d698086b98b5fb30f56940ecea"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 3425269,
+      "sha256": "e937436d88e68eb033017bf46dec4f03a8da1fd68f00ebb34bcd0983776a52dd"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2821954,
+      "sha256": "6ec10d71d744ca81adec54778a6b782a6dbb35078b706a01cf8dc66490025840"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 432120,
+      "sha256": "ac10dbd925089296479d1b191f31ffbda703dbac30da306ea73d02f9c3bcbaaf"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S0-r0/attempt0/config.json": {
+      "bytes": 7035,
+      "sha256": "7f8cb7a1bea459e94e4db297da95b9012d443a1ef510ac5643a09da462dc9ff7"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 3395998,
+      "sha256": "ff93fb09dabd6a872d217ee7aadfdca1a8b419aa2e38b46c04fef8ba3e616662"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2735345,
+      "sha256": "2db918a346a5f0d9ce1754fb355637c0fdc2f0082aae68783602ba718498646b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 408917,
+      "sha256": "a92b09f52a920875c11fb832e5f5e6dd4ad365f1b262729c27208fbdfd15cced"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-whisper-rho1-staggered-CC-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 6142,
+      "sha256": "1efd878d9c0341b39860dc65355e5954a0f1fcc026865462fe0496553b4343e1"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 2579785,
+      "sha256": "2607cc751bdd37336e63437f4102df394e99147d4da4767108b2a88b66b053fa"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3184809,
+      "sha256": "be1c06b3a3fbeaa07b946c0f3ac53bb224f0b31f549a842d62933e9e53a9ef04"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 345198,
+      "sha256": "d6b8c31de003906b236580676e3b2177574502642ba789053b23f37757db83d9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S1-r0/attempt0/config.json": {
+      "bytes": 6142,
+      "sha256": "a573a4064012615b1f2fc54859b68f6a4e4706839e340f3da2730a35ebd20aa4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2592373,
+      "sha256": "ec400c0226ba45a279874b31c47675751af18f7948f3d966159a19a8b8a160ce"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3204258,
+      "sha256": "ff4b3fffd977294dff36397c12825ca4dcd84f874ce8582dc040519e5dbcd7ac"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 360972,
+      "sha256": "16a8fb2887bd7b2abe3746ede358f660edefec72b6ad699da14f3f1d4b5772d4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S0-r0/attempt0/config.json": {
+      "bytes": 6158,
+      "sha256": "720f684af2545d7a576d1e873defa1dc41471e1c589fd8adad5100cd05ab8b86"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2565165,
+      "sha256": "d57559c920da1ea8dd1a99b84e78b33816a3d8b19481f29b2fc0aca9285c470a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3201919,
+      "sha256": "27b93648c57c028a11311bf198df12d226a4259c3eeeb35365c52e5c0c65d0c1"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 343508,
+      "sha256": "2f6e6bb2246c9040a453ab138361e49f9af6a79821892fef70387be5514bf714"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S1-r0/attempt0/config.json": {
+      "bytes": 6143,
+      "sha256": "378992bd0f0c99284a50b1041fdb63d803b0f34118ae9a6c42e12cd257cc148a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 2595799,
+      "sha256": "e9ee4c769fb20b0a7949dbdedd289bc20adbb91b11d5f651fba63f3fef74cec7"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3193138,
+      "sha256": "49e6cb2c0e16e09efc24db492a92b0ac3769d7eac53166afe5b51b42450b7998"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 345014,
+      "sha256": "e37c38539c458232a94b74410874a0e6a7edc9a079dc3b8b4d398b0e7e3025c0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S0-r0/attempt0/config.json": {
+      "bytes": 6159,
+      "sha256": "158d7c1003d3b097bce1a03dd06f5efa473f7b356201f7b671b8cfcc5b3f61f8"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 2561562,
+      "sha256": "40008b70ce2a9e3930a17fc10539f269df3ec2b425733c08b5792efe1b589db9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 3193027,
+      "sha256": "414f843763cdc93ba8e8ce5ffbd2e8da17292ce9881f97f07c62876a3ad98461"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 361840,
+      "sha256": "b2ae139cc3836d8879a20ff916e83033c1c9f442c61aaa9c34f9f6bdbbec3e22"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/primary-qwen-rho1-staggered-CC-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1924,
+      "sha256": "e0c5d7b31f119ec39d496a762cb7a09015088f42cacec1521a9376a526e46aad"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S0-r1/attempt0/config.json": {
+      "bytes": 6159,
+      "sha256": "04d29979e948481b35805a249e2c097a9c2ed880c4e3063f8325052695ad8e31"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S0-r1/attempt0/events.jsonl": {
+      "bytes": 2508359,
+      "sha256": "ccb855580d2829e9e2d7ae8578f74dd75ef0400f889e6facc783d27a48208f12"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S0-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3308127,
+      "sha256": "5170e38a16a002c77356985f806bcf2e72fc599a25770c296f19057f39c72823"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S0-r1/attempt0/consumer.jsonl": {
+      "bytes": 352790,
+      "sha256": "c20b3be6b4e983253b4abdd77210b20d5cca55e53591acd6be420240b31d879d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S0-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/config.json": {
+      "bytes": 6142,
+      "sha256": "56873b7f27fac075ca5dc394bb187e6b8dcc02678fa4069f0127fba100ac3f96"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/events.jsonl": {
+      "bytes": 2628014,
+      "sha256": "352a83e0512817bde20a39a0bb29e8419fe5abeac901c91bb289909667e746b7"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3307946,
+      "sha256": "904837ef6137dcf55d5d7692dba3157b76093d2f6ebd807c5da9fff7f947c85f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/consumer.jsonl": {
+      "bytes": 352207,
+      "sha256": "9c6633f10269f3de13576163fdcd8df5e43d4190d1f11949f4f36754aed4aa78"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S1-r1/attempt0/config.json": {
+      "bytes": 6142,
+      "sha256": "16cfa4fa53bca7c54d18d7f05249a2e1c081fbb9d2d36de8793681718ebc91e0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S1-r1/attempt0/events.jsonl": {
+      "bytes": 2623850,
+      "sha256": "5efd092beea6b2e9f289704d675bf61cb0af10b11b912966f1c71a7bf762b7b7"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S1-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3307818,
+      "sha256": "e7a81e6b7610626207ed5ecf7d0cb9b1520e896522f86247a3d4763556358d5f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S1-r1/attempt0/consumer.jsonl": {
+      "bytes": 356053,
+      "sha256": "87655e036733f8ff51ab727fc701f49f8e75c8ff0f7390e628f6328a0f65dadd"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S1-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S0-r1/attempt0/config.json": {
+      "bytes": 6158,
+      "sha256": "17cd9b4c8f6c744ac7800d67a3cc204a45c7cb1c3b1d28b3a70d091ea34b6db0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S0-r1/attempt0/events.jsonl": {
+      "bytes": 2578527,
+      "sha256": "3b31c202022d6ef3da4540e5e1d2a8dbbba218c0ea387cab76300967770cea64"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S0-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3288839,
+      "sha256": "fd5795f198ee98c1ef295999f2db0464818f94a94a865b17cf4c2aab1072940e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S0-r1/attempt0/consumer.jsonl": {
+      "bytes": 364640,
+      "sha256": "4ee265349919896f82041d828bf6f83e3a312683a2b7d844d992d629e2475fb5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R1_S0-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S1-r1/attempt0/config.json": {
+      "bytes": 6143,
+      "sha256": "b692c8c886eeafbe085e41b66a74bcfd81fe8fb03143e284959db7f50c85a115"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S1-r1/attempt0/events.jsonl": {
+      "bytes": 2521610,
+      "sha256": "935dc54e45c5f4b7b0fc05471f28ee47639ec736fa0ff570b63b324a8d262dcc"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S1-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3302968,
+      "sha256": "07399c1035b76d984bc5071babbfbcf31174bf833597a9c467c108021fbab81f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S1-r1/attempt0/consumer.jsonl": {
+      "bytes": 350963,
+      "sha256": "3efb7812b941e7eb28382cff917b48c02b47adb07ddf726ddd0f32944b59cc15"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-staggered-CA-R0_S1-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S0-r1/attempt0/config.json": {
+      "bytes": 7035,
+      "sha256": "ad43771722016374a20d575b5bc907c1ff7378f88bec4f98021093ceb0b65647"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S0-r1/attempt0/events.jsonl": {
+      "bytes": 2673710,
+      "sha256": "fe42cc910db4a9a89ca1f719f03ee8452607a810b189f10b84cb5f6551d6bf5c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S0-r1/attempt0/worker_records.jsonl": {
+      "bytes": 2264268,
+      "sha256": "d59f94e8793999966da9fceb63e59c18fcef41054715c19aba902ed4777c08e2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S0-r1/attempt0/consumer.jsonl": {
+      "bytes": 384547,
+      "sha256": "c0122c280b2981b39c187a25edce9be45bf3654929327dfd513dd9ae383bea59"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S0-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/config.json": {
+      "bytes": 7018,
+      "sha256": "c65eff718a8ff09f17bb32503ef45e7f6a5a67613c2b9e3c76597400298d673f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/events.jsonl": {
+      "bytes": 2646705,
+      "sha256": "54ed1a4418de3225a49ac24ac99baaf1b64ebc15a00d687fc4639814b0811ae2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/worker_records.jsonl": {
+      "bytes": 1973472,
+      "sha256": "e080c281c88bd88abac0a368a2501e473115a67b3500f0b36ff8332a9a63c54b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/consumer.jsonl": {
+      "bytes": 329378,
+      "sha256": "b064dd35038cb30b131d9061304bfd75a5f1da642b02293bc9e45c8cb52d0d77"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-STANDARD_FULL-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S1-r1/attempt0/config.json": {
+      "bytes": 7016,
+      "sha256": "fbd9209fdb8ffbd73013bf2e150857fcc7d5c50da673ad9b3ed6a1c4379df798"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S1-r1/attempt0/events.jsonl": {
+      "bytes": 2805585,
+      "sha256": "c3ea20325c88c2d899b1c3cb26644e1ee1757ce26d18f36d958f84fb7924383d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S1-r1/attempt0/worker_records.jsonl": {
+      "bytes": 2280229,
+      "sha256": "c0d88f2241a42a83d6f493802766532f5081498ad76687e9bd99a54677eb3ff6"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S1-r1/attempt0/consumer.jsonl": {
+      "bytes": 385355,
+      "sha256": "cc81c891762b27a612ed6f1a2c43ac33d1a2451a1a8e1879dcfe12918379d082"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S1-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S0-r1/attempt0/config.json": {
+      "bytes": 7034,
+      "sha256": "6c20532883c0098c0ae476a8389449a68d2f143da555556488b122e84ec071f8"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S0-r1/attempt0/events.jsonl": {
+      "bytes": 2806413,
+      "sha256": "5279253e49e36c1d6625541a40539bfca2dae94689c340c312c6517aa98649bb"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S0-r1/attempt0/worker_records.jsonl": {
+      "bytes": 2280742,
+      "sha256": "5a47070163ab7dd6bcca8c39212f507831e9d0b522b2c953cfc29e28a0075088"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S0-r1/attempt0/consumer.jsonl": {
+      "bytes": 378861,
+      "sha256": "b9f7791d1fb012fc2d841c139594f60ff682388ce6aa6d9f15450243113817ac"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R1_S0-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S1-r1/attempt0/config.json": {
+      "bytes": 7019,
+      "sha256": "f63b2e38690b82f644b653c9f635e5e5542be49e2ae6502f2d46ce9a7fea078d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S1-r1/attempt0/events.jsonl": {
+      "bytes": 2726559,
+      "sha256": "6f877b646fa546c3d967ce0608f58b528400a240a7578d31906bb775fe78e5c0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S1-r1/attempt0/worker_records.jsonl": {
+      "bytes": 2264293,
+      "sha256": "8e304d504c2f68948df1c7c6cb90fbc9f5852a0de3a76a739ac6bb2325ac3eb6"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S1-r1/attempt0/consumer.jsonl": {
+      "bytes": 384007,
+      "sha256": "b3c09a3699d3f7cb724caae145ceaa1ea053504a4176591f2b6335ac277adc0b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-staggered-CA-R0_S1-r1/attempt0/sessions.json": {
+      "bytes": 1918,
+      "sha256": "b4114a9368b0cc23ee40d97156455ddb32579eb6d36dbb45350238c702bbd630"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S1-r1/attempt0/config.json": {
+      "bytes": 7014,
+      "sha256": "1dcda24b637e532eb9624ee1421be4718e34e5aefdda1d3fcbfedc5e42a35e4a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S1-r1/attempt0/events.jsonl": {
+      "bytes": 2785976,
+      "sha256": "ae650bfef065a0a3171612375bf410ffcc6cfb3f42e104e273f72e6d0f873f50"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S1-r1/attempt0/worker_records.jsonl": {
+      "bytes": 2287788,
+      "sha256": "20309f4172ea48c5451a64608f5dc1461294d895cfea5dfb6a206fcd8e833188"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S1-r1/attempt0/consumer.jsonl": {
+      "bytes": 394267,
+      "sha256": "d71f2be909ab28f9d6c378f2559d1e7195fb2a17fe2d27fd2a7f5953bc38eba3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S1-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S0-r1/attempt0/config.json": {
+      "bytes": 7030,
+      "sha256": "33af7435f8de31e03a15657c085829688d6f2b4789bd778da257393fdb3cdfd2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S0-r1/attempt0/events.jsonl": {
+      "bytes": 2778210,
+      "sha256": "b26efa633e8cd82f746f3892f0287753ef7e93f07aa32b9b1e35493fd53301ba"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S0-r1/attempt0/worker_records.jsonl": {
+      "bytes": 2286652,
+      "sha256": "87969d28f5cbbc40d5554a8102323c650ea069c8ea08820c545b140e2363294a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S0-r1/attempt0/consumer.jsonl": {
+      "bytes": 395341,
+      "sha256": "da07412e6d413bb36e2000be7fd9642c89cfe351a87ceb0b7673980a4b589d3b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R0_S0-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-STANDARD_FULL-r1/attempt0/config.json": {
+      "bytes": 7013,
+      "sha256": "0136e3e47596083e6bcfb229d16eeb23d2b3d35976e353ab68dc3e5b93d27275"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-STANDARD_FULL-r1/attempt0/events.jsonl": {
+      "bytes": 2695070,
+      "sha256": "c2a4f65f1472200e5b47bc6b2ea54437cd9c5c853bff50088e0b03d218e8e022"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-STANDARD_FULL-r1/attempt0/worker_records.jsonl": {
+      "bytes": 2019438,
+      "sha256": "90c91d4b5d0406458b41a0c3c87771cd5b97b931563817cec66736f5915df221"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-STANDARD_FULL-r1/attempt0/consumer.jsonl": {
+      "bytes": 352483,
+      "sha256": "58141f913d77b7d509b89126749832f5397556245f313ea7e45b699e0c6bfb8a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-STANDARD_FULL-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S1-r1/attempt0/config.json": {
+      "bytes": 7013,
+      "sha256": "52f0390749d73cd32173f38317d579cba9a0c115f9090051efc1c6bc34c7cb0d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S1-r1/attempt0/events.jsonl": {
+      "bytes": 2799765,
+      "sha256": "21f5db17565db0ea6d44e42401d0ab11c158c2e4c634e1cbb9f907b64e810037"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S1-r1/attempt0/worker_records.jsonl": {
+      "bytes": 2293481,
+      "sha256": "53414a8e572df020563788dd38371323a9034db997d1488aa46021f9c797c77d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S1-r1/attempt0/consumer.jsonl": {
+      "bytes": 375879,
+      "sha256": "d2a6a2204ad1ad053fec43ebcb7448affc6e3714c9802a38664939a024774eb8"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S1-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S0-r1/attempt0/config.json": {
+      "bytes": 7029,
+      "sha256": "c842ca1112f7d5891519bb5d40b6db3c763987800a7981f3b9a470c0af36820a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S0-r1/attempt0/events.jsonl": {
+      "bytes": 2815930,
+      "sha256": "6fdbc572f8cdcf95bbabc765f351e020f93e492bdefbe3548390b591b834c524"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S0-r1/attempt0/worker_records.jsonl": {
+      "bytes": 2293509,
+      "sha256": "68b6981bc721a8c7a40097788cca626ae57f5164e15bbd9307803e3cb84d7a02"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S0-r1/attempt0/consumer.jsonl": {
+      "bytes": 396930,
+      "sha256": "5a6de2cf799220b50c5cc43fa21d325cf5edb4f9e9524a0d16491a61427a2a21"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-whisper-rho1-sync-CA-R1_S0-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S1-r1/attempt0/config.json": {
+      "bytes": 6138,
+      "sha256": "151c14e28c86fb22353c272237604b844cc85e3b91c0cb0cb0d045d5846f31ae"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S1-r1/attempt0/events.jsonl": {
+      "bytes": 1709314,
+      "sha256": "cd12afb1ff1607663799728d53b8bec46ae7beeaaa56d181c60953412df2b13b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S1-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3304648,
+      "sha256": "11fb9b46df8778018d265a39828a5311ee408acfc3a19c1db0619fdb5927c5df"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S1-r1/attempt0/consumer.jsonl": {
+      "bytes": 397425,
+      "sha256": "ccfc48cfae5e3475fa1509010cc79e692322fa08045296b428bad3b017969c81"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S1-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S0-r1/attempt0/config.json": {
+      "bytes": 6154,
+      "sha256": "a3dc50240ef03be64b5be722338874f6471538492185d1ab08013ce7138c2e31"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S0-r1/attempt0/events.jsonl": {
+      "bytes": 1710224,
+      "sha256": "313c904d9723dd7f3439edbc0f3da326ad70c1071d0436d83c65a224a699d61b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S0-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3304701,
+      "sha256": "941a3fdd96d35783506109aa5e38f51302fdad3073f8f3a5f4fd6fd13709a512"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S0-r1/attempt0/consumer.jsonl": {
+      "bytes": 399534,
+      "sha256": "435edc403526ed563baf791abb7eaf801a2b37dee20d4d07b4fc4d8eb692c405"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R0_S0-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-STANDARD_FULL-r1/attempt0/config.json": {
+      "bytes": 6135,
+      "sha256": "a1dcdf1526ce3b1a90d4a08ea3694c8c220928d8419dccc031fc20d23de855ca"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-STANDARD_FULL-r1/attempt0/events.jsonl": {
+      "bytes": 1745849,
+      "sha256": "4aad2bee313b90f9fe69341f7660b6a399035135b7345f8e94c1a4312a9c275f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-STANDARD_FULL-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3304137,
+      "sha256": "866a586d886bbd285007f5c37235d1c6c2b39aa1fd731e2e3af4abc73c33ea32"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-STANDARD_FULL-r1/attempt0/consumer.jsonl": {
+      "bytes": 397419,
+      "sha256": "9c52e3379f7f1e8bbefdc2b87b7539ecb9a20e5e734ae925b2d20367649aae07"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-STANDARD_FULL-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S1-r1/attempt0/config.json": {
+      "bytes": 6137,
+      "sha256": "f7920a5394e971c62dad08b0ff9dbd442f884d67a62b736ea6d162e516fda9ef"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S1-r1/attempt0/events.jsonl": {
+      "bytes": 1762921,
+      "sha256": "baabf4778370d9d8c4193a191cbae891879a910c8e3e041d73b84ce7bb8849d8"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S1-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3304610,
+      "sha256": "af73defbe9031041f529df9063aca462276bbb22fb06826abed86fb01e36383a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S1-r1/attempt0/consumer.jsonl": {
+      "bytes": 397439,
+      "sha256": "7a4f342b93eb836fe00ff13df962b12afed6b0b2414125cca193040bae8126ae"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S1-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S0-r1/attempt0/config.json": {
+      "bytes": 6153,
+      "sha256": "e012dec2433e4972105aed13a87242d531e98af1717d087be066ec1e1cb96d1e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S0-r1/attempt0/events.jsonl": {
+      "bytes": 1747705,
+      "sha256": "a73b32ae2a750a47f9b70f9a247817850429fac5b51da71dc73652d6b02511ae"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S0-r1/attempt0/worker_records.jsonl": {
+      "bytes": 3304629,
+      "sha256": "5e9500cf7670dd52de72ab29f334f2bafc71d548d5446534342b19dbbf86a0d9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S0-r1/attempt0/consumer.jsonl": {
+      "bytes": 399539,
+      "sha256": "b20d49a4a081c1d7420901cfc7278bf84bc1fcc4328ac9efea71368dd6a6918e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/paired_jitter-qwen-rho1-sync-CA-R1_S0-r1/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S0-r0/attempt0/config.json": {
+      "bytes": 6144,
+      "sha256": "b18f908cd1331a748c87cedd61a8dbdb37d7f09f7f972eaee2321e841df3da21"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1156252,
+      "sha256": "ef7daa9ec22223d441c7163f450d73722614f1ff16f8d2df1922262e7a601e66"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2268992,
+      "sha256": "3e91b5dce8c1b3102f890aecd7405a58834d1c8825ef578f6b44025f283f9e42"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 267151,
+      "sha256": "c7876ca4b5706c024080ae6758f1ea2864ebd8a80c6dc115a45ab62f48dda864"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S1-r0/attempt0/config.json": {
+      "bytes": 6129,
+      "sha256": "e6246f351d7fb54c23170f7b7915f4b393309d304fdfd38f8e4cc39510bd0556"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1140243,
+      "sha256": "9e025ef7d65cdbb3f962f8488da817b09184eaec5183aefb5febb12471c10980"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2266584,
+      "sha256": "ea84a8db41db4a3d9e7dcfd41aa84226af2bf506f7be8d68fb4cb6769da69c25"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 265675,
+      "sha256": "9d78f05430fc1655ecad98c2f314ccd0719429d0403e193fb9931408507de971"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S0-r0/attempt0/config.json": {
+      "bytes": 6146,
+      "sha256": "f8d19168348c9a21a8d9304ef2bd1ba4b5c12713e98f1f1115613f37b078a196"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1126515,
+      "sha256": "53cc820296fe30d1d1b4b7478feea58fe810336d1fdc4b9388973632ad48cf7c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2266776,
+      "sha256": "1480006c9afd80e5ff9350a7dcf79d9f7d5a5ef9acde3aff5a59ba0c4cc65862"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 267164,
+      "sha256": "e5cbbc3f278aea279d25955da66067429e013d209312ac901afa298ff440abd2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 6129,
+      "sha256": "7a75ab8f316e0016c3492f50e5af8eca610f38f201e75e8311b8a1fa249bedc9"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 1153262,
+      "sha256": "4d382c35e0dfb8a58066c1395c6ca8a833683952ccf12ee554d27e8f3d64f08f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2269180,
+      "sha256": "3304d1aa695b0298daeb83db187913c707096c8841778cb27d840d9c22a8c422"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 265663,
+      "sha256": "261a8ffc45abb7f0bdec01734d61e70b20ec01bd9d2a8f5e6973ca76774c2b88"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S1-r0/attempt0/config.json": {
+      "bytes": 6129,
+      "sha256": "1ec4b06c7a88e1c87d9792df94dbc965beb606c3da4e06e1d4fd8af3ded1d204"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1153933,
+      "sha256": "d7d96c9d7d4ead8f321bc95eebf6702f44fc2d3329487424b744bfb4f131f740"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2269182,
+      "sha256": "e76edaf984ab4d0535c7ba26b377841c9b9ea744490fe4ba710fa42cfe9d775a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 265661,
+      "sha256": "388559ccab7a4dac41db421f668656b184c3ef91ae69f1ed5cde0f5d3be3c488"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CA-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S0-r0/attempt0/config.json": {
+      "bytes": 7021,
+      "sha256": "c6da13dcb8f2396f0db0a7395b9f1bb47e5d0fcf934c44d61fc4a2f402194ead"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1141231,
+      "sha256": "f6249fa1707c0425e67fe1b0d6240fb299688860eeaf88d95f892902602360d8"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1498953,
+      "sha256": "089839aea6c680749149b72a37f1ee1dade12f2ca8cfc3afaa095136d5569bd2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 268961,
+      "sha256": "821f7470a2d64b77338f723954d6b783e9ce2798b93234e87809d49d1a917b6d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S1-r0/attempt0/config.json": {
+      "bytes": 7006,
+      "sha256": "ede6fe5affd4509c6a1f62ed06c1f08f169d247df1a7144cc039f36662ce9cca"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1122815,
+      "sha256": "c62f5be332d6d583b3a7cc2cf499572b4759a06d5eff087624011519be1d6dd2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1499151,
+      "sha256": "36ddaccea6ca05159bdc192c39827fe5ba4973920a7a5581c9d8fb065db80370"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 267518,
+      "sha256": "1ba7108afd57c536bcdede14e6dd9f9c7c733598286434cc7892ca4769f0d646"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S0-r0/attempt0/config.json": {
+      "bytes": 7022,
+      "sha256": "71699d2b23921d08bacf7bfb06be08f7d52cec252edc52c7b49dafb7bc75c94b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1127889,
+      "sha256": "fc255771bf314c7039db1b1f3ab72dce545dbafaf558e5707515bea0c72189ca"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1499238,
+      "sha256": "7babc001d01b4cc718ddf683d6c37d363680185f69c840cab525cbea99471e13"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 268971,
+      "sha256": "f7f385f82523163078c3c2b9f640059c8e79186a72530484c693459edd49a9ba"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 7005,
+      "sha256": "9738ed831b459b6f392f1f36f8e339037445b2b662af75ab9d5f0380e9eaccbe"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 1139190,
+      "sha256": "ba830d7b1afcaa4e058a41fa18f7df719f7087d3a7b83a50def8afb5c0860a6c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1499148,
+      "sha256": "db3691779c608f98bb646c7d0ff5a2c545e036f60f6d60e770599874ee8e7a0c"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 267511,
+      "sha256": "39d101a7c89c2360fc2fce5b2672ea43110ffc4ad6a75bd594e004417538e31f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S1-r0/attempt0/config.json": {
+      "bytes": 7004,
+      "sha256": "b2f6401916e25eaadd6cd28879f1225be0a1d395b691ce331b882db1854c6dbf"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1143303,
+      "sha256": "cb41b69473864c59e37d53481ca030eb4e94ac97cb6ce1779de03e3b303a0cae"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1498266,
+      "sha256": "96a8d7bbd2ee20b8b44859a4b22a33abf0dbc1750c7c25549da370ce3f888236"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 267348,
+      "sha256": "873922df10a9e7ddb6199d0590519cc7823ba1ee50d708516977fa21469a91ab"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CA-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1914,
+      "sha256": "1fc1b35ada054d4cc20834152cf8943510c087a70f17b15a6dce4605db730850"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S1-r0/attempt0/config.json": {
+      "bytes": 7005,
+      "sha256": "f4dded9f6f5b78d143fe472aa31ab5c7cbf18b0d4b81df33adcdf225ed159e62"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 991533,
+      "sha256": "66e83d234d03b0a8a649fc65b51bec4d9596723576d5681b5594b21df25f401b"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1310683,
+      "sha256": "bf67f66bca8bf248f106826ab157ac24a508c226a23b7b26bbc344e9375065be"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 214197,
+      "sha256": "0f59d2d31225d5f965c66ecbf385aeb7b8f6a3533ba3d4e110f7c88ca951e6cd"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S0-r0/attempt0/config.json": {
+      "bytes": 7021,
+      "sha256": "64aa336b4ff93c09c2062fe1d67ba0f68f12f7098aef2c1ce96352cd0b19a947"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 994537,
+      "sha256": "566331ff10ac01efb10c731179c23f70bf6f2f1167cb393825a440296158495f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1312145,
+      "sha256": "b82fc5c217fd3c21413827e543e10e84fb354c3ffd59e9b5795880874b715a90"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 217233,
+      "sha256": "7c33f48d319afaf4016e4dd304f288b1516962b0f2d9e109a25ffa932eca0d08"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S1-r0/attempt0/config.json": {
+      "bytes": 7005,
+      "sha256": "51399da70fbc3669d6bb78aea97bfdfffd02c711e20b6dcdd31d63d0e44f2ebb"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 974483,
+      "sha256": "d1f580f23e2dd6158a27a91993480e64b982efa9c00c00179418aa0f38ad8100"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1310563,
+      "sha256": "292ff9c70087249f43588836dc1ed7fe5de35ace21e28456b8a14dbc3ab9b1d0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 214227,
+      "sha256": "e8f4d45d9a3d1316caa6ca830568b1640101103f6e2e5f55c37630977085b265"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S0-r0/attempt0/config.json": {
+      "bytes": 7022,
+      "sha256": "11e510cd64ef80b128777a64ef85ad0acc7325e45ae51d955a385f0ef346490d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 972804,
+      "sha256": "df6af9ef6e8800db19c75b56149f79adc3e6a34f9a816547a0e91df94c9279ff"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1312145,
+      "sha256": "d3c1e785f01f1e6a427761f5b6d37948031c3b1f475e239d7fc37da1d99a91e1"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 215560,
+      "sha256": "45b7f70b1ba97f82d5cb01021efa73fec8dad9804cbeeee337fb7b60d7a60f54"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 7005,
+      "sha256": "ee471d692f037a882ab89949f0c40626ff3c8d158e915713b07bb5f3c0970e3d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 991300,
+      "sha256": "86a6bba75c6bf4f13c0e864ba491f4b17d6a20b14af76d00bdb6caec188a23d4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1310719,
+      "sha256": "f2dd2205d5bf86fc8c11f4be1b70b29d4af853c18b5b9fd5586f368ed6a83029"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 214238,
+      "sha256": "5a0b9665b0375518a824747ed5c5d2741000adc227689eb594499309fa06650f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CB-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S1-r0/attempt0/config.json": {
+      "bytes": 6129,
+      "sha256": "c1c4ff682e364979ae3230a0b4cb71a4d05c2af52882b09f98814be7c883aa59"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1067225,
+      "sha256": "5ceb85ff402913b717ddb9c6abc4ad3841c6a59e5ff1b7c121ab45425eec87e1"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2162608,
+      "sha256": "2ceca390540bc0942ab215eafa5db20f9a3a6f97fe7d7f19c3e7088d7d333098"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 254426,
+      "sha256": "1be35a0b816370a9d2bde658f7f7930f7f6f13dd5eb6f993c7e81d3a987f612e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S0-r0/attempt0/config.json": {
+      "bytes": 6145,
+      "sha256": "c45accd1b4ae0417e3d06a39a86ae69d2155c21490dd0b1e63bb216fbe87a270"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1059864,
+      "sha256": "d4aaf4f0c148732feec9f3e4004c3b9d1b151a2204d01d52a5d9972526fff7e4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2162245,
+      "sha256": "21c75d20495d234557ac86c44c6ffd05f0294ea9dfaae2f37a98b5fbc946fbb3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 255847,
+      "sha256": "8ebbf9e644548e75b48c084025ec1dba6526ba132f87a4d8a093b3e9d8bc5a92"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S1-r0/attempt0/config.json": {
+      "bytes": 6130,
+      "sha256": "5980b13dd290e005ae4769faade80992b81417e1eead2bb05def6b39e1dfb62e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1053049,
+      "sha256": "88d69ec22bb3e2219b692f2a501e6b3581e5df3de6ed361e6b9dd8d6e78f5adb"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2158516,
+      "sha256": "672378f46c52a87177897025be2a2ff333cdd0118cc3eb6a5672ce7854db35ca"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 254443,
+      "sha256": "0b76c1f9b6d658507e0927848b3ae3a3395c9709e3ff252420ac8f754f030569"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S0-r0/attempt0/config.json": {
+      "bytes": 6146,
+      "sha256": "9a41ae4e48df2f08ca57c41475f6fca2bb8cbe9c2f58a394cdfe69773bf55325"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1051149,
+      "sha256": "5fd9a29fe228790b7eba12af7b346a74e49966d0643d8c5caa5117798085499f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2158559,
+      "sha256": "4214b01b23b60d3aec22ca1a55002886e0180529f0a181af3015194624ab2655"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 255870,
+      "sha256": "426b25bb70d7dd3076e9d6a390cbb2c31d2b7c86a44827a722d22befb4f83230"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 6128,
+      "sha256": "9eda206014bab707120584105c0899b6eed1ebd12fe1936bf05ea1bb62c14021"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 1064525,
+      "sha256": "ed74ac790507097408db412e4df6ac3cdd11539f00124e180978ce03fd21fc50"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2161913,
+      "sha256": "046f9d006b77a641be98f7aba96178b723e7447a5ea2786ec6bce8935af5b362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 254394,
+      "sha256": "8b2368444169ee95e9929e0c7d351f0440c711ac59a710d21d5b396ebe156ee0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CB-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1919,
+      "sha256": "6007b7c41a5797efe2e7dc363a25f030988444334492b2ffe8c874f753fc5fc5"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S0-r0/attempt0/config.json": {
+      "bytes": 6145,
+      "sha256": "67640746a78c3b84f757ca10a36093f705bfe2fad4cf4244b288358d1deff879"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1076341,
+      "sha256": "21d2468ccb9baa150c876d481c2d1f90d98b1b8eb4e27783bc50dda8d5508401"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2149993,
+      "sha256": "940b2eb223176fc58187eb442f7617f34adfe1f84d05bab15b0da989de4e00af"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 249676,
+      "sha256": "a46b779effcb2ce8aea07fabc5d26589f6ec42c9c69a49e5334443b4b535572e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S1-r0/attempt0/config.json": {
+      "bytes": 6130,
+      "sha256": "917d48dcbd1210af4fdb4a7416654ba8125fa9bb3b2ffac5275d744f4ce9d308"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1072633,
+      "sha256": "aa12974045001927d79b1c557c2a9ede1f2b8d41e9c2716d7916394baf41144f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2149806,
+      "sha256": "15169880f9106a729980e4d26cde1130fa984ddfee0fd1725a3364b4e71ace34"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 248248,
+      "sha256": "a5b32d9d320e78e26e4e7c6e13b7619b0c1d963c5b43215d696e8ce2aa876bc1"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S0-r0/attempt0/config.json": {
+      "bytes": 6145,
+      "sha256": "8e684b8ae312594eabdb4ca4659560f93db226657adda145bb69e8f3c4ee9367"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1094433,
+      "sha256": "48d499a48eb7c9b05786111165b0ae50bccde7598fc4f5070781220e0ca53111"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2152966,
+      "sha256": "ab3623f748f2185b0ab80345005720a61c36200a59c865481c6c41a64c58e9a0"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 255309,
+      "sha256": "c86b9a010c086e2cf79d0847728767656067aac7e6a04231918f1d6d1091f96d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S1-r0/attempt0/config.json": {
+      "bytes": 6129,
+      "sha256": "41377522bd271826d3628ed2f639428453e70ed202ced487b08a15889a3c0f68"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1094354,
+      "sha256": "a39b08d0bf02800076e72af5dd9a9da05dc2d9550d4c8247da7a905a2f0c2aeb"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2153191,
+      "sha256": "9a25630238f081c84918214d47abb6b7b3828a9de4dc631a72d6cea626207e92"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 253947,
+      "sha256": "6033d6f5707d3e66678ecd9cfaffa544f0429ac0374d36201ed7f308e445f201"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 6129,
+      "sha256": "f7eb1b2ec418a863239323c31556890a168fa6ddc94606ef2a2a850eddeea73f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 1097635,
+      "sha256": "a758c819d26edec4422c6cfe5b19df50b48483484441899b2cf1d36067d85e2a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2153245,
+      "sha256": "1b3524b57439d96fc535777d4165744d63dd7b442215b1ade8a241454f75e382"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 253964,
+      "sha256": "f6f6cda93be86395eed3b198daf2330d7f8352b5eb14b6950229eb8e02dd3f8e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-qwen-rho3-sync-CC-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S0-r0/attempt0/config.json": {
+      "bytes": 7022,
+      "sha256": "9c715256963134fbef28d2246fd0f1a0fe9eae1b6ec2cbaf490e86bdede79b26"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1032786,
+      "sha256": "52c57ed0e3f70b74e9a2583ab62f689003000680bb3b9d5bdc93ec501c121b43"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1402456,
+      "sha256": "86af670446fc724b8aa341c54099fd1248f4e0e3b2e57a41eb7c216d12aa7b21"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 250673,
+      "sha256": "3abf021a10b942a75d9c2b7dc78c11fc512b03fa010a628e86891dbe437c8768"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S0-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S1-r0/attempt0/config.json": {
+      "bytes": 7006,
+      "sha256": "64cf44c61e7859375047065612bef2ec0daca99e416398d14ea067111f4f3c66"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1031168,
+      "sha256": "003a92c92b0af27a0407ee6974916ffd5a300ac955b35f17aee60497f18a97ee"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1412705,
+      "sha256": "cd3934db78b3cf9782f00b5206a3e06d15840de31ac36c9a4fc279169e50f551"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 249044,
+      "sha256": "6543eb0b774cdc80cdfe6833d1745576ececac4810bad07f9b901f031a9dec6d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R0_S1-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S0-r0/attempt0/config.json": {
+      "bytes": 7021,
+      "sha256": "125e6b0718ece228d414f0ca9c8ebe08450829423975c06f8741f748525d4f05"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S0-r0/attempt0/events.jsonl": {
+      "bytes": 1043223,
+      "sha256": "596c07509dc3ca18abfb1400329ab3fa7039b1a7b2a126ae374230f98f2e7e8d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1399779,
+      "sha256": "be5686391ec61fdbc4bb30c3820f67e6e07e23f96f8d1ac3c0633af6fbc8cfa2"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S0-r0/attempt0/consumer.jsonl": {
+      "bytes": 250464,
+      "sha256": "005b704f65c1309419ebb1cd3b015b72f5d1f8fb338f69f8ebd9642358a2e20a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S0-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S1-r0/attempt0/config.json": {
+      "bytes": 7004,
+      "sha256": "dba0a95e5100c50f39d5c29abb0a737c730a947716f01dcaa3b911119ccfda11"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S1-r0/attempt0/events.jsonl": {
+      "bytes": 1044932,
+      "sha256": "4c21a81aed44845c369ecafaf825f5043529ff9d827b85ae1ea1d41e850fd994"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1415296,
+      "sha256": "79b3621323d80a93831cd58a460ed7aab71697d2a01cfbf7ac20f4ece1b18f49"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S1-r0/attempt0/consumer.jsonl": {
+      "bytes": 249236,
+      "sha256": "1272fef8f625c05c6488bd9c9f3f2f3cbf248e88769090e8c7701a2befb4198e"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-R1_S1-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-STANDARD_FULL-r0/attempt0/config.json": {
+      "bytes": 7005,
+      "sha256": "a87a04d9786ae3e860b921084e0ce59977ebb8b74c982d2083ac52633d625a99"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-STANDARD_FULL-r0/attempt0/events.jsonl": {
+      "bytes": 1043427,
+      "sha256": "ef72bb9c3ea5180b877641aa50ac92e7e308ed76aeeb3e3a46dc83eadc81af4d"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-STANDARD_FULL-r0/attempt0/worker_records.jsonl": {
+      "bytes": 1402446,
+      "sha256": "7c670830a4e4a4f25e159b21858dd9d015a83384a20c70bb5d098aacb0a1c093"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-STANDARD_FULL-r0/attempt0/consumer.jsonl": {
+      "bytes": 249254,
+      "sha256": "f5e1b870cdcbb2fe868206d174ffbcd46bccd9779b188cd073bd93ea571ff644"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3/coarse-whisper-rho3-sync-CC-STANDARD_FULL-r0/attempt0/sessions.json": {
+      "bytes": 1920,
+      "sha256": "17e4017ce7647fd5ded1f493a403622817d9f9026eeebcdf3b66ab7e72904362"
+    }
+  },
+  "cells_requested": 110,
+  "cells_recounted": 110,
+  "by_clock": {
+    "owner_install": {
+      "canonical_updates": 11140,
+      "matched_consumer_updates": 11140,
+      "ahead_updates": 281,
+      "compatible_opportunities": 188,
+      "incompatible_ahead_updates": 93,
+      "unresolved_ahead_updates": 0,
+      "compatible_retained": 124,
+      "compatible_cleared": 64,
+      "compatible_changed": 0,
+      "compatible_unmatched": 0,
+      "incompatible_cleared": 93,
+      "incompatible_still_visible": 0,
+      "ahead_to_consumer_boundary_changed": 0,
+      "ahead_observation_missing": 0,
+      "install_inflight_ahead_jobs": 1322,
+      "install_complete_unpublished_ahead_jobs": 23
+    },
+    "consumer_apply": {
+      "canonical_updates": 11140,
+      "matched_consumer_updates": 11140,
+      "ahead_updates": 281,
+      "compatible_opportunities": 188,
+      "incompatible_ahead_updates": 93,
+      "unresolved_ahead_updates": 0,
+      "compatible_retained": 124,
+      "compatible_cleared": 64,
+      "compatible_changed": 0,
+      "compatible_unmatched": 0,
+      "incompatible_cleared": 93,
+      "incompatible_still_visible": 0,
+      "ahead_to_consumer_boundary_changed": 0,
+      "ahead_observation_missing": 0,
+      "install_inflight_ahead_jobs": null,
+      "install_complete_unpublished_ahead_jobs": null
+    }
+  },
+  "gate": "OFFLINE_RECOUNT_COMPLETE",
+  "limits": [
+    "No causal effect is inferred from pooled counts or differing Canonical histories.",
+    "Unresolved ancestry and unmatched Consumer observations remain explicit.",
+    "Compatibility is exact selected-state agreement, not task correctness or a deterministic guarantee.",
+    "Owner-install and Consumer-apply observations have separate denominators and counts.",
+    "In-flight/complete-unpublished job counts are incidence counts at installs, not certified computational retention opportunities.",
+    "Existing independent safety, provenance, deadline, quality and cost gates remain separate."
+  ]
+}

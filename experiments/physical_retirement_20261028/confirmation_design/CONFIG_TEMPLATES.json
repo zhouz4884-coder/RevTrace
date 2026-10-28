@@ -1,0 +1,54 @@
+{
+  "arms": [
+    {
+      "arm": "R0_S0",
+      "method": "dgft_original",
+      "retain": "no",
+      "confirmation_consumer": "checked_snapshot"
+    },
+    {
+      "arm": "R0_S1",
+      "method": "dgft_original",
+      "retain": "no",
+      "confirmation_consumer": "two_lane"
+    },
+    {
+      "arm": "R1_S0",
+      "method": "dgft_original",
+      "retain": "yes",
+      "confirmation_consumer": "checked_snapshot"
+    },
+    {
+      "arm": "R1_S1",
+      "method": "dgft_original",
+      "retain": "yes",
+      "confirmation_consumer": "two_lane"
+    },
+    {
+      "arm": "STANDARD_FULL",
+      "method": "standard_fair",
+      "retain": "yes",
+      "confirmation_consumer": "two_lane",
+      "role": "alternative implementation positive control"
+    }
+  ],
+  "common": {
+    "policy": "row_complete",
+    "sessions": 8,
+    "microbatch": 16,
+    "max_new_tokens": 256,
+    "result_delivery": "row",
+    "protocol_kernel": true,
+    "kernel_copy_mode": "event-cow",
+    "capture_model_inputs": true,
+    "trusted_text_binding": true,
+    "display_slo_seconds": 2.0,
+    "commit_slo_seconds": 8.0,
+    "input_WAL": true,
+    "canonical_WAL": true,
+    "selected_Authority": "full FP32 canonical generation",
+    "physical_exit": "disabled for composition isolation"
+  },
+  "required_new_CLI": "retirement_service.py --confirmation-consumer {checked_snapshot,two_lane}; all other declared flags already exist",
+  "checked_snapshot_contract": "reject incompatible newly received tentative views; canonical application clears old tentative state rather than retaining it; same full kernel and legal-view verification"
+}

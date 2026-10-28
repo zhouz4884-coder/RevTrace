@@ -1,0 +1,1 @@
+Analysis-only correction. Authoritative measured argv --out must agree with controller output. Historical out alias retained and counted. No neural source, frozen plan, raw result, metric or scientific criterion changed. Previous all-missing analysis remains preserved. New GPU calls: zero.

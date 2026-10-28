@@ -1,0 +1,64 @@
+{
+  "review_id": "REVTRACE-WHISPER-BAD-DATA-READONLY-20261028",
+  "scope": "actual failed-quality developer cell diagnosis; no source edit or ASR/GPU/modelweight loading",
+  "raw_source_commit": "1d8c30804a945570429d85d934b3bfcba6171a43",
+  "raw_extract_sha256": "bfed9f26f0aad4579d9943098a749b7fc3a17b7cdd3abe76f0a99a3ba2b250ce",
+  "installed_generation_source_sha256": "f6cbc3599bcc8b9b5194b83c17c5d1dde568d38f6f6419caa2618cf39ec73949",
+  "new_ASR_calls": 0,
+  "cpu_tokenizer_only": true,
+  "all_original_sources_retained": true,
+  "original_full_WER": 237.64705882352942,
+  "outputs": [
+    {
+      "file": "analyze_raw.py",
+      "bytes": 8408,
+      "sha256": "1d35bca85cd1d4fbd8ba7d399a51d18ca67e7b4f7951ca5dadfeaa560845705c"
+    },
+    {
+      "file": "AUTHORITY_TRAJECTORIES.json",
+      "bytes": 97724,
+      "sha256": "1eb5edb00047e48cfd858a1a45e5ceb6e7b888c83282949360241c88863397ee"
+    },
+    {
+      "file": "decode_caps.py",
+      "bytes": 2139,
+      "sha256": "7b060c295900d4b4e7e7e769fe425f8bea119551abc3415db2d54f797e0ae05b"
+    },
+    {
+      "file": "extract_raw.py",
+      "bytes": 1911,
+      "sha256": "a85679bdf64e3b732946667eea40b3596f94be0eb0f307e8784d84af076b10d1"
+    },
+    {
+      "file": "FINDINGS.md",
+      "bytes": 9889,
+      "sha256": "e681b17581bbcdc86efde2eec5a0fa057ddef99cdda7b3f8045050207d7096c4"
+    },
+    {
+      "file": "PAID_PRECISION_PAIRS.json",
+      "bytes": 24987,
+      "sha256": "8d5f1144d3f42821ad16522a5f3773a2c20e667f97962c2ba2cfe536c12306f7"
+    },
+    {
+      "file": "RAW_EXTRACT.json",
+      "bytes": 1917047,
+      "sha256": "bfed9f26f0aad4579d9943098a749b7fc3a17b7cdd3abe76f0a99a3ba2b250ce"
+    },
+    {
+      "file": "SOURCE_QUALITY.json",
+      "bytes": 19101,
+      "sha256": "5c6194946ec70264bcb54bc39643fd1561bcc7cdc91df0596c797242bb4bae7c"
+    },
+    {
+      "file": "SUMMARY.json",
+      "bytes": 9889,
+      "sha256": "55a8b1083c6cf9f87313821aca2c59eb152002a2f8156238012ec4d084b09155"
+    },
+    {
+      "file": "TOKENIZER_AND_SOURCE.json",
+      "bytes": 37242,
+      "sha256": "2968dcc6fd1ee1c9036a8144d6bc42607e630bda3b2aa3103754f1c8ee550606"
+    }
+  ],
+  "decision": "actual raw generation loops dominate quality and decoder cost; narrow sameinput/repeat/whole-source paid controls needed before a shared adapter repair"
+}

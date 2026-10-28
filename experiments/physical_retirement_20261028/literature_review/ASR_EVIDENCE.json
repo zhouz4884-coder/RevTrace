@@ -1,0 +1,549 @@
+{
+  "review_id": "REVTRACE-ASR-NEIGHBORS-20261028",
+  "verified_date": "2026-10-28",
+  "kind": "primary_source_literature_and_author_code_review",
+  "new_gpu_or_remote_runs": false,
+  "scope": [
+    "provisional_display",
+    "feedback_context",
+    "output_authority",
+    "late_results",
+    "compatible_retention",
+    "actual_execution_retirement"
+  ],
+  "tool_limitations": [
+    "Academic-search MCP catalog absent; required manifest, always_load modules, and wf1 read; web discovery and primary-source verification used.",
+    "Publisher simulstream PDF inaccessible; full arXiv v3 read instead.",
+    "StreamCorrect publisher PDF was inaccessible through web tool but subsequently downloaded directly from official ACL OA URL over local network; 13-page full text verified and relevant sections read. Initial failure was not an entitlement failure.",
+    "StreamCorrect camera-ready explicitly links the reviewed author repository, whose README uses an earlier title; exact public-code-commit to camera-ready execution equivalence remains unverified.",
+    "No exhaustive absence claim; no native external reproduction or runtime result produced."
+  ],
+  "discovery_queries": [
+    "Whisper-Streaming LocalAgreement Machacek Dabre Bojar 2023 ACL",
+    "Simul-Whisper incremental attention-guided streaming whisper 2024 paper",
+    "SimulStreaming 2025 Whisper simultaneous speech translation Machacek paper",
+    "Simulstream: Open-Source Toolkit arxiv",
+    "Adapting Whisper for Streaming Speech Recognition via Two-Pass Decoding",
+    "StreamAtt 2024 Papi",
+    "streaming ASR revision 2025 Whisper",
+    "streaming ASR revision 2026 Whisper",
+    "StreamCorrect: Self-Supervised Error Correction for Real-Time ASR",
+    "X2Streaming-ASR site:arxiv.org/abs",
+    "Low-Latency Sequence-to-Sequence Speech Recognition and Translation by Partial Hypothesis Selection"
+  ],
+  "papers": [
+    {
+      "key": "localagreement2020",
+      "title": "Low-Latency Sequence-to-Sequence Speech Recognition and Translation by Partial Hypothesis Selection",
+      "authors": [
+        "Danni Liu",
+        "Gerasimos Spanakis",
+        "Jan Niehues"
+      ],
+      "venue": "Interspeech 2020",
+      "pages": "3620-3624",
+      "doi": "10.21437/Interspeech.2020-2897",
+      "identity": "https://www.isca-archive.org/interspeech_2020/liu20s_interspeech.html",
+      "full_text": "https://www.isca-archive.org/interspeech_2020/liu20s_interspeech.pdf",
+      "sections": [
+        "3",
+        "3.1",
+        "3.2"
+      ],
+      "verified_mechanisms": [
+        "selected immutable prefix conditions next chunk",
+        "buffered decoder-state continuation or forced decoding",
+        "unidirectional encoder avoids future-dependent recomputation"
+      ]
+    },
+    {
+      "key": "whisperstreaming2023",
+      "title": "Turning Whisper into Real-Time Transcription System",
+      "authors": [
+        "Dominik Machacek",
+        "Raj Dabre",
+        "Ondrej Bojar"
+      ],
+      "venue": "IJCNLP-AACL System Demonstrations 2023",
+      "pages": "17-24",
+      "doi": "10.18653/v1/2023.ijcnlp-demo.3",
+      "identity": "https://aclanthology.org/2023.ijcnlp-demo.3/",
+      "full_text": "https://aclanthology.org/2023.ijcnlp-demo.3.pdf",
+      "sections": [
+        "2",
+        "3",
+        "Figure 1"
+      ],
+      "verified_mechanisms": [
+        "LocalAgreement-2 confirmation",
+        "confirmed text changes disregarded",
+        "previous confirmed words used as prompt",
+        "sequential full-buffer reprocessing"
+      ]
+    },
+    {
+      "key": "simulwhisper2024",
+      "title": "Simul-Whisper: Attention-Guided Streaming Whisper with Truncation Detection",
+      "authors": [
+        "Haoyu Wang",
+        "Guoqiang Hu",
+        "Guodong Lin",
+        "Wei-Qiang Zhang",
+        "Jian Li"
+      ],
+      "venue": "Interspeech 2024",
+      "pages": "4483-4487",
+      "doi": "10.21437/Interspeech.2024-1814",
+      "identity": "https://www.isca-archive.org/interspeech_2024/wang24ea_interspeech.html",
+      "full_text": "https://www.isca-archive.org/interspeech_2024/wang24ea_interspeech.pdf",
+      "sections": [
+        "2.1",
+        "2.2"
+      ],
+      "verified_mechanisms": [
+        "attention-guided decoding stop near audio boundary",
+        "integrate-and-fire truncation detection",
+        "unreliable final word removed before continuation"
+      ]
+    },
+    {
+      "key": "streamatt2024",
+      "title": "StreamAtt: Direct Streaming Speech-to-Text Translation with Attention-based Audio History Selection",
+      "authors": [
+        "Sara Papi",
+        "Marco Gaido",
+        "Matteo Negri",
+        "Luisa Bentivogli"
+      ],
+      "venue": "ACL 2024 Long Papers",
+      "pages": "3692-3707",
+      "full_text": "https://aclanthology.org/2024.acl-long.202.pdf",
+      "sections": [
+        "3.1",
+        "3.2.1",
+        "3.2.2"
+      ],
+      "verified_mechanisms": [
+        "AlignAtt hypothesis selection",
+        "textual history selected by word count or punctuation",
+        "audio history aligned with retained text"
+      ]
+    },
+    {
+      "key": "simulstreaming2025",
+      "title": "Simultaneous Translation with Offline Speech and LLM Models in CUNI Submission to IWSLT 2025",
+      "authors": [
+        "Dominik Machacek",
+        "Peter Polak"
+      ],
+      "venue": "IWSLT 2025",
+      "pages": "389-398",
+      "doi": "10.18653/v1/2025.iwslt-1.41",
+      "identity": "https://aclanthology.org/2025.iwslt-1.41/",
+      "full_text": "https://aclanthology.org/2025.iwslt-1.41.pdf",
+      "sections": [
+        "2",
+        "3",
+        "4"
+      ],
+      "verified_mechanisms": [
+        "stable forced-decoding target and distinct context buffers",
+        "AlignAtt for Whisper",
+        "LocalAgreement for EuroLLM cascade",
+        "unbounded speech interface"
+      ]
+    },
+    {
+      "key": "u2whisper2025",
+      "title": "Adapting Whisper for Streaming Speech Recognition via Two-Pass Decoding",
+      "authors": [
+        "Haoran Zhou",
+        "Xingchen Song",
+        "Brendan Fahy",
+        "Qiaochu Song",
+        "Binbin Zhang",
+        "Zhendong Peng",
+        "Anshul Wadhawan",
+        "Denglin Jiang",
+        "Apurv Verma",
+        "Vinay Ramesh",
+        "Srivas Prasad",
+        "Michele M. Franceschini"
+      ],
+      "venue": "Interspeech 2025",
+      "pages": "4428-4432",
+      "doi": "10.21437/Interspeech.2025-511",
+      "identity": "https://www.isca-archive.org/interspeech_2025/zhou25_interspeech.html",
+      "full_text": "https://www.isca-archive.org/interspeech_2025/zhou25_interspeech.pdf",
+      "sections": [
+        "1",
+        "2.2"
+      ],
+      "verified_mechanisms": [
+        "CTC streaming top-k partial transcripts",
+        "silence or maximum delay endpoint triggers attention rescoring",
+        "trained hybrid CTC-attention streaming alternative"
+      ]
+    },
+    {
+      "key": "simulstream2026",
+      "title": "Simulstream: Open-Source Toolkit for Evaluation and Demonstration of Streaming Speech-to-Text Translation Systems",
+      "authors": [
+        "Marco Gaido",
+        "Sara Papi",
+        "Mauro Cettolo",
+        "Matteo Negri",
+        "Luisa Bentivogli"
+      ],
+      "venue": "EMNLP System Demonstrations 2026",
+      "pages": "87-97",
+      "identity": "https://aclanthology.org/2026.emnlp-demos.8/",
+      "full_text": "https://arxiv.org/html/2512.17648v3",
+      "preprint_first_submission": "2025-12-19",
+      "read_version_date": "2026-08-31",
+      "sections": [
+        "2.1",
+        "2.2",
+        "2.3"
+      ],
+      "verified_mechanisms": [
+        "emission and deletion delta protocol",
+        "real-time web visualization",
+        "bounded concurrent processor pool",
+        "last update time for final-sequence latency",
+        "normalized erasure and RTF"
+      ]
+    },
+    {
+      "key": "streamcorrect2026",
+      "title": "StreamCorrect: Self-Supervised Error Correction for Real-Time ASR with Offline Recognizers",
+      "authors": [
+        "Tung D. Vu",
+        "Zeying Xie",
+        "Weiwei Zhao",
+        "Victor Junqiu Wei",
+        "Di Jiang",
+        "Yi R. Fung"
+      ],
+      "venue": "EMNLP Industry 2026",
+      "pages": "2391-2403",
+      "identity": "https://aclanthology.org/2026.emnlp-industry.142/",
+      "full_text_status": "open_access_downloaded_and_read",
+      "verified_abstract_mechanisms": [
+        "learned correction plug-in",
+        "self-generated streaming correction data",
+        "error-propagation target"
+      ],
+      "paper_runtime_claim_status": "full-text methods and evaluation verified; no external runtime reproduction",
+      "full_text": "https://aclanthology.org/2026.emnlp-industry.142.pdf",
+      "sections": [
+        "3.1",
+        "3.2",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.5",
+        "Appendix A",
+        "Appendix B",
+        "Appendix C",
+        "Appendix F",
+        "Appendix G"
+      ],
+      "verified_paper_mechanisms": [
+        "Fig.1 and section 3.1 define sequential ASR top-k -> learned correction -> append finalized segment to confirmed prefix -> next audio chunk.",
+        "Confirmed prefix conditions both candidate ASR generation and correction; selected feedback is a substantive overlap.",
+        "PRA is reference-based boundary recovery for self-generated training supervision, with deterministic tie breaking; not a runtime neural-state certificate.",
+        "Section 4.5 describes complete ASR and corrector replicas per worker and call-level process parallelism across GPUs.",
+        "Section 4.5 caps correction generation at 8 new tokens per 500ms chunk.",
+        "Independent cross-trusted-root branch authority, Consumer reconciliation, accepted-input WAL recovery, and coverage-triggered physical retirement are not part of the specified/evaluated contract."
+      ],
+      "reported_evaluation": {
+        "provenance": "author-reported external results, not RevTrace measurements",
+        "source": "Table 2, printed page 2396, PDF page 6",
+        "chunk_ms": 500,
+        "beam_size": 4,
+        "cer_percent": {
+          "AIShell-1": {
+            "SimulStreaming": 16.3,
+            "StreamCorrect": 9.8
+          },
+          "industrial_Mandarin": {
+            "SimulStreaming": 27.8,
+            "StreamCorrect": 20.7
+          },
+          "WSYue": {
+            "SimulStreaming": 15.6,
+            "StreamCorrect": 10.2
+          }
+        },
+        "AIShell1_latency_ms": {
+          "FTL": {
+            "SimulStreaming": 158,
+            "StreamCorrect": 219
+          },
+          "LTL": {
+            "SimulStreaming": 213,
+            "StreamCorrect": 295
+          }
+        },
+        "metric_definition_source": "Section 4.1, printed page 2395, PDF page 5",
+        "metrics": {
+          "FTL": "audio reception to first emitted token",
+          "LTL": "audio-stream end to transcript finalization"
+        },
+        "repetition_source": "Appendix C and Table 4, printed pages 2401-2402, PDF pages 11-12",
+        "repetition_mode": "Table 4 explicitly computationally unaware; five runs on single NVIDIA H20 with no other sharing process",
+        "service_scope_limit": "No controlled throughput, queueing delay, co-tenant stall, cancellation latency, or physical lease reclamation experiment reported in the reviewed evaluation."
+      }
+    },
+    {
+      "key": "x2streaming2026",
+      "title": "X2Streaming-ASR: Wait When Uncertain, Emit When Ready for Streaming ASR",
+      "authors": [
+        "Zhiwei Lin",
+        "Kaiqi Fu",
+        "Rime Wen",
+        "Zehan Liu",
+        "Shawn Qin",
+        "Roy Gan",
+        "Hao Wang"
+      ],
+      "venue": "arXiv preprint; peer-reviewed venue not verified",
+      "version": "2609.08672v4",
+      "date": "2026-10-12",
+      "identity": "https://arxiv.org/abs/2609.08672v4",
+      "full_text": "https://arxiv.org/html/2609.08672v4",
+      "sections": [
+        "1",
+        "2.1",
+        "Figure 1"
+      ],
+      "verified_mechanisms": [
+        "single-pass hard commit without later correction",
+        "learned wait-emit decision",
+        "asynchronous causal audio encoding versus language-model decoding"
+      ]
+    }
+  ],
+  "author_code_checks": [
+    {
+      "repo": "ufal/SimulStreaming",
+      "commit": "077ea37d5ab4ff98bc567e4507f140dc4e5d5ad6",
+      "commit_date": "2026-06-19",
+      "path": "simulstreaming/whisper/simul_whisper/simul_whisper.py",
+      "lines": [
+        [
+          269,
+          295
+        ],
+        [
+          380,
+          424
+        ],
+        [
+          527,
+          531
+        ],
+        [
+          570,
+          605
+        ]
+      ],
+      "finding": "Retains token/context buffers, attention stop and final-word truncation; cache cleared after generation."
+    },
+    {
+      "repo": "hlt-mt/simulstream",
+      "commit": "b9952dd95a4672ba2806d1f0cd778b7652514697",
+      "commit_date": "2026-09-30",
+      "path": "simulstream/server/speech_processors/base.py",
+      "lines": [
+        [
+          123,
+          135
+        ]
+      ],
+      "finding": "Sequential preprocess, generate, output-delta construction, history updates."
+    },
+    {
+      "repo": "hlt-mt/simulstream",
+      "commit": "b9952dd95a4672ba2806d1f0cd778b7652514697",
+      "path": "simulstream/server/speech_processors/sliding_window_retranslation.py",
+      "lines": [
+        [
+          61,
+          113
+        ]
+      ],
+      "finding": "Current/previous-window matching returns explicit new and deleted tokens; no trusted-state certificate in this interface."
+    },
+    {
+      "repo": "vu-duy-tung/StreamCorrect",
+      "commit": "bbb9f7fde13fabb6c0940f5bae215150d1ea1cb3",
+      "commit_date": "2026-07-28",
+      "path": "simul_whisper/simul_whisper.py",
+      "lines": [
+        [
+          1053,
+          1102
+        ],
+        [
+          1095,
+          1138
+        ]
+      ],
+      "finding": "Corrector output selected as appended token IDs, appended to prefix, then caches cleared and result returned."
+    },
+    {
+      "repo": "vu-duy-tung/StreamCorrect_Qwen3ASR",
+      "commit": "cdd874ea318da7629d1af523794fcf8d6a8db5ec",
+      "commit_date": "2026-04-26",
+      "path": "qwen3asr_streaming_vllm_beam_async.py",
+      "lines": [
+        [
+          153,
+          204
+        ],
+        [
+          248,
+          267
+        ],
+        [
+          287,
+          330
+        ],
+        [
+          487,
+          559
+        ],
+        [
+          561,
+          660
+        ]
+      ],
+      "finding": "Blocking batched generate per block; process_iter calls ASR and corrector, returns latency information; finish emits transcript. Filename does not itself demonstrate independent old/new-root inference overlap.",
+      "caution": "Comments about corrected next-chunk memory are not used as proof that corrected memory feeds the ASR state; inspected prefix construction reads _raw_decoded."
+    },
+    {
+      "repo": "vu-duy-tung/StreamCorrect_Qwen3ASR",
+      "commit": "cdd874ea318da7629d1af523794fcf8d6a8db5ec",
+      "path": "streaming/asr_runner.py",
+      "lines": [
+        [
+          119,
+          196
+        ],
+        [
+          196,
+          289
+        ]
+      ],
+      "finding": "Parallel workers are assigned audio files; per-file loop calls process_iter synchronously."
+    }
+  ],
+  "review_interpretation": {
+    "strongest_positive_neighbors": [
+      "StreamCorrect for correction feedback",
+      "SimulStreaming for stable context composition",
+      "simulstream for revision-capable display/evaluation",
+      "LocalAgreement 2020 for dependency-aware state reuse"
+    ],
+    "candidate_contribution": "Coordinate compatible private computation and useful visible revisions around an unchanged trusted feedback service, plus retirement after installed trusted coverage proves work obsolete.",
+    "most_discriminating_observation": "Actual compatible private progress survives trusted-root advance while incompatible visible output is withdrawn, under the same complete Canonical F/Z/P/text history.",
+    "standard_full_equal_effect": "Constructive positive alternative and sufficiency evidence; not external prior art or a reason to erase the authored combination.",
+    "physical_retirement_boundary": "Compare shared-capability strong heuristics and coverage; do not claim unique causal benefit when extra causal predicates did not fire.",
+    "streamcorrect_fulltext_update": "The explicit selected-prefix recurrence establishes a strong correction-feedback neighbor. The remaining opportunity is independent authoritative progression plus compatible private computation and actual visible progress under the unchanged complete trusted history; not novelty from Qwen/async/correction labels."
+  },
+  "review_version": 2,
+  "streamcorrect_full_text_followup": {
+    "skill": "nature-downloader",
+    "acquisition_status": "open_access_downloaded",
+    "source_url": "https://aclanthology.org/2026.emnlp-industry.142.pdf",
+    "acquired_utc": "2026-10-28T05:52:37.348513+00:00",
+    "pdf_file": "streamcorrect_fulltext/Vu_2026_EMNLP_StreamCorrect.pdf",
+    "pdf_bytes": 3284475,
+    "pdf_sha256": "db5f0153ec0718a424a51d17c4a7c8c75c6e0ba33bb383a78f5f58c9008a7cae",
+    "pdf_page_count": 13,
+    "reading_order_text_file": "streamcorrect_fulltext/Vu_2026_EMNLP_StreamCorrect_reading_order.txt",
+    "reading_order_text_sha256": "aa2dbd504a8c20ff6e4dec0a0f8b0e961eba26f5de398e09429c1c595cca0730",
+    "detailed_review_file": "streamcorrect_fulltext/READING.md",
+    "visual_check": "PDF page 3 rendered and Fig.1 plus section 3.1 visually inspected",
+    "access_method": "Official ACL OA direct urllib request; ordinary sandbox network denied with WinError 10013, approved network escalation returned 200 application/pdf; no authentication or challenge",
+    "attempt_records": [
+      "streamcorrect_fulltext/download_attempt_1.json",
+      "streamcorrect_fulltext/download_attempt_2.json"
+    ],
+    "paper_code_association": "Footnote 1 on printed page 2391 explicitly links vu-duy-tung/StreamCorrect; exact frozen execution source not identified by paper",
+    "page_map": [
+      {
+        "sections": [
+          "3.1",
+          "3.2",
+          "Figure 1"
+        ],
+        "pdf_page": 3,
+        "printed_page": 2393
+      },
+      {
+        "sections": [
+          "3.2 PRA"
+        ],
+        "pdf_page": 4,
+        "printed_page": 2394
+      },
+      {
+        "sections": [
+          "3.2 real-time inference",
+          "4.1",
+          "4.2",
+          "4.3"
+        ],
+        "pdf_page": 5,
+        "printed_page": 2395
+      },
+      {
+        "sections": [
+          "4.3",
+          "Tables 2-3"
+        ],
+        "pdf_page": 6,
+        "printed_page": 2396
+      },
+      {
+        "sections": [
+          "4.4",
+          "4.5",
+          "Figure 4"
+        ],
+        "pdf_page": 7,
+        "printed_page": 2397
+      },
+      {
+        "sections": [
+          "Appendix A",
+          "Appendix B",
+          "Appendix C"
+        ],
+        "pdf_page": 11,
+        "printed_page": 2401
+      },
+      {
+        "sections": [
+          "Appendix C Table 4",
+          "Appendix F",
+          "Appendix G",
+          "Table 8"
+        ],
+        "pdf_page": 12,
+        "printed_page": 2402
+      },
+      {
+        "sections": [
+          "Appendix B Table 9"
+        ],
+        "pdf_page": 13,
+        "printed_page": 2403
+      }
+    ]
+  }
+}

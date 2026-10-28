@@ -1,0 +1,17 @@
+{
+  "experiment_id": "REVTRACE-H3-AGGREGATE-PATHFIX-v2",
+  "argv": [
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+    "-B",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/aggregate_source_v2/aggregate_service_v5.py",
+    "--plan",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/CONFIRMATION_PLAN_v3_FROZEN.json",
+    "--output",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_aggregate_v2/aggregate"
+  ],
+  "driver": "import json,subprocess,time,traceback\nfrom pathlib import Path\nD=Path('/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/confirmation_v3_aggregate_v2')\ncfg=json.loads((D/'CONFIG.json').read_text())\nwith (D/'aggregate.log').open('x') as log:rc=subprocess.run(cfg['argv'],stdout=log,stderr=subprocess.STDOUT).returncode\nsummary=json.loads((D/'aggregate/SUMMARY.json').read_text()) if rc==0 else None\ngate=dict(gate='PASS_110_CELL_AGGREGATION' if rc==0 and summary.get('accepted_cells')==110 else 'FAIL_PRESERVED',returncode=rc,summary=summary,new_GPU_calls=0)\nwith (D/'GATE.json').open('x') as f:json.dump(gate,f,indent=2)\n",
+  "driver_sha256": "9f45420a3d281091c8c6968967f3811f5e388744254db32cb4350318992b71ca",
+  "frozen_plan": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/CONFIRMATION_PLAN_v3_FROZEN.json",
+  "plan_sha256": "8a62b6849842aee0baa432f83c260b11686e328746b3b7f5b3831f5bc652b9ec",
+  "new_GPU_calls": 0
+}

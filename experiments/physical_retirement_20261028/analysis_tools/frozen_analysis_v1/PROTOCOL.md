@@ -1,0 +1,1 @@
+Independent offline H3 analyses. No inference. Require completed110-cell source-v3 service gate and idle GPUs. Keep the actual neural execution commit separate from this analysis commit. Run all three recounters; preserve missing or failed evidence; do not infer novelty, task accuracy or superiority from a green execution gate.

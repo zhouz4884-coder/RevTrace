@@ -1,0 +1,68 @@
+{
+  "experiment_id": "REVTRACE-WHISPER-BAD-DATA-PAID-DIAGNOSTIC-20261028",
+  "plan": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/WHISPER_BAD_DATA_DIAGNOSTIC_PLAN_v3.json",
+  "plan_sha256": "2fbbb87f2ab0ece2a81c9798d39758a285f460905da3140195eac2c3a1b59075",
+  "formal_calls": 9,
+  "explicit_warmup_calls": 1,
+  "validate_inputs_only": false,
+  "physical_GPU": 1,
+  "dtype": "float32",
+  "scope": "six same-neural-input FP32 single-row repetitions plus three empty-history whole-source quality references; no serving claim, full original peer scheduling omitted",
+  "selection": "greedy256, original EOS/budget; no text-dependent stopping or retries",
+  "call_order": [
+    {
+      "call_id": "00-repeat-word_short-r0",
+      "kind": "repeat",
+      "case_id": "word_short",
+      "repeat": 0
+    },
+    {
+      "call_id": "01-repeat-word_full2s-r0",
+      "kind": "repeat",
+      "case_id": "word_full2s",
+      "repeat": 0
+    },
+    {
+      "call_id": "02-repeat-blank_short-r0",
+      "kind": "repeat",
+      "case_id": "blank_short",
+      "repeat": 0
+    },
+    {
+      "call_id": "03-repeat-blank_short-r1",
+      "kind": "repeat",
+      "case_id": "blank_short",
+      "repeat": 1
+    },
+    {
+      "call_id": "04-repeat-word_full2s-r1",
+      "kind": "repeat",
+      "case_id": "word_full2s",
+      "repeat": 1
+    },
+    {
+      "call_id": "05-repeat-word_short-r1",
+      "kind": "repeat",
+      "case_id": "word_short",
+      "repeat": 1
+    },
+    {
+      "call_id": "06-whole-word_short",
+      "kind": "whole",
+      "case_id": "word_short",
+      "repeat": null
+    },
+    {
+      "call_id": "07-whole-word_full2s",
+      "kind": "whole",
+      "case_id": "word_full2s",
+      "repeat": null
+    },
+    {
+      "call_id": "08-whole-blank_short",
+      "kind": "whole",
+      "case_id": "blank_short",
+      "repeat": null
+    }
+  ]
+}

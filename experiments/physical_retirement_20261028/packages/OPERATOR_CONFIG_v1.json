@@ -1,0 +1,28 @@
+{
+  "experiment_id": "REVTRACE-PHYSRET-OPERATOR-v1",
+  "code_commit": "c9c2469ba2ca38db5b7d9a3f1a7ea35052e57d68",
+  "argv": [
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+    "-B",
+    "-u",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/source_v1/retirement_operator.py",
+    "--probe",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/OPERATOR_PROBES_v1.json",
+    "--out",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/operator_v1",
+    "--source-manifest",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/SOURCE_v1.json",
+    "--source-commit",
+    "c9c2469ba2ca38db5b7d9a3f1a7ea35052e57d68",
+    "--repeats",
+    "2",
+    "--policies",
+    "no_cancel",
+    "covered"
+  ],
+  "source_manifest_sha256": "04685e514f7c3e6d1ffc527846a847f08c1e21676ca17189e4c40cbb6863fd67",
+  "probe_sha256": "9e08033d70b6f3c80458e520a71fd7ed507a90d9045587c4c40b1d6b0a765b56",
+  "expected_probes": 3,
+  "expected_trials": 12,
+  "evidence_tier": "real fixed-input operator; not deployed serving"
+}

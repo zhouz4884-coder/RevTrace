@@ -1,0 +1,83 @@
+{
+  "status": "PASS_INDEPENDENT_RAW_FIXED_INPUT_OPERATOR_RECOUNT",
+  "evidence_tier": "real model-resident fixed-input operator; archival intervention; no current Owner, Consumer, service SLO, or prevalence evidence",
+  "execution_source_commit": "c9c2469ba2ca38db5b7d9a3f1a7ea35052e57d68",
+  "source_manifest_files_byte_matched": 238,
+  "raw_files": 46,
+  "raw_bytes": 9690945,
+  "probes": 3,
+  "actual_model_trial_batch_invocations": 12,
+  "actual_model_trial_physical_rows": 184,
+  "actual_full_worker_receipts": 178,
+  "actual_cancelled_worker_receipts": 6,
+  "actual_worker_batch_drains": 12,
+  "observed_worker_warmup_episodes": 3,
+  "source_verified_generate_calls_per_warmup": 1,
+  "warmup_generate_call_evidence": "three warmup-start/complete worker records plus byte-matched source single execute/model.generate path; no per-forward trace",
+  "actual_generate_invocations_including_warmup": 15,
+  "cuda_kernel_invocations": null,
+  "forward_invocations": null,
+  "scalar_float_repeat_claim": "input tensor hashes and chosen-token/state/text outputs repeated exactly; activations/logits not retained",
+  "trial_model_phase_seconds": 53.48003854881972,
+  "trial_operator_interval_seconds": 55.64894167613238,
+  "worker_startup_wall_seconds": 45.754119757562876,
+  "model_load_wall_seconds": 8.025449538603425,
+  "warmup_wall_seconds": 3.1486976630985737,
+  "paired_operator_effects": [
+    {
+      "probe_id": "cap256-standard-staggered-r0",
+      "repeat": 0,
+      "cancelled_rows": 2,
+      "model_phase_saved_seconds": 14.914800763130188,
+      "operator_interval_saved_seconds": 14.979843389242887,
+      "worker_lease_saved_seconds": 14.98042084183544,
+      "both_board_joules_saved": 2772.975812220881
+    },
+    {
+      "probe_id": "cap256-standard-staggered-r0",
+      "repeat": 1,
+      "cancelled_rows": 2,
+      "model_phase_saved_seconds": 14.793278929777443,
+      "operator_interval_saved_seconds": 14.801418760791421,
+      "worker_lease_saved_seconds": 14.8038668083027,
+      "both_board_joules_saved": 2773.3400990260598
+    },
+    {
+      "probe_id": "medium37-standard-sync-r0",
+      "repeat": 0,
+      "cancelled_rows": 1,
+      "model_phase_saved_seconds": 1.4292458724230528,
+      "operator_interval_saved_seconds": 1.4844593415036798,
+      "worker_lease_saved_seconds": 1.4840281382203102,
+      "both_board_joules_saved": 282.0057203736806
+    },
+    {
+      "probe_id": "medium37-standard-sync-r0",
+      "repeat": 1,
+      "cancelled_rows": 1,
+      "model_phase_saved_seconds": 1.186519855633378,
+      "operator_interval_saved_seconds": 1.18133882060647,
+      "worker_lease_saved_seconds": 1.1825028480961919,
+      "both_board_joules_saved": 242.20671223634457
+    },
+    {
+      "probe_id": "clean14-fine-sync-r0",
+      "repeat": 0,
+      "cancelled_rows": 0,
+      "model_phase_saved_seconds": 0.012350122444331646,
+      "operator_interval_saved_seconds": 0.04983347374945879,
+      "worker_lease_saved_seconds": 0.047876521944999695,
+      "both_board_joules_saved": -41.92007006482322
+    },
+    {
+      "probe_id": "clean14-fine-sync-r0",
+      "repeat": 1,
+      "cancelled_rows": 0,
+      "model_phase_saved_seconds": -0.021317721344530582,
+      "operator_interval_saved_seconds": -0.018734234385192394,
+      "worker_lease_saved_seconds": -0.019359358586370945,
+      "both_board_joules_saved": -1.103649119892225
+    }
+  ],
+  "interpretation": "surviving complete rows and repeated inputs verified from raw; all row-mask tails paid to actual model return and BatchDrained; no per-row FLOPs or service benefit inferred"
+}

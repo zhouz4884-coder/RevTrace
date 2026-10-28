@@ -1,0 +1,31 @@
+{
+  "experiment_id": "REVTRACE-PHYSRET-INDEPENDENT-AUDIT-REPAIR-v2",
+  "code_commit": "1d8c30804a945570429d85d934b3bfcba6171a43",
+  "source": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/source_v2",
+  "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/SOURCE_v2.json",
+  "source_manifest_sha256": "5b1527bdcb20e165bc69f5002e3092a38b8ec773606828936c211ed595781f63",
+  "auditor_sha256": "c1f13a06749c9937cfd8ce9c464b564baeb095b691c33d83d7349ae3878b1893",
+  "input_consumer_metrics_sha256": "a8df7aecf1cb8e8444501b4e1e69f00bd3a5d277e38647d05c45658285674118",
+  "original_episode": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_pilot_v1/row_complete-F2-r0",
+  "original_identity_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_audit_repair_v2/ORIGINAL_RAW_IDENTITY.json",
+  "original_identity_sha256": "fe1431b7b11074b5e5914599a573f870a3ed3c464b6fcc55007bcc730df1572b",
+  "argv": [
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+    "-B",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_physical_retirement_20261028/source_v2/retirement_audit.py",
+    "--episode",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_pilot_v1/row_complete-F2-r0",
+    "--manifest",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_pilot_v1/row_complete-F2-r0/manifest.json",
+    "--output",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_audit_repair_v2/audit"
+  ],
+  "controller_source": "from pathlib import Path\nimport hashlib,json,os,subprocess,time,traceback\nfrom retirement_service import verify_source\nD=Path('/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_audit_repair_v2')\ndef sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()\ndef put(path,value):\n    with path.open('x',encoding='utf8') as stream:json.dump(value,stream,indent=2);stream.write('\\n')\ndef snapshot(root):return {str(p.relative_to(root)):dict(bytes=p.stat().st_size,sha256=sha(p)) for p in sorted(root.rglob('*')) if p.is_file()}\ncfg=json.loads((D/'CONFIG.json').read_text());begin=time.perf_counter()\ntry:\n    before=verify_source(Path(cfg['source_manifest']),Path(cfg['source']))\n    original=json.loads((D/'ORIGINAL_RAW_IDENTITY.json').read_text())\n    assert snapshot(Path(cfg['original_episode']))==original['immutable_files'],'raw changed before audit'\n    with (D/'audit_stdout.log').open('x') as stream:\n        run=subprocess.run(cfg['argv'],cwd=cfg['source'],env=os.environ,stdout=stream,stderr=subprocess.STDOUT,timeout=300)\n    after=verify_source(Path(cfg['source_manifest']),Path(cfg['source']))\n    raw_unchanged=snapshot(Path(cfg['original_episode']))==original['immutable_files']\n    assert raw_unchanged,'auditor changed original immutable evidence'\n    if run.returncode:raise RuntimeError('full independent audit returned '+str(run.returncode))\n    result=json.loads((D/'audit/SUMMARY.json').read_text())\n    assert result['status']=='PASS_INDEPENDENT_RETIREMENT_AND_INPUT_CONSUMER_AUDIT'\n    summary=dict(status='PASS_FROZEN_V2_INDEPENDENT_AUDIT_OF_V1_RAW',audit_code_commit=cfg['code_commit'],\n        original_execution_code_commit=original['execution_code_commit'],source_manifest_sha256=cfg['source_manifest_sha256'],\n        complete_audit=result,original_raw_unchanged=raw_unchanged,original_failed_gate_unchanged=True,\n        wall_seconds=time.perf_counter()-begin,new_GPU_calls=0,source_before=before,source_after=after,\n        interpretation='new independent audit identity; original execution/gate retained; performance verdict unchanged')\n    put(D/'SUMMARY.json',summary)\n    put(D/'GATE.json',dict(gate='PASS_INDEPENDENT_AUDIT_ONLY',**summary))\n    print(json.dumps(summary),flush=True)\nexcept BaseException:\n    failure=dict(gate='FAIL_INDEPENDENT_AUDIT_RETAINED',traceback=traceback.format_exc(),audit_code_commit=cfg['code_commit'],new_GPU_calls=0)\n    put(D/'STOP.json',failure)\n    if not (D/'GATE.json').exists():put(D/'GATE.json',failure)\n    raise\n",
+  "controller_sha256": "cc9231089da9859628f61df96e29e1378956fe9c1695467ac3530902b830b2a5",
+  "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_audit_repair_v2/ENVIRONMENT.json",
+  "environment_record_sha256": "ce501951474b0996cc1ae92aaa4f4921cbc816d617f44f5fabd17ba02174442d",
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_audit_repair_v2/audit_stdout.log",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_audit_repair_v2/SUMMARY.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/service_audit_repair_v2/GATE.json",
+  "new_GPU_calls": 0
+}

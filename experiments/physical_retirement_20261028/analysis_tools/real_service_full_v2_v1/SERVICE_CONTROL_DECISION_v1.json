@@ -1,0 +1,501 @@
+{
+  "experiment_family": "REVTRACE-PHYSICAL-RETIREMENT-20261028",
+  "analysis_id": "REVTRACE-SERVICE-CONTROL-DECISION-v1",
+  "analysis_source_sha256": "16ade0be93652ae2fa8db0b193265699ad696c283d3c93aeaab1f4ced7fc4057",
+  "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "input_sha256": {
+    "RUNS.json": "9fd1111c8bc26fab96583e653c31d5aa52cd30d87ced8f9c19acc364a975f49e",
+    "CANONICAL_HISTORY_GROUPS.json": "cec3a970f6930fac45c51765712ae01ca4121bcca4aa58b47b3f8bfbf9395fcb",
+    "ACTUAL_TRIGGER_RECOUNT.json": "35dc099bf2c725c8bc06de0395d4c32c7f0a0e94309a50c3db59222da9ee0957",
+    "ANALYSIS_RECORD.json": "68c73664933394a274941780543b3527f71acb99c5ebfe1accba948d9fb44b38"
+  },
+  "actual_execution_source_commit": "1d8c30804a945570429d85d934b3bfcba6171a43",
+  "cells": 16,
+  "all_audited": true,
+  "all_16_sources_full_canonical_histories_equal_across_all_16_cells": true,
+  "quality": {
+    "word_errors": 14,
+    "reference_words": 687,
+    "WER_percent": 2.037845705967977
+  },
+  "all_whole_run_dual_P99_failed": true,
+  "F2_results": [
+    {
+      "policy": "row_complete",
+      "repeats": 2,
+      "values": {
+        "dual_credited_audio_seconds": [
+          227.02,
+          232.41500000000002
+        ],
+        "dual_audio_fraction": [
+          0.9074266528099768,
+          0.9289911263889999
+        ],
+        "all_offered_audio_goodput_2_8": [
+          10.442310209564948,
+          10.692065335007612
+        ],
+        "display_P99": [
+          3.721767900343984,
+          3.663100890126079
+        ],
+        "commit_view_P99": [
+          3.721767900343984,
+          3.8578255876153706
+        ],
+        "GPU_joules": [
+          8673.58037649025,
+          8639.613181726012
+        ],
+        "physical_model_seconds": [
+          29.092464046552777,
+          28.66007854603231
+        ],
+        "physical_lease_seconds": [
+          31.838177687488496,
+          31.21262986958027
+        ],
+        "cancelled_rows": [
+          0,
+          0
+        ]
+      },
+      "mean": {
+        "dual_credited_audio_seconds": 229.71750000000003,
+        "dual_audio_fraction": 0.9182088895994884,
+        "all_offered_audio_goodput_2_8": 10.56718777228628,
+        "display_P99": 3.692434395235032,
+        "commit_view_P99": 3.7897967439796774,
+        "GPU_joules": 8656.596779108131,
+        "physical_model_seconds": 28.876271296292543,
+        "physical_lease_seconds": 31.525403778534383,
+        "cancelled_rows": 0
+      }
+    },
+    {
+      "policy": "no_cancel",
+      "repeats": 2,
+      "values": {
+        "dual_credited_audio_seconds": [
+          227.02,
+          231.95000000000002
+        ],
+        "dual_audio_fraction": [
+          0.9074266528099768,
+          0.9271324646254697
+        ],
+        "all_offered_audio_goodput_2_8": [
+          10.473538036468074,
+          10.749001189900152
+        ],
+        "display_P99": [
+          3.5923673729039725,
+          3.731790332235396
+        ],
+        "commit_view_P99": [
+          3.606474637463689,
+          3.8316508063860235
+        ],
+        "GPU_joules": [
+          8617.832469690973,
+          8563.217805891712
+        ],
+        "physical_model_seconds": [
+          28.857218466699123,
+          28.83356831036508
+        ],
+        "physical_lease_seconds": [
+          31.440919336862862,
+          31.6344791110605
+        ],
+        "cancelled_rows": [
+          0,
+          0
+        ]
+      },
+      "mean": {
+        "dual_credited_audio_seconds": 229.485,
+        "dual_audio_fraction": 0.9172795587177233,
+        "all_offered_audio_goodput_2_8": 10.611269613184113,
+        "display_P99": 3.6620788525696844,
+        "commit_view_P99": 3.719062721924856,
+        "GPU_joules": 8590.525137791343,
+        "physical_model_seconds": 28.845393388532102,
+        "physical_lease_seconds": 31.53769922396168,
+        "cancelled_rows": 0
+      }
+    },
+    {
+      "policy": "watchdog",
+      "repeats": 2,
+      "values": {
+        "dual_credited_audio_seconds": [
+          241.95000000000002,
+          243.95000000000002
+        ],
+        "dual_audio_fraction": [
+          0.9671036853465506,
+          0.9750979294907667
+        ],
+        "all_offered_audio_goodput_2_8": [
+          11.0346126535294,
+          11.135198533999047
+        ],
+        "display_P99": [
+          2.6722468208707855,
+          2.649305525887756
+        ],
+        "commit_view_P99": [
+          3.805799085907638,
+          3.9312218479439616
+        ],
+        "GPU_joules": [
+          8716.843668148094,
+          8663.11415689325
+        ],
+        "physical_model_seconds": [
+          29.055185921490192,
+          28.864729028195143
+        ],
+        "physical_lease_seconds": [
+          31.991595300845802,
+          31.66412336938083
+        ],
+        "cancelled_rows": [
+          1,
+          1
+        ]
+      },
+      "mean": {
+        "dual_credited_audio_seconds": 242.95000000000002,
+        "dual_audio_fraction": 0.9711008074186587,
+        "all_offered_audio_goodput_2_8": 11.084905593764223,
+        "display_P99": 2.6607761733792707,
+        "commit_view_P99": 3.8685104669258,
+        "GPU_joules": 8689.978912520673,
+        "physical_model_seconds": 28.959957474842668,
+        "physical_lease_seconds": 31.827859335113317,
+        "cancelled_rows": 1
+      }
+    },
+    {
+      "policy": "parent",
+      "repeats": 2,
+      "values": {
+        "dual_credited_audio_seconds": [
+          249.085,
+          243.715
+        ],
+        "dual_audio_fraction": [
+          0.9956231513310416,
+          0.9741586058038212
+        ],
+        "all_offered_audio_goodput_2_8": [
+          11.46164955075862,
+          11.26904548845645
+        ],
+        "display_P99": [
+          3.123604777250434,
+          3.4200416120141703
+        ],
+        "commit_view_P99": [
+          3.6858590253628787,
+          3.9202777727507048
+        ],
+        "GPU_joules": [
+          8626.519086656665,
+          8623.515963162381
+        ],
+        "physical_model_seconds": [
+          28.109569824300706,
+          28.387131048366427
+        ],
+        "physical_lease_seconds": [
+          30.821057950146496,
+          31.293775219470263
+        ],
+        "cancelled_rows": [
+          7,
+          9
+        ]
+      },
+      "mean": {
+        "dual_credited_audio_seconds": 246.4,
+        "dual_audio_fraction": 0.9848908785674314,
+        "all_offered_audio_goodput_2_8": 11.365347519607536,
+        "display_P99": 3.271823194632302,
+        "commit_view_P99": 3.8030683990567917,
+        "GPU_joules": 8625.017524909523,
+        "physical_model_seconds": 28.248350436333567,
+        "physical_lease_seconds": 31.05741658480838,
+        "cancelled_rows": 8
+      }
+    },
+    {
+      "policy": "covered",
+      "repeats": 2,
+      "values": {
+        "dual_credited_audio_seconds": [
+          242.40500000000003,
+          249.67000000000002
+        ],
+        "dual_audio_fraction": [
+          0.9689223758893597,
+          0.9979614677432249
+        ],
+        "all_offered_audio_goodput_2_8": [
+          11.189327510523482,
+          11.486760510163018
+        ],
+        "display_P99": [
+          2.7528574986010774,
+          2.130037464220077
+        ],
+        "commit_view_P99": [
+          3.9343796117044985,
+          3.88758193379268
+        ],
+        "GPU_joules": [
+          8562.16572311291,
+          8577.582961402159
+        ],
+        "physical_model_seconds": [
+          29.14763227570802,
+          28.725653409957886
+        ],
+        "physical_lease_seconds": [
+          32.21595880854875,
+          31.684675831347704
+        ],
+        "cancelled_rows": [
+          1,
+          1
+        ]
+      },
+      "mean": {
+        "dual_credited_audio_seconds": 246.03750000000002,
+        "dual_audio_fraction": 0.9834419218162923,
+        "all_offered_audio_goodput_2_8": 11.33804401034325,
+        "display_P99": 2.4414474814105773,
+        "commit_view_P99": 3.910980772748589,
+        "GPU_joules": 8569.874342257535,
+        "physical_model_seconds": 28.936642842832953,
+        "physical_lease_seconds": 31.950317319948226,
+        "cancelled_rows": 1
+      }
+    },
+    {
+      "policy": "causal",
+      "repeats": 2,
+      "values": {
+        "dual_credited_audio_seconds": [
+          249.16500000000002,
+          235.47500000000002
+        ],
+        "dual_audio_fraction": [
+          0.9959429210968104,
+          0.9412223199296507
+        ],
+        "all_offered_audio_goodput_2_8": [
+          11.47403954796551,
+          10.727342504910899
+        ],
+        "display_P99": [
+          2.1773366302624346,
+          2.3098654373735186
+        ],
+        "commit_view_P99": [
+          3.90882059443742,
+          3.810462410226464
+        ],
+        "GPU_joules": [
+          8628.032090476558,
+          8674.808684579932
+        ],
+        "physical_model_seconds": [
+          28.975847150199115,
+          28.751676008105278
+        ],
+        "physical_lease_seconds": [
+          31.84638779144734,
+          31.7050417130813
+        ],
+        "cancelled_rows": [
+          1,
+          1
+        ]
+      },
+      "mean": {
+        "dual_credited_audio_seconds": 242.32000000000002,
+        "dual_audio_fraction": 0.9685826205132305,
+        "all_offered_audio_goodput_2_8": 11.100691026438206,
+        "display_P99": 2.243601033817977,
+        "commit_view_P99": 3.859641502331942,
+        "GPU_joules": 8651.420387528244,
+        "physical_model_seconds": 28.863761579152197,
+        "physical_lease_seconds": 31.77571475226432,
+        "cancelled_rows": 1
+      }
+    }
+  ],
+  "clean_actuator_comparisons": [
+    {
+      "repeat": 0,
+      "delta_shared_actuator_minus_original": {
+        "dual_credited_audio_seconds": 0.0,
+        "dual_audio_fraction": 0.0,
+        "all_offered_audio_goodput_2_8": -0.13410280046609735,
+        "display_P99": 0.04061619389802207,
+        "commit_view_P99": -0.14855893038213308,
+        "GPU_joules": -9.417157472293184,
+        "physical_model_seconds": 0.5077425269410014,
+        "physical_lease_seconds": 0.4589478773996234,
+        "cancelled_rows": 0
+      },
+      "scope": "full service measured point, not isolated per-token actuator cost"
+    },
+    {
+      "repeat": 1,
+      "delta_shared_actuator_minus_original": {
+        "dual_credited_audio_seconds": 0.799999999999983,
+        "dual_audio_fraction": 0.0031976976576864047,
+        "all_offered_audio_goodput_2_8": -0.05984946934861135,
+        "display_P99": -0.15371627764776363,
+        "commit_view_P99": -0.14909690272062992,
+        "GPU_joules": 49.356364779770956,
+        "physical_model_seconds": -0.21047837007790804,
+        "physical_lease_seconds": -0.344630709849298,
+        "cancelled_rows": 0
+      },
+      "scope": "full service measured point, not isolated per-token actuator cost"
+    }
+  ],
+  "actual_trigger_counts": [
+    {
+      "cell_id": "covered-F2-r0",
+      "reason_counts": {
+        "trusted-coverage": 1
+      },
+      "outcomes": {
+        "row-cancelled": 1
+      }
+    },
+    {
+      "cell_id": "covered-F2-r1",
+      "reason_counts": {
+        "trusted-coverage": 1
+      },
+      "outcomes": {
+        "row-cancelled": 1
+      }
+    },
+    {
+      "cell_id": "row_complete-F2-r0",
+      "reason_counts": {},
+      "outcomes": {}
+    },
+    {
+      "cell_id": "row_complete-F2-r1",
+      "reason_counts": {},
+      "outcomes": {}
+    },
+    {
+      "cell_id": "causal-F2-r0",
+      "reason_counts": {
+        "trusted-coverage": 1
+      },
+      "outcomes": {
+        "row-cancelled": 1
+      }
+    },
+    {
+      "cell_id": "causal-F2-r1",
+      "reason_counts": {
+        "trusted-coverage": 1
+      },
+      "outcomes": {
+        "row-cancelled": 1
+      }
+    },
+    {
+      "cell_id": "no_cancel-F2-r0",
+      "reason_counts": {},
+      "outcomes": {}
+    },
+    {
+      "cell_id": "no_cancel-F2-r1",
+      "reason_counts": {},
+      "outcomes": {}
+    },
+    {
+      "cell_id": "no_cancel-clean-r0",
+      "reason_counts": {},
+      "outcomes": {}
+    },
+    {
+      "cell_id": "no_cancel-clean-r1",
+      "reason_counts": {},
+      "outcomes": {}
+    },
+    {
+      "cell_id": "parent-F2-r0",
+      "reason_counts": {
+        "parent-version-superseded": 15
+      },
+      "outcomes": {
+        "row-cancelled": 7,
+        "completion-won": 8
+      }
+    },
+    {
+      "cell_id": "parent-F2-r1",
+      "reason_counts": {
+        "parent-version-superseded": 13
+      },
+      "outcomes": {
+        "row-cancelled": 9,
+        "completion-won": 4
+      }
+    },
+    {
+      "cell_id": "row_complete-clean-r0",
+      "reason_counts": {},
+      "outcomes": {}
+    },
+    {
+      "cell_id": "row_complete-clean-r1",
+      "reason_counts": {},
+      "outcomes": {}
+    },
+    {
+      "cell_id": "watchdog-F2-r0",
+      "reason_counts": {
+        "watchdog-timeout": 1
+      },
+      "outcomes": {
+        "row-cancelled": 1
+      }
+    },
+    {
+      "cell_id": "watchdog-F2-r1",
+      "reason_counts": {
+        "watchdog-timeout": 1
+      },
+      "outcomes": {
+        "row-cancelled": 1
+      }
+    }
+  ],
+  "decision": "BOUNDED_SERVICE_VALUE_PROVEN_FOR_THIS_CONTROLLED_DEVELOPMENT_SCENARIO; NO_CAUSAL_POLICY_SUPERIORITY_OR_UNIVERSAL_COST_REDUCTION",
+  "own_interpretation": [
+    "Retirement can rescue the usefulness window of an unchanged legal successor batch under identical Canonical histories; this is a concrete composition opportunity.",
+    "Watchdog and parent cancellation also improve several endpoints. No policy dominates all measured service/cost endpoints in these two repeats.",
+    "All causal-policy cancellations were trusted-coverage triggers. Retired-generation superiority was not exercised; covered/causal timing differences cannot be attributed to an unexercised predicate.",
+    "Full pipeline model/lease work need not decrease when earlier release enables additional legal work. Do not subtract an operator tail from service wall-clock.",
+    "Clean no-cancel/original differences change sign or endpoint across repeats; do not claim zero overhead or a precisely estimated overhead from two runs.",
+    "Independent composition confirmation, matched useful-content evidence and backend-quality diagnosis remain outstanding before the full paper-competitiveness decision."
+  ],
+  "generalization": "16 shared development sources, one known long-tail intervention mechanism, two process repeats; not 16 independent anomaly families or a natural prevalence estimate"
+}

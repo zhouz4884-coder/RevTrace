@@ -1,0 +1,33 @@
+{
+  "protocol_id": "REVTRACE_NATIVE_PLANNING_PILOT_V1",
+  "experiment_id": "REVTRACE-NATIVE-PILOT-20261027",
+  "worker_timeout_seconds": 360,
+  "provider": {
+    "kind": "actual_model",
+    "module": "actual_provider",
+    "identity": "Qwen2.5-1.5B-native-planning-owned-selector-v1",
+    "experiment_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9",
+    "model_path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/Qwen2.5-1.5B-Instruct",
+    "authority_device": 1,
+    "authority_dtype": "float32",
+    "proposer_device": 0,
+    "proposer_dtype": "float16",
+    "max_new_tokens": 256,
+    "chat_template_kwargs": {},
+    "cpu_threads": 3
+  },
+  "controlled_substitution": {
+    "kind": "fixed-json-return",
+    "on_cycles": [0],
+    "by_family": {
+      "runbook": {"completed": ["restart"], "last_action": "restart"},
+      "resource_plan": {"reserved": ["nonexistent_reservation"], "remaining": -1}
+    }
+  },
+  "development_unique_tasks": 2,
+  "development_repeats": 2,
+  "strict_policy": "conditional_on_actual_same_input_self_replay_not_assumed_equivalent",
+  "validation_policy": "four_fixed_structural_tasks_retained_but_not_launched_by_this_pilot",
+  "stage_policy": "smoke_returns_before_development_requires_explicit_stage_and_passed_gate",
+  "cost_scope": "mode_required_models_only; both_GPU_power_over_the_same_whole_cell_window; paid_fallback_and_retry_retained"
+}
