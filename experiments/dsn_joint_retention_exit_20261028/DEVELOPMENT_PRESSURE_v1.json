@@ -1,0 +1,491 @@
+{
+  "analysis_id": "REVTRACE-JOINT-DEVELOPMENT-PRESSURE-20261028",
+  "method": "Complete actual nonfault model execution overlaps installed Canonical update, targetF remains uncovered, exact published ancestor path reaches actual selected F/P. Retrospective diagnosis only.",
+  "analysis_script_sha256": "3ed397118cd4de016ecb30db4190d21271b79883724f2b945e036d52bf525206",
+  "inputs": {
+    "experiments\\physical_retirement_20261028\\service_opportunity_v2\\row_complete-F2-r0\\attempt0\\events.jsonl": {
+      "bytes": 2080269,
+      "sha256": "821583d72e98fdc95389cd2cee2e981e404cdea983418bd25cb6c50e4ac84edc"
+    },
+    "experiments\\physical_retirement_20261028\\service_opportunity_v2\\row_complete-F2-r0\\attempt0\\worker_records.jsonl": {
+      "bytes": 2675073,
+      "sha256": "74b973623dc77ae3a232cc252f1394cb2a0742d36b049b5e6929a78d77aab1ff"
+    },
+    "experiments\\physical_retirement_20261028\\service_opportunity_v2\\covered-F2-r0\\attempt0\\events.jsonl": {
+      "bytes": 2164198,
+      "sha256": "175892c5e4f2eb661198b1668ba4545fea172e349c34ac2af3467741b69cf3af"
+    },
+    "experiments\\physical_retirement_20261028\\service_opportunity_v2\\covered-F2-r0\\attempt0\\worker_records.jsonl": {
+      "bytes": 2696075,
+      "sha256": "9895adb9d57b006e55dad366ecfee07358c1d475952a107c4b37f29df2757bf3"
+    },
+    "experiments\\physical_retirement_20261028\\service_opportunity_v2\\row_complete-F2-r1\\attempt0\\events.jsonl": {
+      "bytes": 1956283,
+      "sha256": "84a2a9b806d94a0d90831e648f53ae0d08bdbb90e928268bcb66c40aff905130"
+    },
+    "experiments\\physical_retirement_20261028\\service_opportunity_v2\\row_complete-F2-r1\\attempt0\\worker_records.jsonl": {
+      "bytes": 2686863,
+      "sha256": "b188fd9f40b89a3ea40ca05975ccd0b59b0bb64ffdc5f4afb347311ea5ec17d5"
+    },
+    "experiments\\physical_retirement_20261028\\service_opportunity_v2\\covered-F2-r1\\attempt0\\events.jsonl": {
+      "bytes": 2102477,
+      "sha256": "4773468d895a8c85fae5387344c6babf852ca24406fd78ad7134373b32fc1bf5"
+    },
+    "experiments\\physical_retirement_20261028\\service_opportunity_v2\\covered-F2-r1\\attempt0\\worker_records.jsonl": {
+      "bytes": 2707728,
+      "sha256": "b86e4c60018c5b6ebbf17738fa80b4ba6080868855db5d495b96b0cd2c2c5985"
+    }
+  },
+  "cells": [
+    {
+      "cell": "row_complete-F2-r0",
+      "witnesses": [
+        {
+          "jid": "proposal-11-221",
+          "tokens": 6,
+          "seconds": 0.4539432656019926,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-11-221"
+          ]
+        },
+        {
+          "jid": "proposal-5-222",
+          "tokens": 6,
+          "seconds": 0.4564210809767246,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-5-222"
+          ]
+        },
+        {
+          "jid": "proposal-12-223",
+          "tokens": 7,
+          "seconds": 0.5143456775695086,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-12-223"
+          ]
+        },
+        {
+          "jid": "proposal-15-224",
+          "tokens": 12,
+          "seconds": 0.775635376572609,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-15-224"
+          ]
+        },
+        {
+          "jid": "proposal-1-257",
+          "tokens": 6,
+          "seconds": 0.430544032715261,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-1-257"
+          ]
+        },
+        {
+          "jid": "proposal-3-258",
+          "tokens": 8,
+          "seconds": 0.5358399013057351,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-3-258"
+          ]
+        },
+        {
+          "jid": "proposal-7-259",
+          "tokens": 8,
+          "seconds": 0.5389362489804626,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-7-259"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": "covered-F2-r0",
+      "witnesses": [
+        {
+          "jid": "proposal-10-193",
+          "tokens": 6,
+          "seconds": 0.4799655135720968,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-10-193"
+          ]
+        },
+        {
+          "jid": "proposal-0-194",
+          "tokens": 6,
+          "seconds": 0.4818005356937647,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-0-194"
+          ]
+        },
+        {
+          "jid": "proposal-6-196",
+          "tokens": 6,
+          "seconds": 0.48568442929536104,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-6-196"
+          ]
+        },
+        {
+          "jid": "proposal-4-197",
+          "tokens": 10,
+          "seconds": 0.7138736629858613,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-4-197"
+          ]
+        },
+        {
+          "jid": "proposal-13-233",
+          "tokens": 10,
+          "seconds": 0.9545738454908133,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-13-233"
+          ]
+        },
+        {
+          "jid": "proposal-15-227",
+          "tokens": 12,
+          "seconds": 1.0649812342599034,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-15-227"
+          ]
+        },
+        {
+          "jid": "proposal-7-230",
+          "tokens": 12,
+          "seconds": 1.06749804969877,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-7-230"
+          ]
+        },
+        {
+          "jid": "proposal-9-232",
+          "tokens": 12,
+          "seconds": 1.0699776848778129,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-9-232"
+          ]
+        },
+        {
+          "jid": "proposal-1-228",
+          "tokens": 13,
+          "seconds": 1.127248846925795,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-1-228"
+          ]
+        },
+        {
+          "jid": "proposal-8-231",
+          "tokens": 14,
+          "seconds": 1.1881315121427178,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-8-231"
+          ]
+        },
+        {
+          "jid": "proposal-13-248",
+          "tokens": 9,
+          "seconds": 0.6000551134347916,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-13-248"
+          ]
+        },
+        {
+          "jid": "proposal-1-260",
+          "tokens": 6,
+          "seconds": 0.4320926386862993,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-1-260"
+          ]
+        },
+        {
+          "jid": "proposal-3-261",
+          "tokens": 8,
+          "seconds": 0.5410533603280783,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-3-261"
+          ]
+        },
+        {
+          "jid": "proposal-7-262",
+          "tokens": 8,
+          "seconds": 0.5444547208026052,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-7-262"
+          ]
+        },
+        {
+          "jid": "proposal-9-268",
+          "tokens": 7,
+          "seconds": 0.346542302519083,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-9-268"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": "row_complete-F2-r1",
+      "witnesses": [
+        {
+          "jid": "proposal-11-222",
+          "tokens": 6,
+          "seconds": 0.45065950974822044,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-11-222"
+          ]
+        },
+        {
+          "jid": "proposal-5-223",
+          "tokens": 6,
+          "seconds": 0.4527298416942358,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-5-223"
+          ]
+        },
+        {
+          "jid": "proposal-12-224",
+          "tokens": 7,
+          "seconds": 0.5095497025176883,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-12-224"
+          ]
+        },
+        {
+          "jid": "proposal-15-225",
+          "tokens": 12,
+          "seconds": 0.7612243089824915,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-15-225"
+          ]
+        },
+        {
+          "jid": "proposal-13-246",
+          "tokens": 9,
+          "seconds": 0.5633303532376885,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-13-246"
+          ]
+        },
+        {
+          "jid": "proposal-1-258",
+          "tokens": 6,
+          "seconds": 0.41574739664793015,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-1-258"
+          ]
+        },
+        {
+          "jid": "proposal-3-259",
+          "tokens": 8,
+          "seconds": 0.5207787519320846,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-3-259"
+          ]
+        },
+        {
+          "jid": "proposal-7-260",
+          "tokens": 8,
+          "seconds": 0.5237495293840766,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-7-260"
+          ]
+        },
+        {
+          "jid": "proposal-9-266",
+          "tokens": 7,
+          "seconds": 0.3205516813322902,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-9-266"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": "covered-F2-r1",
+      "witnesses": [
+        {
+          "jid": "proposal-10-193",
+          "tokens": 6,
+          "seconds": 0.4247024031355977,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-10-193"
+          ]
+        },
+        {
+          "jid": "proposal-0-194",
+          "tokens": 6,
+          "seconds": 0.4264888735488057,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-0-194"
+          ]
+        },
+        {
+          "jid": "proposal-2-195",
+          "tokens": 6,
+          "seconds": 0.428454945795238,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-2-195"
+          ]
+        },
+        {
+          "jid": "proposal-6-196",
+          "tokens": 6,
+          "seconds": 0.4298905646428466,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-6-196"
+          ]
+        },
+        {
+          "jid": "proposal-11-225",
+          "tokens": 6,
+          "seconds": 0.45384697057306767,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-11-225"
+          ]
+        },
+        {
+          "jid": "proposal-5-226",
+          "tokens": 6,
+          "seconds": 0.4561178842559457,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-5-226"
+          ]
+        },
+        {
+          "jid": "proposal-15-228",
+          "tokens": 12,
+          "seconds": 0.7761840438470244,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-15-228"
+          ]
+        },
+        {
+          "jid": "proposal-13-249",
+          "tokens": 9,
+          "seconds": 0.5663335425779223,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-13-249"
+          ]
+        },
+        {
+          "jid": "proposal-1-261",
+          "tokens": 6,
+          "seconds": 0.43200292624533176,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-1-261"
+          ]
+        },
+        {
+          "jid": "proposal-3-262",
+          "tokens": 8,
+          "seconds": 0.5440275454893708,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-3-262"
+          ]
+        },
+        {
+          "jid": "proposal-7-263",
+          "tokens": 8,
+          "seconds": 0.5475973868742585,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-7-263"
+          ]
+        },
+        {
+          "jid": "proposal-9-269",
+          "tokens": 7,
+          "seconds": 0.3485818933695555,
+          "compatible": true,
+          "reason": "selected_input_boundary",
+          "chain": [
+            "proposal-9-269"
+          ]
+        }
+      ]
+    }
+  ]
+}

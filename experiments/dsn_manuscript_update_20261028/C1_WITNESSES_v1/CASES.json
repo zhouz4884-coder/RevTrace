@@ -1,0 +1,142 @@
+[
+  {
+    "case": "none",
+    "eligible": true,
+    "reason": [
+      "a",
+      "b"
+    ],
+    "expected": true,
+    "pass_check": true,
+    "evidence_tier": "CPU actual frozen predicate fixture; no neural execution or guard-minimality proof"
+  },
+  {
+    "case": "sameP_wrongF",
+    "eligible": false,
+    "reason": "wrong-certified-boundary",
+    "expected": false,
+    "pass_check": true,
+    "evidence_tier": "CPU actual frozen predicate fixture; no neural execution or guard-minimality proof"
+  },
+  {
+    "case": "different_projection",
+    "eligible": false,
+    "reason": "boundary-projection-mismatch",
+    "expected": false,
+    "pass_check": true,
+    "evidence_tier": "CPU actual frozen predicate fixture; no neural execution or guard-minimality proof"
+  },
+  {
+    "case": "broken_frozen_edge",
+    "eligible": false,
+    "reason": "broken-private-state-edge",
+    "expected": false,
+    "pass_check": true,
+    "evidence_tier": "CPU actual frozen predicate fixture; no neural execution or guard-minimality proof"
+  },
+  {
+    "case": "unreachable_tip",
+    "eligible": false,
+    "reason": "branch-tip-not-reached",
+    "expected": false,
+    "pass_check": true,
+    "evidence_tier": "CPU actual frozen predicate fixture; no neural execution or guard-minimality proof"
+  },
+  {
+    "case": "wrong_inflight_input",
+    "eligible": false,
+    "reason": "frozen-inflight-input-not-descendant",
+    "expected": false,
+    "pass_check": true,
+    "evidence_tier": "CPU actual frozen predicate fixture; no neural execution or guard-minimality proof"
+  },
+  {
+    "case": "duplicate_inflight",
+    "eligible": false,
+    "reason": "inflight-not-unique",
+    "expected": false,
+    "pass_check": true,
+    "evidence_tier": "CPU actual frozen predicate fixture; no neural execution or guard-minimality proof"
+  },
+  {
+    "case": "covered_inflight",
+    "eligible": false,
+    "reason": "inflight-target-already-covered",
+    "expected": false,
+    "pass_check": true,
+    "evidence_tier": "CPU actual frozen predicate fixture; no neural execution or guard-minimality proof"
+  },
+  {
+    "case": "missing_boundary",
+    "eligible": false,
+    "reason": "no-private-node-at-certified-boundary",
+    "expected": false,
+    "pass_check": true,
+    "evidence_tier": "CPU actual frozen predicate fixture; no neural execution or guard-minimality proof"
+  },
+  {
+    "case": "sufficient_is_not_universally_necessary",
+    "owner_eligibility": false,
+    "consumer_direct_frozen_input_proof": true,
+    "pass_check": true,
+    "scope": "Comparison of two actual predicates on declared fixtures; no claim this synthetic state is a native service trace."
+  },
+  {
+    "case": "two_lane_retains_compatible_whole_hypothesis",
+    "view": {
+      "kind": "consumer-view",
+      "source_kind": "canonical-display",
+      "session_id": 0,
+      "server_time": 1.0,
+      "observed_perf": null,
+      "owner_incarnation": 1.0,
+      "contract_digest": null,
+      "canonical_epoch": null,
+      "canonical_version": 1,
+      "certified_transaction": "t",
+      "certified_Z_sha256": null,
+      "certified_P_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "certified_text_sha256": "7692c3ad3540bb803c020b3aee66cd8887123234ea0c6e7143c0add73ff431ed",
+      "certified_frontier": 32000,
+      "certified_text": "one",
+      "valid_visible_frontier": 64000,
+      "visible_text": "one two",
+      "audio_rollback_samples": 0,
+      "erased_characters": 0,
+      "compatible_provisional_retained": true,
+      "tentative_invalidated": false,
+      "joined_suffix": false,
+      "policy": "two_lane"
+    },
+    "pass_check": true
+  },
+  {
+    "case": "snapshot_withdrawal_is_safe_but_loses_progress",
+    "view": {
+      "kind": "consumer-view",
+      "source_kind": "canonical-display",
+      "session_id": 0,
+      "server_time": 1.0,
+      "observed_perf": null,
+      "owner_incarnation": 1.0,
+      "contract_digest": null,
+      "canonical_epoch": null,
+      "canonical_version": 1,
+      "certified_transaction": "t",
+      "certified_Z_sha256": null,
+      "certified_P_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "certified_text_sha256": "7692c3ad3540bb803c020b3aee66cd8887123234ea0c6e7143c0add73ff431ed",
+      "certified_frontier": 32000,
+      "certified_text": "one",
+      "valid_visible_frontier": 32000,
+      "visible_text": "one",
+      "audio_rollback_samples": 32000,
+      "erased_characters": 4,
+      "compatible_provisional_retained": false,
+      "tentative_invalidated": true,
+      "joined_suffix": false,
+      "policy": "checked_snapshot"
+    },
+    "pass_check": true
+  }
+]

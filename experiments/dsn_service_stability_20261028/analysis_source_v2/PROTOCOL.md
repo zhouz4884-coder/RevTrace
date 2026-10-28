@@ -1,0 +1,1 @@
+Independent CPU-only analysis for the frozen DSN service operating-region study. Neural runtime remains f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf. Raw prior failures are retained. No model calls or metric selection. Critical-path partition is descriptive and overlaps are not counterfactual savings.
