@@ -1,5 +1,5 @@
 {
-  "status": "RUNNING_FROZEN_SOURCE0_THREE_ARM_SERVICE_PILOT",
+  "status": "COMPLETE_SOURCE0_PILOT_AND_FOUR_OLD_SOURCE_CONFIRMATION_TASK_FIDELITY_PASS",
   "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
   "neural_profile_runs_completed": 0,
   "GPU_launched": true,
@@ -30,7 +30,7 @@
     "campaign_output": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_pilot_v1/campaign",
     "started_utc": "2026-10-29T11:22:34.832901+00:00"
   },
-  "actual_serving_cells": 0,
+  "actual_serving_cells": 19,
   "neural_EQ_steps_completed": 69,
   "historical_v1_failure": {
     "source_commit": "c7e403b4313ed1283dfea2af043116643e01a0f7",
@@ -44,7 +44,36 @@
   "neural_eq_gate_sha256": "41221280007d94581a640ec329bf5634ccb6012efbc44ab60fca302c51c6849d",
   "old_task_fidelity_gate_sha256": "79f9355a41f42660fb16c3f002b3052551a547dbe6dafd89cdb0a0205c8d1411",
   "old_task_raw_hashes_equal": 0,
-  "remote_resources_released": false,
-  "next_action": "Finish all3 fresh cells and complete task audit, then inspect frozen opportunity gates. No parallel remote heavyCPU/IO/modelsetup.",
-  "service_plan_sha256": "4025ff8af633567a0dd907e5c9f84739dbffb2e1a9a6d19544dc96594729d5a7"
+  "remote_resources_released": true,
+  "next_action": "Analyze all frozen paired data and explicit content/EOS limits. Conditional encoder-readset component probe is separately planned; no new-source measurement yet.",
+  "service_plan_sha256": "4025ff8af633567a0dd907e5c9f84739dbffb2e1a9a6d19544dc96594729d5a7",
+  "service_summary_sha256": "7ba6e1eb14f24554422e77136edb5ffb9a4e897bd483efd968217423a5da708b",
+  "confirmation_handle": {
+    "pid": 1792441,
+    "start_ticks": 502399747,
+    "cmdline_sha256": "3c2149d9204f985d02348653a7e326b339c7a668d3924c124df7dfed86675358",
+    "command": [
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+      "-B",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/source_v3/run_service_campaign.py",
+      "--plan",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/SERVICE_CONFIRMATION_v1_FROZEN.json",
+      "--manifest",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/SOURCE_v3.json",
+      "--out",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_confirmation_v1/campaign"
+    ],
+    "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+    "source_manifest_sha256": "258c33df4eba1d27bef88339aa20b2aae2ffe69f43489255d989ad337b717521",
+    "plan_sha256": "84f7a755bdf81713f083bbb54d6d7b0504bb683f583adfc09988fd015b8d8070",
+    "prerequisite_sha256": "dceef8e69aef41512f0fde3ca06913cab47364d010f2ffa6fcf46ca26fe2e270",
+    "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_confirmation_v1.log",
+    "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_confirmation_v1",
+    "campaign_output": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_confirmation_v1/campaign",
+    "planned_cells": 16,
+    "started_utc": "2026-10-29T11:39:47.694113+00:00"
+  },
+  "completed_pilot_cells": 3,
+  "current_campaign_completed": 0,
+  "planned_current_campaign_cells": 16
 }

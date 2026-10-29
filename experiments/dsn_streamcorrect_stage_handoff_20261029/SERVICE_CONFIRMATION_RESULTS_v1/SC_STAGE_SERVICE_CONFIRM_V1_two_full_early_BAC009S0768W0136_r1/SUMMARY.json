@@ -1,0 +1,80 @@
+{
+  "status": "PASS_ACTUAL_NATIVE_SERVICE_EXECUTION",
+  "cell_id": "SC_STAGE_SERVICE_CONFIRM_V1_two_full_early_BAC009S0768W0136_r1",
+  "arm": "two_full_early",
+  "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+  "primary": {
+    "cell_id": "SC_STAGE_SERVICE_CONFIRM_V1_two_full_early_BAC009S0768W0136_r1",
+    "stage": "development_confirmation",
+    "cohort": "BAC009S0768W0136_single_chain",
+    "arm": "two_full_early",
+    "repeat": 1,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.1439375,
+    "primary_linear_all_offered_D99": 3.4505165012180803,
+    "primary_linear_all_offered_C99": 3.709404727630317,
+    "original_quantile_test_pass": false,
+    "complete_coverage_and_original_quantile_pass": false,
+    "D2_misses_all_offered": 6,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 3.5449782833456993,
+    "C_max": 3.80298666190356,
+    "dual_deadline_audio_credit_seconds": 5.5,
+    "raw_inputs": {
+      "config_sha256": "22291a4ba50990d92640398c5ef7c2c7b15c4e54abfd67218f86ca5e51f5779a",
+      "origin_sha256": "603a265b5a4d782c6198980b0ce43bcdec09763fc0fea8b7baaf9fd1335a76c0",
+      "consumer_sha256": "2e85d735d6d84688449547e80da8391ae868235d116b59d9a0d539065d14ad34"
+    },
+    "primary_linear_all_offered_C50": 1.6136534484103322,
+    "primary_linear_all_offered_D50": 1.3731824839487672
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0768W0136",
+      "text": "未来房企拿地投资新开工等指标可能受到影响",
+      "reference_characters": 20,
+      "character_edits": 0
+    }
+  ],
+  "energy": {
+    "service": {
+      "gpu_joules": {
+        "0": 2178.9602970051974,
+        "1": 2116.3471459807347
+      },
+      "total_joules": 4295.307442985932
+    },
+    "load_and_neural_warmup": {
+      "gpu_joules": {
+        "0": 6208.2821435816595,
+        "1": 5848.710119364794
+      },
+      "total_joules": 12056.992262946453
+    },
+    "service_scope": "both GPUs from actual origin through Consumer drain; cold load and fixed neural warmup separate"
+  },
+  "source_count": 1,
+  "all_authority_steps": 17,
+  "authority_dispatches": 17,
+  "actual_ready_hits": 0,
+  "actual_ready_hit_rate": 0.0,
+  "matching_inflight_fallbacks": 0,
+  "fullspec_inflight_promotions": 0,
+  "fullspec_known_invalid_C_skips": 0,
+  "fullspec_discarded_full_results": 0,
+  "producer_dispatches": 0,
+  "packet_admissions": 0,
+  "wire_total_bytes": 0,
+  "wall_seconds": 11.9486188525334,
+  "load_neural_ready_wall_seconds": 54.07928094174713,
+  "all_actual_roots_and_epochs_checked": true,
+  "component_timer_scopes": {
+    "full": "native model timer excludes pre-model restore; worker_job_wall includes restore/export",
+    "consume": "matching/restore plus original C/U and export is in worker_job_wall; not only C",
+    "receipt": "fresh physical-queue get followed by complete validation, actual admission and decision times"
+  },
+  "original_D2_C8_unchanged": true,
+  "scope": "actual deployed controlled adaptation; original selected quality/history must still pass independent paired audit"
+}

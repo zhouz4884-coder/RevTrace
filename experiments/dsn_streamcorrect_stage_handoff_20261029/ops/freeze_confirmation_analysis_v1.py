@@ -1,0 +1,12 @@
+"""Freeze CPU source/config before reading aggregate result quantities."""
+import pathlib,subprocess,json,hashlib,datetime
+T=pathlib.Path(__file__).resolve().parents[1];S=T/'confirmation_analysis_source_v1';P=T/'packages';snapshot=T/'confirmation_analysis_snapshot_v1'
+def git(*a):return subprocess.check_output(['git','-C',str(S),*a],text=True).strip()
+def sha(p):return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+def put(p,x):assert not p.exists();p.write_bytes(json.dumps(x,indent=2).encode())
+assert not git('status','--porcelain','--untracked-files=all');commit=git('rev-parse','HEAD');snapshot.mkdir(exist_ok=False);rows=[]
+for name in git('ls-files').splitlines():
+ data=(S/name).read_bytes();(snapshot/name).write_bytes(data);rows.append(dict(path=name,bytes=len(data),sha256=hashlib.sha256(data).hexdigest()))
+manifest=P/'CONFIRMATION_ANALYSIS_SOURCE_v1.json';put(manifest,dict(source_commit=commit,code_commit=commit,files=rows));bundle=P/'CONFIRMATION_ANALYSIS_SOURCE_v1.bundle';subprocess.run(['git','-C',str(S),'bundle','create',str(bundle.resolve()),'HEAD'],check=True)
+config=dict(experiment_id='SC_NATIVE_16_OLD_SOURCE_INDEPENDENT_CPU_RECOUNT_V1',analysis_source_commit=commit,collection_root=str((T/'SERVICE_CONFIRMATION_RESULTS_v1').resolve()),collection_manifest_sha256=sha(T/'SERVICE_CONFIRMATION_RESULTS_v1/COLLECTION_MANIFEST.json'),campaign_plan=str((T/'SERVICE_CONFIRMATION_v1_FROZEN.json').resolve()),campaign_plan_sha256=sha(T/'SERVICE_CONFIRMATION_v1_FROZEN.json'),frozen_config_dir=str((T/'service_confirmation_v1_configs').resolve()),reference_details=str((T/'EQ_RESULTS_v2/DETAILS.json').resolve()),reference_ready=str((T/'EQ_RESULTS_v2/READY.json').resolve()),reference_ready_sha256=sha(T/'EQ_RESULTS_v2/READY.json'),scope='independent local saved-output CPU recount; 16 full cells/eight source-repeat pairs/four old sources; all offered/EOS and negative points retained; no inference, new data or remote reads',planned_output=str((T/'CONFIRMATION_ANALYSIS_RESULTS_v1').resolve()))
+put(T/'CONFIRMATION_ANALYSIS_CONFIG_v1_FROZEN.json',config);put(P/'CONFIRMATION_ANALYSIS_FREEZE_RECORD_v1.json',dict(analysis_source_commit=commit,source_manifest_sha256=sha(manifest),bundle_sha256=sha(bundle),config_sha256=sha(T/'CONFIRMATION_ANALYSIS_CONFIG_v1_FROZEN.json'),frozen_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),actual_CPU_recount_executed=False));print(json.dumps(dict(source_commit=commit,manifest_sha256=sha(manifest),config_sha256=sha(T/'CONFIRMATION_ANALYSIS_CONFIG_v1_FROZEN.json')),indent=2))

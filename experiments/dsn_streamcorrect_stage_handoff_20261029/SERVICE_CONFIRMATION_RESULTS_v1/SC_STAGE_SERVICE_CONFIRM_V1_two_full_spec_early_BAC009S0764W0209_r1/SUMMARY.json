@@ -1,0 +1,80 @@
+{
+  "status": "PASS_ACTUAL_NATIVE_SERVICE_EXECUTION",
+  "cell_id": "SC_STAGE_SERVICE_CONFIRM_V1_two_full_spec_early_BAC009S0764W0209_r1",
+  "arm": "two_full_spec_early",
+  "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+  "primary": {
+    "cell_id": "SC_STAGE_SERVICE_CONFIRM_V1_two_full_spec_early_BAC009S0764W0209_r1",
+    "stage": "development_confirmation",
+    "cohort": "BAC009S0764W0209_single_chain",
+    "arm": "two_full_spec_early",
+    "repeat": 1,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.068,
+    "primary_linear_all_offered_D99": 2.603105513565242,
+    "primary_linear_all_offered_C99": 2.870143234506249,
+    "original_quantile_test_pass": false,
+    "complete_coverage_and_original_quantile_pass": false,
+    "D2_misses_all_offered": 1,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 2.718039250932634,
+    "C_max": 2.9835050720721483,
+    "dual_deadline_audio_credit_seconds": 8.0,
+    "raw_inputs": {
+      "config_sha256": "ab6b83c9b488a7f17c5de95653d48e5eec0c9d34e72fcfd7ab44acde83966212",
+      "origin_sha256": "62d8676965efb90b2f3917b6f5b7904c8786d0824948a34e316236286bae4902",
+      "consumer_sha256": "671d1abc2b8f415d404f0f4b2b26dccbb16d251c611591718f589a0b8709b891"
+    },
+    "primary_linear_all_offered_C50": 1.4595514880493283,
+    "primary_linear_all_offered_D50": 1.246676574461162
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0764W0209",
+      "text": "严厉打击春运期间违规上调票价价外收费等法行为为",
+      "reference_characters": 23,
+      "character_edits": 2
+    }
+  ],
+  "energy": {
+    "service": {
+      "gpu_joules": {
+        "0": 2221.0067538364046,
+        "1": 2199.0312186466604
+      },
+      "total_joules": 4420.0379724830655
+    },
+    "load_and_neural_warmup": {
+      "gpu_joules": {
+        "0": 8439.802617415437,
+        "1": 7927.307502347843
+      },
+      "total_joules": 16367.11011976328
+    },
+    "service_scope": "both GPUs from actual origin through Consumer drain; cold load and fixed neural warmup separate"
+  },
+  "source_count": 1,
+  "all_authority_steps": 17,
+  "authority_dispatches": 21,
+  "actual_ready_hits": 0,
+  "actual_ready_hit_rate": 0.0,
+  "matching_inflight_fallbacks": 0,
+  "fullspec_inflight_promotions": 10,
+  "fullspec_known_invalid_C_skips": 4,
+  "fullspec_discarded_full_results": 0,
+  "producer_dispatches": 0,
+  "packet_admissions": 0,
+  "wire_total_bytes": 0,
+  "wall_seconds": 11.05338820349425,
+  "load_neural_ready_wall_seconds": 83.2929043835029,
+  "all_actual_roots_and_epochs_checked": true,
+  "component_timer_scopes": {
+    "full": "native model timer excludes pre-model restore; worker_job_wall includes restore/export",
+    "consume": "matching/restore plus original C/U and export is in worker_job_wall; not only C",
+    "receipt": "fresh physical-queue get followed by complete validation, actual admission and decision times"
+  },
+  "original_D2_C8_unchanged": true,
+  "scope": "actual deployed controlled adaptation; original selected quality/history must still pass independent paired audit"
+}

@@ -1,0 +1,143 @@
+{
+  "status": "PASS_STATIC_READSET_AND_FOUR_ACTUAL_STRUCTURAL_AUDIO_INPUT_WITNESSES",
+  "source_commit": "6cacee199c8ad9818dcc4fef6d4a72079f6675fd",
+  "rows": [
+    {
+      "wrong_job": "j000011",
+      "correct_fallback": "j000012",
+      "start": 80000,
+      "end": 88000,
+      "changed_complete_cut_fields": [
+        "tokens",
+        "transcript"
+      ],
+      "ordered_audio_descriptor_count": 10,
+      "buffered_samples": 80000,
+      "added_samples": 8000,
+      "audio_structural_key_sha256": "963bca17807001d8c4ed3fd4c4bf428aca1b78446b3f23e1508f653a39734ffc",
+      "structural_audio_and_static_key_equal": true,
+      "old_gpu": 0,
+      "new_gpu": 1,
+      "cross_gpu": true,
+      "old_worker_begin": 5023037.883465647,
+      "old_worker_end": 5023038.456659786,
+      "correct_model_start": 5023038.150852358,
+      "correct_model_end": 5023038.699916381,
+      "actual_encoder_ready_time_recorded": false,
+      "actual_encoder_tensor_comparison_performed": false
+    },
+    {
+      "wrong_job": "j000015",
+      "correct_fallback": "j000016",
+      "start": 104000,
+      "end": 112000,
+      "changed_complete_cut_fields": [
+        "tokens",
+        "transcript"
+      ],
+      "ordered_audio_descriptor_count": 13,
+      "buffered_samples": 104000,
+      "added_samples": 8000,
+      "audio_structural_key_sha256": "ed240b4f2f125a8aaca6dda0bc44edbf2d58a8803cfb43aba7c8216b6844f382",
+      "structural_audio_and_static_key_equal": true,
+      "old_gpu": 0,
+      "new_gpu": 1,
+      "cross_gpu": true,
+      "old_worker_begin": 5023039.627123212,
+      "old_worker_end": 5023040.303982702,
+      "correct_model_start": 5023039.906626741,
+      "correct_model_end": 5023040.627201459,
+      "actual_encoder_ready_time_recorded": false,
+      "actual_encoder_tensor_comparison_performed": false
+    },
+    {
+      "wrong_job": "j000018",
+      "correct_fallback": "j000019",
+      "start": 120000,
+      "end": 128000,
+      "changed_complete_cut_fields": [
+        "tokens",
+        "transcript"
+      ],
+      "ordered_audio_descriptor_count": 15,
+      "buffered_samples": 120000,
+      "added_samples": 8000,
+      "audio_structural_key_sha256": "513c4615172c2a01b699183ec61c186247de7816c0a6fdd1d340d0878c4a17dd",
+      "structural_audio_and_static_key_equal": true,
+      "old_gpu": 1,
+      "new_gpu": 0,
+      "cross_gpu": true,
+      "old_worker_begin": 5023040.983383896,
+      "old_worker_end": 5023041.463423428,
+      "correct_model_start": 5023041.340590103,
+      "correct_model_end": 5023041.973613931,
+      "actual_encoder_ready_time_recorded": false,
+      "actual_encoder_tensor_comparison_performed": false
+    },
+    {
+      "wrong_job": "j000020",
+      "correct_fallback": "j000021",
+      "start": 128000,
+      "end": 129088,
+      "changed_complete_cut_fields": [
+        "tokens",
+        "transcript"
+      ],
+      "ordered_audio_descriptor_count": 16,
+      "buffered_samples": 128000,
+      "added_samples": 1088,
+      "audio_structural_key_sha256": "e936ffd91ddc5210e5e3e13c8dc302dfa5768feaa5f88f037a29437d4b34f605",
+      "structural_audio_and_static_key_equal": true,
+      "old_gpu": 1,
+      "new_gpu": 0,
+      "cross_gpu": true,
+      "old_worker_begin": 5023041.730565813,
+      "old_worker_end": 5023042.240697066,
+      "correct_model_start": 5023042.030336048,
+      "correct_model_end": 5023042.761163592,
+      "actual_encoder_ready_time_recorded": false,
+      "actual_encoder_tensor_comparison_performed": false
+    }
+  ],
+  "controls": [
+    {
+      "control": "feedback_tokens",
+      "encoder_structural_key_same": true
+    },
+    {
+      "control": "feedback_transcript",
+      "encoder_structural_key_same": true
+    },
+    {
+      "control": "feedback_last_attend_frame",
+      "encoder_structural_key_same": true
+    },
+    {
+      "control": "feedback_context",
+      "encoder_structural_key_same": true
+    },
+    {
+      "control": "different_source",
+      "encoder_structural_key_same": false
+    },
+    {
+      "control": "different_segment",
+      "encoder_structural_key_same": false
+    },
+    {
+      "control": "different_end",
+      "encoder_structural_key_same": false
+    },
+    {
+      "control": "different_static",
+      "encoder_structural_key_same": false
+    }
+  ],
+  "actual_speculative_dispatches": 14,
+  "author_encoder_call_line": 866,
+  "author_encoder_call": "encoder_feature = self.model.encoder(mel)",
+  "encoder_ready": false,
+  "neural_oracle_run": false,
+  "cache_implemented": false,
+  "conclusion": "Four full feedback starts differ while audio encoder structural inputs agree; actual mel/E numerical equality, readiness, copy cost and service benefit remain unmeasured."
+}

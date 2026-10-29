@@ -1,5 +1,5 @@
 {
-  "status": "CORE_SCOPES_AND_NEURAL_COMPONENTS_COMPLETE_NATIVE_SOURCE0_THREE_ARM_PILOT_RUNNING",
+  "status": "ORIGINAL_SCOPES_AND_NATIVE19_COMPLETE_ENCODER_READSET_COMPONENT_PROBE_PREPARING",
   "user_scope": [
     "36cell service region / timing stability",
     "24cell R x covered physical exit, two_lane fixed",
@@ -10,32 +10,8 @@
   "current_runtime": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
   "core_runtime": "f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf",
   "current_runtime_manifest": "experiments/dsn_streamcorrect_stage_handoff_20261029/packages/SOURCE_v3.json",
-  "gpu_current": {
-    "study": "source0_three_arm_service_pilot",
-    "pid": 1783944,
-    "start_ticks": 502296461,
-    "cmdline_sha256": "a3b44c4ff7242a5e5b0e28823121e95a77c36ed07dba38274554c56950958901",
-    "command": [
-      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
-      "-B",
-      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/source_v3/run_service_campaign.py",
-      "--plan",
-      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/SERVICE_PILOT_v1_FROZEN.json",
-      "--manifest",
-      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/SOURCE_v3.json",
-      "--out",
-      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_pilot_v1/campaign"
-    ],
-    "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
-    "source_manifest_sha256": "258c33df4eba1d27bef88339aa20b2aae2ffe69f43489255d989ad337b717521",
-    "plan_sha256": "4025ff8af633567a0dd907e5c9f84739dbffb2e1a9a6d19544dc96594729d5a7",
-    "prerequisite_sha256": "d230f64d2e5b8a04a2dc029d61c9b2b8ac640fbbfbe30c09b9e710b621479363",
-    "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_pilot_v1.log",
-    "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_pilot_v1",
-    "campaign_output": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_pilot_v1/campaign",
-    "started_utc": "2026-10-29T11:22:34.832901+00:00"
-  },
-  "gpu_next": "Finish all3 frozen fresh cells and full task audit; choose meaningful native implementation and bounded continuation according to pre-pilot decision.",
+  "gpu_current": null,
+  "gpu_next": "One bounded13-call encoder readset/cross-GPU component probe only after independent source/config/CPU gates. No deployment E-cache or independent-source result exists.",
   "resource_rule": "No shared-host heavy CPU/IO/download/modelsetup while timed GPU cells run. Root owns serialized GPU queue.",
   "paper_baseline": "Paper_DSN/revisions/20261008_coordination_spine",
   "paper_new": "Paper_DSN/revisions/20261028_dsn2027_progress",
@@ -96,9 +72,9 @@
     "joint_compatible_timely_loss": 0,
     "results": "timely_continuity_v1/RESULTS_v1"
   },
-  "updated_utc": "2026-10-29T11:23:10.533234+00:00",
-  "phase": "ACTUAL_NATIVE_IMPLEMENTATION_SERVICE_PILOT",
-  "next_design_decision": "Ready-only protected ASR candidate reuse with original C/U, compared with two complete native replicas having identical early ASR visibility and genuine neural warmup. Measure actual receipt/restore cost, hit/fallback, all offered deadlines, content and energy. Stop or independent final-implementation confirmation according to actual headroom.",
+  "updated_utc": "2026-10-29T12:12:19.123245+00:00",
+  "phase": "NATIVE_IMPLEMENTATION_CONFIRMED_ON_OLD_SOURCES_VERTICAL_PARTIAL_REUSE_COST_GATE",
+  "next_design_decision": "Confirm whether real expensive encoder work can remain valid across token feedback mismatch:4actual wrong-start/fallback pairs share full encoder audio input but arecrossGPU. Static condition established; measure actualE time and7.68MB capture/transport/restore before any newcache. Finalmetadata-firstindependent4speaker confirmation waitsfinalimplementationdecision. No stagejoin just to equal our bestfullspec.",
   "RxK_quality": "Completed all24/96 exact-F content support. All96 causal following rows raw/norm match later same-F full Canonical and have real unaltered inputs; first-credit untouched; general24 has real content disagreements, unknown0.",
   "completed_stage_profile": {
     "source_commit": "41dea9bb6666e2c7397b394fb1c7a4a58b27888f",
@@ -134,7 +110,7 @@
   },
   "native_service_pilot": {
     "planned_cells": 3,
-    "actual_completed_cells": 0,
+    "actual_completed_cells": 3,
     "plan_sha256": "4025ff8af633567a0dd907e5c9f84739dbffb2e1a9a6d19544dc96594729d5a7",
     "frozen_order": [
       "two_full_spec_early",
@@ -146,6 +122,49 @@
     "linux_CPU_tests": 118,
     "skipped": 0,
     "model_asset_bytes_rehashed": 10099049234,
-    "no_online_result_claimed": true
+    "no_online_result_claimed": true,
+    "all_task_fidelity_pass": true,
+    "preferred_author_built_implementation": "two_full_spec_early",
+    "gross_credit_seconds": {
+      "fullspec": 8.0,
+      "stage": 6.5,
+      "conservative": 3.0
+    },
+    "retrospective_same_actual_visible_F_text_supported_credit": {
+      "fullspec": 6.0,
+      "stage": 5.5,
+      "conservative": 3.0
+    },
+    "whole_D2_C8_pass": false
+  },
+  "native_confirmation16": {
+    "status": "COMPLETE_ALL16_AND_FROZEN_INDEPENDENT_CPU_RECOUNTS_PASS",
+    "source_tier": "all4 old development sources,2fresh perarm with GPUrolecounterbalance; not independent source validation",
+    "offered_audio_seconds_per_arm": 66.42975,
+    "offered_frontiers_per_arm": 138,
+    "credit_seconds": {
+      "fullspec": 66.29375,
+      "conservative": 37.5
+    },
+    "strict_actual_visible_frontier_raw_text_supported_credit": {
+      "fullspec": 56.287875,
+      "conservative": 33.5
+    },
+    "whole_D2_C8_pass": {
+      "fullspec": "6/8",
+      "conservative": "0/8"
+    },
+    "fullspec_remaining_misses": "2 EOS intervals of0.068s in source0, one perrepeat; no non-EOS D2miss and no C8miss",
+    "service_board_joules": {
+      "fullspec": 32049.848511191536,
+      "conservative": 36941.57389106408
+    },
+    "full_task_states_C_and_IDs_checked": 276,
+    "actual_model_inflight_promotions": 99,
+    "promoted_own_predicted_end_different": 12,
+    "wrong_complete_start_C_skips": 20,
+    "actual_completed_future_buffer_reuse": 0,
+    "analysis_gate_sha256": "c7b4b26b383703e53733f987bf5b59f9ea31949dbc768f2b6d37545b47b94e01",
+    "content_gate_sha256": "1bf319ec3df2add226deb2b47e6a9cc733b599285d050978b5c2944c8dd449e4"
   }
 }

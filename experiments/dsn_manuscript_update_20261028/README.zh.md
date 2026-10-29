@@ -1,6 +1,10 @@
 # DSN 2027 补强实验与正文修订：进行中
 
-**2026-10-29当前进展：**下表四项原实验范围已完成，新的完整核心稿已写并初步编译为9页技术正文加参考文献。原生阶段profiling和69输入神经保真均完成；在线ready-only交接仍在实现，实际服务格数为0。旧稿入口仍保留，最终正文入口待本轮研究决策与全页QA后切换。
+**2026-10-29当前进展：**下表四项原实验范围已完成，新的完整核心稿已写并初步编译为9页技术正文加参考文献。原生阶段profiling和69输入神经保真均完成。新增三臂pilot及全部四旧来源16格确认均完成：我们构造的整调用推测优于当前ready-only交接，选其为优先实现。每臂66.42975s分母上，原信用37.5→66.29375s、整轮D2/C8通过0/8→6/8，276步完整原状态/C/IDs保持。2个0.068s EOS miss未删除，严格实际可见F整文本支持另列33.5→56.287875s，旧指标不变。独立新来源与最终稿仍待本轮最后有意义的设计门闭合。
+
+完整报告：[pilot内容边界](../dsn_streamcorrect_stage_handoff_20261029/PILOT_CONTENT_AND_SERVICE_REVIEW_v1.zh.md)、[阶段真实成本](../dsn_streamcorrect_stage_handoff_20261029/PILOT_STAGE_COST_AND_DECISION_v1.zh.md)、[真实在途保留与EOS](../dsn_streamcorrect_stage_handoff_20261029/PILOT_FULLSPEC_CAUSAL_REVIEW_v1.zh.md)。16格同时保留全部source/GPU角色换位/fresh配对；它是旧开发来源上的确认，不能冒充独立来源。99次promotion均在真实model路径未结束时发生，12次调用自己的预测终点不同仍被合法保留；20个自身完整start被否定的调用没有执行C/U或写入结果。
+
+下一项仅是[编码器读集机会](ENCODER_READSET_OPPORTUNITY_PREPROFILE.zh.md)的有界组件成本探查：4个被否定whole-start与合法fallback的音频编码输入相同，反馈tokens/transcript不同；全部跨卡，需要真实7.68MB搬运。尚未实现或测得encoder缓存服务收益，不把条件成立当收益。现有整调用实现已成立，不因某条阶段代码没有独占性能而否定组合创新。
 
 新证据包括：[阶段成本与完整候选](../dsn_streamcorrect_stage_profile_20261029/RESULTS_REPORT.zh.md)、[69输入神经等价与旧任务保真](../dsn_streamcorrect_stage_handoff_20261029/OLD_FIDELITY_RESULTS_v1.zh.md)、[原生内容端点](../dsn_native_content_20261029/RESULTS_FINDINGS.zh.md)、[完整2s实际文字病例](../dsn_full_interval_case_20261029/RESULTS_v2/timely_full_interval_case.pdf)。13个真实输入的最终预测状态不同，但其完整ASR候选经原C/U后仍与原生完整调用一致；这是组件合法性证据，不能代替在线服务收益。v1字节码参照检查失败和完整模块参照修复均保留。
 
