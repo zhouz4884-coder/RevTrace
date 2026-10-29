@@ -1,0 +1,70 @@
+{
+  "experiment_id": "SC_NATIVE_CPU_CONFIG_PATH_PREFLIGHT_V5",
+  "created_utc": "2026-10-29T05:22:53.850202+00:00",
+  "native_runtime_commit": "a652f6097c2269232b332ad046e399f9968b16e2",
+  "python": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/bin/python",
+  "transformers": "4.57.6",
+  "native_neural_calls": 0,
+  "scope": "actual configuration loader only; no weight/model construction",
+  "metadata": {
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/revtrace_streamcorrect_20261028/ultravox_b95bec8/config.json": "103cff0cf245b20a640c9d8d19c769a74fae74fa227436c4f6d8082aad71db7e",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/revtrace_streamcorrect_20261028/ultravox_b95bec8/ultravox_config.py": "99cf5ad911189f2351c2232234025db56b23763283583c0a848ebf2a1ecc40fc",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/revtrace_streamcorrect_20261028/llama32_1b_instruct_f8e6b/config.json": "2febf68cea25bf4611be02b7536f2488a5ba523bb1134986e3610152abe74fdb"
+  },
+  "status": "FAILED_EXISTING_V5_CONFIG_PATH",
+  "error": "OSError",
+  "message": "We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+  "frames": [
+    {
+      "file": "<stdin>",
+      "line": 11,
+      "function": "<module>"
+    },
+    {
+      "file": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/models/auto/configuration_auto.py",
+      "line": 1350,
+      "function": "from_pretrained"
+    },
+    {
+      "file": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/configuration_utils.py",
+      "line": 640,
+      "function": "from_pretrained"
+    },
+    {
+      "file": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/configuration_utils.py",
+      "line": 808,
+      "function": "from_dict"
+    },
+    {
+      "file": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/cache/revtrace_streamcorrect_20261028/huggingface/modules/transformers_modules/ultravox_b95bec8/ultravox_config.py",
+      "line": 131,
+      "function": "__init__"
+    },
+    {
+      "file": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/models/auto/configuration_auto.py",
+      "line": 1332,
+      "function": "from_pretrained"
+    },
+    {
+      "file": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/configuration_utils.py",
+      "line": 662,
+      "function": "get_config_dict"
+    },
+    {
+      "file": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/configuration_utils.py",
+      "line": 721,
+      "function": "_get_config_dict"
+    },
+    {
+      "file": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/utils/hub.py",
+      "line": 322,
+      "function": "cached_file"
+    },
+    {
+      "file": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revbatch-cu128/lib/python3.12/site-packages/transformers/utils/hub.py",
+      "line": 553,
+      "function": "cached_files"
+    }
+  ],
+  "torch_cuda_initialized": false
+}

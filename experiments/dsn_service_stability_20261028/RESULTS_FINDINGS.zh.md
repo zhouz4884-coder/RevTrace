@@ -67,3 +67,9 @@ c16 超时不再只由很短 EOS 尾段解释。三次合计的超时前沿，R0
 - 正文可用主图与机制图：`FIGURES_v2/service_region.pdf`、`service_region_mechanism.pdf`，另有可编辑 SVG、350dpi PNG、完整 PDF 页面预览及 QA。
 - 图宽 7.15in，全部字体≥8pt，PDF 字体嵌入且 Type3=0；原 PNG/PDF 完整页都包含 legend、a/b/c 标号和 x 轴。v2 将相邻过长 tick 改成紧凑的 session/phase 标签，未改任何值。v1 保留历史，不修改旧冻结源。
 - 研究决定：**本轮 P1 完成，停止横向扩展。** 正文主讲有限区间中的合法进展保留和清晰负载边界；继续 R×K 与 native feedback 已授权工作。是否补 parent/watchdog 只由后续同窗口实际合法工作损失决定。
+
+## 补充：适合正文首图的实际交错
+
+固定c16-staggered r0中，sid7的R1S0与Joint完整Canonical历史相同，已显示的整个Private Z/P/text也相同；其实际prompt逐token等于随后F=18s选中的P。R-only在可信推进时将合法19.025s view撤回到18s，丢失1.025秒音频持续1.017951秒；Joint在自己原始时间线的同F更新处保留完整provisional view。
+
+例图限定同一块中两臂同F都实际有兼容ahead，再按R-only来源面积最大选取；是机制说明，不估计发生率，也不对齐两次事件时钟。完整证明见[trace_illustration_v1/README.zh.md](trace_illustration_v1/README.zh.md)，论文图为[actual_compatible_progress.pdf](trace_illustration_v1/FIGURES_v3/actual_compatible_progress.pdf)。无新GPU工作。

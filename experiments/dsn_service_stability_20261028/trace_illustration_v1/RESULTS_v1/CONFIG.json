@@ -1,0 +1,177 @@
+{
+  "experiment_id": "REVTRACE-DSN-ACTUAL-SHARED-COMPATIBLE-TRACE-20261029-V1",
+  "source_id": "3570-5694-0003",
+  "session_id": 7,
+  "shared_F": 288000,
+  "measured_neural_commit": "f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf",
+  "parent_plan_sha256": "bd06a99155b2f962b0ba9e832424ee84c9ce7d98cff79fad2091c756792fe39f",
+  "cells": [
+    {
+      "arm": "R1_S0",
+      "cell_id": "stability-c16-staggered-r1_s0-r0",
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s0-r0",
+      "expected_visible_job": "proposal-7-254",
+      "expected_selected_job": "authority-7-262"
+    },
+    {
+      "arm": "R1_S1",
+      "cell_id": "stability-c16-staggered-r1_s1-r0",
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s1-r0",
+      "expected_visible_job": "proposal-7-263",
+      "expected_selected_job": "authority-7-259"
+    }
+  ],
+  "expected_inputs": {
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s0-r0/attempt0/events.jsonl": {
+      "bytes": 3315029,
+      "sha256": "3e3246d3dce699d4ade5c0bb8b4f0233756e52da9365c682f59fb1ccbf205a9f"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s0-r0/attempt0/consumer.jsonl": {
+      "bytes": 351549,
+      "sha256": "45c3a797b3f5c3e61444bfc40b6464ff7c788492012b0887e949987917a540e3"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s0-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2777473,
+      "sha256": "505f4b993355883abb52e1248f714a34d7f38299ab58d0ee5fe259493edc3519"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s0-r0/attempt0/sessions.json": {
+      "bytes": 3580,
+      "sha256": "7e8904b10fd586af94a14e096b9a262839b44db1403ff2845aafe36e6ba4570a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s1-r0/attempt0/events.jsonl": {
+      "bytes": 3171856,
+      "sha256": "3c306d168430cac66dfe5b9b1ae617d58a35b7e33711a5f62d6ebb17f2683fe8"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s1-r0/attempt0/consumer.jsonl": {
+      "bytes": 362292,
+      "sha256": "7369643971db4eaf1b63564810641a7466bb20307143e67b23ef901a8db76a5a"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s1-r0/attempt0/worker_records.jsonl": {
+      "bytes": 2769037,
+      "sha256": "0c0845fb174c3c7b2fd9e63595021419db7e6cd8a8330a741eb16a9569ec2848"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_service_stability_v1/stability-c16-staggered-r1_s1-r0/attempt0/sessions.json": {
+      "bytes": 3580,
+      "sha256": "7e8904b10fd586af94a14e096b9a262839b44db1403ff2845aafe36e6ba4570a"
+    }
+  },
+  "selection": {
+    "fixed_block": "c16-staggered repeat0",
+    "rule": "Among sources with actual same-F compatible ahead in both R1S0/R1S1, maximize R1S0 withdrawal area, tie by source ID; choose greatest shared F for highlighting.",
+    "pool": [
+      {
+        "session_id": 0,
+        "source_id": "4831-18525-0029",
+        "R1S0_area": 0.0,
+        "shared_compatible_F": []
+      },
+      {
+        "session_id": 1,
+        "source_id": "1272-128104-0009",
+        "R1S0_area": 0.4542751807626336,
+        "shared_compatible_F": [
+          288000
+        ]
+      },
+      {
+        "session_id": 2,
+        "source_id": "4572-64670-0006",
+        "R1S0_area": 0.0,
+        "shared_compatible_F": []
+      },
+      {
+        "session_id": 3,
+        "source_id": "652-130726-0011",
+        "R1S0_area": 1.2344841779209674,
+        "shared_compatible_F": [
+          288000
+        ]
+      },
+      {
+        "session_id": 4,
+        "source_id": "1988-148538-0004",
+        "R1S0_area": 0.0,
+        "shared_compatible_F": []
+      },
+      {
+        "session_id": 5,
+        "source_id": "7176-88083-0007",
+        "R1S0_area": 0.5204616358503699,
+        "shared_compatible_F": []
+      },
+      {
+        "session_id": 6,
+        "source_id": "8173-294714-0041",
+        "R1S0_area": 0.7253460831660777,
+        "shared_compatible_F": []
+      },
+      {
+        "session_id": 7,
+        "source_id": "3570-5694-0003",
+        "R1S0_area": 5.395283053372987,
+        "shared_compatible_F": [
+          288000
+        ]
+      },
+      {
+        "session_id": 8,
+        "source_id": "1993-147149-0020",
+        "R1S0_area": 1.3425149751640857,
+        "shared_compatible_F": [
+          256000
+        ]
+      },
+      {
+        "session_id": 9,
+        "source_id": "1188-133604-0034",
+        "R1S0_area": 1.013031561388634,
+        "shared_compatible_F": [
+          288000,
+          320000
+        ]
+      },
+      {
+        "session_id": 10,
+        "source_id": "7850-281318-0010",
+        "R1S0_area": 0.0,
+        "shared_compatible_F": []
+      },
+      {
+        "session_id": 11,
+        "source_id": "3000-15664-0024",
+        "R1S0_area": 0.0,
+        "shared_compatible_F": []
+      },
+      {
+        "session_id": 12,
+        "source_id": "3752-4944-0068",
+        "R1S0_area": 0.0,
+        "shared_compatible_F": []
+      },
+      {
+        "session_id": 13,
+        "source_id": "6295-64301-0000",
+        "R1S0_area": 7.6365530944895,
+        "shared_compatible_F": []
+      },
+      {
+        "session_id": 14,
+        "source_id": "3170-137482-0044",
+        "R1S0_area": 4.7251778872264545,
+        "shared_compatible_F": [
+          256000
+        ]
+      },
+      {
+        "session_id": 15,
+        "source_id": "5694-64038-0022",
+        "R1S0_area": 7.034337091669441,
+        "shared_compatible_F": []
+      }
+    ],
+    "excluded_global_area_max": "sid13 has the largest R1S0 area but no Joint ahead update; not suitable for a shared-interleaving mechanism illustration.",
+    "prevalence_claim": false
+  },
+  "clocks": "each actual observed_perf minus that run original episode origin_perf plus session offset; never align update times",
+  "new_model_calls": 0
+}

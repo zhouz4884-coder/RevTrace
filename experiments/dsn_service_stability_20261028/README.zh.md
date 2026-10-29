@@ -1,5 +1,7 @@
 # DSN 服务区间与时序稳定性：36 格已完成
 
+适合正文首图的实际交错见[trace_illustration_v1](trace_illustration_v1/README.zh.md)：相同完整Canonical及Private输出，R-only在可信F=18s更新时将仍合法19.025s view撤回；Joint保留其provisional进展。两条原session时钟分别保留，不作事件时移；无新GPU调用。
+
 **36/36 实际运行及四套 CPU 独立复核全部通过，3204/3204 前沿连接完整路径。** 点级结果与研究取舍见 [RESULTS_FINDINGS.zh.md](RESULTS_FINDINGS.zh.md)。有界证据在 [RESULTS_v1](RESULTS_v1/)，38 文件共 18,747,717 字节已逐一与远端 SHA256 核对；原始模型、音频和大日志保留在 8TB 盘。
 
 本次 c8 两相位所有四臂均三次通过原始 D2/C8 P99；c16 错峰所有臂均未通过 D2。联合设计在 c16 每次比 Neither 多 20.180–22.885 秒双期限音频信用，R-only 的 16/17/12 次回撤在联合下为 0/0/0，但信用交互和额外 S 收益并非每次为正。所有失败、尾段 miss、质量及能耗均保留。更强的同根 sticky 对照因全部 36 格 other-triggered 回撤为 0 而停止，不为未观察到的问题扩展模块。

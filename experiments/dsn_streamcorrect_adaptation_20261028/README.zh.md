@@ -1,11 +1,19 @@
 # StreamCorrect 有界适配：当前完成状态
 
-2026-10-28 更新：状态 `ACTIVE_ALTERNATE_AUTHORIZED_SOURCE_SEARCH`。
-用户指定 ModelScope 路线后，已发现公开原版发行并核验其原始权重身份。
+2026-10-29 当前状态：`ACTIVE_DETACHED_ASSET_ACQUISITION`，具体进度和句柄以
+`CURRENT_STATUS.json` 为准。用户指定 ModelScope 路线后，已发现公开原版发行并核验其原始权重身份。
 `modelscope_metadata_v1/EXACT_WEIGHT_IDENTITY_PROOF.json` 记录了 ModelScope
 SHA-256 重建出的 Git-LFS pointer 与 Meta 官方公开 tree 的 blob SHA-1
 完全匹配。此前 HF 单一路线的 401 限制已经解决，不再据此停止此线。
-当前正等待主实验的共享实验盘空闲窗口，准备 B-only 下载、原生验证和三臂实验。
+实际下载已启动：原始 Llama 完整权重已通过预定 SHA-256，Ultravox 完整权重也已通过预定 SHA-256；
+作者原始中文 ASR checkpoint ZIP 仍在下载。ModelScope 的身份依据保持冻结；
+传输改走已证实相同完整字节身份的公开 HF 发行，保留部分文件并独立核验完整 SHA，未更换模型。
+
+当前原生执行源码为 v6 `a720d02a8cb81db6545d7d9ec6bdc31419dd091d`；
+有界普通源码快照、完整 bundle、逐文件 manifest 与 24 项 CPU 测试结果均已冻结。
+实际配置/processor CPU 预检还发现并修复了嵌套路径解析问题，保留了作者真正使用的
+128-bin Whisper 特征提取器，详见 `PROTOCOL_v3_NATIVE_PATH_REPAIR.md`。
+这些准备没有运行神经模型。原生应用调用、真实纠错 witness 与原生服务结果仍未建立。
 
 以下首先保留此前 CPU 阶段和访问探针的历史记录；这些不是后续实验结果。
 
@@ -31,7 +39,7 @@ SHA-256 重建出的 Git-LFS pointer 与 Meta 官方公开 tree 的 blob SHA-1
    fresh-process 两次，共 12 格。必须先自然观察真实修改与未修改选择，
    不按模型输出筛来源、不人为匹配根、不训练新模型。
 
-## 实际遇到的原生依赖门槛
+## 历史记录：最初遇到的原生依赖门槛（已通过后续公开同一权重路线解决）
 
 StreamCorrect 发布的 LoRA 确实存在；但它不是一个自包含 corrector。
 底模 `fixie-ai/ultravox-v0_5-llama-3_2-1b` 的公开 1.366GB 权重仅含

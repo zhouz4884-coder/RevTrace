@@ -1,5 +1,5 @@
 {
-  "status": "STABILITY36_COMPLETE_ANALYSIS_AND_NATIVE_ASSET_ACQUISITION_ACTIVE",
+  "status": "JOINT_RXK24_RUNNING_NATIVE_READINESS_COMPLETE",
   "user_scope": [
     "36cell service region / timing stability",
     "24cell R x covered physical exit, two_lane fixed",
@@ -9,16 +9,16 @@
   "current_runtime": "f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf",
   "current_runtime_manifest": "experiments/physical_retirement_20261028/packages/SOURCE_v3.json",
   "gpu_current": {
-    "study": "service_stability36",
-    "pid": 1305360,
-    "start_ticks": "493080422",
-    "command_sha256": "f59c8f01629b9a7bcb2781cda31d1083e108d1328f98a4d0a9a6e9b288d80937",
-    "remote_handle": "projects/revtrace_dsn_service_stability_20261028/GPU_HANDLE_v1.json",
-    "controller": "results/revtrace/physical_retirement_20261028/dsn_service_stability_controller_v1",
-    "plan_sha256": "bd06a99155b2f962b0ba9e832424ee84c9ce7d98cff79fad2091c756792fe39f",
-    "status": "COMPLETE36_ALL_EXECUTION_AUDITS_PASS"
+    "study": "joint_RxK24",
+    "pid": 1638632,
+    "start_ticks": "500244107",
+    "command_sha256": "b733a67185619f6a57fb60e033af94b90eba9cf37fdb18b088d1de5da00bceb2",
+    "remote_handle": "projects/revtrace_physical_retirement_20261028/DSN_JOINT_GPU_HANDLE_v1.json",
+    "controller": "results/revtrace/physical_retirement_20261028/dsn_joint_controller_v1",
+    "plan_sha256": "d5da167c84b185dc38c2f5db345b7ba9bd0b501b087fcb06216e8f449a7a7f8e",
+    "status": "RUNNING_FROZEN24_SERIALIZED_GPU"
   },
-  "gpu_next": "R x K 24cell joint plan d5da167c84b185dc38c2f5db345b7ba9bd0b501b087fcb06216e8f449a7a7f8e",
+  "gpu_next": "Native StreamCorrect v6 two prerequisite witnesses then12 formal cells if gate passes; native source a720d02a8cb81db6545d7d9ec6bdc31419dd091d",
   "resource_rule": "No shared-host heavy CPU/IO/download/modelsetup while timed GPU cells run. Root owns serialized GPU queue.",
   "paper_baseline": "Paper_DSN/revisions/20261008_coordination_spine",
   "paper_new": "Paper_DSN/revisions/20261028_dsn2027_progress",
@@ -29,11 +29,21 @@
   "agents": {
     "service_stability": "design/analysis preparation, rootlaunched36",
     "retention_exit_joint": "completed frozenplan/analysis prep, noGPU",
-    "streamcorrect_adapter": "localCPUauthenticadapter/weightmetadata only; downloads deferred while benchmark runs"
+    "streamcorrect_adapter": "Exact public assets and v6 isolated CPU readiness active; conditionally authorized to launch prepared f0 joint24 after heavy IO ends, then pause heavy IO",
+    "contribution_decision_round4": "Completed full36 timely continuity recount; preparing source-grounded method figure"
   },
   "source_policy": "No pull/reset dirtyroot. Before neuralrun use noargpreflight and clean complete manifest, actual execution commit notarchiveHEAD.",
-  "native_application_status": "ModelScopeexactcanonicalbackboneidentityresolved; full9.65GBB-onlyacquisitionandisolatedenvironmentpreparationactive; no native neuralcallsyet",
+  "native_application_status": "All31 exact assets plus2 auxiliary dependencies independently SHA-verified; isolated environment/fullauthor source/24 CPUtests/native config+128bin processor readiness PASS; all heavy IO ended; no native neural calls yet",
   "stop_rule": "Strengthen only gaps that can change claim or end-to-endservice value; finishboundedstudythenwritebodyonceevidence saturates",
   "permissions": "Full filesystem/network access, approvalnever; omit sandbox_permissions field entirely",
-  "stage_findings": "c8sync/staggerall12runsperpointpassedwhole-runD2C8; c16staggerall12D2failC8pass; jointall3creditabovebaseandzeroaudiofrontierrollbacks, interactionnotallpositive"
+  "stage_findings": "c8sync/staggerall12runsperpointpassedwhole-runD2C8; c16staggerall12D2failC8pass; jointall3creditabovebaseandzeroaudiofrontierrollbacks, interactionnotallpositive",
+  "additional_completed_analysis": {
+    "experiment_id": "REVTRACE-DSN-TIMELY-CONTINUITY-20261029-V1",
+    "analysis_commit": "f8cbdb626cf8996643a3cc870594c945a21e744c",
+    "scope": "All36 cells,3204 offered frontiers; subsequent loss of originally D2/C8 timely audio progress; original first-credit unchanged",
+    "c16_compute_only_timely_compatible_rollback_events": [10,11,9],
+    "c16_compute_only_D2_readpoint_absent_audio_seconds": [6.0,10.675,4.0],
+    "joint_compatible_timely_loss": 0,
+    "results": "timely_continuity_v1/RESULTS_v1"
+  }
 }

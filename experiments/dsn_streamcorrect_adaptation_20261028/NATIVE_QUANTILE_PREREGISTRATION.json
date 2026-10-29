@@ -1,0 +1,14 @@
+{
+  "decision_before_paid_native_runs": true,
+  "primary_D99_C99": "Original f0 linear interpolated empirical 99th percentile; reproduce the original implementation or numpy percentile(method=linear)",
+  "missing_frontier_rule": "Missing first-view or certified observation is positive infinity in the primary all-offered quantile vector, exactly as f0; JSON exports non-finite values as null with explicit missing counts",
+  "secondary_D99_C99": "Native v5 carrier nearest-rank ceil(0.99*n), explicitly labeled as auxiliary",
+  "analysis_route": "Independent post-run reread of actual native Consumer events, not a change to native v5 serving decisions",
+  "invariants": [
+    "All offered frontiers remain in first-view/dual-deadline credit denominators",
+    "Original D2/C8 deadlines and source offer clocks remain unchanged",
+    "Report maximum delay and deadline-miss counts separately from P99",
+    "Missing coverage is explicit and cannot establish a service-goal pass",
+    "Retrospective selected-model agreement is not ground truth or an online admission test"
+  ]
+}

@@ -1,0 +1,9 @@
+from pathlib import Path
+T=Path(__file__).resolve().parent
+s=(T/'start_detached_acquisition_v2.py').read_text()
+s=s.replace('job={\'public\':row};url=row[\'url\']','job={\'public\':row};url=row[\'url\']\n if row[\'path\'].endswith(\'/llama32_1b_instruct_f8e6b/model.safetensors\'):\n  url=\'https://huggingface.co/unsloth/Llama-3.2-1B-Instruct/resolve/5a8abab4a5d6f164389b1079fb721cfab8d7126c/model.safetensors\'')
+s=s.replace('attempt03','attempt04')
+s=s.replace("folder=T/'acquisition_attempt04';folder.mkdir(exist_ok=False);(folder/'HANDLE.json').write_text(json.dumps(handle,indent=2))", "folder=T/'acquisition_attempt04';folder.mkdir(exist_ok=False);(folder/'HANDLE.json').write_text(json.dumps(handle,indent=2))\n transport=dict(public_distribution='unsloth/Llama-3.2-1B-Instruct',revision='5a8abab4a5d6f164389b1079fb721cfab8d7126c',asset_plan_unchanged=True,expected_full_sha256='1ff795ff6a07e6a68085d206fb84417da2f083f68391c2843cd2b8ac6df8538f',identity_authority='canonical Meta Git-LFS pointer matched to ModelScope exact weight SHA',reason='64MiB RAM-only public transport probe 2.864x contemporaneous writer; controlled exact-partial resume')\n (folder/'PUBLIC_TRANSPORT_RECORD.json').write_text(json.dumps(transport,indent=2))")
+s=s.replace("s.update(status='ACTIVE_DETACHED_ASSET_ACQUISITION',heavy_io_started=True,acquisition=handle,native_neural_calls=0,formal_application_service_cells_completed=0)","s.update(status='ACTIVE_DETACHED_ASSET_ACQUISITION',heavy_io_started=True,acquisition=handle,native_neural_calls=0,formal_application_service_cells_completed=0,updated_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),actual_backbone_transport=transport,current_phase='exact-partial resume via public byte-identical HF transport; ModelScope identity proof retained')")
+p=T/'start_detached_acquisition_v3.py';assert not p.exists();p.write_text(s)
+print(str(p))

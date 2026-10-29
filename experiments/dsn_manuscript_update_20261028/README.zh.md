@@ -7,8 +7,8 @@
 | 工作 | 范围 | 实际状态 |
 |---|---|---|
 | [服务区间与时序稳定性](../dsn_service_stability_20261028/README.zh.md) | c8-sync / c8-staggered / c16-staggered × R/S四臂 ×3新进程，共36格 | 36/36完成并通过独立复核；[完整结论](../dsn_service_stability_20261028/RESULTS_FINDINGS.zh.md)与[论文图](../dsn_service_stability_20261028/FIGURES_v2/FIGURE_MANIFEST.json)已生成。 |
-| [保留与覆盖退出](../dsn_joint_retention_exit_20261028/PROTOCOL.zh.md) | two_lane固定，R×K四臂 ×sync/staggered ×3新进程，共24格 | 计划及独立分析已冻结，等待串行GPU时隙；不是已完成结果。 |
-| [StreamCorrect有界适配](../dsn_streamcorrect_adaptation_20261028/PROTOCOL.md) | 作者真实ASR与发布纠错选择逻辑，小规模元数据选择完整话语，原生/适配分开 | ModelScope公开发行已匹配Meta原始权重身份；完整状态接口与强两卡顺序基线已冻结，资产下载/环境准备中；尚无应用GPU结果。 |
+| [保留与覆盖退出](../dsn_joint_retention_exit_20261028/PROTOCOL.zh.md) | two_lane固定，R×K四臂 ×sync/staggered ×3新进程，共24格 | 2026-10-29 05:40:31 UTC已真实启动，冻结计划与实际f0源码验证通过，串行占用GPU；不是已完成结果。 |
+| [StreamCorrect有界适配](../dsn_streamcorrect_adaptation_20261028/PROTOCOL.md) | 作者真实ASR与发布纠错选择逻辑，小规模元数据选择完整话语，原生/适配分开 | 31个原生资产及2个辅助依赖已独立全SHA复核，隔离环境、原作者源码、24项CPU及真实config/processor检查通过；等待24格结束后的GPU时隙，尚无应用神经结果。 |
 | DSN正文 | 基于`Paper_DSN/CURRENT.md`所指20261008 coordination-spine旧稿 | 已保护旧稿并复制为20261028修订，旧稿基线编译成功；待实验结论后写正文。 |
 
 实际神经执行源码仍为干净冻结的 `f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf`，不是本过程归档的HEAD。每项独立CPU分析另有自己的干净提交、完整manifest/bundle与实际输入哈希。所有大日志、环境、模型和音频仍在指定8TB盘；相邻任务不并行占用GPU，计时期间也避免重下载/解压和重CPU I/O。
@@ -18,6 +18,10 @@
 36格结果：c8-sync/c8-staggered每个点四臂三次均通过整场D2/C8，但错峰接近边界，仍有0.215秒末尾区间超过D2且没有从分母删去。c16-staggered全部12格未过D2、均过C8；联合相对双关的三次全offered信用净增20.280/22.885/20.180秒（每次250.18秒），R-only的16/17/12次回撤在联合下均为0。信用交互不是每次为正，对仅R也不全面占优。
 
 新36格未出现普通发布触发的同root合法回撤，停止为强化Consumer另开支线。按[第三轮独立讨论](ROUND3_DECISION.zh.md)，不把三个嵌套工作点扩大成普遍容量曲线；下一步优先完成同场R×K与真实应用。当前[主张证据图](CLAIM_EVIDENCE_MAP.zh.md)记录效应、代价与尚未完成的工作。
+
+[第四轮独立讨论](ROUND4_INDEPENDENT_DECISION.zh.md)提出并完成了一项有新意义的补强：在原始首交信用完全不变的前提下，重计全部36格/3204前沿的[及时交付后连续性](timely_continuity_v1/README.zh.md)。c16仅R的45次兼容回撤中，10/11/9次撤掉了原D2首交且C8最终及时的进展；其在原始D2读点仍缺失6.000/10.675/4.000音频秒，联合对应均0。c8错峰四臂P99均通过，仍观察到仅R的0.215/0/0.215s读点缺失。它补充说明首次交付与后续可用性不同，不替换原SLO，也不把暂定内容变成认证事实。必要撤回、未知和跨根截断均保留。
+
+[正文论证计划](MANUSCRIPT_ARGUMENT_PLAN.zh.md)据此收紧：以可执行合法重根和端到端进展保留为主线，执行退出为支撑；后续是否增加候选交接，取决于真实原生机会与阶段成本，不因完整组合正控同效而否定组合创新。
 
 旧开发轨迹的唯一D2 miss为2.154821秒，其中ACK到enqueue为1.625349秒，与前一Proposer物理lease重叠1.553488秒；本次实际生成0.428193秒、输入ACK11.56毫秒、发布到实际Consumer11.92毫秒。这个逐前沿分解表明，需要分别看执行排队、组批和持久化；累计fsync增加不能独立解释一次超时。
 

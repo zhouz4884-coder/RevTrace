@@ -1,0 +1,1 @@
+Offline actual-trace illustration only, no GPU/model calls. Fixed c16-staggered repeat 0; same source and complete selected history in R1S0/R1S1. Require witnessed compatible-ahead event at a shared F in both arms, then choose largest R1S0 source rollback area, tie by source ID. Preserve original per-session clocks. This is diagnostic illustration, not prevalence.
