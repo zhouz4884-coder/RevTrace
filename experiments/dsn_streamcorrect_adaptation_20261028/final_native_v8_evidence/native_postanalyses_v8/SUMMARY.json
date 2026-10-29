@@ -1,0 +1,42 @@
+{
+  "status": "COMPLETED_POSTANALYSES_ORIGINAL_NATIVE_GATES_PRESERVED",
+  "native_controller_gate": {
+    "status": "PASS_TWELVE_ACTUAL_NATIVE_CELLS_AND_FULL_HISTORY_EQUIVALENCE"
+  },
+  "original_failed_v8_controller_gate": {
+    "status": "FAIL_NATIVE_CAMPAIGN_PRESERVED"
+  },
+  "corrective_witness_recount_gate": {
+    "status": "PASS_CORRECTIVE_OFFLINE_WITNESS_RECOUNT"
+  },
+  "original_witness_gate": {
+    "status": "PASS_NATURAL_NONEMPTY_CORRECTED_AND_UNCHANGED_INTERLEAVINGS",
+    "corrected_interleavings": 17,
+    "unchanged_interleavings": 36,
+    "all_corrected_updates": 24,
+    "all_unchanged_updates": 40,
+    "sources": [
+      "BAC009S0764W0209",
+      "BAC009S0765W0203",
+      "BAC009S0767W0329",
+      "BAC009S0768W0136"
+    ]
+  },
+  "analyses": [
+    {
+      "name": "primary_quantiles",
+      "returncode": 0,
+      "gate": {
+        "status": "PASS_ALL_OFFERED_NATIVE_PRIMARY_QUANTILES_RECOUNTED"
+      }
+    },
+    {
+      "name": "feedback_characterization",
+      "returncode": 0,
+      "gate": {
+        "status": "PASS_OBSERVED_NATIVE_FEEDBACK_CHARACTERIZED_ORIGINAL_GATE_UNCHANGED"
+      }
+    }
+  ],
+  "interpretation": "Tool process completion is not evidence that unexecuted conditional formal cells exist; original native gate and each analysis coverage remain explicit."
+}

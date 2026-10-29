@@ -1,0 +1,59 @@
+{
+  "experiment_id": "REVTRACE-DSN-MIDPOINT-CONTINUITY-20261029-V1",
+  "root_allocated": true,
+  "native_scope_executed": "two_witnesses_gate_passed_all12_formal_complete",
+  "local_current_preflight": {
+    "gate": "SOURCE_IDENTITY_PASS",
+    "source": "D:\\VLA_QWEN\\RevTrace\\experiments\\physical_retirement_20261028\\source_v3",
+    "code_commit": "f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf",
+    "source_manifest": "D:\\VLA_QWEN\\RevTrace\\experiments\\physical_retirement_20261028\\packages\\SOURCE_v3.json",
+    "manifest_sha256": "19547df369c2899d4cb0eec49d137eff7f160802668072033ae9197565771625",
+    "files_verified": 242,
+    "run_record_prelaunch_checked": false,
+    "scope": "CPU/local provenance only; not GPU evidence or a completed experiment gate",
+    "setup_pointer": "D:\\VLA_QWEN\\RevTrace\\experiments\\repository_identity_20261027\\CURRENT.json",
+    "setup_pointer_sha256": "75eab028d11d3def540396dd42fabda09fac439f3fa938d68592e740f1d72f58"
+  },
+  "prerequisite_evidence": [
+    {
+      "label": "joint24_execution",
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_joint_controller_v1/GATE.json",
+      "sha256": "d9bbb546e513a841d6ca20acce9a5bf6c80ab711c479f6a0a6cee1028341464c",
+      "required_json_fields": {
+        "gate": "PASS_ALL_FROZEN_EXECUTION_CELLS",
+        "completed": 24
+      }
+    },
+    {
+      "label": "joint24_analysis",
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_joint_analysis_v2/GATE.json",
+      "sha256": "4f85f52643d3ecb4d98245c360458544f1879632493e903776f37b99f704ba89",
+      "required_json_fields": {
+        "gate": "PASS_OFFLINE_RECOUNT"
+      }
+    },
+    {
+      "label": "native_prescribed_scope_decision",
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/native_campaign_v8_continuation_auditfix_v1/GATE.json",
+      "sha256": "ecbeeaffd7d1abb894570d26bb41646aec836d5eac5d454f01da9630c31fedfa",
+      "required_json_fields": {
+        "status": "PASS_TWELVE_ACTUAL_NATIVE_CELLS_AND_FULL_HISTORY_EQUIVALENCE"
+      }
+    },
+    {
+      "label": "native_analysis",
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/native_postanalyses_v8/SUMMARY.json",
+      "sha256": "772179553156df83f1b2ffb40409c50717fc97129d8e853d04f3c5f9203c805f",
+      "required_json_fields": {
+        "status": "COMPLETED_POSTANALYSES_ORIGINAL_NATIVE_GATES_PRESERVED"
+      }
+    }
+  ],
+  "allocated_utc": "2026-10-29T08:20:38.006139+00:00",
+  "resource_release": "Native original14, primary/feedback/ready CPU and bounded IO complete; RxK same-F24/96 CPU/IO complete. Only this timed GPU scope allocated.",
+  "additional_finished_quality_scope": {
+    "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/physical_retirement_20261028/dsn_joint_same_F_support_v1/GATE.json",
+    "sha256": "30f7f4eca2bbbfba512f1f055b3d3e53e06a0446c338fa095918711b1b0b3bcb",
+    "gate": "PASS_ALL24_SAME_F_SUPPORT_RECOUNT"
+  }
+}

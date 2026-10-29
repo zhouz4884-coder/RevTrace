@@ -1,0 +1,3 @@
+import pathlib,json,argparse
+p=argparse.ArgumentParser();p.add_argument('--completed',type=int,required=True);p.add_argument('--observed-utc',required=True);a=p.parse_args();assert 0<=a.completed<=12
+T=pathlib.Path(__file__).resolve().parents[1];q=T/'CURRENT_STATUS.json';s=json.loads(q.read_text());s.update(formal_application_service_cells_completed=a.completed,witness_cells_completed=2,total_completed_native_service_cells=2+a.completed,updated_utc=a.observed_utc,progress_evidence='exact PID/start/cmd-matched continuation controller PROGRESS.json',cross_arm_quality_and_primary_D2C8_pending=True);q.write_text(json.dumps(s,indent=2))

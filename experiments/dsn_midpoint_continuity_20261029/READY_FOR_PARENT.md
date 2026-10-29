@@ -1,6 +1,8 @@
-# 唯一12会话开发中点：本地冻结就绪，未启动
+# 唯一12会话开发中点：完整完成，强见证阴性，STOP
 
-当前只完成本地冻结方案、完整analysis源码和17项CPU控制；**没有远端staging、环境安装、模型调用或GPU启动**。没有修改CURRENT或f0运行源。执行必须等根任务分配。
+**当前12/12神经运行及完整core+timely复核已完成，49文件7,106,265字节逐SHA取回；强见证未建立，依冻结规则停止，不追10/11或加重复。** 全12原D2 P99失败、C8通过；完整protected histories相同，Joint兼容及时损失三次均0，但R-only没有完整2s非EOS强窗口。详见[MIDPOINT_FINDINGS.zh.md](MIDPOINT_FINDINGS.zh.md)。原36与新12的全部四工作点三重复已保存在`COMBINED_DATA_v1/`和`FIGURES_48_v1/`，包括阴性c12。所有远端资源和IO已释放，后续由root分配。
+
+以下为启动前冻结与门槛的历史记录。准备当时只完成本地方案、analysis源码和17项CPU控制；实际神经执行随后由root唯一分配并启动。没有修改或重标f0运行源。
 
 冻结计划`PLAN_v1.json`，SHA256 **fb344f88774b8cdae15af213e66f296adcaf4632fa982383e730f92a18023b84**。真实神经源码仍为 **f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf**；完整manifest SHA256 **19547df369c2899d4cb0eec49d137eff7f160802668072033ae9197565771625**。
 
@@ -18,7 +20,7 @@ analysis独立干净提交 **fb8a429d95ab682002bc39aedca8bcbec8942b67**，15文�
 
 `ALLOCATION_TEMPLATE.json`刻意为`root_allocated:false`且留实际路径/hash占位符，不能直接启动。待上述scope实际结束后，根任务把四类实际结果/decision证据的路径、SHA和必须匹配字段写为远端`ALLOCATION_v1.json`，并注明native是2witness失败关闭还是2+12全部完成。还需当前no-argument source preflight的真实f0 receipt。这个分配文件只管资源顺序，不修改冻结实验参数。
 
-## 待分配后可执行的命令
+## 已完成的历史执行顺序（不可重复启动）
 
 1. 在本地根目录重新运行no-argument repository preflight，确保CURRENT指向这次真实执行的f0源与完整manifest；不重标native或旧运行。如果CURRENT在原生期间变动，先由根任务按本地source identity流程切回f0，再生成新receipt。`stage_remote_v1.py`是有界准备脚本，只有根分配后运行；会拒绝正在计时的GPU、上传计划/完整bundle并核对字节，不启动GPU。
 2. `P=/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_midpoint_continuity_20261029`，待实际分配文件就绪后，使用8TB现有环境执行`P/analysis_source_v1/launch_midpoint.py --allocation P/ALLOCATION_v1.json`。该launcher再次验证前置scope证据、分析源全字节、f0源242文件、所有输出路径未使用和GPU空闲；不import模型。实际campaign在第一模型调用前记录原始config/env/run record。
@@ -27,4 +29,4 @@ analysis独立干净提交 **fb8a429d95ab682002bc39aedca8bcbec8942b67**，15文�
 
 CPU analysis会先执行四项完整core recount，再计算所有四臂的及时连续性和强见证。`GATE.json`表示完整分析可用，`STRONG_WITNESS_DECISION.json`单独表达是否观察到强见证；负效应不伪装为执行失败。完整history不同会阻止same-task/强主张，原始性能仍保留。模型/数据/环境/缓存/原始log始终留8TB盘，只同步有界审计证据。
 
-本目录暂不画新结果图。数据完成后若合并图，既有三个36格工作点和新12点均保留各3次真实重复，即使中点为负也不删除；图题明确不同来源组合的开发工作负载，不暗示纯并发容量曲线。
+已完成四点48格合并图，既有三个36格工作点和新12点均保留各3次真实重复；中点阴性未删除。图题明确不同来源组合的开发工作负载，不暗示纯并发容量曲线。主图为`FIGURES_48_v1/service_region.pdf`，机制/C8/内容支持图为`service_region_mechanism.pdf`。图宽7.15in、字体≥8pt、Type3=0，完整PDF页及四点标签均已目视/文本检查，见`VISUAL_QA_FINAL.json`。

@@ -1,3 +1,5 @@
+当前已完整执行并交付。见 `RESULTS_FINDINGS.zh.md`、`PAPER_PARAGRAPH.en.md`、`RESULTS_v1/`；以下为保留的事前准备说明，不能作为当前未执行状态。
+
 # READY：全 24 格首次消费的后验同 F 完整文本支持
 
 **仅本地方案、源码与 controls 已完成。没有 stage，没有读取远端，没有真实质量重计结果，没有新 GPU。**

@@ -18,3 +18,5 @@
 三次时序重复与两个相位不是新来源确认；固定 F2 fixture 不是自然故障发生率；未改 prompt 的正常跨根计算不能与 F2 无用长尾合并。全部原 D2/C8、offered 分母、质量和能耗均保留。
 
 当前图四臂使用明确 R0K0/R0K1/R1K0/R1K1 标签，S 在全部臂开启；`FIGURES_v1` 保留，v2 只改 legend/caption，八个原始数据表逐字节不变，详见 `FIGURE_LABEL_REVISION_v1.json`。
+
+质量侧补强已完成：`same_F_support_v1/RESULTS_FINDINGS.zh.md`。原 first-credit 不变；固定六同步后继批96/96首次完整内容与未来严格同F Canon原文一致，全部实际无fault override；同时保留整场first-view raw/norm差异。

@@ -1,6 +1,6 @@
 # StreamCorrect 有界适配：当前完成状态
 
-2026-10-29 最新状态：两个真实 native witness 服务格已完成，原定十二个 formal 格正在执行，具体进度和句柄以
+2026-10-29 最新状态：两个真实 native witness 与原定十二个 formal 格、冻结后分析均已完成。完整结果见`NATIVE_RESULTS_REPORT.zh.md`，当前状态以
 `CURRENT_STATUS.json` 为准。用户指定 ModelScope 路线后，已发现公开原版发行并核验其原始权重身份。
 `modelscope_metadata_v1/EXACT_WEIGHT_IDENTITY_PROOF.json` 记录了 ModelScope
 SHA-256 重建出的 Git-LFS pointer 与 Meta 官方公开 tree 的 blob SHA-1
@@ -13,9 +13,11 @@ ModelScope 的身份依据保持冻结；
 有界源码快照、完整 bundle、逐文件 manifest、25项CPU测试与实际双卡median合法oracle控制均已冻结。
 原始 v6 初始化失败及 v7 不正确的非负输入域控制失败均保留，随后只修复原生依赖API与作者遥测时钟接口。
 两个完成的 witness 在独立离线审计修复后满足原门控：17个非空raw-changed交错与36个unchanged交错。
-这些标签不等于语义纠错收益；正式的三臂服务、完整状态/质量一致性及原始D2/C8结论仍待完整十二格与后分析。
+这些标签不等于语义纠错收益。正式三臂各4格完整Canonical状态/输出历史一致、CER均为8.79%；
+原插值D2/C8整格均0/4通过。信用sequential18.5s、drop12.5s、joint17.0s，offered均66.42975s。
+当前500ms双会话点不能声称native部署SLO成功；Joint减少相对drop的重算和进展损失，但未超过强两副本sequential。
 离线审计源码 `a0652a81a205483ba2091dfd345b85be72ee8b19` 只修正空文本应显示前沿0的预期，
-继续执行仍调用未改动的v8服务源码、原冻结配置/顺序；没有重放或重标两格原始神经执行。
+完成的正式执行仍调用未改动的v8服务源码、原冻结配置/顺序；没有重放或重标两格原始神经执行。
 
 以下首先保留此前 CPU 阶段和访问探针的历史记录；这些不是后续实验结果。
 
