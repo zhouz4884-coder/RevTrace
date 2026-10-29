@@ -1,0 +1,48 @@
+{
+  "primary_question": "Where does joint retention preserve progress, where do arms converge, and where can the real service meet original deadlines?",
+  "panels": [
+    {
+      "panel": "A",
+      "data": "RUN_ENDPOINTS",
+      "x": "point",
+      "y": "display_P99",
+      "hue": "arm",
+      "points": "all three fresh repeats",
+      "threshold": 2.0
+    },
+    {
+      "panel": "B",
+      "data": "RUN_ENDPOINTS",
+      "x": "point",
+      "y": "dual_audio_fraction",
+      "hue": "arm",
+      "points": "all three fresh repeats"
+    },
+    {
+      "panel": "C",
+      "data": "OPPORTUNITY_RATES",
+      "filter": "clock_scope == consumer_apply",
+      "x": "point",
+      "y": "compatible_rate_all_updates",
+      "hue": "arm",
+      "points": "all three repeats; also show ahead and incompatible rates"
+    },
+    {
+      "panel": "D",
+      "data": "RUN_ENDPOINTS",
+      "x": "point",
+      "y": "audio_rollback_seconds",
+      "hue": "arm",
+      "points": "all three fresh repeats"
+    }
+  ],
+  "commitments": [
+    "Keep C8 endpoint separate and show every run, even though D2 may dominate.",
+    "No best-point or best-repeat selection; no mean-of-P99 curve described as a pooled P99.",
+    "Relative progress is measured endogenous opportunity incidence, not a controlled independent speed ratio.",
+    "c8 to c16 uses a nested real-source mixture, so no precise universal capacity boundary is inferred.",
+    "All offered denominators, WER and actual two-board joules are available beside the figure.",
+    "Owner and Consumer clocks remain separate; use Consumer application for visible-retention opportunity.",
+    "A necessary incompatible withdrawal is reported separately from compatible progress loss."
+  ]
+}

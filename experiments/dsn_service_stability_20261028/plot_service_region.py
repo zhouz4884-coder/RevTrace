@@ -13,7 +13,7 @@ COLORS={'R0_S0':'#767676','R0_S1':'#42949E','R1_S0':'#B64342','R1_S1':'#0F4D92'}
 MARKERS={'R0_S0':'o','R0_S1':'s','R1_S0':'^','R1_S1':'D'}
 LABELS={'R0_S0':'Neither','R0_S1':'Two-lane only','R1_S0':'Retention only','R1_S1':'Joint'}
 POINTS=('c8-sync','c8-staggered','c16-staggered')
-XTICKS=('8 sessions\nsynchronized','8 sessions\nstaggered','16 sessions\nstaggered')
+XTICKS=('8 / sync','8 / stag.','16 / stag.')
 INPUTS={}
 
 def read(p):
@@ -22,9 +22,9 @@ def values(rows,key):return [r[key] for r in rows if type(r.get(key)) in (int,fl
 def x_for(point,arm,repeat):return POINTS.index(point)+(ARMS.index(arm)-1.5)*.18+(repeat-1)*.038
 
 def style():
-    plt.rcParams.update({'font.family':['Arial','DejaVu Sans','sans-serif'],'font.size':8.2,
-        'axes.titlesize':8.5,'axes.labelsize':8.2,'xtick.labelsize':7.4,'ytick.labelsize':7.4,
-        'legend.fontsize':7.6,'axes.linewidth':.7,'axes.spines.top':False,'axes.spines.right':False,
+    plt.rcParams.update({'font.family':['Arial','DejaVu Sans','sans-serif'],'font.size':8.5,
+        'axes.titlesize':9.,'axes.labelsize':8.5,'xtick.labelsize':8.,'ytick.labelsize':8.,
+        'legend.fontsize':8.,'axes.linewidth':.7,'axes.spines.top':False,'axes.spines.right':False,
         'xtick.major.width':.6,'ytick.major.width':.6,'xtick.major.size':2.5,'ytick.major.size':2.5,
         'pdf.fonttype':42,'ps.fonttype':42,'svg.fonttype':'none','savefig.facecolor':'white',
         'mathtext.fontset':'dejavusans','figure.dpi':150})
@@ -32,6 +32,7 @@ def style():
 def base_axis(ax,title,ylabel):
     ax.set_title(title,loc='left',fontweight='bold',pad=6)
     ax.set_ylabel(ylabel,labelpad=3);ax.set_xticks(range(3),XTICKS)
+    ax.set_xlabel('Sessions / arrival phase',labelpad=3)
     ax.set_xlim(-.5,2.5);ax.yaxis.set_major_locator(MaxNLocator(nbins=4))
     ax.grid(axis='y',alpha=.16,linewidth=.4,zorder=0);ax.set_axisbelow(True)
 
@@ -56,7 +57,7 @@ def dots(ax,rows,key, *, scale=1.,face=True,median=True):
 def tails(ax,rows,key,threshold,title,ylabel):
     base_axis(ax,title,ylabel);dots(ax,rows,key)
     ax.axhline(threshold,color='#272727',lw=.8,ls=(0,(3,2)),zorder=1)
-    ax.text(.99,threshold,('D2' if threshold==2 else 'C8')+' ',ha='right',va='bottom',fontsize=7.1,
+    ax.text(.99,threshold,('D2' if threshold==2 else 'C8')+' ',ha='right',va='bottom',fontsize=8.,
         color='#272727',transform=ax.get_yaxis_transform())
     top=max([threshold]+values(rows,key))*1.14;ax.set_ylim(0,top)
 
@@ -80,7 +81,7 @@ def opportunity(ax,rows):
                 100*r['ahead_rate_all_updates'],color=COLORS[r['arm']],lw=.45,alpha=.65,zorder=1)
     top=max([.01]+values(chosen,'ahead_rate_all_updates'))*100*1.2
     ax.set_ylim(-.02*top,top);ax.yaxis.set_major_formatter(PercentFormatter(xmax=100,decimals=0))
-    ax.text(.01,.98,'open: any ahead\nfilled: compatible',transform=ax.transAxes,va='top',fontsize=6.8,
+    ax.text(.01,.98,'open: any ahead\nfilled: compatible',transform=ax.transAxes,va='top',fontsize=8.,
         bbox=dict(facecolor='white',edgecolor='none',alpha=.85,pad=1))
 
 def legend(fig):
@@ -124,7 +125,7 @@ def main():
     history=read(a.data/'POINT_BLOCK_CANONICAL_HISTORY.json')
     assert len(rows)==36 and len(opps)==72 and all(sum(r['point']==pt and r['arm']==arm for r in rows)==3 for pt in POINTS for arm in ARMS)
     out=a.output;out.mkdir(exist_ok=False,parents=True);style()
-    fig,axes=plt.subplots(1,3,figsize=(7.15,2.25));fig.subplots_adjust(left=.065,right=.993,bottom=.22,top=.79,wspace=.40)
+    fig,axes=plt.subplots(1,3,figsize=(7.15,2.4));fig.subplots_adjust(left=.065,right=.993,bottom=.22,top=.79,wspace=.40)
     tails(axes[0],rows,'display_P99',2.,'a. First actual visibility','Display P99 (s)')
     percentages(axes[1],rows,'dual_audio_fraction','b. Offered-input service','D2/C8 credit (%)')
     rollback(axes[2],rows);legend(fig)
@@ -132,9 +133,10 @@ def main():
         'small horizontal ticks show medians and vertical ranges span the three observed values, without confidence-interval claims. '
         'D2/C8 credit uses every offered audio interval and original 2 s display / 8 s certified-view deadlines. '
         'Withdrawal includes necessary incompatible revisions. The 16-session point expands to the metadata-nested original sources; '
-        'the plot is not a pure-load universal capacity curve. No lines interpolate between workload points.')
+        'the plot is not a pure-load universal capacity curve. No lines interpolate between workload points. '
+        'Arrival phases are synchronized (sync) or staggered by 0.25 s per session (stag.).')
     export(fig,out,'service_region',cap)
-    fig,axes=plt.subplots(1,3,figsize=(7.15,2.25));fig.subplots_adjust(left=.065,right=.993,bottom=.22,top=.79,wspace=.40)
+    fig,axes=plt.subplots(1,3,figsize=(7.15,2.4));fig.subplots_adjust(left=.065,right=.993,bottom=.22,top=.79,wspace=.40)
     tails(axes[0],rows,'commit_view_P99',8.,'a. Actual certified visibility','Certified-view P99 (s)')
     opportunity(axes[1],opps)
     supported=[dict(r,supported_audio_fraction=r['first_certified_or_same_F_raw_agreeing_timely_audio_seconds']/r['offered_audio_seconds']) for r in rows]
@@ -145,7 +147,7 @@ def main():
         'This observed relative progress is an endogenous mechanism measurement. '
         'Supported credit counts first-certified content plus timely first-ahead complete views agreeing byte-for-byte with the later selected Canonical '
         'at that same visible audio boundary; it is a retrospective selected-model agreement metric, not semantic correctness or groundtruth. '
-        'All offered intervals remain in its denominator.')
+        'All offered intervals remain in its denominator. Arrival phases are synchronized (sync) or staggered by 0.25 s per session (stag.).')
     export(fig,out,'service_region_mechanism',cap)
     manifest=dict(code_commit=source['code_commit'],script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         input_files=INPUTS,python=sys.version,matplotlib=matplotlib.__version__,platform=platform.platform(),

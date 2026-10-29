@@ -1,4 +1,8 @@
-# DSN 服务区间与时序稳定性：冻结的 36 格
+# DSN 服务区间与时序稳定性：36 格已完成
+
+**36/36 实际运行及四套 CPU 独立复核全部通过，3204/3204 前沿连接完整路径。** 点级结果与研究取舍见 [RESULTS_FINDINGS.zh.md](RESULTS_FINDINGS.zh.md)。有界证据在 [RESULTS_v1](RESULTS_v1/)，38 文件共 18,747,717 字节已逐一与远端 SHA256 核对；原始模型、音频和大日志保留在 8TB 盘。
+
+本次 c8 两相位所有四臂均三次通过原始 D2/C8 P99；c16 错峰所有臂均未通过 D2。联合设计在 c16 每次比 Neither 多 20.180–22.885 秒双期限音频信用，R-only 的 16/17/12 次回撤在联合下为 0/0/0，但信用交互和额外 S 收益并非每次为正。所有失败、尾段 miss、质量及能耗均保留。更强的同根 sticky 对照因全部 36 格 other-triggered 回撤为 0 而停止，不为未观察到的问题扩展模块。
 
 本研究只使用旧开发清单，神经运行源保持 `f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf`。没有读取 24 个 H3 确认来源的输出来选负载点，没有改变 D2/C8 或丢掉 offered 分母。
 
@@ -35,4 +39,6 @@ ACK→enqueue 区间与同一 Proposer 的前序物理 lease 重叠 **1.553488 �
 
 旧开发分析、原始输入哈希和下载校验在 [old_development_recount_v1](old_development_recount_v1/)。实际原始日志仍在 8TB 盘。已通过本地无参 source preflight、远端 242 文件 byte 校验、CPU 分析源全文件校验与旧开发重算；**本目录准备过程没有启动 GPU 新实验**。
 
-主协调者可用 `python experiments/dsn_service_stability_20261028/launch_gpu.py` 串行发起冻结计划。不得在其他神经实验并发时运行。完成后调用远端 `projects/revtrace_dsn_service_stability_20261028/analysis_source_v2/run_analysis.py`，使用对应冻结计划与 `ANALYSIS_SOURCE_v2.json`，新结果写 `results/revtrace/physical_retirement_20261028/dsn_service_stability_analysis_v1`。
+主协调者已使用其 `launch_v1.py` 完成同一冻结 36 格计划，所有结果仍写上述唯一 raw 路径。启动句柄是远端 `projects/revtrace_dsn_service_stability_20261028/GPU_HANDLE_v1.json`；备用 `launch_gpu.py` 没有执行，不能重复启动。四套 CPU recounter 已从远端 `projects/revtrace_dsn_service_stability_20261028/analysis_source_v2/run_analysis.py` 完成，使用对应冻结计划与 `ANALYSIS_SOURCE_v2.json`，结果在 `results/revtrace/physical_retirement_20261028/dsn_service_stability_analysis_v1`。
+
+图数据由 `figure_data_source_v3`（`eee1a89e0b5117295c84f749cd202be4f676c3d2`）从全部 36 次实际运行生成，三工作点和三次重复分别保存。最终论文图由 `figure_data_source_v4`（`a8ddd8bc2f7552b1366c4fa34a581f44d84bbd24`）绘制；v4 仅将过长相邻 x-tick 改为紧凑的 session/phase 标签，没有改变数据。主图在 [service_region.pdf](FIGURES_v2/service_region.pdf)，机制与 C8 图在 [service_region_mechanism.pdf](FIGURES_v2/service_region_mechanism.pdf)。图宽 7.15 英寸，全部字号 8–9pt，PDF/SVG 向量、350dpi PNG 与完整 PDF 页预览并行导出，Type3=0。完整原 PNG 的顶端 legend 与底部标签、PDF 全页及 a/b/c 标号均已检查，见 [VISUAL_QA_FINAL.json](FIGURES_v2/VISUAL_QA_FINAL.json)。没有使用合成数值代替正式图。

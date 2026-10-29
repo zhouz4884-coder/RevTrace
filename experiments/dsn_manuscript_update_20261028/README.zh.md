@@ -6,14 +6,18 @@
 
 | 工作 | 范围 | 实际状态 |
 |---|---|---|
-| [服务区间与时序稳定性](../dsn_service_stability_20261028/README.zh.md) | c8-sync / c8-staggered / c16-staggered × R/S四臂 ×3新进程，共36格 | 已启动；原D2/C8、全部offered、质量/能耗保持不变；随机点顺序与平衡臂序。 |
+| [服务区间与时序稳定性](../dsn_service_stability_20261028/README.zh.md) | c8-sync / c8-staggered / c16-staggered × R/S四臂 ×3新进程，共36格 | 36/36完成并通过独立复核；[完整结论](../dsn_service_stability_20261028/RESULTS_FINDINGS.zh.md)与[论文图](../dsn_service_stability_20261028/FIGURES_v2/FIGURE_MANIFEST.json)已生成。 |
 | [保留与覆盖退出](../dsn_joint_retention_exit_20261028/PROTOCOL.zh.md) | two_lane固定，R×K四臂 ×sync/staggered ×3新进程，共24格 | 计划及独立分析已冻结，等待串行GPU时隙；不是已完成结果。 |
-| [StreamCorrect有界适配](../dsn_streamcorrect_adaptation_20261028/PROTOCOL.md) | 作者真实ASR与发布纠错选择逻辑，小规模元数据选择完整话语，原生/适配分开 | 正在准备完整状态兼容接口与公开权重；没有新训练或应用GPU结果。 |
+| [StreamCorrect有界适配](../dsn_streamcorrect_adaptation_20261028/PROTOCOL.md) | 作者真实ASR与发布纠错选择逻辑，小规模元数据选择完整话语，原生/适配分开 | ModelScope公开发行已匹配Meta原始权重身份；完整状态接口与强两卡顺序基线已冻结，资产下载/环境准备中；尚无应用GPU结果。 |
 | DSN正文 | 基于`Paper_DSN/CURRENT.md`所指20261008 coordination-spine旧稿 | 已保护旧稿并复制为20261028修订，旧稿基线编译成功；待实验结论后写正文。 |
 
 实际神经执行源码仍为干净冻结的 `f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf`，不是本过程归档的HEAD。每项独立CPU分析另有自己的干净提交、完整manifest/bundle与实际输入哈希。所有大日志、环境、模型和音频仍在指定8TB盘；相邻任务不并行占用GPU，计时期间也避免重下载/解压和重CPU I/O。
 
 ## 当前设计判断
+
+36格结果：c8-sync/c8-staggered每个点四臂三次均通过整场D2/C8，但错峰接近边界，仍有0.215秒末尾区间超过D2且没有从分母删去。c16-staggered全部12格未过D2、均过C8；联合相对双关的三次全offered信用净增20.280/22.885/20.180秒（每次250.18秒），R-only的16/17/12次回撤在联合下均为0。信用交互不是每次为正，对仅R也不全面占优。
+
+新36格未出现普通发布触发的同root合法回撤，停止为强化Consumer另开支线。按[第三轮独立讨论](ROUND3_DECISION.zh.md)，不把三个嵌套工作点扩大成普遍容量曲线；下一步优先完成同场R×K与真实应用。当前[主张证据图](CLAIM_EVIDENCE_MAP.zh.md)记录效应、代价与尚未完成的工作。
 
 旧开发轨迹的唯一D2 miss为2.154821秒，其中ACK到enqueue为1.625349秒，与前一Proposer物理lease重叠1.553488秒；本次实际生成0.428193秒、输入ACK11.56毫秒、发布到实际Consumer11.92毫秒。这个逐前沿分解表明，需要分别看执行排队、组批和持久化；累计fsync增加不能独立解释一次超时。
 

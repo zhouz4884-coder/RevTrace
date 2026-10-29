@@ -1,0 +1,1 @@
+CPU-only point-specific summary and publication figure data. Keep all 36 process repeats and all 3 workload points. Never pool different points into a P99. Exact complete selected histories are compared within each point and repeat. Endogenous relative-progress incidence is not a controlled speed ratio. No model calls.
