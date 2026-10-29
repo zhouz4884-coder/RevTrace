@@ -1,5 +1,5 @@
 {
-  "status": "CORE_SCOPES_COMPLETE_STAGE_PROFILE_AND_NEURAL_EQ_COMPLETE_ONLINE_HANDOFF_IN_DEVELOPMENT",
+  "status": "CORE_SCOPES_AND_NEURAL_COMPONENTS_COMPLETE_NATIVE_SOURCE0_THREE_ARM_PILOT_RUNNING",
   "user_scope": [
     "36cell service region / timing stability",
     "24cell R x covered physical exit, two_lane fixed",
@@ -7,11 +7,35 @@
     "one additional12cell midpoint development workload for SLO-feasible timely continuity; no subsequent10/11point search",
     "write full DSN2027 body based on old draft, compile QA, syncGitHub"
   ],
-  "current_runtime": "99e83a466fee7f1d16830b640cc99e0040d2f147",
+  "current_runtime": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
   "core_runtime": "f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf",
-  "current_runtime_manifest": "experiments/dsn_streamcorrect_stage_handoff_20261029/packages/SOURCE_v2.json",
-  "gpu_current": null,
-  "gpu_next": "Review and freeze source_v3 ready-only stage-handoff paired service development scope. No online handoff service cells exist yet.",
+  "current_runtime_manifest": "experiments/dsn_streamcorrect_stage_handoff_20261029/packages/SOURCE_v3.json",
+  "gpu_current": {
+    "study": "source0_three_arm_service_pilot",
+    "pid": 1783944,
+    "start_ticks": 502296461,
+    "cmdline_sha256": "a3b44c4ff7242a5e5b0e28823121e95a77c36ed07dba38274554c56950958901",
+    "command": [
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+      "-B",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/source_v3/run_service_campaign.py",
+      "--plan",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/SERVICE_PILOT_v1_FROZEN.json",
+      "--manifest",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/SOURCE_v3.json",
+      "--out",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_pilot_v1/campaign"
+    ],
+    "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+    "source_manifest_sha256": "258c33df4eba1d27bef88339aa20b2aae2ffe69f43489255d989ad337b717521",
+    "plan_sha256": "4025ff8af633567a0dd907e5c9f84739dbffb2e1a9a6d19544dc96594729d5a7",
+    "prerequisite_sha256": "d230f64d2e5b8a04a2dc029d61c9b2b8ac640fbbfbe30c09b9e710b621479363",
+    "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_pilot_v1.log",
+    "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_pilot_v1",
+    "campaign_output": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/service_pilot_v1/campaign",
+    "started_utc": "2026-10-29T11:22:34.832901+00:00"
+  },
+  "gpu_next": "Finish all3 frozen fresh cells and full task audit; choose meaningful native implementation and bounded continuation according to pre-pilot decision.",
   "resource_rule": "No shared-host heavy CPU/IO/download/modelsetup while timed GPU cells run. Root owns serialized GPU queue.",
   "paper_baseline": "Paper_DSN/revisions/20261008_coordination_spine",
   "paper_new": "Paper_DSN/revisions/20261028_dsn2027_progress",
@@ -72,8 +96,8 @@
     "joint_compatible_timely_loss": 0,
     "results": "timely_continuity_v1/RESULTS_v1"
   },
-  "updated_utc": "2026-10-29T10:37:49.512459+00:00",
-  "phase": "BOUNDED_STAGE_SERVICE_PREPARATION_AND_FULL_MANUSCRIPT_INTEGRATION",
+  "updated_utc": "2026-10-29T11:23:10.533234+00:00",
+  "phase": "ACTUAL_NATIVE_IMPLEMENTATION_SERVICE_PILOT",
   "next_design_decision": "Ready-only protected ASR candidate reuse with original C/U, compared with two complete native replicas having identical early ASR visibility and genuine neural warmup. Measure actual receipt/restore cost, hit/fallback, all offered deadlines, content and energy. Stop or independent final-implementation confirmation according to actual headroom.",
   "RxK_quality": "Completed all24/96 exact-F content support. All96 causal following rows raw/norm match later same-F full Canonical and have real unaltered inputs; first-credit untouched; general24 has real content disagreements, unknown0.",
   "completed_stage_profile": {
@@ -107,5 +131,21 @@
     "return_s": 3.719605122,
     "new_raw_characters": 37,
     "finding": "Actually new text is delivered beforeD2 but absent at theD2 read point; the identical whole text later returns."
+  },
+  "native_service_pilot": {
+    "planned_cells": 3,
+    "actual_completed_cells": 0,
+    "plan_sha256": "4025ff8af633567a0dd907e5c9f84739dbffb2e1a9a6d19544dc96594729d5a7",
+    "frozen_order": [
+      "two_full_spec_early",
+      "ready_handoff",
+      "two_full_early"
+    ],
+    "expected_all_offered_per_arm_seconds": 8.068,
+    "old_source_development": true,
+    "linux_CPU_tests": 118,
+    "skipped": 0,
+    "model_asset_bytes_rehashed": 10099049234,
+    "no_online_result_claimed": true
   }
 }
