@@ -1,0 +1,542 @@
+{
+  "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+  "run": {
+    "run_id": "full_0",
+    "kind": "full",
+    "source_index": 0,
+    "gpu": 0,
+    "capture": "full"
+  },
+  "native_steps": 17,
+  "warmup_steps": 1,
+  "warmup_stage_seconds": {
+    "A": 3.7266036784276366,
+    "C": 0.0003076428547501564,
+    "H": 0.0007354393601417542,
+    "capture": 0.00949242152273655,
+    "instrumented_model_total": 3.737139182165265
+  },
+  "results": [
+    {
+      "end": 8000,
+      "reference_equal": true,
+      "closed_cut_sha": "c84358bbc000447a3f51f05c9b40b9ef6a7b3bfd0698a795a16583ebe5b22ef0",
+      "native_model_evaluated": false,
+      "selected": null,
+      "model_seconds": 8.575059473514557e-05,
+      "stage_seconds": {
+        "A": 8.575059473514557e-05,
+        "C": 0.0,
+        "H": 0.0,
+        "capture": 0.0,
+        "instrumented_model_total": 8.575059473514557e-05
+      },
+      "C_called": false,
+      "packet_signature": null,
+      "capture_mode": "full"
+    },
+    {
+      "end": 16000,
+      "reference_equal": true,
+      "closed_cut_sha": "2a3c57a56a1c3d4c9d79a259fbb57fe6af65650c55c80a4a80e8f195c53a0aa5",
+      "native_model_evaluated": true,
+      "selected": null,
+      "model_seconds": 0.22538098599761724,
+      "stage_seconds": {
+        "A": 0.2205195091664791,
+        "C": 0.00015721190720796585,
+        "H": 0.0005177939310669899,
+        "capture": 0.004186470992863178,
+        "instrumented_model_total": 0.22538098599761724
+      },
+      "C_called": true,
+      "packet_signature": "320e9c5cd93438dbf0dbf95892493f57a154bd0802cba828745bf860319f07ab",
+      "capture_mode": "full"
+    },
+    {
+      "end": 24000,
+      "reference_equal": true,
+      "closed_cut_sha": "881ad9fb2c7e4567e5581f6c4d925a5a2b0dbf212f56e0f2d11f8cd072752460",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"\"\n\nK-best candidates for the continuation:\n  1. 严\n  2. 严\n  3. 严重\n  4. 严\n\nBased on the audio, what is the correct text that should be appended after \"\"?\n",
+        "previous_transcription": "",
+        "candidates": [
+          "严�",
+          "严�",
+          "严重",
+          "严�"
+        ],
+        "corrected_appended_text": "严",
+        "corrected_appended_token_ids": [
+          940,
+          98
+        ]
+      },
+      "model_seconds": 1.2543607270345092,
+      "stage_seconds": {
+        "A": 0.48531774431467056,
+        "C": 0.7611857242882252,
+        "H": 0.0014538653194904327,
+        "capture": 0.0064033931121230125,
+        "instrumented_model_total": 1.2543607270345092
+      },
+      "C_called": true,
+      "packet_signature": "6556b419c313767107c6f07535ad7e8cdebcfc49745add973c58c214346cfe34",
+      "capture_mode": "full"
+    },
+    {
+      "end": 32000,
+      "reference_equal": true,
+      "closed_cut_sha": "bba030c99bd828ac75b2dbcff62f8c084f08a91d1433a007cf4f9cdb5f6eaba4",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+        "previous_transcription": "严",
+        "candidates": [
+          "严厉打击春",
+          "严厉打击�",
+          "严厉打击村",
+          "严厉打击川"
+        ],
+        "corrected_appended_text": "厉打击春",
+        "corrected_appended_token_ids": [
+          5014,
+          231,
+          12467,
+          6336,
+          119,
+          46953
+        ]
+      },
+      "model_seconds": 1.2761989580467343,
+      "stage_seconds": {
+        "A": 0.7835376942530274,
+        "C": 0.4840775402262807,
+        "H": 0.001566304825246334,
+        "capture": 0.007017418742179871,
+        "instrumented_model_total": 1.2761989580467343
+      },
+      "C_called": true,
+      "packet_signature": "bf7b9053887cf123e7bc0cf0a6b418ef69388e553a9acf031cc88d9d7aa05acd",
+      "capture_mode": "full"
+    },
+    {
+      "end": 40000,
+      "reference_equal": true,
+      "closed_cut_sha": "8fcac6a842b46a8428076460ab895e51321cc2450209ecb0b37040cf0981b47c",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期\n  2. 严厉打击春孕期\n  3. 严厉打击春愿期\n  4. 严厉打击春运期\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春\"?\n",
+        "previous_transcription": "严厉打击春",
+        "candidates": [
+          "严厉打击春运期",
+          "严厉打击春孕期",
+          "严厉打击春愿期",
+          "严厉打击春运期"
+        ],
+        "corrected_appended_text": "运期",
+        "corrected_appended_token_ids": [
+          3316,
+          238,
+          16786
+        ]
+      },
+      "model_seconds": 0.8207401279360056,
+      "stage_seconds": {
+        "A": 0.5241168225184083,
+        "C": 0.28790375031530857,
+        "H": 0.0013558641076087952,
+        "capture": 0.007363690994679928,
+        "instrumented_model_total": 0.8207401279360056
+      },
+      "C_called": true,
+      "packet_signature": "96ab64e509a8abd0e2f154f182b6fa26ec1de8f5169d7e43298b7869f671a20c",
+      "capture_mode": "full"
+    },
+    {
+      "end": 48000,
+      "reference_equal": true,
+      "closed_cut_sha": "cd9525fe51113dad22edc1e684311b37cfd3d14e1cc316a3d34dab8133f0a71e",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间\n  2. 严厉打击春运期间\n  3. 严厉打击春运期间\n  4. 严厉打击春运期间回\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期\"?\n",
+        "previous_transcription": "严厉打击春运期",
+        "candidates": [
+          "严厉打击春运期间�",
+          "严厉打击春运期间",
+          "严厉打击春运期间�",
+          "严厉打击春运期间回"
+        ],
+        "corrected_appended_text": "间",
+        "corrected_appended_token_ids": [
+          31685
+        ]
+      },
+      "model_seconds": 0.6750196544453502,
+      "stage_seconds": {
+        "A": 0.4396850913763046,
+        "C": 0.22618684265762568,
+        "H": 0.0012878533452749252,
+        "capture": 0.007859867066144943,
+        "instrumented_model_total": 0.6750196544453502
+      },
+      "C_called": true,
+      "packet_signature": "d9885e527f4807d4ad577bc735b9d8a92c70569a712d6948031097def2e3ba7e",
+      "capture_mode": "full"
+    },
+    {
+      "end": 56000,
+      "reference_equal": true,
+      "closed_cut_sha": "489657a9b5329ded2469f39c807517d55a7d2566743afc155f6d14a4205007d3",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上\n  2. 严厉打击春运期间违规上\n  3. 严厉打击春运期间违规\n  4. 严厉打击春运期间违规上\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间\"?\n",
+        "previous_transcription": "严厉打击春运期间",
+        "candidates": [
+          "严厉打击春运期间违规上",
+          "严厉打击春运期间违规上",
+          "严厉打击春运期间违规�",
+          "严厉打击春运期间违规上"
+        ],
+        "corrected_appended_text": "违规上",
+        "corrected_appended_token_ids": [
+          3316,
+          251,
+          6758,
+          226,
+          5708
+        ]
+      },
+      "model_seconds": 1.0689806640148163,
+      "stage_seconds": {
+        "A": 0.7031389493495226,
+        "C": 0.356008387170732,
+        "H": 0.001614096574485302,
+        "capture": 0.00821923092007637,
+        "instrumented_model_total": 1.0689806640148163
+      },
+      "C_called": true,
+      "packet_signature": "5a8aa99c06e0bc7c569bb1f59a46a243cc27ef606b1bef2022349edc4837b169",
+      "capture_mode": "full"
+    },
+    {
+      "end": 64000,
+      "reference_equal": true,
+      "closed_cut_sha": "2ef9ee36f70b114d0c3978260f9910372a14922a4dd78df5f4ccda6525102abc",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调\n  2. 严厉打击春运期间违规上条票\n  3. 严厉打击春运期间违规上调\n  4. 严厉打击春运期间违规上挑票\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上",
+        "candidates": [
+          "严厉打击春运期间违规上调",
+          "严厉打击春运期间违规上条票",
+          "严厉打击春运期间违规上调",
+          "严厉打击春运期间违规上挑票"
+        ],
+        "corrected_appended_text": "调",
+        "corrected_appended_token_ids": [
+          8897,
+          225
+        ]
+      },
+      "model_seconds": 0.6847008652985096,
+      "stage_seconds": {
+        "A": 0.4477321272715926,
+        "C": 0.22672096639871597,
+        "H": 0.001409352757036686,
+        "capture": 0.008838418871164322,
+        "instrumented_model_total": 0.6847008652985096
+      },
+      "C_called": true,
+      "packet_signature": "27971687e539a1720ceb4dda3d66bccdb85e58c311b61e45417bd50726909148",
+      "capture_mode": "full"
+    },
+    {
+      "end": 72000,
+      "reference_equal": true,
+      "closed_cut_sha": "d4d313d4ac70c65f6c3b2bc0bf3ed9cd55bab42341cbb74fc0199335eca4293f",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票\n  2. 严厉打击春运期间违规上调票\n  3. 严厉打击春运期间违规上调票\n  4. 严厉打击春运期间违规上调票\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上调",
+        "candidates": [
+          "严厉打击春运期间违规上调票�",
+          "严厉打击春运期间违规上调票�",
+          "严厉打击春运期间违规上调票",
+          "严厉打击春运期间违规上调票�"
+        ],
+        "corrected_appended_text": "票",
+        "corrected_appended_token_ids": [
+          41925
+        ]
+      },
+      "model_seconds": 0.689646415412426,
+      "stage_seconds": {
+        "A": 0.4533515740185976,
+        "C": 0.2260675197467208,
+        "H": 0.0013367151841521263,
+        "capture": 0.008890606462955475,
+        "instrumented_model_total": 0.689646415412426
+      },
+      "C_called": true,
+      "packet_signature": "e3c927115c692ac82b786bac7584d8cf6c531913dafa7bc8bef0b3b009ffc5f1",
+      "capture_mode": "full"
+    },
+    {
+      "end": 80000,
+      "reference_equal": true,
+      "closed_cut_sha": "15ec6332a22aa001c2ccaf51b9f5dc9ddb8f683e8ccbda13612e7b2754432efc",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票\n  2. 严厉打击春运期间违规上调票\n  3. 严厉打击春运期间违规上调票加\n  4. 严厉打击春运期间违规上调票假\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上调票",
+        "candidates": [
+          "严厉打击春运期间违规上调票�",
+          "严厉打击春运期间违规上调票�",
+          "严厉打击春运期间违规上调票加",
+          "严厉打击春运期间违规上调票假"
+        ],
+        "corrected_appended_text": "价",
+        "corrected_appended_token_ids": [
+          1550,
+          115
+        ]
+      },
+      "model_seconds": 0.5942854769527912,
+      "stage_seconds": {
+        "A": 0.3572570998221636,
+        "C": 0.22666925564408302,
+        "H": 0.0012727826833724976,
+        "capture": 0.009086338803172112,
+        "instrumented_model_total": 0.5942854769527912
+      },
+      "C_called": true,
+      "packet_signature": "c0fa274c3f3efbfb7035b88d7328c7440f6dc74221cccd37af8189e09322a0c7",
+      "capture_mode": "full"
+    },
+    {
+      "end": 88000,
+      "reference_equal": true,
+      "closed_cut_sha": "cec599be00770889e43f2ca562244b01e2d8befd8a50a188da8256706056c051",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价\n  2. 严厉打击春运期间违规上调票价\n  3. 严厉打击春运期间违规上调票价假\n  4. 严厉打击春运期间违规上调票价加\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上调票价",
+        "candidates": [
+          "严厉打击春运期间违规上调票价�",
+          "严厉打击春运期间违规上调票价�",
+          "严厉打击春运期间违规上调票价假",
+          "严厉打击春运期间违规上调票价加"
+        ],
+        "corrected_appended_text": "",
+        "corrected_appended_token_ids": []
+      },
+      "model_seconds": 0.5277854632586241,
+      "stage_seconds": {
+        "A": 0.3543984405696392,
+        "C": 0.16322141233831644,
+        "H": 0.0011993413791060448,
+        "capture": 0.008966268971562386,
+        "instrumented_model_total": 0.5277854632586241
+      },
+      "C_called": true,
+      "packet_signature": "416982a2b8bf15d0408753e637f43b96a4491bc7a691dac3b90d1e0aadaf9833",
+      "capture_mode": "full"
+    },
+    {
+      "end": 96000,
+      "reference_equal": true,
+      "closed_cut_sha": "3ccf3d2acdd507f1ed34cd6dbd5d4b8096fc28bd485ff008641d74008e3260b1",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收\n  2. 严厉打击春运期间违规上调票价假外收\n  3. 严厉打击春运期间违规上调票价架外收\n  4. 严厉打击春运期间违规上调票价价位收\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上调票价",
+        "candidates": [
+          "严厉打击春运期间违规上调票价价外收",
+          "严厉打击春运期间违规上调票价假外收�",
+          "严厉打击春运期间违规上调票价架外收",
+          "严厉打击春运期间违规上调票价价位收"
+        ],
+        "corrected_appended_text": "价外收",
+        "corrected_appended_token_ids": [
+          1550,
+          115,
+          12022,
+          18681
+        ]
+      },
+      "model_seconds": 0.9792396957054734,
+      "stage_seconds": {
+        "A": 0.611217962577939,
+        "C": 0.35619672667235136,
+        "H": 0.0014385143294930458,
+        "capture": 0.010386492125689983,
+        "instrumented_model_total": 0.9792396957054734
+      },
+      "C_called": true,
+      "packet_signature": "869cd8578ed7c85f6aa826ce279379b06f81e27815a9a2d793fd3ae6cf9d902a",
+      "capture_mode": "full"
+    },
+    {
+      "end": 104000,
+      "reference_equal": true,
+      "closed_cut_sha": "03aa6b5371c6d0af36b09ecc0208c8d874f3d40747453844e13031e7a2547411",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收\n  2. 严厉打击春运期间违规上调票价价外收\n  3. 严厉打击春运期间违规上调票价价外收\n  4. 严厉打击春运期间违规上调票价价外收会\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上调票价价外收",
+        "candidates": [
+          "严厉打击春运期间违规上调票价价外收�",
+          "严厉打击春运期间违规上调票价价外收�",
+          "严厉打击春运期间违规上调票价价外收�",
+          "严厉打击春运期间违规上调票价价外收会"
+        ],
+        "corrected_appended_text": "费",
+        "corrected_appended_token_ids": [
+          18464,
+          117
+        ]
+      },
+      "model_seconds": 0.6017589969560504,
+      "stage_seconds": {
+        "A": 0.3596273995935917,
+        "C": 0.22898287698626518,
+        "H": 0.0012898016721010208,
+        "capture": 0.011858918704092503,
+        "instrumented_model_total": 0.6017589969560504
+      },
+      "C_called": true,
+      "packet_signature": "2a74b921920a93e9fe50f4699680fb439e36bfb7333963d80f6c63a557f4c35d",
+      "capture_mode": "full"
+    },
+    {
+      "end": 112000,
+      "reference_equal": true,
+      "closed_cut_sha": "dc73e93fc0d81c82870c6b0b86dda53ca7369ce9ad2798a324c72afb4816a6ff",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收费\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收费等\n  2. 严厉打击春运期间违规上调票价价外收费等为\n  3. 严厉打击春运期间违规上调票价价外收费等为\n  4. 严厉打击春运期间违规上调票价价外收费等等\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收费\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上调票价价外收费",
+        "candidates": [
+          "严厉打击春运期间违规上调票价价外收费等�",
+          "严厉打击春运期间违规上调票价价外收费等为",
+          "严厉打击春运期间违规上调票价价外收费等为",
+          "严厉打击春运期间违规上调票价价外收费等等�"
+        ],
+        "corrected_appended_text": "等",
+        "corrected_appended_token_ids": [
+          10187
+        ]
+      },
+      "model_seconds": 0.6869319025427103,
+      "stage_seconds": {
+        "A": 0.44618388917297125,
+        "C": 0.22852441295981407,
+        "H": 0.001333184540271759,
+        "capture": 0.010890415869653225,
+        "instrumented_model_total": 0.6869319025427103
+      },
+      "C_called": true,
+      "packet_signature": "248a52f9aea8b5dbb3d761ff04bce2b7fbcf91d984e25f46c38edd81f2d24cde",
+      "capture_mode": "full"
+    },
+    {
+      "end": 120000,
+      "reference_equal": true,
+      "closed_cut_sha": "89bf13c7a99c5abefdc1b267dab3e20a40ef1612544f2dd1bdb77b54ac31194b",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收费等\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收费等违法\n  2. 严厉打击春运期间违规上调票价价外收费等违反\n  3. 严厉打击春运期间违规上调票价价外收费等违法\n  4. 严厉打击春运期间违规上调票价价外收费等为法行\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收费等\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上调票价价外收费等",
+        "candidates": [
+          "严厉打击春运期间违规上调票价价外收费等违法",
+          "严厉打击春运期间违规上调票价价外收费等违反",
+          "严厉打击春运期间违规上调票价价外收费等违法",
+          "严厉打击春运期间违规上调票价价外收费等为法行"
+        ],
+        "corrected_appended_text": "法行",
+        "corrected_appended_token_ids": [
+          11148,
+          8082
+        ]
+      },
+      "model_seconds": 0.8401357345283031,
+      "stage_seconds": {
+        "A": 0.5328634902834892,
+        "C": 0.29426725674420595,
+        "H": 0.0013849036768078804,
+        "capture": 0.011620083823800087,
+        "instrumented_model_total": 0.8401357345283031
+      },
+      "C_called": true,
+      "packet_signature": "e86c9be6c60f17eea03920d99d5d105514a6d4af3ab378deefcb7b2cfc517b0a",
+      "capture_mode": "full"
+    },
+    {
+      "end": 128000,
+      "reference_equal": true,
+      "closed_cut_sha": "0dc06c3ca669f050207605e9d8677e4e39c46255a680612abbf7f5be012d9a43",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收费等法行\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收费等法行行\n  2. 严厉打击春运期间违规上调票价价外收费等法行\n  3. 严厉打击春运期间违规上调票价价外收费等法行行\n  4. 严厉打击春运期间违规上调票价价外收费等法行为\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收费等法行\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上调票价价外收费等法行",
+        "candidates": [
+          "严厉打击春运期间违规上调票价价外收费等法行行",
+          "严厉打击春运期间违规上调票价价外收费等法行�",
+          "严厉打击春运期间违规上调票价价外收费等法行行",
+          "严厉打击春运期间违规上调票价价外收费等法行为"
+        ],
+        "corrected_appended_text": "为",
+        "corrected_appended_token_ids": [
+          13992
+        ]
+      },
+      "model_seconds": 0.6000190963968635,
+      "stage_seconds": {
+        "A": 0.35973653942346573,
+        "C": 0.22749430313706398,
+        "H": 0.0012385603040456772,
+        "capture": 0.011549693532288074,
+        "instrumented_model_total": 0.6000190963968635
+      },
+      "C_called": true,
+      "packet_signature": "9b3d02002eb8f15f5dcb59a08497074ab38e29bb9d042962e195c9fa085b2599",
+      "capture_mode": "full"
+    },
+    {
+      "end": 129088,
+      "reference_equal": true,
+      "closed_cut_sha": "79324e375353b9cbf0854f58d3605d409425187bb4e148943c904d16fef34f24",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收费等法行为\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收费等法行为的\n  2. 严厉打击春运期间违规上调票价价外收费等法行为的行\n  3. 严厉打击春运期间违规上调票价价外收费等法行为为法\n  4. 严厉打击春运期间违规上调票价价外收费等法行为罪\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收费等法行为\"?\n",
+        "previous_transcription": "严厉打击春运期间违规上调票价价外收费等法行为",
+        "candidates": [
+          "严厉打击春运期间违规上调票价价外收费等法行为的�",
+          "严厉打击春运期间违规上调票价价外收费等法行为的行",
+          "严厉打击春运期间违规上调票价价外收费等法行为为法",
+          "严厉打击春运期间违规上调票价价外收费等法行为罪"
+        ],
+        "corrected_appended_text": "为",
+        "corrected_appended_token_ids": [
+          13992
+        ]
+      },
+      "model_seconds": 0.6903124917298555,
+      "stage_seconds": {
+        "A": 0.44682525284588337,
+        "C": 0.23040515091270208,
+        "H": 0.0013020830228924751,
+        "capture": 0.01178000494837761,
+        "instrumented_model_total": 0.6903124917298555
+      },
+      "C_called": true,
+      "packet_signature": "e9e4f81c666b4bc6310fb5d99d12f95154098eca7f03ace07c88c37e5909b0f7",
+      "capture_mode": "full"
+    }
+  ],
+  "blob_file_bytes": 5543688,
+  "trace_json_bytes": 4201649,
+  "scope": "component replay only, not serving; no stage handoff or resume implemented"
+}

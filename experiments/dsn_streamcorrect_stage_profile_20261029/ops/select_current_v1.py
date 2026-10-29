@@ -1,0 +1,9 @@
+import pathlib,json,hashlib,datetime
+T=pathlib.Path(__file__).resolve().parents[1];R=T.parents[1];C=R/'experiments/repository_identity_20261027/CURRENT.json';backup=T/'CURRENT_BEFORE_PROFILE_v1.json'
+assert not backup.exists();backup.write_bytes(C.read_bytes());x=json.loads(C.read_text(encoding='utf-8'));m=T/'packages/SOURCE_v1_LOCAL_PREFLIGHT.json';plan=T/'PLAN_v1_FROZEN.json';env=T/'remote_cpu_v1/ENVIRONMENT.json';commit=json.loads(m.read_text())['source_commit']
+x.update(updated_date='2026-10-29',source_worktree=str(T/'source_v1'),source_commit=commit,source_manifest=str(m),source_manifest_sha256=hashlib.sha256(m.read_bytes()).hexdigest(),previous_pointer=str(backup),research_state=str(T/'CURRENT_STATUS.json'),GPU_queue='BOUNDED_STAGE_PROFILE_AFTER_COMPLETED_NATIVE_RXK_MIDPOINT',scope='Machine-local pointer only. Completed f0 and native v8 results retain original source identities.')
+C.write_text(json.dumps(x,indent=2),encoding='utf-8')
+record=dict(experiment_id='SC_ORIGINAL_STAGE_PROFILE_V1',code_commit=commit,frozen_config=str(plan),frozen_config_sha256=hashlib.sha256(plan.read_bytes()).hexdigest(),environment_record=str(env),environment_record_sha256=hashlib.sha256(env.read_bytes()).hexdigest(),raw_result_location=json.loads(plan.read_text())['raw_result_location'],aggregate_summary_location=json.loads(plan.read_text())['aggregate_summary_location'],gate_decision_location=json.loads(plan.read_text())['gate_decision_location'])
+(T/'PRELAUNCH_RECORD_v1.json').write_text(json.dumps(record,indent=2),encoding='utf-8')
+(T/'CURRENT_STATUS.json').write_text(json.dumps(dict(status='READY_FROZEN_SOURCE_AND_SAME_ENV_CPU_GATE_WAITING_ROOT_PROFILE_ALLOCATION',source_commit=commit,neural_profile_runs_completed=0,GPU_launched=False,prerequisite_gate='PREREQUISITE_GATE_v1.json',current_pointer=str(C),scope='4 complete old sources plus 6 short controls; original native14 remains completed separately'),indent=2),encoding='utf-8')
+print(commit)

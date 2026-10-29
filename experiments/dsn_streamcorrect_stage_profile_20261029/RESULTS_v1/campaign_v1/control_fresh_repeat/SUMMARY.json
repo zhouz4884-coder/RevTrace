@@ -1,0 +1,62 @@
+{
+  "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+  "run": {
+    "run_id": "control_fresh_repeat",
+    "kind": "control",
+    "source_index": 0,
+    "gpu": 0,
+    "capture": "full",
+    "start_F": 24000,
+    "end_F": 32000
+  },
+  "native_steps": 1,
+  "warmup_steps": 1,
+  "warmup_stage_seconds": {
+    "A": 0.9482550984248519,
+    "C": 0.00017005205154418945,
+    "H": 0.0005516363307833672,
+    "capture": 0.0054635582491755486,
+    "instrumented_model_total": 0.954440345056355
+  },
+  "results": [
+    {
+      "end": 32000,
+      "reference_equal": true,
+      "closed_cut_sha": "bba030c99bd828ac75b2dbcff62f8c084f08a91d1433a007cf4f9cdb5f6eaba4",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+        "previous_transcription": "严",
+        "candidates": [
+          "严厉打击春",
+          "严厉打击�",
+          "严厉打击村",
+          "严厉打击川"
+        ],
+        "corrected_appended_text": "厉打击春",
+        "corrected_appended_token_ids": [
+          5014,
+          231,
+          12467,
+          6336,
+          119,
+          46953
+        ]
+      },
+      "model_seconds": 1.813381565734744,
+      "stage_seconds": {
+        "A": 0.7900173664093018,
+        "C": 1.0131127946078777,
+        "H": 0.001576913520693779,
+        "capture": 0.008674491196870804,
+        "instrumented_model_total": 1.813381565734744
+      },
+      "C_called": true,
+      "packet_signature": "bf7b9053887cf123e7bc0cf0a6b418ef69388e553a9acf031cc88d9d7aa05acd",
+      "capture_mode": "full"
+    }
+  ],
+  "blob_file_bytes": 352144,
+  "trace_json_bytes": 463264,
+  "scope": "component replay only, not serving; no stage handoff or resume implemented"
+}

@@ -1,0 +1,2670 @@
+{
+  "status": "PASS_BOUNDED_ORIGINAL_STAGE_PROFILE_AND_PACKET_CONTROLS",
+  "source_commit": "41dea9bb6666e2c7397b394fb1c7a4a58b27888f",
+  "runs": 10,
+  "full_original_sources": 4,
+  "controls": 6,
+  "whole_reference_equivalence": true,
+  "same_input_packet_equivalence": true,
+  "stage_timing_seconds": {
+    "A": {
+      "mean": 0.43140803006692574,
+      "median": 0.4431022824719548,
+      "count": 65
+    },
+    "C": {
+      "mean": 0.2645886843880782,
+      "median": 0.22941753454506397,
+      "count": 65
+    },
+    "H": {
+      "mean": 0.001295625690657359,
+      "median": 0.0013020830228924751,
+      "count": 65
+    },
+    "capture": {
+      "mean": 0.009141608127034628,
+      "median": 0.008966268971562386,
+      "count": 65
+    }
+  },
+  "first_actual_C_warmup_stage_seconds": [
+    {
+      "A": 3.7266036784276366,
+      "C": 0.0003076428547501564,
+      "H": 0.0007354393601417542,
+      "capture": 0.00949242152273655,
+      "instrumented_model_total": 3.737139182165265
+    },
+    {
+      "A": 0.9933842355385423,
+      "C": 0.0003101229667663574,
+      "H": 0.0007196376100182533,
+      "capture": 0.008586852811276913,
+      "instrumented_model_total": 1.0030008489266038
+    },
+    {
+      "A": 1.0433672647923231,
+      "C": 0.7643912667408586,
+      "H": 0.0012189829722046852,
+      "capture": 0.00608653761446476,
+      "instrumented_model_total": 1.8150640521198511
+    },
+    {
+      "A": 1.0477431444451213,
+      "C": 0.7618897976353765,
+      "H": 0.001267051324248314,
+      "capture": 0.006148028187453747,
+      "instrumented_model_total": 1.8170480215921998
+    },
+    {
+      "A": 0.9582381676882505,
+      "C": 0.00016173161566257477,
+      "H": 0.0005364157259464264,
+      "capture": 0.0025406228378415108,
+      "instrumented_model_total": 0.961476937867701
+    },
+    {
+      "A": 0.9487192323431373,
+      "C": 0.00017167162150144577,
+      "H": 0.0005737356841564178,
+      "capture": 0.005680822767317295,
+      "instrumented_model_total": 0.9551454624161124
+    },
+    {
+      "A": 0.9482550984248519,
+      "C": 0.00017005205154418945,
+      "H": 0.0005516363307833672,
+      "capture": 0.0054635582491755486,
+      "instrumented_model_total": 0.954440345056355
+    },
+    {
+      "A": 0.99373590759933,
+      "C": 0.00016889162361621857,
+      "H": 0.0005676941946148872,
+      "capture": 0.0057062143459916115,
+      "instrumented_model_total": 1.0001787077635527
+    },
+    {
+      "A": 1.0510494085028768,
+      "C": 0.6086825942620635,
+      "H": 0.0012731216847896576,
+      "capture": 0.006215514615178108,
+      "instrumented_model_total": 1.667220639064908
+    }
+  ],
+  "runs_summary": [
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "full_0",
+        "kind": "full",
+        "source_index": 0,
+        "gpu": 0,
+        "capture": "full"
+      },
+      "native_steps": 17,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": {
+        "A": 3.7266036784276366,
+        "C": 0.0003076428547501564,
+        "H": 0.0007354393601417542,
+        "capture": 0.00949242152273655,
+        "instrumented_model_total": 3.737139182165265
+      },
+      "results": [
+        {
+          "end": 8000,
+          "reference_equal": true,
+          "closed_cut_sha": "c84358bbc000447a3f51f05c9b40b9ef6a7b3bfd0698a795a16583ebe5b22ef0",
+          "native_model_evaluated": false,
+          "selected": null,
+          "model_seconds": 8.575059473514557e-05,
+          "stage_seconds": {
+            "A": 8.575059473514557e-05,
+            "C": 0.0,
+            "H": 0.0,
+            "capture": 0.0,
+            "instrumented_model_total": 8.575059473514557e-05
+          },
+          "C_called": false,
+          "packet_signature": null,
+          "capture_mode": "full"
+        },
+        {
+          "end": 16000,
+          "reference_equal": true,
+          "closed_cut_sha": "2a3c57a56a1c3d4c9d79a259fbb57fe6af65650c55c80a4a80e8f195c53a0aa5",
+          "native_model_evaluated": true,
+          "selected": null,
+          "model_seconds": 0.22538098599761724,
+          "stage_seconds": {
+            "A": 0.2205195091664791,
+            "C": 0.00015721190720796585,
+            "H": 0.0005177939310669899,
+            "capture": 0.004186470992863178,
+            "instrumented_model_total": 0.22538098599761724
+          },
+          "C_called": true,
+          "packet_signature": "320e9c5cd93438dbf0dbf95892493f57a154bd0802cba828745bf860319f07ab",
+          "capture_mode": "full"
+        },
+        {
+          "end": 24000,
+          "reference_equal": true,
+          "closed_cut_sha": "881ad9fb2c7e4567e5581f6c4d925a5a2b0dbf212f56e0f2d11f8cd072752460",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"\"\n\nK-best candidates for the continuation:\n  1. 严\n  2. 严\n  3. 严重\n  4. 严\n\nBased on the audio, what is the correct text that should be appended after \"\"?\n",
+            "previous_transcription": "",
+            "candidates": [
+              "严�",
+              "严�",
+              "严重",
+              "严�"
+            ],
+            "corrected_appended_text": "严",
+            "corrected_appended_token_ids": [
+              940,
+              98
+            ]
+          },
+          "model_seconds": 1.2543607270345092,
+          "stage_seconds": {
+            "A": 0.48531774431467056,
+            "C": 0.7611857242882252,
+            "H": 0.0014538653194904327,
+            "capture": 0.0064033931121230125,
+            "instrumented_model_total": 1.2543607270345092
+          },
+          "C_called": true,
+          "packet_signature": "6556b419c313767107c6f07535ad7e8cdebcfc49745add973c58c214346cfe34",
+          "capture_mode": "full"
+        },
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "bba030c99bd828ac75b2dbcff62f8c084f08a91d1433a007cf4f9cdb5f6eaba4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+            "previous_transcription": "严",
+            "candidates": [
+              "严厉打击春",
+              "严厉打击�",
+              "严厉打击村",
+              "严厉打击川"
+            ],
+            "corrected_appended_text": "厉打击春",
+            "corrected_appended_token_ids": [
+              5014,
+              231,
+              12467,
+              6336,
+              119,
+              46953
+            ]
+          },
+          "model_seconds": 1.2761989580467343,
+          "stage_seconds": {
+            "A": 0.7835376942530274,
+            "C": 0.4840775402262807,
+            "H": 0.001566304825246334,
+            "capture": 0.007017418742179871,
+            "instrumented_model_total": 1.2761989580467343
+          },
+          "C_called": true,
+          "packet_signature": "bf7b9053887cf123e7bc0cf0a6b418ef69388e553a9acf031cc88d9d7aa05acd",
+          "capture_mode": "full"
+        },
+        {
+          "end": 40000,
+          "reference_equal": true,
+          "closed_cut_sha": "8fcac6a842b46a8428076460ab895e51321cc2450209ecb0b37040cf0981b47c",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期\n  2. 严厉打击春孕期\n  3. 严厉打击春愿期\n  4. 严厉打击春运期\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春\"?\n",
+            "previous_transcription": "严厉打击春",
+            "candidates": [
+              "严厉打击春运期",
+              "严厉打击春孕期",
+              "严厉打击春愿期",
+              "严厉打击春运期"
+            ],
+            "corrected_appended_text": "运期",
+            "corrected_appended_token_ids": [
+              3316,
+              238,
+              16786
+            ]
+          },
+          "model_seconds": 0.8207401279360056,
+          "stage_seconds": {
+            "A": 0.5241168225184083,
+            "C": 0.28790375031530857,
+            "H": 0.0013558641076087952,
+            "capture": 0.007363690994679928,
+            "instrumented_model_total": 0.8207401279360056
+          },
+          "C_called": true,
+          "packet_signature": "96ab64e509a8abd0e2f154f182b6fa26ec1de8f5169d7e43298b7869f671a20c",
+          "capture_mode": "full"
+        },
+        {
+          "end": 48000,
+          "reference_equal": true,
+          "closed_cut_sha": "cd9525fe51113dad22edc1e684311b37cfd3d14e1cc316a3d34dab8133f0a71e",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间\n  2. 严厉打击春运期间\n  3. 严厉打击春运期间\n  4. 严厉打击春运期间回\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期\"?\n",
+            "previous_transcription": "严厉打击春运期",
+            "candidates": [
+              "严厉打击春运期间�",
+              "严厉打击春运期间",
+              "严厉打击春运期间�",
+              "严厉打击春运期间回"
+            ],
+            "corrected_appended_text": "间",
+            "corrected_appended_token_ids": [
+              31685
+            ]
+          },
+          "model_seconds": 0.6750196544453502,
+          "stage_seconds": {
+            "A": 0.4396850913763046,
+            "C": 0.22618684265762568,
+            "H": 0.0012878533452749252,
+            "capture": 0.007859867066144943,
+            "instrumented_model_total": 0.6750196544453502
+          },
+          "C_called": true,
+          "packet_signature": "d9885e527f4807d4ad577bc735b9d8a92c70569a712d6948031097def2e3ba7e",
+          "capture_mode": "full"
+        },
+        {
+          "end": 56000,
+          "reference_equal": true,
+          "closed_cut_sha": "489657a9b5329ded2469f39c807517d55a7d2566743afc155f6d14a4205007d3",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上\n  2. 严厉打击春运期间违规上\n  3. 严厉打击春运期间违规\n  4. 严厉打击春运期间违规上\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间\"?\n",
+            "previous_transcription": "严厉打击春运期间",
+            "candidates": [
+              "严厉打击春运期间违规上",
+              "严厉打击春运期间违规上",
+              "严厉打击春运期间违规�",
+              "严厉打击春运期间违规上"
+            ],
+            "corrected_appended_text": "违规上",
+            "corrected_appended_token_ids": [
+              3316,
+              251,
+              6758,
+              226,
+              5708
+            ]
+          },
+          "model_seconds": 1.0689806640148163,
+          "stage_seconds": {
+            "A": 0.7031389493495226,
+            "C": 0.356008387170732,
+            "H": 0.001614096574485302,
+            "capture": 0.00821923092007637,
+            "instrumented_model_total": 1.0689806640148163
+          },
+          "C_called": true,
+          "packet_signature": "5a8aa99c06e0bc7c569bb1f59a46a243cc27ef606b1bef2022349edc4837b169",
+          "capture_mode": "full"
+        },
+        {
+          "end": 64000,
+          "reference_equal": true,
+          "closed_cut_sha": "2ef9ee36f70b114d0c3978260f9910372a14922a4dd78df5f4ccda6525102abc",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调\n  2. 严厉打击春运期间违规上条票\n  3. 严厉打击春运期间违规上调\n  4. 严厉打击春运期间违规上挑票\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上",
+            "candidates": [
+              "严厉打击春运期间违规上调",
+              "严厉打击春运期间违规上条票",
+              "严厉打击春运期间违规上调",
+              "严厉打击春运期间违规上挑票"
+            ],
+            "corrected_appended_text": "调",
+            "corrected_appended_token_ids": [
+              8897,
+              225
+            ]
+          },
+          "model_seconds": 0.6847008652985096,
+          "stage_seconds": {
+            "A": 0.4477321272715926,
+            "C": 0.22672096639871597,
+            "H": 0.001409352757036686,
+            "capture": 0.008838418871164322,
+            "instrumented_model_total": 0.6847008652985096
+          },
+          "C_called": true,
+          "packet_signature": "27971687e539a1720ceb4dda3d66bccdb85e58c311b61e45417bd50726909148",
+          "capture_mode": "full"
+        },
+        {
+          "end": 72000,
+          "reference_equal": true,
+          "closed_cut_sha": "d4d313d4ac70c65f6c3b2bc0bf3ed9cd55bab42341cbb74fc0199335eca4293f",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票\n  2. 严厉打击春运期间违规上调票\n  3. 严厉打击春运期间违规上调票\n  4. 严厉打击春运期间违规上调票\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上调",
+            "candidates": [
+              "严厉打击春运期间违规上调票�",
+              "严厉打击春运期间违规上调票�",
+              "严厉打击春运期间违规上调票",
+              "严厉打击春运期间违规上调票�"
+            ],
+            "corrected_appended_text": "票",
+            "corrected_appended_token_ids": [
+              41925
+            ]
+          },
+          "model_seconds": 0.689646415412426,
+          "stage_seconds": {
+            "A": 0.4533515740185976,
+            "C": 0.2260675197467208,
+            "H": 0.0013367151841521263,
+            "capture": 0.008890606462955475,
+            "instrumented_model_total": 0.689646415412426
+          },
+          "C_called": true,
+          "packet_signature": "e3c927115c692ac82b786bac7584d8cf6c531913dafa7bc8bef0b3b009ffc5f1",
+          "capture_mode": "full"
+        },
+        {
+          "end": 80000,
+          "reference_equal": true,
+          "closed_cut_sha": "15ec6332a22aa001c2ccaf51b9f5dc9ddb8f683e8ccbda13612e7b2754432efc",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票\n  2. 严厉打击春运期间违规上调票\n  3. 严厉打击春运期间违规上调票加\n  4. 严厉打击春运期间违规上调票假\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上调票",
+            "candidates": [
+              "严厉打击春运期间违规上调票�",
+              "严厉打击春运期间违规上调票�",
+              "严厉打击春运期间违规上调票加",
+              "严厉打击春运期间违规上调票假"
+            ],
+            "corrected_appended_text": "价",
+            "corrected_appended_token_ids": [
+              1550,
+              115
+            ]
+          },
+          "model_seconds": 0.5942854769527912,
+          "stage_seconds": {
+            "A": 0.3572570998221636,
+            "C": 0.22666925564408302,
+            "H": 0.0012727826833724976,
+            "capture": 0.009086338803172112,
+            "instrumented_model_total": 0.5942854769527912
+          },
+          "C_called": true,
+          "packet_signature": "c0fa274c3f3efbfb7035b88d7328c7440f6dc74221cccd37af8189e09322a0c7",
+          "capture_mode": "full"
+        },
+        {
+          "end": 88000,
+          "reference_equal": true,
+          "closed_cut_sha": "cec599be00770889e43f2ca562244b01e2d8befd8a50a188da8256706056c051",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价\n  2. 严厉打击春运期间违规上调票价\n  3. 严厉打击春运期间违规上调票价假\n  4. 严厉打击春运期间违规上调票价加\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上调票价",
+            "candidates": [
+              "严厉打击春运期间违规上调票价�",
+              "严厉打击春运期间违规上调票价�",
+              "严厉打击春运期间违规上调票价假",
+              "严厉打击春运期间违规上调票价加"
+            ],
+            "corrected_appended_text": "",
+            "corrected_appended_token_ids": []
+          },
+          "model_seconds": 0.5277854632586241,
+          "stage_seconds": {
+            "A": 0.3543984405696392,
+            "C": 0.16322141233831644,
+            "H": 0.0011993413791060448,
+            "capture": 0.008966268971562386,
+            "instrumented_model_total": 0.5277854632586241
+          },
+          "C_called": true,
+          "packet_signature": "416982a2b8bf15d0408753e637f43b96a4491bc7a691dac3b90d1e0aadaf9833",
+          "capture_mode": "full"
+        },
+        {
+          "end": 96000,
+          "reference_equal": true,
+          "closed_cut_sha": "3ccf3d2acdd507f1ed34cd6dbd5d4b8096fc28bd485ff008641d74008e3260b1",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收\n  2. 严厉打击春运期间违规上调票价假外收\n  3. 严厉打击春运期间违规上调票价架外收\n  4. 严厉打击春运期间违规上调票价价位收\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上调票价",
+            "candidates": [
+              "严厉打击春运期间违规上调票价价外收",
+              "严厉打击春运期间违规上调票价假外收�",
+              "严厉打击春运期间违规上调票价架外收",
+              "严厉打击春运期间违规上调票价价位收"
+            ],
+            "corrected_appended_text": "价外收",
+            "corrected_appended_token_ids": [
+              1550,
+              115,
+              12022,
+              18681
+            ]
+          },
+          "model_seconds": 0.9792396957054734,
+          "stage_seconds": {
+            "A": 0.611217962577939,
+            "C": 0.35619672667235136,
+            "H": 0.0014385143294930458,
+            "capture": 0.010386492125689983,
+            "instrumented_model_total": 0.9792396957054734
+          },
+          "C_called": true,
+          "packet_signature": "869cd8578ed7c85f6aa826ce279379b06f81e27815a9a2d793fd3ae6cf9d902a",
+          "capture_mode": "full"
+        },
+        {
+          "end": 104000,
+          "reference_equal": true,
+          "closed_cut_sha": "03aa6b5371c6d0af36b09ecc0208c8d874f3d40747453844e13031e7a2547411",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收\n  2. 严厉打击春运期间违规上调票价价外收\n  3. 严厉打击春运期间违规上调票价价外收\n  4. 严厉打击春运期间违规上调票价价外收会\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上调票价价外收",
+            "candidates": [
+              "严厉打击春运期间违规上调票价价外收�",
+              "严厉打击春运期间违规上调票价价外收�",
+              "严厉打击春运期间违规上调票价价外收�",
+              "严厉打击春运期间违规上调票价价外收会"
+            ],
+            "corrected_appended_text": "费",
+            "corrected_appended_token_ids": [
+              18464,
+              117
+            ]
+          },
+          "model_seconds": 0.6017589969560504,
+          "stage_seconds": {
+            "A": 0.3596273995935917,
+            "C": 0.22898287698626518,
+            "H": 0.0012898016721010208,
+            "capture": 0.011858918704092503,
+            "instrumented_model_total": 0.6017589969560504
+          },
+          "C_called": true,
+          "packet_signature": "2a74b921920a93e9fe50f4699680fb439e36bfb7333963d80f6c63a557f4c35d",
+          "capture_mode": "full"
+        },
+        {
+          "end": 112000,
+          "reference_equal": true,
+          "closed_cut_sha": "dc73e93fc0d81c82870c6b0b86dda53ca7369ce9ad2798a324c72afb4816a6ff",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收费\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收费等\n  2. 严厉打击春运期间违规上调票价价外收费等为\n  3. 严厉打击春运期间违规上调票价价外收费等为\n  4. 严厉打击春运期间违规上调票价价外收费等等\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收费\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上调票价价外收费",
+            "candidates": [
+              "严厉打击春运期间违规上调票价价外收费等�",
+              "严厉打击春运期间违规上调票价价外收费等为",
+              "严厉打击春运期间违规上调票价价外收费等为",
+              "严厉打击春运期间违规上调票价价外收费等等�"
+            ],
+            "corrected_appended_text": "等",
+            "corrected_appended_token_ids": [
+              10187
+            ]
+          },
+          "model_seconds": 0.6869319025427103,
+          "stage_seconds": {
+            "A": 0.44618388917297125,
+            "C": 0.22852441295981407,
+            "H": 0.001333184540271759,
+            "capture": 0.010890415869653225,
+            "instrumented_model_total": 0.6869319025427103
+          },
+          "C_called": true,
+          "packet_signature": "248a52f9aea8b5dbb3d761ff04bce2b7fbcf91d984e25f46c38edd81f2d24cde",
+          "capture_mode": "full"
+        },
+        {
+          "end": 120000,
+          "reference_equal": true,
+          "closed_cut_sha": "89bf13c7a99c5abefdc1b267dab3e20a40ef1612544f2dd1bdb77b54ac31194b",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收费等\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收费等违法\n  2. 严厉打击春运期间违规上调票价价外收费等违反\n  3. 严厉打击春运期间违规上调票价价外收费等违法\n  4. 严厉打击春运期间违规上调票价价外收费等为法行\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收费等\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上调票价价外收费等",
+            "candidates": [
+              "严厉打击春运期间违规上调票价价外收费等违法",
+              "严厉打击春运期间违规上调票价价外收费等违反",
+              "严厉打击春运期间违规上调票价价外收费等违法",
+              "严厉打击春运期间违规上调票价价外收费等为法行"
+            ],
+            "corrected_appended_text": "法行",
+            "corrected_appended_token_ids": [
+              11148,
+              8082
+            ]
+          },
+          "model_seconds": 0.8401357345283031,
+          "stage_seconds": {
+            "A": 0.5328634902834892,
+            "C": 0.29426725674420595,
+            "H": 0.0013849036768078804,
+            "capture": 0.011620083823800087,
+            "instrumented_model_total": 0.8401357345283031
+          },
+          "C_called": true,
+          "packet_signature": "e86c9be6c60f17eea03920d99d5d105514a6d4af3ab378deefcb7b2cfc517b0a",
+          "capture_mode": "full"
+        },
+        {
+          "end": 128000,
+          "reference_equal": true,
+          "closed_cut_sha": "0dc06c3ca669f050207605e9d8677e4e39c46255a680612abbf7f5be012d9a43",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收费等法行\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收费等法行行\n  2. 严厉打击春运期间违规上调票价价外收费等法行\n  3. 严厉打击春运期间违规上调票价价外收费等法行行\n  4. 严厉打击春运期间违规上调票价价外收费等法行为\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收费等法行\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上调票价价外收费等法行",
+            "candidates": [
+              "严厉打击春运期间违规上调票价价外收费等法行行",
+              "严厉打击春运期间违规上调票价价外收费等法行�",
+              "严厉打击春运期间违规上调票价价外收费等法行行",
+              "严厉打击春运期间违规上调票价价外收费等法行为"
+            ],
+            "corrected_appended_text": "为",
+            "corrected_appended_token_ids": [
+              13992
+            ]
+          },
+          "model_seconds": 0.6000190963968635,
+          "stage_seconds": {
+            "A": 0.35973653942346573,
+            "C": 0.22749430313706398,
+            "H": 0.0012385603040456772,
+            "capture": 0.011549693532288074,
+            "instrumented_model_total": 0.6000190963968635
+          },
+          "C_called": true,
+          "packet_signature": "9b3d02002eb8f15f5dcb59a08497074ab38e29bb9d042962e195c9fa085b2599",
+          "capture_mode": "full"
+        },
+        {
+          "end": 129088,
+          "reference_equal": true,
+          "closed_cut_sha": "79324e375353b9cbf0854f58d3605d409425187bb4e148943c904d16fef34f24",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严厉打击春运期间违规上调票价价外收费等法行为\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春运期间违规上调票价价外收费等法行为的\n  2. 严厉打击春运期间违规上调票价价外收费等法行为的行\n  3. 严厉打击春运期间违规上调票价价外收费等法行为为法\n  4. 严厉打击春运期间违规上调票价价外收费等法行为罪\n\nBased on the audio, what is the correct text that should be appended after \"严厉打击春运期间违规上调票价价外收费等法行为\"?\n",
+            "previous_transcription": "严厉打击春运期间违规上调票价价外收费等法行为",
+            "candidates": [
+              "严厉打击春运期间违规上调票价价外收费等法行为的�",
+              "严厉打击春运期间违规上调票价价外收费等法行为的行",
+              "严厉打击春运期间违规上调票价价外收费等法行为为法",
+              "严厉打击春运期间违规上调票价价外收费等法行为罪"
+            ],
+            "corrected_appended_text": "为",
+            "corrected_appended_token_ids": [
+              13992
+            ]
+          },
+          "model_seconds": 0.6903124917298555,
+          "stage_seconds": {
+            "A": 0.44682525284588337,
+            "C": 0.23040515091270208,
+            "H": 0.0013020830228924751,
+            "capture": 0.01178000494837761,
+            "instrumented_model_total": 0.6903124917298555
+          },
+          "C_called": true,
+          "packet_signature": "e9e4f81c666b4bc6310fb5d99d12f95154098eca7f03ace07c88c37e5909b0f7",
+          "capture_mode": "full"
+        }
+      ],
+      "blob_file_bytes": 5543688,
+      "trace_json_bytes": 4201649,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    },
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "full_1",
+        "kind": "full",
+        "source_index": 1,
+        "gpu": 0,
+        "capture": "full"
+      },
+      "native_steps": 17,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": {
+        "A": 0.9933842355385423,
+        "C": 0.0003101229667663574,
+        "H": 0.0007196376100182533,
+        "capture": 0.008586852811276913,
+        "instrumented_model_total": 1.0030008489266038
+      },
+      "results": [
+        {
+          "end": 8000,
+          "reference_equal": true,
+          "closed_cut_sha": "e0118fe83816def9d1893a1035b0a56f9853f0eba962a47965771cdac218c0a2",
+          "native_model_evaluated": false,
+          "selected": null,
+          "model_seconds": 8.689146488904953e-05,
+          "stage_seconds": {
+            "A": 8.689146488904953e-05,
+            "C": 0.0,
+            "H": 0.0,
+            "capture": 0.0,
+            "instrumented_model_total": 8.689146488904953e-05
+          },
+          "C_called": false,
+          "packet_signature": null,
+          "capture_mode": "full"
+        },
+        {
+          "end": 16000,
+          "reference_equal": true,
+          "closed_cut_sha": "9f9859c93a2bf53741955b4161ee0352dd258f74945d5204f1d1af9c4e17b37d",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"\"\n\nK-best candidates for the continuation:\n  1. 下一\n  2. 下一\n  3. 下一\n  4. 下\n\nBased on the audio, what is the correct text that should be appended after \"\"?\n",
+            "previous_transcription": "",
+            "candidates": [
+              "下一",
+              "下一",
+              "下一",
+              "下"
+            ],
+            "corrected_appended_text": "下一",
+            "corrected_appended_token_ids": [
+              45271
+            ]
+          },
+          "model_seconds": 0.9932477008551359,
+          "stage_seconds": {
+            "A": 0.31050317361950874,
+            "C": 0.6754392869770527,
+            "H": 0.0012508723884820938,
+            "capture": 0.006054367870092392,
+            "instrumented_model_total": 0.9932477008551359
+          },
+          "C_called": true,
+          "packet_signature": "40e307f3e122b03ae5cf1bb831ec7ff07db4a44f8416f35d6a1c4992f9fba7b6",
+          "capture_mode": "full"
+        },
+        {
+          "end": 24000,
+          "reference_equal": true,
+          "closed_cut_sha": "e5f20f253d87b58590cf785f61c740a9d29a4fefb4545b51747961ea5674f3d5",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一\"\n\nK-best candidates for the continuation:\n  1. 下一步\n  2. 下一步\n  3. 下一步\n  4. 下一步\n\nBased on the audio, what is the correct text that should be appended after \"下一\"?\n",
+            "previous_transcription": "下一",
+            "candidates": [
+              "下一步",
+              "下一步",
+              "下一步",
+              "下一步"
+            ],
+            "corrected_appended_text": "步",
+            "corrected_appended_token_ids": [
+              31429
+            ]
+          },
+          "model_seconds": 0.5915050311014056,
+          "stage_seconds": {
+            "A": 0.35914002638310194,
+            "C": 0.22487744223326445,
+            "H": 0.0011984128504991531,
+            "capture": 0.006289149634540081,
+            "instrumented_model_total": 0.5915050311014056
+          },
+          "C_called": true,
+          "packet_signature": "1ebee94dfc46ec192ba87d7b14c1d5d52d41a3e3ed71c07e1b89ed0c4a005d22",
+          "capture_mode": "full"
+        },
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "0275f89130cccda7a053ffb9d29d6860bb7704a0ca62b30d5704fd9f3b259fe9",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步\"\n\nK-best candidates for the continuation:\n  1. 下一步将进\n  2. 下一步将近\n  3. 下一步就进\n  4. 下一步江进\n\nBased on the audio, what is the correct text that should be appended after \"下一步\"?\n",
+            "previous_transcription": "下一步",
+            "candidates": [
+              "下一步将进",
+              "下一步将近",
+              "下一步就进",
+              "下一步江进"
+            ],
+            "corrected_appended_text": "将进",
+            "corrected_appended_token_ids": [
+              45456,
+              36700
+            ]
+          },
+          "model_seconds": 0.9250732781365514,
+          "stage_seconds": {
+            "A": 0.45013615768402815,
+            "C": 0.4657622594386339,
+            "H": 0.0013559935614466667,
+            "capture": 0.007818867452442646,
+            "instrumented_model_total": 0.9250732781365514
+          },
+          "C_called": true,
+          "packet_signature": "21cebb170840d98b510d8f3d425895d26fcf1aabfe2a13bd7d7bae2f1066396b",
+          "capture_mode": "full"
+        },
+        {
+          "end": 40000,
+          "reference_equal": true,
+          "closed_cut_sha": "5b7c778726d6d4eb69adb4a2edac7c5e9c3abfaef00c24f181513ac4a2b243d8",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完\n  2. 下一步将进一步改\n  3. 下一步将进一步\n  4. 下一步将进一步\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进\"?\n",
+            "previous_transcription": "下一步将进",
+            "candidates": [
+              "下一步将进一步完",
+              "下一步将进一步改",
+              "下一步将进一步�",
+              "下一步将进一步�"
+            ],
+            "corrected_appended_text": "一步完",
+            "corrected_appended_token_ids": [
+              2257,
+              31429,
+              14128
+            ]
+          },
+          "model_seconds": 0.8424558844417334,
+          "stage_seconds": {
+            "A": 0.53977613709867,
+            "C": 0.2940000519156456,
+            "H": 0.001405094750225544,
+            "capture": 0.007274600677192211,
+            "instrumented_model_total": 0.8424558844417334
+          },
+          "C_called": true,
+          "packet_signature": "f8251c38ddfb03573c5e754023c0fe378ebff502b9790dbba60e45441daaad58",
+          "capture_mode": "full"
+        },
+        {
+          "end": 48000,
+          "reference_equal": true,
+          "closed_cut_sha": "321254dae3d088cd0035a540e5b7be4a0bd5c45546d7b323c38927a2cfe35167",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善\n  2. 下一步将进一步完善\n  3. 下一步将进一步完善\n  4. 下一步将进一步完善\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完\"?\n",
+            "previous_transcription": "下一步将进一步完",
+            "candidates": [
+              "下一步将进一步完善",
+              "下一步将进一步完善",
+              "下一步将进一步完善",
+              "下一步将进一步完善"
+            ],
+            "corrected_appended_text": "善",
+            "corrected_appended_token_ids": [
+              5234,
+              226
+            ]
+          },
+          "model_seconds": 0.6868130834773183,
+          "stage_seconds": {
+            "A": 0.4492205586284399,
+            "C": 0.22857168782502413,
+            "H": 0.0013736439868807793,
+            "capture": 0.007647193036973476,
+            "instrumented_model_total": 0.6868130834773183
+          },
+          "C_called": true,
+          "packet_signature": "1edc581e0d2789b36cfc395beeb883b6b2d467d1fffb245660401c31f6b88b86",
+          "capture_mode": "full"
+        },
+        {
+          "end": 56000,
+          "reference_equal": true,
+          "closed_cut_sha": "8b2af864340aa23c8ae379ae0af07e5c7040e273b6c9ddb6fb9d8ce0b29a9765",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善\n  2. 下一步将进一步完善\n  3. 下一步将进一步完善\n  4. 下一步将进一步完善\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善\"?\n",
+            "previous_transcription": "下一步将进一步完善",
+            "candidates": [
+              "下一步将进一步完善",
+              "下一步将进一步完善",
+              "下一步将进一步完善",
+              "下一步将进一步完善"
+            ],
+            "corrected_appended_text": "",
+            "corrected_appended_token_ids": []
+          },
+          "model_seconds": 0.4393442617729306,
+          "stage_seconds": {
+            "A": 0.270642994903028,
+            "C": 0.16095108166337013,
+            "H": 0.0010931408032774925,
+            "capture": 0.006657044403254986,
+            "instrumented_model_total": 0.4393442617729306
+          },
+          "C_called": true,
+          "packet_signature": "c4dba0ad9ec9dd996183a8089c87e79de18485bbfe48aa2492008a9780ef8bb2",
+          "capture_mode": "full"
+        },
+        {
+          "end": 64000,
+          "reference_equal": true,
+          "closed_cut_sha": "017c1d87e97abd1807ef817ef8a80e86cbbfe9a1f0422b57de2816d987a1dc5e",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城\n  2. 下一步将进一步完善成\n  3. 下一步将进一步完善城\n  4. 下一步将进一步完善\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善\"?\n",
+            "previous_transcription": "下一步将进一步完善",
+            "candidates": [
+              "下一步将进一步完善城",
+              "下一步将进一步完善成",
+              "下一步将进一步完善城",
+              "下一步将进一步完善�"
+            ],
+            "corrected_appended_text": "城",
+            "corrected_appended_token_ids": [
+              45277
+            ]
+          },
+          "model_seconds": 0.5989603586494923,
+          "stage_seconds": {
+            "A": 0.3612300930544734,
+            "C": 0.22789690922945738,
+            "H": 0.0012781620025634766,
+            "capture": 0.008555194362998009,
+            "instrumented_model_total": 0.5989603586494923
+          },
+          "C_called": true,
+          "packet_signature": "aa1e06d57818356c99a6969d86964f78b5cba1cc994f65a4bcfeb99c43c9b0ff",
+          "capture_mode": "full"
+        },
+        {
+          "end": 72000,
+          "reference_equal": true,
+          "closed_cut_sha": "83113c7d86879f51062e107d7ee5e438a4ae5ba173476c201bf6405008c97d65",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投\n  2. 下一步将进一步完善城头\n  3. 下一步将进一步完善城投\n  4. 下一步将进一步完善城投\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城\"?\n",
+            "previous_transcription": "下一步将进一步完善城",
+            "candidates": [
+              "下一步将进一步完善城投",
+              "下一步将进一步完善城头",
+              "下一步将进一步完善城投",
+              "下一步将进一步完善城投"
+            ],
+            "corrected_appended_text": "投",
+            "corrected_appended_token_ids": [
+              37094
+            ]
+          },
+          "model_seconds": 0.6007328564301133,
+          "stage_seconds": {
+            "A": 0.3618498407304287,
+            "C": 0.22881802916526794,
+            "H": 0.0012325020506978035,
+            "capture": 0.008832484483718872,
+            "instrumented_model_total": 0.6007328564301133
+          },
+          "C_called": true,
+          "packet_signature": "a12541572b491c802826b827b6ef421599590ce2fb227ef7197e93d3033e4257",
+          "capture_mode": "full"
+        },
+        {
+          "end": 80000,
+          "reference_equal": true,
+          "closed_cut_sha": "63a560225208079ec532842bd4323f46fe376e5c1eb352a5f8180fc0de7d6c16",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债\n  2. 下一步将进一步完善城投债\n  3. 下一步将进一步完善城投债\n  4. 下一步将进一步完善城投债\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投\"?\n",
+            "previous_transcription": "下一步将进一步完善城投",
+            "candidates": [
+              "下一步将进一步完善城投债�",
+              "下一步将进一步完善城投债�",
+              "下一步将进一步完善城投债�",
+              "下一步将进一步完善城投债�"
+            ],
+            "corrected_appended_text": "债",
+            "corrected_appended_token_ids": [
+              2122,
+              118
+            ]
+          },
+          "model_seconds": 0.7750573251396418,
+          "stage_seconds": {
+            "A": 0.5355622135102749,
+            "C": 0.2287681782618165,
+            "H": 0.0013917116448283195,
+            "capture": 0.009335221722722054,
+            "instrumented_model_total": 0.7750573251396418
+          },
+          "C_called": true,
+          "packet_signature": "3b24bed93e052c8fbe0a1a11cc3abfadf5420fa6ec577e60f444ef2b5066a661",
+          "capture_mode": "full"
+        },
+        {
+          "end": 88000,
+          "reference_equal": true,
+          "closed_cut_sha": "89c00c6303afb191a24899649a4a204b4c90137582c124f7c542a4e693c74fd2",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发\n  2. 下一步将进一步完善城投债券儿\n  3. 下一步将进一步完善城投债券发\n  4. 下一步将进一步完善城投债券发\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债\"?\n",
+            "previous_transcription": "下一步将进一步完善城投债",
+            "candidates": [
+              "下一步将进一步完善城投债券发",
+              "下一步将进一步完善城投债券儿",
+              "下一步将进一步完善城投债券发",
+              "下一步将进一步完善城投债券发"
+            ],
+            "corrected_appended_text": "券发",
+            "corrected_appended_token_ids": [
+              2437,
+              116,
+              28926
+            ]
+          },
+          "model_seconds": 0.8503210349008441,
+          "stage_seconds": {
+            "A": 0.5437218314036727,
+            "C": 0.2951668119058013,
+            "H": 0.0013673631474375725,
+            "capture": 0.010065028443932533,
+            "instrumented_model_total": 0.8503210349008441
+          },
+          "C_called": true,
+          "packet_signature": "b7ff6343b22547f6bc55f43bf4de67ca4fe081e64e8c5ce93efcc2be2585e177",
+          "capture_mode": "full"
+        },
+        {
+          "end": 96000,
+          "reference_equal": true,
+          "closed_cut_sha": "0340d8ec3a5fd9a90d74b7faa1a10c674ec9ec7666691b92a9587cbd60de5865",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行\n  2. 下一步将进一步完善城投债券发型\n  3. 下一步将进一步完善城投债券发行\n  4. 下一步将进一步完善城投债券发行\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发\"?\n",
+            "previous_transcription": "下一步将进一步完善城投债券发",
+            "candidates": [
+              "下一步将进一步完善城投债券发行",
+              "下一步将进一步完善城投债券发型",
+              "下一步将进一步完善城投债券发行",
+              "下一步将进一步完善城投债券发行"
+            ],
+            "corrected_appended_text": "行",
+            "corrected_appended_token_ids": [
+              8082
+            ]
+          },
+          "model_seconds": 0.6074759969487786,
+          "stage_seconds": {
+            "A": 0.36427260003983974,
+            "C": 0.231763175688684,
+            "H": 0.001239260658621788,
+            "capture": 0.01020096056163311,
+            "instrumented_model_total": 0.6074759969487786
+          },
+          "C_called": true,
+          "packet_signature": "5974e7ab709467897118b29966f3bed06829404d68112794e493f8d26b41e708",
+          "capture_mode": "full"
+        },
+        {
+          "end": 104000,
+          "reference_equal": true,
+          "closed_cut_sha": "c1c53b6191602ea6f8e09828f65226fce8bd32bc52eb4c1deb1548fce92dce7c",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度\n  2. 下一步将进一步完善城投债券发行制度\n  3. 下一步将进一步完善城投债券发行系\n  4. 下一步将进一步完善城投债券发行制度\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行\"?\n",
+            "previous_transcription": "下一步将进一步完善城投债券发行",
+            "candidates": [
+              "下一步将进一步完善城投债券发行制度",
+              "下一步将进一步完善城投债券发行制度",
+              "下一步将进一步完善城投债券发行系�",
+              "下一步将进一步完善城投债券发行制度"
+            ],
+            "corrected_appended_text": "制度",
+            "corrected_appended_token_ids": [
+              25491,
+              13127
+            ]
+          },
+          "model_seconds": 0.6964413598179817,
+          "stage_seconds": {
+            "A": 0.45217549148947,
+            "C": 0.23237186204642057,
+            "H": 0.0013155220076441765,
+            "capture": 0.010578484274446964,
+            "instrumented_model_total": 0.6964413598179817
+          },
+          "C_called": true,
+          "packet_signature": "8e45a9b0e37b9aef836f09fdd399d5a08bb8195c89fe03495211b108bfd7a007",
+          "capture_mode": "full"
+        },
+        {
+          "end": 112000,
+          "reference_equal": true,
+          "closed_cut_sha": "6829eefd9d07f6a4c26023c7882dbf02e4c81fb8e235af284b22b8e491a95cf3",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行制度\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度和防\n  2. 下一步将进一步完善城投债券发行制度和\n  3. 下一步将进一步完善城投债券发行制度和方\n  4. 下一步将进一步完善城投债券发行制度和房\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行制度\"?\n",
+            "previous_transcription": "下一步将进一步完善城投债券发行制度",
+            "candidates": [
+              "下一步将进一步完善城投债券发行制度和防",
+              "下一步将进一步完善城投债券发行制度和�",
+              "下一步将进一步完善城投债券发行制度和方",
+              "下一步将进一步完善城投债券发行制度和房"
+            ],
+            "corrected_appended_text": "和防",
+            "corrected_appended_token_ids": [
+              12565,
+              35863
+            ]
+          },
+          "model_seconds": 0.7623412180691957,
+          "stage_seconds": {
+            "A": 0.4521428933367133,
+            "C": 0.29797661770135164,
+            "H": 0.0013147322461009026,
+            "capture": 0.010906974785029888,
+            "instrumented_model_total": 0.7623412180691957
+          },
+          "C_called": true,
+          "packet_signature": "45186d95c8fab50b03615e957f5fb1d0a2d61f3f963bd8e5c24a32b99dca1284",
+          "capture_mode": "full"
+        },
+        {
+          "end": 120000,
+          "reference_equal": true,
+          "closed_cut_sha": "ec9e5d98bef512b36d31ca8d8cb9869cd2016ba167d03554b8adfd8560832a30",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行制度和防\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度和防范风\n  2. 下一步将进一步完善城投债券发行制度和防范风\n  3. 下一步将进一步完善城投债券发行制度和防范危\n  4. 下一步将进一步完善城投债券发行制度和防犯风\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行制度和防\"?\n",
+            "previous_transcription": "下一步将进一步完善城投债券发行制度和防",
+            "candidates": [
+              "下一步将进一步完善城投债券发行制度和防范风",
+              "下一步将进一步完善城投债券发行制度和防范风",
+              "下一步将进一步完善城投债券发行制度和防范危",
+              "下一步将进一步完善城投债券发行制度和防犯风"
+            ],
+            "corrected_appended_text": "范风",
+            "corrected_appended_token_ids": [
+              27395,
+              225,
+              47209
+            ]
+          },
+          "model_seconds": 0.8616173788905144,
+          "stage_seconds": {
+            "A": 0.5492173116654158,
+            "C": 0.2993291802704334,
+            "H": 0.001381034031510353,
+            "capture": 0.011689852923154831,
+            "instrumented_model_total": 0.8616173788905144
+          },
+          "C_called": true,
+          "packet_signature": "29de051615bf1b586dd5ec89463e1b5d837dc86fbc35a7f03837fa920db2b3be",
+          "capture_mode": "full"
+        },
+        {
+          "end": 128000,
+          "reference_equal": true,
+          "closed_cut_sha": "8b955b88c19bcac27d4afa56c0f3ee2ece8062425f71ff6d1ad0360bcb05b09f",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行制度和防范风\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度和防范风\n  2. 下一步将进一步完善城投债券发行制度和防范风\n  3. 下一步将进一步完善城投债券发行制度和防范风限\n  4. 下一步将进一步完善城投债券发行制度和防范风降\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行制度和防范风\"?\n",
+            "previous_transcription": "下一步将进一步完善城投债券发行制度和防范风",
+            "candidates": [
+              "下一步将进一步完善城投债券发行制度和防范风�",
+              "下一步将进一步完善城投债券发行制度和防范风�",
+              "下一步将进一步完善城投债券发行制度和防范风限",
+              "下一步将进一步完善城投债券发行制度和防范风降"
+            ],
+            "corrected_appended_text": "险",
+            "corrected_appended_token_ids": [
+              8842,
+              102
+            ]
+          },
+          "model_seconds": 0.6027833698317409,
+          "stage_seconds": {
+            "A": 0.35917316004633904,
+            "C": 0.23069670423865318,
+            "H": 0.0012423209846019745,
+            "capture": 0.011671184562146664,
+            "instrumented_model_total": 0.6027833698317409
+          },
+          "C_called": true,
+          "packet_signature": "c22f291a895377fab84bf95b02065a8f9c70db336f71178e8720c1d9550751f3",
+          "capture_mode": "full"
+        },
+        {
+          "end": 133344,
+          "reference_equal": true,
+          "closed_cut_sha": "23c7b59435e985f2ad26f6d90355147d10e92915a97f5abc07a9f255319e9e5e",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行制度和防范风险\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度和防范风险基础\n  2. 下一步将进一步完善城投债券发行制度和防范风险基础\n  3. 下一步将进一步完善城投债券发行制度和防范风险机则\n  4. 下一步将进一步完善城投债券发行制度和防范风险机则\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行制度和防范风险\"?\n",
+            "previous_transcription": "下一步将进一步完善城投债券发行制度和防范风险",
+            "candidates": [
+              "下一步将进一步完善城投债券发行制度和防范风险基础",
+              "下一步将进一步完善城投债券发行制度和防范风险基础",
+              "下一步将进一步完善城投债券发行制度和防范风险机则",
+              "下一步将进一步完善城投债券发行制度和防范风险机则"
+            ],
+            "corrected_appended_text": "机制",
+            "corrected_appended_token_ids": [
+              37960,
+              25491
+            ]
+          },
+          "model_seconds": 0.8567669689655304,
+          "stage_seconds": {
+            "A": 0.544016670435667,
+            "C": 0.2987502431496978,
+            "H": 0.0013920348137617111,
+            "capture": 0.012608020566403866,
+            "instrumented_model_total": 0.8567669689655304
+          },
+          "C_called": true,
+          "packet_signature": "22ca3922e0224f861837b0676b41941a9cb25686a102182c059891b978061e21",
+          "capture_mode": "full"
+        }
+      ],
+      "blob_file_bytes": 5647208,
+      "trace_json_bytes": 4052223,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    },
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "full_2",
+        "kind": "full",
+        "source_index": 2,
+        "gpu": 0,
+        "capture": "full"
+      },
+      "native_steps": 18,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": {
+        "A": 1.0433672647923231,
+        "C": 0.7643912667408586,
+        "H": 0.0012189829722046852,
+        "capture": 0.00608653761446476,
+        "instrumented_model_total": 1.8150640521198511
+      },
+      "results": [
+        {
+          "end": 8000,
+          "reference_equal": true,
+          "closed_cut_sha": "57729c5e4e39cee7bf4e7066a119b69344c462f1a3c923cefc0f12a11f8c1d4d",
+          "native_model_evaluated": false,
+          "selected": null,
+          "model_seconds": 8.026044815778732e-05,
+          "stage_seconds": {
+            "A": 8.026044815778732e-05,
+            "C": 0.0,
+            "H": 0.0,
+            "capture": 0.0,
+            "instrumented_model_total": 8.026044815778732e-05
+          },
+          "C_called": false,
+          "packet_signature": null,
+          "capture_mode": "full"
+        },
+        {
+          "end": 16000,
+          "reference_equal": true,
+          "closed_cut_sha": "988d9b91971f97fd4de370d0c747d6e4acf41c5b98f147106522bc450d11b790",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"\"\n\nK-best candidates for the continuation:\n  1. \n  2. 成\n  3. 成\n  4. 城\n\nBased on the audio, what is the correct text that should be appended after \"\"?\n",
+            "previous_transcription": "",
+            "candidates": [
+              "�",
+              "成",
+              "成",
+              "城"
+            ],
+            "corrected_appended_text": "乘",
+            "corrected_appended_token_ids": [
+              2930,
+              246
+            ]
+          },
+          "model_seconds": 0.5317448424175382,
+          "stage_seconds": {
+            "A": 0.30643976014107466,
+            "C": 0.21944684628397226,
+            "H": 0.0012158313766121864,
+            "capture": 0.004642404615879059,
+            "instrumented_model_total": 0.5317448424175382
+          },
+          "C_called": true,
+          "packet_signature": "b48fc052702e72a1de42dd79b5a4458d7a815e13cffceaa12e0eb31ef6fc7bc9",
+          "capture_mode": "full"
+        },
+        {
+          "end": 24000,
+          "reference_equal": true,
+          "closed_cut_sha": "ff058b09e4412842b592336f42ae625aa27638be303396b5d87a90bab257fa75",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘\"\n\nK-best candidates for the continuation:\n  1. 乘飞\n  2. 乘飞\n  3. 乘飞\n  4. 乘飞\n\nBased on the audio, what is the correct text that should be appended after \"乘\"?\n",
+            "previous_transcription": "乘",
+            "candidates": [
+              "乘飞",
+              "乘飞",
+              "乘飞",
+              "乘飞"
+            ],
+            "corrected_appended_text": "非",
+            "corrected_appended_token_ids": [
+              12107
+            ]
+          },
+          "model_seconds": 0.6777510540559888,
+          "stage_seconds": {
+            "A": 0.44637095369398594,
+            "C": 0.22374402731657028,
+            "H": 0.00132842268794775,
+            "capture": 0.0063076503574848175,
+            "instrumented_model_total": 0.6777510540559888
+          },
+          "C_called": true,
+          "packet_signature": "9a666b7e517d105415dacc6c76c56c72e39c1fac4bab0e58a59e2af25dd22a12",
+          "capture_mode": "full"
+        },
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "44a2cf5205cbccf3b1cda1c2e7e4c10ff151dae4c58499b159e9c2279fa6b6b3",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非\"\n\nK-best candidates for the continuation:\n  1. 乘非吉成\n  2. 乘非集成\n  3. 乘非及\n  4. 乘非集成\n\nBased on the audio, what is the correct text that should be appended after \"乘非\"?\n",
+            "previous_transcription": "乘非",
+            "candidates": [
+              "乘非吉成",
+              "乘非集成",
+              "乘非及�",
+              "乘非集成"
+            ],
+            "corrected_appended_text": "吉城",
+            "corrected_appended_token_ids": [
+              42866,
+              45277
+            ]
+          },
+          "model_seconds": 0.7401632219552994,
+          "stage_seconds": {
+            "A": 0.4431022824719548,
+            "C": 0.28811194468289614,
+            "H": 0.0013377424329519272,
+            "capture": 0.0076112523674964905,
+            "instrumented_model_total": 0.7401632219552994
+          },
+          "C_called": true,
+          "packet_signature": "42bf4620a8487610cf658e124722638f4a1648543f12e260a357136fcdf1d964",
+          "capture_mode": "full"
+        },
+        {
+          "end": 40000,
+          "reference_equal": true,
+          "closed_cut_sha": "d3d3b8cf0c0b76a9e382bd3a622d477d9d2bc227c8df2791aa7773ec74cb44de",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城\n  2. 乘非吉城\n  3. 乘非吉城\n  4. 乘非吉城雨\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城\"?\n",
+            "previous_transcription": "乘非吉城",
+            "candidates": [
+              "乘非吉城�",
+              "乘非吉城�",
+              "乘非吉城�",
+              "乘非吉城雨"
+            ],
+            "corrected_appended_text": "",
+            "corrected_appended_token_ids": []
+          },
+          "model_seconds": 0.523139638826251,
+          "stage_seconds": {
+            "A": 0.3566120211035013,
+            "C": 0.15840076003223658,
+            "H": 0.0011439314112067223,
+            "capture": 0.006982926279306412,
+            "instrumented_model_total": 0.523139638826251
+          },
+          "C_called": true,
+          "packet_signature": "de77a9a2f0e4fc59309261ccd6ae5b995b218e4ffa861ec36f4c641b87e9f2ee",
+          "capture_mode": "full"
+        },
+        {
+          "end": 48000,
+          "reference_equal": true,
+          "closed_cut_sha": "2afa62c88844e7fcce98990474661b72e742b2ed53d74cdb8821a0ffa1e0a379",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常\n  2. 乘非吉城与长\n  3. 乘非吉城与长\n  4. 乘非吉城于常州\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城\"?\n",
+            "previous_transcription": "乘非吉城",
+            "candidates": [
+              "乘非吉城与常",
+              "乘非吉城与长",
+              "乘非吉城与长",
+              "乘非吉城于常州"
+            ],
+            "corrected_appended_text": "与常",
+            "corrected_appended_token_ids": [
+              940,
+              236,
+              11279
+            ]
+          },
+          "model_seconds": 0.8299933904781938,
+          "stage_seconds": {
+            "A": 0.527280586771667,
+            "C": 0.29370433650910854,
+            "H": 0.001394432969391346,
+            "capture": 0.007614034228026867,
+            "instrumented_model_total": 0.8299933904781938
+          },
+          "C_called": true,
+          "packet_signature": "fd1aefa8c7b48dc0426ab71fa765fcf6a89d847f50f4a5589b324cd4105b3152",
+          "capture_mode": "full"
+        },
+        {
+          "end": 56000,
+          "reference_equal": true,
+          "closed_cut_sha": "94c7a042f19a412443af8a8040388ed46727de88e06f39d9b73cb429800618b9",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市\n  2. 乘非吉城与常州市\n  3. 乘非吉城与常州市\n  4. 乘非吉城与常州市\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常\"?\n",
+            "previous_transcription": "乘非吉城与常",
+            "candidates": [
+              "乘非吉城与常州市",
+              "乘非吉城与常州市",
+              "乘非吉城与常州市",
+              "乘非吉城与常州市"
+            ],
+            "corrected_appended_text": "州市",
+            "corrected_appended_token_ids": [
+              46974,
+              27261
+            ]
+          },
+          "model_seconds": 0.6792409541085362,
+          "stage_seconds": {
+            "A": 0.44487045612186193,
+            "C": 0.22508229967206717,
+            "H": 0.0013095233589410782,
+            "capture": 0.007978674955666065,
+            "instrumented_model_total": 0.6792409541085362
+          },
+          "C_called": true,
+          "packet_signature": "8406cb727afd9792a12d61763a088502331fd752b3855018948ab70ee3f7318b",
+          "capture_mode": "full"
+        },
+        {
+          "end": 64000,
+          "reference_equal": true,
+          "closed_cut_sha": "759059f74902071f22a724e6f6a8747d9feebf097d402cf5854403fcbeafd2ad",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市\n  2. 乘非吉城与常州市\n  3. 乘非吉城与常州市\n  4. 乘非吉城与常州市\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市\"?\n",
+            "previous_transcription": "乘非吉城与常州市",
+            "candidates": [
+              "乘非吉城与常州市",
+              "乘非吉城与常州市",
+              "乘非吉城与常州市",
+              "乘非吉城与常州市"
+            ],
+            "corrected_appended_text": "",
+            "corrected_appended_token_ids": []
+          },
+          "model_seconds": 0.4365542968735099,
+          "stage_seconds": {
+            "A": 0.2687171073630452,
+            "C": 0.15912245586514473,
+            "H": 0.001085510477423668,
+            "capture": 0.007629223167896271,
+            "instrumented_model_total": 0.4365542968735099
+          },
+          "C_called": true,
+          "packet_signature": "510fb6388ab1c71c403edae682527e906e3c54d03f2ba6aa6e6035d02a71958e",
+          "capture_mode": "full"
+        },
+        {
+          "end": 72000,
+          "reference_equal": true,
+          "closed_cut_sha": "ad952899281da952e04680939c3a4087adb061ea2c3c77247ee95394b39de699",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金\n  2. 乘非吉城与常州市金\n  3. 乘非吉城与常州市\n  4. 乘非吉城与常州市金\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市\"?\n",
+            "previous_transcription": "乘非吉城与常州市",
+            "candidates": [
+              "乘非吉城与常州市金",
+              "乘非吉城与常州市金",
+              "乘非吉城与常州市�",
+              "乘非吉城与常州市金"
+            ],
+            "corrected_appended_text": "金",
+            "corrected_appended_token_ids": [
+              19117
+            ]
+          },
+          "model_seconds": 0.5930108362808824,
+          "stage_seconds": {
+            "A": 0.3578435815870762,
+            "C": 0.22535562049597502,
+            "H": 0.0012565413489937782,
+            "capture": 0.008555092848837376,
+            "instrumented_model_total": 0.5930108362808824
+          },
+          "C_called": true,
+          "packet_signature": "8f5bf45d59d926048c33ef05f8022e3735072bc218842d2512b589acc3f7acd1",
+          "capture_mode": "full"
+        },
+        {
+          "end": 80000,
+          "reference_equal": true,
+          "closed_cut_sha": "dfe3bd82c5a0b844e82fbe3c36329b349a4a638ad9a41cd8afb92e3cbf538c57",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市金\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金潭\n  2. 乘非吉城与常州市金坛\n  3. 乘非吉城与常州市金滩\n  4. 乘非吉城与常州市金塘\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市金\"?\n",
+            "previous_transcription": "乘非吉城与常州市金",
+            "candidates": [
+              "乘非吉城与常州市金潭�",
+              "乘非吉城与常州市金坛�",
+              "乘非吉城与常州市金滩�",
+              "乘非吉城与常州市金塘�"
+            ],
+            "corrected_appended_text": "潭",
+            "corrected_appended_token_ids": [
+              35622,
+              255
+            ]
+          },
+          "model_seconds": 0.8223852654919028,
+          "stage_seconds": {
+            "A": 0.5207744939252734,
+            "C": 0.2907921262085438,
+            "H": 0.0013645626604557037,
+            "capture": 0.009454082697629929,
+            "instrumented_model_total": 0.8223852654919028
+          },
+          "C_called": true,
+          "packet_signature": "5df4b87e33b21e3585daefea2660a02b348beb61b58d3cca5e8445681cde367a",
+          "capture_mode": "full"
+        },
+        {
+          "end": 88000,
+          "reference_equal": true,
+          "closed_cut_sha": "ad7a9a0cdd70a3d37ae3b358d2f666bacb612a8721cbf94f61bc852222d2fa9f",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市金潭\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金潭区政府\n  2. 乘非吉城与常州市金潭区政府\n  3. 乘非吉城与常州市金潭区政\n  4. 乘非吉城与常州市金潭区政府\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市金潭\"?\n",
+            "previous_transcription": "乘非吉城与常州市金潭",
+            "candidates": [
+              "乘非吉城与常州市金潭区政府",
+              "乘非吉城与常州市金潭区政府",
+              "乘非吉城与常州市金潭区政",
+              "乘非吉城与常州市金潭区政府"
+            ],
+            "corrected_appended_text": "区政府",
+            "corrected_appended_token_ids": [
+              9937,
+              118,
+              41116
+            ]
+          },
+          "model_seconds": 0.8328246446326375,
+          "stage_seconds": {
+            "A": 0.5298651801422238,
+            "C": 0.291829077526927,
+            "H": 0.0013946332037448883,
+            "capture": 0.009735753759741783,
+            "instrumented_model_total": 0.8328246446326375
+          },
+          "C_called": true,
+          "packet_signature": "84e2710ddcc1c35de1d18b5195f7ec7a626dd836ef6daa10959682e4f2bca964",
+          "capture_mode": "full"
+        },
+        {
+          "end": 96000,
+          "reference_equal": true,
+          "closed_cut_sha": "a5b6ebbe93a85352cea29466dc5fdccd778fa6c244842295d35d7aec24974dfd",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市金潭区政府\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金潭区政府合\n  2. 乘非吉城与常州市金潭区政府工作\n  3. 乘非吉城与常州市金潭区政府的\n  4. 乘非吉城与常州市金潭区政府和\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市金潭区政府\"?\n",
+            "previous_transcription": "乘非吉城与常州市金潭区政府",
+            "candidates": [
+              "乘非吉城与常州市金潭区政府合",
+              "乘非吉城与常州市金潭区政府工作",
+              "乘非吉城与常州市金潭区政府的",
+              "乘非吉城与常州市金潭区政府和"
+            ],
+            "corrected_appended_text": "合",
+            "corrected_appended_token_ids": [
+              14245
+            ]
+          },
+          "model_seconds": 0.6019938895478845,
+          "stage_seconds": {
+            "A": 0.3632751917466521,
+            "C": 0.2275557005777955,
+            "H": 0.0012280810624361038,
+            "capture": 0.009934916161000729,
+            "instrumented_model_total": 0.6019938895478845
+          },
+          "C_called": true,
+          "packet_signature": "5d4dbacca2949b708f22aecd0cd70ea33b16f49f4f8a8d0f918a16882e9204e5",
+          "capture_mode": "full"
+        },
+        {
+          "end": 104000,
+          "reference_equal": true,
+          "closed_cut_sha": "8bc593ba5576f011621dd5e39b7dd93c1ea0e1b011b3015f08947b4dc972db96",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市金潭区政府合\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金潭区政府合作的\n  2. 乘非吉城与常州市金潭区政府合作项\n  3. 乘非吉城与常州市金潭区政府合做的\n  4. 乘非吉城与常州市金潭区政府合作的\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市金潭区政府合\"?\n",
+            "previous_transcription": "乘非吉城与常州市金潭区政府合",
+            "candidates": [
+              "乘非吉城与常州市金潭区政府合作的�",
+              "乘非吉城与常州市金潭区政府合作项",
+              "乘非吉城与常州市金潭区政府合做的�",
+              "乘非吉城与常州市金潭区政府合作的�"
+            ],
+            "corrected_appended_text": "作的",
+            "corrected_appended_token_ids": [
+              11914,
+              1546
+            ]
+          },
+          "model_seconds": 0.8413487430661917,
+          "stage_seconds": {
+            "A": 0.5344226313754916,
+            "C": 0.2945634527131915,
+            "H": 0.0013888441026210785,
+            "capture": 0.010973814874887466,
+            "instrumented_model_total": 0.8413487430661917
+          },
+          "C_called": true,
+          "packet_signature": "8802af87a599df4cda47e18918fa02878adb8e70b9206600f6a7b002a7d9c7af",
+          "capture_mode": "full"
+        },
+        {
+          "end": 112000,
+          "reference_equal": true,
+          "closed_cut_sha": "a26b7142e35b496a9806e28e9b7e0e6ec8964a8fe41b0a404474bfe0566923d2",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市金潭区政府合作的\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金潭区政府合作的项目将\n  2. 乘非吉城与常州市金潭区政府合作的项目\n  3. 乘非吉城与常州市金潭区政府合作的项目将\n  4. 乘非吉城与常州市金潭区政府合作的项目将\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市金潭区政府合作的\"?\n",
+            "previous_transcription": "乘非吉城与常州市金潭区政府合作的",
+            "candidates": [
+              "乘非吉城与常州市金潭区政府合作的项目将",
+              "乘非吉城与常州市金潭区政府合作的项目�",
+              "乘非吉城与常州市金潭区政府合作的项目将",
+              "乘非吉城与常州市金潭区政府合作的项目将"
+            ],
+            "corrected_appended_text": "项目将",
+            "corrected_appended_token_ids": [
+              10178,
+              117,
+              11386,
+              45456
+            ]
+          },
+          "model_seconds": 0.9301330940797925,
+          "stage_seconds": {
+            "A": 0.623154241591692,
+            "C": 0.29445046186447144,
+            "H": 0.0014398535713553429,
+            "capture": 0.01108853705227375,
+            "instrumented_model_total": 0.9301330940797925
+          },
+          "C_called": true,
+          "packet_signature": "f4d612bb13162b065df90090ffe170dbec45ee71d40b335d8cb43c65dfaab0ae",
+          "capture_mode": "full"
+        },
+        {
+          "end": 120000,
+          "reference_equal": true,
+          "closed_cut_sha": "9c22bd37df5219b7fcf4d6306b1698364ca8723cbc0603dc18535012a7ef7375",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市金潭区政府合作的项目将\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金潭区政府合作的项目将分三\n  2. 乘非吉城与常州市金潭区政府合作的项目将分三\n  3. 乘非吉城与常州市金潭区政府合作的项目将分三\n  4. 乘非吉城与常州市金潭区政府合作的项目将分为\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市金潭区政府合作的项目将\"?\n",
+            "previous_transcription": "乘非吉城与常州市金潭区政府合作的项目将",
+            "candidates": [
+              "乘非吉城与常州市金潭区政府合作的项目将分三",
+              "乘非吉城与常州市金潭区政府合作的项目将分三",
+              "乘非吉城与常州市金潭区政府合作的项目将分三",
+              "乘非吉城与常州市金潭区政府合作的项目将分为"
+            ],
+            "corrected_appended_text": "分三",
+            "corrected_appended_token_ids": [
+              6627,
+              10960
+            ]
+          },
+          "model_seconds": 0.7512775277718902,
+          "stage_seconds": {
+            "A": 0.4467789400368929,
+            "C": 0.29193784669041634,
+            "H": 0.0013524740934371948,
+            "capture": 0.011208266951143742,
+            "instrumented_model_total": 0.7512775277718902
+          },
+          "C_called": true,
+          "packet_signature": "aabb45a84406cb62a0f150afb3dcd5e008e1df64808040bff3e8f213ad51b8c4",
+          "capture_mode": "full"
+        },
+        {
+          "end": 128000,
+          "reference_equal": true,
+          "closed_cut_sha": "a0067caaddbb169d7114aaaa35c9b1e7a6e919507bfd8cd25b09e728d8d91ad4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市金潭区政府合作的项目将分三\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金潭区政府合作的项目将分三期完\n  2. 乘非吉城与常州市金潭区政府合作的项目将分三栖\n  3. 乘非吉城与常州市金潭区政府合作的项目将分三期完成\n  4. 乘非吉城与常州市金潭区政府合作的项目将分三期完\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市金潭区政府合作的项目将分三\"?\n",
+            "previous_transcription": "乘非吉城与常州市金潭区政府合作的项目将分三",
+            "candidates": [
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完",
+              "乘非吉城与常州市金潭区政府合作的项目将分三栖",
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完成",
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完"
+            ],
+            "corrected_appended_text": "期完",
+            "corrected_appended_token_ids": [
+              16786,
+              14128
+            ]
+          },
+          "model_seconds": 0.7496789619326591,
+          "stage_seconds": {
+            "A": 0.4459050912410021,
+            "C": 0.2906699748709798,
+            "H": 0.0013427222147583961,
+            "capture": 0.011761173605918884,
+            "instrumented_model_total": 0.7496789619326591
+          },
+          "C_called": true,
+          "packet_signature": "a327489a594ca05abff8ef9e6a144ef43b5d7f841098226cefbcb0911e7d8732",
+          "capture_mode": "full"
+        },
+        {
+          "end": 136000,
+          "reference_equal": true,
+          "closed_cut_sha": "ec4063e4c6a55f55edc64839a8163fe6806f9a0131e2f6cbaf5e05c1d03622e0",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市金潭区政府合作的项目将分三期完\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金潭区政府合作的项目将分三期完成\n  2. 乘非吉城与常州市金潭区政府合作的项目将分三期完工\n  3. 乘非吉城与常州市金潭区政府合作的项目将分三期完成\n  4. 乘非吉城与常州市金潭区政府合作的项目将分三期完成\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市金潭区政府合作的项目将分三期完\"?\n",
+            "previous_transcription": "乘非吉城与常州市金潭区政府合作的项目将分三期完",
+            "candidates": [
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完成",
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完工",
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完成",
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完成"
+            ],
+            "corrected_appended_text": "成",
+            "corrected_appended_token_ids": [
+              11336
+            ]
+          },
+          "model_seconds": 0.6046803323552012,
+          "stage_seconds": {
+            "A": 0.3621764397248626,
+            "C": 0.22914522513747215,
+            "H": 0.001227731816470623,
+            "capture": 0.012130935676395893,
+            "instrumented_model_total": 0.6046803323552012
+          },
+          "C_called": true,
+          "packet_signature": "812a5e79c1720a01a804fd3f879b53d0a4a6ba14ad632eb21ddb2efd61ac480d",
+          "capture_mode": "full"
+        },
+        {
+          "end": 138703,
+          "reference_equal": true,
+          "closed_cut_sha": "85e641c6b8f4b6365570457b83e9145a922f23647798b49222eb4c8b90b41776",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非吉城与常州市金潭区政府合作的项目将分三期完成\"\n\nK-best candidates for the continuation:\n  1. 乘非吉城与常州市金潭区政府合作的项目将分三期完成的\n  2. 乘非吉城与常州市金潭区政府合作的项目将分三期完成的\n  3. 乘非吉城与常州市金潭区政府合作的项目将分三期完成的\n  4. 乘非吉城与常州市金潭区政府合作的项目将分三期完成儿\n\nBased on the audio, what is the correct text that should be appended after \"乘非吉城与常州市金潭区政府合作的项目将分三期完成\"?\n",
+            "previous_transcription": "乘非吉城与常州市金潭区政府合作的项目将分三期完成",
+            "candidates": [
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完成的",
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完成的",
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完成的",
+              "乘非吉城与常州市金潭区政府合作的项目将分三期完成儿"
+            ],
+            "corrected_appended_text": "成",
+            "corrected_appended_token_ids": [
+              11336
+            ]
+          },
+          "model_seconds": 0.6011997377499938,
+          "stage_seconds": {
+            "A": 0.35821869038045406,
+            "C": 0.22977295145392418,
+            "H": 0.0012746406719088554,
+            "capture": 0.011933455243706703,
+            "instrumented_model_total": 0.6011997377499938
+          },
+          "C_called": true,
+          "packet_signature": "cf89847b57b4258813f0aaac8addb81842e59bbf42d14ac853f2baf3256ef4d3",
+          "capture_mode": "full"
+        }
+      ],
+      "blob_file_bytes": 6175768,
+      "trace_json_bytes": 4355540,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    },
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "full_3",
+        "kind": "full",
+        "source_index": 3,
+        "gpu": 0,
+        "capture": "full"
+      },
+      "native_steps": 17,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": {
+        "A": 1.0477431444451213,
+        "C": 0.7618897976353765,
+        "H": 0.001267051324248314,
+        "capture": 0.006148028187453747,
+        "instrumented_model_total": 1.8170480215921998
+      },
+      "results": [
+        {
+          "end": 8000,
+          "reference_equal": true,
+          "closed_cut_sha": "026de7157966f808d9316f6a59f6da7ff3654c883a1709ae7603b9828a9e5a6e",
+          "native_model_evaluated": false,
+          "selected": null,
+          "model_seconds": 7.976125925779343e-05,
+          "stage_seconds": {
+            "A": 7.976125925779343e-05,
+            "C": 0.0,
+            "H": 0.0,
+            "capture": 0.0,
+            "instrumented_model_total": 7.976125925779343e-05
+          },
+          "C_called": false,
+          "packet_signature": null,
+          "capture_mode": "full"
+        },
+        {
+          "end": 16000,
+          "reference_equal": true,
+          "closed_cut_sha": "e10534b0f5bf9fcf2ee9d2c6a2eda0405f30a8479e6bacc3a31d44790281b4e4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"\"\n\nK-best candidates for the continuation:\n  1. 未\n  2. \n  3. \n  4. 为\n\nBased on the audio, what is the correct text that should be appended after \"\"?\n",
+            "previous_transcription": "",
+            "candidates": [
+              "未",
+              "�",
+              "�",
+              "为"
+            ],
+            "corrected_appended_text": "未",
+            "corrected_appended_token_ids": [
+              29954
+            ]
+          },
+          "model_seconds": 0.5307866018265486,
+          "stage_seconds": {
+            "A": 0.3050851682201028,
+            "C": 0.21828501392155886,
+            "H": 0.0012321807444095612,
+            "capture": 0.006184238940477371,
+            "instrumented_model_total": 0.5307866018265486
+          },
+          "C_called": true,
+          "packet_signature": "77fce2d85e0e632c1a068871ebda5c1773681bbd06bfd236393f247b753fdfbe",
+          "capture_mode": "full"
+        },
+        {
+          "end": 24000,
+          "reference_equal": true,
+          "closed_cut_sha": "7a869c79b08d3cb207de853c4e4f89b5dc5c12261ff0484e8aa2de34a073525b",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未\"\n\nK-best candidates for the continuation:\n  1. 未来\n  2. 未来\n  3. 未来\n  4. 未来\n\nBased on the audio, what is the correct text that should be appended after \"未\"?\n",
+            "previous_transcription": "未",
+            "candidates": [
+              "未来",
+              "未来",
+              "未来",
+              "未来"
+            ],
+            "corrected_appended_text": "来",
+            "corrected_appended_token_ids": [
+              6912
+            ]
+          },
+          "model_seconds": 0.5855090701952577,
+          "stage_seconds": {
+            "A": 0.3559730304405093,
+            "C": 0.2222140096127987,
+            "H": 0.0011826809495687485,
+            "capture": 0.006139349192380905,
+            "instrumented_model_total": 0.5855090701952577
+          },
+          "C_called": true,
+          "packet_signature": "2a7d75fc7006d38552b8fa5f26a74726b89dfe6e854d4b3d258e779eaf0a586c",
+          "capture_mode": "full"
+        },
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "0e626958bd02c26a8c22536facddf873536f84c9d58a1b42a47de75cd53e3875",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来\"\n\nK-best candidates for the continuation:\n  1. 未来房\n  2. 未来防\n  3. 未来\n  4. 未来\n\nBased on the audio, what is the correct text that should be appended after \"未来\"?\n",
+            "previous_transcription": "未来",
+            "candidates": [
+              "未来房",
+              "未来防",
+              "未来�",
+              "未来�"
+            ],
+            "corrected_appended_text": "房",
+            "corrected_appended_token_ids": [
+              38242
+            ]
+          },
+          "model_seconds": 0.582369539886713,
+          "stage_seconds": {
+            "A": 0.3518717410042882,
+            "C": 0.22185933589935303,
+            "H": 0.0012017721310257912,
+            "capture": 0.007436690852046013,
+            "instrumented_model_total": 0.582369539886713
+          },
+          "C_called": true,
+          "packet_signature": "05ddbbb617a29b0c85da3d5ac8f43ec0ba2a5aa944a9cc126f02023dffc1a80c",
+          "capture_mode": "full"
+        },
+        {
+          "end": 40000,
+          "reference_equal": true,
+          "closed_cut_sha": "3b90f26fb0e42efc305b24d3b2d7d912a42dfc5d8cfa4f8b525890e3a2e42012",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房\"\n\nK-best candidates for the continuation:\n  1. 未来房企\n  2. 未来房企\n  3. 未来房企\n  4. 未来房企\n\nBased on the audio, what is the correct text that should be appended after \"未来房\"?\n",
+            "previous_transcription": "未来房",
+            "candidates": [
+              "未来房企",
+              "未来房企",
+              "未来房企",
+              "未来房企"
+            ],
+            "corrected_appended_text": "企",
+            "corrected_appended_token_ids": [
+              7384,
+              223
+            ]
+          },
+          "model_seconds": 0.6725818254053593,
+          "stage_seconds": {
+            "A": 0.4382603308185935,
+            "C": 0.2259814366698265,
+            "H": 0.0012643719092011452,
+            "capture": 0.007075686007738113,
+            "instrumented_model_total": 0.6725818254053593
+          },
+          "C_called": true,
+          "packet_signature": "f1516f38875845b82c6244927b0f93a27b6f3bb1838d6d1355db988be5b1e792",
+          "capture_mode": "full"
+        },
+        {
+          "end": 48000,
+          "reference_equal": true,
+          "closed_cut_sha": "599b2fd45826a33b02855c0ea6264d4714e02b7c5be9c9945eaed11e0c82cdc4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地\n  2. 未来房企拿地\n  3. 未来房企拿\n  4. 未来房企哪地\n\nBased on the audio, what is the correct text that should be appended after \"未来房企\"?\n",
+            "previous_transcription": "未来房企",
+            "candidates": [
+              "未来房企拿地",
+              "未来房企拿地",
+              "未来房企拿",
+              "未来房企哪地"
+            ],
+            "corrected_appended_text": "拿地",
+            "corrected_appended_token_ids": [
+              24351,
+              10928
+            ]
+          },
+          "model_seconds": 0.7373498296365142,
+          "stage_seconds": {
+            "A": 0.43871566373854876,
+            "C": 0.2897118804976344,
+            "H": 0.0012991316616535187,
+            "capture": 0.007623153738677502,
+            "instrumented_model_total": 0.7373498296365142
+          },
+          "C_called": true,
+          "packet_signature": "72c5eee7f2411fefc805792a6172161e96e87b58ec5502cc7cf1190ce3a5633a",
+          "capture_mode": "full"
+        },
+        {
+          "end": 56000,
+          "reference_equal": true,
+          "closed_cut_sha": "38726264e34ba3859aa920eb15f7ef1da932c127bb349c07eb38e480523d10bd",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投\n  2. 未来房企拿地\n  3. 未来房企拿地的\n  4. 未来房企拿地透\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地\"?\n",
+            "previous_transcription": "未来房企拿地",
+            "candidates": [
+              "未来房企拿地投",
+              "未来房企拿地�",
+              "未来房企拿地的",
+              "未来房企拿地透"
+            ],
+            "corrected_appended_text": "投",
+            "corrected_appended_token_ids": [
+              37094
+            ]
+          },
+          "model_seconds": 0.589146233163774,
+          "stage_seconds": {
+            "A": 0.35567485727369785,
+            "C": 0.2242091279476881,
+            "H": 0.0012001823633909225,
+            "capture": 0.008062065578997135,
+            "instrumented_model_total": 0.589146233163774
+          },
+          "C_called": true,
+          "packet_signature": "63730ba1381d866933359f78bea64dcc4dfaab3f9df28fc5ab72dbbd412377dd",
+          "capture_mode": "full"
+        },
+        {
+          "end": 64000,
+          "reference_equal": true,
+          "closed_cut_sha": "11602a594d1c73edc4010827d9a358a44376bd90a09eb56900a62a5f6746a58e",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投\n  2. 未来房企拿地投\n  3. 未来房企拿地投\n  4. 未来房企拿地投\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投\"?\n",
+            "previous_transcription": "未来房企拿地投",
+            "candidates": [
+              "未来房企拿地投�",
+              "未来房企拿地投�",
+              "未来房企拿地投�",
+              "未来房企拿地投�"
+            ],
+            "corrected_appended_text": "资",
+            "corrected_appended_token_ids": [
+              5266,
+              226
+            ]
+          },
+          "model_seconds": 0.5943197906017303,
+          "stage_seconds": {
+            "A": 0.35567672550678253,
+            "C": 0.22903961408883333,
+            "H": 0.0012361621484160423,
+            "capture": 0.00836728885769844,
+            "instrumented_model_total": 0.5943197906017303
+          },
+          "C_called": true,
+          "packet_signature": "f52553d9cb22719a20cde2370a3be69b6d581472b2b04bca207ce2caf532080a",
+          "capture_mode": "full"
+        },
+        {
+          "end": 72000,
+          "reference_equal": true,
+          "closed_cut_sha": "8d41473b0298d9b1330e51a31821b4311031e81cf81f61c626b09a71d15a2989",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投资\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投资\n  2. 未来房企拿地投资\n  3. 未来房企拿地投资\n  4. 未来房企拿地投资\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投资\"?\n",
+            "previous_transcription": "未来房企拿地投资",
+            "candidates": [
+              "未来房企拿地投资",
+              "未来房企拿地投资",
+              "未来房企拿地投资",
+              "未来房企拿地投资"
+            ],
+            "corrected_appended_text": "新",
+            "corrected_appended_token_ids": [
+              12560
+            ]
+          },
+          "model_seconds": 0.50684430077672,
+          "stage_seconds": {
+            "A": 0.2705886084586382,
+            "C": 0.22639425937086344,
+            "H": 0.001151232048869133,
+            "capture": 0.008710200898349285,
+            "instrumented_model_total": 0.50684430077672
+          },
+          "C_called": true,
+          "packet_signature": "a45c8a490ab861d1fee3276cbc9355bfd4790417e1fe417037b0fa1a2cc10b9d",
+          "capture_mode": "full"
+        },
+        {
+          "end": 80000,
+          "reference_equal": true,
+          "closed_cut_sha": "00d560efc5aae7b92a858e9273fc6dae3db6381675a35afcb4dfdb48b085ed51",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投资新\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投资新开\n  2. 未来房企拿地投资新开\n  3. 未来房企拿地投资新开\n  4. 未来房企拿地投资新开\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投资新\"?\n",
+            "previous_transcription": "未来房企拿地投资新",
+            "candidates": [
+              "未来房企拿地投资新开",
+              "未来房企拿地投资新开",
+              "未来房企拿地投资新开",
+              "未来房企拿地投资新开"
+            ],
+            "corrected_appended_text": "开",
+            "corrected_appended_token_ids": [
+              18937
+            ]
+          },
+          "model_seconds": 0.5960309868678451,
+          "stage_seconds": {
+            "A": 0.3595189107581973,
+            "C": 0.22608667612075806,
+            "H": 0.0013006720691919327,
+            "capture": 0.009124727919697762,
+            "instrumented_model_total": 0.5960309868678451
+          },
+          "C_called": true,
+          "packet_signature": "9ce8147970a120d68c482f63b87950c02aba578dafc98f7f17855fcd2cea074f",
+          "capture_mode": "full"
+        },
+        {
+          "end": 88000,
+          "reference_equal": true,
+          "closed_cut_sha": "99cc0816fb7c5eb83b10bd3df26816c0b0024a7b4f719cae84d6ca58378dc811",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投资新开\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投资新开工等\n  2. 未来房企拿地投资新开弓\n  3. 未来房企拿地投资新开工等\n  4. 未来房企拿地投资新开公等\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投资新开\"?\n",
+            "previous_transcription": "未来房企拿地投资新开",
+            "candidates": [
+              "未来房企拿地投资新开工等",
+              "未来房企拿地投资新开弓",
+              "未来房企拿地投资新开工等",
+              "未来房企拿地投资新开公等"
+            ],
+            "corrected_appended_text": "工等",
+            "corrected_appended_token_ids": [
+              23323,
+              10187
+            ]
+          },
+          "model_seconds": 0.7469218475744128,
+          "stage_seconds": {
+            "A": 0.4428772730752826,
+            "C": 0.2928164079785347,
+            "H": 0.001297101378440857,
+            "capture": 0.009931065142154694,
+            "instrumented_model_total": 0.7469218475744128
+          },
+          "C_called": true,
+          "packet_signature": "7dc8653e43e28ad0e3d0f67cfee0367a8c2aab15e42ad0d09c42b30b94fddba1",
+          "capture_mode": "full"
+        },
+        {
+          "end": 96000,
+          "reference_equal": true,
+          "closed_cut_sha": "f101527f359abc03be71aecb0e0cf6a596ffa70d5dd0f0f0ea1fa6f193d4259c",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投资新开工等\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投资新开工等指\n  2. 未来房企拿地投资新开工等指\n  3. 未来房企拿地投资新开工等值\n  4. 未来房企拿地投资新开工等指\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投资新开工等\"?\n",
+            "previous_transcription": "未来房企拿地投资新开工等",
+            "candidates": [
+              "未来房企拿地投资新开工等指�",
+              "未来房企拿地投资新开工等指�",
+              "未来房企拿地投资新开工等值�",
+              "未来房企拿地投资新开工等指"
+            ],
+            "corrected_appended_text": "指",
+            "corrected_appended_token_ids": [
+              25922
+            ]
+          },
+          "model_seconds": 0.6867399448528886,
+          "stage_seconds": {
+            "A": 0.4460437325760722,
+            "C": 0.22912581451237202,
+            "H": 0.001382581889629364,
+            "capture": 0.010187815874814987,
+            "instrumented_model_total": 0.6867399448528886
+          },
+          "C_called": true,
+          "packet_signature": "3836d0b5a7d4a43ea30fab7dd3ec627f9d5c20aa84f35ea4b580e67749184d95",
+          "capture_mode": "full"
+        },
+        {
+          "end": 104000,
+          "reference_equal": true,
+          "closed_cut_sha": "e9c5a457427065d23bded67fb08bdd21e6a557c5ea46783ab657530455a6a004",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投资新开工等指\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投资新开工等指标可能\n  2. 未来房企拿地投资新开工等指标可能\n  3. 未来房企拿地投资新开工等指标可能\n  4. 未来房企拿地投资新开工等指标可能\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投资新开工等指\"?\n",
+            "previous_transcription": "未来房企拿地投资新开工等指",
+            "candidates": [
+              "未来房企拿地投资新开工等指标可能",
+              "未来房企拿地投资新开工等指标可能",
+              "未来房企拿地投资新开工等指标可能",
+              "未来房企拿地投资新开工等指标可能"
+            ],
+            "corrected_appended_text": "标可能",
+            "corrected_appended_token_ids": [
+              162,
+              3921,
+              16657
+            ]
+          },
+          "model_seconds": 0.8469060948118567,
+          "stage_seconds": {
+            "A": 0.5401750942692161,
+            "C": 0.294240172021091,
+            "H": 0.0013841232284903526,
+            "capture": 0.011106705293059349,
+            "instrumented_model_total": 0.8469060948118567
+          },
+          "C_called": true,
+          "packet_signature": "a3d70af859a6ce4e387be80083c62e2486841865eca58a3aeb65db8fc39d4aa4",
+          "capture_mode": "full"
+        },
+        {
+          "end": 112000,
+          "reference_equal": true,
+          "closed_cut_sha": "f3ff079ab8e3076ac0c60906d0d690f4b063bd1e50244cf29986b6df3fa486e4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投资新开工等指标可能\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投资新开工等指标可能受\n  2. 未来房企拿地投资新开工等指标可能收\n  3. 未来房企拿地投资新开工等指标可能\n  4. 未来房企拿地投资新开工等指标可能受\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投资新开工等指标可能\"?\n",
+            "previous_transcription": "未来房企拿地投资新开工等指标可能",
+            "candidates": [
+              "未来房企拿地投资新开工等指标可能受",
+              "未来房企拿地投资新开工等指标可能收",
+              "未来房企拿地投资新开工等指标可能�",
+              "未来房企拿地投资新开工等指标可能受"
+            ],
+            "corrected_appended_text": "受",
+            "corrected_appended_token_ids": [
+              23151
+            ]
+          },
+          "model_seconds": 0.6035939957946539,
+          "stage_seconds": {
+            "A": 0.35984054394066334,
+            "C": 0.23033158481121063,
+            "H": 0.0012415600940585136,
+            "capture": 0.012180306948721409,
+            "instrumented_model_total": 0.6035939957946539
+          },
+          "C_called": true,
+          "packet_signature": "8ef5daa330a7d7b062eb189ce5e0e6cc29dbc217e08710e469e4b6dd95799d05",
+          "capture_mode": "full"
+        },
+        {
+          "end": 120000,
+          "reference_equal": true,
+          "closed_cut_sha": "1f85ae42bd2f1e48b8802454a0554d066a9a5722ace3a7142b9fc8453919266e",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投资新开工等指标可能受\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投资新开工等指标可能受到\n  2. 未来房企拿地投资新开工等指标可能受到了\n  3. 未来房企拿地投资新开工等指标可能受到\n  4. 未来房企拿地投资新开工等指标可能受到\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投资新开工等指标可能受\"?\n",
+            "previous_transcription": "未来房企拿地投资新开工等指标可能受",
+            "candidates": [
+              "未来房企拿地投资新开工等指标可能受到",
+              "未来房企拿地投资新开工等指标可能受到了",
+              "未来房企拿地投资新开工等指标可能受到",
+              "未来房企拿地投资新开工等指标可能受到"
+            ],
+            "corrected_appended_text": "到",
+            "corrected_appended_token_ids": [
+              4511
+            ]
+          },
+          "model_seconds": 0.602091540582478,
+          "stage_seconds": {
+            "A": 0.3597697224467993,
+            "C": 0.22981600929051638,
+            "H": 0.0012572724372148514,
+            "capture": 0.01124853640794754,
+            "instrumented_model_total": 0.602091540582478
+          },
+          "C_called": true,
+          "packet_signature": "8b395963b1c1752f82dac9d0fdbb20da617b47b39b49f6339598cc1a436db987",
+          "capture_mode": "full"
+        },
+        {
+          "end": 128000,
+          "reference_equal": true,
+          "closed_cut_sha": "7d4a87d96659ab807d68875c4bf7a02a293d3131d727f720d8ec1f804e2f5481",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投资新开工等指标可能受到\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投资新开工等指标可能受到影\n  2. 未来房企拿地投资新开工等指标可能受到影\n  3. 未来房企拿地投资新开工等指标可能受到影\n  4. 未来房企拿地投资新开工等指标可能受到的影\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投资新开工等指标可能受到\"?\n",
+            "previous_transcription": "未来房企拿地投资新开工等指标可能受到",
+            "candidates": [
+              "未来房企拿地投资新开工等指标可能受到影�",
+              "未来房企拿地投资新开工等指标可能受到影�",
+              "未来房企拿地投资新开工等指标可能受到影�",
+              "未来房企拿地投资新开工等指标可能受到的影"
+            ],
+            "corrected_appended_text": "影",
+            "corrected_appended_token_ids": [
+              16820
+            ]
+          },
+          "model_seconds": 0.6916656699031591,
+          "stage_seconds": {
+            "A": 0.4486459465697408,
+            "C": 0.22984164021909237,
+            "H": 0.0013113124296069145,
+            "capture": 0.011866770684719086,
+            "instrumented_model_total": 0.6916656699031591
+          },
+          "C_called": true,
+          "packet_signature": "d38ff6ff5a7d0d885b47c0b8191ea57586faa35ad3873a59f1006f14e42d2a8f",
+          "capture_mode": "full"
+        },
+        {
+          "end": 130303,
+          "reference_equal": true,
+          "closed_cut_sha": "cf48cc077ec580e530e648c1f8d99ce974291e17e438f806b5b988287417e906",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"未来房企拿地投资新开工等指标可能受到影\"\n\nK-best candidates for the continuation:\n  1. 未来房企拿地投资新开工等指标可能受到影响\n  2. 未来房企拿地投资新开工等指标可能受到影响\n  3. 未来房企拿地投资新开工等指标可能受到影响\n  4. 未来房企拿地投资新开工等指标可能受到影响\n\nBased on the audio, what is the correct text that should be appended after \"未来房企拿地投资新开工等指标可能受到影\"?\n",
+            "previous_transcription": "未来房企拿地投资新开工等指标可能受到影",
+            "candidates": [
+              "未来房企拿地投资新开工等指标可能受到影响",
+              "未来房企拿地投资新开工等指标可能受到影响",
+              "未来房企拿地投资新开工等指标可能受到影响",
+              "未来房企拿地投资新开工等指标可能受到影响"
+            ],
+            "corrected_appended_text": "响",
+            "corrected_appended_token_ids": [
+              3858,
+              235
+            ]
+          },
+          "model_seconds": 0.6917945705354214,
+          "stage_seconds": {
+            "A": 0.44870621524751186,
+            "C": 0.22941753454506397,
+            "H": 0.0013550333678722382,
+            "capture": 0.012315787374973297,
+            "instrumented_model_total": 0.6917945705354214
+          },
+          "C_called": true,
+          "packet_signature": "af7ffa7e0b5dcb8c590217ce2ee9bcafee35d812879387d36f0a54ef84da3de1",
+          "capture_mode": "full"
+        }
+      ],
+      "blob_file_bytes": 5631496,
+      "trace_json_bytes": 3972557,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    },
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "control_plain",
+        "kind": "control",
+        "source_index": 0,
+        "gpu": 0,
+        "capture": "off",
+        "start_F": 24000,
+        "end_F": 32000
+      },
+      "native_steps": 1,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": null,
+      "results": [
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "bba030c99bd828ac75b2dbcff62f8c084f08a91d1433a007cf4f9cdb5f6eaba4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+            "previous_transcription": "严",
+            "candidates": [
+              "严厉打击春",
+              "严厉打击�",
+              "严厉打击村",
+              "严厉打击川"
+            ],
+            "corrected_appended_text": "厉打击春",
+            "corrected_appended_token_ids": [
+              5014,
+              231,
+              12467,
+              6336,
+              119,
+              46953
+            ]
+          },
+          "model_seconds": 1.66105583216995,
+          "stage_seconds": null,
+          "C_called": null,
+          "packet_signature": null,
+          "capture_mode": "off"
+        }
+      ],
+      "blob_file_bytes": 0,
+      "trace_json_bytes": 0,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    },
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "control_deferred",
+        "kind": "control",
+        "source_index": 0,
+        "gpu": 0,
+        "capture": "deferred",
+        "start_F": 24000,
+        "end_F": 32000
+      },
+      "native_steps": 1,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": {
+        "A": 0.9582381676882505,
+        "C": 0.00016173161566257477,
+        "H": 0.0005364157259464264,
+        "capture": 0.0025406228378415108,
+        "instrumented_model_total": 0.961476937867701
+      },
+      "results": [
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "bba030c99bd828ac75b2dbcff62f8c084f08a91d1433a007cf4f9cdb5f6eaba4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+            "previous_transcription": "严",
+            "candidates": [
+              "严厉打击春",
+              "严厉打击�",
+              "严厉打击村",
+              "严厉打击川"
+            ],
+            "corrected_appended_text": "厉打击春",
+            "corrected_appended_token_ids": [
+              5014,
+              231,
+              12467,
+              6336,
+              119,
+              46953
+            ]
+          },
+          "model_seconds": 1.654727354645729,
+          "stage_seconds": {
+            "A": 0.7961283605545759,
+            "C": 0.853352764621377,
+            "H": 0.0015909550711512566,
+            "capture": 0.003655274398624897,
+            "instrumented_model_total": 1.654727354645729
+          },
+          "C_called": true,
+          "packet_signature": "bf7b9053887cf123e7bc0cf0a6b418ef69388e553a9acf031cc88d9d7aa05acd",
+          "capture_mode": "deferred"
+        }
+      ],
+      "blob_file_bytes": 352144,
+      "trace_json_bytes": 463128,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    },
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "control_full",
+        "kind": "control",
+        "source_index": 0,
+        "gpu": 0,
+        "capture": "full",
+        "start_F": 24000,
+        "end_F": 32000
+      },
+      "native_steps": 1,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": {
+        "A": 0.9487192323431373,
+        "C": 0.00017167162150144577,
+        "H": 0.0005737356841564178,
+        "capture": 0.005680822767317295,
+        "instrumented_model_total": 0.9551454624161124
+      },
+      "results": [
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "bba030c99bd828ac75b2dbcff62f8c084f08a91d1433a007cf4f9cdb5f6eaba4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+            "previous_transcription": "严",
+            "candidates": [
+              "严厉打击春",
+              "严厉打击�",
+              "严厉打击村",
+              "严厉打击川"
+            ],
+            "corrected_appended_text": "厉打击春",
+            "corrected_appended_token_ids": [
+              5014,
+              231,
+              12467,
+              6336,
+              119,
+              46953
+            ]
+          },
+          "model_seconds": 1.8303931495174766,
+          "stage_seconds": {
+            "A": 0.8025732934474945,
+            "C": 1.0179748544469476,
+            "H": 0.0015710843726992607,
+            "capture": 0.008273917250335217,
+            "instrumented_model_total": 1.8303931495174766
+          },
+          "C_called": true,
+          "packet_signature": "bf7b9053887cf123e7bc0cf0a6b418ef69388e553a9acf031cc88d9d7aa05acd",
+          "capture_mode": "full"
+        }
+      ],
+      "blob_file_bytes": 352144,
+      "trace_json_bytes": 462989,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    },
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "control_fresh_repeat",
+        "kind": "control",
+        "source_index": 0,
+        "gpu": 0,
+        "capture": "full",
+        "start_F": 24000,
+        "end_F": 32000
+      },
+      "native_steps": 1,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": {
+        "A": 0.9482550984248519,
+        "C": 0.00017005205154418945,
+        "H": 0.0005516363307833672,
+        "capture": 0.0054635582491755486,
+        "instrumented_model_total": 0.954440345056355
+      },
+      "results": [
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "bba030c99bd828ac75b2dbcff62f8c084f08a91d1433a007cf4f9cdb5f6eaba4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+            "previous_transcription": "严",
+            "candidates": [
+              "严厉打击春",
+              "严厉打击�",
+              "严厉打击村",
+              "严厉打击川"
+            ],
+            "corrected_appended_text": "厉打击春",
+            "corrected_appended_token_ids": [
+              5014,
+              231,
+              12467,
+              6336,
+              119,
+              46953
+            ]
+          },
+          "model_seconds": 1.813381565734744,
+          "stage_seconds": {
+            "A": 0.7900173664093018,
+            "C": 1.0131127946078777,
+            "H": 0.001576913520693779,
+            "capture": 0.008674491196870804,
+            "instrumented_model_total": 1.813381565734744
+          },
+          "C_called": true,
+          "packet_signature": "bf7b9053887cf123e7bc0cf0a6b418ef69388e553a9acf031cc88d9d7aa05acd",
+          "capture_mode": "full"
+        }
+      ],
+      "blob_file_bytes": 352144,
+      "trace_json_bytes": 463264,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    },
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "control_cross_gpu",
+        "kind": "control",
+        "source_index": 0,
+        "gpu": 1,
+        "capture": "full",
+        "start_F": 24000,
+        "end_F": 32000
+      },
+      "native_steps": 1,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": {
+        "A": 0.99373590759933,
+        "C": 0.00016889162361621857,
+        "H": 0.0005676941946148872,
+        "capture": 0.0057062143459916115,
+        "instrumented_model_total": 1.0001787077635527
+      },
+      "results": [
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "bba030c99bd828ac75b2dbcff62f8c084f08a91d1433a007cf4f9cdb5f6eaba4",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+            "previous_transcription": "严",
+            "candidates": [
+              "严厉打击春",
+              "严厉打击�",
+              "严厉打击村",
+              "严厉打击川"
+            ],
+            "corrected_appended_text": "厉打击春",
+            "corrected_appended_token_ids": [
+              5014,
+              231,
+              12467,
+              6336,
+              119,
+              46953
+            ]
+          },
+          "model_seconds": 1.907372608780861,
+          "stage_seconds": {
+            "A": 0.8264619624242187,
+            "C": 1.0707996347919106,
+            "H": 0.0016502141952514648,
+            "capture": 0.008460797369480133,
+            "instrumented_model_total": 1.907372608780861
+          },
+          "C_called": true,
+          "packet_signature": "bf7b9053887cf123e7bc0cf0a6b418ef69388e553a9acf031cc88d9d7aa05acd",
+          "capture_mode": "full"
+        }
+      ],
+      "blob_file_bytes": 352144,
+      "trace_json_bytes": 463157,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    },
+    {
+      "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+      "run": {
+        "run_id": "control_different_source",
+        "kind": "control",
+        "source_index": 2,
+        "gpu": 0,
+        "capture": "full",
+        "start_F": 24000,
+        "end_F": 32000
+      },
+      "native_steps": 1,
+      "warmup_steps": 1,
+      "warmup_stage_seconds": {
+        "A": 1.0510494085028768,
+        "C": 0.6086825942620635,
+        "H": 0.0012731216847896576,
+        "capture": 0.006215514615178108,
+        "instrumented_model_total": 1.667220639064908
+      },
+      "results": [
+        {
+          "end": 32000,
+          "reference_equal": true,
+          "closed_cut_sha": "44a2cf5205cbccf3b1cda1c2e7e4c10ff151dae4c58499b159e9c2279fa6b6b3",
+          "native_model_evaluated": true,
+          "selected": {
+            "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非\"\n\nK-best candidates for the continuation:\n  1. 乘非吉成\n  2. 乘非集成\n  3. 乘非及\n  4. 乘非集成\n\nBased on the audio, what is the correct text that should be appended after \"乘非\"?\n",
+            "previous_transcription": "乘非",
+            "candidates": [
+              "乘非吉成",
+              "乘非集成",
+              "乘非及�",
+              "乘非集成"
+            ],
+            "corrected_appended_text": "吉城",
+            "corrected_appended_token_ids": [
+              42866,
+              45277
+            ]
+          },
+          "model_seconds": 0.7408150807023048,
+          "stage_seconds": {
+            "A": 0.44152624532580376,
+            "C": 0.28980602882802486,
+            "H": 0.0013298718258738518,
+            "capture": 0.008152934722602367,
+            "instrumented_model_total": 0.7408150807023048
+          },
+          "C_called": true,
+          "packet_signature": "42bf4620a8487610cf658e124722638f4a1648543f12e260a357136fcdf1d964",
+          "capture_mode": "full"
+        }
+      ],
+      "blob_file_bytes": 354504,
+      "trace_json_bytes": 419320,
+      "scope": "component replay only, not serving; no stage handoff or resume implemented"
+    }
+  ],
+  "limitation": "No serving claim. H is original tail/synchronization/unclassified residual, not handoff/IPC; capture and post-model materialization are measured instrumentation costs. Open KV/attention payload omitted, original cleanup still executes; no handoff/tail implementation or global numerical guarantee. First actual C per process is separately retained, not removed from scope."
+}

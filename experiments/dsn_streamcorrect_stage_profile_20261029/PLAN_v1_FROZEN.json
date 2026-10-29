@@ -1,0 +1,108 @@
+{
+  "experiment_id": "SC_ORIGINAL_STAGE_PROFILE_V1",
+  "created_utc": "2026-10-29T09:05:38.261415+00:00",
+  "source_commit": "41dea9bb6666e2c7397b394fb1c7a4a58b27888f",
+  "native_plan": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/NATIVE_CAMPAIGN_v8_FROZEN.json",
+  "native_plan_sha256": "b3b8d5612ae3adc9faee5332514184d6fc2471eebcc4a5154db8acff07e35e47",
+  "native_model_source_commit": "61c9afac00561f7ff1351f3eba9fd95adb239e8c",
+  "native_frozen_environment_sha256": "96a0679d34741743de1a1b6d784c0e518cbdcf7b76a23cae3d95c12d20a6fae8",
+  "author_commit": "bbb9f7fde13fabb6c0940f5bae215150d1ea1cb3",
+  "author_infer_sha256": "9f016f71df780c05b04719633ed302b502a457ff18a086eb5412a394b05cacb7",
+  "runs": [
+    {
+      "run_id": "full_0",
+      "kind": "full",
+      "source_index": 0,
+      "gpu": 0,
+      "capture": "full"
+    },
+    {
+      "run_id": "full_1",
+      "kind": "full",
+      "source_index": 1,
+      "gpu": 0,
+      "capture": "full"
+    },
+    {
+      "run_id": "full_2",
+      "kind": "full",
+      "source_index": 2,
+      "gpu": 0,
+      "capture": "full"
+    },
+    {
+      "run_id": "full_3",
+      "kind": "full",
+      "source_index": 3,
+      "gpu": 0,
+      "capture": "full"
+    },
+    {
+      "run_id": "control_plain",
+      "kind": "control",
+      "source_index": 0,
+      "gpu": 0,
+      "capture": "off",
+      "start_F": 24000,
+      "end_F": 32000
+    },
+    {
+      "run_id": "control_deferred",
+      "kind": "control",
+      "source_index": 0,
+      "gpu": 0,
+      "capture": "deferred",
+      "start_F": 24000,
+      "end_F": 32000
+    },
+    {
+      "run_id": "control_full",
+      "kind": "control",
+      "source_index": 0,
+      "gpu": 0,
+      "capture": "full",
+      "start_F": 24000,
+      "end_F": 32000
+    },
+    {
+      "run_id": "control_fresh_repeat",
+      "kind": "control",
+      "source_index": 0,
+      "gpu": 0,
+      "capture": "full",
+      "start_F": 24000,
+      "end_F": 32000
+    },
+    {
+      "run_id": "control_cross_gpu",
+      "kind": "control",
+      "source_index": 0,
+      "gpu": 1,
+      "capture": "full",
+      "start_F": 24000,
+      "end_F": 32000
+    },
+    {
+      "run_id": "control_different_source",
+      "kind": "control",
+      "source_index": 2,
+      "gpu": 0,
+      "capture": "full",
+      "start_F": 24000,
+      "end_F": 32000
+    }
+  ],
+  "cache_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/cache/revtrace_streamcorrect_stage_profile_20261029",
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_profile_20261029/campaign_v1",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_profile_20261029/campaign_v1/SUMMARY.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_profile_20261029/campaign_v1/GATE.json",
+  "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_profile_20261029/source_v1",
+  "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_profile_20261029/SOURCE_v1.json",
+  "environment_python": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+  "source_selection": "all four original metadata-selected sources retained; no output filtering",
+  "logical_infer_calls_max": 85,
+  "control_target": "predeclared 1.5s full canonical input to 2.0s target, first and third fixed source; full input packet repeat across capture and GPU, original v8 selected full histories are legal oracle",
+  "timing": "CUDA-synchronized A to original C entry; original C; H tail/sync/unclassified residual. Explicit snapshot capture cost and post-model materialization reported; none equals IPC or deployed handoff overhead. First actual C per fresh process retained in declared warmup.",
+  "precision": "unchanged native v8 FP32 controlled contract; no autocast/TF32. No claim against original recommended optimized precision.",
+  "scope": "four complete original flows once and six bounded short controls, no training/model/source/dtype grid; no resume/tail/handoff implementation; no deployed serving claim"
+}

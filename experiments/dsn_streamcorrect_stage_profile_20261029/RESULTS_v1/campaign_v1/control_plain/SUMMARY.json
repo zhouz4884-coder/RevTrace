@@ -1,0 +1,50 @@
+{
+  "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+  "run": {
+    "run_id": "control_plain",
+    "kind": "control",
+    "source_index": 0,
+    "gpu": 0,
+    "capture": "off",
+    "start_F": 24000,
+    "end_F": 32000
+  },
+  "native_steps": 1,
+  "warmup_steps": 1,
+  "warmup_stage_seconds": null,
+  "results": [
+    {
+      "end": 32000,
+      "reference_equal": true,
+      "closed_cut_sha": "bba030c99bd828ac75b2dbcff62f8c084f08a91d1433a007cf4f9cdb5f6eaba4",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+        "previous_transcription": "严",
+        "candidates": [
+          "严厉打击春",
+          "严厉打击�",
+          "严厉打击村",
+          "严厉打击川"
+        ],
+        "corrected_appended_text": "厉打击春",
+        "corrected_appended_token_ids": [
+          5014,
+          231,
+          12467,
+          6336,
+          119,
+          46953
+        ]
+      },
+      "model_seconds": 1.66105583216995,
+      "stage_seconds": null,
+      "C_called": null,
+      "packet_signature": null,
+      "capture_mode": "off"
+    }
+  ],
+  "blob_file_bytes": 0,
+  "trace_json_bytes": 0,
+  "scope": "component replay only, not serving; no stage handoff or resume implemented"
+}

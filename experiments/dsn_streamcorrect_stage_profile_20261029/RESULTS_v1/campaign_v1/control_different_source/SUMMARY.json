@@ -1,0 +1,58 @@
+{
+  "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+  "run": {
+    "run_id": "control_different_source",
+    "kind": "control",
+    "source_index": 2,
+    "gpu": 0,
+    "capture": "full",
+    "start_F": 24000,
+    "end_F": 32000
+  },
+  "native_steps": 1,
+  "warmup_steps": 1,
+  "warmup_stage_seconds": {
+    "A": 1.0510494085028768,
+    "C": 0.6086825942620635,
+    "H": 0.0012731216847896576,
+    "capture": 0.006215514615178108,
+    "instrumented_model_total": 1.667220639064908
+  },
+  "results": [
+    {
+      "end": 32000,
+      "reference_equal": true,
+      "closed_cut_sha": "44a2cf5205cbccf3b1cda1c2e7e4c10ff151dae4c58499b159e9c2279fa6b6b3",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"乘非\"\n\nK-best candidates for the continuation:\n  1. 乘非吉成\n  2. 乘非集成\n  3. 乘非及\n  4. 乘非集成\n\nBased on the audio, what is the correct text that should be appended after \"乘非\"?\n",
+        "previous_transcription": "乘非",
+        "candidates": [
+          "乘非吉成",
+          "乘非集成",
+          "乘非及�",
+          "乘非集成"
+        ],
+        "corrected_appended_text": "吉城",
+        "corrected_appended_token_ids": [
+          42866,
+          45277
+        ]
+      },
+      "model_seconds": 0.7408150807023048,
+      "stage_seconds": {
+        "A": 0.44152624532580376,
+        "C": 0.28980602882802486,
+        "H": 0.0013298718258738518,
+        "capture": 0.008152934722602367,
+        "instrumented_model_total": 0.7408150807023048
+      },
+      "C_called": true,
+      "packet_signature": "42bf4620a8487610cf658e124722638f4a1648543f12e260a357136fcdf1d964",
+      "capture_mode": "full"
+    }
+  ],
+  "blob_file_bytes": 354504,
+  "trace_json_bytes": 419320,
+  "scope": "component replay only, not serving; no stage handoff or resume implemented"
+}

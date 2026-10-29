@@ -1,5 +1,9 @@
 # DSN 2027 补强实验与正文修订：进行中
 
+**2026-10-29当前进展：**下表四项原实验范围已完成，新的完整核心稿已写并初步编译为9页技术正文加参考文献。原生阶段profiling和69输入神经保真均完成；在线ready-only交接仍在实现，实际服务格数为0。旧稿入口仍保留，最终正文入口待本轮研究决策与全页QA后切换。
+
+新证据包括：[阶段成本与完整候选](../dsn_streamcorrect_stage_profile_20261029/RESULTS_REPORT.zh.md)、[69输入神经等价与旧任务保真](../dsn_streamcorrect_stage_handoff_20261029/OLD_FIDELITY_RESULTS_v1.zh.md)、[原生内容端点](../dsn_native_content_20261029/RESULTS_FINDINGS.zh.md)、[完整2s实际文字病例](../dsn_full_interval_case_20261029/RESULTS_v2/timely_full_interval_case.pdf)。13个真实输入的最终预测状态不同，但其完整ASR候选经原C/U后仍与原生完整调用一致；这是组件合法性证据，不能代替在线服务收益。v1字节码参照检查失败和完整模块参照修复均保留。
+
 本阶段接续 `cd6cf27` 已完成的110格独立确认与16格退出对照。目标是补齐服务区间/时序稳定性、计算保留×覆盖退出、真实纠错反馈应用，然后基于当前DSN旧稿改写完整正文并编译核验。
 
 ## 当前冻结任务
@@ -10,7 +14,7 @@
 | [保留与覆盖退出](../dsn_joint_retention_exit_20261028/RESULTS_FINDINGS.zh.md) | two_lane固定，R×K四臂 ×sync/staggered ×3新进程，共24格 | 24/24完成；独立重计和实际输入/Consumer侧证据齐全。交互符号混合，K定位执行支撑；同工作后继批真正miss→hit的数量已另列，不把所有obsolete行算作期限失败。 |
 | [StreamCorrect有界适配](../dsn_streamcorrect_adaptation_20261028/NATIVE_RESULTS_REPORT.zh.md) | 原作者真实ASR与发布纠错器，固定4来源，2见证+12正式 | 全14完成，完整可信历史/CER一致。Joint减少41次Private调用、保留70次非空unchanged-ahead，但信用17s低于强两完整副本18.5s；全部formal D2失败，能耗边界已报告。 |
 | [唯一12会话中点](../dsn_midpoint_continuity_20261029/MIDPOINT_FINDINGS.zh.md) | 原16开发源前12、四臂×3fresh | 全12及完整重计完成；强见证阴性，冻结STOP，不试10/11。原36+新12全部四工作点三重复已合并绘图。 |
-| DSN正文 | 基于`Paper_DSN/CURRENT.md`所指20261008 coordination-spine旧稿 | 旧稿保护；新合同/合法性/协议技术章节草稿已写，main与PDF尚为旧基线，待最后有界设计判断后完整改写/编译/QA。 |
+| DSN正文 | 基于`Paper_DSN/CURRENT.md`所指20261008 coordination-spine旧稿 | 旧稿保护；完整核心稿`core_draft.tex`已写并初编译为9技术页+参考文献，正式main/PDF/CURRENT仍为旧基线，待最后研究决策、全页QA与干净发布包。 |
 
 Qwen主实验实际神经源码为干净冻结的 `f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf`；原生v8执行源码为 `61c9afac00561f7ff1351f3eba9fd95adb239e8c`，不是本过程归档的HEAD。各CPU分析另有干净提交、完整manifest/bundle与实际输入哈希。所有大日志、环境、模型和音频仍在指定8TB盘；相邻任务不并行占用GPU，计时期间也避免重下载/解压和重CPU I/O。
 
@@ -28,7 +32,7 @@ Qwen主实验实际神经源码为干净冻结的 `f0a8e7bc5fbcb010de28e94ac5c9d
 
 新增[R×K同F内容支持](../dsn_joint_retention_exit_20261028/same_F_support_v1/RESULTS_FINDINGS.zh.md)完成全24格和固定96行：96/96正常后继行的完整首次消费原文与后来严格同F Canon一致；原R1 miss→hit 6/6/1行全部支持，原mixed交互/信用不改。整场首次及时内容仍有raw/norm不同，完整最终WER相同不能替代这个检查。
 
-原生14完整结果揭示了新的[候选阶段机会](NATIVE_STAGE_VALIDITY_IDEA.zh.md)：244个非空完整同输入Private结果在Authority派发前已ready，预测最终反馈需撤回也不必使同次ASR候选无效。独立讨论同意先做有界同步A/C/H与完整beam/open-state profiling，保留原纠错选择与两完整副本ASR早显强对照。**目前只在本地准备新阶段方案，没有实现handoff或测得其服务收益。** 固定两卡A/C分工不能被预设为吞吐优于两完整副本；原native过载点完整保留。
+原生14完整结果揭示了新的[候选阶段机会](NATIVE_STAGE_VALIDITY_IDEA.zh.md)：244个非空完整同输入Private结果在Authority派发前已ready，预测最终反馈需撤回也不必使同次ASR候选无效。后续有界同步profiling已完成：64次真实非空纠错调用的ASR阶段均值434.70ms、纠错阶段268.72ms，完整快照另有成本。完整候选适配器69输入保真通过，其中13个最终预测反馈不同，原C/U仍给出一致结果。当前source_v3正在集成在线ready-only调度，**尚无在线交接服务结果**。强对照保留两完整副本、相同ASR早显与真实神经预热；固定两卡A/C分工不能预设吞吐优势，原native过载点完整保留。原作者公开推理代码确为FP32，本轮不把未经测量的精度变化当成免费优化。
 
 旧开发轨迹的唯一D2 miss为2.154821秒，其中ACK到enqueue为1.625349秒，与前一Proposer物理lease重叠1.553488秒；本次实际生成0.428193秒、输入ACK11.56毫秒、发布到实际Consumer11.92毫秒。这个逐前沿分解表明，需要分别看执行排队、组批和持久化；累计fsync增加不能独立解释一次超时。
 

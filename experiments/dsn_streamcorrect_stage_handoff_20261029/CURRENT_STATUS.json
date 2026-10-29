@@ -1,0 +1,47 @@
+{
+  "status": "COMPLETE_FOUR_SOURCE_NEURAL_EQ_AND_OLD_TASK_FIDELITY_SERVICE_V3_IN_DEVELOPMENT",
+  "source_commit": "99e83a466fee7f1d16830b640cc99e0040d2f147",
+  "neural_profile_runs_completed": 0,
+  "GPU_launched": true,
+  "prerequisite_gate": "PREREQUISITE_GATE_v2.json",
+  "current_pointer": "D:\\VLA_QWEN\\RevTrace\\experiments\\repository_identity_20261027\\CURRENT.json",
+  "scope": "69 fixed same-input neural equivalence controls; no serving performance claim",
+  "handle": {
+    "pid": 1767604,
+    "start_ticks": 501917204,
+    "cmdline_sha256": "f152a5d3330544b6a10f0891775604b3b30ea6acfa98c789af6c1480d2cfb8b7",
+    "command": [
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+      "-B",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/source_v2/run_neural_equivalence.py",
+      "--plan",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/EQ_PLAN_v2_FROZEN.json",
+      "--manifest",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/SOURCE_v2.json",
+      "--out",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/equivalence_v2"
+    ],
+    "source_commit": "99e83a466fee7f1d16830b640cc99e0040d2f147",
+    "plan_sha256": "a93e27fe5ffb9a7343077867a7386c020480699a2695aa6d9cc285a104f3b92a",
+    "source_manifest_sha256": "2dc1ca87c160e22649e3cf229e09d5840db2e77f6146b730deaea2e539d9638c",
+    "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/equivalence_v2.log",
+    "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_stage_handoff_20261029/equivalence_v2",
+    "started_utc": "2026-10-29T10:19:22.272322+00:00"
+  },
+  "actual_serving_cells": 0,
+  "neural_EQ_steps_completed": 69,
+  "historical_v1_failure": {
+    "source_commit": "c7e403b4313ed1283dfea2af043116643e01a0f7",
+    "status": "FAIL_PROTECTED_STAGE_EQUIVALENCE_PRESERVED",
+    "gate_sha256": "75e78197a61d23ec905ba66a87aa1092498201138ec31359ccdb3934eaa5fb03",
+    "reason": "subset class compile was wrong bytecode oracle; original full module exact"
+  },
+  "updated_utc": "2026-10-29T10:27:56.930042+00:00",
+  "candidate_C_U_comparisons": 65,
+  "end_different_but_valid_candidates": 13,
+  "neural_eq_gate_sha256": "41221280007d94581a640ec329bf5634ccb6012efbc44ab60fca302c51c6849d",
+  "old_task_fidelity_gate_sha256": "79f9355a41f42660fb16c3f002b3052551a547dbe6dafd89cdb0a0205c8d1411",
+  "old_task_raw_hashes_equal": 0,
+  "remote_resources_released": true,
+  "next_action": "Complete source_v3 service controller then root reviews and freezes actual service plan"
+}

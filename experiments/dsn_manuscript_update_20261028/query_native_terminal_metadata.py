@@ -6,10 +6,11 @@ for q in [O/'native_campaign_v8_continuation_auditfix_v1/GATE.json',O/'native_po
     if not q.exists():
         print(json.dumps(dict(path=str(q),exists=False)));continue
     b=q.read_bytes();v=json.loads(b)
-    if q.parent.name=='primary_quantiles':
-        keep=v
-    else:
-        keep={k:x for k,x in v.items() if k not in ('pairs','records','events','calls','cells','sources','cases','matched_pairs')}
-        if 'cells' in v:keep['cells_summary']=v['cells']
+    def compact(x):
+        if isinstance(x,dict):
+            return {k:(len(z) if isinstance(z,list) and k in ('pairs','records','events','calls','updates','same_input_pairs','sources','cases','matched_pairs') else compact(z)) for k,z in x.items()}
+        if isinstance(x,list):return [compact(z) for z in x]
+        return x
+    keep=compact(v)
     print(json.dumps(dict(path=str(q),sha256=hashlib.sha256(b).hexdigest(),data=keep),ensure_ascii=False))
 print(json.dumps(dict(GPU_processes=subprocess.check_output(['nvidia-smi','--query-compute-apps=pid','--format=csv,noheader'],text=True).strip())))

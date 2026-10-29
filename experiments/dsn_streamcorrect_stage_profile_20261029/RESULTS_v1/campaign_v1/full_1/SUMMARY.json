@@ -1,0 +1,549 @@
+{
+  "status": "PASS_ORIGINAL_NATIVE_PROFILE_RUN_REFERENCE_EQUIVALENCE",
+  "run": {
+    "run_id": "full_1",
+    "kind": "full",
+    "source_index": 1,
+    "gpu": 0,
+    "capture": "full"
+  },
+  "native_steps": 17,
+  "warmup_steps": 1,
+  "warmup_stage_seconds": {
+    "A": 0.9933842355385423,
+    "C": 0.0003101229667663574,
+    "H": 0.0007196376100182533,
+    "capture": 0.008586852811276913,
+    "instrumented_model_total": 1.0030008489266038
+  },
+  "results": [
+    {
+      "end": 8000,
+      "reference_equal": true,
+      "closed_cut_sha": "e0118fe83816def9d1893a1035b0a56f9853f0eba962a47965771cdac218c0a2",
+      "native_model_evaluated": false,
+      "selected": null,
+      "model_seconds": 8.689146488904953e-05,
+      "stage_seconds": {
+        "A": 8.689146488904953e-05,
+        "C": 0.0,
+        "H": 0.0,
+        "capture": 0.0,
+        "instrumented_model_total": 8.689146488904953e-05
+      },
+      "C_called": false,
+      "packet_signature": null,
+      "capture_mode": "full"
+    },
+    {
+      "end": 16000,
+      "reference_equal": true,
+      "closed_cut_sha": "9f9859c93a2bf53741955b4161ee0352dd258f74945d5204f1d1af9c4e17b37d",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"\"\n\nK-best candidates for the continuation:\n  1. 下一\n  2. 下一\n  3. 下一\n  4. 下\n\nBased on the audio, what is the correct text that should be appended after \"\"?\n",
+        "previous_transcription": "",
+        "candidates": [
+          "下一",
+          "下一",
+          "下一",
+          "下"
+        ],
+        "corrected_appended_text": "下一",
+        "corrected_appended_token_ids": [
+          45271
+        ]
+      },
+      "model_seconds": 0.9932477008551359,
+      "stage_seconds": {
+        "A": 0.31050317361950874,
+        "C": 0.6754392869770527,
+        "H": 0.0012508723884820938,
+        "capture": 0.006054367870092392,
+        "instrumented_model_total": 0.9932477008551359
+      },
+      "C_called": true,
+      "packet_signature": "40e307f3e122b03ae5cf1bb831ec7ff07db4a44f8416f35d6a1c4992f9fba7b6",
+      "capture_mode": "full"
+    },
+    {
+      "end": 24000,
+      "reference_equal": true,
+      "closed_cut_sha": "e5f20f253d87b58590cf785f61c740a9d29a4fefb4545b51747961ea5674f3d5",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一\"\n\nK-best candidates for the continuation:\n  1. 下一步\n  2. 下一步\n  3. 下一步\n  4. 下一步\n\nBased on the audio, what is the correct text that should be appended after \"下一\"?\n",
+        "previous_transcription": "下一",
+        "candidates": [
+          "下一步",
+          "下一步",
+          "下一步",
+          "下一步"
+        ],
+        "corrected_appended_text": "步",
+        "corrected_appended_token_ids": [
+          31429
+        ]
+      },
+      "model_seconds": 0.5915050311014056,
+      "stage_seconds": {
+        "A": 0.35914002638310194,
+        "C": 0.22487744223326445,
+        "H": 0.0011984128504991531,
+        "capture": 0.006289149634540081,
+        "instrumented_model_total": 0.5915050311014056
+      },
+      "C_called": true,
+      "packet_signature": "1ebee94dfc46ec192ba87d7b14c1d5d52d41a3e3ed71c07e1b89ed0c4a005d22",
+      "capture_mode": "full"
+    },
+    {
+      "end": 32000,
+      "reference_equal": true,
+      "closed_cut_sha": "0275f89130cccda7a053ffb9d29d6860bb7704a0ca62b30d5704fd9f3b259fe9",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步\"\n\nK-best candidates for the continuation:\n  1. 下一步将进\n  2. 下一步将近\n  3. 下一步就进\n  4. 下一步江进\n\nBased on the audio, what is the correct text that should be appended after \"下一步\"?\n",
+        "previous_transcription": "下一步",
+        "candidates": [
+          "下一步将进",
+          "下一步将近",
+          "下一步就进",
+          "下一步江进"
+        ],
+        "corrected_appended_text": "将进",
+        "corrected_appended_token_ids": [
+          45456,
+          36700
+        ]
+      },
+      "model_seconds": 0.9250732781365514,
+      "stage_seconds": {
+        "A": 0.45013615768402815,
+        "C": 0.4657622594386339,
+        "H": 0.0013559935614466667,
+        "capture": 0.007818867452442646,
+        "instrumented_model_total": 0.9250732781365514
+      },
+      "C_called": true,
+      "packet_signature": "21cebb170840d98b510d8f3d425895d26fcf1aabfe2a13bd7d7bae2f1066396b",
+      "capture_mode": "full"
+    },
+    {
+      "end": 40000,
+      "reference_equal": true,
+      "closed_cut_sha": "5b7c778726d6d4eb69adb4a2edac7c5e9c3abfaef00c24f181513ac4a2b243d8",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完\n  2. 下一步将进一步改\n  3. 下一步将进一步\n  4. 下一步将进一步\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进\"?\n",
+        "previous_transcription": "下一步将进",
+        "candidates": [
+          "下一步将进一步完",
+          "下一步将进一步改",
+          "下一步将进一步�",
+          "下一步将进一步�"
+        ],
+        "corrected_appended_text": "一步完",
+        "corrected_appended_token_ids": [
+          2257,
+          31429,
+          14128
+        ]
+      },
+      "model_seconds": 0.8424558844417334,
+      "stage_seconds": {
+        "A": 0.53977613709867,
+        "C": 0.2940000519156456,
+        "H": 0.001405094750225544,
+        "capture": 0.007274600677192211,
+        "instrumented_model_total": 0.8424558844417334
+      },
+      "C_called": true,
+      "packet_signature": "f8251c38ddfb03573c5e754023c0fe378ebff502b9790dbba60e45441daaad58",
+      "capture_mode": "full"
+    },
+    {
+      "end": 48000,
+      "reference_equal": true,
+      "closed_cut_sha": "321254dae3d088cd0035a540e5b7be4a0bd5c45546d7b323c38927a2cfe35167",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善\n  2. 下一步将进一步完善\n  3. 下一步将进一步完善\n  4. 下一步将进一步完善\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完\"?\n",
+        "previous_transcription": "下一步将进一步完",
+        "candidates": [
+          "下一步将进一步完善",
+          "下一步将进一步完善",
+          "下一步将进一步完善",
+          "下一步将进一步完善"
+        ],
+        "corrected_appended_text": "善",
+        "corrected_appended_token_ids": [
+          5234,
+          226
+        ]
+      },
+      "model_seconds": 0.6868130834773183,
+      "stage_seconds": {
+        "A": 0.4492205586284399,
+        "C": 0.22857168782502413,
+        "H": 0.0013736439868807793,
+        "capture": 0.007647193036973476,
+        "instrumented_model_total": 0.6868130834773183
+      },
+      "C_called": true,
+      "packet_signature": "1edc581e0d2789b36cfc395beeb883b6b2d467d1fffb245660401c31f6b88b86",
+      "capture_mode": "full"
+    },
+    {
+      "end": 56000,
+      "reference_equal": true,
+      "closed_cut_sha": "8b2af864340aa23c8ae379ae0af07e5c7040e273b6c9ddb6fb9d8ce0b29a9765",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善\n  2. 下一步将进一步完善\n  3. 下一步将进一步完善\n  4. 下一步将进一步完善\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善\"?\n",
+        "previous_transcription": "下一步将进一步完善",
+        "candidates": [
+          "下一步将进一步完善",
+          "下一步将进一步完善",
+          "下一步将进一步完善",
+          "下一步将进一步完善"
+        ],
+        "corrected_appended_text": "",
+        "corrected_appended_token_ids": []
+      },
+      "model_seconds": 0.4393442617729306,
+      "stage_seconds": {
+        "A": 0.270642994903028,
+        "C": 0.16095108166337013,
+        "H": 0.0010931408032774925,
+        "capture": 0.006657044403254986,
+        "instrumented_model_total": 0.4393442617729306
+      },
+      "C_called": true,
+      "packet_signature": "c4dba0ad9ec9dd996183a8089c87e79de18485bbfe48aa2492008a9780ef8bb2",
+      "capture_mode": "full"
+    },
+    {
+      "end": 64000,
+      "reference_equal": true,
+      "closed_cut_sha": "017c1d87e97abd1807ef817ef8a80e86cbbfe9a1f0422b57de2816d987a1dc5e",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城\n  2. 下一步将进一步完善成\n  3. 下一步将进一步完善城\n  4. 下一步将进一步完善\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善\"?\n",
+        "previous_transcription": "下一步将进一步完善",
+        "candidates": [
+          "下一步将进一步完善城",
+          "下一步将进一步完善成",
+          "下一步将进一步完善城",
+          "下一步将进一步完善�"
+        ],
+        "corrected_appended_text": "城",
+        "corrected_appended_token_ids": [
+          45277
+        ]
+      },
+      "model_seconds": 0.5989603586494923,
+      "stage_seconds": {
+        "A": 0.3612300930544734,
+        "C": 0.22789690922945738,
+        "H": 0.0012781620025634766,
+        "capture": 0.008555194362998009,
+        "instrumented_model_total": 0.5989603586494923
+      },
+      "C_called": true,
+      "packet_signature": "aa1e06d57818356c99a6969d86964f78b5cba1cc994f65a4bcfeb99c43c9b0ff",
+      "capture_mode": "full"
+    },
+    {
+      "end": 72000,
+      "reference_equal": true,
+      "closed_cut_sha": "83113c7d86879f51062e107d7ee5e438a4ae5ba173476c201bf6405008c97d65",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投\n  2. 下一步将进一步完善城头\n  3. 下一步将进一步完善城投\n  4. 下一步将进一步完善城投\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城\"?\n",
+        "previous_transcription": "下一步将进一步完善城",
+        "candidates": [
+          "下一步将进一步完善城投",
+          "下一步将进一步完善城头",
+          "下一步将进一步完善城投",
+          "下一步将进一步完善城投"
+        ],
+        "corrected_appended_text": "投",
+        "corrected_appended_token_ids": [
+          37094
+        ]
+      },
+      "model_seconds": 0.6007328564301133,
+      "stage_seconds": {
+        "A": 0.3618498407304287,
+        "C": 0.22881802916526794,
+        "H": 0.0012325020506978035,
+        "capture": 0.008832484483718872,
+        "instrumented_model_total": 0.6007328564301133
+      },
+      "C_called": true,
+      "packet_signature": "a12541572b491c802826b827b6ef421599590ce2fb227ef7197e93d3033e4257",
+      "capture_mode": "full"
+    },
+    {
+      "end": 80000,
+      "reference_equal": true,
+      "closed_cut_sha": "63a560225208079ec532842bd4323f46fe376e5c1eb352a5f8180fc0de7d6c16",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债\n  2. 下一步将进一步完善城投债\n  3. 下一步将进一步完善城投债\n  4. 下一步将进一步完善城投债\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投\"?\n",
+        "previous_transcription": "下一步将进一步完善城投",
+        "candidates": [
+          "下一步将进一步完善城投债�",
+          "下一步将进一步完善城投债�",
+          "下一步将进一步完善城投债�",
+          "下一步将进一步完善城投债�"
+        ],
+        "corrected_appended_text": "债",
+        "corrected_appended_token_ids": [
+          2122,
+          118
+        ]
+      },
+      "model_seconds": 0.7750573251396418,
+      "stage_seconds": {
+        "A": 0.5355622135102749,
+        "C": 0.2287681782618165,
+        "H": 0.0013917116448283195,
+        "capture": 0.009335221722722054,
+        "instrumented_model_total": 0.7750573251396418
+      },
+      "C_called": true,
+      "packet_signature": "3b24bed93e052c8fbe0a1a11cc3abfadf5420fa6ec577e60f444ef2b5066a661",
+      "capture_mode": "full"
+    },
+    {
+      "end": 88000,
+      "reference_equal": true,
+      "closed_cut_sha": "89c00c6303afb191a24899649a4a204b4c90137582c124f7c542a4e693c74fd2",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发\n  2. 下一步将进一步完善城投债券儿\n  3. 下一步将进一步完善城投债券发\n  4. 下一步将进一步完善城投债券发\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债\"?\n",
+        "previous_transcription": "下一步将进一步完善城投债",
+        "candidates": [
+          "下一步将进一步完善城投债券发",
+          "下一步将进一步完善城投债券儿",
+          "下一步将进一步完善城投债券发",
+          "下一步将进一步完善城投债券发"
+        ],
+        "corrected_appended_text": "券发",
+        "corrected_appended_token_ids": [
+          2437,
+          116,
+          28926
+        ]
+      },
+      "model_seconds": 0.8503210349008441,
+      "stage_seconds": {
+        "A": 0.5437218314036727,
+        "C": 0.2951668119058013,
+        "H": 0.0013673631474375725,
+        "capture": 0.010065028443932533,
+        "instrumented_model_total": 0.8503210349008441
+      },
+      "C_called": true,
+      "packet_signature": "b7ff6343b22547f6bc55f43bf4de67ca4fe081e64e8c5ce93efcc2be2585e177",
+      "capture_mode": "full"
+    },
+    {
+      "end": 96000,
+      "reference_equal": true,
+      "closed_cut_sha": "0340d8ec3a5fd9a90d74b7faa1a10c674ec9ec7666691b92a9587cbd60de5865",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行\n  2. 下一步将进一步完善城投债券发型\n  3. 下一步将进一步完善城投债券发行\n  4. 下一步将进一步完善城投债券发行\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发\"?\n",
+        "previous_transcription": "下一步将进一步完善城投债券发",
+        "candidates": [
+          "下一步将进一步完善城投债券发行",
+          "下一步将进一步完善城投债券发型",
+          "下一步将进一步完善城投债券发行",
+          "下一步将进一步完善城投债券发行"
+        ],
+        "corrected_appended_text": "行",
+        "corrected_appended_token_ids": [
+          8082
+        ]
+      },
+      "model_seconds": 0.6074759969487786,
+      "stage_seconds": {
+        "A": 0.36427260003983974,
+        "C": 0.231763175688684,
+        "H": 0.001239260658621788,
+        "capture": 0.01020096056163311,
+        "instrumented_model_total": 0.6074759969487786
+      },
+      "C_called": true,
+      "packet_signature": "5974e7ab709467897118b29966f3bed06829404d68112794e493f8d26b41e708",
+      "capture_mode": "full"
+    },
+    {
+      "end": 104000,
+      "reference_equal": true,
+      "closed_cut_sha": "c1c53b6191602ea6f8e09828f65226fce8bd32bc52eb4c1deb1548fce92dce7c",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度\n  2. 下一步将进一步完善城投债券发行制度\n  3. 下一步将进一步完善城投债券发行系\n  4. 下一步将进一步完善城投债券发行制度\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行\"?\n",
+        "previous_transcription": "下一步将进一步完善城投债券发行",
+        "candidates": [
+          "下一步将进一步完善城投债券发行制度",
+          "下一步将进一步完善城投债券发行制度",
+          "下一步将进一步完善城投债券发行系�",
+          "下一步将进一步完善城投债券发行制度"
+        ],
+        "corrected_appended_text": "制度",
+        "corrected_appended_token_ids": [
+          25491,
+          13127
+        ]
+      },
+      "model_seconds": 0.6964413598179817,
+      "stage_seconds": {
+        "A": 0.45217549148947,
+        "C": 0.23237186204642057,
+        "H": 0.0013155220076441765,
+        "capture": 0.010578484274446964,
+        "instrumented_model_total": 0.6964413598179817
+      },
+      "C_called": true,
+      "packet_signature": "8e45a9b0e37b9aef836f09fdd399d5a08bb8195c89fe03495211b108bfd7a007",
+      "capture_mode": "full"
+    },
+    {
+      "end": 112000,
+      "reference_equal": true,
+      "closed_cut_sha": "6829eefd9d07f6a4c26023c7882dbf02e4c81fb8e235af284b22b8e491a95cf3",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行制度\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度和防\n  2. 下一步将进一步完善城投债券发行制度和\n  3. 下一步将进一步完善城投债券发行制度和方\n  4. 下一步将进一步完善城投债券发行制度和房\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行制度\"?\n",
+        "previous_transcription": "下一步将进一步完善城投债券发行制度",
+        "candidates": [
+          "下一步将进一步完善城投债券发行制度和防",
+          "下一步将进一步完善城投债券发行制度和�",
+          "下一步将进一步完善城投债券发行制度和方",
+          "下一步将进一步完善城投债券发行制度和房"
+        ],
+        "corrected_appended_text": "和防",
+        "corrected_appended_token_ids": [
+          12565,
+          35863
+        ]
+      },
+      "model_seconds": 0.7623412180691957,
+      "stage_seconds": {
+        "A": 0.4521428933367133,
+        "C": 0.29797661770135164,
+        "H": 0.0013147322461009026,
+        "capture": 0.010906974785029888,
+        "instrumented_model_total": 0.7623412180691957
+      },
+      "C_called": true,
+      "packet_signature": "45186d95c8fab50b03615e957f5fb1d0a2d61f3f963bd8e5c24a32b99dca1284",
+      "capture_mode": "full"
+    },
+    {
+      "end": 120000,
+      "reference_equal": true,
+      "closed_cut_sha": "ec9e5d98bef512b36d31ca8d8cb9869cd2016ba167d03554b8adfd8560832a30",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行制度和防\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度和防范风\n  2. 下一步将进一步完善城投债券发行制度和防范风\n  3. 下一步将进一步完善城投债券发行制度和防范危\n  4. 下一步将进一步完善城投债券发行制度和防犯风\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行制度和防\"?\n",
+        "previous_transcription": "下一步将进一步完善城投债券发行制度和防",
+        "candidates": [
+          "下一步将进一步完善城投债券发行制度和防范风",
+          "下一步将进一步完善城投债券发行制度和防范风",
+          "下一步将进一步完善城投债券发行制度和防范危",
+          "下一步将进一步完善城投债券发行制度和防犯风"
+        ],
+        "corrected_appended_text": "范风",
+        "corrected_appended_token_ids": [
+          27395,
+          225,
+          47209
+        ]
+      },
+      "model_seconds": 0.8616173788905144,
+      "stage_seconds": {
+        "A": 0.5492173116654158,
+        "C": 0.2993291802704334,
+        "H": 0.001381034031510353,
+        "capture": 0.011689852923154831,
+        "instrumented_model_total": 0.8616173788905144
+      },
+      "C_called": true,
+      "packet_signature": "29de051615bf1b586dd5ec89463e1b5d837dc86fbc35a7f03837fa920db2b3be",
+      "capture_mode": "full"
+    },
+    {
+      "end": 128000,
+      "reference_equal": true,
+      "closed_cut_sha": "8b955b88c19bcac27d4afa56c0f3ee2ece8062425f71ff6d1ad0360bcb05b09f",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行制度和防范风\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度和防范风\n  2. 下一步将进一步完善城投债券发行制度和防范风\n  3. 下一步将进一步完善城投债券发行制度和防范风限\n  4. 下一步将进一步完善城投债券发行制度和防范风降\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行制度和防范风\"?\n",
+        "previous_transcription": "下一步将进一步完善城投债券发行制度和防范风",
+        "candidates": [
+          "下一步将进一步完善城投债券发行制度和防范风�",
+          "下一步将进一步完善城投债券发行制度和防范风�",
+          "下一步将进一步完善城投债券发行制度和防范风限",
+          "下一步将进一步完善城投债券发行制度和防范风降"
+        ],
+        "corrected_appended_text": "险",
+        "corrected_appended_token_ids": [
+          8842,
+          102
+        ]
+      },
+      "model_seconds": 0.6027833698317409,
+      "stage_seconds": {
+        "A": 0.35917316004633904,
+        "C": 0.23069670423865318,
+        "H": 0.0012423209846019745,
+        "capture": 0.011671184562146664,
+        "instrumented_model_total": 0.6027833698317409
+      },
+      "C_called": true,
+      "packet_signature": "c22f291a895377fab84bf95b02065a8f9c70db336f71178e8720c1d9550751f3",
+      "capture_mode": "full"
+    },
+    {
+      "end": 133344,
+      "reference_equal": true,
+      "closed_cut_sha": "23c7b59435e985f2ad26f6d90355147d10e92915a97f5abc07a9f255319e9e5e",
+      "native_model_evaluated": true,
+      "selected": {
+        "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"下一步将进一步完善城投债券发行制度和防范风险\"\n\nK-best candidates for the continuation:\n  1. 下一步将进一步完善城投债券发行制度和防范风险基础\n  2. 下一步将进一步完善城投债券发行制度和防范风险基础\n  3. 下一步将进一步完善城投债券发行制度和防范风险机则\n  4. 下一步将进一步完善城投债券发行制度和防范风险机则\n\nBased on the audio, what is the correct text that should be appended after \"下一步将进一步完善城投债券发行制度和防范风险\"?\n",
+        "previous_transcription": "下一步将进一步完善城投债券发行制度和防范风险",
+        "candidates": [
+          "下一步将进一步完善城投债券发行制度和防范风险基础",
+          "下一步将进一步完善城投债券发行制度和防范风险基础",
+          "下一步将进一步完善城投债券发行制度和防范风险机则",
+          "下一步将进一步完善城投债券发行制度和防范风险机则"
+        ],
+        "corrected_appended_text": "机制",
+        "corrected_appended_token_ids": [
+          37960,
+          25491
+        ]
+      },
+      "model_seconds": 0.8567669689655304,
+      "stage_seconds": {
+        "A": 0.544016670435667,
+        "C": 0.2987502431496978,
+        "H": 0.0013920348137617111,
+        "capture": 0.012608020566403866,
+        "instrumented_model_total": 0.8567669689655304
+      },
+      "C_called": true,
+      "packet_signature": "22ca3922e0224f861837b0676b41941a9cb25686a102182c059891b978061e21",
+      "capture_mode": "full"
+    }
+  ],
+  "blob_file_bytes": 5647208,
+  "trace_json_bytes": 4052223,
+  "scope": "component replay only, not serving; no stage handoff or resume implemented"
+}
