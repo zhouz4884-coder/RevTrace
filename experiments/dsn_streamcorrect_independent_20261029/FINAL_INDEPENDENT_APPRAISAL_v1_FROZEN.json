@@ -1,0 +1,48 @@
+{
+  "status": "APPRAISAL_FROZEN_BEFORE_ANY_NEW_SOURCE_NEURAL_REFERENCE",
+  "created_utc": "2026-10-29T12:54:34.869147+00:00",
+  "method_source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+  "method_freeze_sha256": "fb6a1f57aba24b4300d84b9c30cfc8828bcb86c0fd011db92d4023ef1519364d",
+  "metadata_selection_sha256": "4bf6249f275cbe5c43099c528316648e1c6aee3485be8968da08e1d50a3b7ccd",
+  "source_receipt_sha256": "2040995aa06a5c7958479fe42397d65e299c8a4505de18b35f44099edd9e3b9e",
+  "source_ids": [
+    "BAC009S0908W0369",
+    "BAC009S0916W0463",
+    "BAC009S0913W0313",
+    "BAC009S0905W0246"
+  ],
+  "speaker_ids": [
+    "S0908",
+    "S0916",
+    "S0913",
+    "S0905"
+  ],
+  "cells": 16,
+  "within_source_fresh_process_pairs": 8,
+  "acoustic_units": 4,
+  "service_seed": 2026102932,
+  "source_arm_order_reversed_for_repeat1": true,
+  "primary_gpu_equals_repeat": true,
+  "hard_validity_gate": "All16 cells preserve complete original Canonical states, original selected C and returned IDs at every offered step; exact original reference required. Invalid/incomplete scope cannot become performance evidence.",
+  "primary_endpoint": "Original A_2_8: sum offered sample intervals/16000 for first actual Consumer D<=2 and certified C<=8; all offered including partial EOS and missing values retained.",
+  "paired_difference": "A_2_8(fullspec)-A_2_8(conservative) for each source and fresh repeat; compute credited sample counts first to avoid float-sign ambiguity.",
+  "meaningful_directional_confirmation": {
+    "total_paired_difference_samples_greater_than": 0,
+    "new_speakers_with_sum_of_two_repeat_differences_positive_at_least": 3,
+    "new_speakers_total": 4,
+    "does_not_require_all8_pairs_positive": true,
+    "not_an8_independent_sample_significance_test": true
+  },
+  "secondary_endpoints": [
+    "Whole-run original all-offered linear D99/C99 pass counts and all failures/EOS",
+    "C50 on all offered observations",
+    "Both-GPU service energy with loading/neural-warmup separately reported",
+    "Actual-G first whole-text posterior Canon support raw and frozen whitespace-only normalizer; unknown separate; never truncate longer text to F",
+    "Final original-reference fidelity and official-reference CER",
+    "Actual-model in-flight versus worker-owned retention, full-buffer reuse, direct-start known-invalid exits separately"
+  ],
+  "actual_G_support_definition": "For each first actual Consumer visibility row earning an offered F, take that row whole text and actual visible frontier G. Compare with complete Canonical text at G; if no exact G Canon keep unknown. Support is posterior original-model agreement, not online certification/ground truth; do not alter primary A_2_8.",
+  "fixed_group_no_adaptive_followup": "Exactly this one frozen4-speaker/16-cell group regardless positive or negative outcome. No replacement/resampling by model outputs, no model expansion, no timing-phase/deadline/method tuning to recover significance.",
+  "endpoint_separation": "Energy or text-support outcomes never replace deadline results; do not hide EOS or failed whole-run SLOs.",
+  "new_source_neural_calls_at_appraisal_freeze": 0
+}

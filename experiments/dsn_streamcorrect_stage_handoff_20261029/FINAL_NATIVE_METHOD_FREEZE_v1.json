@@ -1,0 +1,22 @@
+{
+  "status": "FINAL_METHOD_FROZEN_BEFORE_INDEPENDENT_METADATA_SELECTION",
+  "created_utc": "2026-10-29T12:36:55.315817+00:00",
+  "method_source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+  "method_source_manifest_sha256": "258c33df4eba1d27bef88339aa20b2aae2ffe69f43489255d989ad337b717521",
+  "method_files": 38,
+  "selected_policy": "two_full_spec_early",
+  "control_policy": "two_full_early",
+  "model_and_feedback": "unchanged original protected full ASR/C/U, FP32, noTF32/autocast",
+  "consumer": "same typed ASR whole-view early consumption for both",
+  "warmup": "fixed old source0 complete reference1.5s to2.0s; realneuralC required, discard/reset",
+  "max_ahead_frames": 32000,
+  "original_D2_seconds": 2,
+  "original_C8_seconds": 8,
+  "all_offered_EOS_retained": true,
+  "independent_design": "4metadata-selectednew speaker-disjoint sources,2fresh perarm/source,primaryGPU=repeat0/1, pairedarmordercounterbalanced. No source chosen by output/compatibility/quality/performance.",
+  "encoder_decision": "Original encoder subcomputation is valid on4pairs, but measured eager binary route fails netcost by305ms. Do not implement another cache or lazy lifetime protocol on an unmeasured optimistic263ms work bound. Full-call implementation remains selected.",
+  "stage_decision": "Retain all ready-only stage pilot evidence and semantic controls; nojoin branch just to equal stronger author-built implementation.",
+  "no_new_source_models_run": true,
+  "no_new_source_metadata_selected_yet": true,
+  "required_next": "Freeze dataset metadata IDs/selection provenance before WAV extraction or neural outputs, then exact original-full reference generator and mechanical referencehash binding before pairedtimedservice. Keep all selected sources and original endpoints."
+}

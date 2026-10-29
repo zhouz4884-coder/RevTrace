@@ -1,10 +1,10 @@
 # DSN 2027 补强实验与正文修订：进行中
 
-**2026-10-29当前进展：**下表四项原实验范围已完成，新的完整核心稿已写并初步编译为9页技术正文加参考文献。原生阶段profiling和69输入神经保真均完成。新增三臂pilot及全部四旧来源16格确认均完成：我们构造的整调用推测优于当前ready-only交接，选其为优先实现。每臂66.42975s分母上，原信用37.5→66.29375s、整轮D2/C8通过0/8→6/8，276步完整原状态/C/IDs保持。2个0.068s EOS miss未删除，严格实际可见F整文本支持另列33.5→56.287875s，旧指标不变。独立新来源与最终稿仍待本轮最后有意义的设计门闭合。
+**2026-10-29当前进展：**下表四项原实验范围已完成，完整核心稿已纳入原生方法与结果并编译为10页技术正文加参考文献。原生阶段profiling和69输入神经保真均完成。新增三臂pilot及全部四旧来源16格确认均完成：我们构造的整调用推测优于当前ready-only交接，选其为优先实现。每臂66.42975s分母上，原信用37.5→66.29375s、整轮D2/C8通过0/8→6/8，276步完整原状态/C/IDs保持。2个0.068s EOS miss未删除，严格实际可见G整文本支持另列33.5→56.287875s，旧指标不变。最终bdfa方法已先于选源冻结，四位新speaker按元数据锁定，正在取得原始公开音频；尚无新来源服务结果。
 
 完整报告：[pilot内容边界](../dsn_streamcorrect_stage_handoff_20261029/PILOT_CONTENT_AND_SERVICE_REVIEW_v1.zh.md)、[阶段真实成本](../dsn_streamcorrect_stage_handoff_20261029/PILOT_STAGE_COST_AND_DECISION_v1.zh.md)、[真实在途保留与EOS](../dsn_streamcorrect_stage_handoff_20261029/PILOT_FULLSPEC_CAUSAL_REVIEW_v1.zh.md)。16格同时保留全部source/GPU角色换位/fresh配对；它是旧开发来源上的确认，不能冒充独立来源。99次promotion均在真实model路径未结束时发生，12次调用自己的预测终点不同仍被合法保留；20个自身完整start被否定的调用没有执行C/U或写入结果。
 
-下一项仅是[编码器读集机会](ENCODER_READSET_OPPORTUNITY_PREPROFILE.zh.md)的有界组件成本探查：4个被否定whole-start与合法fallback的音频编码输入相同，反馈tokens/transcript不同；全部跨卡，需要真实7.68MB搬运。尚未实现或测得encoder缓存服务收益，不把条件成立当收益。现有整调用实现已成立，不因某条阶段代码没有独占性能而否定组合创新。
+[编码器读集机会](../dsn_streamcorrect_encoder_profile_20261029/RESULTS_REPORT.zh.md)的13次原始模型组件探查已完成：4对不同whole-start的实际编码输入及编码输出一致，经收到的编码特征执行原C/U仍与原完整调用一致。然而真实7.68MB两跳跨卡传输与校验成本使固定14次潜在导出/4次使用的资源余量为−305ms，冻结STOP，不再扩缓存工程。它是语义成立但当前eager实现不划算的组件结果，不能当成线上收益。现有整调用组合有独立服务证据。
 
 新证据包括：[阶段成本与完整候选](../dsn_streamcorrect_stage_profile_20261029/RESULTS_REPORT.zh.md)、[69输入神经等价与旧任务保真](../dsn_streamcorrect_stage_handoff_20261029/OLD_FIDELITY_RESULTS_v1.zh.md)、[原生内容端点](../dsn_native_content_20261029/RESULTS_FINDINGS.zh.md)、[完整2s实际文字病例](../dsn_full_interval_case_20261029/RESULTS_v2/timely_full_interval_case.pdf)。13个真实输入的最终预测状态不同，但其完整ASR候选经原C/U后仍与原生完整调用一致；这是组件合法性证据，不能代替在线服务收益。v1字节码参照检查失败和完整模块参照修复均保留。
 
@@ -18,7 +18,7 @@
 | [保留与覆盖退出](../dsn_joint_retention_exit_20261028/RESULTS_FINDINGS.zh.md) | two_lane固定，R×K四臂 ×sync/staggered ×3新进程，共24格 | 24/24完成；独立重计和实际输入/Consumer侧证据齐全。交互符号混合，K定位执行支撑；同工作后继批真正miss→hit的数量已另列，不把所有obsolete行算作期限失败。 |
 | [StreamCorrect有界适配](../dsn_streamcorrect_adaptation_20261028/NATIVE_RESULTS_REPORT.zh.md) | 原作者真实ASR与发布纠错器，固定4来源，2见证+12正式 | 全14完成，完整可信历史/CER一致。Joint减少41次Private调用、保留70次非空unchanged-ahead，但信用17s低于强两完整副本18.5s；全部formal D2失败，能耗边界已报告。 |
 | [唯一12会话中点](../dsn_midpoint_continuity_20261029/MIDPOINT_FINDINGS.zh.md) | 原16开发源前12、四臂×3fresh | 全12及完整重计完成；强见证阴性，冻结STOP，不试10/11。原36+新12全部四工作点三重复已合并绘图。 |
-| DSN正文 | 基于`Paper_DSN/CURRENT.md`所指20261008 coordination-spine旧稿 | 旧稿保护；完整核心稿`core_draft.tex`已写并初编译为9技术页+参考文献，正式main/PDF/CURRENT仍为旧基线，待最后研究决策、全页QA与干净发布包。 |
+| DSN正文 | 基于`Paper_DSN/CURRENT.md`所指20261008 coordination-spine旧稿 | 旧稿保护；完整核心稿`core_draft.tex`含新增原生方法与16格评估，已编译为10技术页+参考文献，正式main/PDF/CURRENT仍为旧基线，待新来源确认、全页QA与干净发布包。 |
 
 Qwen主实验实际神经源码为干净冻结的 `f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf`；原生v8执行源码为 `61c9afac00561f7ff1351f3eba9fd95adb239e8c`，不是本过程归档的HEAD。各CPU分析另有干净提交、完整manifest/bundle与实际输入哈希。所有大日志、环境、模型和音频仍在指定8TB盘；相邻任务不并行占用GPU，计时期间也避免重下载/解压和重CPU I/O。
 
@@ -36,7 +36,7 @@ Qwen主实验实际神经源码为干净冻结的 `f0a8e7bc5fbcb010de28e94ac5c9d
 
 新增[R×K同F内容支持](../dsn_joint_retention_exit_20261028/same_F_support_v1/RESULTS_FINDINGS.zh.md)完成全24格和固定96行：96/96正常后继行的完整首次消费原文与后来严格同F Canon一致；原R1 miss→hit 6/6/1行全部支持，原mixed交互/信用不改。整场首次及时内容仍有raw/norm不同，完整最终WER相同不能替代这个检查。
 
-原生14完整结果揭示了新的[候选阶段机会](NATIVE_STAGE_VALIDITY_IDEA.zh.md)：244个非空完整同输入Private结果在Authority派发前已ready，预测最终反馈需撤回也不必使同次ASR候选无效。后续有界同步profiling已完成：64次真实非空纠错调用的ASR阶段均值434.70ms、纠错阶段268.72ms，完整快照另有成本。完整候选适配器69输入保真通过，其中13个最终预测反馈不同，原C/U仍给出一致结果。当前source_v3正在集成在线ready-only调度，**尚无在线交接服务结果**。强对照保留两完整副本、相同ASR早显与真实神经预热；固定两卡A/C分工不能预设吞吐优势，原native过载点完整保留。原作者公开推理代码确为FP32，本轮不把未经测量的精度变化当成免费优化。
+原生14完整结果揭示了新的[候选阶段机会](NATIVE_STAGE_VALIDITY_IDEA.zh.md)：244个非空完整同输入Private结果在Authority派发前已ready，预测最终反馈需撤回也不必使同次ASR候选无效。后续有界同步profiling已完成：64次真实非空纠错调用的ASR阶段均值434.70ms、纠错阶段268.72ms，完整快照另有成本。完整候选适配器69输入保真通过，其中13个最终预测反馈不同，原C/U仍给出一致结果。随后source_v3在线三臂pilot已实际完成，ready-only取得6.5s而整调用取得8.0s信用，保守双完整取得3.0s（各8.068s分母）；整调用在随后的16格旧源确认中持续领先，因此选定它为最终实现。各实现给同样双卡、早显、原C/U与真实神经预热；原双会话负面结果保留。原作者公开推理代码确为FP32，本轮不把未经测量的精度变化当成免费优化。
 
 旧开发轨迹的唯一D2 miss为2.154821秒，其中ACK到enqueue为1.625349秒，与前一Proposer物理lease重叠1.553488秒；本次实际生成0.428193秒、输入ACK11.56毫秒、发布到实际Consumer11.92毫秒。这个逐前沿分解表明，需要分别看执行排队、组批和持久化；累计fsync增加不能独立解释一次超时。
 

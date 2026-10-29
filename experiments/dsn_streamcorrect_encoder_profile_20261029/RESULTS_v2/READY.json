@@ -1,0 +1,240 @@
+{
+  "0": {
+    "kind": "ready",
+    "gpu": 0,
+    "pid": 1820719,
+    "identity": {
+      "original_author_commit": "bbb9f7fde13fabb6c0940f5bae215150d1ea1cb3",
+      "original_audio_py_sha256": "36ed287b2de3eaf40207cd2a44a8d45d57ea5c212a39df07401d4fcb4d5a5a1a",
+      "original_model_py_sha256": "1b7bb7a31b9f0424574a6ea8e6d2bf0b89ff82af27c0348597667d5481cdf81d",
+      "mel_filters_git_blob": "28ea26909dbdfd608aef67afc4d74d7961ae4bb6",
+      "asr_checkpoint_sha256": "995041b2e81f8490f143933fa909009d5caedf683f882fd2c0d52536623d2f62",
+      "native_asr_config_sha256": "7c9c317550f48a766c606b3b438699bd9652b1ce4bf75d86ffd35b49ab5318c6",
+      "source_sha256": "e48f4231f1bb8ff05f2f1214652257b9c1d9b052470e50bcf3d1fd674d517d95",
+      "N_SAMPLES": 480000,
+      "N_FRAMES": 3000,
+      "dimensions": {
+        "n_mels": 80,
+        "n_audio_ctx": 1500,
+        "n_audio_state": 1280,
+        "n_audio_head": 20,
+        "n_audio_layer": 32,
+        "n_vocab": 51865,
+        "n_text_ctx": 448,
+        "n_text_state": 1280,
+        "n_text_head": 20,
+        "n_text_layer": 32
+      },
+      "precision": "float32",
+      "autocast": false,
+      "TF32": false,
+      "SDPA": false,
+      "eval": true
+    },
+    "load_and_neural_ready_seconds": 53.92612972576171,
+    "warmup": {
+      "seconds": 5.5389989065006375,
+      "original_record": {
+        "role": "authority",
+        "start": 24000,
+        "end": 32000,
+        "is_last": false,
+        "start_state": "49ddfb82849900e0b1a54d90a801b9772a8db935273e667e0f90dafdaf9112d2",
+        "end_state": "a89bd87bf83017d1fb1fbedc6a155c81081dbf1816ec0e2f8f97cd662819071a",
+        "token_ids": [
+          5014,
+          231,
+          12467,
+          6336,
+          119,
+          46953
+        ],
+        "text": "厉打击春",
+        "selected_correction": {
+          "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+          "previous_transcription": "严",
+          "candidates": [
+            "严厉打击春",
+            "严厉打击�",
+            "严厉打击村",
+            "严厉打击川"
+          ],
+          "corrected_appended_text": "厉打击春",
+          "corrected_appended_token_ids": [
+            5014,
+            231,
+            12467,
+            6336,
+            119,
+            46953
+          ]
+        },
+        "selection_changed": false,
+        "top1_full_text": "严厉打击春",
+        "selected_full_text": "严厉打击春",
+        "model_start": 5026860.16032383,
+        "model_end": 5026865.694857846,
+        "model_seconds": 5.5345340156927705,
+        "author_start_time_wall": 1793276850.3818429,
+        "clock_domains": {
+          "service_and_model": "perf_counter",
+          "author_telemetry": "time.time"
+        },
+        "inference": "unmodified author PaddedAlignAttWhisper.infer",
+        "physical_early_exit": false,
+        "native_model_evaluated": true,
+        "private_prediction": null,
+        "producer_role": "authority",
+        "stage_execution": "original_full_infer",
+        "authority_ASR_executed": true,
+        "protected_ASR_executed": true,
+        "candidate_handoff": false
+      },
+      "neural_C_confirmed": true,
+      "ASR_only_producer": false,
+      "fixed_warm_start": 24000,
+      "fixed_warm_end": 32000,
+      "reset_to_genesis": true,
+      "warmup_packet_admitted": false
+    },
+    "environment": {
+      "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+      "executable": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+      "packages": {
+        "torch": "2.9.1",
+        "transformers": "4.57.6",
+        "numpy": "2.2.6",
+        "peft": "0.18.0",
+        "soundfile": "0.14.0",
+        "torchaudio": "2.9.1"
+      },
+      "torch_version": "2.9.1+cu128",
+      "cuda": "12.8",
+      "autocast": false,
+      "TF32": false
+    },
+    "memory_allocated": 14148547584,
+    "sent_perf": 5026865.697638517,
+    "parent_received_perf": 5026868.217826439,
+    "physical_channel_gpu": 0
+  },
+  "1": {
+    "kind": "ready",
+    "gpu": 1,
+    "pid": 1820720,
+    "identity": {
+      "original_author_commit": "bbb9f7fde13fabb6c0940f5bae215150d1ea1cb3",
+      "original_audio_py_sha256": "36ed287b2de3eaf40207cd2a44a8d45d57ea5c212a39df07401d4fcb4d5a5a1a",
+      "original_model_py_sha256": "1b7bb7a31b9f0424574a6ea8e6d2bf0b89ff82af27c0348597667d5481cdf81d",
+      "mel_filters_git_blob": "28ea26909dbdfd608aef67afc4d74d7961ae4bb6",
+      "asr_checkpoint_sha256": "995041b2e81f8490f143933fa909009d5caedf683f882fd2c0d52536623d2f62",
+      "native_asr_config_sha256": "7c9c317550f48a766c606b3b438699bd9652b1ce4bf75d86ffd35b49ab5318c6",
+      "source_sha256": "e48f4231f1bb8ff05f2f1214652257b9c1d9b052470e50bcf3d1fd674d517d95",
+      "N_SAMPLES": 480000,
+      "N_FRAMES": 3000,
+      "dimensions": {
+        "n_mels": 80,
+        "n_audio_ctx": 1500,
+        "n_audio_state": 1280,
+        "n_audio_head": 20,
+        "n_audio_layer": 32,
+        "n_vocab": 51865,
+        "n_text_ctx": 448,
+        "n_text_state": 1280,
+        "n_text_head": 20,
+        "n_text_layer": 32
+      },
+      "precision": "float32",
+      "autocast": false,
+      "TF32": false,
+      "SDPA": false,
+      "eval": true
+    },
+    "load_and_neural_ready_seconds": 53.83692703396082,
+    "warmup": {
+      "seconds": 5.743353696539998,
+      "original_record": {
+        "role": "authority",
+        "start": 24000,
+        "end": 32000,
+        "is_last": false,
+        "start_state": "49ddfb82849900e0b1a54d90a801b9772a8db935273e667e0f90dafdaf9112d2",
+        "end_state": "a89bd87bf83017d1fb1fbedc6a155c81081dbf1816ec0e2f8f97cd662819071a",
+        "token_ids": [
+          5014,
+          231,
+          12467,
+          6336,
+          119,
+          46953
+        ],
+        "text": "厉打击春",
+        "selected_correction": {
+          "prompt": "<|begin_of_text|><|audio|>\nGiven the audio and the following ASR transcription candidates, predict the correct continuation.\n\nPrevious confirmed transcript: \"严\"\n\nK-best candidates for the continuation:\n  1. 严厉打击春\n  2. 严厉打击\n  3. 严厉打击村\n  4. 严厉打击川\n\nBased on the audio, what is the correct text that should be appended after \"严\"?\n",
+          "previous_transcription": "严",
+          "candidates": [
+            "严厉打击春",
+            "严厉打击�",
+            "严厉打击村",
+            "严厉打击川"
+          ],
+          "corrected_appended_text": "厉打击春",
+          "corrected_appended_token_ids": [
+            5014,
+            231,
+            12467,
+            6336,
+            119,
+            46953
+          ]
+        },
+        "selection_changed": false,
+        "top1_full_text": "严厉打击春",
+        "selected_full_text": "严厉打击春",
+        "model_start": 5026859.937112051,
+        "model_end": 5026865.661515403,
+        "model_seconds": 5.724403351545334,
+        "author_start_time_wall": 1793276850.1586323,
+        "clock_domains": {
+          "service_and_model": "perf_counter",
+          "author_telemetry": "time.time"
+        },
+        "inference": "unmodified author PaddedAlignAttWhisper.infer",
+        "physical_early_exit": false,
+        "native_model_evaluated": true,
+        "private_prediction": null,
+        "producer_role": "authority",
+        "stage_execution": "original_full_infer",
+        "authority_ASR_executed": true,
+        "protected_ASR_executed": true,
+        "candidate_handoff": false
+      },
+      "neural_C_confirmed": true,
+      "ASR_only_producer": false,
+      "fixed_warm_start": 24000,
+      "fixed_warm_end": 32000,
+      "reset_to_genesis": true,
+      "warmup_packet_admitted": false
+    },
+    "environment": {
+      "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+      "executable": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+      "packages": {
+        "torch": "2.9.1",
+        "transformers": "4.57.6",
+        "numpy": "2.2.6",
+        "peft": "0.18.0",
+        "soundfile": "0.14.0",
+        "torchaudio": "2.9.1"
+      },
+      "torch_version": "2.9.1+cu128",
+      "cuda": "12.8",
+      "autocast": false,
+      "TF32": false
+    },
+    "memory_allocated": 14148547584,
+    "sent_perf": 5026865.664288174,
+    "parent_received_perf": 5026868.218154299,
+    "physical_channel_gpu": 1
+  }
+}
