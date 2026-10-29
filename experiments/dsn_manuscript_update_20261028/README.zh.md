@@ -1,4 +1,12 @@
-# DSN 2027 补强实验与正文修订：进行中
+# DSN 2027 补强实验与完整正文：完成
+
+**最终结果：**原任务、实现补强、最终新四speaker的16格确认及独立重计均完成。新源原信用37.0→66.33975秒，整轮D2/C8为0/8→8/8，服务双卡能耗−11.13%；272步完整原start/end、C和IDs一致。全文支持29.0→51.518125秒，仍与原信用分开。一次兼容更新同时保持在途调用和5.0秒整视图；两次必要回撤及错误分支不安装均已重建。
+
+**论文已完成并核验：**[正文PDF](../../Paper_DSN/revisions/20261029_dsn2027_release_v1/main.pdf)，10技术页＋1参考页、139词摘要、3图2表19引用，11页逐页检查通过。[完整研究判断与取舍](FINAL_RESEARCH_REPORT.zh.md)是本轮主报告，[源码包/最终QA](FINAL_RELEASE_RECORD_v1.json)记录精确PDF和ZIP SHA。模型、音频、环境及长日志留在8TB盘；不再有待运行实验。
+
+以下为研究过程记录，保留当时的计划与判断；最新完成状态以上方主报告及[ACTIVE_STATE.json](ACTIVE_STATE.json)为准。
+
+## 过程快照与历史判断
 
 **2026-10-29当前进展：**下表四项原实验范围已完成，完整核心稿已纳入原生方法与结果并编译为10页技术正文加参考文献。原生阶段profiling和69输入神经保真均完成。新增三臂pilot及全部四旧来源16格确认均完成：我们构造的整调用推测优于当前ready-only交接，选其为优先实现。每臂66.42975s分母上，原信用37.5→66.29375s、整轮D2/C8通过0/8→6/8，276步完整原状态/C/IDs保持。2个0.068s EOS miss未删除，严格实际可见G整文本支持另列33.5→56.287875s，旧指标不变。最终bdfa方法已先于选源冻结，四位新speaker按元数据锁定，正在取得原始公开音频；尚无新来源服务结果。
 
@@ -18,7 +26,9 @@
 | [保留与覆盖退出](../dsn_joint_retention_exit_20261028/RESULTS_FINDINGS.zh.md) | two_lane固定，R×K四臂 ×sync/staggered ×3新进程，共24格 | 24/24完成；独立重计和实际输入/Consumer侧证据齐全。交互符号混合，K定位执行支撑；同工作后继批真正miss→hit的数量已另列，不把所有obsolete行算作期限失败。 |
 | [StreamCorrect有界适配](../dsn_streamcorrect_adaptation_20261028/NATIVE_RESULTS_REPORT.zh.md) | 原作者真实ASR与发布纠错器，固定4来源，2见证+12正式 | 全14完成，完整可信历史/CER一致。Joint减少41次Private调用、保留70次非空unchanged-ahead，但信用17s低于强两完整副本18.5s；全部formal D2失败，能耗边界已报告。 |
 | [唯一12会话中点](../dsn_midpoint_continuity_20261029/MIDPOINT_FINDINGS.zh.md) | 原16开发源前12、四臂×3fresh | 全12及完整重计完成；强见证阴性，冻结STOP，不试10/11。原36+新12全部四工作点三重复已合并绘图。 |
-| DSN正文 | 基于`Paper_DSN/CURRENT.md`所指20261008 coordination-spine旧稿 | 旧稿保护；完整核心稿`core_draft.tex`含新增原生方法与16格评估，已编译为10技术页+参考文献，正式main/PDF/CURRENT仍为旧基线，待新来源确认、全页QA与干净发布包。 |
+| 最终新speaker确认 | 方法先冻结，再选4speaker×2fresh×2臂 | 全16与严格完整状态/内容重计完成；8/8配对收益、4/4声学来源方向确认；全部EOS保留，所有新full-call运行双P99通过。 |
+| 编码器组件探查 | 13次原模型组件调用 | 保真成立，当前eager净资源余量−305ms，STOP；未冒充上线收益。 |
+| DSN正文 | 基于20261008 coordination-spine旧稿 | 旧稿保护；新干净发布版10技术页＋1参考页已编译、全11页QA并打包，CURRENT指向20261029发布目录。 |
 
 Qwen主实验实际神经源码为干净冻结的 `f0a8e7bc5fbcb010de28e94ac5c9dbd6e67363cf`；原生v8执行源码为 `61c9afac00561f7ff1351f3eba9fd95adb239e8c`，不是本过程归档的HEAD。各CPU分析另有干净提交、完整manifest/bundle与实际输入哈希。所有大日志、环境、模型和音频仍在指定8TB盘；相邻任务不并行占用GPU，计时期间也避免重下载/解压和重CPU I/O。
 

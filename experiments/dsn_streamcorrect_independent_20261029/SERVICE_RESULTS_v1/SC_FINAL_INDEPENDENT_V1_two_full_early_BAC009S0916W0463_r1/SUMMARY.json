@@ -1,0 +1,80 @@
+{
+  "status": "PASS_ACTUAL_NATIVE_SERVICE_EXECUTION",
+  "cell_id": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0916W0463_r1",
+  "arm": "two_full_early",
+  "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+  "primary": {
+    "cell_id": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0916W0463_r1",
+    "stage": "independent_confirmation",
+    "cohort": "four_new_speakers_single_chain",
+    "arm": "two_full_early",
+    "repeat": 1,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.1648125,
+    "primary_linear_all_offered_D99": 4.682100642472506,
+    "primary_linear_all_offered_C99": 4.950727554112673,
+    "original_quantile_test_pass": false,
+    "complete_coverage_and_original_quantile_pass": false,
+    "D2_misses_all_offered": 8,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 4.770157549530268,
+    "C_max": 5.027450870722532,
+    "dual_deadline_audio_credit_seconds": 4.5,
+    "raw_inputs": {
+      "config_sha256": "7afbd8f210c19d2d1ac2327dae15a9ef3f6886ce8d4b5db9dcfb099b4147f8f3",
+      "origin_sha256": "264037dd5bd08dbf67f5c04da5d62d79e193437292f156fccc05f664f81f3644",
+      "consumer_sha256": "065908363a5834fcdbf139630f3b0f962f7f0a7697214b713b46a5a614f72f1a"
+    },
+    "primary_linear_all_offered_C50": 2.3185850735753775,
+    "primary_linear_all_offered_D50": 1.98537140712142
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0916W0463",
+      "text": "湖北省荆州市安监局召开安良百货电梯事故情报通报会会",
+      "reference_characters": 24,
+      "character_edits": 1
+    }
+  ],
+  "energy": {
+    "service": {
+      "gpu_joules": {
+        "0": 2399.439676103358,
+        "1": 2311.802435409399
+      },
+      "total_joules": 4711.242111512757
+    },
+    "load_and_neural_warmup": {
+      "gpu_joules": {
+        "0": 8537.850528813951,
+        "1": 8058.203522139186
+      },
+      "total_joules": 16596.05405095314
+    },
+    "service_scope": "both GPUs from actual origin through Consumer drain; cold load and fixed neural warmup separate"
+  },
+  "source_count": 1,
+  "all_authority_steps": 17,
+  "authority_dispatches": 17,
+  "actual_ready_hits": 0,
+  "actual_ready_hit_rate": 0.0,
+  "matching_inflight_fallbacks": 0,
+  "fullspec_inflight_promotions": 0,
+  "fullspec_known_invalid_C_skips": 0,
+  "fullspec_discarded_full_results": 0,
+  "producer_dispatches": 0,
+  "packet_admissions": 0,
+  "wire_total_bytes": 0,
+  "wall_seconds": 13.19416785147041,
+  "load_neural_ready_wall_seconds": 84.78074102383107,
+  "all_actual_roots_and_epochs_checked": true,
+  "component_timer_scopes": {
+    "full": "native model timer excludes pre-model restore; worker_job_wall includes restore/export",
+    "consume": "matching/restore plus original C/U and export is in worker_job_wall; not only C",
+    "receipt": "fresh physical-queue get followed by complete validation, actual admission and decision times"
+  },
+  "original_D2_C8_unchanged": true,
+  "scope": "actual deployed controlled adaptation; original selected quality/history must still pass independent paired audit"
+}

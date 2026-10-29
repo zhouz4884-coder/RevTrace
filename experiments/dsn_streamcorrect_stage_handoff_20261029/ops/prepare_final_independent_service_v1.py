@@ -20,11 +20,14 @@ def selftest():
  assert collections.Counter((b['source_id'],b['repeat'],arm) for b in a for arm in b['arms'])==collections.Counter((str(s),r,arm) for s in range(4) for r in (0,1) for arm in ARMS)
  print(json.dumps(dict(status='PASS_FINAL16_TEMPLATE_CPU_ONLY',blocks=8,cells=16,models=0,files_frozen=0)))
 def freeze(receipt_path,reference_root):
- receipt=read(receipt_path);metadata=read(I/'METADATA_SELECTION_v1_FROZEN.json');method=read(H/'FINAL_NATIVE_METHOD_FREEZE_v1.json')
+ receipt=read(receipt_path);metadata=read(I/'METADATA_SELECTION_v1_FROZEN.json');method=read(H/'FINAL_NATIVE_METHOD_FREEZE_v1.json');appraisal=read(I/'FINAL_INDEPENDENT_APPRAISAL_v1_FROZEN.json')
  assert method['method_source_commit']==receipt['method_source_commit']==metadata['method_source_commit']==METHOD
  assert receipt['selection_sha256']==sha(I/'METADATA_SELECTION_v1_FROZEN.json') and receipt['frozen_method_sha256']==sha(H/'FINAL_NATIVE_METHOD_FREEZE_v1.json')
  assert receipt['status']=='PASS_FOUR_METADATA_SELECTED_SPEAKER_DISJOINT_AUDIO_AVAILABLE' and receipt['model_calls']==receipt['gpu_calls']==0 and len(receipt['sources'])==4
+ assert appraisal['new_source_neural_calls_at_appraisal_freeze']==0 and appraisal['source_ids']==[s['source_id'] for s in receipt['sources']]
  gate=read(reference_root/'GATE.json');summary=read(reference_root/'SUMMARY.json');details=reference_root/'DETAILS.json'
+ reference_record=read(reference_root/'RUN_RECORD.json');stamp=lambda t:datetime.datetime.fromisoformat(t.replace('Z','+00:00'))
+ assert stamp(appraisal['created_utc'])<stamp(reference_record['started_utc']),'appraisal must precede new-source reference inference'
  assert gate['status']=='PASS_ALL_LOCKED_NEW_SPEAKER_ORIGINAL_FULL_REFERENCE_CALLS' and same(gate,summary)
  assert gate['imported_model_runtime_commit']==METHOD and gate['reference_only'] and gate['actual_serving_cells']==0
  assert gate['source_ids']==[s['source_id'] for s in receipt['sources']] and gate['full_calls']==sum((s['frames']+7999)//8000 for s in receipt['sources'])
@@ -48,6 +51,8 @@ def freeze(receipt_path,reference_root):
   old_task_fidelity_gate=oldplan['old_task_fidelity_gate'],old_task_fidelity_gate_sha256=oldplan['old_task_fidelity_gate_sha256'],
   final_method_freeze_record=P+'/FINAL_NATIVE_METHOD_FREEZE_v1.json',final_method_freeze_sha256=sha(H/'FINAL_NATIVE_METHOD_FREEZE_v1.json'),metadata_selection=P+'/METADATA_SELECTION_v1_FROZEN.json',metadata_selection_sha256=sha(I/'METADATA_SELECTION_v1_FROZEN.json'),
   source_receipt=B+'/datasets/revtrace/streamcorrect_independent_20261029/SOURCE_RECEIPT_v1.json',source_receipt_sha256=sha(receipt_path),expected_cells=16,random_order_seed=SEED,paired_blocks=blocks,cells=cells,
+  frozen_appraisal=P+'/FINAL_INDEPENDENT_APPRAISAL_v1_FROZEN.json',frozen_appraisal_sha256=sha(I/'FINAL_INDEPENDENT_APPRAISAL_v1_FROZEN.json'),
+  primary_appraisal=appraisal['meaningful_directional_confirmation'],fixed_group_no_adaptive_followup=appraisal['fixed_group_no_adaptive_followup'],secondary_endpoints=appraisal['secondary_endpoints'],
   raw_result_location=O+'/service_v1',campaign_output=O+'/service_v1/campaign',aggregate_summary_location=O+'/service_v1/campaign/SUMMARY.json',gate_decision_location=O+'/service_v1/campaign/GATE.json',
   original_D2_seconds=2,original_C8_seconds=8,all_offered_including_EOS=True,source_and_arm_order_chosen_without_reference_C_outputs=True,
   fidelity='All selected inputs/complete states/original C/IDs at every original frontier and partial EOS; only declared stage_execution projection',

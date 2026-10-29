@@ -1,5 +1,7 @@
 # DSN 干净发布包工具：已准备，尚未生成最终包
 
+**后续完成通知：**根任务已使用这些工具完成20261029干净发布、10技术页＋1参考页、全部11页目视QA和源码ZIP；精确结果见[FINAL_RELEASE_RECORD_v1.json](FINAL_RELEASE_RECORD_v1.json)。下文是工具准备时的历史说明，不能作为最新发布状态。最终分页QA使用flow文本，避免双栏参考文献右栏与左栏References标题同行造成识别不确定；旧16个工具控制仍通过，最终PDF字节未因此改变。
+
 状态：`PREPARED_NOT_FINAL_RELEASE`，2026-10-29。根任务在 stage 最终决定后调用；本次没有生成真实 release 目录，没有新编译、上传或改变 `main.tex` / `CURRENT`。开发控制仅使用临时夹具；读取旧 PDF 仅检验 QA 帮助器对实际 IEEE 排版的适配，不替代最终编译或目视检查。
 
 ## 文件与行为

@@ -1,0 +1,114 @@
+\subsection{A continuation under a new root}
+The central question is whether an old call still belongs to a valid
+provisional continuation after trusted feedback advances. Its birth version
+records dispatch history. The dependency witness establishes whether it
+remains usable now.
+
+Let $x=(F,P_C)$. A complete recorded node provides an edge
+\begin{equation}
+ (F,P_C)\xrightarrow{n}(b_n,P_n^+)
+ \quad\text{if}\quad a_n=F\ \land\ P_n^-=P_C,
+ \label{eq:edge}
+\end{equation}
+under the input, identity, and execution contract of
+Section~\ref{sec:contract}. A finite sequence of such edges is a
+\emph{valid provisional continuation} of $C$ when each successor consumes
+the preceding complete output state at its actual frontier. Write
+$C\leadsto n$ for a complete path to $n$. A frozen in-flight successor can
+belong to the same continuation, but contributes no usable result until
+completion.
+
+\begin{proposition}[Sufficient re-rooting witness]
+\label{prop:rebase}
+Suppose an old branch contains a complete boundary node at the new certified
+frontier $F$, with output state $P_C$. If its subsequent recorded calls form
+an unbroken input--output path to the actual branch tip, those nodes are a
+valid provisional continuation of $C$. An in-flight successor may continue
+when its unchanged frozen input is that tip and its target exceeds $F$.
+\end{proposition}
+\begin{proof}
+The boundary node provides $(F,P_C)$, equal to the new root's declared
+cross-call state. The first successor therefore satisfies
+Eq.~\eqref{eq:edge}. Inductively, each next call consumes the preceding
+complete output at its recorded frontier, with the remaining inputs bound
+by the same contract. The path reaches the actual tip. The in-flight
+successor satisfies the next input edge, without yet supplying an output.
+Re-rooting changes none of these calls or their frozen inputs.
+\end{proof}
+
+This establishes dependency validity. The provisional result remains subject
+to later selection and revision; re-rooting grants no Canonical write
+authority. The argument also makes no bitwise-replay assumption for a
+different floating-point execution. Its witness follows calls that actually
+occurred.
+
+Two short counterexamples explain the required observations. A branch born
+under $v$ may reach exactly $(F,P_C)$ when $v+1$ is installed; discarding it
+solely because its version is older loses a valid continuation. Conversely,
+equal displayed text can hide different feedback tokens or alignment state.
+A call consuming one state has no valid path from the other merely because
+their text agrees. Equal state at a different audio frontier likewise does
+not provide Eq.~\eqref{eq:edge}.
+
+\subsection{Retaining computation: \texorpdfstring{$R$}{R}}
+In the core Qwen implementation, the computation guard implements a conservative witness for
+Proposition~\ref{prop:rebase}. On a Canonical installation, it first finds a
+complete Private node at exactly $F$ whose full feedback tokens equal
+$P_C$. It follows complete successors, checking each frozen input and
+frontier, until it reaches the recorded branch tip. An intermediate match
+cannot stand in for a path to that tip. If a successor is in flight, the
+guard requires the unique tracked task to consume this tip and target
+audio beyond $F$.
+
+When the witness succeeds, the Owner retains the branch and updates its
+eligibility relative to the new root. The original job identifiers, birth
+versions, input tokens, and results remain unchanged. Otherwise it fences
+the continuation lacking this witness and rebuilds from an allowed state. This
+guard's boundary-node and unique-slot requirements restrict what this
+implementation can retain; they are not universal necessities for every
+valid reuse scheme.
+
+\subsection{Retaining an actual view: \texorpdfstring{$S$}{S}}
+Computation retention alone does not preserve service that has already
+reached the Consumer. A snapshot Consumer can replace an ahead view with
+the newly certified, shorter view even when the ahead computation is still
+valid. RevTrace instead maintains a certified lane and a provisional lane.
+Both hold whole hypotheses; there is no uncertified suffix splice. The
+Consumer records the certified text and provisional visible text separately,
+so a retained provisional view acquires no certified-prefix status.
+
+On applying a new Canonical publication, $S$ checks the complete currently
+visible provisional node. It can prove a path directly when that node's
+frozen input is $(F,P_C)$, or follow its complete published ancestors to
+that boundary. Missing, cyclic, or ambiguous ancestry is rejected. This
+check uses the same feedback-state contract as $R$, while accepting a
+different sufficient witness: a directly rooted published call does not
+need an extra Private boundary node.
+
+The Consumer first previews the whole next view. The protocol kernel then
+checks the installed durable root, actual registered results, dependency
+path, and bound text/frontier before authorizing the actual application.
+Only that application yields the recorded view receipt. A caller-supplied
+compatibility flag cannot replace the underlying nodes.
+
+\begin{proposition}[Continuity at a compatible application]
+\label{prop:continuity}
+Immediately before an authorized Canonical application, let the visible
+whole provisional view $h$ be ahead of its new frontier $F$. If $S$ proves
+$C\leadsto h$ and no independent withdrawal mode is invoked, that
+application advances the certified lane and preserves $h$ unchanged.
+\end{proposition}
+\begin{proof}
+The compatible-and-ahead branch installs $C$ into the certified lane and
+retains the existing provisional node, text, and frontier. The kernel
+authorizes this preview against the actual root and complete dependency
+records before the Consumer applies it. Thus this application does not
+itself withdraw any part of $h$.
+\end{proof}
+
+An incompatible update must still withdraw the view. Later valid results
+can also revise text or replace a hypothesis. Consequently the property
+concerns one compatible root application, rather than global monotonic
+display. Snapshot-only service and conservative recomputation can be safe;
+the four-arm experiment asks what additional progress $R$ and $S$ preserve
+together, and where that benefit is worth its cost.

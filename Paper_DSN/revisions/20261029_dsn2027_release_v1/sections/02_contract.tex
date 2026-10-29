@@ -1,0 +1,85 @@
+\subsection{Feedback creates an execution dependency}
+Consider a service that receives an immutable audio stream and repeatedly
+uses generated output as input to later recognition. A protected selection
+path produces \emph{Canonical} facts. A faster \emph{Private} path may
+compute and display provisional hypotheses while selection is pending.
+The selected correction can change the state consumed by the next call:
+StreamCorrect, for example, feeds its chosen correction back into subsequent
+ASR~\cite{vu2026streamcorrect}. The problem is to coordinate this dependency
+while the two paths advance asynchronously.
+
+For a fixed session and execution contract, write an installed fact as
+\begin{equation}
+ C=(v,F,Z_C,P_C,T_C).
+ \label{eq:canonical}
+\end{equation}
+Here $v$ is its version, $F$ its certified audio frontier, $Z_C$ the complete
+selected output, $P_C$ the feedback state for later calls, and $T_C$ its bound
+display text. A contract specifies the model, adapter, decoding configuration,
+audio identity, and transformations from a complete output to $P$ and $T$.
+Here $F$ is a state-processing boundary. Consumer coverage follows the
+adapter's publication policy; advancing $F$ need not add visible characters.
+Certification means that the protected selection and installation protocol
+accepted this fact. Recognition accuracy against human transcription is a
+separate property.
+
+The adapter declares a conservative representation of \emph{all mutable
+cross-call state that can affect later model inputs, selection, or feedback}.
+Telemetry and device resources are recorded separately. The Qwen adapter passes prompt
+tokens between calls and carries no numerical KV cache across them. The
+native correction adapter additionally carries audio buffers, token groups,
+context, alignment position, and decoder configuration. A state comparison
+is meaningful only within its declared contract: text equality cannot stand
+in for an unrecorded alignment cursor or numerical cache. The representation
+may include more fields than a particular next call needs; we do not require
+it to be minimal.
+
+\subsection{Three lifetimes of provisional work}
+A complete provisional node $n$ records a frozen call
+\begin{equation}
+ q_n=(a_n,P_n^-,b_n,\chi_n),\quad
+ n=(q_n,Z_n,P_n^+,T_n),
+ \label{eq:node}
+\end{equation}
+where $a_n$ is the input-state frontier, $b_n>a_n$ the target audio frontier,
+and $\chi_n$ binds the remaining inputs and execution identity. The model
+may read the complete audio prefix through $b_n$; $a_n$ does not claim a
+token-to-audio alignment. $P_n^+$ and $T_n$ are derived from the complete
+result through the contract's adapter. An in-flight call has a frozen input
+and no complete output yet. Partially generated or cancelled tokens cannot
+become a complete node.
+
+Such work has three distinct lifetimes. Its \emph{dependency lifetime}
+determines whether it can still be used under the current Canonical root.
+Its \emph{visible lifetime} determines whether the Consumer keeps its whole
+published hypothesis. Its \emph{physical lifetime} ends when the executor
+has actually finished or drained the work. A new root can change the first
+two without immediately ending the third. RevTrace connects their decisions
+while keeping the evidence for each decision explicit.
+
+The service retains every accepted input obligation until certified
+processing covers it. Discarding a branch, requesting cancellation, or
+recovering an old view does not remove that obligation or reset its arrival
+clock. In exact mode, a missed deadline never authorizes an uncertified
+Canonical transition.
+
+\subsection{Trust and failure boundary}
+We assume one trusted Owner per session, a protected selection path,
+immutable accepted audio and model configuration, unambiguous encoding,
+collision-resistant digests, and storage that honors successful
+synchronization. Calls used in the dependency argument must actually consume
+their frozen inputs and return the corresponding complete results. This
+execution-integrity premise is explicit: host receipts and text hashes bind
+API objects; they are not GPU arithmetic attestation. Private and Authority
+need not return identical results from independent floating-point executions.
+
+At its declared interface, the runtime checks result identity, completeness,
+derived-state consistency, and ancestry, including late or repeated messages.
+Provisional content can still be inaccurate. The separately frozen recovery configuration
+handles whole-process termination on the same intact filesystem.
+A compromised coordinator or Authority,
+Byzantine host code, arbitrary persistent corruption, and lost storage are
+outside this boundary. The controlled wrong-input injections in
+Section~\ref{sec:eval} intentionally violate normal Private input fidelity;
+we use them to study containment and executor release, not as examples
+covered by the lawful-continuation proposition.

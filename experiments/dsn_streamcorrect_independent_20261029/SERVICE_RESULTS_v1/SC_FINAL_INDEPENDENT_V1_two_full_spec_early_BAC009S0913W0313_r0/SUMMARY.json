@@ -1,0 +1,80 @@
+{
+  "status": "PASS_ACTUAL_NATIVE_SERVICE_EXECUTION",
+  "cell_id": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0913W0313_r0",
+  "arm": "two_full_spec_early",
+  "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+  "primary": {
+    "cell_id": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0913W0313_r0",
+    "stage": "independent_confirmation",
+    "cohort": "four_new_speakers_single_chain",
+    "arm": "two_full_spec_early",
+    "repeat": 0,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.449,
+    "primary_linear_all_offered_D99": 0.8404421634972096,
+    "primary_linear_all_offered_C99": 1.102707725353539,
+    "original_quantile_test_pass": true,
+    "complete_coverage_and_original_quantile_pass": true,
+    "D2_misses_all_offered": 0,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 0.8537080101668835,
+    "C_max": 1.1028494285419583,
+    "dual_deadline_audio_credit_seconds": 8.449,
+    "raw_inputs": {
+      "config_sha256": "f94e24a3c9e7a3189f666e7c733e6c73161d6dc2f4a94daef2661ea371207921",
+      "origin_sha256": "933f37065bcee90e80f07f0e5c0b91d4be4aa1c7a956db4809ec8c8c48e40827",
+      "consumer_sha256": "1b7eb01468774c5f2889a017185f303fbc03e39bd54bfe3e2cda6c622da4d273"
+    },
+    "primary_linear_all_offered_C50": 0.8441167315468192,
+    "primary_linear_all_offered_D50": 0.6131514413282275
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0913W0313",
+      "text": "以区域为中心建立客户经理负责制质造方面",
+      "reference_characters": 19,
+      "character_edits": 1
+    }
+  ],
+  "energy": {
+    "service": {
+      "gpu_joules": {
+        "0": 1872.956636850254,
+        "1": 1908.5631804147345
+      },
+      "total_joules": 3781.5198172649884
+    },
+    "load_and_neural_warmup": {
+      "gpu_joules": {
+        "0": 5707.995750135966,
+        "1": 5440.966057865846
+      },
+      "total_joules": 11148.961808001812
+    },
+    "service_scope": "both GPUs from actual origin through Consumer drain; cold load and fixed neural warmup separate"
+  },
+  "source_count": 1,
+  "all_authority_steps": 17,
+  "authority_dispatches": 20,
+  "actual_ready_hits": 0,
+  "actual_ready_hit_rate": 0.0,
+  "matching_inflight_fallbacks": 0,
+  "fullspec_inflight_promotions": 12,
+  "fullspec_known_invalid_C_skips": 3,
+  "fullspec_discarded_full_results": 0,
+  "producer_dispatches": 0,
+  "packet_admissions": 0,
+  "wire_total_bytes": 0,
+  "wall_seconds": 9.275875959545374,
+  "load_neural_ready_wall_seconds": 50.05731385573745,
+  "all_actual_roots_and_epochs_checked": true,
+  "component_timer_scopes": {
+    "full": "native model timer excludes pre-model restore; worker_job_wall includes restore/export",
+    "consume": "matching/restore plus original C/U and export is in worker_job_wall; not only C",
+    "receipt": "fresh physical-queue get followed by complete validation, actual admission and decision times"
+  },
+  "original_D2_C8_unchanged": true,
+  "scope": "actual deployed controlled adaptation; original selected quality/history must still pass independent paired audit"
+}

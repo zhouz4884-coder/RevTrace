@@ -1,0 +1,55 @@
+{
+  "status": "TEMPLATE_ONLY_NOT_A_RECOUNT_OR_RESULT",
+  "created_utc": "2026-10-29T13:11:55.793155+00:00",
+  "source_manifest_sha256": "3088bdd7d6f146a36b5d713a9f3808fc25054b706918b426f896abfede6aee53",
+  "common": {
+    "analysis_source_commit": "7d4cded8f587b6f538091c751ede15c22f100caf",
+    "actual_neural_source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+    "expected_cells": 16,
+    "expected_reference_calls": 68,
+    "expected_full_fidelity_steps": 272,
+    "expected_offered_frontiers": 272,
+    "independent_acoustic_sources": 4,
+    "fresh_repeats_per_arm_source": 2,
+    "within_source_fresh_pairs": 8,
+    "source_receipt": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_streamcorrect_independent_20261029\\SOURCE_RECEIPT_v1.json",
+    "source_receipt_sha256": "2040995aa06a5c7958479fe42397d65e299c8a4505de18b35f44099edd9e3b9e",
+    "metadata_selection": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_streamcorrect_independent_20261029\\METADATA_SELECTION_v1_FROZEN.json",
+    "metadata_selection_sha256": "4bf6249f275cbe5c43099c528316648e1c6aee3485be8968da08e1d50a3b7ccd",
+    "method_freeze": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_streamcorrect_stage_handoff_20261029\\FINAL_NATIVE_METHOD_FREEZE_v1.json",
+    "method_freeze_sha256": "fb6a1f57aba24b4300d84b9c30cfc8828bcb86c0fd011db92d4023ef1519364d",
+    "appraisal": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_streamcorrect_independent_20261029\\FINAL_INDEPENDENT_APPRAISAL_v1_FROZEN.json",
+    "appraisal_sha256": "b679d734e367f53a152c87d9a8a4aa96c937c5fa6e151daf48c12c7e4f65fc07",
+    "reference_details": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_streamcorrect_independent_20261029\\REFERENCE_RESULTS_v1\\DETAILS.json",
+    "reference_gate": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_streamcorrect_independent_20261029\\REFERENCE_RESULTS_v1\\GATE.json",
+    "reference_gate_sha256": "28aa26207c509a733db2a9ab95612c48a4b5a96d233faf4460fbaa88a0017524"
+  },
+  "primary": {
+    "entrypoint": "analyze_confirmation.py",
+    "required_late_bindings": [
+      "collection_root",
+      "collection_manifest_sha256",
+      "campaign_plan",
+      "campaign_plan_sha256",
+      "frozen_config_dir"
+    ],
+    "collection_schema": {
+      "all_bytes_equal": true,
+      "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+      "files": "rows{path,bytes,sha256}; flat cell_id/file and campaign/file paths"
+    }
+  },
+  "content": {
+    "entrypoint": "run_confirmation_content.py",
+    "required_late_bindings": [
+      "raw_result_location",
+      "inputs",
+      "cells",
+      "frozen_environment"
+    ],
+    "unchanged_endpoint_source_commit": "c12803e3ab411ad7898a34a2e257fdee313df81c",
+    "max_input_bytes": 134217728,
+    "max_output_bytes": 33554432
+  },
+  "rule": "No execution until all16 original service cells, source manifest, frozen campaign/config/reference/collection byte receipts exist; inputs are mechanical hashes, no endpoint/source/criterion changes."
+}

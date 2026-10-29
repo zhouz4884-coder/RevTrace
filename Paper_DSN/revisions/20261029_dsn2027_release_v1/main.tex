@@ -1,0 +1,64 @@
+% Selected DSN2027 manuscript; evidence and release provenance are archived separately.
+\documentclass[conference,10pt]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{cite,amsmath,amssymb,amsthm}
+\usepackage{booktabs,array,multirow,graphicx}
+\usepackage{url,microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\begin{document}
+\title{RevTrace: Preserving Valid Progress across Trusted Feedback Revisions}
+\author{\IEEEauthorblockN{Anonymous submission}\IEEEauthorblockA{Regular paper}}
+\maketitle
+\begin{abstract}
+Trusted feedback can invalidate speculation without invalidating all of its
+computation or delivered progress. RevTrace composes dependency reuse and
+whole-hypothesis consumption around a protected feedback-state contract.
+Complete frozen inputs provide executable eligibility witnesses; compatible
+certified updates preserve supported ahead views while original selection
+retains write authority. A native implementation confirms inputs of already
+executing full recognizer--corrector calls without requiring their own next
+predictions to be correct. In a predeclared 24-speaker ASR stratum,
+computation-only retention increases frontier withdrawals from 12 to 17;
+joint coordination produces zero and adds 26.645 seconds of deadline credit
+over 714.110 seconds offered. On four previously unused native speakers,
+full-call retention meets both whole-run deadlines in eight of eight runs
+versus zero for conservative execution, preserving complete original
+correction histories. A 48-run workload study separates
+timely first delivery from subsequent availability and identifies measured
+service boundaries.
+\end{abstract}
+\begin{IEEEkeywords}
+dependable inference, feedback state, incremental computation, speculative execution, streaming ASR
+\end{IEEEkeywords}
+\section{Introduction}\label{sec:intro}
+\input{sections/01_progress_introduction}
+\section{Feedback Contract}\label{sec:contract}
+\input{sections/02_contract}
+\section{Valid Continuations and Whole Views}\label{sec:continuation}
+\input{sections/03_continuation}
+\input{sections/03_native_extension}
+\section{Execution Protocol}\label{sec:protocol}
+\input{sections/04_protocol}
+\section{Evaluation}\label{sec:eval}
+\input{sections/05_evaluation_core}
+\input{sections/05_native_retention}
+\input{sections/05_execution_only}
+\section{Related Work}\label{sec:related}
+\input{sections/06_progress_related}
+\section{Discussion}\label{sec:discussion}
+\input{sections/07_progress_discussion}
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/08_progress_conclusion}
+\section*{AI Tool Usage}
+ChatGPT/Codex assisted literature discovery, experiment orchestration,
+analysis and validation code, manuscript drafting, and figures. The artifact
+records execution sources, frozen configurations, controls, and result
+provenance, and distinguishes actual service measurements from component
+tests and retrospective analyses. The authors retain responsibility for the
+submission.
+\clearpage
+\bibliographystyle{IEEEtran}
+\bibliography{refs,formal_refs,coordination_refs}
+\end{document}

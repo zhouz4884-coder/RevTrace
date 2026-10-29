@@ -185,6 +185,9 @@ def main() -> int:
         xmp = run_tool(args.pdfinfo, ["-meta", str(pdf)])
         fonts = run_tool(args.pdffonts, [str(pdf)])
         text = run_tool(args.pdftotext, ["-layout", "-enc", "UTF-8", str(pdf), "-"])
+        # Flow extraction keeps the left-column References heading separate
+        # when the right bibliography column starts on the same physical row.
+        flow = run_tool(args.pdftotext, ["-enc", "UTF-8", str(pdf), "-"])
         pm = re.search(r"(?m)^Pages:\s*(\d+)", info)
         if not pm:
             raise QAError("pdfinfo returned no page count")
@@ -194,7 +197,7 @@ def main() -> int:
                 raise QAError(f"Missing final build evidence {pdf.with_suffix(suffix).name}")
         log, blg, bbl = (pdf.with_suffix(s).read_text(encoding="utf-8", errors="replace") for s in (".log", ".blg", ".bbl"))
         checks = {"source_snapshot": manifest_check(root),
-                  "pagination": reference_pages(text, count, args.max_technical_pages),
+                  "pagination": reference_pages(flow, count, args.max_technical_pages),
                   "fonts": font_check(fonts), "references": logs_check(log, blg, bbl),
                   "anonymity_metadata": metadata_check(info, xmp, args.forbid_token)}
         # Check that cited keys reached the compiled bibliography, including any
@@ -216,7 +219,7 @@ def main() -> int:
                 raise QAError("QA output directory already exists; use a new version")
             args.output.mkdir(parents=False)
             (args.output / "QA.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            for name, data in (("pdfinfo.txt", info), ("xmp.xml", xmp), ("pdffonts.txt", fonts), ("pages.txt", text)):
+            for name, data in (("pdfinfo.txt", info), ("xmp.xml", xmp), ("pdffonts.txt", fonts), ("pages.txt", text), ("pages_flow.txt", flow)):
                 (args.output / name).write_text(data, encoding="utf-8")
         print(json.dumps(report, ensure_ascii=False, indent=2))
         return 0 if passed else 2
