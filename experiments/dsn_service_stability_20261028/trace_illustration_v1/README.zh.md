@@ -16,6 +16,8 @@
 
 该例说明首个deadline信用不足以完整评价服务：首次及时消费之后，可信推进仍可能清掉完整且合法的可见进展。它不代表所有相位有同样事件，也不将provisional变成certified suffix。
 
+随后完成的[全36格及时连续性重计](../../dsn_manuscript_update_20261028/timely_continuity_v1/README.zh.md)也独立包含此既有例子：sid7、frontier304400、version9的首次D延迟为1.556256s，首次实际认证延迟3.414694s，满足原D2/C8；随后这个完整兼容进展仍消失1.017951s，单根缺失面积1.043399音频秒×墙钟秒。此例的撤回开始在该区间D2读点之后，故它属于“及时首交后的连续性损失”，**不计入本例D2读点缺失**。固定读点缺失的6.000/10.675/4.000s是全c16运行其他区间的完整结果，不应移植到这张示意图上。
+
 提取源c9e8a89a7df2f269fad0007a4891922da02d728d；冻结配置SHA bb0b4157b892155dfee352f92969009ceee59817e0ac76d40fbd738dfdfed18a。最终绘图源e1213e8ba5bc13ef9db58402c8030f87579d6ce2，完整byte manifest为TRACE_SOURCE_v3.json。首次绘图QA拒绝了实际窗口之外的自动tick；修复仅限定tick位置。新Windows clone曾发生autocrlf转换，预启动source gate同样拒绝；只将独立CPU checkout恢复为HEAD原始blob字节，另冻完整manifest。没有改legacy或神经源，旧失败记录保留，未重跑或重标神经结果。
 
 最终图宽7.15in、字号8–9pt、嵌入字体、Type3=0，完整PDF页目视检查通过。

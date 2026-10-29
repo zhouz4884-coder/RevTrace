@@ -1,0 +1,149 @@
+{
+  "observed_utc": "2026-10-29T06:27:52.896118+00:00",
+  "scope": "bounded existing evidence read only; no model/GPU",
+  "records": {
+    "native_campaign_v6_controller/GATE.json": {
+      "bytes": 48,
+      "sha256": "4d34ec19ff47e7c837f84b568fccc6dd72eb22170446cb736e015b3c71ee8528",
+      "value": {
+        "status": "FAIL_NATIVE_CAMPAIGN_PRESERVED"
+      }
+    },
+    "native_campaign_v6_controller/SUMMARY.json": {
+      "bytes": 21,
+      "sha256": "ccb6e4ef68da7158f037187bb5cc601664ffb3f1efd6c51445abeb36dbb70a96",
+      "value": {
+        "completed": []
+      }
+    },
+    "median_gpu_gate_v7/GATE.json": {
+      "bytes": 71,
+      "sha256": "c0963fead9a84609502cfdc846780a627eb8af232fe1a7f90884c2ca396afd94",
+      "value": {
+        "status": "FAIL_NATIVE_MEDIAN_GPU_CONTROL_PRESERVED",
+        "returncode": 1
+      }
+    },
+    "median_gpu_gate_v7/SUMMARY.json": {
+      "bytes": 189,
+      "sha256": "4a82f8ab4c3fb286126366246b746eafe8ebb2bc1038fd01e49fd8b0df2e0067",
+      "value": {
+        "status": "FAIL_NATIVE_MEDIAN_GPU_CONTROL_PRESERVED",
+        "returncode": 1,
+        "interpretation": "Technical control execution failed; inspect persistent process log, no native serving conclusion"
+      }
+    },
+    "MEDIAN_GPU_GATE_v7_HANDLE.json": {
+      "bytes": 1442,
+      "sha256": "009df112fae991e29663c377c78453ce0f2705ee21732f649ea5e3b335a6add3",
+      "value": {
+        "pid": 1673423,
+        "start_ticks": 500485388,
+        "cmdline_sha256": "43244f05764b9f04e2633508e82c3617095c87687a8f732f849d11e19bc3f1c8",
+        "started_utc": "2026-10-29T06:20:44.108080+00:00",
+        "source_commit": "6ec7612d26a6664bc28a656217175637d98e1f5a",
+        "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/MEDIAN_GPU_GATE_v7_FROZEN.json",
+        "frozen_config_sha256": "4eafae1a082b984f02377ef0f97de64971bdadd997c044245a98ec0e21e8a013",
+        "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v7",
+        "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v7.log",
+        "control_command": [
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+          "-B",
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/runtime_source_v7/run_median_gpu_gate.py",
+          "--config",
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/MEDIAN_GPU_GATE_v7_FROZEN.json",
+          "--manifest",
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/SOURCE_v7.json",
+          "--out",
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v7"
+        ]
+      }
+    },
+    "median_gpu_gate_v8/PRELAUNCH_RECORD.json": {
+      "bytes": 1111,
+      "sha256": "a11264e4e98dd576629a56440c059f1067689b35953ce85db620e433944aa9f1",
+      "value": {
+        "experiment_id": "SC_NATIVE_TRITON_MEDIAN_API_REPAIR_GPU_GATE_V8",
+        "code_commit": "61c9afac00561f7ff1351f3eba9fd95adb239e8c",
+        "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/MEDIAN_GPU_GATE_v8_FROZEN.json",
+        "frozen_config_sha256": "0744c136d1180237e2aa548966fe672d5387aa3f9c1a8350d02fce953460f893",
+        "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v8/ENVIRONMENT.json",
+        "environment_record_sha256": "61002e5adf2b21192ba1121ac70e6595a6eebc690e79abc16a073fa5b902b1c9",
+        "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v8/ACTUAL_NATIVE_MEDIAN_INPUT.pt",
+        "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v8/SUMMARY.json",
+        "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v8/GATE.json"
+      }
+    },
+    "median_gpu_gate_v8/ENVIRONMENT.json": {
+      "bytes": 447,
+      "sha256": "61002e5adf2b21192ba1121ac70e6595a6eebc690e79abc16a073fa5b902b1c9",
+      "value": {
+        "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+        "executable": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+        "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+        "torch": "2.9.1+cu128",
+        "triton": "3.5.1",
+        "cuda": "12.8",
+        "cache_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/cache/revtrace_streamcorrect_20261028"
+      }
+    },
+    "MEDIAN_GPU_GATE_v8_HANDLE.json": {
+      "bytes": 1442,
+      "sha256": "0ffbb2fb6656e1e3863128173446424e17ff35197c85f239fac473dc7a52694e",
+      "value": {
+        "pid": 1675828,
+        "start_ticks": 500526422,
+        "cmdline_sha256": "148091f439828821412d87e2c977f7c9b0eb580b0cca222735a3155d7c56c7f7",
+        "started_utc": "2026-10-29T06:27:34.443315+00:00",
+        "source_commit": "61c9afac00561f7ff1351f3eba9fd95adb239e8c",
+        "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/MEDIAN_GPU_GATE_v8_FROZEN.json",
+        "frozen_config_sha256": "0744c136d1180237e2aa548966fe672d5387aa3f9c1a8350d02fce953460f893",
+        "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v8",
+        "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v8.log",
+        "control_command": [
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+          "-B",
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/runtime_source_v8/run_median_gpu_gate.py",
+          "--config",
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/MEDIAN_GPU_GATE_v8_FROZEN.json",
+          "--manifest",
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/SOURCE_v8.json",
+          "--out",
+          "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v8"
+        ]
+      }
+    }
+  },
+  "sources": {
+    "v6": {
+      "commit": "a720d02a8cb81db6545d7d9ec6bdc31419dd091d",
+      "manifest_sha256": "37c2ec0d631e75cc5141d3420120ecc7b321f6eb373566e3aca33c561b0b869b",
+      "files": 14,
+      "actual_git_head": "a720d02a8cb81db6545d7d9ec6bdc31419dd091d",
+      "actual_git_clean": true,
+      "native_bridge.py_sha256": "1bfb6829974dc677fbb7da30a5f8d763140c3fef91f31859b11e13fcd700866a"
+    },
+    "v7": {
+      "commit": "6ec7612d26a6664bc28a656217175637d98e1f5a",
+      "manifest_sha256": "006b831e51a5993163d648977e3505b9b71ab0fff2dd249df129c29ded818392",
+      "files": 17,
+      "actual_git_head": "6ec7612d26a6664bc28a656217175637d98e1f5a",
+      "actual_git_clean": true,
+      "native_triton_compat.py_sha256": "bfcf7df5d6654d6ae2ccb88fcc28381b37f1b176e72ce2def8b38f7b67df4b47",
+      "native_bridge.py_sha256": "24d817de8774b12f03a9f7aa28d6fdd8bed49cc9e064bdd33970d257fa342f3c",
+      "run_median_gpu_gate.py_sha256": "f594ca403c7e7530a906de3ebad557b5d1358f1cdd802a368bcdc9312f1ef77a"
+    },
+    "v8": {
+      "commit": "61c9afac00561f7ff1351f3eba9fd95adb239e8c",
+      "manifest_sha256": "fa1fd4ef473e6ace158414456dac052f1b8a3b60ebe32ed417ccef0b95637518",
+      "files": 18,
+      "actual_git_head": "61c9afac00561f7ff1351f3eba9fd95adb239e8c",
+      "actual_git_clean": true,
+      "native_triton_compat.py_sha256": "bfcf7df5d6654d6ae2ccb88fcc28381b37f1b176e72ce2def8b38f7b67df4b47",
+      "native_bridge.py_sha256": "24d817de8774b12f03a9f7aa28d6fdd8bed49cc9e064bdd33970d257fa342f3c",
+      "run_median_gpu_gate.py_sha256": "f0061073bde87d822a83067370f753bb5e50d64de8bca205b1032a568ede31be"
+    }
+  },
+  "median_gpu_gate_v8.log_tail": "",
+  "native_campaign_v6_controller.log_tail": ""
+}

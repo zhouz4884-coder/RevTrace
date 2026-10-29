@@ -1,0 +1,8 @@
+import pathlib,json,datetime
+T=pathlib.Path(__file__).resolve().parents[1];p=T/'CURRENT_STATUS.json';s=json.loads(p.read_text())
+s.update(status='ACTIVE_NATIVE_V8_SIGNED_MEDIAN_COMPONENT_CONTROL',native_runtime_commit='61c9afac00561f7ff1351f3eba9fd95adb239e8c',current_phase='actual signed normalized-attention component control on both GPUs before any new service campaign',updated_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+ native_neural_calls=None,native_model_execution_observed=True,formal_application_service_cells_completed=0,witness_cells_completed=0,
+ previous_technical_failures=[dict(source_commit='a720d02a8cb81db6545d7d9ec6bdc31419dd091d',kind='published Triton host JIT API incompatibility during initialization/warmup;0 completed service cells',raw='native_campaign_v6_controller'),dict(source_commit='6ec7612d26a6664bc28a656217175637d98e1f5a',kind='invalid nonnegative-domain control assertion after actual native ASR warmup completed; real standardized tensor has negative values',raw='median_gpu_gate_v7')],
+ active_control=dict(pid=1675828,start_ticks=500526422,cmdline_sha256='148091f439828821412d87e2c977f7c9b0eb580b0cca222735a3155d7c56c7f7',frozen_config_sha256='0744c136d1180237e2aa548966fe672d5387aa3f9c1a8350d02fce953460f893',started_utc='2026-10-29T06:27:34.443315+00:00',raw_out='/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_20261028/median_gpu_gate_v8'),
+ interpretation='These are model initialization/component controls, not deployed serving results or natural-feedback hypothesis decisions.')
+p.write_text(json.dumps(s,indent=2))

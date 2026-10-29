@@ -1,0 +1,318 @@
+{
+  "status": "PASS_INDEPENDENT_HOST_JIT_API_COMPATIBILITY_AND_BOUNDED_SIGNED_GPU_CONTROLS",
+  "created_utc": "2026-10-29T06:31:23.711516+00:00",
+  "reviewer_scope": "existing-source and evidence read only; local AST/bit-reference checks; no model/GPU/diagnostic writer/SC-source mutation",
+  "decision": "No new independent blocker to root-authorized v8 native service execution.",
+  "source_identity": {
+    "v6": {
+      "commit": "a720d02a8cb81db6545d7d9ec6bdc31419dd091d",
+      "manifest_sha256": "37c2ec0d631e75cc5141d3420120ecc7b321f6eb373566e3aca33c561b0b869b",
+      "files": 14,
+      "actual_git_head": "a720d02a8cb81db6545d7d9ec6bdc31419dd091d",
+      "actual_git_clean": true,
+      "native_bridge.py_sha256": "1bfb6829974dc677fbb7da30a5f8d763140c3fef91f31859b11e13fcd700866a"
+    },
+    "v7": {
+      "commit": "6ec7612d26a6664bc28a656217175637d98e1f5a",
+      "manifest_sha256": "006b831e51a5993163d648977e3505b9b71ab0fff2dd249df129c29ded818392",
+      "files": 17,
+      "actual_git_head": "6ec7612d26a6664bc28a656217175637d98e1f5a",
+      "actual_git_clean": true,
+      "native_triton_compat.py_sha256": "bfcf7df5d6654d6ae2ccb88fcc28381b37f1b176e72ce2def8b38f7b67df4b47",
+      "native_bridge.py_sha256": "24d817de8774b12f03a9f7aa28d6fdd8bed49cc9e064bdd33970d257fa342f3c",
+      "run_median_gpu_gate.py_sha256": "f594ca403c7e7530a906de3ebad557b5d1358f1cdd802a368bcdc9312f1ef77a"
+    },
+    "v8": {
+      "commit": "61c9afac00561f7ff1351f3eba9fd95adb239e8c",
+      "manifest_sha256": "fa1fd4ef473e6ace158414456dac052f1b8a3b60ebe32ed417ccef0b95637518",
+      "files": 18,
+      "actual_git_head": "61c9afac00561f7ff1351f3eba9fd95adb239e8c",
+      "actual_git_clean": true,
+      "native_triton_compat.py_sha256": "bfcf7df5d6654d6ae2ccb88fcc28381b37f1b176e72ce2def8b38f7b67df4b47",
+      "native_bridge.py_sha256": "24d817de8774b12f03a9f7aa28d6fdd8bed49cc9e064bdd33970d257fa342f3c",
+      "run_median_gpu_gate.py_sha256": "f0061073bde87d822a83067370f753bb5e50d64de8bca205b1032a568ede31be"
+    }
+  },
+  "preserved_failures": {
+    "v6_gate": {
+      "status": "FAIL_NATIVE_CAMPAIGN_PRESERVED"
+    },
+    "v6_completed_service_cells": 0,
+    "v7_gate": {
+      "status": "FAIL_NATIVE_MEDIAN_GPU_CONTROL_PRESERVED",
+      "returncode": 1
+    },
+    "v7_control_cause": "unsupported nonnegative assertion on standardized signed attention; original failed control retained under distinct commit"
+  },
+  "api_compatibility": {
+    "author_source_sha256": "164c8317baac5a415615206e489e12bc7bdeb6c43ba4fca1bb20c626f8cdc957",
+    "installed_official_triton_3_5_1_jit_sha256": "ea831e03e08675654c94a21e2e6917ada4b772e97f266c2ce141e7a6645ee16d",
+    "official_source": "https://github.com/triton-lang/triton/blob/v3.5.1/python/triton/runtime/jit.py",
+    "only_host_setter_assignments_changed": 3,
+    "nested_kernel_AST_and_locations_unchanged": true,
+    "generated_source_byte_equivalence": [
+      {
+        "width": 1,
+        "source_sha256": "7baf00d2e84723e5af7318ca6049126a495816dd224855b424dc9122b213b590",
+        "byte_equal": true,
+        "lru_cache_identity": true
+      },
+      {
+        "width": 3,
+        "source_sha256": "923e6a30b59895dd80104307d71127f852ce3bb1dc839a775abb02a45fd8fe6a",
+        "byte_equal": true,
+        "lru_cache_identity": true
+      },
+      {
+        "width": 5,
+        "source_sha256": "26f04d6abe6f6acf24559a8d4d98812b1cb64def34879e4a47264ea74ec61a1c",
+        "byte_equal": true,
+        "lru_cache_identity": true
+      },
+      {
+        "width": 7,
+        "source_sha256": "9412b2ad3b2b4546d79f348423341178238301f181d7098c2429ea819fabf43a",
+        "byte_equal": true,
+        "lru_cache_identity": true
+      },
+      {
+        "width": 9,
+        "source_sha256": "8ad608e8e47f6740a02836fd38756fb6a79fa80369cb9932f6c3b0fc23f4fea2",
+        "byte_equal": true,
+        "lru_cache_identity": true
+      },
+      {
+        "width": 31,
+        "source_sha256": "415dfc1cbfb7731f0e29e5090d1d60dddca1542bb1d1d4bfa00f0be0622ad3d5",
+        "byte_equal": true,
+        "lru_cache_identity": true
+      }
+    ],
+    "new_fresh_jit_object_has_no_compiled_jit_callers_to_invalidate": true
+  },
+  "same_input_repeated_legacy_errors": [
+    {
+      "repeat": 0,
+      "type": "TypeError",
+      "message": "JITCallable._set_src() takes 1 positional argument but 2 were given"
+    },
+    {
+      "repeat": 1,
+      "type": "TypeError",
+      "message": "JITCallable._set_src() takes 1 positional argument but 2 were given"
+    }
+  ],
+  "actual_input": {
+    "shape": [
+      4,
+      23,
+      4,
+      1500
+    ],
+    "dtype": "torch.float32",
+    "tensor_bytes": 2208000,
+    "observed_actual_inputs_all_finite": true,
+    "serialized_sha256": "274d4ffd9c81f83c4a36d920a6e0b94d6e6c068470b18e3d3f2ad79a38ab9962"
+  },
+  "actual_input_domain": [
+    {
+      "stage": "warmup",
+      "shape": [
+        4,
+        23,
+        4,
+        1500
+      ],
+      "dtype": "torch.float32",
+      "elements": 552000,
+      "finite": 552000,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "negative": 389836,
+      "zero": 0,
+      "signed_negative_zero": 0,
+      "minimum": -1.7310106754302979,
+      "maximum": 1.732050895690918
+    },
+    {
+      "stage": "next_offered_interval_component_probe",
+      "shape": [
+        4,
+        23,
+        4,
+        1500
+      ],
+      "dtype": "torch.float32",
+      "elements": 552000,
+      "finite": 552000,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "negative": 389984,
+      "zero": 0,
+      "signed_negative_zero": 0,
+      "minimum": -1.731839895248413,
+      "maximum": 1.732050895690918
+    },
+    {
+      "stage": "next_offered_interval_component_probe",
+      "shape": [
+        4,
+        23,
+        5,
+        1500
+      ],
+      "dtype": "torch.float32",
+      "elements": 690000,
+      "finite": 690000,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "negative": 509462,
+      "zero": 0,
+      "signed_negative_zero": 0,
+      "minimum": -1.9992179870605469,
+      "maximum": 1.9999971389770508
+    },
+    {
+      "stage": "next_offered_interval_component_probe",
+      "shape": [
+        4,
+        23,
+        6,
+        1500
+      ],
+      "dtype": "torch.float32",
+      "elements": 828000,
+      "finite": 828000,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "negative": 629728,
+      "zero": 0,
+      "signed_negative_zero": 0,
+      "minimum": -2.2350211143493652,
+      "maximum": 2.236056327819824
+    },
+    {
+      "stage": "next_offered_interval_component_probe",
+      "shape": [
+        4,
+        23,
+        7,
+        1500
+      ],
+      "dtype": "torch.float32",
+      "elements": 966000,
+      "finite": 966000,
+      "nan": 0,
+      "positive_infinity": 0,
+      "negative_infinity": 0,
+      "negative": 748098,
+      "zero": 0,
+      "signed_negative_zero": 0,
+      "minimum": -2.4479129314422607,
+      "maximum": 2.4494035243988037
+    }
+  ],
+  "numerical_controls": {
+    "oracle": "pinned original Torch CPU median-filter branch",
+    "rows": 100,
+    "repeated_comparisons": 300,
+    "executed_gpu_kernel_comparisons": 282,
+    "short_identity_bypass_comparisons": 18,
+    "gpu_ordinals": [
+      0,
+      1
+    ],
+    "widths": [
+      1,
+      3,
+      5,
+      7,
+      9
+    ],
+    "all_bitwise_equal": true
+  },
+  "exceptional_controls": [
+    {
+      "case": "signed_zero",
+      "gpu": 0,
+      "bitwise_original_network_reference_equal": true,
+      "bitwise_original_torch_sort_equal": false
+    },
+    {
+      "case": "signed_zero",
+      "gpu": 1,
+      "bitwise_original_network_reference_equal": true,
+      "bitwise_original_torch_sort_equal": false
+    },
+    {
+      "case": "nan_payload",
+      "gpu": 0,
+      "bitwise_original_network_reference_equal": true,
+      "bitwise_original_torch_sort_equal": false
+    },
+    {
+      "case": "nan_payload",
+      "gpu": 1,
+      "bitwise_original_network_reference_equal": true,
+      "bitwise_original_torch_sort_equal": false
+    },
+    {
+      "case": "infinities",
+      "gpu": 0,
+      "bitwise_original_network_reference_equal": true,
+      "bitwise_original_torch_sort_equal": true
+    },
+    {
+      "case": "infinities",
+      "gpu": 1,
+      "bitwise_original_network_reference_equal": true,
+      "bitwise_original_torch_sort_equal": true
+    }
+  ],
+  "operator_timings": [
+    {
+      "case": "actual_native_first_warmup",
+      "gpu": 0,
+      "native_repaired_triton_milliseconds": 0.13235211372375488,
+      "original_torch_sort_milliseconds": 0.8491631597280502,
+      "scope": "operator only; aggregate median of15 synchronised calls; no serving speedup inferred"
+    },
+    {
+      "case": "signed_finite_4x23x4x3000",
+      "gpu": 0,
+      "native_repaired_triton_milliseconds": 0.1456737518310547,
+      "original_torch_sort_milliseconds": 1.6875863075256348,
+      "scope": "operator only; aggregate median of15 synchronised calls; no serving speedup inferred"
+    },
+    {
+      "case": "actual_native_first_warmup",
+      "gpu": 1,
+      "native_repaired_triton_milliseconds": 0.13017188757658005,
+      "original_torch_sort_milliseconds": 0.84709282964468,
+      "scope": "operator only; aggregate median of15 synchronised calls; no serving speedup inferred"
+    },
+    {
+      "case": "signed_finite_4x23x4x3000",
+      "gpu": 1,
+      "native_repaired_triton_milliseconds": 0.16010180115699768,
+      "original_torch_sort_milliseconds": 1.6883360221982002,
+      "scope": "operator only; aggregate median of15 synchronised calls; no serving speedup inferred"
+    }
+  ],
+  "scope_limits": [
+    "Actual warmup and next interval are private-ASR component calls; they establish no learned Authority correction witness or deployed service result.",
+    "Actual domain records token axes4,5,6,7, all finiteFP32 without zeros; per-tensor CPUoracle covers the saved first warmup and saved first next-interval tensors (both tokenaxis4), plus synthetic mask/boundary cases. Later tokenaxis5/6/7 entries are executed and observed, not individually saved CPUoracle cases.",
+    "NaN and mixed-zero signs match the original comparator network and differ from Torchsort; preserve these existing semantics and do not claim universal Torchsort bit equivalence.",
+    "Only FP32 measured; generated-source proof width31 is separate from GPU-oracle widths1,3,5,7,9.",
+    "Timing numbers are component aggregate medians, not serving performance or an end-to-end speedup."
+  ],
+  "all_review_io_finished": true,
+  "evidence_snapshot": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_streamcorrect_adaptation_20261028\\independent_triton_review_v7\\CONTROL_EVIDENCE_20261029T063009641940Z.json",
+  "evidence_snapshot_sha256": "2cb00625983e5a8bf23766e09a9b695550e9379abe6314f02f5362222385976f",
+  "v8_summary_sha256": "f519b38e675baa707214ab42a6438f347fb66d2516743d7040723268af27e0e0",
+  "v8_gate_sha256": "6c822c6f5f3d860ce25ef2a8eec2b912afd9b977fa771e717eda64b28c6dee7b"
+}

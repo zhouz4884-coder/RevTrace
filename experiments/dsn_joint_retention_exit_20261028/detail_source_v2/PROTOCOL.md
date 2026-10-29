@@ -1,0 +1,2 @@
+Independent CPU-only actual-input evidence-presence audit and exact Owner-to-Consumer event linkage, complementing frozen aa4e recount. Missing actual audits may not count as equality. Preserve every cell; retain F2 vs unmodified lawful-pressure separation. Run only after 24-cell execution and frozen recount completion, with no timed GPU sharing IO. No neural calls or policy changes.
+ Also bind complete original/materialized/config fixture objects and actual worker target/donor prompts, including cancelled physical rows.

@@ -1,0 +1,19 @@
+{
+  "official_url": "https://raw.githubusercontent.com/triton-lang/triton/v3.5.1/python/triton/runtime/jit.py",
+  "bytes": 41822,
+  "sha256": "ea831e03e08675654c94a21e2e6917ada4b772e97f266c2ce141e7a6645ee16d",
+  "methods": [
+    {
+      "name": "_unsafe_update_src",
+      "lineno": 574,
+      "source": "    def _unsafe_update_src(self, new_src):\n        \"\"\"\n        The only method allowed to modify src.\n        Bypasses the __setattr__ restriction by calling super().__setattr__ directly.\n\n        Note that it is the callers responsibility to make sure any triton functions that call this function have the `.hash` value reset to None.\n        \"\"\"\n        self.hash = None\n        self._src = new_src",
+      "ast": "FunctionDef(name='_unsafe_update_src', args=arguments(args=[arg(arg='self'), arg(arg='new_src')]), body=[Expr(value=Constant(value='\\n        The only method allowed to modify src.\\n        Bypasses the __setattr__ restriction by calling super().__setattr__ directly.\\n\\n        Note that it is the callers responsibility to make sure any triton functions that call this function have the `.hash` value reset to None.\\n        ')), Assign(targets=[Attribute(value=Name(id='self', ctx=Load()), attr='hash', ctx=Store())], value=Constant(value=None)), Assign(targets=[Attribute(value=Name(id='self', ctx=Load()), attr='_src', ctx=Store())], value=Name(id='new_src', ctx=Load()))])"
+    },
+    {
+      "name": "_set_src",
+      "lineno": 584,
+      "source": "    def _set_src(self):\n        raise AttributeError(\"Cannot set attribute 'src' directly. \"\n                             \"Use '_unsafe_update_src()' and manually clear `.hash` of all callers\"\n                             \"instead.\")",
+      "ast": "FunctionDef(name='_set_src', args=arguments(args=[arg(arg='self')]), body=[Raise(exc=Call(func=Name(id='AttributeError', ctx=Load()), args=[Constant(value=\"Cannot set attribute 'src' directly. Use '_unsafe_update_src()' and manually clear `.hash` of all callersinstead.\")]))])"
+    }
+  ]
+}

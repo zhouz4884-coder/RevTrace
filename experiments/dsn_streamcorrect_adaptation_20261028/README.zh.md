@@ -1,19 +1,21 @@
 # StreamCorrect 有界适配：当前完成状态
 
-2026-10-29 当前状态：`ACTIVE_DETACHED_ASSET_ACQUISITION`，具体进度和句柄以
+2026-10-29 最新状态：两个真实 native witness 服务格已完成，原定十二个 formal 格正在执行，具体进度和句柄以
 `CURRENT_STATUS.json` 为准。用户指定 ModelScope 路线后，已发现公开原版发行并核验其原始权重身份。
 `modelscope_metadata_v1/EXACT_WEIGHT_IDENTITY_PROOF.json` 记录了 ModelScope
 SHA-256 重建出的 Git-LFS pointer 与 Meta 官方公开 tree 的 blob SHA-1
 完全匹配。此前 HF 单一路线的 401 限制已经解决，不再据此停止此线。
-实际下载已启动：原始 Llama 完整权重已通过预定 SHA-256，Ultravox 完整权重也已通过预定 SHA-256；
-作者原始中文 ASR checkpoint ZIP 仍在下载。ModelScope 的身份依据保持冻结；
+全部原始资产现已取得，并完成31项原始文件及2项辅助元数据的独立完整 SHA 核验。
+ModelScope 的身份依据保持冻结；
 传输改走已证实相同完整字节身份的公开 HF 发行，保留部分文件并独立核验完整 SHA，未更换模型。
 
-当前原生执行源码为 v6 `a720d02a8cb81db6545d7d9ec6bdc31419dd091d`；
-有界普通源码快照、完整 bundle、逐文件 manifest 与 24 项 CPU 测试结果均已冻结。
-实际配置/processor CPU 预检还发现并修复了嵌套路径解析问题，保留了作者真正使用的
-128-bin Whisper 特征提取器，详见 `PROTOCOL_v3_NATIVE_PATH_REPAIR.md`。
-这些准备没有运行神经模型。原生应用调用、真实纠错 witness 与原生服务结果仍未建立。
+当前实际神经执行源码为 v8 `61c9afac00561f7ff1351f3eba9fd95adb239e8c`；
+有界源码快照、完整 bundle、逐文件 manifest、25项CPU测试与实际双卡median合法oracle控制均已冻结。
+原始 v6 初始化失败及 v7 不正确的非负输入域控制失败均保留，随后只修复原生依赖API与作者遥测时钟接口。
+两个完成的 witness 在独立离线审计修复后满足原门控：17个非空raw-changed交错与36个unchanged交错。
+这些标签不等于语义纠错收益；正式的三臂服务、完整状态/质量一致性及原始D2/C8结论仍待完整十二格与后分析。
+离线审计源码 `a0652a81a205483ba2091dfd345b85be72ee8b19` 只修正空文本应显示前沿0的预期，
+继续执行仍调用未改动的v8服务源码、原冻结配置/顺序；没有重放或重标两格原始神经执行。
 
 以下首先保留此前 CPU 阶段和访问探针的历史记录；这些不是后续实验结果。
 
