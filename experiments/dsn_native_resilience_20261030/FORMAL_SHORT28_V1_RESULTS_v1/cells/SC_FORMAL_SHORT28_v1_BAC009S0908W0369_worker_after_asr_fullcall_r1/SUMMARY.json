@@ -1,0 +1,288 @@
+{
+  "schema": "revtrace-resilience-offline-metrics-v1",
+  "analysis_phase": "offline_after_trial",
+  "new_model_calls": 0,
+  "experiment_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1",
+  "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1",
+  "arm": "fullcall",
+  "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "primary": {
+    "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1",
+    "stage": "formal_failure_coverage",
+    "cohort": "BAC009S0908W0369",
+    "arm": "fullcall",
+    "repeat": 1,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.2590625,
+    "primary_linear_all_offered_D99": 6.065734228417277,
+    "primary_linear_all_offered_C99": 6.403211663775146,
+    "original_quantile_test_pass": false,
+    "complete_coverage_and_original_quantile_pass": false,
+    "D2_misses_all_offered": 13,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 6.162593999877572,
+    "C_max": 6.493610731326044,
+    "dual_deadline_audio_credit_seconds": 2.0,
+    "raw_inputs": {
+      "config_sha256": "ad5b1b66d0bc31860c58fd7e8cccde7aebb73810f7cb688b3ba09a58a844d358",
+      "origin_sha256": "86b2fc83b0e41e58407c79e583680659d6014f4083134cef8e5e25eb1f2112b2",
+      "consumer_sha256": "1e3bb81f9c171ef8279b05620c75fcdd262c120ed19dabb1d12dacb2fcfe7032"
+    },
+    "primary_linear_all_offered_C50": 4.0083739925175905,
+    "primary_linear_all_offered_D50": 3.673603232949972,
+    "EOS_D2_misses": 1,
+    "nonEOS_D2_misses": 12
+  },
+  "content": {
+    "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1",
+    "stage": "formal_failure_coverage",
+    "cohort": "BAC009S0908W0369",
+    "arm": "fullcall",
+    "repeat": 1,
+    "actual_consumer_rows": 50,
+    "sources": 1,
+    "offered_audio_seconds": 8.2590625,
+    "offered_frontiers": 17,
+    "original_dual_credit_audio_seconds": 2.0,
+    "clock": "Actual observed perf; final surviving occurrences are right-censored at last actual same-source observation, not hypothetical UI close.",
+    "raw": {
+      "row_event_classes": {
+        "unchanged": 38,
+        "strict_append": 11,
+        "replacement": 1
+      },
+      "introduced_code_point_occurrences": 17,
+      "LCP_erased_code_point_occurrences": 1,
+      "observed_text_changes": 12,
+      "positive_F_advance_with_unchanged_text_rows": 8,
+      "positive_certified_F_advance_with_unchanged_text_rows": 11,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 0.5,
+        "strict_append": 1.5,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 1,
+      "still_visible_occurrence_code_points": 16,
+      "closed_occurrence_code_point_seconds": 0.29669860750436783,
+      "longest_closed_observed_lifetime_seconds": 0.29669860750436783,
+      "final_observed_text_code_points": 16
+    },
+    "whitespace_stripped": {
+      "row_event_classes": {
+        "unchanged": 38,
+        "strict_append": 11,
+        "replacement": 1
+      },
+      "introduced_code_point_occurrences": 17,
+      "LCP_erased_code_point_occurrences": 1,
+      "observed_text_changes": 12,
+      "positive_F_advance_with_unchanged_text_rows": 8,
+      "positive_certified_F_advance_with_unchanged_text_rows": 11,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 0.5,
+        "strict_append": 1.5,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 1,
+      "still_visible_occurrence_code_points": 16,
+      "closed_occurrence_code_point_seconds": 0.29669860750436783,
+      "longest_closed_observed_lifetime_seconds": 0.29669860750436783,
+      "final_observed_text_code_points": 16
+    }
+  },
+  "posterior_whole_text_support": {
+    "raw": {
+      "original_credit_supported_seconds": 1.5,
+      "original_credit_mismatching_seconds": 0.5,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 12,
+        "mismatching": 5
+      }
+    },
+    "whitespace_stripped": {
+      "original_credit_supported_seconds": 1.5,
+      "original_credit_mismatching_seconds": 0.5,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 12,
+        "mismatching": 5
+      }
+    },
+    "scope": "Posterior whole first-view agreement at its actual G, not online certification, human correctness or newly transcribed character volume."
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0908W0369",
+      "reference_characters": 16,
+      "character_edits": 2,
+      "CER": 0.125,
+      "final_text": "新科市界冠军宁泽涛领接中国队出战",
+      "scope": "Fixed whitespace-only original native CER; final task quality, not provisional correctness."
+    }
+  ],
+  "energy": {
+    "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+    "service": {
+      "gpu_joules": {
+        "0": 1939.4988121131248,
+        "1": 3507.6801217436096
+      },
+      "total_joules": 5447.178933856734
+    },
+    "origin_perf": 5112264.029706386,
+    "service_end_perf": 5112282.056747494,
+    "includes_fault_and_recovery_after_origin": true,
+    "initial_cold_load_excluded": true,
+    "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+  },
+  "integrity": {
+    "durable_frames_verified": true,
+    "complete_original_parent_cadence_records_verified": true,
+    "durable_canonical_steps": 17,
+    "expected_canonical_steps": 17,
+    "all_original_obligations_eventually_processed": true,
+    "accepted_frontiers": {
+      "BAC009S0908W0369": 132145
+    },
+    "pending_accepted_uncertified_samples": {
+      "BAC009S0908W0369": 0
+    },
+    "unprocessed_all_offered_samples": {
+      "BAC009S0908W0369": 0
+    },
+    "observed_acknowledged_input_loss_samples": {
+      "BAC009S0908W0369": 0
+    },
+    "input_loss_scope": "Completed fixed accepted obligations are checked by the full durable source chain; incomplete debt is pending work, not automatically lost input.",
+    "consumer_binding": {
+      "status": "PASS_DURABLE_CONSUMER_BINDING",
+      "applied_durable_facts": 17,
+      "durable_facts_not_yet_consumed": 0,
+      "duplicate_actual_durable_applications": 0,
+      "scope": "Whole provisional text can remain ahead; this does not require Consumer visible text to equal Canonical text."
+    },
+    "original_reference": {
+      "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+      "checked_steps": 17,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "reference_kind": "short_bdfa_static_source_mapping",
+      "projection": "only contract.stage_execution.source_commit maps BDFA/current to BDFA",
+      "reference_sha256": "db1d90dc445ed9e63e9fe201e462e25bc8e2ae464bac002fc33ff25d5baa5785"
+    },
+    "local_reject_records": 0,
+    "local_reject_canonical_mutations": 0,
+    "legal_progress_wrong_rejections": null,
+    "legal_progress_wrong_rejections_status": "REQUIRES_SEPARATE_SEMANTIC_WITNESS_CHECK",
+    "accepted_original_clock_notifications_checked": 17,
+    "owner_error_records": 0,
+    "owner_error_types": {},
+    "explicit_expected_owner_error_types": [],
+    "unexpected_owner_error_records": 0
+  },
+  "history": {
+    "samples": 14,
+    "coordination_entry_maxima": {
+      "live_jobs": 1,
+      "completed_full": 0,
+      "branch_steps": 1,
+      "canonical_witnesses": 1,
+      "nodes": 1,
+      "projections": 1,
+      "issued_proofs": 0,
+      "issued_id_memory_entries": 1,
+      "pending_job_refs": 1,
+      "pending_publications": 2,
+      "consumer_pins": 1
+    },
+    "application_and_process_data": {
+      "owner_RSS_bytes": {
+        "min": 41721856,
+        "max": 43024384,
+        "last": 43024384
+      },
+      "current_cut_bytes": {
+        "min": 10973,
+        "max": 13472,
+        "last": 13472
+      },
+      "current_text_bytes": {
+        "min": 0,
+        "max": 45,
+        "last": 45
+      },
+      "immutable_audio_bytes": {
+        "min": 528580,
+        "max": 528580,
+        "last": 528580
+      }
+    },
+    "scope": "Observed finite-run coordination-entry counts; RSS/current cuts/output/immutable audio are separate. Offline analysis allocation and cumulative application output do not establish constant online total memory."
+  },
+  "state_boundaries": {
+    "actual_worker_audio_insert_observations": 18,
+    "actual_worker_buffer_shifts": 0,
+    "actual_worker_context_trim_changes": 0,
+    "actual_worker_context_bound_still_exceeded": 0,
+    "selected_canonical_buffer_shift_edges": 0,
+    "selected_edge_prediction_clusters": {
+      "BAC009S0908W0369": {
+        "selected_edges": 17,
+        "observed_predictions": 16,
+        "own_prediction_changed": 5,
+        "longest_consecutive_changed": 3,
+        "unknown_prediction_edges": 1
+      }
+    },
+    "scope": "All worker observations include recomputation; selected-edge clusters are separate and unknown edges break a known streak. These are observed coverage, not natural-prevalence or universal-state-sufficiency claims."
+  },
+  "recovery": {
+    "observed_fault_records": 1,
+    "events": [
+      {
+        "fault_kind": "worker_after_actual_ASR_consumption",
+        "fault_perf": 5112266.511424264,
+        "physical_death_confirmed_perf": 5112268.014824262,
+        "replacement_ready_perf": null,
+        "first_actual_old_fact_replay_perf": null,
+        "first_new_durable_fact_actual_consume_perf": 5112268.725924968,
+        "first_new_model_completed_after_fault_and_certified_consume_perf": 5112268.725924968,
+        "accepted_before_fault_samples": {
+          "BAC009S0908W0369": 32000
+        },
+        "pre_fault_durable_sequence": 4,
+        "uncertified_debt_before_fault_samples": {
+          "BAC009S0908W0369": 8000
+        },
+        "debt_clear_actual_certified_consume_perf": 5112268.725924968,
+        "fault_to_death": 1.5033999979496002,
+        "fault_to_replacement_ready": null,
+        "fault_to_old_fact_replay": null,
+        "fault_to_new_durable_fact": 2.2145007038488984,
+        "fault_to_new_certified_result": 2.2145007038488984,
+        "fault_to_debt_clear": 2.2145007038488984,
+        "pre_fault_view_availability": {
+          "BAC009S0908W0369": {
+            "pre_fault_visible_frontier": 32000,
+            "observed_deficit_seconds": 0.0,
+            "longest_observed_deficit_seconds": 0.0,
+            "scope": "Below pre-fault visible frontier; necessary selected revisions are not automatically attributed to failure."
+          }
+        },
+        "scope": "Old durable replay is not new inference. New durable fact and actual model completion after fault are separate clocks. Debt target is accepted before fault, not all future offered audio."
+      }
+    ],
+    "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+  },
+  "gate": "PASS_COMPLETE_TRIAL_TASK_AND_ORIGINAL_ENDPOINT_RECOUNT",
+  "scope": "Offline aggregation only. Complete-task/refinement/physical-owner admissibility evidence roles remain distinct. Cold-fault P99 failure is an endpoint outcome, not automatic evidence that safe recovery failed."
+}

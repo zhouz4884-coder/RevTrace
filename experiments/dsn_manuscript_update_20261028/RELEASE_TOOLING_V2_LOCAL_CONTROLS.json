@@ -1,0 +1,51 @@
+{
+  "scope": "Local release-tool synthetic controls only; no new paper approved, compiled, packaged or published",
+  "created_utc": "2026-10-30T12:29:02.511933+00:00",
+  "gate": "PASS_LOCAL_TOOLING_25_CONTROLS_ZERO_SKIP",
+  "test_command": [
+    "E:\\Anaconda\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "test_dsn_release_tools",
+    "-v"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "test_bib_closure_preserves_entry_bytes_and_parent_macro (test_dsn_release_tools.PackagingControls.test_bib_closure_preserves_entry_bytes_and_parent_macro) ... ok\ntest_crossref_cycle_blocks (test_dsn_release_tools.PackagingControls.test_crossref_cycle_blocks) ... ok\ntest_dynamic_path_escaping_root_and_hidden_macros_block (test_dsn_release_tools.PackagingControls.test_dynamic_path_escaping_root_and_hidden_macros_block) ... ok\ntest_macro_cycle_blocks (test_dsn_release_tools.PackagingControls.test_macro_cycle_blocks) ... ok\ntest_metadata_removal_safe_and_original_recoverable (test_dsn_release_tools.PackagingControls.test_metadata_removal_safe_and_original_recoverable) ... ok\ntest_missing_cited_key_blocks (test_dsn_release_tools.PackagingControls.test_missing_cited_key_blocks) ... ok\ntest_only_reachable_and_binary_bytes_unchanged (test_dsn_release_tools.PackagingControls.test_only_reachable_and_binary_bytes_unchanged) ... ok\ntest_percent_escapes (test_dsn_release_tools.PackagingControls.test_percent_escapes) ... ok\ntest_source_change_after_plan_is_detected (test_dsn_release_tools.PackagingControls.test_source_change_after_plan_is_detected) ... ok\ntest_unknown_citation_and_nocite_star_block (test_dsn_release_tools.PackagingControls.test_unknown_citation_and_nocite_star_block) ... ok\ntest_unresolved_crossref_blocks_instead_of_guess (test_dsn_release_tools.PackagingControls.test_unresolved_crossref_blocks_instead_of_guess) ... ok\ntest_write_only_new_separate_destination_and_verify_manifest (test_dsn_release_tools.PackagingControls.test_write_only_new_separate_destination_and_verify_manifest) ... ok\ntest_author_metadata_and_xmp_identity (test_dsn_release_tools.QAControls.test_author_metadata_and_xmp_identity) ... ok\ntest_font_embedding_and_type3 (test_dsn_release_tools.QAControls.test_font_embedding_and_type3) ... ok\ntest_pages_clean_refs_and_limit (test_dsn_release_tools.QAControls.test_pages_clean_refs_and_limit) ... ok\ntest_undefined_refs_and_failed_build (test_dsn_release_tools.QAControls.test_undefined_refs_and_failed_build) ... ok\ntest_actual_attestation_and_explicit_complete_page_list_required (test_dsn_release_tools.VersionedDeliveryControls.test_actual_attestation_and_explicit_complete_page_list_required) ... ok\ntest_changed_or_renamed_archive_is_rejected (test_dsn_release_tools.VersionedDeliveryControls.test_changed_or_renamed_archive_is_rejected) ... ok\ntest_changed_pdf_is_rejected_by_both_records (test_dsn_release_tools.VersionedDeliveryControls.test_changed_pdf_is_rejected_by_both_records) ... ok\ntest_matching_final_record_is_accepted (test_dsn_release_tools.VersionedDeliveryControls.test_matching_final_record_is_accepted) ... ok\ntest_missing_duplicate_or_malformed_png_rejected (test_dsn_release_tools.VersionedDeliveryControls.test_missing_duplicate_or_malformed_png_rejected) ... ok\ntest_new_pagination_allows_eleven_technical_and_reference_page (test_dsn_release_tools.VersionedDeliveryControls.test_new_pagination_allows_eleven_technical_and_reference_page) ... ok\ntest_new_record_refuses_old_version_and_escape_before_outputs (test_dsn_release_tools.VersionedDeliveryControls.test_new_record_refuses_old_version_and_escape_before_outputs) ... ok\ntest_review_binds_all_pngs_and_automatic_record (test_dsn_release_tools.VersionedDeliveryControls.test_review_binds_all_pngs_and_automatic_record) ... ok\ntest_stale_record_cannot_authorize_other_release_even_same_pdf (test_dsn_release_tools.VersionedDeliveryControls.test_stale_record_cannot_authorize_other_release_even_same_pdf) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 0.367s\n\nOK\n",
+  "files": [
+    {
+      "path": "package_dsn_release.py",
+      "sha256": "20fcac1fc201f1fbb38d780b193572b540430f482e2a37a0ebbe1d370939d1bd",
+      "bytes": 4327
+    },
+    {
+      "path": "publish_progress.py",
+      "sha256": "266db4624a7dddfb2cebebf1afcccfebafbee7b3ae92b3872fb7f64a8f16a66e",
+      "bytes": 6481
+    },
+    {
+      "path": "release_delivery_checks.py",
+      "sha256": "3f669f273de8b18d05451814300ec3840a536b327893572559194788201be1ff",
+      "bytes": 1707
+    },
+    {
+      "path": "record_final_visual_review.py",
+      "sha256": "7d3265d1b084fe2d4db7b22100f43f5499c5041e1046fc45708cd54fd31f8606",
+      "bytes": 5668
+    },
+    {
+      "path": "test_dsn_release_tools.py",
+      "sha256": "515bc7fc26ec06dbf02752aa0d812839324387e7d7431716fb20594017b26378",
+      "bytes": 15987
+    },
+    {
+      "path": "RELEASE_TOOLING_V2_NOTES.zh.md",
+      "sha256": "07997af1d3910ddb5f8a67278089a683a37c774d7394dd647ef899aa0c569972",
+      "bytes": 4406
+    }
+  ],
+  "protected_existing_final_record_sha256": "d1aaf6ad2abdfd09c6d21224ab63156994c461f2ef8e6859aab9ff90aeb136a7",
+  "actual_final_visual_review_performed": false,
+  "actual_paper_package_created": false
+}

@@ -1,0 +1,812 @@
+{
+  "schema": "native-context-full-collected-telemetry-definition-v2",
+  "created_utc": "2026-10-30T11:21:43.868572+00:00",
+  "analysis_script_sha256": "3e119fa7a40919b4489d4c526b255e687a0e470ffb1d277df650d54bfee313f6",
+  "actual_neural_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "reference_gate_sha256": "c18a01d7385499790626dcb01b5be76b4b6511a5640af5f26443decce17ccb70",
+  "collection_manifest_sha256": "f52a4603340e95b58b1be00b75281092f5a6da16e70a723d7560a23ee9888271",
+  "observed_source_coverage": {
+    "original_continuous_steps": 875,
+    "restored_edges": 875,
+    "all_full_state_C_IDs_equal": true
+  },
+  "new_model_calls": 0,
+  "remote_operations": 0,
+  "source_or_CURRENT_changed": false,
+  "inputs": [
+    {
+      "path": "sources/SC_SYNTH_S0770_24UTT_V1/STATE_BOUNDARIES.jsonl",
+      "bytes": 4099417,
+      "sha256": "d11571974bd9527cf190d83fa3bddec10c0c0c1a1e26d92333341a8b88fd97ab"
+    },
+    {
+      "path": "sources/SC_SYNTH_S0903_24UTT_V1/STATE_BOUNDARIES.jsonl",
+      "bytes": 3654124,
+      "sha256": "14db9e1b0cbf02ff7009cfa80d5d5d64005cda6ed62474c8dd0b7b88f8f32d12"
+    }
+  ],
+  "passes": [
+    {
+      "source_id": "SC_SYNTH_S0770_24UTT_V1",
+      "pass_kind": "continuous",
+      "actual_insert_observations": 458,
+      "actual_buffer_shifts": 398,
+      "actual_context_trim_calls": 457,
+      "actual_context_change_observations": 353,
+      "before_soft_true": 354,
+      "after_soft_true": 342,
+      "after_soft_false": 115,
+      "after_initial_decoder_sequence_bins": {
+        "<=428": 103,
+        "429..447": 14,
+        ">=448": 340
+      },
+      "after_context_nonempty": 56,
+      "after_context_empty": 401,
+      "after_soft_true_and_current_window_alone_exceeds428": 342,
+      "after_soft_true_and_empty_context": 342,
+      "after_L_at_least448_and_empty_context": 340,
+      "after_L_at_least448_and_nonempty_context": 0,
+      "cross_bins": [
+        {
+          "L_bin": "429..447",
+          "context": "empty",
+          "soft": "soft_true",
+          "count": 2
+        },
+        {
+          "L_bin": "429..447",
+          "context": "nonempty",
+          "soft": "soft_false",
+          "count": 12
+        },
+        {
+          "L_bin": "<=428",
+          "context": "empty",
+          "soft": "soft_false",
+          "count": 59
+        },
+        {
+          "L_bin": "<=428",
+          "context": "nonempty",
+          "soft": "soft_false",
+          "count": 44
+        },
+        {
+          "L_bin": ">=448",
+          "context": "empty",
+          "soft": "soft_true",
+          "count": 340
+        }
+      ],
+      "token_group_count_distribution": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "22": 1,
+        "23": 1,
+        "24": 1,
+        "25": 1,
+        "26": 1,
+        "27": 1,
+        "28": 1,
+        "29": 1,
+        "30": 1,
+        "31": 1,
+        "32": 1,
+        "33": 1,
+        "34": 1,
+        "35": 1,
+        "36": 1,
+        "37": 1,
+        "38": 1,
+        "39": 1,
+        "40": 1,
+        "41": 1,
+        "42": 1,
+        "43": 1,
+        "44": 1,
+        "45": 1,
+        "46": 1,
+        "47": 1,
+        "48": 1,
+        "49": 1,
+        "50": 1,
+        "51": 1,
+        "52": 1,
+        "53": 1,
+        "54": 1,
+        "55": 1,
+        "56": 1,
+        "57": 1,
+        "58": 1,
+        "59": 399
+      },
+      "context_prefix_counts": [
+        1
+      ],
+      "ranges": {
+        "T": {
+          "min": 4,
+          "max": 739
+        },
+        "C": {
+          "min": 0,
+          "max": 65
+        },
+        "L": {
+          "min": 4,
+          "max": 739
+        },
+        "groups": {
+          "min": 1,
+          "max": 59
+        }
+      },
+      "first_events": [
+        {
+          "label": "first_after_soft_true",
+          "job_id": "continuous_000116",
+          "end_frontier": 936000,
+          "audio_seconds": 58.5,
+          "derived": {
+            "T": 434,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 434,
+            "bucket": "429..447",
+            "groups": 59
+          }
+        },
+        {
+          "label": "first_after_L_at_least448",
+          "job_id": "continuous_000118",
+          "end_frontier": 952000,
+          "audio_seconds": 59.5,
+          "derived": {
+            "T": 455,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 455,
+            "bucket": ">=448",
+            "groups": 59
+          }
+        },
+        {
+          "label": "first_current_window_alone_exceeds_soft",
+          "job_id": "continuous_000116",
+          "end_frontier": 936000,
+          "audio_seconds": 58.5,
+          "derived": {
+            "T": 434,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 434,
+            "bucket": "429..447",
+            "groups": 59
+          }
+        }
+      ],
+      "scope": "Post-original-trim snapshot implies _current_tokens initial sequence length for the immediately following code path. Actual decoder forward/position-index execution is not observed by this counter; author while guard may skip it."
+    },
+    {
+      "source_id": "SC_SYNTH_S0770_24UTT_V1",
+      "pass_kind": "restore",
+      "actual_insert_observations": 458,
+      "actual_buffer_shifts": 398,
+      "actual_context_trim_calls": 457,
+      "actual_context_change_observations": 353,
+      "before_soft_true": 354,
+      "after_soft_true": 342,
+      "after_soft_false": 115,
+      "after_initial_decoder_sequence_bins": {
+        "<=428": 103,
+        "429..447": 14,
+        ">=448": 340
+      },
+      "after_context_nonempty": 56,
+      "after_context_empty": 401,
+      "after_soft_true_and_current_window_alone_exceeds428": 342,
+      "after_soft_true_and_empty_context": 342,
+      "after_L_at_least448_and_empty_context": 340,
+      "after_L_at_least448_and_nonempty_context": 0,
+      "cross_bins": [
+        {
+          "L_bin": "429..447",
+          "context": "empty",
+          "soft": "soft_true",
+          "count": 2
+        },
+        {
+          "L_bin": "429..447",
+          "context": "nonempty",
+          "soft": "soft_false",
+          "count": 12
+        },
+        {
+          "L_bin": "<=428",
+          "context": "empty",
+          "soft": "soft_false",
+          "count": 59
+        },
+        {
+          "L_bin": "<=428",
+          "context": "nonempty",
+          "soft": "soft_false",
+          "count": 44
+        },
+        {
+          "L_bin": ">=448",
+          "context": "empty",
+          "soft": "soft_true",
+          "count": 340
+        }
+      ],
+      "token_group_count_distribution": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "22": 1,
+        "23": 1,
+        "24": 1,
+        "25": 1,
+        "26": 1,
+        "27": 1,
+        "28": 1,
+        "29": 1,
+        "30": 1,
+        "31": 1,
+        "32": 1,
+        "33": 1,
+        "34": 1,
+        "35": 1,
+        "36": 1,
+        "37": 1,
+        "38": 1,
+        "39": 1,
+        "40": 1,
+        "41": 1,
+        "42": 1,
+        "43": 1,
+        "44": 1,
+        "45": 1,
+        "46": 1,
+        "47": 1,
+        "48": 1,
+        "49": 1,
+        "50": 1,
+        "51": 1,
+        "52": 1,
+        "53": 1,
+        "54": 1,
+        "55": 1,
+        "56": 1,
+        "57": 1,
+        "58": 1,
+        "59": 399
+      },
+      "context_prefix_counts": [
+        1
+      ],
+      "ranges": {
+        "T": {
+          "min": 4,
+          "max": 739
+        },
+        "C": {
+          "min": 0,
+          "max": 65
+        },
+        "L": {
+          "min": 4,
+          "max": 739
+        },
+        "groups": {
+          "min": 1,
+          "max": 59
+        }
+      },
+      "first_events": [
+        {
+          "label": "first_after_soft_true",
+          "job_id": "restore_000116",
+          "end_frontier": 936000,
+          "audio_seconds": 58.5,
+          "derived": {
+            "T": 434,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 434,
+            "bucket": "429..447",
+            "groups": 59
+          }
+        },
+        {
+          "label": "first_after_L_at_least448",
+          "job_id": "restore_000118",
+          "end_frontier": 952000,
+          "audio_seconds": 59.5,
+          "derived": {
+            "T": 455,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 455,
+            "bucket": ">=448",
+            "groups": 59
+          }
+        },
+        {
+          "label": "first_current_window_alone_exceeds_soft",
+          "job_id": "restore_000116",
+          "end_frontier": 936000,
+          "audio_seconds": 58.5,
+          "derived": {
+            "T": 434,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 434,
+            "bucket": "429..447",
+            "groups": 59
+          }
+        }
+      ],
+      "scope": "Post-original-trim snapshot implies _current_tokens initial sequence length for the immediately following code path. Actual decoder forward/position-index execution is not observed by this counter; author while guard may skip it."
+    },
+    {
+      "source_id": "SC_SYNTH_S0903_24UTT_V1",
+      "pass_kind": "continuous",
+      "actual_insert_observations": 417,
+      "actual_buffer_shifts": 357,
+      "actual_context_trim_calls": 416,
+      "actual_context_change_observations": 252,
+      "before_soft_true": 252,
+      "after_soft_true": 55,
+      "after_soft_false": 361,
+      "after_initial_decoder_sequence_bins": {
+        "<=428": 199,
+        "429..447": 181,
+        ">=448": 36
+      },
+      "after_context_nonempty": 298,
+      "after_context_empty": 118,
+      "after_soft_true_and_current_window_alone_exceeds428": 55,
+      "after_soft_true_and_empty_context": 55,
+      "after_L_at_least448_and_empty_context": 36,
+      "after_L_at_least448_and_nonempty_context": 0,
+      "cross_bins": [
+        {
+          "L_bin": "429..447",
+          "context": "empty",
+          "soft": "soft_true",
+          "count": 19
+        },
+        {
+          "L_bin": "429..447",
+          "context": "nonempty",
+          "soft": "soft_false",
+          "count": 162
+        },
+        {
+          "L_bin": "<=428",
+          "context": "empty",
+          "soft": "soft_false",
+          "count": 63
+        },
+        {
+          "L_bin": "<=428",
+          "context": "nonempty",
+          "soft": "soft_false",
+          "count": 136
+        },
+        {
+          "L_bin": ">=448",
+          "context": "empty",
+          "soft": "soft_true",
+          "count": 36
+        }
+      ],
+      "token_group_count_distribution": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "22": 1,
+        "23": 1,
+        "24": 1,
+        "25": 1,
+        "26": 1,
+        "27": 1,
+        "28": 1,
+        "29": 1,
+        "30": 1,
+        "31": 1,
+        "32": 1,
+        "33": 1,
+        "34": 1,
+        "35": 1,
+        "36": 1,
+        "37": 1,
+        "38": 1,
+        "39": 1,
+        "40": 1,
+        "41": 1,
+        "42": 1,
+        "43": 1,
+        "44": 1,
+        "45": 1,
+        "46": 1,
+        "47": 1,
+        "48": 1,
+        "49": 1,
+        "50": 1,
+        "51": 1,
+        "52": 1,
+        "53": 1,
+        "54": 1,
+        "55": 1,
+        "56": 1,
+        "57": 1,
+        "58": 1,
+        "59": 358
+      },
+      "context_prefix_counts": [
+        1
+      ],
+      "ranges": {
+        "T": {
+          "min": 4,
+          "max": 492
+        },
+        "C": {
+          "min": 0,
+          "max": 176
+        },
+        "L": {
+          "min": 4,
+          "max": 492
+        },
+        "groups": {
+          "min": 1,
+          "max": 59
+        }
+      },
+      "first_events": [
+        {
+          "label": "first_after_soft_true",
+          "job_id": "continuous_000236",
+          "end_frontier": 1896000,
+          "audio_seconds": 118.5,
+          "derived": {
+            "T": 430,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 430,
+            "bucket": "429..447",
+            "groups": 59
+          }
+        },
+        {
+          "label": "first_after_L_at_least448",
+          "job_id": "continuous_000256",
+          "end_frontier": 2056000,
+          "audio_seconds": 128.5,
+          "derived": {
+            "T": 448,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 448,
+            "bucket": ">=448",
+            "groups": 59
+          }
+        },
+        {
+          "label": "first_current_window_alone_exceeds_soft",
+          "job_id": "continuous_000236",
+          "end_frontier": 1896000,
+          "audio_seconds": 118.5,
+          "derived": {
+            "T": 430,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 430,
+            "bucket": "429..447",
+            "groups": 59
+          }
+        }
+      ],
+      "scope": "Post-original-trim snapshot implies _current_tokens initial sequence length for the immediately following code path. Actual decoder forward/position-index execution is not observed by this counter; author while guard may skip it."
+    },
+    {
+      "source_id": "SC_SYNTH_S0903_24UTT_V1",
+      "pass_kind": "restore",
+      "actual_insert_observations": 417,
+      "actual_buffer_shifts": 357,
+      "actual_context_trim_calls": 416,
+      "actual_context_change_observations": 252,
+      "before_soft_true": 252,
+      "after_soft_true": 55,
+      "after_soft_false": 361,
+      "after_initial_decoder_sequence_bins": {
+        "<=428": 199,
+        "429..447": 181,
+        ">=448": 36
+      },
+      "after_context_nonempty": 298,
+      "after_context_empty": 118,
+      "after_soft_true_and_current_window_alone_exceeds428": 55,
+      "after_soft_true_and_empty_context": 55,
+      "after_L_at_least448_and_empty_context": 36,
+      "after_L_at_least448_and_nonempty_context": 0,
+      "cross_bins": [
+        {
+          "L_bin": "429..447",
+          "context": "empty",
+          "soft": "soft_true",
+          "count": 19
+        },
+        {
+          "L_bin": "429..447",
+          "context": "nonempty",
+          "soft": "soft_false",
+          "count": 162
+        },
+        {
+          "L_bin": "<=428",
+          "context": "empty",
+          "soft": "soft_false",
+          "count": 63
+        },
+        {
+          "L_bin": "<=428",
+          "context": "nonempty",
+          "soft": "soft_false",
+          "count": 136
+        },
+        {
+          "L_bin": ">=448",
+          "context": "empty",
+          "soft": "soft_true",
+          "count": 36
+        }
+      ],
+      "token_group_count_distribution": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "22": 1,
+        "23": 1,
+        "24": 1,
+        "25": 1,
+        "26": 1,
+        "27": 1,
+        "28": 1,
+        "29": 1,
+        "30": 1,
+        "31": 1,
+        "32": 1,
+        "33": 1,
+        "34": 1,
+        "35": 1,
+        "36": 1,
+        "37": 1,
+        "38": 1,
+        "39": 1,
+        "40": 1,
+        "41": 1,
+        "42": 1,
+        "43": 1,
+        "44": 1,
+        "45": 1,
+        "46": 1,
+        "47": 1,
+        "48": 1,
+        "49": 1,
+        "50": 1,
+        "51": 1,
+        "52": 1,
+        "53": 1,
+        "54": 1,
+        "55": 1,
+        "56": 1,
+        "57": 1,
+        "58": 1,
+        "59": 358
+      },
+      "context_prefix_counts": [
+        1
+      ],
+      "ranges": {
+        "T": {
+          "min": 4,
+          "max": 492
+        },
+        "C": {
+          "min": 0,
+          "max": 176
+        },
+        "L": {
+          "min": 4,
+          "max": 492
+        },
+        "groups": {
+          "min": 1,
+          "max": 59
+        }
+      },
+      "first_events": [
+        {
+          "label": "first_after_soft_true",
+          "job_id": "restore_000236",
+          "end_frontier": 1896000,
+          "audio_seconds": 118.5,
+          "derived": {
+            "T": 430,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 430,
+            "bucket": "429..447",
+            "groups": 59
+          }
+        },
+        {
+          "label": "first_after_L_at_least448",
+          "job_id": "restore_000256",
+          "end_frontier": 2056000,
+          "audio_seconds": 128.5,
+          "derived": {
+            "T": 448,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 448,
+            "bucket": ">=448",
+            "groups": 59
+          }
+        },
+        {
+          "label": "first_current_window_alone_exceeds_soft",
+          "job_id": "restore_000236",
+          "end_frontier": 1896000,
+          "audio_seconds": 118.5,
+          "derived": {
+            "T": 430,
+            "C": 0,
+            "P": 1,
+            "M": 448,
+            "K": 448,
+            "context_nonempty": false,
+            "soft": true,
+            "L": 430,
+            "bucket": "429..447",
+            "groups": 59
+          }
+        }
+      ],
+      "scope": "Post-original-trim snapshot implies _current_tokens initial sequence length for the immediately following code path. Actual decoder forward/position-index execution is not observed by this counter; author while guard may skip it."
+    }
+  ],
+  "definitions": {
+    "T": "sum token-group shape[1], beam is not multiplied",
+    "C": "re-encoded context text token count, excluding context prefix",
+    "P": "context prefix count",
+    "observer_soft_total": "T+C",
+    "derived_initial_current_tokens": "T+C+P if context text nonempty else T",
+    "soft_predicate": "C>448 or T+C>428",
+    "actual_original_decoder_guard": "current_tokens.shape[1]<448, with completed initiallyFalse"
+  },
+  "limitations": "No decoder hook/progress tensor was added. L>=448 is the guard condition under which this original while can skip initial decoding, not proof of an out-of-range positional embedding access. Counts are finite observed model state/soft-policy observations, not protocol live-entry bounds."
+}

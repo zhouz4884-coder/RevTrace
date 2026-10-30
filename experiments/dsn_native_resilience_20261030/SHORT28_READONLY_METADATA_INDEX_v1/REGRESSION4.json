@@ -1,0 +1,630 @@
+[
+  {
+    "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_conservative_r0",
+    "cohort": "short_regression",
+    "condition": "none",
+    "arm": "conservative",
+    "repeat": 0,
+    "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+    "source_ids": [
+      "BAC009S0764W0209"
+    ],
+    "config_binding": {
+      "frozen_input_sha256": "dcf50313fed5fbc9cef4351781f6a41a911315913f6b1a9fb69c07fbce5d6175",
+      "runtime_config_echo_sha256": "5f10e5c7cfd7de155b24a3f6f5e68b226b154152af35bc18cdcb685dcd825d4f",
+      "frozen_config_path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\formal_short28_v1_configs\\SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_conservative_r0.json",
+      "complete_JSON_value_equality": true,
+      "byte_encoding_scope": "Frozen original input and runtime echo have separately bound SHA256; no byte-equality claim."
+    },
+    "illegal_installs": null,
+    "legal_progress_wrong_rejections": null,
+    "semantic_audit": null,
+    "complete_original_task": true,
+    "local_reject_records": 0,
+    "local_reject_canonical_mutations": 0,
+    "final_quality": [
+      {
+        "source_id": "BAC009S0764W0209",
+        "reference_characters": 23,
+        "character_edits": 2,
+        "CER": 0.08695652173913043,
+        "final_text": "严厉打击春运期间违规上调票价价外收费等法行为为",
+        "scope": "Fixed whitespace-only original native CER; final task quality, not provisional correctness."
+      }
+    ],
+    "original_reference": {
+      "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+      "checked_steps": 17,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "reference_kind": "short_bdfa_static_source_mapping",
+      "projection": "only contract.stage_execution.source_commit maps BDFA/current to BDFA",
+      "reference_sha256": "db1d90dc445ed9e63e9fe201e462e25bc8e2ae464bac002fc33ff25d5baa5785"
+    },
+    "original_D2_C8_pass": false,
+    "original_D99": 6.561561855822801,
+    "original_C99": 6.8731966522336005,
+    "EOS_D2_misses": 1,
+    "D2_misses_all_offered": 13,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.068,
+    "dual_deadline_audio_credit_seconds": 2.0,
+    "energy_joules": 7274.732264849532,
+    "energy_status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+    "recovery_clock_applicable": false,
+    "recovery": null,
+    "new_model_completed_after_fault_and_certified_consume_seconds": null,
+    "old_durable_replay_seconds": null,
+    "new_durable_fact_seconds": null,
+    "pending_accepted_uncertified_samples": {
+      "BAC009S0764W0209": 0
+    },
+    "unprocessed_all_offered_samples": {
+      "BAC009S0764W0209": 0
+    },
+    "observed_acknowledged_input_loss_samples": {
+      "BAC009S0764W0209": 0
+    },
+    "posterior_whole_text_support": {
+      "raw": {
+        "original_credit_supported_seconds": 2.0,
+        "original_credit_mismatching_seconds": 0,
+        "original_credit_unknown_seconds": 0,
+        "all_offered_frontier_counts": {
+          "supported": 12,
+          "mismatching": 5
+        }
+      },
+      "whitespace_stripped": {
+        "original_credit_supported_seconds": 2.0,
+        "original_credit_mismatching_seconds": 0,
+        "original_credit_unknown_seconds": 0,
+        "all_offered_frontier_counts": {
+          "supported": 12,
+          "mismatching": 5
+        }
+      },
+      "scope": "Posterior whole first-view agreement at its actual G, not online certification, human correctness or newly transcribed character volume."
+    },
+    "runtime_gate": "PASS_COMPLETE_TRIAL_TASK_AND_ORIGINAL_ENDPOINT_RECOUNT",
+    "bounded_input": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\FORMAL_SHORT28_V1_RESULTS_v1\\cells\\SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_conservative_r0",
+    "precomputed_content": {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_conservative_r0",
+      "stage": "fixed_prior_source_regression",
+      "cohort": "BAC009S0764W0209",
+      "arm": "conservative",
+      "repeat": 0,
+      "actual_consumer_rows": 50,
+      "sources": 1,
+      "offered_audio_seconds": 8.068,
+      "offered_frontiers": 17,
+      "original_dual_credit_audio_seconds": 2.0,
+      "clock": "Actual observed perf; final surviving occurrences are right-censored at last actual same-source observation, not hypothetical UI close.",
+      "raw": {
+        "row_event_classes": {
+          "unchanged": 33,
+          "strict_append": 14,
+          "replacement": 3
+        },
+        "introduced_code_point_occurrences": 27,
+        "LCP_erased_code_point_occurrences": 4,
+        "observed_text_changes": 17,
+        "positive_F_advance_with_unchanged_text_rows": 3,
+        "positive_certified_F_advance_with_unchanged_text_rows": 11,
+        "original_credit_by_first_visible_row_class": {
+          "unchanged": 0,
+          "strict_append": 2.0,
+          "replacement": 0,
+          "erase_only": 0,
+          "not_observed": 0
+        },
+        "original_credit_on_whole_text_empty_rows": 0,
+        "retracted_occurrence_code_points": 4,
+        "still_visible_occurrence_code_points": 23,
+        "closed_occurrence_code_point_seconds": 1.259274440817535,
+        "longest_closed_observed_lifetime_seconds": 0.3436961490660906,
+        "final_observed_text_code_points": 23
+      },
+      "whitespace_stripped": {
+        "row_event_classes": {
+          "unchanged": 33,
+          "strict_append": 14,
+          "replacement": 3
+        },
+        "introduced_code_point_occurrences": 27,
+        "LCP_erased_code_point_occurrences": 4,
+        "observed_text_changes": 17,
+        "positive_F_advance_with_unchanged_text_rows": 3,
+        "positive_certified_F_advance_with_unchanged_text_rows": 11,
+        "original_credit_by_first_visible_row_class": {
+          "unchanged": 0,
+          "strict_append": 2.0,
+          "replacement": 0,
+          "erase_only": 0,
+          "not_observed": 0
+        },
+        "original_credit_on_whole_text_empty_rows": 0,
+        "retracted_occurrence_code_points": 4,
+        "still_visible_occurrence_code_points": 23,
+        "closed_occurrence_code_point_seconds": 1.259274440817535,
+        "longest_closed_observed_lifetime_seconds": 0.3436961490660906,
+        "final_observed_text_code_points": 23
+      }
+    },
+    "interpretation_scope": "Copies existing complete-group metrics. No raw event or independent semantic recount performed here."
+  },
+  {
+    "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_fullcall_r0",
+    "cohort": "short_regression",
+    "condition": "none",
+    "arm": "fullcall",
+    "repeat": 0,
+    "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+    "source_ids": [
+      "BAC009S0764W0209"
+    ],
+    "config_binding": {
+      "frozen_input_sha256": "3858908bc5af92e31c14a3f0cbd52be7b8c8acf4d17131c89642f4fc45424c5f",
+      "runtime_config_echo_sha256": "3929287033e44c131dbae02c8ca82251752c3427a9a6c3f4688577db72a9bdd3",
+      "frozen_config_path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\formal_short28_v1_configs\\SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_fullcall_r0.json",
+      "complete_JSON_value_equality": true,
+      "byte_encoding_scope": "Frozen original input and runtime echo have separately bound SHA256; no byte-equality claim."
+    },
+    "illegal_installs": null,
+    "legal_progress_wrong_rejections": null,
+    "semantic_audit": null,
+    "complete_original_task": true,
+    "local_reject_records": 0,
+    "local_reject_canonical_mutations": 0,
+    "final_quality": [
+      {
+        "source_id": "BAC009S0764W0209",
+        "reference_characters": 23,
+        "character_edits": 2,
+        "CER": 0.08695652173913043,
+        "final_text": "严厉打击春运期间违规上调票价价外收费等法行为为",
+        "scope": "Fixed whitespace-only original native CER; final task quality, not provisional correctness."
+      }
+    ],
+    "original_reference": {
+      "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+      "checked_steps": 17,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "reference_kind": "short_bdfa_static_source_mapping",
+      "projection": "only contract.stage_execution.source_commit maps BDFA/current to BDFA",
+      "reference_sha256": "db1d90dc445ed9e63e9fe201e462e25bc8e2ae464bac002fc33ff25d5baa5785"
+    },
+    "original_D2_C8_pass": false,
+    "original_D99": 3.225702749490738,
+    "original_C99": 3.488978350609541,
+    "EOS_D2_misses": 1,
+    "D2_misses_all_offered": 4,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.068,
+    "dual_deadline_audio_credit_seconds": 6.5,
+    "energy_joules": 8001.754767349312,
+    "energy_status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+    "recovery_clock_applicable": false,
+    "recovery": null,
+    "new_model_completed_after_fault_and_certified_consume_seconds": null,
+    "old_durable_replay_seconds": null,
+    "new_durable_fact_seconds": null,
+    "pending_accepted_uncertified_samples": {
+      "BAC009S0764W0209": 0
+    },
+    "unprocessed_all_offered_samples": {
+      "BAC009S0764W0209": 0
+    },
+    "observed_acknowledged_input_loss_samples": {
+      "BAC009S0764W0209": 0
+    },
+    "posterior_whole_text_support": {
+      "raw": {
+        "original_credit_supported_seconds": 5.5,
+        "original_credit_mismatching_seconds": 1.0,
+        "original_credit_unknown_seconds": 0,
+        "all_offered_frontier_counts": {
+          "supported": 12,
+          "mismatching": 5
+        }
+      },
+      "whitespace_stripped": {
+        "original_credit_supported_seconds": 5.5,
+        "original_credit_mismatching_seconds": 1.0,
+        "original_credit_unknown_seconds": 0,
+        "all_offered_frontier_counts": {
+          "supported": 12,
+          "mismatching": 5
+        }
+      },
+      "scope": "Posterior whole first-view agreement at its actual G, not online certification, human correctness or newly transcribed character volume."
+    },
+    "runtime_gate": "PASS_COMPLETE_TRIAL_TASK_AND_ORIGINAL_ENDPOINT_RECOUNT",
+    "bounded_input": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\FORMAL_SHORT28_V1_RESULTS_v1\\cells\\SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_fullcall_r0",
+    "precomputed_content": {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_fullcall_r0",
+      "stage": "fixed_prior_source_regression",
+      "cohort": "BAC009S0764W0209",
+      "arm": "fullcall",
+      "repeat": 0,
+      "actual_consumer_rows": 50,
+      "sources": 1,
+      "offered_audio_seconds": 8.068,
+      "offered_frontiers": 17,
+      "original_dual_credit_audio_seconds": 6.5,
+      "clock": "Actual observed perf; final surviving occurrences are right-censored at last actual same-source observation, not hypothetical UI close.",
+      "raw": {
+        "row_event_classes": {
+          "unchanged": 33,
+          "strict_append": 14,
+          "replacement": 3
+        },
+        "introduced_code_point_occurrences": 27,
+        "LCP_erased_code_point_occurrences": 4,
+        "observed_text_changes": 17,
+        "positive_F_advance_with_unchanged_text_rows": 3,
+        "positive_certified_F_advance_with_unchanged_text_rows": 11,
+        "original_credit_by_first_visible_row_class": {
+          "unchanged": 1.5,
+          "strict_append": 5.0,
+          "replacement": 0,
+          "erase_only": 0,
+          "not_observed": 0
+        },
+        "original_credit_on_whole_text_empty_rows": 0,
+        "retracted_occurrence_code_points": 4,
+        "still_visible_occurrence_code_points": 23,
+        "closed_occurrence_code_point_seconds": 1.336905013769865,
+        "longest_closed_observed_lifetime_seconds": 0.3994931308552623,
+        "final_observed_text_code_points": 23
+      },
+      "whitespace_stripped": {
+        "row_event_classes": {
+          "unchanged": 33,
+          "strict_append": 14,
+          "replacement": 3
+        },
+        "introduced_code_point_occurrences": 27,
+        "LCP_erased_code_point_occurrences": 4,
+        "observed_text_changes": 17,
+        "positive_F_advance_with_unchanged_text_rows": 3,
+        "positive_certified_F_advance_with_unchanged_text_rows": 11,
+        "original_credit_by_first_visible_row_class": {
+          "unchanged": 1.5,
+          "strict_append": 5.0,
+          "replacement": 0,
+          "erase_only": 0,
+          "not_observed": 0
+        },
+        "original_credit_on_whole_text_empty_rows": 0,
+        "retracted_occurrence_code_points": 4,
+        "still_visible_occurrence_code_points": 23,
+        "closed_occurrence_code_point_seconds": 1.336905013769865,
+        "longest_closed_observed_lifetime_seconds": 0.3994931308552623,
+        "final_observed_text_code_points": 23
+      }
+    },
+    "interpretation_scope": "Copies existing complete-group metrics. No raw event or independent semantic recount performed here."
+  },
+  {
+    "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_conservative_r0",
+    "cohort": "short_regression",
+    "condition": "none",
+    "arm": "conservative",
+    "repeat": 0,
+    "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+    "source_ids": [
+      "BAC009S0905W0246"
+    ],
+    "config_binding": {
+      "frozen_input_sha256": "51b109dd16242333b52954e849e4f51b9ff5a644cea6eb50ac9bd070178ce2c0",
+      "runtime_config_echo_sha256": "99ffa04dd1c081f202cae3f17440ef8d2519db31fafe000240ad7ae85c17fc6f",
+      "frozen_config_path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\formal_short28_v1_configs\\SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_conservative_r0.json",
+      "complete_JSON_value_equality": true,
+      "byte_encoding_scope": "Frozen original input and runtime echo have separately bound SHA256; no byte-equality claim."
+    },
+    "illegal_installs": null,
+    "legal_progress_wrong_rejections": null,
+    "semantic_audit": null,
+    "complete_original_task": true,
+    "local_reject_records": 0,
+    "local_reject_canonical_mutations": 0,
+    "final_quality": [
+      {
+        "source_id": "BAC009S0905W0246",
+        "reference_characters": 22,
+        "character_edits": 1,
+        "CER": 0.045454545454545456,
+        "final_text": "合理确定大城市郊区菜篮子产品生产用地保有数量量",
+        "scope": "Fixed whitespace-only original native CER; final task quality, not provisional correctness."
+      }
+    ],
+    "original_reference": {
+      "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+      "checked_steps": 17,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "reference_kind": "short_bdfa_static_source_mapping",
+      "projection": "only contract.stage_execution.source_commit maps BDFA/current to BDFA",
+      "reference_sha256": "db1d90dc445ed9e63e9fe201e462e25bc8e2ae464bac002fc33ff25d5baa5785"
+    },
+    "original_D2_C8_pass": false,
+    "original_D99": 4.670890039801598,
+    "original_C99": 4.964485314488411,
+    "EOS_D2_misses": 1,
+    "D2_misses_all_offered": 10,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.297,
+    "dual_deadline_audio_credit_seconds": 3.5,
+    "energy_joules": 6827.823678546558,
+    "energy_status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+    "recovery_clock_applicable": false,
+    "recovery": null,
+    "new_model_completed_after_fault_and_certified_consume_seconds": null,
+    "old_durable_replay_seconds": null,
+    "new_durable_fact_seconds": null,
+    "pending_accepted_uncertified_samples": {
+      "BAC009S0905W0246": 0
+    },
+    "unprocessed_all_offered_samples": {
+      "BAC009S0905W0246": 0
+    },
+    "observed_acknowledged_input_loss_samples": {
+      "BAC009S0905W0246": 0
+    },
+    "posterior_whole_text_support": {
+      "raw": {
+        "original_credit_supported_seconds": 3.5,
+        "original_credit_mismatching_seconds": 0,
+        "original_credit_unknown_seconds": 0,
+        "all_offered_frontier_counts": {
+          "supported": 14,
+          "mismatching": 3
+        }
+      },
+      "whitespace_stripped": {
+        "original_credit_supported_seconds": 3.5,
+        "original_credit_mismatching_seconds": 0,
+        "original_credit_unknown_seconds": 0,
+        "all_offered_frontier_counts": {
+          "supported": 14,
+          "mismatching": 3
+        }
+      },
+      "scope": "Posterior whole first-view agreement at its actual G, not online certification, human correctness or newly transcribed character volume."
+    },
+    "runtime_gate": "PASS_COMPLETE_TRIAL_TASK_AND_ORIGINAL_ENDPOINT_RECOUNT",
+    "bounded_input": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\FORMAL_SHORT28_V1_RESULTS_v1\\cells\\SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_conservative_r0",
+    "precomputed_content": {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_conservative_r0",
+      "stage": "fixed_prior_source_regression",
+      "cohort": "BAC009S0905W0246",
+      "arm": "conservative",
+      "repeat": 0,
+      "actual_consumer_rows": 50,
+      "sources": 1,
+      "offered_audio_seconds": 8.297,
+      "offered_frontiers": 17,
+      "original_dual_credit_audio_seconds": 3.5,
+      "clock": "Actual observed perf; final surviving occurrences are right-censored at last actual same-source observation, not hypothetical UI close.",
+      "raw": {
+        "row_event_classes": {
+          "unchanged": 33,
+          "strict_append": 15,
+          "replacement": 2
+        },
+        "introduced_code_point_occurrences": 25,
+        "LCP_erased_code_point_occurrences": 2,
+        "observed_text_changes": 17,
+        "positive_F_advance_with_unchanged_text_rows": 2,
+        "positive_certified_F_advance_with_unchanged_text_rows": 12,
+        "original_credit_by_first_visible_row_class": {
+          "unchanged": 0,
+          "strict_append": 3.5,
+          "replacement": 0,
+          "erase_only": 0,
+          "not_observed": 0
+        },
+        "original_credit_on_whole_text_empty_rows": 0,
+        "retracted_occurrence_code_points": 2,
+        "still_visible_occurrence_code_points": 23,
+        "closed_occurrence_code_point_seconds": 0.5441086422652006,
+        "longest_closed_observed_lifetime_seconds": 0.303732194006443,
+        "final_observed_text_code_points": 23
+      },
+      "whitespace_stripped": {
+        "row_event_classes": {
+          "unchanged": 33,
+          "strict_append": 15,
+          "replacement": 2
+        },
+        "introduced_code_point_occurrences": 25,
+        "LCP_erased_code_point_occurrences": 2,
+        "observed_text_changes": 17,
+        "positive_F_advance_with_unchanged_text_rows": 2,
+        "positive_certified_F_advance_with_unchanged_text_rows": 12,
+        "original_credit_by_first_visible_row_class": {
+          "unchanged": 0,
+          "strict_append": 3.5,
+          "replacement": 0,
+          "erase_only": 0,
+          "not_observed": 0
+        },
+        "original_credit_on_whole_text_empty_rows": 0,
+        "retracted_occurrence_code_points": 2,
+        "still_visible_occurrence_code_points": 23,
+        "closed_occurrence_code_point_seconds": 0.5441086422652006,
+        "longest_closed_observed_lifetime_seconds": 0.303732194006443,
+        "final_observed_text_code_points": 23
+      }
+    },
+    "interpretation_scope": "Copies existing complete-group metrics. No raw event or independent semantic recount performed here."
+  },
+  {
+    "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_fullcall_r0",
+    "cohort": "short_regression",
+    "condition": "none",
+    "arm": "fullcall",
+    "repeat": 0,
+    "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+    "source_ids": [
+      "BAC009S0905W0246"
+    ],
+    "config_binding": {
+      "frozen_input_sha256": "a98ea66421e4e33556e225f3d97c3549c7fcb1be1f4ee4887bc6bf5a7631ff6a",
+      "runtime_config_echo_sha256": "b635b8a191107ec33a0039c3e15eee9cf22fbf3a5e247f229b4f72273d9c7992",
+      "frozen_config_path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\formal_short28_v1_configs\\SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_fullcall_r0.json",
+      "complete_JSON_value_equality": true,
+      "byte_encoding_scope": "Frozen original input and runtime echo have separately bound SHA256; no byte-equality claim."
+    },
+    "illegal_installs": null,
+    "legal_progress_wrong_rejections": null,
+    "semantic_audit": null,
+    "complete_original_task": true,
+    "local_reject_records": 0,
+    "local_reject_canonical_mutations": 0,
+    "final_quality": [
+      {
+        "source_id": "BAC009S0905W0246",
+        "reference_characters": 22,
+        "character_edits": 1,
+        "CER": 0.045454545454545456,
+        "final_text": "合理确定大城市郊区菜篮子产品生产用地保有数量量",
+        "scope": "Fixed whitespace-only original native CER; final task quality, not provisional correctness."
+      }
+    ],
+    "original_reference": {
+      "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+      "checked_steps": 17,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "reference_kind": "short_bdfa_static_source_mapping",
+      "projection": "only contract.stage_execution.source_commit maps BDFA/current to BDFA",
+      "reference_sha256": "db1d90dc445ed9e63e9fe201e462e25bc8e2ae464bac002fc33ff25d5baa5785"
+    },
+    "original_D2_C8_pass": true,
+    "original_D99": 1.3256527107581495,
+    "original_C99": 1.6549964454770087,
+    "EOS_D2_misses": 0,
+    "D2_misses_all_offered": 0,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.297,
+    "dual_deadline_audio_credit_seconds": 8.297,
+    "energy_joules": 6885.371948600684,
+    "energy_status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+    "recovery_clock_applicable": false,
+    "recovery": null,
+    "new_model_completed_after_fault_and_certified_consume_seconds": null,
+    "old_durable_replay_seconds": null,
+    "new_durable_fact_seconds": null,
+    "pending_accepted_uncertified_samples": {
+      "BAC009S0905W0246": 0
+    },
+    "unprocessed_all_offered_samples": {
+      "BAC009S0905W0246": 0
+    },
+    "observed_acknowledged_input_loss_samples": {
+      "BAC009S0905W0246": 0
+    },
+    "posterior_whole_text_support": {
+      "raw": {
+        "original_credit_supported_seconds": 7.0,
+        "original_credit_mismatching_seconds": 1.297,
+        "original_credit_unknown_seconds": 0,
+        "all_offered_frontier_counts": {
+          "supported": 14,
+          "mismatching": 3
+        }
+      },
+      "whitespace_stripped": {
+        "original_credit_supported_seconds": 7.0,
+        "original_credit_mismatching_seconds": 1.297,
+        "original_credit_unknown_seconds": 0,
+        "all_offered_frontier_counts": {
+          "supported": 14,
+          "mismatching": 3
+        }
+      },
+      "scope": "Posterior whole first-view agreement at its actual G, not online certification, human correctness or newly transcribed character volume."
+    },
+    "runtime_gate": "PASS_COMPLETE_TRIAL_TASK_AND_ORIGINAL_ENDPOINT_RECOUNT",
+    "bounded_input": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\FORMAL_SHORT28_V1_RESULTS_v1\\cells\\SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_fullcall_r0",
+    "precomputed_content": {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_fullcall_r0",
+      "stage": "fixed_prior_source_regression",
+      "cohort": "BAC009S0905W0246",
+      "arm": "fullcall",
+      "repeat": 0,
+      "actual_consumer_rows": 50,
+      "sources": 1,
+      "offered_audio_seconds": 8.297,
+      "offered_frontiers": 17,
+      "original_dual_credit_audio_seconds": 8.297,
+      "clock": "Actual observed perf; final surviving occurrences are right-censored at last actual same-source observation, not hypothetical UI close.",
+      "raw": {
+        "row_event_classes": {
+          "unchanged": 33,
+          "strict_append": 15,
+          "replacement": 2
+        },
+        "introduced_code_point_occurrences": 25,
+        "LCP_erased_code_point_occurrences": 2,
+        "observed_text_changes": 17,
+        "positive_F_advance_with_unchanged_text_rows": 2,
+        "positive_certified_F_advance_with_unchanged_text_rows": 12,
+        "original_credit_by_first_visible_row_class": {
+          "unchanged": 1.0,
+          "strict_append": 7.297,
+          "replacement": 0,
+          "erase_only": 0,
+          "not_observed": 0
+        },
+        "original_credit_on_whole_text_empty_rows": 0,
+        "retracted_occurrence_code_points": 2,
+        "still_visible_occurrence_code_points": 23,
+        "closed_occurrence_code_point_seconds": 0.6850465722382069,
+        "longest_closed_observed_lifetime_seconds": 0.3440399067476392,
+        "final_observed_text_code_points": 23
+      },
+      "whitespace_stripped": {
+        "row_event_classes": {
+          "unchanged": 33,
+          "strict_append": 15,
+          "replacement": 2
+        },
+        "introduced_code_point_occurrences": 25,
+        "LCP_erased_code_point_occurrences": 2,
+        "observed_text_changes": 17,
+        "positive_F_advance_with_unchanged_text_rows": 2,
+        "positive_certified_F_advance_with_unchanged_text_rows": 12,
+        "original_credit_by_first_visible_row_class": {
+          "unchanged": 1.0,
+          "strict_append": 7.297,
+          "replacement": 0,
+          "erase_only": 0,
+          "not_observed": 0
+        },
+        "original_credit_on_whole_text_empty_rows": 0,
+        "retracted_occurrence_code_points": 2,
+        "still_visible_occurrence_code_points": 23,
+        "closed_occurrence_code_point_seconds": 0.6850465722382069,
+        "longest_closed_observed_lifetime_seconds": 0.3440399067476392,
+        "final_observed_text_code_points": 23
+      }
+    },
+    "interpretation_scope": "Copies existing complete-group metrics. No raw event or independent semantic recount performed here."
+  }
+]

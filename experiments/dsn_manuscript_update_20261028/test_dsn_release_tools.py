@@ -3,12 +3,16 @@
 from __future__ import annotations
 
 import base64
+import json
+import struct
 import tempfile
 import unittest
 from pathlib import Path
 
 from prepare_dsn_release import Closure, ReleaseError, bib_entries, without_comments, write_release
 from qa_dsn_release import font_check, logs_check, manifest_check, metadata_check, reference_pages
+from release_delivery_checks import new_output_path, sha, validate_final_record
+from record_final_visual_review import build_record
 
 
 class PackagingControls(unittest.TestCase):
@@ -162,6 +166,115 @@ class QAControls(unittest.TestCase):
         alias = '<x:creator xmlns:x="http://purl.org/dc/elements/1.1/">PersonalName</x:creator>'
         self.assertEqual(metadata_check("Author:", alias, [])["status"], "FAIL")
         self.assertEqual(metadata_check("Title: Work\nSubject: hidden account", "", ["account"])["status"], "FAIL")
+
+
+class VersionedDeliveryControls(unittest.TestCase):
+    """Synthetic records and PNG headers only; never approve an actual PDF."""
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="revtrace-versioned-delivery-controls-")
+        self.root = Path(self.temp.name)
+        self.release = self.root / "Paper_DSN/revisions/fixture_new"
+        self.release.mkdir(parents=True)
+        self.archive = self.root / "Paper_DSN/fixture.zip"
+        self.archive.write_bytes(b"synthetic archive bytes; not a real package")
+        (self.release / "main.pdf").write_bytes(b"synthetic pdf identity; not a real paper")
+        self.record_path = self.root / "fixture_record.json"
+        self.record = {
+            "gate": "PASS_COMPLETE_ALL_PAGE_VISUAL_AND_AUTOMATED_QA",
+            "release": self.release.relative_to(self.root).as_posix(),
+            "archive": self.archive.relative_to(self.root).as_posix(),
+            "pdf_sha256": sha((self.release / "main.pdf").read_bytes()),
+            "archive_sha256": sha(self.archive.read_bytes()), "archive_bytes": self.archive.stat().st_size,
+        }
+        self.record_path.write_text(json.dumps(self.record), encoding="utf-8")
+        self.qa = self.release / "QA.json"
+        self.qa.write_text(json.dumps({"gate": "PASS_AUTOMATED_PENDING_ALL_PAGE_VISUAL_QA",
+                                      "pdf_sha256": self.record["pdf_sha256"], "total_pages": 2,
+                                      "checks": {"pagination": {"technical_pages": 1, "references_start_page": 2}}}), encoding="utf-8")
+        self.rendered = self.release / "rendered"
+        self.rendered.mkdir()
+        # Parser fixture only: complete PNG decoding is not claimed by the tool.
+        header = b"\x89PNG\r\n\x1a\n" + struct.pack(">I", 13) + b"IHDR" + struct.pack(">II", 1391, 1800) + b"\x08\x02\0\0\0" + b"\0" * 4
+        for page in (1, 2):
+            (self.rendered / f"page-{page:02d}.png").write_bytes(header)
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def review(self, pages=None, attestation=True):
+        return build_record(self.release, self.qa, self.rendered, [1, 2] if pages is None else pages,
+                            attestation, "Synthetic fixture only", self.root)
+
+    def test_new_record_refuses_old_version_and_escape_before_outputs(self):
+        before = self.record_path.read_bytes()
+        with self.assertRaisesRegex(ValueError, "overwrite"):
+            new_output_path(self.record_path, self.root, ".json")
+        self.assertEqual(self.record_path.read_bytes(), before)
+        with self.assertRaisesRegex(ValueError, "inside"):
+            new_output_path(self.root.parent / "escaped-record.json", self.root, ".json")
+        self.assertEqual(new_output_path(self.root / "next.json", self.root, ".json"), self.root / "next.json")
+
+    def test_matching_final_record_is_accepted(self):
+        self.assertEqual(validate_final_record(self.record_path, self.release, self.archive, self.root), self.record)
+
+    def test_stale_record_cannot_authorize_other_release_even_same_pdf(self):
+        other = self.root / "Paper_DSN/revisions/other"
+        other.mkdir()
+        (other / "main.pdf").write_bytes((self.release / "main.pdf").read_bytes())
+        with self.assertRaisesRegex(ValueError, "release"):
+            validate_final_record(self.record_path, other, self.archive, self.root)
+
+    def test_changed_or_renamed_archive_is_rejected(self):
+        alternate = self.archive.with_name("other.zip")
+        alternate.write_bytes(self.archive.read_bytes())
+        with self.assertRaisesRegex(ValueError, "archive"):
+            validate_final_record(self.record_path, self.release, alternate, self.root)
+        self.archive.write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError, "archive_sha256"):
+            validate_final_record(self.record_path, self.release, self.archive, self.root)
+
+    def test_changed_pdf_is_rejected_by_both_records(self):
+        (self.release / "main.pdf").write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError, "pdf_sha256"):
+            validate_final_record(self.record_path, self.release, self.archive, self.root)
+        with self.assertRaisesRegex(ValueError, "changed after"):
+            self.review()
+
+    def test_actual_attestation_and_explicit_complete_page_list_required(self):
+        with self.assertRaisesRegex(ValueError, "attestation"):
+            self.review(attestation=False)
+        for pages in ([1], [1, 1], [2, 1], [1, 2, 3]):
+            with self.assertRaisesRegex(ValueError, "every final page"):
+                self.review(pages=pages)
+
+    def test_review_binds_all_pngs_and_automatic_record(self):
+        record = self.review()
+        self.assertEqual(record["reviewed_pages"], [1, 2])
+        self.assertEqual(record["automated_QA_sha256"], sha(self.qa.read_bytes()))
+        self.assertEqual(record["rendered_max_side_pixels"], 1800)
+        self.assertEqual(record["rendered_pages"][0]["sha256"], sha((self.rendered / "page-01.png").read_bytes()))
+
+    def test_missing_duplicate_or_malformed_png_rejected(self):
+        second = self.rendered / "page-02.png"
+        original = second.read_bytes()
+        second.unlink()
+        with self.assertRaisesRegex(ValueError, "exactly match"):
+            self.review()
+        second.write_bytes(original)
+        duplicate = self.rendered / "page-2.png"
+        duplicate.write_bytes(original)
+        with self.assertRaisesRegex(ValueError, "Duplicate"):
+            self.review()
+        duplicate.unlink()
+        second.write_bytes(b"not a PNG")
+        with self.assertRaisesRegex(ValueError, "not a PNG"):
+            self.review()
+
+    def test_new_pagination_allows_eleven_technical_and_reference_page(self):
+        text = "\f".join([f"Technical content {i}" for i in range(1, 12)] + ["REFERENCES\n[1] A paper."]) + "\f"
+        result = reference_pages(text, 12, 11)
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(result["technical_pages"], 11)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,13 @@
 # RevTrace：同源失效遏制与持续状态补强（执行中）
 
+## 当前进度（2026-10-30 HK20:50过程快照）
+
+最终神经源码 `4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47`，59文件完整manifest `60ae549fcc98165a74e5a3dc420bf93418296099fa12b410572b15d281b2c457`；Linux253 CPU控件零skip通过。正式short28已全完成，476条原任务/参考/实际Consumer检查通过，见`FORMAL_SHORT28_V1_RESULTS_v1/SUMMARY.json`。这不替代仍待完成的独立actual36语义检查，非法安装/错误拒绝不得提前写零。
+
+连续原引擎875步与逐步restore的875次原步骤完整状态/C/IDs全等，见`LONG_REFERENCE_RESULTS_v2`；118MB全DETAILS留8TB，不进Git。冻结长8正在同一源码/环境执行。短流全28已有summary只读索引在`SHORT28_READONLY_METADATA_INDEX_v1`，它不是raw重计/全36终门。正常Full-call只有1/2 fresh过D2，另一格仅EOS错过；worker故障整轮D2失败/C8通过，Owner冷启全部双门失败，旧事实重放与新模型完成的认证消费分开。
+
+论文主张的收束见`SYNTHESIS_NOVELTY_ROUND5.zh.md`：完整输入资格、原C/U选择权威和整个视图支持分别判断。故障和长流补齐同一协议的可执行压力证据；最终36及独立审计无实质反证后进入正文/全部页面QA/新release，而不继续挑时序点。
+
 本轮接续 `6a2721af` 的完整DSN稿和冻结bdfa正常态结果，落实2026-10-30用户附件中的两个主要建议。正常态结果不重标为新实现；旧CK5恢复结果不移植给新原生路径。
 
 ## 本轮固定目标
