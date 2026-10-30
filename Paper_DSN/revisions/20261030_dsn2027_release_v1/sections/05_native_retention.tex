@@ -1,0 +1,105 @@
+% Complete service evidence; component, development and independent scopes stay separate.
+% All service numbers here retain their actual pre-resilience NN source:
+% bdfa3b1307d267a5a4caf6484e1ad465c39a592e. They are not relabelled as 4f4c3c.
+\subsection{Native correction with the original selected task}
+\label{subsec:native_retention_eval}
+We retain StreamCorrect's published recognizer, learned correction, and
+feedback update~\cite{vu2026streamcorrect}, using the fixed 500-ms, no-VAD
+adaptation and original FP32 execution. Both compared policies have two
+protected full workers, the same ASR early-view Consumer, and identical
+neural warmup. Conservative execution waits for selected parent feedback
+before starting the next call; full-call retention confirms conditional
+calls as in Section~\ref{subsec:native_full_calls}.
+The following results belong to the earlier frozen native implementation
+(\texttt{bdfa3b13}); its source and run identities remain separate from
+the resilience extension in Section~\ref{subsec:native_resilience}.
+
+\paragraph{Development and frozen confirmation}
+Development on AISHELL-1~\cite{bu2017aishell} tests original full and
+buffer-only steps, including projected ends that differ from selection
+without invalidating their inputs. Full calls, unlike ready-only ASR
+handoff, retain still-executing work. The artifact retains the pilot and
+development matrix, including two 0.068-s EOS misses.
+
+The method freezes before metadata selection of four unused AISHELL-1
+speakers in an 8--9-s band; all initial selections remain. Two policies
+and two fresh-process repeats give 16 runs, with randomized pair blocks,
+reversed arm order, and swapped GPU roles. Speakers are the independent
+acoustic units. Every original 500-ms frontier and partial EOS stays in
+the denominator.
+
+\paragraph{Task fidelity and timely service}
+Offline original full calls supply 68 reference transitions, separately
+from service timing. All 272 Canonical transitions in this confirmation reproduce
+their complete original start and end states, $C$, and returned IDs,
+including the implementation tag. Both arms have five character edits
+over 81 unique reference characters, or 6.17\% CER. This measures the
+adaptation, not the published author's benchmark CER.
+
+\begin{table}[t]
+\centering
+\caption{Earlier native confirmation: four new speakers, eight runs and
+66.340~s offered per arm, on the frozen pre-resilience implementation.
+Credit and energy are totals; C50 is the median of per-run C50 values.
+Text support compares the first actual whole view at $G$ with later
+complete Canonical text at exactly $G$. Values are rounded.}
+\label{tab:native_full_confirm}
+\small
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Policy & \shortstack{Credit\\(s)} & \shortstack{Text\\support (s)} &
+\shortstack{C50\\(s)} & \shortstack{Energy\\(kJ)} & Pass\\
+\midrule
+Conservative & 37.000 & 29.000 & 2.115 & 35.801 & 0/8\\
+Full-call & 66.340 & 51.518 & 1.203 & 31.815 & 8/8\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:native_full_confirm} reports only the independent
+confirmation. Credit increases in all eight pairs,
+from 37.0 to all 66.33975~s offered per arm. All four speakers have a
+positive two-repeat sum, satisfying the frozen directional rule; this is
+not an eight-independent-sample significance test. Full-call retention
+passes whole-run D2/C8 in 8/8 runs, versus 0/8. Its D99 ranges from 0.837
+to 1.663~s. It has no D2 or C8 miss;
+conservative execution has 62 D2 misses, including eight EOS intervals,
+and no C8 miss. Both-board serving energy, excluding loading and fixed neural warmup,
+falls 11.13\%; credit, C50, and energy improve in every pair.
+
+\paragraph{Retained work and visible content}
+Ninety-two promoted full calls begin original recognition before their
+selected parent finishes, with overlapping recorded model-call intervals. Twenty
+have their own identity-predicted end differ from original correction.
+Twenty-four calls stop after ASR under invalidity or coverage proofs,
+before $C/U$; two
+already-completed conditional full results are discarded. None changes
+the original selected history. These observations distinguish input
+confirmation from requiring each future prediction to be correct.
+
+These runs also contain a concrete whole-view witness: one Canonical
+application advances from 4.0 to 4.5~s while retaining a supported 5.0-s
+Private view and its original executing call. Two other applications,
+on one speaker's two repeats, withdraw 6.0 to 5.5~s because the call's
+complete predicted input disagrees with the actual selected state;
+the two complete conditional results are not installed. These natural
+events illustrate compatible retention and necessary withdrawal, not
+another factorial estimate of the $R\times S$ interaction.
+
+Posterior whole-text support remains separate from original credit.
+Supported credited audio increases from 29.0 to 51.518125~s in all eight
+pairs; raw and whitespace-only comparisons agree and unknown coverage
+is zero. The remaining 14.821625~s of full-call credit does not have this
+support. Six of eight first EOS texts differ from later Canonical text
+in each arm. These are selected-model comparisons, not human correctness
+certificates. Unchanged-text rows first
+cover 10.0 versus 17.0 credited audio seconds; processing-frontier credit
+does not count newly transcribed characters.
+
+An earlier two-source capacity experiment retains its negative result:
+retention earns 17.0~s versus 18.5~s for independent full replicas, using
+more board energy. Its warmup and Consumer differ. The present
+single-chain comparison establishes a service opportunity in this scope;
+it neither supplies a causal before/after comparison nor establishes
+superior saturated multi-source capacity.

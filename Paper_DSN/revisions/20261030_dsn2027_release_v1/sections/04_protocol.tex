@@ -1,0 +1,45 @@
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/coordination_protocol.pdf}
+\caption{The core RevTrace runtime coordinates complete provisional computation and whole
+Consumer views with certified state. $R$ and $S$ use the same declared
+feedback dependencies, with separate sufficient guards. Coverage retirement
+uses a different predicate. A complete result may be consumed before its
+batch drains; only terminal rows plus device synchronization release the
+physical lease.}
+\label{fig:protocol}
+\end{figure*}
+
+\subsection{Complete results and physical ownership}
+In the core runtime of Figure~\ref{fig:protocol}, dispatch binds session,
+incarnation, job, input, target, and contract. A row returns either a
+complete result with re-derived state/text or cancellation without partial
+state. Complete rows can be installed and consumed before their batch
+finishes. Only all terminal rows and device synchronization authorize
+\texttt{BatchDrained} and executor reuse. The native process lifecycle
+below has separate evidence.
+
+\subsection{Covered work and safe-point exit: \texorpdfstring{$K$}{K}}
+For the tested use model, $K$ requests exit when the installed Canonical
+frontier covers a proposal's target and it has no remaining declared use.
+This differs from $R$: valid work beyond the new root can remain useful.
+Workers observe \texttt{CancelRequest} at decode boundaries; completion
+can win, but each row has one terminal outcome. Static batches are not
+compacted or refilled; masked costs and drain delays remain measured.
+
+\subsection{Durable facts and outstanding input}
+Before acknowledgment, synchronized frames bind parent/next states,
+request identity, selected complete result, and receipt; recorded deltas
+must reconstruct the state. Group-ready commit shares synchronization
+among validated sessions without a collection timeout or cross-session
+atomic transaction. Uncertain append/application outcomes block writes.
+Write-ahead recovery~\cite{mohan1992aries} reconstructs facts and identities;
+the native extension binds this to original correction calls.
+
+\subsection{Validation boundaries}
+Propositions~\ref{prop:rebase} and~\ref{prop:continuity} concern the stated
+guards and compatible applications. The artifact retains an earlier,
+separately frozen recovery prototype and its bounded model and crash
+results; they do not validate the later core or native fault paths.
+The selected-trace argument of Proposition~\ref{prop:refinement}, its
+finite specification, and actual execution checks have distinct scopes.

@@ -1,0 +1,55 @@
+% Integrated core working draft; final independent-source research and release QA pending.
+% Evidence scope: original packet controls and actual full-call service; no encoder-cache result.
+\subsection{Native feedback and conditional full calls}
+\label{subsec:native_full_calls}
+StreamCorrect's original recognizer, learned correction, and feedback update
+provide a concrete instance of the contract in Section~\ref{sec:contract}
+\cite{vu2026streamcorrect}. Let $P$ be a complete closed native state and
+$X$ the next accepted audio input. We expose the recognition boundary as
+\begin{equation}
+  A(P,X)=(B,M),
+\end{equation}
+where $B$ contains the ordered beam candidates and $M$ contains the live
+engine state and inputs required by the remaining correction and update.
+The protected original $C/U$ selects a correction and produces the next
+closed state. Its selection, candidate order, prompts, returned token IDs,
+and update rules remain intact.
+
+Before that selection finishes, the original update tail supplied with a
+typed first-beam identity prediction produces a provisional closed state
+$\widehat P^+$. This projection has explicit provenance: recognition has
+executed, but learned correction has not completed for this projected node.
+It supplies a conditional input for the next complete call. Both GPUs host
+the original full recognizer--corrector pipeline, so a call dispatched on
+this input executes the protected original $C/U$ as well. Completed
+conditional full results and typed identity projections remain distinct
+objects. Neither is installed merely because its predicted text looks
+plausible.
+
+When the selected parent arrives, the Owner compares the call's entire
+frozen start state, actual frontier, execution contract, and session epoch
+with the installed parent. An exact match confirms the already owned call:
+an in-flight call continues, or an already completed result becomes eligible
+for ordered installation. The job's birth root, identifier, epoch, inputs,
+and execution history are unchanged. The call's own identity prediction need
+not equal its eventual corrected output; confirming its input establishes
+eligibility, while original correction determines its result.
+
+An earlier ancestor mismatch removes support for the tracked provisional
+chain, but does not prove that a later complete input cannot converge.
+Cancellation before correction therefore requires an actual selected state
+at the call's same start frontier that disagrees with its complete input,
+coverage of its target without remaining use, or a changed epoch. A still
+unresolved future parent supplies none of these proofs. Loss of current
+view support can therefore require withdrawal without yet authorizing
+cancellation of that unresolved call.
+
+This direct native witness instantiates the continuation relation of
+Section~\ref{sec:continuation}. It differs from the core Qwen computation
+guard, which conservatively requires an explicit matching boundary node and
+a uniquely tracked successor. These are different sufficient implementations
+of eligibility. The whole-view Consumer likewise keeps certified and
+provisional provenance separate and applies complete supported hypotheses.
+We compare conditional full-call retention with an already-ready ASR packet
+alternative. Both are author-built implementations of the same feedback
+principles; the measured native benefit concerns confirmed complete calls.

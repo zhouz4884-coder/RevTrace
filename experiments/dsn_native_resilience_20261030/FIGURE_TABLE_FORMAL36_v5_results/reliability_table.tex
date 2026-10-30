@@ -1,0 +1,17 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & Illegal / done & Reject / mutation & New result (s) & D2/C8 pass & EOS miss & Energy (J) \\
+\midrule
+No fault & \shortstack{0 / 2/2\\0 / 2/2} & \shortstack{0 / 0\\0 / 0} & \shortstack{--\\--} & \shortstack{0/2\\1/2} & \shortstack{2\\1} & \shortstack{6566--6574\\5896--5911} \\
+Duplicate / late & \shortstack{0 / 2/2\\0 / 2/2} & \shortstack{4 / 0\\4 / 0} & \shortstack{--\\--} & \shortstack{0/2\\1/2} & \shortstack{2\\1} & \shortstack{5701--5893\\5538--5846} \\
+Worker after ASR & \shortstack{0 / 2/2\\0 / 2/2} & \shortstack{0 / 0\\0 / 0} & \shortstack{1.90--2.22\\2.15--2.21} & \shortstack{0/2\\0/2} & \shortstack{2\\2} & \shortstack{5182--5401\\5447--5647} \\
+Worker partial frame & \shortstack{0 / 2/2\\0 / 2/2} & \shortstack{0 / 0\\0 / 0} & \shortstack{2.10--2.25\\1.76--2.23} & \shortstack{0/2\\0/2} & \shortstack{2\\2} & \shortstack{4775--5178\\5492--5594} \\
+Owner before durable & \shortstack{0 / 2/2\\0 / 2/2} & \shortstack{0 / 0\\0 / 0} & \shortstack{86.42--108.08\\64.61--107.09} & \shortstack{0/2\\0/2} & \shortstack{2\\2} & \shortstack{24549--28019\\19571--26557} \\
+Owner after durable & \shortstack{0 / 2/2\\0 / 2/2} & \shortstack{0 / 0\\0 / 0} & \shortstack{83.90--87.05\\101.80--104.44} & \shortstack{0/2\\0/2} & \shortstack{2\\2} & \shortstack{22415--24200\\26483--27171} \\
+\bottomrule
+\end{tabular}
+% Fixed vertical order within each cell: Conservative / Full-call. Ranges are two fresh trials, not confidence intervals.
+% New result copies frozen 4f fault_to_new_certified_result (runtime model_end>=fault filter). Any strict > statement is a separately audited observed property.
+% A qualifying call may already be in flight on a surviving worker. This clock is neither replacement-neural readiness nor old durable replay.
+% Illegal installs require independent trace-checker evidence. ? means unknown. -- means not applicable, not zero.
+% Main table: development S0908 24 cells only. Regression4 and sustained8 remain separately listed in ALL36_MACHINE_TABLE.

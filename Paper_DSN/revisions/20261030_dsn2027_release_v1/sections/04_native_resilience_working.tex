@@ -1,0 +1,62 @@
+% Integrated method extension; formal paired evaluation remains separate.
+% Code hooks and evidence tiers are mapped in REVISION_BLUEPRINT.zh.md.
+% Formal paired results remain pending; do not substitute six development trials.
+\subsection{Continuing through delivery and process failures}
+\label{subsec:native_resilience}
+Each job has an Owner namespace and monotonic issue number; each physical
+slot has a worker incarnation. Fencing an incarnation removes message
+authority without renaming its already accepted complete results.
+
+\paragraph{Local rejection and physical release}
+The ingress guard classifies events before changing busy slots or selected
+state. Exact duplicates and fenced messages are local rejections that
+cannot release newer leases. Contradictory currently owned contents freeze
+writes; unknown exceptions remain failures. Per-incarnation Pipe endpoints
+and receiver threads isolate incomplete logical frames from the Owner
+loop. Replacement requires process exit, CUDA release, joined receivers,
+and strict validation of complete receipts on the sealed channel. The
+Owner then fences the incarnation and retires unfinished work. Accepted
+complete buffers and supported whole views survive producer death with
+their original identities.
+
+\paragraph{Durable selection and recovery}
+Before installation, a synchronous hook records complete parent/next
+states, original correction and IDs, job identity, Owner/session epochs,
+and producer incarnation. Framing, checksums, and chaining bind the fact;
+synchronization precedes installation and publication. Uncertain writes
+freeze the writer. Recovery may discard only an incomplete final frame;
+complete corruption fails. These conventional write-ahead rules
+\cite{mohan1992aries} bind the original feedback transition.
+
+The surviving Supervisor continues the input ledger and original clocks
+under the failure boundary of Section~\ref{sec:contract}. After confirming
+old physical ownership has ended, it advances the Owner namespace,
+replays the checked fact prefix, and cold-starts workers. Replay adds no
+inference; old publications gain no new authority. Surviving provisional
+views remain subject to subsequent root checks. Both schedulers share
+this coordinator, durability, recovery, and actual Consumer; only
+conditional full-call dispatch and retention differ.
+
+% Preserve the existing label as a prose anchor, not a liveness theorem.
+\paragraph{Conditional continued service}
+\phantomsection
+\label{prop:continued_service}
+For finite accepted work after a finite supported failure prefix,
+progress requires readable durable storage, eventual physical release
+and loading, terminating original calls that advance pending frontiers,
+fair Owner/Consumer scheduling, and unexpired recovery/service budgets.
+Under these conditions, calls from the actual cut can discharge remaining
+obligations without accepting fenced messages. This gives no RTO or
+D2/C8 bound or unbounded liveness proof: cold loading, recovery, and
+recomputation remain measured against original clocks.
+
+\paragraph{Control history}
+Current roots and live-call, complete-buffer, visible-view, and outbox
+dependencies remain pinned. Actual Consumer acknowledgment releases
+publication references, while the visible view stays pinned. Namespace
+and issue high watermarks prevent ID reuse after collection. Unreferenced
+terminal fingerprints and audit windows have fixed limits; full
+diagnostics stream to disk. These are protocol-entry bounds relative to
+active dependencies, not constant total memory: immutable input, current
+state, cumulative text, and offline analysis remain separate.
+

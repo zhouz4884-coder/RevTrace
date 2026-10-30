@@ -37,4 +37,4 @@ uv run --no-project --offline python -B experiments/dsn_manuscript_update_202610
 
 6. 更新 CURRENT / LATEST_RESEARCH 等本轮状态后，root 运行原 publisher，额外传入 `--final-record experiments/dsn_manuscript_update_20261028/FINAL_RELEASE_RECORD_20261030_v1.json`，其余 `--release/--archive` 必须与第5步一致。
 
-注意：publisher 历史逻辑本身排除 `publish_progress.py` 的 self-copy，本次没有改变这项规则；共享 helper、测试和本说明按 T 目录普通 bounded evidence 路径进入快照。
+root后续整合：publisher现在也将自身脚本作为普通bounded源文件逐字节归档，避免文档引用的最终CLI缺席交付包。它不在执行中改写自身；PROCESS/PUBLICATION记录仍分开处理，避免循环清单。实际提交前的Git blob核验同时覆盖发布脚本、共享helper、测试和本说明；这不是追加实验或改变神经结果。

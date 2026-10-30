@@ -1,0 +1,53 @@
+% Integrated method extension; formal paired evaluation remains separate.
+% Source audit: resilience_policy._commit; FactStore.commit/_replay;
+% SurvivorConsumer._fact/replay_fact. No whole Python/CUDA proof is claimed.
+\subsection{Preserving the protected program's semantics}
+\label{subsec:native_refinement}
+Let $P \mathrel{\Rightarrow_{\mathcal A,X}} P'$ denote a transition allowed
+by the original protected program on accepted immutable input $X$.
+The relation may be nondeterministic. A complete original call includes
+its original selection and update, or its declared buffer-only path;
+a typed identity projection is not such a result. We project a protocol
+execution onto its distinct durable selected facts, deleting speculation,
+waiting, local rejection, cancellation, collection, and repeated delivery.
+
+\begin{proposition}[Selected-trace refinement]
+\label{prop:refinement}
+Assume sufficient declared state, faithful execution of frozen inputs,
+exclusive serial selection, correctly bound message identities, and
+storage that honors successful synchronization. If each new durable fact
+binds a complete original call whose full input equals the preceding
+selected cut, retains the call's original identity and valid admission
+authority, and is synchronized before installation or certified
+application, then the projected facts form an execution allowed by
+$\mathcal A$. Replaying an existing fact adds no transition.
+\end{proposition}
+\begin{proof}
+The initial cut is an initial state of $\mathcal A$. Deleted protocol
+actions do not extend the selected prefix. At each new fact, the guard
+identifies a complete original call on exactly the preceding cut and
+accepted input. Its actual result is therefore an allowed next edge,
+irrespective of when the call began. Synchronization records that edge
+before either privileged application. Recovery verifies the same chained
+prefix and replays its existing identities. A fact synchronized just
+before an Owner crash can first become visible during replay, but is
+still counted once. Induction proves the claim.
+\end{proof}
+
+The durable append is the selection boundary; a later installation or
+Consumer application does not select again. An accepted complete buffer
+can retain its producer identity after that worker exits. This differs
+from admitting a new late message after its authority has been fenced.
+The certified Consumer frontier derives only from the checked fact prefix;
+an ahead whole view remains provisional. Thus input confirmation permits
+early execution without requiring every predicted next state to be right.
+
+A separately frozen specification explores 6,231 two-frontier normal
+states and 14,074 one-frontier failure states, each to a 12-event depth,
+with 27 named controls. An independent trace checker binds actual facts
+and whole-view applications to original call receipts. The specification
+is not extracted from the runtime; depth bounds truncate exploration,
+and neither check verifies all Python, CUDA, or operating-system behavior.
+Exact equality with a fixed neural reference is separate empirical evidence,
+rather than a premise that arbitrary GPU reruns must be bitwise identical.
+

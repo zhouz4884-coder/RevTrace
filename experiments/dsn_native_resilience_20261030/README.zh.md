@@ -1,6 +1,14 @@
-# RevTrace：同源失效遏制与持续状态补强（执行中）
+# RevTrace：同源失效遏制与持续状态补强（完整范围已完成）
 
-## 当前进度（2026-10-30 HK20:50过程快照）
+## 最终状态
+
+28短流+8持续状态试验、连续原程序875步+875逐状态恢复、全36独立c4/359b/038核验和最后NN4f无参源身份检查全部完成。3976选中转换保持原任务，90次兼容ahead应用全部保留；4条实际ASR view跨producer退出驻留至合法纠正。具体门与SHA见`FINAL_EXECUTION_AUDIT_GATE_v1.json`。
+
+判定分列：`GO_STATE_AND_PROTOCOL_STRESS_UNDER_DECLARED_PREMISES`；`NO_GO_LONG_REALTIME_QUALITY`。长流全8期限失败、原任务CER严重退化，不是可部署连续ASR。未观测到completed-full-buffer安装或跨death安装，仍保留条件式代码/CPU/有限规格层范围。没有为造事件再开NN，GPU已释放，CURRENT回到最终4f。
+
+新DSN稿和匿名源包已完成自动及全部12页实际视觉检查：[最终报告](../dsn_manuscript_update_20261028/FINAL_RESEARCH_REPORT_20261030.zh.md)、[完整正文](../../Paper_DSN/revisions/20261030_dsn2027_release_v1/main.pdf)。11技术页+1参考文献页；3图3表。旧稿、开发失败和历史阶段文件均保留。未执行会议投稿。
+
+## 历史进度（2026-10-30 HK20:50过程快照，非最终状态）
 
 最终神经源码 `4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47`，59文件完整manifest `60ae549fcc98165a74e5a3dc420bf93418296099fa12b410572b15d281b2c457`；Linux253 CPU控件零skip通过。正式short28已全完成，476条原任务/参考/实际Consumer检查通过，见`FORMAL_SHORT28_V1_RESULTS_v1/SUMMARY.json`。这不替代仍待完成的独立actual36语义检查，非法安装/错误拒绝不得提前写零。
 

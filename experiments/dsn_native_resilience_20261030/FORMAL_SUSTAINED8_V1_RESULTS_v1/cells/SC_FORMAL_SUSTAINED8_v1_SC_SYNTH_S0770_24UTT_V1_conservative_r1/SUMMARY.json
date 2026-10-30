@@ -1,0 +1,257 @@
+{
+  "schema": "revtrace-resilience-offline-metrics-v1",
+  "analysis_phase": "offline_after_trial",
+  "new_model_calls": 0,
+  "experiment_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1",
+  "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1",
+  "arm": "conservative",
+  "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "primary": {
+    "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1",
+    "stage": "formal_synthetic_sustained_state_boundary",
+    "cohort": "SC_SYNTH_S0770_24UTT_V1",
+    "arm": "conservative",
+    "repeat": 1,
+    "offered_frontiers": 458,
+    "offered_audio_seconds": 228.51025,
+    "primary_linear_all_offered_D99": 480.6864333599527,
+    "primary_linear_all_offered_C99": 482.17064969027416,
+    "original_quantile_test_pass": false,
+    "complete_coverage_and_original_quantile_pass": false,
+    "D2_misses_all_offered": 451,
+    "C8_misses_all_offered": 426,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 486.9624371053651,
+    "C_max": 488.45547366701066,
+    "dual_deadline_audio_credit_seconds": 3.5,
+    "raw_inputs": {
+      "config_sha256": "02d3ed095f3514ca9456569c442b1c6869a40af43e3094335dafeadf0a14e0bb",
+      "origin_sha256": "574baa26926d243adb6ca6f22a37b6a176917125a27bfad57ff885c4ed121428",
+      "consumer_sha256": "1e3ad4e6095487044df09ff332642d662ae37d64e8b3347695cf8cc6586bb4d1"
+    },
+    "primary_linear_all_offered_C50": 214.3574434448965,
+    "primary_linear_all_offered_D50": 213.01178204268217,
+    "EOS_D2_misses": 1,
+    "nonEOS_D2_misses": 450
+  },
+  "content": {
+    "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1",
+    "stage": "formal_synthetic_sustained_state_boundary",
+    "cohort": "SC_SYNTH_S0770_24UTT_V1",
+    "arm": "conservative",
+    "repeat": 1,
+    "actual_consumer_rows": 1373,
+    "sources": 1,
+    "offered_audio_seconds": 228.51025,
+    "offered_frontiers": 458,
+    "original_dual_credit_audio_seconds": 3.5,
+    "clock": "Actual observed perf; final surviving occurrences are right-censored at last actual same-source observation, not hypothetical UI close.",
+    "raw": {
+      "row_event_classes": {
+        "unchanged": 883,
+        "strict_append": 461,
+        "replacement": 25,
+        "erase_only": 4
+      },
+      "introduced_code_point_occurrences": 3347,
+      "LCP_erased_code_point_occurrences": 105,
+      "observed_text_changes": 490,
+      "positive_F_advance_with_unchanged_text_rows": 376,
+      "positive_certified_F_advance_with_unchanged_text_rows": 48,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 0.5,
+        "strict_append": 3.0,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 105,
+      "still_visible_occurrence_code_points": 3242,
+      "closed_occurrence_code_point_seconds": 106.22128897625953,
+      "longest_closed_observed_lifetime_seconds": 1.332555086351931,
+      "final_observed_text_code_points": 3242
+    },
+    "whitespace_stripped": {
+      "row_event_classes": {
+        "unchanged": 883,
+        "strict_append": 461,
+        "replacement": 25,
+        "erase_only": 4
+      },
+      "introduced_code_point_occurrences": 3347,
+      "LCP_erased_code_point_occurrences": 105,
+      "observed_text_changes": 490,
+      "positive_F_advance_with_unchanged_text_rows": 376,
+      "positive_certified_F_advance_with_unchanged_text_rows": 48,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 0.5,
+        "strict_append": 3.0,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 105,
+      "still_visible_occurrence_code_points": 3242,
+      "closed_occurrence_code_point_seconds": 106.22128897625953,
+      "longest_closed_observed_lifetime_seconds": 1.332555086351931,
+      "final_observed_text_code_points": 3242
+    }
+  },
+  "posterior_whole_text_support": {
+    "raw": {
+      "original_credit_supported_seconds": 3.5,
+      "original_credit_mismatching_seconds": 0,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 49,
+        "mismatching": 409
+      }
+    },
+    "whitespace_stripped": {
+      "original_credit_supported_seconds": 3.5,
+      "original_credit_mismatching_seconds": 0,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 49,
+        "mismatching": 409
+      }
+    },
+    "scope": "Posterior whole first-view agreement at its actual G, not online certification, human correctness or newly transcribed character volume."
+  },
+  "quality": [
+    {
+      "source_id": "SC_SYNTH_S0770_24UTT_V1",
+      "reference_characters": 486,
+      "character_edits": 3103,
+      "CER": 6.38477366255144,
+      "final_text": "三线城市库存积压又逼倒房地产商在一线城市抢地我也该建设可控的范范化的地方政府融资机制制置置建又将建建制设致部分外秀于于的人化化和兵武运动员集合起来来来青董建合起来内外秀的单人化和兵武运动员集合起来唐青董建仍肩负着扛起中国双人化起来唐青董建仍肩负着扛起中国双人化起来唐青董建仍肩负着扛起中国双人化大旗的重任任有着较为复合合有着较为丰富志愿服务经历内外秀的双人化大旗的重任任有着较为丰富志愿服务经历内外秀的双人化大旗的重任任有着较为丰富志愿服劳经内外秀的双人化大大旗的重任任有着较为丰富志愿服务经历内外秀的双人化大旗的重任任有着较为丰富志愿服务经历内外秀的双人化大旗的重任任有着较为丰富志愿服劳经内外秀的双人化大旗的重任任有着较为丰富志愿服务经历内外秀的双人化大的各地要按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺加强个地内外秀的双人化大里项项为各地的志愿服务经历内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺加为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺就是基基基基即是基础建设内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺在在在这这这在国内四大厂商内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺为各地的志愿服务经内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺在在在这这这在国内四大厂商内按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺在在在这这这在内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺在在在这这这在内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气利用优先顺顺加内按照天然气利用优先顺加强个地要按照天然气优先顺顺加内按照天然气利用优先顺顺加内按照天然气优先顺顺加个地要按照天然气优先顺顺加内按照天然气利用优先顺顺加内按照天然气优先顺顺合推制汇海关总总总总总体总体对对对总体总体对对对对总体要按照文文总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天总体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天然优先顺顺加内按照天体要按照天然气优先顺顺加内按照天然优先顺顺加内按照天然优先顺顺加内按照天体要按照天然气优先顺顺加内按照天然气优先顺顺加内按照天体要按照天然气优先顺顺加内按照天然气优先顺顺加内按照天体要按照天然气优先顺顺加内按照天然气优先顺顺加内按照天然气优先顺顺加内按照天然气优先顺顺内按照天然气优先顺顺加内按照天然气优先顺顺加内按照天然优先顺顺加内按照天然气优先顺顺加内按照天然气优先顺顺内按照天然气优先顺顺加内按照天然气优先顺顺加内按照天然优先顺顺内按照天然气优先顺顺内按照天然气优先顺顺内内按照天然气优先顺顺内按照天然气优先顺顺内按照天然气优先顺顺内按照天然气优先顺顺内按照天然气优先顺顺内按照天然气优先顺顺内按照天然气优先顺顺内内按照天然气优先顺顺加内按照天然气优先顺顺内按照天然气优先顺顺内按照天然气优先顺顺内按照天然气优先顺顺内按照天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内天然气优先顺顺内搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐娱乐创设Note:所有相关内容均由搜狐娱乐搜狐娱乐创设搜娱乐搜狐娱乐创设搜狐娱乐创设搜狐娱乐搜狐娱乐创设搜狐娱乐搜狐",
+      "scope": "Fixed whitespace-only original native CER; final task quality, not provisional correctness."
+    }
+  ],
+  "energy": {
+    "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+    "service": {
+      "gpu_joules": {
+        "0": 23350.891277739134,
+        "1": 196038.4656967241
+      },
+      "total_joules": 219389.35697446324
+    },
+    "origin_perf": 5116840.943048828,
+    "service_end_perf": 5117564.801472474,
+    "includes_fault_and_recovery_after_origin": true,
+    "initial_cold_load_excluded": true,
+    "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+  },
+  "integrity": {
+    "durable_frames_verified": true,
+    "complete_original_parent_cadence_records_verified": true,
+    "durable_canonical_steps": 458,
+    "expected_canonical_steps": 458,
+    "all_original_obligations_eventually_processed": true,
+    "accepted_frontiers": {
+      "SC_SYNTH_S0770_24UTT_V1": 3656164
+    },
+    "pending_accepted_uncertified_samples": {
+      "SC_SYNTH_S0770_24UTT_V1": 0
+    },
+    "unprocessed_all_offered_samples": {
+      "SC_SYNTH_S0770_24UTT_V1": 0
+    },
+    "observed_acknowledged_input_loss_samples": {
+      "SC_SYNTH_S0770_24UTT_V1": 0
+    },
+    "input_loss_scope": "Completed fixed accepted obligations are checked by the full durable source chain; incomplete debt is pending work, not automatically lost input.",
+    "consumer_binding": {
+      "status": "PASS_DURABLE_CONSUMER_BINDING",
+      "applied_durable_facts": 458,
+      "durable_facts_not_yet_consumed": 0,
+      "duplicate_actual_durable_applications": 0,
+      "scope": "Whole provisional text can remain ahead; this does not require Consumer visible text to equal Canonical text."
+    },
+    "original_reference": {
+      "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+      "checked_steps": 458,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "reference_kind": "continuous_original",
+      "projection": "none; entire state/C/IDs compared",
+      "reference_sha256": "6fd66605a495aeb7336ce3d6f64f6e898c5fa61cdf777a0324b7acea060b6c63"
+    },
+    "local_reject_records": 0,
+    "local_reject_canonical_mutations": 0,
+    "legal_progress_wrong_rejections": null,
+    "legal_progress_wrong_rejections_status": "REQUIRES_SEPARATE_SEMANTIC_WITNESS_CHECK",
+    "accepted_original_clock_notifications_checked": 458,
+    "owner_error_records": 0,
+    "owner_error_types": {},
+    "explicit_expected_owner_error_types": [],
+    "unexpected_owner_error_records": 0
+  },
+  "history": {
+    "samples": 715,
+    "coordination_entry_maxima": {
+      "live_jobs": 1,
+      "completed_full": 0,
+      "branch_steps": 1,
+      "canonical_witnesses": 1,
+      "nodes": 1,
+      "projections": 1,
+      "issued_proofs": 0,
+      "issued_id_memory_entries": 1,
+      "pending_job_refs": 1,
+      "pending_publications": 2,
+      "consumer_pins": 1
+    },
+    "application_and_process_data": {
+      "owner_RSS_bytes": {
+        "min": 20537344,
+        "max": 52756480,
+        "last": 52383744
+      },
+      "current_cut_bytes": {
+        "min": 10973,
+        "max": 43445,
+        "last": 43445
+      },
+      "current_text_bytes": {
+        "min": 0,
+        "max": 9716,
+        "last": 9716
+      },
+      "immutable_audio_bytes": {
+        "min": 14624656,
+        "max": 14624656,
+        "last": 14624656
+      }
+    },
+    "scope": "Observed finite-run coordination-entry counts; RSS/current cuts/output/immutable audio are separate. Offline analysis allocation and cumulative application output do not establish constant online total memory."
+  },
+  "state_boundaries": {
+    "actual_worker_audio_insert_observations": 458,
+    "actual_worker_buffer_shifts": 398,
+    "actual_worker_context_trim_changes": 353,
+    "actual_worker_context_bound_still_exceeded": 342,
+    "selected_canonical_buffer_shift_edges": 398,
+    "selected_edge_prediction_clusters": {
+      "SC_SYNTH_S0770_24UTT_V1": {
+        "selected_edges": 458,
+        "observed_predictions": 457,
+        "own_prediction_changed": 409,
+        "longest_consecutive_changed": 302,
+        "unknown_prediction_edges": 1
+      }
+    },
+    "scope": "All worker observations include recomputation; selected-edge clusters are separate and unknown edges break a known streak. These are observed coverage, not natural-prevalence or universal-state-sufficiency claims."
+  },
+  "recovery": {
+    "observed_fault_records": 0,
+    "events": [],
+    "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+  },
+  "gate": "PASS_COMPLETE_TRIAL_TASK_AND_ORIGINAL_ENDPOINT_RECOUNT",
+  "scope": "Offline aggregation only. Complete-task/refinement/physical-owner admissibility evidence roles remain distinct. Cold-fault P99 failure is an endpoint outcome, not automatic evidence that safe recovery failed."
+}

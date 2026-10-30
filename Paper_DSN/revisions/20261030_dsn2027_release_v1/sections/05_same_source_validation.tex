@@ -1,0 +1,81 @@
+\subsection{One coordinator through faults and sustained state}
+\label{subsec:same_source_validation}
+We freeze the resilience implementation (\texttt{4f4c3cab}) separately
+from Table~\ref{tab:native_full_confirm}. Both policies share durability,
+message guards, recovery, Consumer, original FP32 models, and the
+\texttt{expandable\_segments:True} allocator setting. Initial loading and
+fixed warmup precede the serving clock; replacement loading, replay,
+recomputation, and final physical drain remain inside it.
+
+The short bank has six conditions, two policies, and two fresh processes
+on one development clip (24 trials), plus four EOS/compatible-view
+regressions. Across these and eight sustained trials, an independent
+checker binds all 3,976 durable selected transitions to original complete
+call receipts and actual Consumer applications. It finds no illegal
+installation or incorrect owned-message rejection, and preserves every
+accepted input and its original clock. Eight injected duplicate/late
+messages are locally rejected without Canonical mutation; eight
+worker-only deaths have confirmed physical replacements. Short reference
+comparisons map only the static code-version tag; long comparisons are
+unprojected. There are 354 conditional calls promoted and installed,
+and no completed-buffer installation in these trials.
+In four worker-after-ASR cases, an already consumed whole view remains
+in Consumer state across its producer's exit and fencing until legitimate
+Canonical correction. This is retained availability, not another delivery
+of the old job or a claim that its prediction was correct.
+
+\begin{table*}[t]
+\centering
+\caption{Same-source short fault study: six conditions on the fixed
+development clip, two fresh trials per policy. Each cell lists
+Conservative above Full-call; ranges are observed minima and maxima,
+not confidence intervals. Illegal; done gives illegal installations and
+completed/2 trials. Reject/mutation counts local rejections and resulting
+Canonical changes. New result measures fault to actual certified
+consumption of a new durable fact whose original call completes after
+the fault; it excludes old-fact replay and replacement readiness.
+D2/C8 counts joint whole-run passes; EOS counts D2 misses. Both-board
+energy spans the original serving clock through physical drain.}
+\label{tab:native_reliability}
+\begingroup
+\fontsize{8.5}{10}\selectfont
+\setlength{\tabcolsep}{3pt}
+\input{tables/native_reliability}
+\endgroup
+\end{table*}
+
+Table~\ref{tab:native_reliability} retains deadline failures. Normal
+Full-call display P99 is 1.798--2.053~s: one of two fresh trials passes,
+while the other misses D2 only at EOS. Duplicate/late delivery has the
+same one-of-two boundary. All worker-fault trials fail D2 but pass C8;
+all Owner-fault trials fail both. After durable selection, old facts
+reappear in 1.36--1.81~s, whereas new certified post-fault completions
+take 64.61--108.08~s across the Owner cases. A surviving worker can
+provide a post-fault completion before replacement readiness. Neither
+replaying a fact nor finishing the task establishes fault-time D2/C8.
+
+\paragraph{Controlled sustained-state stress}
+Two metadata-selected AISHELL-1 speakers supply 24 utterances each,
+concatenated as exact PCM into 228.51025-s and 208.1003125-s synthetic
+streams without resets or EOS at joins. A continuous original-engine
+reference without between-step restoration and 875 separately restored
+steps agree on complete start/end state, $C$, and IDs, crossing 398/357
+actual buffer shifts and 353/252 context changes. Two policies and two
+fresh processes yield eight trials and 3,500 matching selected steps.
+Unpinned terminal receipts and each retained audit class stay at or
+below 64 entries; live dependencies, serialized state/output, Owner RSS,
+and cumulative disk logs remain separate.
+
+This is state stress, not viable continuous ASR: all eight trials fail
+D2/C8, with display P99 of 449.727--502.952~s. Both policies reproduce
+the original task's severe insertion errors: CER is 3103/486 (638.48\%)
+and 1313/522 (251.53\%) on the two streams. Full-call also uses more
+board energy. The original decoder's length guard can skip its decoding
+loop, so frontier credit need not add decoded text. The checker observes
+90 compatible-ahead applications, all preserved, and 1,118 necessary
+incompatible withdrawals across the 36 trials. These are controlled
+coverage counts, not natural prevalence or transcription correctness.
+Among observed predictions, 409/457 and 333/416 disagree with the selected
+end; one step per stream has no observed prediction. Fewer confirmable next inputs are consistent with the
+extra speculative cost; these traces do not isolate a causal performance
+effect.

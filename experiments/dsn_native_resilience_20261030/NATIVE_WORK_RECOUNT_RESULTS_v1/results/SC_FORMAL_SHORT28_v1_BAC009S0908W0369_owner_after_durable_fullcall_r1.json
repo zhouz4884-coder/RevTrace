@@ -1,0 +1,101 @@
+{
+  "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1",
+  "arm": "fullcall",
+  "condition": "owner_after_durable",
+  "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "canonical_selected_record_counts": {
+    "canonical_selected_steps": 17,
+    "native_model_evaluated_marker_true": 16,
+    "native_model_evaluated_marker_false": 1,
+    "native_model_evaluated_marker_unknown": 0,
+    "model_seconds_sum": 10.79568937793374,
+    "model_seconds_unknown": 0,
+    "returned_token_ids_total": 23,
+    "zero_returned_id_steps": 6,
+    "returned_ids_unknown": 0,
+    "correction_key_present": 17,
+    "correction_payload_non_null": 15,
+    "correction_payload_none": 2,
+    "correction_key_missing": 0,
+    "marker_definition": "record.native_model_evaluated is derived from 'starting_tokens' in original generation; this is not a count of actual decoder/CUDA/kernel forwards",
+    "scope": "Selected unique Canonical original-full-program receipts only; excludes warmup, discarded/abandoned and killed-unreturned work. Returned IDs/characters need not be new/correct ASR text. Sum of selected-call model_seconds is not whole-service latency, total paid work or a serving replay."
+  },
+  "strict_recovery_clock_applicable": true,
+  "strict_recovery_clock_audits": [
+    {
+      "fault_perf": 5110090.301148539,
+      "original_selected_consume_perf": 5110192.105945902,
+      "original_selected_actual_rows": [
+        {
+          "consumer_observed_perf": 5110192.105945902,
+          "source_id": "BAC009S0908W0369",
+          "journal_sequence": 6,
+          "prefault_durable_sequence": 5,
+          "prefault_actual_certified_frontier": 24000,
+          "actual_certified_frontier": 40000,
+          "canonical_frontier": 40000,
+          "record_model_end_perf": 5110192.044639923,
+          "model_end_minus_fault": 101.74349138326943,
+          "native_model_evaluated_marker": true,
+          "checks": {
+            "canonical_actual_consume": true,
+            "after_fault": true,
+            "sequence_newer_than_prefault": true,
+            "not_recovery_replay": true,
+            "model_end_strictly_after_fault": true,
+            "native_model_evaluated_marker_true": true,
+            "actual_certified_frontier_advanced": true
+          },
+          "strict_verified": true
+        }
+      ],
+      "original_selected_strict_verified": true,
+      "strict_first_actual_consume": {
+        "consumer_observed_perf": 5110192.105945902,
+        "source_id": "BAC009S0908W0369",
+        "journal_sequence": 6,
+        "prefault_durable_sequence": 5,
+        "prefault_actual_certified_frontier": 24000,
+        "actual_certified_frontier": 40000,
+        "canonical_frontier": 40000,
+        "record_model_end_perf": 5110192.044639923,
+        "model_end_minus_fault": 101.74349138326943,
+        "native_model_evaluated_marker": true,
+        "checks": {
+          "canonical_actual_consume": true,
+          "after_fault": true,
+          "sequence_newer_than_prefault": true,
+          "not_recovery_replay": true,
+          "model_end_strictly_after_fault": true,
+          "native_model_evaluated_marker_true": true,
+          "actual_certified_frontier_advanced": true
+        },
+        "strict_verified": true
+      },
+      "strict_fault_to_new_certified_consume_seconds": 101.80479736253619,
+      "prefault_actual_certified_baselines": {
+        "BAC009S0908W0369": 24000
+      },
+      "scope": "Literal original clock retained alongside a separate strict post-fault endpoint. starting_tokens-derived marker is not a decoder/kernel-forward probe. No missing clock is assigned zero."
+    }
+  ],
+  "inputs": {
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/CONFIG.json": {
+      "bytes": 34694,
+      "sha256": "ebbd680b55c6a559e9850f321b342ffbd8cd57d1759fb89cb4be15756d24d4fc"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/SUMMARY.json": {
+      "bytes": 11472,
+      "sha256": "c227c94eb7bf68cd9f72fd5dcfbada9db5b02c275265add0d2266915d0ef3dd4"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/facts.wal": {
+      "bytes": 1426210,
+      "sha256": "5ebda79385514322e4ba15956ed92773f0188721c5326041a9643bdc693df4cb"
+    },
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/consumer.jsonl": {
+      "bytes": 18348,
+      "sha256": "1b4622288255ac00cd91521908bbd55f4f480447354285788205c4a99dab5dba"
+    }
+  },
+  "new_model_calls": 0
+}

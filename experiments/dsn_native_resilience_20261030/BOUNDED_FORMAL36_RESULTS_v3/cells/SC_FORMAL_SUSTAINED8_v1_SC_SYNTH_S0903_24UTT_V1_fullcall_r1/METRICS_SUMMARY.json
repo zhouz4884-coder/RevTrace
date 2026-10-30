@@ -1,0 +1,257 @@
+{
+  "schema": "revtrace-resilience-offline-metrics-v1",
+  "analysis_phase": "offline_after_trial",
+  "new_model_calls": 0,
+  "experiment_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1",
+  "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1",
+  "arm": "fullcall",
+  "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "primary": {
+    "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1",
+    "stage": "formal_synthetic_sustained_state_boundary",
+    "cohort": "SC_SYNTH_S0903_24UTT_V1",
+    "arm": "fullcall",
+    "repeat": 1,
+    "offered_frontiers": 417,
+    "offered_audio_seconds": 208.1003125,
+    "primary_linear_all_offered_D99": 456.98601045623417,
+    "primary_linear_all_offered_C99": 457.8979954700917,
+    "original_quantile_test_pass": false,
+    "complete_coverage_and_original_quantile_pass": false,
+    "D2_misses_all_offered": 396,
+    "C8_misses_all_offered": 375,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 465.24009069241583,
+    "C_max": 467.3929392211139,
+    "dual_deadline_audio_credit_seconds": 10.5,
+    "raw_inputs": {
+      "config_sha256": "daab5f45bb9fa44979ba98d5070ab98350d875838ec53448c669dd9a4ef572b8",
+      "origin_sha256": "a7129ebdacea5d85367a5f76c52998b7631921c28b2ef3c4ff1534cb6f225c31",
+      "consumer_sha256": "47a6fae75314250dce9099ccbcc9345cf455faeeb236fedbc41c2cd84596458d"
+    },
+    "primary_linear_all_offered_C50": 210.44365483243018,
+    "primary_linear_all_offered_D50": 207.30501550622284,
+    "EOS_D2_misses": 1,
+    "nonEOS_D2_misses": 395
+  },
+  "content": {
+    "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1",
+    "stage": "formal_synthetic_sustained_state_boundary",
+    "cohort": "SC_SYNTH_S0903_24UTT_V1",
+    "arm": "fullcall",
+    "repeat": 1,
+    "actual_consumer_rows": 1444,
+    "sources": 1,
+    "offered_audio_seconds": 208.1003125,
+    "offered_frontiers": 417,
+    "original_dual_credit_audio_seconds": 10.5,
+    "clock": "Actual observed perf; final surviving occurrences are right-censored at last actual same-source observation, not hypothetical UI close.",
+    "raw": {
+      "row_event_classes": {
+        "unchanged": 752,
+        "strict_append": 522,
+        "replacement": 153,
+        "erase_only": 17
+      },
+      "introduced_code_point_occurrences": 2440,
+      "LCP_erased_code_point_occurrences": 721,
+      "observed_text_changes": 692,
+      "positive_F_advance_with_unchanged_text_rows": 242,
+      "positive_certified_F_advance_with_unchanged_text_rows": 90,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 2.0,
+        "strict_append": 8.5,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 721,
+      "still_visible_occurrence_code_points": 1719,
+      "closed_occurrence_code_point_seconds": 646.3792386138812,
+      "longest_closed_observed_lifetime_seconds": 1.3526327917352319,
+      "final_observed_text_code_points": 1719
+    },
+    "whitespace_stripped": {
+      "row_event_classes": {
+        "unchanged": 752,
+        "strict_append": 522,
+        "replacement": 153,
+        "erase_only": 17
+      },
+      "introduced_code_point_occurrences": 2440,
+      "LCP_erased_code_point_occurrences": 721,
+      "observed_text_changes": 692,
+      "positive_F_advance_with_unchanged_text_rows": 242,
+      "positive_certified_F_advance_with_unchanged_text_rows": 90,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 2.0,
+        "strict_append": 8.5,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 721,
+      "still_visible_occurrence_code_points": 1719,
+      "closed_occurrence_code_point_seconds": 646.3792386138812,
+      "longest_closed_observed_lifetime_seconds": 1.3526327917352319,
+      "final_observed_text_code_points": 1719
+    }
+  },
+  "posterior_whole_text_support": {
+    "raw": {
+      "original_credit_supported_seconds": 8.5,
+      "original_credit_mismatching_seconds": 2.0,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 69,
+        "mismatching": 348
+      }
+    },
+    "whitespace_stripped": {
+      "original_credit_supported_seconds": 8.5,
+      "original_credit_mismatching_seconds": 2.0,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 69,
+        "mismatching": 348
+      }
+    },
+    "scope": "Posterior whole first-view agreement at its actual G, not online certification, human correctness or newly transcribed character volume."
+  },
+  "quality": [
+    {
+      "source_id": "SC_SYNTH_S0903_24UTT_V1",
+      "reference_characters": 522,
+      "character_edits": 1313,
+      "CER": 2.5153256704980844,
+      "final_text": "关于中国东山少林寺方丈齐永信的举报风波尚未停歇然点正是舟林林林歇歇中中相了解中郑家有也有出席也歇歇温州一七月大女童接种疫苗抽出省省省疾控专家调查查症温州网八月二十七日日讯检家调查症结结日记者向瑞见习记者中日日讯者向瑞见习记者黄孟思推广土壳有机制提升者特推广土壳有机制提升者特配方师匪等等等陪肥地理技等培肥地理技等技等位于位位温州市内等温州蓄南龙岗等位位温州市内等温州苍南龙岗镇水门吞位温州蓄南龙岗等水门吞一个仓库发生火灶等位位温州市内等温州蓄南龙岗等水门吞一个仓库发生火�灶等位位温州市内温州温州参南龙岗等水门吞一个仓库发生火灶等加强种子似草料等急救营等急救灾灾中中位位温州市内等温州蓄南龙岗等水门吞一个仓库发生火�灶等加强种子似草料等急救营等急救灾物资储处备调运条件建设设梁调运调运调运条件建设设每股下滑三点八二八美元中三点八八美元报收温于一点一十五点八八美元中三点点八八美元中每股下滑三点八二八美元报收于一点一十五点八八美元中昨晚温州蓄南龙岗等与与与昨晚张保在播映大结局故演员中中位位温州市内等温州蓄南龙岗等水门吞一个仓库发生火�灶等加强种子似与与以及庆祝州温州温温州二零零位面包师致出温州二零位面包师指出二五米蛋高温州温州参南龙岗或申报中|吉尼斯记录中谷歌十点二推广谷歌十点二推广吉尼斯纪录中谷歌十点二推广谷谷歌也出现一点五八分谷歌十点二推广谷谷歌也出现一点五八分七十九的最大中Valley谷歌也出现一点五八分七十九的最大跌幅Valley谷歌也出现一点五八分七十九的最大跌幅温州二零位面包师中吉尼斯纪录中谷歌推广谷歌也出现一点五八分七十九的最大跌温州二零位面包师中吉尼斯纪录中谷歌也出现一点五八分七十九的最大跌幅温州二零位面包师中吉尼斯纪录中谷歌推广温州温温州二零位温州温温州二一一人遇难鞋场老板被控制温温州一夫妻非法集资温州一夫妻非法集资五亿丈夫温州一夫妻非法集中温州一夫妻非法集五亿丈夫温州一夫妻控将账款温州一夫妻非法集五亿丈夫温州一夫妻将账款送给情妻喜钱温州一夫妻非法集资五亿丈夫温州一夫将将将账款温州一夫妻非法集资五亿丈夫温州一夫给秦父喜钱又将北京市丁于排球职七七七七七造成群众性喜钱群众性喜钱群众性喜钱温州一夫妻非法集资五亿丈夫温州一夫给秦父喜钱温州一释中群众性喜钱群众性喜钱群众性喜钱温州一夫妻非法集资五亿丈夫温州一夫将将账款温州一夫给秦父喜钱温州一注:此文可能存在问题群众性喜钱群众性喜钱群众性喜牌赛温州一夫妻非法集资五亿丈夫温州一夫将将账款温州一夫给秦父喜钱温州一释中群众性喜钱群众性喜钱群众性喜行温州一夫将将账款温州一夫妻非法集资五亿丈夫温州一夫将将账款温州一夫molding温州一助持被免政于谋球转型发展温州一助持被免政群众性喜钱群众性喜钱群众性喜钱温州一molding温州一助持被免政于谋球转型发展温温州一夫将将账款款温州一夫给秦父群众性喜钱群众性喜钱群众性喜行温为为科技核释作为作为作为作为科技股领头羊的苹果商后负负当天下脱二百分之二提高提高大型农机具作为作为作为作为科技股领头羊的苹果股价当天下三二高高高后负负当天下脱二百分之二提高提高大型农机具和农药化肥农模等农模等农资生种水平温州一助持被免政等商后发负等农资生种水平温州一中学门口清气罐爆炸卖气球等农资生种水平温州一中学门口清气罐爆炸卖气球等农资犯犯犯不至身亡应应参演剧集姜儿与温州一中学门口清气罐爆炸卖气球等贪犯不至身亡应参演剧集姜儿与陈家宝及赖气球等目应应成为好检妹成为好检妹二零二零一四年中中中际技集三星期累计销售超过一百中中智能锁等超过一百二十万块智能手表超超过一百二十万块智能锁手表温州一中学门口清气罐爆炸卖气球等农资生种水平温州一中学门口清气�罐爆炸卖气球等营做好姐妹二零一四年三星期累计销售超过一百二十万块智能手表温州一中学门口清气罐爆炸卖气球等农资生种水平温州一中学门口清气罐爆炸被判出有期期徒处年被判处有期徒刑一年加强国国家级农业标准化整建加强国国家级农业标准化整建制推进终终现场建设加强国国家级农业标准化整建制推进示范现场建设网网网网网张张张永家条头张永嘉条头国家国家饭饭店的张张永嘉条头国家饭饭店的结账账单十分引人瞩目十分引人瞩目",
+      "scope": "Fixed whitespace-only original native CER; final task quality, not provisional correctness."
+    }
+  ],
+  "energy": {
+    "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+    "service": {
+      "gpu_joules": {
+        "0": 175007.9500851252,
+        "1": 177696.3003591237
+      },
+      "total_joules": 352704.2504442489
+    },
+    "origin_perf": 5118486.310950544,
+    "service_end_perf": 5119168.307486209,
+    "includes_fault_and_recovery_after_origin": true,
+    "initial_cold_load_excluded": true,
+    "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+  },
+  "integrity": {
+    "durable_frames_verified": true,
+    "complete_original_parent_cadence_records_verified": true,
+    "durable_canonical_steps": 417,
+    "expected_canonical_steps": 417,
+    "all_original_obligations_eventually_processed": true,
+    "accepted_frontiers": {
+      "SC_SYNTH_S0903_24UTT_V1": 3329605
+    },
+    "pending_accepted_uncertified_samples": {
+      "SC_SYNTH_S0903_24UTT_V1": 0
+    },
+    "unprocessed_all_offered_samples": {
+      "SC_SYNTH_S0903_24UTT_V1": 0
+    },
+    "observed_acknowledged_input_loss_samples": {
+      "SC_SYNTH_S0903_24UTT_V1": 0
+    },
+    "input_loss_scope": "Completed fixed accepted obligations are checked by the full durable source chain; incomplete debt is pending work, not automatically lost input.",
+    "consumer_binding": {
+      "status": "PASS_DURABLE_CONSUMER_BINDING",
+      "applied_durable_facts": 417,
+      "durable_facts_not_yet_consumed": 0,
+      "duplicate_actual_durable_applications": 0,
+      "scope": "Whole provisional text can remain ahead; this does not require Consumer visible text to equal Canonical text."
+    },
+    "original_reference": {
+      "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+      "checked_steps": 417,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "reference_kind": "continuous_original",
+      "projection": "none; entire state/C/IDs compared",
+      "reference_sha256": "6fd66605a495aeb7336ce3d6f64f6e898c5fa61cdf777a0324b7acea060b6c63"
+    },
+    "local_reject_records": 0,
+    "local_reject_canonical_mutations": 0,
+    "legal_progress_wrong_rejections": null,
+    "legal_progress_wrong_rejections_status": "REQUIRES_SEPARATE_SEMANTIC_WITNESS_CHECK",
+    "accepted_original_clock_notifications_checked": 417,
+    "owner_error_records": 0,
+    "owner_error_types": {},
+    "explicit_expected_owner_error_types": [],
+    "unexpected_owner_error_records": 0
+  },
+  "history": {
+    "samples": 673,
+    "coordination_entry_maxima": {
+      "live_jobs": 2,
+      "completed_full": 1,
+      "branch_steps": 2,
+      "canonical_witnesses": 1,
+      "nodes": 3,
+      "projections": 3,
+      "issued_proofs": 1,
+      "issued_id_memory_entries": 1,
+      "pending_job_refs": 2,
+      "pending_publications": 3,
+      "consumer_pins": 2
+    },
+    "application_and_process_data": {
+      "owner_RSS_bytes": {
+        "min": 20271104,
+        "max": 103784448,
+        "last": 103784448
+      },
+      "current_cut_bytes": {
+        "min": 10973,
+        "max": 31943,
+        "last": 31179
+      },
+      "current_text_bytes": {
+        "min": 0,
+        "max": 5083,
+        "last": 5083
+      },
+      "immutable_audio_bytes": {
+        "min": 13318420,
+        "max": 13318420,
+        "last": 13318420
+      }
+    },
+    "scope": "Observed finite-run coordination-entry counts; RSS/current cuts/output/immutable audio are separate. Offline analysis allocation and cumulative application output do not establish constant online total memory."
+  },
+  "state_boundaries": {
+    "actual_worker_audio_insert_observations": 749,
+    "actual_worker_buffer_shifts": 660,
+    "actual_worker_context_trim_changes": 396,
+    "actual_worker_context_bound_still_exceeded": 98,
+    "selected_canonical_buffer_shift_edges": 357,
+    "selected_edge_prediction_clusters": {
+      "SC_SYNTH_S0903_24UTT_V1": {
+        "selected_edges": 417,
+        "observed_predictions": 416,
+        "own_prediction_changed": 333,
+        "longest_consecutive_changed": 52,
+        "unknown_prediction_edges": 1
+      }
+    },
+    "scope": "All worker observations include recomputation; selected-edge clusters are separate and unknown edges break a known streak. These are observed coverage, not natural-prevalence or universal-state-sufficiency claims."
+  },
+  "recovery": {
+    "observed_fault_records": 0,
+    "events": [],
+    "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+  },
+  "gate": "PASS_COMPLETE_TRIAL_TASK_AND_ORIGINAL_ENDPOINT_RECOUNT",
+  "scope": "Offline aggregation only. Complete-task/refinement/physical-owner admissibility evidence roles remain distinct. Cold-fault P99 failure is an endpoint outcome, not automatic evidence that safe recovery failed."
+}

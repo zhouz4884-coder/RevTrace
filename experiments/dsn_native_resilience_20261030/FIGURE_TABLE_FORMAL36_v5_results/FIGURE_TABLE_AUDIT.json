@@ -1,0 +1,53 @@
+{
+  "figure_size_inches": [
+    7.2,
+    3.0
+  ],
+  "minimum_text_points": 8.5,
+  "serving_trials": 8,
+  "sources": 2,
+  "per_source_trials": 4,
+  "envelope_fresh_trials": 2,
+  "new_model_calls": 0,
+  "transformation": "Native/endpoints: min-max across every actual observation in each 0.5s audio-frontier bin within each fixed (source,arm), two fresh trials. History: maximum over every observed row in each 1s service-time bin separately for each of all eight trials; no cross-run sum. Current data/RSS: min-max every row in each 1s bin within fixed (source,arm), two fresh trials. Not confidence intervals.",
+  "x_axes": "Native/endpoints use original audio frontier. History/current state/RSS use actual wall time since original ORIGIN including post-input drain/backlog; no audio-duration truncation.",
+  "original_input_end_seconds": [
+    208.1003125,
+    228.51025
+  ],
+  "delay_axis": "Logarithmic display only, fixed 0.3--1000s, original 2s/8s thresholds explicitly labelled; raw values and table endpoints unchanged. Formal8 inputs were independently checked strictly positive and within this display domain.",
+  "selected_edge_rug": "Panel a, all eight rows: gray own-prediction-changed edges; orange x unknown. It is not human-error rate.",
+  "rug_row_order_bottom_to_top": [
+    "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r0",
+    "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1",
+    "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r0",
+    "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r1",
+    "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r0",
+    "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r1",
+    "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r0",
+    "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1"
+  ],
+  "missing_D_frontiers": 0,
+  "missing_C_frontiers": 0,
+  "native_boundary_scope": "All actual worker observations including recomputation. Audio-insert and post-trim are distinct boundary events.",
+  "decoder_limit_scope": "Derived post-trim T+C is the exact exported observer field: current token-group sum plus reencoded context tokens, excluding a nonempty-context prefix. It is not full L or an observed forward tensor; no positional-overflow claim.",
+  "pending_visual_review": true,
+  "memory_scope": "No sum of category maxima; no constant total RSS claim. NVML separate; worker torch allocator unknown.",
+  "index_path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\FIGURE_TABLE_FORMAL36_v5_INDEX.json",
+  "index_sha256": "2bea1658495e8ffe65a2b13f67182df30145ecc20759290824fc8fc44dd9a158",
+  "script_sha256": "da7a498ab3d0768665c5ba5264cdcba17a7fa1dcd5911b33e2eef4c55c7967dc",
+  "contract_sha256": "2272e53922a34ff5e0e93fd5f8dd99c36eb671fe65e6f173c779045014a81720",
+  "semantic_audit_known_cells": 36,
+  "outputs": {
+    "ALL36_MACHINE_TABLE.csv": "15c04a4e2d47b9539395de2fdfa4aee66941ecfb99cc5ccfceaa75f5ffa2192d",
+    "ALL36_MACHINE_TABLE.json": "806853b40f96d07003fc5527faad30c0a9f19371f048a54bc8793ac56ca62906",
+    "reliability_table.tex": "de6c7f141ac43d29cc2ae6ff5c49ff8013381e857a37a298ba62a30f60cb3e1a",
+    "SHORT24_AGGREGATES.json": "1cf1bcfd3f3fa6b33cfdecbc0c35fb66f4507dd9b6e1c7c0078967882068f2aa",
+    "SUSTAINED8_FRONTIER_AND_CLUSTER_DETAILS.json": "51bcc48bd2b9844f4f7cec24102fe5ea9324b7eee6db1abd1b79a0750cc32f08",
+    "SUSTAINED8_MEMORY_DETAILS.json": "9aa57e3cd32b7db73d09c873e1796157ab7fbc13dd61b3113790433531fc21bc",
+    "sustained_state_history.pdf": "e485fba32522ffc988426a1efe8bd4cd6bee5e32fa97662e1ca79bc9e8341a23",
+    "sustained_state_history.png": "bc588d546e2bf82e2ac7bef6e1af49b193e70e5ee9aefa81d46d7aa9a89cc042",
+    "sustained_state_history.svg": "50bcb61308554bbc68c442495fed24f4bd4f82b6579dd77ace81bd629d1b093c"
+  },
+  "analysis_gate": "PENDING_INDEPENDENT_INPUT_AND_VISUAL_QA"
+}
