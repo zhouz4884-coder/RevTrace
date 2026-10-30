@@ -1,0 +1,36 @@
+{
+  "status": "PASS_BOUNDED_SPECIFICATION_REFINEMENT_AND_COUNTEREXAMPLE_CONTROLS",
+  "source_commit": "deb3260655e2f3312499a34597cc0be6fc15484b",
+  "source_manifest_sha256": "e2ceaad9d1a6e5f4051689a71b158a75244840be3fa2ccca8829b95a7c39d497",
+  "tests": 27,
+  "skipped": 0,
+  "profiles": {
+    "normal_two_frontiers": {
+      "states": 6231,
+      "edges": 11142,
+      "depth_cutoffs": 2144,
+      "terminal_states": 16,
+      "max_depth": 12,
+      "frontiers": 2,
+      "max_issued": 3,
+      "max_faults": 0,
+      "guarantee": "all explored states and enabled edges inside these finite bounds; not unbounded liveness or CUDA verification"
+    },
+    "failure_one_frontier": {
+      "states": 14074,
+      "edges": 25799,
+      "depth_cutoffs": 2828,
+      "terminal_states": 2196,
+      "max_depth": 12,
+      "frontiers": 1,
+      "max_issued": 2,
+      "max_faults": 1,
+      "guarantee": "all explored states and enabled edges inside these finite bounds; not unbounded liveness or CUDA verification"
+    }
+  },
+  "model_calls": 0,
+  "GPU_calls": 0,
+  "evidence_tier": "finite symbolic specification plus source correspondence; NOT deployed serving, natural prevalence, arbitrary GPU equality, unbounded liveness, or whole Python/CUDA verification",
+  "final_runtime_mechanical_extraction": false,
+  "scope": "Bounded symbolic complete-cut refinement with explicit original-C/U nondeterminism, mutations, Consumer and supported fault/recovery; not extracted implementation proof, real serving, unbounded liveness or natural prevalence."
+}

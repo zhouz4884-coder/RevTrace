@@ -1,0 +1,7 @@
+# 模型v1开发控件失败及窄修
+
+真实开发运行26项中4项通过、22项报同一TypeError；没有运行BFS，没有模型/GPU调用。run_checks写下的失败gate和完整CPU日志原样保留在DEVELOPMENT_RESULTS_v1。
+
+原因在测试辅助函数full：调用receive_full时漏传jid。模型原函数及其守卫并未被执行到失败点，不能把这次脚手架错误解释为原方法语义假说被反驳，也不涉及任何实际神经结果或浮点机制。source_v1保持原0aca完整commit、snapshot与bundle。
+
+source_v2补这个调用参数，并按root最终接口明确分开Owner namespace、session epoch与worker incarnation三个域，新增一个三域区别的控制。实际BFS frontier/issue/depth/state cap不变，不删除旧案例，也不重标原失败为通过。增加session-fence动作属于最终模型接口对齐，不根据结果缩小原故障边界。

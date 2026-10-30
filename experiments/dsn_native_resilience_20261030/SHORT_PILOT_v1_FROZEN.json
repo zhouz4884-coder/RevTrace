@@ -1,0 +1,110 @@
+{
+  "experiment_id": "SC_NATIVE_RESILIENCE_SHORT_DEVELOPMENT_PILOT_V1",
+  "created_utc": "2026-10-30T08:31:23.963863+00:00",
+  "source_commit": "9492d3f9cb35e2b2849ec020817750a221248f0e",
+  "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/source_v1",
+  "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/SOURCE_v1.json",
+  "source_manifest_sha256": "e9fc8b78a85ce3883529158a1a99b5d14105bc30d5eefbd7feedcfd5b3688a27",
+  "environment_python": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+  "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/native_campaign_v8_configs/FROZEN_ENVIRONMENT.json",
+  "environment_sha256": "96a0679d34741743de1a1b6d784c0e518cbdcf7b76a23cae3d95c12d20a6fae8",
+  "reference_details": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_independent_20261029/reference_v1/DETAILS.json",
+  "reference_details_sha256": "58a33465f5af8dc0f39983253abdcf9bccb9ac79e03690e342792281a36c57a6",
+  "reference_kind": "short_bdfa_static_source_mapping",
+  "source_receipt_sha256": "2040995aa06a5c7958479fe42397d65e299c8a4505de18b35f44099edd9e3b9e",
+  "expected_cells": 6,
+  "normal_cells": 2,
+  "fault_development_cells": 4,
+  "cells": [
+    {
+      "cell_id": "SC_RESILIENCE_DEV_v1_none_conservative",
+      "arm": "conservative",
+      "fault_kind": "none",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/short_pilot_v1_configs/SC_RESILIENCE_DEV_v1_none_conservative.json",
+      "config_sha256": "1a38b99fcf2487d19a62d742aac3ba247bfaf5ac10653cc7ba9f6c8e9a987ca1",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/cells/SC_RESILIENCE_DEV_v1_none_conservative",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/logs/SC_RESILIENCE_DEV_v1_none_conservative.log"
+    },
+    {
+      "cell_id": "SC_RESILIENCE_DEV_v1_none_fullcall",
+      "arm": "fullcall",
+      "fault_kind": "none",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/short_pilot_v1_configs/SC_RESILIENCE_DEV_v1_none_fullcall.json",
+      "config_sha256": "036c0c3067215f2f4f6aba1b5eeaec2d5090054911f7cf786fd652e5b8ceaaa2",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/cells/SC_RESILIENCE_DEV_v1_none_fullcall",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/logs/SC_RESILIENCE_DEV_v1_none_fullcall.log"
+    },
+    {
+      "cell_id": "SC_RESILIENCE_DEV_v1_owner_before_durable_fullcall",
+      "arm": "fullcall",
+      "fault_kind": "owner_before_durable",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/short_pilot_v1_configs/SC_RESILIENCE_DEV_v1_owner_before_durable_fullcall.json",
+      "config_sha256": "c24d5d6770d0bbf523bac4a35183950073ba5292dae2112f641813954543af31",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/cells/SC_RESILIENCE_DEV_v1_owner_before_durable_fullcall",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/logs/SC_RESILIENCE_DEV_v1_owner_before_durable_fullcall.log"
+    },
+    {
+      "cell_id": "SC_RESILIENCE_DEV_v1_worker_after_asr_fullcall",
+      "arm": "fullcall",
+      "fault_kind": "worker_after_asr",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/short_pilot_v1_configs/SC_RESILIENCE_DEV_v1_worker_after_asr_fullcall.json",
+      "config_sha256": "528a76f6019b138ba603f10003f60c3c6a1817baa00a01fb225442fc84113cb1",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/cells/SC_RESILIENCE_DEV_v1_worker_after_asr_fullcall",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/logs/SC_RESILIENCE_DEV_v1_worker_after_asr_fullcall.log"
+    },
+    {
+      "cell_id": "SC_RESILIENCE_DEV_v1_owner_after_durable_fullcall",
+      "arm": "fullcall",
+      "fault_kind": "owner_after_durable",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/short_pilot_v1_configs/SC_RESILIENCE_DEV_v1_owner_after_durable_fullcall.json",
+      "config_sha256": "1a3d7c1cb03eb6688e2e8963ae0b42c0439f27c4e212dab0fda64eb65925a169",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/cells/SC_RESILIENCE_DEV_v1_owner_after_durable_fullcall",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/logs/SC_RESILIENCE_DEV_v1_owner_after_durable_fullcall.log"
+    },
+    {
+      "cell_id": "SC_RESILIENCE_DEV_v1_worker_partial_frame_fullcall",
+      "arm": "fullcall",
+      "fault_kind": "worker_partial_frame",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/short_pilot_v1_configs/SC_RESILIENCE_DEV_v1_worker_partial_frame_fullcall.json",
+      "config_sha256": "659d09c805b0e1a1d6d8f924d42af4749b139ab192d817a7113678fe1ebe4609",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/cells/SC_RESILIENCE_DEV_v1_worker_partial_frame_fullcall",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/logs/SC_RESILIENCE_DEV_v1_worker_partial_frame_fullcall.log"
+    }
+  ],
+  "seed": 2026103021,
+  "frozen_order": [
+    {
+      "arm": "conservative",
+      "fault": "none"
+    },
+    {
+      "arm": "fullcall",
+      "fault": "none"
+    },
+    {
+      "arm": "fullcall",
+      "fault": "owner_before_durable"
+    },
+    {
+      "arm": "fullcall",
+      "fault": "worker_after_asr"
+    },
+    {
+      "arm": "fullcall",
+      "fault": "owner_after_durable"
+    },
+    {
+      "arm": "fullcall",
+      "fault": "worker_partial_frame"
+    }
+  ],
+  "normal_before_fault_development": true,
+  "original_D2_seconds": 2.0,
+  "original_C8_seconds": 8.0,
+  "all_offered_including_EOS": true,
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/SUMMARY.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/short_pilot_v1/GATE.json",
+  "scope": "Six development trials only: normal two arms first, four fullcall fault sites next. No result yet; final formal24 and sustained validation require separate frozen plans.",
+  "resource_rule": "Root exclusive NN queue; remote source/assets/formal zero-skip CPU prerequisites and no-argument source gate before launch."
+}
