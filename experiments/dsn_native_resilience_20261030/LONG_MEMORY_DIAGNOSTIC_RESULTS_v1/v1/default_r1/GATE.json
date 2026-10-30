@@ -1,0 +1,28 @@
+{
+  "status": "RECORDED_ORIGINAL_NATIVE_PREFIX_OOM",
+  "diagnostic_source_commit": "a145edbbb05a5d482d6e8b8d45ef3b4861c5dfe8",
+  "imported_neural_source_commit": "9492d3f9cb35e2b2849ec020817750a221248f0e",
+  "mode": "continuous_prefix",
+  "allocator_conf": null,
+  "complete_rows": 94,
+  "complete_rows_sha256": "7fafda8cb19271e860a137c557f2e3222fa3d50d85984e153100592f176a1762",
+  "results": [
+    {
+      "kind": "original_continuous_OOM",
+      "failure_end": 760000,
+      "memory": {
+        "allocated": 21284875264,
+        "reserved": 24058527744,
+        "max_allocated": 22376002048,
+        "max_reserved": 24765267968
+      },
+      "message": "CUDA out of memory. Tried to allocate 912.00 MiB. GPU 0 has a total capacity of 23.57 GiB of which 817.31 MiB is free. Including non-PyTorch memory, this process has 22.74 GiB memory in use. Of the allocated memory 19.82 GiB is allocated by PyTorch, and 2.58 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
+    }
+  ],
+  "source_id": "SC_SYNTH_S0770_24UTT_V1",
+  "source_frames": 3656164,
+  "original_C_U_precision_and_cadence_unchanged": true,
+  "reference_only": true,
+  "actual_serving_cells": 0,
+  "scope": "Fixed original95/96 prefix or two original failed-input calls for allocation/mechanism triage. Full long equivalence and serving remain separate."
+}

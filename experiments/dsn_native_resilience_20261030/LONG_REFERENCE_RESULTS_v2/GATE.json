@@ -1,0 +1,96 @@
+{
+  "status": "PASS_CONTINUOUS_ORIGINAL_AND_ALL_RESTORED_NATIVE_EDGES",
+  "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "sources": 2,
+  "acoustic_speakers": 2,
+  "reference_full_calls": 875,
+  "restored_full_calls": 875,
+  "all_original_full_state_C_IDs_equal": true,
+  "reference_details_sha256": "6fd66605a495aeb7336ce3d6f64f6e898c5fa61cdf777a0324b7acea060b6c63",
+  "reference_details_bytes": 118004382,
+  "source_details": [
+    {
+      "source_id": "SC_SYNTH_S0770_24UTT_V1",
+      "frames": 3656164,
+      "original_continuous_steps": 458,
+      "restored_edge_calls": 458,
+      "all_equal": true,
+      "mismatches": 0,
+      "continuous_state_boundaries": {
+        "counts": {
+          "audio_insert": 458,
+          "context_trim": 457,
+          "actual_buffer_shifts": 398,
+          "actual_context_trim_changes": 353,
+          "context_bound_still_exceeded": 342
+        },
+        "recent_records": 256,
+        "recent_limit": 256,
+        "full_records_require_external_stream": true,
+        "scope": "Observational native boundary diagnostics; complete cut/C/IDs decide fidelity."
+      },
+      "restored_state_boundaries": {
+        "counts": {
+          "audio_insert": 458,
+          "context_trim": 457,
+          "actual_buffer_shifts": 398,
+          "actual_context_trim_changes": 353,
+          "context_bound_still_exceeded": 342
+        },
+        "recent_records": 256,
+        "recent_limit": 256,
+        "full_records_require_external_stream": true,
+        "scope": "Observational native boundary diagnostics; complete cut/C/IDs decide fidelity."
+      },
+      "continuous_details": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/long_reference_v2/sources/SC_SYNTH_S0770_24UTT_V1/CONTINUOUS_DETAILS.json",
+        "sha256": "33e807d1416a31083615ce8250ef97600903fcba91b49ce666a79ad8611feaa3",
+        "bytes": 69153348
+      }
+    },
+    {
+      "source_id": "SC_SYNTH_S0903_24UTT_V1",
+      "frames": 3329605,
+      "original_continuous_steps": 417,
+      "restored_edge_calls": 417,
+      "all_equal": true,
+      "mismatches": 0,
+      "continuous_state_boundaries": {
+        "counts": {
+          "audio_insert": 417,
+          "context_trim": 416,
+          "actual_buffer_shifts": 357,
+          "actual_context_trim_changes": 252,
+          "context_bound_still_exceeded": 55
+        },
+        "recent_records": 256,
+        "recent_limit": 256,
+        "full_records_require_external_stream": true,
+        "scope": "Observational native boundary diagnostics; complete cut/C/IDs decide fidelity."
+      },
+      "restored_state_boundaries": {
+        "counts": {
+          "audio_insert": 417,
+          "context_trim": 416,
+          "actual_buffer_shifts": 357,
+          "actual_context_trim_changes": 252,
+          "context_bound_still_exceeded": 55
+        },
+        "recent_records": 256,
+        "recent_limit": 256,
+        "full_records_require_external_stream": true,
+        "scope": "Observational native boundary diagnostics; complete cut/C/IDs decide fidelity."
+      },
+      "continuous_details": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/long_reference_v2/sources/SC_SYNTH_S0903_24UTT_V1/CONTINUOUS_DETAILS.json",
+        "sha256": "881a6085e66d76bd3aec27a3d4971337b1f24c65084c8381a7f34f37db60ed75",
+        "bytes": 48851037
+      }
+    }
+  ],
+  "failure_controls": [],
+  "original_continuous_no_between_step_restore": true,
+  "reference_only": true,
+  "actual_serving_cells": 0,
+  "scope": "Continuous raw-author task versus every restored input edge on the same GPU and loaded original FP32 models. Full raw/details remain on8TB; no serving latency/goodput or natural-long-recording claim."
+}

@@ -1,0 +1,63 @@
+{
+  "status": "FAIL_RELEASE_G96_OR_STRICT_ACTUAL_CONTROLS_PRESERVED",
+  "diagnostic_source_commit": "99f7a0c17a185467e2fd90cf6af95aaeddf6a927",
+  "imported_neural_source_commit": "9492d3f9cb35e2b2849ec020817750a221248f0e",
+  "mode": "continuous_prefix",
+  "allocator_conf": null,
+  "release_generation": true,
+  "complete_rows": 95,
+  "complete_rows_sha256": "fe068fab653e2dfb14200ac64b35d07202eca4f9f149c101901a7b4c3ea8c23e",
+  "results": [
+    {
+      "kind": "original_continuous_OOM",
+      "failure_end": null,
+      "memory": {
+        "allocated": 21537515520,
+        "reserved": 24595398656,
+        "max_allocated": 22119880192,
+        "max_reserved": 24639438848
+      },
+      "message": "CUDA out of memory. Tried to allocate 480.00 MiB. GPU 0 has a total capacity of 23.57 GiB of which 305.31 MiB is free. Including non-PyTorch memory, this process has 23.24 GiB memory in use. Of the allocated memory 20.59 GiB is allocated by PyTorch, and 2.32 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
+    }
+  ],
+  "source_id": "SC_SYNTH_S0770_24UTT_V1",
+  "source_frames": 3656164,
+  "original_C_U_precision_and_cadence_unchanged": true,
+  "reference_only": true,
+  "actual_serving_cells": 0,
+  "scope": "Fixed original95/96 prefix or two original failed-input calls for allocation/mechanism triage. Full long equivalence and serving remain separate.",
+  "fixed_actual_controls": [
+    {
+      "label": "default_r0",
+      "kind": "continuous_prefix",
+      "old_rows": 94,
+      "compared_pairs": 94,
+      "all_full_start_end_C_IDs_equal": true,
+      "details_sha256": "f87d25a41fd26190ac4727fcc967e05a9426ecba470bbe62c8ef22f323323a8b"
+    },
+    {
+      "label": "default_r1",
+      "kind": "continuous_prefix",
+      "old_rows": 94,
+      "compared_pairs": 94,
+      "all_full_start_end_C_IDs_equal": true,
+      "details_sha256": "f87d25a41fd26190ac4727fcc967e05a9426ecba470bbe62c8ef22f323323a8b"
+    },
+    {
+      "label": "same_input_r0",
+      "kind": "same_input_twice",
+      "old_rows": 2,
+      "compared_pairs": 2,
+      "all_full_start_end_C_IDs_equal": true,
+      "details_sha256": "c52fa192555f563a4e3f5038d1232ca9767eff90cec7f918f5634bd8ec876df2"
+    }
+  ],
+  "all_fixed_actual_complete_state_C_IDs_equal": true,
+  "generation_lifetime": {
+    "measured_edges": 95,
+    "minimum_allocated_drop_bytes": 0,
+    "maximum_allocated_drop_bytes": 283810816,
+    "maximum_exclusive_g_storage_bytes": 283808120,
+    "no_empty_cache_in_release": true
+  }
+}

@@ -1,0 +1,12 @@
+"""Create/freeze the original875+restore875 plan and exact source_v2 launcher."""
+import hashlib,pathlib,subprocess,sys
+F=pathlib.Path(__file__).resolve().parents[1];R=F.parents[1];D=F.parent/'dsn_native_sustained_20261030'
+old=D/'ops/freeze_long_reference_plan_v1.py';text=old.read_text(encoding='utf8').replace('SC_SUSTAINED_CONTINUOUS_RAW_AUTHOR_AND_EACH_RESTORED_EDGE_V1','SC_SUSTAINED_CONTINUOUS_RAW_AUTHOR_AND_EACH_RESTORED_EDGE_V2').replace('source_v1','source_v2').replace('SOURCE_v1.json','SOURCE_v2.json').replace('LONG_REFERENCE_PLAN_v1_FROZEN.json','LONG_REFERENCE_PLAN_v2_FROZEN.json').replace('long_reference_v1','long_reference_v2')
+before="environment_record=pilot['environment_record'],environment_record_sha256=pilot['environment_sha256']"
+after="environment_record=P+'/FROZEN_ENVIRONMENT_v2.json',environment_record_sha256=sha(R/'experiments/dsn_native_resilience_20261030/FROZEN_ENVIRONMENT_v2.json'),runtime_environment=read(R/'experiments/dsn_native_resilience_20261030/FROZEN_ENVIRONMENT_v2.json')['runtime_environment']"
+assert text.count(before)==1;text=text.replace(before,after);builder=D/'ops/freeze_long_reference_plan_v2.py';assert not builder.exists();builder.write_bytes(text.encode())
+plan=D/'LONG_REFERENCE_PLAN_v2_FROZEN.json';subprocess.run([sys.executable,'-B',str(builder),'--runtime-manifest',str(F/'packages/SOURCE_v2.json'),'--runtime-source',str(F/'source_v2')],check=True)
+digest=hashlib.sha256(plan.read_bytes()).hexdigest();launcher=(F/'ops/launch_long_reference_v1.py').read_text(encoding='utf8').replace('v1','v2').replace('RUNTIME_PREREQUISITE_v2_r2','RUNTIME_PREREQUISITE_v2').replace('79b1c3ace4bd419ea998ed3dec37f73a4487122a7228d8bc00fcb15940b92efb',digest).replace("pre['tests']==249","pre['tests']==253")
+needle="childenv=dict(os.environ,PYTHONDONTWRITEBYTECODE='1',PYTHONUNBUFFERED='1');childenv.pop('CUDA_VISIBLE_DEVICES',None)";assert launcher.count(needle)==1;launcher=launcher.replace(needle,needle+";childenv.pop('PYTORCH_ALLOC_CONF',None);childenv.update(plan['runtime_environment']);assert plan['runtime_environment']==env['runtime_environment']")
+needle="started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),reference_only=True";assert launcher.count(needle)==1;launcher=launcher.replace(needle,"runtime_environment=plan['runtime_environment'],"+needle)
+out=F/'ops/launch_long_reference_v2.py';assert not out.exists();out.write_bytes(launcher.encode());print('Prepared exact source_v2 long launcher; no neural execution')

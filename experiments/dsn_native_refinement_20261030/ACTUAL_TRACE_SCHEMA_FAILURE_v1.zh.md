@@ -1,0 +1,7 @@
+# 首轮6真实trial检查的schema失败及窄修
+
+30309源码对固定六个真实开发trial均实际执行34项控制及实际数据读取；六份失败输出原样保留在SHORT_ACTUAL_TRACE_RESULTS_v1。相同失败为最后ingress检查的KeyError: accepted。没有将部分已跑过的结构检查提前包装成整轮PASS。
+
+实际Supervisor写的是kind=accepted_input、frontier、original_offer、observed、audio_sha256；checker准备期用了旧admission日志的accepted字段。v2只明确解析该真实schema，并在同时出现两个frontier字段时要求一致；原时间公式、单调接受、音频身份、全最终输入义务等守卫不变。新增真实schema控制防止此缺陷重现。
+
+同时将run record区分原8TB raw位置与本地逐SHA有界副本，不修改原始数据、实际deadline/任务、任何神经source或结果。原30309与六失败gate不改名、不覆盖。修后使用新source/manifest对同一固定六trial重新检查。

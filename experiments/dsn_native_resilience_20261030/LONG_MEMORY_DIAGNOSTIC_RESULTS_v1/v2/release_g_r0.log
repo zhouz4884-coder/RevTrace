@@ -1,0 +1,27 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Entering infer at 0.000 seconds
+Entering decoding loop at 0.405 seconds
+2026-10-30 18:04:04,694 - simul_whisper.simul_whisper - INFO - End of decoding loop
+2026-10-30 18:04:04,695 - simul_whisper.simul_whisper - INFO - Decoding time: 2220.970 ms
+2026-10-30 18:04:04,695 - simul_whisper.simul_whisper - INFO - Output: 厉打击春
+Entering infer at 0.000 seconds
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/long_memory_diagnostic_source_v2/diagnose_long_memory.py", line 115, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/long_memory_diagnostic_source_v2/diagnose_long_memory.py", line 88, in main
+    for row in transition_loop(model,source,audio[source['source_id']],cut_export=export_cut,to_tensor=lambda x:torch.from_numpy(np.asarray(x,dtype=np.float32).copy()),sync=torch.cuda.synchronize,stop_at=cfg['prefix_end']):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/long_memory_diagnostic_source_v2/memory_release.py", line 91, in continuous_transitions_release_g
+    storage=storage_reporter(g,engine,result);before=memory_stats()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/long_memory_diagnostic_source_v2/memory_release.py", line 68, in generation_storage_report
+    values,_=storage_inventory(tensor,cuda_only=cuda_only);excluded.update(values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/long_memory_diagnostic_source_v2/memory_release.py", line 49, in storage_inventory
+    visit(value)
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/long_memory_diagnostic_source_v2/memory_release.py", line 41, in visit
+    tensor_objects+=1;storage=x.untyped_storage();key=(str(x.device),int(storage.data_ptr()),int(storage.nbytes()))
+                              ^^^^^^^^^^^^^^^^^^^
+NotImplementedError: Cannot access storage of SparseTensorImpl

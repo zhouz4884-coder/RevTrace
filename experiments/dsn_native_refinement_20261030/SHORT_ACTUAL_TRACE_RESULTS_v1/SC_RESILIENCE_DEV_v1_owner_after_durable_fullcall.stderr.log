@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_native_refinement_20261030\trace_source_v1\run_trace.py", line 78, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_native_refinement_20261030\trace_source_v1\run_trace.py", line 63, in main
+    ingress=check_original_ingress(origin=origin,sources=sources,ingress_rows=list(lines(load(cfg['ingress_journal']))))
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_native_refinement_20261030\trace_source_v1\refinement_trace.py", line 247, in check_original_ingress
+    F=row['accepted'];need(type(F) is int and accepted[sid]<=F<=source_map[sid]['frames'],'accepted_frontier_regressed_or_escaped')
+      ~~~^^^^^^^^^^^^
+KeyError: 'accepted'

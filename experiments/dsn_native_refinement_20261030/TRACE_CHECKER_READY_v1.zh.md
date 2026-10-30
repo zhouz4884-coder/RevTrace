@@ -1,5 +1,7 @@
 # 最终runtime实际轨迹精化检查器：准备完成，尚未读取新NN结果
 
+**后续完成记录：**本文件为30309准备期说明。实际六开发trial已由窄schema修正后的c4dde9源码（35控件）全部硬验，详见[实际结果与范围](SHORT_ACTUAL_TRACE_RESULTS_v2.zh.md)及[机器facts](SHORT_ACTUAL_TRACE_FACTS_v2.json)；原六schema失败保留。不要将此历史准备状态当当前未执行状态。
+
 独立source为`trace_source_v1`，commit `30309ccff11df9c8d20f4671ed66f090e76277f0`，完整6文件manifest SHA `717c1c17f539cf6e112f49c8ff3e103b6014c6db77910690f57f66fdf26b7b0e`；bundle、plain snapshot、root可解析完整commit与显式preflight齐。34/34本地**开发**合成控件通过、零skip；`TRACE_DEVELOPMENT_RESULTS_v1`明确不是实际服务轨迹验证。当前没有该checker的新NN数据PASS。
 
 ## 实际读取对象与硬检查
