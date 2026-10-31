@@ -1,0 +1,63 @@
+\paragraph{Incremental information and dependency reuse}
+The incremental-unit model separates newest committed information from
+the active right edge and propagates dependency revocation
+\cite{schlangen2011incremental}. Its commit promises that a unit will not
+be revoked. Here, certification records acceptance by the protected
+selection protocol; later selected facts may still revise the transcript.
+Adapton checks recorded dependencies; Nominal Adapton combines names with
+arguments and dependency checks to recover reusable work
+\cite{hammer2014adapton,hammer2015names}. Differential Dataflow maintains
+incremental computations across evolving versions
+\cite{mcsherry2013differential}. These works establish much of the basis for
+dependency-aware reuse. RevTrace instantiates that basis for complete
+neural feedback state and frozen executed calls. Its service obligation
+connects execution eligibility to the actual whole view retained when an
+independently selected root is applied.
+Our sufficient witness follows recorded executions; it does not transfer a
+from-scratch theorem to independently repeated floating-point inference.
+
+\paragraph{Revisable speech services and speculation}
+Whisper-Streaming converts an offline recognizer into incremental service
+using LocalAgreement~\cite{machacek2023whisperstreaming}. StreamCorrect
+adds learned correction and feeds selected corrections into subsequent
+recognition~\cite{vu2026streamcorrect}. RevTrace retains that selection and
+feedback behavior in its controlled native adapter; its contribution
+concerns the asynchronous execution and consumption around the feedback
+boundary. It does not introduce a better acoustic model or train a new
+corrector.
+
+SSBD coordinates old-output draft reuse with display-only suffix masking
+\cite{zeng2026ssbd}. It revalidates a draft under updated input and includes
+an unbiased configuration. RevTrace follows complete calls that actually
+executed to establish their eligibility under newly selected feedback state,
+then checks the dependency witness for the Consumer's whole current view.
+PredGen provides a close precedent for speculation while speech input
+evolves across recognition, language generation, and speech synthesis
+\cite{li2025predgen}. Our comparison holds the complete selected feedback
+task fixed across the retention policies. The specific reuse object,
+protected selection, and whole-view transition define the composition
+evaluated here. RelayS2S uses a learned verifier to commit a fast-path
+prefix that constrains subsequent slow-path generation
+\cite{mai2026relays2s}. Our native calls instead confirm their complete
+inputs and retain the original correction and feedback update. Work on
+ASR alignment drift also establishes the importance and cost of audio
+position state~\cite{wang2026alignmentdrift}; our contract includes that
+state rather than treating text equality as sufficient.
+
+\paragraph{Execution, authorization, and recovery}
+Retire studies versioned execution and bounded physical exit for
+interruptible agents~\cite{zhang2026retire}. RevTrace likewise distinguishes
+logical progress from an executor's actual release, while deriving the
+tested retention and coverage decisions from the feedback contract. Our
+simple covered-exit implementation is execution support, without a claim
+to a new general cancellation algorithm. A parent-version cancellation
+control is not a reproduction of the complete Retire system.
+
+Optimistic and multiversion concurrency control separate validation and
+commit from concurrent execution~\cite{kung1981occ,bernstein1983mvcc}.
+Write-ahead recovery persists state changes and identities
+\cite{mohan1992aries}, and stream-processing systems coordinate recoverable
+state~\cite{carbone2017flinkstate}. We use these established principles at
+the ASR feedback boundary. They supply machinery for ordering and
+durability; the adapter still has to specify which state constitutes a
+valid continuation and which complete view the Consumer may retain.

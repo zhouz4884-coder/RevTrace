@@ -1,0 +1,88 @@
+{
+  "controller_source_commit": "78b92f2b2b2c67d3650c744204838f4a5ad76e7a",
+  "controller_source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/paired_resident_source_v1",
+  "controller_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/PAIRED_RESIDENT_SOURCE_v1.json",
+  "controller_manifest_sha256": "2347fba630d6a83d4df2f2c2aff7239b7495c0224ca6228a948a4354554977ab",
+  "environment_python": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+  "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/ENVIRONMENT_v1_FROZEN.json",
+  "environment_sha256": "40c867b5225ee1d23253fe63dba4e5e2727f97ececa34f9c94d26f39ff51920a",
+  "runtime_environment": {
+    "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True"
+  },
+  "dependencies": {
+    "bdfa": {
+      "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/source_v3",
+      "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_stage_handoff_20261029/SOURCE_v3.json",
+      "source_manifest_sha256": "258c33df4eba1d27bef88339aa20b2aae2ffe69f43489255d989ad337b717521",
+      "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+      "entry": "stage_service.py"
+    },
+    "final": {
+      "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/source_v2",
+      "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/SOURCE_v2.json",
+      "source_manifest_sha256": "60ae549fcc98165a74e5a3dc420bf93418296099fa12b410572b15d281b2c457",
+      "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "entry": "resilience_trial.py"
+    }
+  },
+  "reference_details": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_independent_20261029/reference_v1/DETAILS.json",
+  "reference_details_sha256": "58a33465f5af8dc0f39983253abdcf9bccb9ac79e03690e342792281a36c57a6",
+  "reference_gate": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_independent_20261029/reference_v1/GATE.json",
+  "reference_gate_sha256": "28aa26207c509a733db2a9ab95612c48a4b5a96d233faf4460fbaa88a0017524",
+  "maximum_process_seconds": 720,
+  "original_D2_seconds": 2.0,
+  "original_C8_seconds": 8.0,
+  "all_offered_including_EOS": true,
+  "experiment_id": "SC_FINITE_CLOSED_LOOP_RESIDENT4_V1",
+  "harness_source": {
+    "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/paired_resident_source_v1",
+    "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/PAIRED_RESIDENT_SOURCE_v1.json",
+    "source_manifest_sha256": "2347fba630d6a83d4df2f2c2aff7239b7495c0224ca6228a948a4354554977ab",
+    "source_commit": "78b92f2b2b2c67d3650c744204838f4a5ad76e7a"
+  },
+  "expected_cells": 4,
+  "smoke_cells": 2,
+  "cells": [
+    {
+      "cell_id": "SC_RESIDENT4_V1_conservative_r0",
+      "arm": "conservative",
+      "repeat": 0,
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/resident4_v1_configs/SC_RESIDENT4_V1_conservative_r0.json",
+      "config_sha256": "a306ccac6197454defa96c7c05e3a44572f4e6738f58dfd3547aaa861dc9955c",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/cells/SC_RESIDENT4_V1_conservative_r0",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/logs/SC_RESIDENT4_V1_conservative_r0.log"
+    },
+    {
+      "cell_id": "SC_RESIDENT4_V1_fullcall_r0",
+      "arm": "fullcall",
+      "repeat": 0,
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/resident4_v1_configs/SC_RESIDENT4_V1_fullcall_r0.json",
+      "config_sha256": "7b1f25d6e5a7362d91131a1e2503c471ee3c992162de99b911d1f5252614d301",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/cells/SC_RESIDENT4_V1_fullcall_r0",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/logs/SC_RESIDENT4_V1_fullcall_r0.log"
+    },
+    {
+      "cell_id": "SC_RESIDENT4_V1_fullcall_r1",
+      "arm": "fullcall",
+      "repeat": 1,
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/resident4_v1_configs/SC_RESIDENT4_V1_fullcall_r1.json",
+      "config_sha256": "51ba2be5209faf638d7461583d435c7d0cc44ba8e18be053664a9a92106dd58b",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/cells/SC_RESIDENT4_V1_fullcall_r1",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/logs/SC_RESIDENT4_V1_fullcall_r1.log"
+    },
+    {
+      "cell_id": "SC_RESIDENT4_V1_conservative_r1",
+      "arm": "conservative",
+      "repeat": 1,
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/resident4_v1_configs/SC_RESIDENT4_V1_conservative_r1.json",
+      "config_sha256": "70e2dd87d9a9863143cbd440159c9204d4268309a57948c29ceeb5ec694dd24f",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/cells/SC_RESIDENT4_V1_conservative_r1",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/logs/SC_RESIDENT4_V1_conservative_r1.log"
+    }
+  ],
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/SUMMARY.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/resident4_v1/GATE.json",
+  "smoke_rule": "Exactly one fresh conservative/fullcall sequence first. Continue predetermined second pair only if all four fullcall requests pass original D2C8 and strict task/request-clock gates and strong E2E opportunity remains. Otherwise resident NO-GO, no source/gap/contract repair.",
+  "scope": "Finite preregistered independent requests, one outstanding closed-loop client. Not fixed-arrival capacity/dynamic registration/unbounded memory or repair of old no-reset long-stream failure."
+}

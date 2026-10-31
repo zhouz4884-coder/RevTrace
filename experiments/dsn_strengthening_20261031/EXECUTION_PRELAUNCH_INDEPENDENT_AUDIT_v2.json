@@ -1,0 +1,72 @@
+{
+  "audit_id": "EXECUTION_PRELAUNCH_INDEPENDENT_AUDIT_20261031_V2",
+  "status": "PASS_LOCAL_SOURCE_CURRENT_AND_36_CONFIG_BINDINGS_PENDING_FORMAL_REMOTE_GATES",
+  "scope": "Read-only local source, identity, frozen-input and launch-schema audit. No remote GPU, heavy IO, model, CUDA or NVML observation.",
+  "source": {
+    "source_root": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\paired_resident_source_v2",
+    "source_commit": "a13fa0a335529dc188f7e738877a3acd027ce4a7",
+    "source_manifest": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\paired_resident_packages_v2\\PAIRED_RESIDENT_SOURCE_v2.json",
+    "source_manifest_sha256": "8cadffbfe9ffcc1eb3efdf5e2702e7afbc2ec932158c12dd197d6f0bdc334934",
+    "files_verified": 18,
+    "clean": true,
+    "complete_manifest_file_set_and_all_file_bytes_verified": true
+  },
+  "CURRENT_and_activation": {
+    "CURRENT_sha256": "97f3520583e38ee01e2fbdbd1e7bd7e7e22d4cfb87206918a9a358d291bb44fa",
+    "activation_receipt_sha256": "0d8e482bb5f531c013a144106a1f213d01136518993d5414421c55ee7385b283",
+    "independent_no_argument_preflight_rerun": "SOURCE_IDENTITY_PASS",
+    "matches_actual_immutable_controller_checkout_commit_manifest_and_CURRENT_bytes": true,
+    "run_record_prelaunch_checked": false,
+    "meaning": "Source identity only. The false run-record field is preserved and does not assert an experiment, environment, asset or GPU gate.",
+    "controller_vs_actual_NN_separation": true,
+    "actual_NN_commits": {
+      "bdfa": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+      "final": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47"
+    }
+  },
+  "frozen_inputs": {
+    "paired_plan_sha256": "8aeb2aae2d080236191333a6101d9869978d10e1de9389acb15c430bc065781d",
+    "resident_plan_sha256": "623ef4d65ac7fbb2b701a2e7b6cde616ca143b6a6f784b2d85b8ea338c93fd9c",
+    "environment_sha256": "40c867b5225ee1d23253fe63dba4e5e2727f97ececa34f9c94d26f39ff51920a",
+    "paired_cells": 32,
+    "resident_cells": 4,
+    "all_36_actual_local_config_hashes_match_plan_entries": true,
+    "all_36_application_settings_exactly_equal_v1": true,
+    "all_36_other_config_contracts_equal_v1_except_experiment_labels_and_harness_identity": true,
+    "environment_exactly_equal_v1": true,
+    "unique_designated_8TB_config_output_log_and_power_paths": 140,
+    "paired_distribution": "Exactly once for each of four source IDs x two versions x two strategies x two repeats; expected first eight S0908 cells retained.",
+    "resident_contract": "Four unique original sources, five model_sources including original warmup; fixed order at repeat 0 and reverse at repeat 1; same original frames/hashes and request clocks.",
+    "precision_and_frontiers": "float32, max_ahead_frames=32000, maximum_service_seconds=240, D2=2, C8=8, all offered frontiers including original EOS preserved.",
+    "FREEZE_RECEIPT_source_dev_path": "Historical generation provenance; not the active immutable execution path. Its commit and manifest bytes match the immutable checkout."
+  },
+  "prelaunch_schema_review": {
+    "controller_enforced": [
+      "Exact controller commit and complete manifest, exact no-argument source receipt hash and matching controller identity",
+      "Root exclusive GPU authorization boolean",
+      "Exact frozen environment hash, current interpreter and package versions",
+      "Asset gate file SHA, PASS status, all_asset_bytes_verified=true, exact frozen asset_manifest_sha256",
+      "Dependency commits/manifests/clean byte-matched checkouts, exact config hashes and immutable input/warmup audio hashes",
+      "Reference hashes and PASS gate; actual pre-cell GPU-empty check; actual worker READY precision/counts/warmup/board/allocator gates"
+    ],
+    "explicit_gap": "The frozen validate_plan schema does not consume formal Linux CPU28 or real orphan-group control receipts. These prerequisites currently depend on the root-owned execution wrapper, not the controller schema.",
+    "required_wrapper_binding_before_GPU_launch": {
+      "formal_CPU_gate": "Bind path+SHA, exact a13 controller commit and manifest hash, actual frozen Linux interpreter/environment, exact test names and 28 passed/0 failed result; verify before launch.",
+      "real_orphan_OS_gate": "Bind path+SHA, exact source commit, status PASS_REAL_LINUX_DEAD_LEADER_ORPHAN_GROUP_CONTROL, actual_group_SIGKILL=true and confirmed_no_executing_members=true. Preserve GPU_or_NVML_checked=false and CUDA_owner_query_was_synthetic=true.",
+      "live_asset_gate": "Bind path+SHA to an actual full-byte verification of the exact frozen asset manifest; all_asset_bytes_verified=true must be a measured result, not a copied historical flag.",
+      "source_identity_receipt": "Stage the exact activation/noarg receipt bytes and hash; compare commit/manifest and CURRENT hash to this audited generation before launch. A later CURRENT change requires a new receipt, not relabelling this receipt."
+    },
+    "frozen_source_edit_required": false,
+    "implementation_location": "Root-owned staging/launch wrapper may enforce these additional prerequisites without changing a13 or the frozen 36 configs."
+  },
+  "not_verified_in_this_audit": [
+    "Remote staging/import/checkout bytes",
+    "Formal Linux CPU28 result",
+    "Real Linux orphan process-group result",
+    "Live full-byte asset verification",
+    "Current remote interpreter/packages, GPU ownership and actual model READY",
+    "Any serving, task, timing, energy or natural fault-prevalence result"
+  ],
+  "no_CURRENT_source_or_remote_mutation": true,
+  "decision": "No local source/config identity blocker. Retain pending status until the root-owned wrapper verifies and records the formal Linux/asset/environment/GPU prerequisites. Do not treat this local audit as GPU launch evidence."
+}

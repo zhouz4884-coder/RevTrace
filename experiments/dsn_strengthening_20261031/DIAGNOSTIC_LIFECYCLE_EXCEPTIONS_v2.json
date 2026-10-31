@@ -1,0 +1,576 @@
+{
+  "schema": "bounded-collection-of-existing-diagnostic-lifecycle-rows-v2",
+  "new_model_calls": 0,
+  "no_original_NN_logs_read": true,
+  "source_diagnostic_commit": "ff95f04465d006f76a0e729d3fd5457c32769c1e",
+  "inputs": [
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/dispatch_pairing.jsonl",
+      "bytes": 94354,
+      "sha256": "703bca82a924c0cf318aa20dea09b5e91a02d2fbd4978456e05d376b6f6db79b"
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/dispatch_pairing.jsonl",
+      "bytes": 94364,
+      "sha256": "52a8dcdb875403798d35d1265f9f76b4c20a73defb313bd50233e0554feec06a"
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0/dispatch_pairing.jsonl",
+      "bytes": 69141,
+      "sha256": "10eefbd27475569a0999159b46ccfa711acc80e292c2524a19c0729d1c7ce47b"
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1/dispatch_pairing.jsonl",
+      "bytes": 69147,
+      "sha256": "5e131d8b75921dc63ba43b39538113e305195dd5b5c117dbef10448a0af365b3"
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0/dispatch_pairing.jsonl",
+      "bytes": 69721,
+      "sha256": "b30e18120655547da94b99848b312a9b350b175a15b798307200dedc859d6798"
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1/dispatch_pairing.jsonl",
+      "bytes": 69718,
+      "sha256": "17a835dbd88ff4424c41aa1ad709babe82e8e5c74ce489193075347063ed7c65"
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/dispatch_pairing.jsonl",
+      "bytes": 87790,
+      "sha256": "469b64fd642a32ebc57be1f6ebb7d8616262c635185030f375afeabcfcbaffe3"
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/dispatch_pairing.jsonl",
+      "bytes": 87779,
+      "sha256": "fa9b9f461b6789e15bbd4c7a781c6b8ab3da1f3961b13d8148473cd0f6982e81"
+    }
+  ],
+  "rows": [
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0",
+      "owner_epoch": 0,
+      "job_id": "e0-j000000004",
+      "source_id": "BAC009S0908W0369",
+      "session_epoch": 0,
+      "physical_slot": "full1",
+      "physical_incarnation": 0,
+      "start_frontier": 24000,
+      "end_frontier": 32000,
+      "dispatched_perf": 5110753.39710648,
+      "eventual_input_status": "CONFIRMED",
+      "eventual_input_status_reason": "complete_bytes_equal",
+      "start_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "actual_parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "full_receipt_observed": true,
+      "abandoned_receipt_observed": false,
+      "actual_live_promotion_events": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5110753.698403003,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "runtime_input_confirmation_evidence": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5110753.698403003,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "actual_selected_durable_fact": false,
+      "selected_journal_sequence": null,
+      "actual_owner_install_events": [],
+      "actual_durable_sync_events": [],
+      "actual_Consumer_fact_applications": [],
+      "physical_loss_retired_live_events": [],
+      "actual_terminal_dispositions": [],
+      "owner_namespace_superseded": true,
+      "full_model_seconds_status": "OBSERVED_COMPLETE_MODEL_INTERVAL",
+      "unreturned_model_work": null,
+      "diagnostic_row_provenance": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/dispatch_pairing.jsonl",
+        "line": 4,
+        "sha256": "703bca82a924c0cf318aa20dea09b5e91a02d2fbd4978456e05d376b6f6db79b"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1",
+      "owner_epoch": 0,
+      "job_id": "e0-j000000004",
+      "source_id": "BAC009S0908W0369",
+      "session_epoch": 0,
+      "physical_slot": "full1",
+      "physical_incarnation": 0,
+      "start_frontier": 24000,
+      "end_frontier": 32000,
+      "dispatched_perf": 5111769.988435574,
+      "eventual_input_status": "CONFIRMED",
+      "eventual_input_status_reason": "complete_bytes_equal",
+      "start_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "actual_parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "full_receipt_observed": true,
+      "abandoned_receipt_observed": false,
+      "actual_live_promotion_events": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5111770.242790975,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "runtime_input_confirmation_evidence": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5111770.242790975,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "actual_selected_durable_fact": false,
+      "selected_journal_sequence": null,
+      "actual_owner_install_events": [],
+      "actual_durable_sync_events": [],
+      "actual_Consumer_fact_applications": [],
+      "physical_loss_retired_live_events": [],
+      "actual_terminal_dispositions": [],
+      "owner_namespace_superseded": true,
+      "full_model_seconds_status": "OBSERVED_COMPLETE_MODEL_INTERVAL",
+      "unreturned_model_work": null,
+      "diagnostic_row_provenance": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/dispatch_pairing.jsonl",
+        "line": 4,
+        "sha256": "52a8dcdb875403798d35d1265f9f76b4c20a73defb313bd50233e0554feec06a"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0",
+      "owner_epoch": 0,
+      "job_id": "e0-j000000004",
+      "source_id": "BAC009S0908W0369",
+      "session_epoch": 0,
+      "physical_slot": "full1",
+      "physical_incarnation": 0,
+      "start_frontier": 24000,
+      "end_frontier": 32000,
+      "dispatched_perf": 5111502.423995356,
+      "eventual_input_status": "CONFIRMED",
+      "eventual_input_status_reason": "complete_bytes_equal",
+      "start_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "actual_parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "full_receipt_observed": false,
+      "abandoned_receipt_observed": false,
+      "actual_live_promotion_events": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5111502.757016319,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "runtime_input_confirmation_evidence": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5111502.757016319,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "actual_selected_durable_fact": false,
+      "selected_journal_sequence": null,
+      "actual_owner_install_events": [],
+      "actual_durable_sync_events": [],
+      "actual_Consumer_fact_applications": [],
+      "physical_loss_retired_live_events": [
+        {
+          "incarnation": 0,
+          "kind": "worker_loss_retired_live_job",
+          "observed_perf": 5111504.286313878,
+          "provenance": {
+            "line": 9,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0/owner_e0/policy_audit.jsonl"
+          },
+          "slot": "full1"
+        }
+      ],
+      "actual_terminal_dispositions": [],
+      "owner_namespace_superseded": false,
+      "full_model_seconds_status": "UNKNOWN_NO_COMPLETE_RECEIPT",
+      "unreturned_model_work": "UNKNOWN_NOT_ZERO",
+      "diagnostic_row_provenance": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0/dispatch_pairing.jsonl",
+        "line": 4,
+        "sha256": "10eefbd27475569a0999159b46ccfa711acc80e292c2524a19c0729d1c7ce47b"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1",
+      "owner_epoch": 0,
+      "job_id": "e0-j000000004",
+      "source_id": "BAC009S0908W0369",
+      "session_epoch": 0,
+      "physical_slot": "full1",
+      "physical_incarnation": 0,
+      "start_frontier": 24000,
+      "end_frontier": 32000,
+      "dispatched_perf": 5112266.057450148,
+      "eventual_input_status": "CONFIRMED",
+      "eventual_input_status_reason": "complete_bytes_equal",
+      "start_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "actual_parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "full_receipt_observed": false,
+      "abandoned_receipt_observed": false,
+      "actual_live_promotion_events": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5112266.38265564,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "runtime_input_confirmation_evidence": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5112266.38265564,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "actual_selected_durable_fact": false,
+      "selected_journal_sequence": null,
+      "actual_owner_install_events": [],
+      "actual_durable_sync_events": [],
+      "actual_Consumer_fact_applications": [],
+      "physical_loss_retired_live_events": [
+        {
+          "incarnation": 0,
+          "kind": "worker_loss_retired_live_job",
+          "observed_perf": 5112268.01455959,
+          "provenance": {
+            "line": 9,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1/owner_e0/policy_audit.jsonl"
+          },
+          "slot": "full1"
+        }
+      ],
+      "actual_terminal_dispositions": [],
+      "owner_namespace_superseded": false,
+      "full_model_seconds_status": "UNKNOWN_NO_COMPLETE_RECEIPT",
+      "unreturned_model_work": "UNKNOWN_NOT_ZERO",
+      "diagnostic_row_provenance": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1/dispatch_pairing.jsonl",
+        "line": 4,
+        "sha256": "5e131d8b75921dc63ba43b39538113e305195dd5b5c117dbef10448a0af365b3"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0",
+      "owner_epoch": 0,
+      "job_id": "e0-j000000004",
+      "source_id": "BAC009S0908W0369",
+      "session_epoch": 0,
+      "physical_slot": "full1",
+      "physical_incarnation": 0,
+      "start_frontier": 24000,
+      "end_frontier": 32000,
+      "dispatched_perf": 5111698.096758064,
+      "eventual_input_status": "CONFIRMED",
+      "eventual_input_status_reason": "complete_bytes_equal",
+      "start_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "actual_parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "full_receipt_observed": false,
+      "abandoned_receipt_observed": false,
+      "actual_live_promotion_events": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5111698.340831187,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "runtime_input_confirmation_evidence": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5111698.340831187,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "actual_selected_durable_fact": false,
+      "selected_journal_sequence": null,
+      "actual_owner_install_events": [],
+      "actual_durable_sync_events": [],
+      "actual_Consumer_fact_applications": [],
+      "physical_loss_retired_live_events": [
+        {
+          "incarnation": 0,
+          "kind": "worker_loss_retired_live_job",
+          "observed_perf": 5111699.578538277,
+          "provenance": {
+            "line": 9,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0/owner_e0/policy_audit.jsonl"
+          },
+          "slot": "full1"
+        }
+      ],
+      "actual_terminal_dispositions": [],
+      "owner_namespace_superseded": false,
+      "full_model_seconds_status": "UNKNOWN_NO_COMPLETE_RECEIPT",
+      "unreturned_model_work": "UNKNOWN_NOT_ZERO",
+      "diagnostic_row_provenance": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0/dispatch_pairing.jsonl",
+        "line": 4,
+        "sha256": "b30e18120655547da94b99848b312a9b350b175a15b798307200dedc859d6798"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1",
+      "owner_epoch": 0,
+      "job_id": "e0-j000000004",
+      "source_id": "BAC009S0908W0369",
+      "session_epoch": 0,
+      "physical_slot": "full1",
+      "physical_incarnation": 0,
+      "start_frontier": 24000,
+      "end_frontier": 32000,
+      "dispatched_perf": 5112409.459401027,
+      "eventual_input_status": "CONFIRMED",
+      "eventual_input_status_reason": "complete_bytes_equal",
+      "start_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "actual_parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "full_receipt_observed": false,
+      "abandoned_receipt_observed": false,
+      "actual_live_promotion_events": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5112409.762708083,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "runtime_input_confirmation_evidence": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5112409.762708083,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "actual_selected_durable_fact": false,
+      "selected_journal_sequence": null,
+      "actual_owner_install_events": [],
+      "actual_durable_sync_events": [],
+      "actual_Consumer_fact_applications": [],
+      "physical_loss_retired_live_events": [
+        {
+          "incarnation": 0,
+          "kind": "worker_loss_retired_live_job",
+          "observed_perf": 5112411.309503312,
+          "provenance": {
+            "line": 9,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1/owner_e0/policy_audit.jsonl"
+          },
+          "slot": "full1"
+        }
+      ],
+      "actual_terminal_dispositions": [],
+      "owner_namespace_superseded": false,
+      "full_model_seconds_status": "UNKNOWN_NO_COMPLETE_RECEIPT",
+      "unreturned_model_work": "UNKNOWN_NOT_ZERO",
+      "diagnostic_row_provenance": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1/dispatch_pairing.jsonl",
+        "line": 4,
+        "sha256": "17a835dbd88ff4424c41aa1ad709babe82e8e5c74ce489193075347063ed7c65"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0",
+      "owner_epoch": 0,
+      "job_id": "e0-j000000004",
+      "source_id": "BAC009S0908W0369",
+      "session_epoch": 0,
+      "physical_slot": "full0",
+      "physical_incarnation": 0,
+      "start_frontier": 24000,
+      "end_frontier": 32000,
+      "dispatched_perf": 5111161.480704832,
+      "eventual_input_status": "CONFIRMED",
+      "eventual_input_status_reason": "complete_bytes_equal",
+      "start_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "actual_parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "full_receipt_observed": true,
+      "abandoned_receipt_observed": false,
+      "actual_live_promotion_events": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5111161.760196864,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "runtime_input_confirmation_evidence": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5111161.760196864,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "actual_selected_durable_fact": true,
+      "selected_journal_sequence": 5,
+      "actual_owner_install_events": [],
+      "actual_durable_sync_events": [
+        {
+          "journal_sequence": 5,
+          "kind": "durable_sync",
+          "observed_perf": 5111162.106264406,
+          "provenance": {
+            "line": 9,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/owner_e0/owner_events.jsonl"
+          }
+        }
+      ],
+      "actual_Consumer_fact_applications": [
+        {
+          "journal_sequence": 5,
+          "observed_owner_epoch": 1,
+          "observed_perf": 5111163.932069759,
+          "provenance": {
+            "line": 10,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/consumer.jsonl"
+          },
+          "recovery_replay": true
+        }
+      ],
+      "physical_loss_retired_live_events": [],
+      "actual_terminal_dispositions": [],
+      "owner_namespace_superseded": true,
+      "full_model_seconds_status": "OBSERVED_COMPLETE_MODEL_INTERVAL",
+      "unreturned_model_work": null,
+      "diagnostic_row_provenance": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/dispatch_pairing.jsonl",
+        "line": 4,
+        "sha256": "469b64fd642a32ebc57be1f6ebb7d8616262c635185030f375afeabcfcbaffe3"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1",
+      "owner_epoch": 0,
+      "job_id": "e0-j000000004",
+      "source_id": "BAC009S0908W0369",
+      "session_epoch": 0,
+      "physical_slot": "full1",
+      "physical_incarnation": 0,
+      "start_frontier": 24000,
+      "end_frontier": 32000,
+      "dispatched_perf": 5110089.660589302,
+      "eventual_input_status": "CONFIRMED",
+      "eventual_input_status_reason": "complete_bytes_equal",
+      "start_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "actual_parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+      "full_receipt_observed": true,
+      "abandoned_receipt_observed": false,
+      "actual_live_promotion_events": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5110089.924254407,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "runtime_input_confirmation_evidence": [
+        {
+          "kind": "actual_live_job_promotion",
+          "observed_perf": 5110089.924254407,
+          "parent_sha256": "264652c8230cb0f5fe873170975b170f3a82de7f003dc3baac853a9f86ba3169",
+          "provenance": {
+            "line": 8,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/owner_e0/policy_audit.jsonl"
+          }
+        }
+      ],
+      "actual_selected_durable_fact": true,
+      "selected_journal_sequence": 5,
+      "actual_owner_install_events": [],
+      "actual_durable_sync_events": [
+        {
+          "journal_sequence": 5,
+          "kind": "durable_sync",
+          "observed_perf": 5110090.291432058,
+          "provenance": {
+            "line": 9,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/owner_e0/owner_events.jsonl"
+          }
+        }
+      ],
+      "actual_Consumer_fact_applications": [
+        {
+          "journal_sequence": 5,
+          "observed_owner_epoch": 1,
+          "observed_perf": 5110091.993820854,
+          "provenance": {
+            "line": 10,
+            "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/consumer.jsonl"
+          },
+          "recovery_replay": true
+        }
+      ],
+      "physical_loss_retired_live_events": [],
+      "actual_terminal_dispositions": [],
+      "owner_namespace_superseded": true,
+      "full_model_seconds_status": "OBSERVED_COMPLETE_MODEL_INTERVAL",
+      "unreturned_model_work": null,
+      "diagnostic_row_provenance": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/dispatch_pairing.jsonl",
+        "line": 4,
+        "sha256": "fa9b9f461b6789e15bbd4c7a781c6b8ab3da1f3961b13d8148473cd0f6982e81"
+      }
+    }
+  ]
+}

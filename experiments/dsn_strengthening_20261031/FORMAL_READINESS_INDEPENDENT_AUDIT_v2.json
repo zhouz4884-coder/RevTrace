@@ -1,0 +1,81 @@
+{
+  "audit_id": "FORMAL_READINESS_INDEPENDENT_AUDIT_20261031_V2",
+  "status": "PASS_LOCAL_RETURNED_FORMAL_READINESS_AND_LAUNCH_BINDINGS",
+  "blocking_findings": [],
+  "scope": "Local read-only audit of 22 returned readiness files (33206 bytes), PRELAUNCH, root source receipt, launch wrapper and launch handle. No remote CPU/IO/GPU command, asset reread or process action.",
+  "controller_source_commit": "a13fa0a335529dc188f7e738877a3acd027ce4a7",
+  "controller_manifest_sha256": "8cadffbfe9ffcc1eb3efdf5e2702e7afbc2ec932158c12dd197d6f0bdc334934",
+  "shared_environment_sha256": "40c867b5225ee1d23253fe63dba4e5e2727f97ececa34f9c94d26f39ff51920a",
+  "support_source": {
+    "source_commit": "a68baa60da3b41a419b59fd17b58e8612e2d72ed",
+    "manifest_sha256": "3ea3a2fb480f8968cca839fa5b9258d1e1ab2519980219aaba0a3866c47f4658",
+    "independent_local_complete_manifest_verification": true,
+    "files_verified": 3,
+    "clean": true
+  },
+  "receipt_chain": {
+    "PRELAUNCH_sha256": "c0050b237c2c0ee0b19848c200cac65e21d72123af0d10296a2c3f40954f502f",
+    "root_noarg_receipt_sha256": "0d8e482bb5f531c013a144106a1f213d01136518993d5414421c55ee7385b283",
+    "CPU_gate_sha256": "93a3c1bad3cb265497c87afc9e1afe76ea280997f5fecc0ca754bc79ca0c6d01",
+    "orphan_gate_sha256": "493f0549ecb794d0d5355d0b18d23b8850a918df14e76830fd2b5371fc0fed3e",
+    "asset_gate_sha256": "51ffd7f20e3d92879ec13612d48870706bf000bd20b8f91928008d428ba8b370",
+    "all_local_gate_bytes_match_PRELAUNCH": true,
+    "each_case_CONFIG_and_ENVIRONMENT_hashes_match_RUN_RECORD": true,
+    "each_case_SUMMARY_equals_GATE": true,
+    "CPU_OS_asset_source_and_shared_environment_bindings_match_frozen_plan": true,
+    "root_receipt_is_source_only_and_run_record_prelaunch_checked_false_preserved": true
+  },
+  "formal_Linux_CPU": {
+    "status": "PASS_FORMAL_LINUX_HARNESS28_ZERO_SKIP",
+    "tests": 28,
+    "raw_log_ok_count": 28,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "trained_model_calls": 0,
+    "actual_returned_environment": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31 / frozen Python 3.12.13 interpreter",
+    "actual_returned_packages_equal_frozen_environment": true
+  },
+  "real_orphan_OS_control": {
+    "status": "PASS_REAL_LINUX_DEAD_LEADER_ORPHAN_GROUP_CONTROL",
+    "owner_exitcode": 0,
+    "actual_group_SIGKILL": true,
+    "confirmed_no_executing_members": true,
+    "GPU_or_NVML_checked": false,
+    "CUDA_owner_query_was_synthetic": true,
+    "raw_stdout_matches_gate_OS_and_synthetic_scope": true,
+    "meaning": "Actual POSIX process-group termination control only; not a real CUDA release, neural task or performance result."
+  },
+  "full_byte_asset_evidence": {
+    "status": "PASS_LIVE_MODEL26_AND_ALL_REGISTERED_ASSET_BYTES",
+    "raw_unique_file_rows": 36,
+    "total_bytes_fully_hashed": 15846603671,
+    "model_contract_files": 26,
+    "all_36_rows_full_bytes_verified": true,
+    "all_26_model_paths_byte_counts_and_SHA256_exactly_match_frozen_model_contract": true,
+    "raw_counts_and_byte_sum_match_gate": true,
+    "asset_manifest_sha256": "8dde505d1dd6f5e9cc7b85722466e1b9725bc915a4d5f8d7bda82cc4c7c117fd",
+    "author_commit": "bbb9f7fde13fabb6c0940f5bae215150d1ea1cb3",
+    "author_dirty": false,
+    "author_whisper_sha256": "9f016f71df780c05b04719633ed302b502a457ff18a086eb5412a394b05cacb7",
+    "NN_source_records": {
+      "bdfa": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e / 38 files clean",
+      "final": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47 / 59 files clean"
+    },
+    "hashing_code_review": "readiness.py performs full-file SHA256 and exact size checks over the union of historical asset-manifest files, all 26 frozen model-contract files and all configured warmup/source WAVs; it verifies author HEAD/clean/Whisper bytes and rechecks NN/controller checkouts after hashing.",
+    "independent_remote_asset_reread_performed": false
+  },
+  "launch_wrapper": {
+    "local_path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\ops\\launch_harness_campaign_v2.py",
+    "sha256": "ed2a686e4975fa8d64146a204b88baeb6b9e9e0ff63491715fc7b051b15d207c",
+    "static_order_verified": "Exact plan/source checks -> CPU/OS receipt SHA+source+environment+status/count/scope checks -> model26 check -> validate_plan asset/reference/environment checks -> GPU-empty check -> root RUN_RECORD -> Popen.",
+    "prior_formal_CPU_OS_schema_gap_closed_by_root_wrapper": true,
+    "CPU_gate_consumed_before_Popen": true,
+    "OS_gate_consumed_before_Popen_with_synthetic_scope_enforced": true,
+    "paired_local_handle_PID": 2633417,
+    "paired_local_handle_start_ticks": 518205202,
+    "handle_plan_and_PRELAUNCH_hashes_match_local_frozen_bytes": true,
+    "current_remote_PID_state_not_polled": true
+  },
+  "decision": "No blocking inconsistency in returned formal readiness or launch bindings. Prior local-audit pending CPU/OS/asset receipts are now present and hash-consistent. Continue only the already-owned queue; task, timing, energy and actual neural worker release conclusions await real cell evidence."
+}

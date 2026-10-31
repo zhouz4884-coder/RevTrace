@@ -1,0 +1,233 @@
+{
+  "status": "PASS_LOCAL_BOUNDED_DELIVERY_QA_WITH_OPPORTUNITY_NO_GO",
+  "date": "2026-10-31",
+  "opportunity_decision": "NO_GO_FIXED_TWO_CLIENT_ADMISSION_OPPORTUNITY",
+  "checks": 416,
+  "errors": [],
+  "verified_local_packages": {
+    "probe": {
+      "files": 35,
+      "bytes": 709104,
+      "index_sha256": "74ea918248995b7accbad774435bb58ea6a76e565eba34f52fdab7a46736cf5e"
+    },
+    "cpu_and_independent": {
+      "files": 42,
+      "bytes": 1243147,
+      "index_sha256": "bbc8cb5af2bb1ad315e91e10627b13d6f0af4512796d55e3cda0698ea0f7dbdc"
+    }
+  },
+  "source_boundaries": {
+    "observation_and_checker_commit": "2198b8d517e068cb8a08e0bc022104b4fed4c8c7",
+    "actual_probe_NN_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+    "legacy_R1_BDFA_cells_keep_their_original_source": true
+  },
+  "repeat_decisions": [
+    {
+      "repeat": 0,
+      "Conservative_all_four_requests_C8_no_miss": true,
+      "AlwaysFull_actual_B_current_ready_inversion": true,
+      "B_worst_request_C99_conservative": 5.670810301043093,
+      "B_worst_request_C99_AlwaysFull": 7.470688498876989,
+      "B_C99_difference_seconds": 1.7998781978338956,
+      "B_extra_C8_frontier_misses": 0,
+      "B_C99_regression_ge_1s_and20percent": true,
+      "B_extra_C8_frontier_misses_ge4": false,
+      "repeat_GO": true
+    },
+    {
+      "repeat": 1,
+      "Conservative_all_four_requests_C8_no_miss": true,
+      "AlwaysFull_actual_B_current_ready_inversion": true,
+      "B_worst_request_C99_conservative": 5.942914161607623,
+      "B_worst_request_C99_AlwaysFull": 6.075752776488661,
+      "B_C99_difference_seconds": 0.1328386148810381,
+      "B_extra_C8_frontier_misses": 0,
+      "B_C99_regression_ge_1s_and20percent": false,
+      "B_extra_C8_frontier_misses_ge4": false,
+      "repeat_GO": false
+    }
+  ],
+  "probe_cases": [
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r0",
+      "arm": "conservative",
+      "repeat": 0,
+      "actual_dispatches": 68,
+      "B_ready_actual_inversions": 0,
+      "request_original_D2C8_passes": 0,
+      "per_client": {
+        "A": {
+          "requests": [
+            "BAC009S0908W0369",
+            "BAC009S0913W0313"
+          ],
+          "worst_request_D99": 4.260582496747374,
+          "worst_request_C99": 4.539770204611123,
+          "D2_misses_all_offered": 17,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 15,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 8.5
+        },
+        "B": {
+          "requests": [
+            "BAC009S0905W0246",
+            "BAC009S0916W0463"
+          ],
+          "worst_request_D99": 5.341529903486371,
+          "worst_request_C99": 5.670810301043093,
+          "D2_misses_all_offered": 21,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 19,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 6.5
+        }
+      },
+      "useful_EOS_both_board_joules": 12802.097130509334,
+      "observed_drain_both_board_joules": 14566.783653743854
+    },
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r0",
+      "arm": "fullcall",
+      "repeat": 0,
+      "actual_dispatches": 72,
+      "B_ready_actual_inversions": 7,
+      "request_original_D2C8_passes": 0,
+      "per_client": {
+        "A": {
+          "requests": [
+            "BAC009S0908W0369",
+            "BAC009S0913W0313"
+          ],
+          "worst_request_D99": 4.147918793000281,
+          "worst_request_C99": 4.416466555893421,
+          "D2_misses_all_offered": 15,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 13,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 9.5
+        },
+        "B": {
+          "requests": [
+            "BAC009S0905W0246",
+            "BAC009S0916W0463"
+          ],
+          "worst_request_D99": 7.182721542492509,
+          "worst_request_C99": 7.470688498876989,
+          "D2_misses_all_offered": 26,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 24,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 4.0
+        }
+      },
+      "useful_EOS_both_board_joules": 13164.171996433699,
+      "observed_drain_both_board_joules": 14487.281211470807
+    },
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r1",
+      "arm": "fullcall",
+      "repeat": 1,
+      "actual_dispatches": 72,
+      "B_ready_actual_inversions": 3,
+      "request_original_D2C8_passes": 0,
+      "per_client": {
+        "A": {
+          "requests": [
+            "BAC009S0908W0369",
+            "BAC009S0913W0313"
+          ],
+          "worst_request_D99": 4.093549364805222,
+          "worst_request_C99": 4.374744439609349,
+          "D2_misses_all_offered": 15,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 13,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 9.5
+        },
+        "B": {
+          "requests": [
+            "BAC009S0905W0246",
+            "BAC009S0916W0463"
+          ],
+          "worst_request_D99": 5.652556877434254,
+          "worst_request_C99": 6.075752776488661,
+          "D2_misses_all_offered": 22,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 20,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 6.0
+        }
+      },
+      "useful_EOS_both_board_joules": 12849.622112975354,
+      "observed_drain_both_board_joules": 14408.522851174781
+    },
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r1",
+      "arm": "conservative",
+      "repeat": 1,
+      "actual_dispatches": 68,
+      "B_ready_actual_inversions": 0,
+      "request_original_D2C8_passes": 0,
+      "per_client": {
+        "A": {
+          "requests": [
+            "BAC009S0908W0369",
+            "BAC009S0913W0313"
+          ],
+          "worst_request_D99": 4.689750491864979,
+          "worst_request_C99": 5.008333569653332,
+          "D2_misses_all_offered": 17,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 15,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 8.5
+        },
+        "B": {
+          "requests": [
+            "BAC009S0905W0246",
+            "BAC009S0916W0463"
+          ],
+          "worst_request_D99": 5.6238839177787305,
+          "worst_request_C99": 5.942914161607623,
+          "D2_misses_all_offered": 21,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 19,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 6.5
+        }
+      },
+      "useful_EOS_both_board_joules": 13110.6413975629,
+      "observed_drain_both_board_joules": 14583.631718123528
+    }
+  ],
+  "selected_transition_accounting": {
+    "previous_R1": 918,
+    "probe": 272,
+    "total": 1190,
+    "probe_actual_dispatches": 280
+  },
+  "raw_recount_receipt": {
+    "raw_files": 1262,
+    "raw_bytes": 348155321,
+    "complete_before_after_indices_equal": true,
+    "new_neural_calls": 0
+  },
+  "scope": "Local bounded-file SHA and receipt/arithmetic consistency QA only. This reviewer did not rerun original raw neural/state audits, rehash original348MB raw or10GB assets, access remote, or start NN. Semantic/clock/PID/durable/held-view recount is the separate frozen2198 CPU execution receipt. Overall44-trial performance success is not claimed; all16 probe per-request original D2/C8 gates failed, while task/ref/clock integrity passed."
+}

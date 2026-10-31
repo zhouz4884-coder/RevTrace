@@ -1,0 +1,80 @@
+{
+  "status": "PASS_ACTUAL_NATIVE_SERVICE_EXECUTION",
+  "cell_id": "SC_PAIRED32_V2_BAC009S0913W0313_bdfa_fullcall_r1",
+  "arm": "two_full_spec_early",
+  "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+  "primary": {
+    "cell_id": "SC_PAIRED32_V2_BAC009S0913W0313_bdfa_fullcall_r1",
+    "stage": "prospective_version_pair",
+    "cohort": "same_four_metadata_selected_speakers",
+    "arm": "two_full_spec_early",
+    "repeat": 1,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.449,
+    "primary_linear_all_offered_D99": 0.865714523345232,
+    "primary_linear_all_offered_C99": 1.1712510849907993,
+    "original_quantile_test_pass": true,
+    "complete_coverage_and_original_quantile_pass": true,
+    "D2_misses_all_offered": 0,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 0.8742204047739506,
+    "C_max": 1.1764937052503228,
+    "dual_deadline_audio_credit_seconds": 8.449,
+    "raw_inputs": {
+      "config_sha256": "7ed91aeb477ac037e329953847529860ceff539fc8d5931bf2e880cef92494e1",
+      "origin_sha256": "0a48848da73ff103a3bb02c8b91f4562d2f21bd10cee2b23a79e31eb8fb3f637",
+      "consumer_sha256": "3534d2093f3782fdeb9134efc0292d997325cba67391ce4445f99798c1106277"
+    },
+    "primary_linear_all_offered_C50": 0.9512203792110085,
+    "primary_linear_all_offered_D50": 0.6740457629784942
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0913W0313",
+      "text": "以区域为中心建立客户经理负责制质造方面",
+      "reference_characters": 19,
+      "character_edits": 1
+    }
+  ],
+  "energy": {
+    "service": {
+      "gpu_joules": {
+        "0": 1905.3484220824148,
+        "1": 1845.5547933261407
+      },
+      "total_joules": 3750.9032154085553
+    },
+    "load_and_neural_warmup": {
+      "gpu_joules": {
+        "0": 8272.931575663042,
+        "1": 7758.257058121885
+      },
+      "total_joules": 16031.188633784928
+    },
+    "service_scope": "both GPUs from actual origin through Consumer drain; cold load and fixed neural warmup separate"
+  },
+  "source_count": 1,
+  "all_authority_steps": 17,
+  "authority_dispatches": 20,
+  "actual_ready_hits": 0,
+  "actual_ready_hit_rate": 0.0,
+  "matching_inflight_fallbacks": 0,
+  "fullspec_inflight_promotions": 12,
+  "fullspec_known_invalid_C_skips": 3,
+  "fullspec_discarded_full_results": 0,
+  "producer_dispatches": 0,
+  "packet_admissions": 0,
+  "wire_total_bytes": 0,
+  "wall_seconds": 9.402026070281863,
+  "load_neural_ready_wall_seconds": 80.73543843347579,
+  "all_actual_roots_and_epochs_checked": true,
+  "component_timer_scopes": {
+    "full": "native model timer excludes pre-model restore; worker_job_wall includes restore/export",
+    "consume": "matching/restore plus original C/U and export is in worker_job_wall; not only C",
+    "receipt": "fresh physical-queue get followed by complete validation, actual admission and decision times"
+  },
+  "original_D2_C8_unchanged": true,
+  "scope": "actual deployed controlled adaptation; original selected quality/history must still pass independent paired audit"
+}

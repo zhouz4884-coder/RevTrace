@@ -28,7 +28,7 @@ if a.release:
  if not attr.exists():attr.write_text('* -text\n',encoding='utf8')
  files.update([provenance,release/'main.pdf',attr,R/'Paper_DSN/CURRENT.md',archive])
  for f in files:assert f.is_file(),f
-new_families={'dsn_streamcorrect_stage_profile_20261029','dsn_native_content_20261029','dsn_full_interval_case_20261029','dsn_streamcorrect_stage_handoff_20261029','dsn_streamcorrect_encoder_profile_20261029','dsn_streamcorrect_independent_20261029','dsn_native_resilience_20261030','dsn_native_sustained_20261030','dsn_native_refinement_20261030'}
+new_families={'dsn_streamcorrect_stage_profile_20261029','dsn_native_content_20261029','dsn_full_interval_case_20261029','dsn_streamcorrect_stage_handoff_20261029','dsn_streamcorrect_encoder_profile_20261029','dsn_streamcorrect_independent_20261029','dsn_native_resilience_20261030','dsn_native_sustained_20261030','dsn_native_refinement_20261030','dsn_strengthening_20261031'}
 for name in ['dsn_service_stability_20261028','dsn_joint_retention_exit_20261028','dsn_manuscript_update_20261028','dsn_midpoint_continuity_20261029',*sorted(new_families)]:
  D=R/'experiments'/name
  if not D.exists():continue
@@ -38,7 +38,7 @@ for name in ['dsn_service_stability_20261028','dsn_joint_retention_exit_20261028
   if not f.is_file() or any(x in f.parts for x in ['.git','__pycache__','.pytest_cache']):continue
   if name in new_families and any(x=='source_dev' or x.endswith('_source_dev') or x.startswith('source_v') or re.search(r'_source_v\d+$',x) for x in f.relative_to(D).parts):continue
   if f.suffix in ['.pyc','.bin'] or f.name.startswith(('PUBLICATION_','PROCESS_')):continue
-  if f.name in ['prepare_remote.py','fetch_old_dev.py','launch_gpu.py']:continue
+  if f.name in ['prepare_remote.py','fetch_old_dev.py','launch_gpu.py','ROOT_CONTINUATION_STATE.md']:continue
   assert f.stat().st_size<20_000_000,f
   files.add(f)
 S=R/'experiments/dsn_streamcorrect_adaptation_20261028'

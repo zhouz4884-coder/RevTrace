@@ -1,0 +1,80 @@
+{
+  "status": "PASS_ACTUAL_NATIVE_SERVICE_EXECUTION",
+  "cell_id": "SC_PAIRED32_V2_BAC009S0905W0246_bdfa_fullcall_r0",
+  "arm": "two_full_spec_early",
+  "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+  "primary": {
+    "cell_id": "SC_PAIRED32_V2_BAC009S0905W0246_bdfa_fullcall_r0",
+    "stage": "prospective_version_pair",
+    "cohort": "same_four_metadata_selected_speakers",
+    "arm": "two_full_spec_early",
+    "repeat": 0,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.297,
+    "primary_linear_all_offered_D99": 1.6174615221843123,
+    "primary_linear_all_offered_C99": 1.9028681188449263,
+    "original_quantile_test_pass": true,
+    "complete_coverage_and_original_quantile_pass": true,
+    "D2_misses_all_offered": 0,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 1.668300467543304,
+    "C_max": 1.9372611856088042,
+    "dual_deadline_audio_credit_seconds": 8.297,
+    "raw_inputs": {
+      "config_sha256": "5b1595a2182b33e7c1c7d5d324e8eae4ee0c9a99fd0d5da797222edeaa6ccd8b",
+      "origin_sha256": "e7fd204eb1a3afcffa7b225433501f06b39663e8c8871662f07f4fb81da1b56b",
+      "consumer_sha256": "2d04a89295c65ba050e9bdd6ba48611a977ecfbf70b2a41dfc6e5f7007ea1447"
+    },
+    "primary_linear_all_offered_C50": 1.3426061710342765,
+    "primary_linear_all_offered_D50": 0.9907301561906934
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0905W0246",
+      "text": "合理确定大城市郊区菜篮子产品生产用地保有数量量",
+      "reference_characters": 22,
+      "character_edits": 1
+    }
+  ],
+  "energy": {
+    "service": {
+      "gpu_joules": {
+        "0": 2008.1821021273613,
+        "1": 2044.7795904149616
+      },
+      "total_joules": 4052.961692542323
+    },
+    "load_and_neural_warmup": {
+      "gpu_joules": {
+        "0": 9010.950962102033,
+        "1": 8527.948222322402
+      },
+      "total_joules": 17538.899184424437
+    },
+    "service_scope": "both GPUs from actual origin through Consumer drain; cold load and fixed neural warmup separate"
+  },
+  "source_count": 1,
+  "all_authority_steps": 17,
+  "authority_dispatches": 20,
+  "actual_ready_hits": 0,
+  "actual_ready_hit_rate": 0.0,
+  "matching_inflight_fallbacks": 0,
+  "fullspec_inflight_promotions": 12,
+  "fullspec_known_invalid_C_skips": 3,
+  "fullspec_discarded_full_results": 0,
+  "producer_dispatches": 0,
+  "packet_admissions": 0,
+  "wire_total_bytes": 0,
+  "wall_seconds": 10.235869999043643,
+  "load_neural_ready_wall_seconds": 89.56302186008543,
+  "all_actual_roots_and_epochs_checked": true,
+  "component_timer_scopes": {
+    "full": "native model timer excludes pre-model restore; worker_job_wall includes restore/export",
+    "consume": "matching/restore plus original C/U and export is in worker_job_wall; not only C",
+    "receipt": "fresh physical-queue get followed by complete validation, actual admission and decision times"
+  },
+  "original_D2_C8_unchanged": true,
+  "scope": "actual deployed controlled adaptation; original selected quality/history must still pass independent paired audit"
+}

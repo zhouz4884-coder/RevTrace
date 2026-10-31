@@ -1,0 +1,103 @@
+{
+  "audit_id": "PAIRED_SMOKE8_INDEPENDENT_AUDIT_20261031_V2",
+  "status": "PASS_SMOKE8_FROZEN_DENOMINATORS_AND_CONTINUE_BRANCH_RECOMPUTED",
+  "poll": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\PAIRED_POLL_v2_1793432944913951200.json",
+  "poll_sha256": "6a252e70cd4f56a5eddb0a3fe5c0695b82896e311899e46a6201f635589129a4",
+  "plan_sha256": "8aeb2aae2d080236191333a6101d9869978d10e1de9389acb15c430bc065781d",
+  "controller_source_commit": "a13fa0a335529dc188f7e738877a3acd027ce4a7",
+  "endpoints_sha256": "3e0eff57664ff28d6f20f325aca19cd7e4a532ce28636f95d5dad1c9c4884647",
+  "scope": "Only local compressed eight-cell poll and frozen plan/code; no remote CPU/IO/GPU access, no raw trace semantic or endpoint recomputation.",
+  "denominators": {
+    "completed_cells": 8,
+    "planned_cells": 32,
+    "remaining_frozen_cells": 24,
+    "unique_source_ids": [
+      "BAC009S0908W0369"
+    ],
+    "versions": 2,
+    "strategies": 2,
+    "repeats": 2,
+    "every_source_version_strategy_repeat_cell_exactly_once": true,
+    "original_frontiers_per_cell": 17,
+    "total_actual_reference_steps_reported": 136,
+    "all_eight_semantic_statuses": "PASS_COMPLETE_SELECTED_TRACE_REFERENCE",
+    "all_source_commits_match_exact_version": true,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "total_offered_audio_seconds_over_repeated_cells": 66.0725,
+    "unique_audio_seconds": 8.2590625,
+    "repeats_are_not_independent_speakers": true
+  },
+  "observed_original_gate": {
+    "bdfa_fullcall_passes": 2,
+    "bdfa_fullcall_runs": 2,
+    "final_fullcall_passes": 0,
+    "final_fullcall_runs": 2,
+    "all_conservative_passes": 0,
+    "all_conservative_runs": 4,
+    "final_fullcall_D2_misses": 2,
+    "final_fullcall_EOS_D2_misses": 2,
+    "final_fullcall_C8_misses": 0
+  },
+  "paired_comparisons": [
+    {
+      "repeat": 0,
+      "bdfa_fullcall_D99": 1.879995970018208,
+      "final_fullcall_D99": 2.042822575569153,
+      "D99_difference_seconds": 0.16282660555094486,
+      "relative_D99_increase_fraction": 0.0866100822276592,
+      "bdfa_original_gate_pass": true,
+      "final_original_gate_pass": false,
+      "matched_pass_to_fail": true,
+      "absolute_0_25s_trigger": false,
+      "relative_15percent_trigger": false,
+      "repeated_regression_trigger": false,
+      "final_vs_final_conservative_audio_credit_gain": 4.0,
+      "final_vs_final_conservative_D99_ratio": 0.45285991762097305,
+      "final_E2E_opportunity": true
+    },
+    {
+      "repeat": 1,
+      "bdfa_fullcall_D99": 1.9623306836560368,
+      "final_fullcall_D99": 2.0126876932010056,
+      "D99_difference_seconds": 0.0503570095449688,
+      "relative_D99_increase_fraction": 0.02566183669469413,
+      "bdfa_original_gate_pass": true,
+      "final_original_gate_pass": false,
+      "matched_pass_to_fail": true,
+      "absolute_0_25s_trigger": false,
+      "relative_15percent_trigger": false,
+      "repeated_regression_trigger": false,
+      "final_vs_final_conservative_audio_credit_gain": 4.0,
+      "final_vs_final_conservative_D99_ratio": 0.44708925835257307,
+      "final_E2E_opportunity": true
+    }
+  ],
+  "recomputed_frozen_decision": {
+    "status": "CONTINUE_REMAINING_24_FROZEN_CELLS",
+    "repeated_regression_trigger": [
+      false,
+      false
+    ],
+    "final_e2e_opportunity": [
+      true,
+      true
+    ],
+    "causal_code_defect_established": false,
+    "single_EOS_miss_does_not_trigger_regression": true,
+    "scope": "Frozen engineering stopping rule, no statistical equivalence/significance claim"
+  },
+  "interpretation": {
+    "continue_branch_correct": true,
+    "actual_paired_pass_to_fail_difference_preserved": true,
+    "no_regression_established": false,
+    "causal_code_defect_established": false,
+    "statistical_equivalence_established": false,
+    "final_8of8_inheritance_established": false,
+    "maximum_final_fullcall_passes_if_remaining_six_all_pass": 6,
+    "natural_prevalence_established": false,
+    "reason": "Both observed pass-to-fail D99 increases are below both frozen regression thresholds (0.25 s and 15%). Strong final-versus-final-conservative E2E opportunity holds in both repeats, so the prewritten rule continues the remaining 24 cells. This is no-regression-trigger-not-met, not evidence of no regression, and the two final failures remain failures."
+  },
+  "raw_trace_reference_and_latency_quantiles_independently_rerun_here": false,
+  "decision": "No inconsistency in the eight-cell compressed audit or frozen CONTINUE branch. Preserve all failures; complete the already-frozen queue and audit full actual results separately."
+}

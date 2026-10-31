@@ -1,0 +1,80 @@
+{
+  "status": "PASS_ACTUAL_NATIVE_SERVICE_EXECUTION",
+  "cell_id": "SC_PAIRED32_V2_BAC009S0908W0369_bdfa_conservative_r0",
+  "arm": "two_full_early",
+  "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+  "primary": {
+    "cell_id": "SC_PAIRED32_V2_BAC009S0908W0369_bdfa_conservative_r0",
+    "stage": "prospective_version_pair",
+    "cohort": "same_four_metadata_selected_speakers",
+    "arm": "two_full_early",
+    "repeat": 0,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.2590625,
+    "primary_linear_all_offered_D99": 3.7568386804684994,
+    "primary_linear_all_offered_C99": 4.025047836527229,
+    "original_quantile_test_pass": false,
+    "complete_coverage_and_original_quantile_pass": false,
+    "D2_misses_all_offered": 8,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 3.8426878517493606,
+    "C_max": 4.101309137418866,
+    "dual_deadline_audio_credit_seconds": 4.5,
+    "raw_inputs": {
+      "config_sha256": "9978213e3df4e4316c0bf45b227301a857807dd1742610999ec7811b3fed1c08",
+      "origin_sha256": "816fd7ee2a981b9157c5a2dd5b821a7c2d58b5ba2eedbee21c75a9ca0d067289",
+      "consumer_sha256": "ee294e5a8dbb465a4da6ae385ad5b29bcd48d32520e7a1f38ada2fadbff03adc"
+    },
+    "primary_linear_all_offered_C50": 2.19600348174572,
+    "primary_linear_all_offered_D50": 1.8764331405982375
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0908W0369",
+      "text": "新科市界冠军宁泽涛领接中国队出战",
+      "reference_characters": 16,
+      "character_edits": 2
+    }
+  ],
+  "energy": {
+    "service": {
+      "gpu_joules": {
+        "0": 2196.140148899417,
+        "1": 2207.81755017399
+      },
+      "total_joules": 4403.957699073408
+    },
+    "load_and_neural_warmup": {
+      "gpu_joules": {
+        "0": 8464.267954492996,
+        "1": 7832.267083088387
+      },
+      "total_joules": 16296.535037581383
+    },
+    "service_scope": "both GPUs from actual origin through Consumer drain; cold load and fixed neural warmup separate"
+  },
+  "source_count": 1,
+  "all_authority_steps": 17,
+  "authority_dispatches": 17,
+  "actual_ready_hits": 0,
+  "actual_ready_hit_rate": 0.0,
+  "matching_inflight_fallbacks": 0,
+  "fullspec_inflight_promotions": 0,
+  "fullspec_known_invalid_C_skips": 0,
+  "fullspec_discarded_full_results": 0,
+  "producer_dispatches": 0,
+  "packet_admissions": 0,
+  "wire_total_bytes": 0,
+  "wall_seconds": 12.362664423882961,
+  "load_neural_ready_wall_seconds": 86.67665344942361,
+  "all_actual_roots_and_epochs_checked": true,
+  "component_timer_scopes": {
+    "full": "native model timer excludes pre-model restore; worker_job_wall includes restore/export",
+    "consume": "matching/restore plus original C/U and export is in worker_job_wall; not only C",
+    "receipt": "fresh physical-queue get followed by complete validation, actual admission and decision times"
+  },
+  "original_D2_C8_unchanged": true,
+  "scope": "actual deployed controlled adaptation; original selected quality/history must still pass independent paired audit"
+}

@@ -1,0 +1,99 @@
+{
+  "environment_python": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+  "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/ENVIRONMENT_v2_FROZEN.json",
+  "environment_sha256": "40c867b5225ee1d23253fe63dba4e5e2727f97ececa34f9c94d26f39ff51920a",
+  "runtime_environment": {
+    "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True"
+  },
+  "reference_details": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_independent_20261029/reference_v1/DETAILS.json",
+  "reference_details_sha256": "58a33465f5af8dc0f39983253abdcf9bccb9ac79e03690e342792281a36c57a6",
+  "reference_gate": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_streamcorrect_independent_20261029/reference_v1/GATE.json",
+  "reference_gate_sha256": "28aa26207c509a733db2a9ab95612c48a4b5a96d233faf4460fbaa88a0017524",
+  "original_D2_seconds": 2.0,
+  "original_C8_seconds": 8.0,
+  "all_offered_including_EOS": true,
+  "controller_source_commit": "2198b8d517e068cb8a08e0bc022104b4fed4c8c7",
+  "controller_source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/interference_source_v1",
+  "controller_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/INTERFERENCE_SOURCE_v1.json",
+  "controller_manifest_sha256": "8f0d2fa7dabd514eee264b5af815b8e218c194ec70b08e88f47bc82bc3cb5d72",
+  "harness_source": {
+    "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/interference_source_v1",
+    "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/INTERFERENCE_SOURCE_v1.json",
+    "source_manifest_sha256": "8f0d2fa7dabd514eee264b5af815b8e218c194ec70b08e88f47bc82bc3cb5d72",
+    "source_commit": "2198b8d517e068cb8a08e0bc022104b4fed4c8c7"
+  },
+  "dependencies": {
+    "final": {
+      "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/source_v2",
+      "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/SOURCE_v2.json",
+      "source_manifest_sha256": "60ae549fcc98165a74e5a3dc420bf93418296099fa12b410572b15d281b2c457",
+      "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "entry": "resilience_trial.py"
+    },
+    "upstream_a13": {
+      "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/paired_resident_source_v2",
+      "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/PAIRED_RESIDENT_SOURCE_v2.json",
+      "source_manifest_sha256": "8cadffbfe9ffcc1eb3efdf5e2702e7afbc2ec932158c12dd197d6f0bdc334934",
+      "source_commit": "a13fa0a335529dc188f7e738877a3acd027ce4a7"
+    }
+  },
+  "experiment_id": "SC_TWO_CLIENT_ADMISSION_OPPORTUNITY4_V1",
+  "expected_cells": 4,
+  "smoke_cells": 2,
+  "maximum_process_seconds": 720,
+  "maximum_failure_cleanup_seconds": 40,
+  "opportunity_rule": {
+    "require_original_all_semantics_clocks": true,
+    "Conservative_all_four_requests_C8_misses": 0,
+    "require_actual_B_ready_dispatch_inversion": true,
+    "B_C99_min_absolute_regression_seconds": 1.0,
+    "B_C99_min_relative_regression": 0.2,
+    "or_B_additional_C8_frontier_misses": 4,
+    "shared_credit_gain_required": false,
+    "maximum_actual_trials": 4,
+    "first_B_offset_seconds": 2.0,
+    "no_source_phase_threshold_retry": true
+  },
+  "cells": [
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r0",
+      "arm": "conservative",
+      "repeat": 0,
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/interference_inputs_v1/interference_opportunity_v1_configs/SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r0.json",
+      "config_sha256": "1feb114aa557eb901f947180135078a6b451cf9985587466e6fcd77ec5f9907c",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/cells/SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r0",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/logs/SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r0.log"
+    },
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r0",
+      "arm": "fullcall",
+      "repeat": 0,
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/interference_inputs_v1/interference_opportunity_v1_configs/SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r0.json",
+      "config_sha256": "be80b1b6ac2dc87c024fd953093ca5f406908d6bcb87a03e839f58b6ed2370f9",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/cells/SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r0",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/logs/SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r0.log"
+    },
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r1",
+      "arm": "fullcall",
+      "repeat": 1,
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/interference_inputs_v1/interference_opportunity_v1_configs/SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r1.json",
+      "config_sha256": "3083ee3758093297c61784f51407bf59f460398192a2aabfae4f114dd2c96443",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/cells/SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r1",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/logs/SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r1.log"
+    },
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r1",
+      "arm": "conservative",
+      "repeat": 1,
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/interference_inputs_v1/interference_opportunity_v1_configs/SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r1.json",
+      "config_sha256": "f203f9c990d2227f3ebee3a7fa08c1e9fb4a116fd1be42d47095c66257fb13ce",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/cells/SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r1",
+      "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/logs/SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r1.log"
+    }
+  ],
+  "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1",
+  "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/SUMMARY.json",
+  "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1/GATE.json",
+  "scope": "At most four actual unchanged-NN59 trials; fixed 2s new-client interference. First pair hard stop, second pair only on opportunity. No scheduling change, phase sweep or credit-gain requirement."
+}

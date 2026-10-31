@@ -1,0 +1,8 @@
+"""Select the verified external NN dependency before importing the Supervisor."""
+import argparse,pathlib,sys
+from common import read,verify_checkout,need,FINAL
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--config',required=True);p.add_argument('--manifest',required=True);p.add_argument('--out',required=True);a=p.parse_args();config=read(a.config)
+    dependency=config['base_NN_source'];verify_checkout(dependency['source_root'],a.manifest,FINAL);sys.path.insert(0,dependency['source_root'])
+    from resident_supervisor import run_resident
+    run_resident(a.config,a.manifest,a.out)

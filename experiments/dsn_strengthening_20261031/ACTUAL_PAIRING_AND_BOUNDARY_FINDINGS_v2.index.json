@@ -1,0 +1,873 @@
+{
+  "schema": "revtrace-diagnostic-v2-report-index",
+  "created_utc": "2026-10-31T07:35:55.459859+00:00",
+  "report_path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\ACTUAL_PAIRING_AND_BOUNDARY_FINDINGS_v2.zh.md",
+  "report_sha256": "dc1d880a4e8e200d974267a0c14066bfed951abffd88f1aa3caa41c3910fc704",
+  "analysis_code_commit": "ff95f04465d006f76a0e729d3fd5457c32769c1e",
+  "actual_neural_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "formal_experiment_id": "SC_ACTUAL36_PAIRING_LONG8_BOUNDARY_20261031_V2",
+  "formal_gate_status": "PASS_ALL36_ACTUAL_DISPATCH_PAIRING_AND_ALL8_LONG_BOUNDARY_DIAGNOSTICS",
+  "formal_gate_sha256": "09daf9313ef888d028414f4404d6de86b4f255d9ccb0e0f44490a5b301bb4843",
+  "formal_summary_sha256": "7cf116b63b8b04dd683b1a100dfb2cf1fa028d42732d6aed334ff99dd6fcf4f0",
+  "bounded_files": {
+    "SUMMARY.json": {
+      "bytes": 1060662,
+      "sha256": "7cf116b63b8b04dd683b1a100dfb2cf1fa028d42732d6aed334ff99dd6fcf4f0"
+    },
+    "ENVIRONMENT.json": {
+      "bytes": 521,
+      "sha256": "ddabd3a41d151271eac16983ff17eadf3e5d4b29fb687210f7e1b77e4476bbc7"
+    },
+    "INPUT_MANIFEST.json": {
+      "bytes": 230100,
+      "sha256": "985c7893adff8c155b697315e89f33674ce85c62c76a07a419b46045db71b85f"
+    },
+    "GATE.json": {
+      "bytes": 1774,
+      "sha256": "09daf9313ef888d028414f4404d6de86b4f255d9ccb0e0f44490a5b301bb4843"
+    },
+    "RUN_RECORD.json": {
+      "bytes": 9361,
+      "sha256": "1e236bbc43a0c88cc544aff376b85c148a9917e858427c2dddb3a083c4514ed5"
+    }
+  },
+  "original_input_files": 725,
+  "original_inputs_verified_before_and_after": true,
+  "CPU_controls": {
+    "tests": 67,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "new_model_calls": 0,
+  "groups": [
+    {
+      "group": "short_normal",
+      "label": "正常短流",
+      "cases": 8,
+      "fullcall_cases": 4,
+      "all_actual_dispatches": 153,
+      "conditional": {
+        "N": 57,
+        "CONFIRMED": 40,
+        "REFUTED": 17,
+        "UNRESOLVED": 0
+      },
+      "confirmation_rate": 0.7017543859649122,
+      "live_promoted": 40,
+      "durable_selected": 40,
+      "original_Owner_installed": 40,
+      "Consumer_used": 40,
+      "case_ids": [
+        "SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_conservative_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0764W0209_none_fullcall_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_none_fullcall_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_none_conservative_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_conservative_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0905W0246_none_fullcall_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_none_conservative_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_none_fullcall_r0"
+      ]
+    },
+    {
+      "group": "short_controlled_fault",
+      "label": "受控故障短流",
+      "cases": 20,
+      "fullcall_cases": 10,
+      "all_actual_dispatches": 384,
+      "conditional": {
+        "N": 90,
+        "CONFIRMED": 58,
+        "REFUTED": 32,
+        "UNRESOLVED": 0
+      },
+      "confirmation_rate": 0.6444444444444445,
+      "live_promoted": 58,
+      "durable_selected": 52,
+      "original_Owner_installed": 50,
+      "Consumer_used": 52,
+      "case_ids": [
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_duplicate_late_fullcall_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_duplicate_late_conservative_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_conservative_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_conservative_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_duplicate_late_conservative_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_duplicate_late_fullcall_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_conservative_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1",
+        "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_conservative_r1"
+      ]
+    },
+    {
+      "group": "long_S0770",
+      "label": "S0770无reset长流",
+      "cases": 4,
+      "fullcall_cases": 2,
+      "all_actual_dispatches": 2660,
+      "conditional": {
+        "N": 924,
+        "CONFIRMED": 96,
+        "REFUTED": 828,
+        "UNRESOLVED": 0
+      },
+      "confirmation_rate": 0.1038961038961039,
+      "live_promoted": 96,
+      "durable_selected": 96,
+      "original_Owner_installed": 96,
+      "Consumer_used": 96,
+      "case_ids": [
+        "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r0",
+        "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r0",
+        "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r1",
+        "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1"
+      ]
+    },
+    {
+      "group": "long_S0903",
+      "label": "S0903无reset长流",
+      "cases": 4,
+      "fullcall_cases": 2,
+      "all_actual_dispatches": 2332,
+      "conditional": {
+        "N": 830,
+        "CONFIRMED": 166,
+        "REFUTED": 664,
+        "UNRESOLVED": 0
+      },
+      "confirmation_rate": 0.2,
+      "live_promoted": 166,
+      "durable_selected": 166,
+      "original_Owner_installed": 166,
+      "Consumer_used": 166,
+      "case_ids": [
+        "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r0",
+        "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r0",
+        "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r1",
+        "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1"
+      ]
+    }
+  ],
+  "all_actual_dispatches": {
+    "N": 5529,
+    "CONFIRMED": 3988,
+    "REFUTED": 1541,
+    "UNRESOLVED": 0,
+    "resolved_confirmation_rate": 0.7212877554711521,
+    "all_dispatch_confirmation_lower": 0.7212877554711521,
+    "all_dispatch_confirmation_upper": 0.7212877554711521
+  },
+  "conditional_actual_dispatches": {
+    "N": 1901,
+    "CONFIRMED": 360,
+    "REFUTED": 1541,
+    "UNRESOLVED": 0,
+    "resolved_confirmation_rate": 0.1893740136770121,
+    "all_dispatch_confirmation_lower": 0.1893740136770121,
+    "all_dispatch_confirmation_upper": 0.1893740136770121
+  },
+  "source_clock_denominator_coverage_series_checked": 144,
+  "long_boundaries": [
+    {
+      "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r0",
+      "source_id": "SC_SYNTH_S0770_24UTT_V1",
+      "arm": "conservative",
+      "repeat": 0,
+      "first_actual_D_above_2": {
+        "source_id": "SC_SYNTH_S0770_24UTT_V1",
+        "frontier": 72000,
+        "audio_seconds": 4.5,
+        "original_offer_perf": 5112738.047207789,
+        "D": 2.080628441646695,
+        "C": 2.2213862454518676,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r0/consumer.jsonl",
+          "line": 24
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r0/consumer.jsonl",
+          "line": 25
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_actual_C_above_8": {
+        "source_id": "SC_SYNTH_S0770_24UTT_V1",
+        "frontier": 288000,
+        "audio_seconds": 18.0,
+        "original_offer_perf": 5112751.547207789,
+        "D": 7.8992824060842395,
+        "C": 8.21881135739386,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r0/consumer.jsonl",
+          "line": 105
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r0/consumer.jsonl",
+          "line": 106
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_repeat_signal_audio_seconds": 36.0,
+      "first_repeat_signal_job_id": "e0-j000000072",
+      "first_after_trim_448_condition_audio_target_seconds": 59.5,
+      "first_after_trim_448_condition_job_id": "e0-j000000119",
+      "offline_length_bound_status": "OFFLINE_ORACLE_VALIDATED_LENGTH_BOUND",
+      "offline_length_bound_first_audio_seconds": {
+        "strictly_above_zero": 27.5,
+        "at_least_16": 33.0,
+        "at_least_64": 41.0
+      },
+      "rolling_20_conditional_dispatch_marker": null,
+      "rolling_window_clock_endpoints": "NOT_APPLICABLE_NO_CONDITIONAL_DISPATCH",
+      "first_refuted_conditional_start_audio_seconds": null,
+      "first_refuted_conditional_dispatch_wall_seconds": null,
+      "final_CER": 6.38477366255144,
+      "online_prefix_CER": "UNIDENTIFIABLE_NO_CHARACTER_TIME_ALIGNMENT_AND_PART_BOUNDARIES_NOT_ON_CALL_GRID",
+      "decoder_guard_execution": "UNOBSERVED_DIRECT_BRANCH; >=448 after trim is an input condition, not a guard-execution probe"
+    },
+    {
+      "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1",
+      "source_id": "SC_SYNTH_S0770_24UTT_V1",
+      "arm": "conservative",
+      "repeat": 1,
+      "first_actual_D_above_2": {
+        "source_id": "SC_SYNTH_S0770_24UTT_V1",
+        "frontier": 64000,
+        "audio_seconds": 4.0,
+        "original_offer_perf": 5116844.943048828,
+        "D": 2.046840526163578,
+        "C": 2.3389169042930007,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1/consumer.jsonl",
+          "line": 21
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1/consumer.jsonl",
+          "line": 22
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_actual_C_above_8": {
+        "source_id": "SC_SYNTH_S0770_24UTT_V1",
+        "frontier": 264000,
+        "audio_seconds": 16.5,
+        "original_offer_perf": 5116857.443048828,
+        "D": 7.681147137656808,
+        "C": 8.00330263003707,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1/consumer.jsonl",
+          "line": 96
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_conservative_r1/consumer.jsonl",
+          "line": 97
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_repeat_signal_audio_seconds": 36.0,
+      "first_repeat_signal_job_id": "e0-j000000072",
+      "first_after_trim_448_condition_audio_target_seconds": 59.5,
+      "first_after_trim_448_condition_job_id": "e0-j000000119",
+      "offline_length_bound_status": "OFFLINE_ORACLE_VALIDATED_LENGTH_BOUND",
+      "offline_length_bound_first_audio_seconds": {
+        "strictly_above_zero": 27.5,
+        "at_least_16": 33.0,
+        "at_least_64": 41.0
+      },
+      "rolling_20_conditional_dispatch_marker": null,
+      "rolling_window_clock_endpoints": "NOT_APPLICABLE_NO_CONDITIONAL_DISPATCH",
+      "first_refuted_conditional_start_audio_seconds": null,
+      "first_refuted_conditional_dispatch_wall_seconds": null,
+      "final_CER": 6.38477366255144,
+      "online_prefix_CER": "UNIDENTIFIABLE_NO_CHARACTER_TIME_ALIGNMENT_AND_PART_BOUNDARIES_NOT_ON_CALL_GRID",
+      "decoder_guard_execution": "UNOBSERVED_DIRECT_BRANCH; >=448 after trim is an input condition, not a guard-execution probe"
+    },
+    {
+      "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r0",
+      "source_id": "SC_SYNTH_S0770_24UTT_V1",
+      "arm": "fullcall",
+      "repeat": 0,
+      "first_actual_D_above_2": {
+        "source_id": "SC_SYNTH_S0770_24UTT_V1",
+        "frontier": 336000,
+        "audio_seconds": 21.0,
+        "original_offer_perf": 5113572.71716464,
+        "D": 2.4480531876906753,
+        "C": 3.15559577383101,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r0/consumer.jsonl",
+          "line": 124
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r0/consumer.jsonl",
+          "line": 125
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_actual_C_above_8": {
+        "source_id": "SC_SYNTH_S0770_24UTT_V1",
+        "frontier": 512000,
+        "audio_seconds": 32.0,
+        "original_offer_perf": 5113583.71716464,
+        "D": 7.127863954752684,
+        "C": 8.444358356297016,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r0/consumer.jsonl",
+          "line": 191
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r0/consumer.jsonl",
+          "line": 195
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_repeat_signal_audio_seconds": 36.0,
+      "first_repeat_signal_job_id": "e0-j000000102",
+      "first_after_trim_448_condition_audio_target_seconds": 59.5,
+      "first_after_trim_448_condition_job_id": "e0-j000000189",
+      "offline_length_bound_status": "OFFLINE_ORACLE_VALIDATED_LENGTH_BOUND",
+      "offline_length_bound_first_audio_seconds": {
+        "strictly_above_zero": 27.5,
+        "at_least_16": 33.0,
+        "at_least_64": 41.0
+      },
+      "rolling_20_conditional_dispatch_marker": {
+        "first_job": [
+          "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r0",
+          0,
+          "e0-j000000023"
+        ],
+        "last_job": [
+          "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r0",
+          0,
+          "e0-j000000052"
+        ],
+        "N": 20,
+        "CONFIRMED": 9,
+        "REFUTED": 11,
+        "UNRESOLVED": 0,
+        "resolved_confirmation_rate": 0.45,
+        "all_dispatch_confirmation_lower": 0.45,
+        "all_dispatch_confirmation_upper": 0.45
+      },
+      "rolling_window_clock_endpoints": "UNKNOWN_NOT_IN_BOUNDED_EXPORT",
+      "first_refuted_conditional_start_audio_seconds": 11.0,
+      "first_refuted_conditional_dispatch_wall_seconds": 11.576031904667616,
+      "final_CER": 6.38477366255144,
+      "online_prefix_CER": "UNIDENTIFIABLE_NO_CHARACTER_TIME_ALIGNMENT_AND_PART_BOUNDARIES_NOT_ON_CALL_GRID",
+      "decoder_guard_execution": "UNOBSERVED_DIRECT_BRANCH; >=448 after trim is an input condition, not a guard-execution probe"
+    },
+    {
+      "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r1",
+      "source_id": "SC_SYNTH_S0770_24UTT_V1",
+      "arm": "fullcall",
+      "repeat": 1,
+      "first_actual_D_above_2": {
+        "source_id": "SC_SYNTH_S0770_24UTT_V1",
+        "frontier": 320000,
+        "audio_seconds": 20.0,
+        "original_offer_perf": 5116032.840343264,
+        "D": 2.1557969180867076,
+        "C": 2.725432568229735,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r1/consumer.jsonl",
+          "line": 117
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r1/consumer.jsonl",
+          "line": 119
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_actual_C_above_8": {
+        "source_id": "SC_SYNTH_S0770_24UTT_V1",
+        "frontier": 504000,
+        "audio_seconds": 31.5,
+        "original_offer_perf": 5116044.340343264,
+        "D": 7.1201941622421145,
+        "C": 8.064796431921422,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r1/consumer.jsonl",
+          "line": 187
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r1/consumer.jsonl",
+          "line": 192
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_repeat_signal_audio_seconds": 36.0,
+      "first_repeat_signal_job_id": "e0-j000000102",
+      "first_after_trim_448_condition_audio_target_seconds": 59.5,
+      "first_after_trim_448_condition_job_id": "e0-j000000189",
+      "offline_length_bound_status": "OFFLINE_ORACLE_VALIDATED_LENGTH_BOUND",
+      "offline_length_bound_first_audio_seconds": {
+        "strictly_above_zero": 27.5,
+        "at_least_16": 33.0,
+        "at_least_64": 41.0
+      },
+      "rolling_20_conditional_dispatch_marker": {
+        "first_job": [
+          "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r1",
+          0,
+          "e0-j000000023"
+        ],
+        "last_job": [
+          "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0770_24UTT_V1_fullcall_r1",
+          0,
+          "e0-j000000052"
+        ],
+        "N": 20,
+        "CONFIRMED": 9,
+        "REFUTED": 11,
+        "UNRESOLVED": 0,
+        "resolved_confirmation_rate": 0.45,
+        "all_dispatch_confirmation_lower": 0.45,
+        "all_dispatch_confirmation_upper": 0.45
+      },
+      "rolling_window_clock_endpoints": "UNKNOWN_NOT_IN_BOUNDED_EXPORT",
+      "first_refuted_conditional_start_audio_seconds": 11.0,
+      "first_refuted_conditional_dispatch_wall_seconds": 11.540065761655569,
+      "final_CER": 6.38477366255144,
+      "online_prefix_CER": "UNIDENTIFIABLE_NO_CHARACTER_TIME_ALIGNMENT_AND_PART_BOUNDARIES_NOT_ON_CALL_GRID",
+      "decoder_guard_execution": "UNOBSERVED_DIRECT_BRANCH; >=448 after trim is an input condition, not a guard-execution probe"
+    },
+    {
+      "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r0",
+      "source_id": "SC_SYNTH_S0903_24UTT_V1",
+      "arm": "conservative",
+      "repeat": 0,
+      "first_actual_D_above_2": {
+        "source_id": "SC_SYNTH_S0903_24UTT_V1",
+        "frontier": 64000,
+        "audio_seconds": 4.0,
+        "original_offer_perf": 5115178.580942642,
+        "D": 2.2230998761951923,
+        "C": 2.5578255876898766,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r0/consumer.jsonl",
+          "line": 21
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r0/consumer.jsonl",
+          "line": 22
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_actual_C_above_8": {
+        "source_id": "SC_SYNTH_S0903_24UTT_V1",
+        "frontier": 232000,
+        "audio_seconds": 14.5,
+        "original_offer_perf": 5115189.080942642,
+        "D": 7.962816713377833,
+        "C": 8.310814678668976,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r0/consumer.jsonl",
+          "line": 84
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r0/consumer.jsonl",
+          "line": 85
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_repeat_signal_audio_seconds": 39.5,
+      "first_repeat_signal_job_id": "e0-j000000079",
+      "first_after_trim_448_condition_audio_target_seconds": 128.5,
+      "first_after_trim_448_condition_job_id": "e0-j000000257",
+      "offline_length_bound_status": "OFFLINE_ORACLE_VALIDATED_LENGTH_BOUND",
+      "offline_length_bound_first_audio_seconds": {
+        "strictly_above_zero": 16.0,
+        "at_least_16": 32.0,
+        "at_least_64": 49.0
+      },
+      "rolling_20_conditional_dispatch_marker": null,
+      "rolling_window_clock_endpoints": "NOT_APPLICABLE_NO_CONDITIONAL_DISPATCH",
+      "first_refuted_conditional_start_audio_seconds": null,
+      "first_refuted_conditional_dispatch_wall_seconds": null,
+      "final_CER": 2.5153256704980844,
+      "online_prefix_CER": "UNIDENTIFIABLE_NO_CHARACTER_TIME_ALIGNMENT_AND_PART_BOUNDARIES_NOT_ON_CALL_GRID",
+      "decoder_guard_execution": "UNOBSERVED_DIRECT_BRANCH; >=448 after trim is an input condition, not a guard-execution probe"
+    },
+    {
+      "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r1",
+      "source_id": "SC_SYNTH_S0903_24UTT_V1",
+      "arm": "conservative",
+      "repeat": 1,
+      "first_actual_D_above_2": {
+        "source_id": "SC_SYNTH_S0903_24UTT_V1",
+        "frontier": 72000,
+        "audio_seconds": 4.5,
+        "original_offer_perf": 5117678.471432813,
+        "D": 2.081034586764872,
+        "C": 2.319830304943025,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r1/consumer.jsonl",
+          "line": 24
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r1/consumer.jsonl",
+          "line": 25
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_actual_C_above_8": {
+        "source_id": "SC_SYNTH_S0903_24UTT_V1",
+        "frontier": 240000,
+        "audio_seconds": 15.0,
+        "original_offer_perf": 5117688.971432813,
+        "D": 7.933919279836118,
+        "C": 8.33751059230417,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r1/consumer.jsonl",
+          "line": 87
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_conservative_r1/consumer.jsonl",
+          "line": 88
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_repeat_signal_audio_seconds": 39.5,
+      "first_repeat_signal_job_id": "e0-j000000079",
+      "first_after_trim_448_condition_audio_target_seconds": 128.5,
+      "first_after_trim_448_condition_job_id": "e0-j000000257",
+      "offline_length_bound_status": "OFFLINE_ORACLE_VALIDATED_LENGTH_BOUND",
+      "offline_length_bound_first_audio_seconds": {
+        "strictly_above_zero": 16.0,
+        "at_least_16": 32.0,
+        "at_least_64": 49.0
+      },
+      "rolling_20_conditional_dispatch_marker": null,
+      "rolling_window_clock_endpoints": "NOT_APPLICABLE_NO_CONDITIONAL_DISPATCH",
+      "first_refuted_conditional_start_audio_seconds": null,
+      "first_refuted_conditional_dispatch_wall_seconds": null,
+      "final_CER": 2.5153256704980844,
+      "online_prefix_CER": "UNIDENTIFIABLE_NO_CHARACTER_TIME_ALIGNMENT_AND_PART_BOUNDARIES_NOT_ON_CALL_GRID",
+      "decoder_guard_execution": "UNOBSERVED_DIRECT_BRANCH; >=448 after trim is an input condition, not a guard-execution probe"
+    },
+    {
+      "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r0",
+      "source_id": "SC_SYNTH_S0903_24UTT_V1",
+      "arm": "fullcall",
+      "repeat": 0,
+      "first_actual_D_above_2": {
+        "source_id": "SC_SYNTH_S0903_24UTT_V1",
+        "frontier": 184000,
+        "audio_seconds": 11.5,
+        "original_offer_perf": 5114396.282348836,
+        "D": 2.171779985539615,
+        "C": 2.5108093302696943,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r0/consumer.jsonl",
+          "line": 66
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r0/consumer.jsonl",
+          "line": 67
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_actual_C_above_8": {
+        "source_id": "SC_SYNTH_S0903_24UTT_V1",
+        "frontier": 368000,
+        "audio_seconds": 23.0,
+        "original_offer_perf": 5114407.782348836,
+        "D": 7.691903553903103,
+        "C": 8.06819273531437,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r0/consumer.jsonl",
+          "line": 137
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r0/consumer.jsonl",
+          "line": 138
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_repeat_signal_audio_seconds": 39.5,
+      "first_repeat_signal_job_id": "e0-j000000127",
+      "first_after_trim_448_condition_audio_target_seconds": 128.5,
+      "first_after_trim_448_condition_job_id": "e0-j000000456",
+      "offline_length_bound_status": "OFFLINE_ORACLE_VALIDATED_LENGTH_BOUND",
+      "offline_length_bound_first_audio_seconds": {
+        "strictly_above_zero": 16.0,
+        "at_least_16": 32.0,
+        "at_least_64": 49.0
+      },
+      "rolling_20_conditional_dispatch_marker": {
+        "first_job": [
+          "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r0",
+          0,
+          "e0-j000000010"
+        ],
+        "last_job": [
+          "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r0",
+          0,
+          "e0-j000000040"
+        ],
+        "N": 20,
+        "CONFIRMED": 9,
+        "REFUTED": 11,
+        "UNRESOLVED": 0,
+        "resolved_confirmation_rate": 0.45,
+        "all_dispatch_confirmation_lower": 0.45,
+        "all_dispatch_confirmation_upper": 0.45
+      },
+      "rolling_window_clock_endpoints": "UNKNOWN_NOT_IN_BOUNDED_EXPORT",
+      "first_refuted_conditional_start_audio_seconds": 6.0,
+      "first_refuted_conditional_dispatch_wall_seconds": 6.595498721115291,
+      "final_CER": 2.5153256704980844,
+      "online_prefix_CER": "UNIDENTIFIABLE_NO_CHARACTER_TIME_ALIGNMENT_AND_PART_BOUNDARIES_NOT_ON_CALL_GRID",
+      "decoder_guard_execution": "UNOBSERVED_DIRECT_BRANCH; >=448 after trim is an input condition, not a guard-execution probe"
+    },
+    {
+      "cell_id": "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1",
+      "source_id": "SC_SYNTH_S0903_24UTT_V1",
+      "arm": "fullcall",
+      "repeat": 1,
+      "first_actual_D_above_2": {
+        "source_id": "SC_SYNTH_S0903_24UTT_V1",
+        "frontier": 176000,
+        "audio_seconds": 11.0,
+        "original_offer_perf": 5118497.310950544,
+        "D": 2.162571475841105,
+        "C": 2.4799100747331977,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1/consumer.jsonl",
+          "line": 63
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1/consumer.jsonl",
+          "line": 64
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_actual_C_above_8": {
+        "source_id": "SC_SYNTH_S0903_24UTT_V1",
+        "frontier": 344000,
+        "audio_seconds": 21.5,
+        "original_offer_perf": 5118507.810950544,
+        "D": 7.681123997084796,
+        "C": 8.440468781627715,
+        "display_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1/consumer.jsonl",
+          "line": 128
+        },
+        "certified_Consumer_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_sustained8_v1/cells/SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1/consumer.jsonl",
+          "line": 129
+        },
+        "scope": "Actual Consumer endpoints under original offered-input clock; original D2/C8, not model-work proxy"
+      },
+      "first_repeat_signal_audio_seconds": 39.5,
+      "first_repeat_signal_job_id": "e0-j000000127",
+      "first_after_trim_448_condition_audio_target_seconds": 128.5,
+      "first_after_trim_448_condition_job_id": "e0-j000000456",
+      "offline_length_bound_status": "OFFLINE_ORACLE_VALIDATED_LENGTH_BOUND",
+      "offline_length_bound_first_audio_seconds": {
+        "strictly_above_zero": 16.0,
+        "at_least_16": 32.0,
+        "at_least_64": 49.0
+      },
+      "rolling_20_conditional_dispatch_marker": {
+        "first_job": [
+          "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1",
+          0,
+          "e0-j000000010"
+        ],
+        "last_job": [
+          "SC_FORMAL_SUSTAINED8_v1_SC_SYNTH_S0903_24UTT_V1_fullcall_r1",
+          0,
+          "e0-j000000040"
+        ],
+        "N": 20,
+        "CONFIRMED": 9,
+        "REFUTED": 11,
+        "UNRESOLVED": 0,
+        "resolved_confirmation_rate": 0.45,
+        "all_dispatch_confirmation_lower": 0.45,
+        "all_dispatch_confirmation_upper": 0.45
+      },
+      "rolling_window_clock_endpoints": "UNKNOWN_NOT_IN_BOUNDED_EXPORT",
+      "first_refuted_conditional_start_audio_seconds": 6.0,
+      "first_refuted_conditional_dispatch_wall_seconds": 6.770868859253824,
+      "final_CER": 2.5153256704980844,
+      "online_prefix_CER": "UNIDENTIFIABLE_NO_CHARACTER_TIME_ALIGNMENT_AND_PART_BOUNDARIES_NOT_ON_CALL_GRID",
+      "decoder_guard_execution": "UNOBSERVED_DIRECT_BRANCH; >=448 after trim is an input condition, not a guard-execution probe"
+    }
+  ],
+  "lifecycle_exception_collection": {
+    "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\DIAGNOSTIC_LIFECYCLE_EXCEPTIONS_v2.json",
+    "sha256": "3619a637ee1da1098b5df8bd47591e065ea845a5c860075d66c55d865132a815",
+    "bytes": 28620,
+    "inputs_verified": [
+      {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/dispatch_pairing.jsonl",
+        "bytes": 94354,
+        "sha256": "703bca82a924c0cf318aa20dea09b5e91a02d2fbd4978456e05d376b6f6db79b"
+      },
+      {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/dispatch_pairing.jsonl",
+        "bytes": 94364,
+        "sha256": "52a8dcdb875403798d35d1265f9f76b4c20a73defb313bd50233e0554feec06a"
+      },
+      {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0/dispatch_pairing.jsonl",
+        "bytes": 69141,
+        "sha256": "10eefbd27475569a0999159b46ccfa711acc80e292c2524a19c0729d1c7ce47b"
+      },
+      {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1/dispatch_pairing.jsonl",
+        "bytes": 69147,
+        "sha256": "5e131d8b75921dc63ba43b39538113e305195dd5b5c117dbef10448a0af365b3"
+      },
+      {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0/dispatch_pairing.jsonl",
+        "bytes": 69721,
+        "sha256": "b30e18120655547da94b99848b312a9b350b175a15b798307200dedc859d6798"
+      },
+      {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1/dispatch_pairing.jsonl",
+        "bytes": 69718,
+        "sha256": "17a835dbd88ff4424c41aa1ad709babe82e8e5c74ce489193075347063ed7c65"
+      },
+      {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/dispatch_pairing.jsonl",
+        "bytes": 87790,
+        "sha256": "469b64fd642a32ebc57be1f6ebb7d8616262c635185030f375afeabcfcbaffe3"
+      },
+      {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/dispatch_pairing.jsonl",
+        "bytes": 87779,
+        "sha256": "fa9b9f461b6789e15bbd4c7a781c6b8ab3da1f3961b13d8148473cd0f6982e81"
+      }
+    ],
+    "exceptions": [
+      {
+        "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0",
+        "job_id": "e0-j000000004",
+        "owner_epoch": 0,
+        "source_diagnostic_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/dispatch_pairing.jsonl",
+          "line": 4,
+          "sha256": "703bca82a924c0cf318aa20dea09b5e91a02d2fbd4978456e05d376b6f6db79b"
+        },
+        "full_receipt": true,
+        "durable_selected": false,
+        "Owner_install_events": 0,
+        "Consumer_recovery_replay": false
+      },
+      {
+        "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1",
+        "job_id": "e0-j000000004",
+        "owner_epoch": 0,
+        "source_diagnostic_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/dispatch_pairing.jsonl",
+          "line": 4,
+          "sha256": "52a8dcdb875403798d35d1265f9f76b4c20a73defb313bd50233e0554feec06a"
+        },
+        "full_receipt": true,
+        "durable_selected": false,
+        "Owner_install_events": 0,
+        "Consumer_recovery_replay": false
+      },
+      {
+        "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0",
+        "job_id": "e0-j000000004",
+        "owner_epoch": 0,
+        "source_diagnostic_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r0/dispatch_pairing.jsonl",
+          "line": 4,
+          "sha256": "10eefbd27475569a0999159b46ccfa711acc80e292c2524a19c0729d1c7ce47b"
+        },
+        "full_receipt": false,
+        "durable_selected": false,
+        "Owner_install_events": 0,
+        "Consumer_recovery_replay": false
+      },
+      {
+        "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1",
+        "job_id": "e0-j000000004",
+        "owner_epoch": 0,
+        "source_diagnostic_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_after_asr_fullcall_r1/dispatch_pairing.jsonl",
+          "line": 4,
+          "sha256": "5e131d8b75921dc63ba43b39538113e305195dd5b5c117dbef10448a0af365b3"
+        },
+        "full_receipt": false,
+        "durable_selected": false,
+        "Owner_install_events": 0,
+        "Consumer_recovery_replay": false
+      },
+      {
+        "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0",
+        "job_id": "e0-j000000004",
+        "owner_epoch": 0,
+        "source_diagnostic_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r0/dispatch_pairing.jsonl",
+          "line": 4,
+          "sha256": "b30e18120655547da94b99848b312a9b350b175a15b798307200dedc859d6798"
+        },
+        "full_receipt": false,
+        "durable_selected": false,
+        "Owner_install_events": 0,
+        "Consumer_recovery_replay": false
+      },
+      {
+        "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1",
+        "job_id": "e0-j000000004",
+        "owner_epoch": 0,
+        "source_diagnostic_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_worker_partial_frame_fullcall_r1/dispatch_pairing.jsonl",
+          "line": 4,
+          "sha256": "17a835dbd88ff4424c41aa1ad709babe82e8e5c74ce489193075347063ed7c65"
+        },
+        "full_receipt": false,
+        "durable_selected": false,
+        "Owner_install_events": 0,
+        "Consumer_recovery_replay": false
+      },
+      {
+        "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0",
+        "job_id": "e0-j000000004",
+        "owner_epoch": 0,
+        "source_diagnostic_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/dispatch_pairing.jsonl",
+          "line": 4,
+          "sha256": "469b64fd642a32ebc57be1f6ebb7d8616262c635185030f375afeabcfcbaffe3"
+        },
+        "full_receipt": true,
+        "durable_selected": true,
+        "Owner_install_events": 0,
+        "Consumer_recovery_replay": true
+      },
+      {
+        "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1",
+        "job_id": "e0-j000000004",
+        "owner_epoch": 0,
+        "source_diagnostic_provenance": {
+          "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/diagnostic_v2_results/cases/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/dispatch_pairing.jsonl",
+          "line": 4,
+          "sha256": "fa9b9f461b6789e15bbd4c7a781c6b8ab3da1f3961b13d8148473cd0f6982e81"
+        },
+        "full_receipt": true,
+        "durable_selected": true,
+        "Owner_install_events": 0,
+        "Consumer_recovery_replay": true
+      }
+    ]
+  },
+  "manuscript_paragraph_words": 147,
+  "scope": "Local explanation of completed frozen diagnostics, no new formal scan or original NN-log reads; production prevalence, online prefixCER and causal guard execution are not inferred."
+}

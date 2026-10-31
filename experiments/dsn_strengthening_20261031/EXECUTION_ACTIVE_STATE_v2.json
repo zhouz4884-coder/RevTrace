@@ -1,0 +1,88 @@
+{
+  "status": "R1_COMPLETE_CURRENT4F_CUDA_EMPTY_LEASE_RETURNED_TO_ROOT",
+  "updated_utc": "2026-10-31T09:18:33.793352+00:00",
+  "CURRENT_and_GPU_owner": "/root",
+  "controller_commit": "a13fa0a335529dc188f7e738877a3acd027ce4a7",
+  "NN_commits": [
+    "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+    "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47"
+  ],
+  "formal_readiness_gate": "READINESS_RESULTS_v2/GATE.json",
+  "formal_readiness_model_calls": 0,
+  "active_handle": {
+    "pid": 2633417,
+    "start_ticks": 518205202,
+    "cmdline_sha256": "481755b3384919480cc682215ee7997b6e198ab4d1f46ba02c9eb8ffee44f7e0",
+    "command": [
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+      "-B",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/paired_resident_source_v2/run_paired_campaign.py",
+      "--plan",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/PAIRED32_v2_FROZEN.json",
+      "--manifest",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/PAIRED_RESIDENT_SOURCE_v2.json",
+      "--prelaunch",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/PRELAUNCH_v2.json",
+      "--out",
+      "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/paired32_v2"
+    ],
+    "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/paired32_v2",
+    "log": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/paired_campaign_v2.log",
+    "expected_cells": 32,
+    "plan_sha256": "8aeb2aae2d080236191333a6101d9869978d10e1de9389acb15c430bc065781d",
+    "prelaunch_sha256": "c0050b237c2c0ee0b19848c200cac65e21d72123af0d10296a2c3f40954f502f"
+  },
+  "last_observed_completed_cells": 32,
+  "paired_frozen_total": 32,
+  "remaining_sequence": [
+    "paired8_smoke_frozen_gate_then_remaining24",
+    "resident2_smoke_then_second_pair_if_frozen_gate_passes",
+    "fixtureLinux25_then_fixture4_with900s_independent_watchdog",
+    "collect bounded evidence and verify CUDA empty",
+    "restore CURRENT to4f and noarg gate; return lease to root"
+  ],
+  "forbidden_parallel_activity": "No simultaneous remote NN, heavy CPU or IO. Only bounded state observation.",
+  "GitHub_push_authorized": false,
+  "last_checkpoint_groups": {
+    "bdfa/conservative": {
+      "runs": 6,
+      "passes": 0,
+      "credit": 25.0,
+      "offered": 49.59375
+    },
+    "bdfa/fullcall": {
+      "runs": 6,
+      "passes": 6,
+      "credit": 49.59375,
+      "offered": 49.59375
+    },
+    "final/conservative": {
+      "runs": 6,
+      "passes": 0,
+      "credit": 22.5,
+      "offered": 49.59375
+    },
+    "final/fullcall": {
+      "runs": 6,
+      "passes": 4,
+      "credit": 49.075625,
+      "offered": 49.59375
+    }
+  },
+  "paired_gate": "COMPLETE_PAIRED32_ACTUAL_SERVICE_AND_REFERENCE_AUDIT",
+  "resident_gate": "PASS_RESIDENT4_COMPLETE_FROZEN_SCOPE",
+  "buffer_v1_gate": "NO_GO_COMPLETE_BUFFER4_NEGATIVES_PRESERVED",
+  "buffer_v1_failure": "Posthoc auditor key(None,ready) wrongly aliases initial physical worker READY events; all4 resident task/reference gates PASS",
+  "GPU_queue_currently_empty": true,
+  "CURRENT_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "bounded_results": [
+    "PAIRED32_V2_RESULTS",
+    "RESIDENT4_V2_RESULTS",
+    "BUFFER4_V1_RESULTS"
+  ],
+  "next": "New frozen fixture audit source; preserve all V1 CLI/watchdog/buffer failures; no frozen-source mutation",
+  "final_record": "FINAL_R1_EXECUTION_RECORD_20261031.json",
+  "final_report": "FINAL_R1_EXECUTION_REPORT_20261031.zh.md",
+  "posthoc_gate": "PASS_COMPLETE_ZERO_NN_BUFFER4_POSTHOC_REAUDIT",
+  "no_new_NN_probe_launched": true
+}

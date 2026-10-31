@@ -1,0 +1,117 @@
+% Complete service evidence; component, development and independent scopes stay separate.
+% All service numbers here retain their actual pre-resilience NN source:
+% bdfa3b1307d267a5a4caf6484e1ad465c39a592e. They are not relabelled as 4f4c3c.
+\subsection{Native correction with the original selected task}
+\label{subsec:native_retention_eval}
+We retain StreamCorrect's published recognizer, learned correction, and
+feedback update~\cite{vu2026streamcorrect}, using the fixed 500-ms, no-VAD
+adaptation and original FP32 execution. Both compared policies have two
+protected full workers, the same ASR early-view Consumer, and identical
+neural warmup. Conservative execution waits for selected parent feedback
+before starting the next call; full-call retention confirms conditional
+calls as in Section~\ref{subsec:native_full_calls}.
+We distinguish the earlier frozen native implementation (\texttt{bdfa3b13})
+from the resilience implementation (\texttt{4f4c3cab}). Historical independent
+confirmation and the new matched comparison retain their own identities.
+
+\paragraph{Development and frozen confirmation}
+Development on AISHELL-1~\cite{bu2017aishell} tests original full and
+buffer-only steps, including projected ends that differ from selection
+without invalidating their inputs. Full calls, unlike ready-only ASR
+handoff, retain still-executing work. The artifact retains the pilot and
+development matrix, including two 0.068-s EOS misses.
+
+For the earlier \texttt{bdfa} independent confirmation, the method was
+frozen before metadata selection of four unused AISHELL-1 speakers in
+an 8--9-s band; all initial selections remain. Two policies
+and two fresh-process repeats give 16 runs, with randomized pair blocks,
+reversed arm order, and swapped GPU roles. Speakers are the independent
+acoustic units. Every original 500-ms frontier and partial EOS stays in
+the denominator.
+
+\paragraph{Task fidelity and timely service}
+Offline original full calls supply 68 reference transitions, separately
+from service timing. All 272 Canonical transitions in this confirmation reproduce
+their complete original start and end states, $C$, and returned IDs,
+including the implementation tag. Both arms have five character edits
+over 81 unique reference characters, or 6.17\% CER. This measures the
+adaptation, not the published author's benchmark CER.
+
+\begin{table}[t]
+\centering
+\caption{Matched version comparison: four previously measured speakers,
+two policies, two versions, and two fresh trials (32 runs).
+Each row offers 66.340~s. Credit and board energy are totals;
+D99 is the median of per-run values. Energy uses one common external
+origin-to-confirmed-physical-model-drain window, an upper observation
+bound. This is a matched regression study, not new acoustic confirmation.}
+\label{tab:native_full_confirm}
+\small
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Version & Policy & \shortstack{Credit\\(s)} & \shortstack{D99\\(s)} &
+\shortstack{Energy\\(kJ)} & Pass\\
+\midrule
+\texttt{bdfa} & Conserv. & 33.500 & 4.450 & 44.690 & 0/8\\
+\texttt{bdfa} & Full-call & 66.340 & 1.633 & 39.735 & 8/8\\
+\texttt{4f} & Conserv. & 30.000 & 4.759 & 47.019 & 0/8\\
+\texttt{4f} & Full-call & 65.822 & 1.638 & 43.952 & 6/8\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The earlier independent confirmation on \texttt{bdfa} raises credit from
+37.0 to all 66.33975~s and whole-run passes from 0/8 to 8/8.
+We then freeze a matched 32-run comparison on those same four sources,
+with common FP32 models, neural warmup, allocator, swapped GPU roles,
+and external board-power observation. All 544 selected transitions
+reproduce complete original inputs/outputs, $C$, and IDs under the
+declared static code-version mapping. Table~\ref{tab:native_full_confirm}
+reports these new runs. The final implementation raises credit from
+30.0 to 65.821625~s and passes from 0/8 to 6/8. Its two failures are
+S0908 EOS intervals: paired display P99 increases by 0.163/0.050~s
+against \texttt{bdfa}. Other paired differences have both signs;
+similar medians do not establish equivalence. Through confirmed physical
+model drain, final Full-call uses 6.52\% less board energy than final
+Conservative and 10.61\% more than earlier Full-call. Model drain and
+source-specific service cleanup have different endpoints; separate
+EOS-window and original per-version results remain in the artifact.
+
+\paragraph{Resident independent requests}
+A new finite contract keeps the models and workers resident while a
+single client submits four pre-registered, independent requests. Each
+original file EOS closes its request; the next origin is assigned only
+after actual certified EOS consumption. This is closed-loop request
+service, not online VAD, one continuous recording, or open-arrival
+capacity. Two policies and two fresh trials preserve all 272 original
+transitions and per-request input clocks. Both worker PIDs persist across
+each trial's requests, with one initial model load. Full-call meets D2/C8
+on 7/8 requests versus 0/8, earning 64.118875 versus 31.0 of 66.33975~s
+offered. The second repeat's S0908 request has D99 2.229~s; residency
+does not establish an invariant deadline margin.
+
+\paragraph{Retained work and visible content}
+The earlier independent confirmation contains 92 promoted calls whose
+recognition begins before their selected parent finishes; 20 have their
+own predicted end differ from original correction. Twenty-four invalid
+or covered calls stop after ASR, and two completed wrong-input results
+are discarded, without changing selection. This separates input
+confirmation from requiring correct future predictions.
+
+One original-source Canonical update from 4.0 to 4.5~s keeps a supported
+5.0-s view and its executing call. Two necessary updates withdraw 6.0 to
+5.5~s when the actual parent refutes the complete input. These witnessed
+cases do not estimate another $R\times S$ interaction or natural rate.
+
+In that earlier confirmation, first whole-text agreement with later
+same-$G$ Canonical text supports 29.0 versus 51.518125~s of credited audio;
+14.821625~s of Full-call credit lacks support, with zero unknown coverage.
+Raw and whitespace-only comparisons agree. Unchanged-text rows cover
+10.0 versus 17.0 credited seconds. Frontier credit is neither newly
+transcribed characters nor human correctness.
+
+An earlier two-source capacity comparison remains negative: retention
+earns 17.0~s versus 18.5~s for independent full replicas, at higher energy
+and with a different warmup/Consumer. Single-chain gains do not establish
+superior saturated multi-source capacity.

@@ -1,0 +1,1522 @@
+{
+  "status": "NO_GO_FIXED_TWO_CLIENT_ADMISSION_OPPORTUNITY",
+  "attempted": 4,
+  "completed": 4,
+  "unrun": 0,
+  "decision": {
+    "status": "NO_GO_FIXED_TWO_CLIENT_ADMISSION_OPPORTUNITY",
+    "checks": [
+      {
+        "repeat": 0,
+        "Conservative_all_four_requests_C8_no_miss": true,
+        "AlwaysFull_actual_B_current_ready_inversion": true,
+        "B_worst_request_C99_conservative": 5.670810301043093,
+        "B_worst_request_C99_AlwaysFull": 7.470688498876989,
+        "B_C99_difference_seconds": 1.7998781978338956,
+        "B_extra_C8_frontier_misses": 0,
+        "B_C99_regression_ge_1s_and20percent": true,
+        "B_extra_C8_frontier_misses_ge4": false,
+        "repeat_GO": true
+      },
+      {
+        "repeat": 1,
+        "Conservative_all_four_requests_C8_no_miss": true,
+        "AlwaysFull_actual_B_current_ready_inversion": true,
+        "B_worst_request_C99_conservative": 5.942914161607623,
+        "B_worst_request_C99_AlwaysFull": 6.075752776488661,
+        "B_C99_difference_seconds": 0.1328386148810381,
+        "B_extra_C8_frontier_misses": 0,
+        "B_C99_regression_ge_1s_and20percent": false,
+        "B_extra_C8_frontier_misses_ge4": false,
+        "repeat_GO": false
+      }
+    ],
+    "shared_credit_gain_required": false,
+    "all_A_B_metrics_and_energy_retained": true,
+    "maximum_actual_trials": 4,
+    "scope": "Preregisitered engineering opportunity gate. Observed inversion plus paired B service regression; no causal proof of all latency, no scheduler benefit measured, no result-dependent source/phase/threshold repair."
+  },
+  "cases": [
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r0",
+      "arm": "conservative",
+      "repeat": 0,
+      "per_client": {
+        "A": {
+          "requests": [
+            "BAC009S0908W0369",
+            "BAC009S0913W0313"
+          ],
+          "worst_request_D99": 4.260582496747374,
+          "worst_request_C99": 4.539770204611123,
+          "D2_misses_all_offered": 17,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 15,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 8.5
+        },
+        "B": {
+          "requests": [
+            "BAC009S0905W0246",
+            "BAC009S0916W0463"
+          ],
+          "worst_request_D99": 5.341529903486371,
+          "worst_request_C99": 5.670810301043093,
+          "D2_misses_all_offered": 21,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 19,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 6.5
+        }
+      },
+      "per_request": [
+        {
+          "source_id": "BAC009S0908W0369",
+          "client_id": "A",
+          "request_origin_perf": 5190346.786530392,
+          "actual_Consumer_EOS_perf": 5190359.669600833,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.2590625,
+            "primary_linear_all_offered_D99": 4.260582496747374,
+            "primary_linear_all_offered_C99": 4.539770204611123,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 4.5,
+            "D2_misses_all_offered": 8,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 7,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0913W0313",
+          "client_id": "A",
+          "request_origin_perf": 5190359.698630842,
+          "actual_Consumer_EOS_perf": 5190372.30242351,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.449,
+            "primary_linear_all_offered_D99": 3.886174139901996,
+            "primary_linear_all_offered_C99": 4.124824288971722,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 4.0,
+            "D2_misses_all_offered": 9,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 8,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0905W0246",
+          "client_id": "B",
+          "request_origin_perf": 5190348.786530392,
+          "actual_Consumer_EOS_perf": 5190362.798864351,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.297,
+            "primary_linear_all_offered_D99": 5.341529903486371,
+            "primary_linear_all_offered_C99": 5.670810301043093,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 3.0,
+            "D2_misses_all_offered": 11,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 10,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0916W0463",
+          "client_id": "B",
+          "request_origin_perf": 5190362.837026951,
+          "actual_Consumer_EOS_perf": 5190376.600675157,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.1648125,
+            "primary_linear_all_offered_D99": 5.252322486937046,
+            "primary_linear_all_offered_C99": 5.5164571487903595,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 3.5,
+            "D2_misses_all_offered": 10,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 9,
+            "nonEOS_C8_misses": 0
+          }
+        }
+      ],
+      "all_offered": 68,
+      "integrity": {
+        "original_reference": {
+          "status": "PASS_COMPLETE_SELECTED_TRACE_REFERENCE",
+          "checked_steps": 68,
+          "sources": 4,
+          "projection": "only exact source marker BDFA/current -> BDFA; no other field removed",
+          "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+          "reference_is_offline_not_serving": true
+        },
+        "request_clock": {
+          "status": "PASS_TWO_INDEPENDENT_CLIENTS_ACTUAL_EOS_ALL_OFFERS",
+          "requests": 4,
+          "clients": 2,
+          "first_phase_seconds": 2.0,
+          "accepted_frontiers_checked": 68,
+          "EOS_included": true,
+          "first_admission_lag_seconds": {
+            "A": 0.0,
+            "B": 0.09035482816398144
+          },
+          "next_release_lag_seconds": {
+            "A": 0.029030009172856808,
+            "B": 0.03816260024905205
+          }
+        },
+        "all_original_obligations_eventually_processed": true
+      },
+      "authority": {
+        "status": "PASS_DURABLE_CONSUMER_BINDING",
+        "applied_durable_facts": 68,
+        "durable_facts_not_yet_consumed": 0,
+        "duplicate_actual_durable_applications": 0,
+        "scope": "Whole provisional text can remain ahead; this does not require Consumer visible text to equal Canonical text."
+      },
+      "actual_dispatches": 68,
+      "B_current_ready_inversions": 0,
+      "all_actual_inversions": [],
+      "original_model_continuity": {
+        "status": "PASS_TWO_CONTINUOUS_ORIGINAL_MODEL_PIDS",
+        "model_loads": 2,
+        "owner_epochs": 1,
+        "worker_PIDs": [
+          2796599,
+          2796603
+        ],
+        "per_request_executing_PIDs": {
+          "BAC009S0908W0369": [
+            2796599
+          ],
+          "BAC009S0913W0313": [
+            2796599,
+            2796603
+          ],
+          "BAC009S0905W0246": [
+            2796599,
+            2796603
+          ],
+          "BAC009S0916W0463": [
+            2796599,
+            2796603
+          ]
+        }
+      },
+      "actual_held_views": [
+        {
+          "source_id": "BAC009S0908W0369",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 3.9547856049612164,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0908W0369",
+            "observed": 5190359.745280211,
+            "owner_epoch": 0,
+            "certified_frontier": 132145,
+            "visible_frontier": 132145,
+            "text": "新科市界冠军宁泽涛领接中国队出战",
+            "canonical_sha": "d839f60dab0d796d9b55c52fbfdd72c2c92dc90bdef77c988b20d6638b887743",
+            "private_job": null,
+            "publication_id": 85,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0913W0313",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 16,
+          "provisional_view_held_seconds": 4.082753854803741,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0913W0313",
+            "observed": 5190372.340834334,
+            "owner_epoch": 0,
+            "certified_frontier": 135184,
+            "visible_frontier": 135184,
+            "text": "以区域为中心建立客户经理负责制质造方面",
+            "canonical_sha": "67e4a5b30743e4a95e74ce9e5d5984286a36b2c4611f547b68a8045d08e7fded",
+            "private_job": null,
+            "publication_id": 183,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0905W0246",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.938544391654432,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0905W0246",
+            "observed": 5190362.920960335,
+            "owner_epoch": 0,
+            "certified_frontier": 132752,
+            "visible_frontier": 132752,
+            "text": "合理确定大城市郊区菜篮子产品生产用地保有数量量",
+            "canonical_sha": "061356599cb4c4b825b6ed7bac56dd91090e5824f535732c545d40b77dea2af0",
+            "private_job": null,
+            "publication_id": 108,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0916W0463",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.6430283803492785,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0916W0463",
+            "observed": 5190376.69229678,
+            "owner_epoch": 0,
+            "certified_frontier": 130637,
+            "visible_frontier": 130637,
+            "text": "湖北省荆州市安监局召开安良百货电梯事故情报通报会会",
+            "canonical_sha": "f5de60db580a04cfac7b204bce7ec9a628bba68b2e8ced12abb0988faf907ea0",
+            "private_job": null,
+            "publication_id": 200,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        }
+      ],
+      "shared_trial_both_board_energy": {
+        "origin_to_final_useful_certified_EOS": {
+          "begin_perf": 5190346.786530392,
+          "end_perf": 5190376.600675157,
+          "seconds": 29.814144765026867,
+          "board_joules": {
+            "0": 6973.921458201793,
+            "1": 5828.175672307541
+          },
+          "total_joules": 12802.097130509334,
+          "method": "linear interpolation/trapezoids on external NVML-backed both-board power; no CPU/PSU energy claim"
+        },
+        "origin_to_confirmed_physical_model_drain": {
+          "begin_perf": 5190346.786530392,
+          "end_perf": 5190383.619963697,
+          "seconds": 36.83343330491334,
+          "board_joules": {
+            "0": 7974.955126395394,
+            "1": 6591.828527348461
+          },
+          "total_joules": 14566.783653743854,
+          "method": "linear interpolation/trapezoids on external NVML-backed both-board power; no CPU/PSU energy claim"
+        },
+        "physical_drain_observation": {
+          "confirmed_perf": 5190383.619963697,
+          "observation_begin_perf": 5190383.429483859,
+          "worker_pids": [
+            2796599,
+            2796603
+          ],
+          "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+        },
+        "original_resident_energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 7992.486715077294,
+              "1": 6618.453711861291
+            },
+            "total_joules": 14610.940426938585
+          },
+          "origin_perf": 5190346.786530392,
+          "service_end_perf": 5190383.871036536,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        }
+      },
+      "scope": "Energy is shared whole trial, not per-client attribution. Inversion records bind actual UID/source/full input/PID/lease and prior accepted work; no new scheduling mechanism."
+    },
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r0",
+      "arm": "fullcall",
+      "repeat": 0,
+      "per_client": {
+        "A": {
+          "requests": [
+            "BAC009S0908W0369",
+            "BAC009S0913W0313"
+          ],
+          "worst_request_D99": 4.147918793000281,
+          "worst_request_C99": 4.416466555893421,
+          "D2_misses_all_offered": 15,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 13,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 9.5
+        },
+        "B": {
+          "requests": [
+            "BAC009S0905W0246",
+            "BAC009S0916W0463"
+          ],
+          "worst_request_D99": 7.182721542492509,
+          "worst_request_C99": 7.470688498876989,
+          "D2_misses_all_offered": 26,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 24,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 4.0
+        }
+      },
+      "per_request": [
+        {
+          "source_id": "BAC009S0908W0369",
+          "client_id": "A",
+          "request_origin_perf": 5190482.178097866,
+          "actual_Consumer_EOS_perf": 5190494.8831954,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.2590625,
+            "primary_linear_all_offered_D99": 4.147918793000281,
+            "primary_linear_all_offered_C99": 4.416466555893421,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 4.0,
+            "D2_misses_all_offered": 9,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 8,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0913W0313",
+          "client_id": "A",
+          "request_origin_perf": 5190494.896386469,
+          "actual_Consumer_EOS_perf": 5190506.951036204,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.449,
+            "primary_linear_all_offered_D99": 3.300288950204849,
+            "primary_linear_all_offered_C99": 3.559616355858743,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 5.5,
+            "D2_misses_all_offered": 6,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 5,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0905W0246",
+          "client_id": "B",
+          "request_origin_perf": 5190484.178097866,
+          "actual_Consumer_EOS_perf": 5190500.019834526,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.297,
+            "primary_linear_all_offered_D99": 7.182721542492509,
+            "primary_linear_all_offered_C99": 7.470688498876989,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 2.0,
+            "D2_misses_all_offered": 13,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 12,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0916W0463",
+          "client_id": "B",
+          "request_origin_perf": 5190500.065282874,
+          "actual_Consumer_EOS_perf": 5190512.130060523,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.1648125,
+            "primary_linear_all_offered_D99": 3.752503503896296,
+            "primary_linear_all_offered_C99": 3.8948639949038624,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 2.0,
+            "D2_misses_all_offered": 13,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 12,
+            "nonEOS_C8_misses": 0
+          }
+        }
+      ],
+      "all_offered": 68,
+      "integrity": {
+        "original_reference": {
+          "status": "PASS_COMPLETE_SELECTED_TRACE_REFERENCE",
+          "checked_steps": 68,
+          "sources": 4,
+          "projection": "only exact source marker BDFA/current -> BDFA; no other field removed",
+          "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+          "reference_is_offline_not_serving": true
+        },
+        "request_clock": {
+          "status": "PASS_TWO_INDEPENDENT_CLIENTS_ACTUAL_EOS_ALL_OFFERS",
+          "requests": 4,
+          "clients": 2,
+          "first_phase_seconds": 2.0,
+          "accepted_frontiers_checked": 68,
+          "EOS_included": true,
+          "first_admission_lag_seconds": {
+            "A": 0.0,
+            "B": 0.0481339730322361
+          },
+          "next_release_lag_seconds": {
+            "A": 0.013191068544983864,
+            "B": 0.04544834792613983
+          }
+        },
+        "all_original_obligations_eventually_processed": true
+      },
+      "authority": {
+        "status": "PASS_DURABLE_CONSUMER_BINDING",
+        "applied_durable_facts": 68,
+        "durable_facts_not_yet_consumed": 0,
+        "duplicate_actual_durable_applications": 0,
+        "scope": "Whole provisional text can remain ahead; this does not require Consumer visible text to equal Canonical text."
+      },
+      "actual_dispatches": 72,
+      "B_current_ready_inversions": 7,
+      "all_actual_inversions": [
+        {
+          "job_id": "e0-j000000014",
+          "physical_slot": "full0",
+          "pid": 2800008,
+          "dispatch_perf": 5190487.571104385,
+          "proposal_before_perf": 5190487.566715222,
+          "speculative_source_id": "BAC009S0908W0369",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0905W0246",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 32000,
+          "ready_Canonical_sha": "cc86db631aacef57f41a3d28c34ea3ff65b84160d09e8afbee9d7a8cadc2cd02",
+          "accepted_frontier": 48000,
+          "actual_worker_begin_perf": 5190487.577898958,
+          "actual_worker_end_perf": 5190488.580641555,
+          "actual_terminal_kind": "abandoned"
+        },
+        {
+          "job_id": "e0-j000000022",
+          "physical_slot": "full0",
+          "pid": 2800008,
+          "dispatch_perf": 5190491.36484831,
+          "proposal_before_perf": 5190491.36126224,
+          "speculative_source_id": "BAC009S0908W0369",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0905W0246",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 56000,
+          "ready_Canonical_sha": "c97bdf70c1f16ab53ebd392ae8c6d97ca823b14c0c67cd851ab0d0317888e7e9",
+          "accepted_frontier": 112000,
+          "actual_worker_begin_perf": 5190491.373712668,
+          "actual_worker_end_perf": 5190492.087841866,
+          "actual_terminal_kind": "completed"
+        },
+        {
+          "job_id": "e0-j000000029",
+          "physical_slot": "full1",
+          "pid": 2800011,
+          "dispatch_perf": 5190494.073626166,
+          "proposal_before_perf": 5190494.071338388,
+          "speculative_source_id": "BAC009S0908W0369",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0905W0246",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 80000,
+          "ready_Canonical_sha": "b5bdce77911264f787b9954a9d0b290c02d76844cf4f1ec877bd74dd3b241ae0",
+          "accepted_frontier": 132752,
+          "actual_worker_begin_perf": 5190494.07986826,
+          "actual_worker_end_perf": 5190494.827368428,
+          "actual_terminal_kind": "completed"
+        },
+        {
+          "job_id": "e0-j000000035",
+          "physical_slot": "full0",
+          "pid": 2800008,
+          "dispatch_perf": 5190496.431765011,
+          "proposal_before_perf": 5190496.430239036,
+          "speculative_source_id": "BAC009S0913W0313",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0905W0246",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 104000,
+          "ready_Canonical_sha": "a7ac220c4d59b6e619238a647cdc7378a079b7f309b8282a8b83b685142ec482",
+          "accepted_frontier": 132752,
+          "actual_worker_begin_perf": 5190496.437304384,
+          "actual_worker_end_perf": 5190496.838647389,
+          "actual_terminal_kind": "abandoned"
+        },
+        {
+          "job_id": "e0-j000000040",
+          "physical_slot": "full0",
+          "pid": 2800008,
+          "dispatch_perf": 5190498.172889759,
+          "proposal_before_perf": 5190498.169699275,
+          "speculative_source_id": "BAC009S0913W0313",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0905W0246",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 120000,
+          "ready_Canonical_sha": "0878c1dedc923a14016014b4eb7d5e48563f6f0a24d8489fc6bb532cb40fc63a",
+          "accepted_frontier": 132752,
+          "actual_worker_begin_perf": 5190498.180960443,
+          "actual_worker_end_perf": 5190498.900945386,
+          "actual_terminal_kind": "completed"
+        },
+        {
+          "job_id": "e0-j000000052",
+          "physical_slot": "full1",
+          "pid": 2800011,
+          "dispatch_perf": 5190502.307959681,
+          "proposal_before_perf": 5190502.305975858,
+          "speculative_source_id": "BAC009S0913W0313",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0916W0463",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 16000,
+          "ready_Canonical_sha": "2664109f3864e35f48ecb7083b18cb9d7173569ed4c349ed85f9db1a536b0376",
+          "accepted_frontier": 32000,
+          "actual_worker_begin_perf": 5190502.314604742,
+          "actual_worker_end_perf": 5190503.140262392,
+          "actual_terminal_kind": "completed"
+        },
+        {
+          "job_id": "e0-j000000054",
+          "physical_slot": "full0",
+          "pid": 2800008,
+          "dispatch_perf": 5190503.073389276,
+          "proposal_before_perf": 5190503.068310412,
+          "speculative_source_id": "BAC009S0913W0313",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0916W0463",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 24000,
+          "ready_Canonical_sha": "5ca062ff74b86e8d6f12b5ca24199ef372cdaacddd1e25f3e0cb035aaea62227",
+          "accepted_frontier": 40000,
+          "actual_worker_begin_perf": 5190503.080423014,
+          "actual_worker_end_perf": 5190504.06223726,
+          "actual_terminal_kind": "completed"
+        }
+      ],
+      "original_model_continuity": {
+        "status": "PASS_TWO_CONTINUOUS_ORIGINAL_MODEL_PIDS",
+        "model_loads": 2,
+        "owner_epochs": 1,
+        "worker_PIDs": [
+          2800008,
+          2800011
+        ],
+        "per_request_executing_PIDs": {
+          "BAC009S0908W0369": [
+            2800008,
+            2800011
+          ],
+          "BAC009S0913W0313": [
+            2800008,
+            2800011
+          ],
+          "BAC009S0905W0246": [
+            2800008,
+            2800011
+          ],
+          "BAC009S0916W0463": [
+            2800008,
+            2800011
+          ]
+        }
+      },
+      "actual_held_views": [
+        {
+          "source_id": "BAC009S0908W0369",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.40618088375777,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0908W0369",
+            "observed": 5190494.989253309,
+            "owner_epoch": 0,
+            "certified_frontier": 132145,
+            "visible_frontier": 132145,
+            "text": "新科市界冠军宁泽涛领接中国队出战",
+            "canonical_sha": "d839f60dab0d796d9b55c52fbfdd72c2c92dc90bdef77c988b20d6638b887743",
+            "private_job": null,
+            "publication_id": 79,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0913W0313",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 16,
+          "provisional_view_held_seconds": 4.007608348503709,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0913W0313",
+            "observed": 5190507.013808232,
+            "owner_epoch": 0,
+            "certified_frontier": 135184,
+            "visible_frontier": 135184,
+            "text": "以区域为中心建立客户经理负责制质造方面",
+            "canonical_sha": "67e4a5b30743e4a95e74ce9e5d5984286a36b2c4611f547b68a8045d08e7fded",
+            "private_job": null,
+            "publication_id": 170,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0905W0246",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.499137230217457,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0905W0246",
+            "observed": 5190500.193820519,
+            "owner_epoch": 0,
+            "certified_frontier": 132752,
+            "visible_frontier": 132752,
+            "text": "合理确定大城市郊区菜篮子产品生产用地保有数量量",
+            "canonical_sha": "061356599cb4c4b825b6ed7bac56dd91090e5824f535732c545d40b77dea2af0",
+            "private_job": null,
+            "publication_id": 117,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0916W0463",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.574576247483492,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0916W0463",
+            "observed": 5190512.168408474,
+            "owner_epoch": 0,
+            "certified_frontier": 130637,
+            "visible_frontier": 130637,
+            "text": "湖北省荆州市安监局召开安良百货电梯事故情报通报会会",
+            "canonical_sha": "f5de60db580a04cfac7b204bce7ec9a628bba68b2e8ced12abb0988faf907ea0",
+            "private_job": null,
+            "publication_id": 200,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        }
+      ],
+      "shared_trial_both_board_energy": {
+        "origin_to_final_useful_certified_EOS": {
+          "begin_perf": 5190482.178097866,
+          "end_perf": 5190512.130060523,
+          "seconds": 29.951962657272816,
+          "board_joules": {
+            "0": 6716.163892868967,
+            "1": 6448.008103564733
+          },
+          "total_joules": 13164.171996433699,
+          "method": "linear interpolation/trapezoids on external NVML-backed both-board power; no CPU/PSU energy claim"
+        },
+        "origin_to_confirmed_physical_model_drain": {
+          "begin_perf": 5190482.178097866,
+          "end_perf": 5190516.984662945,
+          "seconds": 34.80656507983804,
+          "board_joules": {
+            "0": 7414.074896870503,
+            "1": 7073.206314600305
+          },
+          "total_joules": 14487.281211470807,
+          "method": "linear interpolation/trapezoids on external NVML-backed both-board power; no CPU/PSU energy claim"
+        },
+        "physical_drain_observation": {
+          "confirmed_perf": 5190516.984662945,
+          "observation_begin_perf": 5190516.836046942,
+          "worker_pids": [
+            2800008,
+            2800011
+          ],
+          "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+        },
+        "original_resident_energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 7401.801672965924,
+              "1": 7080.272879660779
+            },
+            "total_joules": 14482.074552626702
+          },
+          "origin_perf": 5190482.178097866,
+          "service_end_perf": 5190516.993448282,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        }
+      },
+      "scope": "Energy is shared whole trial, not per-client attribution. Inversion records bind actual UID/source/full input/PID/lease and prior accepted work; no new scheduling mechanism."
+    },
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_fullcall_r1",
+      "arm": "fullcall",
+      "repeat": 1,
+      "per_client": {
+        "A": {
+          "requests": [
+            "BAC009S0908W0369",
+            "BAC009S0913W0313"
+          ],
+          "worst_request_D99": 4.093549364805222,
+          "worst_request_C99": 4.374744439609349,
+          "D2_misses_all_offered": 15,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 13,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 9.5
+        },
+        "B": {
+          "requests": [
+            "BAC009S0905W0246",
+            "BAC009S0916W0463"
+          ],
+          "worst_request_D99": 5.652556877434254,
+          "worst_request_C99": 6.075752776488661,
+          "D2_misses_all_offered": 22,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 20,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 6.0
+        }
+      },
+      "per_request": [
+        {
+          "source_id": "BAC009S0908W0369",
+          "client_id": "A",
+          "request_origin_perf": 5190574.199538741,
+          "actual_Consumer_EOS_perf": 5190586.916338267,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.2590625,
+            "primary_linear_all_offered_D99": 4.093549364805222,
+            "primary_linear_all_offered_C99": 4.374744439609349,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 4.5,
+            "D2_misses_all_offered": 8,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 7,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0913W0313",
+          "client_id": "A",
+          "request_origin_perf": 5190586.924360981,
+          "actual_Consumer_EOS_perf": 5190599.098498928,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.449,
+            "primary_linear_all_offered_D99": 3.2279649141430853,
+            "primary_linear_all_offered_C99": 3.674991119131446,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 5.0,
+            "D2_misses_all_offered": 7,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 6,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0905W0246",
+          "client_id": "B",
+          "request_origin_perf": 5190576.199538741,
+          "actual_Consumer_EOS_perf": 5190590.670467433,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.297,
+            "primary_linear_all_offered_D99": 5.652556877434254,
+            "primary_linear_all_offered_C99": 6.075752776488661,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 2.5,
+            "D2_misses_all_offered": 12,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 11,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0916W0463",
+          "client_id": "B",
+          "request_origin_perf": 5190590.734996456,
+          "actual_Consumer_EOS_perf": 5190602.898124496,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.1648125,
+            "primary_linear_all_offered_D99": 3.7929587550461292,
+            "primary_linear_all_offered_C99": 3.9764575467258694,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 3.5,
+            "D2_misses_all_offered": 10,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 9,
+            "nonEOS_C8_misses": 0
+          }
+        }
+      ],
+      "all_offered": 68,
+      "integrity": {
+        "original_reference": {
+          "status": "PASS_COMPLETE_SELECTED_TRACE_REFERENCE",
+          "checked_steps": 68,
+          "sources": 4,
+          "projection": "only exact source marker BDFA/current -> BDFA; no other field removed",
+          "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+          "reference_is_offline_not_serving": true
+        },
+        "request_clock": {
+          "status": "PASS_TWO_INDEPENDENT_CLIENTS_ACTUAL_EOS_ALL_OFFERS",
+          "requests": 4,
+          "clients": 2,
+          "first_phase_seconds": 2.0,
+          "accepted_frontiers_checked": 68,
+          "EOS_included": true,
+          "first_admission_lag_seconds": {
+            "A": 0.0,
+            "B": 0.009064805693924427
+          },
+          "next_release_lag_seconds": {
+            "A": 0.008022714406251907,
+            "B": 0.06452902313321829
+          }
+        },
+        "all_original_obligations_eventually_processed": true
+      },
+      "authority": {
+        "status": "PASS_DURABLE_CONSUMER_BINDING",
+        "applied_durable_facts": 68,
+        "durable_facts_not_yet_consumed": 0,
+        "duplicate_actual_durable_applications": 0,
+        "scope": "Whole provisional text can remain ahead; this does not require Consumer visible text to equal Canonical text."
+      },
+      "actual_dispatches": 72,
+      "B_current_ready_inversions": 3,
+      "all_actual_inversions": [
+        {
+          "job_id": "e0-j000000019",
+          "physical_slot": "full0",
+          "pid": 2804664,
+          "dispatch_perf": 5190581.564885932,
+          "proposal_before_perf": 5190581.559785536,
+          "speculative_source_id": "BAC009S0908W0369",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0905W0246",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 48000,
+          "ready_Canonical_sha": "73e43c2d64c49de7b260e9246bac7c56f4c9ccde9a1187a2ed820a848de9bbba",
+          "accepted_frontier": 80000,
+          "actual_worker_begin_perf": 5190581.572279986,
+          "actual_worker_end_perf": 5190582.559637583,
+          "actual_terminal_kind": "completed"
+        },
+        {
+          "job_id": "e0-j000000038",
+          "physical_slot": "full1",
+          "pid": 2804668,
+          "dispatch_perf": 5190588.5715972,
+          "proposal_before_perf": 5190588.568397506,
+          "speculative_source_id": "BAC009S0913W0313",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0905W0246",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 120000,
+          "ready_Canonical_sha": "0878c1dedc923a14016014b4eb7d5e48563f6f0a24d8489fc6bb532cb40fc63a",
+          "accepted_frontier": 132752,
+          "actual_worker_begin_perf": 5190588.577009071,
+          "actual_worker_end_perf": 5190588.948498816,
+          "actual_terminal_kind": "abandoned"
+        },
+        {
+          "job_id": "e0-j000000064",
+          "physical_slot": "full1",
+          "pid": 2804668,
+          "dispatch_perf": 5190598.165179402,
+          "proposal_before_perf": 5190598.160674706,
+          "speculative_source_id": "BAC009S0913W0313",
+          "speculative_client": "A",
+          "ready_Canonical_source_id": "BAC009S0916W0463",
+          "ready_Canonical_client": "B",
+          "ready_Canonical_frontier": 72000,
+          "ready_Canonical_sha": "a07f9cff281a2edfbc0865857b0c3d6e2b5dce30a6a858b8ffb2a1f97df85d34",
+          "accepted_frontier": 112000,
+          "actual_worker_begin_perf": 5190598.171805093,
+          "actual_worker_end_perf": 5190598.825084986,
+          "actual_terminal_kind": "completed"
+        }
+      ],
+      "original_model_continuity": {
+        "status": "PASS_TWO_CONTINUOUS_ORIGINAL_MODEL_PIDS",
+        "model_loads": 2,
+        "owner_epochs": 1,
+        "worker_PIDs": [
+          2804664,
+          2804668
+        ],
+        "per_request_executing_PIDs": {
+          "BAC009S0908W0369": [
+            2804664,
+            2804668
+          ],
+          "BAC009S0913W0313": [
+            2804664,
+            2804668
+          ],
+          "BAC009S0905W0246": [
+            2804664,
+            2804668
+          ],
+          "BAC009S0916W0463": [
+            2804664,
+            2804668
+          ]
+        }
+      },
+      "actual_held_views": [
+        {
+          "source_id": "BAC009S0908W0369",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.337731741368771,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0908W0369",
+            "observed": 5190586.963593709,
+            "owner_epoch": 0,
+            "certified_frontier": 132145,
+            "visible_frontier": 132145,
+            "text": "新科市界冠军宁泽涛领接中国队出战",
+            "canonical_sha": "d839f60dab0d796d9b55c52fbfdd72c2c92dc90bdef77c988b20d6638b887743",
+            "private_job": null,
+            "publication_id": 82,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0913W0313",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 16,
+          "provisional_view_held_seconds": 4.2712532030418515,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0913W0313",
+            "observed": 5190599.249719638,
+            "owner_epoch": 0,
+            "certified_frontier": 135184,
+            "visible_frontier": 135184,
+            "text": "以区域为中心建立客户经理负责制质造方面",
+            "canonical_sha": "67e4a5b30743e4a95e74ce9e5d5984286a36b2c4611f547b68a8045d08e7fded",
+            "private_job": null,
+            "publication_id": 177,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0905W0246",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.432774270884693,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0905W0246",
+            "observed": 5190590.849921976,
+            "owner_epoch": 0,
+            "certified_frontier": 132752,
+            "visible_frontier": 132752,
+            "text": "合理确定大城市郊区菜篮子产品生产用地保有数量量",
+            "canonical_sha": "061356599cb4c4b825b6ed7bac56dd91090e5824f535732c545d40b77dea2af0",
+            "private_job": null,
+            "publication_id": 111,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0916W0463",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.654764880426228,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0916W0463",
+            "observed": 5190603.03409528,
+            "owner_epoch": 0,
+            "certified_frontier": 130637,
+            "visible_frontier": 130637,
+            "text": "湖北省荆州市安监局召开安良百货电梯事故情报通报会会",
+            "canonical_sha": "f5de60db580a04cfac7b204bce7ec9a628bba68b2e8ced12abb0988faf907ea0",
+            "private_job": null,
+            "publication_id": 200,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        }
+      ],
+      "shared_trial_both_board_energy": {
+        "origin_to_final_useful_certified_EOS": {
+          "begin_perf": 5190574.199538741,
+          "end_perf": 5190602.898124496,
+          "seconds": 28.698585755191743,
+          "board_joules": {
+            "0": 6386.010473673064,
+            "1": 6463.611639302289
+          },
+          "total_joules": 12849.622112975354,
+          "method": "linear interpolation/trapezoids on external NVML-backed both-board power; no CPU/PSU energy claim"
+        },
+        "origin_to_confirmed_physical_model_drain": {
+          "begin_perf": 5190574.199538741,
+          "end_perf": 5190608.670364928,
+          "seconds": 34.47082618717104,
+          "board_joules": {
+            "0": 7187.046817388586,
+            "1": 7221.476033786195
+          },
+          "total_joules": 14408.522851174781,
+          "method": "linear interpolation/trapezoids on external NVML-backed both-board power; no CPU/PSU energy claim"
+        },
+        "physical_drain_observation": {
+          "confirmed_perf": 5190608.670364928,
+          "observation_begin_perf": 5190608.455081959,
+          "worker_pids": [
+            2804664,
+            2804668
+          ],
+          "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+        },
+        "original_resident_energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 7216.785458947034,
+              "1": 7249.9336543088
+            },
+            "total_joules": 14466.719113255835
+          },
+          "origin_perf": 5190574.199538741,
+          "service_end_perf": 5190609.013024236,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        }
+      },
+      "scope": "Energy is shared whole trial, not per-client attribution. Inversion records bind actual UID/source/full input/PID/lease and prior accepted work; no new scheduling mechanism."
+    },
+    {
+      "cell_id": "SC_INTERFERENCE_OPPORTUNITY_V1_conservative_r1",
+      "arm": "conservative",
+      "repeat": 1,
+      "per_client": {
+        "A": {
+          "requests": [
+            "BAC009S0908W0369",
+            "BAC009S0913W0313"
+          ],
+          "worst_request_D99": 4.689750491864979,
+          "worst_request_C99": 5.008333569653332,
+          "D2_misses_all_offered": 17,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 15,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 8.5
+        },
+        "B": {
+          "requests": [
+            "BAC009S0905W0246",
+            "BAC009S0916W0463"
+          ],
+          "worst_request_D99": 5.6238839177787305,
+          "worst_request_C99": 5.942914161607623,
+          "D2_misses_all_offered": 21,
+          "C8_misses_all_offered": 0,
+          "EOS_D2_misses": 2,
+          "EOS_C8_misses": 0,
+          "nonEOS_D2_misses": 19,
+          "nonEOS_C8_misses": 0,
+          "dual_deadline_audio_credit_seconds": 6.5
+        }
+      },
+      "per_request": [
+        {
+          "source_id": "BAC009S0908W0369",
+          "client_id": "A",
+          "request_origin_perf": 5190693.368742979,
+          "actual_Consumer_EOS_perf": 5190706.729217672,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.2590625,
+            "primary_linear_all_offered_D99": 4.689750491864979,
+            "primary_linear_all_offered_C99": 5.008333569653332,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 4.0,
+            "D2_misses_all_offered": 9,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 8,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0913W0313",
+          "client_id": "A",
+          "request_origin_perf": 5190706.747614202,
+          "actual_Consumer_EOS_perf": 5190719.637023088,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.449,
+            "primary_linear_all_offered_D99": 4.073580940030515,
+            "primary_linear_all_offered_C99": 4.4023955133557315,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 4.5,
+            "D2_misses_all_offered": 8,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 7,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0905W0246",
+          "client_id": "B",
+          "request_origin_perf": 5190695.368742979,
+          "actual_Consumer_EOS_perf": 5190709.670440069,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.297,
+            "primary_linear_all_offered_D99": 5.6238839177787305,
+            "primary_linear_all_offered_C99": 5.942914161607623,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 3.0,
+            "D2_misses_all_offered": 11,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 10,
+            "nonEOS_C8_misses": 0
+          }
+        },
+        {
+          "source_id": "BAC009S0916W0463",
+          "client_id": "B",
+          "request_origin_perf": 5190709.696664651,
+          "actual_Consumer_EOS_perf": 5190723.77581506,
+          "primary": {
+            "offered_frontiers": 17,
+            "offered_audio_seconds": 8.1648125,
+            "primary_linear_all_offered_D99": 5.570829243808984,
+            "primary_linear_all_offered_C99": 5.833469670973718,
+            "original_quantile_test_pass": false,
+            "complete_coverage_and_original_quantile_pass": false,
+            "dual_deadline_audio_credit_seconds": 3.5,
+            "D2_misses_all_offered": 10,
+            "C8_misses_all_offered": 0,
+            "EOS_D2_misses": 1,
+            "missing_D_frontiers": 0,
+            "missing_C_frontiers": 0,
+            "EOS_C8_misses": 0,
+            "nonEOS_D2_misses": 9,
+            "nonEOS_C8_misses": 0
+          }
+        }
+      ],
+      "all_offered": 68,
+      "integrity": {
+        "original_reference": {
+          "status": "PASS_COMPLETE_SELECTED_TRACE_REFERENCE",
+          "checked_steps": 68,
+          "sources": 4,
+          "projection": "only exact source marker BDFA/current -> BDFA; no other field removed",
+          "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+          "reference_is_offline_not_serving": true
+        },
+        "request_clock": {
+          "status": "PASS_TWO_INDEPENDENT_CLIENTS_ACTUAL_EOS_ALL_OFFERS",
+          "requests": 4,
+          "clients": 2,
+          "first_phase_seconds": 2.0,
+          "accepted_frontiers_checked": 68,
+          "EOS_included": true,
+          "first_admission_lag_seconds": {
+            "A": 0.0,
+            "B": 0.07065265998244286
+          },
+          "next_release_lag_seconds": {
+            "A": 0.0183965303003788,
+            "B": 0.02622458152472973
+          }
+        },
+        "all_original_obligations_eventually_processed": true
+      },
+      "authority": {
+        "status": "PASS_DURABLE_CONSUMER_BINDING",
+        "applied_durable_facts": 68,
+        "durable_facts_not_yet_consumed": 0,
+        "duplicate_actual_durable_applications": 0,
+        "scope": "Whole provisional text can remain ahead; this does not require Consumer visible text to equal Canonical text."
+      },
+      "actual_dispatches": 68,
+      "B_current_ready_inversions": 0,
+      "all_actual_inversions": [],
+      "original_model_continuity": {
+        "status": "PASS_TWO_CONTINUOUS_ORIGINAL_MODEL_PIDS",
+        "model_loads": 2,
+        "owner_epochs": 1,
+        "worker_PIDs": [
+          2807895,
+          2807898
+        ],
+        "per_request_executing_PIDs": {
+          "BAC009S0908W0369": [
+            2807895
+          ],
+          "BAC009S0913W0313": [
+            2807895,
+            2807898
+          ],
+          "BAC009S0905W0246": [
+            2807895,
+            2807898
+          ],
+          "BAC009S0916W0463": [
+            2807895,
+            2807898
+          ]
+        }
+      },
+      "actual_held_views": [
+        {
+          "source_id": "BAC009S0908W0369",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.300956127233803,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0908W0369",
+            "observed": 5190706.885750744,
+            "owner_epoch": 0,
+            "certified_frontier": 132145,
+            "visible_frontier": 132145,
+            "text": "新科市界冠军宁泽涛领接中国队出战",
+            "canonical_sha": "d839f60dab0d796d9b55c52fbfdd72c2c92dc90bdef77c988b20d6638b887743",
+            "private_job": null,
+            "publication_id": 86,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0913W0313",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 16,
+          "provisional_view_held_seconds": 3.9827705770730972,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0913W0313",
+            "observed": 5190719.731811151,
+            "owner_epoch": 0,
+            "certified_frontier": 135184,
+            "visible_frontier": 135184,
+            "text": "以区域为中心建立客户经理负责制质造方面",
+            "canonical_sha": "67e4a5b30743e4a95e74ce9e5d5984286a36b2c4611f547b68a8045d08e7fded",
+            "private_job": null,
+            "publication_id": 183,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0905W0246",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.907253974117339,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0905W0246",
+            "observed": 5190709.868605957,
+            "owner_epoch": 0,
+            "certified_frontier": 132752,
+            "visible_frontier": 132752,
+            "text": "合理确定大城市郊区菜篮子产品生产用地保有数量量",
+            "canonical_sha": "061356599cb4c4b825b6ed7bac56dd91090e5824f535732c545d40b77dea2af0",
+            "private_job": null,
+            "publication_id": 108,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        },
+        {
+          "source_id": "BAC009S0916W0463",
+          "actual_Consumer_rows": 50,
+          "provisional_rows": 15,
+          "provisional_view_held_seconds": 4.279319081455469,
+          "actual_last_held_view": {
+            "kind": "private",
+            "source_id": "BAC009S0916W0463",
+            "observed": 5190723.828855046,
+            "owner_epoch": 0,
+            "certified_frontier": 130637,
+            "visible_frontier": 130637,
+            "text": "湖北省荆州市安监局召开安良百货电梯事故情报通报会会",
+            "canonical_sha": "f5de60db580a04cfac7b204bce7ec9a628bba68b2e8ced12abb0988faf907ea0",
+            "private_job": null,
+            "publication_id": 200,
+            "recovery_replay": false
+          },
+          "scope": "Actual Consumer-held whole view; provisional frontier is distinct from durable C/U authority and human correctness."
+        }
+      ],
+      "shared_trial_both_board_energy": {
+        "origin_to_final_useful_certified_EOS": {
+          "begin_perf": 5190693.368742979,
+          "end_perf": 5190723.77581506,
+          "seconds": 30.40707208123058,
+          "board_joules": {
+            "0": 6068.825185092587,
+            "1": 7041.816212470314
+          },
+          "total_joules": 13110.6413975629,
+          "method": "linear interpolation/trapezoids on external NVML-backed both-board power; no CPU/PSU energy claim"
+        },
+        "origin_to_confirmed_physical_model_drain": {
+          "begin_perf": 5190693.368742979,
+          "end_perf": 5190729.439594603,
+          "seconds": 36.07085162401199,
+          "board_joules": {
+            "0": 6723.5947987011,
+            "1": 7860.036919422427
+          },
+          "total_joules": 14583.631718123528,
+          "method": "linear interpolation/trapezoids on external NVML-backed both-board power; no CPU/PSU energy claim"
+        },
+        "physical_drain_observation": {
+          "confirmed_perf": 5190729.439594603,
+          "observation_begin_perf": 5190729.300719815,
+          "worker_pids": [
+            2807895,
+            2807898
+          ],
+          "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+        },
+        "original_resident_energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 6750.851078392495,
+              "1": 7896.2398138505805
+            },
+            "total_joules": 14647.090892243075
+          },
+          "origin_perf": 5190693.368742979,
+          "service_end_perf": 5190729.700890583,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        }
+      },
+      "scope": "Energy is shared whole trial, not per-client attribution. Inversion records bind actual UID/source/full input/PID/lease and prior accepted work; no new scheduling mechanism."
+    }
+  ],
+  "probe_selected_transitions": 272,
+  "actual_dispatches": 280,
+  "all_original_state_C_ID_and_clock_PASS": true
+}

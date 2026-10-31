@@ -1,0 +1,131 @@
+{
+  "status": "NO_GO_FIXED_TWO_CLIENT_ADMISSION_OPPORTUNITY",
+  "actual_trials": 4,
+  "maximum_trials": 4,
+  "unrun_frozen_trials": 0,
+  "contract": "unchanged original4f; two closed-loop clients; A-first sid order; fixed2s first-B phase; original500ms/EOS/D2C8; no new scheduler",
+  "sources": {
+    "observational_controller": "2198b8d517e068cb8a08e0bc022104b4fed4c8c7",
+    "actual_NN": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+    "upstream_a13": "a13fa0a335529dc188f7e738877a3acd027ce4a7"
+  },
+  "source_manifest_sha256": "8f0d2fa7dabd514eee264b5af815b8e218c194ec70b08e88f47bc82bc3cb5d72",
+  "frozen_plan_sha256": "58ac4fad9d8015fe76263021916ad6586187823bf543d01331c452333add2c2b",
+  "gates": {
+    "opportunity_gate": {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_OPPORTUNITY4_V1_RESULTS\\GATE.json",
+      "sha256": "5a715324d5b67765cf2ad16aace5e63661666db9b497cb4272480fae0a6dd525",
+      "status": "NO_GO_FIXED_TWO_CLIENT_ADMISSION_OPPORTUNITY"
+    },
+    "formal98": {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_CPU_AND_INDEPENDENT_AUDIT_v1\\formal_readiness\\linux98\\GATE.json",
+      "sha256": "fa571953731314b61030e4da04e2f8814c8a5fccb9ce46c59c50c0c341f2fa37",
+      "status": "PASS_FORMAL_INTERFERENCE98_LINUX_CPU_ZERO_SKIP"
+    },
+    "OS_synthetic_CUDA": {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_CPU_AND_INDEPENDENT_AUDIT_v1\\formal_readiness\\real_os\\GATE.json",
+      "sha256": "7ddcb3b60311b808788e328b89a32d9fa3c946dbcd2dc02529920999a4a270e7",
+      "status": "PASS_REAL_LINUX_DEAD_LEADER_ORPHAN_GROUP_CONTROL"
+    },
+    "live_model26_and_audio": {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_CPU_AND_INDEPENDENT_AUDIT_v1\\formal_readiness\\live_assets\\GATE.json",
+      "sha256": "ae1617fc317ef9278486c6ce3209dc3e0a7d6066064a3547fd2e5f461ef970ed",
+      "status": "PASS_INTERFERENCE_LIVE_MODEL26_AUDIO_AND_AUTHOR_BYTES"
+    },
+    "prior_R1_bound_gate": {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_CPU_AND_INDEPENDENT_AUDIT_v1\\formal_readiness\\PRIOR_SCOPE_GATE.json",
+      "sha256": "63aad1bcdf072381c1579eabe53951c9d342a369a4dcabd7160952d22b3278eb",
+      "status": "PASS_EXISTING_PAIRED32_USEFUL_RESIDENT4_AND_BUFFER4_POSTHOC_MECHANISMS"
+    },
+    "independent1190_raw_recount": {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_CPU_AND_INDEPENDENT_AUDIT_v1\\independent_raw_recount\\GATE.json",
+      "sha256": "7b6d84572a8914954a1cc477a824c1a4402d20b1b71aa081ff5d5ba01f6bda88",
+      "status": "PASS_INDEPENDENT_ALL1190_STATE_C_IDS_CLOCK_DISPATCH_RAW_RECOUNT"
+    },
+    "final4f_noarg": {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_FINAL_CURRENT4F_NOARG_v1.json",
+      "sha256": "56eb4726d42743d2001f1f47864caa81b2ce665bd4e40ea9db103761ce55b387",
+      "status": "SOURCE_IDENTITY_PASS"
+    },
+    "resource_closure": {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_FINAL_RESOURCE_CLOSURE_v1.json",
+      "sha256": "e5f0fd757285bc7b4084bd2830b001f7e170b070e823147a9932843f6de16977",
+      "status": "PASS_INTERFERENCE_QUEUE_CLOSED_CUDA_EMPTY"
+    }
+  },
+  "decision": {
+    "status": "NO_GO_FIXED_TWO_CLIENT_ADMISSION_OPPORTUNITY",
+    "checks": [
+      {
+        "repeat": 0,
+        "Conservative_all_four_requests_C8_no_miss": true,
+        "AlwaysFull_actual_B_current_ready_inversion": true,
+        "B_worst_request_C99_conservative": 5.670810301043093,
+        "B_worst_request_C99_AlwaysFull": 7.470688498876989,
+        "B_C99_difference_seconds": 1.7998781978338956,
+        "B_extra_C8_frontier_misses": 0,
+        "B_C99_regression_ge_1s_and20percent": true,
+        "B_extra_C8_frontier_misses_ge4": false,
+        "repeat_GO": true
+      },
+      {
+        "repeat": 1,
+        "Conservative_all_four_requests_C8_no_miss": true,
+        "AlwaysFull_actual_B_current_ready_inversion": true,
+        "B_worst_request_C99_conservative": 5.942914161607623,
+        "B_worst_request_C99_AlwaysFull": 6.075752776488661,
+        "B_C99_difference_seconds": 0.1328386148810381,
+        "B_extra_C8_frontier_misses": 0,
+        "B_C99_regression_ge_1s_and20percent": false,
+        "B_extra_C8_frontier_misses_ge4": false,
+        "repeat_GO": false
+      }
+    ],
+    "shared_credit_gain_required": false,
+    "all_A_B_metrics_and_energy_retained": true,
+    "maximum_actual_trials": 4,
+    "scope": "Preregisitered engineering opportunity gate. Observed inversion plus paired B service regression; no causal proof of all latency, no scheduler benefit measured, no result-dependent source/phase/threshold repair."
+  },
+  "all_A_B_metrics_held_views_authority_energy_and_inversions": {
+    "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_FINAL_FACTS_v1.json",
+    "sha256": "ef3995bd90259f7da0eefd00d1d8d09decb8965ede73507eaacd99388e22faf6"
+  },
+  "actual_queue_evidence": {
+    "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_20261031\\INTERFERENCE_ACTUAL_INVERSION_QUEUE_EVIDENCE_v1.json",
+    "sha256": "61f0614e1cb045787819f0d1eb5423f7659cf711575162f5832e0898b4421997"
+  },
+  "independent_raw_recount": {
+    "R1_original_selected_transitions": 918,
+    "probe_original_selected_transitions": 272,
+    "total": 1190,
+    "probe_actual_dispatches": 280,
+    "all_raw_before_after_unchanged": true,
+    "raw_files": 1262,
+    "raw_bytes": 348155321,
+    "new_NN_calls": 0
+  },
+  "probe_raw_inventory": {
+    "raw_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_20261031/interference_opportunity4_v1",
+    "files": 116,
+    "bytes": 100435035,
+    "index_sha256": "e04f839a3bc4edccb4430a60621a05ee70462918871f9e3eb1c241a1a7aa1ee0"
+  },
+  "R1_original_record_unchanged_sha256": "d80c2c07f80cbc614a87ad1510811d9b18968078d70f9e15fc07b1d63e607b4a",
+  "no_Canonical_first_or_adaptive_budget_or_new_NN": true,
+  "no_source_phase_threshold_scan_or_retry": true,
+  "conclusions": [
+    "Actual B-ready inversion repeated7/3 but large B worst-C99 harm only repeated0; predeclared AND gate is NO_GO.",
+    "Both policies kept C8 frontier misses zero for both clients in both repeats; no C8 breach was observed.",
+    "This is not a new scheduling benefit, all-latency causal attribution, capacity/fairness guarantee, or failure of the completed R1 contribution.",
+    "Energy totals are whole shared trial, not per-client energy attribution."
+  ],
+  "closure": {
+    "CURRENT_returned_to4f": true,
+    "matching_noarg59file_gate": true,
+    "original_probe_PID_generation_gone": true,
+    "CUDA_compute_owners_empty": true,
+    "lease_returned_to_root": true
+  },
+  "GitHub_pushed": false,
+  "manuscript_edited": false
+}
