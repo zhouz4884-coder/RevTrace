@@ -1,0 +1,32 @@
+# Source, contract and evidence map
+
+2026-10-31. This maps assertions to source mechanisms and evidence, not an execution log or a proof of all source code. Actual neural commits, CPU analysis commits, drawing commits and GitHub archive commits are different identities.
+
+| Manuscript object / judgment | Concrete source anchor | Contract and evidence |
+|---|---|---|
+| Complete feedback cut | `experiments/dsn_native_resilience_20261030/source_v2/feedback_contract.py:19`, `native_bridge.py`; upstream frozen complete 59-file manifest in `packages/SOURCE_v2.json` | Source NN4f `4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47`; full engine feedback state plus fixed audio/target/EOS/model/decoding, not just rendered text. Native exact references test declared sufficiency empirically. |
+| Same-frontier input confirmation, refutation, UNKNOWN | `source_v2/fullspec_policy.py:29` `_reason`, `:48` `dependency_support_losses`, `:95` `next_full_start` | Current complete input equality can confirm an old-birth owned call; only actual selected witness at its own start frontier refutes it. Earlier ancestor loss alone leaves future input unresolved. No new admission scheduler. |
+| Complete original result and retained suffix | `source_v2/fullspec_policy.py:123` `_replace_conditional_node`, `:151` `complete`, `:166` `pop_ready_commits` | Complete original C/U output, identity and start/end bind before ordered use. Own predicted end can differ. Suffix must consume actual output contiguously, without relabelling. |
+| Durable-before-install, selected trace | `source_v2/resilience_policy.py:150` `_commit`; `resilience_storage.py` FactStore; `resilience_consumer.py` | Full parent/result and original identities synchronized before installation; Consumer checks fact order/parent. Proposition is conditional selected-fact refinement; provisional views and entire Python/CUDA behavior are outside its alphabet. |
+| Producer loss and accepted B | `source_v2/resilience_channel_close.py:58`; worker lifecycle and `resilience_policy.py:274` | Confirm exit/CUDA/readers; strictly process complete sealed-channel receipts before fence. Fenced future message ≠ previously accepted buffer. Four controlled match/mismatch cases; original READY reader gates remain FAIL, separately frozen zero-NN corrected reconstruction validates unchanged receipts. |
+| Whole actual view | `source_v2/resilience_consumer.py:26,48`; complete publication dependency paths | Keep whole h iff complete support from actual installed root; certified lane separate. Native final20 has zero matched compatible opportunity, resident one nonempty opportunity; not a new 2×2 or prevalence estimate. |
+| Core R/S factorization | Core frozen-source manifests under `experiments/physical_retirement_20261028/packages/SOURCE_v3.json`, `experiments/dsn_service_stability_20261028` and associated original records (do not relabel NN4f) | Qwen token-state complete-boundary plus unique successor is conservative R guard; S also permits directly rooted published calls. Core static batches require terminals + device sync / BatchDrained, unlike native per-process release. |
+| Original selected histories and service | `experiments/dsn_strengthening_20261031/PAIRED32_V2_RESULTS`, `RESIDENT4_V2_RESULTS` | Matched32 reuses four sources, not new acoustic confirmation. Final6/8 and resident7/8; all offered500ms/EOS and original per-request origins preserved. Same common model-drain endpoint for energy. |
+| Final actual content and logical continuity | `CONTENT_CPU_V4_RESULTS/complete20/SUMMARY.json`; `content_snapshot_v4/content_reader.py`, vendor12 SHA-pinned upstream files | Actual CPU commit `6eb6639478a87e6be971e23282bd2f31789f242f`, not NN source. 20 old trials/32 request instances/544 frontiers, 330 inputs unchanged, new model calls0. LCP code-point occurrences; first actual view at ownG compared to later selected sameG whole text. MissingG UNKNOWN, absent causal path FAIL. Event-state holding intervals end at real same-source observations; no physical UI inference. |
+| Actual measured Fig1 | `experiments/dsn_full_interval_case_20261029/RESULTS_v2` | One overloaded c16 computation-only interval: 1.443905769→1.543663285→3.719605122s;37raw/31nonwhitespace codepoints, full2saudio. No paired counterfactual or production rate. |
+| All48 workloads Fig3 | `experiments/dsn_midpoint_continuity_20261029/COMBINED_DATA_v1/RUN_ENDPOINTS.json` | Preserve all points and original single-root right-censoring;12session midpoint negative; source content expands, not pure capacity sweep. |
+| Redrawn figures | `FIGURE_SOURCE_dev_v1.json`, `.bundle`, `FIGURE_QA_dev_v1.json` | Independent rendering source `60211b74f78b8420ea48f7a08746aedbbcbfb868`; no new NN, all48 original data values exact. Root separately views actual final-paper pages. |
+
+## Baseline identities and nearest work
+
+See `PRIOR_ART_AND_BASELINE_POSITIONING.zh.md` for the seven-row literature table and primary-source anchors. All four core arms are mechanism ablations on one validated carrier. Full composition(ours) is our alternative complete policy instantiation, not an external pre-existing SOTA or a separately reimplemented neural stack. Native Conservative and Full-call are our same-resource comparators retaining the adapted external original task. Parent-cancel and covered-exit are local actuator policies, not author-system reproductions.
+
+## Scope reconciliation
+
+- Certification means protected selection, not human-correct text. First credit, later availability, new text, model-output agreement and CER have separate denominators.
+- NN4f final matching supported credit22.5→51.0s; resident24→50.2590625s. Old bdfa29→51.518125 belongs only to its earlier independent bank. No values transferred across versions.
+- Each final arm introduces180/retracts14/leaves166 code-point occurrences. All-offered text support106/136 versus104/136: timing improves without more total matching observations.
+- The unique resident compatible tip's0.816859619692s includes0.10694348s before and0.70991614s after the update; it is not avoided downtime, an additive speedup or new deadline credit.
+- No-reset long streams are reference/state stress with failed quality/deadlines; Owner cold new-result recovery misses original budgets; two-client admission probe is NO-GO for this paper's new scheduling claim.
+
+Final packaging binds exact rewritten TeX, selected bibliography entries and new vector PDFs. Legacy dirty HEAD stays7372133; no reset/pull or experiment relabelling.

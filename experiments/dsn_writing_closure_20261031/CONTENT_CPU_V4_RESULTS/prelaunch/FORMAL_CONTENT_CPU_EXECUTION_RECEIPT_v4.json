@@ -1,0 +1,48 @@
+{
+  "status": "COMPLETE_FORMAL_CONTENT_CPU_CLI_SEQUENCE",
+  "results": [
+    {
+      "mode": "controls",
+      "returncode": 0,
+      "actual_CLI": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+        "-B",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_writing_closure_20261031/content_source_v4/run_content_recount.py",
+        "--config",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_writing_closure_20261031/CONTENT_CONTROLS_v4_FROZEN.json",
+        "--manifest",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_writing_closure_20261031/CONTENT_SOURCE_v4.json",
+        "--out",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_writing_closure_20261031/content_cpu_controls_v4"
+      ],
+      "gate": {
+        "gate": "PASS_FROZEN_LINUX_CPU_CONTROLS_ONLY",
+        "summary_sha256": "862dfce84bb7c1df8fdb3bd01d366846f97a934bc4a0e0312031cabd1b1c5eac",
+        "new_model_calls": 0,
+        "output_bytes_before_gate": 141596
+      }
+    },
+    {
+      "mode": "complete20",
+      "returncode": 0,
+      "actual_CLI": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+        "-B",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_writing_closure_20261031/content_source_v4/run_content_recount.py",
+        "--config",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_writing_closure_20261031/CONTENT_COMPLETE20_v4_FROZEN.json",
+        "--manifest",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_writing_closure_20261031/CONTENT_SOURCE_v4.json",
+        "--out",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_writing_closure_20261031/final4f_existing20_content_cpu_v4"
+      ],
+      "gate": {
+        "gate": "PASS_COMPLETE20_CPU_CONTENT_EXACT_G_AND_DEPENDENCY_CONTINUITY",
+        "summary_sha256": "a3c9292ecccebc3660870e181e491d1d41d778941827b51cffa5914f64a26e33",
+        "new_model_calls": 0,
+        "output_bytes_before_gate": 2645393
+      }
+    }
+  ],
+  "new_model_calls": 0
+}

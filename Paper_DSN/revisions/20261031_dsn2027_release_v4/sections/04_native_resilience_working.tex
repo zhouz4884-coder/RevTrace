@@ -1,0 +1,48 @@
+\subsection{Continuing through delivery and process failures}
+\label{subsec:native_resilience}
+Each job has an Owner namespace and monotonic issue number; each physical
+slot has a worker incarnation, using established RPC identity principles
+\cite{birrell1984rpc}. Fencing removes future message authority without
+renaming already accepted complete results.
+
+\paragraph{Local rejection and physical release}
+The ingress guard rejects exact duplicates and fenced messages locally;
+they cannot mutate selected state or release newer leases. Contradictory
+currently owned contents freeze writes. Per-incarnation Pipes and receiver
+threads isolate incomplete frames. Replacement requires process exit,
+CUDA release and joined receivers. Strictly validate complete receipts
+from the sealed channel before fencing the incarnation and retiring
+unfinished work. Accepted buffers and supported views retain their
+original identities.
+
+\paragraph{Durable selection and recovery}
+A synchronous hook binds complete parent/next states, original correction
+and IDs, job, Owner/session epochs, and producer incarnation. Framing,
+checksums and chaining protect the fact; synchronization precedes
+installation/publication. Uncertain writes freeze the writer. Recovery
+discards only an incomplete final frame; complete corruption fails.
+These conventional write-ahead rules~\cite{mohan1992aries} bind the
+original feedback transition.
+
+The surviving Supervisor preserves the input ledger and original clocks.
+After old physical ownership ends, it advances the Owner namespace,
+replays the verified fact prefix, and cold-starts workers. Replay adds no
+inference; old publications gain no new authority. Both policies share
+this coordinator, durability, recovery, and actual Consumer.
+
+\paragraph{Conditional continued service}
+\phantomsection\label{prop:continued_service}
+For finite accepted work after finite supported failures, further progress
+requires readable storage, eventual physical release/loading, terminating
+original calls that advance frontiers, fair Owner/Consumer scheduling,
+and sufficient service budgets. This is not an RTO or D2/C8 guarantee;
+loading, replay and recomputation retain their original clocks.
+
+\paragraph{Control history}
+Roots, calls, buffers, visible views and outboxes pin their dependencies.
+Actual acknowledgment releases publication references, while the visible
+view stays pinned. Namespace/issue high watermarks prevent reuse after
+collection. Unreferenced terminal and audit windows have fixed limits;
+diagnostics stream to disk. These bound protocol entries relative to live
+dependencies, separately from current state, cumulative text and total
+memory.

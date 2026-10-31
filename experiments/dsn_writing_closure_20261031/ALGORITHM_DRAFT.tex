@@ -1,0 +1,194 @@
+% Standalone writing artifact. It is not input by the old manuscript.
+% Describes existing NN4f coordination; no runtime or new experiment is introduced.
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,tabularx}
+\newtheorem{proposition}{Proposition}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\newcommand{\conf}{\textsc{Confirmed}}
+\newcommand{\unk}{\textsc{Unknown}}
+\newcommand{\refut}{\textsc{Refuted}}
+\newcommand{\cov}{\textsc{Covered}}
+\newcommand{\fenced}{\textsc{Fenced}}
+\newcommand{\op}[1]{\textsc{#1}}
+\begin{document}
+\begin{center}
+{\large\bf RevTrace: Coordination Algorithm Draft}\\
+{\small Standalone source-grounded description, 31 October 2026}
+\end{center}
+
+\textbf{Thesis.} RevTrace preserves valid service progress across trusted
+feedback revisions by independently validating complete call inputs,
+retaining original selection authority, and checking support for the
+Consumer's whole view.
+
+\textbf{Objects.} For session $s$, $C_s=(F_s,P_s)$ is the Owner's installed
+selected cut. A frozen call $j$ has input
+$q_j=(s,e_j,a_j,P_j^-,b_j,\chi_j)$, where $a_j$ and $b_j$ are its start and
+target frontiers and $\chi_j$ binds the immutable source/audio, target/EOS,
+model, decoding, and runtime. Its original UID, birth root, and producer
+$(\mathit{slot},\mathit{incarnation})$ never change on confirmation.
+$J$ holds live owned calls and $B$ holds strictly accepted complete original
+results. Typed ASR identity projections have a separate type; they are
+provisional dependency nodes, not complete original selection results.
+$W_s[e,f]$ records an actual selected cut at frontier $f$ in session epoch $e$.
+
+\textbf{Input status, in priority order.} Write $\operatorname{start}(j)$ for
+the complete closed start cut, including its frontier. The remaining inputs
+must retain their frozen bindings.
+\[
+ E(j)=\begin{cases}
+ \fenced & e_j\ne e_s,\\
+ \conf & \operatorname{start}(j)=C_s,\\
+ \refut & W_s[e_s,a_j]\text{ exists and }W_s[e_s,a_j]\ne\operatorname{start}(j),\\
+ \cov & b_j\le F_s,\\
+ \unk & \text{otherwise.}
+ \end{cases}
+\]
+Loss of an earlier ancestor's support does not refute a future complete
+input. $\unk$ grants neither commit authority nor a refutation-based
+cancellation proof. These labels explain the existing guards; they need
+not be stored as runtime states.
+
+\textbf{Whole-view support.} $S(C,h)$ requires a complete, contiguous
+published dependency path from the new cut $C$ to the actual whole view $h$,
+with exact state and frontier matches under one contract. A view may lose
+this support while a future call's input remains $\unk$.
+
+\begin{minipage}{\linewidth}
+\hrule\smallskip
+\textbf{Algorithm 1: Existing full-call coordinator, with separate application}
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item \textbf{Dispatch:} on a ready, unleased worker, prefer missing work
+from $C_s$; otherwise use an unduplicated legal conditional tail within the
+declared ahead bound. Require accepted audio through $b_j$. Freeze $q_j$
+and the original identities before sending the call.
+\item \textbf{Receive:} bind the physical channel, incarnation, registered
+UID, session, phase, and semantic fingerprint. Locally reject foreign,
+fenced, retired, or exact duplicate messages; contradictory currently owned
+contents freeze writes. No local drop clears another lease.
+\item For a valid typed ASR projection, append it only if its start is the
+current conditional tail. Publish a whole-view snapshot; do not record an
+original selected transition.
+\item For a valid complete original result, verify the frozen start,
+target, original C/U record and output binding. Deny selection if its input
+is refuted, covered, or fenced; select immediately if confirmed, otherwise
+buffer it in $B$. For a buffered result, replace its typed prediction with
+the actual full output, retaining only a suffix that consumes that output
+contiguously; publish the resulting view. A validated terminal retires
+exactly its physical job.
+\item \textbf{Select ready:} for an immediately confirmed result, or while
+$B$ contains a result with $E(j)=\conf$,
+recheck the current parent and complete original record. Synchronize the
+bound parent/result/identity as a new durable fact. An uncertain outcome
+freezes writes and requires recovery.
+\item Only after successful synchronization, install its result as $C_s$,
+record $W_s[e_s,F_s]$, reconcile the conditional chain by exact boundaries,
+and publish the fact plus the view snapshot for \emph{this} installed root.
+Reclassify buffered results; keep unresolved results unselected.
+\item \textbf{Actual Consumer:} verify Owner/publication order and the
+durable fact's identity, sequence and actual parent. Apply its certified
+cut; retain the existing ahead whole view only when $S(C_s,h)$ holds.
+Private publications require the current root and a complete path, and
+cannot replace a farther view with a shorter private snapshot.
+\item Record the actual application receipt. Release its outbox references,
+while retaining references still used by the visible view. Input debt and
+original offer clocks survive cancellation, failure, and replay.
+\end{enumerate}
+\smallskip\hrule
+\end{minipage}
+
+\textbf{Worker loss and recovery.} After confirmed OS exit, joined result
+and control readers, and old CUDA release, strictly admit complete receipts
+from the sealed old channel \emph{before} fencing its incarnation. Then
+retire unfinished work and launch a higher incarnation. Already accepted
+complete buffers and supported views keep their original identities;
+producer death does not make them new late messages. Owner recovery fences
+old ownership, advances the Owner namespace, verifies the durable prefix,
+and replays existing facts. Replay adds no inference or new selected edge.
+
+\begin{table}[h]
+\centering\small
+\caption{Separate decisions made by the existing coordinator.}
+\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.24\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+Condition & Call / selected-state decision & View / lifecycle decision\\
+\midrule
+Complete same-frontier input matches & Continue owned call; completed
+result may enter ordered selection with original UID/birth/incarnation &
+Check whole-view support separately; predicted end need not match original C/U\\
+Actual same-frontier full input differs & Deny append/install; safe-point
+exit needs this bound refutation proof & Withdraw unsupported view; do not
+generalize to other future inputs\\
+Future input unresolved, including earlier ancestor loss & Buffer or
+continue; no commit and no refutation-based cancellation & Withdraw a view
+if unsupported; input may later converge\\
+Target covered or session fenced & Deny selection; retire only the exact
+matching old job & Keep accepted-input debt and original clocks\\
+Complete original C/U and confirmed input & Durable sync, then Owner
+installation, then publication & Actual Consumer verifies and applies;
+snapshot belongs to each particular installed root\\
+Producer exits & Seal/strictly drain before fencing; preserve accepted
+buffer identity & Retire unfinished work; replace after physical release;
+supported view can survive\\
+Foreign/fenced/duplicate or owned contradiction & Local reject the former;
+freeze writes for the latter & Drop cannot release a newer lease; a valid
+old-session terminal retires only its own old lease\\
+Owner restart / Consumer receipt & Replay checked existing facts without
+selecting again & ACK frees outbox references; visible dependencies stay
+pinned; replay is not a new result\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Four distinct events.} Let $D$ be durable selection, $C$ Owner
+installation, $V$ actual Consumer application, and $L$ physical release.
+$D$ precedes privileged installation/application; neither $C$ nor $V$
+selects the fact again. Logical invalidation and cancellation requests do
+not imply $L$. The core batch runtime requires all terminal rows plus
+device synchronization for \texttt{BatchDrained}. Native4f instead clears
+one ordinary busy job on its strictly matched complete/abandoned terminal;
+worker replacement additionally requires OS/channel/CUDA release evidence.
+These implementations share the distinction, not an identical release event.
+
+\begin{proposition}[Selected-prefix preservation, conditional]
+Assume sufficient declared cross-call state; faithful execution of frozen
+accepted inputs by the protected original program $\mathcal A$; exclusive
+serial selection with correctly bound current-session receipts; immutable
+audio/model/decoding bindings; unambiguous encoding and binding digests;
+storage honoring successful synchronization; and recovery of only a
+verified contiguous fact prefix. If every new durable fact binds a complete
+original result whose full input equals the preceding selected cut,
+and synchronization precedes installation and certified application,
+then the distinct durable selected facts form a trace permitted by
+$\mathcal A$. Replaying a fact adds no transition.
+\end{proposition}
+\begin{proof}
+The genesis cut is an initial state. Each appended fact is a bound complete
+original call on the actual preceding cut and accepted input, hence an
+allowed next edge. Speculation, projections, waiting, cancellation,
+rejection, collection and repeated delivery add no selected edge. Verified
+replay preserves the same fact identities. Induction yields the prefix.
+\end{proof}
+The relation of $\mathcal A$ may be nondeterministic. Equality with a fixed
+neural reference is separate measured evidence; arbitrary independent GPU
+reruns are not assumed bitwise identical. Provisional UI behavior is outside
+this projection. Its separate sufficient property is per application:
+an ahead whole view satisfying $S(C,h)$ is retained unchanged by that
+compatible Canonical application when no independent withdrawal mode is
+invoked. Neither property certifies human transcription accuracy, global
+text monotonicity, fault-time deadlines, or all Python/CUDA/OS behavior.
+
+{\raggedright\textbf{Source boundary.} The algorithm describes unchanged native source
+\texttt{4f4c3cab}, particularly \texttt{fullspec\_policy},
+\texttt{resilience\_policy}, \texttt{resilience\_owner},
+\texttt{resilience\_consumer}, \texttt{resilience\_storage}, and
+\texttt{resilience\_channel\_close}. Controller \texttt{a13fa0a3} only adds
+paired/resident orchestration. Buffer fixture \texttt{4eb03d6f} controls
+interleaving; reader \texttt{b8670073} separately rechecks unchanged raw
+evidence with zero new neural calls. Its mechanism result does not upgrade
+the original failed CLI or compound gates.\par}
+\end{document}

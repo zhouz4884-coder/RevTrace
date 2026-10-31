@@ -1,0 +1,49 @@
+\begin{table}[t]
+\centering
+\caption{Coordinator for native conditional full calls. Input status and
+whole-view support are separate judgments; selection still uses the
+original complete result. This summarizes existing guards, not a new
+scheduler.}
+\label{tab:coordinator}
+\begingroup\small
+\begin{tabular}{@{}p{0.97\columnwidth}@{}}
+\toprule
+\textbf{State:} selected cut $C$; owned calls $J$; accepted complete
+buffers $B$; selected same-frontier witnesses $W$; actual whole view $h$.\\
+\textbf{Input status} $E(j)$: exact current parent and all frozen bindings
+match: \textsc{confirmed}; actual $W$ at $j$'s start differs:
+\textsc{refuted}; no such witness: \textsc{unknown}.
+Covered targets and fenced sessions are ineligible.\\
+\midrule
+1. \textbf{Dispatch:} prefer missing selected work on a ready worker;
+otherwise freeze an unduplicated conditional full call within the ahead
+bound. Keep original UID, birth, incarnation and accepted-input clocks.\\
+2. \textbf{Receive:} check channel, identity, frozen input and complete
+original output. Local duplicate/fenced rejection cannot clear another
+lease. Reject refuted, covered or fenced results; buffer an admissible
+complete result if its input remains unknown.\\
+Typed ASR projections extend only a checked provisional path; they do not
+select.\\
+3. \textbf{Select ready:} for a complete original result with
+$E(j)=\textsc{confirmed}$, recheck the installed parent, synchronize its
+bound fact, then install $C$ and record $W$. Preserve original identity;
+reclassify pending results. Unknown grants no commit authority.\\
+4. \textbf{Consume:} check fact order and actual parent. Advance the
+certified lane; retain an ahead $h$ whole when $S(C,h)$ proves its path.
+Otherwise render the installed cut, separately from deciding unresolved calls.\\
+5. \textbf{Release:} actual consumption releases outbox references, not
+live-view references. Physical ownership ends at the matching terminal
+or confirmed exit/cleanup; cancellation acknowledgment is insufficient.\\
+\bottomrule
+\end{tabular}
+\endgroup
+\end{table}
+
+Table~\ref{tab:coordinator} summarizes the native event loop. An unknown
+future input authorizes neither selection nor a refutation-based cancel.
+When a complete result replaces its typed prediction, only the suffix
+that consumes the actual output contiguously survives. Worker loss is
+handled separately: validate complete sealed-channel receipts before
+fencing new old-incarnation messages; do not erase already accepted $B$.
+Thus losing a view, rejecting a result, and releasing a worker are
+different actions, even when triggered by one feedback event.

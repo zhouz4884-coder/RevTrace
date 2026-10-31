@@ -1,0 +1,92 @@
+{
+  "gate": "PASS_VISUAL_NUMERIC_AND_SOURCE_QA_REVIEW2",
+  "scope": "CPU-only plotting; no new experimental measurements",
+  "actual_figure_execution_source_commit": "60211b74f78b8420ea48f7a08746aedbbcbfb868",
+  "full_source_manifest_sha256": "10e86489cb50d1fd8bc26d0c8b9d26b19ab7c518cc2ea037e59d83b1cdd71e46",
+  "numeric_checks": {
+    "display_P99": {
+      "n": 48,
+      "raw_exact": true,
+      "only_scale": 1
+    },
+    "dual_audio_fraction": {
+      "n": 48,
+      "raw_exact": true,
+      "only_scale": 100
+    },
+    "compatible_timely_deficit_area": {
+      "n": 48,
+      "raw_exact": true,
+      "only_scale": 1
+    }
+  },
+  "c12_joint_display_P99": [
+    2.1966422889381647,
+    2.2986850943416357,
+    2.22774469666183
+  ],
+  "all13_protected_originals_unchanged": true,
+  "visual_files_reviewed": [
+    "FIGURES_dev_v1/timely_full_interval_case_PDF_PAGE.png",
+    "FIGURES_dev_v1/coordination_protocol_PDF_PAGE.png",
+    "FIGURES_dev_v1/service_region_PDF_PAGE.png",
+    "FIGURES_dev_v1/coordination_protocol_GRAYSCALE_QA.png",
+    "FIGURES_dev_v1/service_region_GRAYSCALE_QA.png"
+  ],
+  "visual_findings": [
+    "No clipped text or low-position annotation crossing the certified line after refinement.",
+    "Mechanism panels separate complete call input confirmation / retained result from whole-view support / UNKNOWN input.",
+    "Marker shapes, dashed lines and hatching retain meaning in grayscale.",
+    "Final Fig3 uses a light-blue open triangle for computation retention and a dark-blue filled diamond for Joint; red is reserved for refuted/withdrawn support. Current Fig1/2 rendered bytes unchanged from reviewed review1."
+  ],
+  "figures": [
+    {
+      "name": "timely_full_interval_case",
+      "width": 7.125,
+      "height": 2.65,
+      "minimum_font_pt": 8.5,
+      "Type3_fonts": 0,
+      "SVG_editable_text_nodes": 22
+    },
+    {
+      "name": "coordination_protocol",
+      "width": 7.125,
+      "height": 3.0,
+      "minimum_font_pt": 8.5,
+      "Type3_fonts": 0,
+      "SVG_editable_text_nodes": 28
+    },
+    {
+      "name": "service_region",
+      "width": 7.125,
+      "height": 2.65,
+      "minimum_font_pt": 8.5,
+      "Type3_fonts": 0,
+      "SVG_editable_text_nodes": 40
+    }
+  ],
+  "new_model_calls": 0,
+  "performance_claim": "None added; actual case and 48 original runs only",
+  "limitations": [
+    "Local source paths in SOURCE_MAP remain provenance checks; reproduction in this workspace uses the already bounded originals.",
+    "Fig2 is a causal schematic, not runtime timing or a proof of whole-system refinement.",
+    "C12 midpoint remains negative; no capacity interpolation or natural-incidence claim."
+  ],
+  "render_history": [
+    {
+      "directory": "FIGURES_dev_v1_initial",
+      "source_commit": "207f9ab21b3f224c50ba6582a56f437b3fe13367",
+      "status": "Preserved initial development rendering; replaced as final candidate after annotation refinement."
+    },
+    {
+      "directory": "FIGURES_dev_v1_review1",
+      "source_commit": "a2a81db4d3042913a20c91efab3128648f0b912f",
+      "status": "Preserved annotation refinement; superseded by final semantic palette refinement."
+    },
+    {
+      "directory": "FIGURES_dev_v1",
+      "source_commit": "60211b74f78b8420ea48f7a08746aedbbcbfb868",
+      "status": "Final review2 candidate: semantic palette plus stronger grayscale cue."
+    }
+  ]
+}

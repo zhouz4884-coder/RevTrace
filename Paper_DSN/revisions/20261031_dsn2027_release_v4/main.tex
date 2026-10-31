@@ -1,0 +1,71 @@
+% Selected DSN2027 manuscript; evidence and release provenance are archived separately.
+\documentclass[conference,10pt]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{cite,amsmath,amssymb,amsthm}
+\usepackage{booktabs,array,multirow,graphicx}
+\usepackage{url,microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\begin{document}
+\title{RevTrace: Preserving Valid Progress across Trusted Feedback Revisions}
+\author{\IEEEauthorblockN{Anonymous submission}\IEEEauthorblockA{Regular paper}}
+\maketitle
+\begin{abstract}
+Trusted feedback can withdraw a timely transcript even when its
+computation remains valid. RevTrace preserves such progress by separately
+confirming complete call inputs, retaining original selection authority,
+and checking support for the Consumer's whole view. A conditional call
+can remain eligible even when its own next prediction is wrong; an
+accepted result can outlive its producer. A selected-trace refinement
+argument connects this coordination to the protected program. In a
+predeclared 24-speaker stratum, computation retention alone increases
+frontier withdrawals from 12 to 17; joint retention yields zero and adds
+26.645 seconds of deadline credit over 714.110 seconds offered. In a
+matched native correction study, the final protocol preserves original
+histories, delivers 65.822 of 66.340 deadline-credited seconds, and passes
+both whole-run deadlines in six of eight trials, versus none for
+conservative execution. Fault and sustained-state tests expose recovery,
+quality, and resource boundaries.
+\end{abstract}
+\begin{IEEEkeywords}
+dependable inference, feedback state, incremental computation, speculative execution, streaming ASR
+\end{IEEEkeywords}
+\section{Introduction}\label{sec:intro}
+\input{sections/01_progress_introduction}
+\section{Feedback Contract}\label{sec:contract}
+\input{sections/02_contract}
+\section{Valid Continuations and Whole Views}\label{sec:continuation}
+\input{sections/03_continuation}
+\input{sections/03_native_extension}
+\input{sections/03_coordination_algorithm}
+\input{sections/03_native_refinement_working}
+\section{Execution Protocol}\label{sec:protocol}
+\input{sections/04_protocol}
+\input{sections/04_native_resilience_working}
+\section{Evaluation}\label{sec:eval}
+\input{sections/05_evaluation_core}
+\input{sections/05_native_retention}
+\input{sections/05_same_source_validation}
+\input{sections/05_execution_only}
+\section{Related Work}\label{sec:related}
+\input{sections/06_progress_related}
+\section{Discussion}\label{sec:discussion}
+\input{sections/07_progress_discussion}
+% Keep the conclusion opening together in the final technical-page column.
+\newpage
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/08_progress_conclusion}
+\section*{AI Tool Usage}
+ChatGPT/Codex assisted literature discovery, drafting and revision of all
+manuscript sections and the refinement argument, runtime extensions and
+experiment orchestration, and validation/analysis code producing the
+figures and tables from recorded measurements. The artifact records
+execution sources, frozen configurations, controls, and result provenance,
+separating actual service measurements from component tests and
+retrospective analyses. Constructed streams concatenate recorded AISHELL-1
+PCM. The authors retain responsibility for the submission.
+\clearpage
+\bibliographystyle{IEEEtran}
+\bibliography{refs,formal_refs,coordination_refs}
+\end{document}

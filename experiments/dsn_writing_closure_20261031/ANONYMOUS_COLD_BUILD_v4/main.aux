@@ -1,0 +1,141 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{vu2026streamcorrect}
+\citation{schlangen2011incremental,hammer2014adapton,hammer2015names}
+\citation{zeng2026ssbd}
+\citation{li2025predgen}
+\citation{vu2026streamcorrect}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{I}{1}{Introduction}{section.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Timely first delivery can still leave a gap in delivered progress. An actual computation-only run displays a complete interval at 1.444~s, withdraws it under a compatible update at 1.544~s, and restores identical text at 3.720~s. Shading marks the 2.176-s gap; the vertical line is the original D2 read point. The view introduces 37 raw code points including spaces, not character/audio alignments. This c16 overload case illustrates the failure mode, not its incidence or a whole-run service win.}}{2}{figure.1}\protected@file@percent }
+\newlabel{fig:continuity_case}{{1}{2}{Timely first delivery can still leave a gap in delivered progress. An actual computation-only run displays a complete interval at 1.444~s, withdraws it under a compatible update at 1.544~s, and restores identical text at 3.720~s. Shading marks the 2.176-s gap; the vertical line is the original D2 read point. The view introduces 37 raw code points including spaces, not character/audio alignments. This c16 overload case illustrates the failure mode, not its incidence or a whole-run service win}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Feedback Contract}{2}{section.2}\protected@file@percent }
+\newlabel{sec:contract}{{II}{2}{Feedback Contract}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Feedback creates an execution dependency}{2}{subsection.2.1}\protected@file@percent }
+\newlabel{eq:canonical}{{1}{2}{Feedback creates an execution dependency}{equation.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Three lifetimes of provisional work}{2}{subsection.2.2}\protected@file@percent }
+\newlabel{eq:node}{{2}{2}{Three lifetimes of provisional work}{equation.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Trust and failure boundary}{2}{subsection.2.3}\protected@file@percent }
+\citation{vu2026streamcorrect}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Valid Continuations and Whole Views}{3}{section.3}\protected@file@percent }
+\newlabel{sec:continuation}{{III}{3}{Valid Continuations and Whole Views}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}A continuation under a new root}{3}{subsection.3.1}\protected@file@percent }
+\newlabel{eq:edge}{{3}{3}{A continuation under a new root}{equation.3}{}}
+\newlabel{prop:rebase}{{1}{3}{Sufficient re-rooting witness}{proposition.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Retaining computation: $R$}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Retaining an actual view: $S$}{3}{subsection.3.3}\protected@file@percent }
+\newlabel{prop:continuity}{{2}{3}{Continuity at a compatible application}{proposition.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Native feedback and conditional full calls}{3}{subsection.3.4}\protected@file@percent }
+\newlabel{subsec:native_full_calls}{{\mbox  {III-D}}{3}{Native feedback and conditional full calls}{subsection.3.4}{}}
+\citation{abadi1991refinement}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Coordinator for native conditional full calls. Input status and whole-view support are separate judgments; selection still uses the original complete result. This summarizes existing guards, not a new scheduler.}}{4}{table.1}\protected@file@percent }
+\newlabel{tab:coordinator}{{I}{4}{Coordinator for native conditional full calls. Input status and whole-view support are separate judgments; selection still uses the original complete result. This summarizes existing guards, not a new scheduler}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Preserving the protected program's semantics}{4}{subsection.3.5}\protected@file@percent }
+\newlabel{subsec:native_refinement}{{\mbox  {III-E}}{4}{Preserving the protected program's semantics}{subsection.3.5}{}}
+\newlabel{prop:refinement}{{3}{4}{Selected-trace refinement}{proposition.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Execution Protocol}{4}{section.4}\protected@file@percent }
+\newlabel{sec:protocol}{{IV}{4}{Execution Protocol}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Complete results and physical ownership}{4}{subsection.4.1}\protected@file@percent }
+\citation{mohan1992aries}
+\citation{birrell1984rpc}
+\citation{mohan1992aries}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Eligibility, original selection, and whole-view support are separate decisions. (a) A complete child call runs on frozen $\setbox \z@ \hbox {\mathsurround \z@ $\textstyle P$}\mathaccent "0362{P}_2$; its own prediction $\setbox \z@ \hbox {\mathsurround \z@ $\textstyle P$}\mathaccent "0362{P}_3$ may differ from original C/U output $P_3$. An accepted buffer keeps its original identity across producer exit and fencing. Matching selected $P_2$ confirms the input; durable sync precedes installation and use. (b) Losing view support does not refute an unknown future input or authorize its commit. This is a causal native schematic, with complete-state and execution assumptions from Section~\ref {sec:contract}, not a measured timeline.}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:protocol}{{2}{5}{Eligibility, original selection, and whole-view support are separate decisions. (a) A complete child call runs on frozen $\widehat P_2$; its own prediction $\widehat P_3$ may differ from original C/U output $P_3$. An accepted buffer keeps its original identity across producer exit and fencing. Matching selected $P_2$ confirms the input; durable sync precedes installation and use. (b) Losing view support does not refute an unknown future input or authorize its commit. This is a causal native schematic, with complete-state and execution assumptions from Section~\ref {sec:contract}, not a measured timeline}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Covered work and safe-point exit: $K$}{5}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Durable facts and outstanding input}{5}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Validation boundaries}{5}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Continuing through delivery and process failures}{5}{subsection.4.5}\protected@file@percent }
+\newlabel{subsec:native_resilience}{{\mbox  {IV-E}}{5}{Continuing through delivery and process failures}{subsection.4.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-E}0a}Local rejection and physical release}{5}{paragraph.4.5.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-E}0b}Durable selection and recovery}{5}{paragraph.4.5.0.2}\protected@file@percent }
+\newlabel{prop:continued_service}{{\mbox  {IV-E}0c}{5}{Conditional continued service}{section*.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-E}0c}Conditional continued service}{5}{section*.1}\protected@file@percent }
+\citation{shi2026qwen3asr}
+\citation{radford2023whisper}
+\citation{panayotov2015librispeech}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-E}0d}Control history}{6}{paragraph.4.5.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Evaluation}{6}{section.5}\protected@file@percent }
+\newlabel{sec:eval}{{V}{6}{Evaluation}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Experimental design and service endpoints}{6}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-A}0a}Implementation and workloads}{6}{paragraph.5.1.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-A}0b}Comparators}{6}{paragraph.5.1.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-A}0c}Endpoints}{6}{paragraph.5.1.0.3}\protected@file@percent }
+\newlabel{eq:credit}{{5}{6}{Endpoints}{equation.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Does retained computation preserve delivered progress?}{6}{subsection.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Independent Qwen confirmation, $\rho =1$, staggered arrivals. Each arm offers 714.11~s across three eight-speaker cohorts. Withdrawals and credit are totals; P99 and energy are medians of three per-run statistics. All 15 runs miss the whole-run D2 criterion.}}{7}{table.2}\protected@file@percent }
+\newlabel{tab:core-h3}{{II}{7}{Independent Qwen confirmation, $\rho =1$, staggered arrivals. Each arm offers 714.11~s across three eight-speaker cohorts. Withdrawals and credit are totals; P99 and energy are medians of three per-run statistics. All 15 runs miss the whole-run D2 criterion}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Relative progress explains when retention matters}{7}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}When does retention become sustained service?}{7}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Quality and cost boundaries}{7}{subsection.5.5}\protected@file@percent }
+\citation{vu2026streamcorrect}
+\citation{bu2017aishell}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces First visibility, timely credit, and later visibility loss are different endpoints. All four workloads and three fresh runs per arm are shown, including the negative twelve-session midpoint. Points are real per-run values; ticks and ranges describe their median and observed range. Panel~(c) is the separate secondary measure of subsequent compatible loss of originally timely intervals, censored at the next Canonical root when necessary. It does not replace panel~(b)'s original first-observation credit.}}{8}{figure.3}\protected@file@percent }
+\newlabel{fig:service-region}{{3}{8}{First visibility, timely credit, and later visibility loss are different endpoints. All four workloads and three fresh runs per arm are shown, including the negative twelve-session midpoint. Points are real per-run values; ticks and ranges describe their median and observed range. Panel~(c) is the separate secondary measure of subsequent compatible loss of originally timely intervals, censored at the next Canonical root when necessary. It does not replace panel~(b)'s original first-observation credit}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-F}}Do early full calls preserve the original task?}{8}{subsection.5.6}\protected@file@percent }
+\newlabel{subsec:native_retention_eval}{{\mbox  {V-F}}{8}{Do early full calls preserve the original task?}{subsection.5.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-F}0a}Independent confirmation and matched regression}{8}{paragraph.5.6.0.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Final full calls preserve task fidelity and improve timely service. The matched version study reuses four measured speakers: two policies, two versions and two fresh trials (32 runs). Each row offers 66.340~s; credit and energy are totals, D99 is the median of per-run P99. Energy uses a common external origin-to-confirmed-physical-model-drain window. This is regression evidence, not new acoustic confirmation.}}{8}{table.3}\protected@file@percent }
+\newlabel{tab:native_full_confirm}{{III}{8}{Final full calls preserve task fidelity and improve timely service. The matched version study reuses four measured speakers: two policies, two versions and two fresh trials (32 runs). Each row offers 66.340~s; credit and energy are totals, D99 is the median of per-run P99. Energy uses a common external origin-to-confirmed-physical-model-drain window. This is regression evidence, not new acoustic confirmation}{table.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-F}0b}Resident independent requests}{8}{paragraph.5.6.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-F}0c}What content arrives, and what remains?}{9}{paragraph.5.6.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-G}}What survives a producer or Owner failure?}{9}{subsection.5.7}\protected@file@percent }
+\newlabel{subsec:same_source_validation}{{\mbox  {V-G}}{9}{What survives a producer or Owner failure?}{subsection.5.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-G}0a}Complete buffers across producer death}{9}{paragraph.5.7.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-G}0b}Sustained-state stress and its limits}{9}{paragraph.5.7.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-H}}From physical release to supported service}{9}{subsection.5.8}\protected@file@percent }
+\newlabel{subsec:release_evidence}{{\mbox  {V-H}}{9}{From physical release to supported service}{subsection.5.8}{}}
+\citation{schlangen2011incremental}
+\citation{hammer2014adapton,hammer2015names}
+\citation{mcsherry2013differential}
+\citation{machacek2023whisperstreaming}
+\citation{vu2026streamcorrect}
+\citation{zeng2026ssbd}
+\citation{li2025predgen}
+\citation{mai2026relays2s}
+\citation{wang2026alignmentdrift}
+\citation{zhang2026retire}
+\citation{kung1981occ,bernstein1983mvcc}
+\citation{mohan1992aries}
+\citation{carbone2017flinkstate}
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Fault containment preserves legality, while cold recovery misses the original service deadlines. Six short conditions use one fixed clip and two fresh trials per policy. Each cell lists Conservative above Full-call; ranges are observed minima/maxima. Illegal; done gives illegal installations and completed/2 trials. Reject/mutation counts local rejections and selected changes. New result is fault-to-actual-certified consumption of a new fact whose call completes after the fault, excluding old-fact replay and replacement readiness. D2/C8 counts joint whole-run passes; EOS counts D2 misses. Both-board energy runs through physical drain.}}{10}{table.4}\protected@file@percent }
+\newlabel{tab:native_reliability}{{IV}{10}{Fault containment preserves legality, while cold recovery misses the original service deadlines. Six short conditions use one fixed clip and two fresh trials per policy. Each cell lists Conservative above Full-call; ranges are observed minima/maxima. Illegal; done gives illegal installations and completed/2 trials. Reject/mutation counts local rejections and selected changes. New result is fault-to-actual-certified consumption of a new fact whose call completes after the fault, excluding old-fact replay and replacement readiness. D2/C8 counts joint whole-run passes; EOS counts D2 misses. Both-board energy runs through physical drain}{table.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Related Work}{10}{section.6}\protected@file@percent }
+\newlabel{sec:related}{{VI}{10}{Related Work}{section.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VI-}0a}Incremental information and dependency reuse}{10}{paragraph.6.0.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VI-}0b}Revisable speech services and speculation}{10}{paragraph.6.0.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VI-}0c}Execution, authorization, and recovery}{10}{paragraph.6.0.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Discussion}{11}{section.7}\protected@file@percent }
+\newlabel{sec:discussion}{{VII}{11}{Discussion}{section.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VII-}0a}Scope of the guarantee}{11}{paragraph.7.0.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VII-}0b}Progress, content, and capacity}{11}{paragraph.7.0.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VII-}0c}Deployment and validation}{11}{paragraph.7.0.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VII-}0d}Eligibility and resource admission}{11}{paragraph.7.0.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{11}{section.8}\protected@file@percent }
+\newlabel{sec:conclusion}{{VIII}{11}{Conclusion}{section.8}{}}
+\bibstyle{IEEEtran}
+\bibdata{refs,formal_refs,coordination_refs}
+\bibcite{vu2026streamcorrect}{1}
+\bibcite{schlangen2011incremental}{2}
+\bibcite{hammer2014adapton}{3}
+\bibcite{hammer2015names}{4}
+\bibcite{zeng2026ssbd}{5}
+\bibcite{li2025predgen}{6}
+\bibcite{abadi1991refinement}{7}
+\bibcite{mohan1992aries}{8}
+\bibcite{birrell1984rpc}{9}
+\bibcite{shi2026qwen3asr}{10}
+\bibcite{radford2023whisper}{11}
+\bibcite{panayotov2015librispeech}{12}
+\bibcite{bu2017aishell}{13}
+\bibcite{mcsherry2013differential}{14}
+\bibcite{machacek2023whisperstreaming}{15}
+\bibcite{mai2026relays2s}{16}
+\bibcite{wang2026alignmentdrift}{17}
+\bibcite{zhang2026retire}{18}
+\bibcite{kung1981occ}{19}
+\bibcite{bernstein1983mvcc}{20}
+\bibcite{carbone2017flinkstate}{21}
+\@writefile{toc}{\contentsline {section}{References}{12}{section*.3}\protected@file@percent }
+\gdef \@abspage@last{12}

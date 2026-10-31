@@ -1,0 +1,101 @@
+\subsection{Do early full calls preserve the original task?}
+\label{subsec:native_retention_eval}
+We test whether input-confirmed calls improve service while retaining
+original learned correction and recursive feedback. The StreamCorrect
+adaptation uses fixed 500-ms inputs, no VAD, and original FP32 execution
+\cite{vu2026streamcorrect}. Both author-built policies have two complete
+workers, the same ASR early-view Consumer and neural warmup. Conservative
+execution waits for selected parent feedback; Full-call permits conditional
+execution. We distinguish the earlier implementation (\texttt{bdfa}) from
+the final resilience implementation (\texttt{4f}); full execution identities
+are in the artifact.
+
+\paragraph{Independent confirmation and matched regression}
+The earlier method was frozen before selecting four unused AISHELL-1
+speakers~\cite{bu2017aishell} by metadata in an 8--9-s band. Two policies
+and two fresh repeats give 16 runs with randomized pair blocks, reversed
+arm order and swapped GPU roles. All selections, 500-ms frontiers and
+partial EOS remain. Speakers, rather than repeated runs, are the acoustic
+units. All 272 selected transitions match complete original start/end
+states, correction and returned IDs against offline full-call references.
+Both arms have five edits over 81 unique reference characters (6.17\%
+CER); this is the adaptation's accuracy, not the published benchmark.
+Earlier Full-call raises credit from 37.0 to 66.33975~s and passes
+from 0/8 to 8/8.
+
+\begin{table}[t]
+\centering
+\caption{Final full calls preserve task fidelity and improve timely
+service. The matched version study reuses four measured speakers:
+two policies, two versions and two fresh trials (32 runs). Each row offers
+66.340~s; credit and energy are totals, D99 is the median of per-run P99.
+Energy uses a common external origin-to-confirmed-physical-model-drain
+window. This is regression evidence, not new acoustic confirmation.}
+\label{tab:native_full_confirm}
+\small\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Version & Policy & \shortstack{Credit\\(s)} & \shortstack{D99\\(s)} &
+\shortstack{Energy\\(kJ)} & Pass\\
+\midrule
+Earlier & Conserv. & 33.500 & 4.450 & 44.690 & 0/8\\
+Earlier & Full-call & 66.340 & 1.633 & 39.735 & 8/8\\
+Final & Conserv. & 30.000 & 4.759 & 47.019 & 0/8\\
+Final & Full-call & 65.822 & 1.638 & 43.952 & 6/8\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The matched 32-run study holds those four sources, FP32 models, warmup,
+allocator and external board-power observation fixed across versions.
+All 544 selected transitions match complete original inputs/outputs,
+correction and IDs under the declared static code-version mapping.
+Final Full-call earns 65.821625 versus 30.0~s and passes 6/8 versus 0/8
+(Table~\ref{tab:native_full_confirm}). Its two failures are S0908 EOS:
+display P99 increases by 0.163/0.050~s against Earlier Full-call.
+Other paired differences have both signs; similar medians do not establish
+equivalence. Final Full-call uses 6.52\% less drain-window board energy
+than Final Conservative, but 10.61\% more than Earlier Full-call.
+Model drain and source-specific cleanup are different endpoints;
+EOS-window and original source endpoints remain separately available.
+
+\paragraph{Resident independent requests}
+Models load once per trial and both worker PIDs persist across four
+pre-registered independent requests. The next request begins only after
+actual certified consumption of the previous file EOS. This is
+single-outstanding closed-loop service, without online VAD or open-arrival
+capacity. Two policies and two fresh trials retain all 272 original
+transitions and each request's own input clock. Full-call passes D2/C8 on
+7/8 requests versus 0/8, earning 64.118875 versus 31.0 of 66.33975~s.
+The second S0908 request has D99 2.229~s; residency does not remove its
+deadline boundary.
+
+\paragraph{What content arrives, and what remains?}
+The earlier independent bank contains 92 promoted calls beginning before
+their selected parent finishes; 20 have wrong own predicted ends.
+Twenty-four invalid/covered calls stop after ASR and two complete
+wrong-input results are discarded. Input confirmation, rather than
+prediction correctness, explains which original work survives.
+
+A frozen zero-neural recount of the final matched and resident logs
+checks actual complete dependencies and first-view text at its own
+frontier $G$. Credit whose whole first view retrospectively equals
+selected text at that same $G$ rises from 22.5 to 51.0~s in matched runs,
+and from 24.0 to 50.259~s in resident requests. Full-call's remaining
+14.822/13.860~s mismatches; unknown coverage is zero. Raw and whitespace
+comparisons agree. Each arm in either bank introduces 180 code-point
+occurrences, retracts 14, and leaves 166 last-visible. All-offered
+whole-text matches are 106/136 for Conservative and 104/136 for Full-call.
+The gain is timely supported content, not more text or a higher overall
+match fraction; agreement with selected model output is not human accuracy.
+
+The final matched bank has no compatible-ahead application, so gives no
+retention-rate evidence. Resident Full-call has one nonempty opportunity:
+its 5.0-s whole view survives a compatible 4.5-s selected update with the
+same tip and job. The complete tip is logically held for 0.817~s spanning
+that update before legitimate supersession; this is Consumer event-state
+observation, not avoided downtime. Each Full-call bank contains two
+necessary incompatible withdrawals. Final objects are right-censored at
+the last actual same-source observation. \emph{Lesson:} confirmed full
+calls accelerate the original task, while content support, continuity
+opportunities and deadline margin require their own denominators.

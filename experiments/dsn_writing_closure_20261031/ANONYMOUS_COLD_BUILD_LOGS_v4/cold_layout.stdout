@@ -1,0 +1,805 @@
+ RevTrace: Preserving Valid Progress across Trusted
+                Feedback Revisions
+                                                      Anonymous submission
+                                                             Regular paper
+
+
+   Abstract—Trusted feedback can withdraw a timely transcript          the Consumer’s current whole hypothesis still have a complete
+even when its computation remains valid. RevTrace preserves            dependency path from that parent? These questions concern
+such progress by separately confirming complete call inputs,           different objects. A call can have a confirmed input while its
+retaining original selection authority, and checking support for
+the Consumer’s whole view. A conditional call can remain eligible      own next prediction is wrong. A view can lose support while
+even when its own next prediction is wrong; an accepted result can     a future call’s input is unresolved. A producer can die after
+outlive its producer. A selected-trace refinement argument connects    its complete result has already been accepted. A birth version,
+this coordination to the protected program. In a predeclared 24-       matching text, or producer-liveness bit cannot stand in for all
+speaker stratum, computation retention alone increases frontier        three judgments.
+withdrawals from 12 to 17; joint retention yields zero and adds
+26.645 seconds of deadline credit over 714.110 seconds offered.           RevTrace checks complete frozen inputs and dependency
+In a matched native correction study, the final protocol preserves     paths before retaining work, leaves result selection to the orig-
+original histories, delivers 65.822 of 66.340 deadline-credited
+seconds, and passes both whole-run deadlines in six of eight trials,
+                                                                       inal program, and revalidates the Consumer’s entire displayed
+versus none for conservative execution. Fault and sustained-state      hypothesis when a selected state installs. Incremental dialogue
+tests expose recovery, quality, and resource boundaries.               and computation supply established dependency and revocation
+   Index Terms—dependable inference, feedback state, incremental       principles [2]–[4]. SSBD already combines draft reuse and
+computation, speculative execution, streaming ASR                      display masking [5]; PredGen speculates across evolving speech
+                                                                       stages [6]. Our focus is a recursively selected feedback task:
+                       I. I NTRODUCTION                                retained work must still execute its original correction and
+                                                                       update, and applying a new selected root must separately
+   A streaming transcript can arrive on time and still disappear
+                                                                       validate the actual whole view. The contribution is this concrete
+when trusted feedback advances. In one actual run, a complete
+                                                                       coordination contract and its service consequences, rather than
+two-second audio interval introduced 37 visible characters
+                                                                       reuse or revocation in isolation.
+at 1.444 s, within its two-second display deadline. A trusted
+update at 1.544 s replaced that whole hypothesis with a shorter          We make three contributions:
+snapshot, although its computation remained compatible with
+the selected feedback state. Identical text returned through             • We identify a service gap between timely first delivery
+certified delivery at 3.720 s, within the eight-second deadline.           and continued availability under compatible feedback, and
+Both first-delivery obligations were met, yet the phrase was               define executable witnesses for complete-call eligibility
+absent for 2.176 s, including at the original display deadline             and whole-view retention (Sections II–III).
+(Figure 1). The service lost delivered progress without needing          • We implement their joint coordination with original selec-
+to correct it. Trusted feedback here means feedback accepted               tion, durable facts, and physical ownership. A conditional
+by protected selection.                                                    selected-trace refinement argument explains how early
+   This problem arises when generated or corrected output                  full calls preserve the protected task, including accepted
+becomes an input to subsequent inference. Streaming speech                 results across supported process failures (Sections III–IV).
+correction is a concrete case: StreamCorrect feeds its chosen            • We test the composition on real neural service: factorial
+correction into later recognition [1]. A new trusted selection             controls isolate the interaction, native correction tests
+can invalidate some speculation while confirming other work                original full calls, and fault and sustained-state controls
+that began earlier. Recomputing everything is conservative, but            establish its costs and limits (Section V).
+retaining computation alone is also insufficient. In our prede-
+clared 24-speaker evaluation, computation retention improves              Deadline credit counts offered audio seconds meeting both
+timely delivery while increasing audio-frontier withdrawals            first-display and certified-delivery deadlines. The headline joint
+from 12 to 17. Jointly retaining computation and its supported         arm adds 26.645 s over 714.110 s offered with unchanged
+whole view yields zero. The missing obligation is to turn valid        selected histories. A matched native comparison raises credit
+work into sustained service across a trusted revision.                 from 30.0 to 65.822 of 66.340 s and whole-run passes from
+   Three questions determine the actions. Does an old call’s           zero to six of eight; resident independent requests pass seven
+complete frozen input still match the selected parent feedback         of eight. The remaining EOS misses, overload, cold recovery,
+state? Has the original selection authorized its result? Does          and no-reset quality failures delimit the service claim.
+                                                                  Actual whole-view frontier          Actual certified frontier
+
+
+                                      Displayed: 1.444 s                                                               Identical text returns
+                                      +37 raw characters                                                               certified: 3.720 s
+                           14
+      Audio frontier (s)
+
+
+
+
+                                                                                                      2.176 s
+                                                                                                   visibility gap
+                           12
+                                                                                         Original D2 read
+                                    Compatible update: 1.544 s                           interval missing
+                                    whole view withdrawn
+                           10
+                                0                          1                          2                            3                              4
+                                                                       Wall seconds from original offered F = 14 s
+
+
+
+Fig. 1. Timely first delivery can still leave a gap in delivered progress. An actual computation-only run displays a complete interval at 1.444 s, withdraws it
+under a compatible update at 1.544 s, and restores identical text at 3.720 s. Shading marks the 2.176-s gap; the vertical line is the original D2 read point. The
+view introduces 37 raw code points including spaces, not character/audio alignments. This c16 overload case illustrates the failure mode, not its incidence or a
+whole-run service win.
+
+
+                                      II. F EEDBACK C ONTRACT                           where an is the input-state frontier, bn > an the audio target,
+A. Feedback creates an execution dependency                                             and χn binds remaining inputs and execution identity. The
+                                                                                        model may read the prefix through bn ; an does not assert
+   An immutable audio stream supplies a protected selection
+                                                                                        token-to-audio alignment. The adapter derives Pn+ and Tn
+path producing Canonical facts and a faster Private path
+                                                                                        from a complete result. An in-flight call has only its frozen
+computing and displaying provisional hypotheses. Selection
+                                                                                        input; partial or cancelled tokens supply no node.
+can change the next call’s input: StreamCorrect feeds its
+                                                                                           The dependency lifetime determines usability under the
+chosen correction into subsequent ASR [1]. We coordinate
+                                                                                        current root; the visible lifetime determines whole-hypothesis
+this dependency as the paths advance asynchronously.
+                                                                                        retention; the physical lifetime ends only when execution
+   For a fixed session and execution contract, write an installed
+                                                                                        finishes or drains. A new root can change the first two before the
+fact as
+                                                                                        third ends. Their decisions therefore require separate evidence.
+                    C = (v, F, ZC , PC , TC ).                (1)
+                                                                                           The service retains every accepted input obligation until
+Here v is the version, F the certified processing frontier, ZC                          certified processing covers it. Discarding a branch, requesting
+the complete selected output, PC the feedback state, and TC                             cancellation, or recovering an old view does not remove that
+its bound text. The contract fixes the model, adapter, decoding,                        obligation or reset its arrival clock. In exact mode, a missed
+audio identity, and transformations to P and T . Consumer                               deadline never authorizes an uncertified Canonical transition.
+coverage follows the adapter’s publication policy; advancing
+F need not add characters. Certification means acceptance by                            C. Trust and failure boundary
+protected selection and installation, separately from human-                               We assume one trusted Owner per session, protected selec-
+transcription accuracy.                                                                 tion, immutable audio and model configuration, unambiguous
+   The adapter declares a conservative representation of all                            encoding, collision-resistant digests, and storage honoring
+mutable cross-call state that can affect later model inputs,                            successful synchronization. Used calls must faithfully consume
+selection, or feedback. Telemetry and resources are separate.                           their frozen inputs. Host receipts bind API objects, not GPU
+Qwen passes prompt tokens without cross-call numerical KV                               arithmetic; independent Private and Authority floating-point
+caches. The native adapter additionally carries audio buffers,                          executions need not agree.
+token groups, context, alignment position, and decoder config-                             The interface checks identity, completeness, derived state,
+uration. Comparisons require the same contract: text equality                           and ancestry. Native resilience supports worker or Owner-group
+cannot replace an omitted cursor or numerical cache. The                                fail-stop on an intact filesystem; Supervisor, accepted-input
+representation may conservatively include fields unnecessary                            ledger, actual Consumer, power observer, and synchronized stor-
+to a particular call.                                                                   age survive. Their original input clocks continue through restart.
+B. Three lifetimes of provisional work                                                  Supervisor/Consumer failure, host power loss, compromised
+                                                                                        Owner or Authority, Byzantine code, persistent corruption, and
+   A complete provisional node n records a frozen call
+                                                                                        lost storage are excluded. Controlled wrong-input injections in
+                    qn = (an , Pn− , bn , χn ),      n = (qn , Zn , Pn+ , Tn ),   (2)   Section V intentionally violate normal Private input fidelity;
+we use them to study containment and executor release, not as        C. Retaining an actual view: S
+examples covered by the lawful-continuation proposition.                A snapshot Consumer can replace a valid ahead view with
+                                                                     a shorter certified snapshot despite computation retention.
+     III. VALID C ONTINUATIONS AND W HOLE V IEWS
+                                                                     RevTrace maintains separate certified and provisional whole-
+A. A continuation under a new root                                   hypothesis lanes, without an uncertified suffix splice or certified-
+   The central question is whether an old call still belongs to a    prefix status for retained views.
+valid provisional continuation after trusted feedback advances.         For a Canonical application, S checks the complete visible
+Its birth version records dispatch history. The dependency           node’s input directly against (F, PC ) or follows complete
+witness establishes whether it remains usable now.                   published ancestors to that boundary. Missing, cyclic, or
+   Let x = (F, PC ). A complete recorded node provides an            ambiguous ancestry is rejected. Unlike R’s conservative guard,
+edge                                                                 a directly rooted published call needs no extra Private boundary
+                                                                     node.
+               n
+               → (bn , Pn+ )
+      (F, PC ) −               if   an = F ∧ Pn− = PC ,       (3)       Before actual application and its receipt, the kernel checks the
+                                                                     preview against the durable root, registered results, dependency
+under the input, identity, and execution contract of Section II. A
+                                                                     path, and bound text/frontier. A caller-supplied compatibility
+finite sequence of such edges is a valid provisional continuation
+                                                                     flag cannot replace these records.
+of C when each successor consumes the preceding complete
+output state at its actual frontier. Write C ⇝ n for a complete      Proposition 2 (Continuity at a compatible application). Im-
+path to n. A frozen in-flight successor can belong to the same       mediately before an authorized Canonical application, let the
+continuation, but contributes no usable result until completion.     visible whole provisional view h be ahead of its new frontier
+                                                                     F . If S proves C ⇝ h and no independent withdrawal mode
+Proposition 1 (Sufficient re-rooting witness). Suppose an old
+                                                                     is invoked, that application advances the certified lane and
+branch contains a complete boundary node at the new certified
+                                                                     preserves h unchanged.
+frontier F , with output state PC . If its subsequent recorded
+calls form an unbroken input–output path to the actual branch        Proof. The authorized compatible-and-ahead branch installs C
+tip, those nodes are a valid provisional continuation of C. An       in the certified lane while retaining h’s node, text, and frontier.
+in-flight successor may continue when its unchanged frozen           That application therefore withdraws none of h.
+input is that tip and its target exceeds F .
+                                                                        Incompatible updates must withdraw the view, and later valid
+Proof. The boundary equals (F, PC ), so the first successor          results can revise it. This is a per-application property, not
+satisfies Eq. (3). Each subsequent call consumes the preceding       global monotonicity. Snapshot consumption and conservative
+complete output at its recorded frontier under the same contract.    recomputation can be safe; the four-arm study measures the
+Induction reaches the tip and the unchanged input of its in-flight   extra progress and cost of joint retention.
+successor, which supplies no output yet.
+                                                                     D. Native feedback and conditional full calls
+   This establishes dependency validity, not Canonical write
+authority. Provisional results remain revisable. The witness            StreamCorrect supplies a concrete recursive feedback task
+follows actual calls without assuming bitwise equality of            [1]. For complete closed state P and accepted audio X, expose
+different floating-point executions.                                 its recognition boundary as
+   A branch born under v can reach (F, PC ) when v+1 installs,                             A(P, X) = (B, M ),                        (4)
+making version-only rejection wasteful. Conversely, equal text
+can hide different tokens or alignment state; equal state at a     where B contains ordered beam candidates and M the engine
+different frontier also fails Eq. (3).                             state and inputs needed by original correction and update
+                                                                   (C/U ). Candidate order, prompts, returned token IDs, selection,
+B. Retaining computation: R                                        and update rules remain intact.
+   The core Qwen guard conservatively implements Proposi-             Before learned correction finishes, the original update tail
+tion 1. On installation, it requires a complete Private node at with a typed first-beam identity prediction produces provisional
+exactly F with full feedback tokens PC , then checks frozen closed state Pb+ . It is a dependency projection, not a complete
+inputs and frontiers along complete successors to the actual tip. selected result. A second worker can run the next complete
+An intermediate match is insufficient. An in-flight successor original call on that conditional input; both GPUs host the full
+must be the unique tracked task, consume that tip, and target recognizer–corrector. Its own prediction may be wrong even
+audio beyond F .                                                   when its input later matches. Original C/U , rather than the
+   Success retains the branch without changing job IDs, birth prediction, determines its output.
+versions, inputs, or results; otherwise the Owner fences it and       When the parent installs, the Owner compares the call’s
+rebuilds from an allowed state. Boundary-node and unique-slot complete frozen start state, actual frontier, contract, and session
+requirements restrict this sufficient guard, not every valid reuse epoch with it. Equality confirms the unchanged owned call: it
+scheme.                                                            continues if running, or becomes eligible for ordered selection
+                             TABLE I                                      E. Preserving the protected program’s semantics
+ C OORDINATOR FOR NATIVE CONDITIONAL FULL CALLS . I NPUT STATUS
+AND WHOLE - VIEW SUPPORT ARE SEPARATE JUDGMENTS ; SELECTION STILL            Let P ⇒A,X P ′ denote a transition allowed by the original
+ USES THE ORIGINAL COMPLETE RESULT. T HIS SUMMARIZES EXISTING             protected program on accepted immutable input X. The
+                  GUARDS , NOT A NEW SCHEDULER .
+                                                                          relation may be nondeterministic. A complete original call
+                                                                          includes its original selection and update, or its declared
+ State: selected cut C; owned calls J; accepted complete buffers
+ B; selected same-frontier witnesses W ; actual whole view h.             buffer-only path; a typed identity projection is not such a
+ Input status E(j): exact current parent and all frozen bindings          result. We project a protocol execution onto its distinct durable
+ match: CONFIRMED; actual W at j’s start differs: REFUTED; no             selected facts, deleting speculation, waiting, local rejection,
+ such witness: UNKNOWN. Covered targets and fenced sessions are           cancellation, collection, and repeated delivery. This restricted
+ ineligible.                                                              projection follows the standard stuttering view of refinement [7];
+ 1. Dispatch: prefer missing selected work on a ready worker;             provisional whole-view behavior remains outside its alphabet
+ otherwise freeze an unduplicated conditional full call within the        and has a separate compatibility property.
+ ahead bound. Keep original UID, birth, incarnation and accepted-
+ input clocks.                                                            Proposition 3 (Selected-trace refinement). Assume sufficient
+ 2. Receive: check channel, identity, frozen input and complete           declared state, faithful execution of frozen inputs, exclusive
+ original output. Local duplicate/fenced rejection cannot clear another
+ lease. Reject refuted, covered or fenced results; buffer an admissible   serial selection, correctly bound message identities, and storage
+ complete result if its input remains unknown.                            that honors successful synchronization. If each new durable
+ Typed ASR projections extend only a checked provisional path;            fact binds a complete original call whose full input equals the
+ they do not select.                                                      preceding selected cut, retains the call’s original identity, was
+ 3. Select ready: for a complete original result with E(j) =              admitted under valid message authority, and is synchronized
+ CONFIRMED , recheck the installed parent, synchronize its bound fact,
+ then install C and record W . Preserve original identity; reclassify     before installation or certified application, then the projected
+ pending results. Unknown grants no commit authority.                     facts form an execution allowed by A. Replaying an existing
+ 4. Consume: check fact order and actual parent. Advance the              fact adds no transition.
+ certified lane; retain an ahead h whole when S(C, h) proves its
+ path. Otherwise render the installed cut, separately from deciding       Proof. The initial cut belongs to A. Deleted actions do not
+ unresolved calls.                                                        extend the prefix. Each new fact binds a complete original
+ 5. Release: actual consumption releases outbox references, not live-     call on exactly the preceding cut and accepted input, hence an
+ view references. Physical ownership ends at the matching terminal or     allowed next edge regardless of dispatch time. Synchronization
+ confirmed exit/cleanup; cancellation acknowledgment is insufficient.
+                                                                          precedes privileged application. Recovery replays the same
+                                                                          checked identities, including a fact first consumed after an
+                                                                          Owner crash, without adding an edge. Induction proves the
+if complete. Job ID, birth, producer incarnation, inputs, and
+                                                                          claim.
+execution history stay unchanged.
+   An earlier ancestor mismatch can remove current view                      The durable append is the selection boundary; installation
+support without refuting a later complete input. Cancellation             and consumption do not select again. Already accepted buffers
+before correction requires a disagreeing actual selected state            retain their producer identities after exit, whereas new fenced
+at that call’s own start frontier, coverage of its target without         messages are inadmissible. The certified frontier derives only
+remaining use, or a changed epoch. An unresolved future parent            from checked facts; ahead views remain provisional. Input
+supplies none of these proofs. The view can therefore require             confirmation does not certify predicted next states.
+withdrawal while the call remains unresolved.                                A separately frozen specification explores 6,231 two-frontier
+   This native input witness and the core Qwen boundary-                  normal states and 14,074 one-frontier failure states, each to
+node/unique-successor guard are different sufficient imple-               a 12-event depth, with 27 named controls. An independent
+mentations of the continuation relation. Neither grants write             trace checker binds actual facts and whole-view applications to
+authority. Both use a whole-view Consumer that keeps certified            original call receipts. The specification is not extracted from the
+and provisional provenance separate. The native comparison                runtime; depth bounds truncate exploration, and neither check
+holds two complete workers fixed and varies conditional                   verifies all Python, CUDA, or operating-system behavior. Exact
+dispatch and retention; ready-only ASR handoff is a separate              equality with a fixed neural reference is separate empirical
+developmental control.                                                    evidence, rather than a premise that arbitrary GPU reruns must
+   Table I summarizes the native event loop. An unknown future            be bitwise identical.
+input authorizes neither selection nor a refutation-based cancel.
+When a complete result replaces its typed prediction, only the                             IV. E XECUTION P ROTOCOL
+suffix that consumes the actual output contiguously survives.
+Worker loss is handled separately: validate complete sealed-              A. Complete results and physical ownership
+channel receipts before fencing new old-incarnation messages;                In the core runtime, dispatch binds session, incarnation, job,
+do not erase already accepted B. Thus losing a view, rejecting            input, target, and contract. A row returns either a complete
+a result, and releasing a worker are different actions, even              result with re-derived state/text or cancellation without partial
+when triggered by one feedback event.                                     state. Complete rows can be installed and consumed before
+  (a) Confirmed input preserves the original full result across producer exit
+
+
+  Parent                   ASR                          Original correction / update                            Selected P2
+
+
+                           Complete call: frozen P̂ 2
+  Child j                                                                                                        P̂ 2 = P2                    Sync D
+                          ASR P̂ 3 → original C/U P3                     Accepted B
+                                                                                                                                           install → use
+                                                                                                             input confirmed
+                               P̂ 3 ≠ P3 is allowed
+                                                                                      Producer exit
+                  Original UID / birth / incarnation retained                     new messages fenced
+
+  (b) A lost view does not refute an unknown future call input
+
+                                                                           true: retain h
+          Trusted                       Whole-view                                                             Future complete input: UNKNOWN
+                                                                                                    ≠           no same-frontier refuting witness
+         update C                       guard S(C,h)
+                                                                                                                  keep call / buffer; no commit
+                                                                         false: withdraw h
+
+
+
+Fig. 2. Eligibility, original selection, and whole-view support are separate decisions. (a) A complete child call runs on frozen Pb2 ; its own prediction Pb3 may
+differ from original C/U output P3 . An accepted buffer keeps its original identity across producer exit and fencing. Matching selected P2 confirms the input;
+durable sync precedes installation and use. (b) Losing view support does not refute an unknown future input or authorize its commit. This is a causal native
+schematic, with complete-state and execution assumptions from Section II, not a measured timeline.
+
+
+
+their batch finishes. Only all terminal rows and device synchro-                  E. Continuing through delivery and process failures
+nization authorize BatchDrained and executor reuse. The                              Each job has an Owner namespace and monotonic issue
+native process lifecycle below has separate evidence.                             number; each physical slot has a worker incarnation, using
+                                                                                  established RPC identity principles [9]. Fencing removes future
+B. Covered work and safe-point exit: K                                            message authority without renaming already accepted complete
+  For the tested use model, K requests exit when the installed                    results.
+Canonical frontier covers a proposal’s target and it has no                            a) Local rejection and physical release: The ingress
+remaining declared use. This differs from R: valid work                           guard rejects exact duplicates and fenced messages locally;
+beyond the new root can remain useful. Workers observe                            they cannot mutate selected state or release newer leases.
+CancelRequest at decode boundaries; completion can win,                           Contradictory currently owned contents freeze writes. Per-
+but each row has one terminal outcome. Static batches are not                     incarnation Pipes and receiver threads isolate incomplete frames.
+compacted or refilled; masked costs and drain delays remain                       Replacement requires process exit, CUDA release and joined
+measured.                                                                         receivers. Strictly validate complete receipts from the sealed
+                                                                                  channel before fencing the incarnation and retiring unfinished
+C. Durable facts and outstanding input                                            work. Accepted buffers and supported views retain their original
+                                                                                  identities.
+   Before acknowledgment, synchronized frames bind par-
+                                                                                       b) Durable selection and recovery: A synchronous hook
+ent/next states, request identity, selected complete result, and
+                                                                                  binds complete parent/next states, original correction and IDs,
+receipt; recorded deltas must reconstruct the state. Group-
+                                                                                  job, Owner/session epochs, and producer incarnation. Framing,
+ready commit shares synchronization among validated sessions
+                                                                                  checksums and chaining protect the fact; synchronization
+without a collection timeout or cross-session atomic transaction.
+                                                                                  precedes installation/publication. Uncertain writes freeze the
+Uncertain append/application outcomes block writes. Write-
+                                                                                  writer. Recovery discards only an incomplete final frame;
+ahead recovery [8] reconstructs facts and identities; the native
+                                                                                  complete corruption fails. These conventional write-ahead
+extension binds this to original correction calls.
+                                                                                  rules [8] bind the original feedback transition.
+                                                                                     The surviving Supervisor preserves the input ledger and
+D. Validation boundaries
+                                                                                  original clocks. After old physical ownership ends, it advances
+   Propositions 1 and 2 concern the stated guards and compati-                    the Owner namespace, replays the verified fact prefix, and
+ble applications. The artifact retains an earlier, separately frozen              cold-starts workers. Replay adds no inference; old publications
+recovery prototype and its bounded model and crash results;                       gain no new authority. Both policies share this coordinator,
+they do not validate the later core or native fault paths. The                    durability, recovery, and actual Consumer.
+selected-trace argument of Proposition 3, its finite specification,                    c) Conditional continued service: For finite accepted
+and actual execution checks have distinct scopes.                                 work after finite supported failures, further progress requires
+readable storage, eventual physical release/loading, terminating  a Canonical application replaces the provisional view with
+original calls that advance frontiers, fair Owner/Consumer        the new certified snapshot. This checked-snapshot Consumer
+scheduling, and sufficient service budgets. This is not an RTO    still validates Private dependencies against the same root and
+or D2/C8 guarantee; loading, replay and recomputation retain      passes the same protocol kernel. Removing retention does not
+their original clocks.                                            remove validation, durability, input accounting, or the execution
+      d) Control history: Roots, calls, buffers, visible views    capability of Section IV. The fifth arm, Full composition
+and outboxes pin their dependencies. Actual acknowledgment        (ours), is a complete-composition positive control: an alternative
+releases publication references, while the visible view stays     policy instantiation with the same retention relation, Consumer
+pinned. Namespace/issue high watermarks prevent reuse after       protection, and shared execution/commit substrate. It is neither
+collection. Unreferenced terminal and audit windows have fixed    an external pre-existing implementation of our complete design
+limits; diagnostics stream to disk. These bound protocol entries  nor an independently reimplemented neural stack. Comparable
+relative to live dependencies, separately from current state,     behavior is the expected positive-control outcome.
+cumulative text and total memory.                                       c) Endpoints: For offered interval i, let wi be its audio
+                                                                  duration, ri its original ready time, di its first actual visible
+                        V. E VALUATION
+                                                                  covering time, and ci its first actual certified covering time.
+A. Experimental design and service endpoints                      Original joint-deadline credit is
+   We evaluate two service obligations under unchanged se-                         X
+lected feedback histories: retaining dependency-valid progress             A2,8 =      wi 1{di − ri ≤ 2 ∧ ci − ri ≤ 8}.          (5)
+                                                                                     i
+already at the Consumer, and completing selected transitions
+before their original deadlines. The core factorial study All offered audio, including end-of-stream (EOS) tails and
+isolates computation and whole-view retention; the native misses, stays in its denominator. Whole-run service passes only
+study tests input-confirmed full execution of the original when display P99 is at most 2 s and certified-view P99 at most
+correction pipeline. Timing, content support, and energy remain 8 s. P99 is computed over offered frontiers within each run;
+separate. The core experiments use actual neural calls, durable credit weights their audio durations. Thus a P99 pass can coexist
+input and Canonical journals, and an instrumented FIFO with a small tail miss. We separately measure adjacent visible-
+Consumer. Measurements use Consumer applications rather frontier withdrawals, their audio magnitude, and the integral of
+than publication or display replay. Accepted input obligations the deficit below the previously observed high watermark. Text
+retain their original arrival clocks.                             revisions, final word error rate (WER), and board energy remain
+      a) Implementation and workloads: The service uses two separate endpoints. Independent recounters check complete
+24-GB RTX 3090s: an FP16 Private worker and an FP32 selected F/Z/P/text histories and reconstruct dependency
+Authority worker. Qwen3-ASR 1.7B [10] is the primary witnesses from actual complete outputs and consumed inputs,
+backend; Whisper base.en [11] tests a second adapter. The rather than trusting a retention flag.
+common carrier uses complete-row delivery, at most 16
+rows per batch, a 256-token generation limit, the protocol B. Does retained computation preserve delivered progress?
+kernel, and synchronized journals. These experiments use             We test whether preserving valid work also preserves its
+row_complete: physical early exit is disabled, so the effects presentation when selected updates replace snapshots. Table II
+of R and S cannot be attributed to cancellation. Model startup is reports the pre-specified Qwen, ρ = 1, staggered stratum,
+outside the serving interval and is recorded separately. Serving including all three cohorts. Retaining computation alone raises
+energy integrates both physical boards; CPU energy is outside deadline credit from 654.115 to 664.150 s but increases audio-
+that measurement.                                                 frontier withdrawals from 12 to 17. The additional work
+   The independent confirmation comprises 24 previously un- survives the new root, while snapshot consumption still discards
+used speaker streams from LibriSpeech [12], totaling 714.11 s, its visible progress. Retaining views alone reduces withdrawals
+selected using metadata before inference and partitioned into to one but yields 628.435 s of credit. The joint arm obtains
+three eight-speaker cohorts. Its 110 cells contain 60 primary 680.760 s and zero audio-frontier withdrawals: 26.645 s, or
+cells (three cohorts, two backends, two arrival patterns, five 3.73 percentage points of offered audio, above R0 S0 . Its gain
+arms), 20 fresh-process repeat cells on cohort A, and 30 coarser- over computation-only is 16.610 s.
+feedback controls. Primary Authority advances at every 2-            The cohort-wise credit interaction, I = Y11 −Y10 −Y01 +Y00 ,
+s input boundary (ρ = 1); ρ = 3 changes both selection is +18.530, +6.205, and +17.555 s. These three contrasts
+frequency and feedback segmentation. Synchronized streams share queues within each cohort. They support a composition
+start together; staggered streams start 0.25 s apart. Repeats and effect in this stratum, rather than treating individual deadline
+arms reuse these sources: the independent acoustic sample is windows as independent trials. The joint arm still erases 569
+24 speakers, not 110 deployments.                                 visible characters: zero audio-frontier withdrawal does not mean
+      b) Comparators: The four arms cross computation re- immutable text. Its 2.329-s median display P99 also remains
+tention R with whole-view retention S (Section III). With R above D2. The result preserves more timely progress without
+disabled, computation rebuilds from the selected root rather establishing that this workload meets its whole-run service
+than retaining its witnessed continuation. With S disabled, target.
+                              TABLE II                                 adds source content; these are explicit operating workloads,
+   I NDEPENDENT Q WEN CONFIRMATION , ρ = 1, STAGGERED ARRIVALS .       not a pure concurrency capacity curve.
+ E ACH ARM OFFERS 714.11 S ACROSS THREE EIGHT- SPEAKER COHORTS .
+W ITHDRAWALS AND CREDIT ARE TOTALS ; P99 AND ENERGY ARE MEDIANS           All arms pass whole-run D2/C8 in the two eight-session
+OF THREE PER - RUN STATISTICS . A LL 15 RUNS MISS THE WHOLE - RUN D2   workloads. Joint display P99 is 1.426–1.528 s when synchro-
+                             CRITERION .                               nized, where the arms largely converge. Staggered joint P99
+                                                                       reaches 1.955 s, and an earlier development run reached 2.034 s,
+                       Audio    Display D2/C8        Energy
+      Arm           withdrawals P99 (s) credit (s) (J/audio-s)         exposing a narrow timing margin. Two 0.215-s tails exceed
+                                                                       D2 in the new eight-session runs and remain uncredited even
+      R0 S0                  12   3.797   654.115       59.72          though their runs’ P99 passes. At sixteen sessions, all twelve
+      R0 S1                   1   3.891   628.435       59.16
+      R1 S0                  17   2.431   664.150       59.68          runs fail D2, while C8 passes. Joint credit exceeds R0 S0 by
+      R1 S1                   0   2.329   680.760       59.37          20.280/22.885/20.180 s, but its credit interactions are +20.910,
+      Full (ours)             0   2.534   667.530       59.73          +26.380, and −9.575 s. Against computation-only, joint credit
+                                                                       changes by +18.910, +5.055, and −7.225 s, and display P99
+                                                                       improves in only one repeat. Continuity is the stable distinction:
+   The full composition likewise has zero frontier withdrawals,        computation-only withdraws compatible views 16/17/12 times,
+the same 569 erased characters, and comparable timing and              versus zero for joint.
+energy. Its lower credit than the joint arm in this stratum               First credit does not reveal a later withdrawal. A frozen
+is not evidence that a different complete composition is               secondary recount therefore follows intervals already delivered
+inherently inferior. Across the confirmation, all 144 matched          within D2 whose eventual certified covering view also meets
+source/backend/granularity/arrival history groups agree on com-        C8. At each subsequent Canonical application it classifies
+plete Canonical F/Z/P/text; all 22 paired full-composition             withdrawal using the complete old view’s dependency witness,
+comparisons preserve those histories. The ablations therefore          separately recording necessary incompatible withdrawals. Loss
+isolate how legal progress is retained, rather than buying latency     lasts until an actual covering view returns or the next Canonical
+by changing the selected feedback task. Lesson: computation            boundary censors this root’s window. At sixteen sessions,
+and consumption protect different objects; their joint value is        computation-only still has 10/12/9 timely compatible loss
+observed under the same selection contract.                            windows with 24.903/23.635/15.736 audio-s×wall-s deficit
+                                                                       area; joint has none. Such holes intersect the original D2 read
+C. Relative progress explains when retention matters                   point for 6.000/10.675/4.000 s of distinct audio. The secondary
+   The useful opportunity is an already observed whole view            measures continuity after delivery; it neither changes Eq. (5)
+ahead of a new Canonical frontier whose complete depen-                nor certifies provisional content.
+dency path remains valid. In the headline joint arm, 18 of                The twelve-session witness is not established: all twelve runs
+368 Canonical updates encounter such a view and retain it.             fail D2, and computation-only never loses a timely complete
+Computation-only encounters 17 and clears all 17. Under                non-EOS interval satisfying the frozen witness criterion. Joint
+synchronized arrivals the joint arm encounters only three of           has no compatible loss windows. The predeclared stop rule
+368; its credit is 0.790 s below computation-only. Without an          ends this search; full criteria and per-run results remain in the
+ahead view, preserving it has little service value. These are          artifact. Lesson: compatible retention prevents a specific later
+witnessed incidences in the executed workload, not a production        loss; first-delivery performance and overload remain separate.
+prevalence estimate.
+   Timing can also change the ranking. In the fresh-process            E. Quality and cost boundaries
+staggered repeat on cohort A, joint credit is 226.320 s versus     All headline Qwen arms have WER 26/1908 = 1.36%
+230.565 s for computation-only, and I = −2.245 s. We retain     and identical selected histories. Retrospective support counting
+this repeat alongside the three positive primary contrasts. The first-certified content plus first-ahead whole views that exactly
+combination’s value depends on relative progress and actual     match later same-F Canonical text leaves the headline credits
+feedback compatibility; independent source confirmation does    unchanged. Elsewhere raw differences remain: joint loses 2 s of
+not imply an invariant timing advantage.                        strict support in the sixteen-session third repeat and 2 s in each
+                                                                of the midpoint’s first two repeats, although the frozen text
+D. When does retention become sustained service?                normalizer agrees. This comparison is with the selected model
+   We expect relative progress to determine both retention output, not human-transcription correctness. Whisper exposes
+opportunities and deadline outcomes. We freeze three develop- a larger adapter boundary: WER is 83.12% at ρ = 1 and
+ment workloads—eight synchronized sessions, eight staggered 11.53% at ρ = 3, whose different feedback contract prevents
+sessions, and sixteen staggered sessions—with four arms interpreting it as a quality-preserving speedup.
+and three fresh processes per arm (36 cells). A single later       The headline arms consume similar board energy (Table II);
+exploratory midpoint adds twelve staggered sessions and the energy does not rank them in credit order. At sixteen develop-
+same twelve arm/repeat cells. Figure 3 retains all 48 runs. The ment sessions, joint reduces total model time by 0.66–1.59 s
+nested source lists offer 121.205, 185.300, and 250.180 s per against R0 S0 , while serving wall time does not consistently
+eight-, twelve-, and sixteen-session run. Adding sessions also fall and the three energy differences change sign. The measured
+                                                Neither                       View only (S)       Compute only (R)                         Joint (R+S)
+
+                          a First visibility                                        b Timely delivery                                           c Later visibility loss
+                      5                                                      100%
+                                                                                                                                           24
+
+
+
+
+                                                                                                                      Compatible deficit
+                      4
+
+
+
+
+                                                                                                                      (audio s × wall s)
+                                                          D2/C8 credit (%)
+    Display P99 (s)
+
+
+
+
+                      3                                                                                                                    16
+                                                                             80%
+                                                 D2
+                      2
+                                                                                                                                            8
+                      1
+                                                                             60%
+                      0                                                                                                                     0
+                          8/sync 8/stg 12/stg 16/stg                                8/sync 8/stg 12/stg 16/stg                                  8/sync 8/stg 12/stg 16/stg
+                                Sessions / arrival                                        Sessions / arrival                                          Sessions / arrival
+
+
+
+Fig. 3. First visibility, timely credit, and later visibility loss are different endpoints. All four workloads and three fresh runs per arm are shown, including the
+negative twelve-session midpoint. Points are real per-run values; ticks and ranges describe their median and observed range. Panel (c) is the separate secondary
+measure of subsequent compatible loss of originally timely intervals, censored at the next Canonical root when necessary. It does not replace panel (b)’s
+original first-observation credit.
+
+
+
+benefit is the progress delivered and preserved under a fixed                                                               TABLE III
+feedback contract. It is not a general reduction in inference                                   F INAL FULL CALLS PRESERVE TASK FIDELITY AND IMPROVE TIMELY
+                                                                                                 SERVICE . T HE MATCHED VERSION STUDY REUSES FOUR MEASURED
+cost or a cure for overload.                                                                   SPEAKERS : TWO POLICIES , TWO VERSIONS AND TWO FRESH TRIALS (32
+                                                                                               RUNS ). E ACH ROW OFFERS 66.340 S ; CREDIT AND ENERGY ARE TOTALS ,
+F. Do early full calls preserve the original task?                                                D99 IS THE MEDIAN OF PER - RUN P99. E NERGY USES A COMMON
+                                                                                               EXTERNAL ORIGIN - TO - CONFIRMED - PHYSICAL - MODEL - DRAIN WINDOW.
+   We test whether input-confirmed calls improve service while                                  T HIS IS REGRESSION EVIDENCE , NOT NEW ACOUSTIC CONFIRMATION .
+retaining original learned correction and recursive feedback.
+The StreamCorrect adaptation uses fixed 500-ms inputs, no                                       Credit D99 Energy
+VAD, and original FP32 execution [1]. Both author-built                      Version Policy      (s)    (s)   (kJ) Pass
+policies have two complete workers, the same ASR early-                      Earlier Conserv. 33.500 4.450 44.690 0/8
+view Consumer and neural warmup. Conservative execution                      Earlier Full-call 66.340 1.633 39.735 8/8
+waits for selected parent feedback; Full-call permits conditional            Final   Conserv. 30.000 4.759 47.019 0/8
+                                                                             Final   Full-call 65.822 1.638 43.952 6/8
+execution. We distinguish the earlier implementation (bdfa)
+from the final resilience implementation (4f); full execution
+identities are in the artifact.
+     a) Independent confirmation and matched regression:
+                                                                  Its two failures are S0908 EOS: display P99 increases by
+The earlier method was frozen before selecting four unused
+                                                                  0.163/0.050 s against Earlier Full-call. Other paired differences
+AISHELL-1 speakers [13] by metadata in an 8–9-s band. Two
+                                                                  have both signs; similar medians do not establish equivalence.
+policies and two fresh repeats give 16 runs with randomized
+                                                                  Final Full-call uses 6.52% less drain-window board energy
+pair blocks, reversed arm order and swapped GPU roles.
+                                                                  than Final Conservative, but 10.61% more than Earlier Full-
+All selections, 500-ms frontiers and partial EOS remain.
+                                                                  call. Model drain and source-specific cleanup are different
+Speakers, rather than repeated runs, are the acoustic units.
+                                                                  endpoints; EOS-window and original source endpoints remain
+All 272 selected transitions match complete original start/end
+                                                                  separately available.
+states, correction and returned IDs against offline full-call
+references. Both arms have five edits over 81 unique reference          b) Resident independent requests: Models load once per
+characters (6.17% CER); this is the adaptation’s accuracy, not trial and both worker PIDs persist across four pre-registered
+the published benchmark. Earlier Full-call raises credit from independent requests. The next request begins only after actual
+37.0 to 66.33975 s and passes from 0/8 to 8/8.                    certified consumption of the previous file EOS. This is single-
+   The matched 32-run study holds those four sources, FP32 outstanding closed-loop service, without online VAD or open-
+models, warmup, allocator and external board-power observa- arrival capacity. Two policies and two fresh trials retain all 272
+tion fixed across versions. All 544 selected transitions match original transitions and each request’s own input clock. Full-call
+complete original inputs/outputs, correction and IDs under the passes D2/C8 on 7/8 requests versus 0/8, earning 64.118875
+declared static code-version mapping. Final Full-call earns versus 31.0 of 66.33975 s. The second S0908 request has D99
+65.821625 versus 30.0 s and passes 6/8 versus 0/8 (Table III). 2.229 s; residency does not remove its deadline boundary.
+      c) What content arrives, and what remains?: The earlier only at EOS. All worker-fault trials fail D2 but pass C8;
+independent bank contains 92 promoted calls beginning before Owner-fault trials fail both. Old durable facts reappear in
+their selected parent finishes; 20 have wrong own predicted 1.36–1.81 s, while new certified post-fault completions take
+ends. Twenty-four invalid/covered calls stop after ASR and two 64.61–108.08 s in Owner cases. A surviving worker may finish
+complete wrong-input results are discarded. Input confirmation, before replacement readiness. Old-fact replay and new inference
+rather than prediction correctness, explains which original work are separate recovery endpoints.
+survives.                                                              a) Complete buffers across producer death: The bank
+   A frozen zero-neural recount of the final matched and above never installs a completed conditional buffer. Four frozen
+resident logs checks actual complete dependencies and first- timing controls cover two matching and two mismatching
+view text at its own frontier G. Credit whose whole first view inputs. A transport fixture holds the parent after original ASR
+retrospectively equals selected text at that same G rises from and the child after sending its complete original result. After
+22.5 to 51.0 s in matched runs, and from 24.0 to 50.259 s the Owner registers the result, we kill its producer, verify
+in resident requests. Full-call’s remaining 14.822/13.860 s exit, CUDA release, sealed-channel validation and fencing,
+mismatches; unknown coverage is zero. Raw and whitespace then release original parent correction. Both matching results
+comparisons agree. Each arm in either bank introduces 180 install and are consumed once with their original job, birth and
+code-point occurrences, retracts 14, and leaves 166 last-visible. incarnation; both mismatches are rejected against the actual
+All-offered whole-text matches are 106/136 for Conservative same-frontier parent. Positive cases also finish a subsequent
+and 104/136 for Full-call. The gain is timely supported content, independent request. These are controlled interleavings, not
+not more text or a higher overall match fraction; agreement natural incidence or fault-time SLO wins. A separately frozen
+with selected model output is not human accuracy.                 zero-neural reconstruction validates the unchanged runs after
+   The final matched bank has no compatible-ahead application, correcting a READY indexing defect; original failed audit gates
+so gives no retention-rate evidence. Resident Full-call has remain in the artifact. Lesson: producer failure ends future
+one nonempty opportunity: its 5.0-s whole view survives a message authority without uniformly invalidating accepted
+compatible 4.5-s selected update with the same tip and job. results.
+The complete tip is logically held for 0.817 s spanning that           b) Sustained-state stress and its limits: Two metadata-
+update before legitimate supersession; this is Consumer event- selected AISHELL-1 speakers contribute 24 utterances each,
+state observation, not avoided downtime. Each Full-call bank concatenated as exact PCM into 228.51025/208.1003125-s
+contains two necessary incompatible withdrawals. Final objects streams without join resets. A continuous original-engine
+are right-censored at the last actual same-source observation. reference and 875 separately restored steps agree on complete
+Lesson: confirmed full calls accelerate the original task, while state, correction and IDs, crossing 398/357 buffer shifts and
+content support, continuity opportunities and deadline margin 353/252 context changes. Eight serving trials produce 3,500
+require their own denominators.                                   matching selected steps. Unpinned terminal and each audit
+                                                                  class stay at most 64 entries; live dependencies, state/output
+G. What survives a producer or Owner failure?                     bytes, Owner RSS and cumulative logs are separate.
+   We test whether failures preserve acquired results without        All eight trials fail D2/C8 (display P99 449.727–502.952 s).
+granting old messages new authority. The final implementation Both policies reproduce severe original-task insertion errors:
+shares models, durability, guards, recovery and Consumer CER 3103/486 (638.48%) and 1313/522 (251.53%). Full-call
+across both policies. Initial loading and fixed warmup pre- uses more energy. The original length guard can skip decoding,
+cede service; replacement loading, replay, recomputation and so frontier credit need not add text. These are state/collection
+physical drain retain the original clock.                         stress tests, not deployable continuous ASR. Across all 36
+   Six conditions, two policies and two fresh processes on one trials, the checker preserves 90 compatible-ahead dependency-
+development clip give 24 short trials, plus four EOS/compatible- tip applications and records 1,118 necessary incompatible
+view regressions. With eight sustained-state trials below, the withdrawals. Internal tips need not add text; these controlled
+bank has 3,976 durable transitions independently bound to counts do not estimate natural prevalence.
+original complete receipts and actual Consumer applications:         An independent dispatch audit finds 360 eventual matches
+zero illegal installations or incorrect owned-message rejections. among 1,901 conditional inputs; 1,541 are refuted, none
+Eight duplicate/late messages cause no selected mutation; unresolved. Six matched jobs never become durable after
+eight worker deaths have confirmed physical replacements. injected failures. Workload-specific ratios remain separate.
+Conditional calls supply 354 durable facts: 352 have original Original-clock misses and a conservative offline excess-length
+Owner installation records, and two first reach the Consumer bound precede the after-trim 448-token condition on each long
+through recovery. In four worker-after-ASR cases, an already stream; neither yields online prefix CER or a unique causal
+consumed whole view remains across producer exit/fencing diagnosis.
+until legitimate correction. This is retained Consumer state, not
+redelivery or proof that the prediction was correct.              H. From physical release to supported service
+   Table IV keeps all deadline failures. Normal and duplicate        A separate 24-run core study crosses R and K with S
+Full-call each pass one of two trials; the other misses D2 enabled, two arrival patterns and three fresh processes, using
+                                                                  TABLE IV
+  FAULT CONTAINMENT PRESERVES LEGALITY, WHILE COLD RECOVERY MISSES THE ORIGINAL SERVICE DEADLINES . S IX SHORT CONDITIONS USE ONE
+   FIXED CLIP AND TWO FRESH TRIALS PER POLICY. E ACH CELL LISTS C ONSERVATIVE ABOVE F ULL - CALL ; RANGES ARE OBSERVED MINIMA / MAXIMA .
+I LLEGAL ; DONE GIVES ILLEGAL INSTALLATIONS AND COMPLETED /2 TRIALS . R EJECT / MUTATION COUNTS LOCAL REJECTIONS AND SELECTED CHANGES .
+   N EW RESULT IS FAULT- TO - ACTUAL - CERTIFIED CONSUMPTION OF A NEW FACT WHOSE CALL COMPLETES AFTER THE FAULT, EXCLUDING OLD - FACT
+REPLAY AND REPLACEMENT READINESS . D2/C8 COUNTS JOINT WHOLE - RUN PASSES ; EOS COUNTS D2 MISSES . B OTH - BOARD ENERGY RUNS THROUGH
+                                                               PHYSICAL DRAIN .
+
+
+                 Condition              Illegal; done Reject / mutation   New result (s) D2/C8 pass EOS miss     Energy (J)
+                                              0; 2/2              0/0                          0/2        2      6566–6574
+                                                                                    –
+                 No fault                     0; 2/2              0/0               –          1/2        1      5896–5911
+                                              0; 2/2              4/0                          0/2        2      5701–5893
+                                                                                    –
+                 Duplicate / late             0; 2/2              4/0               –          1/2        1      5538–5846
+                                              0; 2/2              0/0       1.90–2.22          0/2        2      5182–5401
+                 Worker after ASR             0; 2/2              0/0       2.15–2.21          0/2        2      5447–5647
+                                              0; 2/2              0/0       2.10–2.25          0/2        2      4775–5178
+                 Worker partial frame         0; 2/2              0/0       1.76–2.23          0/2        2      5492–5594
+                                              0; 2/2              0 / 0 86.42–108.08           0/2        2    24549–28019
+                 Owner before durable         0; 2/2              0 / 0 64.61–107.09           0/2        2    19571–26557
+                                              0; 2/2              0 / 0 83.90–87.05            0/2        2    22415–24200
+                 Owner after durable          0; 2/2              0 / 0 101.80–104.44          0/2        2    26483–27171
+
+
+
+a frozen wrong-conditioning fixture. Selected histories and behavior in its controlled native adapter; its contribution
+WER 14/687 match; all 675 same-input/prompt/audio/peer- concerns the asynchronous execution and consumption around
+order pairs return identical outputs. Synchronized R1 releases the feedback boundary. It does not introduce a better acoustic
+the next 16-row computation 473–577 ms earlier. All 96 model or train a new corrector.
+following rows are actually consumed and their whole texts          SSBD coordinates old-output draft reuse with display-only
+match later same-frontier Canonical text. Only 6/6/1 rows suffix masking [5]. It revalidates a draft under updated input and
+switch from deadline miss to hit. Adding K changes credit includes an unbiased configuration. RevTrace follows complete
+by +7.970 to +15.255 s when synchronized and −26.000 to calls that actually executed to establish their eligibility under
++21.780 s when staggered, without consistent energy savings. newly selected feedback state, then checks the dependency
+Request acknowledgment still precedes physical drain. This witness for the Consumer’s whole current view. PredGen
+is a measured release-to-service opportunity, with no stable provides a close precedent for speculation while speech input
+positive R × K interaction.                                      evolves across recognition, language generation, and speech
+                                                                 synthesis [6]. Our comparison holds the complete selected
+                     VI. R ELATED W ORK                          feedback task fixed across the retention policies. The specific
+      a) Incremental information and dependency reuse: The reuse object, protected selection, and whole-view transition
+incremental-unit model separates newest committed informa- define the composition evaluated here. RelayS2S uses a learned
+tion from the active right edge and propagates dependency verifier to commit a fast-path prefix that constrains subsequent
+revocation [2]. Its commit promises that a unit will not be slow-path generation [16]. Our native calls instead confirm their
+revoked. Here, certification records acceptance by the protected complete inputs and retain the original correction and feedback
+selection protocol; later selected facts may still revise the update. Work on ASR alignment drift also establishes the
+transcript. Adapton checks recorded dependencies; Nominal importance and cost of audio position state [17]; our contract
+Adapton combines names with arguments and dependency includes that state rather than treating text equality as sufficient.
+checks to recover reusable work [3], [4]. Differential Dataflow       c) Execution, authorization, and recovery: Retire jointly
+maintains incremental computations across evolving versions addresses revocation, valid state inheritance and physical recla-
+[14]. These works establish much of the basis for dependency- mation for runtime-selected version transitions [18]. RevTrace
+aware reuse. RevTrace instantiates that basis for complete derives complete-call eligibility and whole-view actions from
+neural feedback state and frozen executed calls. Its service an unchanged selected feedback task: an unsupported view can
+obligation connects execution eligibility to the actual whole be withdrawn while a future call’s input remains unresolved.
+view retained when an independently selected root is applied. Our covered-exit policy is execution support, without a new
+Our sufficient witness follows recorded executions; it does general cancellation claim. The parent-version control does not
+not transfer a from-scratch theorem to independently repeated reproduce the complete Retire system.
+floating-point inference.                                           Optimistic and multiversion concurrency control separate
+      b) Revisable speech services and speculation: Whisper- validation and commit from concurrent execution [19], [20].
+Streaming converts an offline recognizer into incremental Write-ahead recovery persists state changes and identities
+service using LocalAgreement [15]. StreamCorrect adds learned [8], and stream-processing systems coordinate recoverable
+correction and feeds selected corrections into subsequent state [21]. We use these established principles at the ASR
+recognition [1]. RevTrace retains that selection and feedback feedback boundary. They supply machinery for ordering and
+durability; the adapter still has to specify which state constitutes                        VIII. C ONCLUSION
+a valid continuation and which complete view the Consumer                 RevTrace separates complete-input eligibility, original selec-
+may retain.                                                            tion authority, and whole-view support while trusted feedback
+                       VII. D ISCUSSION                                advances. Service experiments expose a coordination gap:
+                                                                       first delivery can meet its deadline, yet a compatible update
+      a) Scope of the guarantee: The continuation witness as-
+                                                                       can withdraw that progress. The joint design protects the
+sumes a sufficient adapter state and faithful execution of frozen
+                                                                       supported ahead view. Native full calls can retain original
+inputs. A new adapter must account for every mutable field that
+                                                                       correction work after their inputs are confirmed even when
+can affect later inference, selection, or feedback. A hidden KV
+                                                                       their own next predictions are wrong. Durable facts and physical
+cache, alignment cursor, or external tool state can invalidate a
+                                                                       identities carry this distinction through supported process
+token-only argument. Conservative rejection remains allowed
+                                                                       failures. The resulting composition connects dependency reuse
+when a sufficient witness is absent. The guarantee concerns
+                                                                       to actual continued consumption under a fixed feedback task.
+dependency validity and an individual compatible application;
+                                                                       Computation-only retention increases frontier withdrawals in
+it supplies neither transcription correctness nor monotone text
+                                                                       the headline factorial stratum; joint retention prevents them.
+for an entire session.
+                                                                       Final native calls improve timely supported-content credit while
+      b) Progress, content, and capacity: Processing more
+                                                                       keeping necessary revisions and EOS misses. Actual support,
+audio can leave the cumulative transcript unchanged. Frontier
+                                                                       timing, recovery and capacity bound the composition’s benefit.
+credit, actual text additions and revisions, eventual selected
+                                                                       Extending recovery to Supervisor failure remains a separate
+text agreement, and ground-truth accuracy answer different
+                                                                       direction.
+questions. We report them with their original denominators.
+Preserving compatible progress also cannot remove all input                                   AI T OOL U SAGE
+synchronization, queueing, or neural work. The negative c12               ChatGPT/Codex assisted literature discovery, drafting and
+witness identifies a timing boundary. An earlier native two-           revision of all manuscript sections and the refinement ar-
+source test earns 17.0 s with retention versus 18.5 s for              gument, runtime extensions and experiment orchestration,
+independent full replicas, at higher energy and a different            and validation/analysis code producing the figures and tables
+warmup/Consumer. These do not define a universal capacity              from recorded measurements. The artifact records execution
+envelope. Independent native confirmation establishes a single-        sources, frozen configurations, controls, and result provenance,
+chain service opportunity with the original selected task; it          separating actual service measurements from component tests
+does not turn that result into saturated multi-source capacity.        and retrospective analyses. Constructed streams concatenate
+      c) Deployment and validation: The continuous-original            recorded AISHELL-1 PCM. The authors retain responsibility
+reference exercises the native cut across real buffer and context      for the submission.
+changes; another adapter must establish its own state sufficiency.
+Active-dependency collection bounds protocol entries relative
+to live references, separately from cumulative text, current
+state, and total memory. Owner/worker recovery assumes the
+surviving services of Section II. Replaying old facts restores
+access to that prefix; the measured cold Owner restarts still
+miss original deadlines for new work. Broader ownership
+transfer requires separate validation. Finite specifications,
+source controls, controlled faults, actual GPU service, and
+retrospective checks provide distinct evidence.
+      d) Eligibility and resource admission: A valid input
+witness determines whether an owned call may be used. It
+does not determine whether starting another conditional call
+is worthwhile. Limiting new speculation can leave existing
+supported whole views intact. The long stress study motivates
+this separate resource decision. In a bounded two-client probe,
+new speculative calls precede another client’s ready necessary
+call in both repeats. The later client has no additional C8 misses,
+and its C99 penalty fails the predeclared repeat-consistency
+gate. No admission controller or general native-session fairness
+is evaluated.
+                              R EFERENCES                                         [17] X. Wang, H. Zhou, Z. Zhao, S. Meng, K. Bai, D. Shen, X.-W. Chang,
+                                                                                       and A. Smola, “Alignment drift in single-model speculative decoding
+ [1] T. D. Vu, Z. Xie, W. Zhao, V. J. Wei, D. Jiang, and Y. R. Fung,                   for ASR: Mechanism, correction, and cost,” 2026. [Online]. Available:
+     “StreamCorrect: Self-supervised error correction for real-time ASR                https://arxiv.org/abs/2608.12703v1
+     with offline recognizers,” in Proceedings of the 2026 Conference on          [18] Y. Zhang, R. Sharma, N. Vegesna, Z. Fu, C. Liu, and T. Krishnamurthy,
+     Empirical Methods in Natural Language Processing: Industry Track.                 “Serving a revisable world: Versioned execution for interruptible agents,”
+     Association for Computational Linguistics, Oct. 2026, pp. 2391–2403.              2026. [Online]. Available: https://arxiv.org/abs/2610.01160v1
+     [Online]. Available: https://aclanthology.org/2026.emnlp-industry.142/       [19] H. T. Kung and J. T. Robinson, “On optimistic methods for concurrency
+ [2] D. Schlangen and G. Skantze, “A general, abstract model of incremental            control,” ACM Transactions on Database Systems, vol. 6, no. 2, pp.
+     dialogue processing,” Dialogue & Discourse, vol. 2, no. 1, pp. 83–111,            213–226, 1981.
+     2011. [Online]. Available: https://aclanthology.org/2011.dnd-2.11/           [20] P. A. Bernstein and N. Goodman, “Multiversion concurrency con-
+                                                                                       trol—theory and algorithms,” ACM Transactions on Database Systems,
+ [3] M. A. Hammer, K. Y. Phang, M. Hicks, and J. S. Foster, “Adapton:
+                                                                                       vol. 8, no. 4, pp. 465–483, 1983.
+     Composable, demand-driven incremental computation,” in Proceedings
+                                                                                  [21] P. Carbone, S. Ewen, G. Fóra, S. Haridi, S. Richter, and
+     of the 35th ACM SIGPLAN Conference on Programming Language
+                                                                                       K. Tzoumas, “State Management in Apache Flink: Consistent
+     Design and Implementation. ACM, 2014, pp. 156–166. [Online].
+                                                                                       Stateful Distributed Stream Processing,” Proceedings of the VLDB
+     Available: https://matthewhammer.org/adapton/adapton-pldi2014.pdf
+                                                                                       Endowment, vol. 10, no. 12, pp. 1718–1729, 2017. [Online]. Available:
+ [4] M. A. Hammer, J. Dunfield, K. Headley, N. Labich, J. S. Foster, M. Hicks,
+                                                                                       https://www.vldb.org/pvldb/vol10/p1718-carbone.pdf
+     and D. Van Horn, “Incremental computation with names,” in Proceedings
+     of the 2015 ACM SIGPLAN International Conference on Object-Oriented
+     Programming, Systems, Languages, and Applications. ACM, 2015, pp.
+     748–766. [Online]. Available: https://arxiv.org/abs/1503.07792v2
+ [5] L. Zeng, H. Deng, K. Shu, and S. Wang, “Self-speculative
+     biased decoding for faster re-translation,” 2026. [Online]. Available:
+     https://arxiv.org/abs/2509.21740v2
+ [6] S. Li and A. Grover, “PredGen: Accelerated inference of large language
+     models through input-time speculation for real-time speech interaction,”
+     in Second Conference on Language Modeling, 2025. [Online]. Available:
+     https://openreview.net/forum?id=2Kl8Ztw6wk
+ [7] M. Abadi and L. Lamport, “The Existence of Refinement Mappings,”
+     Theoretical Computer Science, vol. 82, no. 2, pp. 253–284, 1991.
+     [Online]. Available: https://www.sciencedirect.com/science/article/pii/
+     030439759190224P
+ [8] C. Mohan, D. Haderle, B. Lindsay, H. Pirahesh, and P. Schwarz, “ARIES:
+     A Transaction Recovery Method Supporting Fine-Granularity Locking
+     and Partial Rollbacks Using Write-Ahead Logging,” ACM Transactions
+     on Database Systems, vol. 17, no. 1, pp. 94–162, 1992.
+ [9] A. D. Birrell and B. J. Nelson, “Implementing Remote Procedure Calls,”
+     ACM Transactions on Computer Systems, vol. 2, no. 1, pp. 39–59, Feb.
+     1984. [Online]. Available: https://www.microsoft.com/en-us/research/
+     publication/implementing-remote-procedure-calls/
+[10] X. Shi, X. Wang, Z. Guo, Y. Wang, P. Zhang, X. Zhang, Z. Guo, H. Hao,
+     Y. Xi, B. Yang, J. Xu, J. Zhou, and J. Lin, “Qwen3-ASR Technical
+     Report,” arXiv preprint, 2026.
+[11] A. Radford, J. W. Kim, T. Xu, G. Brockman, C. McLeavey, and
+     I. Sutskever, “Robust Speech Recognition via Large-Scale Weak
+     Supervision,” in Proceedings of the 40th International Conference on
+     Machine Learning, ser. Proceedings of Machine Learning Research,
+     vol. 202. PMLR, 2023, pp. 28 492–28 518. [Online]. Available:
+     https://proceedings.mlr.press/v202/radford23a.html
+[12] V. Panayotov, G. Chen, D. Povey, and S. Khudanpur, “LibriSpeech: An
+     ASR Corpus Based on Public Domain Audio Books,” in 2015 IEEE
+     International Conference on Acoustics, Speech and Signal Processing
+     (ICASSP), 2015, pp. 5206–5210.
+[13] H. Bu, J. Du, X. Na, B. Wu, and H. Zheng, “AISHELL-1: An
+     Open-Source Mandarin Speech Corpus and A Speech Recognition
+     Baseline,” in 2017 20th Conference of the Oriental Chapter of the
+     International Coordinating Committee on Speech Databases and Speech
+     I/O Systems and Assessment (O-COCOSDA), 2017, pp. 1–5. [Online].
+     Available: https://ieeexplore.ieee.org/document/8384449/
+[14] F. McSherry, D. G. Murray, R. Isaacs, and M. Isard, “Differential
+     dataflow,” in Sixth Biennial Conference on Innovative Data Systems
+     Research, 2013. [Online]. Available: https://www.cidrdb.org/cidr2013/
+     Papers/CIDR13_Paper111.pdf
+[15] D. Macháček, R. Dabre, and O. Bojar, “Turning Whisper into Real-
+     Time Transcription System,” Proceedings of the 13th International Joint
+     Conference on Natural Language Processing and the 3rd Conference of
+     the Asia-Pacific Chapter of the Association for Computational Linguistics:
+     System Demonstrations, pp. 17–24, 2023.
+[16] L. Mai and J. Liang, “RelayS2S: Dual-path speculative generation for
+     real-time dialogue,” in Findings of the Association for Computational
+     Linguistics: EMNLP 2026. Association for Computational Linguistics,
+     Oct. 2026, pp. 25 379–25 396. [Online]. Available: https://aclanthology.
+     org/2026.findings-emnlp.1201/
+
