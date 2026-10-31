@@ -1,0 +1,259 @@
+{
+  "gate": "PASS_NATIVE_PRESENTATION_ONLY_FROZEN_VALUES_AND_12_POLICY_ROWS",
+  "new_model_calls": 0,
+  "new_raw_scan": false,
+  "original_files_before_after_unchanged": true,
+  "source_hashes_before_after": [
+    {
+      "path": "Paper_DSN/revisions/20261031_dsn2027_release_v4/main.pdf",
+      "bytes": 482144,
+      "sha256": "d5174767ee7101339b535fa3f32f3c2fc45a1cf25ad36a345c57a0a9d2067c62"
+    },
+    {
+      "path": "Paper_DSN/revisions/20261031_dsn2027_release_v4/sections/05_native_retention.tex",
+      "bytes": 5758,
+      "sha256": "1fd91e71e4490d25ecf824206095c3a0244fcb147ee7ff6b55c2aab622adaed9"
+    },
+    {
+      "path": "Paper_DSN/revisions/20261031_dsn2027_release_v4/sections/05_same_source_validation.tex",
+      "bytes": 5285,
+      "sha256": "7ac9ea256ae47c8d94f99bd3b0addc5da4924e9117f873021c0665c7ad7fa9e0"
+    },
+    {
+      "path": "Paper_DSN/revisions/20261031_dsn2027_release_v4/tables/native_reliability.tex",
+      "bytes": 2032,
+      "sha256": "85f44ecf791b9cfd312604d74fea9201ab11146026d6bdd8b811f55164a810b4"
+    },
+    {
+      "path": "experiments/dsn_strengthening_20261031/PAIRED32_V2_RESULTS/SUMMARY.json",
+      "bytes": 337614,
+      "sha256": "6788a843fc45844952380cd16e733df95a294249411db57a25823b3e8d25ddf1"
+    },
+    {
+      "path": "experiments/dsn_strengthening_20261031/RESIDENT4_V2_RESULTS/SUMMARY.json",
+      "bytes": 247359,
+      "sha256": "e8c22bae201af9889196f90392ab68cfe18a2ec49e44dde890e2365fc1043bc8"
+    },
+    {
+      "path": "experiments/dsn_writing_closure_20261031/CONTENT_CPU_V4_RESULTS/complete20/SUMMARY.json",
+      "bytes": 9922,
+      "sha256": "a3c9292ecccebc3660870e181e491d1d41d778941827b51cffa5914f64a26e33"
+    },
+    {
+      "path": "experiments/dsn_native_resilience_20261030/FIGURE_TABLE_FORMAL36_v5_results/ALL36_MACHINE_TABLE.json",
+      "bytes": 257753,
+      "sha256": "806853b40f96d07003fc5527faad30c0a9f19371f048a54bc8793ac56ca62906"
+    }
+  ],
+  "matched_summary_rows": [
+    {
+      "version": "bdfa",
+      "arm": "conservative",
+      "offered_s": 66.33975000000001,
+      "timely_s": 33.5,
+      "timely_percent": 50.497627742040024,
+      "D99_median": 4.449530531279743,
+      "energy_kJ": 44.689672016668226,
+      "passes": 0,
+      "runs": 8
+    },
+    {
+      "version": "bdfa",
+      "arm": "fullcall",
+      "offered_s": 66.33975000000001,
+      "timely_s": 66.33975000000001,
+      "timely_percent": 100.0,
+      "D99_median": 1.6331675078347325,
+      "energy_kJ": 39.73463588939794,
+      "passes": 8,
+      "runs": 8
+    },
+    {
+      "version": "final",
+      "arm": "conservative",
+      "offered_s": 66.33975000000001,
+      "timely_s": 30.0,
+      "timely_percent": 45.22175618690151,
+      "D99_median": 4.759273874219507,
+      "energy_kJ": 47.01922465495275,
+      "passes": 0,
+      "runs": 8
+    },
+    {
+      "version": "final",
+      "arm": "fullcall",
+      "offered_s": 66.33975000000001,
+      "timely_s": 65.821625,
+      "timely_percent": 99.21898258585537,
+      "D99_median": 1.638400322627276,
+      "energy_kJ": 43.95188809380212,
+      "passes": 6,
+      "runs": 8
+    }
+  ],
+  "proposed_content_rows": [
+    {
+      "bank": "matched",
+      "policy": "conservative",
+      "offered_s": 66.33975,
+      "timely_s": 30.0,
+      "timely_same_frontier_selected_text_s": 22.5,
+      "pass_count": 0,
+      "runs_or_requests": 8,
+      "timely_without_same_frontier_text_agreement_s": 7.5,
+      "not_timely_s": 36.339749999999995,
+      "timely_percent": 45.22175618690152
+    },
+    {
+      "bank": "matched",
+      "policy": "fullcall",
+      "offered_s": 66.33975,
+      "timely_s": 65.821625,
+      "timely_same_frontier_selected_text_s": 51.0,
+      "pass_count": 6,
+      "runs_or_requests": 8,
+      "timely_without_same_frontier_text_agreement_s": 14.821624999999997,
+      "not_timely_s": 0.5181249999999977,
+      "timely_percent": 99.21898258585539
+    },
+    {
+      "bank": "resident",
+      "policy": "conservative",
+      "offered_s": 66.33975,
+      "timely_s": 31.0,
+      "timely_same_frontier_selected_text_s": 24.0,
+      "pass_count": 0,
+      "runs_or_requests": 8,
+      "timely_without_same_frontier_text_agreement_s": 7.0,
+      "not_timely_s": 35.339749999999995,
+      "timely_percent": 46.72914805979824
+    },
+    {
+      "bank": "resident",
+      "policy": "fullcall",
+      "offered_s": 66.33975,
+      "timely_s": 64.118875,
+      "timely_same_frontier_selected_text_s": 50.2590625,
+      "pass_count": 7,
+      "runs_or_requests": 8,
+      "timely_without_same_frontier_text_agreement_s": 13.859812500000004,
+      "not_timely_s": 2.2208749999999924,
+      "timely_percent": 96.65227107428052
+    }
+  ],
+  "proposed_JSON_agrees_with_final_frozen_CPU_summary": true,
+  "stack_categories_mutually_exclusive_same_denominator": true,
+  "fault_table_rows": [
+    [
+      "No fault",
+      "Conservative",
+      "0 / 0",
+      "--",
+      "0/2",
+      "2",
+      "6566--6574"
+    ],
+    [
+      "No fault",
+      "RevTrace",
+      "0 / 0",
+      "--",
+      "1/2",
+      "1",
+      "5896--5911"
+    ],
+    [
+      "Duplicate / late",
+      "Conservative",
+      "4 / 0",
+      "--",
+      "0/2",
+      "2",
+      "5701--5893"
+    ],
+    [
+      "Duplicate / late",
+      "RevTrace",
+      "4 / 0",
+      "--",
+      "1/2",
+      "1",
+      "5538--5846"
+    ],
+    [
+      "Worker after ASR",
+      "Conservative",
+      "0 / 0",
+      "1.90--2.22",
+      "0/2",
+      "2",
+      "5182--5401"
+    ],
+    [
+      "Worker after ASR",
+      "RevTrace",
+      "0 / 0",
+      "2.15--2.21",
+      "0/2",
+      "2",
+      "5447--5647"
+    ],
+    [
+      "Worker partial frame",
+      "Conservative",
+      "0 / 0",
+      "2.10--2.25",
+      "0/2",
+      "2",
+      "4775--5178"
+    ],
+    [
+      "Worker partial frame",
+      "RevTrace",
+      "0 / 0",
+      "1.76--2.23",
+      "0/2",
+      "2",
+      "5492--5594"
+    ],
+    [
+      "Owner before durable",
+      "Conservative",
+      "0 / 0",
+      "86.42--108.08",
+      "0/2",
+      "2",
+      "24549--28019"
+    ],
+    [
+      "Owner before durable",
+      "RevTrace",
+      "0 / 0",
+      "64.61--107.09",
+      "0/2",
+      "2",
+      "19571--26557"
+    ],
+    [
+      "Owner after durable",
+      "Conservative",
+      "0 / 0",
+      "83.90--87.05",
+      "0/2",
+      "2",
+      "22415--24200"
+    ],
+    [
+      "Owner after durable",
+      "RevTrace",
+      "0 / 0",
+      "101.80--104.44",
+      "0/2",
+      "2",
+      "26483--27171"
+    ]
+  ],
+  "fault_table_all_numeric_cells_equal_v4": true,
+  "fault_table_all_24_completed_and_zero_illegal_preserved_in_caption": true,
+  "claim_scope": "This is a presentation arithmetic/row mapping check, not another acoustic trial or raw audit."
+}

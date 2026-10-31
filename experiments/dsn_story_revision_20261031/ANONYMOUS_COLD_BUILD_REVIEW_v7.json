@@ -1,0 +1,659 @@
+{
+  "created_utc": "2026-10-31T13:24:40.446315+00:00",
+  "new_model_calls": 0,
+  "SSH_calls": 0,
+  "CURRENT_modified": false,
+  "original_manuscript_modified": false,
+  "source_archive": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\RevTrace_DSN2027_anonymous_source_v7.zip",
+  "cold_directory": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\ANONYMOUS_COLD_BUILD_v7",
+  "final_record": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_manuscript_update_20261028\\FINAL_RELEASE_RECORD_20261031_v7.json",
+  "skill": "C:\\Users\\LENOVO\\.agents\\skills\\latex-paper-en\\SKILL.md",
+  "compile_script": "C:\\Users\\LENOVO\\.agents\\skills\\latex-paper-en\\scripts\\compile.py",
+  "source_whitelist": {
+    "files": 27,
+    "exact_final_record_bytes_and_SHA": true,
+    "exact_provenance_target_SHA": true,
+    "extra_files": [],
+    "unsafe_entries": []
+  },
+  "compile": {
+    "command": [
+      "uv",
+      "run",
+      "--no-project",
+      "--offline",
+      "python",
+      "-B",
+      "C:\\Users\\LENOVO\\.agents\\skills\\latex-paper-en\\scripts\\compile.py",
+      "main.tex",
+      "--recipe",
+      "pdflatex-bibtex"
+    ],
+    "cwd": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\ANONYMOUS_COLD_BUILD_v7",
+    "shell_escape": false,
+    "skill_sha256": "46e2d78f08630a5e465e7d3abefdfc9d829240f02168f23a025e389126a16cdb",
+    "compile_script_sha256": "69f04e61cd961af582d948bc8cfea7279539d6aeab7e18a273c6eb297e892b78",
+    "returncode": 0
+  },
+  "gate": "PASS_ANONYMOUS_ZIP_COLD_SKILL_COMPILE_AND_LAYOUT_PARITY",
+  "layout_comparison": {
+    "pdftotext_layout_bytes_identical": true,
+    "pages": {
+      "release": 12,
+      "cold": 12
+    },
+    "per_page": [
+      {
+        "page": 1,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "e6e1c41d5303d1fd89e2a2e7770662a4deea18f55f1806d9c0fe0db3e5330de6",
+        "cold_text_sha256": "e6e1c41d5303d1fd89e2a2e7770662a4deea18f55f1806d9c0fe0db3e5330de6"
+      },
+      {
+        "page": 2,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "0550dfdbeb580a00add32627791f28dc8ad4d3a8620d15c832d92e91829d57c5",
+        "cold_text_sha256": "0550dfdbeb580a00add32627791f28dc8ad4d3a8620d15c832d92e91829d57c5"
+      },
+      {
+        "page": 3,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "f7744ae169538ecb6ec46133257fe4afc77311681c1834973b9ca15b46daa40c",
+        "cold_text_sha256": "f7744ae169538ecb6ec46133257fe4afc77311681c1834973b9ca15b46daa40c"
+      },
+      {
+        "page": 4,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "58640fb9cb36234b25c10550b18a3077905ae58ce3f12f3ce4b66305454665ee",
+        "cold_text_sha256": "58640fb9cb36234b25c10550b18a3077905ae58ce3f12f3ce4b66305454665ee"
+      },
+      {
+        "page": 5,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "3171debd94f6f7437c2f24a64c41751613e3013d6986aac29f577a8ff04a3f56",
+        "cold_text_sha256": "3171debd94f6f7437c2f24a64c41751613e3013d6986aac29f577a8ff04a3f56"
+      },
+      {
+        "page": 6,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "d4217a845a683974e1bc15a3068288d5332a0ad778b2044a3c053d78a68361b7",
+        "cold_text_sha256": "d4217a845a683974e1bc15a3068288d5332a0ad778b2044a3c053d78a68361b7"
+      },
+      {
+        "page": 7,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "712c0c4ae1dce5f77109b6310f482b66a3d03918544b184bec5b58b76664dfdf",
+        "cold_text_sha256": "712c0c4ae1dce5f77109b6310f482b66a3d03918544b184bec5b58b76664dfdf"
+      },
+      {
+        "page": 8,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "142a9744813f2f2eb8f35462ebebe6c0bb8120625f4c17188274a6069eaf9bea",
+        "cold_text_sha256": "142a9744813f2f2eb8f35462ebebe6c0bb8120625f4c17188274a6069eaf9bea"
+      },
+      {
+        "page": 9,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "2e334ec1e83561c40169929fe99b76efa834e22ac2a1fbf499990e88b34508e4",
+        "cold_text_sha256": "2e334ec1e83561c40169929fe99b76efa834e22ac2a1fbf499990e88b34508e4"
+      },
+      {
+        "page": 10,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "81c174b5fb071ecefa53d44239982a6eb1cd61d46ebb64e164716cba9c583b43",
+        "cold_text_sha256": "81c174b5fb071ecefa53d44239982a6eb1cd61d46ebb64e164716cba9c583b43"
+      },
+      {
+        "page": 11,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "f2e9942d7a80636759de5832ef4c2d66fcb42283be164c6cb12ca59849dfb50e",
+        "cold_text_sha256": "f2e9942d7a80636759de5832ef4c2d66fcb42283be164c6cb12ca59849dfb50e"
+      },
+      {
+        "page": 12,
+        "layout_text_byte_identical": true,
+        "release_text_sha256": "0ae31298d6bfc712d45b72cd4099ebe66851f2a037595bd48bcf6ae2d7a245be",
+        "cold_text_sha256": "0ae31298d6bfc712d45b72cd4099ebe66851f2a037595bd48bcf6ae2d7a245be"
+      }
+    ],
+    "technical_pages": 11,
+    "references_start_page": 12,
+    "PDF_bytes_equality_required": false
+  },
+  "flow_text_bytes_identical": true,
+  "independent_pagination_checks": {
+    "release": {
+      "status": "PASS",
+      "technical_pages": 11,
+      "max_technical_pages": 11,
+      "references_start_page": 12,
+      "reference_page_count": 1,
+      "references_start_on_clean_page": true,
+      "text_before_heading": [],
+      "reference_numbers_seen": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "suspicious_post_reference_headings": [],
+      "scope": "structural text check; root must visually confirm every references page contains references only"
+    },
+    "cold": {
+      "status": "PASS",
+      "technical_pages": 11,
+      "max_technical_pages": 11,
+      "references_start_page": 12,
+      "reference_page_count": 1,
+      "references_start_on_clean_page": true,
+      "text_before_heading": [],
+      "reference_numbers_seen": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "suspicious_post_reference_headings": [],
+      "scope": "structural text check; root must visually confirm every references page contains references only"
+    }
+  },
+  "pagination_checker_sha256": "30afcef8ac664e88be1877584953f4f8cccb4b67601d5c1892913f01b7251ee6",
+  "embedded_fonts": {
+    "release": {
+      "font_rows": 29,
+      "all_embedded": true,
+      "Type3": 0,
+      "unparsed": [],
+      "fonts": [
+        {
+          "description": "ATKLWV+NimbusRomNo9L-Regu            Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "LREKMX+NimbusRomNo9L-MediItal        Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "VXVAOJ+NimbusRomNo9L-Medi            Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "LXGJRW+NimbusRomNo9L-ReguItal        Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "TQYWDH+CMSY7                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "XWLSIS+CMMI10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "VLIKSO+CMR10                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "MHMJJD+CMMI7                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "XBMRZO+CMR7                          Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+ArialMT                       CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+Arial-BoldMT                  CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "OEGFEB+CMMI8                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "GBTBPW+CMR6                          Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "EZATTA+CMEX10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "CFOARX+CMSY10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "GWJQAP+MSAM10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+ArialMT                       CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+Arial-BoldMT                  CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "GCWXDV+DejaVuSans-Oblique            CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "BMQQDV+DejaVuSans                    CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "GYKUUQ+STIXSizeTwoSym-Regular        CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "NDMVJZ+CMMI9                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "USUTHE+CMR9                          Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ONXQXN+NimbusMonL-Regu               Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "UAGOMC+CMBX10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "TYIDIX+CMSY8                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "FZSIMX+CMR8                          Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+ArialMT                       CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+Arial-BoldMT                  CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        }
+      ]
+    },
+    "cold": {
+      "font_rows": 29,
+      "all_embedded": true,
+      "Type3": 0,
+      "unparsed": [],
+      "fonts": [
+        {
+          "description": "ATKLWV+NimbusRomNo9L-Regu            Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "LREKMX+NimbusRomNo9L-MediItal        Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "VXVAOJ+NimbusRomNo9L-Medi            Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "LXGJRW+NimbusRomNo9L-ReguItal        Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "TQYWDH+CMSY7                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "XWLSIS+CMMI10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "VLIKSO+CMR10                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "MHMJJD+CMMI7                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "XBMRZO+CMR7                          Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+ArialMT                       CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+Arial-BoldMT                  CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "OEGFEB+CMMI8                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "GBTBPW+CMR6                          Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "EZATTA+CMEX10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "CFOARX+CMSY10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "GWJQAP+MSAM10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+ArialMT                       CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+Arial-BoldMT                  CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "GCWXDV+DejaVuSans-Oblique            CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "BMQQDV+DejaVuSans                    CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "GYKUUQ+STIXSizeTwoSym-Regular        CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "NDMVJZ+CMMI9                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "USUTHE+CMR9                          Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ONXQXN+NimbusMonL-Regu               Type 1            Custom",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "UAGOMC+CMBX10                        Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "TYIDIX+CMSY8                         Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "FZSIMX+CMR8                          Type 1            Builtin",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+ArialMT                       CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        },
+        {
+          "description": "ELUGPM+Arial-BoldMT                  CID TrueType      Identity-H",
+          "embedded": true,
+          "subset": true,
+          "unicode": true,
+          "type3": false
+        }
+      ]
+    }
+  },
+  "font_lists_byte_identical": true,
+  "final_log_checks": {
+    "undefined_citations": [],
+    "undefined_references": [],
+    "undefined_control_sequences": [],
+    "unresolved_summary": [],
+    "overfull": [],
+    "rerun": []
+  },
+  "original_inputs_hash_before_after_unchanged": true,
+  "cold_packaged_source_bytes_unchanged": true,
+  "original_zip": {
+    "bytes": 625541,
+    "sha256": "4aca80514b19d7aae0a1e74e1e033d83377c2ba169666fb24e29b7cf8305cc59"
+  },
+  "original_pdf": {
+    "bytes": 491251,
+    "sha256": "c75378b1452304b401625a3fb097c4993370ffe5ca6c769141e2f191b9911c71"
+  },
+  "rebuilt_pdf": {
+    "bytes": 491251,
+    "sha256": "46932c78a1767a0d5caa0ec7d116a6021820859b45a391befda9df6403f96b80"
+  },
+  "rebuilt_pdf_metadata_may_differ": true,
+  "final_record_sha256": "ba6975a4c75474dc8a57083a40825b53e64e8976ba69b75ada09d463c502785e",
+  "bounded_logs_total_bytes": 353660,
+  "completed_utc": "2026-10-31T13:25:53.657559+00:00",
+  "review_driver_sha256": "1b83245891e5696cb531800b233ce1d8e92f4b0d8eb454bf7234d740ac5227ad",
+  "completion_reader_sha256": "6aabe554ed8c0f1010e89686e69d66950a772ab6316d0bdf126fd21a74b0034e",
+  "same_single_extraction_and_compile": true,
+  "initial_detector_failure": {
+    "path": "ANONYMOUS_COLD_BUILD_REVIEW_v7_failed_reference_detector.json",
+    "bytes": 8769,
+    "sha256": "71e3aa0b1e1969e9d07d94b7b36e61a9687a05dda51146704851ffb2a6018a6d",
+    "cause": "Strict whole physical layout line matching missed REFERENCES joined with right-column bibliography; flow pagination fixes the detector only.",
+    "compile_returncode": 0,
+    "original_inputs_unchanged": true,
+    "recompiled": false,
+    "reextracted": false
+  }
+}

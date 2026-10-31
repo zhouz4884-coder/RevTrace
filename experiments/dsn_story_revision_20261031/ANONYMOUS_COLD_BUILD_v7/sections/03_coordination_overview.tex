@@ -1,0 +1,23 @@
+\subsection{One revision, three different decisions}
+Figure~\ref{fig:protocol} follows a complete call $j_3$. Recognition in
+its parent produces a provisional state $\widehat P_2$ while original
+Correct/Update is still selecting $P_2$. RevTrace can start $j_3$ on
+$\widehat P_2$. When actual $P_2$ arrives at the same frontier, equality
+of the entire frozen input confirms $j_3$ under [EL]. Its execution
+continues with the same identity. Subscripts identify successive states,
+rather than audio seconds; audio, target, EOS, model and decoding bindings
+are also fixed.
+
+The call can expose its own prediction $\widehat P_3$, yet original
+Correct/Update may choose a different $P_3$. [AU] permits selection of
+that complete original result once its parent is installed; it does not
+certify $\widehat P_3$. Independently, installing $P_2$ triggers [SUP]
+on the actual whole view $h$. A complete path from $P_2$ to $h$ permits
+retention; otherwise the Consumer displays the installed state. Losing
+this path does not refute the unknown input of a later call. The protocol
+therefore distinguishes continuing computation, buffering a result,
+selecting a transition and retaining a view.
+
+The following sufficient witnesses formalize these decisions. Producer
+failure changes message admission separately, as described in
+Section~\ref{subsec:native_resilience}.

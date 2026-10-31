@@ -1,0 +1,69 @@
+\subsection{When does the opportunity appear or disappear?}
+The opportunity is a supported whole view ahead of a newly installed
+selected frontier. In the headline RevTrace arm, 18 of 368 updates encounter
+and retain one; computation-only encounters 17 and clears all 17. Under
+synchronized arrivals, RevTrace encounters only 3 of 368 and covers 0.790~s
+less than computation-only. A fresh staggered repeat on cohort~A also
+changes the timing ranking: 226.320 versus 230.565~s, $I=-2.245$~s.
+Compatible relative progress determines the benefit; the three positive
+primary contrasts do not establish an invariant speed advantage.
+
+\begin{table}[t]
+\centering
+\caption{Operating boundaries remain visible. Each workload has four
+arms and three fresh processes (48 runs total). Pass counts cover all 12
+runs; D99 ranges span three RevTrace observations, and timely-loss windows
+list computation-only/RevTrace counts. Source mix expands with sessions. Full 48-point
+plots and all endpoints remain in the artifact.}
+\label{tab:operating_workloads}
+\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Workload & D2/C8 pass & \shortstack{RevTrace\\D99 (s)} &
+\shortstack{Timely-loss\\windows}\\
+\midrule
+8 sync &12/12 &1.426--1.528 &1,0,0 /0,0,0\\
+8 staggered &12/12 &1.704--1.955 &1,2,1 /0,0,0\\
+12 staggered &0/12 &2.197--2.299 &1,1,3 /0,0,0\\
+16 staggered &0/12 &2.801--3.223 &10,12,9 /0,0,0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:operating_workloads} summarizes 36 predeclared development
+runs (8 synchronized, 8 staggered, 16 staggered sessions) and 12 exploratory
+midpoint runs (12 staggered). Each arm offers 121.205/185.300/250.180~s
+at 8/12/16 sessions. These are explicit workloads with different source
+mixes. At 8 sessions all arms meet whole-run D2/C8; RevTrace synchronized
+display P99 is 1.426--1.528~s and staggered reaches 1.955~s. Two 0.215-s
+tails remain uncredited despite their P99 passes. At 12 and 16 sessions
+all runs fail D2 and pass C8. At 16, RevTrace's extra coverage over
+computation-only is +18.910,+5.055,$-7.225$~s; P99 improves in one repeat.
+Its continuity distinction is stable: compatible withdrawals are zero
+versus 16/17/12.
+
+A secondary analysis follows intervals already delivered within D2 whose
+eventual certified coverage also meets C8. At each selected application,
+the complete dependency path classifies compatible loss separately from
+necessary revision. Loss ends when actual coverage returns or is
+right-censored at the next selected root. Computation-only has 10/12/9
+such windows at 16 sessions, with 24.903/23.635/15.736 audio-s$\times$wall-s
+deficit; RevTrace has none. Holes intersect the original D2 read point
+for 6.000/10.675/4.000~s of distinct audio. The 12-session strong witness
+is not established: computation-only's smaller losses never include a
+timely complete non-EOS interval under its frozen criterion.
+\par\noindent\textbf{Finding 3: continuity and first delivery have different boundaries.}
+Retaining a supported view removes an avoidable withdrawal; whether
+enough work arrives before D2 remains a separate scheduling and load outcome.
+
+\paragraph{Quality and cost}
+Headline Qwen arms share WER 26/1908 (1.36\%) and selected histories.
+Retrospective same-frontier whole-text agreement leaves their credits
+unchanged. Elsewhere RevTrace's raw comparison removes 2~s in the 16-session third
+repeat and 2~s in each midpoint's first two repeats, although the frozen
+normalizer agrees. Whisper WER is 83.12\% at $\rho=1$ versus 11.53\% at
+$\rho=3$; changing its feedback contract changes quality. Headline board
+energy spans 59.16--59.73~J/audio-s across five arm medians. At 16 sessions, RevTrace reduces total
+model time by 0.66--1.59~s over recomputation, while wall-time and energy
+differences change sign. Retained progress is the measured benefit;
+inference cost and overload are independent boundaries.

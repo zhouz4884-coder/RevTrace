@@ -1,19 +1,21 @@
-# Current RevTrace DSN manuscript — 2026-10-31 (writing v4)
+# Current RevTrace manuscript — 2026-10-31, argument revision v7
 
-- [Complete manuscript PDF](revisions/20261031_dsn2027_release_v4/main.pdf)
-- [Main LaTeX source](revisions/20261031_dsn2027_release_v4/main.tex)
-- [Audited anonymous source package](revisions/20261031_dsn2027_release_v4/RevTrace_DSN2027_anonymous_source_v4.zip)
-- [Writing decisions, content results and remaining risks](../experiments/dsn_writing_closure_20261031/FINAL_WRITING_AND_RESEARCH_REPORT.zh.md)
-- [Source, PDF, package and all-page QA](../experiments/dsn_manuscript_update_20261028/FINAL_RELEASE_RECORD_20261031_v4.json)
+- [Manuscript PDF](revisions/20261031_dsn2027_release_v7/main.pdf)
+- [Main LaTeX source](revisions/20261031_dsn2027_release_v7/main.tex)
+- [Anonymous source ZIP](revisions/20261031_dsn2027_release_v7/RevTrace_DSN2027_anonymous_source_v7.zip)
+- [Revision decisions, results and remaining scope](../experiments/dsn_story_revision_20261031/FINAL_REVISION_REPORT.zh.md)
+- [One-page contribution/evidence card](../experiments/dsn_story_revision_20261031/CONTRIBUTION_EVIDENCE_CARD.zh.md)
+- [Editable figures and numeric provenance](../experiments/dsn_story_revision_20261031/FIGURES_v3/)
+- [All-page QA/source-package record](../experiments/dsn_manuscript_update_20261028/FINAL_RELEASE_RECORD_20261031_v7.json)
 
 Title: **RevTrace: Preserving Valid Progress across Trusted Feedback Revisions**
 
-11 technical pages plus one references-only page; 141-word abstract; 21 references; three redrawn vector figures and four tables including the explicit coordinator. All twelve page images reviewed. All27 fonts embedded, no Type3, undefined references or overfull boxes. Source ZIP contains exactly25 reachable source/figure/bibliography/provenance/PDF files, excluding raw models, audio, build logs and local QA.
+The paper focuses on one dependability problem: trusted revisions must reject invalid uses while preserving still-supported computation and delivered progress. Input eligibility [EL], original selection authority [AU] and actual whole-view support [SUP] govern distinct actions.
 
-One message: preserve valid service progress by separately confirming complete call inputs, retaining original selection authority, and checking support for the actual whole view. Same-task factorial, final native service and controlled failures support this combination, with negative timing, quality, recovery and capacity boundaries retained.
+11 technical pages plus one references-only page; three main vector figures, five tables, four explicit Findings and21 references. System/failure assumptions precede a common running example and the page3 mechanism diagram. All12 page contents and main-figure grayscale renders reviewed;29fonts embedded with noType3, undefined references oroverfull.
 
-Final4f matched credit30.0→65.821625/66.33975audio-s, passes0/8→6/8; resident31.0→64.118875, passes0/8→7/8. New frozen CPU-only recount of20 old trials/32requests adds no NN. Timely whole-text support22.5→51.0s (matched),24.0→50.2590625s(resident); every arm introduces180/retracts14/leaves166 code-point occurrences. This is a timing gain, not more text or higher human accuracy. Matched has no compatible-ahead opportunity; resident has one bounded nonempty witness.
+The same-interval two-arm trace is actual old c16 data. Computation-only first displays at1.444s then loses coverage for2.176s. RevTrace first displays the same text at2.027s(D2+27.4ms), then retains coverage and an ahead view at its own later selected update. Different interleavings are explicit. No faster or event-matched counterfactual is claimed.
 
-Old v2 and earlier revisions remain intact. Execution NN4f, CPU analysis6eb6639, figure source60211b7 and archive commits retain separate provenance. Models/data/raw remain on the designated8TB disk; no new neural study or admission scheduler was added.
+Core24-speaker factorial:12/1/17/0 frontier withdrawals under a fixed selected task; all15headline runs still miss whole-run D2. Final native Conservative→RevTrace:45.2%→99.2% dual-deadline offered-audio coverage,0/8→6/8 trials; resident0/8→7/8 requests. All prior quality, EOS, load, energy and cold-recovery boundaries remain visible.
 
-This is a complete research/writing release for author review. Conference submission has not been performed. Actual submission still needs title/author/conflict and public-draft anonymity review under the current official CFP.
+Zero new neural calls, unchanged runtime/raw and v4 release. Actual interval reader73026, final figure sourceaaa13a, original c16 neural sourcef0a8 and native NN4f remain distinct. This is a research manuscript release for author review; no conference submission has been performed.

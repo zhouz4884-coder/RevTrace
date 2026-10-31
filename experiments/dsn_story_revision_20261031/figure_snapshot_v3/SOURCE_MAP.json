@@ -1,0 +1,591 @@
+{
+  "scope": "CPU-only artwork from frozen bounded existing measurements; no NN or raw modifications",
+  "bounded_inputs": [
+    {
+      "key": "case_summary",
+      "copy": "inputs/CASE_SUMMARY.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_full_interval_case_20261029\\RESULTS_v2\\SUMMARY.json",
+      "bytes": 1634,
+      "sha256": "353f6d8f69ed4b0211e23e42c4c822786af96968a0bf22b3fa9994dc1a758724"
+    },
+    {
+      "key": "case_trace",
+      "copy": "inputs/CASE_TRACE.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_full_interval_case_20261029\\RESULTS_v2\\ACTUAL_TRACE.json",
+      "bytes": 2362,
+      "sha256": "1661ed6ae4d333bab69e487fe53b78f84d7a2e5cbb0538dda14ca7c2b51faa23"
+    },
+    {
+      "key": "case_snapshots",
+      "copy": "inputs/CASE_SNAPSHOTS.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_full_interval_case_20261029\\RESULTS_v2\\ACTUAL_SNAPSHOTS.json",
+      "bytes": 6788,
+      "sha256": "51ba34e95626efe84a7852b467a515eb8a921f07f57366983fbe3293033f631d"
+    },
+    {
+      "key": "run_endpoints_48",
+      "copy": "inputs/RUN_ENDPOINTS_48.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_midpoint_continuity_20261029\\COMBINED_DATA_v1\\RUN_ENDPOINTS.json",
+      "bytes": 86352,
+      "sha256": "f5dcb07546b77b173af141aa23aab7abe7ada4e4d2241e02ad9725ffa14aa6eb"
+    },
+    {
+      "key": "core_runs",
+      "copy": "inputs/CORE_RUNS_110.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\physical_retirement_20261028\\H3_RESULTS_v2\\aggregate\\RUNS.json",
+      "bytes": 410334,
+      "sha256": "21826f7ef2bdb344d50f292efd8904c28aa5d22b4d342fc58ef59a2981a0626e"
+    },
+    {
+      "key": "core_tables",
+      "copy": "inputs/CORE_COMPACT_TABLES.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\physical_retirement_20261028\\H3_RESULTS_v2\\COMPACT_TABLES.json",
+      "bytes": 139672,
+      "sha256": "6b22ad38d05146aab9af9a4343d907b474267d5fb921e8df87a471fbbd5d5045"
+    },
+    {
+      "key": "native_content",
+      "copy": "inputs/FINAL4F_CONTENT.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_writing_closure_20261031\\CONTENT_CPU_V4_RESULTS\\complete20\\SUMMARY.json",
+      "bytes": 9922,
+      "sha256": "a3c9292ecccebc3660870e181e491d1d41d778941827b51cffa5914f64a26e33"
+    },
+    {
+      "key": "proposed_values",
+      "copy": "inputs/PROPOSED_CONTENT_VALUES.json",
+      "original": "E:\\Downloads\\proposed_content_chart_values.json",
+      "bytes": 1737,
+      "sha256": "ac47bb238df24bfbaab3d8dfd4fce3a44c41a62a8c67fc98f0c383e9d75b8fd2"
+    },
+    {
+      "key": "comparison_R1_S0_CONSUMER",
+      "copy": "inputs/R1_S0_CONSUMER.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S0\\CONSUMER.json",
+      "bytes": 31467,
+      "sha256": "59a22029a79008e82ddea1e119fb76d5fa87fb39e30664e0d586680ee0582b99"
+    },
+    {
+      "key": "comparison_R1_S0_EVENTS",
+      "copy": "inputs/R1_S0_EVENTS.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S0\\EVENTS.json",
+      "bytes": 305905,
+      "sha256": "3ecaac14ef98afe9790e4abbdf18696565faffce6bbe328ad364fa46c20bab72"
+    },
+    {
+      "key": "comparison_R1_S0_WORKER_RECORDS",
+      "copy": "inputs/R1_S0_WORKER_RECORDS.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S0\\WORKER_RECORDS.json",
+      "bytes": 419113,
+      "sha256": "1e79a659e5043cbcf97f9e3c7bbff19b0ac1610ef14dc9dbe731334200eae04f"
+    },
+    {
+      "key": "comparison_R1_S0_SESSION",
+      "copy": "inputs/R1_S0_SESSION.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S0\\SESSION.json",
+      "bytes": 206,
+      "sha256": "90f8ef9b670faca90a2aa9de49cede8cbc872448da4583a109ac1f894f87c539"
+    },
+    {
+      "key": "comparison_R1_S0_EPISODE",
+      "copy": "inputs/R1_S0_EPISODE.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S0\\EPISODE.json",
+      "bytes": 397,
+      "sha256": "a87248002e5fc2706699e74ae36dbde195a137c7372b9676357d25ac792fb0b8"
+    },
+    {
+      "key": "comparison_R1_S0_MANIFEST_ROW",
+      "copy": "inputs/R1_S0_MANIFEST_ROW.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S0\\MANIFEST_ROW.json",
+      "bytes": 955,
+      "sha256": "57fd59b47431923530d525acbc7ec8d81ba99d805a479bd20c4b30b605968128"
+    },
+    {
+      "key": "comparison_R1_S0_PROOF",
+      "copy": "inputs/R1_S0_PROOF.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S0\\PROOF.json",
+      "bytes": 1814,
+      "sha256": "32c72bcecb9b98b2127ea9e854d3b36f353068dcb90d8ecbed3a60305883be9e"
+    },
+    {
+      "key": "comparison_R1_S1_CONSUMER",
+      "copy": "inputs/R1_S1_CONSUMER.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S1\\CONSUMER.json",
+      "bytes": 31242,
+      "sha256": "6e1c170abd037b9f3733fe4f1e387d157cf6974152c97ce312aade9d9969d966"
+    },
+    {
+      "key": "comparison_R1_S1_EVENTS",
+      "copy": "inputs/R1_S1_EVENTS.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S1\\EVENTS.json",
+      "bytes": 281066,
+      "sha256": "915adafd25cc992fe2087f364a354eba31a281d121426a1ffa0d9c07f696a452"
+    },
+    {
+      "key": "comparison_R1_S1_WORKER_RECORDS",
+      "copy": "inputs/R1_S1_WORKER_RECORDS.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S1\\WORKER_RECORDS.json",
+      "bytes": 415137,
+      "sha256": "4d80b2db0beaa1fcc5b5711db088881ee1c92b9108ff2e65dc7f4de0b0033ad9"
+    },
+    {
+      "key": "comparison_R1_S1_SESSION",
+      "copy": "inputs/R1_S1_SESSION.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S1\\SESSION.json",
+      "bytes": 206,
+      "sha256": "90f8ef9b670faca90a2aa9de49cede8cbc872448da4583a109ac1f894f87c539"
+    },
+    {
+      "key": "comparison_R1_S1_EPISODE",
+      "copy": "inputs/R1_S1_EPISODE.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S1\\EPISODE.json",
+      "bytes": 397,
+      "sha256": "9cd58183699ee47485b824849f15ff9ffd2ab57e719406238f5e2a44b2237c97"
+    },
+    {
+      "key": "comparison_R1_S1_MANIFEST_ROW",
+      "copy": "inputs/R1_S1_MANIFEST_ROW.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S1\\MANIFEST_ROW.json",
+      "bytes": 955,
+      "sha256": "57fd59b47431923530d525acbc7ec8d81ba99d805a479bd20c4b30b605968128"
+    },
+    {
+      "key": "comparison_R1_S1_PROOF",
+      "copy": "inputs/R1_S1_PROOF.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\R1_S1\\PROOF.json",
+      "bytes": 1820,
+      "sha256": "4f65fe303ad5a7234da4c879e5fa837ef91fe067a28614387db12a54046acf50"
+    },
+    {
+      "key": "comparison_index",
+      "copy": "inputs/COMPARISON_INPUT_INDEX.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIG1_COMPARISON_LOCAL_INPUT_INDEX_v1.json",
+      "bytes": 8833,
+      "sha256": "fc7467fdd998e142385adcebd0b233c216b3c16ac9ca7fcca335523e7a1573fd"
+    },
+    {
+      "key": "comparison_download_inventory",
+      "copy": "inputs/COMPARISON_DOWNLOAD_INVENTORY.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_service_stability_20261028\\trace_illustration_v1\\RESULTS_v1\\DOWNLOAD_VERIFICATION.json",
+      "bytes": 5206,
+      "sha256": "47e9bce1607104239102fe51aa8272fbf954cd0ca88cb2ef3b2040dbe7e7c673"
+    },
+    {
+      "key": "actual_interval_comparison",
+      "copy": "inputs/V1_ACTUAL_INTERVAL_COMPARISON.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v1\\ACTUAL_INTERVAL_COMPARISON.json",
+      "bytes": 18086,
+      "sha256": "7df3c385a14c8842f745a66c8fb4f3635fee7cd916aad6d1e23af7cfdc80fd94"
+    },
+    {
+      "key": "actual_interval_analysis_receipt",
+      "copy": "inputs/V1_RUN_RECORD.json",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v1\\RUN_RECORD.json",
+      "bytes": 800,
+      "sha256": "b70786781c09301100a6135b9de11d57f746f9327c1df98e100126dcfb5eaeef"
+    }
+  ],
+  "protected_v4_files": [
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\coordination_refs.bib",
+      "bytes": 4233,
+      "sha256": "526d681e99e67d151188790dce952622586b8e828efd159ffd3dcc6f9233ea35"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\formal_refs.bib",
+      "bytes": 1636,
+      "sha256": "427832c31354fa9e87a2354f4fb82b2963fb688951d14f0e7bd29ccbead319f5"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\main.pdf",
+      "bytes": 482144,
+      "sha256": "d5174767ee7101339b535fa3f32f3c2fc45a1cf25ad36a345c57a0a9d2067c62"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\main.tex",
+      "bytes": 3537,
+      "sha256": "41bce0c7913ca70de3660c762cfc7322ea0f2a696425925c9bcd0ff25987835d"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\refs.bib",
+      "bytes": 3087,
+      "sha256": "99b2cf2332b5aadf932452e4446e8253d635383bbfe929c37f87c2cfeda0b7b0"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\RevTrace_DSN2027_anonymous_source_v4.zip",
+      "bytes": 609518,
+      "sha256": "e51a97416c611fd127591161c83db3cca43f98d9c328367835855f0896f45ce7"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\figures\\coordination_protocol.pdf",
+      "bytes": 55313,
+      "sha256": "de698198d198a88f1b7118c9ee1091bab84ded47c8036429efcbed830a00439c"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\figures\\service_region.pdf",
+      "bytes": 57168,
+      "sha256": "1de81d95ddb05ee81e29c5704dbb2ff1bb0ea2983012e4dceb7c3b6663ffaeb1"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\figures\\timely_full_interval_case.pdf",
+      "bytes": 30820,
+      "sha256": "bb59b51603876dffb0596498cfbba6d0cc852eacd316c32b1c6264acc6b5f63a"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\01_progress_introduction.tex",
+      "bytes": 5095,
+      "sha256": "7492e77695ec7652d3499a07321c8f4df2676fc3a2bc297fbd6115f29b91a0da"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\02_contract.tex",
+      "bytes": 3970,
+      "sha256": "0e46c9eaab8da6925b6d6caa678b7d10659141ee117a76f9b1164c02f64d6f8f"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\03_continuation.tex",
+      "bytes": 4630,
+      "sha256": "65e713b2e5dca23dd449b0ff3bfa9d17c6292720088292ad3437e54731effccd"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\03_coordination_algorithm.tex",
+      "bytes": 2624,
+      "sha256": "87533976c4a817bdfefe595b007ac038a44bb3a7474a99a21098f824abbf94d4"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\03_native_extension.tex",
+      "bytes": 2218,
+      "sha256": "43aa8f95598fbacdf744a5d5afb290fbe00fa01602e4eb9807ae5da468889bab"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\03_native_refinement_working.tex",
+      "bytes": 3080,
+      "sha256": "3aabd37f5089a2b7170f4bce1e03c328a687382f05be5d3cc27590bd9e95ce4a"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\04_native_resilience_working.tex",
+      "bytes": 2680,
+      "sha256": "6a132e7c566a2900b7e8750afddfb6ec946645723259b3dae7b70a8d5d7172f5"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\04_protocol.tex",
+      "bytes": 2749,
+      "sha256": "84ea6df7cdb02f9c9ef985bd4c47bccc54f412deb588a1ef72bd0bda022fd95e"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\05_evaluation_core.tex",
+      "bytes": 13110,
+      "sha256": "e4e28a9e71df0e6e693df56aee18c48be7f6d3dd5dec84e24ef484f69a8f1ffc"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\05_execution_only.tex",
+      "bytes": 1075,
+      "sha256": "6cdb61f55cc5631ae5dfc7145eb6b7b51df8afe006d2caa743737ca3903701a3"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\05_native_retention.tex",
+      "bytes": 5758,
+      "sha256": "1fd91e71e4490d25ecf824206095c3a0244fcb147ee7ff6b55c2aab622adaed9"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\05_same_source_validation.tex",
+      "bytes": 5285,
+      "sha256": "7ac9ea256ae47c8d94f99bd3b0addc5da4924e9117f873021c0665c7ad7fa9e0"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\06_progress_related.tex",
+      "bytes": 4022,
+      "sha256": "deab46e49861031c76b9af57742f7d9c1a5f304a659df40667e50362d1024786"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\07_progress_discussion.tex",
+      "bytes": 2821,
+      "sha256": "393348564186693cf89796226e4af1016e62bc679b4abce6f08f59f1e60b4237"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\sections\\08_progress_conclusion.tex",
+      "bytes": 1050,
+      "sha256": "2ca7fcf801a9e145d227d288c963bbd5929b6fbfb059ffd9d416fa7a447b3057"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v4\\tables\\native_reliability.tex",
+      "bytes": 2032,
+      "sha256": "85f44ecf791b9cfd312604d74fea9201ab11146026d6bdd8b811f55164a810b4"
+    }
+  ],
+  "old_renderer_source_commit": "60211b74f78b8420ea48f7a08746aedbbcbfb868",
+  "dependencies": [
+    {
+      "path": "interaction_opportunities_v1.py",
+      "original": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_full_interval_case_20261029\\source_v2\\interaction_opportunities_v1.py",
+      "sha256": "946b44e1ffca0226ff52ce91659b5a96e13f3dfd77bd21d1dc5f9d19692e90c0",
+      "provenance": "Exact pure complete_chain implementation from earlier case extractor; no neural import or main execution"
+    }
+  ],
+  "actual_interval_analysis_source_commit": "73026a11f6db202d723e6028ad85e6833888ec78",
+  "protected_v2_artwork": [
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\ACTUAL_INTERVAL_COMPARISON.json",
+      "bytes": 18086,
+      "sha256": "7df3c385a14c8842f745a66c8fb4f3635fee7cd916aad6d1e23af7cfdc80fd94"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\COMPARISON_RAM_CONTROLS.json",
+      "bytes": 952,
+      "sha256": "b35522131e782c59200e8976fc6ea77daf9cef362ceca5cbe18cc33520c59f37"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\composition_and_content.caption.txt",
+      "bytes": 1011,
+      "sha256": "61a373022f39c48ff92ff56b2d59ffc9661f34c869a01ea8794091e1e99aa40e"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\composition_and_content.pdf",
+      "bytes": 52387,
+      "sha256": "1d8f4c3a9889b63276ea2459276991b0b026196b3fc632ddcbdc4faa54ab6e3c"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\composition_and_content.png",
+      "bytes": 293482,
+      "sha256": "e3b7ad20fd0c34ae6ab92f2394f856ea4f505ec8a2a4438c200121c423ed1fe7"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\composition_and_content.QA.json",
+      "bytes": 1026,
+      "sha256": "fff2788240c05bb067750eda4933c7e97198fe1739cbb1d7a5d3ca379edf7885"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\composition_and_content.svg",
+      "bytes": 26644,
+      "sha256": "11b0c90d1a97d878997ae42ff4d92b2f72a9621e26c60e8140c9bb0cb8bc7537"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\composition_and_content_GRAYSCALE_QA.png",
+      "bytes": 54832,
+      "sha256": "ed2067c564ded80f98aa3ce72f4b6d135e5baebf0da96a327918fcf13f978aef"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\composition_and_content_PDF_PAGE.png",
+      "bytes": 99901,
+      "sha256": "bd083db9f669d618ff9d52b7a291d5a6aa068637ead4e7e6214085b802ead812"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\CONTROL_HASHES_AFTER.json",
+      "bytes": 765,
+      "sha256": "9ac0d9306d9daf589d7d57f466b0c3290219a1a55499ad695b9004418d4f7fdd"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\CONTROL_HASHES_BEFORE.json",
+      "bytes": 765,
+      "sha256": "9ac0d9306d9daf589d7d57f466b0c3290219a1a55499ad695b9004418d4f7fdd"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\coordination_protocol.caption.txt",
+      "bytes": 688,
+      "sha256": "820cd99aef054fcb2ace261ff8ff01060eda965133f06c45d759f1a03cf0e3fd"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\coordination_protocol.pdf",
+      "bytes": 56511,
+      "sha256": "ebbc02a9418413fbfaac960bf87d57847c86955beb7fdad12e0f00f2401891df"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\coordination_protocol.png",
+      "bytes": 277548,
+      "sha256": "e51d3e321136050040f625fc493fdf3952a8fc6ff6d56c5637c6f227a7036bf6"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\coordination_protocol.QA.json",
+      "bytes": 1287,
+      "sha256": "0eeaee082064533a3949887fd9eedbc36c3f0427e34c25100b1d2c4082927acc"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\coordination_protocol.svg",
+      "bytes": 38669,
+      "sha256": "53b6697bfce1f6e9c8d0b018e5b0b2b1d2f1c69bd3401343dfefa3ebda531604"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\coordination_protocol_GRAYSCALE_QA.png",
+      "bytes": 55038,
+      "sha256": "c84ad2129ffde84c612946570212e719fb8ec2e42fcf22b52446c954f92e65df"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\coordination_protocol_PDF_PAGE.png",
+      "bytes": 95750,
+      "sha256": "55bfc40e478518b5f399197ae0fd0d4510d13f376e43cf2f1fca4d90f541216a"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\ENVIRONMENT.json",
+      "bytes": 296,
+      "sha256": "9284a4993f3b670c71e950fb5e95ff76e297d17d1b72e3896ec182a5c70bfe9e"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\factorial_cohorts_detail.caption.txt",
+      "bytes": 560,
+      "sha256": "e89b2190b83037255368d536cb68b8ef5ed275413da1a4fe647154c249384646"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\factorial_cohorts_detail.pdf",
+      "bytes": 44983,
+      "sha256": "c80faf955d6ac1a70a0bcc05b59d3e0ade8df7bd8b8698873b7b99a84bdaa105"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\factorial_cohorts_detail.png",
+      "bytes": 194360,
+      "sha256": "4f1fd85f24c888f11e80b455d2fbbb3c35eadb6bf99a4866e9222e3c52199c24"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\factorial_cohorts_detail.QA.json",
+      "bytes": 748,
+      "sha256": "c7eaf9c6a45475a25ad9e527b72d2bdeb7910f5c41f85977bc216d2016dd115f"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\factorial_cohorts_detail.svg",
+      "bytes": 25067,
+      "sha256": "70409b2f532095a6af39b879e2a8e5f99c0a422125a173c960ca96e8360527e2"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\factorial_cohorts_detail_GRAYSCALE_QA.png",
+      "bytes": 37700,
+      "sha256": "bba766fb9c7050699368f844ad8af820ad0160793c6219894a152100f80336ed"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\factorial_cohorts_detail_PDF_PAGE.png",
+      "bytes": 66058,
+      "sha256": "292764ad9613ec0c3c4e35dfdcc617e4e38bf0aaa6eb7b629abab6cb130278d0"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\GATE.json",
+      "bytes": 158,
+      "sha256": "5ea0b6fc168eb381985a6de23d54a897646549f06b250d73757ee08f58705aad"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\MAIN_EFFECT_NUMERIC_VALUES.json",
+      "bytes": 3975,
+      "sha256": "f247e0d8d01ac77e3793d188be7cb9ffbf8187d8d5d9beb2461099512213da0f"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\OUTPUT_INDEX.json",
+      "bytes": 8051,
+      "sha256": "2adcbc403b247e5479d9f7b7e11aefbd2797c26ce7a0fa284ba50b499822f0f1"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\PLOTTED_NUMERIC_VALUES.json",
+      "bytes": 22242,
+      "sha256": "cdc8f47ca490653d3fb8ded20942379ffa7d414838c7a6e805d0f00b17458e17"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\RUN_RECORD.json",
+      "bytes": 895,
+      "sha256": "8c9000d4a4d43573dc0cd1755a3ced79f9f5afc6bc6e09610b5898560017a1a8"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\service_region.caption.txt",
+      "bytes": 1257,
+      "sha256": "60f08f963f379ce0cfb40a352dce38c5d9e5fd6e886aa4409260f822a22c460a"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\service_region.pdf",
+      "bytes": 56824,
+      "sha256": "d4ee3defc18dacbf601798cd857f9145ebb343566ed2a3ae6dd93bc6c5dde2ad"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\service_region.png",
+      "bytes": 195375,
+      "sha256": "ceb86f7a554a8634799da4f790413c805e6ed1e2bf4097e9706853bffc3c9d71"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\service_region.QA.json",
+      "bytes": 953,
+      "sha256": "5a0dd88e5c801362f02cb3c16795c6552cd294b708df3e64b6ce1b9dd4d7593d"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\service_region.svg",
+      "bytes": 78151,
+      "sha256": "9316246c00157bd297ced603e3f8f4a55ab508a7eaa3c0764f7380938cb70f4f"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\service_region_GRAYSCALE_QA.png",
+      "bytes": 44232,
+      "sha256": "c9a0338262e2061ee47f8d9243b35e6f2f65747fc73d39909ae0fbe730746668"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\service_region_PDF_PAGE.png",
+      "bytes": 79695,
+      "sha256": "6b6c0eca1876028aa6f3befea50c888192af202698f12acbdbcc53d2250ee8c1"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\SUMMARY.json",
+      "bytes": 7242,
+      "sha256": "09afb1977d15183bdc234536a91c8d96743da66f5e511771db81cf6e31162425"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_full_interval_case.caption.txt",
+      "bytes": 539,
+      "sha256": "6f5a9ef9a94db8a052b2d2997e704d3bc7a3b2857a727be9850d4087f02ce2ab"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_full_interval_case.pdf",
+      "bytes": 30658,
+      "sha256": "5e22a2041376167372bdc116381154f224fb712c7703fb568a9c0fcd1dd6b955"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_full_interval_case.png",
+      "bytes": 166414,
+      "sha256": "4d7e488d93fb3e43e422a86415f085fa5b014bc1ac9d832d0c3c96fddff4a10b"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_full_interval_case.QA.json",
+      "bytes": 818,
+      "sha256": "d9b728fed5b0381f0e89e8ca42bc2580be2f0fc57b2e77504a7a5ae303cfbecd"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_full_interval_case.svg",
+      "bytes": 16430,
+      "sha256": "14737332b5172401028885a41830f717aa9a07cebc44b247f04efa7ec624e995"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_full_interval_case_GRAYSCALE_QA.png",
+      "bytes": 31395,
+      "sha256": "685e18d27047cb8b99110613b4ed59674dd8c8523ec2dee0b3eb01a9e669fdcd"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_full_interval_case_PDF_PAGE.png",
+      "bytes": 58211,
+      "sha256": "ffa6a8dc41b9918e2ac08e8e5ad1fa9ac7ea9f4e961fb26cd697874e24901456"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_interval_comparison.caption.txt",
+      "bytes": 762,
+      "sha256": "922d01dc95779b19e63d7f8041f6747d41afd09d2f5265c4f30ebf0c0375c6fe"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_interval_comparison.pdf",
+      "bytes": 44550,
+      "sha256": "55f280a333ea0c4000e78f61f8ca271620fb2c0752e838dbf47f6d4329c3c8d3"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_interval_comparison.png",
+      "bytes": 180268,
+      "sha256": "40446eaff261fd7a322e68f8edd65757af7bad5cb5a06576f2eaba01c7877587"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_interval_comparison.QA.json",
+      "bytes": 1227,
+      "sha256": "0fcbf5234576bd54d70b10c0eee2d9fb36b71e21e866cf5deac0397a6983b49b"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_interval_comparison.svg",
+      "bytes": 21132,
+      "sha256": "3ee2fedd5abaf71156120e60134f879aa75e86a69d4c40e215aec5f5938b007c"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_interval_comparison_GRAYSCALE_QA.png",
+      "bytes": 35758,
+      "sha256": "e8016fd6017b719e18a1ea9ff98dea1d7548e90dafb3971ebaeb9ace42f93b01"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\FIGURES_v2\\timely_interval_comparison_PDF_PAGE.png",
+      "bytes": 64139,
+      "sha256": "0ec0706f0596cf6831289491fefb1d601bf5baa307cc54e15d0661a1b50ece38"
+    }
+  ]
+}

@@ -28,7 +28,7 @@ if a.release:
  if not attr.exists():attr.write_text('* -text\n',encoding='utf8')
  files.update([provenance,release/'main.pdf',attr,R/'Paper_DSN/CURRENT.md',archive])
  for f in files:assert f.is_file(),f
-new_families={'dsn_streamcorrect_stage_profile_20261029','dsn_native_content_20261029','dsn_full_interval_case_20261029','dsn_streamcorrect_stage_handoff_20261029','dsn_streamcorrect_encoder_profile_20261029','dsn_streamcorrect_independent_20261029','dsn_native_resilience_20261030','dsn_native_sustained_20261030','dsn_native_refinement_20261030','dsn_strengthening_20261031','dsn_writing_closure_20261031'}
+new_families={'dsn_streamcorrect_stage_profile_20261029','dsn_native_content_20261029','dsn_full_interval_case_20261029','dsn_streamcorrect_stage_handoff_20261029','dsn_streamcorrect_encoder_profile_20261029','dsn_streamcorrect_independent_20261029','dsn_native_resilience_20261030','dsn_native_sustained_20261030','dsn_native_refinement_20261030','dsn_strengthening_20261031','dsn_writing_closure_20261031','dsn_story_revision_20261031'}
 for name in ['dsn_service_stability_20261028','dsn_joint_retention_exit_20261028','dsn_manuscript_update_20261028','dsn_midpoint_continuity_20261029',*sorted(new_families)]:
  D=R/'experiments'/name
  if not D.exists():continue

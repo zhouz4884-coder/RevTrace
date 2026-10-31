@@ -1,0 +1,92 @@
+\subsection{Complete dependency witnesses}
+The central question is whether an old call still belongs to a valid
+provisional continuation after trusted feedback advances. Its birth version
+records dispatch history. The dependency witness establishes whether it
+remains usable now.
+
+Let $x=(F,P_C)$. A complete recorded node provides an edge
+\begin{equation}
+ (F,P_C)\xrightarrow{n}(b_n,P_n^+)
+ \quad\text{if}\quad a_n=F\ \land\ P_n^-=P_C,
+ \label{eq:edge}
+\end{equation}
+under the input, identity, and execution contract of
+Section~\ref{sec:contract}. A finite sequence of such edges is a
+\emph{valid provisional continuation} of $C$ when each successor consumes
+the preceding complete output state at its actual frontier. Write
+$C\leadsto n$ for a complete path to $n$. A frozen in-flight successor can
+belong to the same continuation, but contributes no usable result until
+completion.
+
+\begin{proposition}[Sufficient re-rooting witness]
+\label{prop:rebase}
+Suppose an old branch contains a complete boundary node at the new certified
+frontier $F$, with output state $P_C$. If its subsequent recorded calls form
+an unbroken input--output path to the actual branch tip, those nodes are a
+valid provisional continuation of $C$. An in-flight successor may continue
+when its unchanged frozen input is that tip and its target exceeds $F$.
+\end{proposition}
+\begin{proof}
+The boundary equals $(F,P_C)$, so the first successor satisfies
+Eq.~\eqref{eq:edge}. Each subsequent call consumes the preceding complete
+output at its recorded frontier under the same contract. Induction reaches
+the tip and the unchanged input of its in-flight successor, which supplies
+no output yet.
+\end{proof}
+
+This establishes dependency validity, not Canonical write authority.
+Provisional results remain revisable. The witness follows actual calls
+without assuming bitwise equality of different floating-point executions.
+
+A branch born under $v$ can reach $(F,P_C)$ when $v+1$ installs, making
+version-only rejection wasteful. Conversely, equal text can hide different
+tokens or alignment state; equal state at a different frontier also fails
+Eq.~\eqref{eq:edge}.
+
+\subsection{[EL] Retaining computation: \texorpdfstring{$R$}{R}}
+The core Qwen guard conservatively implements Proposition~\ref{prop:rebase}.
+On installation, it requires a complete Private node at exactly $F$ with
+full feedback tokens $P_C$, then checks frozen inputs and frontiers along
+complete successors to the actual tip. An intermediate match is insufficient.
+An in-flight successor must be the unique tracked task, consume that tip,
+and target audio beyond $F$.
+
+Success retains the branch without changing job IDs, birth versions,
+inputs, or results; otherwise the Owner fences it and rebuilds from an
+allowed state. Boundary-node and unique-slot requirements restrict this
+sufficient guard, not every valid reuse scheme.
+
+\subsection{[SUP] Retaining an actual view: \texorpdfstring{$S$}{S}}
+A snapshot Consumer can replace a valid ahead view with a shorter
+certified snapshot despite computation retention. RevTrace maintains
+separate certified and provisional whole-hypothesis lanes, without an
+uncertified suffix splice or certified-prefix status for retained views.
+
+For a Canonical application, $S$ checks the complete visible node's input
+directly against $(F,P_C)$ or follows complete published ancestors to
+that boundary. Missing, cyclic, or ambiguous ancestry is rejected. Unlike
+$R$'s conservative guard, a directly rooted published call needs no extra
+Private boundary node.
+
+Before actual application and its receipt, the kernel checks the preview
+against the durable root, registered results, dependency path, and bound
+text/frontier. A caller-supplied compatibility flag cannot replace these
+records.
+
+\begin{proposition}[Continuity at a compatible application]
+\label{prop:continuity}
+Immediately before an authorized Canonical application, let the visible
+whole provisional view $h$ be ahead of its new frontier $F$. If $S$ proves
+$C\leadsto h$ and no independent withdrawal mode is invoked, that
+application advances the certified lane and preserves $h$ unchanged.
+\end{proposition}
+\begin{proof}
+The authorized compatible-and-ahead branch installs $C$ in the certified
+lane while retaining $h$'s node, text, and frontier. That application
+therefore withdraws none of $h$.
+\end{proof}
+
+Incompatible updates must withdraw the view, and later valid results can
+revise it. This is a per-application property, not global monotonicity.
+Snapshot consumption and conservative recomputation can be safe; the
+four-arm study measures the extra progress and cost of joint retention.

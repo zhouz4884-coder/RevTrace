@@ -1,0 +1,165 @@
+{
+  "gate": "FAIL_PRESERVED_ANONYMOUS_COLD_BUILD",
+  "created_utc": "2026-10-31T13:24:40.446315+00:00",
+  "new_model_calls": 0,
+  "SSH_calls": 0,
+  "CURRENT_modified": false,
+  "original_manuscript_modified": false,
+  "source_archive": "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\RevTrace_DSN2027_anonymous_source_v7.zip",
+  "cold_directory": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\ANONYMOUS_COLD_BUILD_v7",
+  "final_record": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_manuscript_update_20261028\\FINAL_RELEASE_RECORD_20261031_v7.json",
+  "skill": "C:\\Users\\LENOVO\\.agents\\skills\\latex-paper-en\\SKILL.md",
+  "compile_script": "C:\\Users\\LENOVO\\.agents\\skills\\latex-paper-en\\scripts\\compile.py",
+  "source_whitelist": {
+    "files": 27,
+    "exact_final_record_bytes_and_SHA": true,
+    "exact_provenance_target_SHA": true,
+    "extra_files": [],
+    "unsafe_entries": []
+  },
+  "compile": {
+    "command": [
+      "uv",
+      "run",
+      "--no-project",
+      "--offline",
+      "python",
+      "-B",
+      "C:\\Users\\LENOVO\\.agents\\skills\\latex-paper-en\\scripts\\compile.py",
+      "main.tex",
+      "--recipe",
+      "pdflatex-bibtex"
+    ],
+    "cwd": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\ANONYMOUS_COLD_BUILD_v7",
+    "shell_escape": false,
+    "skill_sha256": "46e2d78f08630a5e465e7d3abefdfc9d829240f02168f23a025e389126a16cdb",
+    "compile_script_sha256": "69f04e61cd961af582d948bc8cfea7279539d6aeab7e18a273c6eb297e892b78",
+    "returncode": 0
+  },
+  "error_type": "AssertionError",
+  "reason": "[]",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_story_revision_20261031\\cold_build_tools\\anonymous_cold_build_v7.py\", line 78, in main\n    assert ref_headers==[12], ref_headers\n           ^^^^^^^^^^^^^^^^^\nAssertionError: []\n",
+  "original_inputs_hash_after_failure": {
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\RevTrace_DSN2027_anonymous_source_v7.zip": {
+      "bytes": 625541,
+      "sha256": "4aca80514b19d7aae0a1e74e1e033d83377c2ba169666fb24e29b7cf8305cc59"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_manuscript_update_20261028\\FINAL_RELEASE_RECORD_20261031_v7.json": {
+      "bytes": 6232,
+      "sha256": "ba6975a4c75474dc8a57083a40825b53e64e8976ba69b75ada09d463c502785e"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\experiments\\repository_identity_20261027\\CURRENT.json": {
+      "bytes": 1348,
+      "sha256": "f2fbf911fe39916717c06bae74f46484b5e4dee1ba8b9539da98ad2bef4eda88"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\PACKAGING_PROVENANCE.json": {
+      "bytes": 32652,
+      "sha256": "5f56705cd395227f3bfee8a9fda6d9ca3105b1a95b21d99e9a32c2b3ff945ba1"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\coordination_refs.bib": {
+      "bytes": 4233,
+      "sha256": "526d681e99e67d151188790dce952622586b8e828efd159ffd3dcc6f9233ea35"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\figures\\coordination_protocol.pdf": {
+      "bytes": 56987,
+      "sha256": "75bf0e2722ce39e5e75fd96646f36220a2ee0efe61b67086b58ff6e76c07604f"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\figures\\joint_and_content.pdf": {
+      "bytes": 52583,
+      "sha256": "6cdf67b298f9260c91412233f000f9c87732cc0607f4339ca598ece9dbde4152"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\figures\\timely_full_interval_case.pdf": {
+      "bytes": 44550,
+      "sha256": "92fc0d316fd446d463a16aa2b3f925c0966962650aa5d00f191019b7f58d469f"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\formal_refs.bib": {
+      "bytes": 1636,
+      "sha256": "427832c31354fa9e87a2354f4fb82b2963fb688951d14f0e7bd29ccbead319f5"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\main.pdf": {
+      "bytes": 491251,
+      "sha256": "c75378b1452304b401625a3fb097c4993370ffe5ca6c769141e2f191b9911c71"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\main.tex": {
+      "bytes": 3626,
+      "sha256": "0a956e7072430999082dabfbdfd02b5312056d0caa0b378cde28b534cc01cc91"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\refs.bib": {
+      "bytes": 3087,
+      "sha256": "99b2cf2332b5aadf932452e4446e8253d635383bbfe929c37f87c2cfeda0b7b0"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\01_progress_introduction.tex": {
+      "bytes": 5498,
+      "sha256": "a1914b2d0cf40ae682113c4c10fe4cd050c6f26b33ddce559c858b95d84bc436"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\02_contract.tex": {
+      "bytes": 5029,
+      "sha256": "6e3d34e00e4da42c2c38ceb666d4ec8d6160c40a5730f55911146d3e1a729367"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\03_continuation.tex": {
+      "bytes": 4639,
+      "sha256": "396a02f942fcf2b4f1678dcb1d133370fc26cb071cd61ef26bfd6dd22a545fb6"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\03_coordination_algorithm.tex": {
+      "bytes": 2208,
+      "sha256": "11cc4baa733578defd75882029dff4b712a5ca2369159b72608834db43602745"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\03_coordination_overview.tex": {
+      "bytes": 1356,
+      "sha256": "f24e165476f14dcc23a218ae584c6285c21c262485cbccce9596407dbe557ff9"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\03_native_extension.tex": {
+      "bytes": 2192,
+      "sha256": "9646d9661fee5aea3c4baa55174a9acb771d55c00c0796a8e3b75796e272be49"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\03_native_refinement_working.tex": {
+      "bytes": 3072,
+      "sha256": "f5a99f9e68e928ffc2c863189c743aded5939aed4445dc4af6d13490a6e04c3d"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\04_native_resilience_working.tex": {
+      "bytes": 2680,
+      "sha256": "6a132e7c566a2900b7e8750afddfb6ec946645723259b3dae7b70a8d5d7172f5"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\04_protocol.tex": {
+      "bytes": 1992,
+      "sha256": "f77581f7dd652e2de147b8ec2ea5107245dc93cd6f92c2cd646bc2dbe6250e41"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\05_evaluation_core.tex": {
+      "bytes": 6193,
+      "sha256": "74c0614fca842883447380d163d3dfe1d3c345f31601dcb0e4edf48d37efeb8e"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\05_execution_only.tex": {
+      "bytes": 1075,
+      "sha256": "6cdb61f55cc5631ae5dfc7145eb6b7b51df8afe006d2caa743737ca3903701a3"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\05_native_retention.tex": {
+      "bytes": 5752,
+      "sha256": "288dd9630ff58e2a339ddf4af51f4d23a88f20ade80aefb76b3fd76cc4000026"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\05_operating_boundaries.tex": {
+      "bytes": 3905,
+      "sha256": "6b5e7cc3a3007f960c23fb5d9f78b44c1233e3bde1f47b5185d7fe80d015a0f5"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\05_same_source_validation.tex": {
+      "bytes": 5394,
+      "sha256": "444b77816f46360232073a8c4d5e59c93541668604459573646f4f5db18d9d5d"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\06_progress_related.tex": {
+      "bytes": 4990,
+      "sha256": "a83c21316ad824de80aa4cf5ec343a77d275d13dba6ed1ab3783781b5c407a7f"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\07_progress_discussion.tex": {
+      "bytes": 2821,
+      "sha256": "393348564186693cf89796226e4af1016e62bc679b4abce6f08f59f1e60b4237"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\sections\\08_progress_conclusion.tex": {
+      "bytes": 1005,
+      "sha256": "7998316791040c72e9f46cc2210886094064805c1e35b64aabd8b2ffde30b94c"
+    },
+    "D:\\VLA_QWEN\\RevTrace\\Paper_DSN\\revisions\\20261031_dsn2027_release_v7\\tables\\native_reliability.tex": {
+      "bytes": 1577,
+      "sha256": "87ffbedf25a7a2a84c8c6c1368327a8dee84df27b4f07aab60f5cca815c5caa1"
+    }
+  },
+  "original_inputs_unchanged_after_failure": true
+}

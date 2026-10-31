@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_story_revision_20261031\figure_source_dev\render_story_figures.py", line 285, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_story_revision_20261031\figure_source_dev\render_story_figures.py", line 272, in main
+    b.style();qa=[case(out,inputs),mechanism(out),effects(out,inputs),b.plot_workloads(out,inputs['run_endpoints_48']),factorial_detail(out,inputs),comparison_plot(out,comparison)]
+                                                                                                                                                    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_story_revision_20261031\figure_source_dev\render_story_figures.py", line 241, in comparison_plot
+    return b.export(fig,out,'timely_interval_comparison',cap,'actual same-input two-arm observations, not counterfactual',
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     dict(same_input_interval=True,own_ready_clocks=True,same_execution_interleaving=False,
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      first_visible_whole_text_equal_across_arms=result['first_visible_whole_text_equal_across_arms'],
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      arm_endpoints={a:{k:r[k] for k in ('first_visible','first_certified','first_D2_pass','first_C8_pass')} for a,r in result['arms'].items()}))
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_story_revision_20261031\figure_source_dev\base_renderer.py", line 95, in export
+    assert not outside, outside
+           ^^^^^^^^^^^
+AssertionError: ['4.5']
