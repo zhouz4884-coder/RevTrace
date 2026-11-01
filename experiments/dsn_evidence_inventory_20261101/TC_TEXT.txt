@@ -1,0 +1,805 @@
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                   1
+
+
+
+
+RevTrace: A Dual-Granularity Runtime for Efficient
+           State-Certified ASR Serving
+                                                Bin Zhou, Jiyuan Miao, and Xi Cao
+
+
+
+
+   Abstract—Feedback-driven inference writes generated outputs          discrepancy with feedback, whereas none propagate it when
+into subsequent execution state. Accelerator batching can perturb       the feedback edge is removed.
+these writes, while certifying every fine revision can serialize
+authority work and inflate tail latency. We present RevTrace,              Certifying every fine revision is expensive precisely where
+a runtime based on Dual-Granularity Feedback Transactions               a service needs frequent updates. Each verification can add an
+(DGFT). Fine proposals advance a private display branch; coarse         invocation, wait for the session’s parent, and delay subsequent
+canonical authority amortizes state-authorizing work across             work. Selective verification reduces average work but can retain
+revisions. Certificates bind installed projections to parent versions,  synchronized bursts: on our matched Qwen workload, verifying
+audio frontiers, and execution contracts, preserving certified
+ancestry under atomic installation. We evaluate Qwen3-ASR and           only 8.3%/9.6% of revisions still yields state-entry P99 of
+Whisper on RTX 3090 and V100 systems. In matched two-V100               2.735/2.964 s. The design question is thus not simply how to
+real-time replay, Coarse improves throughput 1.35-fold, saves 39.7      batch more requests, but how to amortize state-authorizing
+percent GPU energy, and lowers display P99 from 3.342 to 1.690          work without allowing unverified output to become a feedback
+seconds versus fine-grained certification, with 0.31 percent P95        parent.
+final-text deviation. Eight V100 GPUs support 64 concurrent 0.6B
+sessions and 32 concurrent 1.7B sessions within a two-second               Existing mechanisms address neighboring boundaries.
+display target; at 16 sessions, both models also achieve sub-           Agreement-based confirmation stabilizes transcript prefixes and
+two-second commit P99. All 30,168 commits across 96 formal              can govern their reuse in subsequent prompts [2]. Verified
+runs pass independent checks. Historical available-input Qwen           speculation checks tokens and repairs the execution state
+execution achieves up to 6.88-fold singleton speedup, 3.44-fold
+GPU-normalized speedup, and 59.8 percent GPU-energy reduction
+                                                                        needed for deterministic continuation [8]; margin gating reduces
+in volatile mode, with WAL disabled. RevTrace combines efficient        that verification cost [9]. Stateful serving manages already
+parallel serving with explicit feedback-state authorization.            materialized state across requests [10], [11]. Our boundary is
+   Index Terms—runtime systems, generative model serving,
+                                                                        the installation of a model-specific projection from revisable
+streaming ASR, state certification, transactional consistency           output into the next recognition round. Its authorization must
+                                                                        identify both the content and the parent/input region for which
+                                                                        it was computed.
+                          I. I NTRODUCTION                                 The key insight is that the frequency of visible revisions need
+                                                                        not determine the frequency of authoritative feedback updates.
+   Feedback-driven inference turns generated output into an
+                                                                        We introduce Dual-Granularity Feedback Transactions
+input dependency. A serving round can revise a transcript and
+                                                                        (DGFT) and implement them in RevTrace. A fine proposer
+then install part of that transcript into the state read by the next
+                                                                        advances a private display branch, while a canonical authority
+round. Streaming automatic speech recognition (ASR) makes
+                                                                        processes larger audio regions. The runtime commits only
+this dependency concrete: Whisper conditions on previous text,
+                                                                        projections bound to the current parent, contiguous audio
+while Qwen3-ASR re-prompts from a rollback prefix [1]–[3].
+                                                                        frontier, and execution contract. Authority work is amortized
+The runtime must therefore manage two consequences of an
+                                                                        across fine revisions, and pending certification need not stall
+output: what the user sees and what subsequent inference is
+                                                                        private display. A frontier-aware rebase rule prevents a delayed
+allowed to consume.
+                                                                        proposal from reading a parent that already incorporates future
+   Accelerator batching makes this a performance–integrity
+                                                                        audio. The same commit discipline applies when the two
+problem. Shared execution, iteration scheduling, and KV-cache
+                                                                        granularities coincide or selective fine replay is added.
+management improve throughput [4]–[6], but execution shape
+can change floating-point reductions and the resulting token               RevTrace contributes a state-entry abstraction, a transaction
+sequence [7], [8]. A discrepancy confined to display can be             mechanism,    and an evaluated parallel runtime:
+revised later. Once installed into feedback, it changes the input          1) Generated-state admission. We characterize feedback-
+to later recognition and can persist even after the original output            state contamination and isolate its propagation channel
+has disappeared. We call this feedback-state contamination.                    through paired interventions. This identifies the state-
+Our paired Whisper intervention identifies the channel: 8                      write decision that a presentation policy alone does not
+of 21 execution-induced output pairs propagate an isolated                     govern.
+                                                                           2) Dual-granularity authorization. We derive certificate,
+   The authors are with Beijing University of Chemical Technology, Bei-        parent, and frontier checks that exclude uncertified ances-
+jing, China (e-mail: 2025200800@buct.edu.cn; 2024200822@buct.edu.cn;
+caoxi@buct.edu.cn).                                                            try and preserve a fork-free forward history independently
+   Corresponding author: Xi Cao.                                               of authority granularity. A cost decomposition connects
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                                       2
+
+
+
+
+Fig. 1. Feedback contamination and DGFT. The upper panel contrasts two trajectories from a shared parent; its dashed state arrow denotes divergence between
+trajectories, not a write from the canonical lane into the batched lane. The lower panel separates provisional presentation from state-write authority. Paired
+interventions isolate propagation through feedback.
+
+
+
+      granularity and parallel execution to the runtime’s critical              fixed in a causal pair. A model adapter projects the output into
+      path.                                                                     the next feedback state:
+   3) Parallel execution with measured system gains. We
+      implement independent proposal/authority scheduling and                                          St+1 = T (St , At , Yt ),                          (1)
+      frontier-safe rebasing, and evaluate two ASR families                                            Ht+1 = Φ(Yt ; Ht ),                                (2)
+      and five checkpoints on RTX 3090 and V100 systems.
+                                                                                                       St+1 = G(Stx , Ht+1 , At ).                        (3)
+      In matched real-time replay, Coarse improves throughput
+      1.35× and saves 39.7% energy relative to Fine-certified,                  For Qwen, Φ constructs the rollback prefix used to re-prompt
+      while eight-GPU replication exposes both high-capacity                    the model. For Whisper, it selects the raw-token history used
+      and low-latency-certification operating points. Separately,               as previous-text conditioning. A displayed rollback suffix need
+      historical volatile-mode available-input Qwen execution                   not belong to that projection. Thus presentation and installation
+      reaches 6.88× singleton speedup with 59.8% less GPU                       are separate operations:
+      energy.
+                                                                                              Display(Yt ) ⇏ Authorize(Φ(Yt ; Ht )).                      (4)
+
+            II. F EEDBACK -S TATE C ONTAMINATION
+                                                                                B. Contamination and its propagation
+A. Generated output as a state write                                               For proposal and authority outputs Ytf , Yta from the same
+                                                                                parent, define Ptf = Φ(Ytf ; Ht ) and Pta = Φ(Yta ; Ht ). Output
+  Let round t enter with state St = (Stx , Ht ), receive                        divergence is εt = dY (Ytf , Yta ); state-entry divergence is et =
+audio frontier At , and generate Yt . Here Ht is generated-text                 dS (Ptf , Pta ). The distances use the declared output/state metric.
+feedback; Stx contains the exogenous and runtime conditions
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                   3
+
+
+
+Definition II.1 (Feedback-state contamination). A contamina-          Definition III.2 (Certificate). For realized authoritative projec-
+tion event occurs when a differing proposal projection acquires       tion Φaj , the protected coordinator issues a single-use record
+write permission:
+                                                                                 certj = Bind sidj , ej , pj , vj , [fj , fj+1 ),
+        Ct ⇐⇒ et > 0 ∧ Ptf is installed into Ht+1 .                                           h(A[fj ,fj+1 ) ), h(Φaj ), χj .
+                                                                                                                               
+
+   An output mismatch confined to display is therefore different The execution contract χ identifies the checkpoint, tokenizer,
+                                                                                               j
+from a contaminating state transition.                           decoding and replay policy, projection adapter, and allowed
+   To test whether feedback carries an execution discrepancy numerical/runtime implementation.
+forward, a separate legacy Whisper protocol enumerates 21
+output pairs produced by legal singleton-versus-batch execution.    The certificate binds content as well as ownership: a current-
+It feeds decoded previous-window text as the next prompt: version result can still be the wrong generated projection.
+12 pairs have different prompt text and nine have identical Conversely, matching content does not make an old-parent
+prompt text despite different generated token IDs. Future audio result admissible.
+and singleton execution are held fixed. Divergence propagates Definition III.3 (Commit validity). A commit Γ is valid iff
+                                                                                                                         j
+in 8/21 output pairs with feedback and 0/21 without it; all its session, epoch, and policy match the live fence; its parent
+eight propagated pairs have different prompt text, and six is current; its interval extends the current frontier without a
+remain divergent at the two-window horizon. This intervention gap or overlap; and an unconsumed certificate binds every
+is distinct from the later raw-token history adapter. Let ∆t+k presented field and the recomputed projection digest.
+denote generated-token edit distance at offset k in this paired
+intervention. The measured cumulative revision amplification        Validation, state replacement, version advancement, and
+is                              PK                               certificate  consumption execute atomically. Failed validation
+                         cum      k=0 ∆t+k                       leaves state unchanged. Detailed field-level records appear in
+                   RAFt,K =                 ,                (5)
+                                max(1, ∆t )                      Supplementary Section S1.
+and reaches 153 for distances 1, 64, 88 at K = 2; the                  a) Trust model: The authority coordinator and ledger are
+corresponding terminal distance ratio is 88. The intervention    trusted.  Proposers and clients cannot issue certificates. We as-
+identifies a causal channel; its selected pairs are not a        sume   immutable    certified audio, collision-resistant digests, and
+traffic-prevalence sample. Supplementary Section S9 gives the    atomic   validation  with installation. Protected issuance supplies
+extended perturbation model.                                     authenticity;  hashing    supplies content binding. The contract
+                                                                 certifies the provenance of an installed projection; independent
+                                                                 quality evaluation assesses the transcript it produces.
+C. Runtime requirements
+   DGFT enforces four requirements. R1: display and state-
+                                                                        B. Committed-history invariants
+write permissions are distinct. R2: a projection may commit
+only against its computed parent version. R3: committed                     A projection belongs to the provenance ancestry of Hj when
+audio intervals form one gap-free, overlap-free forward history.        it labels an accepted transition on the ledger path H0 → · · · →
+R4: risk and coverage signals may schedule authority work,              H  j . Under the trust and atomicity assumptions above:
+but installation requires a certificate. These checks make Theorem III.1 (Uncertified-Ancestry Exclusion). If H changes
+authorization explicit at the generated-state boundary.                 only through valid commits, no fine projection unbound by a
+                                                                        valid certificate enters the ancestry of future committed state.
+   III. D UAL -G RANULARITY F EEDBACK T RANSACTIONS
+                                                                        Theorem III.2 (Fork-Free Committed-State Linearity). Atomic
+A. Decoupling the authorization unit                                    validation and installation with single-use certificates, current-
+   DGFT separates proposing, authorizing, and installing. Fine parent checks, and frontier continuity produce a fork-free
+proposals can advance a private branch for frequent display. forward history whose audio intervals have neither gaps nor
+The authority starts from a committed parent and covers a larger overlap.
+contiguous audio region; only its authorized projection may
+create the next committed parent. With proposal granularity gp Theorem III.3 (Granularity-Independent Safety). For any ρ ≥
+and authority granularity ga , let ρ = ga /gp ≥ 1. Increasing ρ 1, Theorems III.1 and III.2 hold when each authority segment
+reduces the frequency of authority transitions while retaining starts at the committed parent, covers the next contiguous
+the same commit checks.                                                 frontier, and passes the same validity checks.
+
+Definition III.1 (Transaction). A pending or certified transac-             The proof uses induction over accepted commits. Content
+tion is                                                                 binding   preserves certified ancestry; atomic parent comparison
+                                                                        permits one next version; single-use certificates and contiguous
+      τt = (sid, e, p, vparent , [as , ae ), Yt , Φ(Yt ; Ht ), certt ), frontiers exclude replay and duplicate coverage. None of these
+                                                                        steps depends on segment size. Supplementary Section S2 gives
+identifying the session, contract epoch, policy, parent version,
+                                                                        the full proofs. Two consequences follow: stale descendants
+audio interval, generated output, projected state, and certificate
+                                                                        cannot mutate state, and certificate-enforced fine execution
+status.
+                                                                        is the ρ = 1 case. The serialization guarantee concerns
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                              4
+
+
+
+accepted forward commits, rather than a full client-operation      A. Model adapters
+linearizability specification [12].                                  Each family implements a projection, an authority executor,
+                                                                   and an evidence hook. Qwen retains growing audio and
+                                                                   constructs its next prompt from a rollback prefix. Whisper
+C. How granularity reduces authority cost                          preserves raw generated token IDs, including the start-of-
+                                                                   previous marker and a bounded suffix of authoritative segments.
+   Compare work over the same interval of ρ fine windows
+                                                                   Re-tokenizing decoded text would change that state contract.
+and B sessions. Let q be the SG selective-verification fraction,
+                                                                   This adapter boundary lets the commit protocol remain common
+r the Hybrid fine-replay fraction, Cs singleton cost, Cc (ρ, B)
+                                                                   while preserving the distinct feedback semantics of the two
+batched coarse cost, Qs singleton queueing/fragmentation, and
+                                                                   families.
+Ccommit commit overhead. Then
+
+              a
+             TSG ≈ qBρCs + Qs ,                             (6)    B. Independent proposal and authority progress
+           a
+          TDGFT ≈ Cc (ρ, B) + rBρCs + Ccommit .             (7)   The live Qwen proposer advances a private branch every
+                                                              two seconds. Coarse authority covers six-second frontiers from
+For independent proposer/authority lanes, the approximate the latest committed parent; Fine-certified uses two-second
+critical path is                                              frontiers. Jobs become eligible only after their audio has arrived.
+                                                              The coordinator shares ready work across idle replicas and
+                Tservice ≈ max(Tp , T a ) + Trepair .     (8) permits at most one authority job in flight per session.
+                                                                  A pending authority does not block the next private proposal.
+Thus reducing authority work shortens service only while that This   is important when independent planes experience different
+work constrains progress. A low average q can still leave a   queueing     delays. Once a newer certified parent is available, a
+synchronized singleton burst. Coarse amortizes authorization  proposal    rebases  only if that parent’s audio frontier precedes
+across both sessions and fine windows.                        its  target  frontier. Otherwise a late proposal could read text
+                                                              derived from audio beyond its own input. This rule separates
+Proposition III.4 (Authority-limited operating condition). speculative progress from committed ownership and prevents
+Under Eq. (8), with authority on the critical path in both lookahead during rebase. A superseded proposal can remain
+configurations and equal repair costs, Coarse (r = 0) has display-only; it cannot bypass the commit checks.
+lower modeled service time than SG if
+                                                                   C. Atomic feedback installation
+            Cc (ρ, B) + Ccommit < qBρCs + Qs .
+                                                                      The ledger holds the current version, audio frontier, feedback
+                                                                   tokens, and consumed segment identifiers. The Qwen event
+  Hybrid executes fine replay on the proposer GPU after both
+                                                                   loop is its single owner; Whisper uses a per-session lock.
+branches complete, so its measured schedule instead has
+                                                                   Both serialize validation and replacement, providing the atomic
+                                                                   comparison required by Theorem III.2. Every accepted commit
+   THybrid ≈ max(Tp , Cc (ρ, B)) + rBρCs + Ccommit .        (9)
+                                                                   advances the version and invalidates stale speculative descen-
+                                                                   dants. Journal records distinguish output display, certification,
+These decompositions motivate the matched comparisons and
+                                                                   and installation timestamps.
+component experiments; Supplementary Section S3 expands
+                                                                      Whisper terminal recovery uses a separate certificate for full-
+their assumptions.
+                                                                   session replay and replacement of the terminal representation.
+      a) Operating contracts: Fine-certified and Coarse certify    It binds the current parent, replacement segments, and prompt
+every write and use the same FP32 authority precision in           state. This operation can preserve the audio frontier while
+the live study. The historical SG baseline selectively admits      changing its terminal representation, and is validated separately
+high-margin proposals without individual certificates; Hybrid      from forward interval extension. Supplementary Sections S1.3
+adds FP16 fine replay to coarse authority. We compare those        and S2.1 specify its legality, certificate fields, version update,
+complete configurations separately from the precision-matched      and relation to the forward-history theorems.
+live experiment. Granularity and replay are deployment choices
+with measured quality costs, not an online optimum computed
+by RevTrace.                                                       D. Coverage and selective fine replay
+                                                                      Text coverage guides the choice of authority work; audio-
+                                                                   frontier continuity remains a hard commit condition. The
+               IV. T HE R EV T RACE RUNTIME                        coverage hook matches ordered Latin words and individual
+                                                                   CJK characters. Its directional deficit measures fine-output
+   RevTrace implements DGFT through projection adapters,           units absent from coarse output, while the reverse deficit
+parallel proposer and authority workers, and a versioned commit    distinguishes omission from mutual disagreement.
+ledger (Fig. 2). Its scheduling objective is to preserve fine         Qwen Coarse selects coarse authority directly. Hybrid replays
+display progress while moving state-authorizing work off that      from the committed parent when forward deficit is at least 0.20
+path.                                                              and reverse deficit at most 0.20, or minimum margin is at most
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                                          5
+
+
+
+
+Fig. 2. RevTrace architecture and illustrative display/commit timeline. The proposer updates presentation, while certificate, parent-version, and frontier checks
+govern installation. Display and certified progress have distinct clocks. FP16/FP32 identify the evaluated Qwen paths; Whisper uses its own authority adapter.
+Replica scheduling and the private rebase rule are specified in the text.
+
+
+
+0.05. The replay result, not the triggering proposal, supplies limit of 16, and a 256-token generation cap. Jobs carry audio-
+the authoritative projection. Whisper additionally accounts for prefix digests, parents, frontiers, and runtime fingerprints.
+content transported between adjacent segments. Local singleton Actual start, finish, display, and installation times are recorded
+replay repairs display; unresolved omission or repetition can before journal serialization. Two RTX 3090 GPUs run Py-
+trigger certified terminal recovery. These policies expose a Torch 2.9.1/CUDA 12.8; the eight-V100-32-GB RHEL 7.6 node
+quality–cost frontier without changing the installation predicate. runs PyTorch 2.4.1/CUDA 12.1. Both use Transformers 4.57.6
+                                                                   and qwen-asr 0.0.6 with 16-kHz audio.
+
+E. Evidence and implementation
+   Randomized SG audits monitor contract-scoped disagree-
+ment, with 95% anytime-valid bounds of 0.480%/0.478% [13],            The earlier Qwen adapter benchmark uses FP32 coarse
+[14]. Frozen-input preflight checks implementation repeatabil- authority with a 4,096-token per-session KV bound and FP16
+ity; per-write certificate validation authorizes DGFT installation; Hybrid replay. Its one-time frozen preflight costs 10.7–11.1 s.
+independent references measure task quality. Table I distin- Whisper uses FP16 distinct-prompt execution and bounded
+guishes those roles. The original layered schematic is retained raw-token history. Model loading, warmup, preflight, and post-
+in Supplementary Section S10 with its historical event counts run audit are outside service timing; the live measurement
+clarified.                                                          includes arrival waiting through final drain. Each run retains
+                                                                    code, configuration, environment, raw events, and independent
+                                                                    audit. The RevTrace code, frozen experimental records, and
+F. Implementation Details                                           analysis scripts are publicly archived on Zenodo [15] at
+   The live implementation uses persistent Transformers-eager https://doi.org/10.5281/zenodo.22545098. Model weights and
+GPU workers, FP16 proposals, FP32 authority, a microbatch source audio corpora remain with their original providers.
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                     6
+
+
+
+                                                             TABLE I
+ P ROTECTION MECHANISMS AND THEIR SCOPE . T HE MEASURED SG CONFIGURATION SELECTS REVISIONS FOR VERIFICATION ; IT IS DISTINCT FROM A
+     DGFT IMPLEMENTATION THAT CERTIFIES EVERY WRITE AT ρ = 1. A COVERAGE OR RISK SCORE CAN SELECT WORK BUT CANNOT REPLACE A
+                                                CONTENT- BOUND COMMIT CERTIFICATE .
+
+
+  Mechanism                      Protected decision                    Authority for each feedback Parent/frontier binding
+                                                                       write
+  Unprotected batching           Return the batched output             None                           No content certificate
+  Owner/version fence            Reject a stale result                 Content unchecked              Parent only
+  Display confirmation           Stabilize the visible prefix          Not established by confirma-   Not established by confirmation
+                                                                       tion
+  Selective SG (measured)        Verify selected revisions             Selected revisions only        No DGFT certificate per write
+  Certificate-enforced DGFT      Install the authorized projection     Every accepted write           Session, epoch, parent, frontier,
+                                                                                                      content
+
+
+
+                         V. E VALUATION                              coordination from readiness to display/installation, respectively.
+A. Experimental Design                                               A 2-s commit latency starts at the authority frontier’s readiness,
+                                                                     not at the beginning of its six-second audio region. Earlier
+   We evaluate Qwen3-ASR 0.6B/1.7B and Whisper                       Qwen/V100 latency values measure available-input processing;
+tiny.en/base.en/small.en. Three complementary protocols              Whisper’s display and commit delays follow its virtual-arrival
+separate execution efficiency from live service latency. All         schedule. Initialization and post-run replay are excluded from
+historical GPU cells in this section use volatile mode with          all service intervals.
+WAL disabled; journal mode is explicit in the performance               We ask: what performance does each authority contract
+tables. The Qwen adapter benchmark uses two RTX 3090                 provide (RQ1); what quality and integrity accompany it (RQ2);
+GPUs and 16 bilingual 30-s sessions (480 s audio), constructed       which mechanisms explain the gains (RQ3); and how does
+by cycling and offsetting source clips. The independent              replication change live capacity (RQ4)?
+V100 execution harness uses available audio and a simplified
+installer. Whisper executes real GPU work with immutable
+causal virtual arrivals. Its five synchronous and five Poisson       B. RQ1: Throughput, Energy, and Tail Latency
+base.en runs and three synchronous runs each for tiny.en and              a) Execution efficiency across families: Coarse achieves
+small.en give 16 cells.                                              6.88 × /6.06× wall speedup on the available-input Qwen
+   The integrated live study contains 96 formal runs, 48 on          0.6B/1.7B benchmark, retaining 3.44 × /3.03× GPU-
+each GPU platform, with three independent processes per              normalized speedup and 59.8%/51.0% GPU-energy reduction
+configuration and counterbalanced policy order. Its twelve-          against the respective singleton references (Fig. 3). Whis-
+session pool combines six English and six Chinese sessions           per’s median wall speedup is 2.841× (2.633–3.849), with
+from distinct complete LibriSpeech test-clean and AISHELL-1          1.421× GPU-normalized speedup and 31.13% energy reduction.
+utterances [16], [17]. Each session crosses 30 s at an utterance     The small.en group reaches median 3.686×, 1.843× GPU-
+boundary; total unique audio is 398.057 s, and the longest           normalized, and 32.41% energy reduction. All 16 runs meet
+session is 40.295 s. Higher concurrency repeats this pool.           their frozen budgets: display P99 ≤ 1.9 s, commit P99
+Independent quality holdouts supplement these constructed            ≤ 36 s, wall/GPU-normalized speedup ≥ 2.5 × /1.25×, energy
+loads.                                                               reduction ≥ 20%, and audio amplification ≤ 1.2×. Observed
+      a) Comparators and metrics: Fine-certified and Coarse          display P99 is at most 1.492 s; commit P99 is 19.973–24.564 s.
+share FP16 proposals, FP32 batched authority, hardware                    b) Matched Qwen configurations: Table II retains
+resources, and generation limits. They differ in authorization       the absolute measured wall times. Coarse reduces SG’s
+granularity (2 versus 6 s), and both invoke the production           14.905/16.285 s to 10.759/12.763 s, giving direct through-
+commit primitive. SG uses selective FP16 singleton verification;     put gains of 1.39 × /1.28×. SG’s terminal singleton
+Hybrid adds selective fine replay to coarse authority. Revision-     burst yields state-entry P99 2.735/2.964 s and 2-s miss
+level MarginGate and LLM-42 adaptations provide additional           rates 3.33%/4.17%, although verification fractions are only
+cost and failure comparisons. Supplementary Table S8 maps            8.3%/9.6%. Coarse/Hybrid fine-window processing P99 is at
+each comparator to its implementation level, workload, and           most 1.018 s; segment-completion P99 is 2.582–4.437 s.
+supported comparison.                                                   Hybrid improves 0.6B terminal-reference agreement from
+   Audio xRT is completed audio seconds per wall second.             11/16 to 13/16 sessions and edit P95 from 3.43% to 2.15%. It
+Direct policy ratios use matched wall times; singleton speedups      retains 1.03× SG throughput with 16.8% more GPU energy.
+use each path’s independent reference, and GPU-normalized            On 1.7B, agreement rises from 9/16 to 10/16, but edit P95
+speedup charges the physical GPU-count ratio. GPU energy             remains 1.79%; throughput is 0.85× SG and energy rises
+integrates NVML samples per completed audio second. In               54.2%. Coarse’s direct energy comparison also changes sign:
+the live study, actual wall-clock release of audio precedes          4.4% savings on 0.6B versus 15.1% additional energy on 1.7B.
+eligible execution; throughput includes arrival waiting and          The configuration trade-off is therefore measurable rather than
+final drain. Display/commit P99 include queueing and host            uniformly dominated by one policy.
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                                                                                                                                          7
+
+
+
+
+                                                                                                QWEN3-ASR · INDEPENDENT-CANONICAL CONTRACT                                              WHISPER · PROTECTED-FEEDBACK CONTRACT
+                                                                                                peak 6.88× · two scales · Coarse + Hybrid                                               16/16 cells pass · median 2.84× · median energy −31.1%
+                                   GPU-normalized speedup (×) Wall-clock speedup (×)
+
+
+                                                                                             6.88×
+                                                                                                                     6.06×
+                                                                                       6                                                       5.19×
+
+
+a                                                                                      4
+                                                                                                                                                                 3.92×
+                                                                                                                                                                                                                       med 2.84×
+                                                                                                                                                                                                                                                   med 3.69×
+
+                                                                                                                                                                                      med 2.74×
+
+                                                                                       2
+
+
+
+
+                                                                                             3.44×
+                                                                                                                     3.03×
+                                                                                       3
+                                                                                                                                               2.59×
+
+b                                                                                                                                                                1.96×                                                                             med 1.84×
+                                                                                       2
+                                                                                                                                                                                                                      med 1.42×
+                                                                                                                                                                                     med 1.37×
+
+
+                                                                                       1
+         Service-energy reduction (%)
+
+
+
+
+                                                                                            59.81%
+                                                                                       60
+                                                                                                                     51.04%                   51.26%
+
+
+
+c                                                                                      40                                                                                                                            med 31.13%
+                                                                                                                                                                                                                                                  med 32.41%
+                                                                                                                                                                33.22%               med 30.11%
+
+
+
+
+                                                                                       20
+                                                                                            Coarse                  Coarse                    Hybrid            Hybrid                tiny.en                        base.en                      small.en
+                                                                                             0.6B                    1.7B                      0.6B              1.7B
+                                                                                                                                  Qwen Coarse-DGFT       Qwen Hybrid-DGFT     Whisper median        synchronous        Poisson
+
+
+
+Fig. 3. Cross-family execution efficiency against each path’s singleton reference. Qwen uses available-input processing; Whisper combines real GPU execution
+with causal virtual arrivals. The three rows report wall speedup, GPU-normalized speedup, and GPU-energy reduction. Whisper markers show the individual
+runs and annotated group medians.
+
+                                                                  TABLE II
+  M ATCHED Q WEN EXECUTION ON TWO RTX 3090 GPU S : 16 BILINGUAL 30- S SESSIONS , 480 S AUDIO , AND 2- S PROPOSAL WINDOWS . SG VERIFIES
+       SELECTED REVISIONS ; C OARSE /H YBRID USE 6- S AUTHORITY SEGMENTS . S TATE P99 DENOTES ADMITTED - STATE LATENCY FOR SG AND
+ CERTIFIED - SEGMENT PROCESSING LATENCY FOR DGFT. T HIS BENCHMARK RUNS ON AVAILABLE AUDIO ; THESE VALUES EXCLUDE LIVE ACQUISITION
+WAITING . S PEEDUP USES EACH PATH ’ S SINGLETON REFERENCE ; GPU- NORMALIZED SPEEDUP CHARGES THE TWO SERVICE GPU S AGAINST ITS ONE -GPU
+REFERENCE . SG DID NOT SEPARATELY RECORD PROVISIONAL DISPLAY. P95 EDIT USES THE DECLARED FP16 REFERENCE ; SG COMPARES ITS REVISION
+          TRACE , WHEREAS DGFT COMPARES FINAL TRANSCRIPTS . A LL HISTORICAL ENTRIES USED VOLATILE MODE , WITH WAL DISABLED .
+
+
+                                                                                        Model        Policy    Wall (s)       Speedup       GPU-norm.   Energy (J)   State P99 (s)   Window P99 (s)         P95 edit (%)           Journal mode
+                                                                                                     SG         14.905         5.10×            2.55×      4249.4           2.735                    —                 0.00        volatile
+                                                                                        0.6B         Coarse     10.759         6.88×            3.44×      4062.2           2.582                 0.826                3.43        volatile
+                                                                                                     Hybrid     14.428         5.19×            2.59×      4961.6           3.853                 0.782                2.15        volatile
+                                                                                                     SG         16.285         4.68×            2.34×      5215.7           2.964                    —                 0.00        volatile
+                                                                                        1.7B         Coarse     12.763         6.06×            3.03×      6001.9           3.219                 1.018                1.79        volatile
+                                                                                                     Hybrid     19.220         3.92×            1.96×      8045.0           4.437                 0.990                1.79        volatile
+
+
+
+      c) Full-certification live comparison: At the two-V100, and all fine repeats miss it. Coarse saves 28.1% GPU energy
+1.7B/c16 point, Coarse improves inclusive throughput by a with 2.61% P95 final-text deviation. Throughput is 51.68
+paired median 1.35×, lowers GPU energy by 39.7%, and versus 51.08 audio seconds per wall second because audio
+reduces display P99 from 3.342 to 1.690 s. All three Coarse arrival already limits completion. Six additional raw-power
+runs meet 2 s; all Fine-certified runs miss it. P95 final-text runs reproduce 27.97–28.91% paired savings at this point
+deviation is 0.31%. Matching common audio frontiers gives (Supplementary Section S7).
+commit P99 19.119 versus 8.610 s. Final drain falls from a
+median 15.633 to 1.098 s, a paired median reduction of 92.9%.         d) Revision-level verification alternatives: On the
+                                                                 available-input V100 c16 harness, Coarse is 6.91 × /5.64×
+   On eight V100 GPUs with 0.6B/c64, Coarse display P99 faster than the always-verify LLM-42-style revision adaptation.
+is 1.928 s [1.741,1.959], versus 2.458 s [2.217,2.559] for Fine- Against MarginGate-inspired gating, it is 5.6% slower on
+certified. Again all Coarse repeats meet the display target 0.6B and 11.5% faster on 1.7B. All 0.6B modes match the
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                                                              8
+
+
+
+reference; Coarse/Hybrid 1.7B has 3.18% edit P95 and 8/16                                         a       Qwen remains close to its canonical reference
+exact sessions versus 16/16 for the adapted baselines. The                                                dots = sessions; diamond = empirical P95; shaded strip = exact
+
+harness uses lightweight state updates, so these are execution                             Coarse 0.6B                                                          11/16; P95 3.43%
+comparisons; the preceding live experiment includes full
+certificate enforcement. Supplementary Section S6 gives all
+modes.                                                                                     Coarse 1.7B                                                           9/16; P95 1.79%
+
+
+
+
+C. RQ2: Quality and Transaction Integrity                                                   Hybrid 0.6B                                                         13/16; P95 2.15%
+
+      a) Independent quality references: Qwen’s four adapter
+DGFT configurations have edit P95 at most 3.43% and worst-
+                                                                             Hybrid 1.7B                                                             10/16; P95 1.79%
+session edit 5.41% against independent FP16 singleton replay.
+Across the live Coarse/Fine-certified pairs, the corresponding
+                                                                                             0           1         2          3           4            5          6
+P95 is at most 2.61%/1.23% for 0.6B/1.7B. Supplementary
+                                                                                                    Edit rate vs independent FP16 reference (%)
+Table S7 reports ground-truth WER/CER for Fine-certified
+and Coarse on the same unique audio pool, including paired
+differences in percentage points. These are recognition-error
+                                                                                    b      Whisper protection improves both cohorts
+rates, distinct from the preceding reference-text deviation. A                             filled = development; open = untouched (40 long sessions per model)
+distinct FP16 fixed-shape study uses 64-utterance holdouts per                                                                            all 95% upper bounds < 0
+model and language. It records English WER 2.15%/2.30%,                       tiny.en dev                                    -12.23      U -10.48
+
+
+Chinese CER 2.71%/2.16%, and 256/256 normalized terminal-
+text matches against its singleton reference, with partial-revision   tiny.en untouched                                                -8.26           U -5.15
+
+
+edit rates 24.7–31.8%.
+                                                                            base.en dev                        -18.21      U -16.17
+   Whisper’s paired WER improvements against unprotected
+feedback are 12.23/18.21/25.27 percentage points on devel-
+opment data and 8.26/11.03/13.76 points on the untouched base.en untouched                                                      -11.03           U -7.51
+
+
+tiny/base/small.en cohorts (Fig. 4). Every one-sided 95%
+                                                                            small.en dev        -25.27       U -22.15
+bootstrap upper bound is below zero. The untouched cohort
+comprises 40 long sessions per model assembled from 214
+previously unused utterances; the resampling unit is the long small.en untouched
+                                                                                                                         -13.76              U -9.09
+
+
+session.
+                                                                                          −30         −25       −20        −15         −10           −5           0
+      b) Accepted histories and adversarial attempts: Indepen-
+                                                                                                  Paired WER change (points; negative is better)
+dent replay validates all 30,168 live commits and 56,556 display
+events across the 96 formal runs. No invalid install, causal- Fig. 4. Quality under independent references. Qwen dots show session edit
+clock violation, missing event, or generation-cap truncation is rates; diamonds indicate empirical P95. Whisper shows paired WER changes
+found. Each consumed certificate is also replayed and rejected. against unprotected feedback and one-sided 95% bootstrap upper bounds.
+Earlier certified traces contain 320 Qwen segment commits and Untouched cohorts contain 40 long sessions per model.
+1,048 Whisper commits with no install violations or terminal
+fallback. The 480 SG revisions separately have zero replay
+output/state disagreements; their unverified writes are not DGFT           b) Scheduler-version controls: Eight matched c16 con-
+certificates.                                                       trols compare the initial barrier scheduler and final independent
+   A deterministic fuzzer accepts all 10,000 legal commits and scheduler across both platforms, models, and authority policies.
+rejects 240,000 attempts across 24 invalid/replay classes and 64 On V100 1.7B, Coarse display P99 falls from 5.712 to 1.733 s
+sessions, totaling 250,000 attempts. These include stale parents, (69.7%); Fine-certified falls from 18.097 to 3.358 s (81.4%).
+substituted content, cross-session/epoch fields, gaps, overlaps, All 128 paired terminal texts and full prompt-token sequences
+and duplicate certificates. The observed histories and mutation are identical. These are one-run-per-version controls; the final
+suite test the implementation; Section III’s assumptions define runtime is then measured in the three-repeat formal matrix.
+the protocol guarantee.                                             Supplementary Section S8 retains every pair, including small
+                                                                    improvements.
+D. RQ3: Mechanism Attribution                                              c) Cost of state authorization: A CPU microbenchmark
+     a) Authority amortization at fixed precision: The V100 uses 31 randomized repeats of 20,000 production commit
+execution harness varies ρ while holding FP32 authority fixed. calls after 2,000 warmup calls. Full commit costs median
+From ρ = 1 to 3, throughput rises from 18.603/12.294 to 101.107 µs, compared with 19.077 µs for unchecked immutable-
+40.581/27.860 xRT for 0.6B/1.7B, gains of 2.18 × /2.27×. state materialization. The paired increment is 81.960 µs; P99
+Authority/proposer service ratios fall from 2.216/2.669 to across repeat averages is 104.514 µs. The actual Whisper
+0.996/1.176; at ρ = 5, they become 0.759/0.841. This isolates coordinator interval, including lock wait, hashing, certificate
+the authority-work term of Eq. (7) within the processing construction, and installation, has median/P99 1.318/3.784 ms
+harness.                                                       over 1,048 commits (Supplementary Section S4).
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                                                                9
+
+
+
+                                          a RTX3090: matched live throughput                                                         b RTX3090: measured GPU energy
+                                   20.0
+                                                0.6B Coarse
+Audio seconds / wall second
+
+
+                                                                                                                            60
+
+
+
+
+                                                                                                GPU joules / audio second
+                                   17.5         0.6B Fine-certified
+                                                1.7B Coarse
+                                                1.7B Fine-certified                                                         50
+                                   15.0
+
+                                   12.5                                                                                     40
+
+                                   10.0
+                                                                                                                            30
+
+                                    7.5
+                                                                                                                            20
+
+                                            8                          16            32                                                8                        16             32
+                                                               Concurrent sessions                                                                      Concurrent sessions
+                                          c V100: four workers per plane                                                             d V100: actual ready-to-display latency
+                                   100
+                                           Qwen3-ASR                                                                                       2-s target
+     Audio seconds / wall second
+
+
+
+
+                                                                                                                                 1
+                                                                                                                            10
+                                                 0.6B                                                                                      0.6B
+                                    80                                                                                                     1.7B
+                                                 1.7B
+
+
+
+
+                                                                                           Display P99 (s)
+                                    60
+
+
+                                    40
+
+                                                                                                                                 0
+                                    20                                                                                      10
+
+
+                                           16                  32               64   128                                              16                32               64    128
+                                                               Concurrent sessions                                                                      Concurrent sessions
+
+Fig. 5. Integrated real-time replay. (a,b) Two-GPU throughput and GPU energy, including overloaded points. (c,d) Eight-V100 Coarse scaling and readiness-to-
+display P99. Open markers in (c) denote failure of the display target in at least one repeat. Points are three-run medians with min–max ranges; throughput
+includes arrival waiting and drain.
+
+
+
+      d) Why a risk signal is insufficient: On a separate                                        The 1.7B c64 load misses the display target in every
+overloaded c32 trace, MarginGate-inspired verification checks                                 repeat, and c128 fails for both models. At c128, throughput
+3.02% of events but misses a known state-changing flip;                                       reaches 96.74/77.97 xRT but display P99 rises to 6.662/12.002 s.
+owner/version fencing also accepts it. Always-verifying replay                                Likewise, RTX 3090 c32 offers 1.17×/1.44× matched speedup
+removes the error at 1.565 events/s. Scoped selective repair                                  and 25.3%/35.2% energy savings under overload, not SLO-
+checks 5.05%, removes it at 3.046 events/s (1.95×), and still                                 valid capacity. At c8, its energy savings are 10.4%/13.3%
+has P99 6.107 s. This is a selective-verification comparison,                                 with nearly unchanged wall time; 0.6B Coarse display P99 is
+not a DGFT capacity point. A further targeted execution-shape                                 1.948/2.004/2.011 s, so that point is not an all-repeat pass.
+suite yields 613/408 mismatches from 924 evaluations per                                         The earlier available-input eight-V100 harness reaches
+Qwen model, with zero observed margin false-safe events. It                                   157.786/111.722 xRT at c64, and its allocation study shows
+tests susceptible states rather than natural failure prevalence.                              that authority-heavy 3+5 loses throughput to balanced 4+4
+                                                                                              replication. Those processing measurements and the complete
+                                                                                              84-cell matrix plus 30 repeats are preserved in Supplementary
+E. RQ4: Live Capacity and Replica Scaling                                                     Section S5. The live results here measure the additional effects
+                                                                                              of actual arrivals and certified installation.
+   Figure 5 and Table III expose distinct capacity and low-
+latency operating points. With four workers per plane, c64
+for 0.6B and c32 for 1.7B are the largest tested Coarse loads                           VI. D ISCUSSION
+meeting the 2-s display target in every repeat. They sustain        RevTrace’s main benefit comes from changing the amount
+51.68/25.88 audio seconds per wall second with display P99 and placement of authority work, rather than weakening
+1.928/1.467 s and commit P99 4.791/3.931 s.                      installation checks. The fixed-precision granularity experiment
+   At c16, the same 4+4 allocation instead achieves both display exposes the computation saved; matched Fine-certified runs
+and commit P99 below 2 s in every repeat. Display/commit show its effect after arrival waiting, queueing, and commit
+medians are 0.729/1.350 s for 0.6B and 0.790/1.832 s for 1.7B; enforcement are included. The scheduler controls further show
+worst-run commit P99 is 1.505/1.957 s. This is a lower-latency, why a private display branch matters: it removes authority-
+higher-resource operating point, with energy costs shown in induced serialization without changing the paired terminal
+Table III.                                                       states.
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                 10
+
+
+
+                                                               TABLE III
+S ELECTED LIVE - ARRIVAL CONFIGURATIONS . P+A COUNTS PROPOSER AND AUTHORITY GPU S . VALUES ARE THREE - RUN MEDIANS ; DISPLAY P99 ALSO
+ GIVES THE MIN – MAX RANGE . GPU ENERGY EXCLUDES HOST POWER . T HE TWO -GPU C 32 AND V100 1.7B C 64 ROWS ARE OVERLOAD COMPARISONS ,
+NOT 2- S DISPLAY-SLO PASSES . C OMMIT P99 MEASURES READINESS TO CERTIFIED INSTALLATION UNDER EACH POLICY ’ S OWN FRONTIER CADENCE . T HE
+  4+4/ C 16 C OARSE ROWS MEET BOTH 2- S P99 TARGETS IN EVERY REPEAT. A LL HISTORICAL ENTRIES USED VOLATILE MODE , WITH WAL DISABLED .
+
+           GPU    Model P+A Sessions Policy         Audio xRT GPU J/audio-s   Display P99 (s) [range] Commit P99 (s) Journal mode
+           3090   1.7B   1+1     32    Fine-cert.       11.50         42.57 39.007 [38.911, 39.245]          53.044   volatile
+           3090   1.7B   1+1     32    Coarse           16.46         27.61 26.788 [24.571, 27.188]          15.517   volatile
+           V100   0.6B   4+4     64    Fine-cert.       51.08         16.88     2.458 [2.217, 2.559]          6.413   volatile
+           V100   0.6B   4+4     64    Coarse           51.68         12.02     1.928 [1.741, 1.959]          4.791   volatile
+           V100   0.6B   4+4     16    Coarse           13.07         30.58     0.729 [0.724, 0.832]          1.350   volatile
+           V100   1.7B   1+1     16    Fine-cert.        9.57         29.37     3.342 [2.788, 3.358]         19.108   volatile
+           V100   1.7B   1+1     16    Coarse           12.92         17.84     1.690 [1.684, 1.733]          8.610   volatile
+           V100   1.7B   4+4     16    Coarse           13.02         38.23     0.790 [0.789, 1.241]          1.832   volatile
+           V100   1.7B   4+4     32    Coarse           25.88         24.42     1.467 [1.449, 1.496]          3.931   volatile
+           V100   1.7B   4+4     64    Fine-cert.       37.85         27.99     4.521 [4.270, 4.729]         19.399   volatile
+           V100   1.7B   4+4     64    Coarse           49.61         16.92     3.584 [2.687, 3.833]          9.256   volatile
+
+
+
+   Three choices determine the useful operating point. At low design choice rather than reproduce the original text-serving
+load, arrival time limits throughput and reduced work primarily systems.
+saves energy. At higher load, authority amortization shortens          Batch-dependent reductions and kernel choices motivate both
+queues and drain time. Replica allocation then trades resource approaches [7], [27]. Reproducible arithmetic constrains the
+cost for either higher display capacity or lower commit latency. computation itself [28], [29]; DGFT instead constrains what
+Hybrid adds a separate quality-recovery cost, which is beneficial may enter committed feedback under a declared authority.
+only when the resulting quality improvement matters to the               c) Streaming recognition: Incremental ASR distinguishes
+application.                                                        partial stability from final accuracy [30], [31]. Whisper
+   The evaluation covers two ASR families, finite controlled streaming confirms prefixes through repeated agreement;
+interventions, and single-node GPU systems. The live source Simul-Whisper detects chunk-boundary truncation [2], [32].
+pool contains twelve constructed sessions; replicated slots Agreement-based confirmation can stabilize presentation and
+provide load, not additional acoustic samples. Network/UI the text reused as a subsequent prompt. RevTrace studies the
+delay and host power are excluded. Quality is measured against runtime authorization of a model-specific projection: its binding
+independent references, while protocol safety assumes trusted to a current parent, input frontier, and declared authority, with
+issuance and atomic installation. More diverse long-running independently chosen display and authorization granularities.
+workloads and distributed failover are the principal remaining           d) Concurrency and evidence: DGFT builds on optimistic
+deployment questions.                                               validation and multiversion ownership [33], [34]. Descendant
+                                                                    invalidation and provisional effects relate to optimistic rollback
+                     VII. R ELATED W ORK                            and compensation [35], [36]. Its contribution is their application
+                                                                    to an authoritative generated-state projection with independent
+      a) Inference execution and state reuse: Serving run-
+                                                                    display and authorization granularities. The accepted-history
+times improve throughput through paged KV management,
+                                                                    property is narrower than full client-operation linearizabil-
+iteration scheduling, structured execution, chunked prefill,
+                                                                    ity [12]. Confidence sequences quantify SG’s sampled dis-
+phase disaggregation, and request migration [4]–[6], [18]–
+                                                                    agreement process [13], [14], [37]; individual DGFT writes
+[20]. Pensieve and CachedAttention manage cross-request
+                                                                    use content-bound certificates.
+state; Parrot, Agentix, and Mooncake manage dependencies or
+KV reuse [10], [11], [21]–[23]. BrownoutServe adjusts MoE
+computation under bursty workloads to manage the quality–                                VIII. C ONCLUSION
+latency trade-off [24]. RevTrace adds a complementary control          RevTrace makes feedback-state authorization a schedulable
+point before reuse: authorization of the generated projection runtime operation. DGFT separates fine presentation from
+that creates the next feedback state.                               canonical state writes, binds each installed projection to its
+      b) Verified speculation and reproducibility: Speculative parent and frontier, and amortizes authority work across
+decoding preserves a target distribution through draft veri- revisions. Historical volatile-mode Qwen execution reaches
+fication [25], [26]. LLM-42 verifies a nondeterministic fast 6.88× singleton speedup with 59.8% GPU-energy reduction;
+path, groups verification across requests, rolls back inconsistent matched live certification delivers 1.35× throughput and
+tokens, and repairs KV state for deterministic continuation [8]. 39.7% energy savings. Eight V100 GPUs support c64/c32
+MarginGate reduces verification calls using margins and local display capacity and sub-2-s display and commit P99 at
+repair [9]. These mechanisms already protect token-level c16 for the tested models. Cross-family quality results and
+continuation; DGFT moves the authorization unit to a revisable independent commit checks complement these system gains.
+application transition and binds it to parent, input frontier, and The practical result is a performance–quality operating frontier
+projected feedback. Its coarser authority trades reference fidelity whose installation discipline remains unchanged as granularity
+for execution cost. Our revision-level adaptations measure that and parallel resources vary.
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                                                                                                          11
+
+
+
+                          ACKNOWLEDGMENT                                           [19] Y. Zhong, S. Liu, J. Chen, J. Hu, Y. Zhu, X. Liu et al., “DistServe:
+                                                                                         Disaggregating Prefill and Decoding for Goodput-optimized Large
+   The computations in this work were supported by the High                              Language Model Serving,” arXiv preprint, 2024.
+Performance Computing Platform of BUCT (Beijing University                         [20] B. Sun, Z. Huang, H. Zhao, W. Xiao, X. Zhang, Y. Li et al., “Llumnix:
+of Chemical Technology). OpenAI ChatGPT was used for                                     Dynamic Scheduling for Large Language Model Serving,” arXiv preprint,
+                                                                                         2024.
+language polishing and drafting assistance throughout the                          [21] C. Lin, Z. Han, C. Zhang, Y. Yang, F. Yang, C. Chen et al.,
+manuscript. The authors reviewed and edited the resulting                               “Parrot: Efficient Serving of LLM-based Applications with Semantic
+text and take responsibility for the article.                                            Variable,” in 18th USENIX Symposium on Operating Systems Design
+                                                                                         and Implementation (OSDI ’24). USENIX Association, 2024, pp.
+                                                                                         929–945. [Online]. Available: https://www.usenix.org/conference/osdi24/
+                              R EFERENCES                                                presentation/lin-chaofan
+                                                                                   [22] M. Luo, X. Shi, C. Cai, T. Zhang, J. Wong, Y. Wang et al., “Agentix: An
+ [1] A. Radford, J. W. Kim, T. Xu, G. Brockman, C. McLeavey, and                         Efficient Serving Engine for LLM Agents as General Programs,” in 23rd
+     I. Sutskever, “Robust Speech Recognition via Large-Scale Weak Su-                   USENIX Symposium on Networked Systems Design and Implementation
+     pervision,” arXiv preprint, 2022.                                                   (NSDI ’26). USENIX Association, 2026, pp. 2443–2459. [Online].
+ [2] D. Macháček, R. Dabre, and O. Bojar, “Turning Whisper into Real-                   Available: https://www.usenix.org/conference/nsdi26/presentation/luo
+     Time Transcription System,” Proceedings of the 13th International Joint       [23] R. Qin, Z. Li, W. He, M. Zhang, Y. Wu, W. Zheng et al., “Mooncake:
+     Conference on Natural Language Processing and the 3rd Conference of                 A KVCache-centric Disaggregated Architecture for LLM Serving,” in
+     the Asia-Pacific Chapter of the Association for Computational Linguistics:          23rd USENIX Conference on File and Storage Technologies (FAST
+     System Demonstrations, pp. 17–24, 2023.                                            ’25). USENIX Association, 2025, pp. 155–170. [Online]. Available:
+ [3] X. Shi, X. Wang, Z. Guo, Y. Wang, P. Zhang, X. Zhang et al., “Qwen3-                https://www.usenix.org/conference/fast25/presentation/qin
+     ASR Technical Report,” arXiv preprint, 2026.                                  [24] J. Hu, M. Xu, K. Ye, and C. Xu, “BrownoutServe: SLO-Aware
+ [4] W. Kwon, Z. Li, S. Zhuang, Y. Sheng, L. Zheng, C. H. Yu et al.,                     Inference Serving Under Bursty Workloads for MoE-Based LLMs,” IEEE
+     “Efficient Memory Management for Large Language Model Serving                       Transactions on Computers, vol. 75, no. 4, pp. 1636–1649, Apr. 2026.
+     with PagedAttention,” Proceedings of the 29th Symposium on Operating          [25] Y. Leviathan, M. Kalman, and Y. Matias, “Fast Inference from Trans-
+     Systems Principles, pp. 611–626, 2023.                                              formers via Speculative Decoding,” arXiv preprint, 2022.
+ [5] G.-I. Yu, J. S. Jeong, G.-W. Kim, S. Kim, and B.-G. Chun, “Orca: A            [26] C. Chen, S. Borgeaud, G. Irving, J.-B. Lespiau, L. Sifre, and J. Jumper,
+     Distributed Serving System for Transformer-Based Generative Models,”               “Accelerating Large Language Model Decoding with Speculative Sam-
+     in 16th USENIX Symposium on Operating Systems Design and Imple-                     pling,” arXiv preprint, 2023.
+     mentation (OSDI ’22). Carlsbad, CA, USA: USENIX Association,                  [27] B. Antunes and D. R. Hill, “Reproducibility, Replicability and Repeatabil-
+     2022.                                                                               ity: A survey of reproducible research with a focus on high performance
+ [6] L. Zheng, L. Yin, Z. Xie, C. Sun, J. Huang, C. H. Yu et al., “SGLang:               computing,” Computer Science Review, vol. 53, p. 100655, 2024.
+     Efficient Execution of Structured Language Model Programs,” arXiv             [28] J. Demmel and H. D. Nguyen, “Fast Reproducible Floating-Point
+     preprint, 2023.                                                                     Summation,” in 2013 IEEE 21st Symposium on Computer Arithmetic
+ [7] J. Yuan, H. Li, X. Ding, W. Xie, Y.-J. Li, W. Zhao et al., “Understanding           (ARITH), 2013, pp. 163–172.
+     and Mitigating Numerical Sources of Nondeterminism in LLM Inference,”         [29] I. Müller, A. Arteaga, and T. Hoefler, “Reproducible Floating-Point
+     in Advances in Neural Information Processing Systems, vol. 38, 2025.                Aggregation in RDBMSs,” in 2018 IEEE 34th International Conference
+     [Online]. Available: https://arxiv.org/abs/2506.09501                               on Data Engineering (ICDE), 2018, pp. 993–1004.
+ [8] R. Gond, A. K. Kamath, R. Ramjee, and A. Panwar, “LLM-42: Enabling            [30] E. Selfridge, I. Arizmendi, P. A. Heeman, and J. D. Williams,
+     Determinism in LLM Inference with Verified Speculation,” arXiv                     “Stability and Accuracy in Incremental Speech Recognition,” in
+     preprint, 2026. [Online]. Available: https://arxiv.org/abs/2601.17768               Proceedings of the SIGDIAL 2011 Conference. Association for
+ [9] K. Chu, Y. Zhou, and W. Zhang, “MarginGate: Sparse Margin-Triggered                 Computational Linguistics, 2011, pp. 110–119. [Online]. Available:
+     Verification for Batch-Invariant LLM Inference,” arXiv preprint, 2026.              https://aclanthology.org/W11-2014/
+     [Online]. Available: https://arxiv.org/abs/2605.30218                         [31] Y. Shangguan, K. Knister, Y. He, I. McGraw, and F. Beaufays, “Analyzing
+[10] L. Yu, J. Lin, and J. Li, “Stateful Large Language Model Serving with               the Quality and Stability of a Streaming End-to-End On-Device Speech
+     Pensieve,” in Proceedings of the Twentieth European Conference on                   Recognizer,” in Interspeech 2020, 2020, pp. 591–595.
+     Computer Systems, 2025, pp. 144–158.                                          [32] H. Wang, G. Hu, L. Guodong, W.-Q. Zhang, J. Li, S. Wang et al., “Simul-
+[11] B. Gao, Z. He, P. Sharma, Q. Kang, D. Jevdjic, J. Deng                              whisper: Attention-guided streaming whisper with truncation detection,”
+     et al., “Cost-Efficient Large Language Model Serving for Multi-turn                 2024.
+     Conversations with CachedAttention,” in 2024 USENIX Annual Technical          [33] H. T. Kung and J. T. Robinson, “On optimistic methods for concurrency
+     Conference (USENIX ATC ’24). USENIX Association, 2024, pp.                          control,” ACM Transactions on Database Systems, vol. 6, no. 2, pp.
+     111–126. [Online]. Available: https://www.usenix.org/conference/atc24/              213–226, 1981.
+     presentation/gao-bin-cost                                                     [34] P. A. Bernstein and N. Goodman, “Multiversion concurrency con-
+[12] M. P. Herlihy and J. M. Wing, “Linearizability: A Correctness Condition             trol—theory and algorithms,” ACM Transactions on Database Systems,
+     for Concurrent Objects,” ACM Transactions on Programming Languages                  vol. 8, no. 4, pp. 465–483, 1983.
+     and Systems, vol. 12, no. 3, pp. 463–492, 1990.                               [35] D. R. Jefferson, “Virtual Time,” ACM Transactions on Programming
+[13] S. R. Howard, A. Ramdas, J. McAuliffe, and J. Sekhon, “Time-uniform,                Languages and Systems, vol. 7, no. 3, pp. 404–425, 1985.
+     nonparametric, nonasymptotic confidence sequences,” The Annals of             [36] H. Garcia-Molina and K. Salem, “Sagas,” in Proceedings of the 1987
+     Statistics, vol. 49, no. 2, 2021.                                                   ACM SIGMOD International Conference on Management of Data, 1987,
+[14] A. Ramdas, P. Grünwald, V. Vovk, and G. Shafer, “Game-Theoretic                     pp. 249–259.
+     Statistics and Safe Anytime-Valid Inference,” Statistical Science, vol. 38,   [37] P. Grünwald, R. de Heide, and W. Koolen, “Safe testing,” Journal of
+     no. 4, 2023.                                                                        the Royal Statistical Society Series B: Statistical Methodology, vol. 86,
+[15] B. Zhou, J. Miao, and X. Cao, “RevTrace: Code and Experimental                      no. 5, pp. 1091–1128, 2024.
+     Artifacts for Efficient State-Certified ASR Serving,” Zenodo, 2026,
+     version v1, software and experimental artifacts. [Online]. Available:
+     https://doi.org/10.5281/zenodo.22545098
+[16] V. Panayotov, G. Chen, D. Povey, and S. Khudanpur, “LibriSpeech: An
+     ASR Corpus Based on Public Domain Audio Books,” in 2015 IEEE
+     International Conference on Acoustics, Speech and Signal Processing
+     (ICASSP), 2015, pp. 5206–5210.
+[17] H. Bu, J. Du, X. Na, B. Wu, and H. Zheng, “AISHELL-1: An
+     Open-Source Mandarin Speech Corpus and A Speech Recognition
+     Baseline,” 2017. [Online]. Available: https://arxiv.org/abs/1709.05522        Bin Zhou is a graduate student in automation with the College of Information
+[18] A. Agrawal, N. Kedia, A. Panwar, J. Mohan, N. Kwatra, B. S. Gulavani          Science and Technology, Beijing University of Chemical Technology, Beijing,
+     et al., “Taming Throughput-Latency Tradeoff in LLM Inference with             China. Research interests include large-scale AI models and field-programmable
+     Sarathi-Serve,” arXiv preprint, 2024.                                         gate arrays (FPGAs).
+IEEE TRANSACTIONS ON COMPUTERS, MANUSCRIPT FOR REVIEW                             12
+
+
+
+Jiyuan Miao is a graduate student in automation with the College of Infor-
+mation Science and Technology, Beijing University of Chemical Technology,
+Beijing, China. Research interests include large-scale AI models and field-
+programmable gate arrays (FPGAs).
+
+
+
+
+Xi Cao holds a Ph.D. degree and is an associate professor and a supervisor of
+master’s students at Beijing University of Chemical Technology, Beijing, China.
+Cao has been recognized by the university for excellence in experimental
+teaching. Research interests include intelligent hardware design, wearable
+devices, and tiny machine learning (TinyML).
+

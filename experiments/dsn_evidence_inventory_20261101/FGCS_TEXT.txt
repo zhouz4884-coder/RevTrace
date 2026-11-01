@@ -1,0 +1,1293 @@
+        RevTrace: Dual-Granularity Feedback Transactions for State-Certified Streaming ASR
+                                            Serving
+
+                                                          Bin Zhoua , Jiyuan Miaoa , Xi Caoa,∗
+                                                   a Beijing University of Chemical Technology, Beijing, China
+
+
+
+
+     Abstract
+     Streaming ASR often feeds generated text into later rounds, so a displayed revision becomes a write to future model state and batch-
+     induced differences can persist beyond one response. We formalize this feedback-state contamination channel and confirm it causally:
+     among 21 execution-induced output pairs, 8 propagate with feedback and none do when the edge is removed. We introduce Dual-
+     Granularity Feedback Transactions (DGFT), which decouple low-latency proposal and display from coarse canonical state-write
+     authority. Only a certificate-bearing, versioned transaction can enter future state; same-granularity certification is the 𝜌 = 1 case. We
+     prove exclusion of uncertified ancestry, fork-free committed histories, and safety independent of granularity. We evaluate RevTrace
+     on Qwen3-ASR 0.6B/1.7B and Whisper tiny/base/small.en on two RTX 3090 GPUs, and an independent eight-V100 contract. On
+     a matched Qwen workload, coarse authority improves throughput by 1.39×/1.28× over same-granularity configurations; across
+     volatile-mode production contracts RevTrace reaches up to 6.88× wall-clock speedup and passes all 16 Whisper cells. We observe
+     no output/state or transaction-install violation over 800 Qwen revision events (480 SG, 320 DGFT) and 1,048 Whisper commits;
+     a 250,000-attempt fuzzer accepts all 10,000 valid commits and rejects all 240,000 mutations/replays. On the V100 contract, four
+     proposal and four authority replicas sustain median 157.8×/111.7× audio real-time throughput at c64 with display P99 1.089/1.394 s;
+     certified-segment commit P99 is separately 3.080/4.890 s, and c128 is retained as the failed display-SLO boundary. State-write
+     authority therefore enables safe, high-throughput revision serving; risk schedules verification but cannot authorize installation.
+     Keywords: streaming ASR serving, LLM inference, optimistic concurrency control, state certification, transactional runtime,
+     feedback state
+
+
+ 1   1. Introduction                                                          22   causal experiment confirms the prediction: with the feedback
+                                                                              23   edge present, 8 of 21 execution-induced output pairs propagate
+ 2        Streaming speech services are increasingly built on revision- 24         a batch-created divergence, and with the edge removed, none
+ 3   generative models: a Whisper-style decoder is conditioned on 25               do; on the persistent pairs the measured revision amplification
+ 4   its own previously generated text [1, 2], and ASR-capable large 26            factor (cumulative RAF) reaches 153.
+ 5   language models such as Qwen3-ASR re-prompt themselves 27                         Neighboring mechanisms protect different boundaries.
+ 6   with rollback prefixes of their prior output [3]. In these sys- 28            Streaming ASR confirmation policies such as LocalAgreement
+ 7   tems the generated text is not merely displayed; it is written 29             commit stable display prefixes but never constrain which out-
+ 8   back into the state that conditions future generation. Main- 30               puts may become future-state parents [2]. Speculative decoding
+ 9   stream throughput-oriented serving runtimes optimize request 31               verifies draft tokens against a target distribution, not state-write
+10   execution and output delivery but do not expose a distinct autho- 32          authority [11, 12]. LLM-42 is the closest execution mechanism:
+11   rization boundary for model-generated projections before they 33              it combines a nondeterministic fast path with verify–rollback
+12   become future feedback [4, 5, 6].                                  34         for deterministic token generation, but it does not define which
+13        Batching is the standard mechanism by which serving sys- 35              revision projection may become a parent of future multimodal
+14   tems buy throughput: independent sessions share one forward 36                state [13]. Numerical reproducibility work repairs arithmetic
+15   pass [4, 7, 8, 9]. But batched execution can change floating-point 37         execution rather than feedback authorization [10]. Optimistic
+16   reduction order relative to singleton execution, so greedy out- 38            concurrency control supplies the closest analogy [14, 15], yet
+17   puts may diverge across batch configurations [10]. In terminal- 39            classical transactions commit reads and writes of stored data,
+18   output systems this difference remains local to one response. 40              whereas here the “write” is a model-generated projection whose
+19   In revision-generative systems it is worse: once a perturbed 41               legality must be certified by the serving contract itself.
+20   output is written into feedback state, the divergence can per- 42                 This paper takes one position: revision outputs are specu-
+21   sist through future revisions. Section 2 makes this precise; our 43           lative writes to future model state, not merely user-visible re-
+        ∗ Corresponding author.
+                                                                              44   sponses, and
+                                Postal address: Beijing University of Chemical                                                           
+     Technology, 29# Nanjian Road, Changping, Beijing, China.                                   Display(𝑌𝑡 ) ⇏ Authorize Φ(𝑌𝑡 ; 𝐻𝑡 ) .
+         Email addresses: 2025200800@buct.edu.cn (Bin Zhou),
+     2024200822@buct.edu.cn (Jiyuan Miao), caoxi@buct.edu.cn (Xi Cao) 45           We introduce Dual-Granularity Feedback Transactions
+46   (DGFT): a fine proposal path serves low-latency display, while 94        Definition 2.2 (Feedback sub-state and state projection). Write
+47   only a coarse canonical authority may install state projections, 95      𝑆𝑡 = (𝑆𝑡𝑥 , 𝐻𝑡 ), where 𝐻𝑡 is the feedback sub-state written from
+48   and only as a certificate-bearing transaction. DGFT is formal- 96        generated output and 𝑆𝑡𝑥 denotes the exogenous/runtime state
+49   ized in Section 3, where same-granularity certification appears 97       conditioned on in the comparison (model and decoder config-
+50   as the degenerate 𝜌 = 1 case, three transaction invariants 98            uration, input schedule, and batch assignment). We require
+51   are proved, and an authority-cost decomposition states the 99            paired causal executions to hold 𝑆𝑡𝑥 fixed; we do not claim that
+52   operating condition under which coarse authority outperforms100          every cache or runtime buffer is invariant in an arbitrary de-
+53   same-granularity verification. RevTrace (Sections 4–5) imple-101         ployment. The state projection Φ(𝑌𝑡 ; 𝐻𝑡 ) is the adapter map
+54   ments the transaction runtime with a stratified, contract-scoped102      that turns the round-𝑡 output into the next feedback sub-state,
+55   certification layer.
+                                                                                                     𝐻𝑡+1 = Φ(𝑌𝑡 ; 𝐻𝑡 ),                    (2)
+56       Contributions:
+                                                                        103   so that the full update of Eq. (1) factors as
+57      1. A problem characterization of feedback-state contamina-
+58         tion in revision-generative serving, with a causal verifi-                             𝑆𝑡+1 = G(𝑆𝑡𝑥 , 𝐻𝑡+1 , 𝐴𝑡 ),               (3)
+59         cation that the feedback edge is the propagation channel
+60         (Section 2, Section 6, H1).                                104     with generated output affecting the compared future state
+                                                                      105     through 𝐻𝑡+1 . For Qwen3-ASR, 𝐻𝑡 is the rollback prefix re-
+61      2. DGFT, a dual-granularity transaction mechanism with
+                                                                      106     prompted at the next revision [3]; for Whisper with previous-text
+62         provable invariants (uncertified-ancestry exclusion,
+                                                                      107     conditioning it is the conditioning prompt [1].
+63         fork-free committed-state linearity, and granularity-
+64         independent safety) and an authority-path cost decompo-108            Ordinary batched serving makes an implicit assumption we
+65         sition tested against complete operating configurations109         name explicitly:
+           (Section 3, H3).
+                                                                                                    𝐻𝑡+1 = Φ(𝑌𝑡batch ; 𝐻𝑡 ),
+66
+                                                                                                                                            (4)
+67      3. RevTrace, a runtime with contract-scoped stratified cer-
+68         tification: randomized audits and anytime-valid bounds110          i.e. whatever the batched forward pass produced may write the
+69         on the same-granularity path, FP32 preflight invariance111         feedback sub-state, with no authorization step between gener-
+70         checks, exhaustive transaction validation, and indepen-112         ation and state write. Equation (4) conflates “was generated”
+71         dent quality references (Section 4, H2, H5).               113     with “may write future state”.
+72      4. A cross-family evaluation on two architecture fam-
+73         ilies and five checkpoints (Qwen3-ASR 0.6B/1.7B;114                2.2. Display output versus state projection
+74         Whisper tiny/base/small.en) on two RTX 3090 GPUs:115                   The user-facing display function may surface output that car-
+75         same-workload SG/Coarse/Hybrid ablation, production116             ries no future-state authority: display-only suffixes, hold-back
+76         performance, per-family quality contracts, and boundary117         regions, and provisional hypotheses are shown but excluded
+77         evidence; plus an independent 8×V100 Qwen scale-118                from Φ(𝑌𝑡 ; 𝐻𝑡 ) by the adapter (Section 4). The paper’s central
+78         out matrix that separates the proposer and authority119            invariant separates the two permissions:
+79         bottlenecks and locates the 2 s-SLO capacity boundary                          Display(𝑌𝑡 ) ⇏ Authorize Φ(𝑌𝑡 ; 𝐻𝑡 )
+                                                                                                                                 
+                                                                                                                                            (5)
+80         (Section 6, H1–H7).
+                                                                        120   2.3. State-entry divergence and contamination
+                                                                                        𝑓
+81   2. Model and Problem Formulation                                   121       Let 𝑌𝑡 be the fine (batched, proposer) output and 𝑌𝑡𝑎 the
+                                                                        122   canonical authority output for the same round.
+82   2.1. Revision-generative state machines                                                                                        𝑓
+                                                                        123   Definition 2.3 (Output divergence). 𝜀 𝑡 = 𝑑𝑌 (𝑌𝑡 , 𝑌𝑡𝑎 ), with 𝑑𝑌
+83   Definition 2.1 (Revision-generative serving round). A serving
+                                                                        124   an output-space distance (mixed-unit edit distance in our con-
+84   round 𝑡 of a revision-generative system is a tuple (𝑆𝑡 , 𝐴𝑡 , 𝑌𝑡 )
+                                                                        125   tracts).
+85   where 𝑆 𝑡 is the committed feedback state entering the round, 𝐴𝑡
+                                                                                                                                𝑓       𝑓
+86   is the exogenous input (audio frontier), and 𝑌𝑡 is the generated126      Definition 2.4 (State-entry divergence). Let 𝑃𝑡 := Φ(𝑌𝑡 ; 𝐻𝑡 )
+87   output. The state update is                                        127   and 𝑃𝑡𝑎 := Φ(𝑌𝑡𝑎 ; 𝐻𝑡 ). State-entry divergence is 𝑒 𝑡 =
+                                                                                     𝑓
+                                                                        128   𝑑 𝑆 (𝑃𝑡 , 𝑃𝑡𝑎 ), where 𝑑 𝑆 is the distance on feedback sub-states
+                           𝑆𝑡+1 = T (𝑆𝑡 , 𝐴𝑡 , 𝑌𝑡 ),                 (1)129   induced by the same mixed-unit metric.
+88   where T is the model/adapter state-update function. The system130 Definition 2.5 (Contamination event). Round 𝑡 is a contamina-
+89   is revision-generative when T depends on 𝑌𝑡 , i.e. the output of131 tion event 𝐶𝑡 iff the state projection of a fine proposal is installed
+90   round 𝑡 participates in the state read by round 𝑡+1.            132 into the feedback sub-state while 𝑒 𝑡 > 0:
+                                                                                                                𝑓
+91       Not every byte of 𝑌𝑡 enters future state. We therefore isolate          𝐶𝑡 :⇐⇒ 𝑒 𝑡 > 0 ∧ Φ(𝑌𝑡 ; 𝐻𝑡 ) installed into 𝐻𝑡+1 .
+92   the feedback sub-state from the exogenous and runtime condi-133            Definition 2.5 upgrades the problem statement from “out-
+93   tions held fixed in a causal comparison.                           134 puts differ” to “a differing output acquired future-state write
+                                                                        135 permission”. Display-level instability literature observes the
+                                                                        136 former; this paper targets the latter.
+                                                                          2
+      Figure 1: State-entry contamination under ordinary batching (a) and the same scenario under DGFT (b). DGFT does not require every provisional output to be
+      identical; it prevents uncertified outputs from becoming future-state parents.
+
+
+
+137   2.4. Feedback amplification                                               155   the next state. Equation (6) is a per-round decomposition with
+138       Let                                                                   156   unknown coefficients, used only to identify channels.
+                                         𝑓
+                           𝐷 𝑡 := 𝑑 𝐻 (𝐻𝑡 , 𝐻𝑡𝑎 )                               157   Remark 2.2 (Causal prediction). Removing the feedback edge
+139   be the feedback-trajectory distance between the batched-served158               sets 𝛽𝑡 ≡ 0, so an isolated round-𝑡 state-entry perturbation
+140   and canonical executions under identical future exogenous in-159                can no longer propagate through that revision edge, provided
+141   puts and runtime assignments. This definition deliberately160                   subsequent exogenous inputs, batch assignments, and arithmetic
+142   makes no claim that the distance between full runtime states161                 realizations are held equal. This intervention does not rule out
+143   is carried entirely by 𝐻𝑡 .                                   162               a fresh, independent divergence in a later round. Section 6 (H1)
+                                                                                163   tests the scoped prediction.
+144   Assumption 2.1 (Local sensitivity). In a neighborhood of the
+145   canonical trajectory, the state update has finite per-round sen-164             Definition 2.6 (Revision amplification factor). For the paired
+146   sitivity: there exist finite coefficients 𝐿 𝑡 and 𝛽𝑡 such that the165           Whisper decoded-text intervention, let Δ𝑡+𝑘 be generated-token
+147   decomposition (6) below holds for trajectories inside that neigh-166            edit distance at offset 𝑘. For horizon 𝐾, the measured cumulative
+148   borhood. We make no global Lipschitz claim, do not assume167                    amplification factor is
+149   𝐿 𝑡 , 𝛽𝑡 are known in advance, and use them only to identify                                                         Í𝐾
+150   propagation channels.                                                                                                   𝑘=0 Δ𝑡+𝑘
+                                                                                                            RAFcum
+                                                                                                               𝑡 ,𝐾  , =
+151       Under Assumption 2.1, a local perturbation decomposition                                       max(1, Δ𝑡 )
+152   gives                                                          168 an empirical measure of the accumulated token-response differ-
+                        𝐷 𝑡+1 ≤ 𝐿 𝑡 𝐷 𝑡 + 𝛽𝑡 𝑒 𝑡 ,                (6)169 ence after the feedback intervention. The recorded maximum
+153   where 𝐿 𝑡 measures propagation of pre-existing difference and170 153 equals (1 + 64 + 88)/1 at 𝐾 = 2, whereas the terminal-
+154   𝛽𝑡 measures coupling of the round-𝑡 state-entry divergence into171 only ratio is 88. This output-trajectory metric is distinct from
+                                                                                  3
+172   the theoretical feedback-state distance 𝐷 𝑡 above and is not a221 it covers application-process death, not host or storage failure.
+173   theoretical stability bound.                                  222 The research runner has one state owner and does not restore
+                                                                    223 provisional display events as feedback state.
+174   2.5. Design requirements derived from the model               224     The protocol theorems do not assume a deterministic pro-
+175       The model above forces four requirements on any serving   225 poser,  greedy decoding, synchronous GPU kernels, or equality
+176   mechanism that claims to certify feedback state:              226 of proposer  KV caches. The authority may use greedy, beam, or
+                                                                    227 sampled decoding provided that the realized projection and the
+177   R1 (Authority separation). Display permission and state-228 complete decoding/runtime configuration (including any ran-
+178         write permission are distinct grants; Eq. (5).          229 domness policy needed by the contract) are bound by 𝜒 𝑗 . Asyn-
+                                                                    230 chrony is allowed because the parent-version compare-and-swap
+179   R2 (Parent ownership). A state projection commits only onto
+                                                                    231 serializes installation. The theorems certify provenance and
+180         the parent version it was computed against; otherwise
+                                                                    232 installation legality, not semantic correctness of the authority
+181         staleness is undetectable.
+                                                                    233 output or repeatability of an independently rerun stochastic au-
+182   R3 (Frontier monotonicity). Committed audio frontiers ad-     234 thority.
+183        vance monotonically, with no gap and no overlap, so that235 Definition 3.1 (DGFT transaction). A transaction is the object
+184        the committed history is a single sequence.
+                                                                                                                                           
+                                                                            𝜏𝑡 = sid, 𝑒, 𝑝, 𝑣parent , [𝑎 𝑠 , 𝑎 𝑒 ), 𝑌𝑡 , Φ(𝑌𝑡 ; 𝐻𝑡 ), cert𝑡 ,
+185   R4 (Evidence non-authority). Statistical evidence (margins,
+186        coverage, repetition signals) schedules verification; it236 comprising the session id, contract epoch 𝑒, policy 𝑝, the parent
+187        never authorizes installation.                          237 state version read, the audio frontier interval covered, the gen-
+188   R1–R4 reappear as protocol properties of DGFT (Section 3),238 erated output, its state projection, and the certificate it carries
+189   labels on the system diagram (Figure 2), and columns of the239 (pending for fine proposals, issued for authority commits). The
+190   guarantee taxonomy (Table 1).                                        240 proposal granularity 𝑔 𝑝 (fine window) and the authority granu-
+                                                                           241 larity 𝑔𝑎 (coarse canonical segment) define the granularity ratio
+                                                                           242 𝜌 = 𝑔𝑎 /𝑔 𝑝 ≥ 1.
+191   3. DGFT: Theory and Mechanism
+                                                                           243 Definition 3.2 (Certificate). An authority certificate is a binding
+192   3.1. Transactions, certificates, and commits                         244 record
+                                                                                              cert 𝑗 = Bind sid 𝑗 , 𝑒 𝑗 , 𝑝 𝑗 , 𝑣 𝑗 , [ 𝑓 𝑗 , 𝑓 𝑗+1 ),
+193       DGFT wraps every state projection in a transaction.                                                                                       
+194   Throughout this section, “committed state” means the commit-                                              ℎ( 𝐴 [ 𝑓 𝑗 , 𝑓 𝑗+1 ) ), ℎ(Φ𝑎𝑗 ), 𝜒 𝑗 ,
+195   ted feedback sub-state 𝐻 of Section 2; the remaining serving245 where Φ𝑎𝑗 = Φ(𝑌 𝑗𝑎 ; 𝐻𝑣 𝑗 ) is the canonical state projection com-
+196   state 𝑆 𝑥 is never written by generated output and therefore246 puted by the authority against parent version 𝑣 𝑗 , and ℎ(·) is a
+197   needs no certification.                                              247 content digest over immutable bytes. The configuration digest
+                                                                           248 𝜒 𝑗 binds the model checkpoint, tokenizer, decoding parameters,
+198   Trust model. The authority coordinator and versioned ledger249 projection adapter, numerical precision, and authority-runtime
+199   are trusted runtime components; proposers and clients cannot250 version. A certificate therefore binds exactly one canonical pro-
+200   mint or modify certificates. We assume collision resistance of251 jection to exactly one commit tuple; it is issued only when the
+201   ℎ, atomic certificate consumption with the ledger compare-and-252 contract’s authority checks pass, and it is single-use: consumed
+202   swap, and immutable session audio bytes once covered by a253 by the commit that presents it.
+203   certificate. The threat model excludes a Byzantine authority or
+204   compromised ledger. A digest provides content binding, not254 Definition 3.3 (Commit validity). An authority commit is a
+205   standalone authentication; authenticity follows from issuance255 tuple
+206   inside the protected coordinator.
+207       The in-memory configuration has no restart-durability guar-                     Γ 𝑗 = (sid 𝑗 , 𝑒 𝑗 , 𝑝 𝑗 , 𝑣 𝑗 , [ 𝑓 𝑗 , 𝑓 𝑗+1 ), Φ𝑎𝑗 , cert 𝑗 ).
+208   antee: its ledger state exists only for the current process incarna-
+                                                                           256 Γ 𝑗 is valid, written Valid(Γ 𝑗 ), iff (i) session, contract epoch, and
+209   tion, while protocol safety still applies within each active epoch.
+                                                                           257 policy match the live session fence; (ii) 𝑣 𝑗 equals the currently
+210   RevTrace also implements an opt-in, single-writer write-ahead
+                                                                           258 committed parent version; (iii) [ 𝑓 𝑗 , 𝑓 𝑗+1 ) continues the commit-
+211   journal for process-restart recovery. Before the coordinator in-
+                                                                           259 ted frontier without gap or overlap; and (iv) certificate binding:
+212   stalls or acknowledges a commit, it appends and synchronizes a
+                                                                           260 cert 𝑗 binds exactly the presented fields, the digest ℎ(Φ𝑎𝑗 ) recom-
+213   checksummed, hash-chained record containing the transaction
+                                                                           261 putes from the presented projection, and the certificate has not
+214   key, request digest, certificate event, and compact state delta.
+                                                                           262 been consumed before. Only valid commits mutate committed
+215   Recovery replays the complete valid prefix, discards only an
+                                                                           263 state.
+216   incomplete trailing frame, fails closed on a complete invalid
+217   record, restores the committed frontier and consumed transac-264              Definitions 3.1–3.3 realize requirements R1–R4 (Sec-
+218   tion IDs, and advances the contract epoch before accepting new265 tion 2.5) structurally: display never produces a commit (R1), 𝑣 𝑗
+219   work. This guarantee assumes the same frozen session con-266 enforced inside the certificate binding gives parent ownership
+220   tract and a filesystem that honors the synchronization request;267 (R2), [ 𝑓 𝑗 , 𝑓 𝑗+1 ) enforces frontier monotonicity (R3), and cert 𝑗
+                                                                               4
+      Table 1: Guarantee taxonomy. ✓: guaranteed within the stated scope; “display only” means that a policy stabilizes what the user sees without defining feedback-state
+      write authority. Rows 2–4 isolate single-protection regimes; they are not strawmen but the actual components of existing practice. The last four columns are
+      the certification strata of Section 4.4, each with a non-transferable scope (H5): statistical risk bound = anytime-valid UCB from randomized audits, SG adapter
+      path only (Section 6.7(i)); preflight invariance = contract-scoped FP32 batch-repeat and batch-vs-singleton checks (Section 6.7(ii)), not applicable to the singleton
+      SG authority; exhaustive tx validation = exhaustive online validation of certificates, parent versions, and frontier continuity (Section 6.3); semantic reference =
+      independent per-family quality reference (Section 6.7(iv)). Margin and confidence signals schedule verification but authorize nothing (R4), so the margin-gate row
+      carries no evidence column.
+
+      Regime                              Display/state-write authority split Feedback ancestry Canonical authority Stale rejection Statistical risk bound Preflight invariance Exhaustive tx validation Semantic reference
+      Unprotected FP16 batching                          ×                          ×                   ×                 ×                  ×                     ×                      ×                     ×
+      Owner/version check only                           ×                          ×                   ×                 ✓                  ×                     ×                      ×                     ×
+      LocalAgreement-style confirmation             display only                    ×                   ×                 ×                  ×                     ×                      ×                     ×
+      Margin/confidence gate                             ×                          ×                   ×                 ×                  ×                     ×                      ×                     ×
+      SG-DGFT (𝜌 = 1)                                    ✓                          ✓                   ✓                 ✓                  ✓                     ×                     ✓                      ✓
+      Coarse/Hybrid DGFT (𝜌 > 1)                         ✓                          ✓                   ✓                 ✓                  ×                     ✓                     ✓                      ✓
+
+
+
+
+268   is issued only by authority checks, never by risk signals (R4).307                                            each certificate is consumed by at most one commit. Then,
+269   Table 1 previews how these properties separate DGFT from308                                                   under parent-version checking (Definition 3.3(ii)) and frontier-
+270   weaker protection regimes; the guarantee claims are evaluated309                                              continuity checking (Definition 3.3(iii)), the accepted commits
+271   in Section 6 (H2, H5).                                         310                                            of a session form a fork-free, gap-free, overlap-free linear
+                                                                                                            311     history of feedback state.
+272   Definition 3.4 (Committed provenance ancestry). A projection
+273   𝑃 is an ancestor of committed state 𝐻 𝑗 iff 𝑃 labels an accepted312                                           Proof. Atomicity closes the check-then-act race: two distinct
+274   ledger transition on the unique path 𝐻0 → 𝐻1 → · · · → 𝐻 𝑗 .313                                               commits cannot both observe the same committed state, both
+275   Displayed proposals and rejected transactions are not ances-314                                               pass the checks, and both install. Parent-version checking
+276   tors.                                                           315                                           then makes the accepted commits a tree of height at most one
+                                                                                                            316     per version: two distinct commits cannot both satisfy 𝑣 𝑗 =
+277   3.2. Theorem 1: uncertified-ancestry exclusion                                                        317     version(𝐻) against the same committed state, so the history
+278   Theorem 3.1 (Uncertified-Ancestry Exclusion). If committed318                                                 is fork-free. Single-use consumption excludes replay of an
+279   state is updated exclusively through commits satisfying Valid319                                              already-consumed certificate against a later parent. Frontier-
+280   (Definition 3.3), then no fine projection that is not bound by a320                                           continuity checking orders accepted intervals [ 𝑓 𝑗 , 𝑓 𝑗+1 ) into a
+281   valid certificate can become part of the ancestry of any future321                                            sequence with 𝑓 𝑗+1 = 𝑓 𝑗′ for consecutive commits, excluding
+282   committed state in the sense of Definition 3.4.                 322                                           gaps and overlaps. Hence the accepted commits are a single
+                                                                                                            323     linear sequence.                                                  □
+283   Proof. By induction over the commit sequence Γ1 , Γ2 , . . ..
+284   Base: the initial committed state 𝐻0 is contract-defined, so324                                               Remark 3.3 (Scope of the concurrency claim). Theorem 3.2
+285   its ancestry contains no generated output. Step: assume com-325                                               proves a serial accepted-commit history with the ledger
+286   mitted state 𝐻 𝑗 has ancestry containing only certificate-bound326                                            compare-and-swap as its serialization point. It is not a claim
+287   projections. The next state 𝐻 𝑗+1 arises only from a valid Γ 𝑗+1 ;327                                         of full Herlihy–Wing linearizability for every client invo-
+288   by Definition 3.3(iv), commit application installs exactly the328                                             cation and response; such a claim would require a separate
+289   projection whose digest is bound by cert 𝑗+1 , since any other329                                             concurrent-object history and real-time-order specification [16].
+290   content fails the binding check and is rejected. A fine projection330                                         Corollary 3.4 (Stale-descendant rejection). A revision com-
+291   Φ(𝑌 𝑓 ; 𝐻) that differs from the certified canonical projection331                                            puted against a stale parent, i.e. 𝑣parent ≠ version(𝐻 𝑗 ), cannot
+292   Φ𝑎𝑗+1 therefore cannot be installed by Γ 𝑗+1 ; if a fine proposal332                                          legally commit. It fails Definition 3.3(ii) and is rejected without
+293   happens to coincide bitwise with Φ𝑎𝑗+1 , what enters state is the333                                          mutating state.
+294   certified content, attributable to the authority’s certificate rather
+295   than to the uncertified fine generation. Provisional display334                                               3.4. Theorem 3: granularity-independent safety
+296   never mutates committed state by construction of the runtime
+297   (Section 4), completing the induction.                             □335                                       Theorem 3.5 (Granularity-Independent Safety). For any gran-
+                                                                                                            336     ularity ratio 𝜌 ≥ 1, if every authority segment starts at the
+298        Theorem 3.1 is deliberately architecture-agnostic: it de-337                                             committed parent, covers a contiguous audio frontier, yields a
+299   pends on the commit protocol, not on margin accuracy, model338                                                legal state projection, and passes the certificate and version
+300   determinism, FP16/FP32 agreement, or the choice of ASR fam-339                                                checks of Definition 3.3, then the conclusions of Theorems 3.1
+301   ily.                                                          340                                             and 3.2 hold.
+                                                                                                            341     Proof. The proofs of Theorems 3.1 and 3.2 use only the cer-
+302   3.3. Theorem 2: fork-free committed-state linearity
+                                                                                                            342     tificate binding of Definition 3.2, the validity predicate of Def-
+303   Theorem 3.2 (Fork-Free Committed-State Linearity). As-343                                                     inition 3.3, and atomic commit application; none of their steps
+304   sume commit application is atomic: the validity checks of344                                                  depends on the size of [ 𝑓 𝑗 , 𝑓 𝑗+1 ) relative to the fine window.
+305   Definition 3.3 and the state installation execute as one indi-345                                             Varying 𝜌 changes how much audio a single certificate covers,
+306   visible compare-and-swap against the committed state, and346                                                  not which commits are admissible.                                □
+                                                                                                               5
+347   Corollary 3.6 (Same-granularity certification as 𝜌 = 1). Setting398 per segment, 𝐶commit the transaction/commit overhead, and 𝑄 𝑠
+348   𝜌 = 1 makes proposal and authority granularities coincide: the399 the queueing/fragmentation cost of singleton authority. Then
+349   directional coverage witness degenerates to the identity and fine                      𝑎
+350   replay degenerates into risk-triggered re-verification. The same-                    𝑇SG  ≈ 𝑞 𝐵 𝜌 𝐶𝑠 + 𝑄 𝑠 ,                           (7)
+                                                                                          𝑎
+351   granularity (SG) configuration is therefore a reduction of DGFT                    𝑇DGFT  ≈ 𝐶𝑐 (𝜌, 𝐵) + 𝑟 𝐵 𝜌 𝐶𝑠 + 𝐶commit ,           (8)
+352   under the same protocol, not a separate mechanism.
+                                                                         400 and end-to-end service time is governed by the slower lane plus
+353   3.5. Durable acknowledged-prefix recovery                          401 repair:
+                                                                                               𝑇service ≈ max(𝑇 𝑝 , 𝑇 𝑎 ) + 𝑇repair ,        (9)
+354   Proposition 3.7 (Process-restart recovery of acknowledged
+355   commits). Assume a single journal owner, an unchanged402 with proposer and authority running concurrently on separate
+356   session contract, valid complete journal frames, and a local403 GPUs.
+357   filesystem that honors the journal’s synchronization request. If
+                                                                         404 Proposition 3.9 (Model-based operating condition). Let end-
+358   a commit is acknowledged only after its checksummed state-
+                                                                         405 to-end service time be given by Eq. (9). Coarse-DGFT improves
+359   transition record has been appended and synchronized, then
+                                                                         406 service throughput over SG whenever
+360   after an application-process crash recovery reconstructs every
+361   acknowledged commit in order, preserves its single-use trans-                                                                
+                                                                                      max 𝑇 𝑝 , 𝐶𝑐 (𝜌, 𝐵) + 𝑟 𝐵𝜌𝐶𝑠 + 𝐶commit + 𝑇repair𝐷
+362   action key, and returns the prior outcome on an identical retry.                                                     𝑆
+363   An incomplete trailing frame is discarded and the recovered                        < max 𝑇 𝑝 , 𝑞𝐵𝜌𝐶𝑠 + 𝑄 𝑠 + 𝑇repair       .
+364   state is the preceding complete prefix; a complete invalid frame
+                                                                         407 A simplified sufficient condition, applicable when the authority
+365   causes fail-closed recovery.
+                                                                         408 lane is on or near the critical path in both configurations (𝑇 𝑎 ≥
+366   Proof. The genesis frame defines the initial state and hash-409 𝑇 𝑝 ) and the repair costs are comparable, is
+367   chain root. For each subsequent commit frame, the scanner
+368   verifies its length, checksum, sequence, previous-frame digest,                           𝐶𝑐 (𝜌, 𝐵) + 𝑟 𝐵𝜌𝐶𝑠 + 𝐶commit
+369   parent-state hash, certificate bindings, and state delta before                               < 𝑞𝐵𝜌𝐶𝑠 + 𝑄 𝑠 .
+370   applying it. Induction over the scanned prefix therefore recon-
+371   structs the same state sequence and rebuilds the transaction-ID410 In particular, even a small verification fraction 𝑞 leaves SG
+372   index. Because synchronization precedes acknowledgment, ev-411 paying singleton invocation and queueing costs across all 𝐵
+373   ery acknowledged commit is in the complete recoverable prefix412 sessions, while a batched coarse authority amortizes them into
+374   under the stated filesystem assumption; an identical retry re-413 𝐶𝑐 .
+375   solves through the restored index and cannot append a second414            Equations (7)–(8) motivate four empirical hypotheses rather
+376   commit. A partial trailing frame is not applied. A commit415 than determine them without fitted costs: (P1) a burst of sin-
+377   synchronized just before a crash but not yet acknowledged may416 gleton authority work can create an SG tail even at 8–10%
+378   also be recovered; retrying its stable transaction ID resolves this417 verification; (P2) a batched coarse authority can amortize invo-
+379   uncertain response without duplicating the state transition. □418 cation and queueing costs; (P3) Hybrid may trade replay frac-
+                                                                         419 tion 𝑟 for quality at a performance and energy cost; and (P4) the
+380        Theorems 3.1–3.5 describe accepted transitions within an
+                                                                         420 ordering can reverse across models because the complete au-
+381   active contract epoch. The journal extends their state-history
+                                                                         421 thority paths—including precision and execution mode—have
+382   premise across process incarnations by retaining the committed
+                                                                         422 model-dependent costs. Section 6 tests these hypotheses on
+383   parent, frontier, and consumed IDs while fencing each restart
+                                                                         423 the same workload. Because SG and Coarse/Hybrid use dif-
+384   with a new epoch. When the journal is disabled, no cross-
+                                                                         424 ferent canonical arithmetic paths in our implementation (Re-
+385   process continuity claim is made.
+                                                                         425 mark 3.8), the comparison identifies integrated operating points,
+386   Remark 3.8 (Canonical-path boundary). Corollary 3.6 identifies426 not a precision-independent causal effect of 𝜌 alone.
+387   the protocol, not the arithmetic path: in our contracts SG runs
+388   an FP16 singleton authority while Coarse/Hybrid run an FP32427 3.7. Operating-point trade-offs
+389   batched authority. These are distinct canonical paths; we claim428         A deployment selects SG, Coarse, or Hybrid as configuration
+390   protocol equivalence, never bitwise identity.                      429 policy 𝜋, trading latency, energy, and quality subject to hard
+                                                                         430 safety:
+391   3.6. Authority-cost decomposition                                                   max 𝐽 (𝜋) s.t. 𝑉 (𝜋) = 0, 𝐶 (𝜋) ≤ 𝐵,
+                                                                                            𝜋
+392        The safety results above are silent about cost; the follow-
+393   ing analysis is a proposition with explicit assumptions, whose431 where 𝐽 aggregates the deployment objective, 𝑉 counts transac-
+394   predictions we test (Section 6, H3). Let 𝐵 be the number of432 tion violations, and 𝐶 (𝜋) ≤ 𝐵 denotes the contract’s display and
+395   concurrent sessions, 𝑞 the SG verification fraction, 𝑟 the Hy-433 quality caps. DGFT supplies the safety-constrained operating
+396   brid selective-replay fraction, 𝐶𝑠 the singleton authority cost434 envelope; the three evaluated contracts instantiate three oper-
+397   per covered region, 𝐶𝑐 (𝜌, 𝐵) the batched coarse authority cost435 ating points. We do not solve this optimization online and do
+                                                                         436 not claim any single operating point dominates: the measured
+                                                                         437 ordering is workload- and model-dependent (Section 6, H3).
+                                                                          6
+      Figure 2: RevTrace architecture (top) and the DGFT commit timeline (bottom). Provisional display and state write are separate permissions; only a certificate-bearing
+      transaction whose parent version and frontier checks pass may advance committed state. Risk and coverage evidence may schedule verification but cannot authorize
+      installation. FP32 denotes the evaluated coarse-authority implementation, not a DGFT protocol requirement; R4 applies to risk and coverage evidence, not to a valid
+      certificate.
+
+
+
+438   4. The RevTrace System                                                         456   swap-style ledger stores committed state versions; every commit
+                                                                                     457   tuple Γ 𝑗 (Definition 3.3) is checked against session, contract
+439       RevTrace implements DGFT as a transaction runtime: per-458                       epoch, policy, and state-version fences before installation, and
+440   family adapters, a versioned ledger, and a stratified certification459               each accepted commit consumes its certificate exactly once.
+441   layer (Figure 2).                                                  460               Evidence hook. H2: exhaustive transaction validation reports
+                                                                                     461   every install attempt against these fences (320 Qwen events;
+442   4.1. Architecture-specific adapters
+                                                                         462               1,048 Whisper commits; zero violations).
+443       Motivation. The safety proofs of Section 3 require only
+444   three interfaces; everything family-specific must stay out of463                     4.3. Directional coverage and selective fine replay
+445   the protocol. Mechanism. Each family provides (i) a state-
+                                                                         464                   Motivation. A coarse authority segment must be witnessed
+446   projection adapter computing Φ(𝑌𝑡 ; 𝐻𝑡 ) (Qwen rollback prefix;
+                                                                         465               against the fine proposals it replaces; replaying everything would
+447   Whisper previous-text prompt), (ii) an authority adapter execut-
+                                                                         466               forfeit the point of coarse authority. Mechanism. The coverage
+448   ing the canonical path (FP16 singleton for SG; FP32 batched
+                                                                         467               witness records, in Latin and CJK units, which fine-region out-
+449   for Coarse/Hybrid), and (iii) an evidence adapter collecting risk
+                                                                         468               puts the coarse certificate accounts for; uncovered regions are
+450   signals (margins, directional coverage, repetition) for the certi-
+                                                                         469               queued for fine replay. Hybrid adds risk-triggered replay at
+451   fication layer. Evidence hook. H4 (Section 6) runs the identical
+                                                                         470               fraction 𝑟, trading cost for quality (Eq. (8)). Evidence hook.
+452   runtime over both families through these adapters.
+                                                                                     471   H3 ablates 𝑟 = 0 (Coarse) against 𝑟 > 0 (Hybrid) on the same
+453   4.2. Certificate and versioned ledger                          472                   workload.
+454       Motivation. R2/R3 require detecting staleness and frontier
+455   discontinuity at commit time. Mechanism. A compare-and-
+                                                                                       7
+      Figure 3: Stratified, contract-scoped certification. Each rung yields exactly one scope-limited guarantee; no rung’s evidence authorizes another’s installation
+      decisions. Semantic-quality estimands remain family-specific: Qwen uses an independent FP16 reference, whereas Whisper reports paired WER deltas against
+      unprotected feedback; the two are never pooled.
+
+
+
+473   4.4. Stratified certification                                               490   5. Implementation
+474        Four strata, each with a non-transferable scope (Figure 3):
+                                                                          491               RevTrace is implemented as a serving runtime for revision-
+475   (i) SG numerical risk: randomized audits of the singleton au-
+                                                                          492           generative ASR models. The Qwen rollback adapter maintains a
+476   thority with anytime-valid (UCB) bounds, scoped to the SG
+                                                                          493           growing audio buffer with prefix rollback and holdback seman-
+477   adapter path [17, 18]; (ii) authority implementation: contract-
+                                                                          494           tics; the Whisper prompt adapter maintains previous-text condi-
+478   scoped FP32 preflight invariance checks (batch repeat, batch-
+                                                                          495           tioning state [3, 1]. The coarse authority executes in FP32 with a
+479   vs-singleton), fail-closed; (iii) transaction integrity: exhaustive
+                                                                          496           4,096-token KV-cache bound per session; the one-time contract
+480   online validation of certificates, versions, and frontier continu-
+                                                                          497           preflight (batch-repeat and batch-vs-singleton invariance) takes
+481   ity; (iv) semantic quality: independent per-family references. A
+                                                                          498           10.7–11.1 s and is excluded from steady-state service timing, re-
+482   risk signal from any stratum may schedule verification but never
+                                                                          499           ported separately (Section 7). FP32 is the authority realization
+483   authorize installation (R4).
+                                                                                  500   selected for this frozen implementation, not a DGFT protocol
+                                                                                  501   requirement: another precision or deterministic kernel path can
+484   4.5. Online coordinator
+                                                                                  502   replace it only after defining a new canonical contract and pass-
+485       The coordinator schedules the proposer and authority lanes503                 ing the same preflight and quality checks. Sessions arrive online
+486   on separate GPUs (Eq. (9)), invalidates stale descendants (Corol-504              and are scheduled with causal arrival ordering; decoder outputs
+487   lary 3.4), closes terminal frontiers at session end, and performs505              are transferred to the host via vectorized paths. Experiments
+488   rollback/rebase when a commit supersedes displayed provi-506                      use two NVIDIA RTX 3090 GPUs, one hosting the proposer
+489   sional state.                                                    507              lane and one the authority lane. Realizations rejected during
+                                                                                  508   closure and all measurement repairs are retained in the public
+                                                                                  509   release audit rather than counted as experimental evidence. All
+                                                                                  510   evaluated numbers are bound to code commit, contract digest,
+
+                                                                                    8
+511   and result hashes in the release. The source code, frozen audited564     from the token-distance trajectory 1 → 64 → 88. Verdict.
+512   result artifacts, replay manifests, and analysis scripts supporting565   The prediction is confirmed: the feedback edge is the propa-
+513   this study are publicly available in the RevTrace repository at566       gation channel, and contamination is therefore a state-authority
+514   https://github.com/zhouz4884-coder/RevTrace.                       567   problem, not a display problem.
+515       The runtime’s durable mode is opt-in through a local jour-
+516   nal path and is single-owner: each accepted canonical transition568      6.3. H2: transaction invariants exclude uncertified ancestry
+517   is appended as a compact, checksummed state delta before the569               Prediction (Theorems 3.1–3.5): if the runtime enforces Def-
+518   scheduler installs it. On process restart, the runner reloads the570     initions 3.2–3.3, no install violation, fork, gap, or overlap occurs
+519   same frozen audio manifest, restores the committed feedback571           in any completed trace. Experiment. Exhaustive online valida-
+520   frontier and prompt, advances the contract epoch, discards pri-572       tion of every transaction install attempt, reported by scope, plus
+521   vate uncommitted proposal state, and resumes from the first573           a deterministic protocol-state fuzzer. (i) DGFT online transac-
+522   uncommitted audio window. This mode is distinct from the574              tion trace: 320 Qwen revision events (R10 cross-adapter matrix,
+523   volatile configuration used by the previous GPU performance575           four DGFT cells) and 1,048 Whisper commits (R9.E, 16 cells)
+524   matrix; those throughput and latency measurements do not in-576          and terminal frontier closure. (ii) SG cells on the identical run-
+525   clude journal synchronization.                                     577   time and workload: the two SG ablation cells contribute 240
+526       The independent scale-out contract uses one RHEL 7.6 node578         validated events each. (iii) Protocol fuzzing: 250,000 commit
+527   with eight Tesla V100 PCIe GPUs (32 GB each), PyTorch 2.4.1,579          attempts over 64 sessions, cycling through 24 invalid/replay mu-
+528   CUDA 12.1, and the Transformers-eager backend. It runs repli-580         tation classes (cross-session/epoch/policy, certificate-field tam-
+529   cas rather than distributed model parallelism: up to four pro-581        pering, stale parent, gap/overlap, duplicate and replay) and a
+530   posal workers and four authority workers share a versioned582            valid class. This CPU test exercises the commit state ma-
+531   commit queue. Input audio is deterministically resampled to583           chine; it is not a GPU numerical or population failure-rate
+532   16 kHz. This contract has its own environment fingerprint, raw584        experiment. Result. In both scopes: zero transaction-install
+533   cell records, worker diagnostics, and result hashes; its absolute585     violations, zero output/state violations and zero stale or re-
+534   timing is never pooled with the RTX 3090/vLLM contract.            586   played results observed; all sessions closed with monotone ter-
+                                                                         587   minal frontiers. The evaluated production traces contained no
+                                                                         588   stale install attempt, so they validate accepted-history integrity
+535   6. Evaluation
+                                                                         589   rather than fault-injected stale-rejection coverage. Batch-repeat
+536   6.1. Experimental setup and claim contracts                        590   and batch-vs-singleton zeros belong to the separate FP32 pre-
+                                                                         591   flight scope (Section 6.7(ii)) and are not pooled with the online
+537       Table 2 fixes, per family and per model, the proposal path,
+                                                                       592     trace evidence. The fuzzer accepted all 10,000 valid commits,
+538   authority path, workload contract, quality reference, and the
+                                                                       593     rejected all 240,000 mutated/replayed attempts, and recorded
+539   claims each contract supports; no number is ever pooled across
+                                                                       594     zero invalid accepts or state-invariant violations. Its scope ex-
+540   these contracts. Hardware: two RTX 3090 GPUs. Workloads:
+                                                                       595     cludes Byzantine trusted components, wall-clock expiry and
+541   the shared bilingual 30 s 16-session contract (c16, 480 s audio)
+                                                                       596     GPU worker crashes. Verdict. The invariants hold exhaustively
+542   for the same-workload ladder, and the per-family production
+                                                                       597     on the evaluated traces. We report this as exhaustive-trace pro-
+543   contracts for cross-architecture evidence. H7 uses a separate
+                                                                       598     tocol validation; it is not a failure-probability-zero claim for
+544   RHEL 7.6 single-node contract with eight Tesla V100 PCIe
+                                                                       599     unobserved workloads.
+545   32 GB GPUs and the Transformers-eager backend. Its normal-
+546   load, scale-out, and bottleneck-attribution values are reported600 6.4. H2b: acknowledged state survives coordinator process
+547   independently and are never pooled with RTX 3090/vLLM mea-601             death
+548   surements.
+                                                                       602     Failure discovery. Before adding persistence, the in-
+                                                                       603 memory coordinator lost its checkpoint, audio frontier, prompt,
+549   6.2. H1: state divergence propagates through the feedback edge
+                                                                       604 and consumed segment ID at both tested process-death points:
+550       Prediction (Remark 2.2): under identical future inputs, batch605 after state assignment but before event return, and after the
+551   assignments, and arithmetic realization, setting 𝛽𝑡 ≡ 0 by re-606 commit event had returned. A fresh coordinator then accepted
+552   moving the feedback edge eliminates propagation of the isolated607 the same segment ID again. This was loss of committed history
+553   batch-created state-entry divergence. Experiment. A separate608 across process epochs, not a fork or a failure of the in-process
+554   legacy Whisper protocol enumerates 21 output pairs produced609 certificate predicate.
+555   by legal execution-shape changes, then feeds decoded previous610         Repair and experiment. We added an opt-in append-only
+556   text into subsequent singleton recognition. Twelve pairs have611 journal that synchronizes a checksummed state delta and
+557   different prompt text; nine have identical prompt text despite612 transaction key before scheduler installation and acknowl-
+558   different generated token IDs. The feedback-ON/OFF interven-613 edgment. Four isolated child-process kills exercised the
+559   tions fix future audio and execution. This decoded-text protocol614 actual LiveQwenScheduler and production DGFT certifi-
+560   is distinct from the later raw-token adapter. Result. With feed-615 cate/commit path with a deterministic CPU executor fixture:
+561   back, 8 of 21 output pairs propagate the divergence; without616 during a torn frame, after frame synchronization but before
+562   feedback, 0 of 21. Six pairs remain different at the two-window617 journal apply, after journal apply but before scheduler acknowl-
+563   horizon. The cumulative RAF (Definition 2.6) reaches 153,618 edgment, and after acknowledgment. The synthetic session
+
+                                                                           9
+      Table 2: Claim contracts. Every number in this paper is bound to one row; nothing is pooled across rows. Authority paths and quality references are per-contract by
+      design (Section 6.1).
+
+      Family          Model               Proposal path            Authority path             Workload contract            Quality reference        Main claim
+      Qwen3-          0.6B / 1.7B         fine FP16 batched        FP32        batched        shared c16: 16 bilin-        mixed-unit edit rate     throughput,     en-
+      ASR                                 proposer                 (Coarse/Hybrid,            gual 30 s sessions (480 s    vs independent fresh     ergy,      latency;
+                                                                   𝜌 = 3); FP16 single-       audio), online causal ar-    FP16 singleton re-       transaction safety;
+                                                                   ton (SG, 𝜌 = 1)            rivals, 2×RTX 3090           play                     bounded edit rate
+      Qwen3-          0.6B / 1.7B         FP16 batched pro-        FP16/FP32 author-          c16–c128       bilingual     per-cell independent     normal-load
+      ASR                                 poser replicas           ity replicas under the     30 s   sessions,     one     singleton     replay     speedup, bottle-
+      (scale-out)                                                  V100 matrix con-           8×V100 PCIe node,            where applicable         neck attribution,
+                                                                   tract                      Transformers-eager                                    single-node SLO
+                                                                                                                                                    capacity      and
+                                                                                                                                                    replica scale effi-
+                                                                                                                                                    ciency
+      Whisper         tiny / base /       fine FP16 batched        per-cell authority of      R9.E production cells (16    paired WER delta         production wall,
+                      small.en            proposer                 the R9.E production        cells, per model/arrival     vs unprotected feed-     GPU,      energy;
+                                                                   contract                   group),     stable-output    back (dev + un-          WER      improve-
+                                                                                              hash equivalence             touched split)           ment; certificate
+                                                                                                                                                    safety
+
+
+
+619   is 60 ms, divided into two 30 ms segments; after restart, each654                          Experiment. Same-workload ladder on the identical 16
+620   child is given the same frozen contract and input audio.        655                   bilingual 30 s sessions (c16): SG (𝜌 = 1, FP16 singleton au-
+621       Result (Table 3). The 899-byte incomplete tail was dis-656                        thority, verification fractions 8.3%/9.6%), Coarse-DGFT (𝜌 =
+622   carded, and recovery resumed from the preceding prefix. At657                         3, FP32 batched authority, 𝑟 = 0), Hybrid-DGFT (𝜌 = 3,
+623   each of the three post-synchronization kill points, the 30 ms658                      𝑟 > 0), on Qwen3-ASR 0.6B and 1.7B. This is a complete-
+624   committed frontier and its checkpoint were restored; the re-659                       configuration ablation: authority precision and execution mode
+625   maining segment then committed once. All four runs reached660                         change together with granularity. It therefore does not isolate a
+626   the 60 ms terminal frontier at checkpoint 2 with two distinct661                      precision-independent causal effect of 𝜌. Result (Table 5, Fig-
+627   commit IDs and no duplicate installation. A separate complete-662                     ure 4). Direct service wall times are 14.905/16.285 s for SG
+628   frame checksum corruption unit test fails closed. These out-663                       and 10.759/12.763 s for Coarse-DGFT, yielding the pairwise
+629   comes support Proposition 3.7 for application-process crashes664                      throughput ratios 1.39× (0.6B) and 1.28× (1.7B) and wall-time
+630   under its stated filesystem assumptions; they do not establish665                     reductions of 27.8% and 21.6%. The separately normalized
+631   host, power, or storage device recovery.                        666                   headline speedups in Table 5 use each path’s frozen all-singleton
+632       Commit-path cost. A paired Linux/ext4 CPU microbench-667                          reference and must not be divided to recover these pairwise
+633   mark ran 31 repeats of 20,000 real coordinator commits per vari-668                   ratios. SG misses its 2 s certified state-entry deadline at the
+634   ant (620,000 per variant), with randomized volatile/WAL order.669                     terminal burst (miss rates 3.33%/4.17%; P99 2.735/2.964 s).
+635   Median repeat-average commit time was 158.789 𝜇s without670                           Coarse/Hybrid provide provisional display P99 ≤ 1.018 s, while
+636   persistence and 13.710 ms with WAL; the paired median in-671                          their segment-commit P99 is 2.582–4.437 s. We report these as
+637   crement was 13.550 ms per commit (Table 4). The fixture used672                       different latency contracts and do not transfer a pass/fail label
+638   64 KiB synthetic audio, three display tokens, and an empty prior673                   between them. Hybrid holds throughput near SG (1.03× on
+639   prompt. The earlier Windows fixture gives a 1.922 ms paired674                        0.6B) at lower edit rate (2.15% vs 3.43% P95) but costs en-
+640   increment and is retained separately. The two hosts use differ-675                    ergy (+16.8% vs SG on 0.6B; +54.2% on 1.7B, where Hybrid
+641   ent storage and software, so their difference is not an isolated676                   also loses throughput, 0.85×). The direct energy comparison
+642   operating-system effect. This local CPU microbenchmark is677                          against SG reverses between models: Coarse saves 4.4% on
+643   control-plane attribution, not GPU serving or end-to-end la-678                       0.6B but consumes 15.1% more on 1.7B. Verdict. The observa-
+644   tency evidence. The earlier GPU performance matrix ran with679                        tions are consistent with P1–P4, including the model-dependent
+645   the WAL disabled; its throughput and P99 values must not be680                        reversal of the energy ordering, but support a claim about the
+646   presented as WAL-enabled results.                               681                   measured authority-path configurations rather than granularity
+                                                                                    682     alone. The SG configuration remains the same-granularity cer-
+647   6.5. H3: authority-path configuration shapes the performance683                       tification point (Corollary 3.6), not a dominated baseline.
+648        frontier
+649       Hypotheses (Proposition 3.9, P1–P4): the evaluated coarse684                      6.6. H4: one invariant holds across adapters
+650   authority path can beat SG on throughput; SG can show685                                  Prediction (Section 4.1): the protocol needs only projec-
+651   terminal-burst tails even at 8–10% verification; Hybrid may pay686                    tion, authority, and certificate interfaces, so one runtime serves
+652   for quality in performance and energy; and the ordering may687                        structurally different revision semantics. Experiment and re-
+653   reverse across models.                                         688                    sult. On Qwen3-ASR (rollback, holdback, growing buffer), the
+
+                                                                                     10
+      Table 3: Process-restart fault injection on the production Qwen scheduler and DGFT commit path, using deterministic CPU fixture executors. Each run uses one
+      synthetic 60-ms session split into two 30-ms certified segments. The recovered state contains only complete synchronized records; every completed run ends at the
+      same 60-ms frontier with two distinct commit IDs.
+
+
+        Injection point                                    Recovered prefix                       Restart outcome                                                           Gate
+        Torn trailing frame during append                  0 ms; 899-byte suffix dis-             Reprocess both segments; final checkpoint 2                               Pass
+                                                           carded
+        After journal synchronization, be-                 30 ms; checkpoint 1 re-                Resume one segment; final checkpoint 2                                    Pass
+        fore journal apply                                 stored
+        After journal apply, before scheduler              30 ms; checkpoint 1 re-                Resume one segment; final checkpoint 2                                    Pass
+        acknowledgment                                     stored
+        After acknowledgment, before pro-                  30 ms; checkpoint 1 re-                Resume one segment; final checkpoint 2                                    Pass
+        cess exit                                          stored
+
+      Table 4: Local CPU coordinator commit cost. Linux/ext4 is the primary persistence measurement; the earlier Windows fixture is retained separately. Each mode
+      and host has 31 repeats of 20,000 commits. The two hosts use different storage and software, so these rows do not isolate an operating-system effect. They are not
+      GPU service latency measurements.
+
+
+               Host / storage                                   Journal mode               Median repeat-average / commit                 Paired durable increment
+               Linux / ext4                                     volatile                   158.789 𝜇s                                     —
+               Linux / ext4                                     durable                    13.710 ms                                      +13.550 ms
+               Windows fixture                                  volatile                   94.962 𝜇s                                      —
+               Windows fixture                                  durable                    2.017 ms                                       +1.922 ms
+
+
+689   volatile-mode R10 production matrix reaches 6.88× wall-clock708                                  scope. Result, by stratum. (i) SG numerical risk: randomized
+690   and 3.44× GPU-normalized speedup with 59.8% energy re-709                                        audits of the SG authority path (≈30k audits, checkpoints
+691   duction (0.6B, Coarse-DGFT), and 6.06 × /3.03× with 51.0%710                                     20 s/120 s) give anytime-valid UCBs of 0.480%/0.478%; this
+692   energy reduction (1.7B), at P95 mixed-unit edit rates ≤ 3.43%711                                 bound belongs to the SG adapter path only and is not trans-
+693   against an independent FP16 singleton reference and display P99712                               ferred to DGFT paths [17]. (ii) Authority implementation:
+694   ≤ 1.018 s. On Whisper (previous-text conditioning), the iden-713                                 the contract-scoped FP32 preflight records zero batch-repeat
+695   tical runtime passes 16/16 production cells with median wall-714                                 and zero batch-vs-singleton mismatches on the frozen Qwen
+696   clock speedup 2.841× (2.633–3.849 across cells), 1.421× GPU-715                                  contract (10.7–11.1 s, excluded from service timing). (iii)
+697   normalized, 31.13% energy reduction, display P99 ≤ 1.492 s,716                                   Transaction integrity: H2’s exhaustive validation (zero ob-
+698   and 1,048 certificates with zero violations. The 16 cells are ex-717                             served violations on 320 DGFT Qwen events, 480 SG Qwen
+699   plicit rather than pooled: Whisper base.en uses five synchronous718                              events, and 1,048 Whisper certified commits; no stale attempt
+700   and five Poisson seeds, while tiny.en and small.en each use three719                             occurred in these traces). (iv) Semantic quality, per family
+701   synchronous seeds. Verdict. Confirmed: the invariant transfers720                                and never pooled: Qwen mixed-unit edit rate against the
+702   across two architecture families through adapters; performance721                                independent FP16 singleton reference has P95 ≤ 3.43% (worst
+703   magnitudes are family- and model-dependent and are reported722                                   5.41%, zero catastrophic cases; exact sessions rise from 11/16
+704   per contract.                                                    723                             to 13/16 on 0.6B Hybrid and from 9/16 to 10/16 on 1.7B);
+                                                                                                 724   Whisper paired WER deltas against unprotected feedback
+705   6.7. H5: each certification layer guarantees only its scope                                725   are all negative, −12.23/−18.21/−25.27 points on dev for
+706       Prediction (R4, Section 4.4): evidence strata are non-726                                    tiny/base/small.en (bootstrap uppers −10.48/−16.17/−22.15)
+707   transferable; each yields a bounded statement about its own727                                   and −8.26/−11.03/−13.76 on the untouched cohort (40 long
+
+
+      Table 5: Same-workload ladder on the identical 16 bilingual 30 s sessions (c16, 480 s audio; 2×RTX 3090). 𝜌: granularity ratio; 𝑞/𝑟: SG verification / Hybrid
+      replay fraction. Energy Δ is measured against SG on the same workload; the energy-reduction fractions of SG against the all-singleton no-serving baseline are
+      69.1% (0.6B) and 66.1% (1.7B). Headline wall speedups use each path’s frozen all-singleton reference; direct SG–DGFT comparisons use the absolute service wall
+      time. All cells in this historical ladder used volatile journaling (WAL disabled). Commit P99 is the certified state-entry/segment-commit scope; Display P99 is the
+      provisional display scope, so no pass/fail label transfers between columns. The 2 s miss rate is defined only for the SG state-entry contract.
+
+      Config          Model     𝜌    𝑞/𝑟     Service wall (s)     Headline wall   GPU-norm     𝐸 (J)    Δ𝐸 vs SG   Commit P99 (s)   Display P99 (s)   SG 2 s state miss   P95 edit   Journal mode
+      SG              0.6B      1   𝑞=8.3%       14.905              5.10×         2.55×      4249.4       —           2.735              n/a              3.33%          0.00%      volatile
+      SG              1.7B      1   𝑞=9.6%       16.285              4.68×         2.34×      5215.7       —           2.964              n/a              4.17%          0.00%      volatile
+      Coarse-DGFT     0.6B      3    𝑟=0         10.759              6.88×         3.44×      4062.2    −4.4%          2.582            0.826               n/a           3.43%      volatile
+      Coarse-DGFT     1.7B      3    𝑟=0         12.763              6.06×         3.03×      6001.9    +15.1%         3.219            1.018               n/a           1.79%      volatile
+      Hybrid-DGFT     0.6B      3   𝑟=5.0%       14.428              5.19×         2.60×      4961.6    +16.8%         3.853            0.782               n/a           2.15%      volatile
+      Hybrid-DGFT     1.7B      3   𝑟=8.8%       19.220              3.92×         1.96×      8045.0    +54.2%         4.437            0.990               n/a           1.79%      volatile
+
+
+                                                                                                  11
+728   sessions per model, deterministically assembled from 214 pre-773                         adaptations, not end-to-end claims about the original text-only
+729   viously unused source utterances; uppers −5.15/−7.51/−9.09)774                           systems [19, 13].
+730   (Figure 6).      On the independent 64-utterance-per-model-775                               The single causal flip is complemented by an execution-
+731   language closure (deployed fixed-shape authority configura-776                           shape stress suite that changes only legal scheduling variables
+732   tion, deterministic holdout), deployed Qwen records English777                           (batch size, batch slot, co-runner composition, and repeat), with-
+733   WER 2.15%/2.30% (0.6B/1.7B), Chinese CER 2.71%/2.16%,778                                 out mutating the model input or injecting logit noise. Across
+734   terminal exactness 256/256 against singleton authority, zero779                          1,848 target-row evaluations, these controls induce 613/408 real
+735   catastrophic outliers, and partial-revision edit rates 24.7–31.8%.780                    proposal–canonical mismatches on 0.6B/1.7B (1,021 total); the
+736       Verdict. Each layer produces exactly one scope-limited guar-781                      frozen risk scheduler has 0 observed false-safe events. This
+737   antee; no stratum’s evidence is used to authorize another’s in-782                       result measures failure-coverage under stress, not production
+738   stallation decisions.                                             783                    mismatch prevalence, and it does not turn the margin signal into
+                                                                                       784     a deterministic certificate.
+739   6.8. H6: faithful revision adaptations expose the missing con-
+740         tract                                                          785 6.9. H7: proposer–authority scale-out preserves the display
+741        Published systems target different semantic objects, so their   786       SLO until the measured capacity boundary
+742   headline numbers are not an apples-to-apples leaderboard. We         787      Prediction     (Equation (9)): authority-only scaling cannot re-
+743   therefore separate a normal-load performance comparison from         788 move    a proposer     bottleneck; balanced proposal/authority repli-
+744   a flip-rich safety-cost stress test.                                 789 cation   should   increase   service capacity until one stage saturates.
+745        Normal-load comparison. On the independent V100 c16             790 Coarse    FP32    authority    should be most expensive at 𝜌 = 1 and
+746   workload, all 240 display events per cell meet the 2 s SLO           791 become     amortizable     as  𝜌 increases. Experiment. We execute an
+747   (Table 7). Relative to the LLM-42-style adaptation that veri-        792 independent      84-cell   matrix   on one 8×Tesla-V100-32 GB node:
+748   fies every revision, Coarse-DGFT improves audio throughput           793 24  authority     microprofiles,     16 normal-load c16 baselines, 32
+749   by 6.91 × /5.64× on 0.6B/1.7B; Hybrid-DGFT improves it               794 scale   cells   over   c16/c32/c64/c128       and p1a1/p1a2/p2a2/p4a4,
+750   by 6.56 × /5.37×. The comparison with MarginGate-inspired            795 and  12   FP16/FP32       authority-attribution    cells at 𝜌 ∈ {1, 3, 5}.
+751   gating is deliberately less one-sided: Coarse-DGFT is 5.6%           796 Each    30 s  c16   baseline    contains   240  display events; each c64
+752   slower on 0.6B and 11.5% faster on 1.7B. MarginGate verifies         797 cell contains     960.   The   complete    raw  matrix  and  worker diag-
+753   0%/3.33% of revisions on these benign traces and has no state-       798 nostics   are  audited   separately   from   the RTX   3090  contract. We
+754   write authority contract; consequently this result measures its      799 then  freeze   the   headline   configurations   and  run an  independent
+755   low normal-load cost, not safety on a state-changing flip. All800 30-cell repeat matrix: three repetitions per model for p1a1-c64,
+756   0.6B modes are exact against the independent singleton refer-801 p4a4-c32/c64/c128, and the model-predicted authority-heavy
+757   ence. On 1.7B, MarginGate, LLM-42-style, and SG are 16/16802 p3a5-c64 sensitivity. Warm-up events are excluded; ranges in
+758   exact, whereas the declared Coarse/Hybrid quality boundary is803 Figure 7 are min–max over the three repetitions.
+759   3.18% P95 final edit with 8/16 exact sessions. Thus RevTrace804               Result. First, all repeated batched executions agree, yet
+760   is not claimed to dominate heuristic gating on every model; it       805 each  model accumulates 62 batch–singleton request mismatches
+761   minimizes the cost of an explicit state-write contract.              806 across   FP16/FP32 and batch sizes 1–32. FP32 is therefore not
+762        Flip-rich stress. We then run faithful revision-level adapta-   807 an unconditional       singleton-equivalence certificate on this plat-
+763   tions on the same frozen overloaded c32 trace. A MarginGate-         808 form.   Second,     under   the normal-load c16 contract, SG reaches
+764   inspired fixed threshold verifies 3.02% of events but misses the     809 4.682   ×  /3.248×     wall  speedup with 6.67%/10.00% verification
+765   known state-changing flip; an owner/version-only baseline re-        810 and   0%    P95   final  edit  (16/16 exact final sessions against the
+766   jects stale work but still accepts that legal current-owner flip. An 811 independent      FP16   singleton   reference); Hybrid reaches 5.764 ×
+767   LLM-42-style adaptation verifies every revision and eliminates       812 /4.657×     and   Coarse-DGFT        6.072 × /4.893× (Figure 7a). On
+768   the observed state error at 1.565 events/s. RevTrace’s scoped        813 0.6B   every    normal-load      mode   is exact (0% P95 final edit); on
+769   repair verifies 5.05%, eliminates the error, and reaches 3.046       814 1.7B   the  Coarse/Hybrid       quality  boundary is a P95 final edit rate
+770   events/s (1.95× the always-verify adaptation). This overloaded       815 of 3.18%     with    8/16  exact   sessions,   while SG remains at 0%.
+771   trace remains outside the 2 s SLO (P99 6.107 s), so the compar-      816 Third,   p4a4   at c64  sustains   median   157.786   × /111.722× audio
+772   ison isolates safety cost rather than serving capacity. These are    817 real-time    throughput      (ranges   157.577–157.869      and 110.009–
+                                                                           818 116.384) with display P99 1.089/1.394 s and zero misses among
+
+      Table 6: Cross-family production evidence, per contract. Qwen energy reduction is against the all-singleton FP16 no-serving baseline of the R10 contract; Whisper
+      figures are medians/ranges across the 16 R9.E cells. Violation counts are exhaustive observations over the evaluated traces, not a mathematical claim of an error-free
+      implementation. All GPU-backed values in this historical table were measured with WAL disabled (volatile mode).
+
+      Family               Operating point              Wall               GPU-norm   Energy          P95 edit / WER        Display P99   Observed install violations   Journal mode
+      Qwen3-ASR-0.6B       Coarse-DGFT                 6.88×                3.44×     −59.8%              3.43%               0.826 s               0 / 80              volatile
+      Qwen3-ASR-0.6B       Hybrid-DGFT                 5.19×                2.60×     −51.3%              2.15%               0.782 s               0 / 80              volatile
+      Qwen3-ASR-1.7B       Coarse-DGFT                 6.06×                3.03×     −51.0%              1.79%               1.018 s               0 / 80              volatile
+      Qwen3-ASR-1.7B       Hybrid-DGFT                 3.92×                1.96×     −33.2%              1.79%               0.990 s               0 / 80              volatile
+      Whisper (16 cells)   production DGFT   2.841× median (2.633–3.849)    1.421×    −31.13%     paired WER Δ (Figure 6)    ≤ 1.492 s             0 / 1,048            volatile
+
+
+                                                                                        12
+      Table 7: Normal-load c16 comparison on the independent V100 contract. Each cell contains 16 bilingual 30 s sessions and 240 display events; every cell has
+      zero 2 s display-SLO misses and zero observed transaction-install violations. “Schedule” is a revision verification fraction for the first three mechanisms but a
+      coarse authority ratio for DGFT, so these entries are not interchangeable. P95 edit and exactness use the independent FP16 singleton reference. These are faithful
+      revision-level adaptations, not end-to-end reproductions of the original text-only systems. All historical cells used volatile journaling (WAL disabled).
+
+      Model                Mechanism                Verify/authority schedule   Audio xRT     Display P99    Commit P99      P95 edit   Exact sessions    Journal mode
+                           MarginGate-inspired              0.00%                40.501×         1.105 s        1.105 s       0.00%          16/16        volatile
+                           LLM-42-style revision             100%                 5.535×         1.100 s        6.934 s       0.00%          16/16        volatile
+      Qwen3-ASR-0.6B       RevTrace SG                      6.67%                29.474×         1.095 s        5.522 s       0.00%          16/16        volatile
+                           RevTrace Coarse                   𝜌=3                 38.223×         1.106 s        3.091 s       0.00%          16/16        volatile
+                           RevTrace Hybrid               𝜌 = 3 + replay          36.285×         1.086 s        3.334 s       0.00%          16/16        volatile
+                           MarginGate-inspired               3.33%               26.208×         1.433 s        5.061 s       0.00%          16/16        volatile
+                           LLM-42-style revision             100%                 5.180×         1.393 s        7.837 s       0.00%          16/16        volatile
+      Qwen3-ASR-1.7B       RevTrace SG                      10.00%               19.395×         1.440 s        7.891 s       0.00%          16/16        volatile
+                           RevTrace Coarse                   𝜌=3                 29.223×         1.609 s        4.492 s       3.18%           8/16        volatile
+                           RevTrace Hybrid               𝜌 = 3 + replay          27.811×         1.466 s        4.811 s       3.18%          8/16         volatile
+
+
+
+819   2,880 repeated display events per model. The corresponding857                       and certificate; it does not require FP32. FP32 was the conser-
+820   certified-segment commit P99 is 3.080/4.890 s: the six-second858                    vative choice that passed the frozen implementation’s preflight
+821   authority plane remains bounded, but it is a distinct estimand859                   and quality checks. A deterministic BF16/FP16 path with fixed
+822   and does not inherit the 2 s display SLO. At c128, throughput860                    reductions, a certified kernel portfolio, or canonical replay can
+823   saturates at 161.927× and falls to 107.305×, while display P99861                   instantiate the same interface after a new contract epoch is de-
+824   becomes 2.079/2.730 s and commit P99 6.012/10.153 s. En-862                         clared and validated. Merely lowering precision or substituting
+825   ergy per audio second also rises from 6.08/10.56 J at c64 to863                     a distilled predictor is not a certificate: unless that path is it-
+826   6.36/10.89 J at c128. Thus c64 is the largest measured point864                     self promoted to the versioned canonical authority, it cannot
+827   satisfying the display SLO for both models, rather than a claim865                  authorize a state write.
+828   that every internal plane commits within 2 s.
+829       Finally, p3a5-c64 lowers the authority/proposer ratio to866                     Risk evidence does not transfer. The SG-path UCB of 0.480%
+830   0.595/0.604 but also reduces throughput to 93.788 × /77.704×867                     bounds the numerical risk of the SG adapter’s randomized au-
+831   and yields display P99 1.756/2.209 s. More authority repli-868                      dits. It is never applied to Coarse/Hybrid paths, whose safety
+832   cas therefore do not repair a proposer bottleneck; balanced869                      rests on Theorems 3.1–3.5 and exhaustive transaction validation
+833   p4a4 dominates this allocation. At 𝜌 = 1 the FP32 author-870                        instead.
+834   ity/proposer service ratios are 2.216/2.669 and throughput falls
+                                                                         871              The authority plane is trusted and versioned. The current con-
+835   to 18.603 × /12.294×; at 𝜌 = 5 these ratios fall below one
+                                                                         872              tract assumes a non-Byzantine authority coordinator, atomic
+836   (0.759/0.841), restoring 40.630 × /33.909× at c16. Across the
+                                                                         873              certificate consumption and version comparison, immutable au-
+837   matrix we observe no transaction-install, uncertified-ancestry,
+                                                                         874              dio bytes during a transaction, and collision-resistant digests.
+838   or directional-omission violation.
+                                                                         875              A certificate binds the parent version, audio and projection di-
+839       Verdict. The scale and attribution results support the two-
+                                                                         876              gests, and the complete canonical-path configuration; it is not a
+840   stage cost model: balanced replication, rather than authority
+                                                                         877              standalone proof against a compromised authority. Our produc-
+841   replicas alone, expands capacity, and coarse authority becomes
+                                                                         878              tion traces contain no stale-install attempt. Their zero observed
+842   economical only after sufficient amortization. The repeated
+                                                                         879              install violations therefore validate accepted-history integrity,
+843   dual-plane result closes the single-node high-concurrency gap
+                                                                         880              whereas the stale-result rejection rule is supported by the pro-
+844   without redefining display as certification. It does not establish
+                                                                         881              tocol argument rather than a fault-injection denominator.
+845   multi-node scaling; c128 is retained as a failed display-SLO
+846   boundary.                                                          882              Process durability and the single-owner boundary. The volatile
+                                                                                    883   baseline has no separate front-end or adapter cache that re-enters
+847   7. Discussion and Boundaries                                                  884   feedback state after restart, so the probe found no concurrent
+                                                                                    885   split-brain branch in the research runner. However, the post-
+848   FP32 authority is a canonical path, not a repair. The FP32886                       acknowledgment crash loses a commit already returned to its
+849   batched authority defines a new canonical reference for the con-887                 caller, and the fresh epoch accepts the same segment ID again.
+850   tract; it is not a bitwise repair of FP16 arithmetic. FP16 remains888               This is an acknowledged-history durability failure, not merely
+851   the proposer and SG-authority precision. Quality estimands889                       an availability loss; it is distinct from an in-process fork or a
+852   are defined against the FP16 singleton reference (Qwen) and890                      failure of the certificate predicate. This audit does not establish
+853   against unprotected feedback (Whisper); neither claims bitwise891                   display restoration for an external product UI. With the opt-in
+854   equivalence across precisions.                                    892               journal, recovery preserves the last complete committed prefix
+                                                                                    893   and transaction IDs, advances the contract epoch, and recom-
+855   Authority is an interface, not a precision. DGFT requires an894                     putes only the uncommitted suffix; provisional display remains
+856   authority path that emits a contract-bound canonical projection895                  outside the durable commit record. The process-kill evidence is
+                                                                                     13
+            a                                   Authority paths form a speed-quality frontier                                              913   appear. Consequently, the SG certified state-entry deadline and
+                                                color = authority adapter; shape = model scale; area = service energy                      914   the DGFT provisional display/segment-commit measurements
+                                            4
+                                                                                                                                           915   are reported separately; the manuscript does not transfer an SLO
+             P95 mixed-unit edit rate (%)
+
+
+
+
+                                                                                                                             Coarse 0.6B
+                                                                                                                                           916   pass label between them.
+                                            3
+                                                                                                                                           917   Why coarse authority improves throughput. The same-
+                                                                            Hybrid 0.6B
+                                                                                                         Coarse 1.7B
+                                                                                                                                           918   workload ablation supports the cost decomposition rather
+                                            2
+                                                                                                                                           919   than a granularity-only explanation. SG repeatedly invokes
+                                                    Hybrid 1.7B                                                                            920   an FP16 singleton authority and accumulates a synchronized
+                                            1
+                                                                                                                                           921   terminal burst; Coarse amortizes authority work through an
+                                                                  SG 1.7B                 SG 0.6B                                          922   FP32 batch, while Hybrid pays selective replay to recover a
+                                            0                                                                                peak 6.88x
+                                                                                                                                           923   more conservative quality point. This explains why Coarse
+                                                    3.5     4.0        4.5         5.0         5.5        6.0          6.5         7.0
+                                                                                                                                           924   has the shortest absolute wall time, why Hybrid is not uni-
+                                                          Wall-clock speedup over per-path canonical (x)                                   925   formly dominant, and why the ordering may change with
+                                                                                                                                           926   model-specific FP16/FP32 cost. Unlike token-level verified
+                                                                                                                                           927   speculation such as LLM-42 [13], the saved work here is mea-
+            b                                   Display and certification have distinct clocks                                             928   sured at a revision-state authorization boundary; unlike stateful
+                                                SG: state entry; DGFT: display circle to certified-segment square                          929   cache reuse [20, 21], the protected object is the transition that
+                                                                                         SG 2 s state-entry deadline
+          SG 0.6B                                                                                      2.735                               930   creates reusable state.
+
+          SG 1.7B                                                                                          2.964                           931   The cost equations are a decomposition, not a fitted oracle.
+                                                                                                                                           932   Equations (7)–(9) identify the complete authority-path terms
+      Coarse 0.6B                                                                                                                          933   and yield a sufficient operating condition; they do not claim a
+                                                                                                                                           934   workload-independent numerical predictor. H3 therefore com-
+       Hybrid 0.6B                                                                                                                         935   pares complete configurations on one frozen workload and re-
+                                                                                                                                           936   ports the model-dependent ordering reversal. Risk-bound sen-
+      Coarse 1.7B                                                                                                                          937   sitivity is evaluated separately and is never converted into fab-
+                                                                                                                                           938   ricated per-setting GPU times.
+       Hybrid 1.7B
+                                                                                                                                           939   Preflight amortization. The one-time contract preflight
+                                                0                  1                  2                  3                     4           940   costs 10.7–11.1 s.      With per-session steady-state savings
+                                                                                  P99 latency (s)                                          941   Δ𝑇 = 𝑇baseline − 𝑇DGFT , we define the break-even point as
+                                                                                                                                           942   𝑁 = ⌈𝑇preflight /Δ𝑇⌉ sessions. We report the one-time cost and
+                                                                             provisional display        certified commit
+                                                                                                                                           943   steady-state results separately, and exclude the preflight from
+      Figure 4: Same-workload operating points (c16). Coarse-DGFT is the through-944                                                             all service timing.
+      put point, Hybrid the quality-conservative point, and SG the same-granularity
+      certification point; latency scopes are never mixed on one axis.              945                                                          Not every ASR system needs DGFT. The original Voxtral report
+                                                                                                                                           946   studies multimodal audio understanding and long-context tran-
+                                                                                                                                           947   scription [22]; Voxtral Realtime instead uses a natively stream-
+896   CPU-driven; the primary commit-overhead result uses a Linux948                                                                             ing delayed-stream design [23]. Such append-only semantics
+897   ext4 data volume, with the Windows fixture retained separately.949                                                                         expose no rollback-style feedback write path, so the contamina-
+898   We did not inject OS/host crash, power loss, device failure, or950                                                                         tion channel of Section 2.4 is absent; at low concurrency (our
+899   network partition, and we did not run the GPU serving matrix951                                                                            c8 capacity probe) batching pressure is small. DGFT targets
+900   with WAL enabled. Consequently, the paper’s GPU throughput,952                                                                             the revision-generative operating regime where feedback writes
+901   energy, and P99 results remain volatile-mode measurements;953                                                                              and batching coexist.
+902   WAL’s end-to-end serving cost on RTX 3090 or V100 is not yet
+903   measured.                                                        954 Scale boundary. Under the stated trust and atomicity assump-
+                                                                       955 tions, safety is independent of adapter and granularity, but
+904   Quality estimands differ by family. Qwen edit rates measure956 performance remains hardware- and backend-specific. The
+905   distance to an independent canonical reference; Whisper WER957 RTX 3090 results establish cross-architecture mechanism porta-
+906   deltas measure improvement over unprotected feedback. The958 bility over five checkpoints. The independent 8×V100 experi-
+907   two answer different questions and are never pooled into a single959 ment adds single-node replica scaling and identifies c64 as the
+908   quality number.                                                  960 largest measured point satisfying the 2 s display SLO; c128 sat-
+                                                                       961 urates and fails that SLO. Three frozen repeats further separate
+909   Virtual arrival versus wall clock. Production cells schedule962 the planes: c64 display P99 remains 1.089/1.394 s while six-
+910   virtual causal arrivals; service wall-clock and energy meters963 second certified-segment commit P99 is 3.080/4.890 s. Hence
+911   measure real GPU work. Latency columns are labeled by se-964 the capacity statement is explicitly display-scoped; the certified
+912   mantics (display, state-entry, or segment-commit) wherever they965 frontier remains bounded but is not assigned the display SLO.
+
+                                                                                                                                            14
+                                                                                                      QWEN3-ASR · INDEPENDENT-CANONICAL CONTRACT                                           WHISPER · PROTECTED-FEEDBACK CONTRACT
+                                                                                                      peak 6.88× · two scales · Coarse + Hybrid                                            16/16 cells pass · median 2.84× · median energy −31.1%
+                                         GPU-normalized speedup (×) Wall-clock speedup (×)
+
+
+
+
+                                                                                                   6.88×
+                                                                                                                           6.06×
+                                                                                             6                                                     5.19×
+
+
+      a                                                                                      4
+                                                                                                                                                                   3.92×
+                                                                                                                                                                                                                          med 2.84×
+                                                                                                                                                                                                                                                     med 3.69×
+
+                                                                                                                                                                                         med 2.74×
+
+                                                                                             2
+
+
+
+
+                                                                                                   3.44×
+                                                                                                                           3.03×
+                                                                                             3
+                                                                                                                                                   2.59×
+
+      b                                                                                                                                                            1.96×                                                                             med 1.84×
+                                                                                             2
+                                                                                                                                                                                                                         med 1.42×
+                                                                                                                                                                                        med 1.37×
+
+
+                                                                                             1
+               Service-energy reduction (%)
+
+
+
+
+                                                                                                  59.81%
+                                                                                             60
+                                                                                                                           51.04%                 51.26%
+
+
+
+      c                                                                                      40                                                                                                                         med 31.13%
+                                                                                                                                                                                                                                                    med 32.41%
+                                                                                                                                                                  33.22%                med 30.11%
+
+
+
+
+                                                                                             20
+                                                                                                  Coarse                  Coarse                  Hybrid          Hybrid                 tiny.en                        base.en                     small.en
+                                                                                                   0.6B                    1.7B                    0.6B            1.7B
+                                                                                                                                        Qwen Coarse-DGFT   Qwen Hybrid-DGFT       Whisper median       synchronous        Poisson
+
+
+      Figure 5: Cross-family production evidence under per-contract baselines. One DGFT abstraction holds across both architecture families, but gain magnitudes are
+      authority-workload- and model-dependent; the Qwen and Whisper panels are different contracts and are never compared horizontally.
+
+
+
+966   Neither experiment establishes multi-node scalability or a data-988                                                                                                  8. Related Work
+967   center production claim. The V100 result also shows that even
+968   FP32 batching need not match singleton output, so its authority989                                                                                                   Streaming ASR and confirmation policies. Partial-hypothesis
+969   contract is platform-scoped rather than assumed from precision990                                                                                                    stability has long been recognized as distinct from final recog-
+970   alone. Higher-end accelerators and distributed authority ledgers991                                                                                                  nition quality [24, 25]. Modern streaming decoders therefore
+971   may change the cost ordering without changing the state-write992                                                                                                     manage revision at the display layer: transducers emit and revise
+972   authorization problem.                                          993                                                                                                  hypotheses as audio arrives [26], while Whisper-based stream-
+                                                                                                                                                                  994      ing maintains confirmed and unconfirmed prefixes and commits
+973   Distributed realization. DGFT’s commit history is session-995                                                                                                        text after repeated decoding passes agree [2, 1]; chunk-based
+974   local, so a multi-node implementation can partition sessions996                                                                                                      adaptations additionally detect truncation [27]. These policies
+975   across authority coordinators and store each session’s epoch,997                                                                                                     reduce visible flicker. RevTrace addresses a different boundary:
+976   parent version, frontier, and single-use certificate state under998                                                                                                  whether a generated projection is authorized to become a parent
+977   one linearizable ledger key. Certificate consumption and parent-999                                                                                                  of future model state. A display-confirmed prefix need not be
+978   version comparison then become a conditional write on that key;1000                                                                                                  certified against an independent authority path, and a provisional
+979   a replicated KV store or consensus-backed log can implement1001                                                                                                      display need not be allowed to update feedback state.
+980   this operation without placing the provisional display path on
+981   the consensus critical path. Network and consensus latency1002                                                                                                       Speculative execution and numerical verification. Speculative
+982   would instead extend authority/commit latency, while proposer1003                                                                                                    decoding verifies draft tokens against a target model so that ac-
+983   display can remain local. Failover must preserve the contract1004                                                                                                    celeration preserves the target distribution [11, 12]; Medusa,
+984   epoch and prevent certificate reuse. This is a design mapping,1005                                                                                                   EAGLE, and SpecInfer increase the accepted work per verifica-
+985   not an evaluated multi-node result: the present measurements1006                                                                                                     tion step [28, 29, 30]. More directly, LLM-42 combines a fast
+986   do not quantify cross-node commit latency, failover cost, or1007                                                                                                     nondeterministic path with a fixed arithmetic verification path
+987   distributed throughput, and those remain future work.          1008                                                                                                  and rollback [13]. RevTrace shares the propose–verify pattern
+                                                                                                                                                                 1009      but changes both the verified object and the safety condition:
+                                                                                                                                                                 1010      it certifies a revision transition whose projection can condition
+
+                                                                                                                                                                   15
+                    a         Qwen remains close to its canonical reference                                       1028   [20, 21], Parrot schedules application dataflow with semantic
+                              dots = sessions; diamond = empirical P95; shaded strip = exact
+                                                                                                                  1029   variables [31], Agentix manages cross-agent KV reuse [32],
+             Coarse 0.6B                                                                       11/16; P95 3.43% 1030     and Mooncake disaggregates KV-cache storage [33]. These
+                                                                                                                  1031   mechanisms reason about the identity, residency, transfer, or
+                                                                                                                  1032   dependency of already materialized state. They do not generally
+             Coarse 1.7B                                                                        9/16; P95 1.79%
+                                                                                                                  1033   expose a separate authorization point at which a batch-created,
+                                                                                                                  1034   model-generated revision projection must be certified before it
+              Hybrid 0.6B                                                                      13/16; P95 2.15%
+                                                                                                                  1035   becomes future feedback. RevTrace is therefore complemen-
+                                                                                                                  1036   tary: it governs state-entry authority before downstream cache
+                                                                                                                  1037   placement or reuse.
+              Hybrid 1.7B                                                                      10/16; P95 1.79%
+
+                                                                                                                  1038   Revision-generative and self-correcting models. Language
+                               0            1        2          3              4                5          6      1039   models also revise outputs through explicit application loops
+                                      Edit rate vs independent FP16 reference (%)                                 1040   such as self-refinement [34] and verbal feedback retained by
+                                                                                                                  1041   agents [35]. RevTrace targets the narrower systems case in
+                                                                                                                  1042   which generated text is fed back automatically by the serving
+                    b         Whisper protection improves both cohorts                                            1043   pipeline. Under this feedback edge, a numerically induced
+                              filled = development; open = untouched (40 long sessions per model)                 1044   output difference is not merely a different terminal answer: it
+               tiny.en dev                                    -12.23
+                                                                                all 95% upper bounds < 0 1045
+                                                                              U -10.48
+                                                                                                                         can change the next request and create an ancestry of dependent
+                                                                                                                  1046   revisions.
+         tiny.en untouched                                                   -8.26              U -5.15
+                                                                                                                  1047   Numerical variation. Parallel reductions, kernel selection, and
+              base.en dev                        -18.21      U -16.17
+                                                                                                                  1048   low-precision arithmetic can make mathematically equivalent
+                                                                                                                  1049   LLM inference paths numerically non-identical [10, 36]. Re-
+       base.en untouched                                            -11.03              U -7.51
+                                                                                                                  1050   producible reductions are possible, often with implementation
+                                                                                                                  1051   or performance cost [37, 38]. RevTrace does not claim to make
+             small.en dev          -25.27       U -22.15
+                                                                                                                  1052   the proposer bitwise deterministic. It instead names a canonical
+                                                                                                                  1053   authority path, treats proposer divergence as a first-class possi-
+       small.en untouched                                  -13.76                    U -9.09
+                                                                                                                  1054   bility, and restricts state installation to certificate-bearing tran-
+                                                                                                                  1055   sitions. This distinction is important because a small one-round
+                             −30        −25       −20        −15             −10               −5         0
+                                                                                                                  1056   numerical difference can become a durable causal difference
+                                     Paired WER change (points; negative is better)                               1057   only when the serving state machine feeds it forward.
+
+       Figure 6: Per-family quality contracts. Qwen measures distance to an inde-1058                                    Concurrency control and recovery. RevTrace borrows val-
+       pendent canonical reference; Whisper measures improvement over unprotected1059                                    idation and version fencing from optimistic concurrency
+       feedback. Open markers: untouched cohort, 𝑛 = 40 long sessions per model, de-1060                                 control [14] and provenance tracking from multiversion con-
+       terministically assembled from 214 previously unused source utterances (boot-
+       strap unit: long session).                                                   1061                                 currency control [15]. Cascading invalidation is reminiscent
+                                                                                                                  1062   of optimistic simulation rollback in Time Warp [39], while
+                                                                                                                  1063   partial external effects motivate the longstanding distinction
+1011   all later rounds, binds that certificate to parent provenance, and1064                                            between rollback and compensating actions in Sagas [40]. The
+1012   prevents uncertified descendants from entering committed state.1065                                               resulting guarantee is deliberately narrower than Herlihy–Wing
+1013   Thus token acceptance and revision-state installation are re-1066                                                 linearizability [16]: RevTrace proves a single fork-free com-
+1014   lated but non-interchangeable contracts. MarginGate sparsifies1067                                                mitted revision history under its certificate and parent-version
+1015   LLM-42-style verification using low token margins and repairs1068                                                 rules, not a real-time specification for every client invocation
+1016   the current KV column [19]; its risk signal does not itself define1069                                            and response. The validated object is also unusual—a model-
+1017   feedback-state authority, certificate binding, or parent-version1070                                              generated state projection rather than a conventional database
+1018   installation. H6 evaluates a clearly labeled revision-level adap-1071                                             write.
+1019   tation rather than attributing those semantics to the original
+1020   system.                                                           1072 Anytime-valid statistics. Confidence sequences and e-value-
+                                                                         1073 based tests remain valid under optional stopping [17, 18, 41].
+1021   LLM serving and materialized state. Throughput-oriented1074 RevTrace uses them only to monitor the randomized audits of
+1022   serving systems optimize request execution through paged1075 the SG adapter. They neither certify individual DGFT transi-
+1023   KV-cache management [4], iteration-level scheduling [5],1076 tions nor replace the deterministic transaction invariant; each
+1024   structured-program runtimes [6], chunked prefill [7], phase1077 statistical statement is scoped to its declared adapter, sampling
+1025   disaggregation [8], and request migration [9]. Stateful systems1078 process, and estimand.
+1026   further preserve, place, or reuse materialized state: Pensieve
+1027   and CachedAttention reuse or transport multi-turn KV state
+
+                                                                                                                    16
+       a                                            The method benefit survives an independent V100 contract                                                       b                         Balanced 4+4 replication scales the display plane to c64
+        Wall-clock speedup over all-singleton
+
+
+
+
+                                                    c16, 30 s bilingual sessions; circles 0.6B, triangles 1.7B                                                                         175   three-run median and min--max; c16 is an independently frozen baseline
+                                                                                                                         6.07x
+
+
+
+
+                                                                                                                                                  Audio throughput (x real time)
+                                                                                                                                                                                                                                                           157.8x
+                                                6                                         5.76x
+                                                                                                                                                                                       150
+
+                                                                                                                                   4.89x                                               125
+                                                5    4.68x                                        4.66x
+                                                                                                                                                                                                                                                           111.7x
+                                                                                                                                                                                       100
+
+                                                4                                                                                                                                      75
+
+                                                              3.25x
+                                                                                                                                                                                       50
+                                                3                                                                                                                                                                                                                0.6B                1.7B
+                                                                                                                                                                                       25
+                                                          SG                                 Hybrid                         Coarse                                                              c16                        c32                           c64                       c128
+
+
+
+
+       c                                            Display and certified commit have distinct capacity boundaries d                                                                         Balanced resources dominate replica count alone
+
+
+
+
+                                                                                                                                                  c64 audio throughput (x real time)
+                                                    the display SLO is not transferred to six-second segment commit                                                                    175   c64 three-run medians; point labels are allocation · certified-commit P99
+                                                             display P99          0.6B                                                                                                                             authority service <= proposer
+        P99 latency (s, log2 scale)
+
+
+
+
+                                                                                                                                                                                                                                                     Balanced 4+4 - 3.08s
+                                                8            commit P99           1.7B
+                                                                                                                                                                                       150
+                                                                                                   4.89s
+                                                                                                                                                                                       125
+                                                4                                                                                                                                                                    Authority-heavy 3+5 - 4.99s
+                                                                                                                                                                                       100                                                                                Balanced 4+4 - 4.89s
+                                                                                                   3.08s
+                                                2                                                                2 s display SLO                                                       75
+                                                                                                   1.39s
+                                                                                                                                                                                                                     Authority-heavy 3+5 - 6.27s
+                                                                                                                                                                                                                                  Minimal 1+1 - 11.76s
+                                                                                                                                                                                       50                                                          Minimal 1+1 - 19.70s
+                                                1
+                                                                                                   1.09s
+                                                                                                                                                                                       25
+                                                          c32                                  c64                           c128                                                              0.4             0.6                0.8               1.0               1.2                1.4
+                                                                                                                                                                                                                 Authority / proposer service ratio
+
+       Figure 7: Independent V100 replication and dual-plane capacity. (a) The normal-load c16 method ladder remains faster than all-singleton serving; on 1.7B
+       the Coarse/Hybrid quality boundary is 3.18% P95 final edit (8/16 exact sessions) while SG stays at 0%, and on 0.6B all modes are exact. (b) Balanced 4+4
+       proposer/authority replication scales throughput to c64; c32–c128 points are medians with min–max ranges over three frozen repeats, whereas c16 is the separately
+       frozen baseline. (c) Display and certified-segment commit latency are reported separately; the 2 s line applies only to display. (d) At c64, an authority-heavy 3+5
+       allocation reduces the authority/proposer ratio but loses throughput, supporting the two-stage cost model. V100/Transformers-eager measurements are not pooled
+       with RTX 3090/vLLM results.
+
+
+
+1079   Synthesis and gap. The closest lines therefore solve comple-1100                                                                           authority path—not granularity alone—and the measurements
+1080   mentary parts of the problem: streaming confirmation governs1101                                                                           identify when coarse authority is worthwhile. Across two ar-
+1081   display stability, verified speculation governs token acceptance,1102                                                                      chitecture families and five checkpoints, RevTrace reaches up
+1082   stateful serving governs reuse, and concurrency control governs1103                                                                        to 6.88× wall-clock speedup in volatile mode, with WAL dis-
+1083   conventional writes. To our knowledge, prior work does not1104                                                                             abled. We observe no output/state or transaction-install vio-
+1084   jointly define (i) a projection from generated revision output1105                                                                         lations in 800 Qwen revision events (480 SG and 320 DGFT)
+1085   into future feedback state, (ii) a certificate that authorizes that1106                                                                    and 1,048 Whisper commits; these finite traces support the de-
+1086   projection against a canonical path, and (iii) parent-version rules1107                                                                    clared contracts but are not a proof of zero implementation
+1087   that exclude uncertified descendants. RevTrace contributes this1108                                                                        faults. Same-granularity certification is the 𝜌 = 1 reduction of
+1088   intersection and evaluates its cost under two revision-generative1109                                                                      the protocol. Risk signals schedule verification but never autho-
+1089   architecture families; it does not claim to supersede the numer-1110                                                                       rize installation, and quality evidence does not transfer across
+1090   ical, caching, or scheduling mechanisms above.                     1111                                                                    estimands or canonical paths. On an independent single-node
+                                                                                                                                           1112   8×V100 contract, balanced four-proposer/four-authority scaling
+                                                                                                                                           1113   sustains median 157.8 × /111.7× audio real-time throughput for
+1091   9. Conclusion
+                                                                                                                                           1114   Qwen3-ASR 0.6B/1.7B at c64, with display P99 1.089/1.394 s
+1092       Revision-generative serving turns generated outputs into1115                                                                           and separately measured certified commit P99 3.080/4.890 s.
+1093   speculative writes to future model state. This paper formalized1116                                                                        The c128 points fail the 2 s display SLO and are retained as
+1094   the resulting contamination channel and introduced certificate-1117                                                                        the measured capacity boundary. These values extend the ev-
+1095   bearing transactions that separate display authority from state-1118                                                                       idence to high-concurrency single-node serving without being
+1096   write authority. Under the stated trust and binding assump-1119                                                                            pooled with the RTX 3090/vLLM contract. Implementing the
+1097   tions, the protocol excludes uncertified ancestry, produces a1120                                                                          session-partitioned ledger across nodes and measuring its con-
+1098   single fork-free committed revision history, and remains safe1121                                                                          sensus/commit cost, and extending the transaction discipline to
+1099   for any granularity ratio. Its cost is governed by the complete1122                                                                        other feedback-driven text and multimodal revision models, are
+
+                                                                                                                                             17
+1123   the natural next steps.                                           1166    [4] W. Kwon, Z. Li, S. Zhuang, Y. Sheng, L. Zheng, C. H.
+                                                                         1167        Yu, J. Gonzalez, H. Zhang, I. Stoica, Efficient Mem-
+                                                                         1168        ory Management for Large Language Model Serving
+1124   CRediT authorship contribution statement
+                                                                         1169        with PagedAttention, Proceedings of the 29th Symposium
+1125        Bin Zhou: Conceptualization, Methodology, Software,1170                  on Operating Systems Principles (2023) 611–626doi:
+1126   Validation, Investigation, Writing – original draft. Jiyuan1171               10.1145/3600006.3613165.
+1127   Miao: Visualization. Xi Cao: Supervision, Project adminis-
+                                                                  1172           [5] G.-I. Yu, J. S. Jeong, G.-W. Kim, S. Kim, B.-G. Chun,
+1128   tration, Writing – review & editing.
+                                                                         1173        Orca: A Distributed Serving System for Transformer-
+                                                                         1174        Based Generative Models, in: 16th USENIX Symposium
+1129   Declaration of competing interest                                 1175        on Operating Systems Design and Implementation (OSDI
+                                                                         1176        ’22), USENIX Association, Carlsbad, CA, USA, 2022.
+1130       The authors declare that they have no known competing
+1131   financial interests or personal relationships that could have ap-1177     [6] L. Zheng, L. Yin, Z. Xie, C. Sun, J. Huang, C. H. Yu,
+1132   peared to influence the work reported in this paper.             1178         S. Cao, C. Kozyrakis, I. Stoica, J. E. Gonzalez, C. Bar-
+                                                                         1179        rett, Y. Sheng, SGLang: Efficient Execution of Struc-
+1133   Declaration of generative AI and AI-assisted technologies in1180              tured Language Model Programs, arXiv preprint (2023).
+1134   the manuscript preparation process                          1181              arXiv:2312.07104.
+
+1135       During the preparation of this work, the authors used Ope-1182        [7] A. Agrawal, N. Kedia, A. Panwar, J. Mohan, N. Kwa-
+1136   nAI ChatGPT for language polishing and writing assistance.1183                tra, B. S. Gulavani, A. Tumanov, R. Ramjee, Tam-
+1137   The authors reviewed and edited the output as needed and take1184             ing Throughput-Latency Tradeoff in LLM Inference with
+1138   full responsibility for the content of the published article. 1185            Sarathi-Serve, arXiv preprint (2024). arXiv:2403.
+                                                                         1186        02310.
+
+1139   Acknowledgments                                                   1187    [8] Y. Zhong, S. Liu, J. Chen, J. Hu, Y. Zhu, X. Liu, X. Jin,
+                                                                         1188        H. Zhang, DistServe: Disaggregating Prefill and Decoding
+1140       The computations in this work were supported by the High1189              for Goodput-optimized Large Language Model Serving,
+1141   Performance Computing Platform of BUCT (Beijing University1190                arXiv preprint (2024). arXiv:2401.09670.
+1142   of Chemical Technology). This work received no specific grant
+1143   from any funding agency in the public, commercial, or not-for-1191        [9] B. Sun, Z. Huang, H. Zhao, W. Xiao, X. Zhang, Y. Li,
+1144   profit sectors.                                               1192            W. Lin, Llumnix: Dynamic Scheduling for Large Lan-
+                                                                         1193        guage Model Serving, arXiv preprint (2024). arXiv:
+                                                                         1194        2406.03243.
+1145   Data availability
+                                                                         1195   [10] J. Yuan, H. Li, X. Ding, W. Xie, Y.-J. Li, W. Zhao, K. Wan,
+1146       The source code, frozen audited result artifacts, replay man-1196         J. Shi, X. Hu, Z. Liu, Understanding and Mitigating Nu-
+1147   ifests, and analysis scripts supporting this study are publicly1197           merical Sources of Nondeterminism in LLM Inference,
+1148   available in the RevTrace repository at https://github.com/1198               in: Advances in Neural Information Processing Systems,
+1149   zhouz4884-coder/RevTrace.                                        1199         Vol. 38, 2025. arXiv:2506.09501.
+                                                                         1200        URL https://arxiv.org/abs/2506.09501
+1150   References
+                                                                      1201 [11] Y. Leviathan, M. Kalman, Y. Matias, Fast Inference from
+1151    [1] A. Radford, J. W. Kim, T. Xu, G. Brockman, C. McLeavey,1202         Transformers via Speculative Decoding, arXiv preprint
+1152        I. Sutskever, Robust Speech Recognition via Large-Scale1203         (2022). arXiv:2211.17192.
+1153        Weak Supervision, arXiv preprint (2022). arXiv:2212.
+1154        04356.                                                    1204 [12] C. Chen, S. Borgeaud, G. Irving, J.-B. Lespiau, L. Sifre,
+                                                                      1205      J. Jumper, Accelerating Large Language Model Decoding
+1155    [2] D. Macháček, R. Dabre, O. Bojar, Turning Whisper into1206           with Speculative Sampling, arXiv preprint (2023). arXiv:
+1156        Real-Time Transcription System, Proceedings of the 13th1207         2302.01318.
+1157        International Joint Conference on Natural Language Pro-
+1158        cessing and the 3rd Conference of the Asia-Pacific Chapter1208 [13] R. Gond, A. K. Kamath, R. Ramjee, A. Panwar, LLM-42:
+1159        of the Association for Computational Linguistics: System1209        Enabling Determinism in LLM Inference with Verified
+1160        Demonstrations (2023) 17–24doi:10.18653/v1/2023.          1210      Speculation, arXiv preprint (2026). arXiv:2601.17768.
+1161        ijcnlp-demo.3.                                            1211      URL https://arxiv.org/abs/2601.17768
+
+1162    [3] X. Shi, X. Wang, Z. Guo, Y. Wang, P. Zhang, X. Zhang,1212 [14] H. T. Kung, J. T. Robinson, On optimistic methods for con-
+1163        Z. Guo, H. Hao, Y. Xi, B. Yang, J. Xu, J. Zhou, J. Lin,1213    currency control, ACM Transactions on Database Systems
+1164        Qwen3-ASR Technical Report, arXiv preprint (2026).     1214    6 (2) (1981) 213–226. doi:10.1145/319566.319567.
+1165        arXiv:2601.21337.
+                                                                           18
+1215   [15] P. A. Bernstein, N. Goodman, Multiversion concurrency1267           T. Robert, T. Wang, T. Lacroix, T. Bewley, V. Nemy-
+1216        control—theory and algorithms, ACM Transactions on1268              chnikova, V. Paltz, V. Richard, W.-D. Li, W. Marshall,
+1217        Database Systems 8 (4) (1983) 465–483. doi:10.1145/1269             X. Zhang, Y. Wan, Y. Tang, Voxtral, arXiv preprint (2025).
+1218        319996.319998.                                       1270           arXiv:2507.13264.
+1219   [16] M. P. Herlihy, J. M. Wing, Linearizability: A Correctness1271 [23] Mistral-AI, A. H. Liu, A. Ehrenberg, A. Lo, C.-Y. Sun,
+1220        Condition for Concurrent Objects, ACM Transactions on1272          G. Lample, et al., Voxtral Realtime, arXiv preprint
+1221        Programming Languages and Systems 12 (3) (1990) 463–1273           (2026). arXiv:2602.11298, doi:10.48550/arXiv.
+1222        492. doi:10.1145/78969.78972.                            1274      2602.11298.
+
+1223   [17] S. R. Howard, A. Ramdas, J. McAuliffe, J. Sekhon, Time-1275 [24] E. Selfridge, I. Arizmendi, P. A. Heeman, J. D. Williams,
+1224        uniform, nonparametric, nonasymptotic confidence se-1276             Stability and Accuracy in Incremental Speech Recogni-
+1225        quences, The Annals of Statistics 49 (2) (2021). doi:1277            tion, in: Proceedings of the SIGDIAL 2011 Conference,
+1226        10.1214/20-aos1991.                                        1278      Association for Computational Linguistics, 2011, pp. 110–
+                                                                       1279      119.
+1227   [18] A. Ramdas, P. Grünwald, V. Vovk, G. Shafer, Game-1280                URL https://aclanthology.org/W11-2014/
+1228        Theoretic Statistics and Safe Anytime-Valid Inference, Sta-
+1229        tistical Science 38 (4) (2023). doi:10.1214/23-sts894.1281 [25] Y. Shangguan, J. Li, Y. Qian, T. Yoshioka, Optimizing
+                                                                       1282      Speech Recognition for the Edge, in: Proceedings of
+1230   [19] K. Chu, Y. Zhou, W. Zhang, MarginGate: Sparse Margin-1283            Interspeech 2020, 2020, pp. 591–595. doi:10.21437/
+1231        Triggered Verification for Batch-Invariant LLM Inference,1284        Interspeech.2020-1194.
+1232        arXiv preprint (2026). arXiv:2605.30218.
+                                                                       1285 [26] A. Graves, Sequence transduction with recurrent neural
+1233        URL https://arxiv.org/abs/2605.30218
+                                                                       1286      networks (2012). arXiv:1211.3711.
+1234   [20] L. Yu, J. Lin, J. Li, Stateful Large Language Model Serving1287      URL https://arxiv.org/abs/1211.3711
+1235        with Pensieve, in: Proceedings of the Twentieth European
+                                                                       1288 [27] H. Wang, G. Hu, L. Guodong, W.-Q. Zhang, J. Li, S. Wang,
+1236        Conference on Computer Systems, 2025, pp. 144–158.
+                                                                       1289      J. Xiao, Simul-whisper: Attention-guided streaming whis-
+1237        doi:10.1145/3689031.3696086.
+                                                                       1290      per with truncation detection (2024). arXiv:2406.
+1238   [21] B. Gao, Z. He, P. Sharma, Q. Kang, D. Jevdjic, J. Deng,    1291      10052.
+1239        X. Yang, Z. Yu, P. Zuo, Cost-Efficient Large Lan-1292 [28] T. Cai, Y. Li, Z. Geng, H. Peng, J. D. Lee, D. Chen, T. Dao,
+1240        guage Model Serving for Multi-turn Conversations with1293            Medusa: Simple LLM Inference Acceleration Framework
+1241        CachedAttention, in: 2024 USENIX Annual Technical1294                with Multiple Decoding Heads, in: Proceedings of the
+1242        Conference (USENIX ATC ’24), USENIX Association,1295                 41st International Conference on Machine Learning, Vol.
+1243        2024, pp. 111–126.                                         1296      235 of Proceedings of Machine Learning Research, 2024,
+1244        URL            https://www.usenix.org/conference/1297                pp. 5209–5235.
+1245        atc24/presentation/gao-bin-cost                            1298      URL         https://proceedings.mlr.press/v235/
+1246   [22] A. H. Liu, A. Ehrenberg, A. Lo, C. Denoix, C. Bar-1299           cai24b.html
+1247        reau, G. Lample, J.-M. Delignon, K. R. Chandu, P. v.1300 [29] Y. Li, F. Wei, C. Zhang, H. Zhang, EAGLE: Speculative
+1248        Platen, P. R. Muddireddy, S. Gandhi, S. Ghosh, S. Mishra,1301    Sampling Requires Rethinking Feature Uncertainty, in:
+1249        T. Foubert, A. Rastogi, A. Yang, A. Q. Jiang, A. Sablay-1302     Proceedings of the 41st International Conference on
+1250        rolles, A. Héliou, A. Martin, A. Agarwal, A. Roux,1303           Machine Learning, Vol. 235 of Proceedings of Machine
+1251        A. Darcet, A. Mensch, B. Bout, B. Rozière, B. D.1304             Learning Research, 2024, pp. 28935–28948.
+1252        Monicault, C. Bamford, C. Wallenwein, C. Renaudin,1305           URL          https://proceedings.mlr.press/v235/
+1253        C. Lanfranchi, D. Dabert, D. S. Chaplot, D. Mizelle,1306         li24bt.html
+1254        D. d. l. Casas, E. Chane-Sane, E. Fugier, E. B. Hanna,
+1255        G. Berrada, G. Delerce, G. Guinet, G. Novikov, G. Mar-1307 [30] X. Miao, G. Oliaro, Z. Zhang, X. Cheng, Z. Wang,
+1256        tin, H. Jaju, J. Ludziejewski, J. Rute, J.-H. Chabran,1308       Z. Zhang, R. Y. Y. Wong, A. Zhu, L. Yang, X. Shi,
+1257        J. Chudnovsky, J. Studnia, J. Barmentlo, J. Amar, J. S.     1309 C. Shi, Z. Chen, D. Arfeen, R. Abhyankar, Z. Jia, SpecIn-
+1258        Roberts, J. Denize, K. Saxena, K. Yadav, K. Khandel-        1310 fer: Accelerating Generative Large Language Model Serv-
+1259        wal, K. Jain, L. R. Lavaud, L. Blier, L. Zhao, L. Martin,   1311 ing with Tree-based Speculative Inference and Verifica-
+1260        L. Saulnier, L. Gao, M. Pellat, M. Guillaumin, M. Felardos, 1312 tion, in: Proceedings of the 29th ACM International Con-
+1261        M. Dinot, M. Darrin, M. Augustin, M. Seznec, N. Gupta,      1313 ference on Architectural Support for Programming Lan-
+1262        N. Raghuraman, O. Duchenne, P. Wang, P. Saffer, P. Ja-      1314 guages and Operating Systems, Volume 3, 2024, pp. 932–
+1263        cob, P. Wambergue, P. Kurylowicz, P. Chagniot, P. Stock,    1315 949. doi:10.1145/3620666.3651335.
+1264        P. Agrawal, R. Delacourt, R. Sauvestre, R. Soletskyi,1316 [31] C. Lin, Z. Han, C. Zhang, Y. Yang, F. Yang, C. Chen,
+1265        S. Vaze, S. Subramanian, S. Garg, S. Dalal, S. Gandhi,1317       L. Qiu, Parrot: Efficient Serving of LLM-based Ap-
+1266        S. Aithal, S. Antoniak, T. L. Scao, T. Schueller, T. Lavril,1318 plications with Semantic Variable, in: 18th USENIX
+                                                                       19
+1319        Symposium on Operating Systems Design and Imple-1370 [41] P. Grünwald, R. de Heide, W. Koolen, Safe testing,
+1320        mentation (OSDI ’24), USENIX Association, 2024, pp.1371   Journal of the Royal Statistical Society Series B: Sta-
+1321        929–945.                                           1372   tistical Methodology 86 (5) (2024) 1091–1128. doi:
+1322        URL         https://www.usenix.org/conference/1373        10.1093/jrsssb/qkae011.
+1323        osdi24/presentation/lin-chaofan
+
+1324   [32] M. Luo, X. Shi, C. Cai, T. Zhang, J. Wong, Y. Wang,
+1325        C. Wang, Y. Huang, Z. Chen, J. E. Gonzalez, I. Stoica,
+1326        Agentix: An Efficient Serving Engine for LLM Agents
+1327        as General Programs, in: 23rd USENIX Symposium on
+1328        Networked Systems Design and Implementation (NSDI
+1329        ’26), USENIX Association, 2026, pp. 2443–2459.
+1330        URL         https://www.usenix.org/conference/
+1331        nsdi26/presentation/luo
+1332   [33] R. Qin, Z. Li, W. He, M. Zhang, Y. Wu, W. Zheng, J. Xu,
+1333        Mooncake: A KVCache-centric Disaggregated Archi-
+1334        tecture for LLM Serving, in: 23rd USENIX Conference
+1335        on File and Storage Technologies (FAST ’25), USENIX
+1336        Association, 2025, pp. 155–170.
+1337        URL          https://www.usenix.org/conference/
+1338        fast25/presentation/qin
+
+1339   [34] A. Madaan, N. Tandon, P. Gupta, S. Hallinan, L. Gao,
+1340        S. Wiegreffe, U. Alon, N. Dziri, S. Prabhumoye, Y. Yang,
+1341        S. Gupta, B. P. Majumder, K. M. Hermann, S. Welleck,
+1342        A. Yazdanbakhsh, P. Clark, Self-refine: Iterative refine-
+1343        ment with self-feedback (2023). arXiv:2303.17651.
+1344        URL https://arxiv.org/abs/2303.17651
+
+1345   [35] N. Shinn, F. Cassano, E. Berman, A. Gopinath,
+1346        K. Narasimhan, S. Yao, Reflexion: Language agents
+1347        with verbal reinforcement learning (2023). arXiv:2303.
+1348        11366.
+1349        URL https://arxiv.org/abs/2303.11366
+
+1350   [36] B. Antunes, D. R. Hill, Reproducibility, Replicability and
+1351        Repeatability: A survey of reproducible research with a
+1352        focus on high performance computing, Computer Science
+1353        Review 53 (2024) 100655. doi:10.1016/j.cosrev.
+1354        2024.100655.
+
+1355   [37] J. Demmel, H. D. Nguyen, Fast Reproducible Floating-
+1356        Point Summation, in: 2013 IEEE 21st Symposium on
+1357        Computer Arithmetic (ARITH), 2013, pp. 163–172. doi:
+1358        10.1109/arith.2013.9.
+1359   [38] I. Müller, A. Arteaga, T. Hoefler, Reproducible Floating-
+1360        Point Aggregation in RDBMSs, in: 2018 IEEE 34th Inter-
+1361        national Conference on Data Engineering (ICDE), 2018,
+1362        pp. 993–1004. doi:10.1109/icde.2018.00098.
+1363   [39] D. R. Jefferson, Virtual Time, ACM Transactions on Pro-
+1364        gramming Languages and Systems 7 (3) (1985) 404–425.
+1365        doi:10.1145/3916.3988.
+1366   [40] H. Garcia-Molina, K. Salem, Sagas, in: Proceedings
+1367        of the 1987 ACM SIGMOD International Conference
+1368        on Management of Data, 1987, pp. 249–259. doi:
+1369        10.1145/38713.38742.
+                                                                         20
+
