@@ -1,0 +1,1 @@
+Approved four-figure editorial renderer. Shape-first colour mechanism, two-panel core factorial line contrasts, and separate single-column native fractions. Root complete-manifest/no-argument source gate required before formal CLI. No actual interval reader or model is included. Numeric reuse functions remain byte-derived from frozen v7 arithmetic.

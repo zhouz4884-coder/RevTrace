@@ -1,0 +1,46 @@
+For a call $j$, its complete frozen input is \emph{confirmed} when it
+matches the installed parent, \emph{refuted} when an actual selected state
+at its start frontier differs, and \emph{unknown} without either witness.
+Covered targets and fenced sessions cannot supply selected results.
+Table~\ref{tab:coordinator} separates these input decisions from actual
+view application.
+
+\begin{table}[t]
+\centering
+\caption{Event-driven coordination of confirmed calls and supported
+whole views.}
+\label{tab:coordinator}
+\begingroup\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\columnwidth}>{\raggedright\arraybackslash}p{0.32\columnwidth}>{\raggedright\arraybackslash}p{0.46\columnwidth}@{}}
+\toprule
+Event & Required evidence & Action\\
+\midrule
+Dispatch & Ready worker; accepted audio and an eligible session start &
+Use the unchanged dispatcher; freeze the full input, target and original
+job identity.\\
+ASR result & Bound recognition result and contiguous provisional path &
+Extend the typed prediction and publish its provisional view; do not
+select it.\\
+Full result & Bound original result [AU]; complete input status [EL] &
+Select if confirmed, buffer if unknown; deny use if refuted, covered or
+fenced.\\
+Select ready & Confirmed complete result and unchanged installed parent &
+Synchronize the bound fact before installation; record the selected state
+and recheck pending calls.\\
+Consumer update & Ordered fact, actual parent and whole-view support [SUP]
+$S(C,h)$ & Advance the certified view. Retain the complete ahead $h$ when
+supported; otherwise render the installed state.\\
+\bottomrule
+\end{tabular}
+\endgroup
+\end{table}
+
+The dispatcher scans available workers and sessions in their existing
+order. Within each session it tries missing selected work before a
+conditional tail, subject to the ahead bound; it imposes no global
+selected-work priority across sessions. Unknown input grants neither
+selection nor a refutation-based cancellation proof. Replacing a typed
+prediction with its complete result keeps only the suffix that consumes
+the actual output contiguously. Physical release and producer-failure
+handling follow Section~\ref{sec:protocol}.

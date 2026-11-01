@@ -1,0 +1,94 @@
+An audio interval can meet both first-delivery deadlines yet become
+temporarily unavailable after a compatible feedback update. In streaming
+speech correction, a selected correction supplies the input to later
+recognition~\cite{vu2026streamcorrect}. Here, trusted feedback is feedback
+accepted by the original protected selection process. In the actual
+execution of Figure~\ref{fig:continuity_case}(a), a complete interval is
+displayed within two seconds (D2), then withdrawn despite a still-valid
+dependency path. Identical text returns through certified delivery within
+eight seconds (C8), leaving a 2.176-s gap between the two timely first
+deliveries. We call this an \emph{avoidable
+withdrawal}: an update retracts a delivered whole view that it still
+supports. The client loses progress that the revision did not refute.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/timely_full_interval_case.pdf}
+\caption{On-time delivery does not guarantee continued availability.
+Two actual c16-overload runs process the same complete 12--14-s audio
+interval using their own ready clocks. (a) Computation-only displays 37
+new code points at 1.444~s, withdraws the supported view at 1.544~s and
+restores identical text at 3.720~s. (b) RevTrace first displays the same
+whole text at 2.027~s, missing D2 by 27.4~ms, and keeps the interval
+covered thereafter. Its 3.794-s selected update retains an ahead 16-s view.
+The dotted line marks D2 (2~s); both certified deliveries meet C8 (8~s).
+These are separate executions with different interleavings, rather than
+an event-matched counterfactual.}
+\label{fig:continuity_case}
+\end{figure*}
+
+The two executions separate first-delivery latency from continued
+availability; the factorial study in Section~\ref{sec:eval} measures how
+coordination affects both across controlled runs.
+
+A dependable revision service must both reject invalid results and
+preserve progress that remains usable. Discarding all older work enforces
+a conservative boundary at the cost of service. Preserving computation
+alone leaves another gap: the Consumer can still replace its valid ahead
+view when a selected state installs. In a predeclared 24-speaker stratum,
+computation retention improves timely audio coverage while increasing
+backward movements of the displayed audio frontier, or \emph{frontier
+withdrawals}, from 12 to 17. Coordinating computation and view retention
+yields zero. Valid execution must therefore be connected to continued
+availability at the actual Consumer.
+
+The challenge is to act on evidence that arrives at different times.
+A revision can remove a view's support without refuting the unresolved
+input of a future call; confirming an input does not endorse the call's
+own predicted successor. Thus one revision can require different actions
+for an executing call, an accepted result and a displayed hypothesis.
+RevTrace separates
+three judgments. \textbf{[EL] Input eligibility} checks the complete frozen
+input and its dependency path under the selected feedback state.
+\textbf{[AU] Selection authority} keeps the original selection and ordered
+installation bound to the complete original result. \textbf{[SUP] View
+support} checks the Consumer's whole hypothesis when that state installs
+(Figure~\ref{fig:protocol}). Producer exit can end new-message authority
+while leaving an already accepted result eligible. A birth version,
+matching text, or producer-liveness bit cannot stand in for these
+different decisions.
+
+Dependency reuse and revocation have established foundations in
+incremental dialogue and computation
+\cite{schlangen2011incremental,hammer2014adapton,hammer2015names}.
+SSBD coordinates draft reuse with display masking~\cite{zeng2026ssbd};
+PredGen speculates across evolving speech stages~\cite{li2025predgen}.
+RevTrace realizes coordination around a recursively selected feedback
+task: complete calls retain the original correction and update, while
+the actual whole view is checked independently at selected-state
+installation. This provides a concrete use for old work without turning
+a prediction into selection authority.
+
+We make three contributions:
+\begin{itemize}
+\item A service contract exposing avoidable withdrawal and sufficient,
+  executable witnesses for complete-call eligibility and whole-view
+  support across trusted revisions
+  (Sections~\ref{sec:contract}--\ref{sec:continuation}).
+\item A joint coordinator that preserves the original selected transition
+  relation while retaining eligible calls and supported whole views.
+  Its conditional selected-trace argument connects early execution,
+  durable selection and supported process failures
+  (Sections~\ref{sec:continuation}--\ref{sec:protocol}).
+\item Evidence that computation-only retention can worsen visible
+  progress, and that confirmed full calls improve timely original-task
+  service. Factorial, native and fault controls distinguish these benefits
+  from text accuracy, recovery latency and load boundaries
+  (Section~\ref{sec:eval}).
+\end{itemize}
+
+In the matched four-speaker native study, audio coverage meeting both
+deadlines increases from 45.2\% with conservative execution to 99.2\% with
+RevTrace; whole-run passes rise from zero to six of eight. A whole-run
+pass meets both P99 delivery targets. The independent factorial study explains why
+retaining work and retaining its delivered view are separate obligations.
