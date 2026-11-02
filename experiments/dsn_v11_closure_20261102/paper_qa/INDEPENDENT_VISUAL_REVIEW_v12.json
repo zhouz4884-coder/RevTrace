@@ -1,0 +1,65 @@
+{
+  "review_id": "INDEPENDENT_VISUAL_REVIEW_v12_audit_protocol_cost_20261102",
+  "status": "PASS_NO_MUST_FIX_ISSUES_IN_SIX_REVIEWED_PAGES",
+  "reviewer": "/root/audit_protocol_cost",
+  "method": "PDF skill: direct inspection of all six supplied full-page PNG renders; independent SHA256 of actual PDF and each reviewed PNG; read-only PDF text-span bounds sanity check",
+  "scope": "Pages 1, 5, 7, 8, 11 and 12 only. Root reviews the other six pages and grayscale. This is editorial and visual QA, not a new experiment or an independent proof audit.",
+  "pdf_path": "D:/VLA_QWEN/RevTrace/Paper_DSN/revisions/20261102_dsn2027_release_v12/main.pdf",
+  "pdf_sha256": "a9083a908c345003ca0c7f87a23bdb8c647c8350fd74c1ebbeefbcf9f99dbbd9",
+  "pdf_pages": 12,
+  "actual_pdf_hash_matches_requested_hash": true,
+  "reviewed_pages": [
+    {
+      "page": 1,
+      "png_path": "paper_qa/final_render_a9083a908c34/page_01.png",
+      "sha256": "979e07d7fdb822d756300e0b05c4918652dfa3a21b8aed8e74b774a62e9a6a11",
+      "direct_visual_inspection": "PASS",
+      "checks": "Abstract and introduction explicitly name eight previously unused native speakers; 40.6% to 93.9%, 0/16 to 10/16, and paired 53.3 pp [44.8,59.6] are legible and consistent with the existing confirmation summary. EL/AU/SUP have distinct judgments. Contributions and the System and Failure Model heading retain body text on this page."
+    },
+    {
+      "page": 5,
+      "png_path": "paper_qa/final_render_a9083a908c34/page_05.png",
+      "sha256": "65c093508eb9c43002fa2adaa13994d5d85ec39a0a2478b678e4518f9df096b6",
+      "direct_visual_inspection": "PASS",
+      "checks": "Table I is readable without overlapping cells. The AU proposition and proof retain visible assumptions, and the adjacent synthesis connects EL retention, AU selected transitions and SUP supported-view application separately. Section and subsection headings have following body text; no stranded title or clipped proof marker."
+    },
+    {
+      "page": 7,
+      "png_path": "paper_qa/final_render_a9083a908c34/page_07.png",
+      "sha256": "ff06626e1ce32c643a416f2e5437c994c9af3123f194844355b2b6ced3e1b277",
+      "direct_visual_inspection": "PASS",
+      "checks": "Table II contains only the eight-speaker confirmation bank: each policy offers 137.864 audio-s; 56.000/129.460 s credit, 5.027/1.762 s mean per-run D99, 690.989/654.845 J per audio-s and 0/16 versus 10/16 are clearly labeled. Resident evidence remains separately named in prose. The S0915 case correctly distinguishes seven missed frontiers from six late non-EOS replacement calls; 7.591 dispatch, 7.976 ASR and 8.023 actual consumption align with the original r0 events and the 8.000 deadline. No new method claim is implied by this case paragraph."
+    },
+    {
+      "page": 8,
+      "png_path": "paper_qa/final_render_a9083a908c34/page_08.png",
+      "sha256": "8cb39d114639d65c65cd14f35fec43c3b9ae81d67f57a66f0ff1090b8ce2aa99",
+      "direct_visual_inspection": "PASS",
+      "checks": "Figures 3 and 4 and their legends, small slices, axes and captions are legible at the supplied page rendering. Figure 4 separates Independent (8 speakers) from Resident (4 speakers) and gives their separate offered denominators in the caption. Retrospective text agreement is explicitly separated from online SUP and human accuracy. Finding 2 states that AU remains intact while EL confirms inputs and SUP independently supports whole views. No clipping or overlap."
+    },
+    {
+      "page": 11,
+      "png_path": "paper_qa/final_render_a9083a908c34/page_11.png",
+      "sha256": "f0aba2a69c8719c7cf6927b6de5c403b42f55da619b8179dd493ec0ac401e473",
+      "direct_visual_inspection": "PASS",
+      "checks": "Related-work continuations, Discussion, Conclusion and AI Tool Usage are readable with no orphan section heading. The conclusion retains three separate executable witnesses and the declared state/failure scope. It does not claim a new acoustic model, corrector or general Retire reproduction."
+    },
+    {
+      "page": 12,
+      "png_path": "paper_qa/final_render_a9083a908c34/page_12.png",
+      "sha256": "c4784a1c077c27931891872549eb74ba4182fbf5b008906563beb3f709d6dd3e",
+      "direct_visual_inspection": "PASS",
+      "checks": "References occupy the single final page and visibly reach [31]. Reference [17] continues normally at the top of the second column before [18]. No clipped URL, overlap, extra reference page or spill beyond the bottom margin is visible."
+    }
+  ],
+  "text_span_bounds_sanity": {
+    "reviewed_pages_only": true,
+    "text_spans_outside_page": 0,
+    "font_minimum_caveat": "PDF-wide span minima include legitimate mathematical subscripts, so they are not interpreted as body or figure label sizes; the actual page renders were inspected for readability."
+  },
+  "issues": [],
+  "must_fix_count": 0,
+  "preferences_reported_as_defects": false,
+  "modified_manuscript_figures_frozen_source_or_CURRENT": false,
+  "new_models_or_experiments_run": false
+}

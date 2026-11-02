@@ -54,6 +54,32 @@ for row in raw:
     other=next(p for p in posterior['policies'] if p['mode']=='whitespace_stripped' and p['policy']==row['policy'])
     assert {k:v for k,v in row.items() if k!='mode'}=={k:v for k,v in other.items() if k!='mode'}
 assert nd['quality']['policy_repeat_consistent'] and nd['quality']['character_edits_unique_once']==23 and nd['quality']['reference_characters_unique_once']==174
+frozen= json.loads((E/'baseline/FROZEN_V11_INPUTS.json').read_bytes())
+for row in frozen['rows']:
+    p=R/row['path'];assert p.stat().st_size==row['bytes'] and sha(p)==row['sha256'],row['path']
+oldpaper=R/'Paper_DSN/revisions/20261102_dsn2027_release_v11'
+for environment in ['proposition','proof','equation']:
+    pattern=r'\\begin\{'+environment+r'\}.*?\\end\{'+environment+r'\}'
+    oldblocks=[];newblocks=[]
+    for p in sorted(oldpaper.rglob('*.tex')):
+        q=paper/p.relative_to(oldpaper);assert q.exists()
+        oldblocks.extend(re.findall(pattern,p.read_text(encoding='utf-8'),re.S))
+        newblocks.extend(re.findall(pattern,q.read_text(encoding='utf-8'),re.S))
+    assert oldblocks==newblocks,environment+' blocks changed'
+for p in (oldpaper/'figures').glob('*.pdf'):assert sha(p)==sha(paper/'figures'/p.name)
+trace_path=E/'analysis/FINAL/SUMMARY.json';trace=json.loads(trace_path.read_bytes())
+assert trace['status']=='PASS_COMPLETE32_RECORDED_TRACE_ACCOUNTING' and trace['new_model_calls']==0
+assert trace['raw_inputs_before_after_unchanged'] and trace['all32_original_endpoint_fields_conserved']
+assert trace['selected_steps']==trace['all_offered_endpoint_rows']==564
+assert trace['controls']['tests']==9 and trace['raw_input_files']==420 and trace['issued_job_timeline_rows']==610
+claims_path=E/'review/EVENT_CLAIMS.json';claims=json.loads(claims_path.read_bytes())
+assert len(claims['six_late_refutations_each_repeat'])==12
+assert len(claims['all_six_failed_EOS_already_late_at_publication_receive'])==6
+for item in claims['source_deficits']:
+    assert f"{item['fullcall_dual_deadline_missed_audio_s']:.3f}" in nt or item['speaker_id']!='S0915'
+example=claims['S0915_r0_F6']
+for key in ['dispatch_s','ASR_boundary_s','actual_D_s']:assert f"{example[key]:.3f}" in nt
+assert '8.404' in nt and '27.8' in nt and '61.4' in nt
 doc=fitz.open(pdf);assert len(doc)==12
 texts=[p.get_text() for p in doc];assert texts[-1].lstrip().startswith('REFERENCES')
 assert not any(t.lstrip().startswith('REFERENCES') for t in texts[:-1])
@@ -86,6 +112,8 @@ record=dict(gate='PASS_NUMERIC_BINDINGS_ANONYMOUS_SOURCE_FONTS_AND_11_PLUS_1_LAY
             final_native_16_case_272_transition_binding_sha256=sha(prior),
             baseline_v9_preserved=True,baseline_v10_preserved=True,native_report_sha256=sha(native_data),native_source_units=8,native_trials=32,
             native_selected_transitions=564,native_numeric_bindings=native_bindings,native_paired_coverage_CI=ci,
+            baseline_v11_files_preserved=frozen['files'],method_propositions_proofs_equations_unchanged=True,all_four_figures_unchanged=True,
+            recorded_event_analysis_sha256=sha(trace_path),event_claims_sha256=sha(claims_path),new_NN_trials_this_closure=0,
             rendered_pages=renders,visual_acceptance='PENDING_DIRECT_INSPECTION')
 visual=E/'paper_qa/VISUAL_REVIEW_v12.json'
 if visual.exists():
