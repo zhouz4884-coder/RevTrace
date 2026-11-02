@@ -1,0 +1,25 @@
+{"status": "FAIL_FROZEN_CPU_CONTROLS", "tests": 9, "expected": 9, "exit_code": 1, "wall_seconds": 0.1095216078683734, "code_commit": "eac56deba800695c536dd3edc8e1ea43c9af2d1f", "source_clean_after": true, "new_model_calls": 0}
+test_01_actual_G_exceeds_F_and_original_clock_path_is_conserved (test_trace_controls.TraceControls.test_01_actual_G_exceeds_F_and_original_clock_path_is_conserved) ... ok
+test_02_canonical_fallback_requires_bound_fact_not_a_fabricated_private_ASR (test_trace_controls.TraceControls.test_02_canonical_fallback_requires_bound_fact_not_a_fabricated_private_ASR) ... ok
+test_03_missing_phase_time_remains_NA_and_signed_intervals_are_not_zeroed (test_trace_controls.TraceControls.test_03_missing_phase_time_remains_NA_and_signed_intervals_are_not_zeroed) ... ok
+test_04_partial_EOS_all_offered_credit_and_archived_endpoints_are_conserved (test_trace_controls.TraceControls.test_04_partial_EOS_all_offered_credit_and_archived_endpoints_are_conserved) ... ok
+test_05_only_complete_paired_32_scope_with_eight_distinct_speakers_is_accepted (test_trace_controls.TraceControls.test_05_only_complete_paired_32_scope_with_eight_distinct_speakers_is_accepted) ... ok
+test_06_duplicate_dispatch_UID_and_foreign_completion_fail_closed (test_trace_controls.TraceControls.test_06_duplicate_dispatch_UID_and_foreign_completion_fail_closed) ... ok
+test_07_full_state_equality_is_not_text_or_python_numeric_coercion (test_trace_controls.TraceControls.test_07_full_state_equality_is_not_text_or_python_numeric_coercion) ... ok
+test_08_retained_view_keeps_its_actual_publication_and_source_deficits_are_not_hardcoded (test_trace_controls.TraceControls.test_08_retained_view_keeps_its_actual_publication_and_source_deficits_are_not_hardcoded) ... ok
+test_09_empty_text_zero_visible_frontier_keeps_original_nonzero_tip_binding (test_trace_controls.TraceControls.test_09_empty_text_zero_visible_frontier_keeps_original_nonzero_tip_binding) ... FAIL
+
+======================================================================
+FAIL: test_09_empty_text_zero_visible_frontier_keeps_original_nonzero_tip_binding (test_trace_controls.TraceControls.test_09_empty_text_zero_visible_frontier_keeps_original_nonzero_tip_binding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_v11_closure_20261102/trace_v2/test_trace_controls.py", line 241, in test_09_empty_text_zero_visible_frontier_keeps_original_nonzero_tip_binding
+    with self.assertRaisesRegex(TraceError, 'cell=empty-regression consumer_row_index0=0'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: TraceError not raised
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.006s
+
+FAILED (failures=1)
+
