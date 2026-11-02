@@ -1,0 +1,31 @@
+{
+  "experiment_id": "REVTRACE_STRICT_NEW_TEST_SPEAKER_CONFIRMATION_20261102_V1",
+  "frozen_before_first_service_cell": true,
+  "independent_unit": "speaker; combine both timing repeats within each policy first",
+  "expected_speakers": 8,
+  "expected_trials": 32,
+  "service_plan_sha256": "6093f5edc85496fa17e7949f0d4db156579a227e975c0a66156264d3e604d3a0",
+  "primary_coverage_effect": "100*(sum fullcall credit - sum conservative credit)/sum offered; all eight sources and both timing repeats",
+  "source_consistency_effect": "arithmetic mean of eight speaker-paired credit percentage point differences",
+  "bootstrap": {
+    "generator": "stdlib random.Random",
+    "seed": 20261102,
+    "draws": 20000,
+    "speakers_per_draw": 8,
+    "replace": true,
+    "confidence": 0.95,
+    "percentile_interpolation": "linear rank=(draws-1)*p; p=.025,.975",
+    "resample": "same source indices for both policies and all per-source offered denominators"
+  },
+  "retain_negative_sources_and_all_EOS": true,
+  "no_frontier_or_repeat_independence": true,
+  "no_threshold_source_budget_or_method_tuning": true,
+  "mandatory_checks": [
+    "32 complete original4f tasks and endpoints",
+    "per-speaker ABBA with GPU-role rotation",
+    "original selected complete state/C/IDs and human CER unchanged between policies",
+    "common origin-to-physical-model-drain both-board energy",
+    "separate unchanged c4 full actual trace closure"
+  ],
+  "scope": "Uncertainty is source-paired within the metadata-selected8\u20139s cohort; does not estimate natural prevalence or saturated capacity"
+}
