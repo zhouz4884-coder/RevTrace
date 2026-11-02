@@ -1,0 +1,3160 @@
+{
+  "status": "PASS_COMPLETE_ORIGINAL_C4_CONFIRM32_TRACE_CLOSURE",
+  "experiment_id": "REVTRACE-CONFIRM32-ORIGINAL-C4-CLOSURE-20261102",
+  "code_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+  "execution_roles": {
+    "controller": {
+      "source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/confirmation_c4_v1",
+      "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/CONFIRMATION_C4_V1_SOURCE.json",
+      "manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "complete_files": 5,
+      "clean": true
+    },
+    "actual_checker": {
+      "source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/original_c4_source",
+      "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "complete_files": 6,
+      "clean": true
+    },
+    "actual_NN": {
+      "source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/source_v2",
+      "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_resilience_20261030/SOURCE_v2.json",
+      "manifest_sha256": "60ae549fcc98165a74e5a3dc420bf93418296099fa12b410572b15d281b2c457",
+      "complete_files": 59,
+      "clean": true
+    },
+    "original_service_driver": {
+      "source_commit": "d865af11e9a8d6c451146942d1708a8caed8d1d9",
+      "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/confirmation_v2",
+      "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/CONFIRMATION_V2_SOURCE.json",
+      "manifest_sha256": "dee522a8df4680f2d676cac9ed9f852398e5ec39f54db1ff00f1dcf97d1f277e",
+      "complete_files": 6,
+      "clean": true
+    },
+    "production_support": {
+      "source_commit": "a13fa0a335529dc188f7e738877a3acd027ce4a7",
+      "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/paired_resident_source_v2",
+      "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/PAIRED_RESIDENT_SOURCE_v2.json",
+      "manifest_sha256": "8cadffbfe9ffcc1eb3efdf5e2702e7afbc2ec932158c12dd197d6f0bdc334934",
+      "complete_files": 18,
+      "clean": true
+    }
+  },
+  "planned_cells": 32,
+  "completed_cells": 32,
+  "passed_cells": 32,
+  "failed_cells": 0,
+  "expected_source_count": 8,
+  "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+  "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "distinct_original_checker_controls": 35,
+  "control_repetitions_per_complete_case": 35,
+  "controls_are_repeated_not_new_independent_fault_types": true,
+  "original_NN_driver_gate": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/GATE.json",
+  "original_NN_driver_gate_sha256": "dda705b6d5f08465541c6c86c1f728a7a8f5e7f38c40b41ea83a89d4db075bd3",
+  "original_pending_gate_preserved": true,
+  "original_pending_entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/ROOT_ACTUAL_TRACE_RECHECK_ENTRY.json",
+  "original_pending_entry_sha256": "274c02935a61ce94da82cea5e40f7287b40e00394227ab23cdf1dee0a432129c",
+  "root_actual_trace_recheck_pending": false,
+  "Root_actual_trace_audit_pending": false,
+  "new_model_calls": 0,
+  "GPU_calls": 0,
+  "cells": [
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r0",
+      "position": 0,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0902W0343_fullcall_r0",
+      "source_id": "BAC009S0902W0343",
+      "speaker_id": "S0902",
+      "strategy": "fullcall",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0902W0343_fullcall_r0.json",
+      "frozen_config_sha256": "06edefae994914d5e1fa1d3a3663b95def9ad561456e4d4dd8406b2a709c4c22",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0902W0343_fullcall_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0902W0343_fullcall_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0902W0343_fullcall_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:33.530255+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 24,
+        "complete_original_receipts": 19,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 54,
+        "verified_complete_Private_path_links": 21,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 36,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 1,
+          "compatible_ahead_preserved": 1,
+          "incompatible_ahead_withdrawals": 1
+        },
+        "natural_cases": [
+          {
+            "row_index": 28,
+            "source_id": "BAC009S0902W0343",
+            "kind": "compatible_actual_whole_view_preserved",
+            "visible_before": 88000,
+            "certified_processing_after": 80000
+          },
+          {
+            "row_index": 40,
+            "source_id": "BAC009S0902W0343",
+            "kind": "necessary_complete_input_incompatibility",
+            "visible_before": 120000,
+            "certified_processing_after": 112000
+          }
+        ],
+        "final_Canonical_frontiers": {
+          "BAC009S0902W0343": 137055
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1527533,
+          "total_bytes": 1527533,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0902W0343": 137055
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 24,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "45db174bc9fd2a57e410c917d6b0ec8621f5930673a79eadc21fe4b8fe720bf0",
+      "checker_gate_sha256": "45db174bc9fd2a57e410c917d6b0ec8621f5930673a79eadc21fe4b8fe720bf0",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0902W0343_conservative_r0",
+      "position": 1,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0902W0343_conservative_r0",
+      "source_id": "BAC009S0902W0343",
+      "speaker_id": "S0902",
+      "strategy": "conservative",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0902W0343_conservative_r0.json",
+      "frozen_config_sha256": "828c5fd6747a96c4aff7c63e7efee17f5f6867ff43eb9074c39c0e403c185f9f",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0902W0343_conservative_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0902W0343_conservative_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0902W0343_conservative_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:34.184712+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0902W0343": 137055
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1406751,
+          "total_bytes": 1406751,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0902W0343": 137055
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "c00445a4b16455e3ccb6714737a42305dca403cc6fed8ff4d4d6f29bdf7da262",
+      "checker_gate_sha256": "c00445a4b16455e3ccb6714737a42305dca403cc6fed8ff4d4d6f29bdf7da262",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0914W0456_conservative_r0",
+      "position": 2,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0914W0456_conservative_r0",
+      "source_id": "BAC009S0914W0456",
+      "speaker_id": "S0914",
+      "strategy": "conservative",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0914W0456_conservative_r0.json",
+      "frozen_config_sha256": "a8a83a61b1cdbb0c1f8f90fcbc9c3fa661620c8109fa64b02baa4d6e0e8d341f",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0914W0456_conservative_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0914W0456_conservative_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0914W0456_conservative_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:34.784493+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0914W0456": 142449
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1399122,
+          "total_bytes": 1399122,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0914W0456": 142449
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "a48c89757498ff0acb72ef5f28a3a92f4ccfa30a680d75cbe721717f8ab34df2",
+      "checker_gate_sha256": "a48c89757498ff0acb72ef5f28a3a92f4ccfa30a680d75cbe721717f8ab34df2",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0914W0456_fullcall_r0",
+      "position": 3,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0914W0456_fullcall_r0",
+      "source_id": "BAC009S0914W0456",
+      "speaker_id": "S0914",
+      "strategy": "fullcall",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0914W0456_fullcall_r0.json",
+      "frozen_config_sha256": "8426acc4caaec3489c1f77101185ed471da4a1e7436df8ef2c24a2c992a0af7b",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0914W0456_fullcall_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0914W0456_fullcall_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0914W0456_fullcall_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:35.372922+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 20,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0914W0456": 142449
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1560348,
+          "total_bytes": 1560348,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0914W0456": 142449
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 20,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "435c6fdb3afc2bb71c4d71d0d492716c6e74017b105c1a385a607d25ead62682",
+      "checker_gate_sha256": "435c6fdb3afc2bb71c4d71d0d492716c6e74017b105c1a385a607d25ead62682",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0907W0440_conservative_r0",
+      "position": 4,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0907W0440_conservative_r0",
+      "source_id": "BAC009S0907W0440",
+      "speaker_id": "S0907",
+      "strategy": "conservative",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0907W0440_conservative_r0.json",
+      "frozen_config_sha256": "d591b42f79af566e31604417640645b8ab3b6c4e260b5a14ea2e1c137b6f24a3",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0907W0440_conservative_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0907W0440_conservative_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0907W0440_conservative_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:35.986256+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0907W0440": 137215
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1399068,
+          "total_bytes": 1399068,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0907W0440": 137215
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "ccb33e5171188699a7fd80dd552f28f63bee65e2c6fbc57f0c5bcc189ac66ab5",
+      "checker_gate_sha256": "ccb33e5171188699a7fd80dd552f28f63bee65e2c6fbc57f0c5bcc189ac66ab5",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0907W0440_fullcall_r0",
+      "position": 5,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0907W0440_fullcall_r0",
+      "source_id": "BAC009S0907W0440",
+      "speaker_id": "S0907",
+      "strategy": "fullcall",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0907W0440_fullcall_r0.json",
+      "frozen_config_sha256": "9d910739f7ed0ab78e123dcc189fe7477ab38c8c0cd614d2b590c1f8f007fb6d",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0907W0440_fullcall_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0907W0440_fullcall_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0907W0440_fullcall_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:36.549031+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 20,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 19,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 1,
+          "compatible_ahead_preserved": 1,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [
+          {
+            "row_index": 22,
+            "source_id": "BAC009S0907W0440",
+            "kind": "compatible_actual_whole_view_preserved",
+            "visible_before": 72000,
+            "certified_processing_after": 64000
+          }
+        ],
+        "final_Canonical_frontiers": {
+          "BAC009S0907W0440": 137215
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1571017,
+          "total_bytes": 1571017,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0907W0440": 137215
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 20,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "6ad873e58a1324b9ad9d9f5b628438a23c5e713576334f2017581f64e65d51a4",
+      "checker_gate_sha256": "6ad873e58a1324b9ad9d9f5b628438a23c5e713576334f2017581f64e65d51a4",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0769W0190_fullcall_r0",
+      "position": 6,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0769W0190_fullcall_r0",
+      "source_id": "BAC009S0769W0190",
+      "speaker_id": "S0769",
+      "strategy": "fullcall",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0769W0190_fullcall_r0.json",
+      "frozen_config_sha256": "77aa5300ce44dc4b5333f7c8aa70dc561d49c4fa3c3289525f22be3224b2a35e",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0769W0190_fullcall_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0769W0190_fullcall_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0769W0190_fullcall_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:37.140844+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 17,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0769W0190": 134721
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1506301,
+          "total_bytes": 1506301,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0769W0190": 134721
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 17,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "c95199e54eb3a7099ea56e4816d5a8d386e9ef13e2f7c2b1398130df183355b6",
+      "checker_gate_sha256": "c95199e54eb3a7099ea56e4816d5a8d386e9ef13e2f7c2b1398130df183355b6",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0769W0190_conservative_r0",
+      "position": 7,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0769W0190_conservative_r0",
+      "source_id": "BAC009S0769W0190",
+      "speaker_id": "S0769",
+      "strategy": "conservative",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0769W0190_conservative_r0.json",
+      "frozen_config_sha256": "f86a0c5449e0a7748b5258f1af14b5db522e6a712cd3d4670b88437534d8f0bd",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0769W0190_conservative_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0769W0190_conservative_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0769W0190_conservative_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:37.713255+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 17,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0769W0190": 134721
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1321858,
+          "total_bytes": 1321858,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0769W0190": 134721
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 17,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "df3a84830ceec92390819006863aa8848fe4782a4294a6239d3b55a9166d61e6",
+      "checker_gate_sha256": "df3a84830ceec92390819006863aa8848fe4782a4294a6239d3b55a9166d61e6",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0915W0286_fullcall_r0",
+      "position": 8,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0915W0286_fullcall_r0",
+      "source_id": "BAC009S0915W0286",
+      "speaker_id": "S0915",
+      "strategy": "fullcall",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0915W0286_fullcall_r0.json",
+      "frozen_config_sha256": "2b536273d653aa38cc5b7557c0844d6c8a9ad7d37c40de8386cd2c8c3ea9db78",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0915W0286_fullcall_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0915W0286_fullcall_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0915W0286_fullcall_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:38.249724+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 26,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0915W0286": 143969
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1496027,
+          "total_bytes": 1496027,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0915W0286": 143969
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 26,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "7b4735c7deab14906b5b3f8fd7ce43f81e730377985451af122d0c545232b003",
+      "checker_gate_sha256": "7b4735c7deab14906b5b3f8fd7ce43f81e730377985451af122d0c545232b003",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0915W0286_conservative_r0",
+      "position": 9,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0915W0286_conservative_r0",
+      "source_id": "BAC009S0915W0286",
+      "speaker_id": "S0915",
+      "strategy": "conservative",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0915W0286_conservative_r0.json",
+      "frozen_config_sha256": "430ece5865d35149b790041b7becba3b56cc8141e648cee0fe35047e4a08ae65",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0915W0286_conservative_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0915W0286_conservative_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0915W0286_conservative_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:38.812039+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0915W0286": 143969
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1410217,
+          "total_bytes": 1410217,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0915W0286": 143969
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "fa0e23a97f226bc9d7f444f60fcd084738288a0b0c59654f05a2fec5d67267b3",
+      "checker_gate_sha256": "fa0e23a97f226bc9d7f444f60fcd084738288a0b0c59654f05a2fec5d67267b3",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0912W0434_conservative_r0",
+      "position": 10,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0912W0434_conservative_r0",
+      "source_id": "BAC009S0912W0434",
+      "speaker_id": "S0912",
+      "strategy": "conservative",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0912W0434_conservative_r0.json",
+      "frozen_config_sha256": "899423bbe1cd5be0f1f3f62c0b5f498d42b52782eb9501add68a696360331515",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0912W0434_conservative_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0912W0434_conservative_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0912W0434_conservative_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:39.328299+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0912W0434": 144000
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1408830,
+          "total_bytes": 1408830,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0912W0434": 144000
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "d5afa5ca57feb94ecb66158778a974a51a719ee9e6d7a52430e4d836f965ffbe",
+      "checker_gate_sha256": "d5afa5ca57feb94ecb66158778a974a51a719ee9e6d7a52430e4d836f965ffbe",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0912W0434_fullcall_r0",
+      "position": 11,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0912W0434_fullcall_r0",
+      "source_id": "BAC009S0912W0434",
+      "speaker_id": "S0912",
+      "strategy": "fullcall",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0912W0434_fullcall_r0.json",
+      "frozen_config_sha256": "822c0267d5856faa31d32a1814291778f70ef36c4c99983c602dcf554ac489de",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0912W0434_fullcall_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0912W0434_fullcall_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0912W0434_fullcall_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:39.845427+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 19,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0912W0434": 144000
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1582966,
+          "total_bytes": 1582966,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0912W0434": 144000
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 19,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "2a06c1956b709b01118c086901efbd06d8d409f74f745e98bce3b9324cf56596",
+      "checker_gate_sha256": "2a06c1956b709b01118c086901efbd06d8d409f74f745e98bce3b9324cf56596",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0906W0197_conservative_r0",
+      "position": 12,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0906W0197_conservative_r0",
+      "source_id": "BAC009S0906W0197",
+      "speaker_id": "S0906",
+      "strategy": "conservative",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0906W0197_conservative_r0.json",
+      "frozen_config_sha256": "37b5f251dd0ac20bec8d6e854a5344288e4da5e2f3c9c140e36ef2bfcf4d2d74",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0906W0197_conservative_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0906W0197_conservative_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0906W0197_conservative_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:40.417360+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 17,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0906W0197": 133295
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1314034,
+          "total_bytes": 1314034,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0906W0197": 133295
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 17,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "0c922ec4178715c4f7d17760a2c3cd86e12e3c0095a9144549a8e585694cb192",
+      "checker_gate_sha256": "0c922ec4178715c4f7d17760a2c3cd86e12e3c0095a9144549a8e585694cb192",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0906W0197_fullcall_r0",
+      "position": 13,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0906W0197_fullcall_r0",
+      "source_id": "BAC009S0906W0197",
+      "speaker_id": "S0906",
+      "strategy": "fullcall",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0906W0197_fullcall_r0.json",
+      "frozen_config_sha256": "62704bc3eeb93fba643c8ef057885f5915ddfe89770ee6fed9828d4c4505f607",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0906W0197_fullcall_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0906W0197_fullcall_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0906W0197_fullcall_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:40.927121+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 20,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0906W0197": 133295
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1461783,
+          "total_bytes": 1461783,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0906W0197": 133295
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 20,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "1254766b81e03f51bfe2b09badb89763a341ad8bf3dc2f36c99e3a43e4d4a76a",
+      "checker_gate_sha256": "1254766b81e03f51bfe2b09badb89763a341ad8bf3dc2f36c99e3a43e4d4a76a",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0901W0183_conservative_r0",
+      "position": 14,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0901W0183_conservative_r0",
+      "source_id": "BAC009S0901W0183",
+      "speaker_id": "S0901",
+      "strategy": "conservative",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0901W0183_conservative_r0.json",
+      "frozen_config_sha256": "4ed4f8c8d1436161f03abec529968f6ef3781b6cf6cc19609520b2fa0704a4ce",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0901W0183_conservative_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0901W0183_conservative_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0901W0183_conservative_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:41.505183+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 17,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0901W0183": 130209
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1324492,
+          "total_bytes": 1324492,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0901W0183": 130209
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 17,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "ec666d7a10440b0fd18ca0ae99f5ae50fde9e9c13cba0e745efe12be9bc86135",
+      "checker_gate_sha256": "ec666d7a10440b0fd18ca0ae99f5ae50fde9e9c13cba0e745efe12be9bc86135",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0901W0183_fullcall_r0",
+      "position": 15,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0901W0183_fullcall_r0",
+      "source_id": "BAC009S0901W0183",
+      "speaker_id": "S0901",
+      "strategy": "fullcall",
+      "repeat": 0,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0901W0183_fullcall_r0.json",
+      "frozen_config_sha256": "649763bc47e94c004778756e047f6cd7835b36cb2193fb506082b4724b140011",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0901W0183_fullcall_r0",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0901W0183_fullcall_r0/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0901W0183_fullcall_r0/GATE.json",
+      "started_utc": "2026-11-02T10:02:42.029351+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 18,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 20,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 2,
+          "compatible_ahead_preserved": 2,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [
+          {
+            "row_index": 25,
+            "source_id": "BAC009S0901W0183",
+            "kind": "compatible_actual_whole_view_preserved",
+            "visible_before": 80000,
+            "certified_processing_after": 72000
+          },
+          {
+            "row_index": 40,
+            "source_id": "BAC009S0901W0183",
+            "kind": "compatible_actual_whole_view_preserved",
+            "visible_before": 120000,
+            "certified_processing_after": 112000
+          }
+        ],
+        "final_Canonical_frontiers": {
+          "BAC009S0901W0183": 130209
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1485704,
+          "total_bytes": 1485704,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0901W0183": 130209
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "9ca700d9b37a18594a6726967599c6889715c846c46a4468308121159ede45f9",
+      "checker_gate_sha256": "9ca700d9b37a18594a6726967599c6889715c846c46a4468308121159ede45f9",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0901W0183_fullcall_r1",
+      "position": 16,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0901W0183_fullcall_r1",
+      "source_id": "BAC009S0901W0183",
+      "speaker_id": "S0901",
+      "strategy": "fullcall",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0901W0183_fullcall_r1.json",
+      "frozen_config_sha256": "ad18e5858a23133ead7f33d8523e0beb5231edaedb515f722d6db50c8283f96d",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0901W0183_fullcall_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0901W0183_fullcall_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0901W0183_fullcall_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:42.559130+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 18,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 20,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 2,
+          "compatible_ahead_preserved": 2,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [
+          {
+            "row_index": 25,
+            "source_id": "BAC009S0901W0183",
+            "kind": "compatible_actual_whole_view_preserved",
+            "visible_before": 80000,
+            "certified_processing_after": 72000
+          },
+          {
+            "row_index": 40,
+            "source_id": "BAC009S0901W0183",
+            "kind": "compatible_actual_whole_view_preserved",
+            "visible_before": 120000,
+            "certified_processing_after": 112000
+          }
+        ],
+        "final_Canonical_frontiers": {
+          "BAC009S0901W0183": 130209
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1485701,
+          "total_bytes": 1485701,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0901W0183": 130209
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "ee3265efed963cfef6dd90ad45f18d0007b6a54c65966ee38486dac8db6eeb8f",
+      "checker_gate_sha256": "ee3265efed963cfef6dd90ad45f18d0007b6a54c65966ee38486dac8db6eeb8f",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0901W0183_conservative_r1",
+      "position": 17,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0901W0183_conservative_r1",
+      "source_id": "BAC009S0901W0183",
+      "speaker_id": "S0901",
+      "strategy": "conservative",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0901W0183_conservative_r1.json",
+      "frozen_config_sha256": "1666a1904d7299a71c80b72033007e0c13fc4f12f37197fd1d34fe62861dc8ea",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0901W0183_conservative_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0901W0183_conservative_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0901W0183_conservative_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:43.100928+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 17,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0901W0183": 130209
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1324492,
+          "total_bytes": 1324492,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0901W0183": 130209
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 17,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "ec666d7a10440b0fd18ca0ae99f5ae50fde9e9c13cba0e745efe12be9bc86135",
+      "checker_gate_sha256": "ec666d7a10440b0fd18ca0ae99f5ae50fde9e9c13cba0e745efe12be9bc86135",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0906W0197_fullcall_r1",
+      "position": 18,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0906W0197_fullcall_r1",
+      "source_id": "BAC009S0906W0197",
+      "speaker_id": "S0906",
+      "strategy": "fullcall",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0906W0197_fullcall_r1.json",
+      "frozen_config_sha256": "ddfef7f813006b80b2d8a72168da95bb91bdb35d6f6b2dc03cc34f11cfe6a5f7",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0906W0197_fullcall_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0906W0197_fullcall_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0906W0197_fullcall_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:43.608925+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 20,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0906W0197": 133295
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1461783,
+          "total_bytes": 1461783,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0906W0197": 133295
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 20,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "1254766b81e03f51bfe2b09badb89763a341ad8bf3dc2f36c99e3a43e4d4a76a",
+      "checker_gate_sha256": "1254766b81e03f51bfe2b09badb89763a341ad8bf3dc2f36c99e3a43e4d4a76a",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0906W0197_conservative_r1",
+      "position": 19,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0906W0197_conservative_r1",
+      "source_id": "BAC009S0906W0197",
+      "speaker_id": "S0906",
+      "strategy": "conservative",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0906W0197_conservative_r1.json",
+      "frozen_config_sha256": "f62b9576c483399a987b7f5fad2a7803f35b5ca4f517480e4715fb7b7793183b",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0906W0197_conservative_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0906W0197_conservative_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0906W0197_conservative_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:44.170946+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 17,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0906W0197": 133295
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1314032,
+          "total_bytes": 1314032,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0906W0197": 133295
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 17,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "3a9dbfabe6626a516807f1d796b1aa9dd4cca5e34ce436c27e12a5f54ea4a464",
+      "checker_gate_sha256": "3a9dbfabe6626a516807f1d796b1aa9dd4cca5e34ce436c27e12a5f54ea4a464",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0912W0434_fullcall_r1",
+      "position": 20,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0912W0434_fullcall_r1",
+      "source_id": "BAC009S0912W0434",
+      "speaker_id": "S0912",
+      "strategy": "fullcall",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0912W0434_fullcall_r1.json",
+      "frozen_config_sha256": "95f55f7dcd47698c870ce54663c7848716dcd80b150d821f203ecf2beabb3fd7",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0912W0434_fullcall_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0912W0434_fullcall_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0912W0434_fullcall_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:44.665300+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 19,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0912W0434": 144000
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1582983,
+          "total_bytes": 1582983,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0912W0434": 144000
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 19,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "9506ee052126bcaa78c96479cd0b89b57ac4910e88018228aadd03584026ed62",
+      "checker_gate_sha256": "9506ee052126bcaa78c96479cd0b89b57ac4910e88018228aadd03584026ed62",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0912W0434_conservative_r1",
+      "position": 21,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0912W0434_conservative_r1",
+      "source_id": "BAC009S0912W0434",
+      "speaker_id": "S0912",
+      "strategy": "conservative",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0912W0434_conservative_r1.json",
+      "frozen_config_sha256": "ea738d67b24c6138a6448578419461ee7834d9a941ac2be279a629da26972e60",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0912W0434_conservative_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0912W0434_conservative_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0912W0434_conservative_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:45.230923+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0912W0434": 144000
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1408846,
+          "total_bytes": 1408846,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0912W0434": 144000
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "62bd003154d704880dde9198c74b15573616961f17a7c54fc9476a7aa3dac9a8",
+      "checker_gate_sha256": "62bd003154d704880dde9198c74b15573616961f17a7c54fc9476a7aa3dac9a8",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0915W0286_conservative_r1",
+      "position": 22,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0915W0286_conservative_r1",
+      "source_id": "BAC009S0915W0286",
+      "speaker_id": "S0915",
+      "strategy": "conservative",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0915W0286_conservative_r1.json",
+      "frozen_config_sha256": "893d1689f85d3ce3a0c4a54b896b4c718d72207a868b742f1c636b0be9534ad0",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0915W0286_conservative_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0915W0286_conservative_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0915W0286_conservative_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:45.735001+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0915W0286": 143969
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1410209,
+          "total_bytes": 1410209,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0915W0286": 143969
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "3d3ed610f96dd5fcea0e242aba9bf12ac6dbc765bb284c826116d5bf2df763a3",
+      "checker_gate_sha256": "3d3ed610f96dd5fcea0e242aba9bf12ac6dbc765bb284c826116d5bf2df763a3",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0915W0286_fullcall_r1",
+      "position": 23,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0915W0286_fullcall_r1",
+      "source_id": "BAC009S0915W0286",
+      "speaker_id": "S0915",
+      "strategy": "fullcall",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0915W0286_fullcall_r1.json",
+      "frozen_config_sha256": "b80da0094eae667767708f7460f98f031b73265cbddcec5bb86e6683cb2a1f6d",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0915W0286_fullcall_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0915W0286_fullcall_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0915W0286_fullcall_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:46.255304+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 26,
+        "complete_original_receipts": 19,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0915W0286": 143969
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1496034,
+          "total_bytes": 1496034,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0915W0286": 143969
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 26,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "69b17dae8e252c4d72aa82f54d05c96846301dee0f73ad68cb6b96b839e0b9dd",
+      "checker_gate_sha256": "69b17dae8e252c4d72aa82f54d05c96846301dee0f73ad68cb6b96b839e0b9dd",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0769W0190_conservative_r1",
+      "position": 24,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0769W0190_conservative_r1",
+      "source_id": "BAC009S0769W0190",
+      "speaker_id": "S0769",
+      "strategy": "conservative",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0769W0190_conservative_r1.json",
+      "frozen_config_sha256": "871f4811c6d7044b93e5efb8415247902e9160c6547230d8950f950fedf50d73",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0769W0190_conservative_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0769W0190_conservative_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0769W0190_conservative_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:46.839116+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 17,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0769W0190": 134721
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1321862,
+          "total_bytes": 1321862,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0769W0190": 134721
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 17,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "2c85413db50f26647fc09dbcc04b04ddec8812f4a8a675cca51880a93738c65b",
+      "checker_gate_sha256": "2c85413db50f26647fc09dbcc04b04ddec8812f4a8a675cca51880a93738c65b",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0769W0190_fullcall_r1",
+      "position": 25,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0769W0190_fullcall_r1",
+      "source_id": "BAC009S0769W0190",
+      "speaker_id": "S0769",
+      "strategy": "fullcall",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0769W0190_fullcall_r1.json",
+      "frozen_config_sha256": "4ad9b5afb6bf261ef377b6c877fbc8f520584e2a7e62ec81385bde491c37eaa1",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0769W0190_fullcall_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0769W0190_fullcall_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0769W0190_fullcall_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:47.328100+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 17,
+        "unique_original_C_U_jobs_used": 17,
+        "dispatches": 17,
+        "complete_original_receipts": 17,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 50,
+        "verified_complete_Private_path_links": 16,
+        "counts": {
+          "canonical_applications": 17,
+          "private_applications": 33,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0769W0190": 134721
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1506297,
+          "total_bytes": 1506297,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0769W0190": 134721
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 17,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "736567be52281392aac6c7cf199be7013275dc5e4d42ce03362891612a69835f",
+      "checker_gate_sha256": "736567be52281392aac6c7cf199be7013275dc5e4d42ce03362891612a69835f",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 17,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0907W0440_fullcall_r1",
+      "position": 26,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0907W0440_fullcall_r1",
+      "source_id": "BAC009S0907W0440",
+      "speaker_id": "S0907",
+      "strategy": "fullcall",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0907W0440_fullcall_r1.json",
+      "frozen_config_sha256": "7c9f010cc85aeb8f571d979d43a6c08e505809e7da2e86a4ba3b26a83ddb35ef",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0907W0440_fullcall_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0907W0440_fullcall_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0907W0440_fullcall_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:47.878159+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 20,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 19,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 1,
+          "compatible_ahead_preserved": 1,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [
+          {
+            "row_index": 22,
+            "source_id": "BAC009S0907W0440",
+            "kind": "compatible_actual_whole_view_preserved",
+            "visible_before": 72000,
+            "certified_processing_after": 64000
+          }
+        ],
+        "final_Canonical_frontiers": {
+          "BAC009S0907W0440": 137215
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1571018,
+          "total_bytes": 1571018,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0907W0440": 137215
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 20,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "78b6eceafbfd0fc13d40bb61820f9e1666b30719f16fbabd5aa59d3a315eb0e3",
+      "checker_gate_sha256": "78b6eceafbfd0fc13d40bb61820f9e1666b30719f16fbabd5aa59d3a315eb0e3",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0907W0440_conservative_r1",
+      "position": 27,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0907W0440_conservative_r1",
+      "source_id": "BAC009S0907W0440",
+      "speaker_id": "S0907",
+      "strategy": "conservative",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0907W0440_conservative_r1.json",
+      "frozen_config_sha256": "8620dd1570e58d4439ade17226fd847c8ca9b317eeb6e0d90de591f35d43e752",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0907W0440_conservative_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0907W0440_conservative_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0907W0440_conservative_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:48.427005+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0907W0440": 137215
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1399060,
+          "total_bytes": 1399060,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0907W0440": 137215
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "9e9378dad670475f739741eabef194349d70bc6bb7a7f1fe269fd8a4c1144f43",
+      "checker_gate_sha256": "9e9378dad670475f739741eabef194349d70bc6bb7a7f1fe269fd8a4c1144f43",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0914W0456_fullcall_r1",
+      "position": 28,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0914W0456_fullcall_r1",
+      "source_id": "BAC009S0914W0456",
+      "speaker_id": "S0914",
+      "strategy": "fullcall",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0914W0456_fullcall_r1.json",
+      "frozen_config_sha256": "5d899d88e6ec44752c99c974d6c07d4fef138e7a6faebbbd943e99d36495a82f",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0914W0456_fullcall_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0914W0456_fullcall_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0914W0456_fullcall_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:48.924704+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 20,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0914W0456": 142449
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1560358,
+          "total_bytes": 1560358,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0914W0456": 142449
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 20,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "25fdd179039e4f240434cae841a2cac77605abb7a916f2d7f490a918a9268e31",
+      "checker_gate_sha256": "25fdd179039e4f240434cae841a2cac77605abb7a916f2d7f490a918a9268e31",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0914W0456_conservative_r1",
+      "position": 29,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0914W0456_conservative_r1",
+      "source_id": "BAC009S0914W0456",
+      "speaker_id": "S0914",
+      "strategy": "conservative",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0914W0456_conservative_r1.json",
+      "frozen_config_sha256": "c602ef55461206db629c6ac4c5b4c6c4aba88060f52050c61c08a037506ef9fd",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0914W0456_conservative_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0914W0456_conservative_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0914W0456_conservative_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:49.469816+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0914W0456": 142449
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1399126,
+          "total_bytes": 1399126,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0914W0456": 142449
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "e401c6af20e2fc2873ac7fe6f552560ec5b8b52488a23640eca083670a0eee9a",
+      "checker_gate_sha256": "e401c6af20e2fc2873ac7fe6f552560ec5b8b52488a23640eca083670a0eee9a",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0902W0343_conservative_r1",
+      "position": 30,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0902W0343_conservative_r1",
+      "source_id": "BAC009S0902W0343",
+      "speaker_id": "S0902",
+      "strategy": "conservative",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0902W0343_conservative_r1.json",
+      "frozen_config_sha256": "b5920ed7dd4244514df8f6e9bbf2a24bd6de3eb43100e521d100f4c32b288ab6",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0902W0343_conservative_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0902W0343_conservative_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0902W0343_conservative_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:49.962260+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 18,
+        "complete_original_receipts": 18,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 53,
+        "verified_complete_Private_path_links": 17,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 35,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 0,
+          "compatible_ahead_preserved": 0,
+          "incompatible_ahead_withdrawals": 0
+        },
+        "natural_cases": [],
+        "final_Canonical_frontiers": {
+          "BAC009S0902W0343": 137055
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1406753,
+          "total_bytes": 1406753,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0902W0343": 137055
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 18,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "93b22a1fbe07a46bcfdcf455d2dc26a6bba3a85a756f97fb7ad0b5a1aa1bb68f",
+      "checker_gate_sha256": "93b22a1fbe07a46bcfdcf455d2dc26a6bba3a85a756f97fb7ad0b5a1aa1bb68f",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    },
+    {
+      "status": "PASS_UNCHANGED_C4_ACTUAL_TRACE",
+      "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r1",
+      "position": 31,
+      "original_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0902W0343_fullcall_r1",
+      "source_id": "BAC009S0902W0343",
+      "speaker_id": "S0902",
+      "strategy": "fullcall",
+      "repeat": 1,
+      "actual_checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+      "actual_NN_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "controller_source_commit": "6d941594ba4240c24fcc8c41baef2d331bfcdebb",
+      "frozen_config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/configs/SC_NEWTEST_BAC009S0902W0343_fullcall_r1.json",
+      "frozen_config_sha256": "d0835b35c12a281223a6edb9613e0c4db66c862d8797529ed5fb05bc77bf6f06",
+      "environment_record": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/ENVIRONMENT.json",
+      "environment_record_sha256": "f91a7d9a60ac2d26d65af1fcb0caeec31c7c325d4c4b00a54edd5cb431e7866b",
+      "actual_checker_source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/ORIGINAL_C4_SOURCE_v2.json",
+      "actual_checker_manifest_sha256": "0741878971dcdfad577624945ff3bb249860225f1281cf6d833814829f0a3948",
+      "controller_manifest_sha256": "ffd5b9ecba40cf4e25e1ffd343973aebbdfd7c5377f3327075d04bbcf3266d10",
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1/cells/SC_NEWTEST_BAC009S0902W0343_fullcall_r1",
+      "aggregate_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0902W0343_fullcall_r1/SUMMARY.json",
+      "gate_decision_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/actual_c4_closure_v1/checks/SC_NEWTEST_BAC009S0902W0343_fullcall_r1/GATE.json",
+      "started_utc": "2026-11-02T10:02:50.460809+00:00",
+      "checker_summary": {
+        "status": "PASS_ACTUAL_ORIGINAL_FULLCALL_DURABLE_AND_CONSUMER_REFINEMENT",
+        "durable_original_transitions": 18,
+        "unique_original_C_U_jobs_used": 18,
+        "dispatches": 24,
+        "complete_original_receipts": 19,
+        "duplicate_exact_full_receipts": 0,
+        "observed_old_namespace_full_messages_not_new_authority": 0,
+        "actual_Consumer_rows": 54,
+        "verified_complete_Private_path_links": 23,
+        "counts": {
+          "canonical_applications": 18,
+          "private_applications": 36,
+          "recovery_fact_applications": 0,
+          "compatible_ahead_applications": 2,
+          "compatible_ahead_preserved": 2,
+          "incompatible_ahead_withdrawals": 1
+        },
+        "natural_cases": [
+          {
+            "row_index": 13,
+            "source_id": "BAC009S0902W0343",
+            "kind": "compatible_actual_whole_view_preserved",
+            "visible_before": 48000,
+            "certified_processing_after": 40000
+          },
+          {
+            "row_index": 28,
+            "source_id": "BAC009S0902W0343",
+            "kind": "compatible_actual_whole_view_preserved",
+            "visible_before": 88000,
+            "certified_processing_after": 80000
+          },
+          {
+            "row_index": 40,
+            "source_id": "BAC009S0902W0343",
+            "kind": "necessary_complete_input_incompatibility",
+            "visible_before": 120000,
+            "certified_processing_after": 112000
+          }
+        ],
+        "final_Canonical_frontiers": {
+          "BAC009S0902W0343": 137055
+        },
+        "premise": "host/source execution integrity and complete adapter state; this is structural trace refinement, not GPU arithmetic attestation or a fixed replay-equality theorem",
+        "new_model_calls": 0,
+        "scope": "every supplied complete durable frame, actual full-call receipt and actual Consumer row; not natural prevalence or an unbounded proof",
+        "checker_source_commit": "c4dde9ea9c7abf80fae084bc2293e193262c71e6",
+        "actual_runtime_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+        "CPU_controls": 35,
+        "independent_frame_scan": {
+          "valid_bytes": 1527528,
+          "total_bytes": 1527528,
+          "ignored_incomplete_tail_bytes": 0
+        },
+        "original_ingress": {
+          "original_clocks_preserved": true,
+          "source_count": 1,
+          "accepted_final_frontiers": {
+            "BAC009S0902W0343": 137055
+          },
+          "idempotent_prefix_reacknowledgments": 0,
+          "offered_boundaries": "Original 500ms/EOS clocks reconstructed independently of acknowledgment batching"
+        },
+        "dispatch_original_arrivals": {
+          "dispatches_checked": 24,
+          "no_dispatch_before_original_target_offer": true,
+          "scope": "logical frozen target/input arrival binding; not GPU memory-read attestation"
+        },
+        "legal_progress_wrong_rejections": 0,
+        "local_rejection_audit": {
+          "local_rejections_with_complete_ownership_evidence": 0,
+          "insufficient_rejection_snapshots": 0,
+          "validated_old_physical_terminal_retirements": 0,
+          "legal_progress_wrong_rejections": 0,
+          "scope": "current owned first wellformed ASR/full phase under matching Owner/session/physical domains; duplicates and unowned stale channels are not new progress; missing evidence remains unknown"
+        },
+        "worker_only_physical_replacement_audit": {
+          "registered_physical_incarnations": 2,
+          "worker_only_confirmed_deaths": 0,
+          "observed_safe_worker_replacements": 0,
+          "all_dispatch_physical_origins_bound": true,
+          "scope": "per-Owner worker-only replacements; independent Supervisor whole-group termination receipts are separate evidence"
+        }
+      },
+      "checker_summary_sha256": "5f04a1cae50d2d05167a357aecc7702b34d5a003b094f6a2b87831b6a43f1e29",
+      "checker_gate_sha256": "5f04a1cae50d2d05167a357aecc7702b34d5a003b094f6a2b87831b6a43f1e29",
+      "input_SHA_before_after_equal": true,
+      "expected_original_selected_steps": 18,
+      "root_actual_trace_recheck_pending": false,
+      "new_model_calls": 0,
+      "GPU_calls": 0
+    }
+  ],
+  "scope": "Close the already planned original C4 actual-trace check; no new research branch or arithmetic/quality guarantee"
+}
