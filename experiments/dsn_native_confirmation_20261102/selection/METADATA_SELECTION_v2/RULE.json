@@ -1,0 +1,38 @@
+{
+  "experiment_id": "REVTRACE_NATIVE_STRICT_SPEAKER_CONFIRM_SELECTION_20261102_V1",
+  "split_namespace": "AISHELL1/StreamCorrect/aishell1_testset@16f6fd1e17418f1c4111a18fdd39543813206d96",
+  "member_prefix": "StreamCorrect/aishell1_testset/",
+  "catalog_sha256": "efd03c4e9ef086548d353ead2efacb826afcc6440e1c5b866faf79d8e176ccc4",
+  "archive_public_url": "https://huggingface.co/datasets/playwithmino/StreamCorrect/resolve/16f6fd1e17418f1c4111a18fdd39543813206d96/StreamCorrect.zip",
+  "seed": 2026110241,
+  "target_speakers_maximum": 12,
+  "minimum_speakers_not_inferred": "Report exact strict available N; include all eligible when N<12. Do not widen duration or switch split silently.",
+  "duration_seconds": [
+    8,
+    9
+  ],
+  "duration_metadata": "(original uncompressed WAV member bytes -44)/32000 is only an estimate. Actual 16kHz PCM16 mono header duration must be within [8,9] before any model call.",
+  "required_census_phases": [
+    "local_history",
+    "remote_history"
+  ],
+  "speaker_selection": "Fixed PRNG sample without replacement from sorted eligible unused speakers; select min(12,N). All N used when N<12.",
+  "utterance_selection": "One fixed PRNG index in each sorted complete-member pool. Freeze full cyclic same-speaker technical-header fallback order before WAV/reference/model reads.",
+  "technical_fallback": "Transport/CRC errors retry exact same member or stop. Only after exact original CRC: invalid format/header or actual duration outside [8,9] permits next frozen same-speaker member. If none valid, STOP; any smaller N requires Root to freeze a new evidenced plan before model calls, never silent shrink or model/ref selection.",
+  "no_concat": true,
+  "no_trim": true,
+  "no_resample": true,
+  "model_calls": 0,
+  "forbidden_selection_inputs": [
+    "CER",
+    "WER",
+    "latency",
+    "energy",
+    "compatibility",
+    "confirmation rate",
+    "generated tokens",
+    "reference content"
+  ],
+  "independence_claim": "Experimental-history speaker/utterance/audio separation only; not pretrained-model-unseen speech. Speaker count differs from clip/repeat/run counts.",
+  "other_split_policy": "Inspect and report only. Any change from this provided test namespace requires a separately frozen design and separate result stratum."
+}

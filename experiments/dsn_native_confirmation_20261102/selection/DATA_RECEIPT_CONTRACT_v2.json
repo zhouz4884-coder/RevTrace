@@ -1,0 +1,28 @@
+{
+  "status_required": "PASS_STRICT_METADATA_SELECTED_SPEAKER_DISJOINT_AUDIO_AVAILABLE",
+  "original_split_required": "AISHELL1/StreamCorrect/aishell1_testset@16f6fd1e17418f1c4111a18fdd39543813206d96",
+  "split_directory_required": "StreamCorrect/aishell1_testset",
+  "top_level_required": ["selection_source_commit", "selection_source_manifest_sha256", "acquisition_source_commit", "acquisition_source_manifest_sha256", "selection_recipe_sha256", "metadata_selection_sha256", "exclusion_ledger_sha256", "catalog_sha256", "original_split", "selected_speaker_count", "selected_utterance_count", "metadata_first", "model_calls", "gpu_calls", "no_concat", "no_trim", "no_resample", "all_CRC_headers_SHA_passed", "sources"],
+  "source_required": ["source_id", "speaker_id", "path", "audio_sha256", "frames", "duration", "reference", "header", "archive_member", "technical_fallback_index", "original_split", "split_directory"],
+  "header_required": ["channels", "sample_width", "sample_rate", "frames", "compression", "PCM_sha256"],
+  "constraints": {
+    "N": "actual strict metadata-frozen eligible speaker count, never hardcoded12; acquisition may not silently shrink it",
+    "distinct_source_count": "N",
+    "distinct_speaker_count": "N",
+    "source_duration": "8 <= frames / 16000 <= 9 and duration == frames / 16000",
+    "header": "channels1, sample_width2, sample_rate16000, compressionNONE",
+    "source_original_split": "must equal full original_split_required including corpus and pinned archive revision",
+    "source_split_directory": "must equal split_directory_required; never use it as the full namespace",
+    "archive_member_path": "StreamCorrect/aishell1_testset/<exact selected source_id>.wav, exactly the frozen catalog member",
+    "metadata_first": true,
+    "model_calls": 0,
+    "gpu_calls": 0,
+    "no_concat": true,
+    "no_trim": true,
+    "no_resample": true,
+    "reference": "read only after metadata selection frozen; never used to accept/reject/swap a source",
+    "integrity": "actual complete WAV bytes match exact frozen original ZIP member CRC/length; WAV and PCM SHA recorded; exact historical collision stops rather than selects another clip",
+    "technical_failure": "same-member network/CRC retry only; CRC-valid header/band failure can advance only the frozen same-speaker list; exhaustion STOP, no silent N/speaker/split substitution",
+    "self_hash": "receipt SHA is recorded externally in data GATE/driver plan; a data_freeze_sha256 field must name a separate immutable DATA_MANIFEST, never self-reference"
+  }
+}

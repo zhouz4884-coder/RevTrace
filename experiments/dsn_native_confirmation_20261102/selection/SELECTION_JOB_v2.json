@@ -1,0 +1,30 @@
+{
+  "tag": "METADATA_SELECTION_V2",
+  "experiment_id": "REVTRACE_METADATA_ONLY_UNUSED_SPEAKER_SELECTION_20261102_V2",
+  "code_commit": "c95735f0dfefd10c60820830616f579374b91c50",
+  "local_source": "experiments\\dsn_native_confirmation_20261102\\selection\\source_v2",
+  "local_manifest": "experiments\\dsn_native_confirmation_20261102\\packages\\SELECTION_V2_SOURCE.json",
+  "remote_source": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/selection_v2",
+  "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/metadata_selection_v2",
+  "command": [
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+    "-B",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/selection_v2/freeze_candidates.py",
+    "--manifest",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/SELECTION_V2_SOURCE.json",
+    "--rule",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/SELECTION_RULE_v2.json",
+    "--catalog",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/ARCHIVE_ENTRIES_0.json",
+    "--census",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/census_local_history_v2",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/census_remote_history_v2",
+    "--out",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/metadata_selection_v2"
+  ],
+  "frozen_input_files": {
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/SELECTION_RULE_v2.json": "65f31709d8ef7dcc45a84b3bb41e7341ad61c02dd2e18568e58fbd48146a7730",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_confirmation_20261102/ARCHIVE_ENTRIES_0.json": "efd03c4e9ef086548d353ead2efacb826afcc6440e1c5b866faf79d8e176ccc4"
+  },
+  "scope": "metadata-only min12actual-unused stricttest speakers; no waveform/reference/model results"
+}
