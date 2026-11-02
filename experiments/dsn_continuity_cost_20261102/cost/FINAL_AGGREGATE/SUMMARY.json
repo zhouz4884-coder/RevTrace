@@ -1,0 +1,1662 @@
+{
+  "status": "PASS_COMPLETE_CPU12_NN16_UNSUBTRACTED_COST_ACCOUNTING",
+  "analysis_source": "d727336dcc88540bcbe737388b0793d7d567fb8b",
+  "observer_source": "3cf7cd10a3ba76958b4173aa20eb6116ac779a39",
+  "driver_source": "b16481983674dec34e798342caf519e566a2b1cd",
+  "actual_NN_source": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "CPU_fresh_replays": 12,
+  "NN_trials": 16,
+  "off_on_pairs": 8,
+  "independent_sources": 2,
+  "clock_floor_reference_ns": {
+    "wall_ns": 190.0,
+    "thread_cpu_ns": 2755.0,
+    "process_cpu_ns": 1070.0
+  },
+  "calibration_inputs": {
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_analysis_v1/clock_calibration_v1/SUMMARY.json": "194663908b7501dc6a76f7519d700c0bcef335979956fe915b7e37207f749258",
+    "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_analysis_v1/clock_calibration_v1/GATE.json": "dd5ac16c45364c80518246c76c1b83326eced4affeaf79d527542d006077e252"
+  },
+  "pair_selected_program_equal": true,
+  "coarse_table": [
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "role": "cpu_real_trace",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 16.098558779411764,
+      "observed_run_mean_wall_ms_median": 18.490536279411764,
+      "observed_run_mean_wall_ms_max": 20.95777807352941,
+      "call_counts_by_run": "68,68,68",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "role": "cpu_real_trace",
+      "family": "SUP.complete_consumer_apply",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 17.48295312,
+      "observed_run_mean_wall_ms_median": 18.1153652,
+      "observed_run_mean_wall_ms_max": 23.420621960000002,
+      "call_counts_by_run": "50,50,50",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "role": "cpu_real_trace",
+      "family": "WAL.complete_fact_commit",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 24.27628341176471,
+      "observed_run_mean_wall_ms_median": 28.80876517647059,
+      "observed_run_mean_wall_ms_max": 35.585820647058824,
+      "call_counts_by_run": "17,17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "role": "cpu_real_trace",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 15.273651246376813,
+      "observed_run_mean_wall_ms_median": 15.442300173913043,
+      "observed_run_mean_wall_ms_max": 15.91469856521739,
+      "call_counts_by_run": "69,69,69",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "role": "cpu_real_trace",
+      "family": "SUP.complete_consumer_apply",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 16.88097811764706,
+      "observed_run_mean_wall_ms_median": 17.647297725490198,
+      "observed_run_mean_wall_ms_max": 18.44234321568627,
+      "call_counts_by_run": "51,51,51",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "role": "cpu_real_trace",
+      "family": "WAL.complete_fact_commit",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 23.161010647058824,
+      "observed_run_mean_wall_ms_median": 23.56157594117647,
+      "observed_run_mean_wall_ms_max": 25.153167705882353,
+      "call_counts_by_run": "17,17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "role": "cpu_real_trace",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 16.318014661764707,
+      "observed_run_mean_wall_ms_median": 17.048686779411764,
+      "observed_run_mean_wall_ms_max": 17.656096588235293,
+      "call_counts_by_run": "68,68,68",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "role": "cpu_real_trace",
+      "family": "SUP.complete_consumer_apply",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 17.530622960000002,
+      "observed_run_mean_wall_ms_median": 17.882476739999998,
+      "observed_run_mean_wall_ms_max": 19.83365952,
+      "call_counts_by_run": "50,50,50",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "role": "cpu_real_trace",
+      "family": "WAL.complete_fact_commit",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 21.98860082352941,
+      "observed_run_mean_wall_ms_median": 26.420513352941178,
+      "observed_run_mean_wall_ms_max": 33.15390817647059,
+      "call_counts_by_run": "17,17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "role": "cpu_real_trace",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 15.12858976470588,
+      "observed_run_mean_wall_ms_median": 15.573300985294118,
+      "observed_run_mean_wall_ms_max": 16.117447852941176,
+      "call_counts_by_run": "68,68,68",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "role": "cpu_real_trace",
+      "family": "SUP.complete_consumer_apply",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 16.724379640000002,
+      "observed_run_mean_wall_ms_median": 17.652684420000003,
+      "observed_run_mean_wall_ms_max": 18.464127960000003,
+      "call_counts_by_run": "50,50,50",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "cpu",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "role": "cpu_real_trace",
+      "family": "WAL.complete_fact_commit",
+      "fresh_runs": 3,
+      "observed_run_mean_wall_ms_min": 24.174405235294117,
+      "observed_run_mean_wall_ms_median": 24.237473588235293,
+      "observed_run_mean_wall_ms_max": 24.864720411764708,
+      "call_counts_by_run": "17,17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "role": "owner",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 18.59321717647059,
+      "observed_run_mean_wall_ms_median": 20.38768594117647,
+      "observed_run_mean_wall_ms_max": 22.18215470588235,
+      "call_counts_by_run": "17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "role": "owner",
+      "family": "WAL.complete_fact_commit",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 23.247303470588236,
+      "observed_run_mean_wall_ms_median": 24.926199441176472,
+      "observed_run_mean_wall_ms_max": 26.605095411764708,
+      "call_counts_by_run": "17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "role": "supervisor_consumer",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 16.68614783529412,
+      "observed_run_mean_wall_ms_median": 17.619240770588235,
+      "observed_run_mean_wall_ms_max": 18.55233370588235,
+      "call_counts_by_run": "170,170",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "role": "supervisor_consumer",
+      "family": "SUP.complete_consumer_apply",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 20.6535584,
+      "observed_run_mean_wall_ms_median": 21.044400330000002,
+      "observed_run_mean_wall_ms_max": 21.435242260000003,
+      "call_counts_by_run": "50,50",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "role": "owner",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 17.484892529411763,
+      "observed_run_mean_wall_ms_median": 19.81594144117647,
+      "observed_run_mean_wall_ms_max": 22.146990352941177,
+      "call_counts_by_run": "17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "role": "owner",
+      "family": "WAL.complete_fact_commit",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 22.35452688235294,
+      "observed_run_mean_wall_ms_median": 24.803243147058822,
+      "observed_run_mean_wall_ms_max": 27.25195941176471,
+      "call_counts_by_run": "17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "role": "supervisor_consumer",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 14.428234421965318,
+      "observed_run_mean_wall_ms_median": 16.428316537572254,
+      "observed_run_mean_wall_ms_max": 18.42839865317919,
+      "call_counts_by_run": "173,173",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "role": "supervisor_consumer",
+      "family": "SUP.complete_consumer_apply",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 19.37016549019608,
+      "observed_run_mean_wall_ms_median": 21.642277990196078,
+      "observed_run_mean_wall_ms_max": 23.91439049019608,
+      "call_counts_by_run": "51,51",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "role": "owner",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 15.776612411764704,
+      "observed_run_mean_wall_ms_median": 16.47893370588235,
+      "observed_run_mean_wall_ms_max": 17.181255,
+      "call_counts_by_run": "17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "role": "owner",
+      "family": "WAL.complete_fact_commit",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 20.350718588235292,
+      "observed_run_mean_wall_ms_median": 21.179820735294115,
+      "observed_run_mean_wall_ms_max": 22.00892288235294,
+      "call_counts_by_run": "17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "role": "supervisor_consumer",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 16.517985594117647,
+      "observed_run_mean_wall_ms_median": 17.051386223529413,
+      "observed_run_mean_wall_ms_max": 17.58478685294118,
+      "call_counts_by_run": "170,170",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "role": "supervisor_consumer",
+      "family": "SUP.complete_consumer_apply",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 20.196904739999997,
+      "observed_run_mean_wall_ms_median": 20.876025719999998,
+      "observed_run_mean_wall_ms_max": 21.555146699999998,
+      "call_counts_by_run": "50,50",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "role": "owner",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 16.138011294117646,
+      "observed_run_mean_wall_ms_median": 16.895651941176467,
+      "observed_run_mean_wall_ms_max": 17.653292588235292,
+      "call_counts_by_run": "17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "role": "owner",
+      "family": "WAL.complete_fact_commit",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 21.291143941176472,
+      "observed_run_mean_wall_ms_median": 21.919250911764706,
+      "observed_run_mean_wall_ms_max": 22.54735788235294,
+      "call_counts_by_run": "17,17",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "role": "supervisor_consumer",
+      "family": "IO.actual_os_fsync",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 15.680464858823528,
+      "observed_run_mean_wall_ms_median": 17.122706779411764,
+      "observed_run_mean_wall_ms_max": 18.5649487,
+      "call_counts_by_run": "170,170",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    },
+    {
+      "phase": "nn",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "role": "supervisor_consumer",
+      "family": "SUP.complete_consumer_apply",
+      "fresh_runs": 2,
+      "observed_run_mean_wall_ms_min": 18.583767,
+      "observed_run_mean_wall_ms_median": 20.68791916,
+      "observed_run_mean_wall_ms_max": 22.79207132,
+      "call_counts_by_run": "50,50",
+      "units_and_scope": "observed ms/call; range across fresh runs; inclusive families are separate",
+      "floor_subtracted": false
+    }
+  ],
+  "NN_cells": [
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_conservative_off_r0",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "repeat": 0,
+      "observation": false,
+      "offered_audio_s": 8.2590625,
+      "offered_frontiers": 17,
+      "D99_s": 3.8247133185341955,
+      "C99_s": 4.055433280132711,
+      "dual_deadline_credit_audio_s": 4.5,
+      "D2_misses": 8,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 17.45515087712556,
+      "common_both_board_J": 5506.970743063319,
+      "board0_J": 3498.8176156687455,
+      "board1_J": 2008.1531273945732,
+      "original_SERVICE_END_window_s": 17.84521766845137,
+      "owner_export_ms_lower_bound_before_summary_write": 4.28905,
+      "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 0,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 10.499995022080839,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0908W0369_conservative_off_r0",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r0",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "repeat": 0,
+      "observation": true,
+      "offered_audio_s": 8.2590625,
+      "offered_frontiers": 17,
+      "D99_s": 4.197304360158741,
+      "C99_s": 4.475759577192366,
+      "dual_deadline_credit_audio_s": 4.5,
+      "D2_misses": 8,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 18.35837881360203,
+      "common_both_board_J": 5621.370253115653,
+      "board0_J": 3649.1747451970855,
+      "board1_J": 1972.195507918568,
+      "original_SERVICE_END_window_s": 18.923422591760755,
+      "owner_export_ms_lower_bound_before_summary_write": 86.077189,
+      "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 0,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 10.853181662969291,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0908W0369_conservative_on_r0",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r0",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "repeat": 0,
+      "observation": true,
+      "offered_audio_s": 8.2590625,
+      "offered_frontiers": 17,
+      "D99_s": 2.021127052605152,
+      "C99_s": 2.299453530460596,
+      "dual_deadline_credit_audio_s": 8.0,
+      "D2_misses": 1,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 15.441154042258859,
+      "common_both_board_J": 5534.8341246984855,
+      "board0_J": 2821.6342622485063,
+      "board1_J": 2713.1998624499797,
+      "original_SERVICE_END_window_s": 15.978432833217084,
+      "owner_export_ms_lower_bound_before_summary_write": 108.405646,
+      "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+      "selected_steps": 17,
+      "Consumer_applications": 51,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 34,
+      "publication_count": 51,
+      "completed_worker_jobs": 18,
+      "abandoned_ASR_prefix_jobs": 4,
+      "completed_model_evaluated": 17,
+      "cumulative_worker_host_intervals_s": 14.0007861899212,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0908W0369_fullcall_on_r0",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_fullcall_off_r0",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "repeat": 0,
+      "observation": false,
+      "offered_audio_s": 8.2590625,
+      "offered_frontiers": 17,
+      "D99_s": 2.3388037456944586,
+      "C99_s": 2.637546847984195,
+      "dual_deadline_credit_audio_s": 7.0,
+      "D2_misses": 3,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 17.127643702551723,
+      "common_both_board_J": 5932.740637615753,
+      "board0_J": 3052.5359164556803,
+      "board1_J": 2880.204721160073,
+      "original_SERVICE_END_window_s": 17.30100632738322,
+      "owner_export_ms_lower_bound_before_summary_write": 0.83706,
+      "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+      "selected_steps": 17,
+      "Consumer_applications": 51,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 34,
+      "publication_count": 51,
+      "completed_worker_jobs": 18,
+      "abandoned_ASR_prefix_jobs": 4,
+      "completed_model_evaluated": 17,
+      "cumulative_worker_host_intervals_s": 14.605266907252371,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0908W0369_fullcall_off_r0",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_conservative_off_r0",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "repeat": 0,
+      "observation": false,
+      "offered_audio_s": 8.1648125,
+      "offered_frontiers": 17,
+      "D99_s": 5.8130673421919346,
+      "C99_s": 6.1092807557061315,
+      "dual_deadline_credit_audio_s": 3.5,
+      "D2_misses": 10,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 19.241163761354983,
+      "common_both_board_J": 5856.96467826952,
+      "board0_J": 3855.2417993641425,
+      "board1_J": 2001.7228789053777,
+      "original_SERVICE_END_window_s": 19.30131237860769,
+      "owner_export_ms_lower_bound_before_summary_write": 0.701988,
+      "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 0,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 12.700464127585292,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0916W0463_conservative_off_r0",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r0",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "repeat": 0,
+      "observation": true,
+      "offered_audio_s": 8.1648125,
+      "offered_frontiers": 17,
+      "D99_s": 5.24920252609998,
+      "C99_s": 5.553210277222097,
+      "dual_deadline_credit_audio_s": 4.0,
+      "D2_misses": 9,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 19.295965590514243,
+      "common_both_board_J": 5845.278035602403,
+      "board0_J": 3862.478844949701,
+      "board1_J": 1982.7991906527018,
+      "original_SERVICE_END_window_s": 19.257330105639994,
+      "owner_export_ms_lower_bound_before_summary_write": 81.471289,
+      "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 0,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 12.128006145358086,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0916W0463_conservative_on_r0",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r0",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "repeat": 0,
+      "observation": true,
+      "offered_audio_s": 8.1648125,
+      "offered_frontiers": 17,
+      "D99_s": 1.9069654811546206,
+      "C99_s": 2.1201279155537485,
+      "dual_deadline_credit_audio_s": 8.1648125,
+      "D2_misses": 0,
+      "C8_misses": 0,
+      "EOS_D2_misses": 0,
+      "whole_run_pass": true,
+      "physical_drain_window_s": 15.513905077241361,
+      "common_both_board_J": 5427.392837485286,
+      "board0_J": 2766.7428438411766,
+      "board1_J": 2660.6499936441096,
+      "original_SERVICE_END_window_s": 15.738439385779202,
+      "owner_export_ms_lower_bound_before_summary_write": 97.408975,
+      "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 2,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 13.707433175295591,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0916W0463_fullcall_on_r0",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_fullcall_off_r0",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "repeat": 0,
+      "observation": false,
+      "offered_audio_s": 8.1648125,
+      "offered_frontiers": 17,
+      "D99_s": 2.0415090550482273,
+      "C99_s": 2.2979167217388747,
+      "dual_deadline_credit_audio_s": 8.0,
+      "D2_misses": 1,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 15.900253608822823,
+      "common_both_board_J": 5441.7149952014,
+      "board0_J": 2757.748244209229,
+      "board1_J": 2683.9667509921705,
+      "original_SERVICE_END_window_s": 15.957661366090178,
+      "owner_export_ms_lower_bound_before_summary_write": 0.699786,
+      "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 2,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 13.89074754808098,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0916W0463_fullcall_off_r0",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r1",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "repeat": 1,
+      "observation": true,
+      "offered_audio_s": 8.1648125,
+      "offered_frontiers": 17,
+      "D99_s": 1.8402512846887111,
+      "C99_s": 2.0313870180025697,
+      "dual_deadline_credit_audio_s": 8.1648125,
+      "D2_misses": 0,
+      "C8_misses": 0,
+      "EOS_D2_misses": 0,
+      "whole_run_pass": true,
+      "physical_drain_window_s": 15.351535162888467,
+      "common_both_board_J": 5427.493851066565,
+      "board0_J": 2736.8210378287495,
+      "board1_J": 2690.6728132378157,
+      "original_SERVICE_END_window_s": 15.539347804151475,
+      "owner_export_ms_lower_bound_before_summary_write": 95.758966,
+      "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 2,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 13.582295505329967,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0916W0463_fullcall_on_r1",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_fullcall_off_r1",
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "repeat": 1,
+      "observation": false,
+      "offered_audio_s": 8.1648125,
+      "offered_frontiers": 17,
+      "D99_s": 1.7849337788671256,
+      "C99_s": 2.0358311899378894,
+      "dual_deadline_credit_audio_s": 8.1648125,
+      "D2_misses": 0,
+      "C8_misses": 0,
+      "EOS_D2_misses": 0,
+      "whole_run_pass": true,
+      "physical_drain_window_s": 15.40284741204232,
+      "common_both_board_J": 5447.87535339327,
+      "board0_J": 2751.8576021078884,
+      "board1_J": 2696.017751285382,
+      "original_SERVICE_END_window_s": 15.45383667666465,
+      "owner_export_ms_lower_bound_before_summary_write": 0.857681,
+      "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 2,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 13.446767881512642,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0916W0463_fullcall_off_r1",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_conservative_off_r1",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "repeat": 1,
+      "observation": false,
+      "offered_audio_s": 8.1648125,
+      "offered_frontiers": 17,
+      "D99_s": 5.549283368550241,
+      "C99_s": 5.851602647826075,
+      "dual_deadline_credit_audio_s": 3.5,
+      "D2_misses": 10,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 20.025650735013187,
+      "common_both_board_J": 5860.902798115673,
+      "board0_J": 1950.5438886541826,
+      "board1_J": 3910.3589094614904,
+      "original_SERVICE_END_window_s": 20.09949857927859,
+      "owner_export_ms_lower_bound_before_summary_write": 0.773886,
+      "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 0,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 12.465353067964315,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0916W0463_conservative_off_r1",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r1",
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "repeat": 1,
+      "observation": true,
+      "offered_audio_s": 8.1648125,
+      "offered_frontiers": 17,
+      "D99_s": 5.314575100205839,
+      "C99_s": 5.603208469636738,
+      "dual_deadline_credit_audio_s": 4.0,
+      "D2_misses": 9,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 18.79871061258018,
+      "common_both_board_J": 5970.155137532517,
+      "board0_J": 2278.0760945399757,
+      "board1_J": 3692.0790429925414,
+      "original_SERVICE_END_window_s": 18.864376126788557,
+      "owner_export_ms_lower_bound_before_summary_write": 81.027217,
+      "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 0,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 12.25052833929658,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0916W0463_conservative_on_r1",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r1",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "repeat": 1,
+      "observation": true,
+      "offered_audio_s": 8.2590625,
+      "offered_frontiers": 17,
+      "D99_s": 1.9089990535005927,
+      "C99_s": 2.220713929049671,
+      "dual_deadline_credit_audio_s": 8.2590625,
+      "D2_misses": 0,
+      "C8_misses": 0,
+      "EOS_D2_misses": 0,
+      "whole_run_pass": true,
+      "physical_drain_window_s": 15.484563135541975,
+      "common_both_board_J": 5497.716675802733,
+      "board0_J": 2740.606861412773,
+      "board1_J": 2757.1098143899603,
+      "original_SERVICE_END_window_s": 15.630130682140589,
+      "owner_export_ms_lower_bound_before_summary_write": 113.033753,
+      "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+      "selected_steps": 17,
+      "Consumer_applications": 51,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 34,
+      "publication_count": 51,
+      "completed_worker_jobs": 18,
+      "abandoned_ASR_prefix_jobs": 4,
+      "completed_model_evaluated": 17,
+      "cumulative_worker_host_intervals_s": 14.037841748446226,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0908W0369_fullcall_on_r1",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_fullcall_off_r1",
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "repeat": 1,
+      "observation": false,
+      "offered_audio_s": 8.2590625,
+      "offered_frontiers": 17,
+      "D99_s": 2.088197970725596,
+      "C99_s": 2.351429253667593,
+      "dual_deadline_credit_audio_s": 8.0,
+      "D2_misses": 1,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 15.821917402558029,
+      "common_both_board_J": 5582.331335095664,
+      "board0_J": 2787.3710859375237,
+      "board1_J": 2794.9602491581404,
+      "original_SERVICE_END_window_s": 15.71541253849864,
+      "owner_export_ms_lower_bound_before_summary_write": 3.584538,
+      "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+      "selected_steps": 17,
+      "Consumer_applications": 51,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 34,
+      "publication_count": 51,
+      "completed_worker_jobs": 18,
+      "abandoned_ASR_prefix_jobs": 4,
+      "completed_model_evaluated": 17,
+      "cumulative_worker_host_intervals_s": 14.223950820043683,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0908W0369_fullcall_off_r1",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_conservative_off_r1",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "repeat": 1,
+      "observation": false,
+      "offered_audio_s": 8.2590625,
+      "offered_frontiers": 17,
+      "D99_s": 4.266317852810025,
+      "C99_s": 4.562983532324433,
+      "dual_deadline_credit_audio_s": 4.5,
+      "D2_misses": 8,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 18.778093178756535,
+      "common_both_board_J": 5785.39836670816,
+      "board0_J": 2109.6574058491447,
+      "board1_J": 3675.7409608590156,
+      "original_SERVICE_END_window_s": 18.86088881455362,
+      "owner_export_ms_lower_bound_before_summary_write": 0.828933,
+      "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 0,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 10.990813316777349,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0908W0369_conservative_off_r1",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r1",
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "repeat": 1,
+      "observation": true,
+      "offered_audio_s": 8.2590625,
+      "offered_frontiers": 17,
+      "D99_s": 4.226952035799623,
+      "C99_s": 4.495585984326899,
+      "dual_deadline_credit_audio_s": 4.5,
+      "D2_misses": 8,
+      "C8_misses": 0,
+      "EOS_D2_misses": 1,
+      "whole_run_pass": false,
+      "physical_drain_window_s": 18.155447349883616,
+      "common_both_board_J": 5480.4061579138815,
+      "board0_J": 1887.6968278696997,
+      "board1_J": 3592.7093300441816,
+      "original_SERVICE_END_window_s": 18.2456516623497,
+      "owner_export_ms_lower_bound_before_summary_write": 78.808533,
+      "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+      "selected_steps": 17,
+      "Consumer_applications": 50,
+      "canonical_Consumer_rows": 17,
+      "private_Consumer_rows": 33,
+      "publication_count": 50,
+      "completed_worker_jobs": 17,
+      "abandoned_ASR_prefix_jobs": 0,
+      "completed_model_evaluated": 16,
+      "cumulative_worker_host_intervals_s": 10.905262587592006,
+      "raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_continuity_cost_20261102/cost_v1/normal/COST_NN_BAC009S0908W0369_conservative_on_r1",
+      "actual_trace_checker_status": "ROOT_SEPARATE_RECHECK_NOT_INFERRED_FROM_TASK_PASS"
+    }
+  ],
+  "off_on_pairs_data": [
+    {
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "repeat": 0,
+      "off_cell": "COST_NN_BAC009S0908W0369_conservative_off_r0",
+      "on_cell": "COST_NN_BAC009S0908W0369_conservative_on_r0",
+      "same_selected_program": true,
+      "same_offered": true,
+      "interpretation": "total observation impact; may include scheduling changes and Owner export; not protocol removal tax",
+      "D99_s_on_minus_off": 0.3725910416245455,
+      "C99_s_on_minus_off": 0.4203262970596553,
+      "dual_deadline_credit_audio_s_on_minus_off": 0.0,
+      "common_both_board_J_on_minus_off": 114.39951005233434,
+      "physical_drain_window_s_on_minus_off": 0.903227936476469,
+      "completed_worker_jobs_on_minus_off": 0,
+      "abandoned_ASR_prefix_jobs_on_minus_off": 0,
+      "publication_count_on_minus_off": 0,
+      "EOS_D2_misses_on_minus_off": 0
+    },
+    {
+      "source_id": "BAC009S0908W0369",
+      "policy": "conservative",
+      "repeat": 1,
+      "off_cell": "COST_NN_BAC009S0908W0369_conservative_off_r1",
+      "on_cell": "COST_NN_BAC009S0908W0369_conservative_on_r1",
+      "same_selected_program": true,
+      "same_offered": true,
+      "interpretation": "total observation impact; may include scheduling changes and Owner export; not protocol removal tax",
+      "D99_s_on_minus_off": -0.03936581701040254,
+      "C99_s_on_minus_off": -0.06739754799753417,
+      "dual_deadline_credit_audio_s_on_minus_off": 0.0,
+      "common_both_board_J_on_minus_off": -304.99220879427867,
+      "physical_drain_window_s_on_minus_off": -0.6226458288729191,
+      "completed_worker_jobs_on_minus_off": 0,
+      "abandoned_ASR_prefix_jobs_on_minus_off": 0,
+      "publication_count_on_minus_off": 0,
+      "EOS_D2_misses_on_minus_off": 0
+    },
+    {
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "repeat": 0,
+      "off_cell": "COST_NN_BAC009S0908W0369_fullcall_off_r0",
+      "on_cell": "COST_NN_BAC009S0908W0369_fullcall_on_r0",
+      "same_selected_program": true,
+      "same_offered": true,
+      "interpretation": "total observation impact; may include scheduling changes and Owner export; not protocol removal tax",
+      "D99_s_on_minus_off": -0.31767669308930646,
+      "C99_s_on_minus_off": -0.3380933175235987,
+      "dual_deadline_credit_audio_s_on_minus_off": 1.0,
+      "common_both_board_J_on_minus_off": -397.9065129172677,
+      "physical_drain_window_s_on_minus_off": -1.6864896602928638,
+      "completed_worker_jobs_on_minus_off": 0,
+      "abandoned_ASR_prefix_jobs_on_minus_off": 0,
+      "publication_count_on_minus_off": 0,
+      "EOS_D2_misses_on_minus_off": 0
+    },
+    {
+      "source_id": "BAC009S0908W0369",
+      "policy": "fullcall",
+      "repeat": 1,
+      "off_cell": "COST_NN_BAC009S0908W0369_fullcall_off_r1",
+      "on_cell": "COST_NN_BAC009S0908W0369_fullcall_on_r1",
+      "same_selected_program": true,
+      "same_offered": true,
+      "interpretation": "total observation impact; may include scheduling changes and Owner export; not protocol removal tax",
+      "D99_s_on_minus_off": -0.17919891722500325,
+      "C99_s_on_minus_off": -0.13071532461792224,
+      "dual_deadline_credit_audio_s_on_minus_off": 0.25906250000000064,
+      "common_both_board_J_on_minus_off": -84.61465929293081,
+      "physical_drain_window_s_on_minus_off": -0.3373542670160532,
+      "completed_worker_jobs_on_minus_off": 0,
+      "abandoned_ASR_prefix_jobs_on_minus_off": 0,
+      "publication_count_on_minus_off": 0,
+      "EOS_D2_misses_on_minus_off": -1
+    },
+    {
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "repeat": 0,
+      "off_cell": "COST_NN_BAC009S0916W0463_conservative_off_r0",
+      "on_cell": "COST_NN_BAC009S0916W0463_conservative_on_r0",
+      "same_selected_program": true,
+      "same_offered": true,
+      "interpretation": "total observation impact; may include scheduling changes and Owner export; not protocol removal tax",
+      "D99_s_on_minus_off": -0.5638648160919546,
+      "C99_s_on_minus_off": -0.5560704784840347,
+      "dual_deadline_credit_audio_s_on_minus_off": 0.5,
+      "common_both_board_J_on_minus_off": -11.686642667116757,
+      "physical_drain_window_s_on_minus_off": 0.054801829159259796,
+      "completed_worker_jobs_on_minus_off": 0,
+      "abandoned_ASR_prefix_jobs_on_minus_off": 0,
+      "publication_count_on_minus_off": 0,
+      "EOS_D2_misses_on_minus_off": 0
+    },
+    {
+      "source_id": "BAC009S0916W0463",
+      "policy": "conservative",
+      "repeat": 1,
+      "off_cell": "COST_NN_BAC009S0916W0463_conservative_off_r1",
+      "on_cell": "COST_NN_BAC009S0916W0463_conservative_on_r1",
+      "same_selected_program": true,
+      "same_offered": true,
+      "interpretation": "total observation impact; may include scheduling changes and Owner export; not protocol removal tax",
+      "D99_s_on_minus_off": -0.23470826834440217,
+      "C99_s_on_minus_off": -0.2483941781893373,
+      "dual_deadline_credit_audio_s_on_minus_off": 0.5,
+      "common_both_board_J_on_minus_off": 109.25233941684382,
+      "physical_drain_window_s_on_minus_off": -1.2269401224330068,
+      "completed_worker_jobs_on_minus_off": 0,
+      "abandoned_ASR_prefix_jobs_on_minus_off": 0,
+      "publication_count_on_minus_off": 0,
+      "EOS_D2_misses_on_minus_off": 0
+    },
+    {
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "repeat": 0,
+      "off_cell": "COST_NN_BAC009S0916W0463_fullcall_off_r0",
+      "on_cell": "COST_NN_BAC009S0916W0463_fullcall_on_r0",
+      "same_selected_program": true,
+      "same_offered": true,
+      "interpretation": "total observation impact; may include scheduling changes and Owner export; not protocol removal tax",
+      "D99_s_on_minus_off": -0.13454357389360672,
+      "C99_s_on_minus_off": -0.17778880618512627,
+      "dual_deadline_credit_audio_s_on_minus_off": 0.16481250000000003,
+      "common_both_board_J_on_minus_off": -14.322157716113907,
+      "physical_drain_window_s_on_minus_off": -0.38634853158146143,
+      "completed_worker_jobs_on_minus_off": 0,
+      "abandoned_ASR_prefix_jobs_on_minus_off": 0,
+      "publication_count_on_minus_off": 0,
+      "EOS_D2_misses_on_minus_off": -1
+    },
+    {
+      "source_id": "BAC009S0916W0463",
+      "policy": "fullcall",
+      "repeat": 1,
+      "off_cell": "COST_NN_BAC009S0916W0463_fullcall_off_r1",
+      "on_cell": "COST_NN_BAC009S0916W0463_fullcall_on_r1",
+      "same_selected_program": true,
+      "same_offered": true,
+      "interpretation": "total observation impact; may include scheduling changes and Owner export; not protocol removal tax",
+      "D99_s_on_minus_off": 0.055317505821585566,
+      "C99_s_on_minus_off": -0.004444171935319652,
+      "dual_deadline_credit_audio_s_on_minus_off": 0.0,
+      "common_both_board_J_on_minus_off": -20.38150232670523,
+      "physical_drain_window_s_on_minus_off": -0.05131224915385246,
+      "completed_worker_jobs_on_minus_off": 0,
+      "abandoned_ASR_prefix_jobs_on_minus_off": 0,
+      "publication_count_on_minus_off": 0,
+      "EOS_D2_misses_on_minus_off": 0
+    }
+  ],
+  "raw_audit_details": [
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_conservative_off_r0",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 10.2631312943995,
+          "('full1', 0)": 0.2368637276813388
+        },
+        "cumulative_worker_host_intervals_seconds": 10.499995022080839,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5345631.721616404,
+        "observation_begin_perf": 5345631.58828817,
+        "worker_pids": [
+          3457759,
+          3457763
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r0",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 10.853181662969291
+        },
+        "cumulative_worker_host_intervals_seconds": 10.853181662969291,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5345738.143775896,
+        "observation_begin_perf": 5345737.822670709,
+        "worker_pids": [
+          3460945,
+          3460948
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r0",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 18,
+          "completed_native_model_evaluated": 17,
+          "asr_early": 17,
+          "abandoned": 4,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full1', 0)": 6.797694810666144,
+          "('full0', 0)": 7.203091379255056
+        },
+        "cumulative_worker_host_intervals_seconds": 14.0007861899212,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5345846.422777342,
+        "observation_begin_perf": 5345846.21700098,
+        "worker_pids": [
+          3464674,
+          3464678
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_fullcall_off_r0",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 18,
+          "completed_native_model_evaluated": 17,
+          "asr_early": 17,
+          "abandoned": 4,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 7.755963210947812,
+          "('full1', 0)": 6.84930369630456
+        },
+        "cumulative_worker_host_intervals_seconds": 14.605266907252371,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5345957.001214956,
+        "observation_begin_perf": 5345956.781003316,
+        "worker_pids": [
+          3468507,
+          3468511
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_conservative_off_r0",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 12.700464127585292
+        },
+        "cumulative_worker_host_intervals_seconds": 12.700464127585292,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5346070.063655435,
+        "observation_begin_perf": 5346069.741841596,
+        "worker_pids": [
+          3472339,
+          3472342
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r0",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 12.128006145358086
+        },
+        "cumulative_worker_host_intervals_seconds": 12.128006145358086,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5346182.387135218,
+        "observation_begin_perf": 5346182.217955056,
+        "worker_pids": [
+          3476383,
+          3476386
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r0",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "abandoned": 2,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 6.734006631188095,
+          "('full1', 0)": 6.973426544107497
+        },
+        "cumulative_worker_host_intervals_seconds": 13.707433175295591,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5346287.843053376,
+        "observation_begin_perf": 5346287.654430773,
+        "worker_pids": [
+          3480304,
+          3480310
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_fullcall_off_r0",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "abandoned": 2,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 6.8282650811597705,
+          "('full1', 0)": 7.06248246692121
+        },
+        "cumulative_worker_host_intervals_seconds": 13.89074754808098,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5346396.646588688,
+        "observation_begin_perf": 5346396.484243441,
+        "worker_pids": [
+          3483965,
+          3483969
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r1",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "abandoned": 2,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 6.777554914355278,
+          "('full1', 0)": 6.8047405909746885
+        },
+        "cumulative_worker_host_intervals_seconds": 13.582295505329967,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5346508.368832953,
+        "observation_begin_perf": 5346508.167356055,
+        "worker_pids": [
+          3487769,
+          3487772
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_fullcall_off_r1",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "abandoned": 2,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 6.6273273518309,
+          "('full1', 0)": 6.819440529681742
+        },
+        "cumulative_worker_host_intervals_seconds": 13.446767881512642,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5346613.740693449,
+        "observation_begin_perf": 5346613.51656961,
+        "worker_pids": [
+          3491694,
+          3491699
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_conservative_off_r1",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 12.465353067964315
+        },
+        "cumulative_worker_host_intervals_seconds": 12.465353067964315,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5346722.0686569,
+        "observation_begin_perf": 5346721.788340138,
+        "worker_pids": [
+          3495482,
+          3495485
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r1",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "6e9e241624a8589cd37694dd31926fdfe82f25812b01a81761cdf7cbdede9be5",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 11.624240809120238,
+          "('full1', 0)": 0.6262875301763415
+        },
+        "cumulative_worker_host_intervals_seconds": 12.25052833929658,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5346832.100596229,
+        "observation_begin_perf": 5346831.770681831,
+        "worker_pids": [
+          3499297,
+          3499300
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r1",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 18,
+          "completed_native_model_evaluated": 17,
+          "asr_early": 17,
+          "abandoned": 4,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 7.176031241193414,
+          "('full1', 0)": 6.861810507252812
+        },
+        "cumulative_worker_host_intervals_seconds": 14.037841748446226,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5346938.022517024,
+        "observation_begin_perf": 5346937.907308007,
+        "worker_pids": [
+          3503179,
+          3503183
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_fullcall_off_r1",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 18,
+          "completed_native_model_evaluated": 17,
+          "asr_early": 17,
+          "abandoned": 4,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 7.320914776995778,
+          "('full1', 0)": 6.903036043047905
+        },
+        "cumulative_worker_host_intervals_seconds": 14.223950820043683,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5347042.520566358,
+        "observation_begin_perf": 5347042.408599523,
+        "worker_pids": [
+          3506903,
+          3506906
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_conservative_off_r1",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full1', 0)": 0.007477824576199055,
+          "('full0', 0)": 10.98333549220115
+        },
+        "cumulative_worker_host_intervals_seconds": 10.990813316777349,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5347150.748475135,
+        "observation_begin_perf": 5347150.483564976,
+        "worker_pids": [
+          3510566,
+          3510569
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    },
+    {
+      "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r1",
+      "trace": {
+        "selected_steps": 17,
+        "selected_program_sha256": "cefa23c7d62ce799436f585d507961a256d09844c76236098ed328d1b76903c9",
+        "digest_scope": "complete selected parent/next states, original C, IDs and evaluated flag; excludes scheduling IDs/timestamps, whose bindings are independently checked"
+      },
+      "executor": {
+        "counts": {
+          "ready": 2,
+          "completed": 17,
+          "completed_native_model_evaluated": 16,
+          "asr_early": 16,
+          "drained": 2
+        },
+        "per_worker_host_interval_seconds": {
+          "('full0', 0)": 10.905262587592006
+        },
+        "cumulative_worker_host_intervals_seconds": 10.905262587592006,
+        "host_intervals_not_CUDA_kernel_time_or_serving_wall": true,
+        "initial_READY_workers": 2
+      },
+      "external_drain_witness": {
+        "confirmed_perf": 5347226.793445476,
+        "observation_begin_perf": 5347226.433784549,
+        "worker_pids": [
+          3514478,
+          3514482
+        ],
+        "definition": "first external sample confirming all actual READY model-worker PIDs exited/zombie and zero CUDA compute owners on allocated boards; upper observation bound, not an instantaneous hardware timestamp"
+      }
+    }
+  ],
+  "no_floor_subtraction": true,
+  "no_inclusive_family_sum": true,
+  "no_parallel_wall_sum": true,
+  "lock_wait_measured": false,
+  "whole_safety_actual_trace_counts": "Root separate c4 check; never promoted from current task/reference PASS",
+  "limits": [
+    "CPU replay is not live scheduling or serving",
+    "standalone probes use real objects outside original Owner occupancy",
+    "short-function clock brackets differ; microsecond accuracy not claimed",
+    "off/on is observation impact, not net protocol overhead",
+    "two reused previously measured sources are not a new independent-generalization bank",
+    "timing repeats do not increase acoustic independent units or estimate production prevalence",
+    "NVML board energy excludes CPU/PSU and uses an upper observation bound for physical drain"
+  ]
+}

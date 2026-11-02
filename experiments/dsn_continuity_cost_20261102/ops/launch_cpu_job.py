@@ -28,12 +28,19 @@ print(json.dumps(dict(executable=sys.executable,python=sys.version,platform=plat
     rec=folder/'RUN_RECORD_PRELAUNCH.json';rec.write_bytes((json.dumps(record,indent=2)+'\n').encode())
     r=subprocess.run([sys.executable,'-B',str(E/'ops/activate_source.py'),'--source',str(source),'--manifest',str(M),'--tag',tag,'--run-record',str(rec)],cwd=R,capture_output=True,check=True)
     print(r.stdout.decode(),flush=True);gate=E/('ROOT_NOARG_'+tag+'.json');c.put(gate,P+'/'+gate.name);c.put(rec,P+'/'+tag+'_PRELAUNCH.json')
-    C=dict(job=P+'/'+tag+'_JOB.json',jobsha=record['frozen_config_sha256'],environment=record['remote_environment'],envsha=record['environment_record_sha256'],gate=P+'/'+gate.name,gatesha=sha(gate.read_bytes()),log=O+'/'+tag.lower()+'.log',handle=O+'/'+tag.lower()+'_HANDLE.json',tmp=O+'/cpu_job_tmp')
+    entry_files={}
+    if 'entry_prelaunch_file' in job:
+        body=dict(job.get('entry_prelaunch_extra',{}),config_sha256=job['entry_config_sha256'],
+                  root_noarg_preflight=P+'/'+gate.name,root_noarg_preflight_sha256=sha(gate.read_bytes()))
+        extra=folder/'ENTRY_PRELAUNCH.json';extra.write_bytes((json.dumps(body,indent=2)+'\n').encode())
+        c.put(extra,job['entry_prelaunch_file']);entry_files[job['entry_prelaunch_file']]=sha(extra.read_bytes())
+    C=dict(job=P+'/'+tag+'_JOB.json',jobsha=record['frozen_config_sha256'],environment=record['remote_environment'],envsha=record['environment_record_sha256'],gate=P+'/'+gate.name,gatesha=sha(gate.read_bytes()),log=O+'/'+tag.lower()+'.log',handle=O+'/'+tag.lower()+'_HANDLE.json',tmp=O+'/cpu_job_tmp',entry_files=entry_files)
     script='C='+repr(C)+'\n'+r'''
 from pathlib import Path
 import datetime,hashlib,json,os,subprocess
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 assert sha(C['job'])==C['jobsha'] and sha(C['environment'])==C['envsha'] and sha(C['gate'])==C['gatesha']
+for p,h in C['entry_files'].items():assert sha(p)==h
 j=json.loads(Path(C['job']).read_bytes());g=json.loads(Path(C['gate']).read_bytes());assert g['code_commit']==j['code_commit'] and g['run_record_prelaunch_checked']
 assert not Path(j['out']).exists() and not Path(C['log']).exists() and not Path(C['handle']).exists()
 Path(C['tmp']).mkdir(exist_ok=True)

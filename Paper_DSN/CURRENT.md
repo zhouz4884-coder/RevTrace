@@ -1,17 +1,16 @@
-# Current RevTrace manuscript — 2026-11-01, editorial revision v9
+# Current RevTrace manuscript — 2026-11-02, selective research revision v10
 
-- [Manuscript PDF](revisions/20261101_dsn2027_release_v9/main.pdf)
-- [Main LaTeX](revisions/20261101_dsn2027_release_v9/main.tex)
-- [Anonymous source ZIP](revisions/20261101_dsn2027_release_v9/RevTrace_DSN2027_anonymous_source_v9.zip)
-- [One-page editorial delta](../experiments/dsn_editorial_delta_20261101/EDITORIAL_DIFF.md)
-- [Editable final four figures](../experiments/dsn_editorial_delta_20261101/FIGURES_FINAL/)
-- [Verified reference additions](../experiments/dsn_editorial_delta_20261101/LITERATURE_DELTA.md)
-- [Source/package/all-page QA](../experiments/dsn_manuscript_update_20261028/FINAL_RELEASE_RECORD_20261101_v9.json)
+- [Manuscript PDF](revisions/20261102_dsn2027_release_v10/main.pdf)
+- [Main LaTeX](revisions/20261102_dsn2027_release_v10/main.tex)
+- [Anonymous source ZIP](revisions/20261102_dsn2027_release_v10/RevTrace_DSN2027_anonymous_source_v10.zip)
+- [Research results and decisions](../experiments/dsn_continuity_cost_20261102/FINAL_RESEARCH_REPORT.zh.md)
+- [Editorial selection](../experiments/dsn_continuity_cost_20261102/EDITORIAL_DELTA_v10.zh.md)
+- [Measured cost data](../experiments/dsn_continuity_cost_20261102/cost/FINAL_AGGREGATE/PAPER_DATA.json)
+- [Research/package/resource gate](../experiments/dsn_continuity_cost_20261102/FINAL_RELEASE_GATE.json)
+- [Previous v9 PDF](revisions/20261101_dsn2027_release_v9/main.pdf)
 
-11 technical pages plus one references-only page containing31 cited works; four main vector figures and five tables. All12 pages and final grayscale main-figure pages were inspected.30 font entries embedded; noType3, undefined references oroverfull.
+11 technical pages plus one references-only page with31 cited works; four vector figures and six tables. All12 pages, grayscale main plots, numeric bindings and embedded fonts passed review. The29-file anonymous source package compiles in a fresh directory to12 pixel-identical pages.
 
-The editorial delta distinguishes interval-level first delivery from whole-run service, asynchronous evidence for EL/AU/SUP, and the separate core/native/process-failure evidence contracts. The colored mechanism is shape-primary rather than a text-box flowchart. Core factorial interaction and native content are now separate academic result plots.
+The new cost study completes12 real-object CPU replays and16 normal native service trials, with independent cost and original actual-trace checks. TableIII reports current measured durable-state and whole-view processing paths. The core R×S and native full-call story remains the focus; historical fallback and unrelated legacy evidence stay in the research materials.
 
-The original datasets, metrics, runtime and v7 release are preserved. No neural calls, actual interval-reader reruns or new serving measurements were performed. Frozen replot source0040aa8 retains numeric identity with original evidence. Intermediate v8 kept24 references; finalv9 incorporates the user's expanded31-reference requirement at standard size on one page.
-
-The draft remains for author review. No conference submission or repository-privacy change has been performed; title/author/conflict and public-draft anonymity require final submission-stage checks.
+The v9 release and legacy manuscripts remain preserved. No conference submission has been performed.

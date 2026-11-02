@@ -1,0 +1,24 @@
+\begin{tabular}{@{}llrrrrr@{}}
+\toprule
+Condition & Policy & Reject / $\Delta C$ & New result (s) & D2/C8 pass & EOS miss & Energy (J) \\
+\midrule
+\multirow{2}{*}{No fault} & Conservative & 0 / 0 & -- & 0/2 & 2 & 6566--6574 \\
+ & RevTrace & 0 / 0 & -- & 1/2 & 1 & 5896--5911 \\
+\multirow{2}{*}{Duplicate / late} & Conservative & 4 / 0 & -- & 0/2 & 2 & 5701--5893 \\
+ & RevTrace & 4 / 0 & -- & 1/2 & 1 & 5538--5846 \\
+\multirow{2}{*}{Worker after ASR} & Conservative & 0 / 0 & 1.90--2.22 & 0/2 & 2 & 5182--5401 \\
+ & RevTrace & 0 / 0 & 2.15--2.21 & 0/2 & 2 & 5447--5647 \\
+\multirow{2}{*}{Worker partial frame} & Conservative & 0 / 0 & 2.10--2.25 & 0/2 & 2 & 4775--5178 \\
+ & RevTrace & 0 / 0 & 1.76--2.23 & 0/2 & 2 & 5492--5594 \\
+\multirow{2}{*}{Owner before durable} & Conservative & 0 / 0 & 86.42--108.08 & 0/2 & 2 & 24549--28019 \\
+ & RevTrace & 0 / 0 & 64.61--107.09 & 0/2 & 2 & 19571--26557 \\
+\multirow{2}{*}{Owner after durable} & Conservative & 0 / 0 & 83.90--87.05 & 0/2 & 2 & 22415--24200 \\
+ & RevTrace & 0 / 0 & 101.80--104.44 & 0/2 & 2 & 26483--27171 \\
+\bottomrule
+\end{tabular}
+% Presentation labels only: Conservative=conservative; RevTrace=fullcall.
+% All 24 original short trials completed; independently checked illegal installs=0.
+% Range and row values copy frozen FIGURE_TABLE_FORMAL36_v5 / development S0908 only.
+% Regression4 and sustained8 retain their separate ALL36_MACHINE_TABLE identities.
+% New-result calls may already be in flight on a surviving worker.
+% -- is not applicable, not zero; original clocks, failures and energy remain unchanged.

@@ -1,0 +1,32 @@
+\subsection{Observed protocol-path costs}
+\label{subsec:protocol_cost}
+We replay four actual source/policy traces in 12 fresh CPU processes and
+run 16 normal native trials: two fixed sources, two policies, recording
+off/on and two fresh repeats. Replays reproduce the complete fact-journal
+bytes and Consumer semantics. All eight off/on pairs preserve the selected
+states, original corrections and returned IDs.
+
+Table~\ref{tab:protocol_cost} reports the eight trials with timing enabled.
+Synchronous storage accounts for most durable-commit wall time. Service
+comparisons include these complete-state validation, persistence and
+whole-view processing costs.
+
+\begin{table}[t]
+\centering
+\caption{Observed current-protocol costs. Ranges span the eight per-run
+mean wall times with timing enabled in native service. Durable commit includes
+complete transition validation and synchronization; Consumer application
+includes fact binding, whole-view checks and synchronous logging.
+The fsync row is nested within durable commit.}
+\label{tab:protocol_cost}
+\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Operation & Wall time (ms/call)\\
+\midrule
+Durable full-state commit & 20.35--27.25\\
+\quad Owner fsync & 15.78--22.18\\
+Whole-view Consumer application & 18.58--23.91\\
+\bottomrule
+\end{tabular}
+\end{table}

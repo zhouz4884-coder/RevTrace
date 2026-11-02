@@ -15,7 +15,7 @@ for name in ['PROGRESS.json','SUMMARY.json','GATE.json']:
  f=out/name
  if f.exists():
   try:
-   j=json.loads(f.read_bytes());result[name]={k:v for k,v in j.items() if k not in {'runs','failures','run_summaries','attempts'}}
+   j=json.loads(f.read_bytes());result[name]={k:v for k,v in j.items() if k not in {'runs','failures','run_summaries','attempts','repeats_data'} and (not isinstance(v,list) or len(v)<=4)}
   except Exception as e:result[name]=repr(e)
 log=Path(H['log']);result['log_tail']=log.read_text(errors='replace')[-2500:] if log.exists() else ''
 print(json.dumps(result))
