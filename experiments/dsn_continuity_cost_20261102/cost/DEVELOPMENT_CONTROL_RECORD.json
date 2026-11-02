@@ -1,0 +1,20 @@
+{
+  "record_type": "PRECOMMIT_DEVELOPMENT_NOT_LAUNCH_EVIDENCE",
+  "execution_date_local": "2026-11-02",
+  "execution_absolute_time": null,
+  "absolute_time_scope": "Exact execution timestamp was not captured; no later timestamp is substituted",
+  "source_state": "cost/source_dev was uncommitted development code, not a frozen independent execution source",
+  "future_commit_must_not_be_attributed": true,
+  "experiment_identity_preflight": "NOT_RUN_FOR_THIS_DEVELOPMENT_CHECK",
+  "formal_launch_evidence": false,
+  "required_next_action": "Root freezes complete source/config/environment/run-record and reruns all controls before any formal cost or NN launch",
+  "command": "python -B -m unittest -v test_cost_controls",
+  "working_directory": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_continuity_cost_20261102\\cost\\source_dev",
+  "exit_code": 0,
+  "tool_wall_time_seconds": 0.6812252,
+  "unittest_reported_elapsed_seconds": 0.160,
+  "neural_calls": 0,
+  "models_initialized": 0,
+  "stdout": "test_fsync_is_actual_original_syscall_and_bytes_survive (test_cost_controls.Controls.test_fsync_is_actual_original_syscall_and_bytes_survive) ... ok\ntest_nested_calls_are_not_additive_roots (test_cost_controls.Controls.test_nested_calls_are_not_additive_roots) ... ok\ntest_off_retains_original_callable_identity (test_cost_controls.Controls.test_off_retains_original_callable_identity) ... ok\ntest_overflow_fails_study_not_original_work (test_cost_controls.Controls.test_overflow_fails_study_not_original_work) ... ok\ntest_parallel_thread_roots_not_nested (test_cost_controls.Controls.test_parallel_thread_roots_not_nested) ... ok\ntest_same_exception_object_propagates_and_restores (test_cost_controls.Controls.test_same_exception_object_propagates_and_restores) ... ok\ntest_spawn_child_has_its_own_probe (test_cost_controls.Controls.test_spawn_child_has_its_own_probe) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.160s\n\nOK\n",
+  "later_static_changes_not_executed": "Observer-manifest self-verification, complete Owner export/mode coverage gates and negative-exclusive counters were added after this check; no test pass is attributed to those later changes"
+}

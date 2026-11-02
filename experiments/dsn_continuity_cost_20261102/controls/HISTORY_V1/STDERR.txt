@@ -1,0 +1,158 @@
+test_actual_original_raw_hash_mismatch_fails (test_history_analysis.SemanticControls.test_actual_original_raw_hash_mismatch_fails) ... ok
+test_distinct_audio_union_does_not_double_count_repeated_cut (test_history_analysis.SemanticControls.test_distinct_audio_union_does_not_double_count_repeated_cut) ... ok
+test_equal_frontier_different_text_ties_are_exposed (test_history_analysis.SemanticControls.test_equal_frontier_different_text_ties_are_exposed) ... ok
+test_final_zero_duration_Canonical_application_counts_for_deadline (test_history_analysis.SemanticControls.test_final_zero_duration_Canonical_application_counts_for_deadline) ... ERROR
+test_full_output_binding_tamper_is_a_failed_gate (test_history_analysis.SemanticControls.test_full_output_binding_tamper_is_a_failed_gate) ... FAIL
+test_future_host_result_cannot_validate_earlier_publication (test_history_analysis.SemanticControls.test_future_host_result_cannot_validate_earlier_publication) ... FAIL
+test_incomplete_tail_and_corrupt_complete_frame_are_separate (test_history_analysis.SemanticControls.test_incomplete_tail_and_corrupt_complete_frame_are_separate) ... ok
+test_missing_original_consumer_clock_fails_not_replay_time_substitution (test_history_analysis.SemanticControls.test_missing_original_consumer_clock_fails_not_replay_time_substitution) ... ok
+test_mode_and_epoch_are_permission_fences (test_history_analysis.SemanticControls.test_mode_and_epoch_are_permission_fences) ... ok
+test_original_clock_area_not_candidate_age_or_cpu_replay (test_history_analysis.SemanticControls.test_original_clock_area_not_candidate_age_or_cpu_replay) ... ERROR
+test_owner_generation_retirement_cuts_gap_before_queued_withdrawal (test_history_analysis.SemanticControls.test_owner_generation_retirement_cuts_gap_before_queued_withdrawal) ... ERROR
+test_partial_EOS_uses_actual_tail_not_only_full_fine_grid (test_history_analysis.SemanticControls.test_partial_EOS_uses_actual_tail_not_only_full_fine_grid) ... ERROR
+test_receive_to_apply_new_complete_parent_ambiguity_is_not_ignored (test_history_analysis.SemanticControls.test_receive_to_apply_new_complete_parent_ambiguity_is_not_ignored) ... ERROR
+test_same_timestamp_applications_are_not_missing_first_times (test_history_analysis.SemanticControls.test_same_timestamp_applications_are_not_missing_first_times) ... ERROR
+test_unpublished_result_never_enters_registered_tip_universe (test_history_analysis.SemanticControls.test_unpublished_result_never_enters_registered_tip_universe) ... ERROR
+
+======================================================================
+ERROR: test_final_zero_duration_Canonical_application_counts_for_deadline (test_history_analysis.SemanticControls.test_final_zero_duration_Canonical_application_counts_for_deadline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 118, in test_final_zero_duration_Canonical_application_counts_for_deadline
+    summary, _, _ = self.analyze()
+                    ^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 106, in analyze
+    return h.analyze_attempt(entry, paths, {})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 339, in analyze_attempt
+    require(name in row and row[name] == original[name],
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 35, in require
+    raise AuditFailure(message)
+history_analysis.AuditFailure: native replay identity/mode mismatch certified_P_sha256 at Consumer row 1
+
+======================================================================
+ERROR: test_original_clock_area_not_candidate_age_or_cpu_replay (test_history_analysis.SemanticControls.test_original_clock_area_not_candidate_age_or_cpu_replay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 109, in test_original_clock_area_not_candidate_age_or_cpu_replay
+    summary, gaps, cuts = self.analyze()
+                          ^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 106, in analyze
+    return h.analyze_attempt(entry, paths, {})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 339, in analyze_attempt
+    require(name in row and row[name] == original[name],
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 35, in require
+    raise AuditFailure(message)
+history_analysis.AuditFailure: native replay identity/mode mismatch certified_P_sha256 at Consumer row 1
+
+======================================================================
+ERROR: test_owner_generation_retirement_cuts_gap_before_queued_withdrawal (test_history_analysis.SemanticControls.test_owner_generation_retirement_cuts_gap_before_queued_withdrawal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 135, in test_owner_generation_retirement_cuts_gap_before_queued_withdrawal
+    summary, gaps, _ = self.analyze(retirement=107.4)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 106, in analyze
+    return h.analyze_attempt(entry, paths, {})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 339, in analyze_attempt
+    require(name in row and row[name] == original[name],
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 35, in require
+    raise AuditFailure(message)
+history_analysis.AuditFailure: native replay identity/mode mismatch certified_P_sha256 at Consumer row 1
+
+======================================================================
+ERROR: test_partial_EOS_uses_actual_tail_not_only_full_fine_grid (test_history_analysis.SemanticControls.test_partial_EOS_uses_actual_tail_not_only_full_fine_grid)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 123, in test_partial_EOS_uses_actual_tail_not_only_full_fine_grid
+    summary, _, _ = self.analyze(tail=56000)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 106, in analyze
+    return h.analyze_attempt(entry, paths, {})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 339, in analyze_attempt
+    require(name in row and row[name] == original[name],
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 35, in require
+    raise AuditFailure(message)
+history_analysis.AuditFailure: native replay identity/mode mismatch certified_P_sha256 at Consumer row 1
+
+======================================================================
+ERROR: test_receive_to_apply_new_complete_parent_ambiguity_is_not_ignored (test_history_analysis.SemanticControls.test_receive_to_apply_new_complete_parent_ambiguity_is_not_ignored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 142, in test_receive_to_apply_new_complete_parent_ambiguity_is_not_ignored
+    _, without, _ = self.analyze(deep=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 106, in analyze
+    return h.analyze_attempt(entry, paths, {})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 339, in analyze_attempt
+    require(name in row and row[name] == original[name],
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 35, in require
+    raise AuditFailure(message)
+history_analysis.AuditFailure: native replay identity/mode mismatch certified_P_sha256 at Consumer row 1
+
+======================================================================
+ERROR: test_same_timestamp_applications_are_not_missing_first_times (test_history_analysis.SemanticControls.test_same_timestamp_applications_are_not_missing_first_times)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 130, in test_same_timestamp_applications_are_not_missing_first_times
+    summary, _, _ = self.analyze(same_last_time=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 106, in analyze
+    return h.analyze_attempt(entry, paths, {})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 339, in analyze_attempt
+    require(name in row and row[name] == original[name],
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 35, in require
+    raise AuditFailure(message)
+history_analysis.AuditFailure: native replay identity/mode mismatch certified_P_sha256 at Consumer row 1
+
+======================================================================
+ERROR: test_unpublished_result_never_enters_registered_tip_universe (test_history_analysis.SemanticControls.test_unpublished_result_never_enters_registered_tip_universe)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 148, in test_unpublished_result_never_enters_registered_tip_universe
+    summary, gaps, _ = self.analyze(deep=True, ambiguity_received=109.0)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 106, in analyze
+    return h.analyze_attempt(entry, paths, {})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 339, in analyze_attempt
+    require(name in row and row[name] == original[name],
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/history_analysis.py", line 35, in require
+    raise AuditFailure(message)
+history_analysis.AuditFailure: native replay identity/mode mismatch certified_P_sha256 at Consumer row 1
+
+======================================================================
+FAIL: test_full_output_binding_tamper_is_a_failed_gate (test_history_analysis.SemanticControls.test_full_output_binding_tamper_is_a_failed_gate)
+----------------------------------------------------------------------
+history_analysis.AuditFailure: native replay identity/mode mismatch certified_P_sha256 at Consumer row 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 167, in test_full_output_binding_tamper_is_a_failed_gate
+    with self.assertRaisesRegex(h.AuditFailure, 'immutable result binding'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "immutable result binding" does not match "native replay identity/mode mismatch certified_P_sha256 at Consumer row 1"
+
+======================================================================
+FAIL: test_future_host_result_cannot_validate_earlier_publication (test_history_analysis.SemanticControls.test_future_host_result_cannot_validate_earlier_publication)
+----------------------------------------------------------------------
+history_analysis.AuditFailure: native replay identity/mode mismatch certified_P_sha256 at Consumer row 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_continuity_cost_20261102/history_v1/test_history_analysis.py", line 158, in test_future_host_result_cannot_validate_earlier_publication
+    with self.assertRaisesRegex(h.AuditFailure, 'before host receipt'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "before host receipt" does not match "native replay identity/mode mismatch certified_P_sha256 at Consumer row 1"
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.025s
+
+FAILED (failures=2, errors=7)

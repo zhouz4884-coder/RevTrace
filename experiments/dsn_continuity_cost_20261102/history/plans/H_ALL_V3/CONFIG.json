@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "experiment_id": "REVTRACE_H_ALL_V3_20261102",
+  "evidence_tier": "Offline fixed-producer-history original-Consumer-clock counterfactual opportunity analysis; no deployed gain claim",
+  "expected_attempts": {
+    "n5": 151,
+    "ck5": 136
+  },
+  "expected_original_point_cuts": {
+    "n5": 14,
+    "ck5": 0
+  },
+  "policies": [
+    "native_latest",
+    "registered_native_scan",
+    "registered_joint_scan",
+    "registered_joint_index"
+  ],
+  "selection_rank": [
+    "audio_end_sample",
+    "original_display_revision",
+    "original_job_id"
+  ],
+  "query_triggers": [
+    "canonical-display",
+    "display",
+    "view-mode"
+  ],
+  "candidate_universe": "Only already original-Consumer-registered publications; host-only and unpublished results never become candidate tips",
+  "support": "Native published-path compatibility plus unchanged generic core all-parent uniqueness predicate; core source frozen separately",
+  "revocation": "Original mode/epoch/FIFO fences, explicit revoked_job_ids, and recorded owner generation retirement by original wall clock",
+  "clocks": "Original Consumer observed_perf only; never new CPU replay time or candidate age",
+  "interval_window": "Report both within-session last-application window and global observed FIFO-prefix held-state extension; latter is right-censored",
+  "include_partial_EOS": true,
+  "display_deadline_seconds": 2.0,
+  "certified_deadline_seconds": 8.0,
+  "service_cost": "Report opportunity durations and offline analysis CPU separately; zero additional application delay is an opportunity ceiling",
+  "assertions": [
+    "reproduce all original Consumer roots/frontiers/text exactly",
+    "input bytes and SHA before/after",
+    "no candidate before actual registration/host receipt",
+    "no retired/epoch-fenced reauthorization",
+    "scan/index identical selected original IDs",
+    "generic core apply-request/view-applied approves every positive joint selection"
+  ],
+  "primary": "Within-session-observation original-clock audio-seconds x wall-seconds coverage deficit relative to actual native view, jointly admissible candidates only; global-prefix extension separate",
+  "secondary": [
+    "distinct deficient audio",
+    "duration and right-censoring per gap",
+    "old-node restoration vs newly-legal old publication",
+    "first D2 and certified C8 including EOS",
+    "trigger strata",
+    "equal-frontier different-text ties and character revision cost"
+  ],
+  "no_claims": [
+    "new neural execution",
+    "changed online ACK/dispatch counterfactual",
+    "population incidence",
+    "independent indexing algorithm",
+    "deployed end-to-end Goodput",
+    "partial word accuracy without alignment"
+  ],
+  "selection": "all"
+}

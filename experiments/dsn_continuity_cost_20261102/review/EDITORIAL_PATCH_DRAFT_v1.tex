@@ -1,0 +1,143 @@
+% SECTION-WRITING: selective editorial proposal against DSN release v9.
+% This file is NOT included in Paper_DSN and has not been compiled as a paper.
+% Paragraph roles: AU consequence -> identity mechanism -> stratified evidence
+% -> bounded service lesson. Keep the existing labels/citations where replacing.
+
+% BLOCK A: optional AU motivation, 3 sentences; about 80 words.
+% Suggested location: after the AU discussion, or in Discussion; do not put this
+% historical stress result into the current native failure-model guarantee.
+% Evidence: legal_progress_20261026/M_DECISION.md:77-114;
+% M_FORMAT_AUDIT.json and m_format_execution_v1_SOURCE.json.
+In a separate historical controlled stress study, content-only substitution
+of a low-trust return passed current-read-set checks but changed subsequent
+answers from 14/16 correct to 0/16 after the model actually consumed the
+stored memory, over eight tasks and two timing repeats.
+Trusted regeneration and both implementations with complete content
+selection retained 14/16 correct answers.
+This result motivates content-selection authority; it does not extend the
+native failure model or guarantee factual correctness.
+% Changed: added one bounded, actual downstream consequence for AU.
+% Protected: 14/16, 0/16, eight tasks, two timing repeats; protected equivalence.
+% Meaning-Check: PRESERVED
+% Risk-Flags: none
+
+% BLOCK B1: replace 04_native_resilience_working.tex:3-16, preserving citation.
+% Mechanism before validation: future-message authority vs an acquired result.
+Each job has an Owner namespace and monotonic issue number; each physical
+slot has a worker incarnation, using established RPC identity principles
+\cite{birrell1984rpc}. Fencing ends authority to send new evidence while
+preserving the original identity of an already accepted complete result.
+
+\paragraph{Local rejection and physical release}
+Exact duplicates and fenced messages are rejected locally; they cannot
+change selected state or release newer leases. Contradictory currently
+owned contents freeze writes. Per-incarnation Pipes and receivers isolate
+incomplete frames. Replacement requires process exit, CUDA release and
+joined receivers. Complete receipts from the sealed channel are validated
+before fencing. A retained result still needs its original full input to
+match the selected parent; producer exit supplies no such evidence.
+% Changed: centered the acquired-result/message distinction; compressed repeats.
+% Protected: RPC citation, identity domains, fail-closed contradiction,
+% physical exit/CUDA/receiver obligations, full-input eligibility.
+% Meaning-Check: PRESERVED
+% Risk-Flags: none
+
+% BLOCK B2: replace 05_same_source_validation.tex:49-64, preserving Finding 4.
+% Evidence: FINAL_R1_EXECUTION_REPORT_20261031.zh.md buffer4 section;
+% FINAL_CPU_AND_POSTHOC_RESULTS and original BUFFER4_V1_RESULTS remain archived.
+\paragraph{Complete buffers across producer death}
+Two matching and two mismatching timing controls isolate a complete
+result already registered by the Owner. The fixture holds the parent
+after original ASR and the child after sending its complete original
+result. We terminate the producer, verify exit, CUDA release and
+sealed-channel validation, fence new messages, and release the original
+parent correction. Both matching results install and are consumed once
+with their original job, birth and incarnation; both mismatching results
+are rejected against the actual same-frontier parent. Each positive case
+also completes a subsequent independent request. These controlled
+interleavings establish result retention and rejection, rather than
+fault-time SLOs.
+\par\noindent\textbf{Finding 4: producer failure and result invalidity are different.}
+Fencing removes future message authority; an acquired result keeps its
+original identity and remains usable only under its original obligations.
+% Changed: made the original UID survive exit visibly; moved audit-development
+% history to the artifact, without changing the original failed execution gates.
+% Protected: two matching/two mismatching, original C/U and complete receipts,
+% parent check, original identities, subsequent request, no fault-SLO claim.
+% Meaning-Check: PRESERVED
+% Risk-Flags: none
+
+% BLOCK C: replace 05_same_source_validation.tex:86-91; use instead of, not in
+% addition to, the pooled 360/1901 paragraph. Optional single-column table.
+% Evidence: ACTUAL_PAIRING_AND_BOUNDARY_FINDINGS_v2.zh.md:13-37.
+Input confirmation and result use have different denominators
+(Table~\ref{tab:conditional_inputs}). All conditional inputs resolve:
+none remain unknown. Six confirmed jobs fail to become durable under
+injected failures. In the fault stratum, 52 conditional results become
+durable and are consumed; 50 have original-Owner installation records,
+while two are first consumed through recovery. The long streams dominate
+the pooled dispatch count, so the workload strata remain separate.
+
+\begin{table}[t]
+\centering
+\caption{Eligibility and use are distinct. Counts cover actual conditional
+dispatches in the 36-trial fault/state bank. Input-confirmed compares the
+complete frozen input with the eventual selected cut; durable counts
+accepted facts, rather than predictions. Repeats reuse the same sources.}
+\label{tab:conditional_inputs}
+\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Stratum & Dispatched & Input-confirmed & Durable\\
+\midrule
+Normal short & 57 & 40 & 40\\
+Controlled faults & 90 & 58 & 52\\
+No-reset S0770 & 924 & 96 & 96\\
+No-reset S0903 & 830 & 166 & 166\\
+\bottomrule
+\end{tabular}
+\end{table}
+% Changed: replaced the mixed rate with four explicit input/use strata.
+% Protected: 57/40/40; 90/58/52; 924/96/96; 830/166/166; zero unresolved;
+% six confirmed-but-not-durable; fault 50 original installs + 2 replay uses.
+% Meaning-Check: PRESERVED
+% Risk-Flags: none
+
+% BLOCK C-ALT: prose-only alternative to all of BLOCK C if page/float pressure
+% is high. Do not include both. About 85 words, without a new table/label.
+% An independent dispatch audit confirms 40/57 conditional inputs on normal
+% short traces, 58/90 under controlled faults, and 96/924 and 166/830 on the
+% two no-reset stress sources; none remain unresolved. Confirmation does not
+% ensure use: six confirmed jobs do not become durable under injected
+% failures. The fault stratum supplies 52 durable, actually consumed results,
+% of which 50 have original-Owner installation records and two first reach
+% the Consumer through recovery. The strata describe different workloads,
+% rather than a pooled production confirmation rate.
+
+% BLOCK D: compact replacement for the end of the long-stream boundary account.
+% Preserve the actual P99/CER/energy failure results already preceding it.
+% Evidence: ACTUAL_PAIRING_AND_BOUNDARY_FINDINGS_v2.zh.md, actual 8-run boundary.
+On both no-reset sources, actual D2/C8 failures and a conservative offline
+excess-length bound precede the after-trim 448-token condition.
+These earlier observations preclude assigning all degradation to that
+condition. The length bound is not online prefix CER, and the observations
+do not identify the causal
+shares of context evolution, recursive correction or length handling.
+% Changed: stated temporal evidence and causal limit directly; no reset repair.
+% Protected: actual D2/C8 failure, offline-only length bound, after-trim condition,
+% no unique cause, no online prefix-CER claim; existing final CER numbers retained.
+% Meaning-Check: PRESERVED
+% Risk-Flags: none
+
+% BLOCK E: reserved insertion contracts, NOT result prose. Keep disabled until
+% root receives actual frozen results and independent gates.
+%
+% HISTORY RESULT: give original Consumer-timed distinct episodes/area,
+% old-shown restoration vs newly-legal historical publication, partial EOS,
+% unchanged original permissions, necessary revisions and character costs.
+% Label fixed-history CPU replay explicitly; no deployment gain inferred.
+%
+% COST RESULT: name whether measuring current-protocol footprint,
+% instrumentation overhead, or total implementation-extension cost.
+% Give span scope + inclusive/exclusive convention + observed endpoint effects.
+% Never call off/on capture a pure safety tax; no numbers inserted before run.
