@@ -1,0 +1,23 @@
+{
+  "record_type": "PRE_RESULT_FIXED_STATISTICAL_CONTRACT_NOT_RESULTS",
+  "independent_units": "eight previously frozen speakers; one source utterance each",
+  "service_cells": 32,
+  "policies": ["conservative", "fullcall"],
+  "fresh_repeats_per_source_policy": 2,
+  "source_combination": "sum original credit and offered duration over both repeats inside each source and policy",
+  "primary_coverage": "sum all original credited audio seconds / sum all offered audio seconds, including original EOS",
+  "primary_paired_estimand": "100 * (sum fullcall source credits / sum source offered - sum conservative source credits / sum source offered)",
+  "secondary_paired_estimand": "mean of eight source-level percentage-point differences",
+  "bootstrap_generator": "stdlib random.Random(20261102)",
+  "bootstrap_draws": 20000,
+  "draw_size": 8,
+  "resampling": "eight source indices with replacement, using randrange(8); policies/repeats stay paired inside source",
+  "confidence_interval": "95 percent percentile; sorted bootstrap draws; linear interpolation at (n-1)*p for p=.025/.975",
+  "negative_effects": "retained without clipping, removal, sign gate or favorable-estimand selection",
+  "latency_summary": "median and minimum/maximum of original per-run unweighted linear P99 values, not pooled-frontier P99",
+  "energy": "original a13 common both-board origin-to-confirmed-physical-model-drain windows; reference generation separate",
+  "quality": "original final4f whitespace-only metrics, consistency checked across all four runs per source; unique source references counted once",
+  "old_four_speaker_bank_included": false,
+  "actual_trace_refinement": "separate original c4 closure required for final report PASS; pending allowed only with explicit pending report status"
+}
+
