@@ -1,0 +1,415 @@
+--- v12/coordination_refs.bib
++++ v13/coordination_refs.bib
+@@ -102,6 +102,7 @@
+   title = {Efficient Memory Management for Large Language Model Serving with {PagedAttention}},
+   booktitle = {Proceedings of the 29th Symposium on Operating Systems Principles},
+   year = {2023},
++  pages = {611--626},
+   publisher = {ACM},
+   doi = {10.1145/3600006.3613165},
+   url = {https://arxiv.org/abs/2309.06180}
+--- v12/main.tex
++++ v13/main.tex
+@@ -12,20 +12,22 @@
+ \author{\IEEEauthorblockN{Anonymous submission}\IEEEauthorblockA{Regular paper}}
+ \maketitle
+ \begin{abstract}
+-Feedback-driven inference can retract timely output whose computation
+-remains valid. RevTrace coordinates three decisions: complete-input
+-eligibility, original selection authority, and support for the Consumer's
+-whole hypothesis. It retains eligible calls without endorsing their
+-predictions and preserves accepted results across producer failure.
+-We give sufficient retention conditions and a conditional selected-trace
+-refinement argument. In a predeclared 24-speaker stratum, computation
+-retention increases frontier withdrawals from 12 to 17; joint retention
+-yields zero. On eight previously unused speakers in native feedback
+-correction, offered audio coverage meeting both delivery deadlines rises
+-from 40.6\% to 93.9\% with unchanged selected histories. Whole-run passes
+-increase from 0/16 with conservative execution to 10/16 with RevTrace.
+-Controlled producer failures preserve already received complete results
+-when their inputs match and reject them when they do not.
++Feedback-driven inference may withdraw a still-supported view even after
++timely delivery. RevTrace addresses these avoidable withdrawals by
++coordinating complete-input eligibility, original selection authority,
++and whole-view support. It retains eligible calls without endorsing their
++predictions and preserves matching received results across producer
++failure. We give sufficient retention conditions and a conditional
++selected-trace refinement argument. In a 24-speaker factorial study,
++computation retention increases frontier withdrawals from 12 to 17;
++joint retention yields zero in the predeclared stratum. In a separate
++native-correction study on eight previously unused speakers,
++dual-deadline audio coverage rises from 40.6\% to 93.9\% over conservative
++execution, with unchanged selected histories and final quality.
++The speaker-paired gain is 53.3 percentage points (95\% CI [44.8, 59.6]);
++every source improves. Whole-run passes increase from 0/16 to 10/16.
++Controlled failures validate retention of matching received results and
++rejection of mismatches.
+ \end{abstract}
+ \begin{IEEEkeywords}
+ dependable inference, feedback state, incremental computation, speculative execution, streaming ASR
+--- v12/refs.bib
++++ v13/refs.bib
+@@ -22,10 +22,10 @@
+   
+ }
+ 
+-@article{machacek2023whisperstreaming,
++@inproceedings{machacek2023whisperstreaming,
+   author  = { Macháček, Dominik and Dabre, Raj and Bojar, Ondřej },
+   title   = {{Turning Whisper into Real-Time Transcription System}},
+-  journal = {Proceedings of the 13th International Joint Conference on Natural Language Processing and the 3rd Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics: System Demonstrations},
++  booktitle = {Proceedings of the 13th International Joint Conference on Natural Language Processing and the 3rd Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics: System Demonstrations},
+   year    = {2023},
+   pages   = {17--24},
+   doi     = {10.18653/v1/2023.ijcnlp-demo.3},
+@@ -49,7 +49,7 @@
+ @article{shi2026qwen3asr,
+   author  = { Shi, Xian and Wang, Xiong and Guo, Zhifang and Wang, Yongqi and Zhang, Pei and Zhang, Xinyu and Guo, Zishan and Hao, Hongkun and Xi, Yu and Yang, Baosong and Xu, Jin and Zhou, Jingren and Lin, Junyang },
+   title   = {{Qwen3-ASR Technical Report}},
+-  journal = {arXiv preprint},
++  journal = {arXiv preprint arXiv:2601.21337},
+   year    = {2026},
+   
+   eprint = {2601.21337},
+--- v12/sections/01_progress_introduction.tex
++++ v13/sections/01_progress_introduction.tex
+@@ -1,15 +1,13 @@
+-An audio interval can meet both first-delivery deadlines yet become
+-temporarily unavailable after a compatible feedback update. In streaming
+-speech correction, a selected correction supplies the input to later
+-recognition~\cite{vu2026streamcorrect}. Here, trusted feedback is feedback
+-accepted by the original protected selection process. In the actual
+-execution of Figure~\ref{fig:continuity_case}(a), a complete interval is
+-displayed within two seconds (D2), then withdrawn despite a still-valid
+-dependency path. Identical text returns through certified delivery within
+-eight seconds (C8), leaving a 2.176-s gap between the two timely first
+-deliveries. We call this an \emph{avoidable
+-withdrawal}: an update retracts a delivered whole view that it still
+-supports. The client loses progress that the revision did not refute.
++A trusted revision can make timely progress unavailable without refuting
++its computation. In streaming speech correction, selected corrections
++feed later recognition~\cite{vu2026streamcorrect}. Trusted feedback here
++means acceptance by the original protected selection process. In
++Figure~\ref{fig:continuity_case}(a), a complete interval is displayed within
++two seconds (D2), then withdrawn despite a valid dependency path;
++identical certified text returns within eight seconds (C8). Both first
++deliveries meet their deadlines, yet the client loses 2.176~s of coverage.
++We call this an \emph{avoidable withdrawal}: an update retracts a whole
++view that it still supports.
+ 
+ \begin{figure*}[t]
+ \centering
+@@ -26,20 +24,22 @@
+ \label{fig:continuity_case}
+ \end{figure*}
+ 
+-The two executions separate first-delivery latency from continued
+-availability; the factorial study in Section~\ref{sec:eval} measures how
+-coordination affects both across controlled runs.
++First-delivery deadlines and continued availability measure different
++properties: (a) meets D2 but later loses a supported view; (b) retains
++coverage after slightly late first delivery. We therefore report
++avoidable withdrawal and deadline coverage separately.
+ 
+-A dependable revision service must both reject invalid results and
+-preserve progress that remains usable. Discarding all older work enforces
+-a conservative boundary at the cost of service. Preserving computation
+-alone leaves another gap: the Consumer can still replace its valid ahead
+-view when a selected state installs. In a predeclared 24-speaker stratum,
++A dependable revision service must reject invalid uses while preserving
++still-valid progress. When a whole view covers audio through 14~s,
++installing a compatible 12-s state need not erase its supported 12--14-s
++progress. A snapshot replacement does. A conservative version rule may
++discard usable work, while retaining computation alone does not stop the
++Consumer overwriting its supported ahead view. In a predeclared 24-speaker stratum,
+ computation retention improves timely audio coverage while increasing
+ backward movements of the displayed audio frontier, or \emph{frontier
+ withdrawals}, from 12 to 17. Coordinating computation and view retention
+-yields zero. Valid execution must therefore be connected to continued
+-availability at the actual Consumer.
++yields zero. RevTrace connects valid execution to continued availability
++at the actual Consumer without changing which original result is selected.
+ 
+ The challenge is to act on evidence that arrives at different times.
+ A revision can remove a view's support without refuting the unresolved
+--- v12/sections/02_contract.tex
++++ v13/sections/02_contract.tex
+@@ -65,11 +65,11 @@
+ before or after [EL] confirms the actual parent. [AU] joins that complete
+ result, confirmed current parent and owned identity; synchronizing fact
+ $D$ precedes installation. [SUP] independently checks the whole visible
+-view. Numbers identify distinct facts: parent $P_2$ (1) and child $P_3$ (2).
+-The Consumer lane shows application of (1); (2) triggers its own [SUP]
+-check when applied. Pending input permits running/buffering without commit. Solid
+-arrows carry data/state; dashed arrows carry check evidence. Icons and
+-modules are schematic, without a measured time scale.}
++view. The Consumer lane shows application of the parent fact $P_2$;
++the child fact $P_3$ triggers its own [SUP] check when applied.
++Pending input permits running/buffering without commit. Solid arrows
++carry data/state; dashed arrows carry check evidence. This is a causal
++schematic, without a measured time scale.}
+ \label{fig:protocol}
+ \end{figure*}
+ 
+--- v12/sections/05_evaluation_core.tex
++++ v13/sections/05_evaluation_core.tex
+@@ -61,6 +61,9 @@
+ and recomputation on the original clocks. Board energy spans the common trial origin-to-confirmed
+ physical-model-drain window. Tables state their aggregation: totals,
+ per-run P99 medians, or observed ranges.
++Energy is normalized by offered audio and compared within the same
++runtime and workload; native sequential-feedback and batched-core
++values are not directly comparable.
+ 
+ We separately count visible-frontier withdrawals, erased code points and
+ deficit below the previously observed frontier. Retrospective whole-text
+@@ -71,8 +74,8 @@
+ actual consumed input paths from original outputs.
+ 
+ \subsection{Does retaining computation retain delivered service?}
+-Retaining computation alone can improve timeliness while increasing
+-withdrawal. Figure~\ref{fig:main_evidence} shows the predeclared Qwen,
++Retaining computation alone does not preserve delivered progress.
++Figure~\ref{fig:main_evidence} shows the predeclared Qwen,
+ $\rho=1$, staggered stratum. With the same selected histories, computation
+ retention raises covered audio from 654.115 to 664.150~s but withdrawals
+ from 12 to 17. View retention alone reduces withdrawals to 1 but covers
+@@ -86,14 +89,12 @@
+ \begin{figure*}[t]
+ \centering
+ \includegraphics[width=\textwidth]{figures/core_interaction.pdf}
+-\caption{Computation and view retention have different service effects.
+-Each point pools three eight-speaker cohorts in the predeclared Qwen,
+-$\rho=1$, staggered stratum; each arm offers 714.110~s. Lines compare the
+-two computation-retention settings, separately for view retention off/on.
+-(a) Total frontier withdrawals. (b) Offered-audio fraction meeting both
+-display 2~s and certified 8~s deadlines. The joint point is RevTrace.
+-All four arms and the separate Alternative joint positive control
+-fail whole-run D2 (15 runs total).}
++\caption{Factorial interactions in the predeclared Qwen, $\rho=1$,
++staggered stratum. Points pool three eight-speaker cohorts;
++each arm offers 714.110~s. (a) Total frontier withdrawals.
++(b) Offered-audio fraction meeting display 2~s and certified 8~s deadlines.
++Joint retention is RevTrace. All four arms and the Alternative joint
++positive control fail whole-run D2 (15 runs).}
+ \label{fig:main_evidence}
+ \end{figure*}
+ 
+--- v12/sections/05_native_retention.tex
++++ v13/sections/05_native_retention.tex
+@@ -15,7 +15,9 @@
+ policies have two complete workers, the same ASR early-view Consumer and
+ neural warmup. Conservative execution waits for selected parent feedback;
+ RevTrace starts conditional full calls and retains them when their
+-complete inputs are confirmed.
++complete inputs are confirmed. This tests complete-call overlap against
++waiting for selected parent feedback; core factorization separately tests
++computation/view retention.
+ 
+ \begin{table}[t]
+ \centering
+@@ -36,24 +38,23 @@
+ \end{tabular}
+ \end{table}
+ 
+-\paragraph{Independent sources and task fidelity}
++\paragraph{Preserving the original selected task}
+ Metadata selection froze eight unused AISHELL-1 test speakers
+ \cite{bu2017aishell} before reference or service inference, with one complete
+ 8--9-s utterance per speaker. Two policies and two fresh repeats give
+-32 runs with fixed models, warmup and allocator, balanced policy order
+-and GPU roles swapped across repeats. All 564 selected transitions
+-preserve complete original inputs/outputs, correction and returned IDs
+-under strict reference checks and independent actual-Consumer trace
+-audits. Final transcription quality is identical across policies and
+-repeats: 23 edits over 174 unique reference characters (13.22\% CER).
++32 runs with balanced policy order and GPU roles swapped across repeats.
++Reference checks and independent actual-Consumer audits bind all 564
++selected transitions to complete original inputs/outputs, correction and
++returned IDs. Final quality is identical across policies and repeats:
++23 edits over 174 unique reference characters (13.22\% CER).
+ Reference generation is charged separately from service.
+ 
+-\paragraph{Energy through physical completion}
++\paragraph{Energy over the complete service window}
+ On the new speakers, RevTrace uses 5.23\% less common-window board energy
+ than Conservative. The origin-to-physical-drain window includes issued
+ work that is not used.
+ 
+-\paragraph{Where the remaining delay accumulates}
++\paragraph{Where reusable lookahead runs out}
+ The six failed trials come from S0901, S0902 and S0915. S0915 contributes
+ 6.996 of the 8.404~uncredited audio-s: both repeats miss the same seven
+ frontiers from 6~s through EOS. Repeated original corrections refute the
+@@ -63,9 +64,10 @@
+ boundary at 7.976~s, and actual consumption at 8.023~s crosses D2 at
+ 8.000~s. S0901 retains a matching early EOS call after slow preceding
+ recognition; its ASR boundary still arrives late. S0902 loses lookahead after full-input refutations. These
+-recorded paths connect eligibility decisions to actual delivery timing.
++recorded paths show how repeated input refutations exhaust reusable
++lookahead: S0915's lawful inference path outgrows the input cadence.
+ 
+-\paragraph{The same content arrives earlier}
++\paragraph{More selected content meets the deadlines}
+ Figure~\ref{fig:native_content} separates deadline coverage from content
+ support. On the eight new speakers, timely coverage whose whole first
+ view retrospectively matches selected text at that view's own frontier
+@@ -78,16 +80,18 @@
+ \begin{figure}[t]
+ \centering
+ \includegraphics[width=\columnwidth]{figures/native_content.pdf}
+-\caption{More matching content meets both deadlines. The independent
+-eight-speaker and resident four-speaker cohorts offer 137.864 and
+-66.340~audio-s per policy, respectively. Stacks partition
++\caption{More matching content meets both deadlines: display within 2~s
++and certified coverage within 8~s. Independent eight-speaker and resident
++four-speaker cohorts offer 137.864 and 66.340~audio-s per policy.
++Stacks partition
+ timely coverage matching later selected whole text at its own frontier,
+ other timely coverage, and missed deadlines. Retrospective agreement is
+-distinct from online [SUP] and human accuracy. Labels are rounded percentages.}
++distinct from online [SUP] and human accuracy. Boundary labels sum both
++timely categories, in rounded percentages.}
+ \label{fig:native_content}
+ \end{figure}
+ 
+-\paragraph{Resident independent requests}
++\paragraph{Benefits persist across resident requests}
+ RevTrace raises joint D2/C8 passes from 0/8 to 7/8 requests, and timely
+ coverage from 31.0 to 64.118875 of 66.33975~s. Models load once per trial;
+ both worker PIDs persist across four pre-registered independent requests.
+@@ -97,7 +101,7 @@
+ S0908 repeat has D99 2.229~s. This single-outstanding closed-loop contract
+ tests residency.
+ 
+-\paragraph{Deadline sensitivity}
++\paragraph{Benefits are not confined to the D2 cutoff}
+ In the existing four-speaker banks, we recompute offered-audio coverage over display budgets
+ from 0.5 to 6~s, keeping every original frontier and EOS tail.
+ The confirmation budget remains C8.
+--- v12/sections/05_operating_boundaries.tex
++++ v13/sections/05_operating_boundaries.tex
+@@ -48,9 +48,9 @@
+ such windows at 16 sessions, with 24.903/23.635/15.736 audio-s$\times$wall-s
+ deficit; RevTrace has none. Holes intersect the original D2 read point
+ for 6.000/10.675/4.000~s of distinct audio.
+-\par\noindent\textbf{Finding 3: continuity and first delivery have different boundaries.}
+-Retaining a supported view removes an avoidable withdrawal; whether
+-enough work arrives before D2 remains a separate scheduling and load outcome.
++\par\noindent\textbf{Finding 3: continuity can improve without meeting the whole-run deadline.}
++Joint retention removes the measured compatible withdrawals, while all
++12- and 16-session runs still miss D2.
+ 
+ \paragraph{Quality and cost}
+ Headline Qwen arms share WER 26/1908 (1.36\%) and selected histories.
+--- v12/sections/06_progress_related.tex
++++ v13/sections/06_progress_related.tex
+@@ -30,11 +30,9 @@
+ arguments and dependency checks to recover reusable work
+ \cite{hammer2014adapton,hammer2015names}. Differential Dataflow maintains
+ incremental computations across evolving versions
+-\cite{mcsherry2013differential}. These works establish much of the basis for
+-dependency-aware reuse (Table~\ref{tab:neighbor_objects}). RevTrace instantiates that basis for complete
+-neural feedback state and frozen executed calls. Its service obligation
+-connects execution eligibility to the actual whole view retained when an
+-independently selected root is applied.
++\cite{mcsherry2013differential}. These foundations for dependency-aware
++reuse (Table~\ref{tab:neighbor_objects}) support RevTrace's complete-state
++call and Consumer witnesses at independently selected root applications.
+ Our sufficient witness follows recorded executions; it does not transfer a
+ from-scratch theorem to independently repeated floating-point inference.
+ 
+@@ -89,10 +87,10 @@
+ is execution support, without a new general cancellation claim. The
+ parent-version control does not reproduce the complete Retire system.
+ 
+-Optimistic and multiversion concurrency control separate validation and
+-commit from concurrent execution; snapshot isolation further distinguishes
+-read snapshots from transaction guarantees
+-\cite{kung1981occ,bernstein1983mvcc,berenson1995isolation}.
++Optimistic concurrency control validates concurrent work before
++commit~\cite{kung1981occ}; multiversion control manages reads across data
++versions~\cite{bernstein1983mvcc}, while snapshot isolation supplies a
++distinct transaction guarantee~\cite{berenson1995isolation}.
+ Write-ahead recovery persists state changes and identities
+ \cite{mohan1992aries}. Distributed snapshots capture process/channel
+ state~\cite{chandy1985snapshots}, and stream-processing systems recover
+@@ -100,6 +98,5 @@
+ \cite{zaharia2013dstreams,carbone2017flinkstate}. RevTrace replays a local
+ verified selected prefix. Its terminal/drain-based physical ownership
+ also differs from time-bounded cache leases~\cite{gray1989leases}.
+-These mechanisms supply ordering, durability and execution context;
+-the feedback adapter specifies complete-input eligibility and whole-view
+-retention.
++The feedback adapter adds complete-input eligibility and whole-view
++retention to this ordering, durability and execution context.
+--- v12/sections/07_progress_discussion.tex
++++ v13/sections/07_progress_discussion.tex
+@@ -1,18 +1,22 @@
+-\paragraph{Guarantee and adapter scope}
++\paragraph{Evidence and comparison scope}
++Native confirmation uses one 8--9-s utterance per speaker; timing repeats
++do not add acoustic sources. Native and core policy comparisons isolate
++their respective retention effects, rather than rank external
++speculative-serving systems.
++
++\paragraph{Transferring the contract}
+ A new adapter must expose every mutable field affecting inference,
+ selection or feedback, including numerical caches, alignment cursors and
+-external state. The witnesses permit conservative rejection when this
+-evidence is absent. Bounded specifications and observed traces check
+-separate parts of this contract.
++external state. Audio-frontier progress, new text and human accuracy
++remain separate endpoints. Retention still pays synchronization,
++queueing and inference; resource admission governs when to launch more
++work~\cite{welsh2001seda}. Cold Owner recovery restores old facts before
++new inference under the surviving components of
++Section~\ref{subsec:failure_model}.
+ 
+-\paragraph{Service and capacity}
+-Advancing the audio frontier can leave cumulative text unchanged.
+-The original-clock coverage, text-occurrence counts and quality metrics
+-therefore remain separate. Retention does not eliminate synchronization,
+-queueing or neural work. The c12/c16 workloads and per-source native
+-event paths distinguish retained progress from meeting D2. Cold Owner recovery
+-restores old facts before it supplies new inference, under the surviving
+-components of Section~\ref{subsec:failure_model}.
+-
+-Input eligibility permits retention; queue-based resource admission
+-governs when to launch more work~\cite{welsh2001seda}.
++\paragraph{Reproducibility}
++The anonymous material supplies source snapshots, fixed model/data
++configurations, per-run identities, endpoint-checking scripts and
++hash-bound figure inputs. Bounded summaries and raw-log hash indices are
++included; weights and full journals are separate. Figure programs
++regenerate plots from the frozen inputs.
+--- v12/sections/08_progress_conclusion.tex
++++ v13/sections/08_progress_conclusion.tex
+@@ -1,18 +1,9 @@
+-Feedback revisions change which uses of speculative work remain valid.
+-RevTrace coordinates complete-input eligibility, original selection
+-authority and whole-view support so that a selected update can advance
+-without an avoidable withdrawal of still-supported progress. The
+-factorial study separates retained execution from retained service;
+-native full calls improve timely coverage on independent speakers while
+-preserving original correction and feedback. Process-failure controls
+-distinguish accepted results that remain usable from newly fenced
+-messages and refuted inputs.
+-
+-The practical lesson is to bind each use to its own evidence: the complete
+-frozen input for retaining a call, the original complete result for
+-selected advancement, and a whole dependency path for retaining a
+-displayed view. Under the declared state and failure contract, these
+-witnesses preserve selected-task legality and supported views at
+-compatible applications. The independent native study demonstrates how
+-retaining that lawful work improves timely service while original
+-correction and feedback remain intact.
++Trusted feedback changes which uses of speculative work remain valid.
++RevTrace checks complete-call eligibility, original selection authority
++and actual whole-view support separately. Under the declared contract,
++these witnesses preserve selected-task legality and avoid unnecessary
++withdrawals at compatible applications. Factorial controls show why
++retaining computation alone is insufficient; independent native trials
++turn confirmed full calls into timely service without changing original
++correction or feedback. The practical lesson is to bind each retained use
++to its own evidence, including received results whose producer has failed.

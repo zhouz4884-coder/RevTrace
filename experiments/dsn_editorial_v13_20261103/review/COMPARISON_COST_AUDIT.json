@@ -1,0 +1,1146 @@
+{
+  "audit_id": "REVTRACE_DSN_V13_COMPARISON_COST_STATIC_AUDIT_20261103_V1",
+  "created_UTC": "2026-11-03T11:12:28.670474+00:00",
+  "gate": "PASS_V13_COMPARISON_COST_SCOPE_WITH_NO_RESULT_CORRECTION",
+  "material_change_to_new8_main_result": false,
+  "additional_same_contract_native_comparator_found": false,
+  "scope": {
+    "audit_id": "REVTRACE_DSN_V13_COMPARISON_COST_STATIC_AUDIT_20261103_V1",
+    "mode": "static_existing_bounded_evidence_only",
+    "native_cells": 32,
+    "cost_timing_on_cells": 8,
+    "failures_reviewed": 6,
+    "task_scope": [
+      "native_comparator_fairness",
+      "service_energy_window",
+      "per_run_cost_ranges",
+      "recorded_failure_paths"
+    ],
+    "new_GPU_or_service_runs": 0,
+    "new_model_calls": 0,
+    "remote_access": false
+  },
+  "run_record": {
+    "kind": "editorial_static_audit_not_new_serving_experiment",
+    "audit_tooling": "inline Python standard-library SHA/csv/json arithmetic and read-only Git queries",
+    "review_archive_HEAD": "7372133ecf9ff2b7930fb799b56e1fbdd1d80f3f",
+    "archive_HEAD_is_not_execution_source": true,
+    "config_sha256": "03a8c1348d97830f88df9d05fd8bdfa76914067258c113bbc61ce0d7b9563e0a",
+    "environment": {
+      "executable": "E:\\Anaconda\\python.exe",
+      "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "cwd": "D:\\VLA_QWEN\\RevTrace"
+    },
+    "existing_native_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_confirmation_20261102/service_confirmation_v1",
+    "aggregate_summary_location": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_editorial_v13_20261103\\review\\COMPARISON_COST_AUDIT.json",
+    "gate_decision_location": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_editorial_v13_20261103\\review\\COMPARISON_COST_AUDIT.json#gate"
+  },
+  "frozen_execution_sources": [
+    {
+      "local_clean_checkout": "experiments/dsn_native_resilience_20261030/source_v2",
+      "execution_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "manifest": "experiments/dsn_native_resilience_20261030/packages/SOURCE_v2.json",
+      "manifest_sha256": "60ae549fcc98165a74e5a3dc420bf93418296099fa12b410572b15d281b2c457",
+      "complete_files": 59,
+      "all_manifest_files_byte_equal": true,
+      "full_commit_resolves_locally": true,
+      "clean": true
+    },
+    {
+      "local_clean_checkout": "experiments/dsn_strengthening_20261031/paired_resident_source_v2",
+      "execution_source_commit": "a13fa0a335529dc188f7e738877a3acd027ce4a7",
+      "manifest": "experiments/dsn_strengthening_20261031/paired_resident_packages_v2/PAIRED_RESIDENT_SOURCE_v2.json",
+      "manifest_sha256": "8cadffbfe9ffcc1eb3efdf5e2702e7afbc2ec932158c12dd197d6f0bdc334934",
+      "complete_files": 18,
+      "all_manifest_files_byte_equal": true,
+      "full_commit_resolves_locally": true,
+      "clean": true
+    },
+    {
+      "local_clean_checkout": "experiments/dsn_streamcorrect_stage_handoff_20261029/source_v3",
+      "execution_source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+      "manifest": "experiments/dsn_streamcorrect_stage_handoff_20261029/packages/SOURCE_v3.json",
+      "manifest_sha256": "258c33df4eba1d27bef88339aa20b2aae2ffe69f43489255d989ad337b717521",
+      "complete_files": 38,
+      "all_manifest_files_byte_equal": true,
+      "full_commit_resolves_locally": true,
+      "clean": true
+    }
+  ],
+  "immutable_input_hashes": {
+    "experiments/dsn_native_confirmation_20261102/confirmation/SERVICE_PLAN_v1.json": "6093f5edc85496fa17e7949f0d4db156579a227e975c0a66156264d3e604d3a0",
+    "experiments/dsn_native_confirmation_20261102/confirmation/SERVICE_RESULTS_v1/SUMMARY.json": "e2e9f366d7e87b56388d25340f398b576950d7018440f7fdf6ee858145c606f6",
+    "experiments/dsn_native_confirmation_20261102/confirmation/SERVICE_RESULTS_v1/RUN_RECORD.json": "1ff35c0701e9afc8af36c3c0b67d17a5be95a1e23f2467614569bdc7e3e221e8",
+    "experiments/dsn_native_confirmation_20261102/confirmation/SERVICE_RUN_V1_PRELAUNCH/ENVIRONMENT.json": "2bf961a3e22f6d38f88adab5ddc4bda19339ab95ccabaa817eaa6a18fe6fe935",
+    "experiments/dsn_native_confirmation_20261102/confirmation/FINAL_REPORT/ALL32_CELLS.csv": "31c20d95e01900fbc8bcd317f843270410ba78de74bc3733d07a1c6e02b26652",
+    "experiments/dsn_native_confirmation_20261102/confirmation/FINAL_REPORT/SUMMARY.json": "a79755736d4849f7b1b00d4d4e54abf29b6cb6aeac9439dfc19cff3e7ced6cab",
+    "experiments/dsn_native_confirmation_20261102/confirmation/FINAL_REPORT/ENVIRONMENT.json": "a945a206d9f002b974f72f5cb4c1bdab0578204edfb7fd90555c51b903f5e88e",
+    "experiments/dsn_native_confirmation_20261102/confirmation/FINAL_REPORT/RUN_RECORD.json": "9f9088eb449f1f548713cba350eaf41939c7409cc20902d04882b1cd7032db2f",
+    "experiments/dsn_native_confirmation_20261102/confirmation/REFERENCE_RESULTS_v1/SUMMARY.json": "125ace859e2d45cdd8eb1c9d43c9bf0456c4b6ee16bd23ca32cc52597c5da3ce",
+    "experiments/dsn_native_confirmation_20261102/confirmation/REFERENCE_RESULTS_v1/ENVIRONMENT.json": "3c57f5d25c9aad169c8219156b308a462993f50d8bc2b78008803d237082d39e",
+    "experiments/dsn_v11_closure_20261102/analysis/FINAL/JOB_TIMELINES.csv": "b91d07db2452edec535b4d917fdd17eced09e97b3ae80c6c3ebdf1ffe5c90c01",
+    "experiments/dsn_v11_closure_20261102/analysis/FINAL/MISS_TIMELINES.csv": "82a1b4a217466f18abd72159c12b327021ffd38a8b18a147501a9e6e32ae1b19",
+    "experiments/dsn_v11_closure_20261102/analysis/FINAL/ENDPOINTS.csv": "19856ebacb84d093cd97a27b42e82cc31a2779c4330f6fd79903325572f0e15f",
+    "experiments/dsn_v11_closure_20261102/analysis/FINAL/SUMMARY.json": "5218b036f93f0bb651c69c9d0876425e61f92d3b8f9229c02e282e1b455388a7",
+    "experiments/dsn_v11_closure_20261102/analysis/FINAL/SOURCE_DEFICIT_LEDGER.json": "9219aae5538c403d6956f3f3a490bf65198e467db260bc0923819933e2570a88",
+    "experiments/dsn_v11_closure_20261102/review/EVENT_CLAIMS.json": "6ed9560051ed309c33f34cc382992c0ec0633fb56500f28937314506c257e226",
+    "experiments/dsn_continuity_cost_20261102/cost/FINAL_AGGREGATE/PAPER_DATA.json": "b487fc9716375620c693497c92c302190efabde6b5ef9a07d670e952de15c712",
+    "experiments/dsn_continuity_cost_20261102/cost/FINAL_AGGREGATE/UNSUBTRACTED_FAMILY_FOOTPRINTS.csv": "7fafca667190fa7c20ecc662c32764160eb46a0febb3f21260fea0c602e35d44",
+    "experiments/dsn_continuity_cost_20261102/cost/FINAL_AGGREGATE/RUN_RECORD.json": "fdf7f57c403f3573d60a206b7c34affb0e3e20dd816bdc24b53a4428f5b47003",
+    "experiments/dsn_continuity_cost_20261102/review/FINAL_COST_INDEPENDENT/SUMMARY.json": "9837ed2f585f1b492d53ffc44a1d76e8d05a6640b188b3d2a46bca90e298d47e",
+    "experiments/dsn_streamcorrect_stage_handoff_20261029/SERVICE_PILOT_RESULTS_v1/SC_STAGE_SERVICE_PILOT_V1_ready_handoff_source0_r0/READY.json": "13a50cd2e7d76bcf15a70d950559730e6eec1a4c00881222c16caf69b659f4d2",
+    "experiments/dsn_streamcorrect_stage_handoff_20261029/SERVICE_PILOT_RESULTS_v1/SC_STAGE_SERVICE_PILOT_V1_ready_handoff_source0_r0/ENERGY.json": "5bce9fee39c4502cbb7dc6e509815fdf7e65a68b6c6c43e910346155f3b31d11",
+    "experiments/dsn_streamcorrect_stage_handoff_20261029/SERVICE_PILOT_RESULTS_v1/SC_STAGE_SERVICE_PILOT_V1_ready_handoff_source0_r0/SUMMARY.json": "4cd1b5c52bef292a1670dbb1aad2469f5b817e62d5c7c1a5ba2c2dc33be98973",
+    "experiments/dsn_streamcorrect_stage_handoff_20261029/SERVICE_PILOT_v1_FROZEN.json": "4025ff8af633567a0dd907e5c9f84739dbffb2e1a9a6d19544dc96594729d5a7",
+    "experiments/dsn_streamcorrect_stage_handoff_20261029/source_v3/stage_service.py": "eb10051a068a2bcaefdbe0b1c47ebd81faeb14933c51ebc477843ce9e4f912fe",
+    "experiments/dsn_streamcorrect_stage_handoff_20261029/source_v3/candidate_bridge.py": "fd06cc14248eb4672799a79f48c82ed1f2fc9383b2081e6425677efe2f04cbe9",
+    "experiments/dsn_streamcorrect_stage_handoff_20261029/source_v3/native_bridge.py": "0ecf3dbf9628065c45a013044e16529094b20e0bcedab37ea79fc540bde18871",
+    "experiments/dsn_native_resilience_20261030/source_v2/resilience_owner.py": "f1e466740a60a86b8494d5d9bf5a5ce3ebb65803219c4165afcd6803c057993c",
+    "experiments/dsn_native_resilience_20261030/source_v2/resilience_trial.py": "b342c203ea9612c2b68b0367aeadeec069c63eccf6df69574e7977192fe3cc8a",
+    "experiments/dsn_native_resilience_20261030/source_v2/resilience_transport.py": "0bdfbf5f893a2296581d3a5d04abfaca6954d5d4af07d4b7f2906c2402fd52ad",
+    "experiments/dsn_strengthening_20261031/paired_resident_source_v2/run_paired_campaign.py": "485e91617bb267fe6186b7fdaa86d5e3581ed08b8d5fd13735d0d7bb9571f74a",
+    "experiments/dsn_strengthening_20261031/paired_resident_source_v2/external_power.py": "26172a294d54c58dea684161500caa0d0f7a462e111c340a24348e85e0225ba6",
+    "experiments/dsn_strengthening_20261031/paired_resident_source_v2/audit_results.py": "31b00d19ab2c804c26cf0e38fa948dedb8ed701f73a2d787ae53034a59a9f089",
+    "experiments/dsn_native_confirmation_20261102/confirmation/driver_source_v2/run_confirmation.py": "ec866cb64bbfdc3e3613b0bc05843672ba7e5a30d19c52f99a7b763c28ff66dc",
+    "experiments/dsn_native_confirmation_20261102/confirmation/driver_source_v2/make_service_plan.py": "f06963f7d34093dec60243ce8e2acff181f89f1d9ac168729720ca19e6fa1c8e",
+    "experiments/dsn_strengthening_20261031/PAIRED32_V2_RESULTS/SUMMARY.json": "6788a843fc45844952380cd16e733df95a294249411db57a25823b3e8d25ddf1",
+    "experiments/dsn_strengthening_20261031/RESIDENT4_V2_RESULTS/SUMMARY.json": "e8c22bae201af9889196f90392ab68cfe18a2ec49e44dde890e2365fc1043bc8",
+    "experiments/dsn_streamcorrect_adaptation_20261028/NATIVE_RESULTS_REPORT.zh.md": "7f33364a5a9e8573e2fe95ccef3cfcd5d7570b1cb8de1e682a3f6bee67eeaf6a",
+    "experiments/dsn_streamcorrect_adaptation_20261028/PROTOCOL_v2.md": "cb277d3a46c59c2b9ec456218bee095361f8dbf9f81893fa3e4d26ce361e85bd",
+    "experiments/dsn_native_resilience_20261030/packages/SOURCE_v2.json": "60ae549fcc98165a74e5a3dc420bf93418296099fa12b410572b15d281b2c457",
+    "experiments/dsn_strengthening_20261031/paired_resident_packages_v2/PAIRED_RESIDENT_SOURCE_v2.json": "8cadffbfe9ffcc1eb3efdf5e2702e7afbc2ec932158c12dd197d6f0bdc334934",
+    "experiments/dsn_streamcorrect_stage_handoff_20261029/packages/SOURCE_v3.json": "258c33df4eba1d27bef88339aa20b2aae2ffe69f43489255d989ad337b717521"
+  },
+  "frozen_input_manifest_sha256": "ed07558fe948e4ff6904bc94fce7c8df0882b37aa09976f062589a462d797fe2",
+  "current_v13_draft_snapshot_hashes": {
+    "Paper_DSN/revisions/20261103_dsn2027_release_v13/sections/03_native_extension.tex": "9646d9661fee5aea3c4baa55174a9acb771d55c00c0796a8e3b75796e272be49",
+    "Paper_DSN/revisions/20261103_dsn2027_release_v13/sections/05_evaluation_core.tex": "e5c9baf7f52e4424a3d65d00940919bc474e717b15a3e8b649bcf21672c741da",
+    "Paper_DSN/revisions/20261103_dsn2027_release_v13/sections/05_native_retention.tex": "b2b9e971f0651aaaf1c49dc46ef1b52a001433a92ff6cfd59f4e44bdfe316034",
+    "Paper_DSN/revisions/20261103_dsn2027_release_v13/sections/05_protocol_cost.tex": "8229ab9f581a4f8d4aed504e3c428b117eb91bcb8a807b685a83d7c649e925b6"
+  },
+  "draft_can_change_concurrently": true,
+  "comparison_audit": {
+    "ready_only_pilot": {
+      "source_commit": "bdfa3b1307d267a5a4caf6484e1ad465c39a592e",
+      "development_source": "BAC009S0764W0209",
+      "fresh_trials_per_arm": 1,
+      "original_selected_task_preserved": true,
+      "two_complete_workers": false,
+      "actual_worker_models": {
+        "authority": {
+          "mode": "authority",
+          "asr_parameter_dtypes": {
+            "torch.float32": 1541384960
+          },
+          "corrector_parameter_dtypes": {
+            "torch.float32": 1934137344
+          },
+          "neural_C_confirmed": true,
+          "ASR_only_producer": false
+        },
+        "producer": {
+          "mode": "protected_asr_stage",
+          "asr_parameter_dtypes": {
+            "torch.float32": 1541384960
+          },
+          "corrector_parameter_dtypes": {},
+          "neural_C_confirmed": null,
+          "ASR_only_producer": true
+        }
+      },
+      "clock_and_Consumer": "same within pilot; not final NN4f Consumer/durability implementation",
+      "energy_scope": "both GPUs from actual origin through Consumer drain; cold load and fixed neural warmup separate",
+      "actual_service_board_joules": 5111.5141079021905,
+      "full_physical_drain_cost_included": false,
+      "allowed_role": "developmental service pilot only"
+    },
+    "old_matched_and_resident_strategy_sets": [
+      "conservative",
+      "fullcall"
+    ],
+    "core_recomputation_not_native_same_task": true,
+    "old_dual_session_native_not_final_single_chain": true,
+    "component_oracle_CPU_not_serving_comparator": true
+  },
+  "energy_audit": {
+    "reintegrated_full_original_power_streams": false,
+    "validation": "all32 bounded original energies/window endpoint equality/board sum/ALL32 conservation plus frozen source READY/origin/drain ordering",
+    "all32_pass": true,
+    "window_start": "service origin after both fixed learned-C READY workers and reset",
+    "window_end": "first external query confirming actual READY model-worker PIDs exited/zombie and zero CUDA compute owners; upper observation bound",
+    "integration": "linear interpolation/trapezoids over external NVML-backed both-board samples",
+    "policies": {
+      "conservative": {
+        "trials": 16,
+        "offered_audio_seconds": 137.864125,
+        "total_board_joules": 95262.6399747613,
+        "joules_per_offered_audio_second": 690.9893344244654,
+        "per_run_window_seconds_minmax": [
+          18.50043603591621,
+          20.780967284925282
+        ]
+      },
+      "fullcall": {
+        "trials": 16,
+        "offered_audio_seconds": 137.864125,
+        "total_board_joules": 90279.60983385518,
+        "joules_per_offered_audio_second": 654.8448324308821,
+        "per_run_window_seconds_minmax": [
+          14.56306385062635,
+          17.685757747851312
+        ]
+      }
+    },
+    "total_cohort_energy_reduction_percent": 5.2308335589128285,
+    "EOS_to_drain_range_seconds": [
+      4.644510039128363,
+      5.69673899654299
+    ],
+    "final_query_interval_range_seconds": [
+      0.12742375303059816,
+      0.40266877319663763
+    ],
+    "cells": [
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r0",
+        "policy": "fullcall",
+        "origin_perf": 5361324.487417803,
+        "physical_drain_confirmed_perf": 5361341.036369164,
+        "window_seconds": 16.54895136039704,
+        "board_joules": {
+          "0": 3118.1115501278327,
+          "1": 2907.377407198233
+        },
+        "total_board_joules": 6025.488957326066,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.40654671844095,
+        "final_query_observation_interval_seconds": 0.19804564397782087
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_conservative_r0",
+        "policy": "conservative",
+        "origin_perf": 5361409.479310539,
+        "physical_drain_confirmed_perf": 5361429.13633967,
+        "window_seconds": 19.657029131427407,
+        "board_joules": {
+          "0": 3977.3416447946606,
+          "1": 2015.800993165185
+        },
+        "total_board_joules": 5993.142637959845,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.683587704785168,
+        "final_query_observation_interval_seconds": 0.20054014865309
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0914W0456_conservative_r0",
+        "policy": "conservative",
+        "origin_perf": 5361504.615524626,
+        "physical_drain_confirmed_perf": 5361524.335561364,
+        "window_seconds": 19.72003673762083,
+        "board_joules": {
+          "0": 3985.1544372164853,
+          "1": 2013.3379820287064
+        },
+        "total_board_joules": 5998.492419245192,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.419405419379473,
+        "final_query_observation_interval_seconds": 0.40266877319663763
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0914W0456_fullcall_r0",
+        "policy": "fullcall",
+        "origin_perf": 5361579.198543687,
+        "physical_drain_confirmed_perf": 5361594.881796467,
+        "window_seconds": 15.683252779766917,
+        "board_joules": {
+          "0": 2842.53857624137,
+          "1": 2699.803102778581
+        },
+        "total_board_joules": 5542.341679019951,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 4.951273109763861,
+        "final_query_observation_interval_seconds": 0.21884247101843357
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0907W0440_conservative_r0",
+        "policy": "conservative",
+        "origin_perf": 5361652.84452665,
+        "physical_drain_confirmed_perf": 5361671.470585238,
+        "window_seconds": 18.626058587804437,
+        "board_joules": {
+          "0": 3774.2074897823168,
+          "1": 2016.56911331096
+        },
+        "total_board_joules": 5790.776603093276,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.265395077876747,
+        "final_query_observation_interval_seconds": 0.2834027521312237
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0907W0440_fullcall_r0",
+        "policy": "fullcall",
+        "origin_perf": 5361756.419611048,
+        "physical_drain_confirmed_perf": 5361771.08813632,
+        "window_seconds": 14.66852527204901,
+        "board_joules": {
+          "0": 2690.755970931923,
+          "1": 2516.3317465239297
+        },
+        "total_board_joules": 5207.087717455853,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 4.644510039128363,
+        "final_query_observation_interval_seconds": 0.2252431893721223
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0769W0190_fullcall_r0",
+        "policy": "fullcall",
+        "origin_perf": 5361826.523361791,
+        "physical_drain_confirmed_perf": 5361841.086425642,
+        "window_seconds": 14.56306385062635,
+        "board_joules": {
+          "0": 2515.9164376988315,
+          "1": 2486.054486109118
+        },
+        "total_board_joules": 5001.9709238079495,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.078935395926237,
+        "final_query_observation_interval_seconds": 0.16926202736794949
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0769W0190_conservative_r0",
+        "policy": "conservative",
+        "origin_perf": 5361901.398922706,
+        "physical_drain_confirmed_perf": 5361920.751464147,
+        "window_seconds": 19.352541441097856,
+        "board_joules": {
+          "0": 3834.509166154447,
+          "1": 2002.8348911477003
+        },
+        "total_board_joules": 5837.344057302147,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.559091399423778,
+        "final_query_observation_interval_seconds": 0.25380742084234953
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0915W0286_fullcall_r0",
+        "policy": "fullcall",
+        "origin_perf": 5361984.144473837,
+        "physical_drain_confirmed_perf": 5362001.830231585,
+        "window_seconds": 17.685757747851312,
+        "board_joules": {
+          "0": 3363.228996398893,
+          "1": 3050.31567444253
+        },
+        "total_board_joules": 6413.544670841423,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.268952530808747,
+        "final_query_observation_interval_seconds": 0.15546652488410473
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0915W0286_conservative_r0",
+        "policy": "conservative",
+        "origin_perf": 5362056.729078725,
+        "physical_drain_confirmed_perf": 5362076.706163164,
+        "window_seconds": 19.977084439247847,
+        "board_joules": {
+          "0": 4039.726429088912,
+          "1": 1952.1790454640254
+        },
+        "total_board_joules": 5991.905474552937,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.337005271576345,
+        "final_query_observation_interval_seconds": 0.26236269623041153
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0912W0434_conservative_r0",
+        "policy": "conservative",
+        "origin_perf": 5362133.554016917,
+        "physical_drain_confirmed_perf": 5362154.299797118,
+        "window_seconds": 20.74578020069748,
+        "board_joules": {
+          "0": 4209.36707942937,
+          "1": 1757.688483785445
+        },
+        "total_board_joules": 5967.055563214815,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.232585330493748,
+        "final_query_observation_interval_seconds": 0.28160184249281883
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0912W0434_fullcall_r0",
+        "policy": "fullcall",
+        "origin_perf": 5362208.421728096,
+        "physical_drain_confirmed_perf": 5362224.447444739,
+        "window_seconds": 16.025716642849147,
+        "board_joules": {
+          "0": 2911.1529511379745,
+          "1": 2674.469013542204
+        },
+        "total_board_joules": 5585.621964680178,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 4.849302907474339,
+        "final_query_observation_interval_seconds": 0.2247555237263441
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0906W0197_conservative_r0",
+        "policy": "conservative",
+        "origin_perf": 5362280.406301419,
+        "physical_drain_confirmed_perf": 5362299.035683303,
+        "window_seconds": 18.629381883889437,
+        "board_joules": {
+          "0": 3748.973252802771,
+          "1": 1987.1559748718141
+        },
+        "total_board_joules": 5736.129227674585,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.061526247300208,
+        "final_query_observation_interval_seconds": 0.33693006355315447
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0906W0197_fullcall_r0",
+        "policy": "fullcall",
+        "origin_perf": 5362353.996879611,
+        "physical_drain_confirmed_perf": 5362369.410338273,
+        "window_seconds": 15.413458662107587,
+        "board_joules": {
+          "0": 2848.6583850767065,
+          "1": 2612.8667914996445
+        },
+        "total_board_joules": 5461.525176576351,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 4.947488471865654,
+        "final_query_observation_interval_seconds": 0.22379994112998247
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0901W0183_conservative_r0",
+        "policy": "conservative",
+        "origin_perf": 5362424.234795304,
+        "physical_drain_confirmed_perf": 5362445.015762589,
+        "window_seconds": 20.780967284925282,
+        "board_joules": {
+          "0": 4066.913353876057,
+          "1": 2066.7736551099056
+        },
+        "total_board_joules": 6133.687008985962,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.601386312395334,
+        "final_query_observation_interval_seconds": 0.311246600933373
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0901W0183_fullcall_r0",
+        "policy": "fullcall",
+        "origin_perf": 5362500.126311523,
+        "physical_drain_confirmed_perf": 5362516.230193655,
+        "window_seconds": 16.10388213209808,
+        "board_joules": {
+          "0": 2837.346876392327,
+          "1": 2725.7957783936504
+        },
+        "total_board_joules": 5563.142654785977,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.212875097990036,
+        "final_query_observation_interval_seconds": 0.16744196135550737
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0901W0183_fullcall_r1",
+        "policy": "fullcall",
+        "origin_perf": 5362572.400053527,
+        "physical_drain_confirmed_perf": 5362588.714771289,
+        "window_seconds": 16.314717762172222,
+        "board_joules": {
+          "0": 2743.244000019363,
+          "1": 2796.713908381753
+        },
+        "total_board_joules": 5539.957908401116,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.340423442423344,
+        "final_query_observation_interval_seconds": 0.21831483393907547
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0901W0183_conservative_r1",
+        "policy": "conservative",
+        "origin_perf": 5362644.03896421,
+        "physical_drain_confirmed_perf": 5362664.563355637,
+        "window_seconds": 20.524391426704824,
+        "board_joules": {
+          "0": 2347.1322603714875,
+          "1": 3960.19849119644
+        },
+        "total_board_joules": 6307.330751567928,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.566207606345415,
+        "final_query_observation_interval_seconds": 0.3218022119253874
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0906W0197_fullcall_r1",
+        "policy": "fullcall",
+        "origin_perf": 5362720.381272239,
+        "physical_drain_confirmed_perf": 5362735.842956634,
+        "window_seconds": 15.461684395559132,
+        "board_joules": {
+          "0": 2780.2975870745395,
+          "1": 2645.3837038137826
+        },
+        "total_board_joules": 5425.681290888322,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.199681610800326,
+        "final_query_observation_interval_seconds": 0.12742375303059816
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0906W0197_conservative_r1",
+        "policy": "conservative",
+        "origin_perf": 5362790.902396802,
+        "physical_drain_confirmed_perf": 5362810.233927609,
+        "window_seconds": 19.33153080753982,
+        "board_joules": {
+          "0": 2102.346136885204,
+          "1": 3827.412049716602
+        },
+        "total_board_joules": 5929.758186601806,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.623378341086209,
+        "final_query_observation_interval_seconds": 0.2008928768336773
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0912W0434_fullcall_r1",
+        "policy": "fullcall",
+        "origin_perf": 5362866.820044974,
+        "physical_drain_confirmed_perf": 5362883.257403279,
+        "window_seconds": 16.437358304858208,
+        "board_joules": {
+          "0": 2731.9695975692252,
+          "1": 2924.115008581467
+        },
+        "total_board_joules": 5656.084606150693,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.270032805390656,
+        "final_query_observation_interval_seconds": 0.2176349963992834
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0912W0434_conservative_r1",
+        "policy": "conservative",
+        "origin_perf": 5362938.571598621,
+        "physical_drain_confirmed_perf": 5362958.556989587,
+        "window_seconds": 19.98539096582681,
+        "board_joules": {
+          "0": 2163.5490709581077,
+          "1": 4043.862534301894
+        },
+        "total_board_joules": 6207.411605260002,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 4.804448493756354,
+        "final_query_observation_interval_seconds": 0.2614665487781167
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0915W0286_conservative_r1",
+        "policy": "conservative",
+        "origin_perf": 5363014.162410078,
+        "physical_drain_confirmed_perf": 5363033.656521371,
+        "window_seconds": 19.494111292995512,
+        "board_joules": {
+          "0": 2097.7535407275886,
+          "1": 3901.4908711059584
+        },
+        "total_board_joules": 5999.244411833547,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.3264189548790455,
+        "final_query_observation_interval_seconds": 0.39058676548302174
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0915W0286_fullcall_r1",
+        "policy": "fullcall",
+        "origin_perf": 5363091.297502208,
+        "physical_drain_confirmed_perf": 5363108.88311751,
+        "window_seconds": 17.585615302436054,
+        "board_joules": {
+          "0": 3145.2144843849787,
+          "1": 3278.357161918612
+        },
+        "total_board_joules": 6423.571646303591,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.171278089284897,
+        "final_query_observation_interval_seconds": 0.22935607098042965
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0769W0190_conservative_r1",
+        "policy": "conservative",
+        "origin_perf": 5363164.009813669,
+        "physical_drain_confirmed_perf": 5363182.510249705,
+        "window_seconds": 18.50043603591621,
+        "board_joules": {
+          "0": 2057.1221859121974,
+          "1": 3714.269917111811
+        },
+        "total_board_joules": 5771.392103024009,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.155970796942711,
+        "final_query_observation_interval_seconds": 0.3271461632102728
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0769W0190_fullcall_r1",
+        "policy": "fullcall",
+        "origin_perf": 5363237.3580324,
+        "physical_drain_confirmed_perf": 5363252.363323168,
+        "window_seconds": 15.005290768109262,
+        "board_joules": {
+          "0": 2580.456759029602,
+          "1": 2585.3293442708514
+        },
+        "total_board_joules": 5165.786103300454,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.578587312251329,
+        "final_query_observation_interval_seconds": 0.23169375117868185
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0907W0440_fullcall_r1",
+        "policy": "fullcall",
+        "origin_perf": 5363321.24060032,
+        "physical_drain_confirmed_perf": 5363336.933133217,
+        "window_seconds": 15.692532896995544,
+        "board_joules": {
+          "0": 2667.4613716166473,
+          "1": 2802.812101245084
+        },
+        "total_board_joules": 5470.273472861731,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.662319934926927,
+        "final_query_observation_interval_seconds": 0.2055742796510458
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0907W0440_conservative_r1",
+        "policy": "conservative",
+        "origin_perf": 5363390.654121393,
+        "physical_drain_confirmed_perf": 5363409.28219991,
+        "window_seconds": 18.628078516572714,
+        "board_joules": {
+          "0": 2022.073839334857,
+          "1": 3709.129915049449
+        },
+        "total_board_joules": 5731.203754384306,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.69673899654299,
+        "final_query_observation_interval_seconds": 0.16185067035257816
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0914W0456_fullcall_r1",
+        "policy": "fullcall",
+        "origin_perf": 5363465.393520919,
+        "physical_drain_confirmed_perf": 5363481.287762421,
+        "window_seconds": 15.894241502508521,
+        "board_joules": {
+          "0": 2789.359197200841,
+          "1": 2807.046357336155
+        },
+        "total_board_joules": 5596.405554536996,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.3169141840189695,
+        "final_query_observation_interval_seconds": 0.2571601299569011
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0914W0456_conservative_r1",
+        "policy": "conservative",
+        "origin_perf": 5363535.1447957,
+        "physical_drain_confirmed_perf": 5363554.600707755,
+        "window_seconds": 19.455912055447698,
+        "board_joules": {
+          "0": 2013.075085179051,
+          "1": 3937.829256361854
+        },
+        "total_board_joules": 5950.904341540905,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.096940491348505,
+        "final_query_observation_interval_seconds": 0.33768409863114357
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_conservative_r1",
+        "policy": "conservative",
+        "origin_perf": 5363609.750605831,
+        "physical_drain_confirmed_perf": 5363628.83059117,
+        "window_seconds": 19.079985339194536,
+        "board_joules": {
+          "0": 2040.4306690722299,
+          "1": 3876.4311594478067
+        },
+        "total_board_joules": 5916.861828520036,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.2997311325743794,
+        "final_query_observation_interval_seconds": 0.3320696633309126
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r1",
+        "policy": "fullcall",
+        "origin_perf": 5363684.40859159,
+        "physical_drain_confirmed_perf": 5363701.484316494,
+        "window_seconds": 17.075724904425442,
+        "board_joules": {
+          "0": 3192.305416197042,
+          "1": 3008.8200907214973
+        },
+        "total_board_joules": 6201.125506918539,
+        "actual_ready_gate": "PASS_TWO_ACTUAL_FRESH_FP32_READY_WORKERS",
+        "initial_cold_load_excluded": true,
+        "EOS_to_confirmed_drain_seconds": 5.406453214585781,
+        "final_query_observation_interval_seconds": 0.1882235473021865
+      }
+    ],
+    "no_evidence_of_normal_load_or_fixed_warmup_in_service_window": true
+  },
+  "cost_audit": {
+    "units": "ms/call; min and max of eight timing-enabled per-run observed means",
+    "ranges": {
+      "WAL.complete_fact_commit": [
+        20.350718588235292,
+        27.25195941176471
+      ],
+      "IO.actual_os_fsync": [
+        15.776612411764704,
+        22.18215470588235
+      ],
+      "SUP.complete_consumer_apply": [
+        18.583767,
+        23.91439049019608
+      ]
+    },
+    "per_run_means": {
+      "WAL.complete_fact_commit": [
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r0",
+          "role": "owner",
+          "label": "WAL.complete_fact_commit",
+          "count": "17",
+          "observed_mean_wall_ms": "23.247303470588236",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r0",
+          "role": "owner",
+          "label": "WAL.complete_fact_commit",
+          "count": "17",
+          "observed_mean_wall_ms": "27.25195941176471",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r0",
+          "role": "owner",
+          "label": "WAL.complete_fact_commit",
+          "count": "17",
+          "observed_mean_wall_ms": "22.00892288235294",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r0",
+          "role": "owner",
+          "label": "WAL.complete_fact_commit",
+          "count": "17",
+          "observed_mean_wall_ms": "22.54735788235294",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r1",
+          "role": "owner",
+          "label": "WAL.complete_fact_commit",
+          "count": "17",
+          "observed_mean_wall_ms": "21.291143941176472",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r1",
+          "role": "owner",
+          "label": "WAL.complete_fact_commit",
+          "count": "17",
+          "observed_mean_wall_ms": "20.350718588235292",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r1",
+          "role": "owner",
+          "label": "WAL.complete_fact_commit",
+          "count": "17",
+          "observed_mean_wall_ms": "22.35452688235294",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r1",
+          "role": "owner",
+          "label": "WAL.complete_fact_commit",
+          "count": "17",
+          "observed_mean_wall_ms": "26.605095411764708",
+          "floor_subtracted": "False"
+        }
+      ],
+      "IO.actual_os_fsync": [
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r0",
+          "role": "owner",
+          "label": "IO.actual_os_fsync",
+          "count": "17",
+          "observed_mean_wall_ms": "18.59321717647059",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r0",
+          "role": "owner",
+          "label": "IO.actual_os_fsync",
+          "count": "17",
+          "observed_mean_wall_ms": "22.146990352941177",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r0",
+          "role": "owner",
+          "label": "IO.actual_os_fsync",
+          "count": "17",
+          "observed_mean_wall_ms": "17.181255",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r0",
+          "role": "owner",
+          "label": "IO.actual_os_fsync",
+          "count": "17",
+          "observed_mean_wall_ms": "17.653292588235292",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r1",
+          "role": "owner",
+          "label": "IO.actual_os_fsync",
+          "count": "17",
+          "observed_mean_wall_ms": "16.138011294117646",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r1",
+          "role": "owner",
+          "label": "IO.actual_os_fsync",
+          "count": "17",
+          "observed_mean_wall_ms": "15.776612411764704",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r1",
+          "role": "owner",
+          "label": "IO.actual_os_fsync",
+          "count": "17",
+          "observed_mean_wall_ms": "17.484892529411763",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r1",
+          "role": "owner",
+          "label": "IO.actual_os_fsync",
+          "count": "17",
+          "observed_mean_wall_ms": "22.18215470588235",
+          "floor_subtracted": "False"
+        }
+      ],
+      "SUP.complete_consumer_apply": [
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r0",
+          "role": "supervisor_consumer",
+          "label": "SUP.complete_consumer_apply",
+          "count": "50",
+          "observed_mean_wall_ms": "21.435242260000003",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r0",
+          "role": "supervisor_consumer",
+          "label": "SUP.complete_consumer_apply",
+          "count": "51",
+          "observed_mean_wall_ms": "23.91439049019608",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r0",
+          "role": "supervisor_consumer",
+          "label": "SUP.complete_consumer_apply",
+          "count": "50",
+          "observed_mean_wall_ms": "21.555146699999998",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r0",
+          "role": "supervisor_consumer",
+          "label": "SUP.complete_consumer_apply",
+          "count": "50",
+          "observed_mean_wall_ms": "18.583767",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_fullcall_on_r1",
+          "role": "supervisor_consumer",
+          "label": "SUP.complete_consumer_apply",
+          "count": "50",
+          "observed_mean_wall_ms": "22.79207132",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0916W0463_conservative_on_r1",
+          "role": "supervisor_consumer",
+          "label": "SUP.complete_consumer_apply",
+          "count": "50",
+          "observed_mean_wall_ms": "20.196904739999997",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_fullcall_on_r1",
+          "role": "supervisor_consumer",
+          "label": "SUP.complete_consumer_apply",
+          "count": "51",
+          "observed_mean_wall_ms": "19.37016549019608",
+          "floor_subtracted": "False"
+        },
+        {
+          "cell_id": "COST_NN_BAC009S0908W0369_conservative_on_r1",
+          "role": "supervisor_consumer",
+          "label": "SUP.complete_consumer_apply",
+          "count": "50",
+          "observed_mean_wall_ms": "20.6535584",
+          "floor_subtracted": "False"
+        }
+      ]
+    },
+    "pure_validation_subtraction_performed": false,
+    "same_span_remainder_would_not_be_pure_validation": true,
+    "net_protocol_removal_overhead_not_measured": true
+  },
+  "failure_audit": {
+    "claim_input_hashes_verified": true,
+    "job_timeline_rows": 610,
+    "endpoint_rows": 564,
+    "miss_rows": 190,
+    "failed_RevTrace_trials": 6,
+    "failed_speakers": [
+      "S0901",
+      "S0902",
+      "S0915"
+    ],
+    "S0915_late_non_EOS_replacements": 12,
+    "S0915_late_non_EOS_infer_range_seconds": [
+      0.5308696245774627,
+      0.7408669786527753
+    ],
+    "S0915_parent_install_log_to_dispatch_range_seconds": [
+      0.0021622395142912865,
+      0.0052754878997802734
+    ],
+    "S0915_EOS_excluded_from_replacement_range": true,
+    "EOS_paths": [
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r0",
+        "job_id": "e0-j000000024",
+        "input_matches_actual_parent": true,
+        "started_on_canonical": true,
+        "promotion_count": 0,
+        "dispatch_relative_to_parent_install_seconds": 0.005169874057173729,
+        "ASR_after_D2_deadline_seconds": 0.2724597631022334,
+        "dispatch_after_D2_deadline_seconds": -0.11352311819791794,
+        "infer_host_seconds": 0.610504699870944,
+        "actual_Consumer_D_seconds": 2.3140628719702363,
+        "origin_perf": 5361324.487417803
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0915W0286_fullcall_r0",
+        "job_id": "e0-j000000026",
+        "input_matches_actual_parent": true,
+        "started_on_canonical": false,
+        "promotion_count": 1,
+        "dispatch_relative_to_parent_install_seconds": -0.28036120254546404,
+        "ASR_after_D2_deadline_seconds": 1.0538514498621225,
+        "dispatch_after_D2_deadline_seconds": 0.47529843356460333,
+        "infer_host_seconds": 0.813146311789751,
+        "actual_Consumer_D_seconds": 3.0856650788336992,
+        "origin_perf": 5361984.144473837
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0901W0183_fullcall_r0",
+        "job_id": "e0-j000000018",
+        "input_matches_actual_parent": true,
+        "started_on_canonical": false,
+        "promotion_count": 1,
+        "dispatch_relative_to_parent_install_seconds": -0.5194093678146601,
+        "ASR_after_D2_deadline_seconds": 0.31058264058083296,
+        "dispatch_after_D2_deadline_seconds": -0.23622619733214378,
+        "infer_host_seconds": 0.8525203447788954,
+        "actual_Consumer_D_seconds": 2.497231526300311,
+        "origin_perf": 5362500.126311523
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0901W0183_fullcall_r1",
+        "job_id": "e0-j000000018",
+        "input_matches_actual_parent": true,
+        "started_on_canonical": false,
+        "promotion_count": 1,
+        "dispatch_relative_to_parent_install_seconds": -0.5276286592707038,
+        "ASR_after_D2_deadline_seconds": 0.4219006961211562,
+        "dispatch_after_D2_deadline_seconds": -0.08442962542176247,
+        "infer_host_seconds": 0.751519275829196,
+        "actual_Consumer_D_seconds": 2.6358333015814424,
+        "origin_perf": 5362572.400053527
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0915W0286_fullcall_r1",
+        "job_id": "e0-j000000026",
+        "input_matches_actual_parent": true,
+        "started_on_canonical": false,
+        "promotion_count": 1,
+        "dispatch_relative_to_parent_install_seconds": -0.2853871798142791,
+        "ASR_after_D2_deadline_seconds": 1.0313467793166637,
+        "dispatch_after_D2_deadline_seconds": 0.4473344972357154,
+        "infer_host_seconds": 0.8257106076925993,
+        "actual_Consumer_D_seconds": 3.084204999729991,
+        "origin_perf": 5363091.297502208
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r1",
+        "job_id": "e0-j000000024",
+        "input_matches_actual_parent": true,
+        "started_on_canonical": true,
+        "promotion_count": 0,
+        "dispatch_relative_to_parent_install_seconds": 0.004907377064228058,
+        "ASR_after_D2_deadline_seconds": 0.7714768759906292,
+        "dispatch_after_D2_deadline_seconds": 0.3671740014106035,
+        "infer_host_seconds": 0.654233455657959,
+        "actual_Consumer_D_seconds": 2.8255792381241918,
+        "origin_perf": 5363684.40859159
+      }
+    ],
+    "S0902_tail_refutations": [
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r0",
+        "job_id": "e0-j000000019",
+        "proofs": [
+          {
+            "actual_cut_sha": "7d4b5cbff1fc824c71e925d011869cede1647867f3bc2425be505d3ffe84b377",
+            "dispatch_epoch": 0,
+            "expected_cut_sha": "3b03d9ed6f8ea404594230792fccbfeee8eb40a7c996c58b4cc46df421988ef7",
+            "job_id": "e0-j000000019",
+            "kind": "actual_canonical_disagrees_with_complete_start",
+            "source_id": "BAC009S0902W0343",
+            "witness_frontier": 120000
+          }
+        ]
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r0",
+        "job_id": "e0-j000000021",
+        "proofs": [
+          {
+            "actual_cut_sha": "a2020f1656ba87a5a42ded332d44f6cf76ce2d21056488a5d31c7984c6035b8a",
+            "dispatch_epoch": 0,
+            "expected_cut_sha": "dd439576b218b59eff04039c2885a9b5f8738cbbd289671a7805ffc30226ab11",
+            "job_id": "e0-j000000021",
+            "kind": "actual_canonical_disagrees_with_complete_start",
+            "source_id": "BAC009S0902W0343",
+            "witness_frontier": 128000
+          }
+        ]
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r0",
+        "job_id": "e0-j000000023",
+        "proofs": [
+          {
+            "actual_cut_sha": "9151b07d6be81ffa1315a842ad489365e4ed62be95b75bb6421666bc47447b08",
+            "dispatch_epoch": 0,
+            "expected_cut_sha": "2f8aace279167ba37681a97ecdc95ebe03b9ea10cb12e42db36a7f9dfe851d45",
+            "job_id": "e0-j000000023",
+            "kind": "actual_canonical_disagrees_with_complete_start",
+            "source_id": "BAC009S0902W0343",
+            "witness_frontier": 136000
+          }
+        ]
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r1",
+        "job_id": "e0-j000000019",
+        "proofs": [
+          {
+            "actual_cut_sha": "7d4b5cbff1fc824c71e925d011869cede1647867f3bc2425be505d3ffe84b377",
+            "dispatch_epoch": 0,
+            "expected_cut_sha": "3b03d9ed6f8ea404594230792fccbfeee8eb40a7c996c58b4cc46df421988ef7",
+            "job_id": "e0-j000000019",
+            "kind": "actual_canonical_disagrees_with_complete_start",
+            "source_id": "BAC009S0902W0343",
+            "witness_frontier": 120000
+          }
+        ]
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r1",
+        "job_id": "e0-j000000021",
+        "proofs": [
+          {
+            "actual_cut_sha": "a2020f1656ba87a5a42ded332d44f6cf76ce2d21056488a5d31c7984c6035b8a",
+            "dispatch_epoch": 0,
+            "expected_cut_sha": "dd439576b218b59eff04039c2885a9b5f8738cbbd289671a7805ffc30226ab11",
+            "job_id": "e0-j000000021",
+            "kind": "actual_canonical_disagrees_with_complete_start",
+            "source_id": "BAC009S0902W0343",
+            "witness_frontier": 128000
+          }
+        ]
+      },
+      {
+        "cell_id": "SC_NEWTEST_BAC009S0902W0343_fullcall_r1",
+        "job_id": "e0-j000000023",
+        "proofs": [
+          {
+            "actual_cut_sha": "9151b07d6be81ffa1315a842ad489365e4ed62be95b75bb6421666bc47447b08",
+            "dispatch_epoch": 0,
+            "expected_cut_sha": "2f8aace279167ba37681a97ecdc95ebe03b9ea10cb12e42db36a7f9dfe851d45",
+            "job_id": "e0-j000000023",
+            "kind": "actual_canonical_disagrees_with_complete_start",
+            "source_id": "BAC009S0902W0343",
+            "witness_frontier": 136000
+          }
+        ]
+      }
+    ],
+    "observed_paths_not_optimality_lower_bound": true
+  },
+  "minimal_editorial_recommendations": [
+    "State native comparison as input-confirmed overlap versus waiting for selected parent feedback; core factorial controls have a separate task.",
+    "Keep ready-only as developmental control; do not add its old-resource/window values to the new8 table.",
+    "Retain current per-run cost ranges and common physical-drain energy; no pure-validation subtraction or cross-runtime energy ranking.",
+    "Keep six late non-EOS replacements in each repeat; input-matching in-flight EOS is clearer for S0901; call the S0915 path an observed execution boundary."
+  ],
+  "manuscript_modified_by_this_audit": false,
+  "large_raw_or_frozen_result_modified": false,
+  "markdown_summary": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_editorial_v13_20261103\\review\\COMPARISON_COST_AUDIT.zh.md",
+  "markdown_sha256": "fe26446d95aac4595038643823532111d3f8b64963955ae69b972b0dbfa05e40",
+  "immutable_inputs_unchanged_during_final_audit": true
+}
