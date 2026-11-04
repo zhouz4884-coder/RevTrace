@@ -1,0 +1,150 @@
+{
+  "audit_id": "REVTRACE-DSN-EDITORIAL-V14-EXECUTION-PROOF-20261104",
+  "audit_kind": "read_only_source_and_manuscript_review",
+  "status": "PASS_CONDITIONAL_PROOF_ALIGNMENT_EDITORIAL_ADDITION_SUPPORTED",
+  "review_basis": "E:/Downloads/RevTrace_v13_Reviewer_Audit_and_Revision_1f841da.md",
+  "manuscript_basis": "Paper_DSN/revisions/20261103_dsn2027_release_v13",
+  "source_identity": {
+    "source_root": "experiments/dsn_native_resilience_20261030/source_v2",
+    "expected_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+    "observed_head": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+    "commit_object_resolves": true,
+    "git_porcelain_empty": true,
+    "manifest": "experiments/dsn_native_resilience_20261030/packages/SOURCE_v2.json",
+    "manifest_sha256": "60ae549fcc98165a74e5a3dc420bf93418296099fa12b410572b15d281b2c457",
+    "manifest_file_count": 59,
+    "tracked_file_count": 59,
+    "manifest_tracked_set_equal": true,
+    "byte_and_size_mismatches": [],
+    "verification_method": "Read-only git status/rev-parse/cat-file/ls-files and SHA-256 plus byte-count comparison for all manifest files. No experiment launch or test execution."
+  },
+  "findings": [
+    {
+      "id": "EP1",
+      "claim": "A complete unresolved child result is buffered rather than selected on arrival.",
+      "verdict": "SUPPORTED",
+      "anchors": [
+        "source_v2/fullspec_policy.py:151-164",
+        "source_v2/fullspec_policy.py:29-46"
+      ],
+      "detail": "Completion binds the original job, complete start/end cuts, original authority record and timing. Actual same-frontier mismatch, covered target or changed session can discard the result; otherwise a non-current start enters completed_full. Unknown does not imply refuted. The proof sentence must not claim every early result waits forever or is eventually selected."
+    },
+    {
+      "id": "EP2",
+      "claim": "Buffered results can be released only when their full start equals the actual selected parent.",
+      "verdict": "SUPPORTED",
+      "anchors": [
+        "source_v2/fullspec_policy.py:166-179",
+        "source_v2/fullspec_policy.py:139-149",
+        "source_v2/feedback_contract.py:15-33"
+      ],
+      "detail": "pop_ready_commits repeatedly rechecks invalidation and exact current-parent equality, then invokes _commit. FeedbackCut.same compares canonical bytes of the complete declared state, including frontier and contract, rather than text or a birth version. Each iteration installs its parent before another result can become ready. Receipt time orders candidates to inspect, not the projected edges."
+    },
+    {
+      "id": "EP3",
+      "claim": "The current parent and complete frozen start binding are checked before append, synchronized before Owner installation, and checked again before installation.",
+      "verdict": "SUPPORTED_UNDER_SERIAL_OWNER_AND_STORAGE_ASSUMPTIONS",
+      "anchors": [
+        "source_v2/resilience_policy.py:150-186",
+        "source_v2/resilience_owner.py:33-48",
+        "source_v2/resilience_storage.py:71-102",
+        "source_v2/fullspec_policy.py:139-142"
+      ],
+      "detail": "Resilient _commit checks current complete parent and session epoch before the synchronous hook. FactStore validates that parent against its current durable root, binds full job start and complete original C/U record, writes a framed chained record and calls flush/fsync before advancing its durable root or returning a receipt. Resilient _commit rechecks the Owner parent/epoch after the hook, then the base _commit checks them once more and installs. Write/hook uncertainty freezes writes. No atomic CAS primitive or concurrent-writer theorem is implied."
+    },
+    {
+      "id": "EP4",
+      "claim": "The inspected deployment path provides exclusive serial calls into the selection/append path.",
+      "verdict": "SUPPORTED_FOR_INSPECTED_OWNER_PATH",
+      "anchors": [
+        "source_v2/resilience_owner.py:51-66",
+        "source_v2/resilience_owner.py:113-151",
+        "source_v2/resilience_policy.py:221-268"
+      ],
+      "detail": "owner_main processes inbound events and pop_ready_commits from one event loop, using a synchronous commit callback. Reader ingress queues messages rather than committing from a second writer. This supports the explicit exclusive-serial-selection premise for this path; it does not establish arbitrary caller thread safety or replace that premise."
+    },
+    {
+      "id": "EP5",
+      "claim": "The unchanged non-state input bindings are part of the frozen job, rather than recomputed as a new call at selection.",
+      "verdict": "SUPPORTED_WITH_DECLARED_IMMUTABILITY_AND_FAITHFUL_EXECUTION_PREMISES",
+      "anchors": [
+        "source_v2/fullspec_policy.py:105-117",
+        "source_v2/stage_policy.py:25-25",
+        "source_v2/stage_policy.py:39-44",
+        "source_v2/stage_packet.py:55-59",
+        "source_v2/resilience_policy.py:157-164"
+      ],
+      "detail": "The job key binds complete start cut, source hash, target frontier, EOS, added audio bytes and runtime identity. Selection retains that job and its original result; it does not reexecute the model or establish GPU arithmetic correctness. At append, current complete state is rechecked while audio/model/target bindings remain the immutable bindings already recorded."
+    },
+    {
+      "id": "EP6",
+      "claim": "Distinct durable facts, not repeated publication or recovery replay, define projected selected edges.",
+      "verdict": "SUPPORTED",
+      "anchors": [
+        "source_v2/resilience_storage.py:61-80",
+        "source_v2/resilience_consumer.py:26-47",
+        "Paper_DSN/revisions/20261103_dsn2027_release_v13/sections/03_native_refinement_working.tex:11-16",
+        "Paper_DSN/revisions/20261103_dsn2027_release_v13/sections/03_native_refinement_working.tex:42-43"
+      ],
+      "detail": "Storage replay validates every durable parent. The actual Consumer requires consecutive durable sequence and the correct current complete parent, and already applied replay adds no application. A crash after sync but before Owner installation can leave a durable edge to recover; installation is not a second selected edge."
+    }
+  ],
+  "manuscript_alignment": {
+    "proposition3": "sections/03_native_refinement_working.tex:21-40",
+    "table_I": "sections/03_coordination_algorithm.tex:19-30",
+    "table_I_verdict": "Aligned: full result buffers unknown input, rejects refuted/covered/fenced cases; select-ready synchronizes then installs and rechecks pending calls.",
+    "proof_gap_classification": "EXPLANATORY_INTERLEAVING_OMISSION_NOT_IDENTIFIED_CORRECTNESS_GAP",
+    "recommended_insertion_after": "Deleted actions do not extend the prefix.",
+    "recommended_english_insertion": "A complete result that arrives before its parent is installed is buffered while its input remains unknown. Under exclusive serial selection, the actual parent and complete frozen input are revalidated before appending and synchronizing the child's fact, so completion order cannot introduce a parentless projected edge.",
+    "insertion_scope": "Adds the early-completion case to the existing induction; does not strengthen the proposition or add a liveness guarantee.",
+    "premises_to_preserve": [
+      "The original allowed transition relation may be nondeterministic.",
+      "The declared state must be sufficient for later inference, selection and feedback.",
+      "Original calls faithfully execute complete frozen inputs and original selection/update or their declared buffer-only path.",
+      "Message/job identities and message authority remain correctly bound.",
+      "Selection is exclusive and serial.",
+      "Successful synchronization is honored by storage."
+    ],
+    "do_not_infer": [
+      "Atomic CAS or safety for arbitrary concurrent writers.",
+      "Eventual completion, universal liveness, RTO or deadline compliance.",
+      "Determinism of arbitrary repeated GPU executions.",
+      "Global text monotonicity or irrevocable provisional text.",
+      "A machine proof of the whole Python/CUDA/OS stack."
+    ]
+  },
+  "R_S_clarification": {
+    "existing_text": "sections/05_evaluation_core.tex:33-38 already states shared validation and the different disabled-retention actions.",
+    "recommended_one_line": "Here $R$ and $S$ enable retention actions; all four arms share input-admission and view-application safety checks.",
+    "interpretation": "EL/SUP name predicates or safety obligations; R/S name experimental action choices. R=0 rebuilds from selected feedback; S=0 installs the checked snapshot. They do not authorize invalid inputs or unsupported actual ahead views.",
+    "implementation_precision": "Do not say the identical retention-predicate function executes in every arm. The optional eligible_chain retention guard is skipped when R=0, and retention compatibility short-circuits for checked_snapshot; common admission and actual view-application gates still enforce safety.",
+    "supplementary_local_core_anchors": [
+      "experiments/physical_retirement_20261028/source_v3/runtime/src/revtrace/live_qwen.py:651-670",
+      "experiments/physical_retirement_20261028/source_v3/runtime/src/revtrace/certified_display.py:81-93",
+      "experiments/physical_retirement_20261028/source_v3/runtime/src/revtrace/kernel_runtime.py:26-55",
+      "experiments/physical_retirement_20261028/source_v3/runtime/src/revtrace/composed_kernel.py:179-203",
+      "experiments/physical_retirement_20261028/source_v3/runtime/src/revtrace/composed_kernel.py:218-240"
+    ],
+    "supplementary_core_limit": "Core source_v3 was inspected locally as supplementary implementation context and is named by dsn_service_stability_20261028/PLAN_v1.json:6-7. This audit's full 59-file identity verification applies to NN4f only; it does not newly certify the complete core archive or rerun the factorial study. NN4f itself uses fullcall/conservative arms, not an R/S four-arm interface."
+  },
+  "evidence_tiers": {
+    "conditional_argument": "The proof uses the stated premises to establish projected selected-trace safety.",
+    "static_implementation_evidence": "This audit traced frozen source control flow and independently matched its 59-file source manifest.",
+    "preexisting_tests": "Relevant test definitions were read only, including buffered child/matching parent, wrong actual parent, ordered future nodes and hook-before-install cases; no fresh passing-test claim is made.",
+    "bounded_formal_and_trace_checks": "The existing manuscript reports these separately; their published counts were not recomputed here and do not establish full-stack mechanical verification.",
+    "new_service_or_gpu_evidence": "None."
+  },
+  "correctness_gap_found": false,
+  "scope_preservation": {
+    "runtime_modified": false,
+    "manuscript_modified": false,
+    "gpu_or_remote_run": false,
+    "tests_executed": false,
+    "legacy_root_reset_or_pulled": false,
+    "writes": [
+      "experiments/dsn_editorial_v14_20261104/review/EXECUTION_PROOF_AUDIT.json",
+      "experiments/dsn_editorial_v14_20261104/review/EXECUTION_PROOF_AUDIT.zh.md"
+    ]
+  },
+  "gate_decision": "Proceed with the bounded proof insertion and one-line action-switch clarification; no runtime repair or new experiment is justified by this audit."
+}

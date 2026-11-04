@@ -1,0 +1,26 @@
+\paragraph{Evidence and comparison scope}
+Native confirmation uses one 8--9-s utterance per speaker; timing repeats
+do not add acoustic sources. Native and core policy comparisons isolate
+their respective retention effects, rather than rank external
+speculative-serving systems.
+
+\paragraph{Transferring the contract}
+An adapter must (1) capture and restore all state affecting later
+inference, selection or feedback; (2) bind complete original results,
+selection/update, identities and durable transitions; and (3) register
+the actual Consumer's whole-view provenance and dependencies for retention
+or withdrawal. Section~\ref{sec:contract} instantiates these obligations
+for Qwen feedback tokens and native buffer/context/alignment state.
+Hidden caches, external state or irreversible effects require additional
+adapter support.
+Retention still pays synchronization, queueing and inference; resource
+admission governs when to launch more work~\cite{welsh2001seda}.
+Cold Owner recovery uses the surviving components of
+Section~\ref{subsec:failure_model}.
+
+\paragraph{Reproducibility}
+The anonymous companion rebuilds summaries, paired confidence intervals and figures
+from bounded records. It includes source snapshots, frozen configurations,
+per-run identities and endpoint-checking scripts. Full-journal rechecking
+and model reruns additionally require the indexed journals, recordings,
+weights and dependencies; a hash index alone does not recheck their content.

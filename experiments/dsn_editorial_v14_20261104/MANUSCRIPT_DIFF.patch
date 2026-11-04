@@ -1,0 +1,298 @@
+--- v13/main.tex
++++ v14/main.tex
+@@ -59,11 +59,10 @@
+ \section{Conclusion}\label{sec:conclusion}
+ \input{sections/08_progress_conclusion}
+ \section*{AI Tool Usage}
+-ChatGPT/Codex assisted literature discovery, drafting and revision
+-throughout the manuscript and refinement argument, runtime extensions,
++ChatGPT/Codex assisted literature discovery, manuscript drafting/revision
++and the refinement argument. It also assisted runtime extensions,
+ experiment orchestration, and validation/analysis code for figures and
+-tables. The artifact records sources, configurations, measurements and
+-controls. The authors retain full responsibility for the submission.
++tables. The authors retain full responsibility.
+ \clearpage
+ \bibliographystyle{IEEEtran}
+ \bibliography{refs,formal_refs,coordination_refs}
+--- v13/sections/01_progress_introduction.tex
++++ v14/sections/01_progress_introduction.tex
+@@ -1,13 +1,11 @@
+-A trusted revision can make timely progress unavailable without refuting
+-its computation. In streaming speech correction, selected corrections
+-feed later recognition~\cite{vu2026streamcorrect}. Trusted feedback here
+-means acceptance by the original protected selection process. In
+-Figure~\ref{fig:continuity_case}(a), a complete interval is displayed within
+-two seconds (D2), then withdrawn despite a valid dependency path;
+-identical certified text returns within eight seconds (C8). Both first
+-deliveries meet their deadlines, yet the client loses 2.176~s of coverage.
+-We call this an \emph{avoidable withdrawal}: an update retracts a whole
+-view that it still supports.
++A trusted revision can withdraw progress whose computation remains
++valid. In streaming speech correction, selected corrections feed later
++recognition~\cite{vu2026streamcorrect}; trusted feedback means acceptance
++by the original protected selection process. We call the loss of a
++still-supported whole view an \emph{avoidable withdrawal}. In
++Figure~\ref{fig:continuity_case}(a), display within two seconds (D2) and
++certified coverage within eight seconds (C8) both meet their deadlines,
++yet the view becomes unavailable for 2.176~s.
+ 
+ \begin{figure*}[t]
+ \centering
+@@ -24,10 +22,11 @@
+ \label{fig:continuity_case}
+ \end{figure*}
+ 
+-First-delivery deadlines and continued availability measure different
+-properties: (a) meets D2 but later loses a supported view; (b) retains
+-coverage after slightly late first delivery. We therefore report
+-avoidable withdrawal and deadline coverage separately.
++First delivery is a past event; a consumer reads the current view.
++Figure~\ref{fig:continuity_case}(a) exposes a service gap without a
++corresponding refutation; Figure~\ref{fig:continuity_case}(b) preserves
++the shown coverage but misses D2 by 27.4~ms. We therefore evaluate
++continued availability separately from first delivery.
+ 
+ A dependable revision service must reject invalid uses while preserving
+ still-valid progress. When a whole view covers audio through 14~s,
+@@ -60,8 +59,7 @@
+ RevTrace realizes coordination around a recursively selected feedback
+ task: complete calls retain the original correction and update, while
+ the actual whole view is checked independently at selected-state
+-installation. This provides a concrete use for old work without turning
+-a prediction into selection authority.
++installation, binding reuse to the unchanged recursive task.
+ 
+ We make three contributions:
+ \begin{itemize}
+--- v13/sections/03_coordination_overview.tex
++++ v14/sections/03_coordination_overview.tex
+@@ -1,23 +1,28 @@
+ \subsection{One revision, three different decisions}
+-Figure~\ref{fig:protocol} follows a complete call $j_3$. Recognition in
+-its parent produces a provisional state $\widehat P_2$ while original
+-Correct/Update is still selecting $P_2$. RevTrace can start $j_3$ on
+-$\widehat P_2$. When actual $P_2$ arrives at the same frontier, equality
+-of the entire frozen input confirms $j_3$ under [EL]. Its execution
+-continues with the same identity. Subscripts identify successive states,
+-rather than audio seconds; audio, target, EOS, model and decoding bindings
+-are also fixed.
++Figure~\ref{fig:protocol} follows call $j_3$, started on provisional
++$\widehat P_2$ before its parent's original Correct/Update selects $P_2$.
++A full-input match at $P_2$ confirms [EL], preserving $j_3$'s identity.
++Its own prediction $\widehat P_3$ may still
++differ from the original selected result $P_3$: [AU] selects that complete
++result only after its actual parent is installed.
++Independently, installing $P_2$ checks [SUP] on the current whole view
++$h$. Losing $h$'s support does not refute a later call's unknown input.
++Table~\ref{tab:decision_objects} separates the three objects and uses.
++Subscripts denote states; each call freezes all contract inputs.
++In the evaluation, $R/S$ switch retention actions under these judgments.
+ 
+-The call can expose its own prediction $\widehat P_3$, yet original
+-Correct/Update may choose a different $P_3$. [AU] permits selection of
+-that complete original result once its parent is installed; it does not
+-certify $\widehat P_3$. Independently, installing $P_2$ triggers [SUP]
+-on the actual whole view $h$. A complete path from $P_2$ to $h$ permits
+-retention; otherwise the Consumer displays the installed state. Losing
+-this path does not refute the unknown input of a later call. The protocol
+-therefore distinguishes continuing computation, buffering a result,
+-selecting a transition and retaining a view.
+-
+-The witnesses bind actual input confirmation, original selection,
+-synchronization and Consumer application. Process failure separately
+-changes message admission (Section~\ref{subsec:native_resilience}).
++\begin{table}[t]
++\centering
++\caption{Three judgments govern different uses of speculative work.}
++\label{tab:decision_objects}
++\begingroup\small\setlength{\tabcolsep}{3pt}
++\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.29\columnwidth}>{\raggedright\arraybackslash}p{.34\columnwidth}>{\raggedright\arraybackslash}p{.32\columnwidth}@{}}
++\toprule
++Object & Permits & Still requires\\
++\midrule
++{[EL]} Full call input & Confirmed: retain\newline Unknown: run/buffer\newline Refuted: reject use & [AU] for selection; [SUP] for a view.\\
++{[AU]} Original result and parent & Durable selection after full-input confirmation. & [SUP] for the actual ahead view.\\
++{[SUP]} Actual whole view and path & Retain at an authorized compatible application. & [EL] for calls; [AU] for selected transitions.\\
++\bottomrule
++\end{tabular}\endgroup
++\end{table}
+--- v13/sections/03_native_refinement_working.tex
++++ v14/sections/03_native_refinement_working.tex
+@@ -31,7 +31,10 @@
+ \end{proposition}
+ \begin{proof}
+ The initial cut belongs to $\mathcal A$. Deleted actions do not extend
+-the prefix. Each new fact binds a complete original call on exactly the
++the prefix. An early completion remains buffered while its parent input
++is unknown. Exclusive serial selection revalidates its actual parent and
++complete frozen input before append, so completion order adds no parentless
++edge. Each new fact binds a complete original call on exactly the
+ preceding cut and accepted input, hence an allowed next edge regardless
+ of dispatch time. Synchronization precedes privileged application.
+ Recovery replays the same checked identities, including a fact first
+@@ -39,18 +42,13 @@
+ the claim.
+ \end{proof}
+ 
+-Durable append selects one complete original transition; installation,
+-consumption and replay do not select it again.
+-Proposition~\ref{prop:refinement} binds selected advancement to that call's
+-original selection and update [AU]. Proposition~\ref{prop:continuity}
+-independently preserves the supported whole view at a compatible
+-application [SUP]. Input confirmation [EL] permits retention of the call
+-without endorsing its own prediction. These conditions preserve distinct
+-uses of early work. Meeting the paired deadlines additionally depends on
+-when provisional views and complete original results reach the actual
+-Consumer. Our evaluation checks selected histories, avoidable withdrawal
+-and timely coverage separately.
++Propositions~\ref{prop:refinement} and~\ref{prop:continuity} govern original
++selection [AU] and compatible whole-view retention [SUP], respectively.
++Input confirmation [EL] retains work without endorsing its prediction.
++Meeting deadlines further depends on when views and complete original
++results reach the actual Consumer.
+ 
++\paragraph{Specification checks and execution evidence}
+ A separately frozen, hand-written specification explores 6,231 two-frontier normal
+ states and 14,074 one-frontier failure states, each to a 12-event depth,
+ with 27 named controls. An independent trace checker binds actual facts
+--- v13/sections/05_evaluation_core.tex
++++ v14/sections/05_evaluation_core.tex
+@@ -35,7 +35,8 @@
+ \emph{RevTrace: joint retention} ($R_1S_1$) share validation, durability,
+ input accounting and physical execution. Disabling $R$ rebuilds work
+ from selected feedback; disabling $S$ replaces the provisional view
+-with the installed snapshot while retaining the same dependency checks.
++with the installed snapshot. These switches enable retention actions;
++all four arms share input-admission and view-application safety checks.
+ The \emph{Alternative joint implementation} is our complete positive
+ control: another policy instantiation of the same retention and Consumer
+ conditions on the shared execution/commit substrate. External prior work
+--- v13/sections/05_operating_boundaries.tex
++++ v14/sections/05_operating_boundaries.tex
+@@ -1,8 +1,9 @@
+ \subsection{When does the opportunity appear or disappear?}
+-The opportunity is a supported whole view ahead of a newly installed
+-selected frontier. In the headline RevTrace arm, 18 of 368 updates encounter
++Relative progress creates the opportunity: a supported whole view is
++ahead when a selected update installs. In the headline RevTrace arm, 18 of 368 updates encounter
+ and retain one; computation-only encounters 17 and clears all 17. Under
+-synchronized arrivals, RevTrace encounters only 3 of 368 and covers 0.790~s
++synchronized arrivals, the opportunity largely disappears: RevTrace
++encounters only 3 of 368 and covers 0.790~s
+ less than computation-only. A fresh staggered repeat on cohort~A also
+ changes the timing ranking: 226.320 versus 230.565~s, $I=-2.245$~s.
+ Compatible relative progress determines the benefit; the three positive
+--- v13/sections/05_same_source_validation.tex
++++ v14/sections/05_same_source_validation.tex
+@@ -24,8 +24,9 @@
+ \caption{Legality survives worker and Owner faults. Each condition/policy
+ covers two fresh trials on the same clip; all 24 trials have zero illegal
+ installations. Reject/$\Delta C$ counts rejected messages/state mutations.
+-New result is fault to actual certified consumption of a post-fault
+-completion. Pass counts joint D2/C8; EOS counts D2 misses. Ranges are minima/maxima.}
++Fault-to-new-fact runs from the fault to actual certified Consumer
++consumption of a post-fault completion. Pass counts joint D2/C8;
++EOS counts D2 misses. Ranges are minima/maxima.}
+ \label{tab:native_reliability}
+ \begingroup\small
+ \setlength{\tabcolsep}{3pt}
+--- v13/sections/06_progress_related.tex
++++ v14/sections/06_progress_related.tex
+@@ -40,11 +40,9 @@
+ Whisper-Streaming converts an offline recognizer into incremental service
+ using LocalAgreement~\cite{machacek2023whisperstreaming}. StreamCorrect
+ adds learned correction and feeds selected corrections into subsequent
+-recognition~\cite{vu2026streamcorrect}. RevTrace retains that selection and
+-feedback behavior in its controlled native adapter; its contribution
+-concerns the asynchronous execution and consumption around the feedback
+-boundary. It does not introduce a better acoustic model or train a new
+-corrector.
++recognition~\cite{vu2026streamcorrect}. RevTrace's native adapter retains
++this correction/feedback task while coordinating asynchronous full calls
++and whole-view consumption.
+ 
+ SSBD coordinates old-output draft reuse with display-only suffix masking
+ \cite{zeng2026ssbd}. It revalidates a draft under updated input and includes
+@@ -71,10 +69,9 @@
+ program primitives.
+ Speculative decoding verifies draft tokens against a target model while
+ preserving its output distribution~\cite{leviathan2023speculative}.
+-RevTrace studies complete calls in a recursively selected feedback task:
+-the eventual parent can confirm an already executing call's entire input,
+-while original correction and update determine its result. A separate
+-whole-view witness governs retention at selected-state application.
++RevTrace binds each reused full call to its eventual selected parent,
++retains original correction/update, and separately validates the
++Consumer's current whole view.
+ 
+ \paragraph{Execution, authorization, and recovery}
+ Retire enforces runtime-supplied revocation scopes and reuse contracts,
+@@ -91,12 +88,11 @@
+ commit~\cite{kung1981occ}; multiversion control manages reads across data
+ versions~\cite{bernstein1983mvcc}, while snapshot isolation supplies a
+ distinct transaction guarantee~\cite{berenson1995isolation}.
+-Write-ahead recovery persists state changes and identities
+-\cite{mohan1992aries}. Distributed snapshots capture process/channel
+-state~\cite{chandy1985snapshots}, and stream-processing systems recover
+-state through lineage or coordinated snapshots
+-\cite{zaharia2013dstreams,carbone2017flinkstate}. RevTrace replays a local
+-verified selected prefix. Its terminal/drain-based physical ownership
+-also differs from time-bounded cache leases~\cite{gray1989leases}.
+-The feedback adapter adds complete-input eligibility and whole-view
+-retention to this ordering, durability and execution context.
++Write-ahead recovery provides durable replay~\cite{mohan1992aries}, while
++distributed snapshots capture process/channel state~\cite{chandy1985snapshots}.
++Stream processors restore state through lineage or coordinated
++snapshots~\cite{zaharia2013dstreams,carbone2017flinkstate}. RevTrace replays
++a locally verified selected prefix and releases physical ownership at
++terminal/drain, unlike time-bounded cache leases~\cite{gray1989leases}.
++These foundations supply ordering and recovery; the feedback adapter adds
++complete-input eligibility and whole-view retention.
+--- v13/sections/07_progress_discussion.tex
++++ v14/sections/07_progress_discussion.tex
+@@ -5,18 +5,22 @@
+ speculative-serving systems.
+ 
+ \paragraph{Transferring the contract}
+-A new adapter must expose every mutable field affecting inference,
+-selection or feedback, including numerical caches, alignment cursors and
+-external state. Audio-frontier progress, new text and human accuracy
+-remain separate endpoints. Retention still pays synchronization,
+-queueing and inference; resource admission governs when to launch more
+-work~\cite{welsh2001seda}. Cold Owner recovery restores old facts before
+-new inference under the surviving components of
++An adapter must (1) capture and restore all state affecting later
++inference, selection or feedback; (2) bind complete original results,
++selection/update, identities and durable transitions; and (3) register
++the actual Consumer's whole-view provenance and dependencies for retention
++or withdrawal. Section~\ref{sec:contract} instantiates these obligations
++for Qwen feedback tokens and native buffer/context/alignment state.
++Hidden caches, external state or irreversible effects require additional
++adapter support.
++Retention still pays synchronization, queueing and inference; resource
++admission governs when to launch more work~\cite{welsh2001seda}.
++Cold Owner recovery uses the surviving components of
+ Section~\ref{subsec:failure_model}.
+ 
+ \paragraph{Reproducibility}
+-The anonymous material supplies source snapshots, fixed model/data
+-configurations, per-run identities, endpoint-checking scripts and
+-hash-bound figure inputs. Bounded summaries and raw-log hash indices are
+-included; weights and full journals are separate. Figure programs
+-regenerate plots from the frozen inputs.
++The anonymous companion rebuilds summaries, paired confidence intervals and figures
++from bounded records. It includes source snapshots, frozen configurations,
++per-run identities and endpoint-checking scripts. Full-journal rechecking
++and model reruns additionally require the indexed journals, recordings,
++weights and dependencies; a hash index alone does not recheck their content.
+--- v13/tables/native_reliability.tex
++++ v14/tables/native_reliability.tex
+@@ -1,6 +1,6 @@
+ \begin{tabular}{@{}llrrrrr@{}}
+ \toprule
+-Condition & Policy & Reject / $\Delta C$ & New result (s) & D2/C8 pass & EOS miss & Energy (J) \\
++Condition & Policy & Reject / $\Delta C$ & Fault-to-new-fact (s) & D2/C8 pass & EOS miss & Energy (J) \\
+ \midrule
+ \multirow{2}{*}{No fault} & Conservative & 0 / 0 & -- & 0/2 & 2 & 6566--6574 \\
+  & RevTrace & 0 / 0 & -- & 1/2 & 1 & 5896--5911 \\

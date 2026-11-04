@@ -1,0 +1,106 @@
+{
+  "review_id": "dsn_editorial_v14_20261104_fresh_reviewer",
+  "status": "COMPLETE_BOUNDED_EDITORIAL_REVIEW",
+  "manuscript": "Paper_DSN/revisions/20261103_dsn2027_release_v13/main.pdf",
+  "pdf_sha256": "1413182663224acb507c2c68080f4dc8d340b2d7dab47a678e2aea39aa941928",
+  "pdf_pages": 12,
+  "all_pdf_pages_text_read": true,
+  "all_reachable_tex_read": true,
+  "visually_inspected_hash_bound_pages": [1, 2, 3, 5, 8, 11],
+  "inputs_read": [
+    "AGENTS.md",
+    "E:/Downloads/RevTrace_v13_Reviewer_Audit_and_Revision_1f841da.md",
+    "C:/Users/LENOVO/.codex/attachments/5bcbc4c6-9fc4-4753-b8a1-d40b3cd87162/已粘贴的文本.txt",
+    "C:/Users/LENOVO/.codex/attachments/94741a8e-a1bc-42a0-a6e3-f7f21edca3bb/已粘贴的文本.txt"
+  ],
+  "new_gpu_runs": 0,
+  "new_model_calls": 0,
+  "manuscript_modified": false,
+  "runtime_modified": false,
+  "title_change_recommended": false,
+  "new_experiment_required": false,
+  "genuine_unsupported_result_claim_found": false,
+  "improvements": [
+    {
+      "id": "FR1",
+      "priority": "P1",
+      "disposition": "ADOPT",
+      "topic": "Explain the measured service gap and resolve Figure 1 referents",
+      "pdf_pages": [1, 2, 9],
+      "source_anchors": [
+        "sections/01_progress_introduction.tex:5-10",
+        "sections/01_progress_introduction.tex:27-30",
+        "sections/05_operating_boundaries.tex:43-50"
+      ],
+      "action": "Replace a short repeated introduction passage with current-view availability rationale; name Figure 1(a) deadlines and Figure 1(b) 27.4 ms lateness explicitly.",
+      "boundary": "No unmeasured downstream irreversible harm, no assertion that first-delivery accounting is incorrect, no matched-counterfactual interpretation."
+    },
+    {
+      "id": "FR2",
+      "priority": "P1",
+      "disposition": "ADOPT_WITH_IMPLEMENTATION_PRECISION",
+      "topic": "Separate EL/AU/SUP judgments from R/S retention actions",
+      "pdf_pages": [3, 4, 6],
+      "source_anchors": [
+        "sections/03_coordination_overview.tex:11-23",
+        "sections/03_continuation.tex:43-71",
+        "sections/05_evaluation_core.tex:32-42"
+      ],
+      "action": "Replace repeated explanation with a compact three-object map and narrow the common-checks wording.",
+      "recommended_sentence": "R and S enable retention actions; the four arms share input-admission and actual view-application safety checks.",
+      "boundary": "Do not state all retention-specific eligible_chain or compatibility predicates execute identically with R/S disabled; UNKNOWN is not refuted; no runtime defect established."
+    },
+    {
+      "id": "FR3",
+      "priority": "P1",
+      "disposition": "ADOPT",
+      "topic": "Connect early-complete buffering to ordered durable append in the proof",
+      "pdf_pages": [5],
+      "source_anchors": [
+        "sections/03_native_refinement_working.tex:23-39",
+        "sections/03_coordination_algorithm.tex:23-27"
+      ],
+      "execution_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+      "execution_source_read_directly_from": "RevTrace_DSN2027_anonymous_evidence_v13.zip",
+      "frozen_source_anchors": [
+        "source_snapshots/native_runtime_NN4f/fullspec_policy.py:151-179",
+        "source_snapshots/native_runtime_NN4f/resilience_policy.py:150-181",
+        "source_snapshots/native_runtime_NN4f/resilience_storage.py:71-100"
+      ],
+      "action": "Add at most two proof sentences explaining buffering before parent installation and current-parent/full-input revalidation before durable append.",
+      "boundary": "Keep conditional assumptions and nondeterministic original relation; no new atomicity, global liveness, numerical determinism, or whole-program proof."
+    },
+    {
+      "id": "FR4",
+      "priority": "P1",
+      "disposition": "ADOPT_BOUNDED_REPLACEMENT",
+      "topic": "Make transfer obligations and reproducibility levels checkable",
+      "pdf_pages": [2, 4, 11],
+      "source_anchors": [
+        "sections/07_progress_discussion.tex:7-22",
+        "sections/02_contract.tex:50-57",
+        "sections/03_native_extension.tex:21-39"
+      ],
+      "artifact_anchors": ["RevTrace_DSN2027_anonymous_evidence_v13.zip/README.md:21-44"],
+      "action": "State complete-state capture/restore/compare, original selection/update binding, and actual-Consumer provenance/application obligations. Distinguish archived-summary statistics/figure regeneration from raw endpoint remeasurement or service rerun.",
+      "boundary": "No hash-only universal adaptation promise; hash indices are not raw journals; do not claim conference submission already includes the artifact."
+    }
+  ],
+  "retain_without_rework": [
+    "Current abstract with core/native separation, paired CI, and unchanged quality",
+    "Figure 1 separate execution clocks and explicit D2 +27.4 ms",
+    "Figure 2 asynchronous confirmation/result arrival and parent/child identities",
+    "Figure 4 timely totals and retrospective text-support distinction",
+    "Author-built Alternative joint implementation on shared execution/commit substrate",
+    "Sufficient Proposition 1 and per-compatible-application Proposition 2",
+    "Broad accurate AI Tool Usage disclosure",
+    "Frozen denominators, offered/EOS, energy windows, right-censoring and negative results"
+  ],
+  "optional_minor_edit": {
+    "source_anchor": "tables/native_reliability.tex:3",
+    "pdf_page": 10,
+    "change": "New result (s) -> Fault-to-new-fact (s)",
+    "keep": "Existing actual certified Consumer-consumption caption definition and original ranges"
+  },
+  "stop_rule": "After the four bounded replacements, verify numerical/formal invariants and actual rebuilt PDF layout, then freeze this editorial round."
+}
