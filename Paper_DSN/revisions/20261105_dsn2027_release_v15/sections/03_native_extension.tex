@@ -1,0 +1,40 @@
+\subsection{Native feedback and conditional full calls}
+\label{subsec:native_full_calls}
+StreamCorrect supplies a concrete recursive feedback task
+\cite{vu2026streamcorrect}. For complete closed state $P$ and accepted
+audio $X$, expose its recognition boundary as
+\begin{equation}
+ A(P,X)=(B,M),
+\end{equation}
+where $B$ contains ordered beam candidates and $M$ the engine state and
+inputs needed by original Correct/Update. Candidate order,
+prompts, returned token IDs, selection, and update rules remain intact.
+
+Before learned correction finishes, the original update tail with a typed
+first-beam identity prediction produces provisional closed state
+$\widehat P^+$. It is a dependency projection, not a complete selected
+result. A second worker can run the next \emph{complete original call} on
+that conditional input; both GPUs host the full recognizer--corrector.
+Its own prediction may be wrong even when its input later matches.
+Original Correct/Update determines the complete result.
+
+When the parent installs, the Owner compares the call's complete frozen
+start state, actual frontier, contract, and session epoch with it. Equality
+confirms the unchanged owned call: it continues if running, or becomes
+eligible for ordered selection if complete. Job ID, birth, producer
+incarnation, inputs, and execution history stay unchanged.
+
+An earlier ancestor mismatch can remove current view support without
+refuting a later complete input. Cancellation before correction requires
+a disagreeing actual selected state at that call's own start frontier,
+coverage of its target without remaining use, or a changed epoch. An
+unresolved future parent supplies none of these proofs. The view can
+therefore require withdrawal while the call remains unresolved.
+
+This native input witness and the core Qwen boundary-node/unique-successor
+guard are different sufficient implementations of the continuation
+relation. Neither grants write authority. Both use a whole-view Consumer
+that keeps certified and provisional provenance separate. The native
+comparison holds two complete workers fixed and varies conditional
+dispatch and retention; ready-only ASR handoff is a separate developmental
+control.

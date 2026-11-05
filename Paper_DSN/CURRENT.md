@@ -1,23 +1,23 @@
-# Current RevTrace manuscript — editorial v14, 2026-11-04
+# Current RevTrace manuscript — readability v15, 2026-11-05
 
-- [Manuscript PDF](revisions/20261104_dsn2027_release_v14/main.pdf)
-- [Main LaTeX](revisions/20261104_dsn2027_release_v14/main.tex)
-- [Anonymous source ZIP](revisions/20261104_dsn2027_release_v14/RevTrace_DSN2027_anonymous_source_v14.zip)
-- [Frozen v13 evidence companion](revisions/20261104_dsn2027_release_v14/RevTrace_DSN2027_anonymous_evidence_v13.zip)
-- [Revision report](../experiments/dsn_editorial_v14_20261104/FINAL_REPORT.zh.md)
-- [Detailed dispositions](../experiments/dsn_editorial_v14_20261104/EDITORIAL_DELTA.zh.md)
-- [New claim–evidence bindings](../experiments/dsn_editorial_v14_20261104/CLAIM_EVIDENCE_DELTA.md)
-- [Final gate](../experiments/dsn_editorial_v14_20261104/FINAL_RELEASE_GATE.json)
-- [Frozen v13 PDF](revisions/20261103_dsn2027_release_v13/main.pdf)
+- [Manuscript PDF](revisions/20261105_dsn2027_release_v15/main.pdf)
+- [Main LaTeX](revisions/20261105_dsn2027_release_v15/main.tex)
+- [Anonymous source + editable Fig1](revisions/20261105_dsn2027_release_v15/RevTrace_DSN2027_anonymous_source_v15.zip)
+- [Frozen scientific evidence companion](revisions/20261105_dsn2027_release_v15/RevTrace_DSN2027_anonymous_evidence_v13.zip)
+- [Revision report](../experiments/dsn_readability_v15_20261105/FINAL_REPORT.zh.md)
+- [Detailed dispositions](../experiments/dsn_readability_v15_20261105/EDITORIAL_DELTA.zh.md)
+- [Final gate](../experiments/dsn_readability_v15_20261105/FINAL_RELEASE_GATE.json)
+- [Frozen v14](revisions/20261104_dsn2027_release_v14/main.pdf)
 
-v14 sharpens service significance, the three decision objects, early-result
-buffering/selection and adapter obligations. It improves prose and table
-readability without changing the method or scientific results. The native
-confirmation remains eight independent sources,32trials and564selected steps;
-coverage40.6%→93.9%, paired gain53.3pp (95% CI[44.8,59.6]), passes0/16→10/16.
+v15 improves logical flow, terminology and paragraph references. Fig1 adds
+two actual-action labels; the other three figure PDFs/SVGs are unchanged.
+Three propositions, three proofs, five equations and 31 bibliographic items
+remain unchanged. The original method and experiments remain frozen.
 
-The paper has11technical pages plus1reference page and31cited works. Four
-figure PDFs/SVGs and the v13 evidence companion are reused byte-for-byte.
-The new33-file source ZIP cold-builds to12pixel-identical pages. Independent
-reading covers prose, actual table/figure layout and grayscale. No new GPU
-or model run and no conference submission was performed.
+Eight independent sources / 32 trials still give 40.6%→93.9% coverage,
+53.3pp paired gain (95% CI [44.8,59.6]), and 0/16→10/16 passes. No new
+GPU, model or serving run is added. The paper has 11 technical pages plus
+one reference page. The 38-file source ZIP cold-builds to 12 pixel-identical
+pages and reproduces the annotated Fig1 from standalone source. Independent
+semantic/readability and actual color/grayscale review are complete.
+No conference submission has been performed.

@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "review_id": "DSN-READABILITY-V15-LANGUAGE-20261105",
+  "created_date": "2026-11-05",
+  "reviewer_role": "Independent editorial/readability review; root owns manuscript edits",
+  "status": "COMPLETE_READ_ONLY_REVIEW",
+  "scope": {
+    "source_root": "Paper_DSN/revisions/20261104_dsn2027_release_v14",
+    "parent_supplied_github_ref": "3bcbb7638e6d9106965e4274a6c388a0186ab7ee",
+    "github_ref_note": "Parent-supplied authoritative v14 reference; this language subtask independently read local baseline, not remote status.",
+    "read": "main.tex, all 18 reachable section TeX files, included native_reliability.tex, full PDF text pages 1-12, both complete attachments",
+    "excluded": "No manuscript/runtime edits, no model/experiment runs, no external literature or citation-validity review",
+    "pdf_pages": 12
+  },
+  "input_hashes": {
+    "main_pdf_sha256": "5462d73d98a711d94f04e852a1bfd028ed34cce1cf0aefd86a56418bec37d581",
+    "main_tex_sha256": "dab62b9dcc62ef62be7913925932d0f9317ae4a89eac9aa9500d4aebffa682ed",
+    "attachment1_sha256": "142339fa3b2a263e5f00c4d7c07109760f725a9b5d56c52c855bb808e85af55a",
+    "attachment2_sha256": "358f5c242c9db1025906bc6932d82860154d912c5a0b1c1eb80954e7bc4eb915"
+  },
+  "assessment_zh": "v14 的科学主线和证据边界已稳定。最值得做的是降低读者跨对象和跨执行实例切换的成本，不需大幅重构或机械词数配额。本次发现均可定点修复；未发现必须新增实验才能解决的语言层阻断项。",
+  "methods": [
+    "Reader-order pass across full reachable text and PDF",
+    "Terminology ledger",
+    "Claim-boundary and antecedent check",
+    "Regex inventory of narrative numbers with more than three decimals",
+    "Comparison of both attachment suggestions against authoritative baseline"
+  ],
+  "terminology": [
+    {
+      "term": "avoidable withdrawal",
+      "decision_zh": "保留命名；结论回声用 prevent avoidable withdrawals，保留 compatible application 条件。"
+    },
+    {
+      "term": "complete-call input eligibility [EL]",
+      "decision_zh": "与 own prediction correctness、selected-result authority 分开；R 是实验保留动作开关。"
+    },
+    {
+      "term": "original selection authority [AU]",
+      "decision_zh": "原始 Correct/Update 决定完整选中结果；不得用 certified 来表示人工转写正确。"
+    },
+    {
+      "term": "whole-view support [SUP]",
+      "decision_zh": "用于实际 Consumer 的当前整视图；S 是实验保留动作开关。"
+    },
+    {
+      "term": "first delivery / continued availability",
+      "decision_zh": "保留区别；Figure 1 两臂独立轨迹且 RevTrace 首显晚 27.4 ms。"
+    },
+    {
+      "term": "predeclared Qwen, rho=1, staggered setting",
+      "decision_zh": "可用 setting 替 stratum；不能变 held-out benchmark 或泛化到所有负载。"
+    },
+    {
+      "term": "Alternative joint policy (positive control)",
+      "decision_zh": "共享 execution/commit substrate，不能称 independent implementation。"
+    },
+    {
+      "term": "metrics",
+      "decision_zh": "替 endpoints 作为实验测量统称；公式、聚合、时钟保持。"
+    },
+    {
+      "term": "right-censored",
+      "decision_zh": "普通英语解释停止观察且不据此声称恢复；不得以 bounded 代替。"
+    },
+    {
+      "term": "speaker-paired bootstrap / confidence interval / selected-trace refinement",
+      "decision_zh": "有精确技术意义，保留并解释，不因降低术语量而删去。"
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "L01",
+      "priority": "high",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/01_progress_introduction.tex",
+      "lines": [
+        36,
+        41
+      ],
+      "pdf_page": 1,
+      "issue_zh": "把全文最有辨识力的反直觉结果放在让步关系前；同时把 stratum 的实际条件说清。",
+      "original": "In a predeclared 24-speaker stratum,\ncomputation retention improves timely audio coverage while increasing\nbackward movements of the displayed audio frontier, or \\emph{frontier\nwithdrawals}, from 12 to 17. Coordinating computation and view retention\nyields zero. RevTrace connects valid execution to continued availability\nat the actual Consumer without changing which original result is selected.",
+      "replacement": "In the predeclared 24-speaker Qwen setting with $\\rho=1$ and staggered arrivals, computation retention alone increases \\emph{frontier withdrawals}, or backward movements of the displayed audio frontier, from 12 to 17. It does so despite improving timely audio coverage. Joint computation and view retention yields zero withdrawals in that setting, without changing original selection.",
+      "rationale_zh": "先给 12→17，再给及时性改善这一让步，读者能先记住冲突。明确 Qwen、rho=1、错峰，避免把零撤回扩到所有 24-speaker 配置。",
+      "boundary_zh": "仅为该预先声明设置；不暗示全负载零撤回或稳定速度优势。若第一页过满，可将条件压为对 Figure 3 的短参照，不能删除对应条件。"
+    },
+    {
+      "id": "L02",
+      "priority": "high",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/01_progress_introduction.tex",
+      "lines": [
+        70,
+        74
+      ],
+      "pdf_page": 1,
+      "issue_zh": "贡献第二项目前只说 argument connects，未告诉读者验证怎样支撑协调机制。",
+      "original": "\\item A joint coordinator that preserves the original selected transition\n  relation while retaining eligible calls and supported whole views.\n  Its conditional selected-trace argument connects early execution,\n  durable selection and supported process failures\n  (Sections~\\ref{sec:continuation}--\\ref{sec:protocol}).",
+      "replacement": "\\item A joint coordinator that preserves the original selected transition relation while retaining eligible calls and supported whole views. Its conditional selected-trace argument is complemented by bounded normal- and failure-state exploration and receipt-based checks of actual executions (Sections~\\ref{sec:continuation}--\\ref{sec:protocol}).",
+      "rationale_zh": "把论证、有界探索、实际执行收据检查三种支撑分清，比加入状态总数更容易评估可信度。",
+      "boundary_zh": "保留 conditional 和 bounded；不合并 6,231 与 14,074，不称 whole-program proof，不把 36 trials 称为 36 fault injections。"
+    },
+    {
+      "id": "L03",
+      "priority": "high",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/02_contract.tex",
+      "lines": [
+        27,
+        35
+      ],
+      "pdf_page": 2,
+      "issue_zh": "先讲两种 worker 部署，最后才解释反馈依赖，增加首次阅读负担。",
+      "original": "An immutable audio stream supplies a protected selection path producing\n\\emph{Canonical} facts and a \\emph{Private} path computing and displaying\nprovisional hypotheses. These are logical roles. The core runtime assigns\nthem to separate Private and Authority workers. The native runtime uses\ntwo complete original recognizer--corrector workers; either can execute\na selected-input or conditional full call. Selection can change the next call's\ninput: StreamCorrect feeds its chosen correction into subsequent\nASR~\\cite{vu2026streamcorrect}. We coordinate this dependency as the paths\nadvance asynchronously.",
+      "replacement": "An immutable audio stream drives two logical paths: protected selection produces \\emph{Canonical} facts, while a \\emph{Private} path computes and displays provisional hypotheses. A selected correction can change later call inputs; for example, StreamCorrect feeds its chosen correction into subsequent ASR~\\cite{vu2026streamcorrect}. We instantiate these roles in two execution settings. The core runtime uses separate Private and Authority workers. The native runtime uses two complete original recognizer--corrector workers, either of which can execute a selected-input or conditional full call. Both coordinate this feedback dependency as the paths advance asynchronously.",
+      "rationale_zh": "顺序改为共同角色→依赖原因→两个实例。保留 Private display 和完整 recognizer–corrector，不把 native 写成顺序执行。",
+      "boundary_zh": "不加 demonstrate generality、unified code kernel 或 universal portability；两者是不同充分实现与执行合同。"
+    },
+    {
+      "id": "L04",
+      "priority": "high",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/02_contract.tex",
+      "lines": [
+        89,
+        93
+      ],
+      "pdf_page": 3,
+      "issue_zh": "三个 lifetime 连续词典式定义且 Their decisions 指代抽象，不易形成具体因果。",
+      "original": "The \\emph{dependency lifetime} determines usability under the current\nroot; the \\emph{visible lifetime} determines whole-hypothesis retention;\nthe \\emph{physical lifetime} ends only when execution finishes or drains.\nA new root can change the first two before the third ends. Their decisions\ntherefore require separate evidence.",
+      "replacement": "A feedback update can remove support for a displayed hypothesis while its producer is still running. An already accepted result may remain usable after that producer exits. RevTrace therefore tracks dependency validity, whole-view support, and the physical lifetime separately. That physical lifetime ends only when execution finishes or drains.",
+      "rationale_zh": "用不同对象在不同时刻仍可用的例子解释为何要分开判断。全文其他地方不依赖这三个 lifetime 名称，可减少一次性术语。",
+      "boundary_zh": "may 保留条件性；不写 terminate lifetimes，不把 unsupported view 当成未来输入已被 refuted；物理 drain 仍是释放条件。"
+    },
+    {
+      "id": "L05",
+      "priority": "high",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/02_contract.tex",
+      "lines": [
+        8,
+        57
+      ],
+      "pdf_page": 2,
+      "issue_zh": "两句短语的范围需说清：Used calls 容易误读，Telemetry and resources are separate 未说相对谁分开。",
+      "edits": [
+        {
+          "lines": [
+            10,
+            11
+          ],
+          "original": "Used calls must\nfaithfully consume their frozen inputs.",
+          "replacement": "Calls admitted for use must faithfully consume their frozen inputs."
+        },
+        {
+          "lines": [
+            50,
+            53
+          ],
+          "original": "The adapter declares a conservative representation of \\emph{all mutable\ncross-call state that can affect later model inputs, selection, or feedback}.\nTelemetry and resources are separate.",
+          "replacement": "The adapter declares a conservative representation of \\emph{all mutable cross-call state that can affect later model inputs, selection, or feedback}. Telemetry and resource accounting are recorded separately from this inference-relevant state."
+        }
+      ],
+      "rationale_zh": "第一个替换保留 use 限定，第二个说明资源核算与推理相关状态的关系。",
+      "boundary_zh": "不得改为 Every call；故意错输入控制不在忠实执行命题范围内。任何影响模型输入、选择或反馈的资源配置仍必须纳入合同，不因 separately 被排除。"
+    },
+    {
+      "id": "L06",
+      "priority": "high",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/04_native_resilience_working.tex",
+      "lines": [
+        32,
+        38
+      ],
+      "pdf_page": 6,
+      "issue_zh": "在完整条件列举后，用积极陈述接计时，再明确时限界，读起来更自然。",
+      "original": "and sufficient service budgets. This is not an RTO or D2/C8 guarantee;\nloading, replay and recomputation retain their original clocks.",
+      "replacement": "and sufficient service budgets. Recovery keeps the original input clocks: loading, replay and recomputation all count toward the deadlines. These progress conditions establish neither a fixed recovery-time objective (RTO) nor a D2/C8 bound.",
+      "rationale_zh": "把保证边界接到实际行为上，而非以 This is not 起句。RTO 在首次出现处展开。",
+      "boundary_zh": "有限工作、有限支持故障、可读存储、最终释放/加载、终止并推进 frontier 的原调用、公平调度与充足预算全部保留。诚实计时不等于期限保证。"
+    },
+    {
+      "id": "L07",
+      "priority": "high",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/05_evaluation_core.tex",
+      "lines": [
+        1,
+        45
+      ],
+      "pdf_page": 6,
+      "issue_zh": "endpoint 在本系统中易被理解为 RPC 节点；positive control 的共享底座比改成独立 reference 更重要。",
+      "edits": [
+        {
+          "lines": [
+            1,
+            1
+          ],
+          "original": "\\subsection{Design, comparators and service endpoints}",
+          "replacement": "\\subsection{Experimental design, comparisons and metrics}"
+        },
+        {
+          "lines": [
+            40,
+            43
+          ],
+          "original": "The \\emph{Alternative joint implementation} is our complete positive\ncontrol: another policy instantiation of the same retention and Consumer\nconditions on the shared execution/commit substrate. External prior work\nand our author-built comparators have separate identities.",
+          "replacement": "The \\emph{Alternative joint policy} is a positive control that instantiates the same retention and Consumer conditions on the shared execution/commit substrate. It is author-built; external prior systems retain their separate identities."
+        },
+        {
+          "lines": [
+            45,
+            45
+          ],
+          "original": "\\paragraph{Endpoints}",
+          "replacement": "\\paragraph{Metrics}"
+        }
+      ],
+      "rationale_zh": "三个改动直接减少歧义，不更换指标定义；用 policy 更准确表明可变部分。",
+      "boundary_zh": "禁止 independent reference implementation。若采纳名称变化，需同步 Figure 3 caption、后续 Alternative joint implementation 及 positive-control pairs 的称呼，底座共享说明保留。"
+    },
+    {
+      "id": "L08",
+      "priority": "high",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/05_operating_boundaries.tex",
+      "lines": [
+        44,
+        51
+      ],
+      "pdf_page": 9,
+      "issue_zh": "right-censored 需要普通英语解释；原句 Loss ends...or is censored 容易把观察停止读成真实缺口结束。",
+      "original": "Loss ends when actual coverage returns or is\nright-censored at the next selected root.",
+      "replacement": "Loss ends when actual coverage returns. If it has not returned by the next selected root, observation stops there without counting that boundary as recovery.",
+      "rationale_zh": "拆开真实恢复与停止观察，保持统计含义。可在括号保留 right-censored，读者不必先掌握统计术语才能理解。",
+      "boundary_zh": "不能用 bounded 代替删失；下一 selected root 不是证实恢复，也不是完整缺失时长上界。所有窗口计数与 audio-s×wall-s 缺口值保持。"
+    },
+    {
+      "id": "L09",
+      "priority": "medium",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/07_progress_discussion.tex",
+      "lines": [
+        1,
+        5
+      ],
+      "pdf_page": 11,
+      "issue_zh": "Discussion 直接从比较范围开始，缺少综合性的设计教训。",
+      "original": "\\paragraph{Evidence and comparison scope}",
+      "replacement": "A retained computation and a retained view require different evidence. RevTrace coordinates both so that a compatible selected update need not erase still-supported progress.\n\n\\paragraph{Evidence and comparison scope}",
+      "rationale_zh": "给读者一个能把方法和结果连接起来的主题句，再进入现有比较边界与迁移义务。",
+      "boundary_zh": "compatible 与 need not 均保留；不以 valid/available 二分代替 [EL]/[AU]/[SUP]，不暗示所有条件都能持续服务或达标。若必须补空间，应删现有重复而非删条件。"
+    },
+    {
+      "id": "L10",
+      "priority": "high",
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/08_progress_conclusion.tex",
+      "lines": [
+        3,
+        5
+      ],
+      "pdf_page": 11,
+      "issue_zh": "结论应回扣引言命名的 avoidable withdrawal，而不是换成 unnecessary withdrawal。",
+      "original": "Under the declared contract,\nthese witnesses preserve selected-task legality and avoid unnecessary\nwithdrawals at compatible applications.",
+      "replacement": "Under the declared contract, these witnesses preserve selected-task legality and prevent avoidable withdrawals at compatible applications.",
+      "rationale_zh": "最小术语回声改动，帮助读者准确复述论文贡献。",
+      "boundary_zh": "保留 Under the declared contract 与 at compatible applications；不写 all withdrawals 或 global monotonicity。"
+    }
+  ],
+  "precision_fixes": [
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/05_native_retention.tex",
+      "lines": [
+        95,
+        96
+      ],
+      "original": "coverage from 31.0 to 64.118875 of 66.33975~s.",
+      "replacement": "coverage from 31.0 to 64.119 of 66.340~s.",
+      "note_zh": "只规范叙述精度，冻结数据保留全部小数；96.7% 不变。"
+    },
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/05_same_source_validation.tex",
+      "lines": [
+        62,
+        64
+      ],
+      "original": "concatenated as exact PCM into 228.51025/208.1003125-s streams without\nresets.",
+      "replacement": "concatenated as exact PCM into 228.510-s and 208.100-s streams without resets.",
+      "note_zh": "同样只改变显示精度，分开 and 也避免 slash 堆叠。"
+    }
+  ],
+  "pronoun_and_clarity_fixes": [
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/02_contract.tex",
+      "lines": [
+        17,
+        19
+      ],
+      "original": "Their original input clocks\ncontinue through restart.",
+      "replacement": "Accepted inputs retain their original clocks through restart.",
+      "note_zh": "Their 的最近先行词是 Supervisor/ledger/Consumer 等组件，而时钟属于 accepted inputs。"
+    },
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/03_native_extension.tex",
+      "lines": [
+        21,
+        25
+      ],
+      "original": "When the parent installs, the Owner compares the call's complete frozen\nstart state, actual frontier, contract, and session epoch with it.",
+      "replacement": "When the parent installs, the Owner checks the call's complete frozen start state, actual frontier, contract, and session epoch against that installed parent.",
+      "note_zh": "明确 with it 的对象；这是比较 tuple 的简写，不改变 full-input witness。"
+    },
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/04_native_resilience_working.tex",
+      "lines": [
+        29,
+        30
+      ],
+      "original": "Both policies share\nthis coordinator, durability, recovery, and actual Consumer.",
+      "replacement": "Conservative execution and RevTrace share this coordinator, durability, recovery, and actual Consumer.",
+      "note_zh": "此处尚未到两政策的 Evaluation 定义，读者无法从近邻找到 Both policies。"
+    },
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/05_operating_boundaries.tex",
+      "lines": [
+        3,
+        4
+      ],
+      "original": "In the headline RevTrace arm, 18 of 368 updates encounter\nand retain one;",
+      "replacement": "In the headline RevTrace arm, 18 of 368 updates encounter and retain a supported ahead view;",
+      "note_zh": "one 跨句指向 whole view，直接重复核心对象比代词更省认知。"
+    },
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/05_operating_boundaries.tex",
+      "lines": [
+        40,
+        42
+      ],
+      "original": "Its continuity distinction is stable: compatible withdrawals are zero\nversus 16/17/12.",
+      "replacement": "RevTrace's continuity benefit is stable across these repeats: compatible withdrawals are zero versus 16/17/12 for computation-only.",
+      "note_zh": "明确 Its 和对照计数归属；稳定性仅指这三次重复。"
+    },
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/05_native_retention.tex",
+      "lines": [
+        100,
+        102
+      ],
+      "original": "The second\nS0908 repeat has D99 2.229~s.",
+      "replacement": "The second S0908 repeat is the sole failed request, with D99 2.229~s.",
+      "note_zh": "与本段 7/8 对应；可选小修，非新结果。"
+    },
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/05_native_retention.tex",
+      "lines": [
+        123,
+        125
+      ],
+      "original": "Its 0.817-s Consumer event-state\nholding interval spans that update and ends at legitimate supersession.",
+      "replacement": "The Consumer retains that same whole view for a 0.817-s event-state interval spanning the update, until legitimate supersession.",
+      "note_zh": "简化 event-state holding interval 名词链；保留 event-state 以免误写成高频采样证明的连续物理时长。"
+    },
+    {
+      "file": "Paper_DSN/revisions/20261104_dsn2027_release_v14/sections/05_same_source_validation.tex",
+      "lines": [
+        67,
+        69
+      ],
+      "original": "Unpinned terminal and audit windows stay at most 64\nentries; live dependencies, state/output bytes, RSS and cumulative logs\nare separate.",
+      "replacement": "Unpinned terminal and audit windows stay at most 64 entries. Live dependencies, state/output bytes, RSS and cumulative logs are accounted for separately.",
+      "note_zh": "are separate 未说明计数与内存的关系；64-entry 只作用于 unpinned windows，不能读成全内存有界。"
+    }
+  ],
+  "protected_boundaries": [
+    "完整原始调用包括原始选择/更新或其声明的 buffer-only path；typed first-beam identity projection 不是完整选中结果。",
+    "unknown 只表示无确认/否定见证；早期祖先不匹配可撤回当前视图，却不能否定未来 frontier 的完整输入。",
+    "已接受完整结果的原身份可跨 producer exit 保留，但 producer exit 不确认输入；新消息权限在 fencing 后结束。",
+    "R/S 是保留动作开关，所有四臂仍共享安全检查；不能将动作关闭写成安全验证关闭。",
+    "连续性命题是兼容应用的局部性质；不是全局单调性、任意负载进展或期限保证。",
+    "6,231 normal states 与 14,074 failure states 分属两个有界模型；12-event depth 和 hand-written specification 保留，不转写为机械提取整程序证明。",
+    "36 trials、3,976 durable transitions、故障次数与声学来源数具有不同分母，不合并。",
+    "自然轨迹、受控交错/压力测试和条件性命题为不同证据层级；旧 native budget scan 不并入 core factorial 以制造视觉密度。",
+    "第一送达与当前持续覆盖分别评价；Figure 1 不是事件匹配反事实，joint 首显晚 27.4 ms；所有 primary core arms 仍 fail whole-run D2。",
+    "共享底座 comparator、adapter 完整状态义务、失败恢复时钟、排除故障范围及真实 AI 披露均不得因语言润色缩小或夸大。"
+  ],
+  "attachment_assessment": {
+    "adopt_zh": [
+      "逻辑角色→反馈依赖→执行实例",
+      "反直觉结果前置",
+      "方法和验证方式在贡献中明确对应",
+      "endpoint 改 metrics",
+      "普通英语解释删失",
+      "结论回扣 avoidable withdrawal"
+    ],
+    "reject_zh": [
+      "不存在可从这些意见得出的 Strong Accept 风格密码",
+      "独立 reference implementation 替换共享底座正控",
+      "Every call 扩大 fidelity 前提",
+      "terminate lifetimes 使 unknown 看似永久失效",
+      "合并模型状态并当统一证明",
+      "把局部 continuity 换为一般 liveness",
+      "为顺滑叙事给异步汇合安排固定序号",
+      "把 native/core 两实例包装为 universal generality"
+    ]
+  },
+  "review_gate": {
+    "decision": "PASS_FOR_TARGETED_EDITORIAL_REVISION",
+    "remaining_zh": "由 root 选择定点改动，逐句核对语义，再编译检查实际行数/页数和图文一致性。此审查不是实验结果或发布验收。"
+  },
+  "memory_context": {
+    "file": "MEMORY.md",
+    "lines": [
+      43,
+      48
+    ],
+    "use_zh": "仅用于提醒既有证据层级和恢复/服务边界，相关表述已以当前 v14 正文重新核对。",
+    "rollout_id": "019fa2a6-578b-7772-9223-f74b0c3992ce"
+  }
+}

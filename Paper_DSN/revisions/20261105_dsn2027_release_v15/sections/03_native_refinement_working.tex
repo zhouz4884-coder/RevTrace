@@ -1,0 +1,58 @@
+% Integrated method extension; formal paired evaluation remains separate.
+% Source audit: resilience_policy._commit; FactStore.commit/_replay;
+% SurvivorConsumer._fact/replay_fact. No whole Python/CUDA proof is claimed.
+\subsection{[AU] Preserving the selected program}
+\label{subsec:native_refinement}
+State-machine accounts relate service execution to ordered commands
+\cite{schneider1990statemachine}. Let $P \mathrel{\Rightarrow_{\mathcal A,X}} P'$ denote a transition allowed
+by the original protected program on accepted immutable input $X$.
+The relation may be nondeterministic. A complete original call includes
+its original selection and update, or its declared buffer-only path;
+a typed identity projection is not such a result. We project a protocol
+execution onto its distinct durable selected facts, deleting speculation,
+waiting, local rejection, cancellation, collection, and repeated delivery.
+This restricted projection follows the standard stuttering view of
+refinement~\cite{abadi1991refinement}; provisional whole-view behavior
+remains outside its alphabet and has a separate compatibility property.
+
+Early execution must not create an additional selected transition merely
+because a prediction was available. The following condition binds every
+selected advancement to its original complete result.
+\begin{proposition}[Selected-trace refinement]
+\label{prop:refinement}
+Assume sufficient declared state, faithful execution of frozen inputs,
+exclusive serial selection, correctly bound message identities, and
+storage that honors successful synchronization. If each new durable fact
+binds a complete original call whose full input equals the preceding
+selected cut, retains the call's original identity, was admitted under
+valid message authority, and is synchronized before installation or certified
+application, then the projected facts form an execution allowed by
+$\mathcal A$. Replaying an existing fact adds no transition.
+\end{proposition}
+\begin{proof}
+The initial cut belongs to $\mathcal A$. Deleted actions do not extend
+the prefix. An early completion remains buffered while its parent input
+is unknown. Exclusive serial selection revalidates its actual parent and
+complete frozen input before append, so completion order adds no parentless
+edge. Each new fact binds a complete original call on exactly the
+preceding cut and accepted input, hence an allowed next edge regardless
+of dispatch time. Synchronization precedes privileged application.
+Recovery replays the same checked identities, including a fact first
+consumed after an Owner crash, without adding an edge. Induction proves
+the claim.
+\end{proof}
+
+Propositions~\ref{prop:refinement} and~\ref{prop:continuity} govern original
+selection [AU] and compatible whole-view retention [SUP], respectively.
+Input confirmation [EL] retains work without endorsing its prediction.
+Meeting deadlines further depends on when views and complete original
+results reach the actual Consumer.
+
+\paragraph{Specification checks and execution evidence}
+A separately frozen, hand-written specification explores 6,231 two-frontier normal
+states and 14,074 one-frontier failure states, each to a 12-event depth,
+with 27 named controls. An independent trace checker binds actual facts
+and whole-view applications to original call receipts. These bounded
+checks complement the conditional argument; they are not a mechanically
+extracted whole-program proof.
+
