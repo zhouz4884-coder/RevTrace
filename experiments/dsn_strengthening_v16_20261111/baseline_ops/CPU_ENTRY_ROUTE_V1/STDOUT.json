@@ -1,0 +1,29 @@
+{
+  "status": "PASS_FROZEN_ACTUAL_ENTRY_ROUTE_NO_NEURAL_EXECUTION",
+  "cells": 24,
+  "arms": [
+    "conservative",
+    "dependency_versioned",
+    "fullcall",
+    "ready_only",
+    "safe_versioned",
+    "uir"
+  ],
+  "route": [
+    "run_confirmation.run Popen",
+    "resilience_trial.run_trial",
+    "resilience_owner.owner_main",
+    "resilience_transport.start_worker\u2192worker_entry",
+    "stage_worker.worker_main(mode=authority,kind=full)",
+    "CandidateBridge.full_step",
+    "NativeBridge.step",
+    "original engine.infer"
+  ],
+  "legacy_three_arm_entries_executed": false,
+  "scope": "AST and actual frozen argv expression/config contract; not model execution, CUDA attestation, or service performance",
+  "source_commit": "948f363f122a070a76c3f7a0efff8e505f0059f2",
+  "model_calls": 0,
+  "GPU_calls": 0,
+  "driver_source_commit": "f367c4e1068a9391a0e99d8537c94995a3388e13",
+  "runtime_source_commit": "de0936b2e30179d63aeef6e235cd1af685578c58"
+}

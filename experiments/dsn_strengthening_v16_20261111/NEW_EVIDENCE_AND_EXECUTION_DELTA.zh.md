@@ -43,6 +43,8 @@
 
 原静态drain账严格闭合：136=136；162=136安装+24检查点退出+2完整后拒绝。新执行器另有就绪、在飞与故障状态核对，不能把这个化简式硬套到未drain/故障运行。
 
+**完整预算又提供了一个正向结果：** 把同批全部298个job纳入后，Conservative与条件策略的总worker占用为87.194与104.676秒（后者多20.05%）；同批双期限信用由37.000增至66.33975音频秒。因此信用/已占用worker秒从0.42434升至0.63376（+49.35%）；及时且后见同G全文支持的对应生产率提高47.98%。这是同批原始服务结果的资源生产率，单位不是GPU活跃秒、service-wall goodput或能效。它比仅报69/13.5的构成比更接近审稿人关心的预算价值。复算脚本与完整范围见`history_ops/LEDGER_FULL_BUDGET_DERIVED_v1.zh.md`。
+
 正式报告：`history_ops/LEDGER_CPU_RESULTS_v2.zh.md`；实际源`817ebbbabce15e6d9c2d84f8435bbbc8640d8b22`，gate PASS。
 
 ## 3. GPU设计已经改成能辨别机制的版本
@@ -53,10 +55,16 @@
 
 新增native源码`14ae77ee2f1f0c324be3f40b89fb6011972c35b9`共64文件，214项CPU协议控制通过；另冻结逐job账本helper，9项控制通过。Ready-only复用为零或重复间资源差超过2%触发诊断，不作为删结果或自动判无效的门。
 
+随后在任何新服务成绩出现前，将所有臂的公共派发统一为canonical-first round-robin，消除固定首会话优先对资源比较的混入。新runtime `de0936b2e30179d63aeef6e235cd1af685578c58` 共66文件、225项CPU控制通过；新driver `f367c4e1068a9391a0e99d8537c94995a3388e13` 共20文件、56项控制通过。另一个独立源码检查实际24份配置的入口，全部指向`resilience_trial.py`，没有调用旧三臂stage/campaign入口；不把`ready_only`错误映射成语义不同的`ready_handoff`。
+
 权重/环境/现有八WAV的完整字节检查已经PASS，没有模型推理。一个CPU路径比较检查器的v1误拒绝保留为FAIL，修复以新源码/新路径v2执行，不修改旧结果。fresh-process不冒称文件冷缓存。
 
 恢复计划分自然端到端服务与同完整输入诊断，加入无故障同构对照、实际PyTorch资源与page-cache记录；不存在的vLLM参数记N/A。执行细节见`plans/EXECUTION_ADDENDUM_v3.json`、`plans/GPU_PLAN_v2.zh.md`及`plans/RESOURCE_LEDGER_AND_SENTINELS_v1.zh.md`。
 
 ## 4. 当前进度
 
-**新GPU trial=0，新模型调用=0。** 新源原任务参考与五臂driver仍在准备，须完成后才能启动GPU。旧AISHELL同一test里可供新增speaker已经很少；另核官方MAGICDATA test metadata有43位speaker，但6–20秒实际可用N还没有header验证，不预报16人成功。研究源、配置与有界结果同步GitHub；原始文字轨迹、数据和大结果保留8TB。
+**新服务GPU trial=0；新GPU原任务参考已完成。** 四个预定已有来源的69次连续原始step与138次完整输入恢复step全部在完整状态、原选择C和返回IDs上相同；另有1次固定神经warmup。这是参考生成及等价核验，费用独立记录，不能当服务成绩。原PID已退出且CUDA拥有者为空，24格服务plan已冻结，尚未启动。
+
+小批次之后的扩跑按`plans/PILOT_OPPORTUNITY_AND_INTERPRETATION_v5.json`决定：逐个对照记录真正的决策分歧和资源机会；高密度下同效是有效负结果，不将它改称密度不足；先小型2/4会话等资源对照，再决定96格旧来源或10N新来源是否值得。五臂固定SUP，不能把这些arm差简单相加成每项机制的独立audio-s。
+
+旧AISHELL同一test里可供新增speaker已经很少；另核官方MAGICDATA test metadata有43位speaker，但6–20秒实际可用N还没有header验证，不预报16人成功。研究源、配置与有界结果同步GitHub；原始文字轨迹、数据和大结果保留8TB。

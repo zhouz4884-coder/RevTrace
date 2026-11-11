@@ -1,0 +1,199 @@
+{
+  "status": "PASS_FROZEN_ACTUAL_ENTRY_ROUTE_NO_NEURAL_EXECUTION",
+  "cells": 24,
+  "arms": [
+    "conservative",
+    "dependency_versioned",
+    "fullcall",
+    "ready_only",
+    "safe_versioned",
+    "uir"
+  ],
+  "route": [
+    "run_confirmation.run Popen",
+    "resilience_trial.run_trial",
+    "resilience_owner.owner_main",
+    "resilience_transport.start_worker\u2192worker_entry",
+    "stage_worker.worker_main(mode=authority,kind=full)",
+    "CandidateBridge.full_step",
+    "NativeBridge.step",
+    "original engine.infer"
+  ],
+  "legacy_three_arm_entries_executed": false,
+  "actual_argv": [
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_conservative_r0",
+      "arm": "conservative",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_conservative_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_conservative_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_uir_r0",
+      "arm": "uir",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_uir_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_uir_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_fullcall_r0",
+      "arm": "fullcall",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_fullcall_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_fullcall_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r0",
+      "arm": "dependency_versioned",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_safe_versioned_r0",
+      "arm": "safe_versioned",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_safe_versioned_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_safe_versioned_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_ready_only_r0",
+      "arm": "ready_only",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_ready_only_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_ready_only_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_dependency_versioned_r0",
+      "arm": "dependency_versioned",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_dependency_versioned_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_dependency_versioned_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_ready_only_r0",
+      "arm": "ready_only",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_ready_only_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_ready_only_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_fullcall_r0",
+      "arm": "fullcall",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_fullcall_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_fullcall_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_conservative_r0",
+      "arm": "conservative",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_conservative_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_conservative_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_uir_r0",
+      "arm": "uir",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_uir_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_uir_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_safe_versioned_r0",
+      "arm": "safe_versioned",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_safe_versioned_r0.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_safe_versioned_r0"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_safe_versioned_r1",
+      "arm": "safe_versioned",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_safe_versioned_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_safe_versioned_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_uir_r1",
+      "arm": "uir",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_uir_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_uir_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_conservative_r1",
+      "arm": "conservative",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_conservative_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_conservative_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_fullcall_r1",
+      "arm": "fullcall",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_fullcall_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_fullcall_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_ready_only_r1",
+      "arm": "ready_only",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_ready_only_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_ready_only_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_dependency_versioned_r1",
+      "arm": "dependency_versioned",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0901W0183_dependency_versioned_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0901W0183_dependency_versioned_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_ready_only_r1",
+      "arm": "ready_only",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_ready_only_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_ready_only_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_safe_versioned_r1",
+      "arm": "safe_versioned",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_safe_versioned_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_safe_versioned_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r1",
+      "arm": "dependency_versioned",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_fullcall_r1",
+      "arm": "fullcall",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_fullcall_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_fullcall_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_uir_r1",
+      "arm": "uir",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_uir_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_uir_r1"
+    },
+    {
+      "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_conservative_r1",
+      "arm": "conservative",
+      "entry": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source/resilience_trial.py",
+      "config": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/service_configs/SC_V16_pilot_existing_BAC009S0769W0190_conservative_r1.json",
+      "out": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT24_V2/cells/SC_V16_pilot_existing_BAC009S0769W0190_conservative_r1"
+    }
+  ],
+  "scope": "AST and actual frozen argv expression/config contract; not model execution, CUDA attestation, or service performance",
+  "source_commit": "948f363f122a070a76c3f7a0efff8e505f0059f2",
+  "model_calls": 0,
+  "GPU_calls": 0,
+  "driver_source_commit": "f367c4e1068a9391a0e99d8537c94995a3388e13",
+  "runtime_source_commit": "de0936b2e30179d63aeef6e235cd1af685578c58"
+}

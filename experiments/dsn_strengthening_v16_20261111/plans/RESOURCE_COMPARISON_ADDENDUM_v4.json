@@ -1,0 +1,38 @@
+{
+  "record_type": "PROSPECTIVE_RESOURCE_COMPARISON_BEFORE_NEW_GPU_RESULTS",
+  "date": "2026-11-11",
+  "supersedes_execution_detail": "EXECUTION_ADDENDUM_v3.json single-source scope and lexicographic source allocation; historical v2 source/CPU evidence remains unchanged",
+  "primary_question": "Can ordinary inter-session concurrency on the same two GPUs explain the single-chain retention benefit, and what remains when canonical demand fills both workers?",
+  "runtime_change": {
+    "state": "NEW_RUNTIME_V3_IN_PREPARATION_NO_GPU_EXECUTION",
+    "parent_commit": "14ae77ee2f1f0c324be3f40b89fb6011972c35b9",
+    "common_policy": "canonical-first round-robin source dispatch, identical across every arm",
+    "priority": "any admissible actual-canonical-start proposal across sessions before conditional-tail proposals",
+    "round_robin": "among eligible sources in the chosen layer; advance cursor only after actual successful dispatch",
+    "two_slots": "select/register/send first slot, then recompute the second, never reuse stale candidate snapshots",
+    "constraints": "same 8000-sample full step, actual accepted input, max-ahead, no duplicate work, original input/AU/SUP/durable and physical lease guards",
+    "claim": "common resource-control policy, not a claimed algorithmic contribution",
+    "launch_condition": "new full actual execution commit/manifest and full CPU controls; v2 CPU gate cannot certify changed v3 source; all new references generated under v3"
+  },
+  "technical_single_source_pilot": {"sources": 2, "primary_arms": 5, "auxiliary_arms": 1, "repeats": 2, "trials": 24},
+  "multi_session_resource_phase": {
+    "priority": "after technical pilot and before larger independent-source bank",
+    "arms": ["conservative", "fullcall"],
+    "concurrent_source_counts": [2, 4],
+    "repeats": 2,
+    "trials": 8,
+    "sources": "metadata-only lexicographically first four members of the frozen existing-eight bank; two-source group is its first two; no output-based selection",
+    "source_unit": "four existing underlying speakers, not 24 independent source/run observations or new speakers",
+    "release": "same synchronous original ingress origin and 500ms cadence for all group members; all waiting obligations including EOS remain in the denominator",
+    "resources": "same two GPUs and two full FP32 model workers; Conservative is allowed to run different canonical chains on both cards",
+    "references": "new-runtime original full-task references for all four sources; isolated per-source reference binding plus actual grouped selected-transition and Consumer checks",
+    "order": "fixed seed, paired policy-order reversal and primary-GPU swap in repeat1; no performance-based removal",
+    "observables": ["all-offered D2/C8 credit and run passes", "per-source credit and waiting time", "canonical versus conditional dispatch counts", "eligible source layer at dispatch", "actual worker/model intervals by physical GPU", "both-board energy to actual physical drain", "legal selected full transitions and actual Consumer support"],
+    "legitimate_null": "zero speculative dispatch and convergence when canonical chains fill both workers are meaningful boundary results, not pilot invalidity or a reason to retune until RevTrace wins",
+    "interpretation_limit": "two frozen mixtures test this allocation question; they do not establish maximum serving capacity or reproduce an external framework"
+  },
+  "subsequent_phase": "Use actual pilot/resource evidence to decide highest-value next frozen study. Preserve proposed 96 existing-bank and 10N independent trials as plans, not automatic claims of necessity or executed results.",
+  "resource_accounting": "worker/infer wall seconds and confirmation-time interval bounds are separate from CUDA active time, both-board energy and causal service gain",
+  "current_new_GPU_trials": 0,
+  "current_new_model_calls": 0
+}
