@@ -1,20 +1,63 @@
 {
-  "record_type": "CLOSED_PILOT24_RESOURCE8_AND_SEPARATE_RUNNING_CONFIRMATION",
-  "observed_utc": "2026-11-11T13:23:54.451302+00:00",
-  "completed_serving_trials": 32,
-  "pilot24_gate": "COMPLETE_FROZEN_V16_MAIN_AND_AUXILIARY_TASK_AND_ENDPOINTS",
-  "resource8_gate": "COMPLETE_FROZEN_RESOURCE8_TASK_AND_ALL_SOURCE_ENDPOINTS",
-  "pilot24_report": "gpu_results/PILOT24_V2/PILOT24_REPORT.zh.md",
-  "resource8_report": "gpu_results/RESOURCE8_V1/RESOURCE8_REPORT.zh.md",
-  "opportunity_audit_report": "opportunity_ops/OPPORTUNITY_AUDIT_REPORT_V1.zh.md",
-  "EOS_report": "review/EOS_DIAGNOSTIC_v1.zh.md",
-  "current_campaign": "CONFIRM_NEW2_FULL_READY_V1",
-  "current_active": true,
-  "current_completed": 5,
-  "current_planned": 8,
-  "current_sources": [
-    "BAC009S0902W0343",
-    "BAC009S0906W0197"
-  ],
-  "scope": "Two pilot speakers plus two further confirmation speakers pending complete. Closed32 includes a distinct four-speaker concurrency study; these are not32 independent speakers. No final N4/N8 comparison is claimed."
+  "record_type": "FINAL_CLOSED_GPU_EXECUTION_STATUS",
+  "last_authoritative_serving_closure_utc": "2026-11-11T14:15:09.865078+00:00",
+  "active_root_campaigns": 0,
+  "current_active": false,
+  "current_campaign": null,
+  "completed_serving_trials": 56,
+  "primary_full_ready_cells": 32,
+  "primary_speaker_clusters": 8,
+  "paid_reference_campaigns": 2,
+  "closed_campaigns": {
+    "PILOT24_V2": {
+      "trials": 24,
+      "summary": "gpu_results/PILOT24_V2/SUMMARY.json",
+      "gate": "gpu_results/PILOT24_V2/GATE.json",
+      "resource_closure": "launch_ops/PILOT24_V2/RESOURCE_CLOSURE.json",
+      "resource_closure_sha256": "b3a704b91ebc69885dcc78cb8272b6a888f59f93528a0828142d5e7bd891fc36"
+    },
+    "RESOURCE8_V1": {
+      "trials": 8,
+      "summary": "gpu_results/RESOURCE8_V1/SUMMARY.json",
+      "gate": "gpu_results/RESOURCE8_V1/GATE.json",
+      "resource_closure": "launch_ops/RESOURCE8_V1/RESOURCE_CLOSURE.json",
+      "resource_closure_sha256": "d85bcfc13734131e8215748b4838dbd5ca8998d926d60fda340debf4740098ff"
+    },
+    "CONFIRM_NEW2_FULL_READY_V1": {
+      "trials": 8,
+      "summary": "gpu_results/CONFIRM_NEW2_FULL_READY_V1/SUMMARY.json",
+      "gate": "gpu_results/CONFIRM_NEW2_FULL_READY_V1/GATE.json",
+      "resource_closure": "launch_ops/CONFIRM_NEW2_FULL_READY_V1/RESOURCE_CLOSURE.json",
+      "resource_closure_sha256": "e23df172b9b010d8bc07b41c095ef84bdf2ad20331b6636b5fbe84a169db2398"
+    },
+    "CONFIRM_LAST4_FULL_READY_V1": {
+      "trials": 16,
+      "summary": "gpu_results/CONFIRM_LAST4_FULL_READY_V1/SUMMARY.json",
+      "gate": "gpu_results/CONFIRM_LAST4_FULL_READY_V1/GATE.json",
+      "resource_closure": "launch_ops/CONFIRM_LAST4_FULL_READY_V1/RESOURCE_CLOSURE.json",
+      "resource_closure_sha256": "b3d4c51ee9febdfb19a97213be38c159090366ea5c28e7ffe6643c27906bcbc4"
+    }
+  },
+  "reference_closures": {
+    "REFERENCE_FULL4_V2": {
+      "continuous_steps": 69,
+      "exact_start_restored_steps": 138,
+      "fixed_warmup_calls": 1,
+      "summary": "gpu_results/REFERENCE_FULL4_V2/SUMMARY.json",
+      "resource_closure": "launch_ops/REFERENCE_FULL4_V2/RESOURCE_CLOSURE.json",
+      "resource_closure_sha256": "8399287d7d427b83307386906b8d645acd51afbe0f3e04257e8340b6651ca865",
+      "reference_only": true
+    },
+    "REFERENCE_LAST4_V1": {
+      "continuous_steps": 72,
+      "exact_start_restored_steps": 144,
+      "fixed_warmup_calls": 1,
+      "summary": "gpu_results/REFERENCE_LAST4_V1/SUMMARY.json",
+      "resource_closure": "launch_ops/REFERENCE_LAST4_V1/RESOURCE_CLOSURE.json",
+      "resource_closure_sha256": "0a111d4edb20ea53e6f94bc977bdfedf18827d894e1c47d9ebde1152c9795efd",
+      "reference_only": true
+    }
+  },
+  "status_basis": "Collected closed controller gates and PID-generation/physical-release receipts; not a new remote polling observation",
+  "scope": "P24+R8+focused8+focused16; resource mixtures reuse existing voices; these are not56 independent speakers. Research closed by user; no further GPU matrix pending."
 }

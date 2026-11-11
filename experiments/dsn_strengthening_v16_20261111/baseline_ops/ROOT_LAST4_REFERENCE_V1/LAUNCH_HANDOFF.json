@@ -1,0 +1,91 @@
+{
+  "status": "LAST4_METADATA_FROZEN_REFERENCE_INFERENCE_NOT_YET_RUN",
+  "driver": {
+    "source_commit": "f367c4e1068a9391a0e99d8537c94995a3388e13",
+    "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/pilot_driver_v2/source",
+    "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/pilot_driver_v2/SOURCE.json",
+    "source_manifest_sha256": "c9c0fa0c14424fae51d3e822f35286ba69c28b11233fa6c2aef848a231ec724b",
+    "complete_files": 20,
+    "clean": true
+  },
+  "runtime": {
+    "source_commit": "de0936b2e30179d63aeef6e235cd1af685578c58",
+    "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/source",
+    "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v3/SOURCE.json",
+    "source_manifest_sha256": "ce99ca421f5f8b416a1545c57a600ee6a28f43e7d2c10294caa00f0d6636a7c9",
+    "complete_files": 66,
+    "clean": true
+  },
+  "support": {
+    "source_commit": "a13fa0a335529dc188f7e738877a3acd027ce4a7",
+    "source_root": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/paired_resident_source_v2",
+    "source_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_20261031/PAIRED_RESIDENT_SOURCE_v2.json",
+    "source_manifest_sha256": "8cadffbfe9ffcc1eb3efdf5e2702e7afbc2ec932158c12dd197d6f0bdc334934",
+    "complete_files": 18,
+    "clean": true
+  },
+  "metadata_preparation": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/SUMMARY.json",
+  "Root_gates_to_upload": {
+    "root_noarg_runtime": {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/root_last4_reference_v1/root_gates/ROOT_NOARG_RUNTIME.json",
+      "required_commit": "de0936b2e30179d63aeef6e235cd1af685578c58",
+      "required_manifest_sha256": "ce99ca421f5f8b416a1545c57a600ee6a28f43e7d2c10294caa00f0d6636a7c9"
+    },
+    "driver_explicit": {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/root_last4_reference_v1/root_gates/DRIVER_EXPLICIT.json",
+      "required_commit": "f367c4e1068a9391a0e99d8537c94995a3388e13",
+      "required_manifest_sha256": "c9c0fa0c14424fae51d3e822f35286ba69c28b11233fa6c2aef848a231ec724b"
+    }
+  },
+  "ordered_commands": [
+    {
+      "step": 1,
+      "role": "CPU bind Root current/explicit gates to reference plan",
+      "command": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+        "-B",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/pilot_driver_v2/source/make_prelaunch.py",
+        "--manifest",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/pilot_driver_v2/SOURCE.json",
+        "--plan",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/root_last4_reference_v1/REFERENCE_PLAN.json",
+        "--root-noarg-preflight",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/root_last4_reference_v1/root_gates/ROOT_NOARG_RUNTIME.json",
+        "--driver-explicit-preflight",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/root_last4_reference_v1/root_gates/DRIVER_EXPLICIT.json",
+        "--asset-byte-gate",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/PILOT_PREPARATION_V2/ASSET_BYTE_BINDING.json",
+        "--exclusive-window-id",
+        "V16_ROOT_OWNED_REFERENCE_AND_PILOT",
+        "--out",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/root_last4_reference_v1/REFERENCE_PRELAUNCH.json"
+      ]
+    },
+    {
+      "step": 2,
+      "role": "ROOT_ONLY paid neural reference; not serving",
+      "command": [
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+        "-B",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/pilot_driver_v2/source/run_reference.py",
+        "--plan",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/root_last4_reference_v1/REFERENCE_PLAN.json",
+        "--manifest",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/pilot_driver_v2/SOURCE.json",
+        "--prelaunch",
+        "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/root_last4_reference_v1/REFERENCE_PRELAUNCH.json"
+      ],
+      "expected_receipt": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/REFERENCE_LAST4_V1/REFERENCE_RECEIPT.json",
+      "must_verify_owned_process_exit_and_CUDA_empty": true
+    }
+  ],
+  "reference_plan_sha256": "0fff1773532ce685945efd2aa886f1c03732e0beda6bd6489f1592771cafb454",
+  "expected_main_trials": 20,
+  "expected_auxiliary_trials": 4,
+  "new_model_calls_so_far": 0,
+  "new_GPU_trials_so_far": 0,
+  "launcher_handle_requirement": "Root records PID/start_ticks/full command SHA for paid reference; service driver records each actual trial handle and owns bounded cleanup",
+  "no_automatic_source_replacement": true,
+  "no_reference_PASS_manufactured": true,
+  "CURRENT_not_modified_by_this_preparation": true
+}

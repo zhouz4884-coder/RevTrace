@@ -1,0 +1,529 @@
+{
+  "schema": "revtrace_cross_version_ledger_v1",
+  "data_source": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_streamcorrect_independent_20261029\\SERVICE_RESULTS_v1",
+  "assumptions": [
+    "A1 计算成本=record.worker_job_wall_seconds；model_seconds 单列为纯神经阶段",
+    "A2 跨版本=birth_canonical_sha != actual_parent_sha；相等的同版本晋升不计入",
+    "A3 时效节省=(父状态安装时刻+本job model_seconds)-本job完成时刻（反事实估计）",
+    "A4 被取消成本=worker_job_end_perf-worker_job_begin_perf（已实际沉没）",
+    "A5 不混用 audio-s/GPU-s/J，不折算加速比"
+  ],
+  "aggregate": {
+    "cells": 16,
+    "spec_cells": 8,
+    "conservative_cells": 8,
+    "promotions": 92,
+    "promotions_cross_version": 92,
+    "discarded": 2,
+    "abandoned": 24,
+    "recovered_wall_s": 69.01652556005865,
+    "recovered_model_s": 68.30811489373446,
+    "wasted_wall_s": 13.514741560444236,
+    "wasted_model_s": 0.9255152987316251,
+    "latency_saved_s": 23.77908689621836,
+    "latency_saved_n": 92,
+    "spec_total_wall_s": 92.10274227615446,
+    "cons_total_wall_s": 87.19404511153698
+  },
+  "reject_class": {
+    "early_cheap": {
+      "n": 24,
+      "wall_s": 12.573525994084775,
+      "model_s": 0.0
+    },
+    "late_expensive": {
+      "n": 2,
+      "wall_s": 0.9412155663594604,
+      "model_s": 0.9255152987316251
+    }
+  },
+  "reproducibility": {
+    "BAC009S0905W0246": {
+      "r0": {
+        "promotions_cross_version": 12,
+        "abandoned": 3,
+        "discarded": 0,
+        "recovered_wall_s": 9.379091678187251,
+        "wasted_wall_s": 1.3645909987390041,
+        "latency_saved_s": 3.485110846348107
+      },
+      "r1": {
+        "promotions_cross_version": 12,
+        "abandoned": 3,
+        "discarded": 0,
+        "recovered_wall_s": 9.430368646979332,
+        "wasted_wall_s": 1.3865014677867293,
+        "latency_saved_s": 3.459274440072477
+      },
+      "rel_diff_pct": {
+        "recovered_wall_s": 0.5437429936368983,
+        "wasted_wall_s": 1.5802701660821792,
+        "latency_saved_s": 0.7468735633212347
+      }
+    },
+    "BAC009S0908W0369": {
+      "r0": {
+        "promotions_cross_version": 9,
+        "abandoned": 4,
+        "discarded": 1,
+        "recovered_wall_s": 6.466319124214351,
+        "wasted_wall_s": 2.8389958702027798,
+        "latency_saved_s": 2.089268025010824
+      },
+      "r1": {
+        "promotions_cross_version": 9,
+        "abandoned": 4,
+        "discarded": 1,
+        "recovered_wall_s": 6.484888405539095,
+        "wasted_wall_s": 2.8255986757576466,
+        "latency_saved_s": 2.192179571837187
+      },
+      "rel_diff_pct": {
+        "recovered_wall_s": 0.28634696795835674,
+        "wasted_wall_s": 0.474136492208715,
+        "latency_saved_s": 4.694485257889532
+      }
+    },
+    "BAC009S0913W0313": {
+      "r0": {
+        "promotions_cross_version": 12,
+        "abandoned": 3,
+        "discarded": 0,
+        "recovered_wall_s": 8.2555045876652,
+        "wasted_wall_s": 1.531218926422298,
+        "latency_saved_s": 2.7728740824386477
+      },
+      "r1": {
+        "promotions_cross_version": 12,
+        "abandoned": 3,
+        "discarded": 0,
+        "recovered_wall_s": 8.191741704009473,
+        "wasted_wall_s": 1.558580338023603,
+        "latency_saved_s": 2.7088251300156116
+      },
+      "rel_diff_pct": {
+        "recovered_wall_s": 0.7783800559106736,
+        "wasted_wall_s": 1.755534247018754,
+        "latency_saved_s": 2.364455044119698
+      }
+    },
+    "BAC009S0916W0463": {
+      "r0": {
+        "promotions_cross_version": 13,
+        "abandoned": 2,
+        "discarded": 0,
+        "recovered_wall_s": 10.473691657185555,
+        "wasted_wall_s": 1.0100301513448358,
+        "latency_saved_s": 3.551050246693194
+      },
+      "r1": {
+        "promotions_cross_version": 13,
+        "abandoned": 2,
+        "discarded": 0,
+        "recovered_wall_s": 10.334919756278396,
+        "wasted_wall_s": 0.9992251321673393,
+        "latency_saved_s": 3.5205045538023114
+      },
+      "rel_diff_pct": {
+        "recovered_wall_s": 1.3427477346677592,
+        "wasted_wall_s": 1.0813398131870573,
+        "latency_saved_s": 0.8676509978631244
+      }
+    }
+  },
+  "by_source": {
+    "BAC009S0905W0246": {
+      "promotions": 24,
+      "cross_version": 24,
+      "abandoned": 6,
+      "discarded": 0,
+      "recovered_wall_s": 18.809460325166583,
+      "wasted_wall_s": 2.7510924665257335,
+      "latency_saved_s": 6.944385286420584
+    },
+    "BAC009S0908W0369": {
+      "promotions": 18,
+      "cross_version": 18,
+      "abandoned": 8,
+      "discarded": 2,
+      "recovered_wall_s": 12.951207529753447,
+      "wasted_wall_s": 5.664594545960426,
+      "latency_saved_s": 4.281447596848011
+    },
+    "BAC009S0913W0313": {
+      "promotions": 24,
+      "cross_version": 24,
+      "abandoned": 6,
+      "discarded": 0,
+      "recovered_wall_s": 16.447246291674674,
+      "wasted_wall_s": 3.089799264445901,
+      "latency_saved_s": 5.481699212454259
+    },
+    "BAC009S0916W0463": {
+      "promotions": 26,
+      "cross_version": 26,
+      "abandoned": 4,
+      "discarded": 0,
+      "recovered_wall_s": 20.80861141346395,
+      "wasted_wall_s": 2.009255283512175,
+      "latency_saved_s": 7.071554800495505
+    }
+  },
+  "cells": [
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0905W0246_r0",
+      "arm": "conservative",
+      "source_id": "BAC009S0905W0246",
+      "repeat": "r0",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "promotions": 0,
+      "promotions_cross_version": 0,
+      "discarded": 0,
+      "abandoned": 0,
+      "recovered_wall_s": 0.0,
+      "recovered_model_s": 0.0,
+      "wasted_wall_s": 0.0,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 0.0,
+      "latency_saved_n": 0,
+      "has_ledger": false,
+      "baseline_wall_s": 11.288724261336029,
+      "baseline_model_s": 11.196104309521616
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0905W0246_r1",
+      "arm": "conservative",
+      "source_id": "BAC009S0905W0246",
+      "repeat": "r1",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "promotions": 0,
+      "promotions_cross_version": 0,
+      "discarded": 0,
+      "abandoned": 0,
+      "recovered_wall_s": 0.0,
+      "recovered_model_s": 0.0,
+      "wasted_wall_s": 0.0,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 0.0,
+      "latency_saved_n": 0,
+      "has_ledger": false,
+      "baseline_wall_s": 11.432142995297909,
+      "baseline_model_s": 11.288674558512866
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0908W0369_r0",
+      "arm": "conservative",
+      "source_id": "BAC009S0908W0369",
+      "repeat": "r0",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "promotions": 0,
+      "promotions_cross_version": 0,
+      "discarded": 0,
+      "abandoned": 0,
+      "recovered_wall_s": 0.0,
+      "recovered_model_s": 0.0,
+      "wasted_wall_s": 0.0,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 0.0,
+      "latency_saved_n": 0,
+      "has_ledger": false,
+      "baseline_wall_s": 10.265154805034399,
+      "baseline_model_s": 10.167935771867633
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0908W0369_r1",
+      "arm": "conservative",
+      "source_id": "BAC009S0908W0369",
+      "repeat": "r1",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "promotions": 0,
+      "promotions_cross_version": 0,
+      "discarded": 0,
+      "abandoned": 0,
+      "recovered_wall_s": 0.0,
+      "recovered_model_s": 0.0,
+      "wasted_wall_s": 0.0,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 0.0,
+      "latency_saved_n": 0,
+      "has_ledger": false,
+      "baseline_wall_s": 10.32801771350205,
+      "baseline_model_s": 10.194115063175559
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0913W0313_r0",
+      "arm": "conservative",
+      "source_id": "BAC009S0913W0313",
+      "repeat": "r0",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "promotions": 0,
+      "promotions_cross_version": 0,
+      "discarded": 0,
+      "abandoned": 0,
+      "recovered_wall_s": 0.0,
+      "recovered_model_s": 0.0,
+      "wasted_wall_s": 0.0,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 0.0,
+      "latency_saved_n": 0,
+      "has_ledger": false,
+      "baseline_wall_s": 10.431702132336795,
+      "baseline_model_s": 10.288414314389229
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0913W0313_r1",
+      "arm": "conservative",
+      "source_id": "BAC009S0913W0313",
+      "repeat": "r1",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "promotions": 0,
+      "promotions_cross_version": 0,
+      "discarded": 0,
+      "abandoned": 0,
+      "recovered_wall_s": 0.0,
+      "recovered_model_s": 0.0,
+      "wasted_wall_s": 0.0,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 0.0,
+      "latency_saved_n": 0,
+      "has_ledger": false,
+      "baseline_wall_s": 10.231347349472344,
+      "baseline_model_s": 10.13440137077123
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0916W0463_r0",
+      "arm": "conservative",
+      "source_id": "BAC009S0916W0463",
+      "repeat": "r0",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "promotions": 0,
+      "promotions_cross_version": 0,
+      "discarded": 0,
+      "abandoned": 0,
+      "recovered_wall_s": 0.0,
+      "recovered_model_s": 0.0,
+      "wasted_wall_s": 0.0,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 0.0,
+      "latency_saved_n": 0,
+      "has_ledger": false,
+      "baseline_wall_s": 11.571763305924833,
+      "baseline_model_s": 11.434011347591877
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_early_BAC009S0916W0463_r1",
+      "arm": "conservative",
+      "source_id": "BAC009S0916W0463",
+      "repeat": "r1",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "promotions": 0,
+      "promotions_cross_version": 0,
+      "discarded": 0,
+      "abandoned": 0,
+      "recovered_wall_s": 0.0,
+      "recovered_model_s": 0.0,
+      "wasted_wall_s": 0.0,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 0.0,
+      "latency_saved_n": 0,
+      "has_ledger": false,
+      "baseline_wall_s": 11.645192548632622,
+      "baseline_model_s": 11.51284746080637
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0905W0246_r0",
+      "arm": "spec",
+      "source_id": "BAC009S0905W0246",
+      "repeat": "r0",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "has_ledger": true,
+      "promotions": 12,
+      "promotions_cross_version": 12,
+      "discarded": 0,
+      "abandoned": 3,
+      "recovered_wall_s": 9.379091678187251,
+      "recovered_model_s": 9.295876866206527,
+      "wasted_wall_s": 1.3645909987390041,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 3.485110846348107,
+      "latency_saved_n": 12,
+      "refuse_detail": {
+        "abandoned:early_cheap:asr_prefix": 3
+      },
+      "baseline_wall_s": 11.921151447109878
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0905W0246_r1",
+      "arm": "spec",
+      "source_id": "BAC009S0905W0246",
+      "repeat": "r1",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "has_ledger": true,
+      "promotions": 12,
+      "promotions_cross_version": 12,
+      "discarded": 0,
+      "abandoned": 3,
+      "recovered_wall_s": 9.430368646979332,
+      "recovered_model_s": 9.334586673416197,
+      "wasted_wall_s": 1.3865014677867293,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 3.459274440072477,
+      "latency_saved_n": 12,
+      "refuse_detail": {
+        "abandoned:early_cheap:asr_prefix": 3
+      },
+      "baseline_wall_s": 12.04647303931415
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0908W0369_r0",
+      "arm": "spec",
+      "source_id": "BAC009S0908W0369",
+      "repeat": "r0",
+      "jobs_total": 18,
+      "jobs_native_model_evaluated": 17,
+      "has_ledger": true,
+      "promotions": 9,
+      "promotions_cross_version": 9,
+      "discarded": 1,
+      "abandoned": 4,
+      "recovered_wall_s": 6.466319124214351,
+      "recovered_model_s": 6.386415204964578,
+      "wasted_wall_s": 2.8389958702027798,
+      "wasted_model_s": 0.4625730449333787,
+      "latency_saved_s": 2.089268025010824,
+      "latency_saved_n": 9,
+      "refuse_detail": {
+        "abandoned:early_cheap:asr_prefix": 4,
+        "discarded:late_expensive:original_full_infer": 1
+      },
+      "baseline_wall_s": 11.177715231664479
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0908W0369_r1",
+      "arm": "spec",
+      "source_id": "BAC009S0908W0369",
+      "repeat": "r1",
+      "jobs_total": 18,
+      "jobs_native_model_evaluated": 17,
+      "has_ledger": true,
+      "promotions": 9,
+      "promotions_cross_version": 9,
+      "discarded": 1,
+      "abandoned": 4,
+      "recovered_wall_s": 6.484888405539095,
+      "recovered_model_s": 6.413847952149808,
+      "wasted_wall_s": 2.8255986757576466,
+      "wasted_model_s": 0.4629422537982464,
+      "latency_saved_s": 2.192179571837187,
+      "latency_saved_n": 9,
+      "refuse_detail": {
+        "abandoned:early_cheap:asr_prefix": 4,
+        "discarded:late_expensive:original_full_infer": 1
+      },
+      "baseline_wall_s": 11.215461703948677
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0913W0313_r0",
+      "arm": "spec",
+      "source_id": "BAC009S0913W0313",
+      "repeat": "r0",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "has_ledger": true,
+      "promotions": 12,
+      "promotions_cross_version": 12,
+      "discarded": 0,
+      "abandoned": 3,
+      "recovered_wall_s": 8.2555045876652,
+      "recovered_model_s": 8.173512492328882,
+      "wasted_wall_s": 1.531218926422298,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 2.7728740824386477,
+      "latency_saved_n": 12,
+      "refuse_detail": {
+        "abandoned:early_cheap:asr_prefix": 3
+      },
+      "baseline_wall_s": 10.707165841013193
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0913W0313_r1",
+      "arm": "spec",
+      "source_id": "BAC009S0913W0313",
+      "repeat": "r1",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "has_ledger": true,
+      "promotions": 12,
+      "promotions_cross_version": 12,
+      "discarded": 0,
+      "abandoned": 3,
+      "recovered_wall_s": 8.191741704009473,
+      "recovered_model_s": 8.100560544990003,
+      "wasted_wall_s": 1.558580338023603,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 2.7088251300156116,
+      "latency_saved_n": 12,
+      "refuse_detail": {
+        "abandoned:early_cheap:asr_prefix": 3
+      },
+      "baseline_wall_s": 10.645459749735892
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0916W0463_r0",
+      "arm": "spec",
+      "source_id": "BAC009S0916W0463",
+      "repeat": "r0",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "has_ledger": true,
+      "promotions": 13,
+      "promotions_cross_version": 13,
+      "discarded": 0,
+      "abandoned": 2,
+      "recovered_wall_s": 10.473691657185555,
+      "recovered_model_s": 10.373281215317547,
+      "wasted_wall_s": 1.0100301513448358,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 3.551050246693194,
+      "latency_saved_n": 13,
+      "refuse_detail": {
+        "abandoned:early_cheap:asr_prefix": 2
+      },
+      "baseline_wall_s": 12.246287040412426
+    },
+    {
+      "cell": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0916W0463_r1",
+      "arm": "spec",
+      "source_id": "BAC009S0916W0463",
+      "repeat": "r1",
+      "jobs_total": 17,
+      "jobs_native_model_evaluated": 16,
+      "has_ledger": true,
+      "promotions": 13,
+      "promotions_cross_version": 13,
+      "discarded": 0,
+      "abandoned": 2,
+      "recovered_wall_s": 10.334919756278396,
+      "recovered_model_s": 10.230033944360912,
+      "wasted_wall_s": 0.9992251321673393,
+      "wasted_model_s": 0.0,
+      "latency_saved_s": 3.5205045538023114,
+      "latency_saved_n": 13,
+      "refuse_detail": {
+        "abandoned:early_cheap:asr_prefix": 2
+      },
+      "baseline_wall_s": 12.143028222955763
+    }
+  ],
+  "warnings": []
+}

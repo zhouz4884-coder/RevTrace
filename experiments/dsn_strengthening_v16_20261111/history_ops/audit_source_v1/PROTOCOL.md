@@ -1,0 +1,1 @@
+Independent offline proof checker for all29 original Consumer inputs, minimum edit distance, operation/identity/lifetime ledger, all220 metadata contrasts,22 factorials and256 eight-speaker swaps. No model calls. Does not import primary metric modules or independently enumerate all optimal paths.

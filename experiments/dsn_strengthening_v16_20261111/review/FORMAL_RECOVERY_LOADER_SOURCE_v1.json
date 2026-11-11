@@ -1,0 +1,1067 @@
+{
+  "operation": "read-only loader source inspection; no model imports or writes",
+  "files": [
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/author_StreamCorrect_bbb9f7f/simul_whisper/whisper/__init__.py",
+      "bytes": 15122,
+      "sha256": "f9ab895c30bb36218adaace260ec2519d1a5fc98c3fd3e2caa02a75d36003b4d",
+      "lines": [
+        {
+          "line": 100,
+          "text": "        # Cross attention (decoder only) - handle encoder_attn -> cross_attn"
+        },
+        {
+          "line": 101,
+          "text": "        name = name.replace(\".encoder_attn.q_proj\", \".cross_attn.query\")"
+        },
+        {
+          "line": 102,
+          "text": "        name = name.replace(\".encoder_attn.k_proj\", \".cross_attn.key\")"
+        },
+        {
+          "line": 103,
+          "text": "        name = name.replace(\".encoder_attn.v_proj\", \".cross_attn.value\")"
+        },
+        {
+          "line": 104,
+          "text": "        name = name.replace(\".encoder_attn.out_proj\", \".cross_attn.out\")"
+        },
+        {
+          "line": 105,
+          "text": "        "
+        },
+        {
+          "line": 106,
+          "text": "        # Self attention - handle different naming conventions"
+        },
+        {
+          "line": 107,
+          "text": "        name = name.replace(\".self_attn.q_proj\", \".attn.query\")"
+        },
+        {
+          "line": 108,
+          "text": "        name = name.replace(\".self_attn.k_proj\", \".attn.key\")"
+        },
+        {
+          "line": 109,
+          "text": "        name = name.replace(\".self_attn.v_proj\", \".attn.value\")"
+        },
+        {
+          "line": 110,
+          "text": "        name = name.replace(\".self_attn.out_proj\", \".attn.out\")"
+        },
+        {
+          "line": 111,
+          "text": "        "
+        },
+        {
+          "line": 112,
+          "text": "        # Feed forward layers"
+        },
+        {
+          "line": 113,
+          "text": "        name = name.replace(\".fc1\", \".mlp.0\")"
+        },
+        {
+          "line": 114,
+          "text": "        name = name.replace(\".fc2\", \".mlp.2\")"
+        },
+        {
+          "line": 115,
+          "text": "        "
+        },
+        {
+          "line": 116,
+          "text": "        # Normalization layers - handle decoder first (more specific)"
+        },
+        {
+          "line": 117,
+          "text": "        if \"decoder\" in name:"
+        },
+        {
+          "line": 118,
+          "text": "            name = name.replace(\".encoder_attn_layer_norm\", \".cross_attn_ln\")"
+        },
+        {
+          "line": 119,
+          "text": "            name = name.replace(\".final_layer_norm\", \".mlp_ln\")"
+        },
+        {
+          "line": 120,
+          "text": "            name = name.replace(\".self_attn_layer_norm\", \".attn_ln\")"
+        },
+        {
+          "line": 121,
+          "text": "        else:"
+        },
+        {
+          "line": 122,
+          "text": "            name = name.replace(\".final_layer_norm\", \".mlp_ln\")"
+        },
+        {
+          "line": 123,
+          "text": "            name = name.replace(\".self_attn_layer_norm\", \".attn_ln\")"
+        },
+        {
+          "line": 124,
+          "text": "        "
+        },
+        {
+          "line": 125,
+          "text": "        # Post-encoder/decoder normalization"
+        },
+        {
+          "line": 126,
+          "text": "        name = name.replace(\"encoder.layer_norm\", \"encoder.ln_post\")"
+        },
+        {
+          "line": 127,
+          "text": "        name = name.replace(\"decoder.layer_norm\", \"decoder.ln\")"
+        },
+        {
+          "line": 128,
+          "text": "        "
+        },
+        {
+          "line": 129,
+          "text": "        whisper_state_dict[name] = finetuned_state_dict[original_name]"
+        },
+        {
+          "line": 130,
+          "text": "    "
+        },
+        {
+          "line": 131,
+          "text": "    return whisper_state_dict"
+        },
+        {
+          "line": 132,
+          "text": ""
+        },
+        {
+          "line": 133,
+          "text": "def convert_wenet_to_whisper_state_dict(wenet_state_dict):"
+        },
+        {
+          "line": 134,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 135,
+          "text": "    Convert WeNet model state dict to Whisper model state dict by renaming keys."
+        },
+        {
+          "line": 136,
+          "text": "    "
+        },
+        {
+          "line": 137,
+          "text": "    Args:"
+        },
+        {
+          "line": 138,
+          "text": "        wenet_state_dict: Dictionary containing WeNet model parameters"
+        },
+        {
+          "line": 139,
+          "text": "        "
+        },
+        {
+          "line": 140,
+          "text": "    Returns:"
+        },
+        {
+          "line": 141,
+          "text": "        whisper_state_dict: Dictionary with keys renamed to match Whisper format"
+        },
+        {
+          "line": 142,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 143,
+          "text": "    whisper_state_dict = {}"
+        },
+        {
+          "line": 144,
+          "text": "    "
+        },
+        {
+          "line": 145,
+          "text": "    for name in wenet_state_dict.keys():"
+        },
+        {
+          "line": 146,
+          "text": "        original_name = copy.deepcopy(name)"
+        },
+        {
+          "line": 147,
+          "text": "        "
+        },
+        {
+          "line": 148,
+          "text": "        # Skip WeNet-specific keys that don't exist in Whisper"
+        },
+        {
+          "line": 149,
+          "text": "        if (name.startswith(\"ctc.\") or "
+        },
+        {
+          "line": 150,
+          "text": "            name == \"model_state_dict\" or "
+        },
+        {
+          "line": 151,
+          "text": "            name == \"dims\" or"
+        },
+        {
+          "line": 152,
+          "text": "            name == \"decoder.output_layer.weight\" or"
+        },
+        {
+          "line": 153,
+          "text": "            name == \"decoder.output_layer.bias\"):"
+        },
+        {
+          "line": 154,
+          "text": "            continue"
+        },
+        {
+          "line": 155,
+          "text": "        "
+        },
+        {
+          "line": 156,
+          "text": "        # Handle positional embeddings first (special case with squeeze)"
+        },
+        {
+          "line": 157,
+          "text": "        if original_name == \"encoder.embed.pos_enc.pe\":"
+        },
+        {
+          "line": 158,
+          "text": "            name = \"encoder.positional_embedding\""
+        },
+        {
+          "line": 159,
+          "text": "            whisper_state_dict[name] = wenet_state_dict[original_name].squeeze(0)"
+        },
+        {
+          "line": 160,
+          "text": "        elif original_name == \"decoder.embed.1.pe\":"
+        },
+        {
+          "line": 161,
+          "text": "            name = \"decoder.positional_embedding\""
+        },
+        {
+          "line": 162,
+          "text": "            whisper_state_dict[name] = wenet_state_dict[original_name].squeeze(0)"
+        },
+        {
+          "line": 163,
+          "text": "        else:"
+        },
+        {
+          "line": 164,
+          "text": "            # Apply reverse string replacements in correct order"
+        },
+        {
+          "line": 165,
+          "text": "            # Convolution layers"
+        },
+        {
+          "line": 166,
+          "text": "            name = name.replace(\"encoder.embed.conv.0\", \"encoder.conv1\")"
+        },
+        {
+          "line": 167,
+          "text": "            name = name.replace(\"encoder.embed.conv.2\", \"encoder.conv2\")"
+        },
+        {
+          "line": 168,
+          "text": "            "
+        },
+        {
+          "line": 169,
+          "text": "            # Token embedding"
+        },
+        {
+          "line": 170,
+          "text": "            name = name.replace(\"decoder.embed.0\", \"decoder.token_embedding\")"
+        },
+        {
+          "line": 171,
+          "text": "            "
+        },
+        {
+          "line": 172,
+          "text": "            # Encoder/Decoder blocks"
+        },
+        {
+          "line": 173,
+          "text": "            name = name.replace(\"encoder.encoders\", \"encoder.blocks\")"
+        },
+        {
+          "line": 174,
+          "text": "            name = name.replace(\"decoder.decoders\", \"decoder.blocks\")"
+        },
+        {
+          "line": 175,
+          "text": "            "
+        },
+        {
+          "line": 176,
+          "text": "            # Cross attention (decoder only)"
+        },
+        {
+          "line": 177,
+          "text": "            name = name.replace(\".src_attn.linear_q\", \".cross_attn.query\")"
+        },
+        {
+          "line": 178,
+          "text": "            name = name.replace(\".src_attn.linear_k\", \".cross_attn.key\")"
+        },
+        {
+          "line": 179,
+          "text": "            name = name.replace(\".src_attn.linear_v\", \".cross_attn.value\")"
+        },
+        {
+          "line": 180,
+          "text": "            name = name.replace(\".src_attn.linear_out\", \".cross_attn.out\")"
+        },
+        {
+          "line": 181,
+          "text": "            "
+        },
+        {
+          "line": 182,
+          "text": "            # Self attention"
+        },
+        {
+          "line": 183,
+          "text": "            name = name.replace(\".self_attn.linear_q\", \".attn.query\")"
+        },
+        {
+          "line": 184,
+          "text": "            name = name.replace(\".self_attn.linear_k\", \".attn.key\")"
+        },
+        {
+          "line": 185,
+          "text": "            name = name.replace(\".self_attn.linear_v\", \".attn.value\")"
+        },
+        {
+          "line": 186,
+          "text": "            name = name.replace(\".self_attn.linear_out\", \".attn.out\")"
+        },
+        {
+          "line": 187,
+          "text": "            "
+        },
+        {
+          "line": 188,
+          "text": "            # Feed forward layers"
+        },
+        {
+          "line": 189,
+          "text": "            name = name.replace(\"feed_forward.w_1\", \"mlp.0\")"
+        },
+        {
+          "line": 190,
+          "text": "            name = name.replace(\"feed_forward.w_2\", \"mlp.2\")"
+        },
+        {
+          "line": 191,
+          "text": "            "
+        },
+        {
+          "line": 192,
+          "text": "            # Normalization layers - handle decoder first (more specific)"
+        },
+        {
+          "line": 193,
+          "text": "            if \"decoder\" in name:"
+        },
+        {
+          "line": 194,
+          "text": "                name = name.replace(\"norm2\", \"cross_attn_ln\")"
+        },
+        {
+          "line": 195,
+          "text": "                name = name.replace(\"norm3\", \"mlp_ln\")"
+        },
+        {
+          "line": 196,
+          "text": "                name = name.replace(\"norm1\", \"attn_ln\")"
+        },
+        {
+          "line": 197,
+          "text": "            else:"
+        },
+        {
+          "line": 198,
+          "text": "                name = name.replace(\"norm2\", \"mlp_ln\")"
+        },
+        {
+          "line": 199,
+          "text": "                name = name.replace(\"norm1\", \"attn_ln\")"
+        },
+        {
+          "line": 200,
+          "text": "            "
+        },
+        {
+          "line": 201,
+          "text": "            # Post-encoder/decoder normalization"
+        },
+        {
+          "line": 202,
+          "text": "            name = name.replace(\"encoder.after_norm\", \"encoder.ln_post\")"
+        },
+        {
+          "line": 203,
+          "text": "            name = name.replace(\"decoder.after_norm\", \"decoder.ln\")"
+        },
+        {
+          "line": 204,
+          "text": "            "
+        },
+        {
+          "line": 205,
+          "text": "            whisper_state_dict[name] = wenet_state_dict[original_name]"
+        },
+        {
+          "line": 206,
+          "text": "    "
+        },
+        {
+          "line": 207,
+          "text": "    return whisper_state_dict"
+        },
+        {
+          "line": 208,
+          "text": ""
+        },
+        {
+          "line": 209,
+          "text": ""
+        },
+        {
+          "line": 210,
+          "text": "def _download(url: str, root: str, in_memory: bool) -> Union[bytes, str]:"
+        },
+        {
+          "line": 211,
+          "text": "    os.makedirs(root, exist_ok=True)"
+        },
+        {
+          "line": 212,
+          "text": ""
+        },
+        {
+          "line": 213,
+          "text": "    expected_sha256 = url.split(\"/\")[-2]"
+        },
+        {
+          "line": 214,
+          "text": "    download_target = os.path.join(root, os.path.basename(url))"
+        },
+        {
+          "line": 215,
+          "text": ""
+        },
+        {
+          "line": 216,
+          "text": "    if os.path.exists(download_target) and not os.path.isfile(download_target):"
+        },
+        {
+          "line": 217,
+          "text": "        raise RuntimeError(f\"{download_target} exists and is not a regular file\")"
+        },
+        {
+          "line": 218,
+          "text": "        "
+        },
+        {
+          "line": 219,
+          "text": "    if os.path.isfile(download_target):"
+        },
+        {
+          "line": 220,
+          "text": "        with open(download_target, \"rb\") as f:"
+        },
+        {
+          "line": 221,
+          "text": "            model_bytes = f.read()"
+        },
+        {
+          "line": 222,
+          "text": "        if hashlib.sha256(model_bytes).hexdigest() == expected_sha256:"
+        },
+        {
+          "line": 223,
+          "text": "            return model_bytes if in_memory else download_target"
+        },
+        {
+          "line": 224,
+          "text": "        else:"
+        },
+        {
+          "line": 225,
+          "text": "            warnings.warn("
+        },
+        {
+          "line": 226,
+          "text": "                f\"{download_target} exists, but the SHA256 checksum does not match; re-downloading the file\""
+        },
+        {
+          "line": 227,
+          "text": "            )"
+        },
+        {
+          "line": 228,
+          "text": ""
+        },
+        {
+          "line": 229,
+          "text": "    with urllib.request.urlopen(url) as source, open(download_target, \"wb\") as output:"
+        },
+        {
+          "line": 230,
+          "text": "        with tqdm("
+        },
+        {
+          "line": 231,
+          "text": "            total=int(source.info().get(\"Content-Length\")),"
+        },
+        {
+          "line": 232,
+          "text": "            ncols=80,"
+        },
+        {
+          "line": 233,
+          "text": "            unit=\"iB\","
+        },
+        {
+          "line": 234,
+          "text": "            unit_scale=True,"
+        },
+        {
+          "line": 235,
+          "text": "            unit_divisor=1024,"
+        }
+      ]
+    },
+    {
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/revtrace_streamcorrect_20261028/ultravox_b95bec8/ultravox_model.py",
+      "bytes": 41578,
+      "sha256": "df618218561375da01bb53bd2764ea123e0cbf782f3326753f669f63ff6c6d3f",
+      "lines": [
+        {
+          "line": 420,
+          "text": "        cls, config: UltravoxConfig"
+        },
+        {
+          "line": 421,
+          "text": "    ) -> \"UltravoxProjector\":"
+        },
+        {
+          "line": 422,
+          "text": "        projector = UltravoxProjector(config)"
+        },
+        {
+          "line": 423,
+          "text": "        dtype = config.torch_dtype"
+        },
+        {
+          "line": 424,
+          "text": "        if isinstance(dtype, str):"
+        },
+        {
+          "line": 425,
+          "text": "            dtype = getattr(torch, dtype)"
+        },
+        {
+          "line": 426,
+          "text": "        projector.to(dtype)"
+        },
+        {
+          "line": 427,
+          "text": "        return projector"
+        },
+        {
+          "line": 428,
+          "text": ""
+        },
+        {
+          "line": 429,
+          "text": "    @classmethod"
+        },
+        {
+          "line": 430,
+          "text": "    def _create_audio_tower("
+        },
+        {
+          "line": 431,
+          "text": "        cls, config: UltravoxConfig"
+        },
+        {
+          "line": 432,
+          "text": "    ) -> Union[transformers.Wav2Vec2Model, \"ModifiedWhisperEncoder\"]:"
+        },
+        {
+          "line": 433,
+          "text": "        # We probably don't want to pass tp_plan or device_map to the audio tower"
+        },
+        {
+          "line": 434,
+          "text": "        # But potentially other kwargs can be passed in. TODO"
+        },
+        {
+          "line": 435,
+          "text": "        kwargs = {\"torch_dtype\": config.torch_dtype}"
+        },
+        {
+          "line": 436,
+          "text": "        if hasattr(transformers.modeling_utils, \"_init_weights\"):"
+        },
+        {
+          "line": 437,
+          "text": "            # v4 path"
+        },
+        {
+          "line": 438,
+          "text": "            is_init = transformers.modeling_utils._init_weights"
+        },
+        {
+          "line": 439,
+          "text": "        else:"
+        },
+        {
+          "line": 440,
+          "text": "            # v5 path"
+        },
+        {
+          "line": 441,
+          "text": "            _default_device = getattr(torch, \"get_default_device\", lambda: None)()"
+        },
+        {
+          "line": 442,
+          "text": "            is_init = _default_device is None or _default_device.type != \"meta\""
+        },
+        {
+          "line": 443,
+          "text": "        if is_init and config.audio_model_id is not None:"
+        },
+        {
+          "line": 444,
+          "text": "            if \"whisper\" in config.audio_model_id.lower():"
+        },
+        {
+          "line": 445,
+          "text": "                audio_tower = ModifiedWhisperEncoder.from_pretrained("
+        },
+        {
+          "line": 446,
+          "text": "                    config.audio_model_id, **kwargs"
+        },
+        {
+          "line": 447,
+          "text": "                )"
+        },
+        {
+          "line": 448,
+          "text": "                audio_tower.init_latency_mask("
+        },
+        {
+          "line": 449,
+          "text": "                    config.audio_latency_block_size, dtype=config.torch_dtype"
+        },
+        {
+          "line": 450,
+          "text": "                )"
+        },
+        {
+          "line": 451,
+          "text": "            else:"
+        },
+        {
+          "line": 452,
+          "text": "                assert config.audio_latency_block_size in ("
+        },
+        {
+          "line": 453,
+          "text": "                    None,"
+        },
+        {
+          "line": 454,
+          "text": "                    0,"
+        },
+        {
+          "line": 455,
+          "text": "                ), \"only whisper audio tower supports audio latency masking, got non-zero value for 'audio_latency_block_size'\""
+        },
+        {
+          "line": 456,
+          "text": "                audio_tower = transformers.AutoModel.from_pretrained("
+        },
+        {
+          "line": 457,
+          "text": "                    config.audio_model_id, **kwargs"
+        },
+        {
+          "line": 458,
+          "text": "                )"
+        },
+        {
+          "line": 459,
+          "text": "        else:"
+        },
+        {
+          "line": 460,
+          "text": "            with accelerate.init_empty_weights():"
+        },
+        {
+          "line": 461,
+          "text": "                if \"whisper\" in config.audio_config._name_or_path.lower():"
+        },
+        {
+          "line": 462,
+          "text": "                    audio_tower = ModifiedWhisperEncoder(config.audio_config)"
+        },
+        {
+          "line": 463,
+          "text": "                    audio_tower.init_latency_mask("
+        },
+        {
+          "line": 464,
+          "text": "                        config.audio_latency_block_size,"
+        },
+        {
+          "line": 465,
+          "text": "                        dtype=config.torch_dtype,"
+        },
+        {
+          "line": 466,
+          "text": "                    )"
+        },
+        {
+          "line": 467,
+          "text": "                else:"
+        },
+        {
+          "line": 468,
+          "text": "                    assert config.audio_latency_block_size in ("
+        },
+        {
+          "line": 469,
+          "text": "                        None,"
+        },
+        {
+          "line": 470,
+          "text": "                        0,"
+        },
+        {
+          "line": 471,
+          "text": "                    ), \"only whisper audio tower supports audio latency masking, got non-zero value for 'audio_latency_block_size'\""
+        },
+        {
+          "line": 472,
+          "text": "                    # we only ever use from_config if the weights are retrained, hence initializing is not"
+        },
+        {
+          "line": 473,
+          "text": "                    # required. This makes the model quite creation faster since init on CPU is quite slow."
+        },
+        {
+          "line": 474,
+          "text": "                    audio_tower = transformers.AutoModel.from_config("
+        },
+        {
+          "line": 475,
+          "text": "                        config.audio_config, **kwargs"
+        },
+        {
+          "line": 476,
+          "text": "                    )"
+        },
+        {
+          "line": 477,
+          "text": ""
+        },
+        {
+          "line": 478,
+          "text": "        if isinstance("
+        },
+        {
+          "line": 479,
+          "text": "            audio_tower,"
+        },
+        {
+          "line": 480,
+          "text": "            (transformers.Wav2Vec2BertModel, transformers.WhisperModel),"
+        },
+        {
+          "line": 481,
+          "text": "        ):"
+        },
+        {
+          "line": 482,
+          "text": "            # For these models we only need the encoder part"
+        },
+        {
+          "line": 483,
+          "text": "            # Wav2Vec2BertModel -> Wav2Vec2BertEncoder"
+        },
+        {
+          "line": 484,
+          "text": "            # WhisperModel -> WhisperEncoder"
+        },
+        {
+          "line": 485,
+          "text": "            audio_tower = audio_tower.encoder"
+        },
+        {
+          "line": 486,
+          "text": ""
+        },
+        {
+          "line": 487,
+          "text": "        audio_tower = apply_lora(audio_tower, config.audio_model_lora_config)"
+        },
+        {
+          "line": 488,
+          "text": "        return audio_tower"
+        },
+        {
+          "line": 489,
+          "text": ""
+        },
+        {
+          "line": 490,
+          "text": "    @classmethod"
+        },
+        {
+          "line": 491,
+          "text": "    def _create_language_model("
+        },
+        {
+          "line": 492,
+          "text": "        cls, config: UltravoxConfig"
+        },
+        {
+          "line": 493,
+          "text": "    ) -> transformers.LlamaForCausalLM:"
+        },
+        {
+          "line": 494,
+          "text": "        if hasattr(transformers.modeling_utils, \"_init_weights\"):"
+        },
+        {
+          "line": 495,
+          "text": "            # v4 path"
+        },
+        {
+          "line": 496,
+          "text": "            is_init = transformers.modeling_utils._init_weights"
+        },
+        {
+          "line": 497,
+          "text": "        else:"
+        },
+        {
+          "line": 498,
+          "text": "            # v5 path"
+        },
+        {
+          "line": 499,
+          "text": "            _default_device = getattr(torch, \"get_default_device\", lambda: None)()"
+        },
+        {
+          "line": 500,
+          "text": "            is_init = _default_device is None or _default_device.type != \"meta\""
+        },
+        {
+          "line": 501,
+          "text": "        if is_init and config.text_model_id is not None:"
+        },
+        {
+          "line": 502,
+          "text": "            language_model = transformers.AutoModelForCausalLM.from_pretrained("
+        },
+        {
+          "line": 503,
+          "text": "                config.text_model_id,"
+        },
+        {
+          "line": 504,
+          "text": "                **{"
+        },
+        {
+          "line": 505,
+          "text": "                    \"attn_implementation\": config.text_config._attn_implementation,"
+        },
+        {
+          "line": 506,
+          "text": "                    \"torch_dtype\": config.torch_dtype,"
+        },
+        {
+          "line": 507,
+          "text": "                    **FROM_PRETRAINED_KWARGS,"
+        },
+        {
+          "line": 508,
+          "text": "                },"
+        },
+        {
+          "line": 509,
+          "text": "            )"
+        },
+        {
+          "line": 510,
+          "text": "        else:"
+        },
+        {
+          "line": 511,
+          "text": "            with accelerate.init_empty_weights():"
+        },
+        {
+          "line": 512,
+          "text": "                # we only ever use from_config if the weights are retrained, hence initializing is not"
+        },
+        {
+          "line": 513,
+          "text": "                # required. This makes the model quite creation faster since init on CPU is quite slow."
+        },
+        {
+          "line": 514,
+          "text": "                language_model = transformers.AutoModelForCausalLM.from_config("
+        },
+        {
+          "line": 515,
+          "text": "                    config.text_config,"
+        },
+        {
+          "line": 516,
+          "text": "                    attn_implementation=config.text_config._attn_implementation,"
+        },
+        {
+          "line": 517,
+          "text": "                    torch_dtype=config.torch_dtype,"
+        },
+        {
+          "line": 518,
+          "text": "                )"
+        },
+        {
+          "line": 519,
+          "text": ""
+        },
+        {
+          "line": 520,
+          "text": "        language_model = apply_lora(language_model, config.text_model_lora_config)"
+        },
+        {
+          "line": 521,
+          "text": "        return language_model"
+        },
+        {
+          "line": 522,
+          "text": ""
+        },
+        {
+          "line": 523,
+          "text": "    def merge_and_unload(self):"
+        },
+        {
+          "line": 524,
+          "text": "        if isinstance(self.language_model, peft.PeftModel):"
+        },
+        {
+          "line": 525,
+          "text": "            self.language_model = self.language_model.merge_and_unload()"
+        },
+        {
+          "line": 526,
+          "text": "            # no need to download base language model weights anymore, so we can remove the id"
+        },
+        {
+          "line": 527,
+          "text": "            self.config.text_model_id = None"
+        },
+        {
+          "line": 528,
+          "text": "            self.keep_params.update("
+        },
+        {
+          "line": 529,
+          "text": "                set("
+        },
+        {
+          "line": 530,
+          "text": "                    ["
+        },
+        {
+          "line": 531,
+          "text": "                        f\"language_model.{name}\""
+        },
+        {
+          "line": 532,
+          "text": "                        for name, _ in self.language_model.named_parameters()"
+        },
+        {
+          "line": 533,
+          "text": "                    ]"
+        },
+        {
+          "line": 534,
+          "text": "                )"
+        },
+        {
+          "line": 535,
+          "text": "            )"
+        },
+        {
+          "line": 536,
+          "text": ""
+        },
+        {
+          "line": 537,
+          "text": "        if isinstance(self.audio_tower, peft.PeftModel):"
+        },
+        {
+          "line": 538,
+          "text": "            self.audio_tower = self.audio_tower.merge_and_unload()"
+        },
+        {
+          "line": 539,
+          "text": "            # no need to download base audio model weights anymore, so we can remove the id"
+        },
+        {
+          "line": 540,
+          "text": "            self.config.audio_model_id = None"
+        },
+        {
+          "line": 541,
+          "text": "            self.keep_params.update("
+        },
+        {
+          "line": 542,
+          "text": "                set("
+        },
+        {
+          "line": 543,
+          "text": "                    ["
+        },
+        {
+          "line": 544,
+          "text": "                        f\"audio_tower.{name}\""
+        },
+        {
+          "line": 545,
+          "text": "                        for name, _ in self.audio_tower.named_parameters()"
+        }
+      ]
+    }
+  ]
+}

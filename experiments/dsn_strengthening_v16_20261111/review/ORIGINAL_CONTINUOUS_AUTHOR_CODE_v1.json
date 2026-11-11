@@ -1,0 +1,351 @@
+{
+  "operation": "read-only pinned author code via SFTP; no remote execution/model/weights/results reads",
+  "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/author_StreamCorrect_bbb9f7f/simul_whisper/simul_whisper.py",
+  "sha256": "9f016f71df780c05b04719633ed302b502a457ff18a086eb5412a394b05cacb7",
+  "lines": [
+    {
+      "line": 76,
+      "text": "        "
+    },
+    {
+      "line": 77,
+      "text": "        # First Token Latency tracking"
+    },
+    {
+      "line": 78,
+      "text": "        self.first_token_generated = False"
+    },
+    {
+      "line": 79,
+      "text": "        self.first_token_latency = None"
+    },
+    {
+      "line": 80,
+      "text": "        self.is_warmup = False"
+    },
+    {
+      "line": 81,
+      "text": ""
+    },
+    {
+      "line": 231,
+      "text": "        # Reset FTL tracking for new segment"
+    },
+    {
+      "line": 232,
+      "text": "        if complete:"
+    },
+    {
+      "line": 233,
+      "text": "            self.first_token_generated = False"
+    },
+    {
+      "line": 234,
+      "text": "            self.first_token_latency = None"
+    },
+    {
+      "line": 235,
+      "text": "            self.is_warmup = False"
+    },
+    {
+      "line": 236,
+      "text": "        "
+    },
+    {
+      "line": 291,
+      "text": "    def insert_audio(self, segment=None):"
+    },
+    {
+      "line": 292,
+      "text": "        if segment is not None:"
+    },
+    {
+      "line": 293,
+      "text": "            self.segments.append(segment)"
+    },
+    {
+      "line": 294,
+      "text": ""
+    },
+    {
+      "line": 295,
+      "text": "        removed_len = 0"
+    },
+    {
+      "line": 296,
+      "text": "        # Length of audio is bigger than buffer_len. Going to remove the first segment"
+    },
+    {
+      "line": 297,
+      "text": "        segments_len = self.segments_len()"
+    },
+    {
+      "line": 298,
+      "text": "        while len(self.segments) > 1 and segments_len > self.cfg.audio_max_len:"
+    },
+    {
+      "line": 299,
+      "text": "            removed_len = self.segments[0].shape[0] / 16000"
+    },
+    {
+      "line": 300,
+      "text": "            segments_len -= removed_len"
+    },
+    {
+      "line": 301,
+      "text": "            self.last_attend_frame -= int(TOKENS_PER_SECOND * removed_len)"
+    },
+    {
+      "line": 302,
+      "text": "            self.segments = self.segments[1:]"
+    },
+    {
+      "line": 303,
+      "text": "            logger.debug(f\"remove segments: {len(self.segments)} {len(self.tokens)}\")"
+    },
+    {
+      "line": 304,
+      "text": "            if len(self.tokens) > 1:"
+    },
+    {
+      "line": 305,
+      "text": "                self.context.append_token_ids(self.tokens[1][0, :])"
+    },
+    {
+      "line": 306,
+      "text": "                self.tokens = [self.initial_tokens] + self.tokens[2:]"
+    },
+    {
+      "line": 307,
+      "text": "        return removed_len"
+    },
+    {
+      "line": 308,
+      "text": ""
+    },
+    {
+      "line": 309,
+      "text": "    def _clean_cache(self):"
+    },
+    {
+      "line": 310,
+      "text": "        \"\"\"Clean the cache that stores the attention matrices and kv_cache."
+    },
+    {
+      "line": 311,
+      "text": "        "
+    },
+    {
+      "line": 312,
+      "text": "        It must be called every time after generation with the model."
+    },
+    {
+      "line": 313,
+      "text": "        \"\"\""
+    },
+    {
+      "line": 314,
+      "text": "        self.dec_attns = []"
+    },
+    {
+      "line": 315,
+      "text": "        self.kv_cache = {}"
+    },
+    {
+      "line": 316,
+      "text": "        if self.decoder_type == \"beam\":"
+    },
+    {
+      "line": 317,
+      "text": "            self.inference.kv_cache = self.kv_cache"
+    },
+    {
+      "line": 318,
+      "text": "            self.token_decoder.reset()"
+    },
+    {
+      "line": 319,
+      "text": ""
+    },
+    {
+      "line": 320,
+      "text": "    @torch.no_grad()"
+    },
+    {
+      "line": 321,
+      "text": "    def lang_id(self, encoder_features):"
+    },
+    {
+      "line": 348,
+      "text": "            language_probs = language_probs[0]"
+    },
+    {
+      "line": 349,
+      "text": ""
+    },
+    {
+      "line": 350,
+      "text": "        self._clean_cache()"
+    },
+    {
+      "line": 351,
+      "text": "        return language_tokens, language_probs"
+    },
+    {
+      "line": 352,
+      "text": "    "
+    },
+    {
+      "line": 353,
+      "text": "    def _run_qwen_text_only_error_corrector("
+    },
+    {
+      "line": 825,
+      "text": "        corrector_type: str = \"speechlm\",  # \"speechlm\" or \"lm\""
+    },
+    {
+      "line": 826,
+      "text": "    ):"
+    },
+    {
+      "line": 827,
+      "text": "        if (not self.is_warmup and not self.first_token_generated and start_time is not None):"
+    },
+    {
+      "line": 828,
+      "text": "            print(f\"Entering infer at {time.time() - start_time:.3f} seconds\")"
+    },
+    {
+      "line": 829,
+      "text": ""
+    },
+    {
+      "line": 830,
+      "text": "        # start_time should be the time when audio processing started (before load_audio_chunk)"
+    },
+    {
+      "line": 884,
+      "text": ""
+    },
+    {
+      "line": 885,
+      "text": "        # ==================== Decoding Loop ===================="
+    },
+    {
+      "line": 886,
+      "text": "        if (not self.is_warmup and not self.first_token_generated and start_time is not None):"
+    },
+    {
+      "line": 887,
+      "text": "            print(f\"Entering decoding loop at {time.time() - start_time:.3f} seconds\")"
+    },
+    {
+      "line": 888,
+      "text": "        logger.info(\"Decoding loop starts\")"
+    },
+    {
+      "line": 889,
+      "text": "        t_before_decoding = time.time()"
+    },
+    {
+      "line": 1032,
+      "text": "            # When error corrector is used, FTL will be updated after corrector generates result"
+    },
+    {
+      "line": 1033,
+      "text": ""
+    },
+    {
+      "line": 1034,
+      "text": "            if (not self.is_warmup and not self.first_token_generated and"
+    },
+    {
+      "line": 1035,
+      "text": "                start_time is not None and current_tokens.shape[1] > token_len_before_decoding and"
+    },
+    {
+      "line": 1036,
+      "text": "                corrector_model is None):"
+    },
+    {
+      "line": 1037,
+      "text": "                self.first_token_latency = time.time() - infer_start_time"
+    },
+    {
+      "line": 1038,
+      "text": "                self.first_token_generated = True"
+    },
+    {
+      "line": 1039,
+      "text": "                generation[\"first_token_latency\"] = self.first_token_latency"
+    },
+    {
+      "line": 1040,
+      "text": ""
+    },
+    {
+      "line": 1041,
+      "text": "            # Debug print"
+    },
+    {
+      "line": 1086,
+      "text": ""
+    },
+    {
+      "line": 1087,
+      "text": "            # Update first token latency right after error corrector generates result"
+    },
+    {
+      "line": 1088,
+      "text": "            if (not self.is_warmup and not self.first_token_generated and"
+    },
+    {
+      "line": 1089,
+      "text": "                start_time is not None and corrector_result is not None):"
+    },
+    {
+      "line": 1090,
+      "text": "                self.first_token_latency = time.time() - infer_start_time - estimated_run_time"
+    },
+    {
+      "line": 1091,
+      "text": "                self.first_token_generated = True"
+    },
+    {
+      "line": 1092,
+      "text": "                generation[\"first_token_latency\"] = self.first_token_latency"
+    },
+    {
+      "line": 1093,
+      "text": ""
+    },
+    {
+      "line": 1094,
+      "text": ""
+    },
+    {
+      "line": 1134,
+      "text": ""
+    },
+    {
+      "line": 1135,
+      "text": "        logger.info(f\"Output: {self.tokenizer.decode(new_hypothesis)}\")"
+    },
+    {
+      "line": 1136,
+      "text": "        self._clean_cache()"
+    },
+    {
+      "line": 1137,
+      "text": ""
+    },
+    {
+      "line": 1138,
+      "text": "        return new_hypothesis, generation"
+    },
+    {
+      "line": 1139,
+      "text": ""
+    }
+  ]
+}
