@@ -1,0 +1,203 @@
+{
+  "record_type": "PROSPECTIVE_METADATA_SOURCE_CHOICE_NOT_GPU_RESULT",
+  "utc": "2026-11-11T10:04:29.174053+00:00",
+  "audio_read_or_downloaded": false,
+  "TRANS_transcripts_read_or_downloaded": false,
+  "model_weights_or_outputs_read": false,
+  "GPU_calls": 0,
+  "CURRENT_modified": false,
+  "old_AISHELL_bound": {
+    "catalog_sha256": "efd03c4e9ef086548d353ead2efacb826afcc6440e1c5b866faf79d8e176ccc4",
+    "catalog_speakers": 20,
+    "old_exclusions": 43,
+    "new_selected_exclusions": 8,
+    "remaining_speakers": [
+      "S0766",
+      "S0904"
+    ],
+    "remaining": [
+      {
+        "speaker_id": "S0766",
+        "estimated_6to12": 30,
+        "estimated_12to20": 0,
+        "max_estimated_seconds": 7.3789375
+      },
+      {
+        "speaker_id": "S0904",
+        "estimated_6to12": 15,
+        "estimated_12to20": 0,
+        "max_estimated_seconds": 6.8249375
+      }
+    ],
+    "fresh_complete_history_census": false,
+    "headers_verified": false
+  },
+  "choice": {
+    "corpus": "MAGICDATA Mandarin Chinese Read Speech Corpus",
+    "official_release": "OpenSLR68",
+    "split": "test only",
+    "official_page": "https://www.openslr.org/68/",
+    "metadata_url": "https://openslr.magicdatatech.com/resources/68/metadata.tar.gz",
+    "metadata_download": {
+      "requested_url": "https://openslr.magicdatatech.com/resources/68/metadata.tar.gz",
+      "final_url": "https://openslr.magicdatatech.com/resources/68/metadata.tar.gz",
+      "bytes": 3886385,
+      "sha256": "1f71e2dfea4706e76177158a6d45f2be838042af5ecc442f447f8369d40764c9",
+      "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/metadata_options_v1/magicdata_metadata.tar.gz",
+      "headers": {
+        "Content-Type": "application/x-gzip",
+        "Content-Length": "3886385",
+        "Last-Modified": "Mon, 22 Jul 2019 13:34:44 GMT",
+        "ETag": "\"3b4d31-58e4523982bd1\"",
+        "Accept-Ranges": "bytes"
+      },
+      "members": [
+        {
+          "path": "Usage_Instruction.txt",
+          "bytes": 4358,
+          "is_file": true
+        },
+        {
+          "path": "MAGICDATA_Mandarin_Chinese_Read_Speech.docx",
+          "bytes": 12784,
+          "is_file": true
+        },
+        {
+          "path": "SPKINFO.txt",
+          "bytes": 27114,
+          "is_file": true
+        },
+        {
+          "path": "dev.scp",
+          "bytes": 797061,
+          "is_file": true
+        },
+        {
+          "path": "test.scp",
+          "bytes": 1723809,
+          "is_file": true
+        },
+        {
+          "path": "train.scp",
+          "bytes": 40556505,
+          "is_file": true
+        }
+      ],
+      "content_extracted": false
+    },
+    "verified_test_speakers": 43,
+    "verified_test_utterances": 24279,
+    "speaker_IDs": [
+      "38_5715",
+      "38_5716",
+      "38_5718",
+      "38_5720",
+      "38_5721",
+      "38_5722",
+      "38_5723",
+      "38_5724",
+      "38_5725",
+      "38_5727",
+      "38_5733",
+      "38_5734",
+      "38_5735",
+      "38_5739",
+      "38_5741",
+      "38_5744",
+      "38_5751",
+      "38_5752",
+      "38_5753",
+      "38_5754",
+      "38_5771",
+      "38_5781",
+      "38_5788",
+      "38_5794",
+      "38_5798",
+      "38_5799",
+      "38_5802",
+      "38_5814",
+      "38_5836",
+      "38_5837",
+      "38_5852",
+      "38_5856",
+      "38_5858",
+      "38_5859",
+      "38_5866",
+      "38_5867",
+      "38_5870",
+      "38_5883",
+      "38_5886",
+      "38_5887",
+      "38_5888",
+      "38_5889",
+      "38_5890"
+    ],
+    "official_test_hours": 28.08,
+    "duration_fields_in_released_scp": false,
+    "N_eligible_6to20": null,
+    "N_eligible_12to20": null,
+    "sample_rate_channels_PCM_verified": false,
+    "new_experiment_history_census_complete": false,
+    "test_head": {
+      "status": 200,
+      "url": "https://openslr.magicdatatech.com/resources/68/test_set.tar.gz",
+      "method": "HEAD_ONLY_NO_AUDIO_BODY",
+      "headers": {
+        "Content-Length": "2201936013",
+        "Content-Type": "application/x-gzip",
+        "Accept-Ranges": "bytes",
+        "Last-Modified": "Mon, 22 Jul 2019 14:16:57 GMT",
+        "ETag": "\"833ee08d-58e45ba913852\""
+      }
+    },
+    "status": "GO_METADATA_HEADER_FEASIBILITY_ONLY_NOT_READY_FOR_GPU",
+    "license_page": "CC BY-NC-ND4.0 noncommercial; older Usage additionally restricts modifications/format conversion; preserve terms and original files, no invented permission"
+  },
+  "access_feasibility": {
+    "metadata_bytes": 3886385,
+    "test_archive_bytes": 2201936013,
+    "train_download_required": false,
+    "official_per_WAV_URL_or_gzip_random_index_verified": false,
+    "test_audio_body_downloaded": false
+  },
+  "fallback": "Use actual eligible N within official test under a newly frozen plan, not forced16; preserve missing long stratum; no train/dev mixing or audio trimming/concatenation/resampling. AISHELL two residual speakers can only be separately labeled short-source candidates after fresh census/header gates.",
+  "required_next_gates": [
+    "corpus-namespace complete experimental-history census",
+    "official test file/header metadata availability with original bytes and hashes",
+    "all43 speakers duration-stratum counts and technical format validation before transcript/model reads",
+    "freeze eligible IDs/fallback by metadata only",
+    "new shared execution commit/config/env/reference and8TB raw paths before model launch"
+  ],
+  "artifacts": [
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\review\\METADATA_OPTIONS_BOUND_AUDIT_v1.json",
+      "bytes": 18192,
+      "sha256": "9da5d2703d43f620bd5d779170f31a9f97b7f6c6ba7fcb036b36324c35311888"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\review\\MAGICDATA_METADATA_DOCUMENTS_v1.json",
+      "bytes": 6690,
+      "sha256": "e3943978a2766e2c880d225d3a20a0b81bf09dd2d1fbec8399588575ee0517ba"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\review\\MAGICDATA_TEST_METADATA_SCHEMA_v1.json",
+      "bytes": 2203,
+      "sha256": "175eb648051cbd444b1e855333c75b9752911c3b736bb92a6273b9c9bc239f14"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\review\\MAGICDATA_TEST_METADATA_VERIFIED_v2.json",
+      "bytes": 2692,
+      "sha256": "8083154dfa62175c655fd3dcce066cc38c2148778ee7e2fc4028afd88d824917"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\review\\MAGICDATA_TEST_HEAD_ONLY_v1.json",
+      "bytes": 369,
+      "sha256": "b402e91c78a1c85433e201a6e36c505d6c0551846de7683b732a978f44c280ba"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\review\\METADATA_SOURCE_CHOICE_v1.zh.md",
+      "bytes": 8210,
+      "sha256": "1e6589bfb81c9cddbdcc4b3b068ca8426abc2c8a332118a3e1880194fb179f7b"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "status": "PASS_FULL_JOB_BINDINGS_TERMINAL_CONSERVATION_AND_TIMER_SCOPES",
+  "cells": 16,
+  "categories": {
+    "promoted": {
+      "calls": 92,
+      "worker_reported_wall_s": 69.01652556005865,
+      "original_infer_wall_observed_s": 68.30811489373446,
+      "infer_timer_missing_calls": 0
+    },
+    "abandoned": {
+      "calls": 24,
+      "worker_reported_wall_s": 12.573525994084775,
+      "original_infer_wall_observed_s": 0,
+      "infer_timer_missing_calls": 24
+    },
+    "discarded": {
+      "calls": 2,
+      "worker_reported_wall_s": 0.9412155663594604,
+      "original_infer_wall_observed_s": 0.9255152987316251,
+      "infer_timer_missing_calls": 0
+    }
+  },
+  "promoted_overlap_bounds": {
+    "worker_before_parent_lower_s": 22.428635673597455,
+    "worker_before_parent_upper_s": 24.487471990287304,
+    "infer_before_parent_lower_s": 21.865506775677204,
+    "infer_before_parent_upper_s": 23.924343092367053,
+    "immediate_fixed_infer_restart_proxy_s": 23.77908689621836
+  },
+  "promoted_parent_receipt_inside_infer": 92,
+  "promoted_parent_install_inside_infer": 92,
+  "full_retained_to_invalid_worker_composition_ratio": 5.10675881232242,
+  "terminal_totals": {
+    "two_full_early": {
+      "installed": 136,
+      "dispatches": 136
+    },
+    "two_full_spec_early": {
+      "installed": 136,
+      "abandoned_before_C": 24,
+      "dispatches": 162,
+      "completed_discarded": 2
+    }
+  },
+  "late_discard_checkpoint_findings": [
+    {
+      "cell_id": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0908W0369_r0",
+      "source_id": "BAC009S0908W0369",
+      "repeat": 0,
+      "job_id": "j000016",
+      "parent_job_id": "j000015",
+      "before_C_checkpoint_strictly_before_asr_emission": 5030168.342780603,
+      "child_infer_begin": 5030168.060268222,
+      "child_infer_end": 5030168.522841267,
+      "parent_infer_end": 5030168.349519103,
+      "parent_terminal_received": 5030168.353311929,
+      "parent_install_receipt": 5030168.375709036,
+      "hint_observed": 5030168.379537113,
+      "parent_result_still_unfinished_at_checkpoint_upper_bound": true,
+      "minimum_parent_result_lateness_s": 0.006738499738276005,
+      "proof": {
+        "job_id": "j000016",
+        "source_id": "BAC009S0908W0369",
+        "dispatch_epoch": 0,
+        "kind": "actual_canonical_disagrees_with_complete_start",
+        "witness_frontier": 88000,
+        "expected_cut_sha": "87b7dafa9b8b53381917a595a4fe09057cf1713fcf9219b830a03057aa2a438f",
+        "actual_cut_sha": "13badcfe6b8c2972c4030906c3f6dc63992c7a4a9051f35a8a56890546874768"
+      }
+    },
+    {
+      "cell_id": "SC_FINAL_INDEPENDENT_V1_two_full_spec_early_BAC009S0908W0369_r1",
+      "source_id": "BAC009S0908W0369",
+      "repeat": 1,
+      "job_id": "j000016",
+      "parent_job_id": "j000015",
+      "before_C_checkpoint_strictly_before_asr_emission": 5029960.404425853,
+      "child_infer_begin": 5029960.125556816,
+      "child_infer_end": 5029960.58849907,
+      "parent_infer_end": 5029960.474955507,
+      "parent_terminal_received": 5029960.479305559,
+      "parent_install_receipt": 5029960.490804591,
+      "hint_observed": 5029960.495942685,
+      "parent_result_still_unfinished_at_checkpoint_upper_bound": true,
+      "minimum_parent_result_lateness_s": 0.07052965369075537,
+      "proof": {
+        "job_id": "j000016",
+        "source_id": "BAC009S0908W0369",
+        "dispatch_epoch": 0,
+        "kind": "actual_canonical_disagrees_with_complete_start",
+        "witness_frontier": 88000,
+        "expected_cut_sha": "87b7dafa9b8b53381917a595a4fe09057cf1713fcf9219b830a03057aa2a438f",
+        "actual_cut_sha": "13badcfe6b8c2972c4030906c3f6dc63992c7a4a9051f35a8a56890546874768"
+      }
+    }
+  ],
+  "scope": "Offline actual full-call composition and parent-receipt/install interval bounds; infer timers are synchronized engine.infer wall, abandoned ASR infer timers unknown; no causal delay saved or policy equivalence claim",
+  "new_model_calls": 0,
+  "CPU_controls": 6
+}

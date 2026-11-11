@@ -1,0 +1,2636 @@
+{
+  "scope": "read-only existing eight Owner-crash cells; zero model calls/signals/remote writes",
+  "utc": "2026-11-11T09:08:36.842458+00:00",
+  "host": "user",
+  "rows": [
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r0",
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r0/supervisor.jsonl",
+        "bytes": 809831,
+        "sha256": "373960b4bd1c89bd09b102357cbdc24b8f110391b76db2bc12c7d476918be958",
+        "lines": 70
+      },
+      "consumer_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r0/consumer.jsonl",
+        "bytes": 18003,
+        "sha256": "0125448de88714a825ccba762888a7dd9781c1680a9638442c38f78d099fe67f",
+        "lines": 49
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r0/power.jsonl",
+        "bytes": 167622,
+        "sha256": "f59b8d46bdba35c65ea8135d89b8f4a69aa4dd933f5bc766086c2d64b66efc8e",
+        "lines": 1075
+      },
+      "events": [
+        {
+          "line": 1,
+          "kind": "owner_started",
+          "observed": 5110877.405390139,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2238286
+        },
+        {
+          "line": 3,
+          "kind": "owner_event",
+          "observed": 5110878.078077667,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110878.077682842,
+          "event_owner_epoch": 0,
+          "event_pid": 2238376
+        },
+        {
+          "line": 4,
+          "kind": "owner_event",
+          "observed": 5110878.094249927,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110878.079276964,
+          "event_owner_epoch": 0,
+          "event_pid": 2238379
+        },
+        {
+          "line": 5,
+          "kind": "owner_event",
+          "observed": 5110958.028680624,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5110958.026020846,
+          "event_owner_epoch": 0,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 0
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 0,
+              "pid": 2238376,
+              "sent_perf": 5110957.978099025,
+              "model_load_seconds": 71.52436066698283,
+              "full_load_warmup_seconds": 75.81834158021957
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 1,
+              "pid": 2238379,
+              "sent_perf": 5110957.982556928,
+              "model_load_seconds": 71.53289251681417,
+              "full_load_warmup_seconds": 75.82265135087073
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 4.290225362405181,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 4.285904279910028,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 17,
+          "kind": "fault_triggered",
+          "observed": 5110960.920968113,
+          "owner_epoch": 0,
+          "site": "after_durable_before_install_and_consume",
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 18,
+          "kind": "owner_group_death_confirmed",
+          "observed": 5110962.372503307,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 19,
+          "kind": "durable_fact_replayed",
+          "observed": 5110962.411902678,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "consumer_observed": 5110962.404851409
+        },
+        {
+          "line": 20,
+          "kind": "recovery_durable_prefix_ready",
+          "observed": 5110962.419349152,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "newly_applied_facts": 1
+        },
+        {
+          "line": 22,
+          "kind": "owner_started",
+          "observed": 5110962.44995572,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2239759
+        },
+        {
+          "line": 25,
+          "kind": "owner_event",
+          "observed": 5110964.579946531,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110964.579740518,
+          "event_owner_epoch": 1,
+          "event_pid": 2239850
+        },
+        {
+          "line": 26,
+          "kind": "owner_event",
+          "observed": 5110964.585385767,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110964.581646485,
+          "event_owner_epoch": 1,
+          "event_pid": 2239853
+        },
+        {
+          "line": 27,
+          "kind": "owner_event",
+          "observed": 5111047.298756049,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5111047.296720231,
+          "event_owner_epoch": 1,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 32000
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 0,
+              "pid": 2239850,
+              "sent_perf": 5111047.267987053,
+              "model_load_seconds": 73.4948286851868,
+              "full_load_warmup_seconds": 78.57424057461321
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 1,
+              "pid": 2239853,
+              "sent_perf": 5111047.293246833,
+              "model_load_seconds": 73.49404951464385,
+              "full_load_warmup_seconds": 78.59924831986427
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 5.075893059372902,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 5.101926859468222,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 28,
+          "kind": "recovered_owner_neural_ready",
+          "observed": 5111047.318785206,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "recovered_frontiers": {
+            "BAC009S0908W0369": 32000
+          }
+        }
+      ],
+      "original_metrics": {
+        "energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 13142.36942745265,
+              "1": 11057.73376855787
+            },
+            "total_joules": 24200.103196010517
+          },
+          "origin_perf": 5110958.053219257,
+          "service_end_perf": 5111063.325194676,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        },
+        "recovery": {
+          "observed_fault_records": 1,
+          "events": [
+            {
+              "fault_kind": "after_durable_before_install_and_consume",
+              "fault_perf": 5110960.920968113,
+              "physical_death_confirmed_perf": 5110962.372503307,
+              "replacement_ready_perf": 5111047.296720231,
+              "first_actual_old_fact_replay_perf": 5110962.404851409,
+              "first_new_durable_fact_actual_consume_perf": 5111047.975137567,
+              "first_new_model_completed_after_fault_and_certified_consume_perf": 5111047.975137567,
+              "accepted_before_fault_samples": {
+                "BAC009S0908W0369": 40000
+              },
+              "pre_fault_durable_sequence": 5,
+              "uncertified_debt_before_fault_samples": {
+                "BAC009S0908W0369": 8000
+              },
+              "debt_clear_actual_certified_consume_perf": 5111047.975137567,
+              "fault_to_death": 1.4515351941809058,
+              "fault_to_replacement_ready": 86.37575211841613,
+              "fault_to_old_fact_replay": 1.4838832961395383,
+              "fault_to_new_durable_fact": 87.05416945461184,
+              "fault_to_new_certified_result": 87.05416945461184,
+              "fault_to_debt_clear": 87.05416945461184,
+              "pre_fault_view_availability": {
+                "BAC009S0908W0369": {
+                  "pre_fault_visible_frontier": 32000,
+                  "observed_deficit_seconds": 0.0,
+                  "longest_observed_deficit_seconds": 0.0,
+                  "scope": "Below pre-fault visible frontier; necessary selected revisions are not automatically attributed to failure."
+                }
+              },
+              "scope": "Old durable replay is not new inference. New durable fact and actual model completion after fault are separate clocks. Debt target is accepted before fault, not all future offered audio."
+            }
+          ],
+          "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+        }
+      },
+      "first_new_consumer_fact": [
+        12,
+        {
+          "observed": 5111047.975137567,
+          "kind": "canonical",
+          "owner_epoch": 1,
+          "recovery_replay": false,
+          "transition_id": "22959587c9b0d688b989d0ccfd4a073236751809df4163431e1aeb6b7a52ecd7",
+          "journal_sequence": 6,
+          "certified_frontier": 40000,
+          "visible_frontier": 40000
+        }
+      ],
+      "power_schema": [
+        [
+          1,
+          {
+            "time": 5110877.334922455,
+            "watts": {
+              "0": 34.79,
+              "1": 114.17
+            },
+            "gpu_memory_MiB": {
+              "0": 24.0,
+              "1": 24.0
+            },
+            "utilization_percent": {
+              "0": 0.0,
+              "1": 0.0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r1",
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r1/supervisor.jsonl",
+        "bytes": 809880,
+        "sha256": "3081f3a95a0e953b8295235ef7f74367f0ad7d37db36c202eb1bdca58dae39af",
+        "lines": 70
+      },
+      "consumer_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r1/consumer.jsonl",
+        "bytes": 18001,
+        "sha256": "922342b0ccee9a4cc1ad904b1a9be6a85d41d3c35a197e5c52db714ca6aac9f6",
+        "lines": 49
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r1/power.jsonl",
+        "bytes": 183522,
+        "sha256": "925909ed780ed9b42babf92e3a66c7aa7458a06fb9d11a425aad499e499ec704",
+        "lines": 1178
+      },
+      "events": [
+        {
+          "line": 1,
+          "kind": "owner_started",
+          "observed": 5110208.355711974,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2226975
+        },
+        {
+          "line": 3,
+          "kind": "owner_event",
+          "observed": 5110209.103066024,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110209.102898811,
+          "event_owner_epoch": 0,
+          "event_pid": 2227056
+        },
+        {
+          "line": 4,
+          "kind": "owner_event",
+          "observed": 5110209.111731606,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110209.104419447,
+          "event_owner_epoch": 0,
+          "event_pid": 2227059
+        },
+        {
+          "line": 5,
+          "kind": "owner_event",
+          "observed": 5110309.072980843,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5110309.070310808,
+          "event_owner_epoch": 0,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 0
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 1,
+              "pid": 2227056,
+              "sent_perf": 5110309.039974883,
+              "model_load_seconds": 88.36817769706249,
+              "full_load_warmup_seconds": 94.47441951278597
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 0,
+              "pid": 2227059,
+              "sent_perf": 5110309.039996273,
+              "model_load_seconds": 88.36962253041565,
+              "full_load_warmup_seconds": 94.47243572026491
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 6.093879790045321,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 6.088736733421683,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 17,
+          "kind": "fault_triggered",
+          "observed": 5110312.055595051,
+          "owner_epoch": 0,
+          "site": "after_durable_before_install_and_consume",
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 18,
+          "kind": "owner_group_death_confirmed",
+          "observed": 5110313.371022421,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 19,
+          "kind": "durable_fact_replayed",
+          "observed": 5110313.445436959,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "consumer_observed": 5110313.41243954
+        },
+        {
+          "line": 20,
+          "kind": "recovery_durable_prefix_ready",
+          "observed": 5110313.450769957,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "newly_applied_facts": 1
+        },
+        {
+          "line": 22,
+          "kind": "owner_started",
+          "observed": 5110313.476257942,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2228746
+        },
+        {
+          "line": 25,
+          "kind": "owner_event",
+          "observed": 5110315.238820379,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110315.238638466,
+          "event_owner_epoch": 1,
+          "event_pid": 2228869
+        },
+        {
+          "line": 26,
+          "kind": "owner_event",
+          "observed": 5110315.299199522,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110315.239938848,
+          "event_owner_epoch": 1,
+          "event_pid": 2228872
+        },
+        {
+          "line": 27,
+          "kind": "owner_event",
+          "observed": 5110395.260235507,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5110395.25856419,
+          "event_owner_epoch": 1,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 32000
+          },
+          "workers": {
+            "full1": {
+              "worker": "full1",
+              "gpu": 0,
+              "pid": 2228872,
+              "sent_perf": 5110395.253331615,
+              "model_load_seconds": 69.85791892930865,
+              "full_load_warmup_seconds": 75.98532023373991
+            },
+            "full0": {
+              "worker": "full0",
+              "gpu": 1,
+              "pid": 2228869,
+              "sent_perf": 5110395.253720262,
+              "model_load_seconds": 69.85911708790809,
+              "full_load_warmup_seconds": 75.98788830637932
+            }
+          },
+          "warmup": {
+            "full1": {
+              "seconds": 6.121745745651424,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full0": {
+              "seconds": 6.124348376877606,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 28,
+          "kind": "recovered_owner_neural_ready",
+          "observed": 5110395.28531549,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "recovered_frontiers": {
+            "BAC009S0908W0369": 32000
+          }
+        }
+      ],
+      "original_metrics": {
+        "energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 10704.427803240711,
+              "1": 11710.55964238787
+            },
+            "total_joules": 22414.987445628583
+          },
+          "origin_perf": 5110309.118182626,
+          "service_end_perf": 5110411.294993414,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        },
+        "recovery": {
+          "observed_fault_records": 1,
+          "events": [
+            {
+              "fault_kind": "after_durable_before_install_and_consume",
+              "fault_perf": 5110312.055595051,
+              "physical_death_confirmed_perf": 5110313.371022421,
+              "replacement_ready_perf": 5110395.25856419,
+              "first_actual_old_fact_replay_perf": 5110313.41243954,
+              "first_new_durable_fact_actual_consume_perf": 5110395.953979195,
+              "first_new_model_completed_after_fault_and_certified_consume_perf": 5110395.953979195,
+              "accepted_before_fault_samples": {
+                "BAC009S0908W0369": 40000
+              },
+              "pre_fault_durable_sequence": 5,
+              "uncertified_debt_before_fault_samples": {
+                "BAC009S0908W0369": 8000
+              },
+              "debt_clear_actual_certified_consume_perf": 5110395.953979195,
+              "fault_to_death": 1.3154273703694344,
+              "fault_to_replacement_ready": 83.20296913944185,
+              "fault_to_old_fact_replay": 1.3568444894626737,
+              "fault_to_new_durable_fact": 83.8983841445297,
+              "fault_to_new_certified_result": 83.8983841445297,
+              "fault_to_debt_clear": 83.8983841445297,
+              "pre_fault_view_availability": {
+                "BAC009S0908W0369": {
+                  "pre_fault_visible_frontier": 32000,
+                  "observed_deficit_seconds": 0.0,
+                  "longest_observed_deficit_seconds": 0.0,
+                  "scope": "Below pre-fault visible frontier; necessary selected revisions are not automatically attributed to failure."
+                }
+              },
+              "scope": "Old durable replay is not new inference. New durable fact and actual model completion after fault are separate clocks. Debt target is accepted before fault, not all future offered audio."
+            }
+          ],
+          "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+        }
+      },
+      "first_new_consumer_fact": [
+        12,
+        {
+          "observed": 5110395.953979195,
+          "kind": "canonical",
+          "owner_epoch": 1,
+          "recovery_replay": false,
+          "transition_id": "22959587c9b0d688b989d0ccfd4a073236751809df4163431e1aeb6b7a52ecd7",
+          "journal_sequence": 6,
+          "certified_frontier": 40000,
+          "visible_frontier": 40000
+        }
+      ],
+      "power_schema": [
+        [
+          1,
+          {
+            "time": 5110208.305309219,
+            "watts": {
+              "0": 140.79,
+              "1": 32.64
+            },
+            "gpu_memory_MiB": {
+              "0": 24.0,
+              "1": 24.0
+            },
+            "utilization_percent": {
+              "0": 0.0,
+              "1": 0.0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0",
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/supervisor.jsonl",
+        "bytes": 861323,
+        "sha256": "54c3bd041b8a7cd6da2b67b8dc3326814111e636a68436512ce2b10413ca0af8",
+        "lines": 71
+      },
+      "consumer_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/consumer.jsonl",
+        "bytes": 18347,
+        "sha256": "bc982c5e7f5c99529cfb22f38b62a9257b412fdacd62a2ce38b8e22e471d31ee",
+        "lines": 50
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/power.jsonl",
+        "bytes": 195412,
+        "sha256": "de65086a6e781a29f42d0007cfa69269ceed2af5a2e9da85c66f69df03b2ea42",
+        "lines": 1255
+      },
+      "events": [
+        {
+          "line": 1,
+          "kind": "owner_started",
+          "observed": 5111065.031766908,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2241526
+        },
+        {
+          "line": 3,
+          "kind": "owner_event",
+          "observed": 5111065.682931818,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111065.682771826,
+          "event_owner_epoch": 0,
+          "event_pid": 2241599
+        },
+        {
+          "line": 4,
+          "kind": "owner_event",
+          "observed": 5111065.693378352,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111065.684837804,
+          "event_owner_epoch": 0,
+          "event_pid": 2241602
+        },
+        {
+          "line": 5,
+          "kind": "owner_event",
+          "observed": 5111159.39613278,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5111159.389828581,
+          "event_owner_epoch": 0,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 0
+          },
+          "workers": {
+            "full1": {
+              "worker": "full1",
+              "gpu": 1,
+              "pid": 2241602,
+              "sent_perf": 5111159.345705382,
+              "model_load_seconds": 84.11943915393203,
+              "full_load_warmup_seconds": 89.08252553921193
+            },
+            "full0": {
+              "worker": "full0",
+              "gpu": 0,
+              "pid": 2241599,
+              "sent_perf": 5111159.353253099,
+              "model_load_seconds": 84.11603049468249,
+              "full_load_warmup_seconds": 89.09050990082324
+            }
+          },
+          "warmup": {
+            "full1": {
+              "seconds": 4.959637718275189,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full0": {
+              "seconds": 4.971199106425047,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 17,
+          "kind": "fault_triggered",
+          "observed": 5111162.122031907,
+          "owner_epoch": 0,
+          "site": "after_durable_before_install_and_consume",
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 18,
+          "kind": "owner_group_death_confirmed",
+          "observed": 5111163.903980803,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 19,
+          "kind": "durable_fact_replayed",
+          "observed": 5111163.945741561,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "consumer_observed": 5111163.932069759
+        },
+        {
+          "line": 20,
+          "kind": "recovery_durable_prefix_ready",
+          "observed": 5111163.960644252,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "newly_applied_facts": 1
+        },
+        {
+          "line": 22,
+          "kind": "owner_started",
+          "observed": 5111164.021018996,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2243201
+        },
+        {
+          "line": 25,
+          "kind": "owner_event",
+          "observed": 5111165.412194889,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111165.411834553,
+          "event_owner_epoch": 1,
+          "event_pid": 2243282
+        },
+        {
+          "line": 26,
+          "kind": "owner_event",
+          "observed": 5111165.433101614,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111165.413327979,
+          "event_owner_epoch": 1,
+          "event_pid": 2243285
+        },
+        {
+          "line": 27,
+          "kind": "owner_event",
+          "observed": 5111265.82297849,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5111265.820801243,
+          "event_owner_epoch": 1,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 32000
+          },
+          "workers": {
+            "full1": {
+              "worker": "full1",
+              "gpu": 1,
+              "pid": 2243285,
+              "sent_perf": 5111265.77789397,
+              "model_load_seconds": 87.70763184409589,
+              "full_load_warmup_seconds": 94.89699785970151
+            },
+            "full0": {
+              "worker": "full0",
+              "gpu": 0,
+              "pid": 2243282,
+              "sent_perf": 5111265.817453753,
+              "model_load_seconds": 87.7066898709163,
+              "full_load_warmup_seconds": 94.93678400106728
+            }
+          },
+          "warmup": {
+            "full1": {
+              "seconds": 7.141027365811169,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full0": {
+              "seconds": 7.17941171489656,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 28,
+          "kind": "recovered_owner_neural_ready",
+          "observed": 5111265.845993802,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "recovered_frontiers": {
+            "BAC009S0908W0369": 32000
+          }
+        }
+      ],
+      "original_metrics": {
+        "energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 14047.781480889056,
+              "1": 13123.355762963012
+            },
+            "total_joules": 27171.13724385207
+          },
+          "origin_perf": 5111159.437568754,
+          "service_end_perf": 5111282.510328236,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        },
+        "recovery": {
+          "observed_fault_records": 1,
+          "events": [
+            {
+              "fault_kind": "after_durable_before_install_and_consume",
+              "fault_perf": 5111162.122031907,
+              "physical_death_confirmed_perf": 5111163.903980803,
+              "replacement_ready_perf": 5111265.820801243,
+              "first_actual_old_fact_replay_perf": 5111163.932069759,
+              "first_new_durable_fact_actual_consume_perf": 5111266.561054854,
+              "first_new_model_completed_after_fault_and_certified_consume_perf": 5111266.561054854,
+              "accepted_before_fault_samples": {
+                "BAC009S0908W0369": 40000
+              },
+              "pre_fault_durable_sequence": 5,
+              "uncertified_debt_before_fault_samples": {
+                "BAC009S0908W0369": 8000
+              },
+              "debt_clear_actual_certified_consume_perf": 5111266.561054854,
+              "fault_to_death": 1.781948896124959,
+              "fault_to_replacement_ready": 103.69876933656633,
+              "fault_to_old_fact_replay": 1.8100378522649407,
+              "fault_to_new_durable_fact": 104.43902294710279,
+              "fault_to_new_certified_result": 104.43902294710279,
+              "fault_to_debt_clear": 104.43902294710279,
+              "pre_fault_view_availability": {
+                "BAC009S0908W0369": {
+                  "pre_fault_visible_frontier": 32000,
+                  "observed_deficit_seconds": 0.0,
+                  "longest_observed_deficit_seconds": 0.0,
+                  "scope": "Below pre-fault visible frontier; necessary selected revisions are not automatically attributed to failure."
+                }
+              },
+              "scope": "Old durable replay is not new inference. New durable fact and actual model completion after fault are separate clocks. Debt target is accepted before fault, not all future offered audio."
+            }
+          ],
+          "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+        }
+      },
+      "first_new_consumer_fact": [
+        12,
+        {
+          "observed": 5111266.561054854,
+          "kind": "canonical",
+          "owner_epoch": 1,
+          "recovery_replay": false,
+          "transition_id": "22959587c9b0d688b989d0ccfd4a073236751809df4163431e1aeb6b7a52ecd7",
+          "journal_sequence": 6,
+          "certified_frontier": 40000,
+          "visible_frontier": 40000
+        }
+      ],
+      "power_schema": [
+        [
+          1,
+          {
+            "time": 5111064.9836484585,
+            "watts": {
+              "0": 35.34,
+              "1": 133.73
+            },
+            "gpu_memory_MiB": {
+              "0": 24.0,
+              "1": 24.0
+            },
+            "utilization_percent": {
+              "0": 0.0,
+              "1": 0.0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1",
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/supervisor.jsonl",
+        "bytes": 861430,
+        "sha256": "302790cd01709af1774e4038ecaed6c3899097e9138a8646c753a8f3e4e519d7",
+        "lines": 71
+      },
+      "consumer_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/consumer.jsonl",
+        "bytes": 18348,
+        "sha256": "1b4622288255ac00cd91521908bbd55f4f480447354285788205c4a99dab5dba",
+        "lines": 50
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/power.jsonl",
+        "bytes": 201008,
+        "sha256": "521b029f1385307585ea3cabf5017a54d2be1863e3970468a03b5154ad51b86b",
+        "lines": 1291
+      },
+      "events": [
+        {
+          "line": 1,
+          "kind": "owner_started",
+          "observed": 5109983.568410429,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2223222
+        },
+        {
+          "line": 3,
+          "kind": "owner_event",
+          "observed": 5109984.324884006,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5109984.324701343,
+          "event_owner_epoch": 0,
+          "event_pid": 2223295
+        },
+        {
+          "line": 4,
+          "kind": "owner_event",
+          "observed": 5109984.330756643,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5109984.326136611,
+          "event_owner_epoch": 0,
+          "event_pid": 2223298
+        },
+        {
+          "line": 5,
+          "kind": "owner_event",
+          "observed": 5110087.622849824,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5110087.620655933,
+          "event_owner_epoch": 0,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 0
+          },
+          "workers": {
+            "full1": {
+              "worker": "full1",
+              "gpu": 0,
+              "pid": 2223298,
+              "sent_perf": 5110087.587146687,
+              "model_load_seconds": 90.74216611217707,
+              "full_load_warmup_seconds": 96.9461804293096
+            },
+            "full0": {
+              "worker": "full0",
+              "gpu": 1,
+              "pid": 2223295,
+              "sent_perf": 5110087.590009521,
+              "model_load_seconds": 90.73915868531913,
+              "full_load_warmup_seconds": 96.94042758177966
+            }
+          },
+          "warmup": {
+            "full1": {
+              "seconds": 6.187404994852841,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full0": {
+              "seconds": 6.182112756185234,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 17,
+          "kind": "fault_triggered",
+          "observed": 5110090.301148539,
+          "owner_epoch": 0,
+          "site": "after_durable_before_install_and_consume",
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 18,
+          "kind": "owner_group_death_confirmed",
+          "observed": 5110091.954575534,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 19,
+          "kind": "durable_fact_replayed",
+          "observed": 5110092.00385042,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "consumer_observed": 5110091.993820854
+        },
+        {
+          "line": 20,
+          "kind": "recovery_durable_prefix_ready",
+          "observed": 5110092.008179672,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "newly_applied_facts": 1
+        },
+        {
+          "line": 22,
+          "kind": "owner_started",
+          "observed": 5110092.031537736,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2225028
+        },
+        {
+          "line": 25,
+          "kind": "owner_event",
+          "observed": 5110093.690548043,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110093.69041075,
+          "event_owner_epoch": 1,
+          "event_pid": 2225114
+        },
+        {
+          "line": 26,
+          "kind": "owner_event",
+          "observed": 5110093.718214098,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110093.691737315,
+          "event_owner_epoch": 1,
+          "event_pid": 2225117
+        },
+        {
+          "line": 27,
+          "kind": "owner_event",
+          "observed": 5110191.407580851,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5110191.406500352,
+          "event_owner_epoch": 1,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 32000
+          },
+          "workers": {
+            "full1": {
+              "worker": "full1",
+              "gpu": 0,
+              "pid": 2225117,
+              "sent_perf": 5110191.400426666,
+              "model_load_seconds": 87.05056818574667,
+              "full_load_warmup_seconds": 93.20949309878051
+            },
+            "full0": {
+              "worker": "full0",
+              "gpu": 1,
+              "pid": 2225114,
+              "sent_perf": 5110191.403464149,
+              "model_load_seconds": 87.0507170688361,
+              "full_load_warmup_seconds": 93.22784668300301
+            }
+          },
+          "warmup": {
+            "full1": {
+              "seconds": 6.143588102422655,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full0": {
+              "seconds": 6.161525819450617,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 28,
+          "kind": "recovered_owner_neural_ready",
+          "observed": 5110191.436300778,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "recovered_frontiers": {
+            "BAC009S0908W0369": 32000
+          }
+        }
+      ],
+      "original_metrics": {
+        "energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 13418.132616727356,
+              "1": 13064.54755491929
+            },
+            "total_joules": 26482.680171646647
+          },
+          "origin_perf": 5110087.648141696,
+          "service_end_perf": 5110206.318392245,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        },
+        "recovery": {
+          "observed_fault_records": 1,
+          "events": [
+            {
+              "fault_kind": "after_durable_before_install_and_consume",
+              "fault_perf": 5110090.301148539,
+              "physical_death_confirmed_perf": 5110091.954575534,
+              "replacement_ready_perf": 5110191.406500352,
+              "first_actual_old_fact_replay_perf": 5110091.993820854,
+              "first_new_durable_fact_actual_consume_perf": 5110192.105945902,
+              "first_new_model_completed_after_fault_and_certified_consume_perf": 5110192.105945902,
+              "accepted_before_fault_samples": {
+                "BAC009S0908W0369": 40000
+              },
+              "pre_fault_durable_sequence": 5,
+              "uncertified_debt_before_fault_samples": {
+                "BAC009S0908W0369": 8000
+              },
+              "debt_clear_actual_certified_consume_perf": 5110192.105945902,
+              "fault_to_death": 1.6534269945695996,
+              "fault_to_replacement_ready": 101.10535181220621,
+              "fault_to_old_fact_replay": 1.6926723150536418,
+              "fault_to_new_durable_fact": 101.80479736253619,
+              "fault_to_new_certified_result": 101.80479736253619,
+              "fault_to_debt_clear": 101.80479736253619,
+              "pre_fault_view_availability": {
+                "BAC009S0908W0369": {
+                  "pre_fault_visible_frontier": 32000,
+                  "observed_deficit_seconds": 0.0,
+                  "longest_observed_deficit_seconds": 0.0,
+                  "scope": "Below pre-fault visible frontier; necessary selected revisions are not automatically attributed to failure."
+                }
+              },
+              "scope": "Old durable replay is not new inference. New durable fact and actual model completion after fault are separate clocks. Debt target is accepted before fault, not all future offered audio."
+            }
+          ],
+          "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+        }
+      },
+      "first_new_consumer_fact": [
+        12,
+        {
+          "observed": 5110192.105945902,
+          "kind": "canonical",
+          "owner_epoch": 1,
+          "recovery_replay": false,
+          "transition_id": "22959587c9b0d688b989d0ccfd4a073236751809df4163431e1aeb6b7a52ecd7",
+          "journal_sequence": 6,
+          "certified_frontier": 40000,
+          "visible_frontier": 40000
+        }
+      ],
+      "power_schema": [
+        [
+          1,
+          {
+            "time": 5109983.497111402,
+            "watts": {
+              "0": 35.05,
+              "1": 133.62
+            },
+            "gpu_memory_MiB": {
+              "0": 24.0,
+              "1": 24.0
+            },
+            "utilization_percent": {
+              "0": 0.0,
+              "1": 0.0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r0",
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r0/supervisor.jsonl",
+        "bytes": 844353,
+        "sha256": "3fca307b1ba5b62b3e23bc5915e672468e4da121e54c17b1d3056639a7f6ceb1",
+        "lines": 72
+      },
+      "consumer_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r0/consumer.jsonl",
+        "bytes": 18622,
+        "sha256": "a4b0106e1d02f34c964744aee132fddaf3613d0d69ff83adb7b6bac29caa0ca8",
+        "lines": 51
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r0/power.jsonl",
+        "bytes": 215366,
+        "sha256": "a1bb6a2d29d5f21ed4ceec7cb701178ac529211ee8ae52fac7ac461a72ad620e",
+        "lines": 1383
+      },
+      "events": [
+        {
+          "line": 1,
+          "kind": "owner_started",
+          "observed": 5110413.433278962,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2230439
+        },
+        {
+          "line": 3,
+          "kind": "owner_event",
+          "observed": 5110414.225587539,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110414.225343395,
+          "event_owner_epoch": 0,
+          "event_pid": 2230515
+        },
+        {
+          "line": 4,
+          "kind": "owner_event",
+          "observed": 5110414.262253564,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110414.227262045,
+          "event_owner_epoch": 0,
+          "event_pid": 2230518
+        },
+        {
+          "line": 5,
+          "kind": "owner_event",
+          "observed": 5110522.948794741,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5110522.94612618,
+          "event_owner_epoch": 0,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 0
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 0,
+              "pid": 2230515,
+              "sent_perf": 5110522.911607329,
+              "model_load_seconds": 95.51385073084384,
+              "full_load_warmup_seconds": 102.83152459654957
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 1,
+              "pid": 2230518,
+              "sent_perf": 5110522.913536849,
+              "model_load_seconds": 95.51928463764489,
+              "full_load_warmup_seconds": 102.83702488522977
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 7.288945682346821,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 7.28924759849906,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 17,
+          "kind": "fault_triggered",
+          "observed": 5110525.869242586,
+          "owner_epoch": 0,
+          "site": "after_original_C_before_durable",
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 18,
+          "kind": "owner_group_death_confirmed",
+          "observed": 5110527.579869432,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 19,
+          "kind": "recovery_durable_prefix_ready",
+          "observed": 5110527.601566746,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "newly_applied_facts": 0
+        },
+        {
+          "line": 21,
+          "kind": "owner_started",
+          "observed": 5110527.629609337,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2232439
+        },
+        {
+          "line": 24,
+          "kind": "owner_event",
+          "observed": 5110529.42421775,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110529.424017296,
+          "event_owner_epoch": 1,
+          "event_pid": 2232527
+        },
+        {
+          "line": 25,
+          "kind": "owner_event",
+          "observed": 5110529.447466467,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110529.426046038,
+          "event_owner_epoch": 1,
+          "event_pid": 2232530
+        },
+        {
+          "line": 26,
+          "kind": "owner_event",
+          "observed": 5110633.240432725,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5110633.237694674,
+          "event_owner_epoch": 1,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 24000
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 0,
+              "pid": 2232527,
+              "sent_perf": 5110633.223645354,
+              "model_load_seconds": 90.71604969445616,
+              "full_load_warmup_seconds": 97.69728658813983
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 1,
+              "pid": 2232530,
+              "sent_perf": 5110633.224340184,
+              "model_load_seconds": 90.71643695048988,
+              "full_load_warmup_seconds": 97.69633899349719
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 6.9634261867031455,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 6.962458281777799,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 27,
+          "kind": "recovered_owner_neural_ready",
+          "observed": 5110633.259413888,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "recovered_frontiers": {
+            "BAC009S0908W0369": 24000
+          }
+        }
+      ],
+      "original_metrics": {
+        "energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 15405.0147922767,
+              "1": 12614.211233796545
+            },
+            "total_joules": 28019.226026073244
+          },
+          "origin_perf": 5110522.972979404,
+          "service_end_perf": 5110653.062251657,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        },
+        "recovery": {
+          "observed_fault_records": 1,
+          "events": [
+            {
+              "fault_kind": "after_original_C_before_durable",
+              "fault_perf": 5110525.869242586,
+              "physical_death_confirmed_perf": 5110527.579869432,
+              "replacement_ready_perf": 5110633.237694674,
+              "first_actual_old_fact_replay_perf": null,
+              "first_new_durable_fact_actual_consume_perf": 5110633.94977246,
+              "first_new_model_completed_after_fault_and_certified_consume_perf": 5110633.94977246,
+              "accepted_before_fault_samples": {
+                "BAC009S0908W0369": 40000
+              },
+              "pre_fault_durable_sequence": 4,
+              "uncertified_debt_before_fault_samples": {
+                "BAC009S0908W0369": 16000
+              },
+              "debt_clear_actual_certified_consume_perf": 5110634.614570489,
+              "fault_to_death": 1.7106268461793661,
+              "fault_to_replacement_ready": 107.36845208797604,
+              "fault_to_old_fact_replay": null,
+              "fault_to_new_durable_fact": 108.08052987419069,
+              "fault_to_new_certified_result": 108.08052987419069,
+              "fault_to_debt_clear": 108.7453279029578,
+              "pre_fault_view_availability": {
+                "BAC009S0908W0369": {
+                  "pre_fault_visible_frontier": 32000,
+                  "observed_deficit_seconds": 0.0,
+                  "longest_observed_deficit_seconds": 0.0,
+                  "scope": "Below pre-fault visible frontier; necessary selected revisions are not automatically attributed to failure."
+                }
+              },
+              "scope": "Old durable replay is not new inference. New durable fact and actual model completion after fault are separate clocks. Debt target is accepted before fault, not all future offered audio."
+            }
+          ],
+          "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+        }
+      },
+      "first_new_consumer_fact": [
+        11,
+        {
+          "observed": 5110633.94977246,
+          "kind": "canonical",
+          "owner_epoch": 1,
+          "recovery_replay": false,
+          "transition_id": "e9dc6fb4258853b0a4c26e1d6d64ff5910fe5dcb24d2c29c96cfadab921a4171",
+          "journal_sequence": 5,
+          "certified_frontier": 32000,
+          "visible_frontier": 32000
+        }
+      ],
+      "power_schema": [
+        [
+          1,
+          {
+            "time": 5110413.362500347,
+            "watts": {
+              "0": 138.95,
+              "1": 27.41
+            },
+            "gpu_memory_MiB": {
+              "0": 24.0,
+              "1": 24.0
+            },
+            "utilization_percent": {
+              "0": 0.0,
+              "1": 0.0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r1",
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r1/supervisor.jsonl",
+        "bytes": 844403,
+        "sha256": "701eb3ae87861d1351b1c247d396bde0e7e0e883dcf59e0268e09cb8bb236e77",
+        "lines": 72
+      },
+      "consumer_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r1/consumer.jsonl",
+        "bytes": 18624,
+        "sha256": "48288f28cf2e5e344253ac20c20b7cf99638406988ccdd711d9e789bf3d6d0de",
+        "lines": 51
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r1/power.jsonl",
+        "bytes": 152926,
+        "sha256": "e4a49306ec0524305713131386e6f61ecb1bd1f6e67549ebdc8a171388d90675",
+        "lines": 978
+      },
+      "events": [
+        {
+          "line": 1,
+          "kind": "owner_started",
+          "observed": 5111849.114821511,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2254849
+        },
+        {
+          "line": 3,
+          "kind": "owner_event",
+          "observed": 5111849.380739381,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111849.38056268,
+          "event_owner_epoch": 0,
+          "event_pid": 2254916
+        },
+        {
+          "line": 4,
+          "kind": "owner_event",
+          "observed": 5111849.409051807,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111849.40510792,
+          "event_owner_epoch": 0,
+          "event_pid": 2254920
+        },
+        {
+          "line": 5,
+          "kind": "owner_event",
+          "observed": 5111911.188588699,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5111911.177993586,
+          "event_owner_epoch": 0,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 0
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 1,
+              "pid": 2254916,
+              "sent_perf": 5111911.149676684,
+              "model_load_seconds": 55.022695261985064,
+              "full_load_warmup_seconds": 59.76491013355553
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 0,
+              "pid": 2254920,
+              "sent_perf": 5111911.1528258,
+              "model_load_seconds": 54.83662809897214,
+              "full_load_warmup_seconds": 59.79166348557919
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 4.7385758040472865,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 4.951691450551152,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 17,
+          "kind": "fault_triggered",
+          "observed": 5111914.071400473,
+          "owner_epoch": 0,
+          "site": "after_original_C_before_durable",
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 18,
+          "kind": "owner_group_death_confirmed",
+          "observed": 5111915.777431632,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 19,
+          "kind": "recovery_durable_prefix_ready",
+          "observed": 5111915.804940961,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "newly_applied_facts": 0
+        },
+        {
+          "line": 21,
+          "kind": "owner_started",
+          "observed": 5111915.875603586,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2256040
+        },
+        {
+          "line": 24,
+          "kind": "owner_event",
+          "observed": 5111916.843806238,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111916.843613397,
+          "event_owner_epoch": 1,
+          "event_pid": 2256117
+        },
+        {
+          "line": 25,
+          "kind": "owner_event",
+          "observed": 5111916.875018975,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111916.860755233,
+          "event_owner_epoch": 1,
+          "event_pid": 2256120
+        },
+        {
+          "line": 26,
+          "kind": "owner_event",
+          "observed": 5111999.826633085,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5111999.824713354,
+          "event_owner_epoch": 1,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 24000
+          },
+          "workers": {
+            "full1": {
+              "worker": "full1",
+              "gpu": 0,
+              "pid": 2256120,
+              "sent_perf": 5111999.804267238,
+              "model_load_seconds": 73.66398182976991,
+              "full_load_warmup_seconds": 79.62434542737901
+            },
+            "full0": {
+              "worker": "full0",
+              "gpu": 1,
+              "pid": 2256117,
+              "sent_perf": 5111999.81879512,
+              "model_load_seconds": 73.64813543017954,
+              "full_load_warmup_seconds": 79.63935099449009
+            }
+          },
+          "warmup": {
+            "full1": {
+              "seconds": 5.956468506716192,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full0": {
+              "seconds": 5.98778598383069,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 27,
+          "kind": "recovered_owner_neural_ready",
+          "observed": 5111999.847366613,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "recovered_frontiers": {
+            "BAC009S0908W0369": 24000
+          }
+        }
+      ],
+      "original_metrics": {
+        "energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 11711.200723013997,
+              "1": 12837.817335987347
+            },
+            "total_joules": 24549.018059001344
+          },
+          "origin_perf": 5111911.23479921,
+          "service_end_perf": 5112017.003620915,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        },
+        "recovery": {
+          "observed_fault_records": 1,
+          "events": [
+            {
+              "fault_kind": "after_original_C_before_durable",
+              "fault_perf": 5111914.071400473,
+              "physical_death_confirmed_perf": 5111915.777431632,
+              "replacement_ready_perf": 5111999.824713354,
+              "first_actual_old_fact_replay_perf": null,
+              "first_new_durable_fact_actual_consume_perf": 5112000.496149606,
+              "first_new_model_completed_after_fault_and_certified_consume_perf": 5112000.496149606,
+              "accepted_before_fault_samples": {
+                "BAC009S0908W0369": 40000
+              },
+              "pre_fault_durable_sequence": 4,
+              "uncertified_debt_before_fault_samples": {
+                "BAC009S0908W0369": 16000
+              },
+              "debt_clear_actual_certified_consume_perf": 5112001.125207459,
+              "fault_to_death": 1.7060311594977975,
+              "fault_to_replacement_ready": 85.75331288110465,
+              "fault_to_old_fact_replay": null,
+              "fault_to_new_durable_fact": 86.4247491331771,
+              "fault_to_new_certified_result": 86.4247491331771,
+              "fault_to_debt_clear": 87.05380698572844,
+              "pre_fault_view_availability": {
+                "BAC009S0908W0369": {
+                  "pre_fault_visible_frontier": 32000,
+                  "observed_deficit_seconds": 0.0,
+                  "longest_observed_deficit_seconds": 0.0,
+                  "scope": "Below pre-fault visible frontier; necessary selected revisions are not automatically attributed to failure."
+                }
+              },
+              "scope": "Old durable replay is not new inference. New durable fact and actual model completion after fault are separate clocks. Debt target is accepted before fault, not all future offered audio."
+            }
+          ],
+          "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+        }
+      },
+      "first_new_consumer_fact": [
+        11,
+        {
+          "observed": 5112000.496149606,
+          "kind": "canonical",
+          "owner_epoch": 1,
+          "recovery_replay": false,
+          "transition_id": "e9dc6fb4258853b0a4c26e1d6d64ff5910fe5dcb24d2c29c96cfadab921a4171",
+          "journal_sequence": 5,
+          "certified_frontier": 32000,
+          "visible_frontier": 32000
+        }
+      ],
+      "power_schema": [
+        [
+          1,
+          {
+            "time": 5111849.0632041525,
+            "watts": {
+              "0": 141.29,
+              "1": 52.86
+            },
+            "gpu_memory_MiB": {
+              "0": 24.0,
+              "1": 24.0
+            },
+            "utilization_percent": {
+              "0": 0.0,
+              "1": 0.0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0",
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/supervisor.jsonl",
+        "bytes": 895900,
+        "sha256": "be1dab3c3982a63f7e9809c479946bc168cb37b195d7c9d36364f3c1d825d484",
+        "lines": 73
+      },
+      "consumer_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/consumer.jsonl",
+        "bytes": 18967,
+        "sha256": "dcbee0f09431eb5dfae216cb98cb2c3556a3551abf73e7ce9e7cd4725fe2b1ac",
+        "lines": 52
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/power.jsonl",
+        "bytes": 197994,
+        "sha256": "38fd44f223f8f87385d97d438bd714eb5d9a5f06bb876600bea8f705542adb3d",
+        "lines": 1273
+      },
+      "events": [
+        {
+          "line": 1,
+          "kind": "owner_started",
+          "observed": 5110655.119395927,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2234556
+        },
+        {
+          "line": 3,
+          "kind": "owner_event",
+          "observed": 5110655.694234809,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110655.694061276,
+          "event_owner_epoch": 0,
+          "event_pid": 2234627
+        },
+        {
+          "line": 4,
+          "kind": "owner_event",
+          "observed": 5110655.709238531,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110655.696081186,
+          "event_owner_epoch": 0,
+          "event_pid": 2234630
+        },
+        {
+          "line": 5,
+          "kind": "owner_event",
+          "observed": 5110751.345783362,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5110751.343363917,
+          "event_owner_epoch": 0,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 0
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 0,
+              "pid": 2234627,
+              "sent_perf": 5110751.312478549,
+              "model_load_seconds": 84.561373911798,
+              "full_load_warmup_seconds": 90.58201189618558
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 1,
+              "pid": 2234630,
+              "sent_perf": 5110751.312621891,
+              "model_load_seconds": 84.56506325490773,
+              "full_load_warmup_seconds": 90.58222355879843
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 5.953623780049384,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 5.953135731630027,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 17,
+          "kind": "fault_triggered",
+          "observed": 5110754.0586274,
+          "owner_epoch": 0,
+          "site": "after_original_C_before_durable",
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 18,
+          "kind": "owner_group_death_confirmed",
+          "observed": 5110755.73820704,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 19,
+          "kind": "recovery_durable_prefix_ready",
+          "observed": 5110755.764786355,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "newly_applied_facts": 0
+        },
+        {
+          "line": 21,
+          "kind": "owner_started",
+          "observed": 5110755.79340002,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2236261
+        },
+        {
+          "line": 24,
+          "kind": "owner_event",
+          "observed": 5110757.648921212,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110757.648759369,
+          "event_owner_epoch": 1,
+          "event_pid": 2236349
+        },
+        {
+          "line": 25,
+          "kind": "owner_event",
+          "observed": 5110757.6612155,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5110757.650125439,
+          "event_owner_epoch": 1,
+          "event_pid": 2236352
+        },
+        {
+          "line": 26,
+          "kind": "owner_event",
+          "observed": 5110860.431518861,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5110860.430344114,
+          "event_owner_epoch": 1,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 24000
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 0,
+              "pid": 2236349,
+              "sent_perf": 5110860.410658525,
+              "model_load_seconds": 89.48013339750469,
+              "full_load_warmup_seconds": 94.14686150848866
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 1,
+              "pid": 2236352,
+              "sent_perf": 5110860.427200569,
+              "model_load_seconds": 89.47846855409443,
+              "full_load_warmup_seconds": 94.16690021473914
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 4.65857969596982,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 4.6763546876609325,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 27,
+          "kind": "recovered_owner_neural_ready",
+          "observed": 5110860.452693352,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "recovered_frontiers": {
+            "BAC009S0908W0369": 24000
+          }
+        }
+      ],
+      "original_metrics": {
+        "energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 13821.030004284064,
+              "1": 12735.473810682472
+            },
+            "total_joules": 26556.503814966534
+          },
+          "origin_perf": 5110751.378646889,
+          "service_end_perf": 5110875.245933914,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        },
+        "recovery": {
+          "observed_fault_records": 1,
+          "events": [
+            {
+              "fault_kind": "after_original_C_before_durable",
+              "fault_perf": 5110754.0586274,
+              "physical_death_confirmed_perf": 5110755.73820704,
+              "replacement_ready_perf": 5110860.430344114,
+              "first_actual_old_fact_replay_perf": null,
+              "first_new_durable_fact_actual_consume_perf": 5110861.149298508,
+              "first_new_model_completed_after_fault_and_certified_consume_perf": 5110861.149298508,
+              "accepted_before_fault_samples": {
+                "BAC009S0908W0369": 40000
+              },
+              "pre_fault_durable_sequence": 4,
+              "uncertified_debt_before_fault_samples": {
+                "BAC009S0908W0369": 16000
+              },
+              "debt_clear_actual_certified_consume_perf": 5110861.826154381,
+              "fault_to_death": 1.679579640738666,
+              "fault_to_replacement_ready": 106.37171671446413,
+              "fault_to_old_fact_replay": null,
+              "fault_to_new_durable_fact": 107.09067110810429,
+              "fault_to_new_certified_result": 107.09067110810429,
+              "fault_to_debt_clear": 107.76752698142081,
+              "pre_fault_view_availability": {
+                "BAC009S0908W0369": {
+                  "pre_fault_visible_frontier": 32000,
+                  "observed_deficit_seconds": 0.0,
+                  "longest_observed_deficit_seconds": 0.0,
+                  "scope": "Below pre-fault visible frontier; necessary selected revisions are not automatically attributed to failure."
+                }
+              },
+              "scope": "Old durable replay is not new inference. New durable fact and actual model completion after fault are separate clocks. Debt target is accepted before fault, not all future offered audio."
+            }
+          ],
+          "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+        }
+      },
+      "first_new_consumer_fact": [
+        11,
+        {
+          "observed": 5110861.149298508,
+          "kind": "canonical",
+          "owner_epoch": 1,
+          "recovery_replay": false,
+          "transition_id": "e9dc6fb4258853b0a4c26e1d6d64ff5910fe5dcb24d2c29c96cfadab921a4171",
+          "journal_sequence": 5,
+          "certified_frontier": 32000,
+          "visible_frontier": 32000
+        }
+      ],
+      "power_schema": [
+        [
+          1,
+          {
+            "time": 5110655.048350118,
+            "watts": {
+              "0": 34.39,
+              "1": 133.73
+            },
+            "gpu_memory_MiB": {
+              "0": 24.0,
+              "1": 24.0
+            },
+            "utilization_percent": {
+              "0": 0.0,
+              "1": 0.0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1",
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/supervisor.jsonl",
+        "bytes": 895910,
+        "sha256": "d00361cea06ae989b3134c3407e128a15995f2a643567b2171bf2e639c0cb356",
+        "lines": 73
+      },
+      "consumer_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/consumer.jsonl",
+        "bytes": 18975,
+        "sha256": "4cb44cef5f92b1728305a528088da27b9b3ffb17bbf449657752da130c02389d",
+        "lines": 52
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/power.jsonl",
+        "bytes": 120104,
+        "sha256": "60c3ebaca72d5a5d32840fec69d5eeb661d98b41f4294ee121046cb3e41f9350",
+        "lines": 767
+      },
+      "events": [
+        {
+          "line": 1,
+          "kind": "owner_started",
+          "observed": 5111714.777111827,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2252540
+        },
+        {
+          "line": 3,
+          "kind": "owner_event",
+          "observed": 5111715.04075768,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111715.04058374,
+          "event_owner_epoch": 0,
+          "event_pid": 2252607
+        },
+        {
+          "line": 4,
+          "kind": "owner_event",
+          "observed": 5111715.068515953,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111715.068393022,
+          "event_owner_epoch": 0,
+          "event_pid": 2252611
+        },
+        {
+          "line": 5,
+          "kind": "owner_event",
+          "observed": 5111767.881330948,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5111767.87915761,
+          "event_owner_epoch": 0,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 0
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 1,
+              "pid": 2252607,
+              "sent_perf": 5111767.845192727,
+              "model_load_seconds": 46.793072131462395,
+              "full_load_warmup_seconds": 50.78607771825045
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 0,
+              "pid": 2252611,
+              "sent_perf": 5111767.849867024,
+              "model_load_seconds": 46.66368210595101,
+              "full_load_warmup_seconds": 50.73245318233967
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 3.989439274184406,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 4.065506584942341,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 17,
+          "kind": "fault_triggered",
+          "observed": 5111770.627930099,
+          "owner_epoch": 0,
+          "site": "after_original_C_before_durable",
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 18,
+          "kind": "owner_group_death_confirmed",
+          "observed": 5111772.426408216,
+          "owner_epoch": 0,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null
+        },
+        {
+          "line": 19,
+          "kind": "recovery_durable_prefix_ready",
+          "observed": 5111772.444814612,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "newly_applied_facts": 0
+        },
+        {
+          "line": 21,
+          "kind": "owner_started",
+          "observed": 5111772.480489953,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "pid": 2253534
+        },
+        {
+          "line": 24,
+          "kind": "owner_event",
+          "observed": 5111772.808158977,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111772.807942706,
+          "event_owner_epoch": 1,
+          "event_pid": 2253602
+        },
+        {
+          "line": 25,
+          "kind": "owner_event",
+          "observed": 5111772.816258876,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "worker_started",
+          "event_observed": 5111772.810473055,
+          "event_owner_epoch": 1,
+          "event_pid": 2253606
+        },
+        {
+          "line": 26,
+          "kind": "owner_event",
+          "observed": 5111834.563366336,
+          "owner_epoch": null,
+          "site": null,
+          "event_kind": "owner_ready",
+          "event_observed": 5111834.56204301,
+          "event_owner_epoch": 1,
+          "event_recovered_frontiers": {
+            "BAC009S0908W0369": 24000
+          },
+          "workers": {
+            "full0": {
+              "worker": "full0",
+              "gpu": 1,
+              "pid": 2253602,
+              "sent_perf": 5111834.553549314,
+              "model_load_seconds": 55.45721732266247,
+              "full_load_warmup_seconds": 59.1817528847605
+            },
+            "full1": {
+              "worker": "full1",
+              "gpu": 0,
+              "pid": 2253606,
+              "sent_perf": 5111834.558834777,
+              "model_load_seconds": 55.579247863031924,
+              "full_load_warmup_seconds": 59.18751616962254
+            }
+          },
+          "warmup": {
+            "full0": {
+              "seconds": 3.721276077441871,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            },
+            "full1": {
+              "seconds": 3.604705191217363,
+              "neural_C_confirmed": true,
+              "ASR_only_producer": false,
+              "fixed_warm_start": 24000,
+              "fixed_warm_end": 32000,
+              "reset_to_genesis": true,
+              "warmup_packet_admitted": false
+            }
+          }
+        },
+        {
+          "line": 27,
+          "kind": "recovered_owner_neural_ready",
+          "observed": 5111834.586554896,
+          "owner_epoch": 1,
+          "site": null,
+          "event_kind": null,
+          "event_observed": null,
+          "event_owner_epoch": null,
+          "recovered_frontiers": {
+            "BAC009S0908W0369": 24000
+          }
+        }
+      ],
+      "original_metrics": {
+        "energy": {
+          "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+          "service": {
+            "gpu_joules": {
+              "0": 9837.71544010372,
+              "1": 9733.677961982401
+            },
+            "total_joules": 19571.39340208612
+          },
+          "origin_perf": 5111767.973957101,
+          "service_end_perf": 5111847.75847306,
+          "includes_fault_and_recovery_after_origin": true,
+          "initial_cold_load_excluded": true,
+          "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+        },
+        "recovery": {
+          "observed_fault_records": 1,
+          "events": [
+            {
+              "fault_kind": "after_original_C_before_durable",
+              "fault_perf": 5111770.627930099,
+              "physical_death_confirmed_perf": 5111772.426408216,
+              "replacement_ready_perf": 5111834.56204301,
+              "first_actual_old_fact_replay_perf": null,
+              "first_new_durable_fact_actual_consume_perf": 5111835.240123216,
+              "first_new_model_completed_after_fault_and_certified_consume_perf": 5111835.240123216,
+              "accepted_before_fault_samples": {
+                "BAC009S0908W0369": 40000
+              },
+              "pre_fault_durable_sequence": 4,
+              "uncertified_debt_before_fault_samples": {
+                "BAC009S0908W0369": 16000
+              },
+              "debt_clear_actual_certified_consume_perf": 5111835.901345832,
+              "fault_to_death": 1.7984781172126532,
+              "fault_to_replacement_ready": 63.93411291111261,
+              "fault_to_old_fact_replay": null,
+              "fault_to_new_durable_fact": 64.6121931169182,
+              "fault_to_new_certified_result": 64.6121931169182,
+              "fault_to_debt_clear": 65.27341573312879,
+              "pre_fault_view_availability": {
+                "BAC009S0908W0369": {
+                  "pre_fault_visible_frontier": 32000,
+                  "observed_deficit_seconds": 0.0,
+                  "longest_observed_deficit_seconds": 0.0,
+                  "scope": "Below pre-fault visible frontier; necessary selected revisions are not automatically attributed to failure."
+                }
+              },
+              "scope": "Old durable replay is not new inference. New durable fact and actual model completion after fault are separate clocks. Debt target is accepted before fault, not all future offered audio."
+            }
+          ],
+          "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+        }
+      },
+      "first_new_consumer_fact": [
+        11,
+        {
+          "observed": 5111835.240123216,
+          "kind": "canonical",
+          "owner_epoch": 1,
+          "recovery_replay": false,
+          "transition_id": "e9dc6fb4258853b0a4c26e1d6d64ff5910fe5dcb24d2c29c96cfadab921a4171",
+          "journal_sequence": 5,
+          "certified_frontier": 32000,
+          "visible_frontier": 32000
+        }
+      ],
+      "power_schema": [
+        [
+          1,
+          {
+            "time": 5111714.726260977,
+            "watts": {
+              "0": 141.84,
+              "1": 130.08
+            },
+            "gpu_memory_MiB": {
+              "0": 24.0,
+              "1": 24.0
+            },
+            "utilization_percent": {
+              "0": 0.0,
+              "1": 0.0
+            }
+          }
+        ]
+      ]
+    }
+  ],
+  "local_reader_sha256": "17cd97eb3c549f9925d9a9ad9e75461a835f626fe07492135106848a97b91392"
+}

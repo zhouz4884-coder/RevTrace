@@ -1,0 +1,55 @@
+{
+  "experiment_id": "REVTRACE_V16_FORMAL_PHASE_ACTION_V1_20261111",
+  "created_utc": "2026-11-11T09:25:09.640870+00:00",
+  "source_commit": "aa9db5c2396b76d9b50f5281fa4a68b54aca844a",
+  "source_manifest_sha256": "6d4212882ad7a276849336239c5815d3160f8c91ea6ad85313b5741732c4a15f",
+  "original_v3_source_commit": "deb3260655e2f3312499a34597cc0be6fc15484b",
+  "original_neural_source_anchor": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "frozen_environment_sha256": "449801555c1101a05ef359a39d223bb916aa76011fa64ab3b20d4cc449c8358f",
+  "expected_environment": {
+    "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+    "executable": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "CUDA_VISIBLE_DEVICES": "",
+    "execution": "finite symbolic CPU specification only",
+    "model_calls": 0,
+    "GPU_calls": 0
+  },
+  "profiles": {
+    "normal_two_frontiers": {
+      "frontiers": 2,
+      "max_issued": 3,
+      "max_depth": 12,
+      "max_faults": 0,
+      "state_cap": 150000
+    },
+    "failure_one_frontier": {
+      "frontiers": 1,
+      "max_issued": 2,
+      "max_depth": 12,
+      "max_faults": 1,
+      "state_cap": 150000
+    }
+  },
+  "expected_unchanged_model_counts": {
+    "normal_two_frontiers": {
+      "states": 6231,
+      "edges": 11142,
+      "depth_cutoffs": 2144,
+      "terminal_states": 16
+    },
+    "failure_one_frontier": {
+      "states": 14074,
+      "edges": 25799,
+      "depth_cutoffs": 2828,
+      "terminal_states": 2196
+    }
+  },
+  "expected_named_controls": 35,
+  "original_controls_preserved": 27,
+  "new_phase_action_controls": 8,
+  "intended_raw_result_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/formal_action_v1/results",
+  "intended_summary_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/formal_action_v1/results/SUMMARY.json",
+  "intended_gate_location": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/formal_action_v1/results/GATE.json",
+  "scope": "Additional phase-correct state/action obligations on unchanged v3 finite hand-written specification, preserving legal durable-before-install/crash gaps. Not runtime extraction, unbounded proof, neural result, natural prevalence or serving evidence."
+}

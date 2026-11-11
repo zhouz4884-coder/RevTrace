@@ -1,0 +1,560 @@
+{
+  "record_type": "READ_ONLY_EXISTING_EVIDENCE_AUDIT_AND_UNEXECUTED_CPU_SOURCE_DESIGN",
+  "utc": "2026-11-11T09:18:33.191344+00:00",
+  "new_model_calls": 0,
+  "new_experiment_runs": 0,
+  "no_remote_write_or_process_control": true,
+  "old_formal_source_commit": "deb3260655e2f3312499a34597cc0be6fc15484b",
+  "old_neural_source_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+  "old_formal_bounds_unchanged": true,
+  "phase_aware_invariant": "installed canonical is a durable-prefix position; synced-before-install and crash gap allowed; recovery adds no new selected edge",
+  "same_fault_after_durable": [
+    {
+      "repeat": 0,
+      "phase_comparisons": {
+        "fault_to_death": {
+          "conservative": {
+            "seconds": 1.4515351941809058,
+            "gpu_joules": {
+              "0": 249.5791299250157,
+              "1": 190.48029677772973
+            },
+            "total_joules": 440.05942670274544
+          },
+          "RevTrace": {
+            "seconds": 1.781948896124959,
+            "gpu_joules": {
+              "0": 252.34855412069436,
+              "1": 292.9710130206817
+            },
+            "total_joules": 545.3195671413761
+          },
+          "delta_seconds": 0.3304137019440532,
+          "delta_gpu_joules": 105.26014043863063
+        },
+        "death_to_owner_start": {
+          "conservative": {
+            "seconds": 0.0774524137377739,
+            "gpu_joules": {
+              "0": 11.196332805562815,
+              "1": 8.504515906730719
+            },
+            "total_joules": 19.700848712293535
+          },
+          "RevTrace": {
+            "seconds": 0.11703819315880537,
+            "gpu_joules": {
+              "0": 13.988922820275672,
+              "1": 15.654081889684807
+            },
+            "total_joules": 29.64300470996048
+          },
+          "delta_seconds": 0.039585779421031475,
+          "delta_gpu_joules": 9.942155997666944
+        },
+        "owner_start_to_ready": {
+          "conservative": {
+            "seconds": 84.84676451049745,
+            "gpu_joules": {
+              "0": 9257.191483314322,
+              "1": 8687.703824964268
+            },
+            "total_joules": 17944.89530827859
+          },
+          "RevTrace": {
+            "seconds": 101.79978224728256,
+            "gpu_joules": {
+              "0": 10562.514473440411,
+              "1": 9812.579392559323
+            },
+            "total_joules": 20375.093865999734
+          },
+          "delta_seconds": 16.953017736785114,
+          "delta_gpu_joules": 2430.1985577211453
+        },
+        "ready_to_new_certified": {
+          "conservative": {
+            "seconds": 0.6784173361957073,
+            "gpu_joules": {
+              "0": 116.95396974182995,
+              "1": 83.63512244193278
+            },
+            "total_joules": 200.58909218376272
+          },
+          "RevTrace": {
+            "seconds": 0.7402536105364561,
+            "gpu_joules": {
+              "0": 129.11725671208933,
+              "1": 97.2270917027903
+            },
+            "total_joules": 226.34434841487962
+          },
+          "delta_seconds": 0.06183627434074879,
+          "delta_gpu_joules": 25.755256231116903
+        },
+        "fault_to_new_certified": {
+          "conservative": {
+            "seconds": 87.05416945461184,
+            "gpu_joules": {
+              "0": 9634.92091578673,
+              "1": 8970.323760090663
+            },
+            "total_joules": 18605.244675877395
+          },
+          "RevTrace": {
+            "seconds": 104.43902294710279,
+            "gpu_joules": {
+              "0": 10957.969207093473,
+              "1": 10218.431579172484
+            },
+            "total_joules": 21176.400786265956
+          },
+          "delta_seconds": 17.384853492490947,
+          "delta_gpu_joules": 2571.1561103885615
+        },
+        "origin_to_fault": {
+          "conservative": {
+            "seconds": 2.867748855613172,
+            "gpu_joules": {
+              "0": 435.21366850594353,
+              "1": 408.0994509756316
+            },
+            "total_joules": 843.3131194815751
+          },
+          "RevTrace": {
+            "seconds": 2.6844631526619196,
+            "gpu_joules": {
+              "0": 406.48295391869306,
+              "1": 365.0351160165788
+            },
+            "total_joules": 771.5180699352718
+          },
+          "delta_seconds": -0.18328570295125246,
+          "delta_gpu_joules": -71.79504954630329
+        },
+        "new_certified_to_service_end": {
+          "conservative": {
+            "seconds": 15.350057109259069,
+            "gpu_joules": {
+              "0": 3072.2348431599758,
+              "1": 1679.3105574915862
+            },
+            "total_joules": 4751.545400651562
+          },
+          "RevTrace": {
+            "seconds": 15.94927338231355,
+            "gpu_joules": {
+              "0": 2683.329319876896,
+              "1": 2539.889067773948
+            },
+            "total_joules": 5223.218387650844
+          },
+          "delta_seconds": 0.5992162730544806,
+          "delta_gpu_joules": 471.67298699928233
+        },
+        "whole_service": {
+          "conservative": {
+            "seconds": 105.27197541948408,
+            "gpu_joules": {
+              "0": 13142.36942745265,
+              "1": 11057.73376855787
+            },
+            "total_joules": 24200.103196010517
+          },
+          "RevTrace": {
+            "seconds": 123.07275948207825,
+            "gpu_joules": {
+              "0": 14047.781480889056,
+              "1": 13123.355762963012
+            },
+            "total_joules": 27171.13724385207
+          },
+          "delta_seconds": 17.800784062594175,
+          "delta_gpu_joules": 2971.034047841553
+        }
+      }
+    },
+    {
+      "repeat": 1,
+      "phase_comparisons": {
+        "fault_to_death": {
+          "conservative": {
+            "seconds": 1.3154273703694344,
+            "gpu_joules": {
+              "0": 150.57821500471704,
+              "1": 217.01071041820433
+            },
+            "total_joules": 367.58892542292136
+          },
+          "RevTrace": {
+            "seconds": 1.6534269945695996,
+            "gpu_joules": {
+              "0": 257.7804203140226,
+              "1": 276.45558432778904
+            },
+            "total_joules": 534.2360046418116
+          },
+          "delta_seconds": 0.33799962420016527,
+          "delta_gpu_joules": 166.64707921889027
+        },
+        "death_to_owner_start": {
+          "conservative": {
+            "seconds": 0.1052355207502842,
+            "gpu_joules": {
+              "0": 12.13771135236942,
+              "1": 14.143207978269398
+            },
+            "total_joules": 26.280919330638817
+          },
+          "RevTrace": {
+            "seconds": 0.07696220185607672,
+            "gpu_joules": {
+              "0": 10.660200024855166,
+              "1": 10.416773956147315
+            },
+            "total_joules": 21.07697398100248
+          },
+          "delta_seconds": -0.028273318894207478,
+          "delta_gpu_joules": -5.203945349636335
+        },
+        "owner_start_to_ready": {
+          "conservative": {
+            "seconds": 81.78230624832213,
+            "gpu_joules": {
+              "0": 8342.161822591419,
+              "1": 7885.095067874788
+            },
+            "total_joules": 16227.256890466208
+          },
+          "RevTrace": {
+            "seconds": 99.37496261578053,
+            "gpu_joules": {
+              "0": 10291.813523455912,
+              "1": 9748.000461259198
+            },
+            "total_joules": 20039.81398471511
+          },
+          "delta_seconds": 17.592656367458403,
+          "delta_gpu_joules": 3812.557094248903
+        },
+        "ready_to_new_certified": {
+          "conservative": {
+            "seconds": 0.6954150050878525,
+            "gpu_joules": {
+              "0": 89.61147957726858,
+              "1": 117.62352986908827
+            },
+            "total_joules": 207.23500944635686
+          },
+          "RevTrace": {
+            "seconds": 0.6994455503299832,
+            "gpu_joules": {
+              "0": 96.14004112601427,
+              "1": 117.37785799676796
+            },
+            "total_joules": 213.51789912278224
+          },
+          "delta_seconds": 0.004030545242130756,
+          "delta_gpu_joules": 6.282889676425384
+        },
+        "fault_to_new_certified": {
+          "conservative": {
+            "seconds": 83.8983841445297,
+            "gpu_joules": {
+              "0": 8594.489228525776,
+              "1": 8233.872516140349
+            },
+            "total_joules": 16828.361744666123
+          },
+          "RevTrace": {
+            "seconds": 101.80479736253619,
+            "gpu_joules": {
+              "0": 10656.394184920802,
+              "1": 10152.250677539903
+            },
+            "total_joules": 20808.644862460707
+          },
+          "delta_seconds": 17.90641321800649,
+          "delta_gpu_joules": 3980.2831177945845
+        },
+        "origin_to_fault": {
+          "conservative": {
+            "seconds": 2.937412424944341,
+            "gpu_joules": {
+              "0": 347.7638522215334,
+              "1": 495.70907323417555
+            },
+            "total_joules": 843.472925455709
+          },
+          "RevTrace": {
+            "seconds": 2.653006843291223,
+            "gpu_joules": {
+              "0": 334.6074256897217,
+              "1": 412.0430538542702
+            },
+            "total_joules": 746.6504795439919
+          },
+          "delta_seconds": -0.28440558165311813,
+          "delta_gpu_joules": -96.82244591171707
+        },
+        "new_certified_to_service_end": {
+          "conservative": {
+            "seconds": 15.341014218516648,
+            "gpu_joules": {
+              "0": 1762.1747224934008,
+              "1": 2980.978053013353
+            },
+            "total_joules": 4743.152775506754
+          },
+          "RevTrace": {
+            "seconds": 14.212446343153715,
+            "gpu_joules": {
+              "0": 2427.1310061168333,
+              "1": 2500.253823525121
+            },
+            "total_joules": 4927.384829641955
+          },
+          "delta_seconds": -1.1285678753629327,
+          "delta_gpu_joules": 184.232054135201
+        },
+        "whole_service": {
+          "conservative": {
+            "seconds": 102.17681078799069,
+            "gpu_joules": {
+              "0": 10704.427803240711,
+              "1": 11710.55964238787
+            },
+            "total_joules": 22414.987445628583
+          },
+          "RevTrace": {
+            "seconds": 118.67025054898113,
+            "gpu_joules": {
+              "0": 13418.132616727356,
+              "1": 13064.54755491929
+            },
+            "total_joules": 26482.680171646647
+          },
+          "delta_seconds": 16.49343976099044,
+          "delta_gpu_joules": 4067.6927260180637
+        }
+      }
+    }
+  ],
+  "source_design_files": [
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\formal_source_dev\\invariants.py",
+      "bytes": 5394,
+      "sha256": "474d18277eea1e01e13d2db85ca00556821dd29ea1bc6e4c8b13e9378268c6fe"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\formal_source_dev\\model.py",
+      "bytes": 21554,
+      "sha256": "d65176b661665713b934761a2f64e012768f1bed0a27a22986f9e9bc6e18d814"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\formal_source_dev\\README.md",
+      "bytes": 1170,
+      "sha256": "0d29f651d1fe0f7f9f78e99f742b1456ffd87946a14a0284116e998d7d858714"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\formal_source_dev\\run_checks.py",
+      "bytes": 4334,
+      "sha256": "b42de37fa85abb4974aad145f012ffd340d72097e9a904ce2384c29597e605f4"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\formal_source_dev\\test_invariants.py",
+      "bytes": 3050,
+      "sha256": "8da701422aaf10242d9d8d48f4edcb072ebd6b714128eb4ec80e7b0efb3ee0f0"
+    },
+    {
+      "path": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\formal_source_dev\\test_model.py",
+      "bytes": 10339,
+      "sha256": "b3aca890e308735b97a7d8f7b1248166d1caff78d28c36f9802d3316c359916e"
+    }
+  ],
+  "planned_controls": [
+    {
+      "file": "test_invariants.py",
+      "name": "test_synced_preinstall_is_legal_and_refutes_tail_equals_installed",
+      "line": 15
+    },
+    {
+      "file": "test_invariants.py",
+      "name": "test_crash_preserves_legal_synced_install_gap",
+      "line": 20
+    },
+    {
+      "file": "test_invariants.py",
+      "name": "test_recover_closes_install_gap_without_neural_transition",
+      "line": 26
+    },
+    {
+      "file": "test_invariants.py",
+      "name": "test_idle_writable_owner_cannot_forget_pending_synced_fact",
+      "line": 36
+    },
+    {
+      "file": "test_invariants.py",
+      "name": "test_non_append_completion_cannot_create_a_fact",
+      "line": 41
+    },
+    {
+      "file": "test_invariants.py",
+      "name": "test_dispatch_evidence_may_not_disappear_silently",
+      "line": 47
+    },
+    {
+      "file": "test_invariants.py",
+      "name": "test_recovery_cannot_add_an_extra_existing_job_result",
+      "line": 52
+    },
+    {
+      "file": "test_invariants.py",
+      "name": "test_sync_is_append_without_install_then_install_stutters_prefix",
+      "line": 58
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_original_C_U_is_allowed_relation_not_single_replay",
+      "line": 28
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_confirmed_input_does_not_require_own_prediction_correct",
+      "line": 33
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_future_complete_result_buffers_until_parent",
+      "line": 39
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_complete_before_confirmation_and_confirmation_before_complete",
+      "line": 47
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_same_frontier_mismatch_refutes_not_text_equality",
+      "line": 52
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_unknown_future_input_survives_ancestor_loss_then_converges",
+      "line": 58
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_unknown_input_is_not_a_C_entry_cancel_proof",
+      "line": 72
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_known_same_F_mismatch_can_cancel_without_result",
+      "line": 76
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_incompatible_completed_full_is_discarded",
+      "line": 80
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_original_projection_cannot_be_promoted_as_C_U",
+      "line": 85
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_mutation_unconfirmed_prepare_has_counterexample",
+      "line": 92
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_compatible_application_keeps_whole_ahead_view",
+      "line": 97
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_snapshot_consumer_mutation_is_observably_false",
+      "line": 103
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_incompatible_application_withdraws_needed_view",
+      "line": 108
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_provisional_application_never_advances_certification",
+      "line": 114
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_each_queued_commit_has_its_own_root_snapshot",
+      "line": 119
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_final_root_alias_mutation_breaks_first_commit_snapshot",
+      "line": 125
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_full_buffer_remains_usable_after_worker_only_restart",
+      "line": 134
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_worker_exit_must_be_observed_before_slot_reuse",
+      "line": 143
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_expected_duplicate_is_local_idempotent_rejection",
+      "line": 149
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_owner_crash_before_sync_does_not_create_a_fact",
+      "line": 156
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_post_sync_preinstall_recovery_replays_old_fact_not_new_work",
+      "line": 163
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_recovery_keeps_supervisor_consumer_certified_facts_and_original_clocks",
+      "line": 172
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_illegal_install_before_sync_has_counterexample",
+      "line": 180
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_old_epoch_complete_cannot_be_reauthorized_under_identical_root",
+      "line": 185
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_new_legal_work_finishes_after_fail_stop_and_recovery",
+      "line": 192
+    },
+    {
+      "file": "test_model.py",
+      "name": "test_owner_namespace_session_epoch_and_worker_incarnation_are_separate",
+      "line": 204
+    }
+  ],
+  "planned_control_count": 35,
+  "source_design_execution_status": "NOT_FROZEN_NOT_RUN_NO_PASS_CLAIM",
+  "next_steps": [
+    "freeze and run state/action checker on8TB after report",
+    "same-fault paired constructor subphase profiling with exact input/settings and repeated/crossover order controls",
+    "repair common loader only after duplicate/conversion/contention diagnosed; same-input repeated original-loader legal oracle before E2E paired recovery rerun"
+  ],
+  "report": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\review\\FORMAL_RECOVERY_OPPORTUNITIES.zh.md"
+}

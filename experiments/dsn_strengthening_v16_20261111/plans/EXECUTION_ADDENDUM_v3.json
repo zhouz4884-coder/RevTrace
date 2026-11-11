@@ -1,0 +1,28 @@
+{
+  "record_type": "PROSPECTIVE_EXECUTION_ADDENDUM_NOT_GPU_RESULTS",
+  "date": "2026-11-11",
+  "base_contract": "GPU_EXPERIMENT_CONTRACT_v2.json",
+  "base_contract_sha256": "93c7e2c96b54bbac0bf5998e12f3bb7b4a22d41ea8a397bcddd86103ea99ae98",
+  "resource_audit_rules": "RESOURCE_LEDGER_AND_SENTINELS_v1.zh.md",
+  "primary_arms": ["conservative", "dependency_versioned", "ready_only", "fullcall", "uir"],
+  "auxiliary_arm": "safe_versioned",
+  "pilot": {"existing_sources": 2, "fresh_repeats": 2, "primary_trials": 20, "auxiliary_trials": 4, "all_trials": 24},
+  "existing_bank": {"sources": 8, "fresh_repeats": 2, "primary_trials": 80, "auxiliary_trials": 16, "all_trials": 96},
+  "new_bank": {"primary_trials_formula": "10*N", "auxiliary_trials": 0, "N_not_frozen": true},
+  "order": "Per speaker use a fixed-seed shuffled six-arm order for repeat0 and its exact reverse for repeat1; swap primary GPU 0/1; fresh processes; no ties merged or outcomes filtered",
+  "pilot_source_choice": "Two existing sources selected by a frozen metadata-only lexical rule, not latency, CER, retention or readiness outcomes",
+  "native_runtime": {"source_commit": "14ae77ee2f1f0c324be3f40b89fb6011972c35b9", "manifest_sha256": "e9958a4554295399dc90edd4a68d028fdcdf7666c48206da740abbdaa295c969", "files": 64, "formal_CPU_controls": 214},
+  "accounting_helper": {"source_commit": "11e63901b308e41f4b49499e59694750eb3c91dc", "formal_CPU_controls": 9},
+  "current_readiness": {"gate": "PASS_FROZEN_CPU_BYTE_AND_ENVIRONMENT_READINESS", "location": "../readiness_ops_v2/results/GATE.json", "summary_sha256": "6c3cf2bc878f3509f411dd090f23cfe9174032c15bddeb03acda819e000547e1", "scope": "CPU package/full-byte checks of declared assets and eight existing WAVs; hashing warms page cache; not reservation or inference"},
+  "source_availability": {
+    "AISHELL_current_bounded_metadata": "20 original test speakers; old exclusions plus completed new-eight bank leave only S0766/S0904 as possible unused speakers, all estimated shorter than 12 seconds; fresh history census still required",
+    "next_candidate": "Official MAGICDATA OpenSLR68 test",
+    "verified_metadata_test_speakers": 43,
+    "verified_metadata_test_utterances": 24279,
+    "eligible_6_to_20_second_N": "UNKNOWN_PENDING_ORIGINAL_AUDIO_HEADER_CENSUS",
+    "decision": "Do not promise sixteen eligible new speakers or silently mix train/dev. Formal next-source selection remains separate from existing-bank mechanism tests."
+  },
+  "pending_GPU_gates": ["new driver/reference source freezing and CPU validation", "new-source full original-task reference generation under an explicitly frozen GPU reference plan", "complete pilot configs/environment/provenance", "root CURRENT activation and default preflight after concurrent CPU tasks finish", "fresh resource-owner check and owned-process registration at launch"],
+  "new_GPU_trials": 0,
+  "new_model_calls": 0
+}

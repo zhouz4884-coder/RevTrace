@@ -1,0 +1,128 @@
+{
+  "status": "CPU_PROTOCOL_PASS_GPU_NOT_LAUNCHED",
+  "actual_source_commit": "23538150798378c6629c8f75ec87426bb05574b4",
+  "source_manifest": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\packages\\BASELINE_SOURCE_v1.json",
+  "source_manifest_sha256": "525db820cbe5ea8b74e7315b3dd3cc527df452c6e21c838b9229049b6131c095",
+  "source_files": 62,
+  "local_source": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_strengthening_v16_20261111\\baseline_source_dev",
+  "root_execution_ref": "refs/revtrace/execution/dsn-v16-baseline-v1",
+  "remote_source": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v1/source",
+  "remote_manifest": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/baseline_runtime_v1/SOURCE.json",
+  "remote_cpu_raw": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_strengthening_v16_20261111/CPU_BASELINE_V1",
+  "remote_environment": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/envs/revtrace-streamcorrect-20261028/bin/python",
+  "cpu_experiment_id": "DSN_V16_BASELINE_NATIVE_PROTOCOL_CPU_V1",
+  "cpu_tests": 203,
+  "cpu_errors": 0,
+  "cpu_failures": 0,
+  "cpu_skipped": 0,
+  "CPU_only": true,
+  "neural_equivalence_unmeasured": true,
+  "GPU_experiments_launched": 0,
+  "default_pointer_unchanged": {
+    "gate": "SOURCE_IDENTITY_PASS",
+    "source": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\source_v2",
+    "code_commit": "4f4c3caba2b1068951d7a566e7d9e5aa6fc25f47",
+    "source_manifest": "D:\\VLA_QWEN\\RevTrace\\experiments\\dsn_native_resilience_20261030\\packages\\SOURCE_v2.json",
+    "manifest_sha256": "60ae549fcc98165a74e5a3dc420bf93418296099fa12b410572b15d281b2c457",
+    "files_verified": 59,
+    "run_record_prelaunch_checked": false,
+    "scope": "CPU/local provenance only; not GPU evidence or a completed experiment gate",
+    "setup_pointer": "D:\\VLA_QWEN\\RevTrace\\experiments\\repository_identity_20261027\\CURRENT.json",
+    "setup_pointer_sha256": "ea4d2ebe65bfe325a003a4ab50fe25262d6ee67fcfd20a7a460508de797fd867"
+  },
+  "interface": {
+    "entrypoint": "resilience_trial.py",
+    "arms": [
+      "conservative",
+      "fullcall",
+      "safe_versioned",
+      "ready_only",
+      "dependency_versioned"
+    ],
+    "policy_fence_reasons": [
+      "birth_root_policy_fence",
+      "inflight_at_install_policy_fence",
+      "dependency_version_policy_fence"
+    ],
+    "semantic_refutation_reason": "actual_canonical_disagrees_with_complete_start",
+    "policy_hint_event": "policy_C_entry_skip_hint",
+    "same_physical_safe_checkpoint": true
+  },
+  "bounded_cpu_artifacts": [
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\CONFIG.json",
+      "bytes": 1304,
+      "sha256": "c7b16e761e5afc176aac117d687443e95ae201059a07e2de78785fd27ed0ce8e"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\ENVIRONMENT.json",
+      "bytes": 809,
+      "sha256": "af51de810f904785aa65700b106e019ad7629775c5b23b32f269c21c1716743f"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\GATE.json",
+      "bytes": 258,
+      "sha256": "3f2e7e1c0d6ef261dcaea7a10ccdd09f33164fad236c62e3d1683332be4eda7a"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\GATE_STDERR.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\GATE_STDOUT.json",
+      "bytes": 1406,
+      "sha256": "23185653412dc6c176a08448eb835ec35ce37c1d4f70f2b609502f17c9153802"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\LOCAL_PREFLIGHT_STDOUT.log",
+      "bytes": 779,
+      "sha256": "14da884595512c99161afcf3749b7d62adebf749aa7e75255e34719026565d3f"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\LOCAL_PRELAUNCH_RECORD.json",
+      "bytes": 1608,
+      "sha256": "d1f9422a0d93f29669317c96cbd6feab089abd8fcf63e4414831faebe2a7ca14"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\LOCAL_RUN_SOURCE_GATE.json",
+      "bytes": 779,
+      "sha256": "14da884595512c99161afcf3749b7d62adebf749aa7e75255e34719026565d3f"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\RUN_RECORD.json",
+      "bytes": 1618,
+      "sha256": "b397b30762e5b91c48b28e3b3bfa8ea37f0375885a243512176ae605bb734c8d"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\SOURCE_GATE_AFTER.json",
+      "bytes": 210,
+      "sha256": "48bc04bf266ef0f21996718508ebfd04ea3d51f55d07a3fa476217f53e30897d"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\SOURCE_GATE_BEFORE.json",
+      "bytes": 210,
+      "sha256": "48bc04bf266ef0f21996718508ebfd04ea3d51f55d07a3fa476217f53e30897d"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\STAGE_STDERR.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\STAGE_STDOUT.json",
+      "bytes": 2418,
+      "sha256": "a07249b8db271f29d367313c474c4a7e7c9b6a7ca345fa3c6f1d07a09bdc35b5"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\SUMMARY.json",
+      "bytes": 1367,
+      "sha256": "bb20c5e9ebc4877dd3d914e708548d9948c14aa4f3dd4ef224a59e8bc80476f8"
+    },
+    {
+      "path": "baseline_ops\\CPU_BASELINE_V1\\unittest.log",
+      "bytes": 33905,
+      "sha256": "e67a0034604f8e6fb7504ff2e9793d05371bd61df121517fa82eddf54ac60b7e"
+    }
+  ]
+}

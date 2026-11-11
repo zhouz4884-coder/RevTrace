@@ -1,0 +1,171 @@
+{
+  "status": "PASS_ADDITIONAL_PHASE_CORRECT_STATE_ACTION_CHECKS_OVER_UNCHANGED_V3_SPEC",
+  "source_commit": "aa9db5c2396b76d9b50f5281fa4a68b54aca844a",
+  "source_manifest_sha256": "6d4212882ad7a276849336239c5815d3160f8c91ea6ad85313b5741732c4a15f",
+  "tests": 35,
+  "skipped": 0,
+  "profiles": {
+    "normal_two_frontiers": {
+      "states": 6231,
+      "edges": 11142,
+      "depth_cutoffs": 2144,
+      "terminal_states": 16,
+      "max_depth": 12,
+      "frontiers": 2,
+      "max_issued": 3,
+      "max_faults": 0,
+      "checked_action_edges": {
+        "ASR_projection": 836,
+        "actual_Consumer_application": 3328,
+        "cancel": 228,
+        "dispatch": 610,
+        "install_durable_transition": 476,
+        "original_CU": 2676,
+        "prepare": 892,
+        "receive_full": 1460,
+        "sync_original_transition": 636
+      },
+      "phase_state_counts": {
+        "idle": 4703,
+        "prepared": 892,
+        "synced": 636
+      },
+      "legal_durable_install_gap_examples": [
+        {
+          "depth": 5,
+          "phase": "synced",
+          "durable_facts": 1,
+          "installed_index": 0,
+          "owner_alive": true,
+          "durable_tail": {
+            "frontier": 1,
+            "state": 0
+          },
+          "installed_cut": {
+            "frontier": 0,
+            "state": 0
+          }
+        },
+        {
+          "depth": 5,
+          "phase": "synced",
+          "durable_facts": 1,
+          "installed_index": 0,
+          "owner_alive": true,
+          "durable_tail": {
+            "frontier": 1,
+            "state": 1
+          },
+          "installed_cut": {
+            "frontier": 0,
+            "state": 0
+          }
+        },
+        {
+          "depth": 5,
+          "phase": "synced",
+          "durable_facts": 1,
+          "installed_index": 0,
+          "owner_alive": true,
+          "durable_tail": {
+            "frontier": 1,
+            "state": 0
+          },
+          "installed_cut": {
+            "frontier": 0,
+            "state": 0
+          }
+        }
+      ],
+      "guarantee": "additional state and action obligations over unchanged hand-written v3 finite specification; not runtime extraction or unbounded proof"
+    },
+    "failure_one_frontier": {
+      "states": 14074,
+      "edges": 25799,
+      "depth_cutoffs": 2828,
+      "terminal_states": 2196,
+      "max_depth": 12,
+      "frontiers": 1,
+      "max_issued": 2,
+      "max_faults": 1,
+      "checked_action_edges": {
+        "ASR_projection": 756,
+        "Owner_process_crash": 135,
+        "actual_Consumer_application": 5892,
+        "cancel": 480,
+        "dispatch": 378,
+        "install_durable_transition": 1200,
+        "observe_exit": 2334,
+        "original_CU": 4020,
+        "prepare": 2224,
+        "receive_full": 3528,
+        "recover_durable_facts_without_new_neural_work": 123,
+        "restart": 2644,
+        "session_generation_fence": 95,
+        "sync_original_transition": 1720,
+        "worker_fail_stop": 270
+      },
+      "phase_state_counts": {
+        "idle": 10007,
+        "crashed": 123,
+        "prepared": 2224,
+        "synced": 1720
+      },
+      "legal_durable_install_gap_examples": [
+        {
+          "depth": 5,
+          "phase": "synced",
+          "durable_facts": 1,
+          "installed_index": 0,
+          "owner_alive": true,
+          "durable_tail": {
+            "frontier": 1,
+            "state": 0
+          },
+          "installed_cut": {
+            "frontier": 0,
+            "state": 0
+          }
+        },
+        {
+          "depth": 5,
+          "phase": "synced",
+          "durable_facts": 1,
+          "installed_index": 0,
+          "owner_alive": true,
+          "durable_tail": {
+            "frontier": 1,
+            "state": 1
+          },
+          "installed_cut": {
+            "frontier": 0,
+            "state": 0
+          }
+        },
+        {
+          "depth": 5,
+          "phase": "synced",
+          "durable_facts": 1,
+          "installed_index": 0,
+          "owner_alive": true,
+          "durable_tail": {
+            "frontier": 1,
+            "state": 0
+          },
+          "installed_cut": {
+            "frontier": 0,
+            "state": 0
+          }
+        }
+      ],
+      "guarantee": "additional state and action obligations over unchanged hand-written v3 finite specification; not runtime extraction or unbounded proof"
+    }
+  },
+  "model_calls": 0,
+  "GPU_calls": 0,
+  "evidence_tier": "finite symbolic specification plus source correspondence; NOT deployed serving, natural prevalence, arbitrary GPU equality, unbounded liveness, or whole Python/CUDA verification",
+  "final_runtime_mechanical_extraction": false,
+  "original_v3_controls_preserved": 27,
+  "original_v3_source_commit": "deb3260655e2f3312499a34597cc0be6fc15484b",
+  "scope": "Additional phase-correct state/action obligations on unchanged v3 finite hand-written specification, preserving legal durable-before-install/crash gaps. Not runtime extraction, unbounded proof, neural result, natural prevalence or serving evidence."
+}

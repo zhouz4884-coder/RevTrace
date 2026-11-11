@@ -1,0 +1,316 @@
+{
+  "operation": "read-only original loader function; no neural imports",
+  "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/author_StreamCorrect_bbb9f7f/simul_whisper/whisper/__init__.py",
+  "bytes": 15122,
+  "sha256": "f9ab895c30bb36218adaace260ec2519d1a5fc98c3fd3e2caa02a75d36003b4d",
+  "lines": [
+    {
+      "line": 260,
+      "text": "def load_model("
+    },
+    {
+      "line": 261,
+      "text": "    name: str,"
+    },
+    {
+      "line": 262,
+      "text": "    device: Optional[Union[str, torch.device]] = None,"
+    },
+    {
+      "line": 263,
+      "text": "    download_root: str = None,"
+    },
+    {
+      "line": 264,
+      "text": "    in_memory: bool = False,"
+    },
+    {
+      "line": 265,
+      "text": ") -> Whisper:"
+    },
+    {
+      "line": 266,
+      "text": "    \"\"\""
+    },
+    {
+      "line": 267,
+      "text": "    Load a Whisper ASR model"
+    },
+    {
+      "line": 268,
+      "text": ""
+    },
+    {
+      "line": 269,
+      "text": "    Parameters"
+    },
+    {
+      "line": 270,
+      "text": "    ----------"
+    },
+    {
+      "line": 271,
+      "text": "    name : str"
+    },
+    {
+      "line": 272,
+      "text": "        one of the official model names listed by `whisper.available_models()`, or"
+    },
+    {
+      "line": 273,
+      "text": "        path to a model checkpoint containing the model dimensions and the model state_dict."
+    },
+    {
+      "line": 274,
+      "text": "    device : Union[str, torch.device]"
+    },
+    {
+      "line": 275,
+      "text": "        the PyTorch device to put the model into"
+    },
+    {
+      "line": 276,
+      "text": "    download_root: str"
+    },
+    {
+      "line": 277,
+      "text": "        path to download the model files; by default, it uses \"~/.cache/whisper\""
+    },
+    {
+      "line": 278,
+      "text": "    in_memory: bool"
+    },
+    {
+      "line": 279,
+      "text": "        whether to preload the model weights into host memory"
+    },
+    {
+      "line": 280,
+      "text": ""
+    },
+    {
+      "line": 281,
+      "text": "    Returns"
+    },
+    {
+      "line": 282,
+      "text": "    -------"
+    },
+    {
+      "line": 283,
+      "text": "    model : Whisper"
+    },
+    {
+      "line": 284,
+      "text": "        The Whisper ASR model instance"
+    },
+    {
+      "line": 285,
+      "text": "    \"\"\""
+    },
+    {
+      "line": 286,
+      "text": ""
+    },
+    {
+      "line": 287,
+      "text": "    if device is None:"
+    },
+    {
+      "line": 288,
+      "text": "        device = \"cuda\" if torch.cuda.is_available() else \"cpu\""
+    },
+    {
+      "line": 289,
+      "text": "    if download_root is None:"
+    },
+    {
+      "line": 290,
+      "text": "        default = os.path.join(os.path.expanduser(\"~\"), \".cache\")"
+    },
+    {
+      "line": 291,
+      "text": "        download_root = os.path.join(os.getenv(\"XDG_CACHE_HOME\", default), \"whisper\")"
+    },
+    {
+      "line": 292,
+      "text": ""
+    },
+    {
+      "line": 293,
+      "text": "    if name in _MODELS:"
+    },
+    {
+      "line": 294,
+      "text": "        checkpoint_file = _download(_MODELS[name], download_root, in_memory)"
+    },
+    {
+      "line": 295,
+      "text": "        alignment_heads = _ALIGNMENT_HEADS[name]"
+    },
+    {
+      "line": 296,
+      "text": "    elif os.path.isfile(name):"
+    },
+    {
+      "line": 297,
+      "text": "        checkpoint_file = open(name, \"rb\").read() if in_memory else name"
+    },
+    {
+      "line": 298,
+      "text": "        alignment_heads = None"
+    },
+    {
+      "line": 299,
+      "text": "    else:"
+    },
+    {
+      "line": 300,
+      "text": "        raise RuntimeError("
+    },
+    {
+      "line": 301,
+      "text": "            f\"Model {name} not found; available models = {available_models()}\""
+    },
+    {
+      "line": 302,
+      "text": "        )"
+    },
+    {
+      "line": 303,
+      "text": "    "
+    },
+    {
+      "line": 304,
+      "text": ""
+    },
+    {
+      "line": 305,
+      "text": "    # ===== Custom whisper medium ====="
+    },
+    {
+      "line": 306,
+      "text": "    if name == \"medium\":"
+    },
+    {
+      "line": 307,
+      "text": "        checkpoint_file = \"whisper_medium_yue.pt\""
+    },
+    {
+      "line": 308,
+      "text": "    if name == \"large-v2\":"
+    },
+    {
+      "line": 309,
+      "text": "        checkpoint_file = \"large-v2-zh.pt\""
+    },
+    {
+      "line": 310,
+      "text": "    # if name == \"large-v3-turbo\":"
+    },
+    {
+      "line": 311,
+      "text": "    #     checkpoint_file = \"large-v3-turbo-zh.pt\""
+    },
+    {
+      "line": 312,
+      "text": "    # alignment_heads = None"
+    },
+    {
+      "line": 313,
+      "text": "    # ================================"
+    },
+    {
+      "line": 314,
+      "text": ""
+    },
+    {
+      "line": 315,
+      "text": "    with ("
+    },
+    {
+      "line": 316,
+      "text": "        io.BytesIO(checkpoint_file) if in_memory else open(checkpoint_file, \"rb\")"
+    },
+    {
+      "line": 317,
+      "text": "    ) as fp:"
+    },
+    {
+      "line": 318,
+      "text": "        checkpoint = torch.load(fp, map_location=device)"
+    },
+    {
+      "line": 319,
+      "text": "    del checkpoint_file"
+    },
+    {
+      "line": 320,
+      "text": ""
+    },
+    {
+      "line": 321,
+      "text": "    # ===== Custom whisper medium ====="
+    },
+    {
+      "line": 322,
+      "text": "    if name == \"large-v2\":"
+    },
+    {
+      "line": 323,
+      "text": "        checkpoint['model_state_dict'] = convert_finetuned_to_whisper_state_dict(checkpoint['model_state_dict'])"
+    },
+    {
+      "line": 324,
+      "text": "    if name == \"medium\":"
+    },
+    {
+      "line": 325,
+      "text": "        checkpoint['model_state_dict'] = convert_wenet_to_whisper_state_dict(checkpoint)"
+    },
+    {
+      "line": 326,
+      "text": "        checkpoint[\"dims\"] = {'n_mels': 80, 'n_vocab': 51865, 'n_audio_ctx': 1500, 'n_audio_state': 1024, 'n_audio_head': 16, 'n_audio_layer': 24, 'n_text_ctx': 448, 'n_text_state': 1024, 'n_text_head': 16, 'n_text_layer': 24}"
+    },
+    {
+      "line": 327,
+      "text": "    # ================================"
+    },
+    {
+      "line": 328,
+      "text": ""
+    },
+    {
+      "line": 329,
+      "text": "    dims = ModelDimensions(**checkpoint[\"dims\"])"
+    },
+    {
+      "line": 330,
+      "text": "    model = Whisper(dims)"
+    },
+    {
+      "line": 331,
+      "text": "    model.load_state_dict(checkpoint[\"model_state_dict\"])"
+    },
+    {
+      "line": 332,
+      "text": ""
+    },
+    {
+      "line": 333,
+      "text": "    if alignment_heads is not None:"
+    },
+    {
+      "line": 334,
+      "text": "        model.set_alignment_heads(alignment_heads)"
+    },
+    {
+      "line": 335,
+      "text": ""
+    },
+    {
+      "line": 336,
+      "text": "    return model.to(device)"
+    }
+  ]
+}

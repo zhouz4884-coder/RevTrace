@@ -1,0 +1,1963 @@
+{
+  "scope": "read-only old raw power linear integration, same method as original Power.energy; both boards, no CPU energy, no new model execution",
+  "utc": "2026-11-11T09:11:01.142747+00:00",
+  "host": "user",
+  "rows": [
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r0",
+      "phases": {
+        "fault_to_death": {
+          "seconds": 1.4515351941809058,
+          "gpu_joules": {
+            "0": 249.5791299250157,
+            "1": 190.48029677772973
+          },
+          "total_joules": 440.05942670274544
+        },
+        "death_to_owner_start": {
+          "seconds": 0.0774524137377739,
+          "gpu_joules": {
+            "0": 11.196332805562815,
+            "1": 8.504515906730719
+          },
+          "total_joules": 19.700848712293535
+        },
+        "owner_start_to_ready": {
+          "seconds": 84.84676451049745,
+          "gpu_joules": {
+            "0": 9257.191483314322,
+            "1": 8687.703824964268
+          },
+          "total_joules": 17944.89530827859
+        },
+        "ready_to_new_certified": {
+          "seconds": 0.6784173361957073,
+          "gpu_joules": {
+            "0": 116.95396974182995,
+            "1": 83.63512244193278
+          },
+          "total_joules": 200.58909218376272
+        },
+        "fault_to_new_certified": {
+          "seconds": 87.05416945461184,
+          "gpu_joules": {
+            "0": 9634.92091578673,
+            "1": 8970.323760090663
+          },
+          "total_joules": 18605.244675877395
+        },
+        "origin_to_fault": {
+          "seconds": 2.867748855613172,
+          "gpu_joules": {
+            "0": 435.21366850594353,
+            "1": 408.0994509756316
+          },
+          "total_joules": 843.3131194815751
+        },
+        "new_certified_to_service_end": {
+          "seconds": 15.350057109259069,
+          "gpu_joules": {
+            "0": 3072.2348431599758,
+            "1": 1679.3105574915862
+          },
+          "total_joules": 4751.545400651562
+        },
+        "whole_service": {
+          "seconds": 105.27197541948408,
+          "gpu_joules": {
+            "0": 13142.36942745265,
+            "1": 11057.73376855787
+          },
+          "total_joules": 24200.103196010517
+        }
+      },
+      "workers": [
+        {
+          "slot": "full0",
+          "gpu": 0,
+          "pid": 2239850,
+          "worker_start_perf": 5110964.579740518,
+          "sent_perf": 5111047.267987053,
+          "model_load_seconds": 73.4948286851868,
+          "full_load_warmup_seconds": 78.57424057461321,
+          "warmup_seconds": 5.075893059372902,
+          "inferred_constructor_begin_perf": 5110968.693746478,
+          "pre_constructor_seconds": 4.114005960524082,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        },
+        {
+          "slot": "full1",
+          "gpu": 1,
+          "pid": 2239853,
+          "worker_start_perf": 5110964.581646485,
+          "sent_perf": 5111047.293246833,
+          "model_load_seconds": 73.49404951464385,
+          "full_load_warmup_seconds": 78.59924831986427,
+          "warmup_seconds": 5.101926859468222,
+          "inferred_constructor_begin_perf": 5110968.693998513,
+          "pre_constructor_seconds": 4.11235202755779,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        }
+      ],
+      "post_recovery_first_events": [
+        {
+          "file": "worker_results.jsonl",
+          "line": 4,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000001",
+          "dispatched_perf": null,
+          "start": 32000,
+          "end": 40000,
+          "model_start": 5111047.312802213,
+          "model_end": 5111047.915189808,
+          "model_seconds": 0.6023875949904323
+        },
+        {
+          "file": "worker_results.jsonl",
+          "line": 6,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000002",
+          "dispatched_perf": null,
+          "start": 40000,
+          "end": 48000,
+          "model_start": 5111047.965077397,
+          "model_end": 5111048.566857433,
+          "model_seconds": 0.601780035533011
+        }
+      ],
+      "group_death_proof": {
+        "owner_pid": 2238286,
+        "owner_exitcode": -9,
+        "confirmed_no_executing_members": true,
+        "retired_process_members": [
+          {
+            "pid": 2238379,
+            "state": "Z",
+            "start_ticks": 511087807
+          }
+        ],
+        "all_CUDA_owners_released": true,
+        "observed": 5110962.372482866
+      },
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r0/supervisor.jsonl",
+        "bytes": 809831,
+        "sha256": "373960b4bd1c89bd09b102357cbdc24b8f110391b76db2bc12c7d476918be958"
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r0/power.jsonl",
+        "bytes": 167622,
+        "sha256": "f59b8d46bdba35c65ea8135d89b8f4a69aa4dd933f5bc766086c2d64b66efc8e"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r1",
+      "phases": {
+        "fault_to_death": {
+          "seconds": 1.3154273703694344,
+          "gpu_joules": {
+            "0": 150.57821500471704,
+            "1": 217.01071041820433
+          },
+          "total_joules": 367.58892542292136
+        },
+        "death_to_owner_start": {
+          "seconds": 0.1052355207502842,
+          "gpu_joules": {
+            "0": 12.13771135236942,
+            "1": 14.143207978269398
+          },
+          "total_joules": 26.280919330638817
+        },
+        "owner_start_to_ready": {
+          "seconds": 81.78230624832213,
+          "gpu_joules": {
+            "0": 8342.161822591419,
+            "1": 7885.095067874788
+          },
+          "total_joules": 16227.256890466208
+        },
+        "ready_to_new_certified": {
+          "seconds": 0.6954150050878525,
+          "gpu_joules": {
+            "0": 89.61147957726858,
+            "1": 117.62352986908827
+          },
+          "total_joules": 207.23500944635686
+        },
+        "fault_to_new_certified": {
+          "seconds": 83.8983841445297,
+          "gpu_joules": {
+            "0": 8594.489228525776,
+            "1": 8233.872516140349
+          },
+          "total_joules": 16828.361744666123
+        },
+        "origin_to_fault": {
+          "seconds": 2.937412424944341,
+          "gpu_joules": {
+            "0": 347.7638522215334,
+            "1": 495.70907323417555
+          },
+          "total_joules": 843.472925455709
+        },
+        "new_certified_to_service_end": {
+          "seconds": 15.341014218516648,
+          "gpu_joules": {
+            "0": 1762.1747224934008,
+            "1": 2980.978053013353
+          },
+          "total_joules": 4743.152775506754
+        },
+        "whole_service": {
+          "seconds": 102.17681078799069,
+          "gpu_joules": {
+            "0": 10704.427803240711,
+            "1": 11710.55964238787
+          },
+          "total_joules": 22414.987445628583
+        }
+      },
+      "workers": [
+        {
+          "slot": "full1",
+          "gpu": 0,
+          "pid": 2228872,
+          "worker_start_perf": 5110315.239938848,
+          "sent_perf": 5110395.253331615,
+          "model_load_seconds": 69.85791892930865,
+          "full_load_warmup_seconds": 75.98532023373991,
+          "warmup_seconds": 6.121745745651424,
+          "inferred_constructor_begin_perf": 5110319.268011381,
+          "pre_constructor_seconds": 4.028072533197701,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        },
+        {
+          "slot": "full0",
+          "gpu": 1,
+          "pid": 2228869,
+          "worker_start_perf": 5110315.238638466,
+          "sent_perf": 5110395.253720262,
+          "model_load_seconds": 69.85911708790809,
+          "full_load_warmup_seconds": 75.98788830637932,
+          "warmup_seconds": 6.124348376877606,
+          "inferred_constructor_begin_perf": 5110319.265831956,
+          "pre_constructor_seconds": 4.027193489484489,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        }
+      ],
+      "post_recovery_first_events": [
+        {
+          "file": "worker_results.jsonl",
+          "line": 4,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000001",
+          "dispatched_perf": null,
+          "start": 32000,
+          "end": 40000,
+          "model_start": 5110395.270268717,
+          "model_end": 5110395.852171448,
+          "model_seconds": 0.5819027312099934
+        },
+        {
+          "file": "worker_results.jsonl",
+          "line": 6,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000002",
+          "dispatched_perf": null,
+          "start": 40000,
+          "end": 48000,
+          "model_start": 5110395.904599811,
+          "model_end": 5110396.502331343,
+          "model_seconds": 0.5977315315976739
+        }
+      ],
+      "group_death_proof": {
+        "owner_pid": 2226975,
+        "owner_exitcode": -9,
+        "confirmed_no_executing_members": true,
+        "retired_process_members": [
+          {
+            "pid": 2227056,
+            "state": "Z",
+            "start_ticks": 511020910
+          },
+          {
+            "pid": 2227059,
+            "state": "Z",
+            "start_ticks": 511020910
+          }
+        ],
+        "all_CUDA_owners_released": true,
+        "observed": 5110313.370999631
+      },
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r1/supervisor.jsonl",
+        "bytes": 809880,
+        "sha256": "3081f3a95a0e953b8295235ef7f74367f0ad7d37db36c202eb1bdca58dae39af"
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_conservative_r1/power.jsonl",
+        "bytes": 183522,
+        "sha256": "925909ed780ed9b42babf92e3a66c7aa7458a06fb9d11a425aad499e499ec704"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0",
+      "phases": {
+        "fault_to_death": {
+          "seconds": 1.781948896124959,
+          "gpu_joules": {
+            "0": 252.34855412069436,
+            "1": 292.9710130206817
+          },
+          "total_joules": 545.3195671413761
+        },
+        "death_to_owner_start": {
+          "seconds": 0.11703819315880537,
+          "gpu_joules": {
+            "0": 13.988922820275672,
+            "1": 15.654081889684807
+          },
+          "total_joules": 29.64300470996048
+        },
+        "owner_start_to_ready": {
+          "seconds": 101.79978224728256,
+          "gpu_joules": {
+            "0": 10562.514473440411,
+            "1": 9812.579392559323
+          },
+          "total_joules": 20375.093865999734
+        },
+        "ready_to_new_certified": {
+          "seconds": 0.7402536105364561,
+          "gpu_joules": {
+            "0": 129.11725671208933,
+            "1": 97.2270917027903
+          },
+          "total_joules": 226.34434841487962
+        },
+        "fault_to_new_certified": {
+          "seconds": 104.43902294710279,
+          "gpu_joules": {
+            "0": 10957.969207093473,
+            "1": 10218.431579172484
+          },
+          "total_joules": 21176.400786265956
+        },
+        "origin_to_fault": {
+          "seconds": 2.6844631526619196,
+          "gpu_joules": {
+            "0": 406.48295391869306,
+            "1": 365.0351160165788
+          },
+          "total_joules": 771.5180699352718
+        },
+        "new_certified_to_service_end": {
+          "seconds": 15.94927338231355,
+          "gpu_joules": {
+            "0": 2683.329319876896,
+            "1": 2539.889067773948
+          },
+          "total_joules": 5223.218387650844
+        },
+        "whole_service": {
+          "seconds": 123.07275948207825,
+          "gpu_joules": {
+            "0": 14047.781480889056,
+            "1": 13123.355762963012
+          },
+          "total_joules": 27171.13724385207
+        }
+      },
+      "workers": [
+        {
+          "slot": "full1",
+          "gpu": 1,
+          "pid": 2243285,
+          "worker_start_perf": 5111165.413327979,
+          "sent_perf": 5111265.77789397,
+          "model_load_seconds": 87.70763184409589,
+          "full_load_warmup_seconds": 94.89699785970151,
+          "warmup_seconds": 7.141027365811169,
+          "inferred_constructor_begin_perf": 5111170.88089611,
+          "pre_constructor_seconds": 5.467568131163716,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        },
+        {
+          "slot": "full0",
+          "gpu": 0,
+          "pid": 2243282,
+          "worker_start_perf": 5111165.411834553,
+          "sent_perf": 5111265.817453753,
+          "model_load_seconds": 87.7066898709163,
+          "full_load_warmup_seconds": 94.93678400106728,
+          "warmup_seconds": 7.17941171489656,
+          "inferred_constructor_begin_perf": 5111170.880669752,
+          "pre_constructor_seconds": 5.468835199251771,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        }
+      ],
+      "post_recovery_first_events": [
+        {
+          "file": "worker_results.jsonl",
+          "line": 4,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000001",
+          "dispatched_perf": null,
+          "start": 32000,
+          "end": 40000,
+          "model_start": 5111265.837164135,
+          "model_end": 5111266.468882725,
+          "model_seconds": 0.6317185899242759
+        },
+        {
+          "file": "worker_results.jsonl",
+          "line": 7,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000003",
+          "dispatched_perf": null,
+          "start": 40000,
+          "end": 48000,
+          "model_start": 5111266.537173996,
+          "model_end": 5111267.160977306,
+          "model_seconds": 0.6238033100962639
+        }
+      ],
+      "group_death_proof": {
+        "owner_pid": 2241526,
+        "owner_exitcode": -9,
+        "confirmed_no_executing_members": true,
+        "retired_process_members": [],
+        "all_CUDA_owners_released": true,
+        "observed": 5111163.903970853
+      },
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/supervisor.jsonl",
+        "bytes": 861323,
+        "sha256": "54c3bd041b8a7cd6da2b67b8dc3326814111e636a68436512ce2b10413ca0af8"
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r0/power.jsonl",
+        "bytes": 195412,
+        "sha256": "de65086a6e781a29f42d0007cfa69269ceed2af5a2e9da85c66f69df03b2ea42"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1",
+      "phases": {
+        "fault_to_death": {
+          "seconds": 1.6534269945695996,
+          "gpu_joules": {
+            "0": 257.7804203140226,
+            "1": 276.45558432778904
+          },
+          "total_joules": 534.2360046418116
+        },
+        "death_to_owner_start": {
+          "seconds": 0.07696220185607672,
+          "gpu_joules": {
+            "0": 10.660200024855166,
+            "1": 10.416773956147315
+          },
+          "total_joules": 21.07697398100248
+        },
+        "owner_start_to_ready": {
+          "seconds": 99.37496261578053,
+          "gpu_joules": {
+            "0": 10291.813523455912,
+            "1": 9748.000461259198
+          },
+          "total_joules": 20039.81398471511
+        },
+        "ready_to_new_certified": {
+          "seconds": 0.6994455503299832,
+          "gpu_joules": {
+            "0": 96.14004112601427,
+            "1": 117.37785799676796
+          },
+          "total_joules": 213.51789912278224
+        },
+        "fault_to_new_certified": {
+          "seconds": 101.80479736253619,
+          "gpu_joules": {
+            "0": 10656.394184920802,
+            "1": 10152.250677539903
+          },
+          "total_joules": 20808.644862460707
+        },
+        "origin_to_fault": {
+          "seconds": 2.653006843291223,
+          "gpu_joules": {
+            "0": 334.6074256897217,
+            "1": 412.0430538542702
+          },
+          "total_joules": 746.6504795439919
+        },
+        "new_certified_to_service_end": {
+          "seconds": 14.212446343153715,
+          "gpu_joules": {
+            "0": 2427.1310061168333,
+            "1": 2500.253823525121
+          },
+          "total_joules": 4927.384829641955
+        },
+        "whole_service": {
+          "seconds": 118.67025054898113,
+          "gpu_joules": {
+            "0": 13418.132616727356,
+            "1": 13064.54755491929
+          },
+          "total_joules": 26482.680171646647
+        }
+      },
+      "workers": [
+        {
+          "slot": "full1",
+          "gpu": 0,
+          "pid": 2225117,
+          "worker_start_perf": 5110093.691737315,
+          "sent_perf": 5110191.400426666,
+          "model_load_seconds": 87.05056818574667,
+          "full_load_warmup_seconds": 93.20949309878051,
+          "warmup_seconds": 6.143588102422655,
+          "inferred_constructor_begin_perf": 5110098.1909335675,
+          "pre_constructor_seconds": 4.499196252785623,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        },
+        {
+          "slot": "full0",
+          "gpu": 1,
+          "pid": 2225114,
+          "worker_start_perf": 5110093.69041075,
+          "sent_perf": 5110191.403464149,
+          "model_load_seconds": 87.0507170688361,
+          "full_load_warmup_seconds": 93.22784668300301,
+          "warmup_seconds": 6.161525819450617,
+          "inferred_constructor_begin_perf": 5110098.175617466,
+          "pre_constructor_seconds": 4.485206715762615,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        }
+      ],
+      "post_recovery_first_events": [
+        {
+          "file": "worker_results.jsonl",
+          "line": 4,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000001",
+          "dispatched_perf": null,
+          "start": 32000,
+          "end": 40000,
+          "model_start": 5110191.419784147,
+          "model_end": 5110192.044639923,
+          "model_seconds": 0.624855775386095
+        },
+        {
+          "file": "worker_results.jsonl",
+          "line": 7,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000003",
+          "dispatched_perf": null,
+          "start": 40000,
+          "end": 48000,
+          "model_start": 5110192.088685948,
+          "model_end": 5110192.715707289,
+          "model_seconds": 0.6270213406533003
+        }
+      ],
+      "group_death_proof": {
+        "owner_pid": 2223222,
+        "owner_exitcode": -9,
+        "confirmed_no_executing_members": true,
+        "retired_process_members": [
+          {
+            "pid": 2223295,
+            "state": "Z",
+            "start_ticks": 510998432
+          },
+          {
+            "pid": 2223298,
+            "state": "Z",
+            "start_ticks": 510998432
+          }
+        ],
+        "all_CUDA_owners_released": true,
+        "observed": 5110091.954555524
+      },
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/supervisor.jsonl",
+        "bytes": 861430,
+        "sha256": "302790cd01709af1774e4038ecaed6c3899097e9138a8646c753a8f3e4e519d7"
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_after_durable_fullcall_r1/power.jsonl",
+        "bytes": 201008,
+        "sha256": "521b029f1385307585ea3cabf5017a54d2be1863e3970468a03b5154ad51b86b"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r0",
+      "phases": {
+        "fault_to_death": {
+          "seconds": 1.7106268461793661,
+          "gpu_joules": {
+            "0": 283.8208785605625,
+            "1": 186.4337491277112
+          },
+          "total_joules": 470.2546276882737
+        },
+        "death_to_owner_start": {
+          "seconds": 0.04973990470170975,
+          "gpu_joules": {
+            "0": 6.646211114159523,
+            "1": 5.591243351768331
+          },
+          "total_joules": 12.237454465927854
+        },
+        "owner_start_to_ready": {
+          "seconds": 105.60808533709496,
+          "gpu_joules": {
+            "0": 10932.016117987274,
+            "1": 10117.132038291245
+          },
+          "total_joules": 21049.14815627852
+        },
+        "ready_to_new_certified": {
+          "seconds": 0.7120777862146497,
+          "gpu_joules": {
+            "0": 117.71219905619525,
+            "1": 85.11580969408587
+          },
+          "total_joules": 202.82800875028113
+        },
+        "fault_to_new_certified": {
+          "seconds": 108.08052987419069,
+          "gpu_joules": {
+            "0": 11340.195406718189,
+            "1": 10394.272840464813
+          },
+          "total_joules": 21734.468247183002
+        },
+        "origin_to_fault": {
+          "seconds": 2.8962631821632385,
+          "gpu_joules": {
+            "0": 494.22789114877605,
+            "1": 323.4508036004045
+          },
+          "total_joules": 817.6786947491805
+        },
+        "new_certified_to_service_end": {
+          "seconds": 19.112479196861386,
+          "gpu_joules": {
+            "0": 3570.591494409724,
+            "1": 1896.48758973133
+          },
+          "total_joules": 5467.079084141054
+        },
+        "whole_service": {
+          "seconds": 130.0892722532153,
+          "gpu_joules": {
+            "0": 15405.0147922767,
+            "1": 12614.211233796545
+          },
+          "total_joules": 28019.226026073244
+        }
+      },
+      "workers": [
+        {
+          "slot": "full0",
+          "gpu": 0,
+          "pid": 2232527,
+          "worker_start_perf": 5110529.424017296,
+          "sent_perf": 5110633.223645354,
+          "model_load_seconds": 90.71604969445616,
+          "full_load_warmup_seconds": 97.69728658813983,
+          "warmup_seconds": 6.9634261867031455,
+          "inferred_constructor_begin_perf": 5110535.526358766,
+          "pre_constructor_seconds": 6.102341469377279,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        },
+        {
+          "slot": "full1",
+          "gpu": 1,
+          "pid": 2232530,
+          "worker_start_perf": 5110529.426046038,
+          "sent_perf": 5110633.224340184,
+          "model_load_seconds": 90.71643695048988,
+          "full_load_warmup_seconds": 97.69633899349719,
+          "warmup_seconds": 6.962458281777799,
+          "inferred_constructor_begin_perf": 5110535.52800119,
+          "pre_constructor_seconds": 6.101955152116716,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        }
+      ],
+      "post_recovery_first_events": [
+        {
+          "file": "worker_results.jsonl",
+          "line": 4,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000001",
+          "dispatched_perf": null,
+          "start": 24000,
+          "end": 32000,
+          "model_start": 5110633.259813194,
+          "model_end": 5110633.891965888,
+          "model_seconds": 0.6321526942774653
+        },
+        {
+          "file": "worker_results.jsonl",
+          "line": 6,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000002",
+          "dispatched_perf": null,
+          "start": 32000,
+          "end": 40000,
+          "model_start": 5110633.935640269,
+          "model_end": 5110634.55097069,
+          "model_seconds": 0.6153304213657975
+        }
+      ],
+      "group_death_proof": {
+        "owner_pid": 2230439,
+        "owner_exitcode": -9,
+        "confirmed_no_executing_members": true,
+        "retired_process_members": [],
+        "all_CUDA_owners_released": true,
+        "observed": 5110527.579850812
+      },
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r0/supervisor.jsonl",
+        "bytes": 844353,
+        "sha256": "3fca307b1ba5b62b3e23bc5915e672468e4da121e54c17b1d3056639a7f6ceb1"
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r0/power.jsonl",
+        "bytes": 215366,
+        "sha256": "a1bb6a2d29d5f21ed4ceec7cb701178ac529211ee8ae52fac7ac461a72ad620e"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r1",
+      "phases": {
+        "fault_to_death": {
+          "seconds": 1.7060311594977975,
+          "gpu_joules": {
+            "0": 196.39161449200043,
+            "1": 279.03070994296024
+          },
+          "total_joules": 475.4223244349607
+        },
+        "death_to_owner_start": {
+          "seconds": 0.09817195404320955,
+          "gpu_joules": {
+            "0": 11.521353565764676,
+            "1": 12.635948797249247
+          },
+          "total_joules": 24.157302363013923
+        },
+        "owner_start_to_ready": {
+          "seconds": 83.94910976756364,
+          "gpu_joules": {
+            "0": 9184.485943595168,
+            "1": 8708.241531570107
+          },
+          "total_joules": 17892.727475165273
+        },
+        "ready_to_new_certified": {
+          "seconds": 0.6714362520724535,
+          "gpu_joules": {
+            "0": 86.20548676930507,
+            "1": 113.81060207312956
+          },
+          "total_joules": 200.0160888424346
+        },
+        "fault_to_new_certified": {
+          "seconds": 86.4247491331771,
+          "gpu_joules": {
+            "0": 9478.604398422236,
+            "1": 9113.718792383448
+          },
+          "total_joules": 18592.323190805684
+        },
+        "origin_to_fault": {
+          "seconds": 2.836601262912154,
+          "gpu_joules": {
+            "0": 335.41420428198643,
+            "1": 474.6221253187969
+          },
+          "total_joules": 810.0363296007833
+        },
+        "new_certified_to_service_end": {
+          "seconds": 16.507471309043467,
+          "gpu_joules": {
+            "0": 1897.1821203097675,
+            "1": 3249.4764182851063
+          },
+          "total_joules": 5146.658538594874
+        },
+        "whole_service": {
+          "seconds": 105.76882170513272,
+          "gpu_joules": {
+            "0": 11711.200723013997,
+            "1": 12837.817335987347
+          },
+          "total_joules": 24549.018059001344
+        }
+      },
+      "workers": [
+        {
+          "slot": "full1",
+          "gpu": 0,
+          "pid": 2256120,
+          "worker_start_perf": 5111916.860755233,
+          "sent_perf": 5111999.804267238,
+          "model_load_seconds": 73.66398182976991,
+          "full_load_warmup_seconds": 79.62434542737901,
+          "warmup_seconds": 5.956468506716192,
+          "inferred_constructor_begin_perf": 5111920.1799218105,
+          "pre_constructor_seconds": 3.3191665774211287,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        },
+        {
+          "slot": "full0",
+          "gpu": 1,
+          "pid": 2256117,
+          "worker_start_perf": 5111916.843613397,
+          "sent_perf": 5111999.81879512,
+          "model_load_seconds": 73.64813543017954,
+          "full_load_warmup_seconds": 79.63935099449009,
+          "warmup_seconds": 5.98778598383069,
+          "inferred_constructor_begin_perf": 5111920.179444126,
+          "pre_constructor_seconds": 3.335830728523433,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        }
+      ],
+      "post_recovery_first_events": [
+        {
+          "file": "worker_results.jsonl",
+          "line": 4,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000001",
+          "dispatched_perf": null,
+          "start": 24000,
+          "end": 32000,
+          "model_start": 5111999.837005985,
+          "model_end": 5112000.421651632,
+          "model_seconds": 0.5846456466242671
+        },
+        {
+          "file": "worker_results.jsonl",
+          "line": 6,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000002",
+          "dispatched_perf": null,
+          "start": 32000,
+          "end": 40000,
+          "model_start": 5112000.460570453,
+          "model_end": 5112001.052129883,
+          "model_seconds": 0.5915594305843115
+        }
+      ],
+      "group_death_proof": {
+        "owner_pid": 2254849,
+        "owner_exitcode": -9,
+        "confirmed_no_executing_members": true,
+        "retired_process_members": [
+          {
+            "pid": 2254916,
+            "state": "Z",
+            "start_ticks": 511184934
+          }
+        ],
+        "all_CUDA_owners_released": true,
+        "observed": 5111915.777421942
+      },
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r1/supervisor.jsonl",
+        "bytes": 844403,
+        "sha256": "701eb3ae87861d1351b1c247d396bde0e7e0e883dcf59e0268e09cb8bb236e77"
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_conservative_r1/power.jsonl",
+        "bytes": 152926,
+        "sha256": "e4a49306ec0524305713131386e6f61ecb1bd1f6e67549ebdc8a171388d90675"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0",
+      "phases": {
+        "fault_to_death": {
+          "seconds": 1.679579640738666,
+          "gpu_joules": {
+            "0": 288.22416084242474,
+            "1": 252.9816823504681
+          },
+          "total_joules": 541.2058431928929
+        },
+        "death_to_owner_start": {
+          "seconds": 0.055192979983985424,
+          "gpu_joules": {
+            "0": 7.940446518593682,
+            "1": 7.7089052583024005
+          },
+          "total_joules": 15.649351776896083
+        },
+        "owner_start_to_ready": {
+          "seconds": 104.63694409374148,
+          "gpu_joules": {
+            "0": 10367.51258819223,
+            "1": 9637.215415660872
+          },
+          "total_joules": 20004.728003853103
+        },
+        "ready_to_new_certified": {
+          "seconds": 0.7189543936401606,
+          "gpu_joules": {
+            "0": 123.51640498334787,
+            "1": 97.04512354441808
+          },
+          "total_joules": 220.56152852776594
+        },
+        "fault_to_new_certified": {
+          "seconds": 107.09067110810429,
+          "gpu_joules": {
+            "0": 10787.1936005366,
+            "1": 9994.951126814058
+          },
+          "total_joules": 20782.144727350656
+        },
+        "origin_to_fault": {
+          "seconds": 2.6799805108457804,
+          "gpu_joules": {
+            "0": 435.53365789016163,
+            "1": 317.30005681607554
+          },
+          "total_joules": 752.8337147062372
+        },
+        "new_certified_to_service_end": {
+          "seconds": 14.096635405905545,
+          "gpu_joules": {
+            "0": 2598.302745857297,
+            "1": 2423.222627052345
+          },
+          "total_joules": 5021.525372909642
+        },
+        "whole_service": {
+          "seconds": 123.86728702485561,
+          "gpu_joules": {
+            "0": 13821.030004284064,
+            "1": 12735.473810682472
+          },
+          "total_joules": 26556.503814966534
+        }
+      },
+      "workers": [
+        {
+          "slot": "full0",
+          "gpu": 0,
+          "pid": 2236349,
+          "worker_start_perf": 5110757.648759369,
+          "sent_perf": 5110860.410658525,
+          "model_load_seconds": 89.48013339750469,
+          "full_load_warmup_seconds": 94.14686150848866,
+          "warmup_seconds": 4.65857969596982,
+          "inferred_constructor_begin_perf": 5110766.263797017,
+          "pre_constructor_seconds": 8.615037648007274,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        },
+        {
+          "slot": "full1",
+          "gpu": 1,
+          "pid": 2236352,
+          "worker_start_perf": 5110757.650125439,
+          "sent_perf": 5110860.427200569,
+          "model_load_seconds": 89.47846855409443,
+          "full_load_warmup_seconds": 94.16690021473914,
+          "warmup_seconds": 4.6763546876609325,
+          "inferred_constructor_begin_perf": 5110766.260300354,
+          "pre_constructor_seconds": 8.610174914821982,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        }
+      ],
+      "post_recovery_first_events": [
+        {
+          "file": "worker_results.jsonl",
+          "line": 4,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000001",
+          "dispatched_perf": null,
+          "start": 24000,
+          "end": 32000,
+          "model_start": 5110860.445258617,
+          "model_end": 5110861.061249556,
+          "model_seconds": 0.6159909386187792
+        },
+        {
+          "file": "worker_results.jsonl",
+          "line": 7,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000003",
+          "dispatched_perf": null,
+          "start": 32000,
+          "end": 40000,
+          "model_start": 5110861.112848079,
+          "model_end": 5110861.734854324,
+          "model_seconds": 0.622006244957447
+        }
+      ],
+      "group_death_proof": {
+        "owner_pid": 2234556,
+        "owner_exitcode": -9,
+        "confirmed_no_executing_members": true,
+        "retired_process_members": [],
+        "all_CUDA_owners_released": true,
+        "observed": 5110755.73819798
+      },
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/supervisor.jsonl",
+        "bytes": 895900,
+        "sha256": "be1dab3c3982a63f7e9809c479946bc168cb37b195d7c9d36364f3c1d825d484"
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r0/power.jsonl",
+        "bytes": 197994,
+        "sha256": "38fd44f223f8f87385d97d438bd714eb5d9a5f06bb876600bea8f705542adb3d"
+      }
+    },
+    {
+      "cell_id": "SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1",
+      "phases": {
+        "fault_to_death": {
+          "seconds": 1.7984781172126532,
+          "gpu_joules": {
+            "0": 284.54941183771535,
+            "1": 293.6477048597916
+          },
+          "total_joules": 578.197116697507
+        },
+        "death_to_owner_start": {
+          "seconds": 0.05408173706382513,
+          "gpu_joules": {
+            "0": 7.516987412850788,
+            "1": 7.432019112856115
+          },
+          "total_joules": 14.949006525706903
+        },
+        "owner_start_to_ready": {
+          "seconds": 62.08155305683613,
+          "gpu_joules": {
+            "0": 6868.4338835892895,
+            "1": 6520.254196159273
+          },
+          "total_joules": 13388.688079748563
+        },
+        "ready_to_new_certified": {
+          "seconds": 0.6780802058055997,
+          "gpu_joules": {
+            "0": 95.75927137409221,
+            "1": 115.38851907684867
+          },
+          "total_joules": 211.14779045094087
+        },
+        "fault_to_new_certified": {
+          "seconds": 64.6121931169182,
+          "gpu_joules": {
+            "0": 7256.259554213949,
+            "1": 6936.722439208771
+          },
+          "total_joules": 14192.98199342272
+        },
+        "origin_to_fault": {
+          "seconds": 2.6539729982614517,
+          "gpu_joules": {
+            "0": 341.69287217824564,
+            "1": 418.47893828187637
+          },
+          "total_joules": 760.1718104601221
+        },
+        "new_certified_to_service_end": {
+          "seconds": 12.518349844031036,
+          "gpu_joules": {
+            "0": 2239.763013711527,
+            "1": 2378.476584491752
+          },
+          "total_joules": 4618.2395982032795
+        },
+        "whole_service": {
+          "seconds": 79.7845159592107,
+          "gpu_joules": {
+            "0": 9837.71544010372,
+            "1": 9733.677961982401
+          },
+          "total_joules": 19571.39340208612
+        }
+      },
+      "workers": [
+        {
+          "slot": "full0",
+          "gpu": 1,
+          "pid": 2253602,
+          "worker_start_perf": 5111772.807942706,
+          "sent_perf": 5111834.553549314,
+          "model_load_seconds": 55.45721732266247,
+          "full_load_warmup_seconds": 59.1817528847605,
+          "warmup_seconds": 3.721276077441871,
+          "inferred_constructor_begin_perf": 5111775.371796429,
+          "pre_constructor_seconds": 2.5638537229970098,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        },
+        {
+          "slot": "full1",
+          "gpu": 0,
+          "pid": 2253606,
+          "worker_start_perf": 5111772.810473055,
+          "sent_perf": 5111834.558834777,
+          "model_load_seconds": 55.579247863031924,
+          "full_load_warmup_seconds": 59.18751616962254,
+          "warmup_seconds": 3.604705191217363,
+          "inferred_constructor_begin_perf": 5111775.371318608,
+          "pre_constructor_seconds": 2.560845552943647,
+          "note": "constructor begin inferred from original duration and sent_perf; preceding audio/ready argument work introduces tiny timing slack"
+        }
+      ],
+      "post_recovery_first_events": [
+        {
+          "file": "worker_results.jsonl",
+          "line": 4,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000001",
+          "dispatched_perf": null,
+          "start": 24000,
+          "end": 32000,
+          "model_start": 5111834.576326812,
+          "model_end": 5111835.162573152,
+          "model_seconds": 0.5862463405355811
+        },
+        {
+          "file": "worker_results.jsonl",
+          "line": 7,
+          "kind": null,
+          "event_kind": "completed",
+          "observed": null,
+          "job_id": "e1-j000000003",
+          "dispatched_perf": null,
+          "start": 32000,
+          "end": 40000,
+          "model_start": 5111835.22247572,
+          "model_end": 5111835.818489995,
+          "model_seconds": 0.5960142752155662
+        }
+      ],
+      "group_death_proof": {
+        "owner_pid": 2252540,
+        "owner_exitcode": -9,
+        "confirmed_no_executing_members": true,
+        "retired_process_members": [],
+        "all_CUDA_owners_released": true,
+        "observed": 5111772.426398786
+      },
+      "supervisor_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/supervisor.jsonl",
+        "bytes": 895910,
+        "sha256": "d00361cea06ae989b3134c3407e128a15995f2a643567b2171bf2e639c0cb356"
+      },
+      "power_identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/results/revtrace/dsn_native_resilience_20261030/formal_short28_v1/cells/SC_FORMAL_SHORT28_v1_BAC009S0908W0369_owner_before_durable_fullcall_r1/power.jsonl",
+        "bytes": 120104,
+        "sha256": "60c3ebaca72d5a5d32840fec69d5eeb661d98b41f4294ee121046cb3e41f9350"
+      }
+    }
+  ],
+  "source": [
+    {
+      "identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/revtrace_streamcorrect_20261028/ultravox_b95bec8/ultravox_model.py",
+        "bytes": 41578,
+        "sha256": "df618218561375da01bb53bd2764ea123e0cbf782f3326753f669f63ff6c6d3f"
+      },
+      "selected_lines": [
+        {
+          "line": 54,
+          "text": "    accepts_loss_kwargs = False"
+        },
+        {
+          "line": 55,
+          "text": ""
+        },
+        {
+          "line": 56,
+          "text": "    def __init__(self, config: UltravoxConfig):"
+        },
+        {
+          "line": 57,
+          "text": "        super().__init__(config)"
+        },
+        {
+          "line": 58,
+          "text": "        self._register_load_state_dict_pre_hook(self._pre_load_state_dict_hook)"
+        },
+        {
+          "line": 59,
+          "text": ""
+        },
+        {
+          "line": 60,
+          "text": "        self.keep_params: Set[str] = set()"
+        },
+        {
+          "line": 61,
+          "text": "        self.vocab_size = config.vocab_size"
+        },
+        {
+          "line": 62,
+          "text": ""
+        },
+        {
+          "line": 63,
+          "text": "        self.audio_tower = self._create_audio_tower(config)"
+        },
+        {
+          "line": 64,
+          "text": "        self.audio_tower_context_length: Optional[int] = None"
+        },
+        {
+          "line": 102,
+          "text": ""
+        },
+        {
+          "line": 103,
+          "text": "    @classmethod"
+        },
+        {
+          "line": 104,
+          "text": "    def from_pretrained(cls, *args, **kwargs):"
+        },
+        {
+          "line": 105,
+          "text": "        global FROM_PRETRAINED_KWARGS"
+        },
+        {
+          "line": 106,
+          "text": "        FROM_PRETRAINED_KWARGS = {"
+        },
+        {
+          "line": 107,
+          "text": "            k: v for k, v in kwargs.items() if k in SHARED_PRETRAINED_KWARGS"
+        },
+        {
+          "line": 108,
+          "text": "        }"
+        },
+        {
+          "line": 109,
+          "text": "        model = super().from_pretrained(*args, **kwargs)"
+        },
+        {
+          "line": 110,
+          "text": "        FROM_PRETRAINED_KWARGS = {}"
+        },
+        {
+          "line": 111,
+          "text": "        return model"
+        },
+        {
+          "line": 112,
+          "text": ""
+        },
+        {
+          "line": 113,
+          "text": "    def get_input_embeddings(self):"
+        },
+        {
+          "line": 114,
+          "text": "        return self.language_model.get_input_embeddings()"
+        },
+        {
+          "line": 115,
+          "text": ""
+        },
+        {
+          "line": 443,
+          "text": "        if is_init and config.audio_model_id is not None:"
+        },
+        {
+          "line": 444,
+          "text": "            if \"whisper\" in config.audio_model_id.lower():"
+        },
+        {
+          "line": 445,
+          "text": "                audio_tower = ModifiedWhisperEncoder.from_pretrained("
+        },
+        {
+          "line": 446,
+          "text": "                    config.audio_model_id, **kwargs"
+        },
+        {
+          "line": 447,
+          "text": "                )"
+        },
+        {
+          "line": 448,
+          "text": "                audio_tower.init_latency_mask("
+        },
+        {
+          "line": 449,
+          "text": "                    config.audio_latency_block_size, dtype=config.torch_dtype"
+        },
+        {
+          "line": 450,
+          "text": "                )"
+        },
+        {
+          "line": 451,
+          "text": "            else:"
+        },
+        {
+          "line": 454,
+          "text": "                    0,"
+        },
+        {
+          "line": 455,
+          "text": "                ), \"only whisper audio tower supports audio latency masking, got non-zero value for 'audio_latency_block_size'\""
+        },
+        {
+          "line": 456,
+          "text": "                audio_tower = transformers.AutoModel.from_pretrained("
+        },
+        {
+          "line": 457,
+          "text": "                    config.audio_model_id, **kwargs"
+        },
+        {
+          "line": 458,
+          "text": "                )"
+        },
+        {
+          "line": 459,
+          "text": "        else:"
+        },
+        {
+          "line": 460,
+          "text": "            with accelerate.init_empty_weights():"
+        },
+        {
+          "line": 461,
+          "text": "                if \"whisper\" in config.audio_config._name_or_path.lower():"
+        },
+        {
+          "line": 462,
+          "text": "                    audio_tower = ModifiedWhisperEncoder(config.audio_config)"
+        },
+        {
+          "line": 500,
+          "text": "            is_init = _default_device is None or _default_device.type != \"meta\""
+        },
+        {
+          "line": 501,
+          "text": "        if is_init and config.text_model_id is not None:"
+        },
+        {
+          "line": 502,
+          "text": "            language_model = transformers.AutoModelForCausalLM.from_pretrained("
+        },
+        {
+          "line": 503,
+          "text": "                config.text_model_id,"
+        },
+        {
+          "line": 504,
+          "text": "                **{"
+        },
+        {
+          "line": 505,
+          "text": "                    \"attn_implementation\": config.text_config._attn_implementation,"
+        },
+        {
+          "line": 506,
+          "text": "                    \"torch_dtype\": config.torch_dtype,"
+        },
+        {
+          "line": 507,
+          "text": "                    **FROM_PRETRAINED_KWARGS,"
+        },
+        {
+          "line": 508,
+          "text": "                },"
+        },
+        {
+          "line": 584,
+          "text": "        super().save_pretrained(*args, state_dict=state_dict, **kwargs)"
+        },
+        {
+          "line": 585,
+          "text": ""
+        },
+        {
+          "line": 586,
+          "text": "    def _pre_load_state_dict_hook(self, state_dict: Dict[str, Any], *args, **kwargs):"
+        },
+        {
+          "line": 587,
+          "text": "        self.keep_params.update(set(state_dict.keys()))"
+        },
+        {
+          "line": 588,
+          "text": ""
+        },
+        {
+          "line": 589,
+          "text": "    def print_trainable_parameters(self):"
+        },
+        {
+          "line": 590,
+          "text": "        \"\"\""
+        },
+        {
+          "line": 591,
+          "text": "        Prints the number of trainable parameters in the model (reuses Peft model's method)"
+        },
+        {
+          "line": 592,
+          "text": "        \"\"\""
+        },
+        {
+          "line": 628,
+          "text": "        # not sharded"
+        },
+        {
+          "line": 629,
+          "text": "        sharded_metadata = None"
+        },
+        {
+          "line": 630,
+          "text": "        state_dict = transformers.modeling_utils.load_state_dict(resolved_archive_file)"
+        },
+        {
+          "line": 631,
+          "text": "        loaded_state_dict_keys = list(state_dict.keys())"
+        },
+        {
+          "line": 632,
+          "text": "    else:"
+        },
+        {
+          "line": 633,
+          "text": "        # sharded"
+        },
+        {
+          "line": 634,
+          "text": "        resolved_archive_file = transformers.utils.cached_file("
+        },
+        {
+          "line": 635,
+          "text": "            model_id, transformers.utils.SAFE_WEIGHTS_INDEX_NAME"
+        },
+        {
+          "line": 636,
+          "text": "        )"
+        },
+        {
+          "line": 694,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 695,
+          "text": ""
+        },
+        {
+          "line": 696,
+          "text": "    def __init__(self, stack_factor: int = 8):"
+        },
+        {
+          "line": 697,
+          "text": "        super().__init__()"
+        },
+        {
+          "line": 698,
+          "text": "        self.stack_factor = stack_factor"
+        },
+        {
+          "line": 699,
+          "text": ""
+        },
+        {
+          "line": 700,
+          "text": "    def forward(self, audio_embeds: torch.Tensor) -> torch.Tensor:"
+        },
+        {
+          "line": 701,
+          "text": "        B, T, C = audio_embeds.shape"
+        },
+        {
+          "line": 702,
+          "text": "        T_pad = (T + self.stack_factor - 1) // self.stack_factor * self.stack_factor"
+        },
+        {
+          "line": 710,
+          "text": ""
+        },
+        {
+          "line": 711,
+          "text": "class RMSNorm(transformers.models.llama.modeling_llama.LlamaRMSNorm):"
+        },
+        {
+          "line": 712,
+          "text": "    def __init__(self, hidden_size: int, init: float = 1, eps: float = 1e-6):"
+        },
+        {
+          "line": 713,
+          "text": "        super().__init__(hidden_size=hidden_size, eps=eps)"
+        },
+        {
+          "line": 714,
+          "text": "        self.weight.data.fill_(init)"
+        },
+        {
+          "line": 715,
+          "text": ""
+        },
+        {
+          "line": 716,
+          "text": ""
+        },
+        {
+          "line": 717,
+          "text": "class SwiGLU(nn.Module):"
+        },
+        {
+          "line": 718,
+          "text": "    def forward(self, x):"
+        },
+        {
+          "line": 722,
+          "text": ""
+        },
+        {
+          "line": 723,
+          "text": "class UltravoxProjector(nn.Module):"
+        },
+        {
+          "line": 724,
+          "text": "    def __init__(self, config: UltravoxConfig):"
+        },
+        {
+          "line": 725,
+          "text": "        super().__init__()"
+        },
+        {
+          "line": 726,
+          "text": "        self.hidden_dim = config.hidden_size"
+        },
+        {
+          "line": 727,
+          "text": "        self._pad_and_stack = StackAudioFrames(config.stack_factor)"
+        },
+        {
+          "line": 728,
+          "text": "        dim_in = config.audio_config.hidden_size * config.stack_factor"
+        },
+        {
+          "line": 729,
+          "text": "        self.ln_pre = RMSNorm(dim_in, init=config.norm_init)"
+        },
+        {
+          "line": 730,
+          "text": "        self.linear_1 = nn.Linear(dim_in, self.hidden_dim, bias=False)"
+        },
+        {
+          "line": 786,
+          "text": ""
+        },
+        {
+          "line": 787,
+          "text": "    This implementation is a slightly modified version of HF Transformers' Whisper Encoder, with only a few fixes:"
+        },
+        {
+          "line": 788,
+          "text": "    1. base_model_prefix updated to allow for doing `.from_pretrained` directly on the encoder"
+        },
+        {
+          "line": 789,
+          "text": "    2. allow less than 30 second of audio padding to be passed in:"
+        },
+        {
+          "line": 790,
+          "text": "        - relaxed ValueError check for `input_features` length to be less than or equal to `expected_seq_length` instead of strictly equal"
+        },
+        {
+          "line": 791,
+          "text": "        - embed_pos is now sliced to match the length of `inputs_embeds`"
+        },
+        {
+          "line": 792,
+          "text": ""
+        },
+        {
+          "line": 793,
+          "text": "    Original: https://github.com/huggingface/transformers/blob/main/src/transformers/models/whisper/modeling_whisper.py"
+        },
+        {
+          "line": 794,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 798,
+          "text": "    _keys_to_ignore_on_load_unexpected = [\"model.decoder.*\"]"
+        },
+        {
+          "line": 799,
+          "text": ""
+        },
+        {
+          "line": 800,
+          "text": "    def __init__(self, config: transformers.WhisperConfig):"
+        },
+        {
+          "line": 801,
+          "text": "        super().__init__(config)"
+        },
+        {
+          "line": 802,
+          "text": "        self.config.is_decoder = False"
+        },
+        {
+          "line": 803,
+          "text": "        sig = inspect.signature(self.layers[0].forward)"
+        },
+        {
+          "line": 804,
+          "text": "        self.use_layer_head_mask = \"layer_head_mask\" in sig.parameters"
+        },
+        {
+          "line": 805,
+          "text": ""
+        },
+        {
+          "line": 806,
+          "text": "    @property"
+        }
+      ]
+    },
+    {
+      "identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/models/revtrace_streamcorrect_20261028/ultravox_b95bec8/ultravox_config.py",
+        "bytes": 7057,
+        "sha256": "99cf5ad911189f2351c2232234025db56b23763283583c0a848ebf2a1ecc40fc"
+      },
+      "selected_lines": [
+        {
+          "line": 101,
+          "text": "    is_composition = False"
+        },
+        {
+          "line": 102,
+          "text": ""
+        },
+        {
+          "line": 103,
+          "text": "    def __init__("
+        },
+        {
+          "line": 104,
+          "text": "        self,"
+        },
+        {
+          "line": 105,
+          "text": "        audio_config: dict[str, Any] | transformers.PretrainedConfig | None = None,"
+        },
+        {
+          "line": 106,
+          "text": "        text_config: dict[str, Any] | transformers.PretrainedConfig | None = None,"
+        },
+        {
+          "line": 107,
+          "text": "        audio_model_id: str | None = None,"
+        },
+        {
+          "line": 108,
+          "text": "        text_model_id: str | None = None,"
+        },
+        {
+          "line": 109,
+          "text": "        ignore_index: int = -100,"
+        },
+        {
+          "line": 129,
+          "text": "        self.projector_ln_mid = projector_ln_mid"
+        },
+        {
+          "line": 130,
+          "text": "        if text_model_id is not None:"
+        },
+        {
+          "line": 131,
+          "text": "            text_config = transformers.AutoConfig.from_pretrained(text_model_id)"
+        },
+        {
+          "line": 132,
+          "text": "        else:"
+        },
+        {
+          "line": 133,
+          "text": "            text_config = text_config or {}"
+        },
+        {
+          "line": 134,
+          "text": "            if isinstance(text_config, dict):"
+        },
+        {
+          "line": 135,
+          "text": "                text_config = transformers.CONFIG_MAPPING["
+        },
+        {
+          "line": 136,
+          "text": "                    text_config.get(\"model_type\", \"llama\")"
+        },
+        {
+          "line": 137,
+          "text": "                ](**text_config)"
+        },
+        {
+          "line": 138,
+          "text": ""
+        },
+        {
+          "line": 139,
+          "text": "        if audio_model_id is not None:"
+        },
+        {
+          "line": 140,
+          "text": "            audio_config = transformers.AutoConfig.from_pretrained(audio_model_id)"
+        },
+        {
+          "line": 141,
+          "text": "        else:"
+        },
+        {
+          "line": 142,
+          "text": "            audio_config = audio_config or {}"
+        },
+        {
+          "line": 143,
+          "text": "            if isinstance(audio_config, dict):"
+        },
+        {
+          "line": 144,
+          "text": "                audio_config = transformers.CONFIG_MAPPING["
+        },
+        {
+          "line": 145,
+          "text": "                    audio_config.get(\"model_type\", \"whisper\")"
+        },
+        {
+          "line": 146,
+          "text": "                ](**audio_config)"
+        }
+      ]
+    },
+    {
+      "identity": {
+        "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/author_StreamCorrect_bbb9f7f/simul_whisper/simul_whisper.py",
+        "bytes": 50435,
+        "sha256": "9f016f71df780c05b04719633ed302b502a457ff18a086eb5412a394b05cacb7"
+      },
+      "selected_lines": [
+        {
+          "line": 49,
+          "text": "# - context"
+        },
+        {
+          "line": 50,
+          "text": "class PaddedAlignAttWhisper:"
+        },
+        {
+          "line": 51,
+          "text": "    def __init__(self, cfg: AlignAttConfig) -> None:"
+        },
+        {
+          "line": 52,
+          "text": "        self.logdir_i = 0"
+        },
+        {
+          "line": 53,
+          "text": "        self.log_segments = 0"
+        },
+        {
+          "line": 54,
+          "text": "        if cfg.logdir is not None and not os.path.exists(cfg.logdir):"
+        },
+        {
+          "line": 55,
+          "text": "            os.makedirs(cfg.logdir)"
+        },
+        {
+          "line": 56,
+          "text": "        "
+        },
+        {
+          "line": 57,
+          "text": "        # Load the model - keep it simple for OpenAI Whisper format"
+        },
+        {
+          "line": 58,
+          "text": "        model_name = os.path.basename(cfg.model_path).replace(\".pt\", \"\")"
+        },
+        {
+          "line": 59,
+          "text": "        model_path = os.path.dirname(os.path.abspath(cfg.model_path))"
+        },
+        {
+          "line": 60,
+          "text": "        self.model = load_model(name=model_name, download_root=model_path)"
+        },
+        {
+          "line": 61,
+          "text": ""
+        },
+        {
+          "line": 62,
+          "text": "        logger.info(f\"Model dimensions: {self.model.dims}\")"
+        },
+        {
+          "line": 63,
+          "text": ""
+        },
+        {
+          "line": 64,
+          "text": "        self.decode_options = DecodingOptions("
+        },
+        {
+          "line": 65,
+          "text": "            language=cfg.language,"
+        },
+        {
+          "line": 66,
+          "text": "            without_timestamps=True,"
+        },
+        {
+          "line": 365,
+          "text": "        # Lazy load the Qwen model (cache it as class attribute)"
+        },
+        {
+          "line": 366,
+          "text": "        if not hasattr(self, '_qwen_text_model'):"
+        },
+        {
+          "line": 367,
+          "text": "            self._qwen_text_tokenizer = AutoTokenizer.from_pretrained("
+        },
+        {
+          "line": 368,
+          "text": "                \"Qwen/Qwen3-30B-A3B-Instruct-2507\","
+        },
+        {
+          "line": 369,
+          "text": "                trust_remote_code=True"
+        },
+        {
+          "line": 370,
+          "text": "            )"
+        },
+        {
+          "line": 371,
+          "text": "            self._qwen_text_model = AutoModelForCausalLM.from_pretrained("
+        },
+        {
+          "line": 372,
+          "text": "                \"Qwen/Qwen3-30B-A3B-Instruct-2507\","
+        },
+        {
+          "line": 373,
+          "text": "                torch_dtype=torch.float32,"
+        },
+        {
+          "line": 374,
+          "text": "                device_map=\"auto\","
+        },
+        {
+          "line": 375,
+          "text": "                trust_remote_code=True"
+        },
+        {
+          "line": 376,
+          "text": "            )"
+        },
+        {
+          "line": 377,
+          "text": "        "
+        },
+        {
+          "line": 750,
+          "text": "        if not hasattr(self, '_qwen_audio_model'):"
+        },
+        {
+          "line": 751,
+          "text": "            from transformers import AutoProcessor, Qwen2AudioForConditionalGeneration"
+        },
+        {
+          "line": 752,
+          "text": "            self._qwen_audio_processor = AutoProcessor.from_pretrained(\"Qwen/Qwen2-Audio-7B-Instruct\")"
+        },
+        {
+          "line": 753,
+          "text": "            self._qwen_audio_model = Qwen2AudioForConditionalGeneration.from_pretrained("
+        },
+        {
+          "line": 754,
+          "text": "                \"Qwen/Qwen2-Audio-7B-Instruct\", "
+        },
+        {
+          "line": 755,
+          "text": "                device_map=\"auto\""
+        },
+        {
+          "line": 756,
+          "text": "            )"
+        },
+        {
+          "line": 757,
+          "text": "        "
+        },
+        {
+          "line": 758,
+          "text": "        qwen_prompt_template = ("
+        },
+        {
+          "line": 759,
+          "text": "            \"You are an ASR error corrector for streaming transcription.\\n\\n\""
+        }
+      ]
+    }
+  ],
+  "local_reader_sha256": "c256ee73dd3f85b0e3f7338cfc1aea9bb26dc9b2a740c2eed2454d688ad3c158"
+}

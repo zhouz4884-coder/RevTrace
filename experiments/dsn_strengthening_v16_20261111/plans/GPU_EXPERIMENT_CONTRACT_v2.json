@@ -1,0 +1,81 @@
+{
+  "record_type": "PROSPECTIVE_DESIGN_NOT_EXECUTED_RESULT",
+  "date": "2026-11-11",
+  "supersedes_plan": "../GPU_PLAN_FOR_REVIEW.zh.md",
+  "gpu_launch_state": "HOLD_TECHNICAL_GATES_NO_GPU_LAUNCHED",
+  "permission_dependency": false,
+  "main_arms": ["conservative", "dependency_versioned", "ready_only", "fullcall", "uir"],
+  "appendix_arms": ["safe_versioned"],
+  "unsafe_useall": "CPU negative control only; never commit an uncertified result in live exact mode",
+  "uir": {
+    "dispatch": "identical to fullcall conditional speculative dispatch",
+    "treatment": "suppress Owner cooperative before-C skip hints for already-issued jobs",
+    "shared_guards": ["complete frozen-input classification", "unchanged original actual-parent selection", "durable-before-install", "whole-view support validation", "physical incarnation and channel binding"],
+    "estimand": "service and resource consequences of early stopping known-invalid or covered computation",
+    "tie_interpretation": "early stopping has no established incremental benefit in this workload; does not establish end-use input checks redundant"
+  },
+  "cadence": {
+    "sample_rate_hz": 16000,
+    "frontier_release_seconds": 0.5,
+    "full_frontier_increment_samples": 8000,
+    "fixed_across_total_duration_strata": true,
+    "final_partial_frontier": "original remaining samples and actual EOS; no padding, truncation, concatenation or resampling to manufacture strata",
+    "length_strata_seconds": [[6, 12], [12, 20]],
+    "stratum_boundary": "first [6,12), second [12,20]; header-confirmed actual duration"
+  },
+  "ready_only": {
+    "readiness_event": "validated complete full receipt admitted by Owner into ready bank before each actual canonical install",
+    "decision_boundary": "actual Reconciler.install, not worker model_end, socket arrival, or Consumer apply",
+    "same_timestamp_order": "serial Owner dequeue and unified coordinator policy-execution sequence",
+    "required_trace": ["worker model_end", "worker_job_end_perf", "worker terminal sent_perf", "bound channel_received_perf", "owner_dequeued_perf", "owner_dequeue_sequence", "complete_receipt_order", "canonical_install_order", "other_ready_full_receipts_before_install"],
+    "ready_snapshot_scope": "other ready jobs before install; selected job has its own complete_receipt_order and may already have been popped from the ready bank",
+    "historical_zero_ready_reuse": "cannot prove Ready-only equals Conservative or predict its new closed-loop schedule"
+  },
+  "common_service_contract": {
+    "gpus": 2,
+    "worker_dtype": "FP32",
+    "worker_model_count": "two complete original native ASR/Correct/Update workers",
+    "neural_task": "unchanged original full ASR/Correct/Update and feedback state",
+    "backend": "native PyTorch/HuggingFace/author ASR, not vLLM",
+    "consumer": "actual independent FIFO Consumer and original support validation",
+    "deadlines_seconds": {"display": 2, "certified": 8},
+    "denominator": "all offered audio including failures and actual EOS, original ingress clock",
+    "power_scope": "both physical GPUs, original service origin through confirmed physical model drain; startup and reference costs additionally itemized",
+    "reference": "full original-task outputs and selected transitions; no memoized model output as serving measurement"
+  },
+  "planned_counts": {
+    "pilot": {"existing_sources": 2, "main_arms": 5, "fresh_repeats": 2, "trials": 20},
+    "existing_eight_source_bank": {"sources": 8, "main_arms": 5, "fresh_repeats": 2, "trials": 80},
+    "new_independent_bank": {"target_unused_speakers": 16, "availability_verified": false, "fresh_repeats": 2, "trials_formula": "10*N; 160 only if N=16 is actually eligible and frozen", "selection": "metadata-only historical census and technical audio-header validation before model calls"},
+    "formal_main_total_formula": "80+10*N; pilot and appendix controls separately reported",
+    "strict_birth_control": "preserve auxiliary design and existing CPU evidence; freeze bounded GPU auxiliary cells before launch, never substitute for stronger dependency_versioned control"
+  },
+  "retention_normalization": {
+    "primary_unit": "unique complete-call job retained across at least one actual selected-parent handover while its model path is active, with complete frozen input still compatible",
+    "exposure_denominator": "all offered audio seconds per arm",
+    "additional_counts": ["all compatible handover events including repeated handovers of one job", "unique retained job count", "installed frontiers", "dispatched jobs", "Owner-admitted ready reuse", "actual model-path overlap", "invalid and covered jobs allowed to finish in UIR"],
+    "historical_ratio": "92/136 belongs to its historical 500ms contract; do not transport the ratio to another workload without a new event-bound recount"
+  },
+  "recovery": {
+    "natural_e2e": "same frozen after-durable fault point and original ingress clock; no forced postfault dispatch barrier or clock reset",
+    "controlled_diagnostic": "same new-source bootstrap full-state fixture, exact WAV and sample-slice hashes, target frontier, EOS and model configuration; identical first forced native call in each branch",
+    "no_fault_control": "matched process/initialization and same frozen call without injected Owner failure, separately labeled diagnostic",
+    "replication": "at least five balanced fresh-process paired repeats per frozen diagnostic comparison; original-loader controls before any repair",
+    "resource_fields": ["actual model context limits and generation config", "dtype", "device map", "CUDA allocated/reserved/peak bytes", "process GPU memory", "actual cache settings", "CUDA graph enabled/use/count if supported", "constructor subphase times", "both GPU energy"],
+    "nonexistent_fields": "record backend-inapplicable vLLM gpu_memory_utilization/KV-block allocator fields as not_applicable with reason, never invent values",
+    "page_cache": "record MemAvailable/Cached/SwapCached/Dirty/Writeback and non-mutating weight-file residency where supported before and after constructors; no global cache dropping",
+    "temperature_claim": "fresh process is not cold file cache; observed residency supports labels, no unmeasured cold-cache claim"
+  },
+  "content": {
+    "primary": "Unicode-codepoint minimum-edit I/D/S with fixed deterministic alignment and full-history alternative-alignment sensitivity",
+    "modified_exposure_character_seconds": "sum exposure ages of character identities retired by D or S under each declared alignment; initial empty view included; survivor censoring separately reported",
+    "interpretation": "measured display exposure proxy; alignment-dependent and not a validated human-perception outcome",
+    "stable_prefix_curve": "retrospective common prefix of each actual view and all subsequent views through the frozen observation horizon; export timestamped curve and horizon, not an online serving oracle",
+    "legacy_external_counts": "179/206/279 excluded unless exact input scope and independent reproduction establish them"
+  },
+  "statistics": "speaker-paired contrasts; fresh repeats and frontiers are not independent acoustic samples; all preselected cells and failures retained",
+  "external_system_positioning": "SSBD/PredGen/Retire official task, output, selection and observable contracts tabulated; author controls never labeled external reproductions",
+  "launch_gates": ["clean newly committed complete source and byte-matched manifest", "actual full source commit resolves locally and remotely", "default CURRENT preflight plus explicit newly selected execution identity", "new v2 formal CPU controls and independent review", "complete frozen experiment config and environment hashes", "model and audio byte identity", "metadata-only source selection", "unchanged original-task reference binding", "GPU idle/owner recheck and experiment-owned process record", "8TB raw, summary and gate paths assigned before launch"],
+  "new_gpu_trials": 0,
+  "new_model_calls": 0
+}
