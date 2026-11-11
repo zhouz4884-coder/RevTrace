@@ -1,0 +1,21 @@
+test_nested_two_four_complete_eight_reversed_cells (test_resource_controls.MatrixControls.test_nested_two_four_complete_eight_reversed_cells) ... ok
+test_omitted_waiting_chain_or_missing_policy_rejected (test_resource_controls.MatrixControls.test_omitted_waiting_chain_or_missing_policy_rejected) ... ok
+test_repeat_order_or_GPU_role_cannot_be_reused (test_resource_controls.MatrixControls.test_repeat_order_or_GPU_role_cannot_be_reused) ... ok
+test_actual_two_source_owner_pipe_and_all_source_audit (test_resource_controls.PipeIntegrationControls.test_actual_two_source_owner_pipe_and_all_source_audit) ... ERROR
+
+======================================================================
+ERROR: test_actual_two_source_owner_pipe_and_all_source_audit (test_resource_controls.PipeIntegrationControls.test_actual_two_source_owner_pipe_and_all_source_audit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/resource_driver_v1/source/test_resource_controls.py", line 56, in test_actual_two_source_owner_pipe_and_all_source_audit
+    r=audit_group(dict(cell_id='CPU_PIPE_ONLY',group_id='sync2',strategy='conservative',repeat=0,out=str(root)),cfg,reference,observer,audit_results=audit_results,endpoints=endpoints,scan=scan)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_strengthening_v16_20261111/resource_driver_v1/source/group_audit.py", line 33, in audit_group
+    result.update(source_group_id=cell['group_id'],source_count=len(sources),source_ids=list(sources),speaker_ids=[s['speaker_id'] for s in sources.values()],per_source_primary=per_source,
+                                                                                                                   ~^^^^^^^^^^^^^^
+KeyError: 'speaker_id'
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.064s
+
+FAILED (errors=1)

@@ -1,0 +1,255 @@
+{
+  "schema": "revtrace-resilience-offline-metrics-v1",
+  "analysis_phase": "offline_after_trial",
+  "new_model_calls": 0,
+  "experiment_id": "SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r1",
+  "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r1",
+  "arm": "dependency_versioned",
+  "source_commit": "de0936b2e30179d63aeef6e235cd1af685578c58",
+  "primary": {
+    "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r1",
+    "stage": "pilot_existing",
+    "cohort": "metadata_frozen_pilot_existing",
+    "arm": "dependency_versioned",
+    "repeat": 1,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.4200625,
+    "primary_linear_all_offered_D99": 0.949007699303329,
+    "primary_linear_all_offered_C99": 1.2190622229129076,
+    "original_quantile_test_pass": true,
+    "complete_coverage_and_original_quantile_pass": true,
+    "D2_misses_all_offered": 0,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 0.9644651850685477,
+    "C_max": 1.221703851595521,
+    "dual_deadline_audio_credit_seconds": 8.4200625,
+    "raw_inputs": {
+      "config_sha256": "8ddc820c188f642eb38f02b803f93c66a920bd68e3a346c53a304a423dc6aa2e",
+      "origin_sha256": "4a6858167668afa05afb41ad871110e6b20f73ea08d648234c29a3088d4ab92c",
+      "consumer_sha256": "1ee0dcdceb8a478ea1430fe4bf1cf2d6b07bebb2a7c1076f0924ac0f113c7dc6"
+    },
+    "primary_linear_all_offered_C50": 1.0530245378613472,
+    "primary_linear_all_offered_D50": 0.7906629797071218,
+    "EOS_D2_misses": 0,
+    "nonEOS_D2_misses": 0
+  },
+  "content": {
+    "cell_id": "SC_V16_pilot_existing_BAC009S0769W0190_dependency_versioned_r1",
+    "stage": "pilot_existing",
+    "cohort": "metadata_frozen_pilot_existing",
+    "arm": "dependency_versioned",
+    "repeat": 1,
+    "actual_consumer_rows": 50,
+    "sources": 1,
+    "offered_audio_seconds": 8.4200625,
+    "offered_frontiers": 17,
+    "original_dual_credit_audio_seconds": 8.4200625,
+    "clock": "Actual observed perf; final surviving occurrences are right-censored at last actual same-source observation, not hypothetical UI close.",
+    "raw": {
+      "row_event_classes": {
+        "unchanged": 34,
+        "strict_append": 15,
+        "replacement": 1
+      },
+      "introduced_code_point_occurrences": 23,
+      "LCP_erased_code_point_occurrences": 1,
+      "observed_text_changes": 16,
+      "positive_F_advance_with_unchanged_text_rows": 1,
+      "positive_certified_F_advance_with_unchanged_text_rows": 15,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 0.5,
+        "strict_append": 7.9200625,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 1,
+      "still_visible_occurrence_code_points": 22,
+      "closed_occurrence_code_point_seconds": 0.255827602930367,
+      "longest_closed_observed_lifetime_seconds": 0.255827602930367,
+      "final_observed_text_code_points": 22
+    },
+    "whitespace_stripped": {
+      "row_event_classes": {
+        "unchanged": 34,
+        "strict_append": 15,
+        "replacement": 1
+      },
+      "introduced_code_point_occurrences": 23,
+      "LCP_erased_code_point_occurrences": 1,
+      "observed_text_changes": 16,
+      "positive_F_advance_with_unchanged_text_rows": 1,
+      "positive_certified_F_advance_with_unchanged_text_rows": 15,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 0.5,
+        "strict_append": 7.9200625,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 1,
+      "still_visible_occurrence_code_points": 22,
+      "closed_occurrence_code_point_seconds": 0.255827602930367,
+      "longest_closed_observed_lifetime_seconds": 0.255827602930367,
+      "final_observed_text_code_points": 22
+    }
+  },
+  "posterior_whole_text_support": {
+    "raw": {
+      "original_credit_supported_seconds": 8.0,
+      "original_credit_mismatching_seconds": 0.4200625,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 16,
+        "mismatching": 1
+      }
+    },
+    "whitespace_stripped": {
+      "original_credit_supported_seconds": 8.0,
+      "original_credit_mismatching_seconds": 0.4200625,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 16,
+        "mismatching": 1
+      }
+    },
+    "scope": "Posterior whole first-view agreement at its actual G, not online certification, human correctness or newly transcribed character volume."
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0769W0190",
+      "reference_characters": 22,
+      "character_edits": 0,
+      "CER": 0.0,
+      "final_text": "人民银行多次提高存款准备金率和存贷款基准利率",
+      "scope": "Fixed whitespace-only original native CER; final task quality, not provisional correctness."
+    }
+  ],
+  "energy": {
+    "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+    "service": {
+      "gpu_joules": {
+        "0": 2782.91078942972,
+        "1": 2778.8015573291123
+      },
+      "total_joules": 5561.712346758832
+    },
+    "origin_perf": 6149074.120320956,
+    "service_end_perf": 6149090.882099841,
+    "includes_fault_and_recovery_after_origin": true,
+    "initial_cold_load_excluded": true,
+    "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+  },
+  "integrity": {
+    "durable_frames_verified": true,
+    "complete_original_parent_cadence_records_verified": true,
+    "durable_canonical_steps": 17,
+    "expected_canonical_steps": 17,
+    "all_original_obligations_eventually_processed": true,
+    "accepted_frontiers": {
+      "BAC009S0769W0190": 134721
+    },
+    "pending_accepted_uncertified_samples": {
+      "BAC009S0769W0190": 0
+    },
+    "unprocessed_all_offered_samples": {
+      "BAC009S0769W0190": 0
+    },
+    "observed_acknowledged_input_loss_samples": {
+      "BAC009S0769W0190": 0
+    },
+    "input_loss_scope": "Completed fixed accepted obligations are checked by the full durable source chain; incomplete debt is pending work, not automatically lost input.",
+    "consumer_binding": {
+      "status": "PASS_DURABLE_CONSUMER_BINDING",
+      "applied_durable_facts": 17,
+      "durable_facts_not_yet_consumed": 0,
+      "duplicate_actual_durable_applications": 0,
+      "scope": "Whole provisional text can remain ahead; this does not require Consumer visible text to equal Canonical text."
+    },
+    "original_reference": {
+      "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+      "checked_steps": 17,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "reference_kind": "strict",
+      "projection": "none; entire state/C/IDs compared",
+      "reference_sha256": "ba214a4a1e32071d87d46793b7c22401da1dc286463cf1fde578e350dbda4b85"
+    },
+    "local_reject_records": 0,
+    "local_reject_canonical_mutations": 0,
+    "legal_progress_wrong_rejections": null,
+    "legal_progress_wrong_rejections_status": "REQUIRES_SEPARATE_SEMANTIC_WITNESS_CHECK",
+    "accepted_original_clock_notifications_checked": 17,
+    "owner_error_records": 0,
+    "owner_error_types": {},
+    "explicit_expected_owner_error_types": [],
+    "unexpected_owner_error_records": 0
+  },
+  "history": {
+    "samples": 10,
+    "coordination_entry_maxima": {
+      "live_jobs": 2,
+      "completed_full": 0,
+      "branch_steps": 1,
+      "canonical_witnesses": 1,
+      "nodes": 1,
+      "projections": 1,
+      "issued_proofs": 0,
+      "issued_id_memory_entries": 1,
+      "pending_job_refs": 1,
+      "pending_publications": 2,
+      "consumer_pins": 1
+    },
+    "application_and_process_data": {
+      "owner_RSS_bytes": {
+        "min": 38531072,
+        "max": 40288256,
+        "last": 39047168
+      },
+      "current_cut_bytes": {
+        "min": 10973,
+        "max": 13590,
+        "last": 13590
+      },
+      "current_text_bytes": {
+        "min": 0,
+        "max": 63,
+        "last": 63
+      },
+      "immutable_audio_bytes": {
+        "min": 538884,
+        "max": 538884,
+        "last": 538884
+      }
+    },
+    "scope": "Observed finite-run coordination-entry counts; RSS/current cuts/output/immutable audio are separate. Offline analysis allocation and cumulative application output do not establish constant online total memory."
+  },
+  "state_boundaries": {
+    "actual_worker_audio_insert_observations": 17,
+    "actual_worker_buffer_shifts": 0,
+    "actual_worker_context_trim_changes": 0,
+    "actual_worker_context_bound_still_exceeded": 0,
+    "selected_canonical_buffer_shift_edges": 0,
+    "selected_edge_prediction_clusters": {
+      "BAC009S0769W0190": {
+        "selected_edges": 17,
+        "observed_predictions": 16,
+        "own_prediction_changed": 1,
+        "longest_consecutive_changed": 1,
+        "unknown_prediction_edges": 1
+      }
+    },
+    "scope": "All worker observations include recomputation; selected-edge clusters are separate and unknown edges break a known streak. These are observed coverage, not natural-prevalence or universal-state-sufficiency claims."
+  },
+  "recovery": {
+    "observed_fault_records": 0,
+    "events": [],
+    "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+  },
+  "gate": "PASS_COMPLETE_TRIAL_TASK_AND_ORIGINAL_ENDPOINT_RECOUNT",
+  "scope": "Offline aggregation only. Complete-task/refinement/physical-owner admissibility evidence roles remain distinct. Cold-fault P99 failure is an endpoint outcome, not automatic evidence that safe recovery failed."
+}

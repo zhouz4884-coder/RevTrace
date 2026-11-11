@@ -1,0 +1,507 @@
+{
+  "path": "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_streamcorrect_20261028/author_StreamCorrect_bbb9f7f/simul_whisper/simul_whisper.py",
+  "sha256": "9f016f71df780c05b04719633ed302b502a457ff18a086eb5412a394b05cacb7",
+  "scope": "pinned author code inspection only; no model/raw service scan",
+  "lines": [
+    {
+      "line": 811,
+      "text": "            \"candidates\": candidate_texts,"
+    },
+    {
+      "line": 812,
+      "text": "            \"corrected_appended_text\": response,"
+    },
+    {
+      "line": 813,
+      "text": "        }"
+    },
+    {
+      "line": 814,
+      "text": ""
+    },
+    {
+      "line": 815,
+      "text": "    # ==================== Transcription / Translation ===================="
+    },
+    {
+      "line": 816,
+      "text": ""
+    },
+    {
+      "line": 817,
+      "text": "    @torch.no_grad()"
+    },
+    {
+      "line": 818,
+      "text": "    def infer("
+    },
+    {
+      "line": 819,
+      "text": "        self,"
+    },
+    {
+      "line": 820,
+      "text": "        is_last: bool = False,"
+    },
+    {
+      "line": 821,
+      "text": "        start_time=None,"
+    },
+    {
+      "line": 822,
+      "text": "        *,"
+    },
+    {
+      "line": 823,
+      "text": "        corrector_model=None,"
+    },
+    {
+      "line": 824,
+      "text": "        corrector_processor=None,"
+    },
+    {
+      "line": 825,
+      "text": "        corrector_type: str = \"speechlm\",  # \"speechlm\" or \"lm\""
+    },
+    {
+      "line": 826,
+      "text": "    ):"
+    },
+    {
+      "line": 827,
+      "text": "        if (not self.is_warmup and not self.first_token_generated and start_time is not None):"
+    },
+    {
+      "line": 828,
+      "text": "            print(f\"Entering infer at {time.time() - start_time:.3f} seconds\")"
+    },
+    {
+      "line": 829,
+      "text": ""
+    },
+    {
+      "line": 830,
+      "text": "        # start_time should be the time when audio processing started (before load_audio_chunk)"
+    },
+    {
+      "line": 831,
+      "text": "        if start_time is None and not self.is_warmup:"
+    },
+    {
+      "line": 832,
+      "text": "            raise ValueError(\"start_time must be provided for First Token Latency tracking.\")"
+    },
+    {
+      "line": 896,
+      "text": ""
+    },
+    {
+      "line": 897,
+      "text": "        token_len_before_decoding = current_tokens.shape[1]"
+    },
+    {
+      "line": 898,
+      "text": "        "
+    },
+    {
+      "line": 899,
+      "text": "        generation_progress = []"
+    },
+    {
+      "line": 900,
+      "text": "        generation = {"
+    },
+    {
+      "line": 901,
+      "text": "            \"starting_tokens\": BeamTokens(current_tokens[0,:].clone(), self.cfg.beam_size),"
+    },
+    {
+      "line": 902,
+      "text": "            \"token_len_before_decoding\": token_len_before_decoding,"
+    },
+    {
+      "line": 903,
+      "text": "            #\"fire_detected\": fire_detected,"
+    },
+    {
+      "line": 904,
+      "text": "            \"frames_len\": content_mel_len,"
+    },
+    {
+      "line": 905,
+      "text": "            \"frames_threshold\": 4 if is_last else self.cfg.frame_threshold,"
+    },
+    {
+      "line": 906,
+      "text": ""
+    },
+    {
+      "line": 907,
+      "text": "            # to be filled later"
+    },
+    {
+      "line": 908,
+      "text": "            \"logits_starting\": None,"
+    },
+    {
+      "line": 909,
+      "text": ""
+    },
+    {
+      "line": 910,
+      "text": "            # to be filled later"
+    },
+    {
+      "line": 911,
+      "text": "            \"no_speech_prob\": None,"
+    },
+    {
+      "line": 912,
+      "text": "            \"no_speech\": False,"
+    },
+    {
+      "line": 913,
+      "text": ""
+    },
+    {
+      "line": 914,
+      "text": "            # to be filled in the loop"
+    },
+    {
+      "line": 915,
+      "text": "            \"progress\": generation_progress,"
+    },
+    {
+      "line": 916,
+      "text": "            "
+    },
+    {
+      "line": 917,
+      "text": "            # First Token Latency (will be set in the loop if first token is generated)"
+    },
+    {
+      "line": 1000,
+      "text": ""
+    },
+    {
+      "line": 1001,
+      "text": "            generation_progress.append(dict(generation_progress_loop))"
+    },
+    {
+      "line": 1002,
+      "text": "            logger.debug(\"current tokens \" + str(current_tokens.shape))"
+    },
+    {
+      "line": 1003,
+      "text": "            if completed:"
+    },
+    {
+      "line": 1004,
+      "text": "                # Stripping the last token, the eot"
+    },
+    {
+      "line": 1005,
+      "text": "                current_tokens = current_tokens[:, :-1]"
+    },
+    {
+      "line": 1006,
+      "text": "                break"
+    },
+    {
+      "line": 1007,
+      "text": "            "
+    },
+    {
+      "line": 1008,
+      "text": "            # For some rare cases where the attention fails"
+    },
+    {
+      "line": 1009,
+      "text": "            if not is_last and self.last_attend_frame - most_attended_frame > self.cfg.rewind_threshold:"
+    },
+    {
+      "line": 1010,
+      "text": "                if current_tokens.shape[1] > 1 and current_tokens[0, -2] >= DEC_PAD:"
+    },
+    {
+      "line": 1011,
+      "text": "                    logger.debug(\"omit rewinding from special tokens\")"
+    },
+    {
+      "line": 1012,
+      "text": "                    self.last_attend_frame = most_attended_frame"
+    },
+    {
+      "line": 1013,
+      "text": "                else:"
+    },
+    {
+      "line": 1014,
+      "text": "                    logger.debug("
+    },
+    {
+      "line": 1015,
+      "text": "                        f\"[rewind detected] current attention pos: {most_attended_frame}, \""
+    },
+    {
+      "line": 1016,
+      "text": "                        f\"last attention pos: {self.last_attend_frame}; omit this segment\""
+    },
+    {
+      "line": 1017,
+      "text": "                    )"
+    },
+    {
+      "line": 1018,
+      "text": "                    self.last_attend_frame = -self.cfg.rewind_threshold"
+    },
+    {
+      "line": 1019,
+      "text": "                    current_tokens = torch.cat(self.tokens, dim=1) if len(self.tokens) > 0 else self.tokens[0]"
+    },
+    {
+      "line": 1020,
+      "text": "                    break"
+    },
+    {
+      "line": 1021,
+      "text": "            else:"
+    },
+    {
+      "line": 1022,
+      "text": "                self.last_attend_frame = most_attended_frame"
+    },
+    {
+      "line": 1023,
+      "text": ""
+    },
+    {
+      "line": 1024,
+      "text": "            if content_mel_len - most_attended_frame <= (-1 if is_last else self.cfg.frame_threshold):"
+    },
+    {
+      "line": 1025,
+      "text": "                logger.debug(f\"attention reaches the end: {most_attended_frame}/{content_mel_len}\")"
+    },
+    {
+      "line": 1026,
+      "text": "                # Stripping the last token, the one that is attended too close to the end"
+    },
+    {
+      "line": 1027,
+      "text": "                current_tokens = current_tokens[:, :-1]"
+    },
+    {
+      "line": 1028,
+      "text": "                generation[\"frame_delay\"] = True"
+    },
+    {
+      "line": 1029,
+      "text": "                break"
+    },
+    {
+      "line": 1030,
+      "text": ""
+    },
+    {
+      "line": 1031,
+      "text": "            # Only update FTL in decoding loop if error corrector is NOT being used"
+    },
+    {
+      "line": 1032,
+      "text": "            # When error corrector is used, FTL will be updated after corrector generates result"
+    },
+    {
+      "line": 1033,
+      "text": ""
+    },
+    {
+      "line": 1034,
+      "text": "            if (not self.is_warmup and not self.first_token_generated and"
+    },
+    {
+      "line": 1035,
+      "text": "                start_time is not None and current_tokens.shape[1] > token_len_before_decoding and"
+    },
+    {
+      "line": 1036,
+      "text": "                corrector_model is None):"
+    },
+    {
+      "line": 1064,
+      "text": "                # LM corrector (text-only, Llama with LoRA)"
+    },
+    {
+      "line": 1065,
+      "text": "                corrector_result = self._run_LM_error_corrector("
+    },
+    {
+      "line": 1066,
+      "text": "                    current_tokens=current_tokens,"
+    },
+    {
+      "line": 1067,
+      "text": "                    token_len_before_decoding=token_len_before_decoding,"
+    },
+    {
+      "line": 1068,
+      "text": "                    corrector_model=corrector_model,"
+    },
+    {
+      "line": 1069,
+      "text": "                    corrector_tokenizer=corrector_processor,  # For LM, processor is actually the tokenizer"
+    },
+    {
+      "line": 1070,
+      "text": "                )"
+    },
+    {
+      "line": 1071,
+      "text": "            else:"
+    },
+    {
+      "line": 1072,
+      "text": "                # SpeechLM corrector (audio + text, Ultravox with LoRA)"
+    },
+    {
+      "line": 1073,
+      "text": "                corrector_result = self._run_SpeechLM_error_corrector("
+    },
+    {
+      "line": 1074,
+      "text": "                    input_audio=input_segments,"
+    },
+    {
+      "line": 1075,
+      "text": "                    current_tokens=current_tokens,"
+    },
+    {
+      "line": 1076,
+      "text": "                    token_len_before_decoding=token_len_before_decoding,"
+    },
+    {
+      "line": 1077,
+      "text": "                    corrector_model=corrector_model,"
+    },
+    {
+      "line": 1078,
+      "text": "                    corrector_processor=corrector_processor,"
+    },
+    {
+      "line": 1079,
+      "text": "                )"
+    },
+    {
+      "line": 1080,
+      "text": "            "
+    },
+    {
+      "line": 1081,
+      "text": "            estimated_run_time_end = time.time()"
+    },
+    {
+      "line": 1082,
+      "text": ""
+    },
+    {
+      "line": 1083,
+      "text": "            if corrector_result is not None:"
+    },
+    {
+      "line": 1084,
+      "text": "                tmp_len = len(corrector_result['corrected_appended_text']) + 1"
+    },
+    {
+      "line": 1085,
+      "text": "                estimated_run_time = (estimated_run_time_end - estimated_run_time_start) / tmp_len * (tmp_len - 1)"
+    },
+    {
+      "line": 1105,
+      "text": "            logger.info(\"End of decoding loop\")"
+    },
+    {
+      "line": 1106,
+      "text": "            t_after_decoding = time.time()"
+    },
+    {
+      "line": 1107,
+      "text": "            logger.info(f\"Decoding time: {1000 * (t_after_decoding - t_before_decoding):.3f} ms\")"
+    },
+    {
+      "line": 1108,
+      "text": ""
+    },
+    {
+      "line": 1109,
+      "text": "        # Let's now operate only with the top beam hypothesis"
+    },
+    {
+      "line": 1110,
+      "text": "        tokens_to_split = current_tokens[0, token_len_before_decoding:]"
+    },
+    {
+      "line": 1111,
+      "text": ""
+    },
+    {
+      "line": 1112,
+      "text": "        if use_error_corrector and \"error_corrector\" in generation:"
+    },
+    {
+      "line": 1113,
+      "text": "            new_hypothesis = generation[\"error_corrector\"][\"corrected_appended_token_ids\"]"
+    },
+    {
+      "line": 1114,
+      "text": "        elif fire_detected or is_last:"
+    },
+    {
+      "line": 1115,
+      "text": "            new_hypothesis = tokens_to_split.flatten().tolist()"
+    },
+    {
+      "line": 1116,
+      "text": "        else:"
+    },
+    {
+      "line": 1117,
+      "text": "            # Going to truncate the tokens after the last space"
+    },
+    {
+      "line": 1118,
+      "text": "            split_words, split_tokens = self.tokenizer.split_to_word_tokens(tokens_to_split.tolist())"
+    },
+    {
+      "line": 1119,
+      "text": "            generation[\"result\"] = {\"split_words\": split_words[:-1], \"split_tokens\": split_tokens[:-1]}"
+    },
+    {
+      "line": 1120,
+      "text": "            generation[\"result_truncated\"] = {\"split_words\": split_words[-1:], \"split_tokens\": split_tokens[-1:]}"
+    },
+    {
+      "line": 1121,
+      "text": ""
+    },
+    {
+      "line": 1122,
+      "text": "            if len(split_words) > 1:"
+    },
+    {
+      "line": 1123,
+      "text": "                new_hypothesis = [i for sublist in split_tokens[:-1] for i in sublist]"
+    },
+    {
+      "line": 1124,
+      "text": "            else:"
+    },
+    {
+      "line": 1125,
+      "text": "                new_hypothesis = []"
+    },
+    {
+      "line": 1126,
+      "text": ""
+    }
+  ]
+}

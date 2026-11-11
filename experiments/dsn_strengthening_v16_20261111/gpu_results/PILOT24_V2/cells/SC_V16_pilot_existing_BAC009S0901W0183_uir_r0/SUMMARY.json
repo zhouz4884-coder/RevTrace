@@ -1,0 +1,255 @@
+{
+  "schema": "revtrace-resilience-offline-metrics-v1",
+  "analysis_phase": "offline_after_trial",
+  "new_model_calls": 0,
+  "experiment_id": "SC_V16_pilot_existing_BAC009S0901W0183_uir_r0",
+  "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_uir_r0",
+  "arm": "uir",
+  "source_commit": "de0936b2e30179d63aeef6e235cd1af685578c58",
+  "primary": {
+    "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_uir_r0",
+    "stage": "pilot_existing",
+    "cohort": "metadata_frozen_pilot_existing",
+    "arm": "uir",
+    "repeat": 0,
+    "offered_frontiers": 17,
+    "offered_audio_seconds": 8.1380625,
+    "primary_linear_all_offered_D99": 2.8003397816047073,
+    "primary_linear_all_offered_C99": 3.1144474866986274,
+    "original_quantile_test_pass": false,
+    "complete_coverage_and_original_quantile_pass": false,
+    "D2_misses_all_offered": 4,
+    "C8_misses_all_offered": 0,
+    "missing_D_frontiers": 0,
+    "missing_C_frontiers": 0,
+    "D_max": 2.8682471429929137,
+    "C_max": 3.1150367744266987,
+    "dual_deadline_audio_credit_seconds": 6.5,
+    "raw_inputs": {
+      "config_sha256": "fa825caff850cef1ed4b56ec2433b5f002569013f0d292ab110844e95c1adc9c",
+      "origin_sha256": "90207da5f57a956efdd8d1ae1c454365b7e37b001e196fb38b19a105119ed0a7",
+      "consumer_sha256": "5403fd127008a352d5d922046cf64350df1128f0510136eb0c0a5a5723369ced"
+    },
+    "primary_linear_all_offered_C50": 1.4716824442148209,
+    "primary_linear_all_offered_D50": 1.1560261454433203,
+    "EOS_D2_misses": 1,
+    "nonEOS_D2_misses": 3
+  },
+  "content": {
+    "cell_id": "SC_V16_pilot_existing_BAC009S0901W0183_uir_r0",
+    "stage": "pilot_existing",
+    "cohort": "metadata_frozen_pilot_existing",
+    "arm": "uir",
+    "repeat": 0,
+    "actual_consumer_rows": 50,
+    "sources": 1,
+    "offered_audio_seconds": 8.1380625,
+    "offered_frontiers": 17,
+    "original_dual_credit_audio_seconds": 6.5,
+    "clock": "Actual observed perf; final surviving occurrences are right-censored at last actual same-source observation, not hypothetical UI close.",
+    "raw": {
+      "row_event_classes": {
+        "unchanged": 36,
+        "strict_append": 13,
+        "replacement": 1
+      },
+      "introduced_code_point_occurrences": 26,
+      "LCP_erased_code_point_occurrences": 1,
+      "observed_text_changes": 14,
+      "positive_F_advance_with_unchanged_text_rows": 3,
+      "positive_certified_F_advance_with_unchanged_text_rows": 14,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 1.0,
+        "strict_append": 5.5,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 1,
+      "still_visible_occurrence_code_points": 25,
+      "closed_occurrence_code_point_seconds": 0.24310658313333988,
+      "longest_closed_observed_lifetime_seconds": 0.24310658313333988,
+      "final_observed_text_code_points": 25
+    },
+    "whitespace_stripped": {
+      "row_event_classes": {
+        "unchanged": 36,
+        "strict_append": 13,
+        "replacement": 1
+      },
+      "introduced_code_point_occurrences": 26,
+      "LCP_erased_code_point_occurrences": 1,
+      "observed_text_changes": 14,
+      "positive_F_advance_with_unchanged_text_rows": 3,
+      "positive_certified_F_advance_with_unchanged_text_rows": 14,
+      "original_credit_by_first_visible_row_class": {
+        "unchanged": 1.0,
+        "strict_append": 5.5,
+        "replacement": 0,
+        "erase_only": 0,
+        "not_observed": 0
+      },
+      "original_credit_on_whole_text_empty_rows": 0,
+      "retracted_occurrence_code_points": 1,
+      "still_visible_occurrence_code_points": 25,
+      "closed_occurrence_code_point_seconds": 0.24310658313333988,
+      "longest_closed_observed_lifetime_seconds": 0.24310658313333988,
+      "final_observed_text_code_points": 25
+    }
+  },
+  "posterior_whole_text_support": {
+    "raw": {
+      "original_credit_supported_seconds": 6.0,
+      "original_credit_mismatching_seconds": 0.5,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 15,
+        "mismatching": 2
+      }
+    },
+    "whitespace_stripped": {
+      "original_credit_supported_seconds": 6.0,
+      "original_credit_mismatching_seconds": 0.5,
+      "original_credit_unknown_seconds": 0,
+      "all_offered_frontier_counts": {
+        "supported": 15,
+        "mismatching": 2
+      }
+    },
+    "scope": "Posterior whole first-view agreement at its actual G, not online certification, human correctness or newly transcribed character volume."
+  },
+  "quality": [
+    {
+      "source_id": "BAC009S0901W0183",
+      "reference_characters": 24,
+      "character_edits": 1,
+      "CER": 0.041666666666666664,
+      "final_text": "如果申请公积金贷款或公积金贷款与商业贷款的组合贷款",
+      "scope": "Fixed whitespace-only original native CER; final task quality, not provisional correctness."
+    }
+  ],
+  "energy": {
+    "status": "PASS_ACTUAL_BOTH_BOARD_SERVICE_INTERVAL",
+    "service": {
+      "gpu_joules": {
+        "0": 2929.1761169464025,
+        "1": 2734.9740419682626
+      },
+      "total_joules": 5664.150158914665
+    },
+    "origin_perf": 6148196.821382713,
+    "service_end_perf": 6148213.115694293,
+    "includes_fault_and_recovery_after_origin": true,
+    "initial_cold_load_excluded": true,
+    "scope": "Original Power.energy linear interpolation, both physical boards; no CPU-energy claim."
+  },
+  "integrity": {
+    "durable_frames_verified": true,
+    "complete_original_parent_cadence_records_verified": true,
+    "durable_canonical_steps": 17,
+    "expected_canonical_steps": 17,
+    "all_original_obligations_eventually_processed": true,
+    "accepted_frontiers": {
+      "BAC009S0901W0183": 130209
+    },
+    "pending_accepted_uncertified_samples": {
+      "BAC009S0901W0183": 0
+    },
+    "unprocessed_all_offered_samples": {
+      "BAC009S0901W0183": 0
+    },
+    "observed_acknowledged_input_loss_samples": {
+      "BAC009S0901W0183": 0
+    },
+    "input_loss_scope": "Completed fixed accepted obligations are checked by the full durable source chain; incomplete debt is pending work, not automatically lost input.",
+    "consumer_binding": {
+      "status": "PASS_DURABLE_CONSUMER_BINDING",
+      "applied_durable_facts": 17,
+      "durable_facts_not_yet_consumed": 0,
+      "duplicate_actual_durable_applications": 0,
+      "scope": "Whole provisional text can remain ahead; this does not require Consumer visible text to equal Canonical text."
+    },
+    "original_reference": {
+      "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+      "checked_steps": 17,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "reference_kind": "strict",
+      "projection": "none; entire state/C/IDs compared",
+      "reference_sha256": "ba214a4a1e32071d87d46793b7c22401da1dc286463cf1fde578e350dbda4b85"
+    },
+    "local_reject_records": 0,
+    "local_reject_canonical_mutations": 0,
+    "legal_progress_wrong_rejections": null,
+    "legal_progress_wrong_rejections_status": "REQUIRES_SEPARATE_SEMANTIC_WITNESS_CHECK",
+    "accepted_original_clock_notifications_checked": 17,
+    "owner_error_records": 0,
+    "owner_error_types": {},
+    "explicit_expected_owner_error_types": [],
+    "unexpected_owner_error_records": 0
+  },
+  "history": {
+    "samples": 12,
+    "coordination_entry_maxima": {
+      "live_jobs": 2,
+      "completed_full": 0,
+      "branch_steps": 2,
+      "canonical_witnesses": 2,
+      "nodes": 2,
+      "projections": 2,
+      "issued_proofs": 1,
+      "issued_id_memory_entries": 1,
+      "pending_job_refs": 2,
+      "pending_publications": 3,
+      "consumer_pins": 2
+    },
+    "application_and_process_data": {
+      "owner_RSS_bytes": {
+        "min": 41037824,
+        "max": 43171840,
+        "last": 43098112
+      },
+      "current_cut_bytes": {
+        "min": 10973,
+        "max": 13743,
+        "last": 13743
+      },
+      "current_text_bytes": {
+        "min": 0,
+        "max": 72,
+        "last": 72
+      },
+      "immutable_audio_bytes": {
+        "min": 520836,
+        "max": 520836,
+        "last": 520836
+      }
+    },
+    "scope": "Observed finite-run coordination-entry counts; RSS/current cuts/output/immutable audio are separate. Offline analysis allocation and cumulative application output do not establish constant online total memory."
+  },
+  "state_boundaries": {
+    "actual_worker_audio_insert_observations": 18,
+    "actual_worker_buffer_shifts": 0,
+    "actual_worker_context_trim_changes": 0,
+    "actual_worker_context_bound_still_exceeded": 0,
+    "selected_canonical_buffer_shift_edges": 0,
+    "selected_edge_prediction_clusters": {
+      "BAC009S0901W0183": {
+        "selected_edges": 17,
+        "observed_predictions": 16,
+        "own_prediction_changed": 2,
+        "longest_consecutive_changed": 1,
+        "unknown_prediction_edges": 1
+      }
+    },
+    "scope": "All worker observations include recomputation; selected-edge clusters are separate and unknown edges break a known streak. These are observed coverage, not natural-prevalence or universal-state-sufficiency claims."
+  },
+  "recovery": {
+    "observed_fault_records": 0,
+    "events": [],
+    "scope": "Component clocks may overlap; replay may precede cold model readiness. Missing markers remain unknown, never zero-duration recovery."
+  },
+  "gate": "PASS_COMPLETE_TRIAL_TASK_AND_ORIGINAL_ENDPOINT_RECOUNT",
+  "scope": "Offline aggregation only. Complete-task/refinement/physical-owner admissibility evidence roles remain distinct. Cold-fault P99 failure is an endpoint outcome, not automatic evidence that safe recovery failed."
+}
