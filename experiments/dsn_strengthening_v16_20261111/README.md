@@ -1,5 +1,9 @@
 # RevTrace v16: substantive strengthening
 
+Current serving progress: [timestamped partial GPU status](LIVE_GPU_STATUS.json).
+The reference/prelaunch counts below describe their frozen snapshot; the live
+status is incomplete and does not replace a final matrix gate.
+
 Start with [new evidence and execution changes](NEW_EVIDENCE_AND_EXECUTION_DELTA.zh.md).
 The pre-experiment inventory is [MISSED_STRONG_EVIDENCE.zh.md](MISSED_STRONG_EVIDENCE.zh.md).
 
