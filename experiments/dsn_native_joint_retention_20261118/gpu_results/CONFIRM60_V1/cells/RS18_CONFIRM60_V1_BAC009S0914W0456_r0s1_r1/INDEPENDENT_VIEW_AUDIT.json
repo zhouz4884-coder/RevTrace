@@ -1,0 +1,210 @@
+{
+  "status": "PASS_NATIVE_VIEW_APPLICATION_AUDIT",
+  "cell_id": "RS18_CONFIRM60_V1_BAC009S0914W0456_r0s1_r1",
+  "condition": "r0s1",
+  "runtime_execution_commit": "11453433c154aeffbff703c4c8dc9697421430e1",
+  "consumer_retain_views": true,
+  "continuity": {
+    "canonical_applications": 18,
+    "nonempty_ahead_canonical_applications": 0,
+    "compatible_ahead_applications": 0,
+    "compatible_ahead_preserved": 0,
+    "compatible_ahead_changed": 0,
+    "refuted_ahead_applications": 0,
+    "missing_witness_ahead_applications": 0,
+    "total_withdrawals": 0,
+    "avoidable_withdrawals": 0,
+    "necessary_withdrawals": 0,
+    "unknown_withdrawals": 0,
+    "removed_audio_seconds": 0,
+    "avoidable_removed_audio_seconds": 0,
+    "necessary_removed_audio_seconds": 0,
+    "unknown_removed_audio_seconds": 0,
+    "actual_consumer_rows": 53,
+    "source_count": 1,
+    "total_gap_audio_seconds_x_wall_seconds": 0.0,
+    "service_end_perf": 19696.727863415,
+    "gap_right_censored_windows": 0,
+    "gap_boundary_truncated_windows": 0,
+    "gap_restored_windows": 0,
+    "maximum_observed_same_root_gap_seconds": 0.0,
+    "avoidable_gap_audio_seconds_x_wall_seconds": 0.0,
+    "same_root_avoidable_gap_audio_seconds_x_wall_seconds": 0.0,
+    "necessary_gap_audio_seconds_x_wall_seconds": 0.0,
+    "same_root_necessary_gap_audio_seconds_x_wall_seconds": 0.0,
+    "unknown_gap_audio_seconds_x_wall_seconds": 0.0,
+    "same_root_unknown_gap_audio_seconds_x_wall_seconds": 0.0,
+    "observed_loss_window_union_area_audio_seconds_x_wall_seconds": 0.0,
+    "gap_scope": {
+      "total": "H3-compatible high-watermark frontier deficit through the explicit observed service end; includes necessary/unknown withdrawals.",
+      "classified": "Union of actual loss windows within one canonical root and Owner epoch. Next canonical/epoch boundaries truncate continuation unless frontier coverage is actually restored there.",
+      "avoidable": "Complete-path-compatible canonical clear; observed same-root area only, not a reconstructed full cross-root legally-supported G.",
+      "restoration": "Actual visible audio frontier reaches the pre-drop frontier; this does not assert byte-identical text restoration.",
+      "removed_audio_seconds": "Cumulative adjacent frontier drops; not a deduplicated fraction of offered input.",
+      "non_additive": "Classified root-bounded areas do not partition full high-watermark area; separately classified window areas may overlap."
+    }
+  },
+  "consumer_support": {
+    "actual_consumer_rows_checked": 53
+  },
+  "original_reference": {
+    "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+    "checked_steps": 18,
+    "mismatches": 0,
+    "first_mismatches": [],
+    "reference_kind": "strict",
+    "projection": "none; entire state/C/IDs compared",
+    "reference_sha256": "acb1d0fca25e958fae334952c0dec11283ff29b4f2fd2905c0825c26cf71d5e6"
+  },
+  "original_durable_facts_applied": 18,
+  "job_accounting": {
+    "status": "PASS_DISJOINT_JOB_ACCOUNTING",
+    "errors": [],
+    "dispatches": 33,
+    "counts": {
+      "selected_installed": 18,
+      "selected_durable_replayed": 0,
+      "fully_discarded": 0,
+      "pre_C_skipped": 15,
+      "fenced_terminal": 0,
+      "worker_lifecycle_terminated": 0,
+      "owner_lifecycle_terminated": 0,
+      "still_ready": 0,
+      "still_inflight": 0,
+      "still_durable_selected_unapplied": 0
+    },
+    "partition_count": 33,
+    "disjoint": true,
+    "closed_drain_requested": true,
+    "closed_drain_terminal_sum": 33,
+    "pending_jobs": 0,
+    "promotion_events": 0,
+    "unique_promoted_jobs": 0,
+    "selected_promoted_jobs": 0,
+    "promotions_are_not_terminal_category": true,
+    "Owner_admitted_ready_reuse": 0,
+    "ready_reuse_positive_is_hard_gate": false,
+    "zero_ready_reuse_requires_timing_audit": true,
+    "zero_ready_reuse_establishes_policy_equivalence": false,
+    "UIR": {
+      "enabled": false,
+      "C_entry_skip_hints_sent": 15,
+      "known_mismatched_jobs": 0,
+      "known_mismatched_selected": 0,
+      "known_mismatched_full_results_returned": 0,
+      "known_mismatched_full_results_discarded": 0
+    },
+    "jobs": {
+      "selected_installed": [
+        "e0-j000000001",
+        "e0-j000000002",
+        "e0-j000000003",
+        "e0-j000000005",
+        "e0-j000000007",
+        "e0-j000000009",
+        "e0-j000000011",
+        "e0-j000000013",
+        "e0-j000000015",
+        "e0-j000000017",
+        "e0-j000000019",
+        "e0-j000000021",
+        "e0-j000000023",
+        "e0-j000000025",
+        "e0-j000000027",
+        "e0-j000000029",
+        "e0-j000000031",
+        "e0-j000000033"
+      ],
+      "selected_durable_replayed": [],
+      "fully_discarded": [],
+      "pre_C_skipped": [
+        "e0-j000000004",
+        "e0-j000000006",
+        "e0-j000000008",
+        "e0-j000000010",
+        "e0-j000000012",
+        "e0-j000000014",
+        "e0-j000000016",
+        "e0-j000000018",
+        "e0-j000000020",
+        "e0-j000000022",
+        "e0-j000000024",
+        "e0-j000000026",
+        "e0-j000000028",
+        "e0-j000000030",
+        "e0-j000000032"
+      ],
+      "fenced_terminal": [],
+      "worker_lifecycle_terminated": [],
+      "owner_lifecycle_terminated": [],
+      "still_ready": [],
+      "still_inflight": [],
+      "still_durable_selected_unapplied": []
+    },
+    "scope": "actual recorded protocol outcomes only; zero reuse is not equivalence; promotions are not terminals",
+    "cell_id": "RS18_CONFIRM60_V1_BAC009S0914W0456_r0s1_r1",
+    "arm": "ready_only"
+  },
+  "input_files": [
+    {
+      "path": "CONFIG.json",
+      "bytes": 34153,
+      "sha256": "b135f8dc3360aa6232b9b39b60643df89053362f91eb6948597bcec9206a9f0b"
+    },
+    {
+      "path": "GENESIS.json",
+      "bytes": 12956,
+      "sha256": "7faea7b9d7c60c559eca9212f50cfed345f63b4bfb5f37e9aadc12da09c7ee73"
+    },
+    {
+      "path": "facts.wal",
+      "bytes": 1401265,
+      "sha256": "4ec6dc9d68e70b96ac83687048984a7807b77af3c1347deb867b7c28061b3e79"
+    },
+    {
+      "path": "consumer.jsonl",
+      "bytes": 40926,
+      "sha256": "ba404fee24d0b43d4511dceff94c89e3beb1a036809c84f6b2bd1093b11ce8cc"
+    },
+    {
+      "path": "publications.jsonl",
+      "bytes": 668571,
+      "sha256": "d31874bda337df01719029aed39866ecbd206a51a0423a9c883bd7d58bbfe250"
+    },
+    {
+      "path": "SERVICE_END.json",
+      "bytes": 280,
+      "sha256": "b90f303d3b431b8910390de7d25988691a583c8844034b38e8593876d4f58028"
+    },
+    {
+      "path": "owner_e0/dispatch.jsonl",
+      "bytes": 1850117,
+      "sha256": "7a7cbd9b236be5c5a341a25251b35d2ce88b4a6f727315d0b23b0d44bead0347"
+    },
+    {
+      "path": "owner_e0/worker_results.jsonl",
+      "bytes": 1215935,
+      "sha256": "4064642995107748b60a5a2d423341cdaed4c1c7b723ddccffd50e702a4300eb"
+    }
+  ],
+  "pure_parser_files": [
+    {
+      "path": "feedback_contract.py",
+      "sha256": "96f44e800b2d30838932cda7f45d9701549b783cfb60ddbbc546f4c87fc15be3"
+    },
+    {
+      "path": "resilience_storage.py",
+      "sha256": "f0adfca93469035d43df0b47f507fd2e8ce601e3541945a703e33127c2cdc9a2"
+    },
+    {
+      "path": "resilience_metrics.py",
+      "sha256": "1e3f7fbf50d4f621d51700f44ef4fb80cc335e3439e6e43e190aca9275cf121e"
+    }
+  ],
+  "detail_files": [
+    "view_audit/CANONICAL_SUPPORT_EVENTS.json",
+    "view_audit/OBSERVED_LOSS_WINDOWS.json"
+  ],
+  "neural_modules_imported": [],
+  "benefit_or_nonzero_activation_required": false
+}

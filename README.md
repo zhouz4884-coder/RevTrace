@@ -1,6 +1,17 @@
 # RevTrace
 
-## Current manuscript and evidence — 2026-11-01
+## Latest native experiment evidence — 2026-11-18
+
+[Complete 80-trial report](experiments/dsn_native_joint_retention_20261118/FINAL_REPORT.zh.md) · [Independent recount](experiments/dsn_native_joint_retention_20261118/review/FINAL_RECOUNT_V2/REPORT.zh.md) · [Per-source results](experiments/dsn_native_joint_retention_20261118/FINAL_PER_SOURCE.csv) · [Actual-view witnesses](experiments/dsn_native_joint_retention_20261118/review/NATIVE_CONTINUITY_FINAL_INTERPRETATION.zh.md)
+
+Eight existing speakers, five policies and two fresh-process repeats share the original full-step task, 500 ms cadence, D2/C8 deadlines, actual runtime and two GPUs. Joint retention earns 129.960/137.864125 audio-s (94.27%), versus 58.500 (42.43%) with completed-result reuse and 55.500 (40.26%) without speculation. All 1,410 selected original transitions match the fresh original-program reference.
+
+In-flight retention with snapshot replacement earns slightly more first credit (130.960 audio-s), but removes ten still-supported delivered views; joint retention removes none of these and still performs two necessary withdrawals. This is selective continuity evidence, not a positive first-credit interaction. The full factorial interaction is -1.500 audio-s; all zero-opportunity sources and SLO failures are retained.
+
+The manuscript is unchanged. Complete execution sources, configs, environment records, bounded outputs, failed premodel/analysis attempts, raw SHA indices and independent recounts are archived in the experiment directory. Large raw streams, audio and models remain on the designated experiment disk. Historical entries below retain their original dates and claims.
+
+
+## Historical manuscript and evidence — 2026-11-01
 
 [Current manuscript/source package](Paper_DSN/CURRENT.md) · [Paper PDF](Paper_DSN/revisions/20261101_dsn2027_release_v9/main.pdf) · [Editorial delta](experiments/dsn_editorial_delta_20261101/EDITORIAL_DIFF.md) · [Editable figures](experiments/dsn_editorial_delta_20261101/FIGURES_FINAL/)
 

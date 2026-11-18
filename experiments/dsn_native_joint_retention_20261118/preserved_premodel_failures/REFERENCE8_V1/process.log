@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_joint_retention_20261118/campaign_v1/source/run_reference.py", line 307, in <module>
+    run(p.parse_args())
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_joint_retention_20261118/campaign_v1/source/run_reference.py", line 100, in run
+    plan = read(args.plan); own, base, sources, packages, gpu = boot(args, plan)
+                                                                ^^^^^^^^^^^^^^^^
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_joint_retention_20261118/campaign_v1/source/run_reference.py", line 37, in boot
+    need(assets['status'].startswith('PASS') and assets.get('all_asset_bytes_verified') is True,
+  File "/media/user/5bc0dc8d-c938-4b2a-af1b-94174fc511a9/projects/revtrace_dsn_native_joint_retention_20261118/campaign_v1/source/ref_common.py", line 16, in need
+    if not value: raise ReferenceError(message)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ref_common.ReferenceError: Root actual model-byte prerequisite failed

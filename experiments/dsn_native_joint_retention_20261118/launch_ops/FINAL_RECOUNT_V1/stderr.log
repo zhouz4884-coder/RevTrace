@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_native_joint_retention_20261118\analysis_source\final_recount.py", line 334, in <module>
+    try:run(args)
+        ~~~^^^^^^
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_native_joint_retention_20261118\analysis_source\final_recount.py", line 262, in run
+    all_rows.append(check_cell(folder,cell,planned[cell['cell_id']],source_map[cell['source_id']],plan,reference_sha))
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_native_joint_retention_20261118\analysis_source\final_recount.py", line 195, in check_cell
+    need(cell['common_external_energy']['physical_drain_observation']['confirmed_perf']>=end['service_end_perf'],'external physical-drain window ended before original service')
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\VLA_QWEN\RevTrace\experiments\dsn_native_joint_retention_20261118\analysis_source\final_recount.py", line 34, in need
+    if not ok:raise ValueError(message)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: external physical-drain window ended before original service

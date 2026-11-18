@@ -1,0 +1,212 @@
+{
+  "status": "PASS_NATIVE_VIEW_APPLICATION_AUDIT",
+  "cell_id": "RS18_CONFIRM60_V1_BAC009S0902W0343_r1s0_r1",
+  "condition": "r1s0",
+  "runtime_execution_commit": "11453433c154aeffbff703c4c8dc9697421430e1",
+  "consumer_retain_views": false,
+  "continuity": {
+    "canonical_applications": 18,
+    "nonempty_ahead_canonical_applications": 3,
+    "compatible_ahead_applications": 2,
+    "compatible_ahead_preserved": 0,
+    "compatible_ahead_changed": 2,
+    "refuted_ahead_applications": 1,
+    "missing_witness_ahead_applications": 0,
+    "total_withdrawals": 3,
+    "avoidable_withdrawals": 2,
+    "necessary_withdrawals": 1,
+    "unknown_withdrawals": 0,
+    "removed_audio_seconds": 1.5,
+    "avoidable_removed_audio_seconds": 1.0,
+    "necessary_removed_audio_seconds": 0.5,
+    "unknown_removed_audio_seconds": 0,
+    "actual_consumer_rows": 54,
+    "source_count": 1,
+    "total_gap_audio_seconds_x_wall_seconds": 0.19669619950036576,
+    "service_end_perf": 22349.047007116,
+    "gap_right_censored_windows": 0,
+    "gap_boundary_truncated_windows": 0,
+    "gap_restored_windows": 3,
+    "maximum_observed_same_root_gap_seconds": 0.23864120099824504,
+    "avoidable_gap_audio_seconds_x_wall_seconds": 0.07737559900124324,
+    "same_root_avoidable_gap_audio_seconds_x_wall_seconds": 0.07737559900124324,
+    "necessary_gap_audio_seconds_x_wall_seconds": 0.11932060049912252,
+    "same_root_necessary_gap_audio_seconds_x_wall_seconds": 0.11932060049912252,
+    "unknown_gap_audio_seconds_x_wall_seconds": 0.0,
+    "same_root_unknown_gap_audio_seconds_x_wall_seconds": 0.0,
+    "observed_loss_window_union_area_audio_seconds_x_wall_seconds": 0.19669619950036576,
+    "gap_scope": {
+      "total": "H3-compatible high-watermark frontier deficit through the explicit observed service end; includes necessary/unknown withdrawals.",
+      "classified": "Union of actual loss windows within one canonical root and Owner epoch. Next canonical/epoch boundaries truncate continuation unless frontier coverage is actually restored there.",
+      "avoidable": "Complete-path-compatible canonical clear; observed same-root area only, not a reconstructed full cross-root legally-supported G.",
+      "restoration": "Actual visible audio frontier reaches the pre-drop frontier; this does not assert byte-identical text restoration.",
+      "removed_audio_seconds": "Cumulative adjacent frontier drops; not a deduplicated fraction of offered input.",
+      "non_additive": "Classified root-bounded areas do not partition full high-watermark area; separately classified window areas may overlap."
+    }
+  },
+  "consumer_support": {
+    "actual_consumer_rows_checked": 54,
+    "internal_ahead_canonical_applications": 3,
+    "nonempty_ahead_canonical_applications": 3,
+    "compatible_ahead_applications": 2,
+    "compatible_ahead_changed": 2,
+    "avoidable_supported_view_losses": 2,
+    "supported_loss_area": 0.07737559900124324,
+    "incompatible_ahead_applications": 1,
+    "necessary_incompatible_changes": 1,
+    "necessary_incompatible_withdrawals": 1,
+    "necessary_loss_area": 0.11932060049912252
+  },
+  "original_reference": {
+    "status": "PASS_COMPLETE_ORIGINAL_REFERENCE",
+    "checked_steps": 18,
+    "mismatches": 0,
+    "first_mismatches": [],
+    "reference_kind": "strict",
+    "projection": "none; entire state/C/IDs compared",
+    "reference_sha256": "acb1d0fca25e958fae334952c0dec11283ff29b4f2fd2905c0825c26cf71d5e6"
+  },
+  "original_durable_facts_applied": 18,
+  "job_accounting": {
+    "status": "PASS_DISJOINT_JOB_ACCOUNTING",
+    "errors": [],
+    "dispatches": 24,
+    "counts": {
+      "selected_installed": 18,
+      "selected_durable_replayed": 0,
+      "fully_discarded": 1,
+      "pre_C_skipped": 5,
+      "fenced_terminal": 0,
+      "worker_lifecycle_terminated": 0,
+      "owner_lifecycle_terminated": 0,
+      "still_ready": 0,
+      "still_inflight": 0,
+      "still_durable_selected_unapplied": 0
+    },
+    "partition_count": 24,
+    "disjoint": true,
+    "closed_drain_requested": true,
+    "closed_drain_terminal_sum": 24,
+    "pending_jobs": 0,
+    "promotion_events": 10,
+    "unique_promoted_jobs": 10,
+    "selected_promoted_jobs": 10,
+    "promotions_are_not_terminal_category": true,
+    "Owner_admitted_ready_reuse": 0,
+    "ready_reuse_positive_is_hard_gate": false,
+    "zero_ready_reuse_requires_timing_audit": true,
+    "zero_ready_reuse_establishes_policy_equivalence": false,
+    "UIR": {
+      "enabled": false,
+      "C_entry_skip_hints_sent": 6,
+      "known_mismatched_jobs": 6,
+      "known_mismatched_selected": 0,
+      "known_mismatched_full_results_returned": 1,
+      "known_mismatched_full_results_discarded": 1
+    },
+    "jobs": {
+      "selected_installed": [
+        "e0-j000000001",
+        "e0-j000000002",
+        "e0-j000000003",
+        "e0-j000000005",
+        "e0-j000000006",
+        "e0-j000000007",
+        "e0-j000000008",
+        "e0-j000000009",
+        "e0-j000000010",
+        "e0-j000000011",
+        "e0-j000000012",
+        "e0-j000000014",
+        "e0-j000000015",
+        "e0-j000000016",
+        "e0-j000000018",
+        "e0-j000000020",
+        "e0-j000000022",
+        "e0-j000000024"
+      ],
+      "selected_durable_replayed": [],
+      "fully_discarded": [
+        "e0-j000000017"
+      ],
+      "pre_C_skipped": [
+        "e0-j000000004",
+        "e0-j000000013",
+        "e0-j000000019",
+        "e0-j000000021",
+        "e0-j000000023"
+      ],
+      "fenced_terminal": [],
+      "worker_lifecycle_terminated": [],
+      "owner_lifecycle_terminated": [],
+      "still_ready": [],
+      "still_inflight": [],
+      "still_durable_selected_unapplied": []
+    },
+    "scope": "actual recorded protocol outcomes only; zero reuse is not equivalence; promotions are not terminals",
+    "cell_id": "RS18_CONFIRM60_V1_BAC009S0902W0343_r1s0_r1",
+    "arm": "fullcall"
+  },
+  "input_files": [
+    {
+      "path": "CONFIG.json",
+      "bytes": 34157,
+      "sha256": "84ae19006704b7cd330a50af037fedb4b5eff2408f909f09e4d26571c22d896c"
+    },
+    {
+      "path": "GENESIS.json",
+      "bytes": 12956,
+      "sha256": "c55d3b5d79fcf44892636bce3e6733bd359af0bf7c369039aa66f340d01fc3fb"
+    },
+    {
+      "path": "facts.wal",
+      "bytes": 1529148,
+      "sha256": "3d7bfbf7c7fc84ee50b10bcb2a3904ab5e2d7ef462a66434ade9115931b136ba"
+    },
+    {
+      "path": "consumer.jsonl",
+      "bytes": 41958,
+      "sha256": "46bdd93e7a2a7d7efe5f881ebd832ddfb635a7de2fb0e6be3a393508f7c46364"
+    },
+    {
+      "path": "publications.jsonl",
+      "bytes": 824180,
+      "sha256": "35fbc00787c5c2a9fe98385f9cc746156b06fd86486f746ec325535462b7a404"
+    },
+    {
+      "path": "SERVICE_END.json",
+      "bytes": 281,
+      "sha256": "252fc4bca79777bd6ae0cd2d055fa62d8fc78aa1e24d251487e918cfd4669cf2"
+    },
+    {
+      "path": "owner_e0/dispatch.jsonl",
+      "bytes": 1416780,
+      "sha256": "65a17d787fa83e2425340d037e7e2517ce985a540ba87fe63490b54c3ed630a7"
+    },
+    {
+      "path": "owner_e0/worker_results.jsonl",
+      "bytes": 1139482,
+      "sha256": "be96ed1ff94b693262fa69a8d79a6224887ecd21da33e361db48ce2879dc91e7"
+    }
+  ],
+  "pure_parser_files": [
+    {
+      "path": "feedback_contract.py",
+      "sha256": "96f44e800b2d30838932cda7f45d9701549b783cfb60ddbbc546f4c87fc15be3"
+    },
+    {
+      "path": "resilience_storage.py",
+      "sha256": "f0adfca93469035d43df0b47f507fd2e8ce601e3541945a703e33127c2cdc9a2"
+    },
+    {
+      "path": "resilience_metrics.py",
+      "sha256": "1e3f7fbf50d4f621d51700f44ef4fb80cc335e3439e6e43e190aca9275cf121e"
+    }
+  ],
+  "detail_files": [
+    "view_audit/CANONICAL_SUPPORT_EVENTS.json",
+    "view_audit/OBSERVED_LOSS_WINDOWS.json"
+  ],
+  "neural_modules_imported": [],
+  "benefit_or_nonzero_activation_required": false
+}
