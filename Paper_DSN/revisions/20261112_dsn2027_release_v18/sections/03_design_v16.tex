@@ -1,0 +1,244 @@
+\subsection{One original call through a revision}
+RevTrace coordinates an original call that starts before its input is
+selected, its eventual use at the actual parent, and the whole view that
+the Consumer currently reads. Figure~\ref{fig:protocol} follows call
+$j_3$ on forecast $\widehat P_2$. Selecting a matching $P_2$ can preserve
+that call; it does not endorse $j_3$'s own forecast $\widehat P_3$.
+Original Correct/Update must still produce its complete result $P_3$.
+Independently, the Consumer checks whether its current view is supported
+when $P_2$ is applied. Keeping computation alone does not keep that view.
+Table~\ref{tab:decision_objects} maps each use to its governing judgment.
+
+
+\begin{table}[t]
+\centering
+\caption{Evidence and permitted actions for calls, results, and views.}
+\label{tab:decision_objects}
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.27\columnwidth}>{\raggedright\arraybackslash}p{.35\columnwidth}>{\raggedright\arraybackslash}p{.33\columnwidth}@{}}
+\toprule
+Object & Judgment & Permitted use\\
+\midrule
+{[EL]} Frozen call input & Confirmed, pending, or refuted by actual full-state evidence & Continue confirmed or pending work; not select its prediction.\\
+{[AU]} Original full result & Owned result on the actual current parent & Append a selected fact, then install after synchronization.\\
+{[SUP]} Current whole view & Complete support under this actual application & Preserve the ahead view; not certify its forecast.\\
+\bottomrule
+\end{tabular}\endgroup
+\end{table}
+
+\subsection{Retain the call without selecting its prediction}
+\label{subsec:native_full_calls}
+In the native pipeline, ASR produces ordered beam candidates and the
+open state needed by original correction. Before learned correction
+finishes, the same update tail with a typed first-beam identity prediction
+can expose provisional closed state $\widehat P^+$. This is a forecast,
+not evidence that original Correct/Update selected it. The other worker
+may execute the next \emph{complete original call} on that conditional
+input. Both workers still execute ASR, original correction, and update.
+
+For that call, [EL] compares its immutable start with actual selected
+state at the same frontier. Equality confirms the input; disagreement
+refutes it; without such a witness it is pending. Pending is not false.
+A running call can continue, or its full result can wait in a ready bank,
+without obtaining selection authority. A known same-frontier mismatch,
+an already covered target, or a lifecycle fence can justify rejecting
+use. An earlier ancestor mismatch alone does not refute an unresolved
+future complete input. Conservative policy fences may discard work,
+but are distinct from a proof that its input is wrong.
+
+The witness can have different representations. The core runtime checks
+a matching complete boundary and the unbroken recorded suffix to the
+actual tip. The native full-call runtime checks the call's own complete
+start. A version uniquely bound to that input can carry the same
+evidence; a coarse birth version need not. Safe unconditional in-flight
+retention can also let work finish and validate it before use. These
+representations can share a complete-input witness, while [AU] still
+governs selection and [SUP] governs the actual whole view.
+
+In the factorial study, $R$ enables computation retention under its
+declared witness, and $S$ enables retention of a supported ahead view.
+Disabling either retention action preserves the shared safe-use checks.
+The native policy comparisons likewise retain original selection and
+whole-view validation while varying dispatch, in-flight retention,
+ready-result retention, or cooperative early stopping.
+
+\subsection{Selection is a serialized join}
+The selected parent can change after dispatch. The Owner therefore joins
+the worker's completed result with the parent that is current at
+selection. It first binds that result to the registered call's original
+identity, frozen start and target, contract, and original selection/update
+record. It selects the result only when its full start equals the
+installed parent. A future result waits; completion order cannot create
+a missing parent, and refuted or covered work cannot supply a new fact.
+Table~\ref{tab:coordinator} gives the transaction.
+
+\begin{table}[t]
+\centering
+\caption{The selection transaction, followed by independent reading and
+physical retirement.}
+\label{tab:coordinator}
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{.10\columnwidth}>{\raggedright\arraybackslash}p{.84\columnwidth}@{}}
+\toprule
+Step & Coordinator action\\
+\midrule
+1 & Bind the full result to its unchanged owned call; buffer while its complete input is pending.\\
+2 & Under serial selection, revalidate that input against the installed parent and the durable writer's root for this session.\\
+3 & Append the original result, parent, and identity; flush and synchronize the bound record. An uncertain outcome freezes new writes.\\
+4 & Recheck the parent after the callback, install only with the bound durable receipt, and publish this installation's own view snapshot.\\
+Read & The Consumer validates fact order and its actual parent, then separately reconciles its whole view.\\
+Retire & Reuse a physical slot only after its matching terminal/drained outcome or confirmed process and CUDA release.\\
+\bottomrule
+\end{tabular}\endgroup
+\end{table}
+
+\paragraph{The invariant established by these actions}
+For one session, let $D=(d_1,\ldots,d_n)$ be its ordered facts within the
+verified journal prefix, with genesis $x_0$ and successive endpoints
+$x_1,\ldots,x_n$. Other sessions may interleave in the journal. The invariant
+has three parts: each new $d_i$ binds a distinct owned original call
+from $x_{i-1}$ to its original complete result $x_i$; the Owner's
+installed cut is some verified prefix position $x_k$, $0\leq k\leq n$;
+and the Consumer applies only ordered facts from this prefix, while
+provisional views remain a separate lane. In particular, successful
+synchronization followed by a crash before installation permits
+$k=n-1$. Installed state is a durable \emph{prefix}, not always its tail.
+
+\begin{proposition}[Selected-trace refinement]
+\label{prop:refinement}
+Under the contract and failure assumptions of
+Section~\ref{sec:contract}, the coordinator's guarded actions preserve
+this invariant. Projecting onto distinct new selected facts yields an
+execution allowed by the original program $\mathcal A$. Replaying an
+existing fact adds no original transition.
+\end{proposition}
+\begin{proof}
+Genesis supplies the initial prefix. Dispatch, forecasts, completion,
+waiting, and rejection do not extend $D$. For an append, call binding
+and faithful execution supply an original result
+$s\mathrel{\Rightarrow_{\mathcal A,X}}t$ on its frozen input. The serial
+pre-append checks compare $s$ with both the installed parent and the
+writer's verified per-session tail. Hence $s=x_n$; the new record extends
+the old allowed prefix by that original edge. Identity consumption and
+duplicate rejection prevent another new edge from the same owned outcome.
+Synchronization precedes installation; installation only advances $k$.
+If the callback is uncertain, writes freeze rather than grant a new
+installation. Recovery validates the complete recorded prefix and
+replays those identities; it executes no new neural transition.
+The Consumer's sequence and parent checks preserve its prefix.
+Induction establishes the claim. The omitted protocol actions are
+stuttering in this selected-fact projection~\cite{schneider1990statemachine,abadi1991refinement}.
+\end{proof}
+
+Proposition~\ref{prop:refinement} needs less than bit-exact repetition.
+Its premise is that the appended edge is the one the original program
+produced on its frozen input, not that two independent executions agree
+bit for bit, which the contract's nondeterministic relation $\mathcal A$
+already permits. The runtime supplies that premise operationally: a
+channel bound to the physical worker incarnation returns each result
+under the identity of the call that produced it, and all 32 native runs
+match an independently generated reference.
+
+The result retains its original identity through this join. A complete
+result already received and owned before a worker-only fence can remain
+usable with its original incarnation. Owner-group recovery instead
+replays durable facts, and leaves uncommitted old-Owner work outside the
+new write namespace. Section~\ref{sec:protocol} describes the corresponding
+physical ownership rules.
+
+\subsection{The Consumer checks its whole view}
+A call input and a displayed path can diverge. For a recorded node,
+the provisional dependency relation is
+\begin{equation}
+ (F,P_C)\xrightarrow{n_j}(b_j,P_j^+)
+ \quad\text{when}\quad a_j=F\ \land\ P_j^-=P_C,
+ \label{eq:edge}
+\end{equation}
+under the same full-input and identity contract. Write $C\leadsto h$
+when complete published nodes form an unbroken path from $C$ to the
+actual displayed tip. This relation checks support of a forecast or
+full node; it does not turn a forecast edge into an original selected
+transition.
+
+At an actual canonical application, [SUP] checks the Consumer's current
+whole view, not merely a convenient Owner node. A matching complete
+boundary permits removal of the covered path prefix while retaining its
+entire supported suffix. Missing, ambiguous, or mismatching ancestry
+cannot justify retention. The bound text, frontier, original results,
+and current root are checked together; there is no uncertified suffix
+splice or caller-supplied compatibility flag.
+
+\begin{proposition}[Continuity at a compatible application]
+\label{prop:continuity}
+Immediately before an authorized canonical application at frontier $F$,
+let the actual whole view $h$ be ahead of $F$. If the incoming selected
+fact $C$ satisfies $C\leadsto h$ and no independent withdrawal mode is
+invoked, that application advances the selected lane and preserves $h$
+unchanged.
+\end{proposition}
+\begin{proof}
+The Consumer first validates publication authority, order, and the
+durable parent. At the matching boundary, reconciliation removes only
+the covered path prefix. The remaining suffix has the same original tip,
+text, and frontier as $h$. Old or duplicate publications are rejected
+before changing these lanes. Thus this application does not withdraw
+$h$.
+\end{proof}
+
+An incompatible application may require withdrawal, and later original
+results may revise text. This property protects the supported whole view
+at each compatible application.
+
+\subsection{A call can outlive an ancestor prediction}\label{subsec:ancestor_outlives}
+Consider an allowed state-convergence case, with all referenced audio
+already accepted and its boundaries numbered 0--3. Call $A$ runs from $x_0$ and forecasts
+$\widehat x_1$. Call $B$ starts there and completes $x_2$ before $A$;
+its future result waits, freeing a worker. Call $C$ can now start from
+$x_2$ while its birth root is still $x_0$. Suppose $A$ then selects
+$x_1\ne\widehat x_1$. This refutes $B$'s input, but says nothing yet
+about $C$'s complete input at frontier 2. If an original recomputation
+$D$ from $x_1$ produces $x_2$, $C$ becomes confirmed and may supply its
+own complete result $x_3$. The selected execution is
+\begin{equation}
+ x_0\xrightarrow{A}x_1\xrightarrow{D}x_2\xrightarrow{C}x_3.
+\end{equation}
+It is contiguous: no skipped frontier or rollback is needed. $B$'s
+output equality with $x_2$ never authorizes $B$, whose input was wrong.
+$C$ retains its identity and still executes original Correct/Update.
+If the Consumer had displayed the old path through $\widehat x_1$,
+that path would separately fail [SUP].
+
+An executable three-frontier, four-call control constructs this case.
+It separates a call's own complete input from its ancestral provenance:
+$C$ can become usable even after its tracked ancestry fails. A strict
+ancestor-revocation policy may safely discard $C$, but then forgoes this
+reuse. A policy that preserves the opportunity needs a witness for $C$'s
+actual input; input-bound versions can supply it. Matching expected-parent
+handovers likewise support multi-step compatible chains. This finite
+protocol case establishes the opportunity rather than its prevalence
+in the native traces.
+
+\subsection{Executable checks and implementation correspondence}
+\label{subsec:native_refinement}
+A separately frozen, hand-written Python state machine checks the
+invariants over explicit protocol actions. Two symbolic values represent
+equality or disagreement of complete opaque state; original C/U is an
+allowed, potentially nondeterministic relation. A custom breadth-first
+search checks 6,231 states/11,142 edges with two frontiers, at most three
+issued jobs and no fault; and 14,074 states/25,799 edges with one frontier,
+at most two issued jobs and at most one fault. Both explore to depth 12, leaving
+2,144 and 2,828 depth-boundary states unexpanded. The 35 named controls
+comprise the original 27 legal/mutation cases and eight phase/action
+checks. They verify that Sync extends the fact prefix while Install and
+Replay use existing facts. Constructed mutations expose using a forecast
+as C/U, withdrawing a compatible view, and attaching a later root to an
+earlier publication. These are checks of a bounded protocol model.
+
+Source-level protocol controls and an independent trace checker connect
+actual dispatches, full-call receipts, durable facts, publications, and
+Consumer applications to the same obligations. The selected-fact
+projection connects durable append, installation, and replay to the
+original transition relation. Separate application checks evaluate the
+actual Consumer's retained read view. The model explores protocol
+interleavings; the trace checker binds those obligations to recorded
+runtime actions.

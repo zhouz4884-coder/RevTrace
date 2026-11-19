@@ -1,0 +1,59 @@
+% Selected DSN2027 manuscript; evidence and release provenance are archived separately.
+\documentclass[conference,10pt]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{cite,amsmath,amssymb,amsthm}
+\usepackage{booktabs,array,multirow,graphicx}
+\usepackage{url,microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\input{tables/native_metrics_v16}
+\begin{document}
+\title{RevTrace: Preserving Valid Progress across Trusted Feedback Revisions}
+\author{\IEEEauthorblockN{Anonymous submission}\IEEEauthorblockA{Regular paper}}
+\maketitle
+\begin{abstract}
+A stateful inference service can deliver text within its display deadline,
+then erase it when a trusted revision confirms the screen. RevTrace
+preserves valid progress by coordinating running original
+calls, selected results, and whole consumer views, with separate evidence
+for eligibility, selection, and support. Every selected transition is
+allowed by the original program. In a 24-speaker factorial study the two
+retentions remove different withdrawal classes: computation retention
+raises avoidable withdrawals from 6 to 17, view retention ends them, and
+joint retention leaves neither. On a native recognizer--corrector path
+the switches separate again: replacing the view erases all ten supported
+views that retained calls meet, keeping it erases none. Retention
+delivers \NativeFullCreditPct\% dual-deadline coverage against
+\NativeReadyCreditPct\% for completed-result reuse and
+\NativeConsCreditPct\% for serial execution, with 31.8\% less worker
+time and 23.7\% less energy than reuse; on 15-s natural inputs
+certification misses fall from 27 to zero.
+\end{abstract}
+\begin{IEEEkeywords}
+dependable inference, feedback state, incremental computation, speculative execution, streaming ASR
+\end{IEEEkeywords}
+\section{Introduction}\label{sec:intro}
+\input{sections/01_progress_introduction}
+\section{System and Feedback Contract}\label{sec:contract}
+\input{sections/02_contract}
+\section{Coordinating Calls and Whole Views}\label{sec:continuation}
+\input{sections/03_design_v16}
+\section{Implementation and Reliable Execution}\label{sec:protocol}
+\input{sections/04_execution_v16}
+\section{Evaluation}\label{sec:eval}
+\input{sections/05_evaluation_v16}
+\section{Related Work}\label{sec:related}
+\input{sections/06_progress_related}
+\section{Discussion}\label{sec:discussion}
+\input{sections/07_discussion_v16}
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/08_progress_conclusion}
+\section*{AI Tool Usage}
+ChatGPT/Codex assisted literature discovery, drafting, revision
+including the refinement exposition, runtime extensions, experiment
+orchestration, and analysis code. The authors retain full responsibility.
+\clearpage
+\bibliographystyle{IEEEtran}
+\bibliography{refs,formal_refs,coordination_refs}
+\end{document}

@@ -1,0 +1,74 @@
+\paragraph{Incremental information and dependency reuse}
+Incremental dialogue processing represents dependencies between units
+and propagates revocation~\cite{schlangen2011incremental}; its commitment
+promises that a unit will not be revoked. RevTrace's certification
+records selection by the original feedback program, whose later
+corrections can still revise the transcript. Adapton validates recorded
+dependencies, Nominal Adapton recovers reusable computation by name and
+argument, and Differential Dataflow maintains incremental results across
+versions~\cite{hammer2014adapton,hammer2015names,mcsherry2013differential}.
+These are foundations for the complete-input witness. Our author-built
+version-DAG control uses the same complete-input, selection, and
+view-support checks as RevTrace and adds revocation after an ancestor
+is refuted. Both retain the observed compatible native handovers; the
+convergence case in Section~\ref{subsec:ancestor_outlives} explains
+where that additional revocation rule can discard a future call before
+its own input resolves.
+
+\paragraph{Revisable speech services and speculation}
+Whisper-Streaming makes an offline Whisper
+recognizer~\cite{radford2023whisper} incremental through
+LocalAgreement~\cite{machacek2023whisperstreaming}. StreamCorrect adds
+learned correction and feeds the selected text back into later
+recognition~\cite{vu2026streamcorrect}. RevTrace retains that original
+ASR/Correct/Update program while coordinating asynchronous full calls
+and the Consumer's whole view. LocalAgreement-2/3 controls and
+prefix-to-prefix commit rules for simultaneous
+translation~\cite{ma2019stacl} address the complementary publication
+decision. Our fixed-schedule LA2-CP control applies a common-prefix rule
+above the native AlignAtt-based kernel~\cite{papi2023alignatt}. It
+measures the display tradeoff on recorded candidate schedules with
+original correction and feedback unchanged.
+
+SSBD reuses the previous translation as a draft, verifies it under
+updated input, and masks displayed suffixes; PredGen generates candidate
+replies while input is evolving; RelayS2S commits a verified fast-path
+prefix that constrains slow-path generation
+\cite{zeng2026ssbd,li2025predgen,mai2026relays2s}. RevTrace keeps that
+rule: a confirmed input permits the call's full original result, while
+its predicted successor stays subject to original correction. ASR
+alignment-drift work shows the
+importance of audio-position state~\cite{wang2026alignmentdrift}; that
+state is part of our complete-input contract.
+
+\paragraph{Inference reuse and verification}
+Orca schedules transformer iterations, PagedAttention and RadixAttention
+share KV blocks and token prefixes, and speculative decoding with
+tree-based verification accepts draft
+tokens~\cite{yu2022orca,kwon2023pagedattention,zheng2024sglang,leviathan2023speculative,miao2024specinfer}.
+SGLang also speculates across program primitives by retaining generation
+beyond a stop condition and matching it to later operations. RevTrace coordinates
+complete frozen feedback calls and binds each retained use to the actual
+selected parent. The Consumer then checks the support of its current
+whole view. Backend reuse and faster token execution can compose with
+this service protocol.
+
+\paragraph{Execution authority and recovery}
+Retire separates request-owned resources from execution-version
+publication authority and certifies state inheritance under a reuse
+contract~\cite{zhang2026retire}. RevTrace derives call and view actions
+from selected neural feedback: a view may require withdrawal while a
+future input remains unresolved, and an input match leaves original
+correction responsible for selecting the successor. We implement
+task-level version-DAG and birth-root controls around this same feedback
+program.
+
+Optimistic concurrency control validates work before commit;
+multiversion control and snapshot isolation supply distinct read
+guarantees~\cite{kung1981occ,bernstein1983mvcc,berenson1995isolation}.
+Write-ahead logging, distributed snapshots, and lineage restore a
+prefix after failure~\cite{mohan1992aries,chandy1985snapshots,zaharia2013dstreams,carbone2017flinkstate}.
+RevTrace applies these ordering principles to selected original facts:
+it replays the verified prefix, keeps received-result ownership
+independent of producer lifetime, and ends physical ownership at
+terminal drain rather than lease expiry~\cite{gray1989leases}.

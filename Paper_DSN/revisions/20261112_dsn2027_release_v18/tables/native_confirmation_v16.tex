@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\caption{Native retention policies: eight speakers, two fresh repeats,
+137.864~audio-s and 282 offered frontiers per policy. R0 uses received
+complete results only; R1 also keeps a call whose input is confirmed
+while it runs. S0 replaces the whole view at a canonical application;
+S1 keeps it when the support check passes. Conservative issues no work
+ahead of confirmation. Work is occupied-worker wall time; energy covers
+both boards to confirmed physical model drain.}
+\label{tab:native_confirmation_v16}
+\scriptsize\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Policy & $A_{2,8}$ (s) & Cov. & Pass & Av./Nec. & Work (s) & kJ\\
+\midrule
+Conservative & 55.500 & 40.26\% & 0/16 & 0/0 & 197.573 & 96.985\\
+$R_0S_0$ & 58.000 & 42.07\% & 0/16 & 13/6 & 326.546 & 118.632\\
+$R_0S_1$ & 58.500 & 42.43\% & 0/16 & 0/6 & 326.232 & 117.826\\
+$R_1S_0$ & 130.960 & 94.99\% & 10/16 & 10/2 & 222.646 & 92.814\\
+$R_1S_1$ & 129.960 & 94.27\% & 10/16 & 0/2 & 222.523 & 89.848\\
+\bottomrule
+\end{tabular}
+\end{table}

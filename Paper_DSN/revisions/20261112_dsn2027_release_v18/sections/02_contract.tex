@@ -1,0 +1,84 @@
+\subsection{The original feedback program}
+A session consumes immutable audio released over time. Its original
+program recognizes candidates, selects a correction, and updates the
+state used by the next call. In StreamCorrect, selected corrections feed
+later ASR~\cite{vu2026streamcorrect}. RevTrace changes when calls run and
+which progress remains visible while preserving this original program.
+Write $s\mathrel{\Rightarrow_{\mathcal A,X}}t$ for a transition allowed
+by the original program $\mathcal A$ on accepted immutable input $X$;
+this relation may be nondeterministic.
+
+The adapter declares a closed cut $x=(F,P)$, where $F$ is the input
+frontier and $P$ contains all mutable cross-call state that can affect
+subsequent inference or selection. The execution contract binds the
+model, audio identity, decoding, state encoding, and output-to-text
+transformation. A selected fact is
+\begin{equation}
+ C=(v,F,Z_C,P_C,T_C),
+ \label{eq:canonical}
+\end{equation}
+where $v$ identifies the selected version, $Z_C$ is the complete original
+result, and $T_C$ is its bound text. Selection is distinct from human
+transcription accuracy. The adapter also records processing coverage:
+an original buffer-only transition need not earn new neural-processing
+credit, and advancing a state frontier need not add characters.
+
+A job freezes its complete input before dispatch. A recorded node has
+\begin{equation}
+ q_j=(a_j,P_j^-,b_j,\chi_j),\qquad
+ n_j=(q_j,\tau_j,Z_j,P_j^+,T_j),
+ \label{eq:node}
+\end{equation}
+with start cut $(a_j,P_j^-)$, target $b_j>a_j$, and $\chi_j$ binding the
+remaining inputs: accepted audio, EOS, configuration, and original job
+identity. The node type $\tau_j$ distinguishes a stage forecast from a
+complete original call. A forecast may become available while original
+correction is still running; completion requires the original selection
+and update, including their declared buffer-only path. The frontier
+records input progress rather than a word-to-audio alignment.
+
+State equality means equality of the complete declared encoding under
+the same contract. The native adapter carries audio buffers, token
+groups, context, alignment position, and decoder configuration at a
+clean-cache boundary. The core Qwen adapter carries feedback prompt
+tokens without cross-call numerical KV caches. Text alone cannot witness
+equality of an omitted cursor, token state, or numerical cache. Telemetry
+and resource accounting are recorded separately.
+
+\subsection{Selected facts, calls, and the actual view}
+An \emph{Owner} serializes selected transitions for each session. The
+native runtime has two protected workers, each hosting the complete
+original recognizer--corrector--update pipeline. Either can run from a
+selected cut or a conditional forecast. A Supervisor preserves accepted
+input obligations and monitors processes; an actual FIFO Consumer applies
+the Owner's publications. Durable storage records the selected prefix.
+The earlier factorial runtime uses the same logical roles with separate
+provisional and protected-selection paths.
+
+The Consumer's whole view $h$ binds text and a visible frontier to a
+complete published path from its selected root to its displayed tip.
+It may be ahead of the selected state. A path node is not selected merely
+because its text was displayed. Conversely, an already received complete
+result may remain usable after its producer exits. Call eligibility,
+selection of an original result, support of $h$, and physical resource
+ownership therefore refer to different objects.
+
+Every accepted input remains an obligation until original certified
+processing covers it. Rejecting a branch, cancelling a call, or replaying
+an old fact neither removes that obligation nor resets its arrival
+clock. Exact mode never trades this rule for a deadline: lateness cannot
+authorize an uncertified selected transition.
+
+\subsection{System and failure model}\label{subsec:failure_model}
+The argument assumes one legitimate serial writer, faithful execution of
+frozen inputs and original selection code, sufficient declared state,
+unambiguous encoding, collision-resistant digests, and storage honoring
+successful synchronization. Workers and host components faithfully
+execute the original program; its allowed relation accommodates
+nondeterministic execution.
+
+The native failure model covers worker or Owner-group crash-stop,
+late/duplicate messages, and fenced physical incarnations on an intact
+filesystem. Supervisor, ingress ledger, actual Consumer, power observer,
+and recoverable storage survive. Controlled wrong-input injections in
+Section~\ref{sec:eval} exercise the input and identity rejection guards.

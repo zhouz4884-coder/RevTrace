@@ -1,0 +1,45 @@
+The results identify two service objectives that require coordination:
+making original computation timely and keeping its supported progress
+available. First-delivery credit captures the former event; whole-view
+support captures the latter state. Their ranking can differ, as the
+continuity experiment shows. A service contract therefore needs both a
+deadline and a rule for what remains available after feedback changes.
+
+The native comparison isolates a second choice within the same safety
+contract: which issued work remains available for reuse. Ready-only and
+Fullcall share original selection and view-support checks, but only the
+latter preserves a call while its input is being resolved. Input-bound
+versions can supply the same eligibility evidence. This gives builders
+freedom in representing dependencies while retaining the separate
+checks at execution, selection, and application.
+
+\paragraph{What an implementation must preserve}
+Three obligations survive any encoding. First, input eligibility:
+a representation supports safe in-flight retention only if it can witness
+the complete input of the call at the installed parent; a coarse birth
+version cannot. Second, original selection: retaining executed work never
+endorses its prediction, and the original Correct/Update and the durable
+selection boundary stay unchanged. Third, view support: protecting
+computation does not protect delivery, so the Consumer validates the
+whole view at each actual application. The contract is informational, not
+representational: the measured version-DAG policy matches Fullcall's
+eligible handovers.
+
+\paragraph{Operating scope}
+The measured gains separate a correctness contract from the scheduling
+conditions that make reuse profitable: witnesses govern the contract,
+while available execution overlap and Consumer timing govern the
+profit. Local agreement reduces revisions by waiting for more
+evidence; independent canonical chains can consume the slots needed for
+conditional execution~\cite{welsh2001seda}. The selected-fact
+argument establishes allowed transitions under the execution contract,
+while controlled fault injections exercise its lifecycle boundaries.
+
+Adapting this protocol requires a closed, serializably comparable call
+boundary: all state read by the original inference and feedback update,
+its complete result and selected transition, and the published
+dependencies of the Consumer's current view. These interfaces make
+eligibility and continued support checkable at the point where retained
+work is used. Numerical cross-call state, such as a reused KV cache,
+would need an approximate or prefix-matched witness before the same
+checks apply.

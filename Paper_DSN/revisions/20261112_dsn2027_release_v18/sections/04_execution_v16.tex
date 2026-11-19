@@ -1,0 +1,101 @@
+\subsection{Executing an original call}
+A dispatch freezes the complete model input, source audio range, target
+frontier and execution contract. Each native FP32 worker executes the
+original inference, selection and feedback-update code. Its early ASR
+observation can supply a typed provisional view while original correction
+continues; its complete result follows the original C/U path.
+
+All native policies use the same work-conserving dispatcher. It first
+considers eligible calls from actual selected inputs across sessions,
+then conditional calls, and rotates among eligible sessions. It registers
+and sends one dispatch before reconsidering the next free slot.
+Conservative can therefore use both GPUs for distinct sessions under the
+same resource budget. The policy differences concern which outstanding
+calls survive revisions, as evaluated in
+Section~\ref{sec:eval}.
+
+\subsection{Logical invalidation and physical ownership}
+Dispatch and receipt identities bind the session, Owner namespace,
+monotonic job number and physical worker incarnation, following established
+RPC identity principles~\cite{birrell1984rpc}. Exact duplicates and fenced
+messages are rejected locally. They neither modify selected state nor
+release a newer job's slot. Contradictory contents from a currently owned
+call freeze further writes.
+
+A retention decision does not terminate GPU execution. In the native
+runtime, a known-input mismatch or covered target can request a cooperative
+exit at the checkpoint before learned correction. A worker either returns
+a complete original result or acknowledges cancellation without a partial
+feedback state. Cleanup and device synchronization precede its terminal
+receipt. If completion wins the race, the returned result still passes
+the original input and selection checks. UIR suppresses these early-exit
+requests while keeping the same end-use checks.
+
+Per-incarnation channels bind the message stream to its physical producer.
+After an unexpected channel close, complete received frames are validated
+before the channel is sealed. Replacement requires confirmed process
+exit, released CUDA ownership and joined receivers. In the batched core
+instance, a completed row can be used before other rows finish, but the
+batch lease ends only after every terminal row and device synchronization.
+Neither a logical fence nor a masked row is charged as freed computation.
+
+\subsection{Durable selection and recovery}
+An exclusive writer records the full parent and next states, original
+correction and returned IDs, owned job and relevant epochs. Framing,
+checksums and chaining bind the record; synchronization precedes
+installation and publication, following conventional write-ahead
+rules~\cite{mohan1992aries}. A successful callback returns the receipt for
+that record. An uncertain append or installation outcome freezes writes
+until recovery establishes the verified prefix.
+
+\label{subsec:native_resilience}
+For an Owner-group failure, the Supervisor confirms the end of old
+physical ownership, advances the Owner namespace, and replays the verified
+durable prefix to the surviving Consumer before starting the replacement
+Owner. Only an incomplete final frame may be discarded; complete
+corruption fails verification. Replay preserves the original fact and
+job identities. Workers cold-start and continue from the recovered
+selected input, using the original ingress clocks.
+
+The sync--install distinction has an observed counterpart. In two repeats
+of an earlier Fullcall fault case, journal sequence 5 was synchronized when
+the original Owner was terminated before installation. During recovery
+to the next Owner epoch, the surviving Consumer replayed that same fact
+with its original job identity. For these two facts, the counts of
+durable records, original-Owner installations, and Consumer uses were
+$2/0/2$. This instantiates the sync--install gap permitted by
+Proposition~\ref{prop:refinement}: replay used the existing edge without
+adding a neural transition.
+
+Twenty-four further fault cells on one development source exercise six
+conditions under both policies. No cell installs illegally or accepts a
+rejected mutation. Recovery cost splits by what must be rebuilt: worker
+faults resume in 1.8--2.3~s against a surviving model, while Owner-group
+faults pay 64.6--108.1~s to rebuild the worker group. No fault cell meets
+its deadlines, so these trials establish the absence of an illegal
+transition and a bound on recovery rather than continued timeliness. One
+condition prices retention directly: when the Owner dies after the
+durable install, retaining needs 101.8--104.4~s and 26.5--27.2~kJ against
+83.9--87.1~s and 22.4--24.2~kJ, because more outstanding work survives to
+be re-driven. Retention moves cost onto the recovery path instead of
+paying it in steady state.
+
+An independent audit of that earlier runtime also bound 3,976 selected
+and 9,068 provisional applications across 36 traces, and verified
+preservation at all 90 compatible-ahead applications.
+
+\phantomsection\label{prop:continued_service}
+After finitely many supported failures, eventual progress requires readable
+storage, terminating original calls, eventual worker release and loading,
+and fair Owner/Consumer scheduling. Loading and replay remain part of
+post-fault service time; destroying a model process incurs its actual
+reconstruction cost even when an acquired result survives.
+
+\subsection{Keeping control history bounded}
+Active calls, ready results, delivered views and unacknowledged
+publications pin their required evidence. Acknowledgment releases
+publication references, not arbitrary computation dependencies. Monotonic
+issue high watermarks prevent old identities from being reissued after
+collection. Unreferenced terminal and diagnostic windows are bounded and
+streamed to disk. These are bounds on control history; audio, cumulative
+text and model state retain their separately measured costs.
