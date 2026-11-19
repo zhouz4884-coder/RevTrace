@@ -6,6 +6,7 @@
 - Plot sourcewise dual-deadline audio coverage and both-board service energy per
   offered audio-second. Filled points pool repeats; open points and short ranges
   show both observed repetitions. Shapes distinguish policies in grayscale.
+- Place the native comparison on page 9 beside its main results and table.
 - Use a shared speaker order and descriptive labels instead of the old pilot/
   confirmation markers. Include the non-speculative Serial anchor so the reader
   can assess both completed-result reuse and in-flight retention.

@@ -159,6 +159,22 @@ selected frontier, result, state, and text histories within each
 source/block.
 
 \subsection{What does each switch contribute on the native path?}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/native_comparison.pdf}
+\caption{Timely progress and service energy on the eight-speaker native
+workload. The three policies all retain whole supported views; they differ
+in whether calls are serial, reusable only after completion, or retained
+in flight. These are the same trials as Table~\ref{tab:native_confirmation_v16}:
+two fresh-process repeats per speaker and policy from the 80-trial
+factorial campaign. Filled markers pool the two repeats; open markers and
+short ranges show the individual observations. Speakers use the same
+order in both panels. (a) Audio meeting both the 2-s display and 8-s
+certification deadlines. (b) Both-board energy from service origin to
+confirmed physical model drain, divided by offered audio duration.}
+\label{fig:native_comparison}
+\end{figure*}
 The native comparison isolates a call whose input becomes confirmed while
 it is still running. \emph{Fullcall} ($R_1S_1$) keeps that original
 complete call; \emph{Ready-only} ($R_0S_1$) can reuse a received,
@@ -227,21 +243,7 @@ passes 10/16 runs against 0/16 for Ready-only. No arm misses $C_8$ in
 these 80 runs, so every miss in Table~\ref{tab:native_confirmation_v16}
 is a display miss; the shorter bank never makes the deadline bind.
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/native_comparison.pdf}
-\caption{Timely progress and service energy on the eight-speaker native
-workload. The three policies all retain whole supported views; they differ
-in whether calls are serial, reusable only after completion, or retained
-in flight. These are the same trials as Table~\ref{tab:native_confirmation_v16}:
-two fresh-process repeats per speaker and policy from the 80-trial
-factorial campaign. Filled markers pool the two repeats; open markers and
-short ranges show the individual observations. Speakers use the same
-order in both panels. (a) Audio meeting both the 2-s display and 8-s
-certification deadlines. (b) Both-board energy from service origin to
-confirmed physical model drain, divided by offered audio duration.}
-\label{fig:native_comparison}
-\end{figure*}
+
 
 An earlier two-policy campaign on the same speakers reproduced aggregate
 credit within 0.500~audio-s (129.460 against 129.960) and the same 10/16
