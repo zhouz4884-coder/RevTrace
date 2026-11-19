@@ -1,6 +1,15 @@
 # RevTrace
 
-## Latest native experiment evidence — 2026-11-18
+## Latest natural workload evidence — 2026-11-19
+
+[Research report and writing recommendations](experiments/dsn_native_workload_extension_20261119/REPORT_PUBLIC.zh.md) · [Public scalar recount](experiments/dsn_native_workload_extension_20261119/public_scalars/FINAL_718_PUBLIC.json) · [Rebuild all24 cells](experiments/dsn_native_workload_extension_20261119/rebuild_public_scalars.py) · [Source/dependency identities](experiments/dsn_native_workload_extension_20261119/DEPENDENCIES.json)
+
+The new frozen extension uses four untouched14.4–15.2s MAGICDATA68 test utterances, three policies and two fresh-process repeats (24 actual trials), with the same original FP32 ASR/Correct/Update, two GPUs,500ms cadence and D2/C8. In-flight execution raises timely coverage from31.71% to54.48% and changes certification-deadline misses from27 to0; all27 were also display misses. Full/S0 and joint retention earn the same65.292750 audio-s, while joint retention removes five avoidable withdrawals (avoidable gap0.171848→0) and still performs necessary corrections. The extra timely progress costs13.28% more two-board energy than serial execution on this bank.
+
+All732 selected original transitions match new continuous/restored full-state, correction and returned-ID references. The public-only packet recomputes original D/C endpoints, gap geometry, read points and resource sums from numeric/event projections. Complete private originals remain on the experiment disk; no speech payload, official transcript, token stream, full cut/state or manuscript is distributed here. The manuscript is unchanged. Historical banks and diagnostic results retain their own identities and denominators.
+
+
+## Historical native experiment evidence — 2026-11-18
 
 [Complete 80-trial report](experiments/dsn_native_joint_retention_20261118/FINAL_REPORT.zh.md) · [Independent recount](experiments/dsn_native_joint_retention_20261118/review/FINAL_RECOUNT_V2/REPORT.zh.md) · [Per-source results](experiments/dsn_native_joint_retention_20261118/FINAL_PER_SOURCE.csv) · [Actual-view witnesses](experiments/dsn_native_joint_retention_20261118/review/NATIVE_CONTINUITY_FINAL_INTERPRETATION.zh.md)
 

@@ -1,0 +1,63 @@
+{
+  "schema": "DERIVED_PUBLIC_NOT_EXECUTED_CONFIG",
+  "derived_from": {
+    "private_input": "plans/SCIENTIFIC_PROTOCOL_V1.json",
+    "bytes": 5362,
+    "sha256": "c09d86c48a1af3f244ce1aab5006816bc84b6a09d47cf95090d19e82bd181e3b",
+    "payload_included": false
+  },
+  "payload": {
+    "experiment_id": "REVTRACE_NATIVE_NATURAL_LONG_MAGICDATA68_V1_20261119",
+    "frozen_utc": "2026-11-19T07:36:31.042603+00:00",
+    "conditions": {
+      "conservative_s1": {
+        "arm": "conservative",
+        "consumer_retain_views": true
+      },
+      "r1s0": {
+        "arm": "fullcall",
+        "consumer_retain_views": false
+      },
+      "r1s1": {
+        "arm": "fullcall",
+        "consumer_retain_views": true
+      }
+    },
+    "timing_repeats": 2,
+    "source_selection": {
+      "corpus": "MAGICDATA68",
+      "official_page": "https://www.openslr.org/68/",
+      "official_test_URL": "https://openslr.magicdatatech.com/resources/68/test_set.tar.gz",
+      "expected_archive_bytes": 2201936013,
+      "minimum_frames": 192000,
+      "maximum_frames": 320000,
+      "target_frames": 256000,
+      "maximum_speakers": 4,
+      "speaker_order": "lexicographic",
+      "tie_break": "absolute_frame_distance_then_source_id",
+      "metadata_first": true,
+      "no_trim": true,
+      "no_concat": true,
+      "no_resample": true
+    },
+    "contract": {
+      "runtime_source_commit": "11453433c154aeffbff703c4c8dc9697421430e1",
+      "independent_view_audit_commit": "0571d51d85542e1eaf000be8082585a66e5978be",
+      "original_corrector_and_update": true,
+      "two_physical_FP32_workers": true,
+      "cadence_seconds": 0.5,
+      "max_ahead_frames": 32000,
+      "D2_seconds": 2.0,
+      "C8_seconds": 8.0,
+      "all_safety_and_path_checks_enabled": true,
+      "no_artificial_sleep_or_selected_output_manipulation": true
+    },
+    "random_seed": 20261119,
+    "strategy_order": "seeded_shuffle_then_reverse",
+    "primary_GPU_roles": "repeat0_GPU0_repeat1_GPU1",
+    "all_outcomes_retained": true,
+    "zero_opportunity_retained": true,
+    "no_positive_effect_gate": true,
+    "no_complete_RxS_interaction": true
+  }
+}
