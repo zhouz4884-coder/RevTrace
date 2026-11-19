@@ -13,6 +13,8 @@
 - Tie the sourcewise energy statement explicitly to Ready-only. Place the older
   repeated-execution result with the AISHELL results, before the second corpus;
   remove the obsolete pilot-bank sentence accompanying the old figure.
+- Align the older/current display-miss order (20 versus 19) with the
+  older/current credit order in the repeated-execution sentence.
 - Preserve the original v25 PDF and source archive. No new GPU experiments.
 - Twelve pages: eleven technical plus one references; no overfull boxes or
   unresolved references. The normalized anonymous source recompiles with every
